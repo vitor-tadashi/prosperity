@@ -1,0 +1,6 @@
+package snippet;
+
+public class Snippet {
+	Server Tomcat v9.0 Server at localhost failed to start.
+}
+
