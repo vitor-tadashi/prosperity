@@ -506,12 +506,28 @@
                             <div class="row">
                                 
                                     <div class="form-group col-md-6">
-                                        <label for="nome">Nome</label>
-                                        <input type="text" class="form-control" id="nome" data-required="true">
+                                        <label for="funcionario">Funcionário</label>
+                                        <select class="form-control">
+                                            <option value="0">Selecionar funcionário</option>
+                                            <option value="1">André</option>
+                                            <option value="2">Daniel</option>
+                                            <option value="3">Fabio</option>
+                                            <option value="4">Graziela</option>
+                                            <option value="5">Guilherme</option>
+                                            <option value="6">Iago</option>
+                                            <option value="7">Leonardo</option>
+                                            <option value="8">Stephen</option>
+                                            <option value="9">Thamires</option>
+                                            <option value="10">Vitor</option>
+                                            <option value="11">Yuri</option>
+                                        </select>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="usuario">Usuário</label>
-                                        <input type="text" class="form-control" id="usuario"data-required="true">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">@</span>
+											<input type="text" class="form-control" id="usuario"data-required="true">
+								        </div>
                                     </div>
                                     <div class="form-group col-md-6 cold-md-offset-6">
                                         <label for="email">Email corporativo</label>
@@ -532,15 +548,6 @@
 											<option value="9">CEO</option>
                                         </select>
                                     </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="senha">Senha</label>
-                                        <input type="password" class="form-control" id="senha" data-required="true">
-                                    </div>
-                                        <div class="form-group col-md-4 col-md-offset-2">
-                                            <label for="senhaConfirmar">Confirmar senha</label>
-                                           <input type="password" class="form-control" id="senhaConfirmar" data-required="true">
-                                    </div>
-                                
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
@@ -550,8 +557,8 @@
                         </form>
                     </div>
                 </section>
-                </div>
-            </div>
+                </div><!--close row-->
+            </div><!--close padding-->
 
         <!-- /Modal -->
         <div class="modal fade" id="formModal">
