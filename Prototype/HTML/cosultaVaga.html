@@ -524,13 +524,16 @@
 
             <!--corpo -->
             <br/>
-            <div class="container-fluid">
+            <div class="container">
+                <div class="padding-md">
+                    <div class="row">
+                        <div class="col-sm-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         Consulta de vagas
                     </div>
                     <!--<form class="form-inline">-->
-                    <div class=" panel-body">
+                    <div class="panel-body">
 
                         <!--<div class=" ">-->
                         <div class="col-md-2">
@@ -563,12 +566,12 @@
                         <!-- /.col -->
                         <div class="text-right ">
                             <a href="# " style="text-decoration: none; color: #ffffff ">
-                                <button class="btn btn-info " style=" margin-top: 22px; ">Pesquisar</button>
+                                <button class="btn btn-primary " style=" margin-top: 22px; ">Aplicar</button>
                             </a>
                         </div>
                     <!--</div>-->
-            <br/>    
-            
+                
+            </div><!--</panel body>-->
             <!--</form>-->
             <!--<div class="container-fluid ">-->
                 <table class="table table-bordered table-condensed table-hover table-striped " style="font-size: 12px; ">
@@ -583,35 +586,35 @@
                             <th class="text-center ">Ações</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="text-center">
                         <tr>
                             <td>
                                 Desenvolvedor de sistema
                             </td>
-                            <td class="text-center ">
-                                Junior
+                            <td>
+                                Junior   
                             </td>
-                            <td class="text-center ">
+                            <td>
                                 Carrefour
                             </td>
-                            <td class="text-center ">
+                            <td>
                                 Alocado
                             </td>
-                            <td class="text-center ">
+                            <td>
                                 15/02/2017
                             </td>
-                            <td class="text-center ">
-                                <span class="btn btn-success btn-xs ">Ativo</span>
+                            <td>
+                                <span class="label label-success">Ativo</span>
                             </td>
-                            <td class="actions text-center ">
+                            <td>
                                 <div class="btn-group">
-							<button class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cogs"></i> <span class="caret"></span></button>
-							<ul class="dropdown-menu dropdown-menu-right ">
-								<li><a href="#vaga-modal" data-toggle="modal "><i class="fa fa-eye ">&nbsp</i>Visualizar</a></li>
+							<button class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cogs fa-lg">&nbsp;</i> <span class="caret"></span></button>
+							<ul class="dropdown-menu dropdown-menu-right slidedown">
+								<li><a href="#vaga-modal" data-toggle="modal"><i class="fa fa-eye ">&nbsp</i>Visualizar</a></li>
                                 <li class="divider "></li>
 								<li><a href="# "><i class="fa fa-pencil ">&nbsp</i>Editar</a></li>
                                 <li class="divider "></li>
-								<li><a href="#delete-modal" data-toggle="modal "><i class="fa fa-trash-o ">&nbsp</i>Excluir</a></li>
+								<li><a href="#delete-modal" data-toggle="modal" ><i class="fa fa-trash-o ">&nbsp</i>Excluir</a></li>
 							</ul>
 						</div><!-- /btn-group -->
                             </td>
@@ -620,30 +623,30 @@
                             <td>
                                 Desenvolvedor de sistema
                             </td>
-                            <td class="text-center ">
+                            <td>
                                 Pleno
                             </td>
-                            <td class="text-center ">
+                            <td>
                                 Carrefour
                             </td>
-                            <td class="text-center ">
+                            <td>
                                 Interno
                             </td>
-                            <td class="text-center ">
+                            <td>
                                 15/02/2017
                             </td>
-                            <td class="text-center ">
-                                <span class="btn btn-success btn-xs ">Ativo</span>
+                            <td>
+                                <span class="label label-success">Ativo</span>
                             </td>
-                            <td class="actions text-center ">
+                            <td>
                                 <div class="btn-group">
-							<button class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cogs"></i> <span class="caret"></span></button>
-							<ul class="dropdown-menu dropdown-menu-right ">
-								<li><a href="#vaga-modal " data-toggle="modal "><i class="fa fa-eye ">&nbsp</i>Visualizar</a></li>
+							<button class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cogs fa-lg">&nbsp;</i> <span class="caret"></span></button>
+							<ul class="dropdown-menu dropdown-menu-right slidedown">
+								<li><a href="#vaga-modal" data-toggle="modal"><i class="fa fa-eye ">&nbsp</i>Visualizar</a></li>
                                 <li class="divider "></li>
 								<li><a href="# "><i class="fa fa-pencil ">&nbsp</i>Editar</a></li>
                                 <li class="divider "></li>
-								<li><a href="#delete-modal " data-toggle="modal "><i class="fa fa-trash-o ">&nbsp</i>Excluir</a></li>
+								<li><a href="#delete-modal" data-toggle="modal"><i class="fa fa-trash-o ">&nbsp</i>Excluir</a></li>
 							</ul>
 						</div><!-- /btn-group -->
                             </td>
@@ -652,68 +655,82 @@
                             <td>
                                 Analista de sistema
                             </td>
-                            <td class="text-center ">
+                            <td>
                                 Pleno
                             </td>
-                            <td class="text-center ">
+                            <td>
                                 Carrefour
                             </td>
-                            <td class="text-center ">
+                            <td>
                                 Alocado
                             </td>
-                            <td class="text-center ">
+                            <td>
                                 15/02/2017
                             </td>
-                            <td class="text-center ">
-                                <span class="btn btn-danger btn-xs ">Inativo</span>
+                            <td>
+                                <span class="label label-danger">Inativo</span>
                             </td>
-                            <td class="text-center ">
+                            <td>
                                 <div class="btn-group">
-							<button class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cogs"></i> <span class="caret"></span></button>
-							<ul class="dropdown-menu dropdown-menu-right ">
-								<li><a href="#vaga-modal " data-toggle="modal "><i class="fa fa-eye ">&nbsp</i>Visualizar</a></li>
+							<button class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cogs fa-lg">&nbsp;</i> <span class="caret"></span></button>
+							<ul class="dropdown-menu dropdown-menu-right slidedown">
+								<li><a href="#vaga-modal" data-toggle="modal"><i class="fa fa-eye ">&nbsp</i>Visualizar</a></li>
                                 <li class="divider "></li>
 								<li><a href="# "><i class="fa fa-pencil ">&nbsp</i>Editar</a></li>
                                 <li class="divider "></li>
-								<li><a href="#delete-modal " data-toggle="modal "><i class="fa fa-trash-o ">&nbsp</i>Excluir</a></li>
+								<li><a href="#delete-modal" data-toggle="modal"><i class="fa fa-trash-o ">&nbsp</i>Excluir</a></li>
 							</ul>
 						</div><!-- /btn-group -->
                             </td>
                         </tr>
                     </tbody>
                 </table>
-            
-            <!--</div>-->
-                    </div><!--</panel body>-->
-                    <div class="panel-footer ">
-                    <div class="text-right ">
+                    </div><!--</panel default>-->
+                    <div class="panel-footer clearfix">
+                        <div class="row">
+                        <ul class="pagination pagination-xs m-top-none pull-right">
+                            <li class="disabled"><a href="#">Previous</a></li>
+                            <li class="active"><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#">Next</a></li>
+                        </ul>
+                        <div class="text-left ">
                             <a href="# " style="text-decoration: none; color: #ffffff ">
-                                <button class="btn btn-info ">Novo</button>
+                                <button class="btn btn-sm btn-primary ">Novo</button>
                             </a>
                             </div>
+</div>
+
+                    
                         </div><!--</panel footer>-->
-                        </div><!--</panel default>-->
-                </div><!--</container-fluid>-->
+                        
+                </div><!--</col-sm-12>-->
+                </div><!--</row>-->
+                </div><!--</padding>-->
+                </div><!--</container>-->
             </div><!--</main container>-->
         <!--corpo -->
 
         <!-- /Modal -->
-        <div class="modal fade " id="formModal ">
+        <div class="modal fade " id="formModal">
             <div class="modal-dialog ">
                 <div class="modal-content ">
                     <div class="modal-header ">
-                        <button type="button " class="close " data-dismiss="modal " aria-hidden="true ">&times;</button>
+                        <button type="button " class="close " data-dismiss="modal" aria-hidden="true ">&times;</button>
                         <h4>Modal with form</h4>
                     </div>
                     <div class="modal-body ">
                         <form>
                             <div class="form-group ">
                                 <label>Username</label>
-                                <input type="text " class="form-control input-sm " placeholder="Email Address ">
+                                <input type="text" class="form-control input-sm" placeholder="Email Address ">
                             </div>
                             <div class="form-group ">
                                 <label>Password</label>
-                                <input type="password " class="form-control input-sm " placeholder="Password ">
+                                <input type="password " class="form-control input-sm" placeholder="Password ">
                             </div>
                             <div class="form-group ">
                                 <label class="label-checkbox ">
@@ -722,7 +739,7 @@
 									 Remember me
 								</label>
                             </div>
-                            <div class="form-group text-right ">
+                            <div class="form-group text-right">
                                 <a href="# " class="btn btn-success ">Sign in</a>
                                 <a href="# " class="btn btn-success ">Sign up</a>
                             </div>
