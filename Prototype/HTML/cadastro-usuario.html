@@ -491,20 +491,19 @@
         <div id="main-container">
             <div id="breadcrumb">
                 <ul class="breadcrumb">
-                     <li><i class="fa fa-home"></i><a href="index.html"> Home</a></li>
-                     <li>Form</li>	 
-                     <li class="active">Form Element</li>	 
+                    <li><i class="fa fa-home"></i><a href="index.html"> Home</a></li>
+                    <li>Form</li>	 
+                    <li class="active">Cadastro de usuário</li>	 
                 </ul>
             </div><!--breadcrumb-->
             
             <div class="padding-md">
-            <div class="row">
-                <section class="panel panel-default">
-                    <div class="panel-heading">Cadastro de usuário</div>
-                    <div class="panel-body">
-                        <form>
-                            <div class="row">
-                                
+                <div class="row">
+                    <section class="panel panel-default">
+                        <div class="panel-heading">Cadastro de usuário</div>
+                        <div class="panel-body">
+                            <form>
+                                <div class="row">
                                     <div class="form-group col-md-6">
                                         <label for="funcionario">Funcionário</label>
                                         <select class="form-control">
@@ -530,7 +529,7 @@
 								        </div>
                                     </div>
                                     <div class="form-group col-md-6 cold-md-offset-6">
-                                        <label for="email">Email corporativo</label>
+                                        <label for="email">E-mail corporativo</label>
                                         <input type="email" class="form-control" id="email"data-required="true">
                                     </div>
                                     <div class="form-group open col-md-6">
@@ -548,18 +547,17 @@
 											<option value="9">CEO</option>
                                         </select>
                                     </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <button class="btn btn-success pull-right"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
                                 </div>
-                            </div>
-                        </form>
-                    </div>
-                </section>
+                                <div class="row pull-right">
+                                    <button class="btn btn-success"><i class="fa fa-check"></i> Salvar</button>
+                                    <button class="btn btn-warning"><i class="fa fa-edit"></i> Redefinir senha</button>
+                                    <button class="btn btn-danger"><span class="fa fa-trash-o"></span> Excluir</button>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
                 </div><!--close row-->
             </div><!--close padding-->
-
         <!-- /Modal -->
         <div class="modal fade" id="formModal">
             <div class="modal-dialog">
