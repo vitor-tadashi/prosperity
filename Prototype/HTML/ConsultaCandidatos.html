@@ -4,7 +4,7 @@
   <head>
 
     <meta charset="utf-8">
-    <title>Aprovação de Vaga</title>
+    <title>Consulta de Candidato</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -155,7 +155,7 @@
 						<span class="notification-label bounceIn animation-delay5">4</span>
 					</a>
 					<ul class="dropdown-menu task dropdown-2">
-						<li><a href="#">You have26246tasks to complete</a></li>					  
+						<li><a href="#">You have 4 tasks to complete</a></li>					  
 						<li>
 							<a href="#">
 								<div class="clearfix">
@@ -321,7 +321,7 @@
 									<i class="fa fa-desktop fa-lg"></i> 
 								</span>
 								<span class="text">
-									Dashboard
+									Consulta candidato
 								</span>
 								<span class="menu-hover"></span>
 							</a>
@@ -479,6 +479,10 @@
 							</ul>
 						</li>
 					</ul>
+					
+					<div class="alert alert-info">
+						Welcome to Perfect Admin. Do not forget to check all my pages. 
+					</div>
 				</div><!-- /main-menu -->
 			</div><!-- /sidebar-inner scrollable-sidebar -->
 		</aside>
@@ -487,94 +491,140 @@
 			<div id="breadcrumb">
 				<ul class="breadcrumb">
 					 <li><i class="fa fa-home"></i><a href="index.html"> Home</a></li>
-					 <li>Form</li>	 
-					 <li class="active">Form Element</li>	 
+					 <li>Gestor</li>	 
+					 <li class="active">Consulta candidato</li>	 
 				</ul>
 			</div><!--breadcrumb-->
+<!-- /Corpo -->
+<div class="padding-md">
+			<div class="container">
+				<div class="panel-default">
+					<div class="row">
+						<div class="col-md-4">
+							<h2> Consulta de candidatos </h2>
+						</div>
+					</div>
+						<form>	
 
-		<div class="padding-md">
-			<div class="panel panel-default">
-							<div class="panel-heading"><b>Aprovação de vaga</b></div>
-							<div class="panel-body">
+							<div class="col-md-10">
+								<br>
+								<br>
+								<br>
+							<table class="table table-bordered table-condensed table-hover table-striped">
+								<thead>
+									<tr>
+										<th>Nome</th>
+										<th>Vaga</th>
+										<th>Senioridade</th>
+										<th>Status</th>
+										<th>Ações</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											Bill Doe
+										</td>
+										<td>
+											Estagiário
+										</td>
+										<td>
+											Estágio
+										</td>
+										<td>
+											<span class="label label-warning">Análise</span>
+										</td>
+										<td>
+										<a href="#simpleModal" role="button" data-toggle="modal" class="btn btn-xs btn-success btn-small">Detalhes</a>
+											</td>
+											<!-- Modal -->
+											<div class="modal fade" id="simpleModal">
+											<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+													<h4>Detalhes</h4>
+												</div>
+												<div class="modal-body">	
+													<p>...</p>
+												</div>
+												<div class="modal-footer">
+													<button class="btn btn-sm btn-success" data-dismiss="modal" aria-hidden="true">Fechar</button>
+													<a href="#" class="btn btn-danger btn-sm">Salvar </a>
+												</div>
+											
+									</tr>
+									<tr>
+										<td>
+											John
+										</td>
+										<td>
+											Liferay
+										</td>
+										<td>
+											Pleno
+										</td>
+										<td>
+											<span class="label label-warning">Análise</span>
+										</td>
+										<td>
+										<a href="#simpleModal" role="button" data-toggle="modal" class="btn btn-xs btn-success btn-small">Detalhes</a>
+											</td>
+											<!-- Modal -->
+											<div class="modal fade" id="simpleModal">
+											<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+													<h4>Detalhes</h4>
+												</div>
+												<div class="modal-body">	
+													<p>...</p>
+												</div>
+												<div class="modal-footer">
+													<button class="btn btn-sm btn-success" data-dismiss="modal" aria-hidden="true">Fechar</button>
+													<a href="#" class="btn btn-danger btn-sm">Salvar </a>
+												</div>
+									</tr>
+									<tr>
+										<td>
+											Leon
+										</td>
+										<td>
+											Analista de Sistemas
+										</td>
+										<td>
+											Senior
+										</td>
+										<td>
+											<span class="label label-warning">Análise</span>
+										</td>
+										<td>
+										<a href="#simpleModal" role="button" data-toggle="modal" class="btn btn-xs btn-success btn-small">Detalhes</a>
+											</td>
+											<!-- Modal -->
+											<div class="modal fade" id="simpleModal">
+											<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+													<h4>Detalhes</h4>
+												</div>
+												<div class="modal-body">	
+													<p>...</p>
+												</div>
+												<div class="modal-footer">
+													<button class="btn btn-sm btn-success" data-dismiss="modal" aria-hidden="true">Fechar</button>
+													<a href="#" class="btn btn-danger btn-sm">Salvar</a>
+												</div>
+									</tr>
 
-			<table class="table table-striped" id="responsiveTable">
-						<thead>
-							<tr>
-								<th>Nome da vaga</th>
-								<th>Solicitante</th>
-								<th>Senioridade</th>
-								<th>Projeto</th>
-								<th>Cliente</th>
-								<th>Local de trabalho</th>
-								<th>Ação</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Desenvolvedor</td>
-								<td>Vitor Tadashi</td>
-								<td>Senior</td>
-								<td>Projeto Web</td>
-								<td>Carrefour</td>
-								<td>Interno</td>
-								<td>
-									<div class="btn-group">
-										<button class="btn btn-sm dropdown-toggle btn-info" data-toggle="dropdown"><i class="fa fa-cogs fa-lg"></i> <span class="caret"></span></button>
-											<ul class="dropdown-menu">
-												<li><a href="#">Aprovar</a></li>
-												<li><a href="#">Reprovar</a></li>
-												<li><a href="solicitacaoVaga.html">Visualizar</a></li>
-											</ul>
-									</div><!-- /btn-group -->
-								</td>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Desenvolvedor</td>
-								<td>Vitor Tadashi</td>
-								<td>Senior</td>
-								<td>Projeto Web</td>
-								<td>Carrefour</td>
-								<td>Interno</td>
-								<td>
-									<div class="btn-group">
-										<button class="btn btn-sm dropdown-toggle btn-info" data-toggle="dropdown"><i class="fa fa-cogs fa-lg"></i> <span class="caret"></span></button>
-											<ul class="dropdown-menu">
-												<li><a href="#">Aprovar</a></li>
-												<li><a href="#">Reprovar</a></li>
-												<li><a href="#">Visualizar</a></li>
-											</ul>
-									</div><!-- /btn-group -->
-								</td>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Analista</td>
-								<td>Marcelo</td>
-								<td>Junior</td>
-								<td>Mobile</td>
-								<td>Alelo</td>
-								<td>Interno</td>
-								<td>
-									<div class="btn-group">
-										<button class="btn btn-sm dropdown-toggle btn-info" data-toggle="dropdown"><i class="fa fa-cogs fa-lg"></i> <span class="caret"></span></button>
-											<ul class="dropdown-menu">
-												<li><a href="#">Aprovar</a></li>
-												<li><a href="#">Reprovar</a></li>
-												<li><a href="#">Visualizar</a></li>
-											</ul>
-									</div><!-- /btn-group -->
-								</td>
-							</tr>
-					</tbody>
-					</table>
-				</div><!-- /panel -->
-							
-		</div><!-- /.padding-md -->
-
-	</div><!-- /wrapper -->
+									
+									
+						</div><!-- /panel -->
+					</div><!-- /.col -->
+					
+					
 
 	<a href="" id="scroll-to-top" class="hidden-print"><i class="fa fa-chevron-up"></i></a>
 	

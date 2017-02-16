@@ -4,7 +4,7 @@
   <head>
 
     <meta charset="utf-8">
-    <title>Aprovação de Vaga</title>
+    <title>Consulta Gestor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -155,7 +155,7 @@
 						<span class="notification-label bounceIn animation-delay5">4</span>
 					</a>
 					<ul class="dropdown-menu task dropdown-2">
-						<li><a href="#">You have26246tasks to complete</a></li>					  
+						<li><a href="#">You have 4 tasks to complete</a></li>					  
 						<li>
 							<a href="#">
 								<div class="clearfix">
@@ -479,6 +479,10 @@
 							</ul>
 						</li>
 					</ul>
+					
+					<div class="alert alert-info">
+						Welcome to Perfect Admin. Do not forget to check all my pages. 
+					</div>
 				</div><!-- /main-menu -->
 			</div><!-- /sidebar-inner scrollable-sidebar -->
 		</aside>
@@ -487,93 +491,184 @@
 			<div id="breadcrumb">
 				<ul class="breadcrumb">
 					 <li><i class="fa fa-home"></i><a href="index.html"> Home</a></li>
-					 <li>Form</li>	 
-					 <li class="active">Form Element</li>	 
+					 <li>Gestor</li>	 
+					 <li class="active">Consulta candidato</li>	 
 				</ul>
 			</div><!--breadcrumb-->
 
-		<div class="padding-md">
-			<div class="panel panel-default">
-							<div class="panel-heading"><b>Aprovação de vaga</b></div>
-							<div class="panel-body">
-
-			<table class="table table-striped" id="responsiveTable">
-						<thead>
-							<tr>
-								<th>Nome da vaga</th>
-								<th>Solicitante</th>
-								<th>Senioridade</th>
-								<th>Projeto</th>
-								<th>Cliente</th>
-								<th>Local de trabalho</th>
-								<th>Ação</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Desenvolvedor</td>
-								<td>Vitor Tadashi</td>
-								<td>Senior</td>
-								<td>Projeto Web</td>
-								<td>Carrefour</td>
-								<td>Interno</td>
-								<td>
-									<div class="btn-group">
-										<button class="btn btn-sm dropdown-toggle btn-info" data-toggle="dropdown"><i class="fa fa-cogs fa-lg"></i> <span class="caret"></span></button>
-											<ul class="dropdown-menu">
-												<li><a href="#">Aprovar</a></li>
-												<li><a href="#">Reprovar</a></li>
-												<li><a href="solicitacaoVaga.html">Visualizar</a></li>
-											</ul>
-									</div><!-- /btn-group -->
-								</td>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Desenvolvedor</td>
-								<td>Vitor Tadashi</td>
-								<td>Senior</td>
-								<td>Projeto Web</td>
-								<td>Carrefour</td>
-								<td>Interno</td>
-								<td>
-									<div class="btn-group">
-										<button class="btn btn-sm dropdown-toggle btn-info" data-toggle="dropdown"><i class="fa fa-cogs fa-lg"></i> <span class="caret"></span></button>
-											<ul class="dropdown-menu">
-												<li><a href="#">Aprovar</a></li>
-												<li><a href="#">Reprovar</a></li>
-												<li><a href="#">Visualizar</a></li>
-											</ul>
-									</div><!-- /btn-group -->
-								</td>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Analista</td>
-								<td>Marcelo</td>
-								<td>Junior</td>
-								<td>Mobile</td>
-								<td>Alelo</td>
-								<td>Interno</td>
-								<td>
-									<div class="btn-group">
-										<button class="btn btn-sm dropdown-toggle btn-info" data-toggle="dropdown"><i class="fa fa-cogs fa-lg"></i> <span class="caret"></span></button>
-											<ul class="dropdown-menu">
-												<li><a href="#">Aprovar</a></li>
-												<li><a href="#">Reprovar</a></li>
-												<li><a href="#">Visualizar</a></li>
-											</ul>
-									</div><!-- /btn-group -->
-								</td>
-							</tr>
-					</tbody>
-					</table>
+            <div class="padding-md">
+			<div class="container">
+				<div class="panel-default">
+					<div class="row">
+						<div class="col-md-5">
+							<h2> Consulta de candidatos - Gestor </h2>
+						</div>
+					</div>
+						<form>	
+                                
+<div class="padding-md clearfix">
+    <div class="col-md-10">
+								
+							<table class="table table-bordered table-condensed table-hover table-striped">
+							<table class="table table-striped" id="dataTable">
+                            
+							<thead>
+								<tr>
+                                    
+									<th>Nome </th>
+									<th>Vaga</th>
+									<th>Senioridade</th>
+									<th>Status</th>
+									<th>Ações</th>
+                                    
+									</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Leon</td>
+									<td>SCRUM</td>
+									<td>Junior</td>
+									<td><span class="label label-warning">Análise</span>
+                                    </td>
+									<td>
+										<a href="#simpleModal" role="button" data-toggle="modal" class="btn btn-xs btn-success btn-small">Detalhes</a>
+											</td>
+											<!-- Modal -->
+											<div class="modal fade" id="simpleModal">
+											<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+													<h4>Detalhes</h4>
+												</div>
+												<div class="modal-body">	
+													<p>...</p>
+												</div>
+												<div class="modal-footer">
+													<button class="btn btn-sm btn-success" data-dismiss="modal" aria-hidden="true">Fechar</button>
+													<a href="#" class="btn btn-danger btn-sm">Salvar </a>
+												</div>
+								</tr>
+								
+								<tr>
+									<td>Daniel Valle</td>
+									<td>Estágio</td>
+									<td>Estágio</td>
+									<td><span class="label label-warning">Análise</span></td>
+									
+									<td>
+										<a href="#simpleModal" role="button" data-toggle="modal" class="btn btn-xs btn-success btn-small">Detalhes</a>
+											</td>
+											<!-- Modal -->
+											<div class="modal fade" id="simpleModal">
+											<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+													<h4>Detalhes</h4>
+												</div>
+												<div class="modal-body">	
+													<p>...</p>
+												</div>
+												<div class="modal-footer">
+													<button class="btn btn-sm btn-success" data-dismiss="modal" aria-hidden="true">Fechar</button>
+													<a href="#" class="btn btn-danger btn-sm">Salvar </a>
+												</div>
+								</tr>
+								<tr>
+									<td>Igor</td>
+									<td>Analista de Sistemas</td>
+									<td>Senior</td>
+									<td><span class="label label-warning">Análise</span></td>
+                                    <td>
+										<a href="#simpleModal" role="button" data-toggle="modal" class="btn btn-xs btn-success btn-small">Detalhes</a>
+											</td>
+											<!-- Modal -->
+											<div class="modal fade" id="simpleModal">
+											<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+													<h4>Detalhes</h4>
+												</div>
+												<div class="modal-body">	
+													<p>...</p>
+												</div>
+												<div class="modal-footer">
+													<button class="btn btn-sm btn-success" data-dismiss="modal" aria-hidden="true">Fechar</button>
+													<a href="#" class="btn btn-danger btn-sm">Salvar </a>
+												</div>
+								</tr>
+	
+                                <tr>
+									<td>Guilherme </td>
+									<td>Desenvolvedor</td>
+									<td>Pleno</td>
+									<td><span class="label label-warning">Análise</span></td>
+									
+									<td>
+										<a href="#simpleModal" role="button" data-toggle="modal" class="btn btn-xs btn-success btn-small">Detalhes</a>
+											</td>
+											<!-- Modal -->
+											<div class="modal fade" id="simpleModal">
+											<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+													<h4>Detalhes</h4>
+												</div>
+												<div class="modal-body">	
+													<p>...</p>
+												</div>
+												<div class="modal-footer">
+													<button class="btn btn-sm btn-success" data-dismiss="modal" aria-hidden="true">Fechar</button>
+													<a href="#" class="btn btn-danger btn-sm">Salvar </a>
+												</div>
+								</tr>
+                         
+                                
+								
+							</tbody>
+						</table>
+					</div><!-- /.padding-md -->
 				</div><!-- /panel -->
-							
-		</div><!-- /.padding-md -->
+			</div><!-- /.padding-md -->
 
+
+            <!-- /Modal -->
+		<div class="modal fade" id="formModal">
+  			<div class="modal-dialog">
+    			<div class="modal-content">
+      				<div class="modal-header">
+        				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4>Modal with form</h4>
+      				</div>
+				    <div class="modal-body">
+						<form>
+							<div class="form-group">
+								<label>Username</label>
+								<input type="text" class="form-control input-sm" placeholder="Email Address">
+							</div>
+							<div class="form-group">
+								<label>Password</label>
+								<input type="password" class="form-control input-sm" placeholder="Password">
+							</div>
+							<div class="form-group">
+								 <label class="label-checkbox">
+								 <input type="checkbox" class="regular-checkbox" />
+								 <span class="custom-checkbox"></span>
+									 Remember me
+								</label>
+							</div>
+							<div class="form-group text-right">
+								<a href="#" class="btn btn-success">Sign in</a>
+								<a href="#" class="btn btn-success">Sign up</a>
+							</div>
+						</form>
+				    </div>
+			  	</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
 	</div><!-- /wrapper -->
 
 	<a href="" id="scroll-to-top" class="hidden-print"><i class="fa fa-chevron-up"></i></a>
