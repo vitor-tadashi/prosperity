@@ -7,7 +7,7 @@
         <meta name="author" content="">
         
         <!-- Bootstrap core CSS -->
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         
         <!-- Font Awesome -->
         <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -28,6 +28,34 @@
     </head>
     
     <body>	
+        
+        
+        
+        
+        <!-- Modal delete -->
+    <div class="modal fade" id="delete-modal" data-target="#delete-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+						<span aria-hidden="true">&times;</span>
+					</button>
+                    <h4 class="modal-title" id="modalLabel">Excluir Candidato</h4>
+                </div>
+                <div class="modal-body">Deseja realmente excluir este candidato</div>
+                <div class="modal-footer">
+                    <a id="excluir" href="#">
+                        <button type="button" class="btn btn-danger">Sim</button>
+                    </a>
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Não</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.modal delete-->
+        
+        
+        
         
 <!-- Overlay Div -->
 	<div id="overlay" class="transparent"></div>
@@ -484,21 +512,18 @@
             <div class="padding-md">
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="panel panel-default table-responsive">
+                    <div class="panel panel-default">
                         <div class="panel-heading">
-                            Consulta de Candidatos
+                            Consulta de Candidatos (RH)
                         </div>
                         <div class="panel-body">
                             <div class="row">
 
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <label for="exampleInputEmail1">Pesquisar</label>
                                     <div class="search-block">
                                         <div class="input-group">
-                                            <input type="text" class="form-control input-sm" placeholder="Pesquisar...">
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
-                                            </span>
+                                            <input type="text" class="form-control input-sm" placeholder="Nome...">
                                         </div><!-- /input-group -->
                                     </div><!-- /search-block -->
                                 </div>
@@ -509,66 +534,75 @@
                                         <option value="0">Selecione:</option> 
                                         <option value="1">Desenvolvedor</option> 
                                         <option value="2">Analista</option>  
-                                        <option value="3">Faxineiro</option> 
+                                        <option value="3">Arquiteto</option> 
                                     </select>
                                 </div>
-                                <div class="col-md-2">
+                                
+                                 <div class="col-md-2">
+                                    <label for="exampleInputEmail1">Senioridade</label>
+                                    <select class="form-control inline"> 
+                                        <option value="0">Selecione:</option> 
+                                        <option value="1">Estagiário</option> 
+                                        <option value="2">Junior</option>  
+                                        <option value="3">Pleno</option> 
+                                        <option value="3">Sênior</option> 
+                                    </select>
+                                </div>
+                                
+                                
+                                <div class="col-md-1">
                                     <label for="exampleInputEmail1">Salário</label>
-                                    <select class="form-control inline"> 
-                                        <option value="0">Selecione:</option> 
-                                        <option value="1">R$ 1000-R$ 2000</option> 
-                                        <option value="2">R$ 2000-R$ 3000</option>  
-                                        <option value="3">R$ 3000-R$ 4000</option>
-                                        <option value="4">R$ 4000-Max</option>
-                                    </select>
+                                        <input type="text" class="form-control"placeholder="De...">
                                 </div>
-                                <div class="col-md-2">
-                                    <label for="exampleInputEmail1">Estado</label>
-                                    <select class="form-control inline"> 
-                                        <option value="0">Selecione:</option> 
-                                        <option value="1">São Paulo</option> 
-                                        <option value="2">Rio de Janeiro</option> 
-                                        <option value="3">Minas Gerais</option> 
-                                    </select>
+                                <div class="col-md-1">
+                                    <label for="exampleInputEmail1">&nbsp;</label>
+                                        <input type="text" class="form-control"placeholder="Até...">
                                 </div>
-
-                                <a class="btn btn-primary " style="margin-top: 22px">Aplicar</a>
+                
+                                <a class="btn btn-info " style="margin-top: 22px">Aplicar</a>
 
                             </div><!-- /.row -->
                         </div><!-- /.panel-body -->
 
 
-                        <table class="table table-striped" id="" style="font-size: 12px">
+                        <table class="table table-bordered table-condensed table-hover table-striped" id="" style="font-size: 12px !important; vertical-align: middle !important;">
                             <thead>
 
                                 <tr>
 
                                     <th>Nome do Candidato</th>
                                     <th>Cargo</th>
+                                    <th>Senioridade</th>
                                     <th>Pretensão</th>
-                                    <th>Cidade</th>
                                     <th>Data</th>
                                     <th>Status</th>
                                     <th>Ações</th>
 
                                 </tr>
                             </thead>
-                            <tbody style="font-size: 13px">
+                            <tbody>
                                 <tr>
 
                                     <td>Kurt Cobain</td>
                                     <td>Desenvolvedor</td>
-                                    <td>3000</td>
-                                    <td>São Paulo</td>
-                                    <td>Oct 08,2014</td>
-                                    <td><span class="label label-success">Aberto</span></td>
+                                    <td>Junior</td>
+                                    <td>R$3.000</td>
+                                    <td>08/11/2016</td>
                                     <td>
-                                    <span class="line"></span>
-                            <a class="btn btn-success btn-sm">Enviar Email</a>
-                                        <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
-      Editar
-    </button>
+                                        <span class="label label-primary" style="">Aprovado</span>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group"><!-- começo botao -->
+                                          <button type="button" class="btn btn-info dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
+                                          </button>
+                                          <ul class="dropdown-menu slidedown">
+                                            <li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
+                                            <li role="separator" class="divider"></li>
+                                             <li><a href="#delete-modal" data-toggle="modal"><i class="fa fa-trash-o fa-lg">&nbsp;</i>Excluir</a>
+
+                                          </ul>
+                                        </div><!-- /fim botao -->
                                     </td>
 
 
@@ -577,72 +611,91 @@
 
                                     <td>Michael Jordan</td>
                                     <td>Analista</td>
-                                    <td>5000</td>
-                                    <td>São Paulo</td>
-                                    <td>Sep 15,2007</td>
-                                    <td><span class="label label-primary">Aprovado</span></td>
+                                    <td>Sênior</td>
+                                    <td>R$5.000</td>
+                                    <td>17/02/2015</td>
+                                    <td><span class="label label-primary" style="">Aprovado</span></td>
                                     <td>
-                                    <span class="line"></span>
-                            <a class="btn btn-success btn-sm">Enviar Email</a>
-                                        <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
-      Editar
-    </button>
+                                         <div class="btn-group"><!-- começo botao -->
+                                          <button type="button" class="btn btn-info dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
+                                          </button>
+                                          <ul class="dropdown-menu slidedown">
+                                            <li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
+                                            <li role="separator" class="divider"></li>
+                                             <li><a href="#delete-modal" data-toggle="modal"><i class="fa fa-trash-o fa-lg">&nbsp;</i>Excluir</a>
 
+                                          </ul>
+                                        </div><!-- /fim botao -->
                                     </td>
                                 </tr>
                                 <tr>
 
                                     <td>Shaquile Oneal</td>
                                     <td>Gerente</td>
-                                    <td>10000</td>
-                                    <td>São Paulo</td>
-                                    <td>Oct 08,2014</td>
+                                    <td>Sênior</td>
+                                    <td>R$10.000</td>
+                                    <td>17/02/2015</td>
                                     <td><span class="label label-info">Em Análise</span></td>
                                     <td>
                                     <span class="line"></span>
-                            <a class="btn btn-success btn-sm">Enviar Email</a>
-                                        <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
-      Editar
-    </button>
+                                         <div class="btn-group"><!-- começo botao -->
+                                          <button type="button" class="btn btn-info dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
+                                          </button>
+                                          <ul class="dropdown-menu slidedown">
+                                            <li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
+                                            <li role="separator" class="divider"></li>
+                                            <li><a href="#delete-modal" data-toggle="modal"><i class="fa fa-trash-o fa-lg">&nbsp;</i>Excluir</a></li>
 
+                                          </ul>
+                                        </div><!-- /fim botao -->
                                     </td>
                                 </tr>
                                 <tr>
 
                                     <td>Kevin Durant</td>
                                     <td>Diretor</td>
-                                    <td>7500</td>
-                                    <td>São Paulo</td>
-                                    <td>Oct 08,2014</td>
+                                    <td>Pleno</td>
+                                    <td>R$7.500</td>
+                                    <td>17/02/2015</td>
                                     <td><span class="label label-warning">Pendente</span></td>
                                     <td>
                                     <span class="line"></span>
-                            <a class="btn btn-success btn-sm">Enviar Email</a>
-                                        <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
-      Editar
-    </button>
+                                       <div class="btn-group"><!-- começo botao -->
+                                          <button type="button" class="btn btn-info dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
+                                          </button>
+                                          <ul class="dropdown-menu slidedown">
+                                            <li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
+                                            <li role="separator" class="divider"></li>
+                                             <li><a href="#delete-modal" data-toggle="modal"><i class="fa fa-trash-o fa-lg">&nbsp;</i>Excluir</a>
+
+                                          </ul>
+                                        </div><!-- /fim botao -->
                             </td>
                                 </tr>
                                 <tr>
 
                                     <td>James Harden</td>
-                                    <td>Faxineiro</td>
-                                    <td>1000</td>
-                                    <td>São Paulo</td>
-                                    <td>Oct 08,2014</td>
+                                    <td>Desenvolvedor</td>
+                                    <td>Estagiário</td>
+                                    <td>R$1000</td>
+                                    <td>17/02/2015</td>
                                     <td><span class="label label-danger">Reprovado</span></td>
                                     <td>
                                     <span class="line"></span>
-                            <a class="btn btn-success btn-sm">Enviar Email</a>
-                                        <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-sm">
-      Editar
-    </button>
+                                         <div class="btn-group"><!-- começo botao -->
+                                          <button type="button" class="btn btn-info dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
+                                          </button>
+                                          <ul class="dropdown-menu slidedown">
+                                            <li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
+                                            <li role="separator" class="divider"></li>
+                                            <li><a href="#delete-modal" data-toggle="modal"><i class="fa fa-trash-o fa-lg">&nbsp;</i>Excluir</a>
 
-
+                                          </ul>
+                                        </div><!-- /fim botao -->
                                     </td>
                                 </tr>
                             </tbody>
@@ -718,45 +771,7 @@
 			<a class="btn btn-success m-right-sm" href="login.html">Logout</a>
 			<a class="btn btn-danger logoutConfirm_close">Cancel</a>
 		</div>
-	</div>
-
-</body>
-<!-- Le javascript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-
-<!-- Jquery -->
-<script src="js/jquery-1.10.2.min.js"></script>
-
-<!-- Bootstrap -->
-<script src="bootstrap/js/bootstrap.min.js"></script>
-
-<!-- holder -->
-<script src='js/uncompressed/holder.js'></script>
-
-<!-- Gritter -->
-<script src="js/jquery.gritter.min.js"></script>
-
-<!-- Google Code Prettify -->
-<script src='js/uncompressed/run_prettify.js'></script>
-
-<!-- Modernizr -->
-<script src='js/modernizr.min.js'></script>
-
-<!-- Pace -->
-<script src='js/pace.min.js'></script>
-
-<!-- Popup Overlay -->
-<script src='js/jquery.popupoverlay.min.js'></script>
-
-<!-- Slimscroll -->
-<script src='js/jquery.slimscroll.min.js'></script>
-
-<!-- Cookie -->
-<script src='js/jquery.cookie.min.js'></script>
-
-<!-- Perfect -->
-<script src="js/app/app.js"></script>
+</div>
 
 
 <!-- Le javascript
@@ -812,5 +827,6 @@
             }
         });
     });
-</script>
+</script>            
+</body>
 </html>
