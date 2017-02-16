@@ -42,6 +42,20 @@
         <!-- Perfect -->
         <link href="css/app.min.css" rel="stylesheet">
         <link href="css/app-skin.css" rel="stylesheet">
+        <style>
+            .nav-tabs li a {
+                /* background-color: #c5c5c5; */
+                border-color: #07507F;
+            }
+            .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+                color: #fff;
+                background-color: #096EB0;
+            }
+            .nav-tabs li a:hover {
+                color: #fff;
+                background-color: #4995C7;
+            }
+        </style>
         
     </head>
     <body>
@@ -500,101 +514,150 @@
                 
                 <div class="padding-md">
                     <div class="row">
-                        <section class="panel panel-default">
-                            <div class="panel-heading">Informações básicas</div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Informações do candidato</div>
                             <div class="panel-body">
-                                <form>
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#tabInfoPessoais" aria-controls="tabInfoPessoais" role="tab" data-toggle="tab">Informações pessoais</a></li>
+                                    <li role="presentation"><a href="#tabInfoAcademicas" aria-controls="tabInfoAcademicas" role="tab" data-toggle="tab">Informações acadêmicas</a></li>
+                                </ul>
+                                
+                                <hr />
+                                <form>                             
+                                    <!-- Início Tabs -->
+                                    <div class="tab-content">
+
+                                        <!-- Tab Informações Pessoais -->
+                                        <div role="tabpanel" class="tab-pane fade in active" id="tabInfoPessoais">
+                                            <div class="row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="nome">Nome</label>
+                                                    <input type="text" class="form-control" id="nome" data-required="true" placeholder="Informe seu nome">
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <label for="email">E-mail</label>
+                                                    <input type="text" class="form-control" id="email" data-required="true" placeholder="email@dominio.com">
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <label for="cpf">CPF</label>
+                                                    <input type="text" class="form-control" id="cpf" data-required="true" placeholder="Informe seu CPF">
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <label for="rg">RG</label>
+                                                    <input type="text" class="form-control" id="rg" data-required="true">
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <label for="dataNascimento">Data nascimento</label>
+                                                    <input type="text" class="form-control" id="dataNascimento" data-required="true">
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <label for="telefone">Telefone</label>
+                                                    <input type="text" class="form-control" id="telefone" data-required="true">
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <label for="cep">CEP</label>
+                                                    <input type="text" class="form-control" id="cep" data-required="true">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="endereco">Endereço</label>
+                                                    <input type="text" class="form-control" id="endereco" data-required="true">
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <label for="numero">Número</label>
+                                                    <input type="text" class="form-control" id="numero" data-required="true">
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <label for="complemento">Complemento</label>
+                                                    <input type="text" class="form-control" id="complemento" data-required="true">
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <label for="estado">Estado</label>
+                                                    <select class="form-control" id="estado">
+                                                        <option value="0">Selecione</option>
+                                                        <option value="1">Minas Gerais</option>
+                                                        <option value="2">Paraná</option>
+                                                        <option value="3">São Paulo</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-5">
+                                                    <label for="cidade">Cidade</label>
+                                                    <select class="form-control" id="cidade">
+                                                        <option value="0">Selecione</option>
+                                                        <option value="1">Belo Horizonte</option>
+                                                        <option value="2">Curitiba</option>
+                                                        <option value="3">São Paulo</option>
+                                                        <option value="4">Campinas</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- FIM Tab Informações Pessoais -->
+
+                                        <!-- Tab Informações Acadêmicas -->
+                                        <div role="tabpanel" class="tab-pane fade in" id="tabInfoAcademicas">
+                                            <div class="row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="exampleInputEmail1">Curso</label>
+                                                    <input type="text" class="form-control" id="exampleInputEmail1" data-required="true">
+                                                </div>
+                                                <div class="form-group col-md-5">
+                                                    <label for="exampleInputEmail1">Instituição</label>
+                                                    <input type="text" class="form-control" id="exampleInputEmail1" data-required="true">
+                                                </div>
+
+                                                <div class="form-group col-md-3">
+                                                    <label for="exampleInputEmail1">Tipo de curso</label>
+                                                    <select class="form-control">
+                                                        <option value="0">Selecione</option>
+                                                        <option value="1">Formação Escolar Fundamental (1°Grau) e Média (3°Grau)</option>
+                                                        <option value="2">Curso Técnico - Médio (2°Grau)</option>
+                                                        <option value="3">Graduação</option>
+                                                        <option value="4">Pós Graduação - Especialização</option>
+                                                        <option value="5">Pós Graduação - MBA</option>
+                                                        <option value="6">Pós Graduação - Mestrado</option>
+                                                        <option value="7">Pós Graduação - Doutorado</option>
+                                                        <option value="8">Cursos Complemetares</option>
+                                                    </select> 
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <label for="exampleInputEmail1">Situação atual</label>
+                                                    <select class="form-control">
+                                                        <option value="0">Selecione</option>
+                                                        <option value="1">Concluído</option>
+                                                        <option value="2">Cursando</option>
+                                                        <option value="3">Interrompido</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <label for="exampleInputEmail1">Mês/Ano de conclusão</label>
+                                                    <input type="text" class="form-control" id="exampleInputEmail1" data-required="true">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- FIM Tab Informações Acadêmicas -->
+                                    </div>
+                                    
+                                    <hr />
+                                    
                                     <div class="row">
-                                        <div class="form-group col-md-6">
-                                            <label for="nome">Nome completo</label>
-                                            <input type="text" class="form-control input-sm" id="nome" data-required="true" required>
-                                        </div><!-- /-->
-                                        <div class="form-group col-md-6">
-                                            <label for="email">E-mail</label>
-                                            <input type="text" class="form-control input-sm" id="email" data-required="true">
-                                        </div><!-- /-->
-                                        
-                                        <div class="form-group col-md-6">
-                                            <label for="cpf">CPF</label>
-                                            <input type="text" class="form-control input-sm" id="cpf" data-required="true">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="rg">RG</label>
-                                            <input type="text" class="form-control input-sm" id="rg" data-required="true">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="exampleInputEmail1">Data nascimento</label>
-                                            <input type="text" class="form-control input-sm" id="exampleInputEmail1" data-required="true">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="exampleInputEmail1">Telefone</label>
-                                            <input type="text" class="form-control input-sm" id="exampleInputEmail1" data-required="true">
-                                        </div>
-                                        <div>
-                                            <div class="form-group col-md-6">
-                                                <label for="exampleInputEmail1">Cidade</label>
-                                                <select class="form-control">
-                                                    <option value="0">Selecione</option>
-                                                    <option value="1">Belo Horizonte</option>
-                                                    <option value="2">Curitiba</option>
-                                                    <option value="3">São Paulo</option>
-                                                    <option value="4">Campinas</option>
-                                                </select>
+                                        <div class="form-group col-md-12">
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <label class="control-label">Pretensão salarial</label>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <input type="text" class="form-control" placeholder="R$" />
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <p class="text-center">até</p>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <input type="text" class="form-control" placeholder="R$" />
+                                                </div>
                                             </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="exampleInputEmail1">Estado</label>
-                                                <select class="form-control">
-                                                    <option value="0">Selecione</option>
-                                                    <option value="1">Minas Gerais</option>
-                                                    <option value="2">Paraná</option>
-                                                    <option value="3">São Paulo</option>
-                                                </select>
-                                            </div>
-                                        </div>	
-                                        
-                                        <div>
-                                            <div class="form-group col-md-6">
-                                                <label for="exampleInputEmail1">Curso</label>
-                                                <input type="text" class="form-control input-sm" id="exampleInputEmail1" data-required="true">
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="exampleInputEmail1">Instituição</label>
-                                                <input type="text" class="form-control input-sm" id="exampleInputEmail1" data-required="true">
-                                            </div>
-                                        </div>	
-                                        
-                                        <div class="form-group col-md-6">
-                                            <label for="exampleInputEmail1">Tipo de curso</label>
-                                            <select class="form-control">
-                                                <option value="0">Selecione</option>
-                                                <option value="1">Formação Escolar Fundamental (1°Grau) e Média (3°Grau)</option>
-                                                <option value="2">Curso Técnico - Médio (2°Grau)</option>
-                                                <option value="3">Graduação</option>
-                                                <option value="4">Pós Graduação - Especialização</option>
-                                                <option value="5">Pós Graduação - MBA</option>
-                                                <option value="6">Pós Graduação - Mestrado</option>
-                                                <option value="7">Pós Graduação - Doutorado</option>
-                                                <option value="8">Cursos Complemetares</option>
-                                            </select> 
                                         </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="exampleInputEmail1">Situação atual</label>
-                                            <select class="form-control">
-                                                <option value="0">Selecione</option>
-                                                <option value="1">Concluído</option>
-                                                <option value="2">Cursando</option>
-                                                <option value="3">Interrompido</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="exampleInputEmail1">Mês/Ano de conclusão</label>
-                                            <input type="text" class="form-control input-sm" id="exampleInputEmail1" data-required="true">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label class="control-label">Pretensão salarial</label>
-                                            <div class="slider slider-horizontal" style="width: 210px;"><div class="slider-track"><div class="slider-selection" style="left: 14.1414%; width: 50.5051%;"></div><div class="slider-handle round" style="left: 14.1414%;"></div><div class="slider-handle round" style="left: 64.6465%;"></div></div><div class="tooltip top" style="top: -30px; left: 49.2273px;"><div class="tooltip-arrow"></div><div class="tooltip-inner">150 : 650</div></div><input type="text" class="form-control" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[150,650]" id="sl2"></div>
-                                        </div>
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-4">
                                             <label for="exampleInputEmail1">Como ficou sabendo desta vaga?</label>
                                             <select class="form-control">
                                                 <option value="0">Selecione</option>
@@ -608,9 +671,14 @@
                                                 <option value="8">Outros</option>
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="exampleInputEmail1">Currículo</label>
-                                            <input type="file">
+                                        <div class="form-group col-xs-12">
+                                            <label class="control-label">Currículo</label>
+                                            <div class="upload-file">
+                                                <input type="file" id="upload-curriculo" class="upload-demo">
+                                                <label data-title="Selecione" for="upload-curriculo">
+                                                    <span data-title="Nenhum arquivo selecionado..."></span>
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -620,8 +688,8 @@
                                     </div>
                                 </form>
                             </div>
-                        </section><!-- /Section -->
-                    </div><!-- /.padding-md -->
+                        </div>
+                    </div>
                 
                 <!-- SOMENTE ALTERAR DAQUI PARA CIMA -->
                 
