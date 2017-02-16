@@ -565,10 +565,83 @@
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-success"><i class="fa fa-check"></i> Salvar</button>
+                        <button class="btn btn-warning"><i class="fa fa-edit"></i> Redefinir senha</button>
+                        <button class="btn btn-danger"><span class="fa fa-trash-o"></span> Excluir</button>
                     </div>
                 </div>
             </div>
         </div>
+            
+            <!-- Modal -->
+        <div class="modal fade" id="editar-usuario-modal" data-target="#editar-usuario-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Editar usuário</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="padding-md">
+                            <div class="row">
+                                <form>
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label for="funcionario">Funcionário</label>
+                                            <select class="form-control">
+                                                <option value="0">Selecionar funcionário</option>
+                                                <option value="1">André</option>
+                                                <option value="2">Daniel</option>
+                                                <option value="3">Fabio</option>
+                                                <option value="4">Graziela</option>
+                                                <option value="5">Guilherme</option>
+                                                <option value="6">Iago</option>
+                                                <option value="7">Leonardo</option>
+                                                <option value="8">Stephen</option>
+                                                <option value="9">Thamires</option>
+                                                <option value="10">Vitor</option>
+                                                <option value="11">Yuri</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="usuario">Usuário</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">@</span>
+                                                <input type="text" class="form-control" id="usuario"data-required="true">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 cold-md-offset-6">
+                                            <label for="email">E-mail corporativo</label>
+                                            <input type="email" class="form-control" id="email"data-required="true">
+                                        </div>
+                                        <div class="form-group open col-md-6">
+                                            <label for="permissao">Perfil</label>
+                                            <select class="form-control">
+                                                <option value="0">Selecionar</option>
+                                                <option value="1">Administrador</option>
+                                                <option value="2">RH</option>
+                                                <option value="3">Gestor Administrativo</option>
+                                                <option value="4">Gestor de Desenvolvimento</option>
+                                                <option value="5">Gestor de Teste</option>
+                                                <option value="6">Gestor de Projetos</option>
+                                                <option value="7">Arquiteto </option>
+                                                <option value="8">Diretor de Operação</option>
+                                                <option value="9">CEO</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div><!--close row-->
+                        </div><!--close padding-->
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success"><i class="fa fa-check"></i> Salvar</button>
+                        <button class="btn btn-warning"><i class="fa fa-edit"></i> Redefinir senha</button>
+                        <button class="btn btn-danger"><span class="fa fa-trash-o"></span> Excluir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
 <div class="container">
     <div class="padding-md">	
         <div class="col-md-12">
@@ -604,13 +677,8 @@
                                <span class="label label-success status ">Ativo</span>
                                 </td>
                                 <td>
-                                    <div class="btn-group">
-                                        <button class="btn btn-info dropdown-toggle  btn-sm" data-toggle="dropdown"><i class="fa fa-cogs fa-lg"></i> <span class="caret"></span></button>
-                                        <ul class="dropdown-menu slidedown">
-                                            <li><a href="#rederfinir-senha-modal" data-toggle="modal">Redefinir senha</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#excluir-modal" data-toggle="modal">Excluir</a></li>
-                                        </ul>
+                                    <div class="btn-group" >
+                                        <a class="btn btn-info" href="#editar-usuario-modal" data-toggle="modal"><i class="fa fa-edit"></i> Editar</a>	
                                     </div>
                                 </td>
                             </tr>
@@ -628,16 +696,11 @@
                                     Gestor
                                 </td>
                                 <td>
-                            <span class="label label-success status">Ativo</span>
+                                    <span class="label label-success status">Ativo</span>
                                 </td>
                                 <td>
-                                   <div class="btn-group">
-                                        <button class="btn btn-info dropdown-toggle  btn-sm" data-toggle="dropdown"><i class="fa fa-cogs fa-lg"></i> <span class="caret"></span></button>
-                                        <ul class="dropdown-menu slidedown">
-                                            <li><a href="#rederfinir-senha-modal" data-toggle="modal">Redefinir senha</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#excluir-modal" data-toggle="modal">Excluir</a></li>
-                                        </ul>
+                                   <div class="btn-group" >
+                                        <a class="btn btn-info" href="#editar-usuario-modal" data-toggle="modal"><i class="fa fa-edit"></i> Editar</a>	
                                     </div>
                                 </td>
                             </tr>
@@ -659,13 +722,8 @@
                                     <span class="label label-success status">Ativo</span>
                                 </td>
                                 <td>
-                                    <div class="btn-group">
-                                        <button class="btn btn-info dropdown-toggle  btn-sm" data-toggle="dropdown"><i class="fa fa-cogs fa-lg"></i> <span class="caret"></span></button>
-                                        <ul class="dropdown-menu slidedown">
-                                            <li><a href="#rederfinir-senha-modal" data-toggle="modal">Redefinir senha</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#excluir-modal" data-toggle="modal">Excluir</a></li>
-                                        </ul>
+                                    <div class="btn-group" >
+                                        <a class="btn btn-info" href="#editar-usuario-modal" data-toggle="modal"><i class="fa fa-edit"></i> Editar</a>	
                                     </div>
                                 </td>
                             </tr>
