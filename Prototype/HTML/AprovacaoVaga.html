@@ -493,7 +493,10 @@
 			</div><!--breadcrumb-->
 
 		<div class="padding-md">
-			
+			<div class="panel panel-default">
+							<div class="panel-heading"><b>Aprovação de vaga</b></div>
+							<div class="panel-body">
+
 			<table class="table table-striped" id="responsiveTable">
 						<thead>
 							<tr>
@@ -515,12 +518,14 @@
 								<td>Carrefour</td>
 								<td>Interno</td>
 								<td>
-									<div class="row">
-										
-											<a class="btn btn-xs btn-success">Aprovar</a>
-											<a class="btn btn-xs btn-danger">Reprovar</a>
-											<a href="#formModal" class="btn btn-xs btn-info" data-toggle="modal">Visualizar</a>
-										</div>
+									<div class="btn-group">
+										<button class="btn btn-sm dropdown-toggle btn-info" data-toggle="dropdown"><i class="fa fa-cogs fa-lg"></i> <span class="caret"></span></button>
+											<ul class="dropdown-menu">
+												<li><a href="#">Aprovar</a></li>
+												<li><a href="#">Reprovar</a></li>
+												<li><a href="solicitacaoVaga.html">Visualizar</a></li>
+											</ul>
+									</div><!-- /btn-group -->
 								</td>
 							</tr>
 						</thead>
@@ -533,12 +538,14 @@
 								<td>Carrefour</td>
 								<td>Interno</td>
 								<td>
-									<div class="row">
-										
-											<a class="btn btn-xs btn-success">Aprovar</a>
-											<a class="btn btn-xs btn-danger">Reprovar</a>
-											<a href="#formModal" class="btn btn-xs btn-info" data-toggle="modal">Visualizar</a>
-										</div>
+									<div class="btn-group">
+										<button class="btn btn-sm dropdown-toggle btn-info" data-toggle="dropdown"><i class="fa fa-cogs fa-lg"></i> <span class="caret"></span></button>
+											<ul class="dropdown-menu">
+												<li><a href="#">Aprovar</a></li>
+												<li><a href="#">Reprovar</a></li>
+												<li><a href="#">Visualizar</a></li>
+											</ul>
+									</div><!-- /btn-group -->
 								</td>
 							</tr>
 						</thead>
@@ -551,52 +558,22 @@
 								<td>Alelo</td>
 								<td>Interno</td>
 								<td>
-									<div class="row">
-										
-											<a class="btn btn-xs btn-success">Aprovar</a>
-											<a class="btn btn-xs btn-danger">Reprovar</a>
-											<a href="#formModal" class="btn btn-xs btn-info" data-toggle="modal">Visualizar</a>
-										
-										</div>
+									<div class="btn-group">
+										<button class="btn btn-sm dropdown-toggle btn-info" data-toggle="dropdown"><i class="fa fa-cogs fa-lg"></i> <span class="caret"></span></button>
+											<ul class="dropdown-menu">
+												<li><a href="#">Aprovar</a></li>
+												<li><a href="#">Reprovar</a></li>
+												<li><a href="#">Visualizar</a></li>
+											</ul>
+									</div><!-- /btn-group -->
 								</td>
 							</tr>
 					</tbody>
 					</table>
-					
+				</div><!-- /panel -->
 							
 		</div><!-- /.padding-md -->
 
-		<!-- /Modal -->
-		<div class="modal fade" id="formModal">
-  			<div class="modal-dialog">
-    			<div class="modal-content">
-      				<div class="modal-header">
-        				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4>Informações da vaga</h4>
-      				</div>
-				    <div class="modal-body">
-						<form>
-							<div class="form-group">
-								<label>Salário</label>
-								R$ 4200,00
-							</div>
-							<div class="form-group">
-								<label>Data de início</label>
-								23/03/2017
-							</div>
-							<div class="form-group">
-								<label>Descrição</label>
-								A vaga tal tal tal larararara
-							</div>
-							<div class="form-group text-right">
-								<a class="btn btn-success">Aprovar</a>
-								<a class="btn btn-danger">Reprovar</a>
-							</div>
-						</form>
-				    </div>
-			  	</div><!-- /.modal-content -->
-			</div><!-- /.modal-dialog -->
-		</div><!-- /.modal -->
 	</div><!-- /wrapper -->
 
 	<a href="" id="scroll-to-top" class="hidden-print"><i class="fa fa-chevron-up"></i></a>
