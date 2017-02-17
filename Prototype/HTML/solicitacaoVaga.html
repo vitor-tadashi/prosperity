@@ -487,30 +487,44 @@
 			</div><!-- /sidebar-inner scrollable-sidebar -->
 		</aside>
 
-		<div id="main-container">
-			<div id="breadcrumb">
-				<ul class="breadcrumb">
-					 <li><i class="fa fa-home"></i><a href="index.html"> Home</a></li>
-					 <li>Form</li>	 
-					 <li class="active">Form Element</li>	 
+	<div id="main-container">
+		<div id="breadcrumb">
+			<ul class="breadcrumb">
+				 <li><i class="fa fa-home"></i><a href="index.html"> Home</a></li>
+				 <li>Form</li>	 
+				 <li class="active">Abertura de Vaga</li>	 
+			</ul>
+		</div><!--breadcrumb-->
+
+		<div class="panel panel-default">
+
+			<div class="panel-tab">	
+				<ul class="wizard-steps" id="wizardTab2"> 
+					<li class="active">
+						<a href="#wizardContent1" data-toggle="tab">Informações Básicas</a>
+					</li> 
+					<li>
+						<a href="#wizardContent2" data-toggle="tab">Dados do Projeto</a>
+					</li> 
+					<li>
+						<a href="#wizardContent3" data-toggle="tab">Perfil</a>
+					</li>
 				</ul>
-			</div><!--breadcrumb-->
+			</div>
 
-		<div class="padding-md">
-			<div class="row">
-				<section class="panel panel-default">
-					<div class="panel-heading">Informações básicas</div>
-					<div class="panel-body">
+			<div class="panel-body">
+				<div class="tab-content">
+					<div class="tab-pane fade in active" id="wizardContent1">
+
 						<form>
-
 							<div class="form-group row">
 								<div>
-									<div class="form-group col-md-6" style="margin-bottom: 0px">
+									<div class="form-group col-md-6">
 										<label for="exampleInputEmail1">Solicitante</label>
 										<input type="name" class="form-control input-sm" id="exampleInputEmail1" placeholder="Solicitante" data-required="true">
 									</div><!-- /form-group -->
 
-									<div class="form-group col-md-6" style="margin-bottom: 0px">																						
+									<div class="form-group col-md-6">																						
 										<label for="exampleInputEmail1">Local de trabalho</label>
 										<div>
 											<label class="label-radio inline">
@@ -523,48 +537,48 @@
 												<span class="custom-radio"></span>
 												Cliente
 											</label>
-										</div><!-- /.col -->
-									</div>
-								</div>	
-							</div>
-
-							<div class="form-group row">
-								<div>
-									<div class="form-group col-md-6" style="margin-bottom: 0px">
-										<label for="exampleInputEmail1">Cargo</label>
-										<select class="form-control chzn-select">
-											<option>Analista de testes</option>
-											<option>Analista de sistemas</option>
-											<option>Desenvolvedor</option>
-											<option>Gerente de projetos</option>
-										</select>	
+										</div>
 									</div><!-- /form-group -->
-
-									<div class="form-group col-md-6" style="margin-bottom: 0px">																						
-										<label for="exampleInputEmail1">Tipo de vaga</label>
-										<div>
-											<label class="label-radio inline">
-												<input type="radio" name="inline-radio3" checked>
-												<span class="custom-radio"></span>
-												Real
-											</label>
-											<label class="label-radio inline">
-												<input type="radio" name="inline-radio3">
-												<span class="custom-radio"></span>
-												Prospecção
-											</label>
-											<label class="label-radio inline">
-												<input type="radio" name="inline-radio3">
-												<span class="custom-radio"></span>
-												Hunting
-											</label>
-										</div><!-- /.col -->
-									</div>
-								</div>
-							</div>
+								</div>	
+							</div><!-- /form-group -->
 
 							<div class="form-group row">
-								<div class="form-group col-md-6" style="margin-bottom: 0px">
+							
+								<div class="form-group col-md-6">
+									<label for="exampleInputEmail1">Cargo</label>
+									<select class="form-control chzn-select">
+										<option>Analista de testes</option>
+										<option>Analista de sistemas</option>
+										<option>Desenvolvedor</option>
+										<option>Gerente de projetos</option>
+									</select>	
+								</div><!-- /form-group -->
+
+								<div class="form-group col-md-6">																						
+									<label for="exampleInputEmail1">Tipo de vaga</label>
+									<div>
+										<label class="label-radio inline">
+											<input type="radio" name="inline-radio3" checked>
+											<span class="custom-radio"></span>
+											Real
+										</label>
+										<label class="label-radio inline">
+											<input type="radio" name="inline-radio3">
+											<span class="custom-radio"></span>
+											Prospecção
+										</label>
+										<label class="label-radio inline">
+											<input type="radio" name="inline-radio3">
+											<span class="custom-radio"></span>
+											Hunting
+										</label>
+									</div>
+								</div><!-- /form-group -->
+									
+							</div><!-- /form-group -->
+
+							<div class="form-group row">
+								<div class="form-group col-md-6">
 									<label for="exampleInputEmail1">Senioridade da vaga</label>
 									<select class="form-control chzn-select">
 										<option>Estágio</option>
@@ -574,7 +588,7 @@
 									</select>	
 								</div><!-- /form-group -->
 
-								<div class="form-group col-md-6" style="margin-bottom: 0px">
+								<div class="form-group col-md-6">
 									<label class="control-label">Horário</label>
 
 									<div>
@@ -583,108 +597,79 @@
 												<input class="timepicker form-control" type="text"/ value="08:00 AM">
 												<span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
 											</div>
-										</div>
+										</div><!-- /form-group -->
 
 										<div class="form-group col-md-1">
 											<label style="margin-top: 7px">Às</label>
-										</div>
+										</div><!-- /form-group -->
 
 										<div class="form-group col-md-5">
 											<div class="input-group bootstrap-timepicker">
 												<input class="timepicker form-control" type="text"/ value="05:00 PM">
 												<span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
 											</div>
-										</div>
+										</div><!-- /form-group -->
 									</div>
 
-								</div>
+								</div><!-- /form-group -->
 							</div>
 
 							<div class="form-group row">
 
-								<div class="">
-									<div class="form-group col-md-6" style="margin-bottom: 0px">
-										<label for="exampleInputPassword1">Faixa salarial</label>												
-										<input type="password" class="form-control input-sm" id="exampleInputPassword1" placeholder="Faixa Salarial" disabled>
-									</div><!-- /form-group -->
+								<div class="form-group col-md-6">
+									<label for="exampleInputPassword1">Faixa salarial</label>												
+									<input type="password" class="form-control input-sm" id="exampleInputPassword1" placeholder="Faixa Salarial" disabled>
+								</div><!-- /form-group -->
 
-									<div class="form-group col-md-6" style="margin-bottom: 0px">
-										<label for="exampleInputEmail1">Aumento de quadro</label>
-										<div>
-											<label class="label-radio inline">
-												<input id="novo" type="radio" name="inline-radio" checked> 
-												<span class="custom-radio">
-												</span>
-												Novo
-											</label>
-											<label class="label-radio inline">
-												<input id="sub" type="radio" name="inline-radio">
-												<span class="custom-radio" >
-												</span>
-												Substituição
-											</label>
-											
-										</div><!-- /.col -->
-									</div>
-								</div>
-							</div>
+								<div class="form-group col-md-6">
+									<label for="exampleInputEmail1">Aumento de quadro</label>
+									<div>
+										<label class="label-radio inline">
+											<input id="novo" type="radio" name="inline-radio" checked> 
+											<span class="custom-radio">
+											</span>
+											Novo
+										</label>
+										<label class="label-radio inline">
+											<input id="sub" type="radio" name="inline-radio">
+											<span class="custom-radio" >
+											</span>
+											Substituição
+										</label>
+									</div><!-- /.col -->
+								</div><!-- /form-group -->
+								
+							</div><!-- /form-group -->
 
-								<div class="form-group row">
+							<div class="form-group row">
 
-									<div class="form-group col-md-6" style="margin-bottom: 0px">
-
+								<div class="form-group col-md-6">
+									<div class="form-group">
+										<label class="control-label">Data para inicio</label>
 										<div class="form-group">
-											<label class="control-label">Data para inicio</label>
-											<div class="form-group">
-												<div class="input-group">
-													<input type="text" value="01/01/2017" class="datepicker form-control">
-													<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-												</div>
-											</div><!-- /.col -->
-										</div><!-- /form-group -->
-									</div>
+											<div class="input-group">
+												<input type="text" value="01/01/2017" class="datepicker form-control">
+												<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+											</div>
+										</div><!-- /.col -->
+									</div><!-- /form-group -->
+								</div><!-- /form-group -->
 
-									<div class="form-group col-md-6" style="margin-bottom: 0px">
-										<div id="nome" class="hide">
-											<label>Nome do substituido</label>
-											<input type="text" class="form-control input-sm" placeholder="Nome do Substituido">
-										</div>
-									</div>
-									
+								<div id="nome" class="form-group col-md-6 hide">
+									<label>Nome do substituido</label>
+									<input type="text" class="form-control input-sm" placeholder="Nome do Substituido">
 								</div>
+								
+							</div><!-- /form-group -->
 
 						</form>
 					</div>
-				</section><!-- /Section -->
 
-					<section id="dadosInterno" class="panel panel-default">
-						<div class="panel-heading">Dados do projeto</div>
-						<div class="panel-body">
-							<div>
+					<div class="tab-pane fade" id="wizardContent2">
 
-								<div class="form-group">
-									<label for="exampleInputEmail1">Nome do projeto</label>
-									<input type="text" class="form-control input-sm" id="exampleInputEmail1" placeholder="Nome do Projeto" data-required="true">
-								</div><!-- /form-group -->
-								<div class="form-group">
-									<label for="exampleInputEmail1">Cliente</label>
-									<input type="text" class="form-control input-sm" id="exampleInputEmail1" placeholder="Cliente" data-required="true">
-								</div><!-- /form-group -->
-
-								<div class="form-group">
-									<label for="exampleInputEmail1">Gestor imediato</label>
-									<input type="name" class="form-control input-sm" id="exampleInputEmail1" placeholder="Gestor Imediato" data-required="true">
-								</div><!-- /form-group -->
-
-						</div>
-							</div>
-					</section><!-- /Section-->
-
-					<section id="dadosAlocacao" class="panel panel-default hide">
-						<div class="panel-heading">Dados do projeto</div>
-						<div class="panel-body">
-
-							<div class="col-md-6">
+						<section id="dadosInterno" class="panel panel-default">
+							
+							<div class="panel-body">
 
 								<div class="form-group">
 									<label for="exampleInputEmail1">Nome do projeto</label>
@@ -701,104 +686,104 @@
 									<input type="name" class="form-control input-sm" id="exampleInputEmail1" placeholder="Gestor Imediato" data-required="true">
 								</div><!-- /form-group -->
 
-								<div class="form-group">
-									<label for="exampleInputEmail1">Telefone 1</label>										
-										<input id="phone-mask" type="text" class=" form-control input-sm phone">
-								</div><!-- /form-group -->
+							</div>
+						</section><!-- /Section-->
+
+						<section id="dadosAlocacao" class="panel panel-default hide">
+							
+							<div class="panel-body">
+
+								<div class="col-md-6">
+
+									<div class="form-group">
+										<label for="exampleInputEmail1">Nome do projeto</label>
+										<input type="text" class="form-control input-sm" id="exampleInputEmail1" placeholder="Nome do Projeto" data-required="true">
+									</div><!-- /form-group -->
+
+									<div class="form-group">
+										<label for="exampleInputEmail1">Cliente</label>
+										<input type="text" class="form-control input-sm" id="exampleInputEmail1" placeholder="Cliente" data-required="true">
+									</div><!-- /form-group -->
+
+									<div class="form-group">
+										<label for="exampleInputEmail1">Gestor imediato</label>
+										<input type="name" class="form-control input-sm" id="exampleInputEmail1" placeholder="Gestor Imediato" data-required="true">
+									</div><!-- /form-group -->
+
+									<div class="form-group">
+										<label for="exampleInputEmail1">Telefone 1</label>										
+											<input id="phone-mask" type="text" class=" form-control input-sm phone">
+									</div><!-- /form-group -->
+
+								</div>
+
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="exampleInputEmail1">Nome do responsável</label>
+										<input type="name" class="form-control input-sm" id="exampleInputEmail1" placeholder="Nome do Cliente Responsável" data-required="true">
+									</div><!-- /form-group -->
+
+									<div class="form-group">
+										<label for="exampleInputEmail1">Área do responsável</label>
+										<input type="text" class="form-control input-sm" id="exampleInputEmail1" placeholder="Área do Cliente Responsável" data-required="true">
+									</div><!-- /form-group -->
+
+									<div class="form-group">
+										<label for="exampleInputEmail1">E-mail</label>
+										<input type="email" class="form-control input-sm" id="exampleInputEmail1" placeholder="E-mail do Cliente Responsável" data-required="true">
+									</div><!-- /form-group -->
+
+									<div class="form-group">
+										<label for="exampleInputEmail1">Telefone 2</label>										
+											<input id="phone-mask" type="text" class=" form-control input-sm phone">
+									</div><!-- /form-group -->
+								</div>
 
 							</div>
+						</section><!-- /Section -->	
 
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="exampleInputEmail1">Nome do responsável</label>
-									<input type="name" class="form-control input-sm" id="exampleInputEmail1" placeholder="Nome do Cliente Responsável" data-required="true">
-								</div><!-- /form-group -->
+					</div>
 
-								<div class="form-group">
-									<label for="exampleInputEmail1">Área do responsável</label>
-									<input type="text" class="form-control input-sm" id="exampleInputEmail1" placeholder="Área do Cliente Responsável" data-required="true">
-								</div><!-- /form-group -->
+					<div class="tab-pane fade" id="wizardContent3">
 
-								<div class="form-group">
-									<label for="exampleInputEmail1">E-mail</label>
-									<input type="email" class="form-control input-sm" id="exampleInputEmail1" placeholder="E-mail do Cliente Responsável" data-required="true">
-								</div><!-- /form-group -->
-
-								<div class="form-group">
-									<label for="exampleInputEmail1">Telefone 2</label>										
-										<input id="phone-mask" type="text" class=" form-control input-sm phone">
-								</div><!-- /form-group -->
-
+						<section class="panel panel-default">
+							<div class="panel-heading">Formação acadêmica</div>
+							<div class="panel-body relative">
+								<textarea class="form-control" rows="3"></textarea>
 							</div>
-						</div>
-					</section><!-- /Section -->
-
-					<section class="panel panel-default">
-						<div class="panel-heading">Etapas do processo seletivo</div>
-						<div class="panel-body relative">
-							<select multiple="multiple" id="selectedBox1" class="select-box pull-left form-control">
-								<option value="1">Entrevista no cliente</option>
-								<option value="2">Entrevista com o gestor</option>
-								<option value="3">Entrevista em inglês</option>
-								<option value="4">Entrevista RH</option>
-								<option value="5">Testes técnicos</option>
-							</select>		
-
-							<div class="select-box-option">
-								<a class="btn btn-sm btn-default" id="btnRemove">
-									<i class="fa fa-angle-left"></i>
-								</a>
-								<a class="btn btn-sm btn-default" id="btnSelect">
-									<i class="fa fa-angle-right"></i>
-								</a>
-								<div class="seperator"></div>
-								<a class="btn btn-sm btn-default" id="btnRemoveAll">
-									<i class="fa fa-angle-double-left"></i>
-								</a>
-								<a class="btn btn-sm btn-default" id="btnSelectAll">
-									<i class="fa fa-angle-double-right"></i>
-								</a>
-							</div>
-
-							<select multiple="multiple" id="selectedBox2" class="select-box pull-right form-control">
-								
-							</select>		
-						</div>
-					</section><!-- /panel -->
-
-					<section class="panel panel-default">
-						<div class="panel-heading">Formação acadêmica</div>
-						<div class="panel-body relative">
-							<div class="form-group">
-							<textarea class="form-control" rows="3"></textarea>
-							</div><!-- /form-group -->
-
-						</div>
-					</section><!-- /panel -->
+						</section><!-- /panel -->
 
 					<section class="panel panel-default">
 						<div class="panel-heading">Perfil comportamental</div>
 						<div class="panel-body relative">
-							<div class="form-group">
 							<textarea class="form-control" rows="3"></textarea>
-							</div><!-- /form-group -->
-
 						</div>
 					</section><!-- /panel -->
 
 					<section class="panel panel-default">
 						<div class="panel-heading">Perfil técnico</div>
 						<div class="panel-body relative">
-
-							<div class="form-group">
 							<textarea class="form-control" rows="3"></textarea>
-							</div><!-- /form-group -->
-
 						</div>
 					</section><!-- /panel -->
-			</div>
-		</div><!-- /.padding-md -->
 
+					</div>
+
+				</div>
+			</div>
+
+			<div class="panel-footer">
+				<button class="btn btn-success btn-sm disabled" id="prevStep" disabled>Previous</button>
+				<button type="submit" class="btn btn-sm btn-success" id="nextStep">Next</button>
+
+				<div class="pull-right" style="width:30%">
+					<div class="progress progress-striped active m-top-sm m-bottom-none">
+						<div class="progress-bar progress-bar-success" id="wizardProgress" style="width:33%;"></div>
+					</div>
+				</div>
+			</div>
+		</div><!-- /panel -->
+		
 		<!-- /Modal -->
 		<div class="modal fade" id="formModal">
   			<div class="modal-dialog">
@@ -904,6 +889,67 @@
 		<script src="js/app/app.js"></script>
 
 		<!-- Custom -->
-		<script src="js/custom/solicitacaoVaga.js"></script>	
+		<script src="js/custom/solicitacaoVaga.js"></script>
+
+		<script>
+		$(function	()	{
+			var currentStep = 1;
+			
+			$('#wizardTab2 li a').click(function()	{
+				return false;
+			});
+			
+			$('#nextStep').click(function()	{
+	
+				currentStep++;
+				
+				if(currentStep == 2)	{
+					$('#wizardTab2 li:eq(1) a').tab('show');
+					$('#wizardProgress').css("width","66%");
+					
+					$('#prevStep').attr('disabled',false);
+					$('#prevStep').removeClass('disabled');
+				}
+				else if(currentStep == 3)	{
+					$('#wizardTab2 li:eq(2) a').tab('show');
+					$('#wizardProgress').css("width","100%");
+					
+					$('#nextStep').attr('disabled',true);
+					$('#nextStep').addClass('disabled');
+				}
+				
+				return false;
+			});
+			
+			$('#prevStep').click(function()	{
+		
+				currentStep--;
+				
+				if(currentStep == 1)	{
+				
+					$('#wizardTab2 li:eq(0) a').tab('show');
+					$('#wizardProgress').css("width","66%");
+						
+					$('#prevStep').attr('disabled',true);
+					$('#prevStep').addClass('disabled');
+					
+					$('#wizardProgress').css("width","33%");
+				}
+				else if(currentStep == 2)	{
+				
+					$('#wizardTab2 li:eq(1) a').tab('show');
+					$('#wizardProgress').css("width","66%");
+							
+					$('#nextStep').attr('disabled',false);
+					$('#nextStep').removeClass('disabled');
+					
+					$('#wizardProgress').css("width","66%");
+				}
+				
+				return false;
+			});
+		});
+	</script>
+
   </body>
 </html>
