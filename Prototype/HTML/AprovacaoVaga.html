@@ -315,8 +315,26 @@
 				</div><!-- /search-block -->
 				<div class="main-menu">
 					<ul>
-						<li>
+
+						<li class="openable">
 							<a href="#">
+								<span class="menu-icon">
+									<i class="fa fa-desktop fa-lg"></i> 
+								</span>
+								<span class="text">
+									Tela de Login
+								</span>
+								<span class="menu-hover"></span>
+							</a>
+							<ul class="submenu">
+								<li><a href="acesso.html"><span class="submenu-label">Login</span></a></li>
+								<li><a href="primeiro-acesso.html"><span class="submenu-label">Primeiro Acesso</span></a></li>
+								
+							</ul>
+						</li>
+
+						<li>
+							<a href="dashboard.html">
 								<span class="menu-icon">
 									<i class="fa fa-desktop fa-lg"></i> 
 								</span>
@@ -397,13 +415,8 @@
 								<span class="menu-hover"></span>
 							</a>
 							
-						</li>
-						
+						</li>	
 					</ul>
-					
-					<div class="alert alert-info">
-						Welcome to Perfect Admin. Do not forget to check all my pages. 
-					</div>
 				</div><!-- /main-menu -->
 			</div><!-- /sidebar-inner scrollable-sidebar -->
 		</aside>
@@ -419,21 +432,21 @@
 
 		<div class="padding-md">
 			<div class="panel panel-default">
-							<div class="panel-heading"><b>Aprovação de vaga</b></div>
+							<div class="panel-heading">Aprovação de vaga</div>
 							<div class="panel-body">
 
-			<table class="table table-striped" id="responsiveTable"> <!-- Começo Tabela -->
+			<table class="table table-bordered table-condensed table-hover table-stripedd" id="responsiveTable"> <!-- Começo Tabela -->
 						<thead>
 							<tr class="text-center">
-								<th>Nome da vaga</th>
-								<th>Solicitante</th>
-								<th>Senioridade</th>
-								<th>Projeto</th>
-								<th>Cliente</th>
-								<th>Local de trabalho</th>
-								<th>Data abertura</th>
-								<th>Data encerramento</th>
-								<th>Ação</th>
+								<th class="text-center">Nome da vaga</th>
+								<th class="text-center">Solicitante</th>
+								<th class="text-center">Senioridade</th>
+								<th class="text-center">Projeto</th>
+								<th class="text-center">Cliente</th>
+								<th class="text-center">Local de trabalho</th>
+								<th class="text-center">Data abertura</th>
+								<th class="text-center">Data encerramento</th>
+								<th class="text-center">Ações</th>
 							</tr>
 						</thead>
 						<tbody>
