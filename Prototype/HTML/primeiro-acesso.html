@@ -23,7 +23,7 @@
 		<div class="text-center">
                       <img src="img/png_colorido_slogan.png" alt="Second slide" class="m-bottom-md" style="width:400px;">
 		</div>
-		<div class="login-widget">	
+		<div class="login-widget animation-delay1">	
 			<div class="panel panel-default">
 				<div class="panel-heading clearfix">
 					<div class="text-center">
@@ -32,17 +32,23 @@
 				</div>
 				<div class="panel-body">
 					<form class="form-login">
-						<div class="form-group">
+						<div class="form-group bounceIn animation-delay2">
 							<label>Usuário</label>
-							<input type="name" placeholder="Usuário" class="form-control input-sm bounceIn" >
+                            <p class="form-control-static">guilherme.oliveira</p>
 						</div>			
-						<div class="form-group">
+						<div class="form-group bounceIn animation-delay3">
 							<label>Nova senha</label>
-							<input type="password" placeholder="Nova senha" class="form-control input-sm bounceIn" >
+                            <div class="input-group input-sm">
+                                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+				                <input type="password" placeholder="Senha" class="form-control input-sm" >
+                            </div>
 						</div>
-						<div class="form-group">
+						<div class="form-group bounceIn animation-delay4">
 							<label>Confirmar nova senha</label>
-							<input type="password" placeholder="Confirmar nova senha" class="form-control input-sm bounceIn">
+                            <div class="input-group input-sm">
+                                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+				                <input type="password" placeholder="Confirmar nova senha" class="form-control input-sm" >
+                            </div>
 						</div>					
 						<a class="btn btn-success btn-sm bounceIn animation-delay5 login-link pull-right" href="index.html"><i class="fa fa-sign-in"></i> Entrar</a>
 					</form>
