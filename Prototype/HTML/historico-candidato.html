@@ -45,211 +45,211 @@
         
         <style>
             .page-header h1 {
-              font-size: 3.26em;
-              text-align: center;
-              color: #efefef;
-              text-shadow: 1px 1px 0 #000;
+                font-size: 3.26em;
+                text-align: center;
+                color: #efefef;
+                text-shadow: 1px 1px 0 #000;
             }
-
+            
             /** timeline box structure **/
             .timeline {
-              list-style: none;
-              padding: 20px 0 20px;
-              position: relative;
+                list-style: none;
+                padding: 20px 0 20px;
+                position: relative;
             }
-
+            
             .timeline:before {
-              top: 0;
-              bottom: 0;
-              position: absolute;
-              content: " ";
-              width: 3px;
-              background-color: #eee;
-              left: 50%;
-              margin-left: -1.5px;
+                top: 0;
+                bottom: 0;
+                position: absolute;
+                content: " ";
+                width: 3px;
+                background-color: #eee;
+                left: 50%;
+                margin-left: -1.5px;
             }
-
+            
             .tldate {
-              display: block;
-              width: 200px;
-              background: #414141;
-              border: 3px solid #212121;
-              color: #ededed;
-              margin: 0 auto;
-              padding: 3px 0;
-              font-weight: bold;
-              text-align: center;
-              -webkit-box-shadow: 0 0 11px rgba(0,0,0,0.35);
+                display: block;
+                width: 200px;
+                background: #414141;
+                border: 3px solid #212121;
+                color: #ededed;
+                margin: 0 auto;
+                padding: 3px 0;
+                font-weight: bold;
+                text-align: center;
+                -webkit-box-shadow: 0 0 11px rgba(0,0,0,0.35);
             }
-
+            
             .timeline li {
-              margin-bottom: 25px;
-              position: relative;
+                margin-bottom: 25px;
+                position: relative;
             }
-
+            
             .timeline li:before, .timeline li:after {
-              content: " ";
-              display: table;
+                content: " ";
+                display: table;
             }
             .timeline li:after {
-              clear: both;
+                clear: both;
             }
             .timeline li:before, .timeline li:after {
-              content: " ";
-              display: table;
+                content: " ";
+                display: table;
             }
-
+            
             /** timeline panels **/
             .timeline li .timeline-panel {
-              width: 46%;
-              float: left;
-              background: #fff;
-              border: 1px solid #d4d4d4;
-              padding: 20px;
-              position: relative;
-              -webkit-border-radius: 8px;
-              -moz-border-radius: 8px;
-              border-radius: 8px;
-              -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
-              -moz-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
-              box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
+                width: 46%;
+                float: left;
+                background: #fff;
+                border: 1px solid #d4d4d4;
+                padding: 20px;
+                position: relative;
+                -webkit-border-radius: 8px;
+                -moz-border-radius: 8px;
+                border-radius: 8px;
+                -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
+                -moz-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
+                box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
             }
-
+            
             /** panel arrows **/
             .timeline li .timeline-panel:before {
-              position: absolute;
-              top: 26px;
-              right: -15px;
-              display: inline-block;
-              border-top: 15px solid transparent;
-              border-left: 15px solid #ccc;
-              border-right: 0 solid #ccc;
-              border-bottom: 15px solid transparent;
-              content: " ";
+                position: absolute;
+                top: 26px;
+                right: -15px;
+                display: inline-block;
+                border-top: 15px solid transparent;
+                border-left: 15px solid #ccc;
+                border-right: 0 solid #ccc;
+                border-bottom: 15px solid transparent;
+                content: " ";
             }
-
+            
             .timeline li .timeline-panel:after {
-              position: absolute;
-              top: 27px;
-              right: -14px;
-              display: inline-block;
-              border-top: 14px solid transparent;
-              border-left: 14px solid #fff;
-              border-right: 0 solid #fff;
-              border-bottom: 14px solid transparent;
-              content: " ";
+                position: absolute;
+                top: 27px;
+                right: -14px;
+                display: inline-block;
+                border-top: 14px solid transparent;
+                border-left: 14px solid #fff;
+                border-right: 0 solid #fff;
+                border-bottom: 14px solid transparent;
+                content: " ";
             }
             .timeline li .timeline-panel.noarrow:before, .timeline li .timeline-panel.noarrow:after {
-              top:0;
-              right:0;
-              display: none;
-              border: 0;
+                top:0;
+                right:0;
+                display: none;
+                border: 0;
             }
-
+            
             .timeline li.timeline-inverted .timeline-panel {
-              float: right;
-            }
-
-            .timeline li.timeline-inverted .timeline-panel:before {
-              border-left-width: 0;
-              border-right-width: 15px;
-              left: -15px;
-              right: auto;
-            }
-
-            .timeline li.timeline-inverted .timeline-panel:after {
-              border-left-width: 0;
-              border-right-width: 14px;
-              left: -14px;
-              right: auto;
-            }
-
-
-            /** timeline circle icons **/
-            .timeline li .tl-circ {
-              position: absolute;
-              top: 23px;
-              left: 50%;
-              text-align: center;
-              background: #6a8db3;
-              color: #fff;
-              width: 35px;
-              height: 35px;
-              line-height: 35px;
-              margin-left: -16px;
-              border: 3px solid #90acc7;
-              border-top-right-radius: 50%;
-              border-top-left-radius: 50%;
-              border-bottom-right-radius: 50%;
-              border-bottom-left-radius: 50%;
-              z-index: 99999;
-            }
-
-
-            /** timeline content **/
-
-            .tl-heading h4 {
-              margin: 0;
-              color: #c25b4e;
-            }
-
-            .tl-body p, .tl-body ul {
-              margin-bottom: 0;
-            }
-
-            .tl-body > p + p {
-              margin-top: 5px;
-            }
-
-            /** media queries **/
-            @media (max-width: 991px) {
-              .timeline li .timeline-panel {
-                width: 44%;
-              }
-            }
-
-            @media (max-width: 700px) {
-              .page-header h1 { font-size: 1.8em; }
-
-              ul.timeline:before {
-                left: 40px;
-              }
-
-              .tldate { width: 140px; }
-
-              ul.timeline li .timeline-panel {
-                width: calc(100% - 90px);
-                width: -moz-calc(100% - 90px);
-                width: -webkit-calc(100% - 90px);
-              }
-
-              ul.timeline li .tl-circ {
-                top: 22px;
-                left: 22px;
-                margin-left: 0;
-
-              }
-              ul.timeline > li > .tldate {
-                margin: 0;
-              }
-
-              ul.timeline > li > .timeline-panel {
                 float: right;
-              }
-
-              ul.timeline > li > .timeline-panel:before {
+            }
+            
+            .timeline li.timeline-inverted .timeline-panel:before {
                 border-left-width: 0;
                 border-right-width: 15px;
                 left: -15px;
                 right: auto;
-              }
-
-              ul.timeline > li > .timeline-panel:after {
+            }
+            
+            .timeline li.timeline-inverted .timeline-panel:after {
                 border-left-width: 0;
                 border-right-width: 14px;
                 left: -14px;
                 right: auto;
-              }
+            }
+            
+            
+            /** timeline circle icons **/
+            .timeline li .tl-circ {
+                position: absolute;
+                top: 23px;
+                left: 50%;
+                text-align: center;
+                background: #6a8db3;
+                color: #fff;
+                width: 35px;
+                height: 35px;
+                line-height: 35px;
+                margin-left: -16px;
+                border: 3px solid #90acc7;
+                border-top-right-radius: 50%;
+                border-top-left-radius: 50%;
+                border-bottom-right-radius: 50%;
+                border-bottom-left-radius: 50%;
+                z-index: 99999;
+            }
+            
+            
+            /** timeline content **/
+            
+            .tl-heading h4 {
+                margin: 0;
+                color: #c25b4e;
+            }
+            
+            .tl-body p, .tl-body ul {
+                margin-bottom: 0;
+            }
+            
+            .tl-body > p + p {
+                margin-top: 5px;
+            }
+            
+            /** media queries **/
+            @media (max-width: 991px) {
+                .timeline li .timeline-panel {
+                    width: 44%;
+                }
+            }
+            
+            @media (max-width: 700px) {
+                .page-header h1 { font-size: 1.8em; }
+                
+                ul.timeline:before {
+                    left: 40px;
+                }
+                
+                .tldate { width: 140px; }
+                
+                ul.timeline li .timeline-panel {
+                    width: calc(100% - 90px);
+                    width: -moz-calc(100% - 90px);
+                    width: -webkit-calc(100% - 90px);
+                }
+                
+                ul.timeline li .tl-circ {
+                    top: 22px;
+                    left: 22px;
+                    margin-left: 0;
+                    
+                }
+                ul.timeline > li > .tldate {
+                    margin: 0;
+                }
+                
+                ul.timeline > li > .timeline-panel {
+                    float: right;
+                }
+                
+                ul.timeline > li > .timeline-panel:before {
+                    border-left-width: 0;
+                    border-right-width: 15px;
+                    left: -15px;
+                    right: auto;
+                }
+                
+                ul.timeline > li > .timeline-panel:after {
+                    border-left-width: 0;
+                    border-right-width: 14px;
+                    left: -14px;
+                    right: auto;
+                }
             }
             
             .timeline-title {
@@ -809,130 +809,164 @@
                                             <p class="form-control-static">R$ 1200,00</p>
                                         </div>
                                     </div>
-                                </div>
-                                
-                                <hr>
-                                
-                                <h3 class="text-center">Linha do tempo</h3>
-                                <ul class="timeline">
-                                    
-                                    <li><div class="tldate">Fev 2017</div></li>
-                                    
-                                    <li>
-                                        <div class="tl-circ"></div>
-                                        <div class="timeline-panel">
-                                            <div class="tl-heading">
-                                                <h4>Contratação</h4>
-                                                <p><small class="text-muted"><i class="fa fa-calendar"></i> 01/02/2017</small></p>
-                                            </div>
-                                            <div class="tl-body">
-                                                <p>O candidato foi considerado apto para as funções da vaga.</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    
-                                    <li><div class="tldate">Jan 2017</div></li>
-                                    
-                                    <li class="timeline-inverted">
-                                        <div class="tl-circ"></div>
-                                        <div class="timeline-panel">
-                                            <div class="tl-heading">
-                                                <h4>Aprovado pelo Gestor de Projetos</h4>
-                                                <p><small class="text-muted"><i class="fa fa-calendar"></i> 27/01/2017</small></p>
-                                            </div>
-                                            <div class="tl-body">
-                                                <p>O candidato possui boa comunicação, aparenta ser pró-ativo e possui vasto conhecimento na linguagem JAVA.</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="timeline-panel">
-                                            <div class="tl-heading">
-                                                <h4>Aprovado pelo RH</h4>
-                                                <p><small class="text-muted"><i class="fa fa-calendar"></i> 20/01/2017</small></p>
-                                            </div>
-                                            <div class="tl-body">
-                                                <p>Realizado última etapa do processo seletivo, a próxima etapa será a entrevista com o gestor.</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
+                                    <div class="form-group col-md-6">
+                                        <label class="col-xs-5 control-label">Competências</label>
+                                        <div class="col-xs-7">
+                                            <ul class="list-group">
+                                                <li class="list-group-item">
+                                                    <span class="badge">Atende as expectativas</span>
+                                                    Desenvolvimento
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <span class="badge">Atende as expectativas</span>
+                                                    Profundidade
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <span class="badge">Atende as expectativas</span>
+                                                    Planejamento
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <span class="badge">Atende as expectativas</span>
+                                                    Execução e entrega
+                                                </li>
+                                                </li>
+                                            <li class="list-group-item">
+                                                <span class="badge">Atende as expectativas</span>
+                                                Pessoas
+                                            </li>
+                                            </li>
+                                        <li class="list-group-item">
+                                            <span class="badge">Atende as expectativas</span>
+                                            Comercial e financeiro
+                                        </li>
+                                        </li>
+                                    </ul>
                             </div>
-                        </section><!-- /Section -->
-                    </div><!-- /.padding-md -->
-                    
-                    <!-- SOMENTE ALTERAR DAQUI PARA CIMA -->
-                    
-                </div><!-- /wrapper -->
-                
-                <a href="" id="scroll-to-top" class="hidden-print"><i class="fa fa-chevron-up"></i></a>
-                
-                <!-- Logout confirmation -->
-                <div class="custom-popup width-100" id="logoutConfirm">
-                    <div class="padding-md">
-                        <h6 class="m-top-none"> Do you want to logout?</h6>
+                            </div>
                     </div>
                     
-                    <div class="text-center">
-                        <a class="btn btn-success m-right-sm" href="login.html">Logout</a>
-                        <a class="btn btn-danger logoutConfirm_close">Cancel</a>
-                    </div>
+                    <hr>
+                    
+                    <h3 class="text-center">Linha do tempo</h3>
+                    <ul class="timeline">
+                        
+                        <li><div class="tldate">Fev 2017</div></li>
+                        
+                        <li>
+                            <div class="tl-circ"></div>
+                            <div class="timeline-panel">
+                                <div class="tl-heading">
+                                    <h4>Contratação</h4>
+                                    <p><small class="text-muted"><i class="fa fa-calendar"></i> 01/02/2017</small></p>
+                                </div>
+                                <div class="tl-body">
+                                    <p>O candidato foi considerado apto para as funções da vaga.</p>
+                                </div>
+                            </div>
+                        </li>
+                        
+                        <li><div class="tldate">Jan 2017</div></li>
+                        
+                        <li class="timeline-inverted">
+                            <div class="tl-circ"></div>
+                            <div class="timeline-panel">
+                                <div class="tl-heading">
+                                    <h4>Aprovado pelo Gestor de Projetos</h4>
+                                    <p><small class="text-muted"><i class="fa fa-calendar"></i> 27/01/2017</small></p>
+                                </div>
+                                <div class="tl-body">
+                                    <p>O candidato possui boa comunicação, aparenta ser pró-ativo e possui vasto conhecimento na linguagem JAVA.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="timeline-panel">
+                                <div class="tl-heading">
+                                    <h4>Aprovado pelo RH</h4>
+                                    <p><small class="text-muted"><i class="fa fa-calendar"></i> 20/01/2017</small></p>
+                                </div>
+                                <div class="tl-body">
+                                    <p>Realizado última etapa do processo seletivo, a próxima etapa será a entrevista com o gestor.</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-                
-                <!-- Le javascript ================================================== -->
-                <!-- Placed at the end of the document so the pages load faster -->
-                
-                <!-- Jquery -->
-                <script src="js/jquery-1.10.2.min.js"></script>
-                
-                <!-- Bootstrap -->
-                <script src="bootstrap/js/bootstrap.min.js"></script>
-                
-                <!-- Chosen -->
-                <script src='js/chosen.jquery.min.js'></script>	
-                
-                <!-- Mask-input -->
-                <script src='js/jquery.maskedinput.min.js'></script>	
-                
-                <!-- Datepicker -->
-                <script src='js/bootstrap-datepicker.min.js'></script>	
-                
-                <!-- Timepicker -->
-                <script src='js/bootstrap-timepicker.min.js'></script>	
-                
-                <!-- Slider -->
-                <script src='js/bootstrap-slider.min.js'></script>	
-                
-                <!-- Tag input -->
-                <script src='js/jquery.tagsinput.min.js'></script>	
-                
-                <!-- WYSIHTML5 -->
-                <script src='js/wysihtml5-0.3.0.min.js'></script>	
-                <script src='js/uncompressed/bootstrap-wysihtml5.js'></script>	
-                
-                <!-- Dropzone -->
-                <script src='js/dropzone.min.js'></script>	
-                
-                <!-- Modernizr -->
-                <script src='js/modernizr.min.js'></script>
-                
-                <!-- Pace -->
-                <script src='js/pace.min.js'></script>
-                
-                <!-- Popup Overlay -->
-                <script src='js/jquery.popupoverlay.min.js'></script>
-                
-                <!-- Slimscroll -->
-                <script src='js/jquery.slimscroll.min.js'></script>
-                
-                <!-- Cookie -->
-                <script src='js/jquery.cookie.min.js'></script>
-                
-                <!-- Perfect -->
-                <script src="js/app/app_form.js"></script>
-                <script src="js/app/app.js"></script>
-                
-                <!-- Custom -->
-                <script src="js/custom/solicitacaoVaga.js"></script>	
-                </body>
-            </html>
+                </section><!-- /Section -->
+        </div><!-- /.padding-md -->
+        
+        <!-- SOMENTE ALTERAR DAQUI PARA CIMA -->
+        
+        </div><!-- /wrapper -->
+    
+    <a href="" id="scroll-to-top" class="hidden-print"><i class="fa fa-chevron-up"></i></a>
+    
+    <!-- Logout confirmation -->
+    <div class="custom-popup width-100" id="logoutConfirm">
+        <div class="padding-md">
+            <h6 class="m-top-none"> Do you want to logout?</h6>
+        </div>
+        
+        <div class="text-center">
+            <a class="btn btn-success m-right-sm" href="login.html">Logout</a>
+            <a class="btn btn-danger logoutConfirm_close">Cancel</a>
+        </div>
+    </div>
+    
+    <!-- Le javascript ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    
+    <!-- Jquery -->
+    <script src="js/jquery-1.10.2.min.js"></script>
+    
+    <!-- Bootstrap -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    
+    <!-- Chosen -->
+    <script src='js/chosen.jquery.min.js'></script>	
+    
+    <!-- Mask-input -->
+    <script src='js/jquery.maskedinput.min.js'></script>	
+    
+    <!-- Datepicker -->
+    <script src='js/bootstrap-datepicker.min.js'></script>	
+    
+    <!-- Timepicker -->
+    <script src='js/bootstrap-timepicker.min.js'></script>	
+    
+    <!-- Slider -->
+    <script src='js/bootstrap-slider.min.js'></script>	
+    
+    <!-- Tag input -->
+    <script src='js/jquery.tagsinput.min.js'></script>	
+    
+    <!-- WYSIHTML5 -->
+    <script src='js/wysihtml5-0.3.0.min.js'></script>	
+    <script src='js/uncompressed/bootstrap-wysihtml5.js'></script>	
+    
+    <!-- Dropzone -->
+    <script src='js/dropzone.min.js'></script>	
+    
+    <!-- Modernizr -->
+    <script src='js/modernizr.min.js'></script>
+    
+    <!-- Pace -->
+    <script src='js/pace.min.js'></script>
+    
+    <!-- Popup Overlay -->
+    <script src='js/jquery.popupoverlay.min.js'></script>
+    
+    <!-- Slimscroll -->
+    <script src='js/jquery.slimscroll.min.js'></script>
+    
+    <!-- Cookie -->
+    <script src='js/jquery.cookie.min.js'></script>
+    
+    <!-- Perfect -->
+    <script src="js/app/app_form.js"></script>
+    <script src="js/app/app.js"></script>
+    
+    <!-- Custom -->
+    <script src="js/custom/solicitacaoVaga.js"></script>	
+    </body>
+</html>
