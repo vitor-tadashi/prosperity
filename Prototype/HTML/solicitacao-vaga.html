@@ -83,6 +83,7 @@
 	<div id="wrapper" class="preload">
 		<div id="top-nav" class="skin-6 fixed">
 			<div class="brand">
+				<span><img src="img/png_colorido2.png" style="width:30px"></span>
 				<span>Verity</span>
 			</div><!-- /brand -->
 			<button type="button" class="navbar-toggle pull-left" id="sidebarToggle">
@@ -342,8 +343,8 @@
 								<span class="menu-hover"></span>
 							</a>
 						</li>
-						<li class="openable">
-							<a href="#">
+						<li>
+							<a href="solicitacao-vaga.html">
 								<span class="menu-icon">
 									<i class="fa fa-edit fa-lg"></i> 
 								</span>
@@ -553,8 +554,8 @@
 							<div class="form-group row">
 
 								<div class="form-group col-md-6">
-									<label for="exampleInputPassword1">Faixa salarial</label>												
-									<input type="password" class="form-control input-sm" id="exampleInputPassword1" placeholder="Faixa Salarial" disabled>
+									<label for="exampleInputEmail1">Proposta Salarial</label>
+									<input type="name" class="form-control input-sm" id="exampleInputEmail1" placeholder="R$" data-required="true">
 								</div><!-- /form-group -->
 
 								<div class="form-group col-md-6">
@@ -607,19 +608,29 @@
 							
 							<div class="panel-body">
 
-								<div class="form-group">
-									<label for="exampleInputEmail1">Nome do projeto</label>
-									<input type="text" class="form-control input-sm" id="exampleInputEmail1" placeholder="Nome do Projeto" data-required="true">
+								<div class="form-group col-md-4" style="padding-left:0px;">
+									<label for="exampleInputEmail1">Nome do Projeto</label>
+									<select class="form-control chzn-select">
+										<option>P20150806_001 - Biometria Facial no Front único</option>
+										<option>P20160120_001 - Melhorias na abertura de Conta via internet</option>
+										<option>P20160805_001 - Cartão Gold</option>
+										<option>P20150226_001 - Migração Servidores 2012</option>
+									</select>	
 								</div><!-- /form-group -->
 
-								<div class="form-group">
+								<div class="form-group col-md-4" style="padding-left:0px;">
 									<label for="exampleInputEmail1">Cliente</label>
 									<input type="text" class="form-control input-sm" id="exampleInputEmail1" placeholder="Cliente" data-required="true">
 								</div><!-- /form-group -->
 
-								<div class="form-group">
+								<div class="form-group col-md-4" style="padding-left:0px;">
 									<label for="exampleInputEmail1">Gestor imediato</label>
-									<input type="name" class="form-control input-sm" id="exampleInputEmail1" placeholder="Gestor Imediato" data-required="true">
+									<select class="form-control chzn-select">
+										<option>Gabriela Nascimento</option>
+										<option>Michela Senario</option>
+										<option>Vitor Tadashi</option>
+										<option>Vera Tavares</option>
+									</select>	
 								</div><!-- /form-group -->
 
 							</div>
@@ -631,9 +642,14 @@
 
 								<div class="col-md-6">
 
-									<div class="form-group">
-										<label for="exampleInputEmail1">Nome do projeto</label>
-										<input type="text" class="form-control input-sm" id="exampleInputEmail1" placeholder="Nome do Projeto" data-required="true">
+									<div class="form-group" style="padding-left:0px;">
+										<label for="exampleInputEmail1">Nome do Projeto</label>
+										<select class="form-control chzn-select">
+											<option>P20150806_001 - Biometria Facial no Front único</option>
+											<option>P20160120_001 - Melhorias na abertura de Conta via internet</option>
+											<option>P20160805_001 - Cartão Gold</option>
+											<option>P20150226_001 - Migração Servidores 2012</option>
+										</select>	
 									</div><!-- /form-group -->
 
 									<div class="form-group">
@@ -641,14 +657,19 @@
 										<input type="text" class="form-control input-sm" id="exampleInputEmail1" placeholder="Cliente" data-required="true">
 									</div><!-- /form-group -->
 
-									<div class="form-group">
+									<div class="form-group" style="padding-left:0px;">
 										<label for="exampleInputEmail1">Gestor imediato</label>
-										<input type="name" class="form-control input-sm" id="exampleInputEmail1" placeholder="Gestor Imediato" data-required="true">
+										<select class="form-control chzn-select">
+											<option>Gabriela Nascimento</option>
+											<option>Michela Senario</option>
+											<option>Vitor Tadashi</option>
+											<option>Vera Tavares</option>
+										</select>	
 									</div><!-- /form-group -->
 
 									<div class="form-group">
 										<label for="exampleInputEmail1">Telefone 1</label>										
-											<input id="phone-mask" type="text" class=" form-control input-sm phone">
+										<input id="phone-mask" type="text" class=" form-control input-sm phone">
 									</div><!-- /form-group -->
 
 								</div>
