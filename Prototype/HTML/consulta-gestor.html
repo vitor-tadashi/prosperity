@@ -90,7 +90,7 @@
 			</div>
 		</div>
 		</div>
-		<!-- Modal Aprovado -->
+<!-- Modal Aprovado -->
 		<div class="modal fade" id="aprovado-modal" data-target="#aprovado-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 			aria-hidden="true">
 			<div class="modal-dialog" role="document">
@@ -99,16 +99,29 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4>Aprovado</h4>
 					</div>
+					<br>
+					
 					<div class="form-group">
-							<label for="message-text" class="form-control-label" style="margin-left: 15px">Feedback</label>
+							<label for="message-text" class="form-control-label" style="margin-left: 15px">Parecer</label>
 							<textarea class="form-control" id="message-text" style="margin-left: 10px; width: 550px"></textarea>
+							<div class="form-group">
+								<label class="col-lg-5 control-label">Select</label>
+								<div class="col-lg-10">
+									<select class="form-control">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+									</select>
+								</div><!-- /.col -->
 						</div>
 						</form>
 
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
 							<button type="button" class="btn btn-primary">Enviar</button>
-						</div>
+						</div>	
 				</div>
 			</div>
 			</div>
@@ -573,7 +586,7 @@
 														<td>Daniel Valle</td>
 														<td>Estágio</td>
 														<td>Estágio</td>
-														<td><span class="label label-aprovado">Aprovado</span></td>
+														<td><span class="label label-analiseTecnica">Análise</span>
 
 														<td>
 															<div class="btn-group">
@@ -590,7 +603,7 @@
 																<td>Igor</td>
 																<td>Analista de Sistemas</td>
 																<td>Senior</td>
-																<td><span class="label label-reprovado">Reprovado</span></td>
+																<td><span class="label label-analiseTecnica">Análise</span>
 																<td>
 																	<div class="btn-group">
 																		<button class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cogs fa-lg"></i> <span class="caret"></span></button>
@@ -607,7 +620,7 @@
 																		<td>Guilherme </td>
 																		<td>Desenvolvedor</td>
 																		<td>Pleno</td>
-																		<td><span class="label label-stand">Stand by</span></td>
+																		<td><span class="label label-analiseTecnica">Análise</span>
 
 																		<td>
 																			<div class="btn-group">
