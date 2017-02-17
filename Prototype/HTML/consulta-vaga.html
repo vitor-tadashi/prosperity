@@ -62,11 +62,37 @@
                             <li><a data-toggle="tab" href="#menu1">Especificações</a></li>
                         </ul>
 					</div>
-                    <div class="tab-content">
+                      <div class="tab-content"> 
                         <div id="home" class="tab-pane fade in active">
-                            <h3>HOME</h3>
-                            <p>Some content.</p>
-                        </div>
+                            <form>
+                                <section class="panel panel-default panel-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Data de abertura</label>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <input type="text" value="01/01/2017" class="datepicker form-control">
+                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    </div>
+                                                </div><!-- /.col -->
+                                            </div><!-- /form-group -->
+                                        </div> 
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Data de aprovação</label>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <input type="text" value="01/01/2017" class="datepicker form-control">
+                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    </div>
+                                                </div><!-- /.col -->
+                                            </div><!-- /form-group -->
+                                        </div>
+                                    </div>
+                                </section>
+                            </form>
+                        </div>      
                         <div id="menu1" class="tab-pane fade">
                             <section class="panel panel-default">
                             <div class="panel-heading">Informações básicas</div>
@@ -259,11 +285,11 @@
                                 <button type="button" class="btn btn-primary">Imprimir</button>
                             </div>
                         </div>
+                    </div><!-- /tab-content -->
                     </div>
                 </div> 
             </div>
         </div>
-    </div>
 
     <!-- Modal delete -->
     <div class="modal fade" id="delete-modal" data-target="#delete-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
