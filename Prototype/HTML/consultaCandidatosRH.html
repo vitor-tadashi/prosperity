@@ -25,6 +25,40 @@
         <link href="css/app.min.css" rel="stylesheet">
         <link href="css/app-skin.css" rel="stylesheet">
         
+        <style>
+            .label-stand, .badge-stand {
+                background-color: #9b59b6;
+                color: #fff;
+            }
+            
+            .label-aprovadoPendente, .badge-stand {
+                background-color: #2980b9;
+                color: #fff;
+            }
+            
+             .label-analiseRH, .badge-stand {
+                background-color: #e67e22;
+                color: #fff;
+            }
+            
+            .label-analiseTecnica, .badge-stand {
+                background-color: #f1c40f;
+                color: #fff;
+            }
+            
+            .label-reprovado, .badge-stand {
+                background-color: #e74c3c;
+                color: #fff;
+            }
+            
+            .label-contratado, .badge-stand {
+                background-color: #2ecc71;
+                color: #fff;
+            }
+            
+            
+        </style>
+        
     </head>
     
     <body>	
@@ -553,10 +587,19 @@
                                 <div class="col-md-1">
                                     <label for="exampleInputEmail1">Salário</label>
                                         <input type="text" class="form-control"placeholder="De...">
-                                </div>
+                                </div>  
                                 <div class="col-md-1">
                                     <label for="exampleInputEmail1">&nbsp;</label>
                                         <input type="text" class="form-control"placeholder="Até...">
+                                </div>
+                                
+                                <div class="col-md-2">
+                                    <label for="exampleInputEmail1">Data:</label>
+                                    <select class="form-control inline"> 
+                                        <option value="0">Selecione:</option> 
+                                        <option value="1">Mais Recente</option> 
+                                        <option value="2">Mais Antiga</option> 
+                                    </select>
                                 </div>
                 
                                 <a class="btn btn-primary " style="margin-top: 22px">Filtrar</a>
@@ -574,39 +617,15 @@
                                     <th class="text-center">Cargo</th>
                                     <th class="text-center">Senioridade</th>
                                     <th class="text-center">Pretensão</th>
-                                    <th class="text-center">Data</th>
+                                    <th class="text-center">Data de Abertura</th>
+                                    <th class="text-center">Data de Aprovação</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Ações</th>
 
                                 </tr>
                             </thead>
                             <tbody class="text-center">
-                                <tr>
-
-                                    <td>Kurt Cobain</td>
-                                    <td>Desenvolvedor</td>
-                                    <td>Junior</td>
-                                    <td>R$3.000</td>
-                                    <td>08/11/2016</td>
-                                    <td>
-                                        <span class="label label-success" style="">Aprovado</span>
-                                    </td>
-                                    <td>
-                                        <div class="btn-group"><!-- começo botao -->
-                                          <button type="button" class="btn btn-info dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
-                                          </button>
-                                          <ul class="dropdown-menu slidedown">
-                                            <li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
-                                            <li role="separator" class="divider"></li>
-                                             <li><a href="#delete-modal" data-toggle="modal"><i class="fa fa-trash-o fa-lg">&nbsp;</i>Excluir</a>
-
-                                          </ul>
-                                        </div><!-- /fim botao -->
-                                    </td>
-
-
-                                </tr>
+                                
                                 <tr>
 
                                     <td>Michael Jordan</td>
@@ -614,8 +633,9 @@
                                     <td>Sênior</td>
                                     <td>R$5.000</td>
                                     <td>17/02/2015</td>
+                                    <td>31/04/2017</td>
                                     <td>
-                                        <span class="label label-default" style="">Arquivado</span></td>
+                                        <span class="label label-stand" style="">Stand By</span></td>
                                     <td class="text-center">
                                          <div class="btn-group"><!-- começo botao -->
                                           <button type="button" class="btn btn-info dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -632,13 +652,14 @@
                                 </tr>
                                 <tr>
 
-                                    <td>Shaquile Oneal</td>
+                                    <td>Kobe Bryant</td>
                                     <td>Gerente</td>
                                     <td>Sênior</td>
                                     <td>R$10.000</td>
                                     <td>17/02/2015</td>
+                                    <td>31/04/2017</td>
                                     <td>
-                                        <span class="label label-info">Em Análise</span></td>
+                                        <span class="label label-analiseRH">Em Análise do RH</span></td>
                                     <td>
                                     <span class="line"></span>
                                          <div class="btn-group"><!-- começo botao -->
@@ -661,8 +682,9 @@
                                     <td>Pleno</td>
                                     <td>R$7.500</td>
                                     <td>17/02/2015</td>
+                                    <td>25/07/2016</td>
                                     <td>
-                                        <span class="label label-warning">Pendente</span></td>
+                                        <span class="label label-analiseTecnica">Em Análise Técnica</span></td>
                                     <td class="text-center">
                                     <span class="line"></span>
                                        <div class="btn-group"><!-- começo botao -->
@@ -685,8 +707,9 @@
                                     <td>Estagiário</td>
                                     <td>R$1000</td>
                                     <td>17/02/2015</td>
+                                    <td>09/11/2017</td>
                                     <td>
-                                        <span class="label label-danger">Reprovado</span></td>
+                                        <span class="label label-reprovado">Reprovado</span></td>
                                     <td class="text-center">
                                     <span class="line"></span>
                                          <div class="btn-group"><!-- começo botao -->
@@ -702,6 +725,63 @@
                                         </div><!-- /fim botao -->
                                     </td>
                                 </tr>
+                                
+                                <tr>
+
+                                    <td>Kyrie Irving</td>
+                                    <td>Desenvolvedor</td>
+                                    <td>Junior</td>
+                                    <td>R$3.000</td>
+                                    <td>08/11/2016</td>
+                                    <td>31/12/2016</td>
+                                    <td>
+                                        <span class="label label-contratado" style="">Contratado</span>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group"><!-- começo botao -->
+                                          <button type="button" class="btn btn-info dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
+                                          </button>
+                                          <ul class="dropdown-menu slidedown">
+                                            <li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
+                                            <li role="separator" class="divider"></li>
+                                             <li><a href="#delete-modal" data-toggle="modal"><i class="fa fa-trash-o fa-lg">&nbsp;</i>Excluir</a>
+
+                                          </ul>
+                                        </div><!-- /fim botao -->
+                                    </td>
+
+
+                                </tr>
+                                
+                                <tr>
+
+                                    <td>LeBron James</td>
+                                    <td>Desenvolvedor</td>
+                                    <td>Junior</td>
+                                    <td>R$3.000</td>
+                                    <td>08/11/2016</td>
+                                    <td>31/04/2017</td>
+                                    <td>
+                                        <span class="label label-aprovadoPendente" style="">Aprovado Pendente</span>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group"><!-- começo botao -->
+                                          <button type="button" class="btn btn-info dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
+                                          </button>
+                                          <ul class="dropdown-menu slidedown">
+                                            <li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
+                                            <li role="separator" class="divider"></li>
+                                             <li><a href="#delete-modal" data-toggle="modal"><i class="fa fa-trash-o fa-lg">&nbsp;</i>Excluir</a>
+
+                                          </ul>
+                                        </div><!-- /fim botao -->
+                                    </td>
+
+
+                                </tr>
+                                
                             </tbody>
                         </table>
                     </div><!-- fim da div panel -->
