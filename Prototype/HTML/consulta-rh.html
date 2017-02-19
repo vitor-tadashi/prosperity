@@ -1,7 +1,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Tabela de Candidatos</title>
+        <title>Consulta de candidatos - RH</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -74,14 +74,13 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4>Aprovado</h4>
+						<h4>Candidato aprovado</h4>
 					</div>
 					<div class="modal-body">
-						Candidato aprovado!
 					</div>
 					<div class="form-group">
-							<label for="message-text" class="form-control-label" style="margin-left: 15px">Feedback</label>
-							<textarea class="form-control" id="message-text" style="margin-left: 10px; width: 550px"></textarea>
+							<label for="message-text" class="form-control-label" style="margin-left: 15px">Parecer:</label>
+							<textarea class="form-control" id="message-text" style="margin-left: 10px; width: 570px"></textarea>
 						</div>
                     </form>
 
@@ -99,14 +98,13 @@
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							<h4>Reprovado</h4>
+							<h4>Candidato reprovado</h4>
 						</div>
 						<div class="modal-body">
-							Candidato reprovado!
 						</div>
 						<div class="form-group">
 							<label for="message-text" class="form-control-label" style="margin-left: 15px">Feedback</label>
-							<textarea class="form-control" id="message-text" style="margin-left: 10px; width: 550px"></textarea>
+							<textarea class="form-control" id="message-text" style="margin-left: 10px; width: 570px"></textarea>
 						</div>
 						</form>
 
@@ -131,9 +129,9 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
 						<span aria-hidden="true">&times;</span>
 					</button>
-                    <h4 class="modal-title" id="modalLabel">Excluir Candidato</h4>
+                    <h4 class="modal-title" id="modalLabel">Fechar vaga</h4>
                 </div>
-                <div class="modal-body">Deseja realmente excluir este candidato?</div>
+                <div class="modal-body">Deseja realmente excluir esta vaga?</div>
                 <div class="modal-footer">
                     <a id="excluir" href="#">
                         <button type="button" class="btn btn-danger">Sim</button>
@@ -587,8 +585,8 @@
                                     <label for="exampleInputEmail1">Data:</label>
                                     <select class="form-control inline"> 
                                         <option value="0">Selecione:</option> 
-                                        <option value="1">Mais Recente</option> 
-                                        <option value="2">Mais Antiga</option> 
+                                        <option value="1">Mais recente</option> 
+                                        <option value="2">Mais antiga</option> 
                                     </select>
                                 </div>
                 
@@ -603,11 +601,11 @@
 
                                 <tr>
 
-                                    <th class="text-center">Nome do Candidato</th>
+                                    <th class="text-center">Nome do candidato</th>
                                     <th class="text-center">Vaga</th>
                                     <th class="text-center">Pretensão</th>
-                                    <th class="text-center">Data de Abertura</th>
-                                    <th class="text-center">Data de Aprovação</th>
+                                    <th class="text-center">Data de abertura</th>
+                                    <th class="text-center">Data de aprovação</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Ações</th>
 
