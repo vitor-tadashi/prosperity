@@ -7,7 +7,7 @@ $(function	()	{
 	var currentStep_2 = 1; 
 	
 	$('.wizard-demo li a').click(function()	{
-		alert('You must enter your information')
+		//alert('You must enter your information')
 		return false;
 	});
 	 
