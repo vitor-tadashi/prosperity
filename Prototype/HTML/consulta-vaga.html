@@ -62,11 +62,37 @@
                             <li><a data-toggle="tab" href="#menu1">Especificações</a></li>
                         </ul>
 					</div>
-                    <div class="tab-content">
+                      <div class="tab-content"> 
                         <div id="home" class="tab-pane fade in active">
-                            <h3>HOME</h3>
-                            <p>Some content.</p>
-                        </div>
+                            <form>
+                                <section class="panel panel-default panel-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Data de abertura</label>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <input type="text" value="01/01/2017" class="datepicker form-control">
+                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    </div>
+                                                </div><!-- /.col -->
+                                            </div><!-- /form-group -->
+                                        </div> 
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Data de aprovação</label>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <input type="text" value="01/01/2017" class="datepicker form-control">
+                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    </div>
+                                                </div><!-- /.col -->
+                                            </div><!-- /form-group -->
+                                        </div>
+                                    </div>
+                                </section>
+                            </form>
+                        </div>      
                         <div id="menu1" class="tab-pane fade">
                             <section class="panel panel-default">
                             <div class="panel-heading">Informações básicas</div>
@@ -259,11 +285,11 @@
                                 <button type="button" class="btn btn-primary">Imprimir</button>
                             </div>
                         </div>
+                    </div><!-- /tab-content -->
                     </div>
                 </div> 
             </div>
         </div>
-    </div>
 
     <!-- Modal delete -->
     <div class="modal fade" id="delete-modal" data-target="#delete-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
@@ -566,8 +592,19 @@
 								<span class="menu-hover"></span>
 							</a>
 						</li>
-						<li class="openable">
-							<a href="#">
+						<li>
+							<a href="solicitacao-vaga.html">
+								<span class="menu-icon">
+									<i class="fa fa-edit fa-lg"></i> 
+								</span>
+								<span class="text">
+									Solicitação de Vaga
+								</span>
+								<span class="menu-hover"></span>
+							</a>
+						</li>
+						<li>
+							<a href="cadastro-candidato.html">
 								<span class="menu-icon">
 									<i class="fa fa-edit fa-lg"></i> 
 								</span>
@@ -576,7 +613,6 @@
 								</span>
 								<span class="menu-hover"></span>
 							</a>
-							
 						</li>
 
 						<li class="openable">
@@ -590,9 +626,9 @@
 								<span class="menu-hover"></span>
 							</a>
 							<ul class="submenu">
-								<li><a href="#"><span class="submenu-label">Candidato</span></a></li>
-								<li><a href="#l"><span class="submenu-label">Vaga</span></a></li>
-								
+								<li><a href="consulta-rh.html"><span class="submenu-label">Candidato</span></a></li>
+								<li><a href="consulta-vaga.html"><span class="submenu-label">Vaga</span></a></li>
+                                <li><a href="historico-candidato.html"><span class="submenu-label">Histórico</span></a></li>
 							</ul>
 						</li>
 
@@ -608,7 +644,7 @@
 							</a>
 							<ul class="submenu">
 								<li><a href="#"><span class="submenu-label">Candidato</span></a></li>
-								<li><a href="#"><span class="submenu-label">Vaga</span></a></li>
+								<li><a href="aprovacao-vaga.html"><span class="submenu-label">Vaga</span></a></li>
 								
 							</ul>
 						</li>
@@ -636,14 +672,8 @@
 								</span>
 								<span class="menu-hover"></span>
 							</a>
-							
-						</li>
-						
+						</li>	
 					</ul>
-					
-					<div class="alert alert-info">
-						Welcome to Perfect Admin. Do not forget to check all my pages. 
-					</div>
 				</div><!-- /main-menu -->
             </div>
             <!-- /sidebar-inner scrollable-sidebar -->
