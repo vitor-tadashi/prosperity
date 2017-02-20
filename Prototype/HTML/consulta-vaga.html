@@ -60,9 +60,9 @@
                 </div>
                 <div class="modal-body">
                     <div class="panel-tab clearfix">
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a data-toggle="tab" href="#home">Informações</a></li>
-                            <li><a data-toggle="tab" href="#menu1">Especificações</a></li>
+                        <ul class="tab-bar">
+                            <li class="active"><a data-toggle="tab" href="#home"><i class="fa fa-info-circle">&nbsp</i>Informações</a></li>
+                            <li><a data-toggle="tab" href="#menu1"><i class="fa fa-tags">&nbsp</i>Especificações</a></li>
                         </ul>
 					</div>
                       <div class="tab-content"> 
@@ -70,23 +70,40 @@
                             <form>
                                 <section class="panel panel-default panel-body">
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="form-group col-md-3">
+                                            <label for="">Candidatos</label>
+                                            <input type="number" class="form-control input-sm" id="" min="0" value="123">
+                                        </div><!-- /form-group -->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="control-label">Data de abertura</label>
                                                 <div class="form-group">
                                                     <div class="input-group">
-                                                        <input type="text" value="01/01/2017" class="datepicker form-control">
+                                                        <input type="text" value="01/01/2017" class="datepicker form-control" readonly>
                                                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                                     </div>
                                                 </div><!-- /.col -->
                                             </div><!-- /form-group -->
                                         </div> 
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="control-label">Data de aprovação</label>
                                                 <div class="form-group">
                                                     <div class="input-group">
-                                                        <input type="text" value="01/01/2017" class="datepicker form-control">
+                                                        <input type="text" value="01/01/2017" class="datepicker form-control" readonly>
+                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    </div>
+                                                </div><!-- /.col -->
+                                            </div><!-- /form-group -->
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="control-label">Data de fechamento</label>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <input type="text" value="01/01/2017" class="datepicker form-control" readonly>
                                                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                                     </div>
                                                 </div><!-- /.col -->
@@ -177,7 +194,7 @@
 
                                             <div>
                                                 <div class="form-group col-md-3">
-                                                    <div class="input-group bootstrap-timepicker">
+                                                    <div class="input-group bootstrap-timepicker" style="width: 105%;">
                                                         <input class="timepicker form-control" type="text"/ value="08:00 AM">
                                                         <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
                                                     </div>
@@ -188,7 +205,7 @@
                                                 </div>
 
                                                 <div class="form-group col-md-3">
-                                                    <div class="input-group bootstrap-timepicker">
+                                                    <div class="input-group bootstrap-timepicker" style="width: 105%;">
                                                         <input class="timepicker form-control" type="text"/ value="05:00 PM">
                                                         <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
                                                     </div>
@@ -535,49 +552,50 @@
                         Consulta de vagas
                     </div>
                     <!--<form class="form-inline">-->
-                    <div class="panel-body">
+                    <div class="">
 
                         <!--<div class=" ">-->
-                        <div class="col-md-2">
-                            <label for="cargo">Cargo</label>
-                            <select id="cargo" class="form-control" style="width:130px;"> 
-									<option value="1">Selecione</option> 
-									<option value="2">Analista</option> 
-									<option value="3">Estagiário</option> 
-								</select>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Vaga</label>
+                                <select class="form-control"><!--chzn-select-->
+                                    <option>Selecione:</option>
+                                    <option>Estágio</option>
+                                    <option>Júnior</option>
+                                    <option>Pleno</option>
+                                    <option>Senior</option>
+                                </select>
+                            </div>
                         </div>
 
-                        <div class="col-md-2">
-                            <label for="cargo">Senioridade</label>
-                            <select id="cargo" class="form-control" style="width:130px;"> 
-									<option value="0">Selecione</option> 
-                                    <option value="1">Junior</option>         
-									<option value="2">Pleno</option> 
-									<option value="3">Sênior</option>  
-								</select>
+                        <div class="col-md-5">
+                            <label for="">Data</label>
+                            <div class="input-group">
+                                <input type="date" class="form-control">
+                                <span class="input-group-addon">até</span>
+                                <input type="date" class="form-control">
+                             </div>
                         </div>
 
                         <div class="col-md-2">
                             <label for="cargo">Status</label>
-                            <select id="cargo" class="form-control" style="width:130px;" "> 
-									<option value="0">Selecione</option> 
-									<option value="1">Ativo</option>
-                                    <option value="2">Inativo</option>  
-								</select>
+                            <select id="cargo" class="form-control" style="width:130px;"> 
+								<option value="0">Selecione:</option> 
+								<option value="1">Ativo</option>
+                                <option value="2">Inativo</option>  
+							</select>
                         </div>
-
 
                         <div class="text-right">
                             <a href="#" style="text-decoration: none; color: #ffffff">
-                                <button class="btn btn-primary" style="margin-top: 22px;">Aplicar</button>
+                                <button class="btn btn-primary" style="margin-top: 22px; margin-right: 22px;">Filtrar</button>
                             </a>
                         </div>
             </div><!--</panel body>-->
                 <table class="table table-bordered table-condensed table-hover table-striped" style="font-size: 12px;">
                     <thead>
                         <tr>
-                            <th class="text-center">Cargo</th>
-                            <th class="text-center">Senioridade</th>
+                            <th class="text-center">Vaga</th>
                             <th class="text-center">Cliente</th>
                             <th class="text-center">Local de trabalho</th>
                             <th class="text-center">Data de abertura</th>
@@ -587,8 +605,7 @@
                     </thead>
                     <tbody class="text-center">
                         <tr>
-                            <td>Desenvolvedor de sistema</td>
-                            <td>Junior</td>
+                            <td>Desenvolvedor .Net Junior</td>
                             <td>Carrefour</td>
                             <td>Alocado</td>
                             <td>15/02/2017</td>
@@ -599,16 +616,15 @@
 							<ul class="dropdown-menu dropdown-menu-right slidedown">
 								<li><a href="#vaga-modal" data-toggle="modal"><i class="fa fa-eye">&nbsp</i>Visualizar</a></li>
                                 <li class="divider"></li>
-								<li><a href="#"><i class="fa fa-pencil">&nbsp</i>Editar</a></li>
+								<li><a href="#"><i class="fa fa-lock">&nbsp</i>Fechar</a></li>
                                 <li class="divider "></li>
-								<li><a href="#delete-modal" data-toggle="modal" ><i class="fa fa-trash-o">&nbsp</i>Excluir</a></li>
+								<li><a href="#delete-modal" data-toggle="modal" ><i class="fa fa-times">&nbsp</i>Cancelar</a></li>
 							</ul>
 						</div><!-- /btn-group -->
                             </td>
                         </tr>
                         <tr>
-                            <td>Desenvolvedor de sistema</td>
-                            <td> Pleno</td>
+                            <td>Analista de sistema</td>
                             <td>Carrefour</td>
                             <td>Interno</td>
                             <td>15/02/2017</td>
@@ -627,8 +643,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Analista de sistema</td>
-                            <td>Pleno</td>
+                            <td>Analista .NET Pleno</td>
                             <td>Carrefour</td>
                             <td>Alocado</td>
                             <td>15/02/2017</td>
