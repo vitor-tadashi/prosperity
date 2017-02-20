@@ -1,610 +1,352 @@
 <!DOCTYPE html>
-<html lang="en">
-
-  <head>
-
-    <meta charset="utf-8">
-    <title>Modelo de dashboard</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <!-- Bootstrap core CSS -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	
-	<!-- Font Awesome -->
-	<link href="css/font-awesome.min.css" rel="stylesheet">
-	
-	<!-- Pace -->
-	<link href="css/pace.css" rel="stylesheet">
-	
-	<!-- Chosen -->
-	<link href="css/chosen/chosen.min.css" rel="stylesheet"/>
-
-	<!-- Datepicker -->
-	<link href="css/datepicker.css" rel="stylesheet"/>
-	
-	<!-- Timepicker -->
-	<link href="css/bootstrap-timepicker.css" rel="stylesheet"/>
-	
-	<!-- Slider -->
-	<link href="css/slider.css" rel="stylesheet"/>
-	
-	<!-- Tag input -->
-	<link href="css/jquery.tagsinput.css" rel="stylesheet"/>
-
-	<!-- WYSIHTML5 -->
-	<link href="css/bootstrap-wysihtml5.css" rel="stylesheet"/>
-	
-	<!-- Dropzone -->
-	<link href='css/dropzone/dropzone.css' rel="stylesheet"/>
-	
-	<!-- Perfect -->
-	<link href="css/app.min.css" rel="stylesheet">
-	<link href="css/app-skin.css" rel="stylesheet">
-
-	<style>
-		.form-group {
-	    margin-bottom: 5px;
-		}
-	</style>
-
-  </head>
-  	<body>
-  		<!-- Overlay Div -->
-	<div id="overlay" class="transparent"></div>
-	
-	<a href="" id="theme-setting-icon"><i class="fa fa-cog fa-lg"></i></a>
-	<div id="theme-setting">
-		<div class="title">
-			<strong class="no-margin">Skin Color</strong>
-		</div>
-		<div class="theme-box">
-			<a class="theme-color" style="background:#323447" id="default"></a>
-			<a class="theme-color" style="background:#efefef" id="skin-1"></a>
-			<a class="theme-color" style="background:#a93922" id="skin-2"></a>
-			<a class="theme-color" style="background:#3e6b96" id="skin-3"></a>
-			<a class="theme-color" style="background:#635247" id="skin-4"></a>
-			<a class="theme-color" style="background:#3a3a3a" id="skin-5"></a>
-			<a class="theme-color" style="background:#495B6C" id="skin-6"></a>
-		</div>
-		<div class="title">
-			<strong class="no-margin">Sidebar Menu</strong>
-		</div>
-		<div class="theme-box">
-			<label class="label-checkbox">
-				<input type="checkbox" checked id="fixedSidebar">
-				<span class="custom-checkbox"></span>
-				Fixed Sidebar
-			</label>
-		</div>
-	</div><!-- /theme-setting -->
-
-	<div id="wrapper" class="preload">
-		<div id="top-nav" class="skin-6 fixed">
-			<div class="brand">
-				<span><img src="img/png_colorido2.png" style="width:30px"></span>
-				<span>Verity</span>
-			</div><!-- /brand -->
-			<button type="button" class="navbar-toggle pull-left" id="sidebarToggle">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<button type="button" class="navbar-toggle pull-left hide-menu" id="menuToggle">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<ul class="nav-notification clearfix">
-				<li class="dropdown">
-					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-						<i class="fa fa-envelope fa-lg"></i>
-						<span class="notification-label bounceIn animation-delay4">7</span>
-					</a>
-					<ul class="dropdown-menu message dropdown-1">
-						<li><a>You have 4 new unread messages</a></li>					  
-						<li>
-							<a class="clearfix" href="#">
-								<img src="img/user.jpg" alt="User Avatar">
-								<div class="detail">
-									<strong>John Doe</strong>
-									<p class="no-margin">
-										Lorem ipsum dolor sit amet...
-									</p>
-									<small class="text-muted"><i class="fa fa-check text-success"></i> 27m ago</small>
-								</div>
-							</a>	
-						</li>
-						<li>
-							<a class="clearfix" href="#">
-								<img src="img/user2.jpg" alt="User Avatar">
-								<div class="detail">
-									<strong>Jane Doe</strong>
-									<p class="no-margin">
-										Lorem ipsum dolor sit amet...
-									</p>
-									<small class="text-muted"><i class="fa fa-check text-success"></i> 5hr ago</small>
-								</div>
-							</a>	
-						</li>
-						<li>
-							<a class="clearfix" href="#">
-								<img src="img/user.jpg" alt="User Avatar">
-								<div class="detail">
-									<strong>Bill Doe</strong>
-									<p class="no-margin">
-										Lorem ipsum dolor sit amet...
-									</p>
-									<small class="text-muted"><i class="fa fa-reply"></i> Yesterday</small>
-								</div>
-							</a>	
-						</li>
-						<li>
-							<a class="clearfix" href="#">
-								<img src="img/user2.jpg" alt="User Avatar">
-								<div class="detail">
-									<strong>Baby Doe</strong>
-									<p class="no-margin">
-										Lorem ipsum dolor sit amet...
-									</p>
-									<small class="text-muted"><i class="fa fa-reply"></i> 9 Feb 2013</small>
-								</div>
-							</a>	
-						</li>
-						<li><a href="#">View all messages</a></li>					  
-					</ul>
-				</li>
-				<li class="dropdown hidden-xs">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						<i class="fa fa-tasks fa-lg"></i>
-						<span class="notification-label bounceIn animation-delay5">4</span>
-					</a>
-					<ul class="dropdown-menu task dropdown-2">
-						<li><a href="#">You have 4 tasks to complete</a></li>					  
-						<li>
-							<a href="#">
-								<div class="clearfix">
-									<span class="pull-left">Bug Fixes</span>
-									<small class="pull-right text-muted">78%</small>
-								</div>
-								<div class="progress">
-									<div class="progress-bar" style="width:78%"></div>
-								</div>
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<div class="clearfix">
-									<span class="pull-left">Software Updating</span>
-									<small class="pull-right text-muted">54%</small>
-								</div>
-								<div class="progress progress-striped">
-									<div class="progress-bar progress-bar-success" style="width:54%"></div>
-								</div>
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<div class="clearfix">
-									<span class="pull-left">Database Migration</span>
-									<small class="pull-right text-muted">23%</small>
-								</div>
-								<div class="progress">
-									<div class="progress-bar progress-bar-warning" style="width:23%"></div>
-								</div>
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<div class="clearfix">
-									<span class="pull-left">Unit Testing</span>
-									<small class="pull-right text-muted">92%</small>
-								</div>
-								<div class="progress progress-striped active">
-									<div class="progress-bar progress-bar-danger " style="width:92%"></div>
-								</div>
-							</a>
-						</li>
-						<li><a href="#">View all tasks</a></li>					  
-					</ul>
-				</li>
-				<li class="dropdown">
-					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-						<i class="fa fa-bell fa-lg"></i>
-						<span class="notification-label bounceIn animation-delay6">5</span>
-					</a>
-					<ul class="dropdown-menu notification dropdown-3">
-						<li><a href="#">You have 5 new notifications</a></li>					  
-						<li>
-							<a href="#">
-								<span class="notification-icon bg-warning">
-									<i class="fa fa-warning"></i>
-								</span>
-								<span class="m-left-xs">Server #2 not responding.</span>
-								<span class="time text-muted">Just now</span>
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<span class="notification-icon bg-success">
-									<i class="fa fa-plus"></i>
-								</span>
-								<span class="m-left-xs">New user registration.</span>
-								<span class="time text-muted">2m ago</span>
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<span class="notification-icon bg-danger">
-									<i class="fa fa-bolt"></i>
-								</span>
-								<span class="m-left-xs">Application error.</span>
-								<span class="time text-muted">5m ago</span>
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<span class="notification-icon bg-success">
-									<i class="fa fa-usd"></i>
-								</span>
-								<span class="m-left-xs">2 items sold.</span>
-								<span class="time text-muted">1hr ago</span>
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<span class="notification-icon bg-success">
-									<i class="fa fa-plus"></i>
-								</span>
-								<span class="m-left-xs">New user registration.</span>
-								<span class="time text-muted">1hr ago</span>
-							</a>
-						</li>
-						<li><a href="#">View all notifications</a></li>					  
-					</ul>
-				</li>
-				<li class="profile dropdown">
-					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-						<strong>John Doe</strong>
-						<span><i class="fa fa-chevron-down"></i></span>
-					</a>
-					<ul class="dropdown-menu">
-						<li>
-							<a class="clearfix" href="#">
-								<img src="img/user.jpg" alt="User Avatar">
-								<div class="detail">
-									<strong>John Doe</strong>
-									<p class="grey">John_Doe@email.com</p> 
-								</div>
-							</a>
-						</li>
-						<li><a tabindex="-1" href="profile.html" class="main-link"><i class="fa fa-edit fa-lg"></i> Edit profile</a></li>
-						<li><a tabindex="-1" href="gallery.html" class="main-link"><i class="fa fa-picture-o fa-lg"></i> Photo Gallery</a></li>
-						<li><a tabindex="-1" href="#" class="theme-setting"><i class="fa fa-cog fa-lg"></i> Setting</a></li>
-						<li class="divider"></li>
-						<li><a tabindex="-1" class="main-link logoutConfirm_open" href="#logoutConfirm"><i class="fa fa-lock fa-lg"></i> Log out</a></li>
-					</ul>
-				</li>
-			</ul>
-		</div><!-- /top-nav-->
-		
-		<aside class="fixed skin-6">		
-			<div class="sidebar-inner scrollable-sidebar">
-				<div class="size-toggle">
-					<a class="btn btn-sm" id="sizeToggle">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</a>
-					<a class="btn btn-sm pull-right logoutConfirm_open"  href="#logoutConfirm">
-						<i class="fa fa-power-off"></i>
-					</a>
-				</div><!-- /size-toggle -->	
-				<div class="user-block clearfix">
-					<img src="img/user.jpg" alt="User Avatar">
-					<div class="detail">
-						<strong>John Doe</strong><span class="badge badge-danger bounceIn animation-delay4 m-left-xs">4</span>
-						<ul class="list-inline">
-							<li><a href="profile.html">Profile</a></li>
-							<li><a href="inbox.html" class="no-margin">Inbox</a></li>
-						</ul>
-					</div>
-				</div><!-- /user-block -->
-				
-				<div class="main-menu">
-					<ul>
-
-						<li class="openable">
-							<a href="#">
-								<span class="menu-icon">
-									<i class="fa fa-desktop fa-lg"></i> 
-								</span>
-								<span class="text">
-									Tela de Login
-								</span>
-								<span class="menu-hover"></span>
-							</a>
-							<ul class="submenu">
-								<li><a href="acesso.html"><span class="submenu-label">Login</span></a></li>
-								<li><a href="primeiro-acesso.html"><span class="submenu-label">Primeiro Acesso</span></a></li>
-								
-							</ul>
-						</li>
-
-						<li>
-							<a href="dashboard.html">
-								<span class="menu-icon">
-									<i class="fa fa-desktop fa-lg"></i> 
-								</span>
-								<span class="text">
-									Dashboard
-								</span>
-								<span class="menu-hover"></span>
-							</a>
-						</li>
-						<li>
-							<a href="solicitacao-vaga.html">
-								<span class="menu-icon">
-									<i class="fa fa-edit fa-lg"></i> 
-								</span>
-								<span class="text">
-									Solicitação de Vaga
-								</span>
-								<span class="menu-hover"></span>
-							</a>
-						</li>
-						<li>
-							<a href="cadastro-candidato.html">
-								<span class="menu-icon">
-									<i class="fa fa-edit fa-lg"></i> 
-								</span>
-								<span class="text">
-									Cadastrar Candidato
-								</span>
-								<span class="menu-hover"></span>
-							</a>
-						</li>
-
-						<li class="openable">
-							<a href="#">
-								<span class="menu-icon">
-									<i class="fa fa-file-text fa-lg"></i> 
-								</span>
-								<span class="text">
-									Consulta
-								</span>
-								<span class="menu-hover"></span>
-							</a>
-							<ul class="submenu">
-								<li><a href="consulta-rh.html"><span class="submenu-label">Candidato</span></a></li>
-								<li><a href="consulta-vaga.html"><span class="submenu-label">Vaga</span></a></li>
-                                <li><a href="historico-candidato.html"><span class="submenu-label">Histórico</span></a></li>
-							</ul>
-						</li>
-
-						<li class="openable">
-							<a href="#">
-								<span class="menu-icon">
-									<i class="fa fa-check fa-lg"></i> 
-								</span>
-								<span class="text">
-									Aprovação
-								</span>
-								<span class="menu-hover"></span>
-							</a>
-							<ul class="submenu">
-								<li><a href="#"><span class="submenu-label">Candidato</span></a></li>
-								<li><a href="aprovacao-vaga.html"><span class="submenu-label">Vaga</span></a></li>
-								
-							</ul>
-						</li>
-
-						<li class="openable">
-							<a href="#">
-								<span class="menu-icon">
-									<i class="fa fa-print fa-lg"></i> 
-								</span>
-								<span class="text">
-									Relatórios
-								</span>
-								<span class="menu-hover"></span>
-							</a>
-							
-						</li>
-
-						<li class="openable">
-							<a href="#">
-								<span class="menu-icon">
-									<i class="fa fa-cogs fa-lg"></i> 
-								</span>
-								<span class="text">
-									Configuração
-								</span>
-								<span class="menu-hover"></span>
-							</a>
-						</li>	
-					</ul>
-				</div><!-- /main-menu -->
-			</div><!-- /sidebar-inner scrollable-sidebar -->
-		</aside>
-
-	<div id="main-container">
-		<div id="breadcrumb">
-			<ul class="breadcrumb">
-				 <li><i class="fa fa-home"></i><a href="#"> Home</a></li>	 
-				 <li class="active">Dashboard</li>	 
-			</ul>
-
-			<h1 style="text-align: center">Bom Dia, Bem vindo !</h1>
-		</div><!--breadcrumb-->
-				
-		<!-- /Modal -->
-		<div class="modal fade" id="formModal">
-  			<div class="modal-dialog">
-    			<div class="modal-content">
-      				<div class="modal-header">
-        				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4>Modal with form</h4>
-      				</div>
-				    <div class="modal-body">
-						<form>
-							<div class="form-group">
-								<label>Username</label>
-								<input type="text" class="form-control input-sm" placeholder="Email Address">
-							</div>
-							<div class="form-group">
-								<label>Password</label>
-								<input type="password" class="form-control input-sm" placeholder="Password">
-							</div>
-							<div class="form-group">
-								 <label class="label-checkbox">
-								 <input type="checkbox" class="regular-checkbox" />
-								 <span class="custom-checkbox"></span>
-									 Remember me
-								</label>
-							</div>
-							<div class="form-group text-right">
-								<a href="#" class="btn btn-success">Sign in</a>
-								<a href="#" class="btn btn-success">Sign up</a>
-							</div>
-						</form>
-				    </div>
-			  	</div><!-- /.modal-content -->
-			</div><!-- /.modal-dialog -->
-		</div><!-- /.modal -->
-	</div><!-- /wrapper -->
-
-	<a href="" id="scroll-to-top" class="hidden-print"><i class="fa fa-chevron-up"></i></a>
-	
-	<!-- Logout confirmation -->
-	<div class="custom-popup width-100" id="logoutConfirm">
-		<div class="padding-md">
-			<h4 class="m-top-none"> Do you want to logout?</h4>
-		</div>
-
-		<div class="text-center">
-			<a class="btn btn-success m-right-sm" href="login.html">Logout</a>
-			<a class="btn btn-danger logoutConfirm_close">Cancel</a>
-		</div>
-	</div>
-			
-		<!-- Le javascript
-		================================================== -->
-		<!-- Placed at the end of the document so the pages load faster -->
-
-		<!-- Jquery -->
-		<script src="js/jquery-1.10.2.min.js"></script>
-
-		<!-- Bootstrap -->
-		<script src="bootstrap/js/bootstrap.min.js"></script>
-
-		<!-- Chosen -->
-		<script src='js/chosen.jquery.min.js'></script>	
-
-		<!-- Mask-input -->
-		<script src='js/jquery.maskedinput.min.js'></script>	
-
-		<!-- Datepicker -->
-		<script src='js/bootstrap-datepicker.min.js'></script>	
-
-		<!-- Timepicker -->
-		<script src='js/bootstrap-timepicker.min.js'></script>	
-
-		<!-- Slider -->
-		<script src='js/bootstrap-slider.min.js'></script>	
-
-		<!-- Tag input -->
-		<script src='js/jquery.tagsinput.min.js'></script>	
-
-		<!-- WYSIHTML5 -->
-		<script src='js/wysihtml5-0.3.0.min.js'></script>	
-		<script src='js/uncompressed/bootstrap-wysihtml5.js'></script>	
-
-		<!-- Dropzone -->
-		<script src='js/dropzone.min.js'></script>	
-
-		<!-- Modernizr -->
-		<script src='js/modernizr.min.js'></script>
-
-		<!-- Pace -->
-		<script src='js/pace.min.js'></script>
-
-		<!-- Popup Overlay -->
-		<script src='js/jquery.popupoverlay.min.js'></script>
-
-		<!-- Slimscroll -->
-		<script src='js/jquery.slimscroll.min.js'></script>
-
-		<!-- Cookie -->
-		<script src='js/jquery.cookie.min.js'></script>
-
-		<!-- Perfect -->
-		<script src="js/app/app_form.js"></script>
-		<script src="js/app/app.js"></script>
-
-		<!-- Custom -->
-		<script src="js/custom/solicitacaoVaga.js"></script>
-
-		<script>
-		$(function	()	{
-			var currentStep = 1;
-			
-			$('#wizardTab2 li a').click(function()	{
-				return false;
-			});
-			
-			$('#nextStep').click(function()	{
-	
-				currentStep++;
-				
-				if(currentStep == 2)	{
-					$('#wizardTab2 li:eq(1) a').tab('show');
-					$('#wizardProgress').css("width","66%");
-					
-					$('#prevStep').attr('disabled',false);
-					$('#prevStep').removeClass('disabled');
-				}
-				else if(currentStep == 3)	{
-					$('#wizardTab2 li:eq(2) a').tab('show');
-					$('#wizardProgress').css("width","100%");
-					
-					$('#nextStep').attr('disabled',true);
-					$('#nextStep').addClass('disabled');
-				}
-				
-				return false;
-			});
-			
-			$('#prevStep').click(function()	{
-		
-				currentStep--;
-				
-				if(currentStep == 1)	{
-				
-					$('#wizardTab2 li:eq(0) a').tab('show');
-					$('#wizardProgress').css("width","66%");
-						
-					$('#prevStep').attr('disabled',true);
-					$('#prevStep').addClass('disabled');
-					
-					$('#wizardProgress').css("width","33%");
-				}
-				else if(currentStep == 2)	{
-				
-					$('#wizardTab2 li:eq(1) a').tab('show');
-					$('#wizardProgress').css("width","66%");
-							
-					$('#nextStep').attr('disabled',false);
-					$('#nextStep').removeClass('disabled');
-					
-					$('#wizardProgress').css("width","66%");
-				}
-				
-				return false;
-			});
-		});
-	</script>
-
-  </body>
+<html lang="pt-br">
+    
+    <head>
+        
+        <meta charset="UTF-8">
+        <title>Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        
+        <!-- Bootstrap core CSS -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        
+        <!-- Font Awesome -->
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        
+        <!-- Pace -->
+        <link href="css/pace.css" rel="stylesheet">
+        
+        <!-- Chosen -->
+        <link href="css/chosen/chosen.min.css" rel="stylesheet"/>
+        
+        <!-- Datepicker -->
+        <link href="css/datepicker.css" rel="stylesheet"/>
+        
+        <!-- Timepicker -->
+        <link href="css/bootstrap-timepicker.css" rel="stylesheet"/>
+        
+        <!-- Slider -->
+        <link href="css/slider.css" rel="stylesheet"/>
+        
+        <!-- Tag input -->
+        <link href="css/jquery.tagsinput.css" rel="stylesheet"/>
+        
+        <!-- WYSIHTML5 -->
+        <link href="css/bootstrap-wysihtml5.css" rel="stylesheet"/>
+        
+        <!-- Dropzone -->
+        <link href='css/dropzone/dropzone.css' rel="stylesheet"/>
+        
+        <!-- Perfect -->
+        <link href="css/app.min.css" rel="stylesheet" />
+        <link href="css/app-skin.css" rel="stylesheet" />
+        
+        <!-- Custom -->
+        <link href="css/custom.css" rel="stylesheet" />
+        
+    </head>
+    <body>
+        <!-- Overlay Div -->
+        <div id="overlay" class="transparent"></div>
+        
+        <div id="wrapper" class="preload">
+            <div id="top-nav" class="skin-6 fixed">
+                <div class="brand">
+                    <a href="dashboard.html"><img src="img/logo.png" class="logo"></a>
+                </div><!-- /brand -->
+                <button type="button" class="navbar-toggle pull-left" id="sidebarToggle">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <button type="button" class="navbar-toggle pull-left hide-menu" id="menuToggle">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <ul class="nav-notification clearfix">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-bell fa-lg"></i>
+                            <span class="notification-label bounceIn animation-delay6">2</span>
+                        </a>
+                        <ul class="dropdown-menu notification dropdown-3">
+                            <li><a href="#">Você tem 2 novas notificações</a></li>					  
+                            <li>
+                                <a href="#">
+                                    <span class="notification-icon bg-warning">
+                                        <i class="fa fa-warning"></i>
+                                    </span>
+                                    <span class="m-left-xs">Aprovação pendente.</span>
+                                    <span class="time text-muted">Agora</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="notification-icon bg-success">
+                                        <i class="fa fa-plus"></i>
+                                    </span>
+                                    <span class="m-left-xs">Novo usuário registrado.</span>
+                                    <span class="time text-muted">2m atrás</span>
+                                </a>
+                            </li>
+                            <li><a href="#">Ver todas as notificações</a></li>					  
+                        </ul>
+                    </li>
+                    <li class="profile dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <strong>João da Silva</strong>
+                            <span><i class="fa fa-chevron-down"></i></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="clearfix" href="#">
+                                    <div class="detail">
+                                        <strong>João da Silva</strong>
+                                        <p class="grey">joaosilva@verity.com.br</p> 
+                                    </div>
+                                </a>
+                            </li>
+                            <li><a tabindex="-1" href="profile.html" class="main-link"><i class="fa fa-edit fa-lg"></i> Editar perfil</a></li>
+                            <li><a tabindex="-1" href="#" class="theme-setting"><i class="fa fa-cog fa-lg"></i> Configurações</a></li>
+                            <li class="divider"></li>
+                            <li><a tabindex="-1" class="main-link logoutConfirm_open" href="#logoutConfirm"><i class="fa fa-lock fa-lg"></i> Sair</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /top-nav-->
+            
+            <aside class="fixed skin-6">		
+                <div class="sidebar-inner scrollable-sidebar">
+                    <div class="size-toggle">
+                        <a class="btn btn-sm" id="sizeToggle">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="btn btn-sm pull-right logoutConfirm_open"  href="#logoutConfirm">
+                            <i class="fa fa-power-off"></i>
+                        </a>
+                    </div><!-- /size-toggle -->	
+                    
+                    <div class="main-menu">
+                        <ul>
+                            
+                            <li class="openable">
+                                <a href="#">
+                                    <span class="menu-icon">
+                                        <i class="fa fa-desktop fa-lg"></i> 
+                                    </span>
+                                    <span class="text">
+                                        Tela de Login
+                                    </span>
+                                    <span class="menu-hover"></span>
+                                </a>
+                                <ul class="submenu">
+                                    <li><a href="acesso.html"><span class="submenu-label">Login</span></a></li>
+                                    <li><a href="primeiro-acesso.html"><span class="submenu-label">Primeiro Acesso</span></a></li>
+                                    
+                                </ul>
+                            </li>
+                            
+                            <li>
+                                <a href="dashboard.html">
+                                    <span class="menu-icon">
+                                        <i class="fa fa-desktop fa-lg"></i> 
+                                    </span>
+                                    <span class="text">
+                                        Dashboard
+                                    </span>
+                                    <span class="menu-hover"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="solicitacao-vaga.html">
+                                    <span class="menu-icon">
+                                        <i class="fa fa-edit fa-lg"></i> 
+                                    </span>
+                                    <span class="text">
+                                        Solicitação de Vaga
+                                    </span>
+                                    <span class="menu-hover"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="cadastro-candidato.html">
+                                    <span class="menu-icon">
+                                        <i class="fa fa-edit fa-lg"></i> 
+                                    </span>
+                                    <span class="text">
+                                        Cadastrar Candidato
+                                    </span>
+                                    <span class="menu-hover"></span>
+                                </a>
+                            </li>
+                            
+                            <li class="openable">
+                                <a href="#">
+                                    <span class="menu-icon">
+                                        <i class="fa fa-file-text fa-lg"></i> 
+                                    </span>
+                                    <span class="text">
+                                        Consulta
+                                    </span>
+                                    <span class="menu-hover"></span>
+                                </a>
+                                <ul class="submenu">
+                                    <li><a href="consulta-rh.html"><span class="submenu-label">Candidato</span></a></li>
+                                    <li><a href="consulta-vaga.html"><span class="submenu-label">Vaga</span></a></li>
+                                    <li><a href="historico-candidato.html"><span class="submenu-label">Histórico</span></a></li>
+                                </ul>
+                            </li>
+                            
+                            <li class="openable">
+                                <a href="#">
+                                    <span class="menu-icon">
+                                        <i class="fa fa-check fa-lg"></i> 
+                                    </span>
+                                    <span class="text">
+                                        Aprovação
+                                    </span>
+                                    <span class="menu-hover"></span>
+                                </a>
+                                <ul class="submenu">
+                                    <li><a href=""><span class="submenu-label">Candidato</span></a></li>
+                                    <li><a href="aprovacao-vaga.html"><span class="submenu-label">Vaga</span></a></li>
+                                    
+                                </ul>
+                            </li>
+                            
+                            <li class="openable">
+                                <a href="#">
+                                    <span class="menu-icon">
+                                        <i class="fa fa-print fa-lg"></i> 
+                                    </span>
+                                    <span class="text">
+                                        Relatórios
+                                    </span>
+                                    <span class="menu-hover"></span>
+                                </a>
+                                
+                            </li>
+                            
+                            <li class="openable">
+                                <a href="#">
+                                    <span class="menu-icon">
+                                        <i class="fa fa-cogs fa-lg"></i> 
+                                    </span>
+                                    <span class="text">
+                                        Configuração
+                                    </span>
+                                    <span class="menu-hover"></span>
+                                </a>
+                            </li>	
+                        </ul>
+                    </div><!-- /main-menu -->
+                </div><!-- /sidebar-inner scrollable-sidebar -->
+            </aside>
+            
+            <div id="main-container">
+                <div id="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li><i class="fa fa-home"></i><a href="dashboard.html"> Início</a></li>
+                        <li class="active"> Dashboard</li>
+                    </ul>
+                </div><!--breadcrumb-->
+                
+                <div class="main-header clearfix">
+                    <div class="page-title">
+                        <h3 class="no-margin">Dashboard</h3>
+                        <span>Bem-vindo ao sistema <strong class="text-success">Prosperity</strong>!</span>
+                    </div><!-- /page-title -->
+                </div>
+                
+            </div>
+            
+            <!-- Footer ================================================== -->
+            <footer>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <span class="footer-brand">
+                            <strong class="text-success">Prosperity</strong>
+                        </span>
+                        <p class="no-margin">
+                            &copy; 2017 <strong>Verity TI</strong>. Todos os direitos reservados. 
+                        </p>
+                    </div><!-- /.col -->
+                </div><!-- /.row-->
+            </footer>
+            
+        </div><!-- /wrapper -->
+        
+        <a href="" id="scroll-to-top" class="hidden-print"><i class="fa fa-chevron-up"></i></a>
+        
+        <!-- Logout confirmation -->
+        <div class="custom-popup width-100" id="logoutConfirm">
+            <div class="padding-md">
+                <h4 class="m-top-none"> Deseja realmente sair?</h4>
+            </div>
+            
+            <div class="text-center">
+                <a class="btn btn-success m-right-sm" href="login.html">Sair</a>
+                <a class="btn btn-danger logoutConfirm_close">Cancelar</a>
+            </div>
+        </div>
+        
+        <!-- Le javascript ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        
+        <!-- Jquery -->
+        <script src="js/jquery-1.10.2.min.js"></script>
+        
+        <!-- Bootstrap -->
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        
+        <!-- Chosen -->
+        <script src='js/chosen.jquery.min.js'></script>	
+        
+        <!-- Mask-input -->
+        <script src='js/jquery.maskedinput.min.js'></script>	
+        
+        <!-- Datepicker -->
+        <script src='js/bootstrap-datepicker.min.js'></script>	
+        
+        <!-- Timepicker -->
+        <script src='js/bootstrap-timepicker.min.js'></script>	
+        
+        <!-- Slider -->
+        <script src='js/bootstrap-slider.min.js'></script>	
+        
+        <!-- Tag input -->
+        <script src='js/jquery.tagsinput.min.js'></script>	
+        
+        <!-- WYSIHTML5 -->
+        <script src='js/wysihtml5-0.3.0.min.js'></script>	
+        <script src='js/uncompressed/bootstrap-wysihtml5.js'></script>	
+        
+        <!-- Dropzone -->
+        <script src='js/dropzone.min.js'></script>	
+        
+        <!-- Modernizr -->
+        <script src='js/modernizr.min.js'></script>
+        
+        <!-- Pace -->
+        <script src='js/pace.min.js'></script>
+        
+        <!-- Popup Overlay -->
+        <script src='js/jquery.popupoverlay.min.js'></script>
+        
+        <!-- Slimscroll -->
+        <script src='js/jquery.slimscroll.min.js'></script>
+        
+        <!-- Cookie -->
+        <script src='js/jquery.cookie.min.js'></script>
+        
+        <!-- Perfect -->
+        <script src="js/app/app_form.js"></script>
+        <script src="js/app/app.js"></script>
+        
+    </body>
 </html>
