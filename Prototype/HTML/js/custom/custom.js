@@ -3,10 +3,10 @@ $(function	()	{
 	//#formCadastro
 	var currentStep = 1; 
 	 
-    $('.wizard-demo li a').click(function()	{
-		//alert('You must enter your information')
+    // Desativa navegação por tabs
+    /*$('.wizard-demo li a').click(function()	{
 		return false;
-	});
+	});*/
     
 	//Form Validation
 	$('#basic-constraint').parsley( { listeners: {

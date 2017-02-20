@@ -245,10 +245,10 @@ footer {
 /** FIM - TIMELINE */
 
 .tab-bar>li a {
-    color: #3e3c3c;
+    /*color: #3e3c3c;*/
     text-shadow: 0 0;
 }
 
 .tab-bar>li.active a {
-    color: #000;
+    /*color: #000;*/
 }
