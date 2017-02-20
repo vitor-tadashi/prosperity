@@ -23,7 +23,7 @@ footer {
 }
 
 .tab-verity {
-    background-color: #65cea7;
+    background-color: #efefef;
     border: 1px solid #ccc;
 }
 
@@ -245,6 +245,10 @@ footer {
 /** FIM - TIMELINE */
 
 .tab-bar>li a {
-    color: #ddd;
+    color: #3e3c3c;
     text-shadow: 0 0;
+}
+
+.tab-bar>li.active a {
+    color: #000;
 }
