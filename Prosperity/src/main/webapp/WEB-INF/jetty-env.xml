@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://www.eclipse.org/jetty/configure_9_0.dtd">
 
 <Configure class="org.eclipse.jetty.webapp.WebAppContext">
 	<New id="DSProsperity" class="org.eclipse.jetty.plus.jndi.Resource">
 		<Arg></Arg>
 		<Arg>jdbc/prosperityDS</Arg>
 		<Arg>
-			<New id="prosperityDS" class="net.sourceforge.jtds.jdbcx.JtdsDataSource">
-				<Set name="User">userdes</Set>
-				<Set name="Password">userdes</Set>
+			<New class="net.sourceforge.jtds.jdbcx.JtdsDataSource">
+				<Set name="User">axa_developers</Set>
+				<Set name="Password">axa@123</Set>
 				<Set name="DatabaseName">prosperity</Set>
-				<Set name="ServerName">192.168.2.12</Set>
+				<Set name="ServerName">192.168.2.20\mssql2012</Set>
 				<Set name="PortNumber">1433</Set>
 			</New>
 		</Arg>
