@@ -1,3 +1,28 @@
 .logo {
     width: 100px;
 }
+
+#main-container {
+    min-height: 690px;
+}
+
+#wrapper {
+    min-height: 0;
+}
+
+footer {
+ 	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	padding: 1rem;
+}
+
+.form-group {
+    border-bottom: 0 !important;
+}
+
+.tab-verity {
+    background-color: #65cea7;
+    border: 1px solid #ccc;
+}

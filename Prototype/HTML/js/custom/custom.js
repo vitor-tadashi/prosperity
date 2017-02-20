@@ -1,8 +1,13 @@
 $(function	()	{
 	
-	//#tab-cadastraCandidato
+	//#formCadastro
 	var currentStep = 1; 
 	 
+    $('.wizard-demo li a').click(function()	{
+		//alert('You must enter your information')
+		return false;
+	});
+    
 	//Form Validation
 	$('#basic-constraint').parsley( { listeners: {
         onFormSubmit: function ( isFormValid, event ) {
@@ -38,7 +43,7 @@ $(function	()	{
         }
     }});
 	
-	$('#tab-cadastraCandidato').parsley( { listeners: {
+	$('#formCadastro').parsley( { listeners: {
 		onFieldValidate: function ( elem ) {
 			// if field is not visible, do not apply Parsley validation!
 			if ( !$( elem ).is( ':visible' ) ) {
@@ -53,19 +58,15 @@ $(function	()	{
 				currentStep++;
 				
 				if(currentStep == 2)	{
-					$('#tab-cadastraCandidato li:eq(1) a').tab('show');
+					$('#wizardDemo li:eq(1) a').tab('show');
 					
-					$('#prevStep2').attr('disabled',false);
-					$('#prevStep2').removeClass('disabled');
+					$('#prevStep').attr('disabled',false);
+					$('#prevStep').removeClass('disabled');
+                    $('#nextStep').text('Próximo');
 				}
 				else if(currentStep == 3)	{
-					$('#tab-cadastraCandidato li:eq(2) a').tab('show');
-				}
-				else if(currentStep == 4)	{
-					$('#tab-cadastraCandidato li:eq(3) a').tab('show');
-					
-					$('#nextStep2').attr('disabled',true);
-					$('#nextStep2').addClass('disabled');
+					$('#wizardDemo li:eq(2) a').tab('show');
+					$('#nextStep').text('Cadastrar');
 				}
 				
 				return false;
@@ -73,29 +74,25 @@ $(function	()	{
         }
     }});
 	
-	$('#prevStep2').click(function()	{
+	$('#prevStep').click(function()	{
 		
 		currentStep--;
 		
 		if(currentStep == 1)	{
 		
-			$('#tab-cadastraCandidato li:eq(0) a').tab('show');
+			$('#wizardDemo li:eq(0) a').tab('show');
 				
-			$('#prevStep2').attr('disabled',true);
-			$('#prevStep2').addClass('disabled');
+			$('#prevStep').attr('disabled',true);
+			$('#prevStep').addClass('disabled');
 			
 		}
 		else if(currentStep == 2)	{
-			$('#tab-cadastraCandidato li:eq(1) a').tab('show');
+			$('#wizardDemo li:eq(1) a').tab('show');
+			$('#nextStep').text('Próximo');
 		}
 		
 		else if(currentStep == 3)	{
-		
-			$('#tab-cadastraCandidato li:eq(2) a').tab('show');
-					
-			$('#nextStep2').attr('disabled',false);
-			$('#nextStep2').removeClass('disabled');
-			
+			$('#wizardDemo li:eq(2) a').tab('show');
 		}
 		
 		return false;

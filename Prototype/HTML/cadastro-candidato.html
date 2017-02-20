@@ -42,48 +42,14 @@
         <!-- Perfect -->
         <link href="css/app.min.css" rel="stylesheet">
         <link href="css/app-skin.css" rel="stylesheet">
-        
-        <style>
-            .form-group {
-                border-bottom: 0 !important;
-            }
-            
-            .tab-verity {
-                background-color: rgb(0, 177, 205);
-                border-radius: 5%;
-            }
-        </style>
+
+        <!-- Custom -->
+        <link href="css/custom.css" rel="stylesheet" />
         
     </head>
     <body>
         <!-- Overlay Div -->
         <div id="overlay" class="transparent"></div>
-        
-        <a href="" id="theme-setting-icon"><i class="fa fa-cog fa-lg"></i></a>
-        <div id="theme-setting">
-            <div class="title">
-                <strong class="no-margin">Skin Color</strong>
-            </div>
-            <div class="theme-box">
-                <a class="theme-color" style="background:#32367" id="default"></a>
-                <a class="theme-color" style="background:#efefef" id="skin-1"></a>
-                <a class="theme-color" style="background:#a93922" id="skin-2"></a>
-                <a class="theme-color" style="background:#3e6b96" id="skin-3"></a>
-                <a class="theme-color" style="background:#635267" id="skin-6"></a>
-                <a class="theme-color" style="background:#3a3a3a" id="skin-5"></a>
-                <a class="theme-color" style="background:#695B6C" id="skin-6"></a>
-            </div>
-            <div class="title">
-                <strong class="no-margin">Sidebar Menu</strong>
-            </div>
-            <div class="theme-box">
-                <label class="label-checkbox">
-                    <input type="checkbox" checked id="fixedSidebar">
-                    <span class="custom-checkbox"></span>
-                    Fixed Sidebar
-                </label>
-            </div>
-        </div><!-- /theme-setting -->
         
         <div id="wrapper" class="preload">
             <div id="top-nav" class="skin-6 fixed">
@@ -457,9 +423,9 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">Informações do candidato</div>
                             <div class="panel-body">
-                                <form class="form-border" id="tab-cadastraCandidato" novalidate="">
+                                <form class="form-border" id="formCadastro" novalidate="">
                                     <div class="panel-tab clearfix">
-                                        <ul class="tab-bar wizard-demo" id="wizardDemo2">
+                                        <ul class="tab-bar wizard-demo" id="wizardDemo">
                                             <li class="active tab-verity"><a href="#first" data-toggle="tab"><i class="fa fa-user"></i> Inf. pessoais</a></li>
                                             <li class="tab-verity"><a href="#second" data-toggle="tab" class="text-success"><i class="fa fa-pencil"></i> Inf. acadêmicas</a></li>
                                             <li class="tab-verity"><a href="#third" data-toggle="tab" class="text-success"><i class="fa fa-briefcase"></i> Currículo</a></li>
@@ -623,8 +589,8 @@
                                         </div>
                                     </div>
                                     <div class="panel-footer text-right">
-                                        <button class="btn btn-success btn-sm disabled" id="prevStep2" disabled="">Anterior</button>
-                                        <button type="submit" class="btn btn-sm btn-success" id="nextStep2">Próximo</button>
+                                        <button class="btn btn-success btn-sm disabled" id="prevStep" disabled="">Anterior</button>
+                                        <button type="submit" class="btn btn-sm btn-success" id="nextStep">Próximo</button>
                                     </div>
                                 </form>
                                 
@@ -706,7 +672,6 @@
                 <!-- Perfect -->
                 <script src="js/app/app_form.js"></script>
                 <script src="js/app/app.js"></script>
-                <script src="js/app/app_wizard.js"></script>
                 
                 <!-- Custom -->
                 <script src="js/custom/solicitacaoVaga.js"></script>
