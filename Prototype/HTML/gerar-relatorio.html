@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <title>Gerar relatório</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Pace -->
+    <link href="css/pace.css" rel="stylesheet">
+
+    <!-- Chosen -->
+    <link href="css/chosen/chosen.min.css" rel="stylesheet" />
+
+    <!-- Datepicker -->
+    <link href="css/datepicker.css" rel="stylesheet" />
+
+    <!-- Timepicker -->
+    <link href="css/bootstrap-timepicker.css" rel="stylesheet" />
+
+    <!-- Slider -->
+    <link href="css/slider.css" rel="stylesheet" />
+
+    <!-- Tag input -->
+    <link href="css/jquery.tagsinput.css" rel="stylesheet" />
+
+    <!-- WYSIHTML5 -->
+    <link href="css/bootstrap-wysihtml5.css" rel="stylesheet" />
+
+    <!-- Dropzone -->
+    <link href='css/dropzone/dropzone.css' rel="stylesheet" />
+
+    <!-- Perfect -->
+    <link href="css/app.min.css" rel="stylesheet">
+    <link href="css/app-skin.css" rel="stylesheet">
+    
+    <!-- Custom -->
+    <link href="css/custom.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+    <!-- Modal visualizar-->
+    <div class="modal fade" id="vaga-modal" data-target="#vaga-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Desenvolvedor .Net Pleno</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-tab clearfix">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#home">Informações</a></li>
+                            <li><a data-toggle="tab" href="#menu1">Especificações</a></li>
+                        </ul>
+					</div>
+                      <div class="tab-content"> 
+                        <div id="home" class="tab-pane fade in active">
+                            <form>
+                                <section class="panel panel-default panel-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Data de abertura</label>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <input type="text" value="01/01/2017" class="datepicker form-control">
+                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    </div>
+                                                </div><!-- /.col -->
+                                            </div><!-- /form-group -->
+                                        </div> 
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Data de aprovação</label>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <input type="text" value="01/01/2017" class="datepicker form-control">
+                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    </div>
+                                                </div><!-- /.col -->
+                                            </div><!-- /form-group -->
+                                        </div>
+                                    </div>
+                                </section>
+                            </form>
+                        </div>      
+                        <div id="menu1" class="tab-pane fade">
+                            <section class="panel panel-default">
+                            <div class="panel-heading">Informações básicas</div>
+                            <div class="panel-body">
+                                <form>
+                                    <div class="form-group row">
+                                        <div>
+                                            <div class="form-group col-md-6" style="margin-bottom: 0px">
+                                                <label for="exampleInputEmail1">Solicitante</label>
+                                                <input type="name" class="form-control input-sm" id="exampleInputEmail1" placeholder="Solicitante" data-required="true">
+                                            </div><!-- /form-group -->
+
+                                            <div class="form-group col-md-6" style="margin-bottom: 0px">																						
+                                                <label for="exampleInputEmail1">Local de trabalho</label>
+                                                <div>
+                                                    <label class="label-radio inline">
+                                                        <input id="interno" type="radio" name="inline-radio2" checked>
+                                                        <span class="custom-radio"></span>
+                                                        Interno
+                                                    </label>
+                                                    <label class="label-radio inline">
+                                                        <input id="cliente" type="radio" name="inline-radio2">
+                                                        <span class="custom-radio"></span>
+                                                        Cliente
+                                                    </label>
+                                                </div><!-- /.col -->
+                                            </div>
+                                        </div>	
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div>
+                                            <div class="form-group col-md-6" style="margin-bottom: 0px">
+                                                <label for="exampleInputEmail1">Cargo</label>
+                                                <select class="form-control chzn-select">
+                                                    <option>Analista de testes</option>
+                                                    <option>Analista de sistemas</option>
+                                                    <option>Desenvolvedor</option>
+                                                    <option>Gerente de projetos</option>
+                                                </select>	
+                                            </div><!-- /form-group -->
+
+                                            <div class="form-group col-md-6" style="margin-bottom: 0px">																						
+                                                <label for="exampleInputEmail1">Tipo de vaga</label>
+                                                <div>
+                                                    <label class="label-radio inline">
+                                                        <input type="radio" name="inline-radio3" checked>
+                                                        <span class="custom-radio"></span>
+                                                        Real
+                                                    </label>
+                                                    <label class="label-radio inline">
+                                                        <input type="radio" name="inline-radio3">
+                                                        <span class="custom-radio"></span>
+                                                        Prospecção
+                                                    </label>
+                                                    <label class="label-radio inline">
+                                                        <input type="radio" name="inline-radio3">
+                                                        <span class="custom-radio"></span>
+                                                        Hunting
+                                                    </label>
+                                                </div><!-- /.col -->
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="form-group col-md-4" style="margin-bottom: 0px">
+                                            <label for="exampleInputEmail1">Senioridade da vaga</label>
+                                            <select class="form-control chzn-select">
+                                                <option>Estágio</option>
+                                                <option>Júnior</option>
+                                                <option>Pleno</option>
+                                                <option>Senior</option>
+                                            </select>	
+                                        </div><!-- /form-group -->
+
+                                        <div class="form-group" style="margin-bottom: 0px">
+                                            <label class="control-label">Horário</label>
+
+                                            <div>
+                                                <div class="form-group col-md-3">
+                                                    <div class="input-group bootstrap-timepicker">
+                                                        <input class="timepicker form-control" type="text"/ value="08:00 AM">
+                                                        <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group col-md-1">
+                                                    <label style="margin-top: 7px">Às</label>
+                                                </div>
+
+                                                <div class="form-group col-md-3">
+                                                    <div class="input-group bootstrap-timepicker">
+                                                        <input class="timepicker form-control" type="text"/ value="05:00 PM">
+                                                        <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+
+                                        <div class="">
+                                            <div class="form-group col-md-6" style="margin-bottom: 0px">
+                                                <label for="exampleInputPassword1">Faixa salarial</label>												
+                                                <input type="password" class="form-control input-sm" id="exampleInputPassword1" placeholder="Faixa Salarial" disabled>
+                                            </div><!-- /form-group -->
+
+                                            <div class="form-group col-md-6" style="margin-bottom: 0px">
+                                                <label for="exampleInputEmail1">Aumento de quadro</label>
+                                                <div>
+                                                    <label class="label-radio inline">
+                                                        <input id="novo" type="radio" name="inline-radio" checked> 
+                                                        <span class="custom-radio">
+                                                        </span>
+                                                        Novo
+                                                    </label>
+                                                    <label class="label-radio inline">
+                                                        <input id="sub" type="radio" name="inline-radio">
+                                                        <span class="custom-radio" >
+                                                        </span>
+                                                        Substituição
+                                                    </label>
+                                                    
+                                                </div><!-- /.col -->
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                        <div class="form-group row">
+
+                                            <div class="form-group col-md-6" style="margin-bottom: 0px">
+
+                                                <div class="form-group">
+                                                    <label class="control-label">Data para inicio</label>
+                                                    <div class="form-group">
+                                                        <div class="input-group">
+                                                            <input type="text" value="01/01/2017" class="datepicker form-control">
+                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                        </div>
+                                                    </div><!-- /.col -->
+                                                </div><!-- /form-group -->
+                                            </div>
+
+                                            <div class="form-group col-md-6" style="margin-bottom: 0px">
+                                                <div id="" class="">
+                                                    <label>Nome do substituido</label>
+                                                    <input type="text" class="form-control input-sm" placeholder="Nome do substituido">
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+
+                                </form>
+                            </div>
+                        </section><!-- /Section -->
+                        <section class="panel panel-default">
+                                <div class="panel-heading">Formação acadêmica</div>
+                                <div class="panel-body relative">
+                                    <div class="form-group">
+                                    <textarea class="form-control" rows="3"></textarea>
+                                    </div><!-- /form-group -->
+
+                                </div>
+                            </section><!-- /panel -->
+
+                            <section class="panel panel-default">
+                                <div class="panel-heading">Perfil comportamental</div>
+                                <div class="panel-body relative">
+                                    <div class="form-group">
+                                    <textarea class="form-control" rows="3"></textarea>
+                                    </div><!-- /form-group -->
+
+                                </div>
+                            </section><!-- /panel -->
+
+                            <section class="panel panel-default">
+                                <div class="panel-heading">Perfil técnico</div>
+                                <div class="panel-body relative">
+
+                                    <div class="form-group">
+                                    <textarea class="form-control" rows="3"></textarea>
+                                    </div><!-- /form-group -->
+
+                                </div>
+                            </section><!-- /panel -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">Imprimir</button>
+                            </div>
+                        </div>
+                    </div><!-- /tab-content -->
+                    </div>
+                </div> 
+            </div>
+        </div>
+
+    <!-- Modal delete -->
+    <div class="modal fade" id="delete-modal" data-target="#delete-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+						<span aria-hidden="true">&times;</span>
+					</button>
+                    <h4 class="modal-title" id="modalLabel">Excluir Item</h4>
+                </div>
+                <div class="modal-body">Deseja realmente excluir este item?</div>
+                <div class="modal-footer">
+                    <a id="excluir" href="#">
+                        <button type="button" class="btn btn-primary">Sim</button>
+                    </a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.modal delete-->
+
+    <!-- Overlay Div -->
+    <div id="overlay" class="transparent"></div>
+
+    <div id="wrapper" class="preload">
+            <div id="top-nav" class="skin-6 fixed">
+                <div class="brand">
+                    <a href="dashboard.html"><img src="img/logo.png" class="logo"></a>
+                </div><!-- /brand -->
+                <button type="button" class="navbar-toggle pull-left" id="sidebarToggle">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <button type="button" class="navbar-toggle pull-left hide-menu" id="menuToggle">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <ul class="nav-notification clearfix">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-bell fa-lg"></i>
+                            <span class="notification-label bounceIn animation-delay6">2</span>
+                        </a>
+                        <ul class="dropdown-menu notification dropdown-3">
+                            <li><a href="#">Você tem 2 novas notificações</a></li>					  
+                            <li>
+                                <a href="#">
+                                    <span class="notification-icon bg-warning">
+                                        <i class="fa fa-warning"></i>
+                                    </span>
+                                    <span class="m-left-xs">Aprovação pendente.</span>
+                                    <span class="time text-muted">Agora</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="notification-icon bg-success">
+                                        <i class="fa fa-plus"></i>
+                                    </span>
+                                    <span class="m-left-xs">Novo usuário registrado.</span>
+                                    <span class="time text-muted">2m atrás</span>
+                                </a>
+                            </li>
+                            <li><a href="#">Ver todas as notificações</a></li>					  
+                        </ul>
+                    </li>
+                    <li class="profile dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <strong>João da Silva</strong>
+                            <span><i class="fa fa-chevron-down"></i></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="clearfix" href="#">
+                                    <div class="detail">
+                                        <strong>João da Silva</strong>
+                                        <p class="grey">joaosilva@verity.com.br</p> 
+                                    </div>
+                                </a>
+                            </li>
+                            <li><a tabindex="-1" href="profile.html" class="main-link"><i class="fa fa-edit fa-lg"></i> Editar perfil</a></li>
+                            <li><a tabindex="-1" href="#" class="theme-setting"><i class="fa fa-cog fa-lg"></i> Configurações</a></li>
+                            <li class="divider"></li>
+                            <li><a tabindex="-1" class="main-link logoutConfirm_open" href="#logoutConfirm"><i class="fa fa-lock fa-lg"></i> Sair</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /top-nav-->
+            
+            <aside class="fixed skin-6">		
+                <div class="sidebar-inner scrollable-sidebar">
+                    <div class="size-toggle">
+                        <a class="btn btn-sm" id="sizeToggle">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="btn btn-sm pull-right logoutConfirm_open"  href="#logoutConfirm">
+                            <i class="fa fa-power-off"></i>
+                        </a>
+                    </div><!-- /size-toggle -->	
+                    
+                    <div class="main-menu">
+                        <ul>
+                            
+                            <li class="openable">
+                                <a href="#">
+                                    <span class="menu-icon">
+                                        <i class="fa fa-desktop fa-lg"></i> 
+                                    </span>
+                                    <span class="text">
+                                        Tela de Login
+                                    </span>
+                                    <span class="menu-hover"></span>
+                                </a>
+                                <ul class="submenu">
+                                    <li><a href="acesso.html"><span class="submenu-label">Login</span></a></li>
+                                    <li><a href="primeiro-acesso.html"><span class="submenu-label">Primeiro Acesso</span></a></li>
+                                    
+                                </ul>
+                            </li>
+                            
+                            <li>
+                                <a href="dashboard.html">
+                                    <span class="menu-icon">
+                                        <i class="fa fa-desktop fa-lg"></i> 
+                                    </span>
+                                    <span class="text">
+                                        Dashboard
+                                    </span>
+                                    <span class="menu-hover"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="solicitacao-vaga.html">
+                                    <span class="menu-icon">
+                                        <i class="fa fa-edit fa-lg"></i> 
+                                    </span>
+                                    <span class="text">
+                                        Solicitação de Vaga
+                                    </span>
+                                    <span class="menu-hover"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="cadastro-candidato.html">
+                                    <span class="menu-icon">
+                                        <i class="fa fa-edit fa-lg"></i> 
+                                    </span>
+                                    <span class="text">
+                                        Cadastrar Candidato
+                                    </span>
+                                    <span class="menu-hover"></span>
+                                </a>
+                            </li>
+                            
+                            <li class="openable">
+                                <a href="#">
+                                    <span class="menu-icon">
+                                        <i class="fa fa-file-text fa-lg"></i> 
+                                    </span>
+                                    <span class="text">
+                                        Consulta
+                                    </span>
+                                    <span class="menu-hover"></span>
+                                </a>
+                                <ul class="submenu">
+                                    <li><a href="consulta-rh.html"><span class="submenu-label">Candidato</span></a></li>
+                                    <li><a href="consulta-vaga.html"><span class="submenu-label">Vaga</span></a></li>
+                                    <li><a href="historico-candidato.html"><span class="submenu-label">Histórico</span></a></li>
+                                </ul>
+                            </li>
+                            
+                            <li class="openable">
+                                <a href="#">
+                                    <span class="menu-icon">
+                                        <i class="fa fa-check fa-lg"></i> 
+                                    </span>
+                                    <span class="text">
+                                        Aprovação
+                                    </span>
+                                    <span class="menu-hover"></span>
+                                </a>
+                                <ul class="submenu">
+                                    <li><a href=""><span class="submenu-label">Candidato</span></a></li>
+                                    <li><a href="aprovacao-vaga.html"><span class="submenu-label">Vaga</span></a></li>
+                                    
+                                </ul>
+                            </li>
+                            
+                            <li>
+                                <a href="gerar-relatorio.html">
+                                    <span class="menu-icon">
+                                        <i class="fa fa-print fa-lg"></i> 
+                                    </span>
+                                    <span class="text">
+                                        Relatórios
+                                    </span>
+                                    <span class="menu-hover"></span>
+                                </a>
+                                
+                            </li>
+                            
+                            <li class="openable">
+                                <a href="#">
+                                    <span class="menu-icon">
+                                        <i class="fa fa-cogs fa-lg"></i> 
+                                    </span>
+                                    <span class="text">
+                                        Configuração
+                                    </span>
+                                    <span class="menu-hover"></span>
+                                </a>
+                            </li>	
+                        </ul>
+                    </div><!-- /main-menu -->
+                </div><!-- /sidebar-inner scrollable-sidebar -->
+            </aside>
+            
+            <div id="main-container">
+                <div id="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li><i class="fa fa-home"></i><a href="dashboard.html"> Início</a></li>
+                        <li class="active"> Gerar relatório</li>
+                    </ul>
+                </div><!--breadcrumb-->
+
+            <!--corpo -->
+            <br/>
+            <div class="container">
+                <div class="padding-md">
+                    <div class="row">
+                        <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Relatório
+                    </div>
+                    <!--<form class="form-inline">-->
+                    <div class="panel-body">
+
+                        <!--<div class=" ">-->
+                        <div class="col-md-4">
+                            <label for="cargo">Relatórios</label>
+                            <select id="cargo" class="form-control"> 
+								<option value="0">Selecionar</option>
+                                <option value="1">Candidatos por vaga</option>	
+                                <option value="2">Vagas</option> 
+								<option value="3">Candidatos</option> 
+                                <option value="4">Como ficou sabendo da vaga?</option> 
+                                <option value="5">Tempo de abertura da vaga</option> 
+				            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1">Data:</label>
+                            <div class="input-group">
+                                <input type="date" class="form-control">
+                                <span class="input-group-addon">até</span>
+                                <input type="date" class="form-control">
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <a href="#" style="text-decoration: none; color: #ffffff">
+                                <button class="btn btn-primary" style="margin-top: 22px;">Gerar</button>
+                            </a>
+                        </div>
+            </div><!--</panel body>-->
+                        
+                </div><!--</col-sm-12>-->
+                </div><!--</row>-->
+                </div><!--</padding>-->
+                </div><!--</container>-->
+            </div><!--</main container>-->
+        <!--corpo -->
+
+        <!-- /Modal -->
+        <div class="modal fade" id="formModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4>Modal with form</h4>
+                    </div>
+                    <div class="modal-body ">
+                        <form>
+                            <div class="form-group ">
+                                <label>Username</label>
+                                <input type="text" class="form-control input-sm" placeholder="Email Address ">
+                            </div>
+                            <div class="form-group ">
+                                <label>Password</label>
+                                <input type="password " class="form-control input-sm" placeholder="Password ">
+                            </div>
+                            <div class="form-group ">
+                                <label class="label-checkbox ">
+								 <input type="checkbox " class="regular-checkbox " />
+								 <span class="custom-checkbox "></span>
+									 Remember me
+								</label>
+                            </div>
+                            <div class="form-group text-right">
+                                <a href="# " class="btn btn-success ">Sign in</a>
+                                <a href="# " class="btn btn-success ">Sign up</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+    </div>
+    <!-- /wrapper -->
+
+    <a href=" " id="scroll-to-top" class="hidden-print"><i class="fa fa-chevron-up"></i></a>
+
+    <!-- Logout confirmation -->
+    <div class="custom-popup width-100" id="logoutConfirm">
+        <div class="padding-md">
+            <h4 class="m-top-none"> Deseja realmente sair?</h4>
+        </div>
+
+        <div class="text-center">
+            <a class="btn btn-success m-right-sm " href="acesso.html">Sair</a>
+            <a class="btn btn-danger logoutConfirm_close">Cancelar</a>
+        </div>
+    </div>
+
+    <!-- Le javascript
+		================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <!-- Jquery -->
+    <script src="js/jquery-1.10.2.min.js "></script>
+
+    <!-- Bootstrap -->
+    <script src="bootstrap/js/bootstrap.min.js "></script>
+
+    <!-- Chosen -->
+    <script src='js/chosen.jquery.min.js'></script>
+
+    <!-- Mask-input -->
+    <script src='js/jquery.maskedinput.min.js'></script>
+
+    <!-- Datepicker -->
+    <script src='js/bootstrap-datepicker.min.js'></script>
+
+    <!-- Timepicker -->
+    <script src='js/bootstrap-timepicker.min.js'></script>
+
+    <!-- Slider -->
+    <script src='js/bootstrap-slider.min.js'></script>
+
+    <!-- Tag input -->
+    <script src='js/jquery.tagsinput.min.js'></script>
+
+    <!-- WYSIHTML5 -->
+    <script src='js/wysihtml5-0.3.0.min.js'></script>
+    <script src='js/uncompressed/bootstrap-wysihtml5.js'></script>
+
+    <!-- Dropzone -->
+    <script src='js/dropzone.min.js'></script>
+
+    <!-- Modernizr -->
+    <script src='js/modernizr.min.js'></script>
+
+    <!-- Pace -->
+    <script src='js/pace.min.js'></script>
+
+    <!-- Popup Overlay -->
+    <script src='js/jquery.popupoverlay.min.js'></script>
+
+    <!-- Slimscroll -->
+    <script src='js/jquery.slimscroll.min.js'></script>
+
+    <!-- Cookie -->
+    <script src='js/jquery.cookie.min.js'></script>
+
+    <!-- Perfect -->
+    <script src="js/app/app_form.js "></script>
+    <script src="js/app/app.js "></script>
+
+    <!-- Custom -->
+    <script src="js/custom/solicitacaoVaga.js "></script>
+</body>
+
+</html>

@@ -74,83 +74,401 @@
     
     <body>
         
-        <!-- Modal Candidato -->
-        <div class="modal fade" id="candidato-modal" data-target="#candidato-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4>Candidato</h4>
-                    </div>
-                    <div class="modal-body">
-                        Dados do Candidato
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-dismiss="modal" <a href="#aprovado-modal" data-toggle="modal">Aprovar</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" <a href="#reprovado-modal" data-toggle="modal">Reprovar</button>
-            </div>
-        </div>
-        </div>
-    </div>
+    
 <!-- Modal Aprovado -->
-<div class="modal fade" id="aprovado-modal" data-target="#aprovado-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4>Aprovado</h4>
-            </div>
-            <br>
+		<div class="modal fade" id="aprovado-modal" data-target="#aprovado-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4>Candidato aprovado</h4>
+					</div>
+					<div class="modal-body">
+					</div>
+                    
+                    
+                    <table class="table" style="font-size: 10px">
+                        <thead class="text-center">
+                        <tr class="text-center">
+                            <th class="text-center">Competências</th>   
+                            <th>Insatisfatório</th>
+                            <th>Em Desenvolvimento</th>
+                            <th>Atende as Expectativas</th>
+                            <th>Supera as Expectativas</th>
+                        </tr> 
+                        </thead>
+                       <tbody class="text-center">
+                           <tr>
+                               <td>Desenvolvimento</td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio1">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio2">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio3">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio4">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                           
+                           </tr>
+                           <tr><td>Profundidade</td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio1">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio2">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio3">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio4">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                           </tr>
+                           <tr><td>Planejamento</td><td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio1">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio2">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio3">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio4">
+                                        <span class="custom-radio"></span>
+                                    </label></td></tr>
+                           <tr><td>Planejamento</td><td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio1">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio2">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio3">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio4">
+                                        <span class="custom-radio"></span>
+                                    </label></td></tr>
+                           <tr><td>Execução e Entrega</td><td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio1">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio2">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio3">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio4">
+                                        <span class="custom-radio"></span>
+                                    </label></td></tr>
+                           <tr><td>Relacionamento</td><td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio1">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio2">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio3">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio4">
+                                        <span class="custom-radio"></span>
+                                    </label></td></tr>
+                           <tr><td>Pessoas</td><td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio1">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio2">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio3">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio4">
+                                        <span class="custom-radio"></span>
+                                    </label></td></tr>
+                           <tr><td>Comercial</td><td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio1">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio2">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio3">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio4">
+                                        <span class="custom-radio"></span>
+                                    </label></td></tr>
+                           <tr><td>Financeiro</td><td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio1">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio2">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio3">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio4">
+                                        <span class="custom-radio"></span>
+                                    </label></td></tr>
+                           
+                        </tbody> 
+                       
+                    </table>
+                    
+                    
+                    
+                    
+                  
+                    
+					<div class="form-group">
+							<label for="message-text" class="form-control-label" style="margin-left: 15px">Parecer:</label>
+							<textarea class="form-control" id="message-text" style="margin-left: 10px; width: 570px"></textarea>
+						</div>
+                    </form>
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+							<button type="button" class="btn btn-primary">Enviar</button>
+                            <button type="button" class="btn btn-success"><i class="fa fa-download fa-lg"></i> Baixar CV</button>
+						</div>
+				</div>
+			</div>
+			</div>
+                <!-- /.col -->
+                
             
-            <div class="form-group">
-                <label for="message-text" class="form-control-label" style="margin-left: 15px">Parecer</label>
-                <textarea class="form-control" id="message-text" style="margin-left: 10px; width: 550px"></textarea>
-                <div class="form-group">
-                    <label class="col-lg-5 control-label">Select</label>
-                    <div class="col-lg-10">
-                        <select class="form-control">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                    </div><!-- /.col -->
-                </div>
-                </form>
-            
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary">Enviar</button>
-            </div>	
-        </div>
-    </div>
-</div>
-<!-- Modal Reprovado -->
+            <!-- Modal Reprovado -->
 <div class="modal fade" id="reprovado-modal" data-target="#reprovado-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4>Reprovado</h4>
-            </div>
-            <div class="form-group">
-                <label for="message-text" class="form-control-label" style="margin-left: 15px"> Feedback</label>
-                <textarea class="form-control" id="message-text" style="margin-left: 10px; width: 550px"></textarea>
-            </div>
-            </form>
+				aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4>Candidato reprovado</h4>
+						</div>
+						<div class="modal-body">
+						</div>
         
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-            <button type="button" class="btn btn-primary">Enviar</button>
-        </div>
-    </div>
-</div>
-</div>
-</div>
+                    <table class="table" style="font-size: 10px">
+                        <thead class="text-center">
+                        <tr class="text-center" style="width: 20px">
+                            <th class="text-center">Competências</th>   
+                            <th>Insatisfatório</th>
+                            <th>Em Desenvolvimento</th>
+                            <th>Atende as Expectativas</th>
+                            <th>Supera as Expectativas</th>
+                        </tr> 
+                        </thead>
+                       <tbody class="text-center">
+                           <tr>
+                               <td>Desenvolvimento</td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio1">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio2">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio3">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio4">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                           
+                           </tr>
+                           <tr><td>Profundidade</td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio1">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio2">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio3">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio4">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                           </tr>
+                           <tr><td>Planejamento</td><td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio1">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio2">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio3">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio4">
+                                        <span class="custom-radio"></span>
+                                    </label></td></tr>
+                           <tr><td>Planejamento</td><td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio1">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio2">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio3">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio4">
+                                        <span class="custom-radio"></span>
+                                    </label></td></tr>
+                           <tr><td>Execução e Entrega</td><td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio1">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio2">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio3">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio4">
+                                        <span class="custom-radio"></span>
+                                    </label></td></tr>
+                           <tr><td>Relacionamento</td><td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio1">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio2">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio3">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio4">
+                                        <span class="custom-radio"></span>
+                                    </label></td></tr>
+                           <tr><td>Pessoas</td><td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio1">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio2">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio3">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio4">
+                                        <span class="custom-radio"></span>
+                                    </label></td></tr>
+                           <tr><td>Comercial</td><td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio1">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio2">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio3">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio4">
+                                        <span class="custom-radio"></span>
+                                    </label></td></tr>
+                           <tr><td>Financeiro</td><td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio1">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio2">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio3">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio4">
+                                        <span class="custom-radio"></span>
+                                    </label></td></tr>
+                           
+                        </tbody> 
+                       
+                    </table>
+                        
+                        
+						<div class="form-group">
+							<label for="message-text" class="form-control-label" style="margin-left: 15px">Parecer</label>
+							<textarea class="form-control" id="message-text" style="margin-left: 10px; width: 570px"></textarea>
+						</div>
+						</form>
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+							<button type="button" class="btn btn-primary">Enviar</button>
+                            <button type="button" class="btn btn-success"><i class="fa fa-download fa-lg"></i> Baixar CV</button>
+						</div>
+					</div>
+				</div>
+				</div>
 
 <!--Modal Feedback-->
 
@@ -325,8 +643,8 @@
                         </ul>
                     </li>
                     
-                    <li class="openable">
-                        <a href="#">
+                    <li>
+                        <a href="gerar-relatorio.html">
                             <span class="menu-icon">
                                 <i class="fa fa-print fa-lg"></i> 
                             </span>
@@ -534,12 +852,12 @@
                         <!-- Logout confirmation -->
                         <div class="custom-popup width-100" id="logoutConfirm">
                             <div class="padding-md">
-                                <h4 class="m-top-none"> Do you want to logout?</h4>
+                                <h4 class="m-top-none"> Desejar realmente sair?</h4>
                             </div>
                             
                             <div class="text-center">
-                                <a class="btn btn-success m-right-sm" href="login.html">Logout</a>
-                                <a class="btn btn-danger logoutConfirm_close">Cancel</a>
+                                <a class="btn btn-success m-right-sm" href="acesso.html">Sair</a>
+                                <a class="btn btn-danger logoutConfirm_close">Cancelar</a>
                             </div>
                         </div>
                         
