@@ -8,6 +8,8 @@
         
         <!-- Bootstrap core CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+         
+        
         
         <!-- Font Awesome -->
         <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -21,9 +23,34 @@
         <!-- Google Code Prettify -->
         <link href="css/prettify.css" rel="stylesheet">
         
+        <!-- Chosen -->
+	<link href="css/chosen/chosen.min.css" rel="stylesheet"/>
+
+	<!-- Datepicker -->
+	<link href="css/datepicker.css" rel="stylesheet"/>
+	
+	<!-- Timepicker -->
+	<link href="css/bootstrap-timepicker.css" rel="stylesheet"/>
+	
+	<!-- Slider -->
+	<link href="css/slider.css" rel="stylesheet"/>
+	
+	<!-- Tag input -->
+	<link href="css/jquery.tagsinput.css" rel="stylesheet"/>
+
+	<!-- WYSIHTML5 -->
+	<link href="css/bootstrap-wysihtml5.css" rel="stylesheet"/>
+	
+	<!-- Dropzone -->
+	<link href='css/dropzone/dropzone.css' rel="stylesheet"/>
+	
+        
         <!-- Perfect -->
         <link href="css/app.min.css" rel="stylesheet">
         <link href="css/app-skin.css" rel="stylesheet">
+     
+        <link href="css/custom.css" rel="stylesheet">
+        
         
         <style>
             .label-stand, .badge-stand {
@@ -57,14 +84,16 @@
             }
             
             .dropdown-menu {
-                left: -115px !important;
-                    
+                /*left: -115px !important;*/
+                z-index: 1050;
+                
             }
             .col-md-9 .label-radio {
                 margin-right: 58px;
                 margin-left: 20px;
                 
             }
+            
         </style>
         
     </head>
@@ -87,7 +116,8 @@
                                         <ul class="tab-bar wizard-demo" id="wizardDemo">
                                             <li class="active tab-verity"><a href="#first" data-toggle="tab"><i class="fa fa-user"></i> Informações de entrevista</a></li>
                                             <li class="tab-verity"><a href="#second" data-toggle="tab" class="text-success"><i class="fa fa-pencil"></i> Processo de seleção</a></li>
-                                            <li class="tab-verity"><a href="#third" data-toggle="tab" class="text-success"><i class="fa fa-briefcase"></i> Propostas</a></li>
+                                            <li class="tab-verity"><a href="#third" data-toggle="tab" class="text-success"><i class="fa fa-briefcase"></i> Avaliação de competências</a></li>
+                                            <li class="tab-verity"><a href="#fourth" data-toggle="tab" class="text-success"><i class="fa fa-money"></i> Proposta</a></li>
                                         </ul>
                                     </div>
                                     <div class="panel-body">
@@ -104,9 +134,10 @@
                                                 </div><!-- /form-group -->
                                                 
                                                 <div class="row">
-                                                    
                                                     <div class="form-group col-md-6">
                                                         <label for="exampleInputEmail1">Vaga:</label>
+                                                        <br><br><br>
+                                                        <!--
                                                         <select class="form-control chzn-select">
                                                             <option>Selecione:</option>
                                                             <option>Analista de testes</option>
@@ -114,9 +145,10 @@
                                                             <option>Desenvolvedor</option>
                                                             <option>Gerente de projetos</option>
                                                         </select>	
+                                                        -->
                                                     </div><!-- /form-group -->
                                                     
-                                                    <div class="form-group col-md-6">																						
+                                                    <div class="form-group col-md-6">										
                                                         <label for="exampleInputEmail1">Senioridade da vaga:</label>
                                                         <select class="form-control chzn-select">
                                                             <option>Selecione:</option>
@@ -127,17 +159,45 @@
                                                         </select>	
                                                     </div><!-- /form-group -->
                                                     
-                                                </div><!-- /form-group -->
+                                                </div><!-- /-row -->
                                                 
                                                 <div class="row">
-                                                    <div class="form-group col-md-6">
-                                                        <label for="exampleInputEmail1">Avaliadores:</label>
-                                                        <select class="form-control chzn-select">
-                                                            <option>Selecione:</option>
-                                                            <option>Taiama</option>
-                                                            <option>Vitor</option>
-                                                            <option>Rodrigo</option>
-                                                        </select>	
+                                                    <div class="form-group col-md-12">
+                                                       <div class="panel panel-default">
+					<div class="panel-heading">
+						 <label for="exampleInputEmail1">Avaliadores:</label>
+					</div>
+					<div class="panel-body relative">
+						<select multiple="multiple" id="selectedBox1" class="select-box pull-left form-control">
+							<option value="1">Taiama</option>
+							<option value="2">Melissa</option>
+							<option value="3">Juliana</option>
+						</select>		
+
+						<div class="select-box-option">
+							<a class="btn btn-sm btn-default" id="btnRemove">
+								<i class="fa fa-angle-left"></i>
+							</a>
+							<a class="btn btn-sm btn-default" id="btnSelect">
+								<i class="fa fa-angle-right"></i>
+							</a>
+							<div class="seperator"></div>
+							<a class="btn btn-sm btn-default" id="btnRemoveAll">
+								<i class="fa fa-angle-double-left"></i>
+							</a>
+							<a class="btn btn-sm btn-default" id="btnSelectAll">
+								<i class="fa fa-angle-double-right"></i>
+							</a>
+						</div>
+
+						<select multiple="multiple" id="selectedBox2" class="select-box pull-right form-control">
+							<option>Vitor</option>
+							<option>Evandro</option>
+							<option>Suelen</option>
+							<option>Rodrigo</option>
+						</select>		
+					</div>
+				</div><!-- /panel -->
                                                     </div><!-- /form-group -->
                                                 </div>
                                                     
@@ -277,7 +337,7 @@
                                                     </div>
                                                 </section><!-- /Section -->	
                                             </div>
-                                            <div class="tab-pane fade" id="third">
+                                            <div class="tab-pane fade" id="fourth">
                                                 <section class="panel panel-default">
                                                     <div class="panel-heading">Formação acadêmica</div>
                                                     <div class="panel-body relative">
@@ -299,7 +359,173 @@
                                                     </div>
                                                 </section><!-- /panel -->
                                             </div>
+                                            
+                                            <div class="tab-pane fade" id="third">
+                                                <section class="panel panel-default">
+                                                    <div class="panel-heading text-center"><label for="exampleInputEmail1">Avaliação de competências</label></div>
+       
+                    <table class="table" style="font-size: 10px">
+                        <thead class="text-center">
+                        <tr class="text-center">
+                            <th class="text-center">Competências</th>   
+                            <th>Insatisfatório</th>
+                            <th>Em Desenvolvimento</th>
+                            <th>Atende as Expectativas</th>
+                            <th>Supera as Expectativas</th>
+                        </tr> 
+                        </thead>
+                       <tbody class="text-center">
+                            <tr>
+                               <td>Desenvolvimento</td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio1">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio1">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio1">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio1">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                           
+                           </tr>
+                           
+                           <tr><td>Profundidade</td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio2">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio2">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio2">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio2">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                           </tr>
+                           
+                           <tr><td>Planejamento</td><td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio3">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio3">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio3">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio3">
+                                        <span class="custom-radio"></span>
+                                    </label></td></tr>
+                           
+                         
+                           <tr><td>Execução e Entrega</td><td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio5">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio5">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio5">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio5">
+                                        <span class="custom-radio"></span>
+                                    </label></td></tr>
+                           
+                           <tr><td>Relacionamento</td><td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio4">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio4">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio4">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio">
+                                        <span class="custom-radio"></span>
+                                    </label></td></tr>
+                           
+                           <tr><td>Pessoas</td><td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio6">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio6">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio6">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio6">
+                                        <span class="custom-radio"></span>
+                                    </label></td></tr>
+                           
+                           <tr><td>Comercial</td><td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio7">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio7">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio7">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio7">
+                                        <span class="custom-radio"></span>
+                                    </label></td></tr>
+                           
+                           <tr><td>Financeiro</td><td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio8">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio8">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio8">
+                                        <span class="custom-radio"></span>
+                                    </label></td>
+                               <td><label class="label-radio inline">
+                                        <input id="interno" type="radio" name="inline-radio8">
+                                        <span class="custom-radio"></span>
+                                    </label></td></tr>
+                           
+                           
+                        </tbody> 
+                    </table>
+                                                    </div>
+                                                </section></div>
                                         </div>
+                                    
+                   
                                     </div>
                                     <div class="panel-footer text-right">
                                         <button class="btn btn-success btn-sm disabled" id="prevStep" disabled="">Anterior</button>
@@ -805,7 +1031,7 @@
                                           <button type="button" class="btn btn-info dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
                                           </button>
-                                          <ul class="dropdown-menu slidedown">
+                                          <ul class="dropdown-menu slidedown btnAlinhado">
                                                <li><a href="#aprovado-modal" data-toggle="modal"data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
                                               <li class="divider"></li>
                                               <li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
@@ -834,7 +1060,7 @@
                                           <button type="button" class="btn btn-info dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
                                           </button>
-                                          <ul class="dropdown-menu slidedown">
+                                          <ul class="dropdown-menu slidedown btnAlinhado">
                                                <li><a href="#aprovado-modal" data-toggle="modal"data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
                                               <li class="divider"></li>
                                               <li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
@@ -863,7 +1089,7 @@
                                           <button type="button" class="btn btn-info dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
                                           </button>
-                                          <ul class="dropdown-menu slidedown">
+                                          <ul class="dropdown-menu slidedown btnAlinhado">
                                                <li><a href="#aprovado-modal" data-toggle="modal"data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
                                               <li class="divider"></li>
                                               <li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
@@ -894,7 +1120,7 @@
                                           <button type="button" class="btn btn-info dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
                                           </button>
-                                          <ul class="dropdown-menu slidedown">
+                                          <ul class="dropdown-menu slidedown btnAlinhado">
                                                <li><a href="#aprovado-modal" data-toggle="modal"data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
                                               <li class="divider"></li>
                                               <li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
@@ -927,7 +1153,7 @@
                                           <button type="button" class="btn btn-info dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
                                           </button>
-                                          <ul class="dropdown-menu slidedown">
+                                          <ul class="dropdown-menu slidedown btnAlinhado">
                                                <li><a href="#aprovado-modal" data-toggle="modal"data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
                                               <li class="divider"></li>
                                               <li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
@@ -1018,7 +1244,7 @@
 			<a class="btn btn-danger logoutConfirm_close">Cancelar</a>
 		</div>
 </div>
-
+           </div></div></div></div>
 
 <!-- Le javascript
 ================================================== -->
@@ -1029,10 +1255,36 @@
 
 <!-- Bootstrap -->
 <script src="bootstrap/js/bootstrap.min.js"></script>
+	
+<!-- Chosen -->
+<script src='js/chosen.jquery.min.js'></script>	
+
+<!-- Mask-input -->
+<script src='js/jquery.maskedinput.min.js'></script>	
 
 <!-- Datatable -->
 <script src='js/jquery.dataTables.min.js'></script>	
 
+	<!-- Datepicker -->
+	<script src='js/bootstrap-datepicker.min.js'></script>	
+
+	<!-- Timepicker -->
+	<script src='js/bootstrap-timepicker.min.js'></script>	
+	
+	<!-- Slider -->
+	<script src='js/bootstrap-slider.min.js'></script>	
+	
+	<!-- Tag input -->
+	<script src='js/jquery.tagsinput.min.js'></script>	
+
+	<!-- WYSIHTML5 -->
+	<script src='js/wysihtml5-0.3.0.min.js'></script>	
+	<script src='js/uncompressed/bootstrap-wysihtml5.js'></script>	
+
+	<!-- Dropzone -->
+	<script src='js/dropzone.min.js'></script>	
+	                
+                
 <!-- Modernizr -->
 <script src='js/modernizr.min.js'></script>
 
@@ -1049,8 +1301,10 @@
 <script src='js/jquery.cookie.min.js'></script>
 
 <!-- Perfect -->
-<script src="js/app/app.js"></script>
 
+	<script src="js/app/app_form.js"></script>
+	<script src="js/app/app.js"></script>
+	
 <script>
     $(function	()	{
         $('#dataTable').dataTable( {
@@ -1073,6 +1327,7 @@
             }
         });
     });
-</script>            
+</script> 
+ 
 </body>
 </html>
