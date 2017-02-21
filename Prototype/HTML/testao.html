@@ -1,15 +1,13 @@
 <html lang="en">
-    <head>
+    <head>  
         <meta charset="utf-8">
-        <title>Consulta de candidatos - RH</title>
+        <title>Cadastro de Candidato</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
         
         <!-- Bootstrap core CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-         
-        
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
         
         <!-- Font Awesome -->
         <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -17,86 +15,335 @@
         <!-- Pace -->
         <link href="css/pace.css" rel="stylesheet">
         
-        <!-- Gritter -->
-        <link href="css/gritter/jquery.gritter.css" rel="stylesheet">
-        
-        <!-- Google Code Prettify -->
-        <link href="css/prettify.css" rel="stylesheet">
-        
         <!-- Chosen -->
-	<link href="css/chosen/chosen.min.css" rel="stylesheet"/>
-
-	<!-- Datepicker -->
-	<link href="css/datepicker.css" rel="stylesheet"/>
-	
-	<!-- Timepicker -->
-	<link href="css/bootstrap-timepicker.css" rel="stylesheet"/>
-	
-	<!-- Slider -->
-	<link href="css/slider.css" rel="stylesheet"/>
-	
-	<!-- Tag input -->
-	<link href="css/jquery.tagsinput.css" rel="stylesheet"/>
-
-	<!-- WYSIHTML5 -->
-	<link href="css/bootstrap-wysihtml5.css" rel="stylesheet"/>
-	
-	<!-- Dropzone -->
-	<link href='css/dropzone/dropzone.css' rel="stylesheet"/>
-	
+        <link href="css/chosen/chosen.min.css" rel="stylesheet"/>
+        
+        <!-- Datepicker -->
+        <link href="css/datepicker.css" rel="stylesheet"/>
+        
+        <!-- Timepicker -->
+        <link href="css/bootstrap-timepicker.css" rel="stylesheet"/>
+        
+        <!-- Slider -->
+        <link href="css/slider.css" rel="stylesheet"/>
+        
+        <!-- Tag input -->
+        <link href="css/jquery.tagsinput.css" rel="stylesheet"/>
+        
+        <!-- WYSIHTML5 -->
+        <link href="css/bootstrap-wysihtml5.css" rel="stylesheet"/>
+        
+        <!-- Dropzone -->
+        <link href='css/dropzone/dropzone.css' rel="stylesheet"/>
         
         <!-- Perfect -->
         <link href="css/app.min.css" rel="stylesheet">
         <link href="css/app-skin.css" rel="stylesheet">
-     
-        <link href="css/custom.css" rel="stylesheet">
         
+        <!-- Custom -->
+        <link href="css/custom.css" rel="stylesheet" />
         
         <style>
-            .label-stand, .badge-stand {
-                background-color: #9b59b6;
-                color: #fff;
+            .page-header h1 {
+                font-size: 3.26em;
+                text-align: center;
+                color: #efefef;
+                text-shadow: 1px 1px 0 #000;
             }
             
-            .label-aprovadoPendente, .badge-stand {
-                background-color: #2980b9;
-                color: #fff;
+            /** timeline box structure **/
+            .timeline {
+                list-style: none;
+                padding: 20px 0 20px;
+                position: relative;
             }
             
-             .label-analiseRH, .badge-stand {
-                background-color: #e67e22;
-                color: #fff;
+            .timeline:before {
+                top: 0;
+                bottom: 0;
+                position: absolute;
+                content: " ";
+                width: 3px;
+                background-color: #eee;
+                left: 50%;
+                margin-left: -1.5px;
             }
             
-            .label-analiseTecnica, .badge-stand {
-                background-color: #f1c40f;
-                color: #fff;
+            .tldate {
+                display: block;
+                width: 200px;
+                background: #414141;
+                border: 3px solid #212121;
+                color: #ededed;
+                margin: 0 auto;
+                padding: 3px 0;
+                font-weight: bold;
+                text-align: center;
+                -webkit-box-shadow: 0 0 11px rgba(0,0,0,0.35);
             }
             
-            .label-reprovado, .badge-stand {
-                background-color: #e74c3c;
-                color: #fff;
+            .timeline li {
+                margin-bottom: 25px;
+                position: relative;
             }
             
-            .label-contratado, .badge-stand {
-                background-color: #2ecc71;
-                color: #fff;
+            .timeline li:before, .timeline li:after {
+                content: " ";
+                display: table;
+            }
+            .timeline li:after {
+                clear: both;
+            }
+            .timeline li:before, .timeline li:after {
+                content: " ";
+                display: table;
             }
             
-            .dropdown-menu {
-                /*left: -115px !important;*/
-                z-index: 1050;
+            /** timeline panels **/
+            .timeline li .timeline-panel {
+                width: 46%;
+                float: left;
+                background: #fff;
+                border: 1px solid #d4d4d4;
+                padding: 20px;
+                position: relative;
+                -webkit-border-radius: 8px;
+                -moz-border-radius: 8px;
+                border-radius: 8px;
+                -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
+                -moz-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
+                box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
+            }
+            
+            /** panel arrows **/
+            .timeline li .timeline-panel:before {
+                position: absolute;
+                top: 26px;
+                right: -15px;
+                display: inline-block;
+                border-top: 15px solid transparent;
+                border-left: 15px solid #ccc;
+                border-right: 0 solid #ccc;
+                border-bottom: 15px solid transparent;
+                content: " ";
+            }
+            
+            .timeline li .timeline-panel:after {
+                position: absolute;
+                top: 27px;
+                right: -14px;
+                display: inline-block;
+                border-top: 14px solid transparent;
+                border-left: 14px solid #fff;
+                border-right: 0 solid #fff;
+                border-bottom: 14px solid transparent;
+                content: " ";
+            }
+            .timeline li .timeline-panel.noarrow:before, .timeline li .timeline-panel.noarrow:after {
+                top:0;
+                right:0;
+                display: none;
+                border: 0;
+            }
+            
+            .timeline li.timeline-inverted .timeline-panel {
+                float: right;
+            }
+            
+            .timeline li.timeline-inverted .timeline-panel:before {
+                border-left-width: 0;
+                border-right-width: 15px;
+                left: -15px;
+                right: auto;
+            }
+            
+            .timeline li.timeline-inverted .timeline-panel:after {
+                border-left-width: 0;
+                border-right-width: 14px;
+                left: -14px;
+                right: auto;
+            }
+            
+            
+            /** timeline circle icons **/
+            .timeline li .tl-circ {
+                position: absolute;
+                top: 23px;
+                left: 50%;
+                text-align: center;
+                background: #6a8db3;
+                color: #fff;
+                width: 35px;
+                height: 35px;
+                line-height: 35px;
+                margin-left: -16px;
+                border: 3px solid #90acc7;
+                border-top-right-radius: 50%;
+                border-top-left-radius: 50%;
+                border-bottom-right-radius: 50%;
+                border-bottom-left-radius: 50%;
+                z-index: 99999;
+            }
+            
+            
+            /** timeline content **/
+            
+            .tl-heading h4 {
+                margin: 0;
+                color: #c25b4e;
+            }
+            
+            .tl-body p, .tl-body ul {
+                margin-bottom: 0;
+            }
+            
+            .tl-body > p + p {
+                margin-top: 5px;
+            }
+            
+            /** media queries **/
+            @media (max-width: 991px) {
+                .timeline li .timeline-panel {
+                    width: 44%;
+                }
+            }
+            
+            @media (max-width: 700px) {
+                .page-header h1 { font-size: 1.8em; }
+                
+                ul.timeline:before {
+                    left: 40px;
+                }
+                
+                .tldate { width: 140px; }
+                
+                ul.timeline li .timeline-panel {
+                    width: calc(100% - 90px);
+                    width: -moz-calc(100% - 90px);
+                    width: -webkit-calc(100% - 90px);
+                }
+                
+                ul.timeline li .tl-circ {
+                    top: 22px;
+                    left: 22px;
+                    margin-left: 0;
+                    
+                }
+                ul.timeline > li > .tldate {
+                    margin: 0;
+                }
+                
+                ul.timeline > li > .timeline-panel {
+                    float: right;
+                }
+                
+                ul.timeline > li > .timeline-panel:before {
+                    border-left-width: 0;
+                    border-right-width: 15px;
+                    left: -15px;
+                    right: auto;
+                }
+                
+                ul.timeline > li > .timeline-panel:after {
+                    border-left-width: 0;
+                    border-right-width: 14px;
+                    left: -14px;
+                    right: auto;
+                }
+            }
+            
+            .timeline-title {
+                font-size: 16px;
                 
             }
-            .col-md-9 .label-radio {
-                margin-right: 58px;
-                margin-left: 20px;
-                
-            }
-            
         </style>
-        
-    </head>
+        <script type="text/javascript">
+//Total máximo de campos que você permitirá criar em seu site:
+var totalCampos = 4;
+
+//Não altere os valores abaixo, pois são variáveis controle;
+var iLoop = 1;
+var iCount = 0;
+var linhaAtual;
+
+
+function AddCampos() {
+var hidden1 = document.getElementById("hidden1");
+var hidden2 = document.getElementById("hidden2");
+
+//Executar apenas se houver possibilidade de inserção de novos campos:
+if (iCount < totalCampos) {
+
+//Limpar hidden1, para atualizar a lista dos campos que ainda estão vazios:
+hidden2.value = "";
+
+//Atualizando a lista dos campos que estão ocultos.
+//Essa lista ficará armazenada temporiariamente em hidden2;
+for (iLoop = 1; iLoop <= totalCampos; iLoop++) {
+        if (document.getElementById("linha"+iLoop).style.display == "none") {
+                if (hidden2.value == "") {
+                        hidden2.value = "linha"+iLoop;
+                }else{
+                        hidden2.value += ",linha"+iLoop;
+                }
+        }
+}
+//Quebrando a lista que foi armazenada em hidden2 em array:
+
+linhasOcultas = hidden2.value.split(",");
+
+
+        if (linhasOcultas.length > 0) {
+                //Tornar visível o primeiro elemento de linhasOcultas:
+                document.getElementById(linhasOcultas[0]).style.display = "block"; iCount++;
+                
+                //Acrescentando o índice zero a hidden1:
+                if (hidden1.value == "") {
+                        hidden1.value = linhasOcultas[0];
+                }else{
+                        hidden1.value += ","+linhasOcultas[0];
+                }
+                
+                /*Retirar a opção acima da lista de itens ocultos: <-------- OPCIONAL!!!
+                if (hidden2.value.indexOf(","+linhasOcultas[0]) != -1) {
+                        hidden2.value = hidden2.value.replace(linhasOcultas[0]+",","");
+                }else if (hidden2.indexOf(linhasOcultas[0]+",") == 0) {
+                        hidden2.value = hidden2.value.replace(linhasOcultas[0]+",","");
+                }else{
+                        hidden2.value = "";
+                }
+                */
+        }
+}
+}
+
+function RemoverCampos(id) {
+//Criando ponteiro para hidden1:        
+var hidden1 = document.getElementById("hidden1");
+
+//Pegar o valor do campo que será excluído:
+var campoValor = document.getElementById("arq"+id).value;
+        //Se o campo não tiver nenhum valor, atribuir a string: vazio:
+        if (campoValor == "") {
+                campoValor = "vazio";
+        }
+
+        if(confirm("O campo que contém o valor:\n» "+campoValor+"\nserá excluído!\n\nDeseja prosseguir?")){
+                document.getElementById("linha"+id).style.display = "none"; iCount--;
+                
+                //Removendo o valor de hidden1:
+                if (hidden1.value.indexOf(",linha"+id) != -1) {
+                        hidden1.value = hidden1.value.replace(",linha"+id,"");
+                }else if (hidden1.value.indexOf("linha"+id+",") == 0) {
+                        hidden1.value = hidden1.value.replace("linha"+id+",","");
+                }else{
+                        hidden1.value = "";
+                }
+        }
+}
+</script>
+</head>
+
     
     <body>	
         
@@ -116,8 +363,7 @@
                                         <ul class="tab-bar wizard-demo" id="wizardDemo">
                                             <li class="active tab-verity"><a href="#first" data-toggle="tab"><i class="fa fa-user"></i> Informações de entrevista</a></li>
                                             <li class="tab-verity"><a href="#second" data-toggle="tab" class="text-success"><i class="fa fa-pencil"></i> Processo de seleção</a></li>
-                                            <li class="tab-verity"><a href="#third" data-toggle="tab" class="text-success"><i class="fa fa-briefcase"></i> Avaliação de competências</a></li>
-                                            <li class="tab-verity"><a href="#fourth" data-toggle="tab" class="text-success"><i class="fa fa-money"></i> Proposta</a></li>
+                                            <li class="tab-verity"><a href="#third" data-toggle="tab" class="text-success"><i class="fa fa-briefcase"></i> Propostas</a></li>
                                         </ul>
                                     </div>
                                     <div class="panel-body">
@@ -134,10 +380,9 @@
                                                 </div><!-- /form-group -->
                                                 
                                                 <div class="row">
+                                                    
                                                     <div class="form-group col-md-6">
                                                         <label for="exampleInputEmail1">Vaga:</label>
-                                                        <br><br><br>
-                                                        <!--
                                                         <select class="form-control chzn-select">
                                                             <option>Selecione:</option>
                                                             <option>Analista de testes</option>
@@ -145,10 +390,9 @@
                                                             <option>Desenvolvedor</option>
                                                             <option>Gerente de projetos</option>
                                                         </select>	
-                                                        -->
                                                     </div><!-- /form-group -->
                                                     
-                                                    <div class="form-group col-md-6">										
+                                                    <div class="form-group col-md-6">																						
                                                         <label for="exampleInputEmail1">Senioridade da vaga:</label>
                                                         <select class="form-control chzn-select">
                                                             <option>Selecione:</option>
@@ -159,45 +403,17 @@
                                                         </select>	
                                                     </div><!-- /form-group -->
                                                     
-                                                </div><!-- /-row -->
+                                                </div><!-- /form-group -->
                                                 
                                                 <div class="row">
-                                                    <div class="form-group col-md-12">
-                                                       <div class="panel panel-default">
-					<div class="panel-heading">
-						 <label for="exampleInputEmail1">Avaliadores:</label>
-					</div>
-					<div class="panel-body relative">
-						<select multiple="multiple" id="selectedBox1" class="select-box pull-left form-control">
-							<option value="1">Taiama</option>
-							<option value="2">Melissa</option>
-							<option value="3">Juliana</option>
-						</select>		
-
-						<div class="select-box-option">
-							<a class="btn btn-sm btn-default" id="btnRemove">
-								<i class="fa fa-angle-left"></i>
-							</a>
-							<a class="btn btn-sm btn-default" id="btnSelect">
-								<i class="fa fa-angle-right"></i>
-							</a>
-							<div class="seperator"></div>
-							<a class="btn btn-sm btn-default" id="btnRemoveAll">
-								<i class="fa fa-angle-double-left"></i>
-							</a>
-							<a class="btn btn-sm btn-default" id="btnSelectAll">
-								<i class="fa fa-angle-double-right"></i>
-							</a>
-						</div>
-
-						<select multiple="multiple" id="selectedBox2" class="select-box pull-right form-control">
-							<option>Vitor</option>
-							<option>Evandro</option>
-							<option>Suelen</option>
-							<option>Rodrigo</option>
-						</select>		
-					</div>
-				</div><!-- /panel -->
+                                                    <div class="form-group col-md-6">
+                                                        <label for="exampleInputEmail1">Avaliadores:</label>
+                                                        <select class="form-control chzn-select">
+                                                            <option>Selecione:</option>
+                                                            <option>Taiama</option>
+                                                            <option>Vitor</option>
+                                                            <option>Rodrigo</option>
+                                                        </select>	
                                                     </div><!-- /form-group -->
                                                 </div>
                                                     
@@ -237,284 +453,64 @@
                                                 </div><!-- /form-group -->
                                                 
                                             </div>
+
+
                                             <div class="tab-pane fade" id="second">
                                                 <section id="dadosInterno" class="panel panel-default">
                                                     
                                                     <div class="panel-body">
-                                                        
-                                                        <div class="form-group col-md-4" style="padding-left:0px;">
-                                                            <label for="exampleInputEmail1">Nome do projeto</label>
-                                                            <select class="form-control chzn-select">
-                                                                <option>P20150806_001 - Biometria Facial no Front único</option>
-                                                                <option>P20160120_001 - Melhorias na abertura de Conta via internet</option>
-                                                                <option>P20160805_001 - Cartão Gold</option>
-                                                                <option>P20150226_001 - Migração Servidores 2012</option>
-                                                            </select>	
-                                                        </div><!-- /form-group -->
-                                                        
-                                                        <div class="form-group col-md-4" style="padding-left:0px;">
-                                                            <label for="exampleInputEmail1">Cliente</label>
-                                                            <select class="form-control chzn-select">
-                                                                <option>Cliente A</option>
-                                                                <option>Cliente B</option>
-                                                                <option>Cliente C</option>
-                                                            </select>	
-                                                        </div><!-- /form-group -->
-                                                        
-                                                        <div class="form-group col-md-4" style="padding-left:0px;">
-                                                            <label for="exampleInputEmail1">Gestor imediato</label>
-                                                            <select class="form-control chzn-select">
-                                                                <option>Gabriela Nascimento</option>
-                                                                <option>Michela Senario</option>
-                                                                <option>Vitor Tadashi</option>
-                                                                <option>Vera Tavares</option>
-                                                            </select>	
-                                                        </div><!-- /form-group -->
-                                                        
-                                                    </div>
-                                                </section><!-- /Section-->
-                                                
-                                                <section id="dadosAlocacao" class="panel panel-default hide">
-                                                    
-                                                    <div class="panel-body">
-                                                        
-                                                        <div class="col-md-6">
-                                                            
-                                                            <div class="form-group" style="padding-left:0px;">
-                                                                <label for="exampleInputEmail1">Nome do Projeto</label>
-                                                                <select class="form-control chzn-select">
-                                                                    <option>P20150806_001 - Biometria Facial no Front único</option>
-                                                                    <option>P20160120_001 - Melhorias na abertura de Conta via internet</option>
-                                                                    <option>P20160805_001 - Cartão Gold</option>
-                                                                    <option>P20150226_001 - Migração Servidores 2012</option>
-                                                                </select>	
-                                                            </div><!-- /form-group -->
-                                                            
-                                                            <div class="form-group">
-                                                                <label for="exampleInputEmail1">Cliente</label>
-                                                                <input type="text" class="form-control input-sm" id="exampleInputEmail1" placeholder="Cliente" data-required="true">
-                                                            </div><!-- /form-group -->
-                                                            
-                                                            <div class="form-group" style="padding-left:0px;">
-                                                                <label for="exampleInputEmail1">Gestor imediato</label>
-                                                                <select class="form-control chzn-select">
-                                                                    <option>Gabriela Nascimento</option>
-                                                                    <option>Michela Senario</option>
-                                                                    <option>Vitor Tadashi</option>
-                                                                    <option>Vera Tavares</option>
-                                                                </select>	
-                                                            </div><!-- /form-group -->
-                                                            
-                                                            <div class="form-group">
-                                                                <label for="exampleInputEmail1">Telefone 1</label>										
-                                                                <input id="phone-mask" type="text" class=" form-control input-sm phone">
-                                                            </div><!-- /form-group -->
-                                                            
-                                                        </div>
-                                                        
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label for="exampleInputEmail1">Nome do responsável</label>
-                                                                <input type="name" class="form-control input-sm" id="exampleInputEmail1" placeholder="Nome do Cliente Responsável" data-required="true">
-                                                            </div><!-- /form-group -->
-                                                            
-                                                            <div class="form-group">
-                                                                <label for="exampleInputEmail1">Área do responsável</label>
-                                                                <input type="text" class="form-control input-sm" id="exampleInputEmail1" placeholder="Área do Cliente Responsável" data-required="true">
-                                                            </div><!-- /form-group -->
-                                                            
-                                                            <div class="form-group">
-                                                                <label for="exampleInputEmail1">E-mail</label>
-                                                                <input type="email" class="form-control input-sm" id="exampleInputEmail1" placeholder="E-mail do Cliente Responsável" data-required="true">
-                                                            </div><!-- /form-group -->
-                                                            
-                                                            <div class="form-group">
-                                                                <label for="exampleInputEmail1">Telefone 2</label>										
-                                                                <input id="phone-mask" type="text" class=" form-control input-sm phone">
-                                                            </div><!-- /form-group -->
-                                                        </div>
-                                                        
-                                                    </div>
-                                                </section><!-- /Section -->	
+
+                                                    <label>Etapa:</label>
+                                                     <!-- SOMENTE ALTERAR DAQUI PARA BAIXO -->
+                
+                <form name="form1" action="paginaPHPouASP" method="post">
+                    <input type="button" value="Adicionar etapa" onclick="AddCampos()">
+                    <script type="text/javascript">
+                    //Escrevendo o código-fonte HTML e ocultando os campos criados:
+                    for (iLoop = 1; iLoop <= totalCampos; iLoop++) {
+                        document.write("<span id='linha"+iLoop+"' style='display:none'> <select class='btn btn-default btn-xs dropdown-toggle' style='width: 160px;'><option value='0'>Selecione etapa</option><option value='1'>Prova Prática</option><option value='2'>Prova teórica</option><option value='3'>Dinâmica de Grupo</option></select> <input type='text' id='arq"+iLoop+"' name='arq"+iLoop+"'> <input type='button' value='Remover' onclick='RemoverCampos(\""+iLoop+"\")'></span><br>");
+                    }
+                    </script>
+                    
+                    <input type="hidden" name="hidden2" id="hidden2">
+                </form>
+
+                <div class="form-group">
+                    <!-- SOMENTE ALTERAR DAQUI PARA CIMA -->
+                    <label>Parecer técnico: </label>
+                    <textarea class="form-control" id="message-text" style="margin-left: 10px; width: 570px"></textarea>
+                    </div>
+
+                                                    </div>    
+
                                             </div>
-                                            <div class="tab-pane fade" id="fourth">
+                                            <div class="tab-pane fade" id="third">
                                                 <section class="panel panel-default">
-                                                    <div class="panel-heading"> <label for="exampleInputEmail1">Proposta:</label>
+                                                    <div class="panel-heading">Formação acadêmica</div>
+                                                    <div class="panel-body relative">
+                                                        <textarea class="form-control" rows="3"></textarea>
+                                                    </div>
+                                                </section><!-- /panel -->
+                                                
+                                                <section class="panel panel-default">
+                                                    <div class="panel-heading">Perfil comportamental</div>
+                                                    <div class="panel-body relative">
+                                                        <textarea class="form-control" rows="3"></textarea>
+                                                    </div>
+                                                </section><!-- /panel -->
+                                                
+                                                <section class="panel panel-default">
+                                                    <div class="panel-heading">Perfil técnico</div>
+                                                    <div class="panel-body relative">
                                                         <textarea class="form-control" rows="3"></textarea>
                                                     </div>
                                                 </section><!-- /panel -->
                                             </div>
-                                            
-                                            <div class="tab-pane fade" id="third">
-                                                <section class="panel panel-default">
-                                                    <div class="panel-heading text-center"><label for="exampleInputEmail1">Avaliação de competências</label></div>
-       
-                    <table class="table" style="font-size: 10px">
-                        <thead class="text-center">
-                        <tr class="text-center">
-                            <th class="text-center">Competências</th>   
-                            <th>Insatisfatório</th>
-                            <th>Em Desenvolvimento</th>
-                            <th>Atende as Expectativas</th>
-                            <th>Supera as Expectativas</th>
-                        </tr> 
-                        </thead>
-                       <tbody class="text-center">
-                            <tr>
-                               <td>Desenvolvimento</td>
-                               <td><label class="label-radio inline">
-                                        <input id="interno" type="radio" name="inline-radio1">
-                                        <span class="custom-radio"></span>
-                                    </label></td>
-                               <td><label class="label-radio inline">
-                                        <input id="interno" type="radio" name="inline-radio1">
-                                        <span class="custom-radio"></span>
-                                    </label></td>
-                               <td><label class="label-radio inline">
-                                        <input id="interno" type="radio" name="inline-radio1">
-                                        <span class="custom-radio"></span>
-                                    </label></td>
-                               <td><label class="label-radio inline">
-                                        <input id="interno" type="radio" name="inline-radio1">
-                                        <span class="custom-radio"></span>
-                                    </label></td>
-                           
-                           </tr>
-                           
-                           <tr><td>Profundidade</td>
-                               <td><label class="label-radio inline">
-                                        <input id="interno" type="radio" name="inline-radio2">
-                                        <span class="custom-radio"></span>
-                                    </label></td>
-                               <td><label class="label-radio inline">
-                                        <input id="interno" type="radio" name="inline-radio2">
-                                        <span class="custom-radio"></span>
-                                    </label></td>
-                               <td><label class="label-radio inline">
-                                        <input id="interno" type="radio" name="inline-radio2">
-                                        <span class="custom-radio"></span>
-                                    </label></td>
-                               <td><label class="label-radio inline">
-                                        <input id="interno" type="radio" name="inline-radio2">
-                                        <span class="custom-radio"></span>
-                                    </label></td>
-                           </tr>
-                           
-                           <tr><td>Planejamento</td><td><label class="label-radio inline">
-                                        <input id="interno" type="radio" name="inline-radio3">
-                                        <span class="custom-radio"></span>
-                                    </label></td>
-                               <td><label class="label-radio inline">
-                                        <input id="interno" type="radio" name="inline-radio3">
-                                        <span class="custom-radio"></span>
-                                    </label></td>
-                               <td><label class="label-radio inline">
-                                        <input id="interno" type="radio" name="inline-radio3">
-                                        <span class="custom-radio"></span>
-                                    </label></td>
-                               <td><label class="label-radio inline">
-                                        <input id="interno" type="radio" name="inline-radio3">
-                                        <span class="custom-radio"></span>
-                                    </label></td></tr>
-                           
-                         
-                           <tr><td>Execução e Entrega</td><td><label class="label-radio inline">
-                                        <input id="interno" type="radio" name="inline-radio5">
-                                        <span class="custom-radio"></span>
-                                    </label></td>
-                               <td><label class="label-radio inline">
-                                        <input id="interno" type="radio" name="inline-radio5">
-                                        <span class="custom-radio"></span>
-                                    </label></td>
-                               <td><label class="label-radio inline">
-                                        <input id="interno" type="radio" name="inline-radio5">
-                                        <span class="custom-radio"></span>
-                                    </label></td>
-                               <td><label class="label-radio inline">
-                                        <input id="interno" type="radio" name="inline-radio5">
-                                        <span class="custom-radio"></span>
-                                    </label></td></tr>
-                           
-                           <tr><td>Relacionamento</td><td><label class="label-radio inline">
-                                        <input id="interno" type="radio" name="inline-radio4">
-                                        <span class="custom-radio"></span>
-                                    </label></td>
-                               <td><label class="label-radio inline">
-                                        <input id="interno" type="radio" name="inline-radio4">
-                                        <span class="custom-radio"></span>
-                                    </label></td>
-                               <td><label class="label-radio inline">
-                                        <input id="interno" type="radio" name="inline-radio4">
-                                        <span class="custom-radio"></span>
-                                    </label></td>
-                               <td><label class="label-radio inline">
-                                        <input id="interno" type="radio" name="inline-radio">
-                                        <span class="custom-radio"></span>
-                                    </label></td></tr>
-                           
-                           <tr><td>Pessoas</td><td><label class="label-radio inline">
-                                        <input id="interno" type="radio" name="inline-radio6">
-                                        <span class="custom-radio"></span>
-                                    </label></td>
-                               <td><label class="label-radio inline">
-                                        <input id="interno" type="radio" name="inline-radio6">
-                                        <span class="custom-radio"></span>
-                                    </label></td>
-                               <td><label class="label-radio inline">
-                                        <input id="interno" type="radio" name="inline-radio6">
-                                        <span class="custom-radio"></span>
-                                    </label></td>
-                               <td><label class="label-radio inline">
-                                        <input id="interno" type="radio" name="inline-radio6">
-                                        <span class="custom-radio"></span>
-                                    </label></td></tr>
-                           
-                           <tr><td>Comercial</td><td><label class="label-radio inline">
-                                        <input id="interno" type="radio" name="inline-radio7">
-                                        <span class="custom-radio"></span>
-                                    </label></td>
-                               <td><label class="label-radio inline">
-                                        <input id="interno" type="radio" name="inline-radio7">
-                                        <span class="custom-radio"></span>
-                                    </label></td>
-                               <td><label class="label-radio inline">
-                                        <input id="interno" type="radio" name="inline-radio7">
-                                        <span class="custom-radio"></span>
-                                    </label></td>
-                               <td><label class="label-radio inline">
-                                        <input id="interno" type="radio" name="inline-radio7">
-                                        <span class="custom-radio"></span>
-                                    </label></td></tr>
-                           
-                           <tr><td>Financeiro</td><td><label class="label-radio inline">
-                                        <input id="interno" type="radio" name="inline-radio8">
-                                        <span class="custom-radio"></span>
-                                    </label></td>
-                               <td><label class="label-radio inline">
-                                        <input id="interno" type="radio" name="inline-radio8">
-                                        <span class="custom-radio"></span>
-                                    </label></td>
-                               <td><label class="label-radio inline">
-                                        <input id="interno" type="radio" name="inline-radio8">
-                                        <span class="custom-radio"></span>
-                                    </label></td>
-                               <td><label class="label-radio inline">
-                                        <input id="interno" type="radio" name="inline-radio8">
-                                        <span class="custom-radio"></span>
-                                    </label></td></tr>
-                           
-                           
-                        </tbody> 
-                    </table>
-                                                    </div>
-                                                </section></div>
                                         </div>
-                                    
-                   
                                     </div>
                                     <div class="panel-footer text-right">
-<!--                                        <button class="btn btn-success btn-sm disabled" id="prevStep" disabled="">Anterior</button>-->
-                                        <button type="submit" class="btn btn-sm btn-success" id="nextStep">Salvar</button>
+                                        <button class="btn btn-success btn-sm disabled" id="prevStep" disabled="">Anterior</button>
+                                        <button type="submit" class="btn btn-sm btn-success" id="nextStep">Próximo</button>
                                     </div>
                                 </form>  
                             </div>
@@ -1016,7 +1012,7 @@
                                           <button type="button" class="btn btn-info dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
                                           </button>
-                                          <ul class="dropdown-menu slidedown btnAlinhado">
+                                          <ul class="dropdown-menu slidedown">
                                                <li><a href="#aprovado-modal" data-toggle="modal"data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
                                               <li class="divider"></li>
                                               <li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
@@ -1045,7 +1041,7 @@
                                           <button type="button" class="btn btn-info dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
                                           </button>
-                                          <ul class="dropdown-menu slidedown btnAlinhado">
+                                          <ul class="dropdown-menu slidedown">
                                                <li><a href="#aprovado-modal" data-toggle="modal"data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
                                               <li class="divider"></li>
                                               <li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
@@ -1074,7 +1070,7 @@
                                           <button type="button" class="btn btn-info dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
                                           </button>
-                                          <ul class="dropdown-menu slidedown btnAlinhado">
+                                          <ul class="dropdown-menu slidedown">
                                                <li><a href="#aprovado-modal" data-toggle="modal"data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
                                               <li class="divider"></li>
                                               <li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
@@ -1105,7 +1101,7 @@
                                           <button type="button" class="btn btn-info dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
                                           </button>
-                                          <ul class="dropdown-menu slidedown btnAlinhado">
+                                          <ul class="dropdown-menu slidedown">
                                                <li><a href="#aprovado-modal" data-toggle="modal"data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
                                               <li class="divider"></li>
                                               <li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
@@ -1138,7 +1134,7 @@
                                           <button type="button" class="btn btn-info dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
                                           </button>
-                                          <ul class="dropdown-menu slidedown btnAlinhado">
+                                          <ul class="dropdown-menu slidedown">
                                                <li><a href="#aprovado-modal" data-toggle="modal"data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
                                               <li class="divider"></li>
                                               <li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
@@ -1229,7 +1225,7 @@
 			<a class="btn btn-danger logoutConfirm_close">Cancelar</a>
 		</div>
 </div>
-           </div></div></div></div>
+
 
 <!-- Le javascript
 ================================================== -->
@@ -1240,36 +1236,10 @@
 
 <!-- Bootstrap -->
 <script src="bootstrap/js/bootstrap.min.js"></script>
-	
-<!-- Chosen -->
-<script src='js/chosen.jquery.min.js'></script>	
-
-<!-- Mask-input -->
-<script src='js/jquery.maskedinput.min.js'></script>	
 
 <!-- Datatable -->
 <script src='js/jquery.dataTables.min.js'></script>	
 
-	<!-- Datepicker -->
-	<script src='js/bootstrap-datepicker.min.js'></script>	
-
-	<!-- Timepicker -->
-	<script src='js/bootstrap-timepicker.min.js'></script>	
-	
-	<!-- Slider -->
-	<script src='js/bootstrap-slider.min.js'></script>	
-	
-	<!-- Tag input -->
-	<script src='js/jquery.tagsinput.min.js'></script>	
-
-	<!-- WYSIHTML5 -->
-	<script src='js/wysihtml5-0.3.0.min.js'></script>	
-	<script src='js/uncompressed/bootstrap-wysihtml5.js'></script>	
-
-	<!-- Dropzone -->
-	<script src='js/dropzone.min.js'></script>	
-	                
-                
 <!-- Modernizr -->
 <script src='js/modernizr.min.js'></script>
 
@@ -1286,10 +1256,8 @@
 <script src='js/jquery.cookie.min.js'></script>
 
 <!-- Perfect -->
+<script src="js/app/app.js"></script>
 
-	<script src="js/app/app_form.js"></script>
-	<script src="js/app/app.js"></script>
-	
 <script>
     $(function	()	{
         $('#dataTable').dataTable( {
@@ -1312,7 +1280,6 @@
             }
         });
     });
-</script> 
- 
+</script>            
 </body>
 </html>
