@@ -252,3 +252,13 @@ footer {
 .tab-bar>li.active a {
     /*color: #000;*/
 }
+
+
+
+/*alinhamento do botao dropdown da tela consulta candidatos rh*/
+.btnAlinhado {
+        left: -125px !important;
+}
+     
+     
+     
