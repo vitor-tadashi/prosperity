@@ -460,18 +460,24 @@ var campoValor = document.getElementById("arq"+id).value;
                                                     
                                                     <div class="panel-body">
 
-                                                    <label>Etapa:</label>
+                                                    <label>Etapa: </label>
                                                      <!-- SOMENTE ALTERAR DAQUI PARA BAIXO -->
                 
                 <form name="form1" action="paginaPHPouASP" method="post">
-                    <input type="button" value="Adicionar etapa" onclick="AddCampos()">
+
+                    <input class="btn btn-xs btn-success" type="button" value="Adicionar etapa" onclick="AddCampos()">
+                    <br>
+                    <br>
                     <script type="text/javascript">
                     //Escrevendo o código-fonte HTML e ocultando os campos criados:
                     for (iLoop = 1; iLoop <= totalCampos; iLoop++) {
-                        document.write("<span id='linha"+iLoop+"' style='display:none'> <select class='btn btn-default btn-xs dropdown-toggle' style='width: 160px;'><option value='0'>Selecione etapa</option><option value='1'>Prova Prática</option><option value='2'>Prova teórica</option><option value='3'>Dinâmica de Grupo</option></select> <input type='text' id='arq"+iLoop+"' name='arq"+iLoop+"'> <input type='button' value='Remover' onclick='RemoverCampos(\""+iLoop+"\")'></span><br>");
+                        document.write("<span id='linha"+iLoop+"' style='display:none'> <select class='btn btn-default btn-xs dropdown-toggle' style='width: 160px;'><option value='0'>Selecione etapa</option><option value='1'>Prova Prática</option><option value='2'>Prova teórica</option><option value='3'>Dinâmica de Grupo</option></select> <input type='text' id='arq"+iLoop+"' name='arq"+iLoop+"'> <button type='submit' class='btn btn-xs btn-danger' id='nextStep' onclick='RemoverCampos(\""+iLoop+"\")'>Remover</button></span><br>");
                     }
                     </script>
                     
+
+
+
                     <input type="hidden" name="hidden2" id="hidden2">
                 </form>
 
