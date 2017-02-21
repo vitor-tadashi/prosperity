@@ -2,9 +2,18 @@
     <wb-module deploy-name="Prosperity-0.0.1-SNAPSHOT">
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+<<<<<<< HEAD
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
+=======
+<<<<<<< HEAD
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
+=======
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/"/>
+>>>>>>> 1c304ac2e33914bab4dd87306dc97d0dbb00c0f0
+>>>>>>> 75fc7208dea58295eac6d440156db6cf656ca8c3
         <property name="context-root" value="Prosperity"/>
         <property name="java-output-path" value="/Prosperity/target/classes"/>
     </wb-module>
