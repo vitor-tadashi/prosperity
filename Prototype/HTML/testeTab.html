@@ -78,16 +78,16 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 style="text-align:center;">Avaliação de competências</h4>
+						<h4 style="text-align:center;">Gestão de candidato</h4>
 					</div>
 					<div class="modal-body">
                         <div class="panel-body">
                                 <form class="form-border" id="formCadastro" novalidate="">
                                     <div class="panel-tab clearfix">
                                         <ul class="tab-bar wizard-demo" id="wizardDemo">
-                                            <li class="active tab-verity"><a href="#first" data-toggle="tab"><i class="fa fa-user"></i> Informações básicas</a></li>
-                                            <li class="tab-verity"><a href="#second" data-toggle="tab" class="text-success"><i class="fa fa-pencil"></i> Dados do projeto</a></li>
-                                            <li class="tab-verity"><a href="#third" data-toggle="tab" class="text-success"><i class="fa fa-briefcase"></i> Perfil</a></li>
+                                            <li class="active tab-verity"><a href="#first" data-toggle="tab"><i class="fa fa-user"></i> Informações de entrevista</a></li>
+                                            <li class="tab-verity"><a href="#second" data-toggle="tab" class="text-success"><i class="fa fa-pencil"></i> Processo de seleção</a></li>
+                                            <li class="tab-verity"><a href="#third" data-toggle="tab" class="text-success"><i class="fa fa-briefcase"></i> Propostas</a></li>
                                         </ul>
                                     </div>
                                     <div class="panel-body">
@@ -96,33 +96,19 @@
                                                 <div class="row">
                                                     <div>
                                                         <div class="form-group col-md-6">
-                                                            <label for="exampleInputEmail1">Solicitante</label>
-                                                            <input type="name" class="form-control input-sm" id="exampleInputEmail1" placeholder="Solicitante" data-required="true">
+                                                           <label for="exampleInputEmail1">Nome do candidato:</label>
+                                                             <!--<input type="name" class="form-control input-sm" id="exampleInputEmail1" placeholder="Nome do candidato" data-required="true">-->
                                                         </div><!-- /form-group -->
                                                         
-                                                        <div class="form-group col-md-6">																						
-                                                            <label for="exampleInputEmail1">Local de trabalho</label>
-                                                            <div>
-                                                                <label class="label-radio inline">
-                                                                    <input id="interno" type="radio" name="inline-radio2" checked>
-                                                                    <span class="custom-radio"></span>
-                                                                    Interno
-                                                                </label>
-                                                                <label class="label-radio inline">
-                                                                    <input id="cliente" type="radio" name="inline-radio2">
-                                                                    <span class="custom-radio"></span>
-                                                                    Cliente
-                                                                </label>
-                                                            </div>
-                                                        </div><!-- /form-group -->
                                                     </div>	
                                                 </div><!-- /form-group -->
                                                 
                                                 <div class="row">
                                                     
                                                     <div class="form-group col-md-6">
-                                                        <label for="exampleInputEmail1">Cargo</label>
+                                                        <label for="exampleInputEmail1">Vaga:</label>
                                                         <select class="form-control chzn-select">
+                                                            <option>Selecione:</option>
                                                             <option>Analista de testes</option>
                                                             <option>Analista de sistemas</option>
                                                             <option>Desenvolvedor</option>
@@ -131,97 +117,49 @@
                                                     </div><!-- /form-group -->
                                                     
                                                     <div class="form-group col-md-6">																						
-                                                        <label for="exampleInputEmail1">Tipo de vaga</label>
-                                                        <div>
-                                                            <label class="label-radio inline">
-                                                                <input type="radio" name="inline-radio3" checked>
-                                                                <span class="custom-radio"></span>
-                                                                Real
-                                                            </label>
-                                                            <label class="label-radio inline">
-                                                                <input type="radio" name="inline-radio3">
-                                                                <span class="custom-radio"></span>
-                                                                Prospecção
-                                                            </label>
-                                                            <label class="label-radio inline">
-                                                                <input type="radio" name="inline-radio3">
-                                                                <span class="custom-radio"></span>
-                                                                Hunting
-                                                            </label>
-                                                        </div>
-                                                    </div><!-- /form-group -->
-                                                    
-                                                </div><!-- /form-group -->
-                                                
-                                                <div class="row">
-                                                    <div class="form-group col-md-6">
-                                                        <label for="exampleInputEmail1">Senioridade da vaga</label>
+                                                        <label for="exampleInputEmail1">Senioridade da vaga:</label>
                                                         <select class="form-control chzn-select">
+                                                            <option>Selecione:</option>
                                                             <option>Estágio</option>
-                                                            <option>Júnior</option>
+                                                            <option>Junior</option>
                                                             <option>Pleno</option>
-                                                            <option>Senior</option>
+                                                            <option>Sênior</option>
                                                         </select>	
                                                     </div><!-- /form-group -->
                                                     
-                                                    <div class="form-group col-md-6">
-                                                        <label class="control-label">Horário</label>
-                                                        
-                                                        <div>
-                                                            <div class="form-group col-md-5">
-                                                                <div class="input-group bootstrap-timepicker">
-                                                                    <input class="timepicker form-control" type="text" value="08:00 AM">
-                                                                    <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                                                </div>
-                                                            </div><!-- /form-group -->
-                                                            
-                                                            <div class="form-group col-md-1">
-                                                                <label style="margin-top: 7px">às</label>
-                                                            </div><!-- /form-group -->
-                                                            
-                                                            <div class="form-group col-md-5">
-                                                                <div class="input-group bootstrap-timepicker">
-                                                                    <input class="timepicker form-control" type="text"/ value="05:00 PM">
-                                                                    <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                                                </div>
-                                                            </div><!-- /form-group -->
-                                                        </div>
-                                                        
-                                                    </div><!-- /form-group -->
-                                                </div>
+                                                </div><!-- /form-group -->
                                                 
                                                 <div class="row">
+                                                    <div class="form-group col-md-6">
+                                                        <label for="exampleInputEmail1">Avaliadores:</label>
+                                                        <select class="form-control chzn-select">
+                                                            <option>Selecione:</option>
+                                                            <option>Taiama</option>
+                                                            <option>Vitor</option>
+                                                            <option>Rodrigo</option>
+                                                        </select>	
+                                                    </div><!-- /form-group -->
+                                                </div>
+                                                    
+                                               
                                                     
                                                     <div class="form-group col-md-6">
-                                                        <label for="exampleInputEmail1">Proposta salarial</label>
-                                                        <input type="name" class="form-control input-sm" id="exampleInputEmail1" placeholder="R$" data-required="true">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Data do último contato:</label>
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <input type="text" value="01/01/2017" class="datepicker form-control">
+                                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                </div>
+                                                            </div><!-- /.col -->
+                                                        </div><!-- /form-group -->
                                                     </div><!-- /form-group -->
-                                                    
-                                                    <div class="form-group col-md-6">
-                                                        <label for="exampleInputEmail1">Aumento de quadro</label>
-                                                        <div>
-                                                            <label class="label-radio inline">
-                                                                <input id="novo" type="radio" name="inline-radio" checked> 
-                                                                <span class="custom-radio">
-                                                                </span>
-                                                                Novo
-                                                            </label>
-                                                            <label class="label-radio inline">
-                                                                <input id="sub" type="radio" name="inline-radio">
-                                                                <span class="custom-radio" >
-                                                                </span>
-                                                                Substituição
-                                                            </label>
-                                                        </div><!-- /.col -->
-                                                    </div><!-- /form-group -->
-                                                    
-                                                </div><!-- /form-group -->
                                                 
                                                 <div class="row">
                                                     
                                                     <div class="form-group col-md-6">
                                                         <div class="form-group">
-                                                            <label class="control-label">Data para início</label>
+                                                            <label class="control-label">Data de entrevista:</label>
                                                             <div class="form-group">
                                                                 <div class="input-group">
                                                                     <input type="text" value="01/01/2017" class="datepicker form-control">
