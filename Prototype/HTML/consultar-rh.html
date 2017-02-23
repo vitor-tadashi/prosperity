@@ -440,13 +440,6 @@ var campoValor = document.getElementById("arq"+id).value;
                                                     
                                                     <div class="form-group col-md-6">                                       
                                                         <label for="exampleInputEmail1">Senioridade da vaga:</label>
-                                                        <select class="form-control chzn-select">
-                                                            <option>Selecione:</option>
-                                                            <option>Estágio</option>
-                                                            <option>Junior</option>
-                                                            <option>Pleno</option>
-                                                            <option>Sênior</option>
-                                                        </select>   
                                                     </div><!-- /form-group -->
                                                     
                                                 </div><!-- /-row -->
@@ -519,12 +512,18 @@ var campoValor = document.getElementById("arq"+id).value;
                                                         </div><!-- /form-group -->
                                                     </div><!-- /form-group -->
                                                     
-                                                    <div id="nome" class="form-group col-md-6 hide">
-                                                        <label>Nome do substituido</label>
-                                                        <input type="text" class="form-control input-sm" placeholder="Nome do Substituido">
-                                                    </div>
                                                     
                                                 </div><!-- /form-group -->
+                                                
+                                                <div class="form-group col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Parecer:</label>
+                                                            <div class="form-group">
+                                                               
+                    <textarea class="form-control" id="message-text" style="margin-left: 10px; width: 570px"></textarea>
+                                                            </div><!-- /.col -->
+                                                        </div><!-- /form-group -->
+                                                    </div><!-- /form-group -->
                                                 
                                             </div>
                                             <div class="tab-pane fade" id="second">
@@ -744,9 +743,11 @@ var campoValor = document.getElementById("arq"+id).value;
                                     
                    
                                     </div>
-                                    <div class="panel-footer text-right">
-<!--                                        <button class="btn btn-success btn-sm disabled" id="prevStep" disabled="">Anterior</button>-->
-                                        <button type="submit" class="btn btn-sm btn-success" id="nextStep">Salvar</button>
+                                    <div class="panel-footer ">
+                                        <button type="submit" class="btn btn-sm btn-primary pull-right" id="nextStep">Salvar</button>
+                                        <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-times fa-lg"></i>&nbsp;Reprovar candidato</button>
+                                        <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-check fa-lg"></i>&nbsp;Aprovar candidato</button>
+                                        
                                     </div>
                                 </form>  
                             </div>
@@ -1173,7 +1174,7 @@ var campoValor = document.getElementById("arq"+id).value;
                             <div class="row">
 
                                 <div class="col-md-2">
-                                    <label for="exampleInputEmail1">Pesquisar</label>
+                                    <label for="exampleInputEmail1">Nome: </label>
                                     <div class="search-block">
                                         <div class="input-group">
                                             <input type="text" class="form-control input-sm" placeholder="Nome">
@@ -1252,8 +1253,7 @@ var campoValor = document.getElementById("arq"+id).value;
                                                <li><a href="#aprovado-modal" data-toggle="modal"data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
                                               <li class="divider"></li>
                                               <li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
-                                              <li class="divider"></li>
-                                              <li><a href="#reprovado-modal" data-toggle="modal"><i class="fa fa-times fa-lg"></i> Reprovar</a></li>
+                                              
                                               <li class="divider"></li>
                                               <li><a href="#delete-modal" data-toggle="modal"><i class="fa fa-trash-o fa-lg">&nbsp;</i>Fechar vaga</a></li>
 
