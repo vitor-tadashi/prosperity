@@ -3,8 +3,9 @@ package br.com.prosperity.bean;
 public class FuncionarioBean {
 	private int idFuncionario;
 	private String nome;
-	private int idCargo;
-	private int idSenioridade;
+	private CargoBean cargo;
+	private SenioridadeBean senioridade;
+	
 	public int getIdFuncionario() {
 		return idFuncionario;
 	}
@@ -17,16 +18,16 @@ public class FuncionarioBean {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public int getIdCargo() {
-		return idCargo;
+	public CargoBean getCargo() {
+		return cargo;
 	}
-	public void setIdCargo(int idCargo) {
-		this.idCargo = idCargo;
+	public void setCargo(CargoBean cargo) {
+		this.cargo = cargo;
 	}
-	public int getIdSenioridade() {
-		return idSenioridade;
+	public SenioridadeBean getSenioridade() {
+		return senioridade;
 	}
-	public void setIdSenioridade(int idSenioridade) {
-		this.idSenioridade = idSenioridade;
+	public void setSenioridade(SenioridadeBean senioridade) {
+		this.senioridade = senioridade;
 	}
 }
