@@ -1,9 +1,13 @@
 package br.com.prosperity.bean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SenioridadeBean {
 
 	private int id;
 	private String descricao;
+	private List<CargoBean> senioridade; //relacionamento entre Senioridade e CargoBeana
 
 	public SenioridadeBean(int id, String descricao) {
 
