@@ -1,9 +1,14 @@
 package br.com.prosperity.bean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PerfilBean {
 
 	private int id;
 	private String nome;
+	private List permissoes; //relacionamento entre Perfil e Permissões
+	
 
 	public PerfilBean(int id, String nome) {
 		this.id = id;

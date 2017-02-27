@@ -7,7 +7,7 @@ public class TipoCursoBean {
 	
 	private int id;
 	private String descricao;
-	private List<FormacaoBean> formacao = new ArrayList(); //relacionamento entre TipoCurso e Formação
+	private List<FormacaoBean> formacao; //relacionamento entre TipoCurso e Formação
 	
 	public TipoCursoBean(int id, String descricao){
 		this.id = id;
