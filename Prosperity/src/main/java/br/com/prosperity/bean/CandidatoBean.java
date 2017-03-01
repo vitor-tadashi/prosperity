@@ -1,5 +1,6 @@
 package br.com.prosperity.bean;
 
+import java.io.File;
 import java.util.Calendar;
 import java.util.List;
 
@@ -13,6 +14,7 @@ public class CandidatoBean {
 	private Calendar dtFechamento;
 	private String email;
 	private Calendar dtAlteracao;
+	private File curriculo;
 	private ContatoBean contato;
 	private EnderecoBean endereco;
 	private FormacaoBean formacao;
@@ -20,8 +22,6 @@ public class CandidatoBean {
 	private List<StatusBean> status;
 	private List<VagaBean> vagas;
 	//TODO relacionamento avaliadores
-	//TODO atributo curriculo
-	
 	
 	public String getCpf() {
 		return cpf;

@@ -15,9 +15,9 @@
 		http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd"/>
 
-	<context:component-scan base-package="com.prosperity.controller" />
+<!-- 	<context:component-scan base-package="br.com.prosperity.controller" />
 	<context:component-scan base-package="com.prosperity.service" />
-	<context:component-scan base-package="com.prosperity.dao" />
+	<context:component-scan base-package="com.prosperity.dao" /> -->
 
 	<beans:bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

@@ -6,9 +6,8 @@ public class FormacaoBean {
 	private int id;
 	private String instituicao;
 	private Calendar conclusao;
-	
-	TipoCursoBean tipoCursoBean = new TipoCursoBean();
-	SituacaoAtualBean situacaoAtualBean = new SituacaoAtualBean();
+	private TipoCursoBean tipoCursoBean;
+	private SituacaoAtualBean situacaoAtualBean;
 	
 	public int getId() {
 		return id;
@@ -27,5 +26,17 @@ public class FormacaoBean {
 	}
 	public void setConclusao(Calendar conclusao) {
 		this.conclusao = conclusao;
+	}
+	public TipoCursoBean getTipoCursoBean() {
+		return tipoCursoBean;
+	}
+	public void setTipoCursoBean(TipoCursoBean tipoCursoBean) {
+		this.tipoCursoBean = tipoCursoBean;
+	}
+	public SituacaoAtualBean getSituacaoAtualBean() {
+		return situacaoAtualBean;
+	}
+	public void setSituacaoAtualBean(SituacaoAtualBean situacaoAtualBean) {
+		this.situacaoAtualBean = situacaoAtualBean;
 	}
 }
