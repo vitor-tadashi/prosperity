@@ -3,7 +3,7 @@ package br.com.prosperity.bean;
 import java.util.List;
 
 public class FuncionarioBean {
-	private int idFuncionario;
+	private int id;
 	private String nome;
 	private CargoBean cargo;
 	private SenioridadeBean senioridade;
@@ -15,11 +15,11 @@ public class FuncionarioBean {
 	public void setProjeto(List<ProjetoBean> projeto) {
 		this.projeto = projeto;
 	}
-	public int getIdFuncionario() {
-		return idFuncionario;
+	public int getId() {
+		return id;
 	}
-	public void setIdFuncionario(int idFuncionario) {
-		this.idFuncionario = idFuncionario;
+	public void setIdFuncionario(int id) {
+		this.id = id;
 	}
 	public String getNome() {
 		return nome;
