@@ -4,51 +4,38 @@ import java.util.Calendar;
 
 public class VagaEntity {
 	private int id;
-	private String solicitante;
-	private Double prtSalarial;
+	private String nmSolicitante;
+	private Double vlSalarial;
 	private Calendar dtInicio;
-	private String localTrabalho;
-	private String tipoVaga;
-	private String horarioEntrada;
-	private String horarioSaida;
-	private String aumentaQuadro;
-	private ProjetoEntity projetoBean;
-	private CargoEntity cargoBean;
-	private SenioridadeEntity senioridadeBean;
+	private String flLocalTrabalho;
+	private String idTpVaga;
+	private String hrEntrada;
+	private String hrSaida;
+	private String flAumentaQuadro;
+	private ProjetoEntity projetoEntity;
+	private CargoEntity cargoEntity;
+	private SenioridadeEntity senioridadeEntity;
 
-	public ProjetoEntity getProjetoBean() {
-		return projetoBean;
+	public VagaEntity() {
+
 	}
 
-	public void setProjetoBean(ProjetoEntity projetoBean) {
-		this.projetoBean = projetoBean;
+	public VagaEntity(int id, String nmSolicitante, Double vlSalarial, Calendar dtInicio, String flLocalTrabalho,
+			String idTpVaga, String hrEntrada, String hrSaida, String flAumentaQuadro, ProjetoEntity projetoEntity,
+			CargoEntity cargoEntity, SenioridadeEntity senioridadeEntity) {
+		this.id = id;
+		this.nmSolicitante = nmSolicitante;
+		this.vlSalarial = vlSalarial;
+		this.dtInicio = dtInicio;
+		this.flLocalTrabalho = flLocalTrabalho;
+		this.idTpVaga = idTpVaga;
+		this.hrEntrada = hrEntrada;
+		this.hrSaida = hrSaida;
+		this.flAumentaQuadro = flAumentaQuadro;
+		this.projetoEntity = projetoEntity;
+		this.cargoEntity = cargoEntity;
+		this.senioridadeEntity = senioridadeEntity;
 	}
-
-	public CargoEntity getCargoBean() {
-		return cargoBean;
-	}
-
-	public void setCargoBean(CargoEntity cargoBean) {
-		this.cargoBean = cargoBean;
-	}
-
-	public SenioridadeEntity getSenioridadeBean() {
-		return senioridadeBean;
-	}
-
-	public void setSenioridadeBean(SenioridadeEntity senioridadeBean) {
-		this.senioridadeBean = senioridadeBean;
-	}
-
-	public UsuarioEntity getUsuarioBean() {
-		return usuarioBean;
-	}
-
-	public void setUsuarioBean(UsuarioEntity usuarioBean) {
-		this.usuarioBean = usuarioBean;
-	}
-
-	private UsuarioEntity usuarioBean;
 
 	public int getId() {
 		return id;
@@ -58,20 +45,20 @@ public class VagaEntity {
 		this.id = id;
 	}
 
-	public String getSolicitante() {
-		return solicitante;
+	public String getNmSolicitante() {
+		return nmSolicitante;
 	}
 
-	public void setSolicitante(String solicitante) {
-		this.solicitante = solicitante;
+	public void setNmSolicitante(String nmSolicitante) {
+		this.nmSolicitante = nmSolicitante;
 	}
 
-	public Double getPrtSalarial() {
-		return prtSalarial;
+	public Double getVlSalarial() {
+		return vlSalarial;
 	}
 
-	public void setPrtSalarial(Double prtSalarial) {
-		this.prtSalarial = prtSalarial;
+	public void setVlSalarial(Double vlSalarial) {
+		this.vlSalarial = vlSalarial;
 	}
 
 	public Calendar getDtInicio() {
@@ -82,43 +69,68 @@ public class VagaEntity {
 		this.dtInicio = dtInicio;
 	}
 
-	public String getLocalTrabalho() {
-		return localTrabalho;
+	public String getFlLocalTrabalho() {
+		return flLocalTrabalho;
 	}
 
-	public void setLocalTrabalho(String localTrabalho) {
-		this.localTrabalho = localTrabalho;
+	public void setFlLocalTrabalho(String flLocalTrabalho) {
+		this.flLocalTrabalho = flLocalTrabalho;
 	}
 
-	public String getTipoVaga() {
-		return tipoVaga;
+	public String getIdTpVaga() {
+		return idTpVaga;
 	}
 
-	public void setTipoVaga(String tipoVaga) {
-		this.tipoVaga = tipoVaga;
+	public void setIdTpVaga(String idTpVaga) {
+		this.idTpVaga = idTpVaga;
 	}
 
-	public String getHorarioEntrada() {
-		return horarioEntrada;
+	public String getHrEntrada() {
+		return hrEntrada;
 	}
 
-	public void setHorarioEntrada(String horarioEntrada) {
-		this.horarioEntrada = horarioEntrada;
+	public void setHrEntrada(String hrEntrada) {
+		this.hrEntrada = hrEntrada;
 	}
 
-	public String getHorarioSaida() {
-		return horarioSaida;
+	public String getHrSaida() {
+		return hrSaida;
 	}
 
-	public void setHorarioSaida(String horarioSaida) {
-		this.horarioSaida = horarioSaida;
+	public void setHrSaida(String hrSaida) {
+		this.hrSaida = hrSaida;
 	}
 
-	public String getAumentaQuadro() {
-		return aumentaQuadro;
+	public String getFlAumentaQuadro() {
+		return flAumentaQuadro;
 	}
 
-	public void setAumentaQuadro(String aumentaQuadro) {
-		this.aumentaQuadro = aumentaQuadro;
+	public void setFlAumentaQuadro(String flAumentaQuadro) {
+		this.flAumentaQuadro = flAumentaQuadro;
 	}
+
+	public ProjetoEntity getProjetoEntity() {
+		return projetoEntity;
+	}
+
+	public void setProjetoEntity(ProjetoEntity projetoEntity) {
+		this.projetoEntity = projetoEntity;
+	}
+
+	public CargoEntity getCargoEntity() {
+		return cargoEntity;
+	}
+
+	public void setCargoEntity(CargoEntity cargoEntity) {
+		this.cargoEntity = cargoEntity;
+	}
+
+	public SenioridadeEntity getSenioridadeEntity() {
+		return senioridadeEntity;
+	}
+
+	public void setSenioridadeEntity(SenioridadeEntity senioridadeEntity) {
+		this.senioridadeEntity = senioridadeEntity;
+	}
+
 }

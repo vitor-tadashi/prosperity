@@ -4,11 +4,11 @@ import java.util.Calendar;
 
 public class VagaBean {
 	private int id;
-	private String solicitante;
-	private Double prtSalarial;
-	private Calendar dtInicio;
+	private String nomeSolicitante;
+	private Double valorSalarial;
+	private Calendar dataInicio;
 	private String localTrabalho;
-	private String tipoVaga;
+	private String idTipoVaga;
 	private String horarioEntrada;
 	private String horarioSaida;
 	private String aumentaQuadro;
@@ -16,39 +16,26 @@ public class VagaBean {
 	private CargoBean cargoBean;
 	private SenioridadeBean senioridadeBean;
 
-	public ProjetoBean getProjetoBean() {
-		return projetoBean;
+	public VagaBean() {
+
 	}
 
-	public void setProjetoBean(ProjetoBean projetoBean) {
+	public VagaBean(int id, String nomeSolicitante, Double valorSalarial, Calendar dataInicio, String localTrabalho,
+			String idTipoVaga, String horarioEntrada, String horarioSaida, String aumentaQuadro,
+			ProjetoBean projetoBean, CargoBean cargoBean, SenioridadeBean senioridadeBean) {
+		this.id = id;
+		this.nomeSolicitante = nomeSolicitante;
+		this.valorSalarial = valorSalarial;
+		this.dataInicio = dataInicio;
+		this.localTrabalho = localTrabalho;
+		this.idTipoVaga = idTipoVaga;
+		this.horarioEntrada = horarioEntrada;
+		this.horarioSaida = horarioSaida;
+		this.aumentaQuadro = aumentaQuadro;
 		this.projetoBean = projetoBean;
-	}
-
-	public CargoBean getCargoBean() {
-		return cargoBean;
-	}
-
-	public void setCargoBean(CargoBean cargoBean) {
 		this.cargoBean = cargoBean;
-	}
-
-	public SenioridadeBean getSenioridadeBean() {
-		return senioridadeBean;
-	}
-
-	public void setSenioridadeBean(SenioridadeBean senioridadeBean) {
 		this.senioridadeBean = senioridadeBean;
 	}
-
-	public UsuarioBean getUsuarioBean() {
-		return usuarioBean;
-	}
-
-	public void setUsuarioBean(UsuarioBean usuarioBean) {
-		this.usuarioBean = usuarioBean;
-	}
-
-	private UsuarioBean usuarioBean;
 
 	public int getId() {
 		return id;
@@ -58,28 +45,28 @@ public class VagaBean {
 		this.id = id;
 	}
 
-	public String getSolicitante() {
-		return solicitante;
+	public String getNomeSolicitante() {
+		return nomeSolicitante;
 	}
 
-	public void setSolicitante(String solicitante) {
-		this.solicitante = solicitante;
+	public void setNomeSolicitante(String nomeSolicitante) {
+		this.nomeSolicitante = nomeSolicitante;
 	}
 
-	public Double getPrtSalarial() {
-		return prtSalarial;
+	public Double getValorSalarial() {
+		return valorSalarial;
 	}
 
-	public void setPrtSalarial(Double prtSalarial) {
-		this.prtSalarial = prtSalarial;
+	public void setValorSalarial(Double valorSalarial) {
+		this.valorSalarial = valorSalarial;
 	}
 
-	public Calendar getDtInicio() {
-		return dtInicio;
+	public Calendar getDataInicio() {
+		return dataInicio;
 	}
 
-	public void setDtInicio(Calendar dtInicio) {
-		this.dtInicio = dtInicio;
+	public void setDataInicio(Calendar dataInicio) {
+		this.dataInicio = dataInicio;
 	}
 
 	public String getLocalTrabalho() {
@@ -90,12 +77,12 @@ public class VagaBean {
 		this.localTrabalho = localTrabalho;
 	}
 
-	public String getTipoVaga() {
-		return tipoVaga;
+	public String getIdTipoVaga() {
+		return idTipoVaga;
 	}
 
-	public void setTipoVaga(String tipoVaga) {
-		this.tipoVaga = tipoVaga;
+	public void setIdTipoVaga(String tipoVaga) {
+		this.idTipoVaga = tipoVaga;
 	}
 
 	public String getHorarioEntrada() {
@@ -120,5 +107,29 @@ public class VagaBean {
 
 	public void setAumentaQuadro(String aumentaQuadro) {
 		this.aumentaQuadro = aumentaQuadro;
+	}
+
+	public ProjetoBean getProjetoBean() {
+		return projetoBean;
+	}
+
+	public void setProjetoBean(ProjetoBean projetoBean) {
+		this.projetoBean = projetoBean;
+	}
+
+	public CargoBean getCargoBean() {
+		return cargoBean;
+	}
+
+	public void setCargoBean(CargoBean cargoBean) {
+		this.cargoBean = cargoBean;
+	}
+
+	public SenioridadeBean getSenioridadeBean() {
+		return senioridadeBean;
+	}
+
+	public void setSenioridadeBean(SenioridadeBean senioridadeBean) {
+		this.senioridadeBean = senioridadeBean;
 	}
 }

@@ -9,11 +9,11 @@ public class CandidatoBean {
 	private String nome;
 	private String rg;
 	private Calendar dtNascimento;
-	private double prtSalarial;
-	private Calendar dtAbertura;
-	private Calendar dtFechamento;
+	private double valorPretensao;
+	private Calendar dataAbertura;
+	private Calendar dataFechamento;
 	private String email;
-	private Calendar dtAlteracao;
+	private Calendar dataAlteracao;
 	private File curriculo;
 	private ContatoBean contato;
 	private EnderecoBean endereco;
@@ -65,35 +65,37 @@ public class CandidatoBean {
 	public void setDtNascimento(Calendar dtNascimento) {
 		this.dtNascimento = dtNascimento;
 	}
-	public double getPrtSalarial() {
-		return prtSalarial;
-	}
-	public void setPrtSalarial(double prtSalarial) {
-		this.prtSalarial = prtSalarial;
-	}
-	public Calendar getDtAbertura() {
-		return dtAbertura;
-	}
-	public void setDtAbertura(Calendar dtAbertura) {
-		this.dtAbertura = dtAbertura;
-	}
-	public Calendar getDtFechamento() {
-		return dtFechamento;
-	}
-	public void setDtFechamento(Calendar dtFechamento) {
-		this.dtFechamento = dtFechamento;
-	}
+
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Calendar getDtAlteracao() {
-		return dtAlteracao;
+
+	public double getValorPretensao() {
+		return valorPretensao;
 	}
-	public void setDtAlteracao(Calendar dtAlteracao) {
-		this.dtAlteracao = dtAlteracao;
+	public void setValorPretensao(double valorPretensao) {
+		this.valorPretensao = valorPretensao;
+	}
+	public Calendar getDataAbertura() {
+		return dataAbertura;
+	}
+	public void setDataAbertura(Calendar dataAbertura) {
+		this.dataAbertura = dataAbertura;
+	}
+	public Calendar getDataFechamento() {
+		return dataFechamento;
+	}
+	public void setDataFechamento(Calendar dataFechamento) {
+		this.dataFechamento = dataFechamento;
+	}
+	public Calendar getDataAlteracao() {
+		return dataAlteracao;
+	}
+	public void setDataAlteracao(Calendar dataAlteracao) {
+		this.dataAlteracao = dataAlteracao;
 	}
 	public ContatoBean getContato() {
 		return contato;

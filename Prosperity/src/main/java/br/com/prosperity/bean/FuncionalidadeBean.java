@@ -2,7 +2,7 @@ package br.com.prosperity.bean;
 
 import java.util.List;
 
-public class PermicaoBean {
+public class FuncionalidadeBean {
 	private int id;
 	private String nome;
 	private List<PerfilBean> perfil;
