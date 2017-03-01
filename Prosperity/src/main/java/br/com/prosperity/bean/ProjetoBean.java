@@ -1,28 +1,27 @@
 package br.com.prosperity.bean;
 
 public class ProjetoBean {
-	private int idProjeto;
-	private String nmProjeto;
-	private String clienteProjeto;
+	private int id;
+	private String nome;
+	private String cliente;
 	private FuncionarioBean funcionario;
-	
-	public int getIdProjeto() {
-		return idProjeto;
+	public int getId() {
+		return id;
 	}
-	public void setIdProjeto(int idProjeto) {
-		this.idProjeto = idProjeto;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public String getNmProjeto() {
-		return nmProjeto;
+	public String getNome() {
+		return nome;
 	}
-	public void setNmProjeto(String nmProjeto) {
-		this.nmProjeto = nmProjeto;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
-	public String getClienteProjeto() {
-		return clienteProjeto;
+	public String getCliente() {
+		return cliente;
 	}
-	public void setClienteProjeto(String clienteProjeto) {
-		this.clienteProjeto = clienteProjeto;
+	public void setCliente(String cliente) {
+		this.cliente = cliente;
 	}
 	public FuncionarioBean getFuncionario() {
 		return funcionario;
