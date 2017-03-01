@@ -2,7 +2,7 @@ package br.com.prosperity.bean;
 
 public class CargoBean {
 	private int id;
-	private String descricao;
+	private String nomeCargo;
 
 	public int getId() {
 		return id;
@@ -12,11 +12,12 @@ public class CargoBean {
 		this.id = id;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getNomeCargo() {
+		return nomeCargo;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setNomeCargo(String nomeCargo) {
+		this.nomeCargo = nomeCargo;
 	}
+
 }

@@ -1,27 +1,27 @@
-package br.com.prosperity.bean;
+package br.com.prosperity.entity;
 
 import java.util.List;
 
-public class TipoCursoBean {
+public class TipoCursoEntity {
 	
 	private int id;
 	private String descricao;
-	private List<FormacaoBean> formacao; //relacionamento entre TipoCurso e Formação
+	private List<FormacaoEntity> formacao; //relacionamento entre TipoCurso e Formação
 	
-	public List<FormacaoBean> getFormacao() {
+	public List<FormacaoEntity> getFormacao() {
 		return formacao;
 	}
 
-	public void setFormacao(List<FormacaoBean> formacao) {
+	public void setFormacao(List<FormacaoEntity> formacao) {
 		this.formacao = formacao;
 	}
 
-	public TipoCursoBean(int id, String descricao){
+	public TipoCursoEntity(int id, String descricao){
 		this.id = id;
 		this.descricao = descricao;
 	}
 
-	public TipoCursoBean(){
+	public TipoCursoEntity(){
 
 	}
 
