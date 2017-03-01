@@ -1,16 +1,16 @@
-package br.com.prosperity.bean;
+package br.com.prosperity.entity;
 
-public class EnderecoBean {
-	private int idEndereco;
+public class EnderecoEntity {
+	private int id;
 	private String cep;
 	private int numero;
 	private String complemento;
 	
-	public int getIdEndereco() {
-		return idEndereco;
+	public int getId() {
+		return id;
 	}
-	public void setIdEndereco(int id) {
-		this.idEndereco = id;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getCep() {
 		return cep;

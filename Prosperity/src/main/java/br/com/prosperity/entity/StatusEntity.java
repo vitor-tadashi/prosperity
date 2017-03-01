@@ -1,6 +1,6 @@
-package br.com.prosperity.bean;
+package br.com.prosperity.entity;
 
-public class StatusBean {
+public class StatusEntity {
 	private String descricao;
 	private String css;
 	private String tipo;

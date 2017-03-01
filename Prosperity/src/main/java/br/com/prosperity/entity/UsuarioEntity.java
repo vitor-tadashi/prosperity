@@ -1,31 +1,31 @@
-package br.com.prosperity.bean;
+package br.com.prosperity.entity;
 
-public class UsuarioBean {
+public class UsuarioEntity {
 
-	private UsuarioBean idusuario;
-	private PerfilBean idperfil;
-	private FuncionarioBean idfuncionario;
+	private UsuarioEntity idusuario;
+	private PerfilEntity idperfil;
+	private FuncionarioEntity idfuncionario;
 	//classes
 	private String usuario;
 	private String senha;
 	
 	
-	public UsuarioBean getIdusuario() {
+	public UsuarioEntity getIdusuario() {
 		return idusuario;
 	}
-	public void setIdusuario(UsuarioBean idusuario) {
+	public void setIdusuario(UsuarioEntity idusuario) {
 		this.idusuario = idusuario;
 	}
-	public PerfilBean getIdperfil() {
+	public PerfilEntity getIdperfil() {
 		return idperfil;
 	}
-	public void setIdperfil(PerfilBean idperfil) {
+	public void setIdperfil(PerfilEntity idperfil) {
 		this.idperfil = idperfil;
 	}
-	public FuncionarioBean getIdfuncionario() {
+	public FuncionarioEntity getIdfuncionario() {
 		return idfuncionario;
 	}
-	public void setIdfuncionario(FuncionarioBean idfuncionario) {
+	public void setIdfuncionario(FuncionarioEntity idfuncionario) {
 		this.idfuncionario = idfuncionario;
 	}
 	public String getUsuario() {

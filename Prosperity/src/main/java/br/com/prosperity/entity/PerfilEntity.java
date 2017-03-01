@@ -1,28 +1,28 @@
-package br.com.prosperity.bean;
+package br.com.prosperity.entity;
 
 import java.util.List;
 
-public class PerfilBean {
+public class PerfilEntity {
 
 	private int id;
 	private String nome;
-	private List<PermicaoBean> permissoes; //relacionamento entre Perfil e Permissões
+	private List<PermicaoEntity> permissoes; //relacionamento entre Perfil e Permissões
 	
 
-	public List<PermicaoBean> getPermissoes() {
+	public List<PermicaoEntity> getPermissoes() {
 		return permissoes;
 	}
 
-	public void setPermissoes(List<PermicaoBean> permissoes) {
+	public void setPermissoes(List<PermicaoEntity> permissoes) {
 		this.permissoes = permissoes;
 	}
 
-	public PerfilBean(int id, String nome) {
+	public PerfilEntity(int id, String nome) {
 		this.id = id;
 		this.nome = nome;
 	}
 	
-	public PerfilBean(){
+	public PerfilEntity(){
 		
 	}
 

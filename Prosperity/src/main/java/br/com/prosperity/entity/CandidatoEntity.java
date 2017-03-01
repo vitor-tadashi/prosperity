@@ -1,10 +1,10 @@
-package br.com.prosperity.bean;
+package br.com.prosperity.entity;
 
 import java.io.File;
 import java.util.Calendar;
 import java.util.List;
 
-public class CandidatoBean {
+public class CandidatoEntity {
 	private String cpf;
 	private String nome;
 	private String rg;
@@ -15,12 +15,12 @@ public class CandidatoBean {
 	private String email;
 	private Calendar dtAlteracao;
 	private File curriculo;
-	private ContatoBean contato;
-	private EnderecoBean endereco;
-	private FormacaoBean formacao;
-	private UsuarioBean usuario;
-	private List<StatusBean> status;
-	private List<VagaBean> vagas;
+	private ContatoEntity contato;
+	private EnderecoEntity endereco;
+	private FormacaoEntity formacao;
+	private UsuarioEntity usuario;
+	private List<StatusEntity> status;
+	private List<VagaEntity> vagas;
 	//TODO relacionamento avaliadores
 	
 	public String getCpf() {
@@ -32,16 +32,16 @@ public class CandidatoBean {
 	public void setCurriculo(File curriculo) {
 		this.curriculo = curriculo;
 	}
-	public List<StatusBean> getStatus() {
+	public List<StatusEntity> getStatus() {
 		return status;
 	}
-	public void setStatus(List<StatusBean> status) {
+	public void setStatus(List<StatusEntity> status) {
 		this.status = status;
 	}
-	public List<VagaBean> getVagas() {
+	public List<VagaEntity> getVagas() {
 		return vagas;
 	}
-	public void setVagas(List<VagaBean> vagas) {
+	public void setVagas(List<VagaEntity> vagas) {
 		this.vagas = vagas;
 	}
 	public void setCpf(String cpf) {
@@ -95,28 +95,28 @@ public class CandidatoBean {
 	public void setDtAlteracao(Calendar dtAlteracao) {
 		this.dtAlteracao = dtAlteracao;
 	}
-	public ContatoBean getContato() {
+	public ContatoEntity getContato() {
 		return contato;
 	}
-	public void setContato(ContatoBean contato) {
+	public void setContato(ContatoEntity contato) {
 		this.contato = contato;
 	}
-	public EnderecoBean getEndereco() {
+	public EnderecoEntity getEndereco() {
 		return endereco;
 	}
-	public void setEndereco(EnderecoBean endereco) {
+	public void setEndereco(EnderecoEntity endereco) {
 		this.endereco = endereco;
 	}
-	public FormacaoBean getFormacao() {
+	public FormacaoEntity getFormacao() {
 		return formacao;
 	}
-	public void setFormacao(FormacaoBean formacao) {
+	public void setFormacao(FormacaoEntity formacao) {
 		this.formacao = formacao;
 	}
-	public UsuarioBean getUsuario() {
+	public UsuarioEntity getUsuario() {
 		return usuario;
 	}
-	public void setUsuario(UsuarioBean usuario) {
+	public void setUsuario(UsuarioEntity usuario) {
 		this.usuario = usuario;
 	}
 	

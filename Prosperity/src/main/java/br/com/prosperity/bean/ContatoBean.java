@@ -1,26 +1,26 @@
 package br.com.prosperity.bean;
 
 public class ContatoBean {
-	private int idContato;
+	private int id;
 	private String telefone;
-	private String celular;
+	private CandidatoBean candidato;
 	
-	public int getIdContato() {
-		return idContato;
+	public CandidatoBean getCandidato() {
+		return candidato;
 	}
-	public void setIdContato(int idContato) {
-		this.idContato = idContato;
+	public void setCandidato(CandidatoBean candidato) {
+		this.candidato = candidato;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getTelefone() {
 		return telefone;
 	}
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
-	}
-	public String getCelular() {
-		return celular;
-	}
-	public void setCelular(String celular) {
-		this.celular = celular;
 	}
 }
