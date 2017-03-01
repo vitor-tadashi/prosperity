@@ -6,14 +6,14 @@ public class PerfilEntity {
 
 	private int id;
 	private String nome;
-	private List<PermicaoEntity> permissoes; //relacionamento entre Perfil e Permissões
+	private List<FuncionalidadeEntity> permissoes; //relacionamento entre Perfil e Permissões
 	
 
-	public List<PermicaoEntity> getPermissoes() {
+	public List<FuncionalidadeEntity> getPermissoes() {
 		return permissoes;
 	}
 
-	public void setPermissoes(List<PermicaoEntity> permissoes) {
+	public void setPermissoes(List<FuncionalidadeEntity> permissoes) {
 		this.permissoes = permissoes;
 	}
 
@@ -41,7 +41,4 @@ public class PerfilEntity {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	
-
 }
