@@ -26,6 +26,12 @@ public class CandidatoBean {
 	public String getCpf() {
 		return cpf;
 	}
+	public File getCurriculo() {
+		return curriculo;
+	}
+	public void setCurriculo(File curriculo) {
+		this.curriculo = curriculo;
+	}
 	public List<StatusBean> getStatus() {
 		return status;
 	}
