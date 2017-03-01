@@ -5,6 +5,19 @@ public class ProjetoBean {
 	private String nome;
 	private String cliente;
 	private FuncionarioBean funcionario;
+	
+	public ProjetoBean() {
+		
+	}
+	
+	public ProjetoBean(int id, String nome, String cliente,
+			FuncionarioBean funcionario) {
+		this.id = id;
+		this.nome = nome;
+		this.cliente = cliente;
+		this.funcionario = funcionario;
+	}
+
 	public int getId() {
 		return id;
 	}

@@ -3,6 +3,18 @@ package br.com.prosperity.bean;
 import java.util.List;
 
 public class FuncionarioBean {
+	
+	public FuncionarioBean() {
+		
+	}
+	public FuncionarioBean(int id, String nome, CargoBean cargo,
+			SenioridadeBean senioridade, List<ProjetoBean> projeto) {
+		this.id = id;
+		this.nome = nome;
+		this.cargo = cargo;
+		this.senioridade = senioridade;
+		this.projeto = projeto;
+	}
 	private int id;
 	private String nome;
 	private CargoBean cargo;

@@ -1,6 +1,15 @@
 package br.com.prosperity.bean;
 
 public class ContatoBean {
+	
+	public ContatoBean() {
+		
+	}
+	public ContatoBean(int id, String telefone, CandidatoBean candidato) {
+		this.id = id;
+		this.telefone = telefone;
+		this.candidato = candidato;
+	}
 	private int id;
 	private String telefone;
 	private CandidatoBean candidato;
