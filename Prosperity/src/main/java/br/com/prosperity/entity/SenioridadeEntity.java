@@ -1,28 +1,28 @@
-package br.com.prosperity.bean;
+package br.com.prosperity.entity;
 
 import java.util.List;
 
-public class SenioridadeBean {
+public class SenioridadeEntity {
 
 	private int id;
 	private String descricao;
-	private List<CargoBean> senioridade; //relacionamento entre Senioridade e CargoBeana
+	private List<CargoEntity> senioridade; //relacionamento entre Senioridade e CargoBeana
 
-	public List<CargoBean> getSenioridade() {
+	public List<CargoEntity> getSenioridade() {
 		return senioridade;
 	}
 
-	public void setSenioridade(List<CargoBean> senioridade) {
+	public void setSenioridade(List<CargoEntity> senioridade) {
 		this.senioridade = senioridade;
 	}
 
-	public SenioridadeBean(int id, String descricao) {
+	public SenioridadeEntity(int id, String descricao) {
 
 		this.id = id;
 		this.descricao = descricao;
 	}
 
-	public SenioridadeBean() {
+	public SenioridadeEntity() {
 
 	}
 
