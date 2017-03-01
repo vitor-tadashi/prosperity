@@ -6,14 +6,14 @@ public class PerfilBean {
 
 	private int id;
 	private String nome;
-	private List<PermicaoBean> permissoes; //relacionamento entre Perfil e Permissões
+	private List<FuncionalidadeBean> permissoes; //relacionamento entre Perfil e Permissões
 	
 
-	public List<PermicaoBean> getPermissoes() {
+	public List<FuncionalidadeBean> getPermissoes() {
 		return permissoes;
 	}
 
-	public void setPermissoes(List<PermicaoBean> permissoes) {
+	public void setPermissoes(List<FuncionalidadeBean> permissoes) {
 		this.permissoes = permissoes;
 	}
 
