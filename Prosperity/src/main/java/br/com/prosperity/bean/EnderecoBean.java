@@ -5,6 +5,7 @@ public class EnderecoBean {
 	private String cep;
 	private int numero;
 	private String complemento;
+	
 	public int getId() {
 		return id;
 	}
