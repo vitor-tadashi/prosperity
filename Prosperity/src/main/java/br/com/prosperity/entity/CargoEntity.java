@@ -2,7 +2,7 @@ package br.com.prosperity.entity;
 
 public class CargoEntity {
 	private int id;
-	private String descricao;
+	private String nmCargo;
 
 	public int getId() {
 		return id;
@@ -12,11 +12,11 @@ public class CargoEntity {
 		this.id = id;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getNmCargo() {
+		return nmCargo;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setNmCargo(String nmCargo) {
+		this.nmCargo = nmCargo;
 	}
 }

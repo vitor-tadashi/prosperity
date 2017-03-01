@@ -4,7 +4,7 @@ import java.util.Calendar;
 
 public class VagaBean {
 	private int id;
-	private String solicitante;
+	private String nomeSolicitante;
 	private Double valorSalarial;
 	private Calendar dataInicio;
 	private String localTrabalho;
@@ -24,12 +24,12 @@ public class VagaBean {
 		this.id = id;
 	}
 
-	public String getSolicitante() {
-		return solicitante;
+	public String getNomeSolicitante() {
+		return nomeSolicitante;
 	}
 
-	public void setSolicitante(String solicitante) {
-		this.solicitante = solicitante;
+	public void setNomeSolicitante(String nomeSolicitante) {
+		this.nomeSolicitante = nomeSolicitante;
 	}
 
 	public Double getValorSalarial() {
