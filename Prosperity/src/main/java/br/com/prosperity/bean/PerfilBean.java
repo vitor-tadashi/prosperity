@@ -1,44 +1,46 @@
 package br.com.prosperity.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PerfilBean {
 
-	private int id;
-	private String nome;
-	private List<FuncionalidadeBean> permissoes; //relacionamento entre Perfil e Permissões
-	
+	private int idPerfil;
+	private String nmPerfil;
+	private int idAvaliador;
 
-	public List<FuncionalidadeBean> getPermissoes() {
-		return permissoes;
+	public PerfilBean(int id, String nmPerfil, int idAvaliador) {
+		this.idPerfil = idPerfil;
+		this.nmPerfil = nmPerfil;
+		this.idAvaliador = idAvaliador;
 	}
 
-	public void setPermissoes(List<FuncionalidadeBean> permissoes) {
-		this.permissoes = permissoes;
+	public PerfilBean() {
+
 	}
 
-	public PerfilBean(int id, String nome) {
-		this.id = id;
-		this.nome = nome;
-	}
-	
-	public PerfilBean(){
-		
+	public int getIdPerfil() {
+		return idPerfil;
 	}
 
-	public int getId() {
-		return id;
+	public void setIdPerfil(int idPerfil) {
+		this.idPerfil = idPerfil;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public String getNmPerfil() {
+		return nmPerfil;
 	}
 
-	public String getNome() {
-		return nome;
+	public void setNmPerfil(String nmPerfil) {
+		this.nmPerfil = nmPerfil;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+
+	public int getIdAvaliador() {
+		return idAvaliador;
+	}
+
+	public void setIdAvaliador(int idAvaliador) {
+		this.idAvaliador = idAvaliador;
 	}
 }
