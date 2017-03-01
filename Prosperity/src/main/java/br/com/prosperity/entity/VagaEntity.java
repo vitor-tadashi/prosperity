@@ -16,6 +16,27 @@ public class VagaEntity {
 	private CargoEntity cargoEntity;
 	private SenioridadeEntity senioridadeEntity;
 
+	public VagaEntity() {
+
+	}
+
+	public VagaEntity(int id, String nmSolicitante, Double vlSalarial, Calendar dtInicio, String flLocalTrabalho,
+			String idTpVaga, String hrEntrada, String hrSaida, String flAumentaQuadro, ProjetoEntity projetoEntity,
+			CargoEntity cargoEntity, SenioridadeEntity senioridadeEntity) {
+		this.id = id;
+		this.nmSolicitante = nmSolicitante;
+		this.vlSalarial = vlSalarial;
+		this.dtInicio = dtInicio;
+		this.flLocalTrabalho = flLocalTrabalho;
+		this.idTpVaga = idTpVaga;
+		this.hrEntrada = hrEntrada;
+		this.hrSaida = hrSaida;
+		this.flAumentaQuadro = flAumentaQuadro;
+		this.projetoEntity = projetoEntity;
+		this.cargoEntity = cargoEntity;
+		this.senioridadeEntity = senioridadeEntity;
+	}
+
 	public int getId() {
 		return id;
 	}

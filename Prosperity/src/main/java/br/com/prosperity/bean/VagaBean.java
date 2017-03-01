@@ -8,13 +8,34 @@ public class VagaBean {
 	private Double valorSalarial;
 	private Calendar dataInicio;
 	private String localTrabalho;
-	private String tipoVaga;
+	private String idTipoVaga;
 	private String horarioEntrada;
 	private String horarioSaida;
 	private String aumentaQuadro;
 	private ProjetoBean projetoBean;
 	private CargoBean cargoBean;
 	private SenioridadeBean senioridadeBean;
+
+	public VagaBean() {
+
+	}
+
+	public VagaBean(int id, String nomeSolicitante, Double valorSalarial, Calendar dataInicio, String localTrabalho,
+			String idTipoVaga, String horarioEntrada, String horarioSaida, String aumentaQuadro,
+			ProjetoBean projetoBean, CargoBean cargoBean, SenioridadeBean senioridadeBean) {
+		this.id = id;
+		this.nomeSolicitante = nomeSolicitante;
+		this.valorSalarial = valorSalarial;
+		this.dataInicio = dataInicio;
+		this.localTrabalho = localTrabalho;
+		this.idTipoVaga = idTipoVaga;
+		this.horarioEntrada = horarioEntrada;
+		this.horarioSaida = horarioSaida;
+		this.aumentaQuadro = aumentaQuadro;
+		this.projetoBean = projetoBean;
+		this.cargoBean = cargoBean;
+		this.senioridadeBean = senioridadeBean;
+	}
 
 	public int getId() {
 		return id;
@@ -56,12 +77,12 @@ public class VagaBean {
 		this.localTrabalho = localTrabalho;
 	}
 
-	public String getTipoVaga() {
-		return tipoVaga;
+	public String getIdTipoVaga() {
+		return idTipoVaga;
 	}
 
-	public void setTipoVaga(String tipoVaga) {
-		this.tipoVaga = tipoVaga;
+	public void setIdTipoVaga(String tipoVaga) {
+		this.idTipoVaga = tipoVaga;
 	}
 
 	public String getHorarioEntrada() {

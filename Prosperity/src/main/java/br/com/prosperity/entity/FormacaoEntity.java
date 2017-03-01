@@ -9,6 +9,20 @@ public class FormacaoEntity {
 	private TipoCursoEntity tipoCursoEntity;
 	private SituacaoAtualEntity situacaoAtualEntity;
 
+	public FormacaoEntity() {
+
+	}
+
+	public FormacaoEntity(int id, String nmInstituicao, Calendar dtConclusao, TipoCursoEntity tipoCursoEntity,
+			SituacaoAtualEntity situacaoAtualEntity) {
+		this.id = id;
+		this.nmInstituicao = nmInstituicao;
+		this.dtConclusao = dtConclusao;
+		this.tipoCursoEntity = tipoCursoEntity;
+		this.situacaoAtualEntity = situacaoAtualEntity;
+
+	}
+
 	public int getId() {
 		return id;
 	}
