@@ -2,7 +2,7 @@ package br.com.prosperity.entity;
 
 import java.util.List;
 
-public class PermicaoEntity {
+public class FuncionalidadeEntity {
 	private int id;
 	private String nome;
 	private List<PerfilEntity> perfil;
