@@ -41,7 +41,4 @@ public class PerfilBean {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	
-
 }
