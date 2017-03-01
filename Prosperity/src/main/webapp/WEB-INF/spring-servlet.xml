@@ -20,7 +20,7 @@
 	<context:component-scan base-package="br.com.prosperity.connection" />
 	<context:component-scan base-package="br.com.prosperity.dao" />
 	<context:component-scan base-package="br.com.prosperity.entity" />
-	<context:component-scan base-package="br.com.prosperity.service" />
+	<context:component-scan base-package="br.com.prosperity.controller" />
 
 	<beans:bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
