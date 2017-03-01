@@ -13,6 +13,11 @@ public class VagaBean {
 	private String horarioSaida;
 	private String aumentaQuadro;
 	
+	ProjetoBean projetoBean = new ProjetoBean();
+	CargoBean cargoBean = new CargoBean();
+	SenioridadeBean senioridadeBean = new SenioridadeBean();
+	UsuarioBean usuarioBean = new UsuarioBean();
+	
 	public int getId() {
 		return id;
 	}

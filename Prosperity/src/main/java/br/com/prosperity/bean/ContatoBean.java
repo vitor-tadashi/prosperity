@@ -4,6 +4,7 @@ public class ContatoBean {
 	private int idContato;
 	private String telefone;
 	private String celular;
+	
 	public int getIdContato() {
 		return idContato;
 	}
