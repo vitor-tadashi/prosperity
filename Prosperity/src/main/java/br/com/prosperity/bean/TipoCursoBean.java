@@ -5,34 +5,31 @@ import java.util.List;
 
 public class TipoCursoBean {
 
-	private int idTipoCurso;
-	private String nmTipoCurso;
+	private int id;
+	private String nome;
 
-	public TipoCursoBean(int idTipoCurso, String nmTipoCurso) {
-		this.idTipoCurso = idTipoCurso;
-		this.nmTipoCurso = nmTipoCurso;
+	public TipoCursoBean(int idT, String nome) {
+		this.id = id;
+		this.nome = nome;
 	}
 
 	public TipoCursoBean() {
-
 	}
 
-	public int getIdTipoCurso() {
-		return idTipoCurso;
+	public int getId() {
+		return id;
 	}
 
-	public void setIdTipoCurso(int idTipoCurso) {
-		this.idTipoCurso = idTipoCurso;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public String getNmTipoCurso() {
-		return nmTipoCurso;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setNmTipoCurso(String nmTipoCurso) {
-		this.nmTipoCurso = nmTipoCurso;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
-
-
 
 }
