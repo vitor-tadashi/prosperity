@@ -16,7 +16,7 @@ public class UsuarioBean {
 	public FuncionarioBean getFuncionario() {
 		return funcionario;
 	}
-	public UsuarioBean(PerfilBean perfil, FuncionarioBean funcionario, String nome, String senha) {
+	public UsuarioBean(PerfilBean perfil, FuncionarioBean funcionario, String nome	, String senha) {
 		this.perfil = perfil;
 		this.funcionario = funcionario;
 		this.nome = nome;
