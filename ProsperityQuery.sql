@@ -1,4 +1,62 @@
-CREATE DATABASE Prosperity
+CREATE DATABASE Prosperity;
+
+USE Prosperity;
+
+CREATE TABLE tbCargo (
+	idCargo INT PRIMARY KEY IDENTITY (1,1),
+	nmCargo VARCHAR(50)
+);
+
+CREATE TABLE tbSenioridade (
+	idSenioridade INT NOT NULL PRIMARY KEY IDENTITY (1,1),
+	nmSenioridade VARCHAR(20),
+
+);
+
+CREATE TABLE tbCliente (
+	idCliente INT PRIMARY KEY IDENTITY (1,1),
+	nmCliente VARCHAR(50)
+);
+
+CREATE TABLE tbFuncionario(
+	 idFuncionario INT IDENTITY (1,1) PRIMARY KEY,
+	 nmFuncionario  VARCHAR(50),
+	 idCargo INT FOREIGN KEY REFERENCES tbCargo(idCargo),
+	 idSenioridade INT FOREIGN KEY REFERENCES tbSenioridade(idSenioridade),
+
+);
+
+CREATE TABLE tbProjeto (
+	idProjeto INT IDENTITY (1,1) PRIMARY KEY,
+	nmProjeto VARCHAR(100),
+	idFuncionario INT FOREIGN KEY REFERENCES tbFuncionario(idFuncionario),
+	idCliente INT FOREIGN KEY REFERENCES tbCliente(idCliente)
+);
+
+CREATE TABLE tbContato(
+	idContato INT IDENTITY (1,1) PRIMARY KEY,
+	telefone VARCHAR(50),
+);
+
+CREATE TABLE tbTpStatus(
+	idTpStatus INT IDENTITY (1,1) PRIMARY KEY,
+	nmTpStatus VARCHAR(50)
+);
+
+CREATE TABLE tbPerfil (
+
+	idPerfil INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	nmPerfil VARCHAR(45),
+);
+
+CREATE TABLE tbUsuario(
+	idUsuario INT IDENTITY(1,1) PRIMARY KEY,
+	idPerfil INT FOREIGN KEY REFERENCES tbPerfil(idPerfil),
+	idFuncionario INT FOREIGN KEY REFERENCES tbFuncionario(idFuncionario),
+	nmUsuario VARCHAR(200),
+	senha VARCHAR(20),
+
+);
 
 CREATE TABLE tbVaga (
 	idVaga INT IDENTITY(1,1) PRIMARY KEY,
@@ -13,17 +71,14 @@ CREATE TABLE tbVaga (
 	idTpVaga CHAR,
 	hrEntrada DATE,
 	hrSaida DATE,
-	flAumentoQuadra CHAR,
-	idAvaliador INT FOREIGN KEY REFERENCES(tbAvaliador)
+	flAumentoQuadra CHAR
 );
 
-CREATE TABLE tbUsuario(
-	idUsuario INT IDENTITY(1,1) PRIMARY KEY,
-	idPerfil INT FOREIGN KEY REFERENCES tbPerfil(idPerfil),
-	idFuncionario INT FOREIGN KEY REFERENCES tbFuncionario(idFuncionario),
-	nmUsuario VARCHAR(200),
-	senha VARCHAR(20),
+Create TABLE tbAvaliador (
 
+	idAvaliador INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	idPerfil INT FOREIGN KEY REFERENCES tbPerfil (idPerfil),
+	idVaga INT FOREIGN KEY REFERENCES tbVaga (idVaga)
 );
 
 CREATE TABLE tbStatus(
@@ -32,24 +87,6 @@ CREATE TABLE tbStatus(
 	tpCss VARCHAR(100),
 	idTpStatus INT FOREIGN KEY REFERENCES tbTpStatus(idTpStatus)
 
-);
-
-CREATE TABLE tbProjeto (
-	idProjeto INT IDENTITY (1,1) PRIMARY KEY,
-	nmProjeto VARCHAR(100),
-	idFuncionario INT FOREIGN KEY REFERENCES tbFuncionario(idFuncionario),
-	idCliente INT FOREIGN KEY REFERENCES tbCliente(idCliente)
-)
-
-CREATE TABLE tbSenioridade (
-	idSenioridade INT NOT NULL PRIMARY KEY IDENTITY (1,1),
-	nmSenioridade VARCHAR(20),
-
-);
-
-CREATE TABLE tbCargo (
-	idCargo INT PRIMARY KEY IDENTITY (1,1),
-	nmCargo VARCHAR(50)
 );
 
 CREATE TABLE tbFuncionalidade (
@@ -76,20 +113,6 @@ CREATE TABLE tbPerfilFuncionalidade (
 	idFuncionalidade INT FOREIGN KEY REFERENCES tbFuncionalidade(idFuncionalidade)
 );
 
-CREATE TABLE tbVagaCandidato (
-	idVagaCandidato INT PRIMARY KEY IDENTITY (1,1),
-	idVaga INT FOREIGN KEY REFERENCES tbVaga(idVaga),
-	cpf VARCHAR(30) FOREIGN KEY REFERENCES tbCandidato(cpf)
-);
-
-CREATE TABLE tbStatusCandidato (
-	idStatusCandidato INT PRIMARY KEY IDENTITY (1,1),
-	idStatus INT FOREIGN KEY REFERENCES tbStatus(idStatus),
-	cpf VARCHAR(30) FOREIGN KEY REFERENCES tbCandidato(cpf),
-	dtAlteracao DATE,
-	dsParecer VARCHAR(500) 
-);
-
 CREATE TABLE tbStatusVaga (
 	idStatusVaga INT PRIMARY KEY IDENTITY (1,1),
 	idStatus INT FOREIGN KEY REFERENCES tbStatus(idStatus),
@@ -97,61 +120,18 @@ CREATE TABLE tbStatusVaga (
 	dtAlteracao DATE
 );
 
-CREATE TABLE tbCliente (
-	idCliente INT PRIMARY KEY IDENTITY (1,1),
-	nmCliente VARCHAR(50)
-);
-
-CREATE TABLE tbFuncionario(
-	 idFuncionario INT IDENTITY (1,1) PRIMARY KEY,
-	 nmFuncionario  VARCHAR(50),
-	 idCargo INT FOREIGN KEY REFERENCES tbCargo(idCargo),
-	 idSenioridade INT FOREIGN KEY REFERENCES tbSenioridade(idSenioridade),
-
+CREATE TABLE tbSituacaoAtual (
+	idSituacaoAtual INT IDENTITY(1,1) PRIMARY KEY,
+	nmSituacaoAtual VARCHAR (50)
 );
 
 CREATE TABLE tbFormacao(
-	idCurso INT IDENTITY(1,1) PRIMARY KEY,
+	idFormacao INT IDENTITY(1,1) PRIMARY KEY,
 	nmInstituicao VARCHAR (100),
 	dtConclusao DATE,
 	idTipoCurso INT FOREIGN KEY REFERENCES tbTipoCurso(idTipoCurso),
 	idSituacaoAtual INT FOREIGN KEY REFERENCES tbSituacaoAtual(idSituacaoAtual),
 
-);
-
-CREATE TABLE tbContato(
-	idContato INT IDENTITY (1,1) PRIMARY KEY,
-	telefone VARCHAR(50),
-);
-
-CREATE TABLE tbPerfil (
-
-	idPerfil INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-	nmPerfil VARCHAR(45),
-	idAvaliador INT FOREIGN KEY
-);
-
-CREATE TABLE tbCandidato (
-
-	cpf VARCHAR (50) NOT NULL IDENTITY PRIMARY KEY(1,1),
-	idContato INT FOREIGN KEY REFERENCES tbContato (idContato),
-	idEndereço INT FOREIGN KEY REFERENCES tbEndereço (idEndereço),
-	idCurso INT FOREIGN KEY REFERENCES tbCurso (idCurso),
-	nmCandidato VARCHAR (100),
-	rg VARCHAR (20),
-	dtNascimento DATE,
-	vlPretensao DOUBLE,
-	dtAbertura DATE,
-	dtFechamento DATE,
-	cmCurriculo VARCHAR (200),
-	nmEmail VARCHAR (45),
-	idUsuario INT FOREIGN KEY REFERENCES tbUsuario (idUsuario),
-	dtAlteracao DATE
-);
-
-Create TABLE tbAvaliador (
-
-	idAvaliador INT NOT NULL PRIMARY KEY IDENTITY(1,1)
 );
 
 Create TABLE tbEndereco (
@@ -165,6 +145,39 @@ Create TABLE tbEndereco (
 	nmCidade VARCHAR (45)
 
 );
+
+CREATE TABLE tbCandidato (
+
+	cpf VARCHAR (50) PRIMARY KEY,
+	idContato INT FOREIGN KEY REFERENCES tbContato (idContato),
+	idEndereço INT FOREIGN KEY REFERENCES tbEndereco (idEndereco),
+	idFormacao INT FOREIGN KEY REFERENCES tbFormacao (idFormacao),
+	nmCandidato VARCHAR (100),
+	rg VARCHAR (20),
+	dtNascimento DATE,
+	vlPretensao DECIMAL,
+	dtAbertura DECIMAL,
+	dtFechamento DATE,
+	cmCurriculo VARCHAR (200),
+	nmEmail VARCHAR (45),
+	idUsuario INT FOREIGN KEY REFERENCES tbUsuario (idUsuario),
+	dtAlteracao DATE
+);
+
+CREATE TABLE tbVagaCandidato (
+	idVagaCandidato INT PRIMARY KEY IDENTITY (1,1),
+	idVaga INT FOREIGN KEY REFERENCES tbVaga(idVaga),
+	cpf VARCHAR(50) FOREIGN KEY REFERENCES tbCandidato(cpf)
+);
+
+CREATE TABLE tbStatusCandidato (
+	idStatusCandidato INT PRIMARY KEY IDENTITY (1,1),
+	idStatus INT FOREIGN KEY REFERENCES tbStatus(idStatus),
+	cpf VARCHAR(50) FOREIGN KEY REFERENCES tbCandidato(cpf),
+	dtAlteracao DATE,
+	dsParecer VARCHAR(500) 
+);
+
 
 
 
