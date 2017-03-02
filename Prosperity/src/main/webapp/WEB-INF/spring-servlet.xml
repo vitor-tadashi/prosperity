@@ -17,7 +17,6 @@
 
  	<context:component-scan base-package="br.com.prosperity.bean" />
 	<context:component-scan base-package="br.com.prosperity.business" />
-	<context:component-scan base-package="br.com.prosperity.connection" />
 	<context:component-scan base-package="br.com.prosperity.dao" />
 	<context:component-scan base-package="br.com.prosperity.entity" />
 	<context:component-scan base-package="br.com.prosperity.controller" />

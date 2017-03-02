@@ -5,35 +5,33 @@ import java.util.List;
 
 public class SenioridadeBean {
 
-	private int idSenioridade;
-	private String nmSenioridade;
+	private int id;
+	private String nome;
 
-	public SenioridadeBean(int idSenioridade, String nmSenioridade) {
+	public SenioridadeBean(int id, String nome) {
 
-		this.idSenioridade = idSenioridade;
-		this.nmSenioridade = nmSenioridade;
+		this.id = id;
+		this.nome = nome;
 	}
 
 	public SenioridadeBean() {
 
 	}
 
-	public int getIdSenioridade() {
-		return idSenioridade;
+	public int getId() {
+		return id;
 	}
 
-	public void setIdSenioridade(int idSenioridade) {
-		this.idSenioridade = idSenioridade;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public String getNmSenioridade() {
-		return nmSenioridade;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setNmSenioridade(String nmSenioridade) {
-		this.nmSenioridade = nmSenioridade;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
-
-
 
 }

@@ -5,42 +5,41 @@ import java.util.List;
 
 public class PerfilBean {
 
-	private int idPerfil;
-	private String nmPerfil;
-	private int idAvaliador;
+	private int id;
+	private String nome;
+	private List<FuncionalidadeBean> listaFuncionalidades = new ArrayList();
 
-	public PerfilBean(int id, String nmPerfil, int idAvaliador) {
-		this.idPerfil = idPerfil;
-		this.nmPerfil = nmPerfil;
-		this.idAvaliador = idAvaliador;
+	public PerfilBean(int id, String nome, List<FuncionalidadeBean> listaFuncionalidades) {
+		this.id = id;
+		this.nome = nome;
+		this.listaFuncionalidades = listaFuncionalidades;
 	}
 
 	public PerfilBean() {
-
 	}
 
-	public int getIdPerfil() {
-		return idPerfil;
+	public int getId() {
+		return id;
 	}
 
-	public void setIdPerfil(int idPerfil) {
-		this.idPerfil = idPerfil;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public String getNmPerfil() {
-		return nmPerfil;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setNmPerfil(String nmPerfil) {
-		this.nmPerfil = nmPerfil;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-
-	public int getIdAvaliador() {
-		return idAvaliador;
+	public List<FuncionalidadeBean> getListaFuncionalidades() {
+		return listaFuncionalidades;
 	}
 
-	public void setIdAvaliador(int idAvaliador) {
-		this.idAvaliador = idAvaliador;
+	public void setListaFuncionalidades(List<FuncionalidadeBean> listaFuncionalidades) {
+		this.listaFuncionalidades = listaFuncionalidades;
 	}
+
 }

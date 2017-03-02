@@ -2,15 +2,15 @@ package br.com.prosperity.bean;
 
 public class ClienteBean {
 	private int id;
-	private String nomeCliente;
+	private String nome;
 
 	public ClienteBean() {
 
 	}
 
-	public ClienteBean(int id, String nomeCliente) {
+	public ClienteBean(int id, String nome) {
 		this.id = id;
-		this.nomeCliente = nomeCliente;
+		this.nome = nome;
 	}
 
 	public int getId() {
@@ -21,12 +21,12 @@ public class ClienteBean {
 		this.id = id;
 	}
 
-	public String getNomeCliente() {
-		return nomeCliente;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setNomeCliente(String nomeCliente) {
-		this.nomeCliente = nomeCliente;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 }

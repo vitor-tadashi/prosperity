@@ -5,7 +5,7 @@ import java.util.Calendar;
 public class VagaEntity {
 	private int id;
 	private String nmSolicitante;
-	private Double vlSalarial;
+	private Double vlPretensao;
 	private Calendar dtInicio;
 	private String flLocalTrabalho;
 	private String idTpVaga;
@@ -20,12 +20,12 @@ public class VagaEntity {
 
 	}
 
-	public VagaEntity(int id, String nmSolicitante, Double vlSalarial, Calendar dtInicio, String flLocalTrabalho,
+	public VagaEntity(int id, String nmSolicitante, Double vlPretensao, Calendar dtInicio, String flLocalTrabalho,
 			String idTpVaga, String hrEntrada, String hrSaida, String flAumentaQuadro, ProjetoEntity projetoEntity,
 			CargoEntity cargoEntity, SenioridadeEntity senioridadeEntity) {
 		this.id = id;
 		this.nmSolicitante = nmSolicitante;
-		this.vlSalarial = vlSalarial;
+		this.vlPretensao = vlPretensao;
 		this.dtInicio = dtInicio;
 		this.flLocalTrabalho = flLocalTrabalho;
 		this.idTpVaga = idTpVaga;
@@ -53,12 +53,12 @@ public class VagaEntity {
 		this.nmSolicitante = nmSolicitante;
 	}
 
-	public Double getVlSalarial() {
-		return vlSalarial;
+	public Double getVlPretensao() {
+		return vlPretensao;
 	}
 
-	public void setVlSalarial(Double vlSalarial) {
-		this.vlSalarial = vlSalarial;
+	public void setVlPretensao(Double vlPretensao) {
+		this.vlPretensao = vlPretensao;
 	}
 
 	public Calendar getDtInicio() {
