@@ -9,6 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class VagaController {
 	@RequestMapping(value ="/teste", method = RequestMethod.GET)
 	public ModelAndView cliente() {
-		return new ModelAndView("teste");
+		return new ModelAndView("consultar-vaga");
 	}
 }
