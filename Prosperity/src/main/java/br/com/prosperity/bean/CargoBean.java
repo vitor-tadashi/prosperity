@@ -2,15 +2,15 @@ package br.com.prosperity.bean;
 
 public class CargoBean {
 	private int id;
-	private String nomeCargo;
+	private String nome;
 	
 	public CargoBean(){
 		
 	}
 	
-	public CargoBean(int id, String nomeCargo){
+	public CargoBean(int id, String nome){
 		this.id=id;
-		this.nomeCargo=nomeCargo;
+		this.nome=nome;
 	}
 
 	public int getId() {
@@ -21,12 +21,12 @@ public class CargoBean {
 		this.id = id;
 	}
 
-	public String getNomeCargo() {
-		return nomeCargo;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setNomeCargo(String nomeCargo) {
-		this.nomeCargo = nomeCargo;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 }

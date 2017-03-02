@@ -2,15 +2,15 @@ package br.com.prosperity.entity;
 
 public class CargoEntity {
 	private int id;
-	private String nmCargo;
+	private String nome;
 	
 	public CargoEntity(){
 		
 	}
 	
-	public CargoEntity(int id, String nmCargo){
+	public CargoEntity(int id, String nome){
 		this.id=id;
-		this.nmCargo=nmCargo;
+		this.nome=nome;
 	}
 	
 	public int getId() {
@@ -21,11 +21,11 @@ public class CargoEntity {
 		this.id = id;
 	}
 
-	public String getNmCargo() {
-		return nmCargo;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setNmCargo(String nmCargo) {
-		this.nmCargo = nmCargo;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 }
