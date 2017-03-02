@@ -4,7 +4,7 @@
 <div id="wrapper" class="preload">
 	<div id="top-nav" class="skin-6 fixed">
 		<div class="brand">
-			<a href="dashboard.html"><img src="img/logo.png" class="logo"></a>
+			<a href="dashboard.html"><img src="resources/img/logo.png" class="logo"></a>
 		</div>
 		<!-- /brand -->
 		<button type="button" class="navbar-toggle pull-left"
