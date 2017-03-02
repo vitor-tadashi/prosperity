@@ -7,7 +7,6 @@ public class PerfilEntity {
 	private int id;
 	private String nome;
 	private List<FuncionalidadeEntity> permissoes; //relacionamento entre Perfil e Permissões
-	
 
 	public List<FuncionalidadeEntity> getPermissoes() {
 		return permissoes;
