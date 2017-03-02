@@ -1,21 +1,18 @@
-package br.com.prosperity.bean;
+package br.com.prosperity.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class TipoCursoBean {
-
+public class CargoEntity {
 	private int id;
 	private String nome;
-
-	public TipoCursoBean(int idT, String nome) {
-		this.id = id;
-		this.nome = nome;
+	
+	public CargoEntity(){
+		
 	}
-
-	public TipoCursoBean() {
+	
+	public CargoEntity(int id, String nome){
+		this.id=id;
+		this.nome=nome;
 	}
-
+	
 	public int getId() {
 		return id;
 	}
@@ -31,5 +28,4 @@ public class TipoCursoBean {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 }

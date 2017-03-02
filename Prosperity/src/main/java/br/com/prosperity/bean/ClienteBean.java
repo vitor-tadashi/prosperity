@@ -1,19 +1,16 @@
 package br.com.prosperity.bean;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class TipoCursoBean {
-
+public class ClienteBean {
 	private int id;
 	private String nome;
 
-	public TipoCursoBean(int idT, String nome) {
-		this.id = id;
-		this.nome = nome;
+	public ClienteBean() {
+
 	}
 
-	public TipoCursoBean() {
+	public ClienteBean(int id, String nome) {
+		this.id = id;
+		this.nome = nome;
 	}
 
 	public int getId() {

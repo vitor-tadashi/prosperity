@@ -6,13 +6,12 @@ import java.util.List;
 public class SenioridadeBean {
 
 	private int id;
-	private String descricao;
-	private List<CargoBean> senioridade; //relacionamento entre Senioridade e CargoBeana
+	private String nome;
 
-	public SenioridadeBean(int id, String descricao) {
+	public SenioridadeBean(int id, String nome) {
 
 		this.id = id;
-		this.descricao = descricao;
+		this.nome = nome;
 	}
 
 	public SenioridadeBean() {
@@ -27,12 +26,12 @@ public class SenioridadeBean {
 		this.id = id;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 }
