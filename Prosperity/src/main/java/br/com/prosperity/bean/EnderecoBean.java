@@ -6,6 +6,17 @@ public class EnderecoBean {
 	private int numero;
 	private String complemento;
 	
+	public EnderecoBean() {
+		
+	}
+	
+	public EnderecoBean(int id, String cep, int numero, String complemento) {
+		super();
+		this.id = id;
+		this.cep = cep;
+		this.numero = numero;
+		this.complemento = complemento;
+	}
 	public int getId() {
 		return id;
 	}
