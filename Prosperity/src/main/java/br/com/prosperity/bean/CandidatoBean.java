@@ -21,7 +21,29 @@ public class CandidatoBean {
 	private UsuarioBean usuario;
 	private List<StatusBean> status;
 	private List<VagaBean> vagas;
-	//TODO relacionamento avaliadores
+	//TODO relacionamento avaliadores	
+	
+	public CandidatoBean(String cpf, String nome, String rg, Calendar dtNascimento, double valorPretensao,
+			Calendar dataAbertura, Calendar dataFechamento, String email, Calendar dataAlteracao, File curriculo,
+			ContatoBean contato, EnderecoBean endereco, FormacaoBean formacao, UsuarioBean usuario,
+			List<StatusBean> status, List<VagaBean> vagas) {
+		this.cpf = cpf;
+		this.nome = nome;
+		this.rg = rg;
+		this.dtNascimento = dtNascimento;
+		this.valorPretensao = valorPretensao;
+		this.dataAbertura = dataAbertura;
+		this.dataFechamento = dataFechamento;
+		this.email = email;
+		this.dataAlteracao = dataAlteracao;
+		this.curriculo = curriculo;
+		this.contato = contato;
+		this.endereco = endereco;
+		this.formacao = formacao;
+		this.usuario = usuario;
+		this.status = status;
+		this.vagas = vagas;
+	}
 	
 	public String getCpf() {
 		return cpf;

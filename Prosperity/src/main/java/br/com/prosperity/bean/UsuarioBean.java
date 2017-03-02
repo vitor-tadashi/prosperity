@@ -5,7 +5,7 @@ public class UsuarioBean {
 	private PerfilBean perfil;
 	private FuncionarioBean funcionario;
 	//classes
-	private String usuario;
+	private String nome;
 	private String senha;
 	public PerfilBean getPerfil() {
 		return perfil;
@@ -16,14 +16,20 @@ public class UsuarioBean {
 	public FuncionarioBean getFuncionario() {
 		return funcionario;
 	}
+	public UsuarioBean(PerfilBean perfil, FuncionarioBean funcionario, String nome, String senha) {
+		this.perfil = perfil;
+		this.funcionario = funcionario;
+		this.nome = nome;
+		this.senha = senha;
+	}
 	public void setFuncionario(FuncionarioBean funcionario) {
 		this.funcionario = funcionario;
 	}
-	public String getUsuario() {
-		return usuario;
+	public String getnome() {
+		return nome;
 	}
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+	public void setUsuario(String nome) {
+		this.nome = nome;
 	}
 	public String getSenha() {
 		return senha;
