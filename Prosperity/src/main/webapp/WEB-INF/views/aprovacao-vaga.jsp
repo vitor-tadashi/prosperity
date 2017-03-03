@@ -240,24 +240,20 @@
 	</div>
 	<c:import url="shared/dashboard.jsp"></c:import>
 	<!-- CORPO DA PÁGINA -->
-	<div id="main-container">
-		<div id="breadcrumb">
-			<ul class="breadcrumb">
-				<li><i class="fa fa-home"></i><a href="dashboard.html">
-						Início</a></li>
-				<li class="active">Aprovação de vaga</li>
-			</ul>
-		</div>
-		<!--breadcrumb-->
+<div id="main-container">
+                <div id="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li><i class="fa fa-home"></i><a href="dashboard.html"> Início</a></li>
+                        <li class="active"> Aprovação de vaga</li>
+                    </ul>
+                </div><!--breadcrumb-->
+
 		<div class="padding-md">
 			<div class="panel panel-default">
-				<div class="panel-heading">Aprovação de vaga</div>
-				<div class="panel-body">
-					<table>
-						class="table table-bordered table-condensed table-hover table-striped"
-						id=""
-						style="font-size: 12px !important; vertical-align: middle !important;">
-						<!-- Começo Tabela -->
+							<div class="panel-heading">Aprovação de vaga</div>
+							<div class="panel-body">
+
+			<table class="table table-bordered table-condensed table-hover table-striped" id="" style="font-size: 12px !important; vertical-align: middle !important;"> <!-- Começo Tabela -->
 						<thead>
 							<tr class="text-center">
 								<th class="text-center">Nome da vaga</th>
@@ -282,23 +278,17 @@
 								<td>17/02/2017</td>
 								<td>01/03/2017</td>
 								<td>
-									<div class="btn-group">
-										<!-- Começo Botão -->
-										<button class="btn btn-sm dropdown-toggle btn-info"
-											data-toggle="dropdown" aria-haspopup="true"
-											aria-expanded="false">
+									<div class="btn-group"> <!-- Começo Botão -->
+										<button class="btn btn-sm dropdown-toggle btn-info" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 											<i class="fa fa-cogs fa-lg"></i> <span class="caret"></span>
 										</button>
-										<ul class="dropdown-menu">
-											<li><a href="#vaga-modal" data-toggle="modal"><i
-													class="fa fa-eye">&nbsp</i>Visualizar</a></li>
-											<li role="separator" class="divider"></li>
-											<li><a href="#"><i class="fa fa-check fa-lg"></i>
-													Aprovar</a></li>
-											<li role="separator" class="divider"></li>
-											<li><a href="#"><i class="fa fa-times fa-lg"></i>
-													Reprovar</a></li>
-										</ul>
+											<ul class="dropdown-menu">
+												<li><a href="#vaga-modal" data-toggle="modal"><i class="fa fa-eye">&nbsp</i>Visualizar</a></li>
+												<li role="separator" class="divider"></li>
+												<li><a href="#"><i class="fa fa-check fa-lg"></i> Aprovar</a></li>
+												<li role="separator" class="divider"></li>
+												<li><a href="#"><i class="fa fa-times fa-lg"></i> Reprovar</a></li>
+											</ul>
 									</div> <!-- Fim Botão -->
 								</td>
 							</tr>
@@ -312,22 +302,15 @@
 								<td>17/02/2017</td>
 								<td>01/03/2017</td>
 								<td>
-									<div class="btn-group">
-										<!-- Começo Botão -->
-										<button class="btn btn-sm dropdown-toggle btn-info"
-											data-toggle="dropdown">
-											<i class="fa fa-cogs fa-lg"></i> <span class="caret"></span>
-										</button>
-										<ul class="dropdown-menu">
-											<li><a href="#vaga-modal" data-toggle="modal"><i
-													class="fa fa-eye">&nbsp</i>Visualizar</a></li>
-											<li role="separator" class="divider"></li>
-											<li><a href="#"><i class="fa fa-check fa-lg"></i>
-													Aprovar</a></li>
-											<li role="separator" class="divider"></li>
-											<li><a href="#"><i class="fa fa-times fa-lg"></i>
-													Reprovar</a></li>
-										</ul>
+									<div class="btn-group"> <!-- Começo Botão -->
+										<button class="btn btn-sm dropdown-toggle btn-info" data-toggle="dropdown"><i class="fa fa-cogs fa-lg"></i> <span class="caret"></span></button>
+											<ul class="dropdown-menu">
+												<li><a href="#vaga-modal" data-toggle="modal"><i class="fa fa-eye">&nbsp</i>Visualizar</a></li>
+												<li role="separator" class="divider"></li>
+												<li><a href="#"><i class="fa fa-check fa-lg"></i> Aprovar</a></li>
+												<li role="separator" class="divider"></li>
+												<li><a href="#"><i class="fa fa-times fa-lg"></i> Reprovar</a></li>
+											</ul>
 									</div> <!-- Fim Botão -->
 								</td>
 							</tr>
@@ -341,34 +324,24 @@
 								<td>17/02/2017</td>
 								<td>01/03/2017</td>
 								<td>
-									<div class="btn-group">
-										<!-- Começo Botão -->
-										<button class="btn btn-sm dropdown-toggle btn-info"
-											data-toggle="dropdown">
-											<i class="fa fa-cogs fa-lg"></i> <span class="caret"></span>
-										</button>
-										<ul class="dropdown-menu">
-											<li><a href="#vaga-modal" data-toggle="modal"><i
-													class="fa fa-eye">&nbsp</i>Visualizar</a></li>
-											<li role="separator" class="divider"></li>
-											<li><a href="#"><i class="fa fa-check fa-lg"></i>
-													Aprovar</a></li>
-											<li role="separator" class="divider"></li>
-											<li><a href="#"><i class="fa fa-times fa-lg"></i>
-													Reprovar</a></li>
-										</ul>
+									<div class="btn-group"> <!-- Começo Botão -->
+										<button class="btn btn-sm dropdown-toggle btn-info" data-toggle="dropdown"><i class="fa fa-cogs fa-lg"></i> <span class="caret"></span></button>
+											<ul class="dropdown-menu">
+												<li><a href="#vaga-modal" data-toggle="modal"><i class="fa fa-eye">&nbsp</i>Visualizar</a></li>
+												<li role="separator" class="divider"></li>
+												<li><a href="#"><i class="fa fa-check fa-lg"></i> Aprovar</a></li>
+												<li role="separator" class="divider"></li>
+												<li><a href="#"><i class="fa fa-times fa-lg"></i> Reprovar</a></li>
+											</ul>
 									</div> <!-- Fim Botão -->
 								</td>
 							</tr>
-						</tbody>
-					</table>
-					<!-- Fim Tabela -->
-				</div>
-				<!-- /panel -->
-			</div>
-			<!-- /.padding-md -->
-		</div>
-		<!-- /wrapper -->
+					</tbody>
+					</table> <!-- Fim Tabela -->
+				</div><!-- /panel -->					
+		</div><!-- /.padding-md -->
+
+	</div><!-- /wrapper -->
 	</div>
 	<c:import url="shared/footer.jsp"></c:import>
 	<c:import url="shared/js.jsp"></c:import>
