@@ -1,11 +1,24 @@
 package br.com.prosperity.entity;
 
 import java.util.Calendar;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "tbFormacao")
 public class FormacaoEntity {
+
+	/* Mapeamento de Atributos */
+	@Id
+	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+	@Column(name = "idFormacao", unique = true, nullable = false)
 	private int id;
-	private String nmInstituicao;
-	private Calendar dtConclusao;
+
+	@Column(name = "nmInstituicao")
+	private String nome;
+
+	@Column(name = "dtConclusao")
+	private Calendar dataConclusao;
+
 	private TipoCursoEntity tipoCursoEntity;
 	private SituacaoAtualEntity situacaoAtualEntity;
 
@@ -13,11 +26,11 @@ public class FormacaoEntity {
 
 	}
 
-	public FormacaoEntity(int id, String nmInstituicao, Calendar dtConclusao, TipoCursoEntity tipoCursoEntity,
+	public FormacaoEntity(int id, String nome, Calendar dataConclusao, TipoCursoEntity tipoCursoEntity,
 			SituacaoAtualEntity situacaoAtualEntity) {
 		this.id = id;
-		this.nmInstituicao = nmInstituicao;
-		this.dtConclusao = dtConclusao;
+		this.nome = nome;
+		this.dataConclusao = dataConclusao;
 		this.tipoCursoEntity = tipoCursoEntity;
 		this.situacaoAtualEntity = situacaoAtualEntity;
 
@@ -31,20 +44,20 @@ public class FormacaoEntity {
 		this.id = id;
 	}
 
-	public String getNmInstituicao() {
-		return nmInstituicao;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setNmInstituicao(String nmInstituicao) {
-		this.nmInstituicao = nmInstituicao;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public Calendar getDtConclusao() {
-		return dtConclusao;
+	public Calendar getDataConclusao() {
+		return dataConclusao;
 	}
 
-	public void setDtConclusao(Calendar dtConclusao) {
-		this.dtConclusao = dtConclusao;
+	public void setDataConclusao(Calendar dataConclusao) {
+		this.dataConclusao = dataConclusao;
 	}
 
 	public TipoCursoEntity getTipoCursoEntity() {
