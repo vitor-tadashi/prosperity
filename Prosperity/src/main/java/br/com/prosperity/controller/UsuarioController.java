@@ -4,9 +4,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
+@RequestMapping("usuario")
 public class UsuarioController {
-	@RequestMapping(value ="/acesso", method = RequestMethod.GET)
-	public String login() {
+	@RequestMapping(value ="", method = RequestMethod.GET)
+	public String indexLogin() {
 		return "acesso";
+	}
+	@RequestMapping(value ="/primeiro-acesso", method = RequestMethod.GET)
+	public String primeiroAcessoUsuario(){
+		return "primeiro-acesso";
 	}
 }
