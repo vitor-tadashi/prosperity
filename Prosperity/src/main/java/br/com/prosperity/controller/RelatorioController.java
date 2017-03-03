@@ -7,9 +7,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class RelatorioController {
-	@RequestMapping(value ="/testes", method = RequestMethod.GET)
+	@RequestMapping(value ="/gerar-relatorio", method = RequestMethod.GET)
 	public String relatorio() {
-		return "gerar";
+		return "gerar-relatorio";
 	}
 
 }
