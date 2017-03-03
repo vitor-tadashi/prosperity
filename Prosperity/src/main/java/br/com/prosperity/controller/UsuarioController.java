@@ -14,4 +14,12 @@ public class UsuarioController {
 	public String primeiroAcessoUsuario(){
 		return "primeiro-acesso";
 	}
+	@RequestMapping(value ="/consulta", method = RequestMethod.GET)
+	public String consultaUsuario(){
+		return "consultar-usuario";
+	}
+	@RequestMapping(value ="/cria-perfil", method = RequestMethod.GET)
+	public String criaPerfil(){
+		return "criar-perfil";
+	}
 }

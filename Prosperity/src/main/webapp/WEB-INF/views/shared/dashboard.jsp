@@ -4,7 +4,7 @@
 <div id="wrapper" class="preload">
 	<div id="top-nav" class="skin-6 fixed">
 		<div class="brand">
-			<a href="dashboard.html"><img src="resources/img/logo.png" class="logo"></a>
+			<a href="#"><img src="/resources/img/logo.png" class="logo"></a>
 		</div>
 		<!-- /brand -->
 		<button type="button" class="navbar-toggle pull-left"
@@ -55,7 +55,7 @@
 							class="fa fa-cog fa-lg"></i> Configurações</a></li>
 					<li class="divider"></li>
 					<li><a tabindex="-1" class="main-link logoutConfirm_open"
-						href="#logoutConfirm"><i class="fa fa-lock fa-lg"></i> Sair</a></li>
+						href="usuario"><i class="fa fa-lock fa-lg"></i> Sair</a></li>
 				</ul></li>
 		</ul>
 	</div>
@@ -67,7 +67,7 @@
 				<a class="btn btn-sm" id="sizeToggle"> <span class="icon-bar"></span>
 					<span class="icon-bar"></span> <span class="icon-bar"></span>
 				</a> <a class="btn btn-sm pull-right logoutConfirm_open"
-					href="#logoutConfirm"> <i class="fa fa-power-off"></i>
+					href="usuario"> <i class="fa fa-power-off"></i>
 				</a>
 			</div>
 			<!-- /size-toggle -->
@@ -81,8 +81,8 @@
 							class="menu-hover"></span>
 					</a>
 						<ul class="submenu">
-							<li><a href="acesso.html"><span class="submenu-label">Acesso</span></a></li>
-							<li><a href="primeiro-acesso.html"><span
+							<li><a href="usuario"><span class="submenu-label">Acesso</span></a></li>
+							<li><a href="usuario/primeiro-acesso"><span
 									class="submenu-label">Primeiro acesso</span></a></li>
 
 						</ul></li>
