@@ -1,3 +1,4 @@
+
 package br.com.prosperity.entity;
 
 import java.util.Date;
@@ -7,7 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "tbStatusCandidato")
@@ -20,7 +25,7 @@ public class StatusCandidatoEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", unique = true, nullable = false)
+	@Column(name = "idStatus", unique = true, nullable = false)
 	private int id;
 	/* fim */
 	
@@ -28,10 +33,15 @@ public class StatusCandidatoEntity {
 	private String cpf;
 	
 	@Column (name = "dtAlteracao")
+	@Temporal(TemporalType.DATE)
 	private Date dataAlteracao;
 	
 	@Column(name = "dsParecer")
 	private String descricaoParecer;
+	
+	@ManyToOne
+	@JoinColumn(name="idStatus")
+	private StatusEntity status;
 
 	public int getId() {
 		return id;
@@ -65,4 +75,4 @@ public class StatusCandidatoEntity {
 		this.descricaoParecer = descricaoParecer;
 	}
 	
-}
+} 
