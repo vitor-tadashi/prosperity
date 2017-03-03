@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class VagaController {
 	@RequestMapping(value ="/teste", method = RequestMethod.GET)
-	public ModelAndView cliente() {
-		return new ModelAndView("consultar-vaga");
+	public String cliente() {
+		return "consultar-vaga";
 	}
 }
