@@ -19,7 +19,12 @@ public class FormacaoEntity {
 	@Column(name = "dtConclusao")
 	private Calendar dataConclusao;
 
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@JoinColumn(name = "idTipoCurso")
 	private TipoCursoEntity tipoCursoEntity;
+	
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@JoinColumn(name = "idSituacaoAtual")
 	private SituacaoAtualEntity situacaoAtualEntity;
 
 	public FormacaoEntity() {
