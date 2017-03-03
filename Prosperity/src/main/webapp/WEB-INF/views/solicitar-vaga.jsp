@@ -13,7 +13,6 @@
 
 <c:import url="shared/stylesheet.jsp"></c:import>
 <body>
-
 	<c:import url="shared/dashboard.jsp"></c:import>
 	<div id="main-container">
 		<div id="breadcrumb">
@@ -55,7 +54,6 @@
 														data-required="true">
 												</div>
 												<!-- /form-group -->
-
 												<div class="form-group col-md-6">
 													<label for="exampleInputEmail1">Local de trabalho</label>
 													<div>
@@ -72,9 +70,7 @@
 											</div>
 										</div>
 										<!-- /form-group -->
-
 										<div class="row">
-
 											<div class="form-group col-md-6">
 												<label for="exampleInputEmail1">Cargo</label> <select
 													class="form-control chzn-select">
@@ -85,7 +81,6 @@
 												</select>
 											</div>
 											<!-- /form-group -->
-
 											<div class="form-group col-md-6">
 												<label for="exampleInputEmail1">Tipo de vaga</label>
 												<div>
@@ -105,7 +100,6 @@
 
 										</div>
 										<!-- /form-group -->
-
 										<div class="row">
 											<div class="form-group col-md-6">
 												<label for="exampleInputEmail1">Senioridade da vaga</label>
@@ -117,10 +111,8 @@
 												</select>
 											</div>
 											<!-- /form-group -->
-
 											<div class="form-group col-md-6">
 												<label class="control-label">Horário</label>
-
 												<div>
 													<div class="form-group col-md-5">
 														<div class="input-group bootstrap-timepicker">
@@ -131,12 +123,10 @@
 														</div>
 													</div>
 													<!-- /form-group -->
-
 													<div class="form-group col-md-1">
 														<label style="margin-top: 7px">às</label>
 													</div>
 													<!-- /form-group -->
-
 													<div class="form-group col-md-5">
 														<div class="input-group bootstrap-timepicker">
 															<input class="timepicker form-control" type="text"
@@ -147,13 +137,10 @@
 													</div>
 													<!-- /form-group -->
 												</div>
-
 											</div>
 											<!-- /form-group -->
 										</div>
-
 										<div class="row">
-
 											<div class="form-group col-md-6">
 												<label for="exampleInputEmail1">Proposta salarial</label> <input
 													type="name" class="form-control input-sm"
@@ -161,7 +148,6 @@
 													data-required="true">
 											</div>
 											<!-- /form-group -->
-
 											<div class="form-group col-md-6">
 												<label for="exampleInputEmail1">Aumento de quadro</label>
 												<div>
@@ -176,12 +162,9 @@
 												<!-- /.col -->
 											</div>
 											<!-- /form-group -->
-
 										</div>
 										<!-- /form-group -->
-
 										<div class="row">
-
 											<div class="form-group col-md-6">
 												<div class="form-group">
 													<label class="control-label">Data para início</label>
@@ -198,22 +181,17 @@
 												<!-- /form-group -->
 											</div>
 											<!-- /form-group -->
-
 											<div id="nome" class="form-group col-md-6 hide">
 												<label>Nome do substituido</label> <input type="text"
 													class="form-control input-sm"
 													placeholder="Nome do Substituido">
 											</div>
-
 										</div>
 										<!-- /form-group -->
-
 									</div>
 									<div class="tab-pane fade" id="second">
 										<section id="dadosInterno" class="panel panel-default">
-
 										<div class="panel-body">
-
 											<div class="form-group col-md-4" style="padding-left: 0px;">
 												<label for="exampleInputEmail1">Nome do projeto</label> <select
 													class="form-control chzn-select">
@@ -226,7 +204,6 @@
 												</select>
 											</div>
 											<!-- /form-group -->
-
 											<div class="form-group col-md-4" style="padding-left: 0px;">
 												<label for="exampleInputEmail1">Cliente</label> <select
 													class="form-control chzn-select">
@@ -236,7 +213,6 @@
 												</select>
 											</div>
 											<!-- /form-group -->
-
 											<div class="form-group col-md-4" style="padding-left: 0px;">
 												<label for="exampleInputEmail1">Gestor imediato</label> <select
 													class="form-control chzn-select">
@@ -247,17 +223,12 @@
 												</select>
 											</div>
 											<!-- /form-group -->
-
 										</div>
 										</section>
 										<!-- /Section-->
-
 										<section id="dadosAlocacao" class="panel panel-default hide">
-
 										<div class="panel-body">
-
 											<div class="col-md-6">
-
 												<div class="form-group" style="padding-left: 0px;">
 													<label for="exampleInputEmail1">Nome do Projeto</label> <select
 														class="form-control chzn-select">
@@ -270,7 +241,6 @@
 													</select>
 												</div>
 												<!-- /form-group -->
-
 												<div class="form-group">
 													<label for="exampleInputEmail1">Cliente</label> <input
 														type="text" class="form-control input-sm"
@@ -278,7 +248,6 @@
 														data-required="true">
 												</div>
 												<!-- /form-group -->
-
 												<div class="form-group" style="padding-left: 0px;">
 													<label for="exampleInputEmail1">Gestor imediato</label> <select
 														class="form-control chzn-select">
@@ -289,16 +258,13 @@
 													</select>
 												</div>
 												<!-- /form-group -->
-
 												<div class="form-group">
 													<label for="exampleInputEmail1">Telefone 1</label> <input
 														id="phone-mask" type="text"
 														class=" form-control input-sm phone">
 												</div>
 												<!-- /form-group -->
-
 											</div>
-
 											<div class="col-md-6">
 												<div class="form-group">
 													<label for="exampleInputEmail1">Nome do responsável</label>
@@ -308,7 +274,6 @@
 														data-required="true">
 												</div>
 												<!-- /form-group -->
-
 												<div class="form-group">
 													<label for="exampleInputEmail1">Área do responsável</label>
 													<input type="text" class="form-control input-sm"
@@ -317,7 +282,6 @@
 														data-required="true">
 												</div>
 												<!-- /form-group -->
-
 												<div class="form-group">
 													<label for="exampleInputEmail1">E-mail</label> <input
 														type="email" class="form-control input-sm"
@@ -326,7 +290,6 @@
 														data-required="true">
 												</div>
 												<!-- /form-group -->
-
 												<div class="form-group">
 													<label for="exampleInputEmail1">Telefone 2</label> <input
 														id="phone-mask" type="text"
@@ -334,7 +297,6 @@
 												</div>
 												<!-- /form-group -->
 											</div>
-
 										</div>
 										</section>
 										<!-- /Section -->
@@ -347,7 +309,6 @@
 										</div>
 										</section>
 										<!-- /panel -->
-
 										<section class="panel panel-default">
 										<div class="panel-heading">Perfil comportamental</div>
 										<div class="panel-body relative">
@@ -355,7 +316,6 @@
 										</div>
 										</section>
 										<!-- /panel -->
-
 										<section class="panel panel-default">
 										<div class="panel-heading">Perfil técnico</div>
 										<div class="panel-body relative">
@@ -373,20 +333,14 @@
 									id="nextStep">Próximo</button>
 							</div>
 						</form>
-
 					</div>
 				</div>
 			</div>
-
 			<!-- SOMENTE ALTERAR DAQUI PARA CIMA -->
-
 		</div>
 		<!-- /wrapper -->
 	</div>
-
-
 	<c:import url="shared/footer.jsp"></c:import>
 	<c:import url="shared/js.jsp"></c:import>
-
 </body>
 </html>
