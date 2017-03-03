@@ -14,7 +14,8 @@ public class SituacaoAtualEntity {
 	@Column(name="nmSituacaoAtual")
 	private String descricao;
 	
-	
+	@OneToMany
+	@JoinColumn(name = "idSituacaoAtual")
 	private List<FormacaoEntity> formacao;
 	
 	public List<FormacaoEntity> getFormacao() {

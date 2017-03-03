@@ -21,7 +21,7 @@ import javax.persistence.Table;
 	/* fim */
 	
 	@Column(name = "TpStatus")
-	private char Status;
+	private String Status;
 
 	public int getId() {
 		return id;
@@ -31,11 +31,11 @@ import javax.persistence.Table;
 		this.id = id;
 	}
 
-	public int getStatus() {
+	public String getStatus() {
 		return Status;
 	}
 
-	public void setStatus(int status) {
-		Status = (char) status;
+	public void setStatus(String status) {
+		Status = status;
 	}
 }

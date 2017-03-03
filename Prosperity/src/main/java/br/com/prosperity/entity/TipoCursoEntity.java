@@ -16,6 +16,8 @@ public class TipoCursoEntity {
 	@Column(name = "nmTipoCurso")
 	private String descricao;
 
+	@OneToMany
+	@JoinColumn(name = "idTipoCurso")
 	private List<FormacaoEntity> formacao;
 	
 	/* fim */

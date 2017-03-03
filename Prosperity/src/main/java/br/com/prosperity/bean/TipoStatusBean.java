@@ -3,10 +3,10 @@ package br.com.prosperity.bean;
 public class TipoStatusBean {
 
 	private int id;
-	private char Status;
+	private String Status;
 	
 	
-	public TipoStatusBean(int id, char status) {
+	public TipoStatusBean(int id, String status) {
 		this.id = id;
 		Status = status;
 	}
@@ -16,10 +16,10 @@ public class TipoStatusBean {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public char getStatus() {
+	public String getStatus() {
 		return Status;
 	}
-	public void setStatus(char status) {
+	public void setStatus(String status) {
 		Status = status;
 	}
 	
