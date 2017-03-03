@@ -571,11 +571,11 @@
 		<!--</padding>-->
 	</div>
 	<!--</container>-->
-	</div>
 	<!--</main container>-->
 	<!--corpo -->
 
 	<c:import url="shared/footer.jsp"></c:import>
+	<c:import url="shared/js.jsp"></c:import>
 
 	<script>
 		$("#fechaVaga").click(
