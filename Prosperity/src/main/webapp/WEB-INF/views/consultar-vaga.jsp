@@ -403,7 +403,7 @@
 	<c:import url="shared/dashboard.jsp"></c:import>
 
 	<!--corpo -->
-	<div class="container">
+	<div id="main-container">
 		<div class="padding-md">
 			<div class="row">
 				<div class="col-sm-12">
