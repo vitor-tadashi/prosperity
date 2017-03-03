@@ -1,10 +1,20 @@
 package br.com.prosperity.entity;
 
 import java.util.List;
+import javax.persistence.*;
 
+@Entity
+@Table(name="tbSituacaoAtual")
 public class SituacaoAtualEntity {
+	
+	@Id
+	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
 	private int idSituacaoAtual;
+	
+	@Column(name="nmSituacaoAtual")
 	private String descricao;
+	
+	
 	private List<FormacaoEntity> formacao;
 	
 	public List<FormacaoEntity> getFormacao() {
