@@ -2,6 +2,12 @@ CREATE DATABASE Prosperity;
 
 USE Prosperity;
 
+CREATE TABLE tbRelatorio(
+	idRelatorio INT PRIMARY KEY IDENTITY (1,1),
+	nmRelatorio VARCHAR(100),
+	cmRelatorio VARCHAR(100)
+)
+
 CREATE TABLE tbCargo (
 	idCargo INT PRIMARY KEY IDENTITY (1,1),
 	nmCargo VARCHAR(50)
@@ -31,11 +37,6 @@ CREATE TABLE tbProjeto (
 	nmProjeto VARCHAR(100),
 	idFuncionario INT FOREIGN KEY REFERENCES tbFuncionario(idFuncionario),
 	idCliente INT FOREIGN KEY REFERENCES tbCliente(idCliente)
-);
-
-CREATE TABLE tbContato(
-	idContato INT IDENTITY (1,1) PRIMARY KEY,
-	telefone VARCHAR(50),
 );
 
 CREATE TABLE tbTpStatus(
@@ -148,8 +149,8 @@ Create TABLE tbEndereco (
 
 CREATE TABLE tbCandidato (
 
-	cpf VARCHAR (50) PRIMARY KEY,
-	idContato INT FOREIGN KEY REFERENCES tbContato (idContato),
+	idCandidato INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	cpf VARCHAR (50) NOT NULL,
 	idEndereço INT FOREIGN KEY REFERENCES tbEndereco (idEndereco),
 	idFormacao INT FOREIGN KEY REFERENCES tbFormacao (idFormacao),
 	nmCandidato VARCHAR (100),
@@ -164,21 +165,22 @@ CREATE TABLE tbCandidato (
 	dtAlteracao DATE
 );
 
+CREATE TABLE tbContato(
+	idContato INT IDENTITY (1,1) PRIMARY KEY,
+	idCandidato INT FOREIGN KEY REFERENCES tbCandidato(idCandidato),
+	telefone VARCHAR(50),
+);
+
 CREATE TABLE tbVagaCandidato (
 	idVagaCandidato INT PRIMARY KEY IDENTITY (1,1),
 	idVaga INT FOREIGN KEY REFERENCES tbVaga(idVaga),
-	cpf VARCHAR(50) FOREIGN KEY REFERENCES tbCandidato(cpf)
+	idCandidato INT FOREIGN KEY REFERENCES tbCandidato(idCandidato)
 );
 
 CREATE TABLE tbStatusCandidato (
 	idStatusCandidato INT PRIMARY KEY IDENTITY (1,1),
 	idStatus INT FOREIGN KEY REFERENCES tbStatus(idStatus),
-	cpf VARCHAR(50) FOREIGN KEY REFERENCES tbCandidato(cpf),
+	idCandidato INT FOREIGN KEY REFERENCES tbCandidato(idCandidato),
 	dtAlteracao DATE,
 	dsParecer VARCHAR(500) 
 );
-
-
-
-
-

@@ -1,16 +1,23 @@
 package br.com.prosperity.entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="tbCliente")
+
 public class ClienteEntity {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="idCliente", unique = true)
 	private int id;
-	private String nmCliente;
-
-	public ClienteEntity() {
-
-	}
+	
+	@Column(name="nmCliente")
+	private String nome;
 
 	public ClienteEntity(int id, String nmCliente) {
 		this.id = id;
-		this.nmCliente = nmCliente;
+		this.nome = nmCliente;
 	}
 
 	public int getId() {
@@ -21,12 +28,12 @@ public class ClienteEntity {
 		this.id = id;
 	}
 
-	public String getNmCliente() {
-		return nmCliente;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setNmCliente(String nmCliente) {
-		this.nmCliente = nmCliente;
+	public void setNome(String nmCliente) {
+		this.nome = nmCliente;
 	}
 
 }

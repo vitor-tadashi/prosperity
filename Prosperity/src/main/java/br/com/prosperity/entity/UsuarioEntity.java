@@ -1,47 +1,73 @@
 package br.com.prosperity.entity;
 
+import javax.persistence.*;
+
+/**
+ * Entity implementation class for Entity: PerfilFuncionalidadeEntity
+ *
+ */
+@Entity
+@Table(name="tbUsuario")
+
 public class UsuarioEntity {
 
-	private UsuarioEntity idusuario;
-	private PerfilEntity idperfil;
-	private FuncionarioEntity idfuncionario;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="idCliente", unique = true)
+	private int id;
+	
+	@ManyToOne(cascade=CascadeType.ALL)
+	private PerfilEntity idPerfil;
+	
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@JoinColumn(name = "idFuncionario")
+	private FuncionarioEntity idFuncionario;
+	
 	//classes
-	private String usuario;
+	@Column(name="nmUsuario")
+	private String nome;
+	
+	@Column(name="senha")
 	private String senha;
-	
-	
-	public UsuarioEntity getIdusuario() {
-		return idusuario;
+
+	public int getId() {
+		return id;
 	}
-	public void setIdusuario(UsuarioEntity idusuario) {
-		this.idusuario = idusuario;
+
+	public void setId(int id) {
+		this.id = id;
 	}
-	public PerfilEntity getIdperfil() {
-		return idperfil;
+
+	public PerfilEntity getIdPerfil() {
+		return idPerfil;
 	}
-	public void setIdperfil(PerfilEntity idperfil) {
-		this.idperfil = idperfil;
+
+	public void setIdPerfil(PerfilEntity idPerfil) {
+		this.idPerfil = idPerfil;
 	}
-	public FuncionarioEntity getIdfuncionario() {
-		return idfuncionario;
+
+	public FuncionarioEntity getIdFuncionario() {
+		return idFuncionario;
 	}
-	public void setIdfuncionario(FuncionarioEntity idfuncionario) {
-		this.idfuncionario = idfuncionario;
+
+	public void setIdFuncionario(FuncionarioEntity idFuncionario) {
+		this.idFuncionario = idFuncionario;
 	}
-	public String getUsuario() {
-		return usuario;
+
+	public String getNome() {
+		return nome;
 	}
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
+
 	public String getSenha() {
 		return senha;
 	}
+
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
-	
-	
-	
+		
 }
