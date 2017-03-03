@@ -55,6 +55,7 @@
 </style>
 </head>
 <body>
+	<c:import url="shared/dashboard.jsp"></c:import>
 	<div id="main-container">
 		<div id="breadcrumb">
 			<ul class="breadcrumb">
