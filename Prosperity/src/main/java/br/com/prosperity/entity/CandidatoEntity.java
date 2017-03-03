@@ -4,122 +4,188 @@ import java.io.File;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tbCandidato")
+
 public class CandidatoEntity {
+	/* Mapeamento dos Atributos */
+
+	/* Mapeamento do ID */
+	@Id
+	@Column(name = "cpf", unique = true, nullable = false)
 	private String cpf;
+	/* fim Id */
+
+	@Column(name = "nmCandidato")
 	private String nome;
+
+	@Column(name = "rg")
 	private String rg;
+
+	@Column(name = "dtNascimento")
 	private Calendar dtNascimento;
-	private double prtSalarial;
-	private Calendar dtAbertura;
-	private Calendar dtFechamento;
+
+	@Column(name = "vlPretensao")
+	private double valorPretensaoSalarial;
+
+	@Column(name = "dtAbertura")
+	private Calendar dataAbertura;
+
+	@Column(name = "dtFechamento")
+	private Calendar dataFechamento;
+
+	@Column(name = "nmEmail")
 	private String email;
-	private Calendar dtAlteracao;
+
+	@Column(name = "dtAlteracao")
+	private Calendar dataAlteracao;
+
+	@Column(name = "cmCurriculo")
 	private File curriculo;
+
+	/* Mapeamento de Relacionamentos */
 	private ContatoEntity contato;
 	private EnderecoEntity endereco;
 	private FormacaoEntity formacao;
 	private UsuarioEntity usuario;
 	private List<StatusEntity> status;
 	private List<VagaEntity> vagas;
-	//TODO relacionamento avaliadores
+
+	// relacionamento avaliadores
+	/* fim dos mapeamentos */
+	
 	
 	public String getCpf() {
 		return cpf;
 	}
+
 	public File getCurriculo() {
 		return curriculo;
 	}
-	public void setCurriculo(File curriculo) {
-		this.curriculo = curriculo;
-	}
-	public List<StatusEntity> getStatus() {
-		return status;
-	}
-	public void setStatus(List<StatusEntity> status) {
-		this.status = status;
-	}
-	public List<VagaEntity> getVagas() {
-		return vagas;
-	}
-	public void setVagas(List<VagaEntity> vagas) {
-		this.vagas = vagas;
-	}
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public String getRg() {
 		return rg;
 	}
+
 	public void setRg(String rg) {
 		this.rg = rg;
 	}
+
 	public Calendar getDtNascimento() {
 		return dtNascimento;
 	}
+
 	public void setDtNascimento(Calendar dtNascimento) {
 		this.dtNascimento = dtNascimento;
 	}
-	public double getPrtSalarial() {
-		return prtSalarial;
+
+	public double getValorPretensaoSalarial() {
+		return valorPretensaoSalarial;
 	}
-	public void setPrtSalarial(double prtSalarial) {
-		this.prtSalarial = prtSalarial;
+
+	public void setValorPretensaoSalarial(double valorPretensaoSalarial) {
+		this.valorPretensaoSalarial = valorPretensaoSalarial;
 	}
-	public Calendar getDtAbertura() {
-		return dtAbertura;
+
+	public Calendar getDataAbertura() {
+		return dataAbertura;
 	}
-	public void setDtAbertura(Calendar dtAbertura) {
-		this.dtAbertura = dtAbertura;
+
+	public void setDataAbertura(Calendar dataAbertura) {
+		this.dataAbertura = dataAbertura;
 	}
-	public Calendar getDtFechamento() {
-		return dtFechamento;
+
+	public Calendar getDataFechamento() {
+		return dataFechamento;
 	}
-	public void setDtFechamento(Calendar dtFechamento) {
-		this.dtFechamento = dtFechamento;
+
+	public void setDataFechamento(Calendar dataFechamento) {
+		this.dataFechamento = dataFechamento;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Calendar getDtAlteracao() {
-		return dtAlteracao;
+
+	public Calendar getDataAlteracao() {
+		return dataAlteracao;
 	}
-	public void setDtAlteracao(Calendar dtAlteracao) {
-		this.dtAlteracao = dtAlteracao;
+
+	public void setDataAlteracao(Calendar dataAlteracao) {
+		this.dataAlteracao = dataAlteracao;
 	}
+
 	public ContatoEntity getContato() {
 		return contato;
 	}
+
 	public void setContato(ContatoEntity contato) {
 		this.contato = contato;
 	}
+
 	public EnderecoEntity getEndereco() {
 		return endereco;
 	}
+
 	public void setEndereco(EnderecoEntity endereco) {
 		this.endereco = endereco;
 	}
+
 	public FormacaoEntity getFormacao() {
 		return formacao;
 	}
+
 	public void setFormacao(FormacaoEntity formacao) {
 		this.formacao = formacao;
 	}
+
 	public UsuarioEntity getUsuario() {
 		return usuario;
 	}
+
 	public void setUsuario(UsuarioEntity usuario) {
 		this.usuario = usuario;
 	}
-	
-	
-	
+
+	public List<StatusEntity> getStatus() {
+		return status;
+	}
+
+	public void setStatus(List<StatusEntity> status) {
+		this.status = status;
+	}
+
+	public List<VagaEntity> getVagas() {
+		return vagas;
+	}
+
+	public void setVagas(List<VagaEntity> vagas) {
+		this.vagas = vagas;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public void setCurriculo(File curriculo) {
+		this.curriculo = curriculo;
+	}
+
 }
