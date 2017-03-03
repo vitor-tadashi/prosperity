@@ -4,10 +4,18 @@ import java.io.File;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.persistence.Entity;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "tbCandidato")
@@ -17,49 +25,69 @@ public class CandidatoEntity {
 
 	/* Mapeamento do ID */
 	@Id
-	@Column(name = "cpf", unique = true, nullable = false)
-	private String cpf;
+	@Column(name = "idCandidato", unique = true, nullable = false)
+	private int Id;
 	/* fim Id */
 
 	@Column(name = "nmCandidato")
 	private String nome;
 
+	@Column(name = "cpf")
+	private String cpf;
+
 	@Column(name = "rg")
 	private String rg;
 
 	@Column(name = "dtNascimento")
-	private Calendar dtNascimento;
+	@Temporal(TemporalType.DATE)
+	private Calendar dataNascimento;
 
 	@Column(name = "vlPretensao")
 	private double valorPretensaoSalarial;
 
 	@Column(name = "dtAbertura")
+	@Temporal(TemporalType.DATE)
 	private Calendar dataAbertura;
 
 	@Column(name = "dtFechamento")
+	@Temporal(TemporalType.DATE)
 	private Calendar dataFechamento;
 
 	@Column(name = "nmEmail")
 	private String email;
 
 	@Column(name = "dtAlteracao")
+	@Temporal(TemporalType.DATE)
 	private Calendar dataAlteracao;
 
 	@Column(name = "cmCurriculo")
 	private File curriculo;
 
 	/* Mapeamento de Relacionamentos */
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@JoinColumn(name = "idContato")
 	private ContatoEntity contato;
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@JoinColumn(name = "idEndereco")
 	private EnderecoEntity endereco;
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@JoinColumn(name = "idCurso")
 	private FormacaoEntity formacao;
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
+
+//	private TipoStatusEntity status;
 	private List<StatusEntity> status;
+
 	private List<VagaEntity> vagas;
 
-	// relacionamento avaliadores
 	/* fim dos mapeamentos */
-	
-	
+
 	public String getCpf() {
 		return cpf;
 	}
@@ -85,11 +113,11 @@ public class CandidatoEntity {
 	}
 
 	public Calendar getDtNascimento() {
-		return dtNascimento;
+		return dataNascimento;
 	}
 
-	public void setDtNascimento(Calendar dtNascimento) {
-		this.dtNascimento = dtNascimento;
+	public void setDtNascimento(Calendar dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
 	public double getValorPretensaoSalarial() {
