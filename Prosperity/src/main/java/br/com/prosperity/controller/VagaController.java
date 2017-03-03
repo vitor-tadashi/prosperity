@@ -7,8 +7,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class VagaController {
-	@RequestMapping(value ="/teste", method = RequestMethod.GET)
+	@RequestMapping(value = "/consultar-vaga", method = RequestMethod.GET)
 	public String cliente() {
 		return "consultar-vaga";
+	}
+
+	@RequestMapping(value = "/aprovacao-vaga", method = RequestMethod.GET)
+	public String aprovacaoVaga() {
+
+		return "aprovacao-vaga";
 	}
 }
