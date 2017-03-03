@@ -59,7 +59,7 @@
 	position: relative;
 }
 
-.timeline li:before,.timeline li:after {
+.timeline li:before, .timeline li:after {
 	content: " ";
 	display: table;
 }
@@ -68,7 +68,7 @@
 	clear: both;
 }
 
-.timeline li:before,.timeline li:after {
+.timeline li:before, .timeline li:after {
 	content: " ";
 	display: table;
 }
@@ -114,7 +114,7 @@
 	content: " ";
 }
 
-.timeline li .timeline-panel.noarrow:before,.timeline li .timeline-panel.noarrow:after
+.timeline li .timeline-panel.noarrow:before, .timeline li .timeline-panel.noarrow:after
 	{
 	top: 0;
 	right: 0;
@@ -166,7 +166,7 @@
 	color: #c25b4e;
 }
 
-.tl-body p,.tl-body ul {
+.tl-body p, .tl-body ul {
 	margin-bottom: 0;
 }
 
@@ -225,32 +225,32 @@
 	font-size: 16px;
 }
 
-.label-stand,.badge-stand {
+.label-stand, .badge-stand {
 	background-color: #9b59b6;
 	color: #fff;
 }
 
-.label-aprovadoPendente,.badge-stand {
+.label-aprovadoPendente, .badge-stand {
 	background-color: #2980b9;
 	color: #fff;
 }
 
-.label-analiseRH,.badge-stand {
+.label-analiseRH, .badge-stand {
 	background-color: #e67e22;
 	color: #fff;
 }
 
-.label-analiseTecnica,.badge-stand {
+.label-analiseTecnica, .badge-stand {
 	background-color: #f1c40f;
 	color: #fff;
 }
 
-.label-reprovado,.badge-stand {
+.label-reprovado, .badge-stand {
 	background-color: #e74c3c;
 	color: #fff;
 }
 
-.label-contratado,.badge-stand {
+.label-contratado, .badge-stand {
 	background-color: #2ecc71;
 	color: #fff;
 }
@@ -309,15 +309,12 @@
 													<!--<input type="name" class="form-control input-sm" id="exampleInputEmail1" placeholder="Nome do candidato" data-required="true">-->
 												</div>
 												<!-- /form-group -->
-
 											</div>
 										</div>
 										<!-- /form-group -->
-
 										<div class="row">
 											<div class="form-group col-md-6">
-												<label for="exampleInputEmail1">Vaga:</label> <br>
-												<br>
+												<label for="exampleInputEmail1">Vaga:</label> <br> <br>
 												<br>
 												<!--
                                                         <select class="form-control chzn-select">
@@ -330,15 +327,12 @@
                                                         -->
 											</div>
 											<!-- /form-group -->
-
 											<div class="form-group col-md-6">
 												<label for="exampleInputEmail1">Senioridade da vaga:</label>
 											</div>
 											<!-- /form-group -->
-
 										</div>
 										<!-- /-row -->
-
 										<div class="row">
 											<div class="form-group col-md-12">
 												<div class="panel panel-default">
@@ -396,9 +390,7 @@
 											<!-- /form-group -->
 										</div>
 										<!-- /form-group -->
-
 										<div class="row">
-
 											<div class="form-group col-md-6">
 												<div class="form-group">
 													<label class="control-label">Data de entrevista:</label>
@@ -415,16 +407,12 @@
 												<!-- /form-group -->
 											</div>
 											<!-- /form-group -->
-
-
 										</div>
 										<!-- /form-group -->
-
 										<div class="form-group col-md-6">
 											<div class="form-group">
 												<label class="control-label">Parecer:</label>
 												<div class="form-group">
-
 													<textarea class="form-control" id="message-text"
 														style="margin-left: 10px; width: 570px"></textarea>
 												</div>
@@ -433,18 +421,13 @@
 											<!-- /form-group -->
 										</div>
 										<!-- /form-group -->
-
 									</div>
 									<div class="tab-pane fade" id="second">
 										<section id="dadosInterno" class="panel panel-default">
-
 										<div class="panel-body">
-
 											<label>Etapas dos processos de seleção: </label>
 											<!-- SOMENTE ALTERAR DAQUI PARA BAIXO -->
-
 											<form name="form1" action="paginaPHPouASP" method="post">
-
 												<input class="btn btn-xs btn-success" type="button"
 													value="Adicionar etapa" onclick="AddCampos()"> <br>
 												<br>
@@ -455,12 +438,10 @@
 																.write("<span id='linha"+iLoop+"' style='display:none'> <select class='btn btn-default btn-xs dropdown-toggle' style='width: 160px;'><option value='0'>Selecione etapa</option><option value='1'>Prova Prática</option><option value='2'>Prova teórica</option><option value='3'>Dinâmica de Grupo</option></select> <input type='text' id='arq"+iLoop+"' name='arq"+iLoop+"'> <input class='btn btn-xs btn-danger' type='button' value='Remover' onclick='RemoverCampos(\""
 																		+ iLoop
 																		+ "\")'></span><br>");
-
 													}
 												</script>
 												<input type="hidden" name="hidden2" id="hidden2">
 											</form>
-
 											<div class="form-group">
 												<!-- SOMENTE ALTERAR DAQUI PARA CIMA -->
 												<label>Parecer técnico: </label>
@@ -470,7 +451,6 @@
 										</div>
 										</section>
 									</div>
-
 									<div class="tab-pane fade" id="fourth">
 										<section class="panel panel-default">
 										<div class="panel-heading">
@@ -482,14 +462,12 @@
 										</section>
 										<!-- /panel -->
 									</div>
-
 									<div class="tab-pane fade" id="third">
 										<section class="panel panel-default">
 										<div class="panel-heading text-center">
 											<label for="exampleInputEmail1">Avaliação de
 												competências</label>
 										</div>
-
 										<table class="table" style="font-size: 10px">
 											<thead class="text-center">
 												<tr class="text-center">
@@ -519,9 +497,7 @@
 															id="interno" type="radio" name="inline-radio1"> <span
 															class="custom-radio"></span>
 													</label></td>
-
 												</tr>
-
 												<tr>
 													<td>Profundidade</td>
 													<td><label class="label-radio inline"> <input
@@ -541,7 +517,6 @@
 															class="custom-radio"></span>
 													</label></td>
 												</tr>
-
 												<tr>
 													<td>Planejamento</td>
 													<td><label class="label-radio inline"> <input
@@ -561,8 +536,6 @@
 															class="custom-radio"></span>
 													</label></td>
 												</tr>
-
-
 												<tr>
 													<td>Execução e Entrega</td>
 													<td><label class="label-radio inline"> <input
@@ -582,7 +555,6 @@
 															class="custom-radio"></span>
 													</label></td>
 												</tr>
-
 												<tr>
 													<td>Relacionamento</td>
 													<td><label class="label-radio inline"> <input
@@ -602,7 +574,6 @@
 															class="custom-radio"></span>
 													</label></td>
 												</tr>
-
 												<tr>
 													<td>Pessoas</td>
 													<td><label class="label-radio inline"> <input
@@ -622,7 +593,6 @@
 															class="custom-radio"></span>
 													</label></td>
 												</tr>
-
 												<tr>
 													<td>Comercial</td>
 													<td><label class="label-radio inline"> <input
@@ -642,7 +612,6 @@
 															class="custom-radio"></span>
 													</label></td>
 												</tr>
-
 												<tr>
 													<td>Financeiro</td>
 													<td><label class="label-radio inline"> <input
@@ -662,14 +631,13 @@
 															class="custom-radio"></span>
 													</label></td>
 												</tr>
-
-
 											</tbody>
 										</table>
 									</div>
 									</section>
 								</div>
 							</div>
+						</form>
 					</div>
 					<div class="panel-footer ">
 						<button type="submit" class="btn btn-sm btn-primary pull-right"
@@ -680,19 +648,12 @@
 						<button type="submit" class="btn btn-sm btn-success">
 							<i class="fa fa-check fa-lg"></i>&nbsp;Aprovar
 						</button>
-
 					</div>
-					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-	</div>
-
 	<!--Modal Feedback-->
-
-
-
 	<!-- Modal delete -->
 	<div class="modal fade" id="delete-modal" data-target="#delete-modal"
 		tabindex="-1" role="dialog" aria-labelledby="modalLabel">
@@ -716,684 +677,323 @@
 		</div>
 	</div>
 	<!-- /.modal delete-->
-
-
-
-
-	<!-- Overlay Div -->
-	<div id="overlay" class="transparent"></div>
-
-	<a href="" id="theme-setting-icon"><i class="fa fa-cog fa-lg"></i></a>
-	<div id="theme-setting">
-		<div class="title">
-			<strong class="no-margin">Skin Color</strong>
-		</div>
-		<div class="theme-box">
-			<a class="theme-color" style="background: #323447" id="default"></a>
-			<a class="theme-color" style="background: #efefef" id="skin-1"></a> <a
-				class="theme-color" style="background: #a93922" id="skin-2"></a> <a
-				class="theme-color" style="background: #3e6b96" id="skin-3"></a> <a
-				class="theme-color" style="background: #635247" id="skin-4"></a> <a
-				class="theme-color" style="background: #3a3a3a" id="skin-5"></a> <a
-				class="theme-color" style="background: #495B6C" id="skin-6"></a>
-		</div>
-		<div class="title">
-			<strong class="no-margin">Sidebar Menu</strong>
-		</div>
-		<div class="theme-box">
-			<label class="label-checkbox"> <input type="checkbox" checked
-				id="fixedSidebar"> <span class="custom-checkbox"></span>
-				Fixed Sidebar
-			</label>
-		</div>
-	</div>
-	<!-- /theme-setting -->
-
-	<div id="wrapper" class="preload">
-		<div id="top-nav" class="skin-6 fixed">
-			<div class="brand">
-				<span>Perfect</span> <span class="text-toggle"> Admin</span>
-			</div>
-			<!-- /brand -->
-			<button type="button" class="navbar-toggle pull-left"
-				id="sidebarToggle">
-				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<button type="button" class="navbar-toggle pull-left hide-menu"
-				id="menuToggle">
-				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<ul class="nav-notification clearfix">
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#"> <i
-						class="fa fa-envelope fa-lg"></i> <span
-						class="notification-label bounceIn animation-delay4">7</span>
-				</a>
-					<ul class="dropdown-menu message dropdown-1">
-						<li><a>You have 4 new unread messages</a></li>
-						<li><a class="clearfix" href="#"> <img src="img/user.jpg"
-								alt="User Avatar">
-								<div class="detail">
-									<strong>John Doe</strong>
-									<p class="no-margin">Lorem ipsum dolor sit amet...</p>
-									<small class="text-muted"><i
-										class="fa fa-check text-success"></i> 27m ago</small>
-								</div>
-						</a></li>
-						<li><a class="clearfix" href="#"> <img
-								src="img/user2.jpg" alt="User Avatar">
-								<div class="detail">
-									<strong>Jane Doe</strong>
-									<p class="no-margin">Lorem ipsum dolor sit amet...</p>
-									<small class="text-muted"><i
-										class="fa fa-check text-success"></i> 5hr ago</small>
-								</div>
-						</a></li>
-						<li><a class="clearfix" href="#"> <img src="img/user.jpg"
-								alt="User Avatar">
-								<div class="detail">
-									<strong>Bill Doe</strong>
-									<p class="no-margin">Lorem ipsum dolor sit amet...</p>
-									<small class="text-muted"><i class="fa fa-reply"></i>
-										Yesterday</small>
-								</div>
-						</a></li>
-						<li><a class="clearfix" href="#"> <img
-								src="img/user2.jpg" alt="User Avatar">
-								<div class="detail">
-									<strong>Baby Doe</strong>
-									<p class="no-margin">Lorem ipsum dolor sit amet...</p>
-									<small class="text-muted"><i class="fa fa-reply"></i> 9
-										Feb 2013</small>
-								</div>
-						</a></li>
-						<li><a href="#">View all messages</a></li>
-					</ul></li>
-				<li class="dropdown hidden-xs"><a href="#"
-					class="dropdown-toggle" data-toggle="dropdown"> <i
-						class="fa fa-tasks fa-lg"></i> <span
-						class="notification-label bounceIn animation-delay5">4</span>
-				</a>
-					<ul class="dropdown-menu task dropdown-2">
-						<li><a href="#">You have 4 tasks to complete</a></li>
-						<li><a href="#">
-								<div class="clearfix">
-									<span class="pull-left">Bug Fixes</span> <small
-										class="pull-right text-muted">78%</small>
-								</div>
-								<div class="progress">
-									<div class="progress-bar" style="width: 78%"></div>
-								</div>
-						</a></li>
-						<li><a href="#">
-								<div class="clearfix">
-									<span class="pull-left">Software Updating</span> <small
-										class="pull-right text-muted">54%</small>
-								</div>
-								<div class="progress progress-striped">
-									<div class="progress-bar progress-bar-success"
-										style="width: 54%"></div>
-								</div>
-						</a></li>
-						<li><a href="#">
-								<div class="clearfix">
-									<span class="pull-left">Database Migration</span> <small
-										class="pull-right text-muted">23%</small>
-								</div>
-								<div class="progress">
-									<div class="progress-bar progress-bar-warning"
-										style="width: 23%"></div>
-								</div>
-						</a></li>
-						<li><a href="#">
-								<div class="clearfix">
-									<span class="pull-left">Unit Testing</span> <small
-										class="pull-right text-muted">92%</small>
-								</div>
-								<div class="progress progress-striped active">
-									<div class="progress-bar progress-bar-danger "
-										style="width: 92%"></div>
-								</div>
-						</a></li>
-						<li><a href="#">View all tasks</a></li>
-					</ul></li>
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#"> <i class="fa fa-bell fa-lg"></i>
-						<span class="notification-label bounceIn animation-delay6">5</span>
-				</a>
-					<ul class="dropdown-menu notification dropdown-3">
-						<li><a href="#">You have 5 new notifications</a></li>
-						<li><a href="#"> <span
-								class="notification-icon bg-warning"> <i
-									class="fa fa-warning"></i>
-							</span> <span class="m-left-xs">Server #2 not responding.</span> <span
-								class="time text-muted">Just now</span>
-						</a></li>
-						<li><a href="#"> <span
-								class="notification-icon bg-success"> <i
-									class="fa fa-plus"></i>
-							</span> <span class="m-left-xs">New user registration.</span> <span
-								class="time text-muted">2m ago</span>
-						</a></li>
-						<li><a href="#"> <span
-								class="notification-icon bg-danger"> <i
-									class="fa fa-bolt"></i>
-							</span> <span class="m-left-xs">Application error.</span> <span
-								class="time text-muted">5m ago</span>
-						</a></li>
-						<li><a href="#"> <span
-								class="notification-icon bg-success"> <i
-									class="fa fa-usd"></i>
-							</span> <span class="m-left-xs">2 items sold.</span> <span
-								class="time text-muted">1hr ago</span>
-						</a></li>
-						<li><a href="#"> <span
-								class="notification-icon bg-success"> <i
-									class="fa fa-plus"></i>
-							</span> <span class="m-left-xs">New user registration.</span> <span
-								class="time text-muted">1hr ago</span>
-						</a></li>
-						<li><a href="#">View all notifications</a></li>
-					</ul></li>
-				<li class="profile dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#"> <strong>John Doe</strong> <span><i
-							class="fa fa-chevron-down"></i></span>
-				</a>
-					<ul class="dropdown-menu">
-						<li><a class="clearfix" href="#"> <img src="img/user.jpg"
-								alt="User Avatar">
-								<div class="detail">
-									<strong>John Doe</strong>
-									<p class="grey">John_Doe@email.com</p>
-								</div>
-						</a></li>
-						<li><a tabindex="-1" href="profile.html" class="main-link"><i
-								class="fa fa-edit fa-lg"></i> Edit profile</a></li>
-						<li><a tabindex="-1" href="gallery.html" class="main-link"><i
-								class="fa fa-picture-o fa-lg"></i> Photo Gallery</a></li>
-						<li><a tabindex="-1" href="#" class="theme-setting"><i
-								class="fa fa-cog fa-lg"></i> Setting</a></li>
-						<li class="divider"></li>
-						<li><a tabindex="-1" class="main-link logoutConfirm_open"
-							href="#logoutConfirm"><i class="fa fa-lock fa-lg"></i> Log
-								out</a></li>
-					</ul></li>
+	<div id="main-container">
+		<div id="breadcrumb">
+			<ul class="breadcrumb">
+				<li><i class="fa fa-home"></i><a href="index.html"> Home</a></li>
+				<li>Consultar</li>
+				<li class="active">Candidatos - RH</li>
 			</ul>
 		</div>
-		<!-- /top-nav-->
-
-		<aside class="fixed skin-6">
-		<div class="sidebar-inner scrollable-sidebar">
-			<div class="size-toggle">
-				<a class="btn btn-sm" id="sizeToggle"> <span class="icon-bar"></span>
-					<span class="icon-bar"></span> <span class="icon-bar"></span>
-				</a> <a class="btn btn-sm pull-right logoutConfirm_open"
-					href="#logoutConfirm"> <i class="fa fa-power-off"></i>
-				</a>
-			</div>
-			<!-- /size-toggle -->
-
-			<div class="main-menu">
-				<ul>
-
-					<li class="openable"><a href="#"> <span class="menu-icon">
-								<i class="fa fa-desktop fa-lg"></i>
-						</span> <span class="text"> Tela de acesso </span> <span
-							class="menu-hover"></span>
-					</a>
-						<ul class="submenu">
-							<li><a href="acesso.html"><span class="submenu-label">Acesso</span></a></li>
-							<li><a href="primeiro-acesso.html"><span
-									class="submenu-label">Primeiro acesso</span></a></li>
-
-						</ul></li>
-
-					<li><a href="dashboard.html"> <span class="menu-icon">
-								<i class="fa fa-home fa-lg"></i>
-						</span> <span class="text"> Página Inicial </span> <span
-							class="menu-hover"></span>
-					</a></li>
-					<li><a href="solicitar-vaga.html"> <span class="menu-icon">
-								<i class="fa fa-plus fa-lg"></i>
-						</span> <span class="text"> Solicitar vaga </span> <span
-							class="menu-hover"></span>
-					</a></li>
-					<li><a href="cadastrar-candidato.html"> <span
-							class="menu-icon"> <i class="fa fa-edit fa-lg"></i>
-						</span> <span class="text"> Cadastrar candidato </span> <span
-							class="menu-hover"></span>
-					</a></li>
-
-					<li class="openable"><a href="#"> <span class="menu-icon">
-								<i class="fa fa-file-text fa-lg"></i>
-						</span> <span class="text"> Consultar </span> <span class="menu-hover"></span>
-					</a>
-						<ul class="submenu">
-							<li><a href="consultar-rh.html"><span
-									class="submenu-label">Candidato</span></a></li>
-							<li><a href="consultar-vaga.html"><span
-									class="submenu-label">Vaga</span></a></li>
-							<li><a href="historico-candidato.html"><span
-									class="submenu-label">Histórico</span></a></li>
-						</ul></li>
-
-					<li class="openable"><a href="#"> <span class="menu-icon">
-								<i class="fa fa-check fa-lg"></i>
-						</span> <span class="text"> Aprovar </span> <span class="menu-hover"></span>
-					</a>
-						<ul class="submenu">
-							<li><a href=""><span class="submenu-label">Candidato</span></a></li>
-							<li><a href="aprovacao-vaga.html"><span
-									class="submenu-label">Vaga</span></a></li>
-
-						</ul></li>
-
-					<li><a href="gerar-relatorio.html"> <span
-							class="menu-icon"> <i class="fa fa-print fa-lg"></i>
-						</span> <span class="text"> Relatório </span> <span class="menu-hover"></span>
-					</a></li>
-
-					<li class="openable"><a href="#"> <span class="menu-icon">
-								<i class="fa fa-cogs fa-lg"></i>
-						</span> <span class="text"> Configurações </span> <span
-							class="menu-hover"></span>
-					</a></li>
-				</ul>
-			</div>
-			<!-- /main-menu -->
-		</div>
-		<!-- /sidebar-inner scrollable-sidebar --> </aside>
-
-		<div id="main-container">
-			<div id="breadcrumb">
-				<ul class="breadcrumb">
-					<li><i class="fa fa-home"></i><a href="index.html"> Home</a></li>
-					<li>Consultar</li>
-					<li class="active">Candidatos - RH</li>
-				</ul>
-			</div>
-			<!--breadcrumb-->
-
-			<div class="container">
-				<div class="padding-md">
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="panel panel-default">
-								<div class="panel-heading">Consultar candidatos - RH</div>
-								<div class="panel-body">
-									<div class="row">
-
-										<div class="col-md-2">
-											<label for="exampleInputEmail1">Nome: </label>
-											<div class="search-block">
-												<div class="input-group">
-													<input type="text" class="form-control input-sm"
-														placeholder="Nome">
-												</div>
-												<!-- /input-group -->
-											</div>
-											<!-- /search-block -->
-										</div>
-
-										<div class="col-md-2">
-											<label for="exampleInputEmail1">Cargo</label> <select
-												class="form-control inline">
-												<option value="0">Selecione:</option>
-												<option value="1">Desenvolvedor</option>
-												<option value="2">Analista</option>
-												<option value="3">Arquiteto</option>
-											</select>
-										</div>
-
-
-										<div class="col-md-1">
-											<label for="exampleInputEmail1">Salário</label> <input
-												type="text" class="form-control" placeholder="De"
-												style="width: 80px">
-										</div>
-										<div class="col-md-1">
-											<label for="exampleInputEmail1">&nbsp;</label> <input
-												type="text" class="form-control" placeholder="Até"
-												style="width: 80px">
-										</div>
-
-										<div class="col-md-3">
-											<label for="exampleInputEmail1">Data:</label>
+		<!--breadcrumb-->
+		<div class="container">
+			<div class="padding-md">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">Consultar candidatos - RH</div>
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-md-2">
+										<label for="exampleInputEmail1">Nome: </label>
+										<div class="search-block">
 											<div class="input-group">
-												<input type="date" class="form-control"> <span
-													class="input-group-addon">até</span> <input type="date"
-													class="form-control">
+												<input type="text" class="form-control input-sm"
+													placeholder="Nome">
 											</div>
+											<!-- /input-group -->
 										</div>
-										<div class="col-md-2 col-md-offset-1">
-											<a class="btn btn-primary pull-right "
-												style="margin-top: 22px">Filtrar</a>
-										</div>
-
-
+										<!-- /search-block -->
 									</div>
-									<!-- /.row -->
+									<div class="col-md-2">
+										<label for="exampleInputEmail1">Cargo</label> <select
+											class="form-control inline">
+											<option value="0">Selecione:</option>
+											<option value="1">Desenvolvedor</option>
+											<option value="2">Analista</option>
+											<option value="3">Arquiteto</option>
+										</select>
+									</div>
+									<div class="col-md-1">
+										<label for="exampleInputEmail1">Salário</label> <input
+											type="text" class="form-control" placeholder="De"
+											style="width: 80px">
+									</div>
+									<div class="col-md-1">
+										<label for="exampleInputEmail1">&nbsp;</label> <input
+											type="text" class="form-control" placeholder="Até"
+											style="width: 80px">
+									</div>
+									<div class="col-md-3">
+										<label for="exampleInputEmail1">Data:</label>
+										<div class="input-group">
+											<input type="date" class="form-control"> <span
+												class="input-group-addon">até</span> <input type="date"
+												class="form-control">
+										</div>
+									</div>
+									<div class="col-md-2 col-md-offset-1">
+										<a class="btn btn-primary pull-right "
+											style="margin-top: 22px">Filtrar</a>
+									</div>
 								</div>
-								<!-- /.panel-body -->
-
-
-								<table
-									class="table table-bordered table-condensed table-hover table-striped"
-									id=""
-									style="font-size: 12px !important; vertical-align: middle !important;">
-									<thead>
-
-										<tr>
-
-											<th class="text-center">Nome do candidato</th>
-											<th class="text-center">Vaga</th>
-											<th class="text-center">Pretensão</th>
-											<th class="text-center">Data de abertura</th>
-											<th class="text-center">Data de aprovação</th>
-											<th class="text-center">Status</th>
-											<th class="text-center">Ações</th>
-
-										</tr>
-									</thead>
-									<tbody class="text-center">
-
-										<tr>
-
-											<td>Kobe Bryant</td>
-											<td>Gerente</td>
-											<td>R$10.000</td>
-											<td>17/02/2015</td>
-											<td>31/04/2017</td>
-											<td><span class="label label-analiseRH">Em
-													análise do RH</span></td>
-											<td><span class="line"></span>
-												<div class="btn-group">
-													<!-- começo botao -->
-													<button type="button"
-														class="btn btn-info dropdown-toggle btn-sm"
-														data-toggle="dropdown" aria-haspopup="true"
-														aria-expanded="false">
-														<i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
-													</button>
-													<ul class="dropdown-menu slidedown btnAlinhado">
-														<li><a href="#aprovado-modal" data-toggle="modal"
-															data-toggle="modal" data-target=".bs-example-modal-lg"><i
-																class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
-														<li class="divider"></li>
-														<li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
-
-														<li class="divider"></li>
-														<li><a href="#delete-modal" data-toggle="modal"><i
-																class="fa fa-trash-o fa-lg">&nbsp;</i>Fechar vaga</a></li>
-
-													</ul>
-												</div>
-												<!-- /fim botao --></td>
-										</tr>
-										<tr>
-
-											<td>Kevin Durant</td>
-											<td>Diretor</td>
-											<td>R$7.500</td>
-											<td>17/02/2015</td>
-											<td>25/07/2016</td>
-											<td><span class="label label-analiseTecnica">Em
-													análise técnica</span></td>
-											<td class="text-center"><span class="line"></span>
-
-												<div class="btn-group">
-													<!-- começo botao -->
-													<button type="button"
-														class="btn btn-info dropdown-toggle btn-sm"
-														data-toggle="dropdown" aria-haspopup="true"
-														aria-expanded="false">
-														<i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
-													</button>
-													<ul class="dropdown-menu slidedown btnAlinhado">
-														<li><a href="#aprovado-modal" data-toggle="modal"
-															data-toggle="modal" data-target=".bs-example-modal-lg"><i
-																class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
-														<li class="divider"></li>
-														<li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
-
-														<li class="divider"></li>
-														<li><a href="#delete-modal" data-toggle="modal"><i
-																class="fa fa-trash-o fa-lg">&nbsp;</i>Fechar vaga</a></li>
-
-													</ul>
-												</div>
-												<!-- /fim botao --></td>
-										</tr>
-										<tr class="text-center">
-
-											<td>James Harden</td>
-											<td>Desenvolvedor</td>
-											<td>R$1000</td>
-											<td>17/02/2015</td>
-											<td>09/11/2017</td>
-											<td><span class="label label-reprovado">Reprovado</span></td>
-											<td class="text-center"><span class="line"></span>
-
-												<div class="btn-group">
-													<!-- começo botao -->
-													<button type="button"
-														class="btn btn-info dropdown-toggle btn-sm"
-														data-toggle="dropdown" aria-haspopup="true"
-														aria-expanded="false">
-														<i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
-													</button>
-													<ul class="dropdown-menu slidedown btnAlinhado">
-														<li><a href="#aprovado-modal" data-toggle="modal"
-															data-toggle="modal" data-target=".bs-example-modal-lg"><i
-																class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
-														<li class="divider"></li>
-														<li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
-														<li class="divider"></li>
-														<li><a href="#delete-modal" data-toggle="modal"><i
-																class="fa fa-trash-o fa-lg">&nbsp;</i>Fechar vaga</a></li>
-
-													</ul>
-												</div>
-												<!-- /fim botao --></td>
-										</tr>
-
-										<tr class="text-center">
-
-											<td>Michael Jordan</td>
-											<td>Desenvolvedor</td>
-											<td>R$1000</td>
-											<td>17/02/2015</td>
-											<td>09/11/2017</td>
-											<td><span class="label label-stand">Candidatura</span></td>
-											<td class="text-center"><span class="line"></span>
-
-												<div class="btn-group">
-													<!-- começo botao -->
-													<button type="button"
-														class="btn btn-info dropdown-toggle btn-sm"
-														data-toggle="dropdown" aria-haspopup="true"
-														aria-expanded="false">
-														<i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
-													</button>
-													<ul class="dropdown-menu slidedown btnAlinhado">
-														<li><a href="#aprovado-modal" data-toggle="modal"
-															data-toggle="modal" data-target=".bs-example-modal-lg"><i
-																class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
-														<li class="divider"></li>
-														<li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
-														<li class="divider"></li>
-														<li><a href="#delete-modal" data-toggle="modal"><i
-																class="fa fa-trash-o fa-lg">&nbsp;</i>Fechar vaga</a></li>
-
-													</ul>
-												</div>
-												<!-- /fim botao --></td>
-										</tr>
-
-										<tr>
-
-											<td>Kyrie Irving</td>
-											<td>Desenvolvedor</td>
-											<td>R$3.000</td>
-											<td>08/11/2016</td>
-											<td>31/12/2016</td>
-											<td><span class="label label-contratado" style="">Contratado</span>
-											</td>
-											<td>
-
-												<div class="btn-group">
-													<!-- começo botao -->
-													<button type="button"
-														class="btn btn-info dropdown-toggle btn-sm"
-														data-toggle="dropdown" aria-haspopup="true"
-														aria-expanded="false">
-														<i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
-													</button>
-													<ul class="dropdown-menu slidedown btnAlinhado">
-														<li><a href="#aprovado-modal" data-toggle="modal"
-															data-toggle="modal" data-target=".bs-example-modal-lg"><i
-																class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
-														<li class="divider"></li>
-														<li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
-														<li class="divider"></li>
-														<li><a href="#delete-modal" data-toggle="modal"><i
-																class="fa fa-trash-o fa-lg">&nbsp;</i>Fechar vaga</a></li>
-
-													</ul>
-												</div>
-												<!-- /fim botao -->
-
-											</td>
-
-
-										</tr>
-
-										<tr>
-
-											<td>LeBron James</td>
-											<td>Desenvolvedor</td>
-											<td>R$3.000</td>
-											<td>08/11/2016</td>
-											<td>31/04/2017</td>
-											<td><span class="label label-aprovadoPendente" style="">Proposta</span>
-											</td>
-											<td>
-
-												<div class="btn-group">
-													<!-- começo botao -->
-													<button type="button"
-														class="btn btn-info dropdown-toggle btn-sm"
-														data-toggle="dropdown" aria-haspopup="true"
-														aria-expanded="false">
-														<i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
-													</button>
-													<ul class="dropdown-menu slidedown btnAlinhado">
-														<li><a href="#aprovado-modal" data-toggle="modal"
-															data-toggle="modal" data-target=".bs-example-modal-lg"><i
-																class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
-														<li class="divider"></li>
-														<li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
-														<li class="divider"></li>
-														<li><a href="#delete-modal" data-toggle="modal"><i
-																class="fa fa-trash-o fa-lg">&nbsp;</i>Fechar vaga</a></li>
-
-													</ul>
-												</div>
-												<!-- /fim botao -->
-
-											</td>
-
-
-										</tr>
-
-									</tbody>
-								</table>
+								<!-- /.row -->
 							</div>
-							<!-- fim da div panel -->
+							<!-- /.panel-body -->
+							<table
+								class="table table-bordered table-condensed table-hover table-striped"
+								id=""
+								style="font-size: 12px !important; vertical-align: middle !important;">
+								<thead>
+									<tr>
+										<th class="text-center">Nome do candidato</th>
+										<th class="text-center">Vaga</th>
+										<th class="text-center">Pretensão</th>
+										<th class="text-center">Data de abertura</th>
+										<th class="text-center">Data de aprovação</th>
+										<th class="text-center">Status</th>
+										<th class="text-center">Ações</th>
+									</tr>
+								</thead>
+								<tbody class="text-center">
+									<tr>
+										<td>Kobe Bryant</td>
+										<td>Gerente</td>
+										<td>R$10.000</td>
+										<td>17/02/2015</td>
+										<td>31/04/2017</td>
+										<td><span class="label label-analiseRH">Em análise
+												do RH</span></td>
+										<td><span class="line"></span>
+											<div class="btn-group">
+												<!-- começo botao -->
+												<button type="button"
+													class="btn btn-info dropdown-toggle btn-sm"
+													data-toggle="dropdown" aria-haspopup="true"
+													aria-expanded="false">
+													<i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
+												</button>
+												<ul class="dropdown-menu slidedown btnAlinhado">
+													<li><a href="#aprovado-modal" data-toggle="modal"
+														data-toggle="modal" data-target=".bs-example-modal-lg"><i
+															class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
+													<li class="divider"></li>
+													<li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
 
+													<li class="divider"></li>
+													<li><a href="#delete-modal" data-toggle="modal"><i
+															class="fa fa-trash-o fa-lg">&nbsp;</i>Fechar vaga</a></li>
+												</ul>
+											</div> <!-- /fim botao --></td>
+									</tr>
+									<tr>
+										<td>Kevin Durant</td>
+										<td>Diretor</td>
+										<td>R$7.500</td>
+										<td>17/02/2015</td>
+										<td>25/07/2016</td>
+										<td><span class="label label-analiseTecnica">Em
+												análise técnica</span></td>
+										<td class="text-center"><span class="line"></span>
+											<div class="btn-group">
+												<!-- começo botao -->
+												<button type="button"
+													class="btn btn-info dropdown-toggle btn-sm"
+													data-toggle="dropdown" aria-haspopup="true"
+													aria-expanded="false">
+													<i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
+												</button>
+												<ul class="dropdown-menu slidedown btnAlinhado">
+													<li><a href="#aprovado-modal" data-toggle="modal"
+														data-toggle="modal" data-target=".bs-example-modal-lg"><i
+															class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
+													<li class="divider"></li>
+													<li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
 
-							<div class="panel-footer clearfix">
+													<li class="divider"></li>
+													<li><a href="#delete-modal" data-toggle="modal"><i
+															class="fa fa-trash-o fa-lg">&nbsp;</i>Fechar vaga</a></li>
+												</ul>
+											</div> <!-- /fim botao --></td>
+									</tr>
+									<tr class="text-center">
+										<td>James Harden</td>
+										<td>Desenvolvedor</td>
+										<td>R$1000</td>
+										<td>17/02/2015</td>
+										<td>09/11/2017</td>
+										<td><span class="label label-reprovado">Reprovado</span></td>
+										<td class="text-center"><span class="line"></span>
+											<div class="btn-group">
+												<!-- começo botao -->
+												<button type="button"
+													class="btn btn-info dropdown-toggle btn-sm"
+													data-toggle="dropdown" aria-haspopup="true"
+													aria-expanded="false">
+													<i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
+												</button>
+												<ul class="dropdown-menu slidedown btnAlinhado">
+													<li><a href="#aprovado-modal" data-toggle="modal"
+														data-toggle="modal" data-target=".bs-example-modal-lg"><i
+															class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
+													<li class="divider"></li>
+													<li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
+													<li class="divider"></li>
+													<li><a href="#delete-modal" data-toggle="modal"><i
+															class="fa fa-trash-o fa-lg">&nbsp;</i>Fechar vaga</a></li>
+												</ul>
+											</div> <!-- /fim botao --></td>
+									</tr>
+									<tr class="text-center">
+										<td>Michael Jordan</td>
+										<td>Desenvolvedor</td>
+										<td>R$1000</td>
+										<td>17/02/2015</td>
+										<td>09/11/2017</td>
+										<td><span class="label label-stand">Candidatura</span></td>
+										<td class="text-center"><span class="line"></span>
+											<div class="btn-group">
+												<!-- começo botao -->
+												<button type="button"
+													class="btn btn-info dropdown-toggle btn-sm"
+													data-toggle="dropdown" aria-haspopup="true"
+													aria-expanded="false">
+													<i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
+												</button>
+												<ul class="dropdown-menu slidedown btnAlinhado">
+													<li><a href="#aprovado-modal" data-toggle="modal"
+														data-toggle="modal" data-target=".bs-example-modal-lg"><i
+															class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
+													<li class="divider"></li>
+													<li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
+													<li class="divider"></li>
+													<li><a href="#delete-modal" data-toggle="modal"><i
+															class="fa fa-trash-o fa-lg">&nbsp;</i>Fechar vaga</a></li>
+												</ul>
+											</div> <!-- /fim botao --></td>
+									</tr>
+									<tr>
+										<td>Kyrie Irving</td>
+										<td>Desenvolvedor</td>
+										<td>R$3.000</td>
+										<td>08/11/2016</td>
+										<td>31/12/2016</td>
+										<td><span class="label label-contratado" style="">Contratado</span>
+										</td>
+										<td>
+											<div class="btn-group">
+												<!-- começo botao -->
+												<button type="button"
+													class="btn btn-info dropdown-toggle btn-sm"
+													data-toggle="dropdown" aria-haspopup="true"
+													aria-expanded="false">
+													<i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
+												</button>
+												<ul class="dropdown-menu slidedown btnAlinhado">
+													<li><a href="#aprovado-modal" data-toggle="modal"
+														data-toggle="modal" data-target=".bs-example-modal-lg"><i
+															class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
+													<li class="divider"></li>
+													<li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
+													<li class="divider"></li>
+													<li><a href="#delete-modal" data-toggle="modal"><i
+															class="fa fa-trash-o fa-lg">&nbsp;</i>Fechar vaga</a></li>
+												</ul>
+											</div> <!-- /fim botao -->
+										</td>
+									</tr>
+									<tr>
+										<td>LeBron James</td>
+										<td>Desenvolvedor</td>
+										<td>R$3.000</td>
+										<td>08/11/2016</td>
+										<td>31/04/2017</td>
+										<td><span class="label label-aprovadoPendente" style="">Proposta</span>
+										</td>
+										<td>
 
-								<ul class="pagination pagination-xs m-top-none pull-right">
-									<li class="disabled"><a href="#">Anterior</a></li>
-									<li class="active"><a href="#">1</a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#">4</a></li>
-									<li><a href="#">5</a></li>
-									<li><a href="#">Próxima</a></li>
-								</ul>
-							</div>
+											<div class="btn-group">
+												<!-- começo botao -->
+												<button type="button"
+													class="btn btn-info dropdown-toggle btn-sm"
+													data-toggle="dropdown" aria-haspopup="true"
+													aria-expanded="false">
+													<i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
+												</button>
+												<ul class="dropdown-menu slidedown btnAlinhado">
+													<li><a href="#aprovado-modal" data-toggle="modal"
+														data-toggle="modal" data-target=".bs-example-modal-lg"><i
+															class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
+													<li class="divider"></li>
+													<li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
+													<li class="divider"></li>
+													<li><a href="#delete-modal" data-toggle="modal"><i
+															class="fa fa-trash-o fa-lg">&nbsp;</i>Fechar vaga</a></li>
+												</ul>
+											</div> <!-- /fim botao -->
+										</td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
-						<!-- /col-md-12 -->
-
-
+						<!-- fim da div panel -->
+						<div class="panel-footer clearfix">
+							<ul class="pagination pagination-xs m-top-none pull-right">
+								<li class="disabled"><a href="#">Anterior</a></li>
+								<li class="active"><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">5</a></li>
+								<li><a href="#">Próxima</a></li>
+							</ul>
+						</div>
 					</div>
-					<!-- /.row -->
+					<!-- /col-md-12 -->
 				</div>
-				<!-- /.paddin.md -->
+				<!-- /.row -->
 			</div>
-			<!-- /.container -->
-
-
-			<a href="" id="scroll-to-top" class="hidden-print"><i
-				class="fa fa-chevron-up"></i></a>
-			<!-- /Modal -->
-			<div class="modal fade" id="formModal">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-hidden="true">&times;</button>
-							<h4>Modal with form</h4>
-						</div>
-						<div class="modal-body">
-							<form>
-								<div class="form-group">
-									<label>Username</label> <input type="text"
-										class="form-control input-sm" placeholder="Email Address">
-								</div>
-								<div class="form-group">
-									<label>Password</label> <input type="password"
-										class="form-control input-sm" placeholder="Password">
-								</div>
-								<div class="form-group">
-									<label class="label-checkbox"> <input type="checkbox"
-										class="regular-checkbox" /> <span class="custom-checkbox"></span>
-										Remember me
-									</label>
-								</div>
-								<div class="form-group text-right">
-									<a href="#" class="btn btn-success">Sign in</a> <a href="#"
-										class="btn btn-success">Sign up</a>
-								</div>
-							</form>
-						</div>
-
+			<!-- /.paddin.md -->
+		</div>
+		<!-- /.container -->
+		<a href="" id="scroll-to-top" class="hidden-print"><i
+			class="fa fa-chevron-up"></i></a>
+		<!-- /Modal -->
+		<div class="modal fade" id="formModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4>Modal with form</h4>
 					</div>
-					<!-- /wrapper -->
-
-					<a href="" id="scroll-to-top" class="hidden-print"><i
-						class="fa fa-chevron-up"></i></a>
-
-					<!-- Logout confirmation -->
-					<div class="custom-popup width-100" id="logoutConfirm">
-						<div class="padding-md">
-							<h4 class="m-top-none">Deseja realmente sair?</h4>
-						</div>
-
-						<div class="text-center">
-							<a class="btn btn-success m-right-sm" href="acesso.html">Sair</a>
-							<a class="btn btn-danger logoutConfirm_close">Cancelar</a>
-						</div>
+					<div class="modal-body">
+						<form>
+							<div class="form-group">
+								<label>Username</label> <input type="text"
+									class="form-control input-sm" placeholder="Email Address">
+							</div>
+							<div class="form-group">
+								<label>Password</label> <input type="password"
+									class="form-control input-sm" placeholder="Password">
+							</div>
+							<div class="form-group">
+								<label class="label-checkbox"> <input type="checkbox"
+									class="regular-checkbox" /> <span class="custom-checkbox"></span>
+									Remember me
+								</label>
+							</div>
+							<div class="form-group text-right">
+								<a href="#" class="btn btn-success">Sign in</a> <a href="#"
+									class="btn btn-success">Sign up</a>
+							</div>
+						</form>
 					</div>
 				</div>
+				<!-- /wrapper -->
 			</div>
 		</div>
 	</div>
-	
 	<c:import url="shared/footer.jsp"></c:import>
 	<c:import url="shared/js.jsp"></c:import>
 
@@ -1425,90 +1025,91 @@
 		});
 	</script>
 	<script type="text/javascript">
-	//Total máximo de campos que você permitirá criar em seu site:
-	var totalCampos = 4;
+		//Total máximo de campos que você permitirá criar em seu site:
+		var totalCampos = 4;
 
-	//Não altere os valores abaixo, pois são variáveis controle;
-	var iLoop = 1;
-	var iCount = 0;
-	var linhaAtual;
+		//Não altere os valores abaixo, pois são variáveis controle;
+		var iLoop = 1;
+		var iCount = 0;
+		var linhaAtual;
 
-	function AddCampos() {
-		var hidden1 = document.getElementById("hidden1");
-		var hidden2 = document.getElementById("hidden2");
+		function AddCampos() {
+			var hidden1 = document.getElementById("hidden1");
+			var hidden2 = document.getElementById("hidden2");
 
-		//Executar apenas se houver possibilidade de inserção de novos campos:
-		if (iCount < totalCampos) {
+			//Executar apenas se houver possibilidade de inserção de novos campos:
+			if (iCount < totalCampos) {
 
-			//Limpar hidden1, para atualizar a lista dos campos que ainda estão vazios:
-			hidden2.value = "";
+				//Limpar hidden1, para atualizar a lista dos campos que ainda estão vazios:
+				hidden2.value = "";
 
-			//Atualizando a lista dos campos que estão ocultos.
-			//Essa lista ficará armazenada temporiariamente em hidden2;
-			for (iLoop = 1; iLoop <= totalCampos; iLoop++) {
-				if (document.getElementById("linha" + iLoop).style.display == "none") {
-					if (hidden2.value == "") {
-						hidden2.value = "linha" + iLoop;
-					} else {
-						hidden2.value += ",linha" + iLoop;
+				//Atualizando a lista dos campos que estão ocultos.
+				//Essa lista ficará armazenada temporiariamente em hidden2;
+				for (iLoop = 1; iLoop <= totalCampos; iLoop++) {
+					if (document.getElementById("linha" + iLoop).style.display == "none") {
+						if (hidden2.value == "") {
+							hidden2.value = "linha" + iLoop;
+						} else {
+							hidden2.value += ",linha" + iLoop;
+						}
 					}
 				}
+				//Quebrando a lista que foi armazenada em hidden2 em array:
+
+				linhasOcultas = hidden2.value.split(",");
+
+				if (linhasOcultas.length > 0) {
+					//Tornar visível o primeiro elemento de linhasOcultas:
+					document.getElementById(linhasOcultas[0]).style.display = "block";
+					iCount++;
+
+					//Acrescentando o índice zero a hidden1:
+					if (hidden1.value == "") {
+						hidden1.value = linhasOcultas[0];
+					} else {
+						hidden1.value += "," + linhasOcultas[0];
+					}
+
+					/*Retirar a opção acima da lista de itens ocultos: <-------- OPCIONAL!!!
+					if (hidden2.value.indexOf(","+linhasOcultas[0]) != -1) {
+					        hidden2.value = hidden2.value.replace(linhasOcultas[0]+",","");
+					}else if (hidden2.indexOf(linhasOcultas[0]+",") == 0) {
+					        hidden2.value = hidden2.value.replace(linhasOcultas[0]+",","");
+					}else{
+					        hidden2.value = "";
+					}
+					 */
+				}
 			}
-			//Quebrando a lista que foi armazenada em hidden2 em array:
+		}
 
-			linhasOcultas = hidden2.value.split(",");
+		function RemoverCampos(id) {
+			//Criando ponteiro para hidden1:        
+			var hidden1 = document.getElementById("hidden1");
 
-			if (linhasOcultas.length > 0) {
-				//Tornar visível o primeiro elemento de linhasOcultas:
-				document.getElementById(linhasOcultas[0]).style.display = "block";
-				iCount++;
+			//Pegar o valor do campo que será excluído:
+			var campoValor = document.getElementById("arq" + id).value;
+			//Se o campo não tiver nenhum valor, atribuir a string: vazio:
+			if (campoValor == "") {
+				campoValor = "vazio";
+			}
 
-				//Acrescentando o índice zero a hidden1:
-				if (hidden1.value == "") {
-					hidden1.value = linhasOcultas[0];
+			if (confirm("O campo que contém o valor:\n» " + campoValor
+					+ "\nserá excluído!\n\nDeseja prosseguir?")) {
+				document.getElementById("linha" + id).style.display = "none";
+				iCount--;
+
+				//Removendo o valor de hidden1:
+				if (hidden1.value.indexOf(",linha" + id) != -1) {
+					hidden1.value = hidden1.value.replace(",linha" + id, "");
+				} else if (hidden1.value.indexOf("linha" + id + ",") == 0) {
+					hidden1.value = hidden1.value.replace("linha" + id + ",",
+							"");
 				} else {
-					hidden1.value += "," + linhasOcultas[0];
+					hidden1.value = "";
 				}
-
-				/*Retirar a opção acima da lista de itens ocultos: <-------- OPCIONAL!!!
-				if (hidden2.value.indexOf(","+linhasOcultas[0]) != -1) {
-				        hidden2.value = hidden2.value.replace(linhasOcultas[0]+",","");
-				}else if (hidden2.indexOf(linhasOcultas[0]+",") == 0) {
-				        hidden2.value = hidden2.value.replace(linhasOcultas[0]+",","");
-				}else{
-				        hidden2.value = "";
-				}
-				 */
 			}
 		}
-	}
-
-	function RemoverCampos(id) {
-		//Criando ponteiro para hidden1:        
-		var hidden1 = document.getElementById("hidden1");
-
-		//Pegar o valor do campo que será excluído:
-		var campoValor = document.getElementById("arq" + id).value;
-		//Se o campo não tiver nenhum valor, atribuir a string: vazio:
-		if (campoValor == "") {
-			campoValor = "vazio";
-		}
-
-		if (confirm("O campo que contém o valor:\n» " + campoValor
-				+ "\nserá excluído!\n\nDeseja prosseguir?")) {
-			document.getElementById("linha" + id).style.display = "none";
-			iCount--;
-
-			//Removendo o valor de hidden1:
-			if (hidden1.value.indexOf(",linha" + id) != -1) {
-				hidden1.value = hidden1.value.replace(",linha" + id, "");
-			} else if (hidden1.value.indexOf("linha" + id + ",") == 0) {
-				hidden1.value = hidden1.value.replace("linha" + id + ",", "");
-			} else {
-				hidden1.value = "";
-			}
-		}
-	}
-</script>
+	</script>
 </body>
 </html>

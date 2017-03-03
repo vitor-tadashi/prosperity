@@ -296,7 +296,6 @@
 							<div class="panel-heading">Relatório</div>
 							<!--<form class="form-inline">-->
 							<div class="panel-body">
-
 								<!--<div class=" ">-->
 								<div class="col-md-4">
 									<label for="cargo">Relatórios</label> <select id="cargo"
@@ -312,8 +311,8 @@
 								<div class="col-md-3">
 									<label for="exampleInputEmail1">Data:</label>
 									<div class="input-group">
-										<input type="text" class="form-control"> <span
-											class="input-group-addon">até</span> <input type="text"
+										<input type="date" class="form-control"> <span
+											class="input-group-addon">até</span> <input type="date"
 											class="form-control">
 									</div>
 								</div>
@@ -324,7 +323,6 @@
 								</div>
 							</div>
 							<!--</panel body>-->
-
 						</div>
 						<!--</col-sm-12>-->
 					</div>
@@ -337,7 +335,6 @@
 	</div>
 	<!--</main container>-->
 	<!--corpo -->
-
 	<c:import url="shared/footer.jsp"></c:import>
 	<c:import url="shared/js.jsp"></c:import>
 </body>
