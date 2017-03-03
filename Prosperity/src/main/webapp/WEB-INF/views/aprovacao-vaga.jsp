@@ -15,6 +15,8 @@
 </head>
 <body>
 	<!-- Modal visualizar-->
+	
+	
 	<div class="modal fade" id="vaga-modal" data-target="#vaga-modal"
 		tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
@@ -265,6 +267,9 @@
 			</div>
 		</div>
 	</div>
+	
+	<c:import url="shared/dashboard.jsp"></c:import>
+	
 	<!-- CORPO DA PÁGINA -->
 	<div class="padding-md">
 		<div class="panel panel-default">

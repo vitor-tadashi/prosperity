@@ -17,4 +17,8 @@ public class VagaController {
 
 		return "aprovacao-vaga";
 	}
+	@RequestMapping (value= "/solicitar-vaga", method = RequestMethod.GET)
+	public String solicitarVaga(){
+		return "solicitar-vaga";
+	}
 }
