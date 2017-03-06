@@ -18,6 +18,7 @@ public class CargoSenioridade{
 	private int id;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="idCargo")
 	private CargoEntity idCargo;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)

@@ -2,6 +2,11 @@ package br.com.prosperity.entity;
 
 import javax.persistence.*;
 
+/**
+ * Entity implementation class for Entity: CargoSenioridade
+ *
+ */
+
 @Entity
 @Table(name="tbCliente")
 
