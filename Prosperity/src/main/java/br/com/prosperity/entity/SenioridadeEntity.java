@@ -1,11 +1,20 @@
 package br.com.prosperity.entity;
 
 import java.util.List;
+import javax.persistence.*;
 
+@Entity
+@Table(name="tbSenioridade")
 public class SenioridadeEntity {
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="idSenioridade", unique = true, nullable = false)
 	private int id;
+	@Column(name="nmSenioridade")
 	private String descricao;
+	
+	 @ManyToMany
+	 @JoinTable(name="tbCargoSenioridade", joinColumns={@JoinColumn(name="idCargo")}, inverseJoinColumns={@JoinColumn(name="idSenioridade")})
 	private List<CargoEntity> senioridade; //relacionamento entre Senioridade e CargoBeana
 
 	public List<CargoEntity> getSenioridade() {

@@ -1,14 +1,36 @@
 package br.com.prosperity.entity;
 
 import java.util.List;
+import javax.persistence.*;
+
+@Entity
+@Table(name = "tbFuncionario")
+
 
 public class FuncionarioEntity {
-	private int idFuncionario;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
+	@Column(name="idFuncionario", unique = true, nullable = false)
+	private int id;
+	
+	@Column(name="nmFuncionario")
 	private String nome;
+	
+	@ManyToOne(cascade=CascadeType.ALL)
 	private CargoEntity cargo;
+	
+	@ManyToOne(cascade=CascadeType.ALL)
 	private SenioridadeEntity senioridade;
+	
+	@OneToMany
+	@JoinTable(name = "funcionarioProjeto", joinColumns = {
+			@JoinColumn(name = "idProjeto", referencedColumnName = "idProjeto") }, inverseJoinColumns = {
+					@JoinColumn(name = "idFuncionario", referencedColumnName = "idFuncionario") })
 	private List<ProjetoEntity> projeto;
 	
+	//GETTERS AND SETTERS
 	public List<ProjetoEntity> getProjeto() {
 		return projeto;
 	}
@@ -16,10 +38,10 @@ public class FuncionarioEntity {
 		this.projeto = projeto;
 	}
 	public int getIdFuncionario() {
-		return idFuncionario;
+		return id;
 	}
 	public void setIdFuncionario(int idFuncionario) {
-		this.idFuncionario = idFuncionario;
+		this.id = idFuncionario;
 	}
 	public String getNome() {
 		return nome;
