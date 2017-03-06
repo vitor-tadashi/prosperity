@@ -1,7 +1,42 @@
 package br.com.prosperity.entity;
 
-public class UsuarioEntity {
+import java.io.File;
+import java.util.Calendar;
+import java.util.List;
 
+import javax.persistence.*;
+
+
+@Entity
+@Table(name= "tbUsuario")
+public class UsuarioEntity {
+/* Mapeamento dos Atributos */
+	
+	/* Mapeamento do ID */
+	@Id
+	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+	@Column(name="idUsuario", unique = true, nullable = false)
+	private int id;
+	/* fim Id */
+	
+	@Column(name = "nmUsuario")
+	private String nomeUsuario;
+	
+	@Column(name = "nmUsuario")
+	private String senhaUsuario;
+
+	/* Mapeamento de Relacionamentos Tudo o que estiver ligado na tabela Vaga 1-N*/
+	
+	@ManyToOne (cascade = CascadeType.ALL)
+	private PerfilEntity perfilEntity;
+	
+	@OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER, orphanRemoval = true)
+	@PrimaryKeyJoinColumn
+	private FuncionarioEntity funcionarioEntity;
+
+	// relacionamento avaliadores
+				/* fim dos mapeamentos */
+	
 	private UsuarioEntity idusuario;
 	private PerfilEntity idperfil;
 	private FuncionarioEntity idfuncionario;
@@ -40,8 +75,5 @@ public class UsuarioEntity {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
-	
-	
 	
 }

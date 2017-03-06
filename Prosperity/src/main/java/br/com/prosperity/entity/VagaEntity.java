@@ -1,41 +1,93 @@
 package br.com.prosperity.entity;
 
+import java.io.File;
 import java.util.Calendar;
+import java.util.List;
 
+import javax.persistence.*;
+
+
+@Entity
+@Table(name= "tbVaga")	
 public class VagaEntity {
+	/* Mapeamento dos Atributos */
+	
+	/* Mapeamento do ID */
+	@Id
+	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+	@Column(name="idVaga", unique = true, nullable = false)
 	private int id;
-	private String nmSolicitante;
-	private Double vlPretensao;
-	private Calendar dtInicio;
-	private String flLocalTrabalho;
-	private String idTpVaga;
-	private String hrEntrada;
-	private String hrSaida;
-	private String flAumentaQuadro;
+	/* fim Id */
+	
+	@Column(name = "nmSolicitante")
+	private String nomeSolicitante;
+	
+	@Column(name = "vlPretensao")
+	private double valorPretensao;
+	
+	@Column(name = "dtInicio")
+	private Calendar dataInicio;
+	
+	@Column(name = "flLocalTrabalho")
+	private char localTrabalho;
+	
+	@Column(name = "idTpVaga")
+	private char tipoVaga;
+	
+	@Column(name = "hrEntrada")
+	private Calendar horaEntrada;
+	
+	@Column(name = "hrSaida")
+	private Calendar horaSaida;
+		
+	@Column(name = "flAumentoQuadro")
+	private String aumentoQuadro;
+	
+	/* Mapeamento de Relacionamentos Tudo o que estiver ligado na tabela Vaga 1-N*/
+	
+	@OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER, orphanRemoval = true)
+	@PrimaryKeyJoinColumn
 	private ProjetoEntity projetoEntity;
+	
+	@ManyToOne (cascade = CascadeType.ALL)
 	private CargoEntity cargoEntity;
+	
+	@ManyToOne (cascade = CascadeType.ALL)	
 	private SenioridadeEntity senioridadeEntity;
-
+	
+	@ManyToOne (cascade = CascadeType.ALL)
+	private UsuarioEntity usuarioEntity;
+	
+	@ManyToOne (cascade = CascadeType.ALL)
+	private AvaliadorEntity avaliadorEntity;
+	
+	// relacionamento avaliadores
+			/* fim dos mapeamentos */
 	public VagaEntity() {
 
 	}
-
-	public VagaEntity(int id, String nmSolicitante, Double vlPretensao, Calendar dtInicio, String flLocalTrabalho,
-			String idTpVaga, String hrEntrada, String hrSaida, String flAumentaQuadro, ProjetoEntity projetoEntity,
-			CargoEntity cargoEntity, SenioridadeEntity senioridadeEntity) {
+     
+	public VagaEntity(int id, String nomeSolicitante, double valorPretensao, Calendar dataInicio, char localTrabalho,
+			char tipoVaga, Calendar horaEntrada, Calendar horaSaida, String aumentoQuadro, ProjetoEntity projetoEntity,
+			CargoEntity cargoEntity, SenioridadeEntity senioridadeEntity, UsuarioEntity usuarioEntity,
+			AvaliadorEntity avaliadorEntity) {
+		super();
 		this.id = id;
-		this.nmSolicitante = nmSolicitante;
-		this.vlPretensao = vlPretensao;
-		this.dtInicio = dtInicio;
-		this.flLocalTrabalho = flLocalTrabalho;
-		this.idTpVaga = idTpVaga;
-		this.hrEntrada = hrEntrada;
-		this.hrSaida = hrSaida;
-		this.flAumentaQuadro = flAumentaQuadro;
+		this.nomeSolicitante = nomeSolicitante;
+		this.valorPretensao = valorPretensao;
+		this.dataInicio = dataInicio;
+		this.localTrabalho = localTrabalho;
+		this.tipoVaga = tipoVaga;
+		this.horaEntrada = horaEntrada;
+		this.horaSaida = horaSaida;
+		this.aumentoQuadro = aumentoQuadro;
 		this.projetoEntity = projetoEntity;
 		this.cargoEntity = cargoEntity;
 		this.senioridadeEntity = senioridadeEntity;
+		this.usuarioEntity = usuarioEntity;
+		this.avaliadorEntity = avaliadorEntity;
 	}
+
 
 	public int getId() {
 		return id;
@@ -45,68 +97,68 @@ public class VagaEntity {
 		this.id = id;
 	}
 
-	public String getNmSolicitante() {
-		return nmSolicitante;
+	public String getNomeSolicitante() {
+		return nomeSolicitante;
 	}
 
-	public void setNmSolicitante(String nmSolicitante) {
-		this.nmSolicitante = nmSolicitante;
+	public void setNomeSolicitante(String nomeSolicitante) {
+		this.nomeSolicitante = nomeSolicitante;
 	}
 
-	public Double getVlPretensao() {
-		return vlPretensao;
+	public double getValorPretensao() {
+		return valorPretensao;
 	}
 
-	public void setVlPretensao(Double vlPretensao) {
-		this.vlPretensao = vlPretensao;
+	public void setValorPretensao(double valorPretensao) {
+		this.valorPretensao = valorPretensao;
 	}
 
-	public Calendar getDtInicio() {
-		return dtInicio;
+	public Calendar getDataInicio() {
+		return dataInicio;
 	}
 
-	public void setDtInicio(Calendar dtInicio) {
-		this.dtInicio = dtInicio;
+	public void setDataInicio(Calendar dataInicio) {
+		this.dataInicio = dataInicio;
 	}
 
-	public String getFlLocalTrabalho() {
-		return flLocalTrabalho;
+	public char getLocalTrabalho() {
+		return localTrabalho;
 	}
 
-	public void setFlLocalTrabalho(String flLocalTrabalho) {
-		this.flLocalTrabalho = flLocalTrabalho;
+	public void setLocalTrabalho(char localTrabalho) {
+		this.localTrabalho = localTrabalho;
 	}
 
-	public String getIdTpVaga() {
-		return idTpVaga;
+	public char getTipoVaga() {
+		return tipoVaga;
 	}
 
-	public void setIdTpVaga(String idTpVaga) {
-		this.idTpVaga = idTpVaga;
+	public void setTipoVaga(char tipoVaga) {
+		this.tipoVaga = tipoVaga;
 	}
 
-	public String getHrEntrada() {
-		return hrEntrada;
+	public Calendar getHoraEntrada() {
+		return horaEntrada;
 	}
 
-	public void setHrEntrada(String hrEntrada) {
-		this.hrEntrada = hrEntrada;
+	public void setHoraEntrada(Calendar horaEntrada) {
+		this.horaEntrada = horaEntrada;
 	}
 
-	public String getHrSaida() {
-		return hrSaida;
+	public Calendar getHoraSaida() {
+		return horaSaida;
 	}
 
-	public void setHrSaida(String hrSaida) {
-		this.hrSaida = hrSaida;
+	public void setHoraSaida(Calendar horaSaida) {
+		this.horaSaida = horaSaida;
 	}
 
-	public String getFlAumentaQuadro() {
-		return flAumentaQuadro;
+	public String getAumentoQuadro() {
+		return aumentoQuadro;
 	}
 
-	public void setFlAumentaQuadro(String flAumentaQuadro) {
-		this.flAumentaQuadro = flAumentaQuadro;
+	public void setAumentoQuadro(String aumentoQuadro) {
+		this.aumentoQuadro = aumentoQuadro;
 	}
 
 	public ProjetoEntity getProjetoEntity() {
@@ -132,5 +184,22 @@ public class VagaEntity {
 	public void setSenioridadeEntity(SenioridadeEntity senioridadeEntity) {
 		this.senioridadeEntity = senioridadeEntity;
 	}
+
+	public UsuarioEntity getUsuarioEntity() {
+		return usuarioEntity;
+	}
+
+	public void setUsuarioEntity(UsuarioEntity usuarioEntity) {
+		this.usuarioEntity = usuarioEntity;
+	}
+
+	public AvaliadorEntity getAvaliadorEntity() {
+		return avaliadorEntity;
+	}
+
+	public void setAvaliadorEntity(AvaliadorEntity avaliadorEntity) {
+		this.avaliadorEntity = avaliadorEntity;
+	}
+
 
 }

@@ -1,9 +1,34 @@
 package br.com.prosperity.entity;
 
+import java.io.File;
+import java.util.Calendar;
 import java.util.List;
 
-public class PerfilEntity {
+import javax.persistence.*;
 
+@Entity
+@Table(name= "tbPerfil")
+public class PerfilEntity {
+/* Mapeamento dos Atributos */
+	
+	/* Mapeamento do ID */
+	@Id
+	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+	@Column(name="idUsuario", unique = true, nullable = false)
+	private int id;
+	/* fim Id */
+
+	@Column(name = "nmPerfil")
+	private String nomePerfil;
+	
+/* Mapeamento de Relacionamentos Tudo o que estiver ligado na tabela Vaga 1-N*/
+	
+	@ManyToOne (cascade = CascadeType.ALL)
+	private PerfilEntity avaliadorEntity;
+	
+	// relacionamento avaliadores
+	/* fim dos mapeamentos */
+	
 	private int id;
 	private String nome;
 	private List<FuncionalidadeEntity> permissoes; //relacionamento entre Perfil e Permissões
