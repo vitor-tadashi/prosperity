@@ -1,0 +1,30 @@
+
+
+@ManyToMany 
+
+//JoinTable coloca o nome da tabela relacional
+//JoinColumn coloca a coluna da tabela que está relacionada a tabela realacional
+//InverseJoinColumns coloca a coluna da propria classe
+@JoinTable(name = "tbStatusCandidato", joinColumns = { @JoinColumn(name = "idStatus") }, 
+inverseJoinColumns = { @JoinColumn(name = "idCandidato") })
+//Sempre que for o Many for segundo argumento a variavel tem que ser lista.
+List<>
+
+@ManyToOne
+
+@JoinColumn(name="idStatus") //JoinColumn da variavel
+private int idStatus;
+
+
+@OneToMany
+
+Class CargoSenioridade;
+
+@JoinColumn(name="idCargoSenioridade") //JoinColumn da propria classe
+List<> idCargo;
+//Sempre que for o Many for segundo argumento a variavel tem que ser lista.
+
+@OneToOne
+(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+@JoinColumn(name = "idSenioridade")
+private SenioridadeEntity idSenioridade;

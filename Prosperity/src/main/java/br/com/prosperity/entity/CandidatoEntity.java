@@ -4,68 +4,95 @@ import java.io.File;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.persistence.Entity;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "tbCandidato")
-
 public class CandidatoEntity {
 	/* Mapeamento dos Atributos */
 
 	/* Mapeamento do ID */
 	@Id
-	@Column(name = "cpf", unique = true, nullable = false)
-	private String cpf;
+	@Column(name = "idCandidato", unique = true, nullable = false)
+	private int Id;
 	/* fim Id */
 
 	@Column(name = "nmCandidato")
 	private String nome;
 
+	@Column(name = "cpf")
+	private String cpf;
+
 	@Column(name = "rg")
 	private String rg;
 
 	@Column(name = "dtNascimento")
-	private Calendar dtNascimento;
+	@Temporal(TemporalType.DATE)
+	private Calendar dataNascimento;
 
 	@Column(name = "vlPretensao")
 	private double valorPretensaoSalarial;
 
 	@Column(name = "dtAbertura")
+	@Temporal(TemporalType.DATE)
 	private Calendar dataAbertura;
 
 	@Column(name = "dtFechamento")
+	@Temporal(TemporalType.DATE)
 	private Calendar dataFechamento;
 
 	@Column(name = "nmEmail")
 	private String email;
 
 	@Column(name = "dtAlteracao")
+	@Temporal(TemporalType.DATE)
 	private Calendar dataAlteracao;
 
 	@Column(name = "cmCurriculo")
 	private File curriculo;
 
 	/* Mapeamento de Relacionamentos */
-	private ContatoEntity contato;
-	private EnderecoEntity endereco;
-	private FormacaoEntity formacao;
-	private UsuarioEntity usuario;
-	private List<StatusEntity> status;
-	private List<VagaEntity> vagas;
 
-	// relacionamento avaliadores
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@JoinColumn(name = "idContato")
+	private ContatoEntity contato;
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@JoinColumn(name = "idEndereco")
+	private EnderecoEntity endereco;
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@JoinColumn(name = "idCurso")
+	private FormacaoEntity formacao;
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@JoinColumn(name = "idUsuario")
+	private UsuarioEntity usuario;
+
+	@OneToMany
+	@JoinColumn(name = "idCandidato")
+	private List<StatusCandidatoEntity> statusCandidato;
+
+
 	/* fim dos mapeamentos */
+
 	
-	
-	public String getCpf() {
-		return cpf;
+	public int getId() {
+		return Id;
 	}
 
-	public File getCurriculo() {
-		return curriculo;
+	public void setId(int id) {
+		Id = id;
 	}
 
 	public String getNome() {
@@ -76,6 +103,14 @@ public class CandidatoEntity {
 		this.nome = nome;
 	}
 
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
 	public String getRg() {
 		return rg;
 	}
@@ -84,12 +119,12 @@ public class CandidatoEntity {
 		this.rg = rg;
 	}
 
-	public Calendar getDtNascimento() {
-		return dtNascimento;
+	public Calendar getDataNascimento() {
+		return dataNascimento;
 	}
 
-	public void setDtNascimento(Calendar dtNascimento) {
-		this.dtNascimento = dtNascimento;
+	public void setDataNascimento(Calendar dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
 	public double getValorPretensaoSalarial() {
@@ -132,6 +167,14 @@ public class CandidatoEntity {
 		this.dataAlteracao = dataAlteracao;
 	}
 
+	public File getCurriculo() {
+		return curriculo;
+	}
+
+	public void setCurriculo(File curriculo) {
+		this.curriculo = curriculo;
+	}
+
 	public ContatoEntity getContato() {
 		return contato;
 	}
@@ -164,28 +207,12 @@ public class CandidatoEntity {
 		this.usuario = usuario;
 	}
 
-	public List<StatusEntity> getStatus() {
-		return status;
+	public List<StatusCandidatoEntity> getStatusCandidato() {
+		return statusCandidato;
 	}
 
-	public void setStatus(List<StatusEntity> status) {
-		this.status = status;
-	}
-
-	public List<VagaEntity> getVagas() {
-		return vagas;
-	}
-
-	public void setVagas(List<VagaEntity> vagas) {
-		this.vagas = vagas;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public void setCurriculo(File curriculo) {
-		this.curriculo = curriculo;
+	public void setStatusCandidato(List<StatusCandidatoEntity> statusCandidato) {
+		this.statusCandidato = statusCandidato;
 	}
 
 }

@@ -6,13 +6,14 @@
 <html lang="pt-br">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Gerar relatório</title>
+<title>Cria perfil</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
 
 <c:import url="shared/stylesheet.jsp"></c:import>
 
+<!-- Link e style aqui -->
 <style>
 .page-header h1 {
 	font-size: 3.26em;
@@ -263,8 +264,45 @@
 	margin-left: 20px;
 }
 </style>
+
 </head>
+
 <body>
+	<!-- Modais aqui-->
+	<!-- Modal de erro -->
+	<div class="modal fade" id="erro" data-target="#erro" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Erro</h4>
+				</div>
+				<div class="modal-body">
+					<div class="padding-md">
+						<div class="row">
+							<form>
+								<div class="row">
+									<label>hashaushuahduashduahd</label>
+								</div>
+							</form>
+						</div>
+						<!--close row-->
+					</div>
+					<!--close padding-->
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-success">Ok</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal -->
+
 	<!-- Modal salvo com sucesso -->
 	<div class="modal fade" id="salvo" data-target="#salvo" tabindex="-1"
 		role="dialog" aria-labelledby="myModalLabel">
@@ -276,66 +314,63 @@
 
 	<c:import url="shared/dashboard.jsp"></c:import>
 
+	<!-- Corpo da pagina aqui -->
 	<div id="main-container">
-		<div id="breadcrumb">
-			<ul class="breadcrumb">
-				<li><i class="fa fa-home"></i><a href="dashboard.html">
-						Início</a></li>
-				<li class="active">Gerar relatório</li>
-			</ul>
-		</div>
-		<!--breadcrumb-->
+                <div id="breadcrumb">
+                    <ul class="breadcrumb">
+                         <li><i class="fa fa-home"></i><a href="index.html"> Home</a></li>
+                         <li class="active">Criar perfil</li>     
+                    </ul>
+                </div><!--breadcrumb-->
+                <div class="container">
+                    <div class="padding-md">
+                        <div class="row">   
+                            <div class="form-group col-md-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <label>Criação de perfil</label>
+                                    </div>
+                                    <div class="panel-body col-md-5">
+                                        <label>Perfil</label>
+                                        <input type="text" class="form-control" id="usuario"data-required="true">
+                                    </div>
+                                    <div class="row"></div>
+                                    <div class="panel-body relative">
+                                        <select multiple="multiple" id="selectedBox1" class="select-box pull-left form-control">
+                                            <option value="1">Aprovar vaga</option>
+                                            <option value="2">Cadastrar vaga</option>
+                                            <option value="3">Consultar vaga</option>
+                                        </select>       
 
-		<!--corpo -->
-		<br />
-		<div class="container">
-			<div class="padding-md">
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="panel panel-default">
-							<div class="panel-heading">Relatório</div>
-							<!--<form class="form-inline">-->
-							<div class="panel-body">
-								<!--<div class=" ">-->
-								<div class="col-md-4">
-									<label for="cargo">Relatórios</label> <select id="cargo"
-										class="form-control">
-										<option value="0">Selecionar</option>
-										<option value="1">Candidatos por vaga</option>
-										<option value="2">Vagas</option>
-										<option value="3">Candidatos</option>
-										<option value="4">Como ficou sabendo da vaga?</option>
-										<option value="5">Tempo de abertura da vaga</option>
-									</select>
-								</div>
-								<div class="col-md-3">
-									<label for="exampleInputEmail1">Data:</label>
-									<div class="input-group">
-										<input type="date" class="form-control"> <span
-											class="input-group-addon">até</span> <input type="date"
-											class="form-control">
-									</div>
-								</div>
-								<div class="text-right">
-									<a href="#" style="text-decoration: none; color: #ffffff">
-										<button class="btn btn-primary" style="margin-top: 22px;">Gerar</button>
-									</a>
-								</div>
-							</div>
-							<!--</panel body>-->
-						</div>
-						<!--</col-sm-12>-->
-					</div>
-					<!--</row>-->
-				</div>
-				<!--</padding>-->
-			</div>
-			<!--</container>-->
-		</div>
-	</div>
-	<!--</main container>-->
-	<!--corpo -->
+                                        <div class="select-box-option">
+                                            <a class="btn btn-sm btn-default" id="btnRemove"><i class="fa fa-angle-left"></i></a>
+                                            <a class="btn btn-sm btn-default" id="btnSelect"><i class="fa fa-angle-right"></i></a>
+                                            <div class="seperator"></div>
+                                            <a class="btn btn-sm btn-default" id="btnRemoveAll"><i class="fa fa-angle-double-left"></i></a>
+                                            <a class="btn btn-sm btn-default" id="btnSelectAll"><i class="fa fa-angle-double-right"></i></a>
+                                        </div>
+
+                                        <select multiple="multiple" id="selectedBox2" class="select-box pull-right form-control">
+                                            <option>Alterar candidato</option>
+                                            <option>Cadastrar usuário</option>
+                                            <option>Excluir usuário</option>
+                                            <option>Consultar usuário</option>
+                                        </select>       
+                                    </div>
+                                </div><!-- /panel -->
+                            </div><!-- /form-group -->
+                        </div>
+                        <div class="btn-group pull-right" >
+                            <a class="btn btn-success" href="#salvo" data-toggle="modal">Salvar</a>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
 	<c:import url="shared/footer.jsp"></c:import>
 	<c:import url="shared/js.jsp"></c:import>
+
+	<!-- javaScript aqui -->
+
 </body>
 </html>

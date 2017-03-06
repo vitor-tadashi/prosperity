@@ -1,28 +1,45 @@
 package br.com.prosperity.entity;
 
+import java.util.List;
+import javax.persistence.*;
+
+@Entity
+@Table(name="tbProjeto")
+
 public class ProjetoEntity {
-	private int idProjeto;
-	private String nmProjeto;
-	private String clienteProjeto;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
+	@Column(name="idProjeto", unique = true, nullable = false)
+	private int id;
+	
+	@Column(name="nmProjeto")
+	private String nome;
+	
+	@ManyToOne(cascade=CascadeType.ALL)
 	private FuncionarioEntity funcionario;
 	
+	@ManyToOne(cascade=CascadeType.ALL)
+	private String cliente;
+	
+	
 	public int getIdProjeto() {
-		return idProjeto;
+		return id;
 	}
 	public void setIdProjeto(int idProjeto) {
-		this.idProjeto = idProjeto;
+		this.id = idProjeto;
 	}
 	public String getNmProjeto() {
-		return nmProjeto;
+		return nome;
 	}
 	public void setNmProjeto(String nmProjeto) {
-		this.nmProjeto = nmProjeto;
+		this.nome = nmProjeto;
 	}
 	public String getClienteProjeto() {
-		return clienteProjeto;
+		return cliente;
 	}
 	public void setClienteProjeto(String clienteProjeto) {
-		this.clienteProjeto = clienteProjeto;
+		this.cliente = clienteProjeto;
 	}
 	public FuncionarioEntity getFuncionario() {
 		return funcionario;

@@ -1,5 +1,6 @@
 package br.com.prosperity.entity;
 
+
 import java.io.File;
 import java.util.Calendar;
 import java.util.List;
@@ -7,25 +8,18 @@ import java.util.List;
 import javax.persistence.*;
 
 
+/**
+ * Entity implementation class for Entity: PerfilFuncionalidadeEntity
+ *
+ */
 @Entity
-@Table(name= "tbUsuario")
+@Table(name="tbUsuario")
 public class UsuarioEntity {
-/* Mapeamento dos Atributos */
 	
-	/* Mapeamento do ID */
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
 	@Column(name="idUsuario", unique = true, nullable = false)
 	private int id;
-	/* fim Id */
-	
-	@Column(name = "nmUsuario")
-	private String nomeUsuario;
-	
-	@Column(name = "nmUsuario")
-	private String senhaUsuario;
-
-	/* Mapeamento de Relacionamentos Tudo o que estiver ligado na tabela Vaga 1-N*/
 	
 	@ManyToOne (cascade = CascadeType.ALL)
 	private PerfilEntity perfilEntity;
@@ -33,47 +27,50 @@ public class UsuarioEntity {
 	@OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER, orphanRemoval = true)
 	@PrimaryKeyJoinColumn
 	private FuncionarioEntity funcionarioEntity;
-
-	// relacionamento avaliadores
-				/* fim dos mapeamentos */
 	
-	private UsuarioEntity idusuario;
-	private PerfilEntity idperfil;
-	private FuncionarioEntity idfuncionario;
-	//classes
-	private String usuario;
+	@Column(name = "nmUsuario")
+	private String nome;
+	
+	@Column(name = "senha")
 	private String senha;
 	
-	
-	public UsuarioEntity getIdusuario() {
-		return idusuario;
+	public int getId() {
+		return id;
 	}
-	public void setIdusuario(UsuarioEntity idusuario) {
-		this.idusuario = idusuario;
+
+	public void setId(int id) {
+		this.id = id;
 	}
-	public PerfilEntity getIdperfil() {
-		return idperfil;
+
+	public PerfilEntity getPerfilEntity() {
+		return perfilEntity;
 	}
-	public void setIdperfil(PerfilEntity idperfil) {
-		this.idperfil = idperfil;
+
+	public void setPerfilEntity(PerfilEntity perfilEntity) {
+		this.perfilEntity = perfilEntity;
 	}
-	public FuncionarioEntity getIdfuncionario() {
-		return idfuncionario;
+
+	public FuncionarioEntity getFuncionarioEntity() {
+		return funcionarioEntity;
 	}
-	public void setIdfuncionario(FuncionarioEntity idfuncionario) {
-		this.idfuncionario = idfuncionario;
+
+	public void setFuncionarioEntity(FuncionarioEntity funcionarioEntity) {
+		this.funcionarioEntity = funcionarioEntity;
 	}
-	public String getUsuario() {
-		return usuario;
+
+	public String getNome() {
+		return nome;
 	}
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
+
 	public String getSenha() {
 		return senha;
 	}
+
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
 }

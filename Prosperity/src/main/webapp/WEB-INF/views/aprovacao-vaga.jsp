@@ -6,11 +6,10 @@
 <html lang="pt-br">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Aprovação vaga</title>
+<title>Aprovar vagas</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
-
 <c:import url="shared/stylesheet.jsp"></c:import>
 </head>
 <body>
@@ -65,7 +64,6 @@
 											</div>
 										</div>
 									</div>
-
 									<div class="form-group row">
 										<div>
 											<div class="form-group col-md-6" style="margin-bottom: 0px">
@@ -94,7 +92,6 @@
 											</div>
 										</div>
 									</div>
-
 									<div class="form-group row">
 										<div class="form-group col-md-4" style="margin-bottom: 0px">
 											<label for="exampleInputEmail1">Senioridade da vaga</label> <input
@@ -103,10 +100,8 @@
 												da Vaga" disabled>
 										</div>
 										<!-- /form-group -->
-
 										<div class="form-group" style="margin-bottom: 0px">
 											<label class="control-label">Horário</label>
-
 											<div>
 												<div class="form-group col-md-3">
 													<div class="input-group bootstrap-timepicker"
@@ -116,11 +111,9 @@
 															class="input-group-addon"><i class="fa fa-clock-o"></i></span>
 													</div>
 												</div>
-
 												<div class="form-group col-md-1">
 													<label style="margin-top: 7px">Às</label>
 												</div>
-
 												<div class="form-group col-md-3">
 													<div class="input-group bootstrap-timepicker"
 														style="width: 105%;">
@@ -130,12 +123,9 @@
 													</div>
 												</div>
 											</div>
-
 										</div>
 									</div>
-
 									<div class="form-group row">
-
 										<div class="">
 											<div class="form-group col-md-6" style="margin-bottom: 0px">
 												<label for="exampleInputPassword1">Faixa salarial</label> <input
@@ -144,7 +134,6 @@
 													disabled>
 											</div>
 											<!-- /form-group -->
-
 											<div class="form-group col-md-6" style="margin-bottom: 0px">
 												<label for="exampleInputEmail1">Aumento de quadro</label>
 												<div>
@@ -155,17 +144,13 @@
 														type="radio" name="inline-radio" disabled> <span
 														class="custom-radio"> </span> Substituição
 													</label>
-
 												</div>
 												<!-- /.col -->
 											</div>
 										</div>
 									</div>
-
 									<div class="form-group row">
-
 										<div class="form-group col-md-6" style="margin-bottom: 0px">
-
 											<div class="form-group">
 												<label class="control-label">Data para inicio</label>
 												<div class="form-group">
@@ -180,7 +165,6 @@
 											</div>
 											<!-- /form-group -->
 										</div>
-
 										<div class="form-group col-md-6" style="margin-bottom: 0px">
 											<div id="" class="">
 												<label>Nome do substituido</label> <input type="text"
@@ -188,18 +172,14 @@
 													disabled>
 											</div>
 										</div>
-
 									</div>
-
 								</form>
 							</div>
 							</section>
 							<!-- /Section -->
-
 							<section class="panel panel-default">
 							<div class="row">
 								<div class="panel-heading">Informações de projeto</div>
-
 								<div class="form-group row"></div>
 								<!-- /form-group -->
 								<div class="form-group col-md-4">
@@ -215,10 +195,8 @@
 										readonly class="form-control" value="Vitor Tadashi">
 								</div>
 							</div>
-
 							</section>
 							<!-- /panel -->
-
 							<section class="panel panel-default">
 							<div class="panel-heading">Formação acadêmica</div>
 							<div class="panel-body relative">
@@ -226,11 +204,9 @@
 									<textarea class="form-control" rows="3"></textarea>
 								</div>
 								<!-- /form-group -->
-
 							</div>
 							</section>
 							<!-- /panel -->
-
 							<section class="panel panel-default">
 							<div class="panel-heading">Perfil comportamental</div>
 							<div class="panel-body relative">
@@ -238,7 +214,6 @@
 									<textarea class="form-control" rows="3"></textarea>
 								</div>
 								<!-- /form-group -->
-
 							</div>
 							</section>
 							<!-- /panel -->
@@ -246,12 +221,10 @@
 							<section class="panel panel-default">
 							<div class="panel-heading">Perfil técnico</div>
 							<div class="panel-body relative">
-
 								<div class="form-group">
 									<textarea class="form-control" rows="3"></textarea>
 								</div>
 								<!-- /form-group -->
-
 							</div>
 							</section>
 							<!-- /panel -->
@@ -265,129 +238,111 @@
 			</div>
 		</div>
 	</div>
+	<c:import url="shared/dashboard.jsp"></c:import>
 	<!-- CORPO DA PÁGINA -->
-	<div class="padding-md">
-		<div class="panel panel-default">
-			<div class="panel-heading">Aprovação de vaga</div>
-			<div class="panel-body">
+<div id="main-container">
+                <div id="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li><i class="fa fa-home"></i><a href="dashboard.html"> Início</a></li>
+                        <li class="active"> Aprovação de vaga</li>
+                    </ul>
+                </div><!--breadcrumb-->
 
-				<table
-					class="table table-bordered table-condensed table-hover table-striped"
-					id=""
-					style="font-size: 12px !important; vertical-align: middle !important;">
-					<!-- Começo Tabela -->
-					<thead>
-						<tr class="text-center">
-							<th class="text-center">Nome da vaga</th>
-							<th class="text-center">Solicitante</th>
-							<th class="text-center">Senioridade</th>
-							<th class="text-center">Projeto</th>
-							<th class="text-center">Cliente</th>
-							<th class="text-center">Local de trabalho</th>
-							<th class="text-center">Data abertura</th>
-							<th class="text-center">Data encerramento</th>
-							<th class="text-center">Ações</th>
-						</tr>
-					</thead>
-					<tbody class="text-center">
-						<tr>
-							<td>Desenvolvedor</td>
-							<td>Vitor Tadashi</td>
-							<td>Senior</td>
-							<td>Projeto Web</td>
-							<td>Carrefour</td>
-							<td>Interno</td>
-							<td>17/02/2017</td>
-							<td>01/03/2017</td>
-							<td>
-								<div class="btn-group">
-									<!-- Começo Botão -->
-									<button class="btn btn-sm dropdown-toggle btn-info"
-										data-toggle="dropdown" aria-haspopup="true"
-										aria-expanded="false">
-										<i class="fa fa-cogs fa-lg"></i> <span class="caret"></span>
-									</button>
-									<ul class="dropdown-menu">
-										<li><a href="#vaga-modal" data-toggle="modal"><i
-												class="fa fa-eye">&nbsp</i>Visualizar</a></li>
-										<li role="separator" class="divider"></li>
-										<li><a href="#"><i class="fa fa-check fa-lg"></i>
-												Aprovar</a></li>
-										<li role="separator" class="divider"></li>
-										<li><a href="#"><i class="fa fa-times fa-lg"></i>
-												Reprovar</a></li>
-									</ul>
-								</div> <!-- Fim Botão -->
-							</td>
-						</tr>
-						<tr>
-							<td>Desenvolvedor</td>
-							<td>Vitor Tadashi</td>
-							<td>Senior</td>
-							<td>Projeto Web</td>
-							<td>Carrefour</td>
-							<td>Interno</td>
-							<td>17/02/2017</td>
-							<td>01/03/2017</td>
-							<td>
-								<div class="btn-group">
-									<!-- Começo Botão -->
-									<button class="btn btn-sm dropdown-toggle btn-info"
-										data-toggle="dropdown">
-										<i class="fa fa-cogs fa-lg"></i> <span class="caret"></span>
-									</button>
-									<ul class="dropdown-menu">
-										<li><a href="#vaga-modal" data-toggle="modal"><i
-												class="fa fa-eye">&nbsp</i>Visualizar</a></li>
-										<li role="separator" class="divider"></li>
-										<li><a href="#"><i class="fa fa-check fa-lg"></i>
-												Aprovar</a></li>
-										<li role="separator" class="divider"></li>
-										<li><a href="#"><i class="fa fa-times fa-lg"></i>
-												Reprovar</a></li>
-									</ul>
-								</div> <!-- Fim Botão -->
-							</td>
-						</tr>
-						<tr>
-							<td>Analista</td>
-							<td>Marcelo</td>
-							<td>Junior</td>
-							<td>Mobile</td>
-							<td>Alelo</td>
-							<td>Interno</td>
-							<td>17/02/2017</td>
-							<td>01/03/2017</td>
-							<td>
-								<div class="btn-group">
-									<!-- Começo Botão -->
-									<button class="btn btn-sm dropdown-toggle btn-info"
-										data-toggle="dropdown">
-										<i class="fa fa-cogs fa-lg"></i> <span class="caret"></span>
-									</button>
-									<ul class="dropdown-menu">
-										<li><a href="#vaga-modal" data-toggle="modal"><i
-												class="fa fa-eye">&nbsp</i>Visualizar</a></li>
-										<li role="separator" class="divider"></li>
-										<li><a href="#"><i class="fa fa-check fa-lg"></i>
-												Aprovar</a></li>
-										<li role="separator" class="divider"></li>
-										<li><a href="#"><i class="fa fa-times fa-lg"></i>
-												Reprovar</a></li>
-									</ul>
-								</div> <!-- Fim Botão -->
-							</td>
-						</tr>
+		<div class="padding-md">
+			<div class="panel panel-default">
+							<div class="panel-heading">Aprovação de vaga</div>
+							<div class="panel-body">
+
+			<table class="table table-bordered table-condensed table-hover table-striped" id="" style="font-size: 12px !important; vertical-align: middle !important;"> <!-- Começo Tabela -->
+						<thead>
+							<tr class="text-center">
+								<th class="text-center">Nome da vaga</th>
+								<th class="text-center">Solicitante</th>
+								<th class="text-center">Senioridade</th>
+								<th class="text-center">Projeto</th>
+								<th class="text-center">Cliente</th>
+								<th class="text-center">Local de trabalho</th>
+								<th class="text-center">Data abertura</th>
+								<th class="text-center">Data encerramento</th>
+								<th class="text-center">Ações</th>
+							</tr>
+						</thead>
+						<tbody class="text-center">
+							<tr>
+								<td>Desenvolvedor</td>
+								<td>Vitor Tadashi</td>
+								<td>Senior</td>
+								<td>Projeto Web</td>
+								<td>Carrefour</td>
+								<td>Interno</td>
+								<td>17/02/2017</td>
+								<td>01/03/2017</td>
+								<td>
+									<div class="btn-group"> <!-- Começo Botão -->
+										<button class="btn btn-sm dropdown-toggle btn-info" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<i class="fa fa-cogs fa-lg"></i> <span class="caret"></span>
+										</button>
+											<ul class="dropdown-menu">
+												<li><a href="#vaga-modal" data-toggle="modal"><i class="fa fa-eye">&nbsp</i>Visualizar</a></li>
+												<li role="separator" class="divider"></li>
+												<li><a href="#"><i class="fa fa-check fa-lg"></i> Aprovar</a></li>
+												<li role="separator" class="divider"></li>
+												<li><a href="#"><i class="fa fa-times fa-lg"></i> Reprovar</a></li>
+											</ul>
+									</div> <!-- Fim Botão -->
+								</td>
+							</tr>
+							<tr>
+								<td>Desenvolvedor</td>
+								<td>Vitor Tadashi</td>
+								<td>Senior</td>
+								<td>Projeto Web</td>
+								<td>Carrefour</td>
+								<td>Interno</td>
+								<td>17/02/2017</td>
+								<td>01/03/2017</td>
+								<td>
+									<div class="btn-group"> <!-- Começo Botão -->
+										<button class="btn btn-sm dropdown-toggle btn-info" data-toggle="dropdown"><i class="fa fa-cogs fa-lg"></i> <span class="caret"></span></button>
+											<ul class="dropdown-menu">
+												<li><a href="#vaga-modal" data-toggle="modal"><i class="fa fa-eye">&nbsp</i>Visualizar</a></li>
+												<li role="separator" class="divider"></li>
+												<li><a href="#"><i class="fa fa-check fa-lg"></i> Aprovar</a></li>
+												<li role="separator" class="divider"></li>
+												<li><a href="#"><i class="fa fa-times fa-lg"></i> Reprovar</a></li>
+											</ul>
+									</div> <!-- Fim Botão -->
+								</td>
+							</tr>
+							<tr>
+								<td>Analista</td>
+								<td>Marcelo</td>
+								<td>Junior</td>
+								<td>Mobile</td>
+								<td>Alelo</td>
+								<td>Interno</td>
+								<td>17/02/2017</td>
+								<td>01/03/2017</td>
+								<td>
+									<div class="btn-group"> <!-- Começo Botão -->
+										<button class="btn btn-sm dropdown-toggle btn-info" data-toggle="dropdown"><i class="fa fa-cogs fa-lg"></i> <span class="caret"></span></button>
+											<ul class="dropdown-menu">
+												<li><a href="#vaga-modal" data-toggle="modal"><i class="fa fa-eye">&nbsp</i>Visualizar</a></li>
+												<li role="separator" class="divider"></li>
+												<li><a href="#"><i class="fa fa-check fa-lg"></i> Aprovar</a></li>
+												<li role="separator" class="divider"></li>
+												<li><a href="#"><i class="fa fa-times fa-lg"></i> Reprovar</a></li>
+											</ul>
+									</div> <!-- Fim Botão -->
+								</td>
+							</tr>
 					</tbody>
-				</table>
-				<!-- Fim Tabela -->
-			</div>
-			<!-- /panel -->
-		</div>
-		<!-- /.padding-md -->
+					</table> <!-- Fim Tabela -->
+				</div><!-- /panel -->					
+		</div><!-- /.padding-md -->
 
+	</div><!-- /wrapper -->
 	</div>
-	<!-- /wrapper -->
 	<c:import url="shared/footer.jsp"></c:import>
 	<c:import url="shared/js.jsp"></c:import>
 </body>
