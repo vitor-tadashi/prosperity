@@ -14,11 +14,11 @@ public class UsuarioController {
 	public String primeiroAcessoUsuario(){
 		return "primeiro-acesso";
 	}
-	@RequestMapping(value ="/consulta", method = RequestMethod.GET)
+	@RequestMapping(value ="/consultar", method = RequestMethod.GET)
 	public String consultaUsuario(){
 		return "consultar-usuario";
 	}
-	@RequestMapping(value ="/cria-perfil", method = RequestMethod.GET)
+	@RequestMapping(value ="/criar-perfil", method = RequestMethod.GET)
 	public String criaPerfil(){
 		return "criar-perfil";
 	}

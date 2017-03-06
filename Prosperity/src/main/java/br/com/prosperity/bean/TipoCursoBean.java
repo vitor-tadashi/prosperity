@@ -8,7 +8,7 @@ public class TipoCursoBean {
 	private int id;
 	private String nome;
 
-	public TipoCursoBean(int idT, String nome) {
+	public TipoCursoBean(int id, String nome) {
 		this.id = id;
 		this.nome = nome;
 	}

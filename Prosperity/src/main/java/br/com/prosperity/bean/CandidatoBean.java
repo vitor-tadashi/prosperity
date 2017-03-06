@@ -8,7 +8,7 @@ public class CandidatoBean {
 	private String cpf;
 	private String nome;
 	private String rg;
-	private Calendar dtNascimento;
+	private Calendar dataNascimento;
 	private double valorPretensao;
 	private Calendar dataAbertura;
 	private Calendar dataFechamento;
@@ -21,16 +21,19 @@ public class CandidatoBean {
 	private UsuarioBean usuario;
 	private List<StatusBean> status;
 	private List<VagaBean> vagas;
-	//TODO relacionamento avaliadores	
 	
-	public CandidatoBean(String cpf, String nome, String rg, Calendar dtNascimento, double valorPretensao,
+	public CandidatoBean(){
+		
+	}
+	
+	public CandidatoBean(String cpf, String nome, String rg, Calendar dataNascimento, double valorPretensao,
 			Calendar dataAbertura, Calendar dataFechamento, String email, Calendar dataAlteracao, File curriculo,
 			ContatoBean contato, EnderecoBean endereco, FormacaoBean formacao, UsuarioBean usuario,
 			List<StatusBean> status, List<VagaBean> vagas) {
 		this.cpf = cpf;
 		this.nome = nome;
 		this.rg = rg;
-		this.dtNascimento = dtNascimento;
+		this.dataNascimento = dataNascimento;
 		this.valorPretensao = valorPretensao;
 		this.dataAbertura = dataAbertura;
 		this.dataFechamento = dataFechamento;
@@ -81,11 +84,11 @@ public class CandidatoBean {
 	public void setRg(String rg) {
 		this.rg = rg;
 	}
-	public Calendar getDtNascimento() {
-		return dtNascimento;
+	public Calendar getDataNascimento() {
+		return dataNascimento;
 	}
-	public void setDtNascimento(Calendar dtNascimento) {
-		this.dtNascimento = dtNascimento;
+	public void setDataNascimento(Calendar dtNascimento) {
+		this.dataNascimento = dtNascimento;
 	}
 
 	public String getEmail() {
