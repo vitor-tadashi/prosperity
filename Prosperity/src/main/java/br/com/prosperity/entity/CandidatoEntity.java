@@ -10,8 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -81,19 +80,20 @@ public class CandidatoEntity {
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
 
-//	private TipoStatusEntity status;
-	private List<StatusEntity> status;
+	@OneToMany
+	@JoinColumn(name = "idCandidato")
+	private List<StatusCandidatoEntity> statusCandidato;
 
-	private List<VagaEntity> vagas;
 
 	/* fim dos mapeamentos */
 
-	public String getCpf() {
-		return cpf;
+	
+	public int getId() {
+		return Id;
 	}
 
-	public File getCurriculo() {
-		return curriculo;
+	public void setId(int id) {
+		Id = id;
 	}
 
 	public String getNome() {
@@ -104,6 +104,14 @@ public class CandidatoEntity {
 		this.nome = nome;
 	}
 
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
 	public String getRg() {
 		return rg;
 	}
@@ -112,11 +120,11 @@ public class CandidatoEntity {
 		this.rg = rg;
 	}
 
-	public Calendar getDtNascimento() {
+	public Calendar getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDtNascimento(Calendar dataNascimento) {
+	public void setDataNascimento(Calendar dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
@@ -160,6 +168,14 @@ public class CandidatoEntity {
 		this.dataAlteracao = dataAlteracao;
 	}
 
+	public File getCurriculo() {
+		return curriculo;
+	}
+
+	public void setCurriculo(File curriculo) {
+		this.curriculo = curriculo;
+	}
+
 	public ContatoEntity getContato() {
 		return contato;
 	}
@@ -192,28 +208,12 @@ public class CandidatoEntity {
 		this.usuario = usuario;
 	}
 
-	public List<StatusEntity> getStatus() {
-		return status;
+	public List<StatusCandidatoEntity> getStatusCandidato() {
+		return statusCandidato;
 	}
 
-	public void setStatus(List<StatusEntity> status) {
-		this.status = status;
-	}
-
-	public List<VagaEntity> getVagas() {
-		return vagas;
-	}
-
-	public void setVagas(List<VagaEntity> vagas) {
-		this.vagas = vagas;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public void setCurriculo(File curriculo) {
-		this.curriculo = curriculo;
+	public void setStatusCandidato(List<StatusCandidatoEntity> statusCandidato) {
+		this.statusCandidato = statusCandidato;
 	}
 
 }
