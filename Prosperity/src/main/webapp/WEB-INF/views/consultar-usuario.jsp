@@ -282,12 +282,23 @@
 					</div>
 				</div>
 			</div>
+			<div class="panel-footer clearfix">
+				<ul class="pagination pagination-xs m-top-none pull-right">
+					<li class="disabled"><a href="#">Anterior</a></li>
+					<li class="active"><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">5</a></li>
+					<li><a href="#">Próxima</a></li>
+				</ul>
+			</div>
 		</div>
-		</div>
+	</div>
 
-		<c:import url="shared/footer.jsp"></c:import>
-		<c:import url="shared/js.jsp"></c:import>
+	<c:import url="shared/footer.jsp"></c:import>
+	<c:import url="shared/js.jsp"></c:import>
 
-		<!-- javaScript aqui -->
+	<!-- javaScript aqui -->
 </body>
 </html>
