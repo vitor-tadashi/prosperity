@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="UTF-8">
 <title>Consulta RH</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
@@ -271,7 +271,7 @@
 	<c:import url="shared/dashboard.jsp"></c:import>
 
 	<!--    Modais   -->
-	<!-- Modal Avaliação de Competencias -->
+	<!-- Modal AvaliaÃ§Ã£o de Competencias -->
 	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
 		aria-labelledby="myLargeModalLabel">
 		<div class="modal-dialog modal-lg" role="document">
@@ -279,7 +279,7 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 style="text-align: center;">Gestão de candidato</h4>
+					<h4 style="text-align: center;">GestÃ£o de candidato</h4>
 				</div>
 				<div class="modal-body">
 					<div class="panel-body">
@@ -287,14 +287,14 @@
 							<div class="panel-tab clearfix">
 								<ul class="tab-bar wizard-demo" id="wizardDemo">
 									<li class="active tab-verity"><a href="#first"
-										data-toggle="tab"><i class="fa fa-user"></i> Informações
+										data-toggle="tab"><i class="fa fa-user"></i> InformaÃ§Ãµes
 											de entrevista</a></li>
 									<li class="tab-verity"><a href="#second" data-toggle="tab"
 										class="text-success"><i class="fa fa-pencil"></i> Processo
-											de seleção</a></li>
+											de seleÃ§Ã£o</a></li>
 									<li class="tab-verity"><a href="#third" data-toggle="tab"
 										class="text-success"><i class="fa fa-briefcase"></i>
-											Avaliação de competências</a></li>
+											AvaliaÃ§Ã£o de competÃªncias</a></li>
 									<li class="tab-verity"><a href="#fourth" data-toggle="tab"
 										class="text-success"><i class="fa fa-money"></i> Proposta</a></li>
 								</ul>
@@ -376,7 +376,7 @@
 										</div>
 										<div class="form-group col-md-6">
 											<div class="form-group">
-												<label class="control-label">Data do último contato:</label>
+												<label class="control-label">Data do Ãºltimo contato:</label>
 												<div class="form-group">
 													<div class="input-group">
 														<input type="text" value="01/01/2017"
@@ -425,17 +425,17 @@
 									<div class="tab-pane fade" id="second">
 										<section id="dadosInterno" class="panel panel-default">
 										<div class="panel-body">
-											<label>Etapas dos processos de seleção: </label>
+											<label>Etapas dos processos de seleÃ§Ã£o: </label>
 											<!-- SOMENTE ALTERAR DAQUI PARA BAIXO -->
 											<form name="form1" action="paginaPHPouASP" method="post">
 												<input class="btn btn-xs btn-success" type="button"
 													value="Adicionar etapa" onclick="AddCampos()"> <br>
 												<br>
 												<script type="text/javascript">
-													//Escrevendo o código-fonte HTML e ocultando os campos criados:
+													//Escrevendo o cÃ³digo-fonte HTML e ocultando os campos criados:
 													for (iLoop = 1; iLoop <= totalCampos; iLoop++) {
 														document
-																.write("<span id='linha"+iLoop+"' style='display:none'> <select class='btn btn-default btn-xs dropdown-toggle' style='width: 160px;'><option value='0'>Selecione etapa</option><option value='1'>Prova Prática</option><option value='2'>Prova teórica</option><option value='3'>Dinâmica de Grupo</option></select> <input type='text' id='arq"+iLoop+"' name='arq"+iLoop+"'> <input class='btn btn-xs btn-danger' type='button' value='Remover' onclick='RemoverCampos(\""
+																.write("<span id='linha"+iLoop+"' style='display:none'> <select class='btn btn-default btn-xs dropdown-toggle' style='width: 160px;'><option value='0'>Selecione etapa</option><option value='1'>Prova PrÃ¡tica</option><option value='2'>Prova teÃ³rica</option><option value='3'>DinÃ¢mica de Grupo</option></select> <input type='text' id='arq"+iLoop+"' name='arq"+iLoop+"'> <input class='btn btn-xs btn-danger' type='button' value='Remover' onclick='RemoverCampos(\""
 																		+ iLoop
 																		+ "\")'></span><br>");
 													}
@@ -444,7 +444,7 @@
 											</form>
 											<div class="form-group">
 												<!-- SOMENTE ALTERAR DAQUI PARA CIMA -->
-												<label>Parecer técnico: </label>
+												<label>Parecer tÃ©cnico: </label>
 												<textarea class="form-control" id="message-text"
 													style="margin-left: 10px; width: 570px"></textarea>
 											</div>
@@ -465,14 +465,14 @@
 									<div class="tab-pane fade" id="third">
 										<section class="panel panel-default">
 										<div class="panel-heading text-center">
-											<label for="exampleInputEmail1">Avaliação de
-												competências</label>
+											<label for="exampleInputEmail1">AvaliaÃ§Ã£o de
+												competÃªncias</label>
 										</div>
 										<table class="table" style="font-size: 10px">
 											<thead class="text-center">
 												<tr class="text-center">
-													<th class="text-center">Competências</th>
-													<th>Insatisfatório</th>
+													<th class="text-center">CompetÃªncias</th>
+													<th>InsatisfatÃ³rio</th>
 													<th>Em Desenvolvimento</th>
 													<th>Atende as Expectativas</th>
 													<th>Supera as Expectativas</th>
@@ -537,7 +537,7 @@
 													</label></td>
 												</tr>
 												<tr>
-													<td>Execução e Entrega</td>
+													<td>ExecuÃ§Ã£o e Entrega</td>
 													<td><label class="label-radio inline"> <input
 															id="interno" type="radio" name="inline-radio5"> <span
 															class="custom-radio"></span>
@@ -671,7 +671,7 @@
 					<a id="excluir" href="#">
 						<button type="button" class="btn btn-danger">Sim</button>
 					</a>
-					<button type="button" class="btn btn-success" data-dismiss="modal">Não</button>
+					<button type="button" class="btn btn-success" data-dismiss="modal">NÃ£o</button>
 				</div>
 			</div>
 		</div>
@@ -715,20 +715,20 @@
 										</select>
 									</div>
 									<div class="col-md-1">
-										<label for="exampleInputEmail1">Salário</label> <input
+										<label for="exampleInputEmail1">SalÃ¡rio</label> <input
 											type="text" class="form-control" placeholder="De"
 											style="width: 80px">
 									</div>
 									<div class="col-md-1">
 										<label for="exampleInputEmail1">&nbsp;</label> <input
-											type="text" class="form-control" placeholder="Até"
+											type="text" class="form-control" placeholder="AtÃ©"
 											style="width: 80px">
 									</div>
 									<div class="col-md-3">
 										<label for="exampleInputEmail1">Data:</label>
 										<div class="input-group">
 											<input type="date" class="form-control"> <span
-												class="input-group-addon">até</span> <input type="date"
+												class="input-group-addon">atÃ©</span> <input type="date"
 												class="form-control">
 										</div>
 									</div>
@@ -748,11 +748,11 @@
 									<tr>
 										<th class="text-center">Nome do candidato</th>
 										<th class="text-center">Vaga</th>
-										<th class="text-center">Pretensão</th>
+										<th class="text-center">PretensÃ£o</th>
 										<th class="text-center">Data de abertura</th>
-										<th class="text-center">Data de aprovação</th>
+										<th class="text-center">Data de aprovaÃ§Ã£o</th>
 										<th class="text-center">Status</th>
-										<th class="text-center">Ações</th>
+										<th class="text-center">AÃ§Ãµes</th>
 									</tr>
 								</thead>
 								<tbody class="text-center">
@@ -762,11 +762,11 @@
 										<td>R$10.000</td>
 										<td>17/02/2015</td>
 										<td>31/04/2017</td>
-										<td><span class="label label-analiseRH">Em análise
+										<td><span class="label label-analiseRH">Em anÃ¡lise
 												do RH</span></td>
 										<td><span class="line"></span>
 											<div class="btn-group">
-												<!-- começo botao -->
+												<!-- comeÃ§o botao -->
 												<button type="button"
 													class="btn btn-info dropdown-toggle btn-sm"
 													data-toggle="dropdown" aria-haspopup="true"
@@ -776,7 +776,7 @@
 												<ul class="dropdown-menu slidedown btnAlinhado">
 													<li><a href="#aprovado-modal" data-toggle="modal"
 														data-toggle="modal" data-target=".bs-example-modal-lg"><i
-															class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
+															class="fa fa-tasks fa-lg"></i>&nbsp;GestÃ£o de candidato</a></li>
 													<li class="divider"></li>
 													<li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
 
@@ -793,10 +793,10 @@
 										<td>17/02/2015</td>
 										<td>25/07/2016</td>
 										<td><span class="label label-analiseTecnica">Em
-												análise técnica</span></td>
+												anÃ¡lise tÃ©cnica</span></td>
 										<td class="text-center"><span class="line"></span>
 											<div class="btn-group">
-												<!-- começo botao -->
+												<!-- comeÃ§o botao -->
 												<button type="button"
 													class="btn btn-info dropdown-toggle btn-sm"
 													data-toggle="dropdown" aria-haspopup="true"
@@ -806,7 +806,7 @@
 												<ul class="dropdown-menu slidedown btnAlinhado">
 													<li><a href="#aprovado-modal" data-toggle="modal"
 														data-toggle="modal" data-target=".bs-example-modal-lg"><i
-															class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
+															class="fa fa-tasks fa-lg"></i>&nbsp;GestÃ£o de candidato</a></li>
 													<li class="divider"></li>
 													<li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
 
@@ -825,7 +825,7 @@
 										<td><span class="label label-reprovado">Reprovado</span></td>
 										<td class="text-center"><span class="line"></span>
 											<div class="btn-group">
-												<!-- começo botao -->
+												<!-- comeÃ§o botao -->
 												<button type="button"
 													class="btn btn-info dropdown-toggle btn-sm"
 													data-toggle="dropdown" aria-haspopup="true"
@@ -835,7 +835,7 @@
 												<ul class="dropdown-menu slidedown btnAlinhado">
 													<li><a href="#aprovado-modal" data-toggle="modal"
 														data-toggle="modal" data-target=".bs-example-modal-lg"><i
-															class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
+															class="fa fa-tasks fa-lg"></i>&nbsp;GestÃ£o de candidato</a></li>
 													<li class="divider"></li>
 													<li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
 													<li class="divider"></li>
@@ -853,7 +853,7 @@
 										<td><span class="label label-stand">Candidatura</span></td>
 										<td class="text-center"><span class="line"></span>
 											<div class="btn-group">
-												<!-- começo botao -->
+												<!-- comeÃ§o botao -->
 												<button type="button"
 													class="btn btn-info dropdown-toggle btn-sm"
 													data-toggle="dropdown" aria-haspopup="true"
@@ -863,7 +863,7 @@
 												<ul class="dropdown-menu slidedown btnAlinhado">
 													<li><a href="#aprovado-modal" data-toggle="modal"
 														data-toggle="modal" data-target=".bs-example-modal-lg"><i
-															class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
+															class="fa fa-tasks fa-lg"></i>&nbsp;GestÃ£o de candidato</a></li>
 													<li class="divider"></li>
 													<li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
 													<li class="divider"></li>
@@ -882,7 +882,7 @@
 										</td>
 										<td>
 											<div class="btn-group">
-												<!-- começo botao -->
+												<!-- comeÃ§o botao -->
 												<button type="button"
 													class="btn btn-info dropdown-toggle btn-sm"
 													data-toggle="dropdown" aria-haspopup="true"
@@ -892,7 +892,7 @@
 												<ul class="dropdown-menu slidedown btnAlinhado">
 													<li><a href="#aprovado-modal" data-toggle="modal"
 														data-toggle="modal" data-target=".bs-example-modal-lg"><i
-															class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
+															class="fa fa-tasks fa-lg"></i>&nbsp;GestÃ£o de candidato</a></li>
 													<li class="divider"></li>
 													<li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
 													<li class="divider"></li>
@@ -913,7 +913,7 @@
 										<td>
 
 											<div class="btn-group">
-												<!-- começo botao -->
+												<!-- comeÃ§o botao -->
 												<button type="button"
 													class="btn btn-info dropdown-toggle btn-sm"
 													data-toggle="dropdown" aria-haspopup="true"
@@ -923,7 +923,7 @@
 												<ul class="dropdown-menu slidedown btnAlinhado">
 													<li><a href="#aprovado-modal" data-toggle="modal"
 														data-toggle="modal" data-target=".bs-example-modal-lg"><i
-															class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
+															class="fa fa-tasks fa-lg"></i>&nbsp;GestÃ£o de candidato</a></li>
 													<li class="divider"></li>
 													<li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
 													<li class="divider"></li>
@@ -945,7 +945,7 @@
 								<li><a href="#">3</a></li>
 								<li><a href="#">4</a></li>
 								<li><a href="#">5</a></li>
-								<li><a href="#">Próxima</a></li>
+								<li><a href="#">PrÃ³xima</a></li>
 							</ul>
 						</div>
 					</div>
@@ -1025,10 +1025,10 @@
 		});
 	</script>
 	<script type="text/javascript">
-		//Total máximo de campos que você permitirá criar em seu site:
+		//Total mÃ¡ximo de campos que vocÃª permitirÃ¡ criar em seu site:
 		var totalCampos = 4;
 
-		//Não altere os valores abaixo, pois são variáveis controle;
+		//NÃ£o altere os valores abaixo, pois sÃ£o variÃ¡veis controle;
 		var iLoop = 1;
 		var iCount = 0;
 		var linhaAtual;
@@ -1037,14 +1037,14 @@
 			var hidden1 = document.getElementById("hidden1");
 			var hidden2 = document.getElementById("hidden2");
 
-			//Executar apenas se houver possibilidade de inserção de novos campos:
+			//Executar apenas se houver possibilidade de inserÃ§Ã£o de novos campos:
 			if (iCount < totalCampos) {
 
-				//Limpar hidden1, para atualizar a lista dos campos que ainda estão vazios:
+				//Limpar hidden1, para atualizar a lista dos campos que ainda estÃ£o vazios:
 				hidden2.value = "";
 
-				//Atualizando a lista dos campos que estão ocultos.
-				//Essa lista ficará armazenada temporiariamente em hidden2;
+				//Atualizando a lista dos campos que estÃ£o ocultos.
+				//Essa lista ficarÃ¡ armazenada temporiariamente em hidden2;
 				for (iLoop = 1; iLoop <= totalCampos; iLoop++) {
 					if (document.getElementById("linha" + iLoop).style.display == "none") {
 						if (hidden2.value == "") {
@@ -1059,18 +1059,18 @@
 				linhasOcultas = hidden2.value.split(",");
 
 				if (linhasOcultas.length > 0) {
-					//Tornar visível o primeiro elemento de linhasOcultas:
+					//Tornar visÃ­vel o primeiro elemento de linhasOcultas:
 					document.getElementById(linhasOcultas[0]).style.display = "block";
 					iCount++;
 
-					//Acrescentando o índice zero a hidden1:
+					//Acrescentando o Ã­ndice zero a hidden1:
 					if (hidden1.value == "") {
 						hidden1.value = linhasOcultas[0];
 					} else {
 						hidden1.value += "," + linhasOcultas[0];
 					}
 
-					/*Retirar a opção acima da lista de itens ocultos: <-------- OPCIONAL!!!
+					/*Retirar a opÃ§Ã£o acima da lista de itens ocultos: <-------- OPCIONAL!!!
 					if (hidden2.value.indexOf(","+linhasOcultas[0]) != -1) {
 					        hidden2.value = hidden2.value.replace(linhasOcultas[0]+",","");
 					}else if (hidden2.indexOf(linhasOcultas[0]+",") == 0) {
@@ -1087,15 +1087,15 @@
 			//Criando ponteiro para hidden1:        
 			var hidden1 = document.getElementById("hidden1");
 
-			//Pegar o valor do campo que será excluído:
+			//Pegar o valor do campo que serÃ¡ excluÃ­do:
 			var campoValor = document.getElementById("arq" + id).value;
-			//Se o campo não tiver nenhum valor, atribuir a string: vazio:
+			//Se o campo nÃ£o tiver nenhum valor, atribuir a string: vazio:
 			if (campoValor == "") {
 				campoValor = "vazio";
 			}
 
-			if (confirm("O campo que contém o valor:\n» " + campoValor
-					+ "\nserá excluído!\n\nDeseja prosseguir?")) {
+			if (confirm("O campo que contÃ©m o valor:\nÂ» " + campoValor
+					+ "\nserÃ¡ excluÃ­do!\n\nDeseja prosseguir?")) {
 				document.getElementById("linha" + id).style.display = "none";
 				iCount--;
 

@@ -55,7 +55,7 @@ public class GenericDAOImpl<T, ID extends Serializable> implements GenericDAO<T,
 	public List<T> listar() {
 		List<T> ret = null;
 		try {
-			ret = findByCriteria();
+			ret = buscarPorCriterio();
 		} catch (Exception e) {
 
 		}
@@ -64,10 +64,10 @@ public class GenericDAOImpl<T, ID extends Serializable> implements GenericDAO<T,
 	}
 
 	@Override
-	public List<T> findAll(String propertyOrder, Boolean isDesc) {
+	public List<T> buscarTodos(String propertyOrder, Boolean isDesc) {
 		List<T> ret = null;
 		try {
-			ret = findByCriteria(propertyOrder, isDesc);
+			ret = buscarPorCriterio(propertyOrder, isDesc);
 		} catch (Exception e) {
 
 		}
@@ -88,7 +88,7 @@ public class GenericDAOImpl<T, ID extends Serializable> implements GenericDAO<T,
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<T> findByNamedQuery(final String name, Object... params) {
+	public List<T> buscarPorNomeQuery(final String name, Object... params) {
 		List<T> result = null;
 
 		try {
@@ -109,10 +109,10 @@ public class GenericDAOImpl<T, ID extends Serializable> implements GenericDAO<T,
 	/**
 	 * Use this inside subclasses as a convenience method.
 	 */
-	protected List<T> findByCriteria(final Criterion... criterion) {
+	protected List<T> buscarPorCriterio(final Criterion... criterion) {
 		List<T> ret = null;
 		try {
-			ret = findByCriteria(null, null, -1, -1, criterion);
+			ret = buscarPorCriterio(null, null, -1, -1, criterion);
 		} catch (Exception e) {
 
 		}
@@ -122,10 +122,10 @@ public class GenericDAOImpl<T, ID extends Serializable> implements GenericDAO<T,
 	/**
 	 * Use this inside subclasses as a convenience method.
 	 */
-	protected List<T> findByCriteria(String propertyOrder, Boolean isDesc, final Criterion... criterion) {
+	protected List<T> buscarPorCriterio(String propertyOrder, Boolean isDesc, final Criterion... criterion) {
 		List<T> ret = null;
 		try {
-			ret = findByCriteria(propertyOrder, isDesc, -1, -1, criterion);
+			ret = buscarPorCriterio(propertyOrder, isDesc, -1, -1, criterion);
 		} catch (Exception e) {
 
 		}
@@ -136,7 +136,7 @@ public class GenericDAOImpl<T, ID extends Serializable> implements GenericDAO<T,
 	 * Use this inside subclasses as a convenience method.
 	 */
 	@SuppressWarnings("unchecked")
-	protected List<T> findByCriteria(String propertyOrder, Boolean isDesc, final int firstResult, final int maxResults, final Criterion... criterion) {
+	protected List<T> buscarPorCriterio(String propertyOrder, Boolean isDesc, final int firstResult, final int maxResults, final Criterion... criterion) {
 		List<T> result = null;
 
 		try {
@@ -171,7 +171,7 @@ public class GenericDAOImpl<T, ID extends Serializable> implements GenericDAO<T,
 		return result;
 	}
 
-	protected int countByCriteria(Criterion... criterion) {
+	protected int contarPorCriterio(Criterion... criterion) {
 
 		Integer ret = null;
 
