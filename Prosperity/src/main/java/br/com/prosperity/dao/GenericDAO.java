@@ -12,9 +12,9 @@ public interface GenericDAO<T, K extends Serializable> {
 
 	List<T> listar();
 
-	List<T> findAll(String propertyOrder, Boolean isDesc);
+	List<T> buscarTodos(String propertyOrder, Boolean isDesc);
 
-	List<T> findByNamedQuery(final String queryName, Object... params);
+	List<T> buscarPorNomeQuery(final String nomeQuery, Object... params);
 
 	T adicionar(final T entity);
 

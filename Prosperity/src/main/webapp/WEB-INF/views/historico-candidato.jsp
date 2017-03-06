@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Histórico de candidato</title>
+<meta charset="UTF-8">
+<title>HistÃ³rico de candidato</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -270,8 +270,8 @@
 		<div id="breadcrumb">
 			<ul class="breadcrumb">
 				<li><i class="fa fa-home"></i><a href="dashboard.html">
-						Início</a></li>
-				<li class="active">Histórico candidato</li>
+						InÃ­cio</a></li>
+				<li class="active">HistÃ³rico candidato</li>
 			</ul>
 		</div>
 		<!--breadcrumb-->
@@ -281,13 +281,13 @@
 		<div class="padding-md">
 			<div class="row">
 				<section class="panel panel-default">
-				<div class="panel-heading">Informações básicas</div>
+				<div class="panel-heading">InformaÃ§Ãµes bÃ¡sicas</div>
 				<div class="panel-body">
 					<div class="row">
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Nome do candidato</label>
 							<div class="col-xs-7">
-								<p class="form-control-static">João da Silva</p>
+								<p class="form-control-static">JoÃ£o da Silva</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
@@ -329,7 +329,7 @@
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Cidade</label>
 							<div class="col-xs-7">
-								<p class="form-control-static">São Paulo</p>
+								<p class="form-control-static">SÃ£o Paulo</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
@@ -341,11 +341,11 @@
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Curso</label>
 							<div class="col-xs-7">
-								<p class="form-control-static">Engenharia da Computação</p>
+								<p class="form-control-static">Engenharia da ComputaÃ§Ã£o</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
-							<label class="col-xs-5 control-label">Instituição</label>
+							<label class="col-xs-5 control-label">InstituiÃ§Ã£o</label>
 							<div class="col-xs-7">
 								<p class="form-control-static">UNASP</p>
 							</div>
@@ -353,29 +353,29 @@
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Tipo de curso</label>
 							<div class="col-xs-7">
-								<p class="form-control-static">Graduação</p>
+								<p class="form-control-static">GraduaÃ§Ã£o</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
-							<label class="col-xs-5 control-label">Situação atual</label>
+							<label class="col-xs-5 control-label">SituaÃ§Ã£o atual</label>
 							<div class="col-xs-7">
 								<p class="form-control-static">Cursando</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
-							<label class="col-xs-5 control-label">Mês/Ano conclusão</label>
+							<label class="col-xs-5 control-label">MÃªs/Ano conclusÃ£o</label>
 							<div class="col-xs-7">
 								<p class="form-control-static">07/2018</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
-							<label class="col-xs-5 control-label">Pretensão salarial</label>
+							<label class="col-xs-5 control-label">PretensÃ£o salarial</label>
 							<div class="col-xs-7">
 								<p class="form-control-static">R$ 1200,00</p>
 							</div>
 						</div>
 						<div class="form-group col-xs-12">
-							<label class="col-xs-2 control-label">Competências</label>
+							<label class="col-xs-2 control-label">CompetÃªncias</label>
 							<div class="col-xs-4"
 								style="margin-left: 39px; padding-right: 30px">
 								<table class="table table-condensed table-bordered">
@@ -395,7 +395,7 @@
 												expectativas</span></td>
 									</tr>
 									<tr>
-										<td>Execução e entrega</td>
+										<td>ExecuÃ§Ã£o e entrega</td>
 										<td><span class="badge badge-info">Atende as
 												expectativas</span></td>
 									</tr>
@@ -425,14 +425,14 @@
 							<div class="tl-circ"></div>
 							<div class="timeline-panel">
 								<div class="tl-heading">
-									<h4>Contratação</h4>
+									<h4>ContrataÃ§Ã£o</h4>
 									<p>
 										<small class="text-muted"><i class="fa fa-calendar"></i>
 											01/02/2017</small>
 									</p>
 								</div>
 								<div class="tl-body">
-									<p>O candidato foi considerado apto para as funções da
+									<p>O candidato foi considerado apto para as funÃ§Ãµes da
 										vaga.</p>
 								</div>
 							</div>
@@ -451,8 +451,8 @@
 									</p>
 								</div>
 								<div class="tl-body">
-									<p>O candidato possui boa comunicação, aparenta ser
-										pró-ativo e possui vasto conhecimento na linguagem JAVA.</p>
+									<p>O candidato possui boa comunicaÃ§Ã£o, aparenta ser
+										prÃ³-ativo e possui vasto conhecimento na linguagem JAVA.</p>
 								</div>
 							</div>
 						</li>
@@ -466,8 +466,8 @@
 									</p>
 								</div>
 								<div class="tl-body">
-									<p>Realizado última etapa do processo seletivo, a próxima
-										etapa será a entrevista com o gestor.</p>
+									<p>Realizado Ãºltima etapa do processo seletivo, a prÃ³xima
+										etapa serÃ¡ a entrevista com o gestor.</p>
 								</div>
 							</div>
 						</li>

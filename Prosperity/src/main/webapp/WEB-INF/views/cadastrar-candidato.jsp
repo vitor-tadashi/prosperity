@@ -1,13 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html lang="pt-br">
     
     <head>
         
-        <meta charset="utf-8">
+        <meta charset="UTF-8">
         <title>Cadastro de Candidato</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
@@ -22,7 +22,7 @@
             <div id="main-container">
                 <div id="breadcrumb">
                     <ul class="breadcrumb">
-                        <li><i class="fa fa-home"></i><a href=""> Início</a></li>
+                        <li><i class="fa fa-home"></i><a href=""> InÃ­cio</a></li>
                         <li class="active"> Cadastrar candidato</li>
                     </ul>
                 </div><!--breadcrumb-->
@@ -32,14 +32,14 @@
                 <div class="padding-md">
                     <div class="row">
                         <div class="panel panel-default">
-                            <div class="panel-heading">Informações do candidato</div>
+                            <div class="panel-heading">InformaÃ§Ãµes do candidato</div>
                             <div class="panel-body">
                                 <form class="form-border" id="formCadastro" novalidate="">
                                     <div class="panel-tab clearfix">
                                         <ul class="tab-bar wizard-demo" id="wizardDemo">
                                             <li class="active tab-verity"><a href="#first" data-toggle="tab"><i class="fa fa-user"></i> Inf. pessoais</a></li>
-                                            <li class="tab-verity"><a href="#second" data-toggle="tab" class="text-success"><i class="fa fa-pencil"></i> Inf. acadêmicas</a></li>
-                                            <li class="tab-verity"><a href="#third" data-toggle="tab" class="text-success"><i class="fa fa-briefcase"></i> Currículo</a></li>
+                                            <li class="tab-verity"><a href="#second" data-toggle="tab" class="text-success"><i class="fa fa-pencil"></i> Inf. acadÃªmicas</a></li>
+                                            <li class="tab-verity"><a href="#third" data-toggle="tab" class="text-success"><i class="fa fa-briefcase"></i> CurrÃ­culo</a></li>
                                         </ul>
                                     </div>
                                     <div class="panel-body">
@@ -48,7 +48,7 @@
                                                 <div class="row">
                                                     <div class="form-group col-md-4">
                                                         <label class="control-label" for="nome">Nome</label>
-                                                        <input type="text" class="form-control" id="nome" data-required="true" placeholder="Informe seu nome" value="João da Silva">
+                                                        <input type="text" class="form-control" id="nome" data-required="true" placeholder="Informe seu nome" value="JoÃ£o da Silva">
                                                     </div>
                                                     <div class="form-group col-md-3">
                                                         <label for="email" class="control-label">E-mail</label>
@@ -75,11 +75,11 @@
                                                         <input type="text" class="form-control" id="cep" data-required="true" value="12345-000">
                                                     </div>
                                                     <div class="form-group col-md-6">
-                                                        <label for="endereco" class="control-label">Endereço</label>
+                                                        <label for="endereco" class="control-label">EndereÃ§o</label>
                                                         <input type="text" class="form-control" id="endereco" data-required="true" value="Av. Brigadeiro Faria Lima">
                                                     </div>
                                                     <div class="form-group col-md-2">
-                                                        <label for="numero" class="control-label">Número</label>
+                                                        <label for="numero" class="control-label">NÃºmero</label>
                                                         <input type="text" class="form-control" id="numero" data-required="true" value="1768">
                                                     </div>
                                                     <div class="form-group col-md-2">
@@ -91,8 +91,8 @@
                                                         <select class="form-control" id="estado" data-required="true">
                                                             <option value="">Selecione</option>
                                                             <option value="1" selected>Minas Gerais</option>
-                                                            <option value="2">Paraná</option>
-                                                            <option value="3">São Paulo</option>
+                                                            <option value="2">ParanÃ¡</option>
+                                                            <option value="3">SÃ£o Paulo</option>
                                                         </select>
                                                     </div>
                                                     <div class="form-group col-md-5">
@@ -101,7 +101,7 @@
                                                             <option value="">Selecione</option>
                                                             <option value="1" selected>Belo Horizonte</option>
                                                             <option value="2">Curitiba</option>
-                                                            <option value="3">São Paulo</option>
+                                                            <option value="3">SÃ£o Paulo</option>
                                                             <option value="4">Campinas</option>
                                                         </select>
                                                     </div>
@@ -113,35 +113,35 @@
                                                     <input type="text" class="form-control" id="curso" data-required="true" placeholder="Informe seu curso">
                                                 </div>
                                                 <div class="form-group col-md-5">
-                                                    <label for="instituicao">Instituição</label>
-                                                    <input type="text" class="form-control" id="instituicao" data-required="true" placeholder="Instituição">
+                                                    <label for="instituicao">InstituiÃ§Ã£o</label>
+                                                    <input type="text" class="form-control" id="instituicao" data-required="true" placeholder="InstituiÃ§Ã£o">
                                                 </div>
                                                 
                                                 <div class="form-group col-md-3">
                                                     <label for="tipoDeCurso">Tipo de curso</label>
                                                     <select class="form-control" id="tipoDeCurso">
                                                         <option value="0">Selecione</option>
-                                                        <option value="1">Formação Escolar Fundamental (1°Grau) e Média (3°Grau)</option>
-                                                        <option value="2">Curso Técnico - Médio (2°Grau)</option>
-                                                        <option value="3">Graduação</option>
-                                                        <option value="4">Pós Graduação - Especialização</option>
-                                                        <option value="5">Pós Graduação - MBA</option>
-                                                        <option value="6">Pós Graduação - Mestrado</option>
-                                                        <option value="7">Pós Graduação - Doutorado</option>
+                                                        <option value="1">FormaÃ§Ã£o Escolar Fundamental (1Â°Grau) e MÃ©dia (3Â°Grau)</option>
+                                                        <option value="2">Curso TÃ©cnico - MÃ©dio (2Â°Grau)</option>
+                                                        <option value="3">GraduaÃ§Ã£o</option>
+                                                        <option value="4">PÃ³s GraduaÃ§Ã£o - EspecializaÃ§Ã£o</option>
+                                                        <option value="5">PÃ³s GraduaÃ§Ã£o - MBA</option>
+                                                        <option value="6">PÃ³s GraduaÃ§Ã£o - Mestrado</option>
+                                                        <option value="7">PÃ³s GraduaÃ§Ã£o - Doutorado</option>
                                                         <option value="8">Cursos Complemetares</option>
                                                     </select> 
                                                 </div>
                                                 <div class="form-group col-md-2">
-                                                    <label for="situacaoAtual">Situação atual</label>
+                                                    <label for="situacaoAtual">SituaÃ§Ã£o atual</label>
                                                     <select class="form-control" id="situacaoAtual">
                                                         <option value="0">Selecione</option>
-                                                        <option value="1">Concluído</option>
+                                                        <option value="1">ConcluÃ­do</option>
                                                         <option value="2">Cursando</option>
                                                         <option value="3">Interrompido</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group col-md-2">
-                                                    <label for="mesAnoConclusao">Mês/Ano de conclusão</label>
+                                                    <label for="mesAnoConclusao">MÃªs/Ano de conclusÃ£o</label>
                                                     <input type="text" class="form-control" id="mesAnoConclusao" data-required="true">
                                                 </div>
                                             </div>
@@ -149,13 +149,13 @@
                                                 <div class="form-group col-xs-12">
                                                     <div class="row">
                                                         <div class="col-xs-12">
-                                                            <label class="control-label" for="pretensaoSalarial">Pretensão salarial</label>
+                                                            <label class="control-label" for="pretensaoSalarial">PretensÃ£o salarial</label>
                                                         </div>
                                                         <div class="col-md-2">
                                                             <input type="text" class="form-control" id="pretensaoSalarial" placeholder="R$" />
                                                         </div>
                                                         <div class="col-sm-1">
-                                                            <p class="text-center">até</p>
+                                                            <p class="text-center">atÃ©</p>
                                                         </div>
                                                         <div class="col-md-2">
                                                             <input type="text" class="form-control" placeholder="R$" />
@@ -183,12 +183,12 @@
                                                         <option value="4">ApInfo</option>
                                                         <option value="5">Catho</option>
                                                         <option value="6">Outros sites de oportunidades</option>
-                                                        <option value="7">Indicação de colegas</option>
+                                                        <option value="7">IndicaÃ§Ã£o de colegas</option>
                                                         <option value="8">Outros</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group col-xs-12">
-                                                    <label class="control-label">Currículo</label>
+                                                    <label class="control-label">CurrÃ­culo</label>
                                                     <div class="upload-file" style="width: 356px;">
                                                         <input type="file" id="upload-curriculo" class="upload-demo">
                                                         <label data-title="Selecione" for="upload-curriculo">
@@ -201,7 +201,7 @@
                                     </div>
                                     <div class="panel-footer text-right">
                                         <button class="btn btn-success btn-sm disabled" id="prevStep" disabled="">Anterior</button>
-                                        <button type="submit" class="btn btn-sm btn-success" id="nextStep">Próximo</button>
+                                        <button type="submit" class="btn btn-sm btn-success" id="nextStep">PrÃ³ximo</button>
                                     </div>
                                 </form>
                             </div>

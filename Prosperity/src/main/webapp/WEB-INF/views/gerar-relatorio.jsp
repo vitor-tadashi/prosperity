@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Gerar relatório</title>
+<meta charset="UTF-8">
+<title>Gerar relatÃ³rio</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -280,8 +280,8 @@
 		<div id="breadcrumb">
 			<ul class="breadcrumb">
 				<li><i class="fa fa-home"></i><a href="dashboard.html">
-						Início</a></li>
-				<li class="active">Gerar relatório</li>
+						InÃ­cio</a></li>
+				<li class="active">Gerar relatÃ³rio</li>
 			</ul>
 		</div>
 		<!--breadcrumb-->
@@ -293,12 +293,12 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="panel panel-default">
-							<div class="panel-heading">Relatório</div>
+							<div class="panel-heading">RelatÃ³rio</div>
 							<!--<form class="form-inline">-->
 							<div class="panel-body">
 								<!--<div class=" ">-->
 								<div class="col-md-4">
-									<label for="cargo">Relatórios</label> <select id="cargo"
+									<label for="cargo">RelatÃ³rios</label> <select id="cargo"
 										class="form-control">
 										<option value="0">Selecionar</option>
 										<option value="1">Candidatos por vaga</option>
@@ -312,7 +312,7 @@
 									<label for="exampleInputEmail1">Data:</label>
 									<div class="input-group">
 										<input type="date" class="form-control"> <span
-											class="input-group-addon">até</span> <input type="date"
+											class="input-group-addon">atÃ©</span> <input type="date"
 											class="form-control">
 									</div>
 								</div>
