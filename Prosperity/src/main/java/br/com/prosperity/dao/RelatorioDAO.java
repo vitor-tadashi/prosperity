@@ -1,5 +1,5 @@
 package br.com.prosperity.dao;
 
-public class ContatoDAO {
+public class RelatorioDAO {
 
 }

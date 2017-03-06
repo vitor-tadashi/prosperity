@@ -13,12 +13,12 @@ public class CandidatoController {
 		return "cadastrar-candidato";
 	}
 	
-	@RequestMapping(value ="consulta-rh", method = RequestMethod.GET)
+	@RequestMapping(value ="consultar-rh", method = RequestMethod.GET)
 	public String consultarCandidatoRH() {
 		return "consulta-rh";
 	}
 	
-	@RequestMapping(value ="consulta-gestor", method = RequestMethod.GET)
+	@RequestMapping(value ="consultar-gestor", method = RequestMethod.GET)
 	public String consultarCandidatoGestor() {
 		return "consulta-gestor";
 	}
