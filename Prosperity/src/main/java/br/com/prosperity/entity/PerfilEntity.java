@@ -29,9 +29,8 @@ public class PerfilEntity {
 	// relacionamento avaliadores
 	/* fim dos mapeamentos */
 	
-	private int id;
-	private String nome;
-	private List<FuncionalidadeEntity> permissoes; //relacionamento entre Perfil e Permissões
+	
+	private List<FuncionalidadeEntity> permissoes; //relacionamento entre Perfil e Permissï¿½es
 
 	public List<FuncionalidadeEntity> getPermissoes() {
 		return permissoes;
@@ -43,7 +42,7 @@ public class PerfilEntity {
 
 	public PerfilEntity(int id, String nome) {
 		this.id = id;
-		this.nome = nome;
+		this.nomePerfil = nome;
 	}
 	
 	public PerfilEntity(){
@@ -59,10 +58,10 @@ public class PerfilEntity {
 	}
 
 	public String getNome() {
-		return nome;
+		return nomePerfil;
 	}
 
 	public void setNome(String nome) {
-		this.nome = nome;
+		this.nomePerfil = nome;
 	}
 }
