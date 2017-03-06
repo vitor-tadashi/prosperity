@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="UTF-8">
 <title>Consultar vaga</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
@@ -73,9 +73,9 @@
 					<div class="panel-tab clearfix">
 						<ul class="tab-bar">
 							<li class="active"><a data-toggle="tab" href="#home"><i
-									class="fa fa-info-circle">&nbsp</i>Informações</a></li>
+									class="fa fa-info-circle">&nbsp</i>InformaÃ§Ãµes</a></li>
 							<li><a data-toggle="tab" href="#menu1"><i
-									class="fa fa-tags">&nbsp</i>Especificações</a></li>
+									class="fa fa-tags">&nbsp</i>EspecificaÃ§Ãµes</a></li>
 						</ul>
 					</div>
 					<div class="tab-content">
@@ -99,7 +99,7 @@
 									</div>
 									<div class="col-md-4">
 										<div class="form-group">
-											<label class="control-label">Data de aprovação</label>
+											<label class="control-label">Data de aprovaÃ§Ã£o</label>
 											<div class="form-group">
 												<div class="input-group">
 													<input type="text" value="01/01/2017"
@@ -138,7 +138,7 @@
 						</div>
 						<div id="menu1" class="tab-pane fade">
 							<section class="panel panel-default">
-							<div class="panel-heading">Informações básicas</div>
+							<div class="panel-heading">InformaÃ§Ãµes bÃ¡sicas</div>
 							<div class="panel-body">
 								<form>
 									<div class="form-group row">
@@ -188,7 +188,7 @@
 														class="custom-radio"></span> Real
 													</label> <label class="label-radio inline"> <input
 														type="radio" name="inline-radio3"> <span
-														class="custom-radio"></span> Prospecção
+														class="custom-radio"></span> ProspecÃ§Ã£o
 													</label> <label class="label-radio inline"> <input
 														type="radio" name="inline-radio3"> <span
 														class="custom-radio"></span> Hunting
@@ -203,8 +203,8 @@
 										<div class="form-group col-md-4" style="margin-bottom: 0px">
 											<label for="exampleInputEmail1">Senioridade da vaga</label> <select
 												class="form-control chzn-select">
-												<option>Estágio</option>
-												<option>Júnior</option>
+												<option>EstÃ¡gio</option>
+												<option>JÃºnior</option>
 												<option>Pleno</option>
 												<option>Senior</option>
 											</select>
@@ -212,7 +212,7 @@
 										<!-- /form-group -->
 
 										<div class="form-group" style="margin-bottom: 0px">
-											<label class="control-label">Horário</label>
+											<label class="control-label">HorÃ¡rio</label>
 
 											<div>
 												<div class="form-group col-md-3">
@@ -225,7 +225,7 @@
 												</div>
 
 												<div class="form-group col-md-1">
-													<label style="margin-top: 7px">Às</label>
+													<label style="margin-top: 7px">Ã€s</label>
 												</div>
 
 												<div class="form-group col-md-3">
@@ -260,7 +260,7 @@
 														class="custom-radio"> </span> Novo
 													</label> <label class="label-radio inline"> <input id="sub"
 														type="radio" name="inline-radio"> <span
-														class="custom-radio"> </span> Substituição
+														class="custom-radio"> </span> SubstituiÃ§Ã£o
 													</label>
 
 												</div>
@@ -303,7 +303,7 @@
 							</section>
 							<!-- /Section -->
 							<section class="panel panel-default">
-							<div class="panel-heading">Formação acadêmica</div>
+							<div class="panel-heading">FormaÃ§Ã£o acadÃªmica</div>
 							<div class="panel-body relative">
 								<div class="form-group">
 									<textarea class="form-control" rows="3"></textarea>
@@ -327,7 +327,7 @@
 							<!-- /panel -->
 
 							<section class="panel panel-default">
-							<div class="panel-heading">Perfil técnico</div>
+							<div class="panel-heading">Perfil tÃ©cnico</div>
 							<div class="panel-body relative">
 
 								<div class="form-group">
@@ -362,13 +362,13 @@
 					</button>
 					<h4 class="modal-title" id="modalLabel">Fechar vaga</h4>
 				</div>
-				<div class="modal-body">Deseja realmente fechar está vaga?</div>
+				<div class="modal-body">Deseja realmente fechar estÃ¡ vaga?</div>
 				<div class="modal-footer">
 					<a href="#">
 						<button id="fechaVaga" type="button" class="btn btn-primary"
 							data-dismiss="modal">Sim</button>
 					</a>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">NÃ£o</button>
 				</div>
 			</div>
 		</div>
@@ -387,13 +387,13 @@
 					</button>
 					<h4 class="modal-title" id="modalLabel">Cancelar vaga</h4>
 				</div>
-				<div class="modal-body">Deseja realmente cancelar está vaga?</div>
+				<div class="modal-body">Deseja realmente cancelar estÃ¡ vaga?</div>
 				<div class="modal-footer">
 					<a href="#">
 						<button id="excluiVaga" type="button" class="btn btn-primary"
 							data-dismiss="modal">Sim</button>
 					</a>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">NÃ£o</button>
 				</div>
 			</div>
 		</div>
@@ -406,7 +406,7 @@
 	<div id="main-container">
 		<div id="breadcrumb">
 			<ul class="breadcrumb">
-				<li><i class="fa fa-home"></i><a href="dashboard.html">Início</a></li>
+				<li><i class="fa fa-home"></i><a href="dashboard.html">InÃ­cio</a></li>
 				<li>Consultar</li>
 				<li class="active">Vaga</li>
 			</ul>
@@ -428,7 +428,7 @@
 											<option>Selecione:</option>
 											<option>Desenvolvedor .Net Junior</option>
 											<option>Desenvolvedor .Net Pleno</option>
-											<option>Desenvolvedor .Net Sênior</option>
+											<option>Desenvolvedor .Net SÃªnior</option>
 											<option>Analista Java Junior</option>
 										</select>
 									</div>
@@ -438,7 +438,7 @@
 									<label for="">Data</label>
 									<div class="input-group">
 										<input type="date" class="form-control"> <span
-											class="input-group-addon">até</span> <input type="date"
+											class="input-group-addon">atÃ©</span> <input type="date"
 											class="form-control">
 									</div>
 								</div>
@@ -472,7 +472,7 @@
 									<th class="text-center">Local de trabalho</th>
 									<th class="text-center">Data de abertura</th>
 									<th class="text-center">Status</th>
-									<th class="text-center">Ações</th>
+									<th class="text-center">AÃ§Ãµes</th>
 								</tr>
 							</thead>
 							<tbody class="text-center">
@@ -565,7 +565,7 @@
 								<li><a href="#">3</a></li>
 								<li><a href="#">4</a></li>
 								<li><a href="#">5</a></li>
-								<li><a href="#">Próximo</a></li>
+								<li><a href="#">PrÃ³ximo</a></li>
 							</ul>
 						</div>
 						<!--</div row>-->

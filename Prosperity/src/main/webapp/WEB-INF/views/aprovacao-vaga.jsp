@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="UTF-8">
 <title>Aprovar vagas</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
@@ -30,13 +30,13 @@
 					<div class="panel-tab clearfix">
 						<ul class="tab-bar">
 							<li class="active"><a data-toggle="tab" href="#home"><i
-									class="fa fa-tags">&nbsp</i>Especificações</a></li>
+									class="fa fa-tags">&nbsp</i>EspecificaÃ§Ãµes</a></li>
 						</ul>
 					</div>
 					<div class="tab-content">
 						<div id="home" class="tab-pane fade in active">
 							<section class="panel panel-default">
-							<div class="panel-heading">Informações básicas</div>
+							<div class="panel-heading">InformaÃ§Ãµes bÃ¡sicas</div>
 							<div class="panel-body">
 								<form>
 									<div class="form-group row">
@@ -82,7 +82,7 @@
 														class="custom-radio"></span> Real
 													</label> <label class="label-radio inline"> <input
 														type="radio" name="inline-radio3" disabled> <span
-														class="custom-radio"></span> Prospecção
+														class="custom-radio"></span> ProspecÃ§Ã£o
 													</label> <label class="label-radio inline"> <input
 														type="radio" name="inline-radio3" disabled> <span
 														class="custom-radio"></span> Hunting
@@ -96,12 +96,12 @@
 										<div class="form-group col-md-4" style="margin-bottom: 0px">
 											<label for="exampleInputEmail1">Senioridade da vaga</label> <input
 												type="name" class="form-control input-sm"
-												id="exampleInputEmail1" placeholder="Estágio" "Senioridade
+												id="exampleInputEmail1" placeholder="EstÃ¡gio" "Senioridade
 												da Vaga" disabled>
 										</div>
 										<!-- /form-group -->
 										<div class="form-group" style="margin-bottom: 0px">
-											<label class="control-label">Horário</label>
+											<label class="control-label">HorÃ¡rio</label>
 											<div>
 												<div class="form-group col-md-3">
 													<div class="input-group bootstrap-timepicker"
@@ -112,7 +112,7 @@
 													</div>
 												</div>
 												<div class="form-group col-md-1">
-													<label style="margin-top: 7px">Às</label>
+													<label style="margin-top: 7px">Ã€s</label>
 												</div>
 												<div class="form-group col-md-3">
 													<div class="input-group bootstrap-timepicker"
@@ -142,7 +142,7 @@
 														class="custom-radio"> </span> Novo
 													</label> <label class="label-radio inline"> <input id="sub"
 														type="radio" name="inline-radio" disabled> <span
-														class="custom-radio"> </span> Substituição
+														class="custom-radio"> </span> SubstituiÃ§Ã£o
 													</label>
 												</div>
 												<!-- /.col -->
@@ -179,7 +179,7 @@
 							<!-- /Section -->
 							<section class="panel panel-default">
 							<div class="row">
-								<div class="panel-heading">Informações de projeto</div>
+								<div class="panel-heading">InformaÃ§Ãµes de projeto</div>
 								<div class="form-group row"></div>
 								<!-- /form-group -->
 								<div class="form-group col-md-4">
@@ -198,7 +198,7 @@
 							</section>
 							<!-- /panel -->
 							<section class="panel panel-default">
-							<div class="panel-heading">Formação acadêmica</div>
+							<div class="panel-heading">FormaÃ§Ã£o acadÃªmica</div>
 							<div class="panel-body relative">
 								<div class="form-group">
 									<textarea class="form-control" rows="3"></textarea>
@@ -219,7 +219,7 @@
 							<!-- /panel -->
 
 							<section class="panel panel-default">
-							<div class="panel-heading">Perfil técnico</div>
+							<div class="panel-heading">Perfil tÃ©cnico</div>
 							<div class="panel-body relative">
 								<div class="form-group">
 									<textarea class="form-control" rows="3"></textarea>
@@ -239,21 +239,21 @@
 		</div>
 	</div>
 	<c:import url="shared/dashboard.jsp"></c:import>
-	<!-- CORPO DA PÁGINA -->
+	<!-- CORPO DA PÃGINA -->
 <div id="main-container">
                 <div id="breadcrumb">
                     <ul class="breadcrumb">
-                        <li><i class="fa fa-home"></i><a href="dashboard.html"> Início</a></li>
-                        <li class="active"> Aprovação de vaga</li>
+                        <li><i class="fa fa-home"></i><a href="dashboard.html"> InÃ­cio</a></li>
+                        <li class="active"> AprovaÃ§Ã£o de vaga</li>
                     </ul>
                 </div><!--breadcrumb-->
 
 		<div class="padding-md">
 			<div class="panel panel-default">
-							<div class="panel-heading">Aprovação de vaga</div>
+							<div class="panel-heading">AprovaÃ§Ã£o de vaga</div>
 							<div class="panel-body">
 
-			<table class="table table-bordered table-condensed table-hover table-striped" id="" style="font-size: 12px !important; vertical-align: middle !important;"> <!-- Começo Tabela -->
+			<table class="table table-bordered table-condensed table-hover table-striped" id="" style="font-size: 12px !important; vertical-align: middle !important;"> <!-- ComeÃ§o Tabela -->
 						<thead>
 							<tr class="text-center">
 								<th class="text-center">Nome da vaga</th>
@@ -264,7 +264,7 @@
 								<th class="text-center">Local de trabalho</th>
 								<th class="text-center">Data abertura</th>
 								<th class="text-center">Data encerramento</th>
-								<th class="text-center">Ações</th>
+								<th class="text-center">AÃ§Ãµes</th>
 							</tr>
 						</thead>
 						<tbody class="text-center">
@@ -278,7 +278,7 @@
 								<td>17/02/2017</td>
 								<td>01/03/2017</td>
 								<td>
-									<div class="btn-group"> <!-- Começo Botão -->
+									<div class="btn-group"> <!-- ComeÃ§o BotÃ£o -->
 										<button class="btn btn-sm dropdown-toggle btn-info" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 											<i class="fa fa-cogs fa-lg"></i> <span class="caret"></span>
 										</button>
@@ -289,7 +289,7 @@
 												<li role="separator" class="divider"></li>
 												<li><a href="#"><i class="fa fa-times fa-lg"></i> Reprovar</a></li>
 											</ul>
-									</div> <!-- Fim Botão -->
+									</div> <!-- Fim BotÃ£o -->
 								</td>
 							</tr>
 							<tr>
@@ -302,7 +302,7 @@
 								<td>17/02/2017</td>
 								<td>01/03/2017</td>
 								<td>
-									<div class="btn-group"> <!-- Começo Botão -->
+									<div class="btn-group"> <!-- ComeÃ§o BotÃ£o -->
 										<button class="btn btn-sm dropdown-toggle btn-info" data-toggle="dropdown"><i class="fa fa-cogs fa-lg"></i> <span class="caret"></span></button>
 											<ul class="dropdown-menu">
 												<li><a href="#vaga-modal" data-toggle="modal"><i class="fa fa-eye">&nbsp</i>Visualizar</a></li>
@@ -311,7 +311,7 @@
 												<li role="separator" class="divider"></li>
 												<li><a href="#"><i class="fa fa-times fa-lg"></i> Reprovar</a></li>
 											</ul>
-									</div> <!-- Fim Botão -->
+									</div> <!-- Fim BotÃ£o -->
 								</td>
 							</tr>
 							<tr>
@@ -324,7 +324,7 @@
 								<td>17/02/2017</td>
 								<td>01/03/2017</td>
 								<td>
-									<div class="btn-group"> <!-- Começo Botão -->
+									<div class="btn-group"> <!-- ComeÃ§o BotÃ£o -->
 										<button class="btn btn-sm dropdown-toggle btn-info" data-toggle="dropdown"><i class="fa fa-cogs fa-lg"></i> <span class="caret"></span></button>
 											<ul class="dropdown-menu">
 												<li><a href="#vaga-modal" data-toggle="modal"><i class="fa fa-eye">&nbsp</i>Visualizar</a></li>
@@ -333,7 +333,7 @@
 												<li role="separator" class="divider"></li>
 												<li><a href="#"><i class="fa fa-times fa-lg"></i> Reprovar</a></li>
 											</ul>
-									</div> <!-- Fim Botão -->
+									</div> <!-- Fim BotÃ£o -->
 								</td>
 							</tr>
 					</tbody>

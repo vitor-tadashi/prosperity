@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="UTF-8">
 <title>Consulta gestor</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
@@ -60,8 +60,8 @@
 		<div id="breadcrumb">
 			<ul class="breadcrumb">
 				<li><i class="fa fa-home"></i><a href="dashboard.html">
-						Início</a></li>
-				<li class="active">Solicitação de vaga</li>
+						InÃ­cio</a></li>
+				<li class="active">SolicitaÃ§Ã£o de vaga</li>
 			</ul>
 		</div>
 		<!--breadcrumb-->
@@ -69,14 +69,14 @@
 		<div class="padding-md">
 			<div class="row">
 				<div class="panel panel-default">
-					<div class="panel-heading">Informações da vaga</div>
+					<div class="panel-heading">InformaÃ§Ãµes da vaga</div>
 					<div class="panel-body">
 						<form class="form-border" id="formCadastro" novalidate="">
 							<div class="panel-tab clearfix">
 								<ul class="tab-bar wizard-demo" id="wizardDemo">
 									<li class="active tab-verity"><a href="#first"
-										data-toggle="tab"><i class="fa fa-user"></i> Informações
-											básicas</a></li>
+										data-toggle="tab"><i class="fa fa-user"></i> InformaÃ§Ãµes
+											bÃ¡sicas</a></li>
 									<li class="tab-verity"><a href="#second" data-toggle="tab"
 										class="text-success"><i class="fa fa-pencil"></i> Dados do
 											projeto</a></li>
@@ -136,7 +136,7 @@
 														class="custom-radio"></span> Real
 													</label> <label class="label-radio inline"> <input
 														type="radio" name="inline-radio3"> <span
-														class="custom-radio"></span> Prospecção
+														class="custom-radio"></span> ProspecÃ§Ã£o
 													</label> <label class="label-radio inline"> <input
 														type="radio" name="inline-radio3"> <span
 														class="custom-radio"></span> Hunting
@@ -152,8 +152,8 @@
 											<div class="form-group col-md-6">
 												<label for="exampleInputEmail1">Senioridade da vaga</label>
 												<select class="form-control chzn-select">
-													<option>Estágio</option>
-													<option>Júnior</option>
+													<option>EstÃ¡gio</option>
+													<option>JÃºnior</option>
 													<option>Pleno</option>
 													<option>Senior</option>
 												</select>
@@ -161,7 +161,7 @@
 											<!-- /form-group -->
 
 											<div class="form-group col-md-6">
-												<label class="control-label">Horário</label>
+												<label class="control-label">HorÃ¡rio</label>
 
 												<div>
 													<div class="form-group col-md-5">
@@ -175,7 +175,7 @@
 													<!-- /form-group -->
 
 													<div class="form-group col-md-1">
-														<label style="margin-top: 7px">às</label>
+														<label style="margin-top: 7px">Ã s</label>
 													</div>
 													<!-- /form-group -->
 
@@ -212,7 +212,7 @@
 														class="custom-radio"> </span> Novo
 													</label> <label class="label-radio inline"> <input id="sub"
 														type="radio" name="inline-radio"> <span
-														class="custom-radio"> </span> Substituição
+														class="custom-radio"> </span> SubstituiÃ§Ã£o
 													</label>
 												</div>
 												<!-- /.col -->
@@ -226,7 +226,7 @@
 
 											<div class="form-group col-md-6">
 												<div class="form-group">
-													<label class="control-label">Data para início</label>
+													<label class="control-label">Data para inÃ­cio</label>
 													<div class="form-group">
 														<div class="input-group">
 															<input type="text" value="01/01/2017"
@@ -260,11 +260,11 @@
 												<label for="exampleInputEmail1">Nome do projeto</label> <select
 													class="form-control chzn-select">
 													<option>P20150806_001 - Biometria Facial no Front
-														único</option>
+														Ãºnico</option>
 													<option>P20160120_001 - Melhorias na abertura de
 														Conta via internet</option>
-													<option>P20160805_001 - Cartão Gold</option>
-													<option>P20150226_001 - Migração Servidores 2012</option>
+													<option>P20160805_001 - CartÃ£o Gold</option>
+													<option>P20150226_001 - MigraÃ§Ã£o Servidores 2012</option>
 												</select>
 											</div>
 											<!-- /form-group -->
@@ -304,11 +304,11 @@
 													<label for="exampleInputEmail1">Nome do Projeto</label> <select
 														class="form-control chzn-select">
 														<option>P20150806_001 - Biometria Facial no Front
-															único</option>
+															Ãºnico</option>
 														<option>P20160120_001 - Melhorias na abertura de
 															Conta via internet</option>
-														<option>P20160805_001 - Cartão Gold</option>
-														<option>P20150226_001 - Migração Servidores 2012</option>
+														<option>P20160805_001 - CartÃ£o Gold</option>
+														<option>P20150226_001 - MigraÃ§Ã£o Servidores 2012</option>
 													</select>
 												</div>
 												<!-- /form-group -->
@@ -343,19 +343,19 @@
 
 											<div class="col-md-6">
 												<div class="form-group">
-													<label for="exampleInputEmail1">Nome do responsável</label>
+													<label for="exampleInputEmail1">Nome do responsÃ¡vel</label>
 													<input type="name" class="form-control input-sm"
 														id="exampleInputEmail1"
-														placeholder="Nome do Cliente Responsável"
+														placeholder="Nome do Cliente ResponsÃ¡vel"
 														data-required="true">
 												</div>
 												<!-- /form-group -->
 
 												<div class="form-group">
-													<label for="exampleInputEmail1">Área do responsável</label>
+													<label for="exampleInputEmail1">Ãrea do responsÃ¡vel</label>
 													<input type="text" class="form-control input-sm"
 														id="exampleInputEmail1"
-														placeholder="Área do Cliente Responsável"
+														placeholder="Ãrea do Cliente ResponsÃ¡vel"
 														data-required="true">
 												</div>
 												<!-- /form-group -->
@@ -364,7 +364,7 @@
 													<label for="exampleInputEmail1">E-mail</label> <input
 														type="email" class="form-control input-sm"
 														id="exampleInputEmail1"
-														placeholder="E-mail do Cliente Responsável"
+														placeholder="E-mail do Cliente ResponsÃ¡vel"
 														data-required="true">
 												</div>
 												<!-- /form-group -->
@@ -383,7 +383,7 @@
 									</div>
 									<div class="tab-pane fade" id="third">
 										<section class="panel panel-default">
-										<div class="panel-heading">Formação acadêmica</div>
+										<div class="panel-heading">FormaÃ§Ã£o acadÃªmica</div>
 										<div class="panel-body relative">
 											<textarea class="form-control" rows="3"></textarea>
 										</div>
@@ -399,7 +399,7 @@
 										<!-- /panel -->
 
 										<section class="panel panel-default">
-										<div class="panel-heading">Perfil técnico</div>
+										<div class="panel-heading">Perfil tÃ©cnico</div>
 										<div class="panel-body relative">
 											<textarea class="form-control" rows="3"></textarea>
 										</div>
@@ -412,7 +412,7 @@
 								<button class="btn btn-success btn-sm disabled" id="prevStep"
 									disabled="">Anterior</button>
 								<button type="submit" class="btn btn-sm btn-success"
-									id="nextStep">Próximo</button>
+									id="nextStep">PrÃ³ximo</button>
 							</div>
 						</form>
 
