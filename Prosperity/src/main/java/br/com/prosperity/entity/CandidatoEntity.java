@@ -18,7 +18,6 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "tbCandidato")
-
 public class CandidatoEntity {
 	/* Mapeamento dos Atributos */
 
