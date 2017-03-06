@@ -15,10 +15,10 @@ public class PerfilDAO extends GenericDAOImpl<PerfilEntity, Integer>{
 				return listaPerfis;
 			} 
 		
-			public PerfilEntity obterPorTipo(String tipo) {
-					<PerfilEntity> query = entityManager
+			public PerfilEntity obterPorTipo(String nome) {
+				TypedQuery<PerfilEntity> query = entityManager
 						.createQuery("SELECT u FROM PerfilBean AS u WHERE u.tipo = :tipo AND u.ativo = 'S'", PerfilEntity.class);
-				query.setParameter("tipo", tipo);
+				query.setParameter("nomePerfil", nome);
 				List<PerfilEntity> listaPerfil = query.getResultList();
 				if (listaPerfil.isEmpty()) {
 					return null;
