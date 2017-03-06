@@ -1,6 +1,12 @@
 package br.com.prosperity.entity;
 
+
+import java.io.File;
+import java.util.Calendar;
+import java.util.List;
+
 import javax.persistence.*;
+
 
 /**
  * Entity implementation class for Entity: PerfilFuncionalidadeEntity
@@ -8,28 +14,26 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="tbUsuario")
-
 public class UsuarioEntity {
-
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idCliente", unique = true)
+	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+	@Column(name="idUsuario", unique = true, nullable = false)
 	private int id;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
-	private PerfilEntity idPerfil;
+	@ManyToOne (cascade = CascadeType.ALL)
+	private PerfilEntity perfilEntity;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-	@JoinColumn(name = "idFuncionario")
-	private FuncionarioEntity idFuncionario;
+	@OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER, orphanRemoval = true)
+	@PrimaryKeyJoinColumn
+	private FuncionarioEntity funcionarioEntity;
 	
-	//classes
-	@Column(name="nmUsuario")
+	@Column(name = "nmUsuario")
 	private String nome;
 	
-	@Column(name="senha")
+	@Column(name = "senha")
 	private String senha;
-
+	
 	public int getId() {
 		return id;
 	}
@@ -38,20 +42,20 @@ public class UsuarioEntity {
 		this.id = id;
 	}
 
-	public PerfilEntity getIdPerfil() {
-		return idPerfil;
+	public PerfilEntity getPerfilEntity() {
+		return perfilEntity;
 	}
 
-	public void setIdPerfil(PerfilEntity idPerfil) {
-		this.idPerfil = idPerfil;
+	public void setPerfilEntity(PerfilEntity perfilEntity) {
+		this.perfilEntity = perfilEntity;
 	}
 
-	public FuncionarioEntity getIdFuncionario() {
-		return idFuncionario;
+	public FuncionarioEntity getFuncionarioEntity() {
+		return funcionarioEntity;
 	}
 
-	public void setIdFuncionario(FuncionarioEntity idFuncionario) {
-		this.idFuncionario = idFuncionario;
+	public void setFuncionarioEntity(FuncionarioEntity funcionarioEntity) {
+		this.funcionarioEntity = funcionarioEntity;
 	}
 
 	public String getNome() {
@@ -69,5 +73,4 @@ public class UsuarioEntity {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-		
 }
