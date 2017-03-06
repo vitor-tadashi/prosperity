@@ -1,5 +1,7 @@
 package br.com.prosperity.dao;
 
-public class AvaliadorDAO {
+import br.com.prosperity.entity.AvaliadorEntity;
+
+public class AvaliadorDAO extends GenericDAOImpl<AvaliadorEntity, Integer>{
 
 }
