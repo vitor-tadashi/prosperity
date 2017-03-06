@@ -2,14 +2,14 @@
 package br.com.prosperity.entity;
 
 import java.util.Date;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToOne;	
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -39,9 +39,22 @@ public class StatusCandidatoEntity {
 	@Column(name = "dsParecer")
 	private String descricaoParecer;
 	
-	@ManyToOne
-	@JoinColumn(name="idStatus")
+	
+	/* Mapeamento de Relacionamentos */
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "idStatus")
 	private StatusEntity status;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "idcpf")
+	private CandidatoEntity candidato ;
+	
+	
+
+
+	/* fim dos mapeamentos */
+
 
 	public int getId() {
 		return id;
