@@ -100,7 +100,7 @@ CREATE TABLE tbTipoCurso (
 	nmTipoCurso VARCHAR(40)
 );
 
-CREATE TABLE CargoSenioridade (
+CREATE TABLE tbCargoSenioridade (
 	idCargoSenioridade INT PRIMARY KEY IDENTITY(1,1),
 	idCargo INT FOREIGN KEY REFERENCES tbCargo(idCargo), 
 	idSenioridade INT FOREIGN KEY REFERENCES tbSenioridade(idSenioridade),
