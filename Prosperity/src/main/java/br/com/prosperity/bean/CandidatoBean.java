@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class CandidatoBean {
+	private int id;
 	private String cpf;
 	private String nome;
 	private String rg;
@@ -48,6 +49,16 @@ public class CandidatoBean {
 		this.vagas = vagas;
 	}
 	
+	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getCpf() {
 		return cpf;
 	}
