@@ -20,6 +20,9 @@ public class ClienteEntity {
 	@Column(name="nmCliente")
 	private String nome;
 
+	public ClienteEntity() {
+	}
+	
 	public ClienteEntity(int id, String nmCliente) {
 		this.id = id;
 		this.nome = nmCliente;
