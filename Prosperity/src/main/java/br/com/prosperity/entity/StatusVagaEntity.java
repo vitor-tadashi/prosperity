@@ -29,10 +29,12 @@ public class StatusVagaEntity {
 	/* fim */
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	private String idStatus;
+	@JoinColumn(name="idStatus")
+	private StatusEntity idStatus;
 	
-	@ManyToOne
-	private String idVaga;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="idVaga")
+	private VagaEntity idVaga;
 	
 	@Column (name = "dtAlteracao")
 	@Temporal(TemporalType.DATE)
@@ -48,8 +50,6 @@ public class StatusVagaEntity {
 	@JoinColumn(name = "idVaga")
 	private VagaEntity vaga;
 	
-
-
 	/* fim dos mapeamentos */
 
 
@@ -61,19 +61,19 @@ public class StatusVagaEntity {
 		this.id = id;
 	}
 
-	public String getIdStatus() {
+	public StatusEntity getIdStatus() {
 		return idStatus;
 	}
 
-	public void setIdStatus(String idStatus) {
+	public void setIdStatus(StatusEntity idStatus) {
 		this.idStatus = idStatus;
 	}
 
-	public String getIdVaga() {
+	public VagaEntity getIdVaga() {
 		return idVaga;
 	}
 
-	public void setIdVaga(String idVaga) {
+	public void setIdVaga(VagaEntity idVaga) {
 		this.idVaga = idVaga;
 	}
 
