@@ -1,24 +1,31 @@
 package br.com.prosperity.bean;
 
 public class StatusBean {
-	private String idStatus;
+	
+	private int id;
 	private String nome;
 	private String Css;
 	private String tipo;
 	
-	public StatusBean(String idStatus, String nome, String Css, String tipo) {
-		this.idStatus = idStatus;
+	public StatusBean(int id, String nome, String Css, String tipo) {
+		this.id = id;
 		this.nome = nome;
 		this.Css = Css;
 		this.tipo = tipo;
 		
 	}
-	public String getDescricao() {
-		return idStatus;
+	public StatusBean() {
 	}
-	public void setDescricao(String idStatus) {
-		this.idStatus = idStatus;
+
+	public int getId() {
+		return id;
 	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	
 	public String getCss() {
 		return Css;
 	}
