@@ -42,6 +42,9 @@ public class FuncionarioBean {
 	public CargoBean getCargo() {
 		return cargo;
 	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public void setCargo(CargoBean cargo) {
 		this.cargo = cargo;
 	}
