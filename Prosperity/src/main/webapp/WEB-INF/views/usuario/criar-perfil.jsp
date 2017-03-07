@@ -11,7 +11,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<c:import url="shared/stylesheet.jsp"></c:import>
+<c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
 
 <!-- Link e style aqui -->
 <style>
@@ -312,7 +312,7 @@
 	</div>
 	<!-- Modal -->
 
-	<c:import url="shared/dashboard.jsp"></c:import>
+	<c:import url="/WEB-INF/views/shared/dashboard.jsp"></c:import>
 
 	<!-- Corpo da pagina aqui -->
 	<div id="main-container">
@@ -367,8 +367,8 @@
                 </div>
         </div>
 
-	<c:import url="shared/footer.jsp"></c:import>
-	<c:import url="shared/js.jsp"></c:import>
+	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
+	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
 
 	<!-- javaScript aqui -->
 

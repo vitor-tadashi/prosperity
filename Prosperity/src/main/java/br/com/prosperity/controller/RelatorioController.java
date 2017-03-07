@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class RelatorioController {
 	@RequestMapping(value ="", method = RequestMethod.GET)
 	public String relatorio() {
-		return "gerar-relatorio";
+		return "relatorio/gerar-relatorio";
 	}
 
 }

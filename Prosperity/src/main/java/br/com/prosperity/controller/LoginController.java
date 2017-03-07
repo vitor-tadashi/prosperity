@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class LoginController {
 	@RequestMapping(value ="login", method = RequestMethod.GET)
 	public String indexLogin() {
-		return "acesso";
+		return "login/acesso";
 	}
 	@RequestMapping(value ="primeiro-acesso", method = RequestMethod.GET)
 	public String primeiroAcessoUsuario(){
-		return "primeiro-acesso";
+		return "login/primeiro-acesso";
 	}
 }
