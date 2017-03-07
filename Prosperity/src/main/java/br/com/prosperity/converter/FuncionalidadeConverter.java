@@ -25,18 +25,6 @@ public class FuncionalidadeConverter implements Converter<FuncionalidadeEntity, 
 
 		return bean;
 	}
-	/*
-	 * public List<FuncionalidadeBean>
-	 * convertListEntityToBean(List<FuncionalidadeEntity> listEntity){
-	 * List<FuncionalidadeBean> bean = new ArrayList<>();
-	 * 
-	 * convertBeanToEntity(listEntity); for(FuncionalidadeEntity e :
-	 * listEntity){ bean.add(convertEntityToBean(e)); }
-	 * 
-	 * return bean;
-	 * 
-	 * }
-	 */
 
 	@Override
 	public List<FuncionalidadeBean> convertEntityToBean(List<FuncionalidadeEntity> entities) {
