@@ -216,5 +216,4 @@ public class GenericDAOImpl<T, ID extends Serializable> implements GenericDAO<T,
 		}
 		return entity;
 	}
-
 }

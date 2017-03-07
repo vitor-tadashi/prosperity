@@ -306,7 +306,7 @@
 											<div>
 												<div class="form-group col-md-6">
 													<label for="exampleInputEmail1">Nome do candidato:</label>
-													<!--<input type="name" class="form-control input-sm" id="exampleInputEmail1" placeholder="Nome do candidato" data-required="true">-->
+													<input type="name" class="form-control input-sm" id="exampleInputEmail1" placeholder="Nome do candidato" data-required="true">
 												</div>
 												<!-- /form-group -->
 											</div>
@@ -314,9 +314,8 @@
 										<!-- /form-group -->
 										<div class="row">
 											<div class="form-group col-md-6">
-												<label for="exampleInputEmail1">Vaga:</label> <br> <br>
-												<br>
-												<!--
+												<label for="exampleInputEmail1">Vaga:</label>
+												
                                                         <select class="form-control chzn-select">
                                                             <option>Selecione:</option>
                                                             <option>Analista de testes</option>
@@ -324,11 +323,18 @@
                                                             <option>Desenvolvedor</option>
                                                             <option>Gerente de projetos</option>
                                                         </select>   
-                                                        -->
+                                                        
 											</div>
 											<!-- /form-group -->
 											<div class="form-group col-md-6">
 												<label for="exampleInputEmail1">Senioridade da vaga:</label>
+												<select class="form-control chzn-select">
+                                                            <option>Selecione:</option>
+                                                            <option>Analista de testes</option>
+                                                            <option>Analista de sistemas</option>
+                                                            <option>Desenvolvedor</option>
+                                                            <option>Gerente de projetos</option>
+                                                        </select>
 											</div>
 											<!-- /form-group -->
 										</div>

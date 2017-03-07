@@ -1,14 +1,14 @@
 package br.com.prosperity.bean;
 
-public class ClienteBean {
+public class ClienteEntity {
 	private int id;
 	private String nome;
 
-	public ClienteBean() {
+	public ClienteEntity() {
 
 	}
 
-	public ClienteBean(int id, String nome) {
+	public ClienteEntity(int id, String nome) {
 		this.id = id;
 		this.nome = nome;
 	}
