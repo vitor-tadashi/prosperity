@@ -1,7 +1,6 @@
 package br.com.prosperity.entity;
 
-import java.io.File;
-import java.util.Calendar;
+
 import java.util.List;
 
 import javax.persistence.*;
@@ -15,7 +14,7 @@ public class PerfilEntity {
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
 	@Column(name="idUsuario", unique = true, nullable = false)
-	private int id;
+	private int idPerfil;
 	/* fim Id */
 
 	@Column(name = "nmPerfil")
@@ -40,8 +39,8 @@ public class PerfilEntity {
 		this.permissoes = permissoes;
 	}
 
-	public PerfilEntity(int id, String nome) {
-		this.id = id;
+	public PerfilEntity(int idPerfil, String nome) {
+		this.idPerfil = idPerfil;
 		this.nomePerfil = nome;
 	}
 	
@@ -50,11 +49,11 @@ public class PerfilEntity {
 	}
 
 	public int getId() {
-		return id;
+		return idPerfil;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.idPerfil = id;
 	}
 
 	public String getNome() {

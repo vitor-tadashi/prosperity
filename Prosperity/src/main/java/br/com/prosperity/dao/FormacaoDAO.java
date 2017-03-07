@@ -18,8 +18,10 @@ public class FormacaoDAO extends GenericDAOImpl<FormacaoEntity, Integer> {
 	 *            parameters
 	 * @return listaCliente (retorna a lista de formação)
 	 */
+	@Override
 	public List<FormacaoEntity> listar() {
-		TypedQuery<FormacaoEntity> query = entityManager.createQuery("SELECT formacao FROM tbFormacao AS formacao", FormacaoEntity.class);
+		TypedQuery<FormacaoEntity> query = entityManager.createQuery("SELECT formacao FROM tbFormacao AS formacao",
+				FormacaoEntity.class);
 		List<FormacaoEntity> listaFormacao = query.getResultList();
 		return listaFormacao;
 	}
@@ -33,8 +35,8 @@ public class FormacaoDAO extends GenericDAOImpl<FormacaoEntity, Integer> {
 	 */
 	@Override
 	public FormacaoEntity obterPorId(Integer idCurso) {
-		TypedQuery<FormacaoEntity> query = entityManager
-				.createQuery("SELECT formacao FROM tbFormacao AS formacao WHERE formacao.id = :id", FormacaoEntity.class);
+		TypedQuery<FormacaoEntity> query = entityManager.createQuery(
+				"SELECT formacao FROM tbFormacao AS formacao WHERE formacao.id = :id", FormacaoEntity.class);
 		return query.setParameter("id", idCurso).getResultList().get(0);
 	}
 

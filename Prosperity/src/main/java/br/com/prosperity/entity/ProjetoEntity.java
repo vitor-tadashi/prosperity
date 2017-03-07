@@ -17,12 +17,13 @@ public class ProjetoEntity {
 	private String nome;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="idFuncionario")
 	private FuncionarioEntity funcionario;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
-	private String cliente;
-	
-	
+	@JoinColumn(name="idCliente")
+	private ClienteEntity cliente;
+		
 	public int getIdProjeto() {
 		return id;
 	}
@@ -35,10 +36,10 @@ public class ProjetoEntity {
 	public void setNmProjeto(String nmProjeto) {
 		this.nome = nmProjeto;
 	}
-	public String getClienteProjeto() {
+	public ClienteEntity getClienteProjeto() {
 		return cliente;
 	}
-	public void setClienteProjeto(String clienteProjeto) {
+	public void setClienteProjeto(ClienteEntity clienteProjeto) {
 		this.cliente = clienteProjeto;
 	}
 	public FuncionarioEntity getFuncionario() {
