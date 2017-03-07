@@ -1,5 +1,7 @@
 package br.com.prosperity.dao;
 
-public class FuncionalidadeDAO {
+import br.com.prosperity.entity.FuncionalidadeEntity;
+
+public class FuncionalidadeDAO extends GenericDAOImpl<FuncionalidadeEntity, Integer>{
 
 }

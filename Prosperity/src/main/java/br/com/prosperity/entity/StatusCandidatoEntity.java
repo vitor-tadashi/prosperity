@@ -49,9 +49,6 @@ public class StatusCandidatoEntity {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idcpf")
 	private CandidatoEntity candidato ;
-	
-	
-
 
 	/* fim dos mapeamentos */
 
