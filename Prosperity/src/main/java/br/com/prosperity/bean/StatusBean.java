@@ -1,7 +1,8 @@
 package br.com.prosperity.bean;
 
 public class StatusBean {
-	private String idStatus;
+
+	private int id;
 	private String nome;
 	private String Css;
 	private String tipo;
@@ -9,20 +10,20 @@ public class StatusBean {
 	public StatusBean() {
 	}
 
-	public StatusBean(String idStatus, String nome, String Css, String tipo) {
-		this.idStatus = idStatus;
+	public StatusBean(int id, String nome, String Css, String tipo) {
+		this.id = id;
+
 		this.nome = nome;
 		this.Css = Css;
 		this.tipo = tipo;
-
 	}
 
-	public String getIdStatus() {
-		return idStatus;
+	public int getId() {
+		return id;
 	}
 
-	public void setIdStatus(String idStatus) {
-		this.idStatus = idStatus;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -48,5 +49,4 @@ public class StatusBean {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-
 }
