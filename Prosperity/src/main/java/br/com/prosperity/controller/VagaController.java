@@ -9,16 +9,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class VagaController {
 	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
 	public String cliente() {
-		return "consultar-vaga";
+		return "vaga/consultar-vaga";
 	}
 
 	@RequestMapping(value = "/aprovar", method = RequestMethod.GET)
 	public String aprovacaoVaga() {
-
-		return "aprovacao-vaga";
+		return "vaga/aprovacao-vaga";
 	}
 	@RequestMapping (value= "/solicitar", method = RequestMethod.GET)
 	public String solicitarVaga(){
-		return "solicitar-vaga";
+		return "vaga/solicitar-vaga";
 	}
 }

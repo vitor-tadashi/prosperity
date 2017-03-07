@@ -11,7 +11,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<c:import url="shared/stylesheet.jsp"></c:import>
+<c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
 
 <!-- Link e style aqui -->
 
@@ -268,7 +268,7 @@
 </head>
 <body>
 
-	<c:import url="shared/dashboard.jsp"></c:import>
+	<c:import url="/WEB-INF/views/shared/dashboard.jsp"></c:import>
 
 	<!--    Modais   -->
 	<!-- Modal Avaliação de Competencias -->
@@ -1000,8 +1000,8 @@
 			</div>
 		</div>
 	</div>
-	<c:import url="shared/footer.jsp"></c:import>
-	<c:import url="shared/js.jsp"></c:import>
+	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
+	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
 
 	<script>
 		$(function() {

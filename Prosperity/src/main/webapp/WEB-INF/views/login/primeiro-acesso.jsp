@@ -11,7 +11,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<c:import url="shared/stylesheet.jsp"></c:import>
+<c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
 
 <!-- Link e style aqui -->
 
@@ -59,7 +59,7 @@
 		</div><!-- /login-widget -->
 	</div><!-- /login-wrapper -->
 
-	<c:import url="shared/js.jsp"></c:import>
+	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
 
 	<!-- javaScript aqui -->
 
