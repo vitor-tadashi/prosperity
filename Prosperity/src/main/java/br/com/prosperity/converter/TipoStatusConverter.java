@@ -1,7 +1,5 @@
 package br.com.prosperity.converter;
 
-import java.util.List;
-
 import br.com.prosperity.bean.TipoStatusBean;
 import br.com.prosperity.entity.TipoStatusEntity;
 
@@ -23,10 +21,4 @@ public class TipoStatusConverter implements Converter <TipoStatusEntity, TipoSta
 		bean.setStatus(entity.getStatus());
 		return null;
 	}
-
-	@Override
-	public List<TipoStatusBean> convertEntityToBean(List<TipoStatusEntity> entities) {
-		return null;
-	}
-
 }

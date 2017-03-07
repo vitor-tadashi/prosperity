@@ -1,12 +1,7 @@
 package br.com.prosperity.converter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import br.com.prosperity.bean.ContatoBean;
-import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.entity.ContatoEntity;
-import br.com.prosperity.entity.FuncionalidadeEntity;
 
 public class ContatoConverter implements Converter<ContatoEntity, ContatoBean> {
 
@@ -28,16 +23,5 @@ public class ContatoConverter implements Converter<ContatoEntity, ContatoBean> {
 		bean.setCelular(entity.getCelular());
 		bean.setTelefone(entity.getTelefone());
 		return null;
-	}
-
-	@Override
-	public List<ContatoBean> convertEntityToBean(List<ContatoEntity> entities) {
-		List<ContatoBean> beanList = new ArrayList<>();
-		
-		for (ContatoEntity e : entities) {
-			beanList.add(convertEntityToBean(e));
-		}
-
-		return beanList;
 	}
 }
