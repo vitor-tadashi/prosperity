@@ -11,20 +11,20 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 
-
 public class GenericDAOImpl<T, ID extends Serializable> implements GenericDAO<T, ID> {
 
 	// ~ Instance fields
 	// --------------------------------------------------------
 	private Class<T> entityClass;
-	
+
 	@PersistenceContext
 	protected EntityManager entityManager;
 
 	@SuppressWarnings("unchecked")
 	public GenericDAOImpl() {
 
-		this.entityClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+		this.entityClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass())
+				.getActualTypeArguments()[0];
 	}
 
 	public GenericDAOImpl(final Class<T> persistentClass) {
@@ -93,8 +93,6 @@ public class GenericDAOImpl<T, ID extends Serializable> implements GenericDAO<T,
 		return result;
 	}
 
-
-
 	/**
 	 * Use this inside subclasses as a convenience method.
 	 */
@@ -125,7 +123,8 @@ public class GenericDAOImpl<T, ID extends Serializable> implements GenericDAO<T,
 	 * Use this inside subclasses as a convenience method.
 	 */
 	@SuppressWarnings("unchecked")
-	protected List<T> findByCriteria(String propertyOrder, Boolean isDesc, final int firstResult, final int maxResults, final Criterion... criterion) {
+	protected List<T> findByCriteria(String propertyOrder, Boolean isDesc, final int firstResult, final int maxResults,
+			final Criterion... criterion) {
 		List<T> result = null;
 
 		try {
