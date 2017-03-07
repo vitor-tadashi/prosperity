@@ -1,6 +1,8 @@
 package br.com.prosperity.converter;
 
 
+import java.util.List;
+
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.entity.UsuarioEntity;
 
@@ -26,6 +28,9 @@ public class UsuarioConverter implements Converter<UsuarioEntity,UsuarioBean>{
 		return bean;
 	}
 
-	
-
+	@Override
+	public List<UsuarioBean> convertEntityToBean(List<UsuarioEntity> entities) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
