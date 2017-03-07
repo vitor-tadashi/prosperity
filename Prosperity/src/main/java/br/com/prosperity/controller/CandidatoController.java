@@ -10,21 +10,21 @@ public class CandidatoController {
 	
 	@RequestMapping(value ="cadastrar", method = RequestMethod.GET)
 	public String cadastrarCandidato() {
-		return "cadastrar-candidato";
+		return "candidato/cadastrar-candidato";
 	}
 	
 	@RequestMapping(value ="consultar-rh", method = RequestMethod.GET)
 	public String consultarCandidatoRH() {
-		return "consulta-rh";
+		return "candidato/consulta-rh";
 	}
 	
 	@RequestMapping(value ="consultar-gestor", method = RequestMethod.GET)
 	public String consultarCandidatoGestor() {
-		return "consulta-gestor";
+		return "candidato/consulta-gestor";
 	}
 	
 	@RequestMapping(value ="historico", method = RequestMethod.GET)
 	public String historicoCandidato() {
-		return "historico-candidato";
+		return "candidato/historico-candidato";
 	}
 }
