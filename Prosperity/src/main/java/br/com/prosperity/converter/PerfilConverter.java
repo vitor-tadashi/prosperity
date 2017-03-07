@@ -1,8 +1,5 @@
 package br.com.prosperity.converter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import br.com.prosperity.bean.PerfilBean;
 import br.com.prosperity.entity.PerfilEntity;
 
@@ -32,16 +29,4 @@ public class PerfilConverter implements Converter<PerfilEntity, PerfilBean> {
 		bean.setId(entity.getId());
 		return null;
 	}
-
-	@Override
-	public List<PerfilBean> convertEntityToBean(List<PerfilEntity> entities) {
-		List<PerfilBean> beanList = new ArrayList<>();
-		
-		for (PerfilEntity e : entities) {
-			beanList.add(convertEntityToBean(e));
-		}
-
-		return beanList;
-	}
-
 }
