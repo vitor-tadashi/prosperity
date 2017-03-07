@@ -12,6 +12,7 @@ public class ContatoBean {
 	}
 	private int id;
 	private String telefone;
+	private String celular;
 	private CandidatoBean candidato;
 	
 	public CandidatoBean getCandidato() {
@@ -31,5 +32,11 @@ public class ContatoBean {
 	}
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+	public String getCelular() {
+		return celular;
+	}
+	public void setCelular(String celular) {
+		this.celular = celular;
 	}
 }
