@@ -2,36 +2,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 	version="2.0">
-	<persistence-unit name="JPA_EFICAZ_HIBERNATE" transaction-type="RESOURCE_LOCAL">
-		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<!-- <class>com.jpa.eficaz.model.Musica</class> -->
-		<exclude-unlisted-classes>true</exclude-unlisted-classes>
-		<properties>
-			<property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
-	      	<property name="javax.persistence.jdbc.url"    value="jdbc:sqlserver://localhost\MSSQLSERVER2016:1433;databaseName=prosperity" />
-		    <property name="javax.persistence.jdbc.user" value="sa" />
-		    <property name="javax.persistence.jdbc.password" value="Pa$$w0rd" />
-		    <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
-		    <property name="show_sql" value="true"/>
-		    <property name="hibernate.format_sql" value="true" />
-		    <property name="hibernate.hbm2ddl.auto" value="update" />
-		    <property name="hibernate.temp.use_jdbc_metadata_defaults" value="false"/>
-			<!-- outras propriedades -->
-		</properties>
-	</persistence-unit>
-	
 	<persistence-unit name="prosperityPU">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<non-jta-data-source>java:comp/env/jdbc/prosperityDS</non-jta-data-source>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
-			
-			<!-- Configurações específicas do Hibernate -->
-			<property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect" />
-			<property name="hibernate.hbm2ddl.auto" value="update" />
-			<property name="hibernate.show_sql" value="true" />
-			<property name="hibernate.format_sql" value="true" />
 		</properties>
 	</persistence-unit>
 </persistence>
