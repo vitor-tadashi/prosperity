@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="tbCargoSenioridade")
 
-public class CargoSenioridade{
+public class CargoSenioridadeEntity{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
