@@ -5,12 +5,12 @@ public class StatusBean {
 	private int id;
 	private String nome;
 	private String Css;
-	private String tipo;
+	private int tipo;
 
 	public StatusBean() {
 	}
 
-	public StatusBean(int id, String nome, String Css, String tipo) {
+	public StatusBean(int id, String nome, String Css, int tipo) {
 		this.id = id;
 
 		this.nome = nome;
@@ -42,11 +42,11 @@ public class StatusBean {
 		Css = css;
 	}
 
-	public String getTipo() {
+	public int getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(String tipo) {
+	public void setTipo(int tipo) {
 		this.tipo = tipo;
 	}
 }
