@@ -7,6 +7,6 @@ import javax.persistence.TypedQuery;
 import br.com.prosperity.bean.UsuarioBean;
 
 
-public class UsuarioDAO {
+public class UsuarioDAO extends GenericDAOImpl<UsuarioBean, Integer>{
 	
 }

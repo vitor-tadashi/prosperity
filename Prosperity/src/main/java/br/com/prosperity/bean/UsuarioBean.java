@@ -1,14 +1,26 @@
 package br.com.prosperity.bean;
 
 public class UsuarioBean {
-
+	private int IdUsuario;
 	private PerfilBean perfil;
 	private FuncionarioBean funcionario;
 	//classes
 	private String nome;
 	private String senha;
+	
+	//métodos
+	
+	public UsuarioBean() {
+		
+	}
 	public PerfilBean getPerfil() {
 		return perfil;
+	}
+	public int getIdUsuario() {
+		return IdUsuario;
+	}
+	public void setIdUsuario(int idUsuario) {
+		IdUsuario = idUsuario;
 	}
 	public void setPerfil(PerfilBean perfil) {
 		this.perfil = perfil;
