@@ -1,5 +1,8 @@
 package br.com.prosperity.converter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.com.prosperity.bean.RelatorioBean;
 import br.com.prosperity.entity.RelatorioEntity;
 
@@ -19,6 +22,16 @@ public class RelatorioConverter implements Converter<RelatorioEntity, RelatorioB
 		bean.setId(entity.getId());
 
 		return bean;
+	}
+
+	@Override
+	public List<RelatorioBean> convertEntityToBean(List<RelatorioEntity> entities) {
+		List<RelatorioBean> beanList = new ArrayList<>();
+		for (RelatorioEntity e : entities) {
+			beanList.add(convertEntityToBean(e));
+
+		}
+		return beanList;
 	}
 
 }
