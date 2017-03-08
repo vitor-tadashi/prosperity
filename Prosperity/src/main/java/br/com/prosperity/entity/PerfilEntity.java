@@ -18,7 +18,7 @@ public class PerfilEntity {
 	/* fim Id */
 
 	@Column(name = "nmPerfil")
-	private String nomePerfil;
+	private String nome;
 	
 /* Mapeamento de Relacionamentos Tudo o que estiver ligado na tabela Vaga 1-N*/
 	
@@ -28,20 +28,11 @@ public class PerfilEntity {
 	// relacionamento avaliadores
 	/* fim dos mapeamentos */
 	
-	
-	private List<FuncionalidadeEntity> permissoes; //relacionamento entre Perfil e Permiss�es
 
-	public List<FuncionalidadeEntity> getPermissoes() {
-		return permissoes;
-	}
-
-	public void setPermissoes(List<FuncionalidadeEntity> permissoes) {
-		this.permissoes = permissoes;
-	}
 
 	public PerfilEntity(int idPerfil, String nome) {
 		this.idPerfil = idPerfil;
-		this.nomePerfil = nome;
+		this.nome = nome;
 	}
 	
 	public PerfilEntity(){
@@ -57,10 +48,10 @@ public class PerfilEntity {
 	}
 
 	public String getNome() {
-		return nomePerfil;
+		return nome;
 	}
 
 	public void setNome(String nome) {
-		this.nomePerfil = nome;
+		this.nome = nome;
 	}
 }

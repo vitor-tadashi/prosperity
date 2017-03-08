@@ -1,28 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:jee="http://www.springframework.org/schema/jee"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="
-		http://www.springframework.org/schema/jee
-		http://www.springframework.org/schema/jee/spring-jee.xsd
-		http://www.springframework.org/schema/mvc
-		http://www.springframework.org/schema/mvc/spring-mvc.xsd
-		http://www.springframework.org/schema/beans
-		http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context
-		http://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/tx
-        http://www.springframework.org/schema/tx/spring-tx.xsd">
+	xmlns:oxm="http://www.springframework.org/schema/oxm" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/oxm
+						http://www.springframework.org/schema/oxm/spring-oxm-3.2.xsd
+						http://www.springframework.org/schema/mvc 
+						http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+						http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context-3.2.xsd
+						http://www.springframework.org/schema/jee 
+						http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
+						http://www.springframework.org/schema/task 
+						http://www.springframework.org/schema/task/spring-task-3.1.xsd
+						http://www.springframework.org/schema/tx 
+						http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+	<context:annotation-config />
 
-    <context:annotation-config />
-    <mvc:annotation-driven />
-    
-	<context:component-scan base-package="br.com.prosperity.controller" />
+	<task:annotation-driven />
+
+	<tx:annotation-driven />
+
+	<!-- MVC -->
+	<mvc:annotation-driven />
+
+	<context:component-scan base-package="br.com.prosperity.bean" />
 	<context:component-scan base-package="br.com.prosperity.business" />
+	<context:component-scan base-package="br.com.prosperity.controller" />
+	<context:component-scan base-package="br.com.prosperity.converter" />
 	<context:component-scan base-package="br.com.prosperity.dao" />
+	<context:component-scan base-package="br.com.prosperity.entity" />
+	<context:component-scan base-package="br.com.prosperity.rest" />
 	
+
 	<mvc:resources mapping="/resources/**" location="/resources/" />
-	
+
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
@@ -32,5 +49,39 @@
 			<value>.jsp</value>
 		</property>
 	</bean>
-	
+
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+		scope="singleton">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="br.com.prosperity.entity" />
+		<property name="jpaVendorAdapter">
+			<bean id="hibernateJpaVendorAdapter"
+				class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"></bean>
+		</property>
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+				<prop key="hibernate.archive.autodetection">class</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+		<property name="url"
+			value="jdbc:sqlserver://192.168.2.20/mssql2012:1433;instanceName=Prosperity;Database=Prosperity" />
+		<property name="username" value="axa_developers" />
+		<property name="password" value="axa@123" />
+	</bean>
+
 </beans>

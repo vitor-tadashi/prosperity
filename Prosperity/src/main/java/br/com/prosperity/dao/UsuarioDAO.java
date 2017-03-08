@@ -1,13 +1,9 @@
 package br.com.prosperity.dao;
 
-import javax.persistence.TypedQuery;
-
 import org.springframework.stereotype.Repository;
 
-import br.com.prosperity.entity.UsuarioEntity;
 
-
-//@Repository
+@Repository
 public class UsuarioDAO/* extends GenericDAOImpl<UsuarioEntity, Integer> */{
 /*
 	public UsuarioEntity obterPorUsuario(String nmUsuario, String senha) {

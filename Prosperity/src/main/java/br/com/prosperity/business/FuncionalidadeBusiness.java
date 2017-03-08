@@ -21,10 +21,10 @@ public class FuncionalidadeBusiness {
 
 	@Transactional
 	public List<FuncionalidadeBean> obterTodos() {
-			List<FuncionalidadeEntity> listaFuncionalidadeEntity = funcionalidadeDAO.listar();
-			List<FuncionalidadeBean> listaFuncionalidadeBean = funcionalidadeConverter
-					.convertEntityToBean(listaFuncionalidadeEntity);
 
-			return listaFuncionalidadeBean;
+		List<FuncionalidadeEntity> funcionalidadeEntity = funcionalidadeDAO.listar();
+		List<FuncionalidadeBean> funcionalidadeBean = null;
+
+			return funcionalidadeBean;
 	}
 }

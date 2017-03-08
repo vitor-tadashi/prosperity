@@ -1,8 +1,11 @@
 package br.com.prosperity.converter;
 
+import org.springframework.stereotype.Component;
+
 import br.com.prosperity.bean.RelatorioBean;
 import br.com.prosperity.entity.RelatorioEntity;
 
+@Component
 public class RelatorioConverter implements Converter<RelatorioEntity, RelatorioBean> {
 
 	@Override

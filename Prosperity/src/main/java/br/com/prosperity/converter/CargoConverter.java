@@ -1,8 +1,11 @@
 package br.com.prosperity.converter;
 
+import org.springframework.stereotype.Component;
+
 import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.entity.CargoEntity;
 
+@Component
 public class CargoConverter implements Converter<CargoEntity, CargoBean> {
 
 	@Override

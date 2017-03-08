@@ -1,8 +1,11 @@
 package br.com.prosperity.converter;
 
+import org.springframework.stereotype.Component;
+
 import br.com.prosperity.bean.ClienteBean;
 import br.com.prosperity.entity.ClienteEntity;
 
+@Component
 public class ClienteConverter implements Converter <ClienteEntity, ClienteBean> {
 
 	@Override

@@ -1,13 +1,8 @@
 package br.com.prosperity.business;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
 
-import br.com.prosperity.bean.UsuarioBean;
-import br.com.prosperity.dao.UsuarioDAO;
-import br.com.prosperity.entity.UsuarioEntity;
-
-@Controller
+@Component
 public class UsuarioBusiness {
 	/*
 	@Autowired
