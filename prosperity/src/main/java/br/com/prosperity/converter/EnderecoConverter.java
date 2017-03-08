@@ -1,8 +1,11 @@
 package br.com.prosperity.converter;
 
+import org.springframework.stereotype.Component;
+
 import br.com.prosperity.bean.EnderecoBean;
 import br.com.prosperity.entity.EnderecoEntity;
 
+@Component
 public class EnderecoConverter implements Converter<EnderecoEntity, EnderecoBean>{
 
 	@Override

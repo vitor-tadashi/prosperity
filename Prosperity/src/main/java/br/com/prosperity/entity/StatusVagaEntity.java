@@ -30,26 +30,17 @@ public class StatusVagaEntity {
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="idStatus")
-	private StatusEntity idStatus;
+	private StatusEntity status;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="idVaga")
-	private VagaEntity idVaga;
+	private VagaEntity vaga;
 	
 	@Column (name = "dtAlteracao")
 	@Temporal(TemporalType.DATE)
 	private Date dataAlteracao;
 	
-	/* Mapeamento de Relacionamentos */
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "idStatus")
-	private StatusEntity status;
-
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "idVaga")
-	private VagaEntity vaga;
-	
 	/* fim dos mapeamentos */
 
 
@@ -61,22 +52,6 @@ public class StatusVagaEntity {
 		this.id = id;
 	}
 
-	public StatusEntity getIdStatus() {
-		return idStatus;
-	}
-
-	public void setIdStatus(StatusEntity idStatus) {
-		this.idStatus = idStatus;
-	}
-
-	public VagaEntity getIdVaga() {
-		return idVaga;
-	}
-
-	public void setIdVaga(VagaEntity idVaga) {
-		this.idVaga = idVaga;
-	}
-
 	public Date getDataAlteracao() {
 		return dataAlteracao;
 	}
@@ -84,5 +59,23 @@ public class StatusVagaEntity {
 	public void setDataAlteracao(Date dataAlteracao) {
 		this.dataAlteracao = dataAlteracao;
 	}
+
+	public StatusEntity getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusEntity status) {
+		this.status = status;
+	}
+
+	public VagaEntity getVaga() {
+		return vaga;
+	}
+
+	public void setVaga(VagaEntity vaga) {
+		this.vaga = vaga;
+	}
+	
+	
 	
 }

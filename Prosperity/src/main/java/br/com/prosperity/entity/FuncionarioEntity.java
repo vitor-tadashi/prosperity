@@ -30,19 +30,6 @@ public class FuncionarioEntity {
 	@ManyToOne(cascade=CascadeType.ALL)
 	private SenioridadeEntity senioridade;
 	
-	@OneToMany
-	@JoinTable(name = "funcionarioProjeto", joinColumns = {
-			@JoinColumn(name = "idProjeto", referencedColumnName = "idProjeto") }, inverseJoinColumns = {
-					@JoinColumn(name = "idFuncionario", referencedColumnName = "idFuncionario") })
-	private List<ProjetoEntity> projeto;
-	
-	//GETTERS AND SETTERS
-	public List<ProjetoEntity> getProjeto() {
-		return projeto;
-	}
-	public void setProjeto(List<ProjetoEntity> projeto) {
-		this.projeto = projeto;
-	}
 	public int getIdFuncionario() {
 		return id;
 	}

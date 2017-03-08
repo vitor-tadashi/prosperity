@@ -1,8 +1,11 @@
 package br.com.prosperity.converter;
 
+import org.springframework.stereotype.Component;
+
 import br.com.prosperity.bean.StatusBean;
 import br.com.prosperity.entity.StatusEntity;
 
+@Component
 public class StatusCandidatoConverter implements Converter<StatusEntity, StatusBean> {
 
 	/*

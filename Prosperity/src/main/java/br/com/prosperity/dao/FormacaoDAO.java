@@ -6,8 +6,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
-import br.com.prosperity.entity.FormacaoEntity;
+import org.springframework.stereotype.Repository;
 
+import br.com.prosperity.entity.FormacaoEntity;
+@Repository
 public class FormacaoDAO extends GenericDAOImpl<FormacaoEntity, Integer> {
 
 	/**

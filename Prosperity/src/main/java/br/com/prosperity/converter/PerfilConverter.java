@@ -1,8 +1,11 @@
 package br.com.prosperity.converter;
 
+import org.springframework.stereotype.Component;
+
 import br.com.prosperity.bean.PerfilBean;
 import br.com.prosperity.entity.PerfilEntity;
 
+@Component
 public class PerfilConverter implements Converter<PerfilEntity, PerfilBean> {
 
 	/* (non-Javadoc)

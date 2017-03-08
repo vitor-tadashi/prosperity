@@ -1,8 +1,11 @@
 package br.com.prosperity.converter;
 
+import org.springframework.stereotype.Component;
+
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.entity.VagaEntity;
 
+@Component
 public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 
 	@Override

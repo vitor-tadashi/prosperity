@@ -1,8 +1,11 @@
 package br.com.prosperity.converter;
 
+import org.springframework.stereotype.Component;
+
 import br.com.prosperity.bean.FormacaoBean;
 import br.com.prosperity.entity.FormacaoEntity;
 
+@Component
 public class FormacaoConverter implements Converter<FormacaoEntity, FormacaoBean> {
 
 	@Override

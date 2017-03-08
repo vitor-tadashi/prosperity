@@ -1,8 +1,11 @@
 package br.com.prosperity.converter;
 
+import org.springframework.stereotype.Component;
+
 import br.com.prosperity.bean.ContatoBean;
 import br.com.prosperity.entity.ContatoEntity;
 
+@Component
 public class ContatoConverter implements Converter<ContatoEntity, ContatoBean> {
 
 	@Override

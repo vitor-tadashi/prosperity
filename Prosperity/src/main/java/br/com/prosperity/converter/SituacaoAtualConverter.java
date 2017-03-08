@@ -1,8 +1,11 @@
 package br.com.prosperity.converter;
 
+import org.springframework.stereotype.Component;
+
 import br.com.prosperity.bean.SituacaoAtualBean;
 import br.com.prosperity.entity.SituacaoAtualEntity;
 
+@Component
 public class SituacaoAtualConverter implements Converter<SituacaoAtualEntity, SituacaoAtualBean> {
 
 	@Override
