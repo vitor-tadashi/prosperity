@@ -184,3 +184,18 @@ CREATE TABLE tbStatusCandidato (
 	dtAlteracao DATE,
 	dsParecer VARCHAR(500) 
 );
+
+
+CREATE TABLE tbCompetencias (
+	idCompetencias INT PRIMARY KEY IDENTITY (1,1),
+	idCandidato INT FOREIGN KEY REFERENCES tbCandidato(idCandidato),
+	compDesenvolvimento NUMERIC,
+	compProfundidade NUMERIC,
+	compPlanejamento NUMERIC,
+	compExecucaoEntrega NUMERIC,
+	compRelacionamento NUMERIC,
+	compPessoas NUMERIC,
+	compComercial NUMERIC,
+	compFinanceiro NUMERIC,
+	dsParecer VARCHAR(500)
+);
