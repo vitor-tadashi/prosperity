@@ -24,10 +24,12 @@ public class FuncionarioEntity {
 	@Column(name="nmFuncionario")
 	private String nome;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne (cascade = CascadeType.ALL)
+	@JoinColumn(name="idCargo")
 	private CargoEntity cargo;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne (cascade = CascadeType.ALL)
+	@JoinColumn(name="idSenioridade")
 	private SenioridadeEntity senioridade;
 	
 	public int getIdFuncionario() {

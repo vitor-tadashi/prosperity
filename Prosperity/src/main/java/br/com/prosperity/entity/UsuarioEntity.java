@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -27,10 +28,11 @@ public class UsuarioEntity {
 	private Integer id;
 	
 	@ManyToOne (cascade = CascadeType.ALL)
+	@JoinColumn(name="idPerfil")
 	private PerfilEntity perfilEntity;
 	
-	@OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER, orphanRemoval = true)
-	@PrimaryKeyJoinColumn
+	@ManyToOne (cascade = CascadeType.ALL)
+	@JoinColumn(name="idFuncionario")
 	private FuncionarioEntity funcionarioEntity;
 	
 	@Column(name = "nmUsuario")
