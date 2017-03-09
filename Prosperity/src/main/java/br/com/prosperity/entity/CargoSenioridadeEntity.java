@@ -19,7 +19,7 @@ public class CargoSenioridadeEntity{
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="idCargo")
-	private CargoEntity idCargo;
+	private CargoEntity cargo;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	@JoinColumn(name = "idSenioridade")
@@ -37,11 +37,12 @@ public class CargoSenioridadeEntity{
 	public void setId(int id) {
 		this.id = id;
 	}
-	public CargoEntity getIdCargo() {
-		return idCargo;
+
+	public CargoEntity getCargo() {
+		return cargo;
 	}
-	public void setIdCargo(CargoEntity idCargo) {
-		this.idCargo = idCargo;
+	public void setCargo(CargoEntity cargo) {
+		this.cargo = cargo;
 	}
 	public SenioridadeEntity getIdSenioridade() {
 		return idSenioridade;
