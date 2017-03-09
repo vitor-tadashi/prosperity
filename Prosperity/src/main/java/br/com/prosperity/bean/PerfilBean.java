@@ -1,15 +1,14 @@
 package br.com.prosperity.bean;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PerfilBean {
 
-	private int id;
+	private Integer id;
 	private String nome;
 	//private List<FuncionalidadeBean> listaFuncionalidades;
 
-	public PerfilBean(int id, String nome, List<FuncionalidadeBean> listaFuncionalidades) {
+	public PerfilBean(Integer id, String nome, List<FuncionalidadeBean> listaFuncionalidades) {
 		this.id = id;
 		this.nome = nome;
 		//this.listaFuncionalidades = listaFuncionalidades;
@@ -18,11 +17,11 @@ public class PerfilBean {
 	public PerfilBean() {
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

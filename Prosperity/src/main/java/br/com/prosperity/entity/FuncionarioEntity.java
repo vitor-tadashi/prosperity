@@ -9,16 +9,16 @@ import javax.persistence.*;
 
 public class FuncionarioEntity {
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	
 	@Column(name="idFuncionario", unique = true, nullable = false)
-	private int id;
+	private Integer id;
 	
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	@Column(name="nmFuncionario")

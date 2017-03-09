@@ -306,7 +306,9 @@
 											<div>
 												<div class="form-group col-md-6">
 													<label for="exampleInputEmail1">Nome do candidato:</label>
-													<input type="name" class="form-control input-sm" id="exampleInputEmail1" placeholder="Nome do candidato" data-required="true">
+													<input type="text" class="form-control input-sm"
+														id="exampleInputEmail1" placeholder="Nome do candidato"
+														data-required="true" name="nome">
 												</div>
 												<!-- /form-group -->
 											</div>
@@ -314,27 +316,26 @@
 										<!-- /form-group -->
 										<div class="row">
 											<div class="form-group col-md-6">
-												<label for="exampleInputEmail1">Vaga:</label>
-												
-                                                        <select class="form-control chzn-select">
-                                                            <option>Selecione:</option>
-                                                            <option>Analista de testes</option>
-                                                            <option>Analista de sistemas</option>
-                                                            <option>Desenvolvedor</option>
-                                                            <option>Gerente de projetos</option>
-                                                        </select>   
-                                                        
+												<label for="exampleInputEmail1">Vaga:</label> <select
+													class="form-control chzn-select">
+													<option>Selecione:</option>
+													<option>Analista de testes</option>
+													<option>Analista de sistemas</option>
+													<option>Desenvolvedor</option>
+													<option>Gerente de projetos</option>
+												</select>
+
 											</div>
 											<!-- /form-group -->
 											<div class="form-group col-md-6">
 												<label for="exampleInputEmail1">Senioridade da vaga:</label>
 												<select class="form-control chzn-select">
-                                                            <option>Selecione:</option>
-                                                            <option>Analista de testes</option>
-                                                            <option>Analista de sistemas</option>
-                                                            <option>Desenvolvedor</option>
-                                                            <option>Gerente de projetos</option>
-                                                        </select>
+													<option>Selecione:</option>
+													<option>Analista de testes</option>
+													<option>Analista de sistemas</option>
+													<option>Desenvolvedor</option>
+													<option>Gerente de projetos</option>
+												</select>
 											</div>
 											<!-- /form-group -->
 										</div>
@@ -430,215 +431,215 @@
 									</div>
 									<div class="tab-pane fade" id="second">
 										<section id="dadosInterno" class="panel panel-default">
-										<div class="panel-body">
-											<label>Etapas dos processos de seleção: </label>
-											<!-- SOMENTE ALTERAR DAQUI PARA BAIXO -->
-											<form name="form1" action="paginaPHPouASP" method="post">
-												<input class="btn btn-xs btn-success" type="button"
-													value="Adicionar etapa" onclick="AddCampos()"> <br>
-												<br>
-												<script type="text/javascript">
-													//Escrevendo o código-fonte HTML e ocultando os campos criados:
-													for (iLoop = 1; iLoop <= totalCampos; iLoop++) {
-														document
-																.write("<span id='linha"+iLoop+"' style='display:none'> <select class='btn btn-default btn-xs dropdown-toggle' style='width: 160px;'><option value='0'>Selecione etapa</option><option value='1'>Prova Prática</option><option value='2'>Prova teórica</option><option value='3'>Dinâmica de Grupo</option></select> <input type='text' id='arq"+iLoop+"' name='arq"+iLoop+"'> <input class='btn btn-xs btn-danger' type='button' value='Remover' onclick='RemoverCampos(\""
-																		+ iLoop
-																		+ "\")'></span><br>");
-													}
-												</script>
-												<input type="hidden" name="hidden2" id="hidden2">
-											</form>
-											<div class="form-group">
-												<!-- SOMENTE ALTERAR DAQUI PARA CIMA -->
-												<label>Parecer técnico: </label>
-												<textarea class="form-control" id="message-text"
-													style="margin-left: 10px; width: 570px"></textarea>
+											<div class="panel-body">
+												<label>Etapas dos processos de seleção: </label>
+												<!-- SOMENTE ALTERAR DAQUI PARA BAIXO -->
+												<form name="form1" action="paginaPHPouASP" method="post">
+													<input class="btn btn-xs btn-success" type="button"
+														value="Adicionar etapa" onclick="AddCampos()"> <br>
+													<br>
+													<script type="text/javascript">
+														//Escrevendo o código-fonte HTML e ocultando os campos criados:
+														for (iLoop = 1; iLoop <= totalCampos; iLoop++) {
+															document
+																	.write("<span id='linha"+iLoop+"' style='display:none'> <select class='btn btn-default btn-xs dropdown-toggle' style='width: 160px;'><option value='0'>Selecione etapa</option><option value='1'>Prova Prática</option><option value='2'>Prova teórica</option><option value='3'>Dinâmica de Grupo</option></select> <input type='text' id='arq"+iLoop+"' name='arq"+iLoop+"'> <input class='btn btn-xs btn-danger' type='button' value='Remover' onclick='RemoverCampos(\""
+																			+ iLoop
+																			+ "\")'></span><br>");
+														}
+													</script>
+													<input type="hidden" name="hidden2" id="hidden2">
+												</form>
+												<div class="form-group">
+													<!-- SOMENTE ALTERAR DAQUI PARA CIMA -->
+													<label>Parecer técnico: </label>
+													<textarea class="form-control" id="message-text"
+														style="margin-left: 10px; width: 570px"></textarea>
+												</div>
 											</div>
-										</div>
 										</section>
 									</div>
 									<div class="tab-pane fade" id="fourth">
 										<section class="panel panel-default">
-										<div class="panel-heading">
-											<label for="exampleInputEmail1">Proposta:</label>
-											<textarea id="wysihtml5-textarea"
-												placeholder="Enter your text ..." class="form-control"
-												rows="6"></textarea>
-										</div>
+											<div class="panel-heading">
+												<label for="exampleInputEmail1">Proposta:</label>
+												<textarea id="wysihtml5-textarea"
+													placeholder="Enter your text ..." class="form-control"
+													rows="6"></textarea>
+											</div>
 										</section>
 										<!-- /panel -->
 									</div>
 									<div class="tab-pane fade" id="third">
 										<section class="panel panel-default">
-										<div class="panel-heading text-center">
-											<label for="exampleInputEmail1">Avaliação de
-												competências</label>
-										</div>
-										<table class="table" style="font-size: 10px">
-											<thead class="text-center">
-												<tr class="text-center">
-													<th class="text-center">Competências</th>
-													<th>Insatisfatório</th>
-													<th>Em Desenvolvimento</th>
-													<th>Atende as Expectativas</th>
-													<th>Supera as Expectativas</th>
-												</tr>
-											</thead>
-											<tbody class="text-center">
-												<tr>
-													<td>Desenvolvimento</td>
-													<td><label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio1"> <span
-															class="custom-radio"></span>
-													</label></td>
-													<td><label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio1"> <span
-															class="custom-radio"></span>
-													</label></td>
-													<td><label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio1"> <span
-															class="custom-radio"></span>
-													</label></td>
-													<td><label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio1"> <span
-															class="custom-radio"></span>
-													</label></td>
-												</tr>
-												<tr>
-													<td>Profundidade</td>
-													<td><label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio2"> <span
-															class="custom-radio"></span>
-													</label></td>
-													<td><label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio2"> <span
-															class="custom-radio"></span>
-													</label></td>
-													<td><label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio2"> <span
-															class="custom-radio"></span>
-													</label></td>
-													<td><label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio2"> <span
-															class="custom-radio"></span>
-													</label></td>
-												</tr>
-												<tr>
-													<td>Planejamento</td>
-													<td><label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio3"> <span
-															class="custom-radio"></span>
-													</label></td>
-													<td><label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio3"> <span
-															class="custom-radio"></span>
-													</label></td>
-													<td><label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio3"> <span
-															class="custom-radio"></span>
-													</label></td>
-													<td><label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio3"> <span
-															class="custom-radio"></span>
-													</label></td>
-												</tr>
-												<tr>
-													<td>Execução e Entrega</td>
-													<td><label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio5"> <span
-															class="custom-radio"></span>
-													</label></td>
-													<td><label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio5"> <span
-															class="custom-radio"></span>
-													</label></td>
-													<td><label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio5"> <span
-															class="custom-radio"></span>
-													</label></td>
-													<td><label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio5"> <span
-															class="custom-radio"></span>
-													</label></td>
-												</tr>
-												<tr>
-													<td>Relacionamento</td>
-													<td><label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio4"> <span
-															class="custom-radio"></span>
-													</label></td>
-													<td><label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio4"> <span
-															class="custom-radio"></span>
-													</label></td>
-													<td><label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio4"> <span
-															class="custom-radio"></span>
-													</label></td>
-													<td><label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio"> <span
-															class="custom-radio"></span>
-													</label></td>
-												</tr>
-												<tr>
-													<td>Pessoas</td>
-													<td><label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio6"> <span
-															class="custom-radio"></span>
-													</label></td>
-													<td><label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio6"> <span
-															class="custom-radio"></span>
-													</label></td>
-													<td><label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio6"> <span
-															class="custom-radio"></span>
-													</label></td>
-													<td><label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio6"> <span
-															class="custom-radio"></span>
-													</label></td>
-												</tr>
-												<tr>
-													<td>Comercial</td>
-													<td><label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio7"> <span
-															class="custom-radio"></span>
-													</label></td>
-													<td><label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio7"> <span
-															class="custom-radio"></span>
-													</label></td>
-													<td><label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio7"> <span
-															class="custom-radio"></span>
-													</label></td>
-													<td><label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio7"> <span
-															class="custom-radio"></span>
-													</label></td>
-												</tr>
-												<tr>
-													<td>Financeiro</td>
-													<td><label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio8"> <span
-															class="custom-radio"></span>
-													</label></td>
-													<td><label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio8"> <span
-															class="custom-radio"></span>
-													</label></td>
-													<td><label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio8"> <span
-															class="custom-radio"></span>
-													</label></td>
-													<td><label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio8"> <span
-															class="custom-radio"></span>
-													</label></td>
-												</tr>
-											</tbody>
-										</table>
+											<div class="panel-heading text-center">
+												<label for="exampleInputEmail1">Avaliação de
+													competências</label>
+											</div>
+											<table class="table" style="font-size: 10px">
+												<thead class="text-center">
+													<tr class="text-center">
+														<th class="text-center">Competências</th>
+														<th>Insatisfatório</th>
+														<th>Em Desenvolvimento</th>
+														<th>Atende as Expectativas</th>
+														<th>Supera as Expectativas</th>
+													</tr>
+												</thead>
+												<tbody class="text-center">
+													<tr>
+														<td>Desenvolvimento</td>
+														<td><label class="label-radio inline"> <input
+																id="interno" type="radio" name="inline-radio1">
+																<span class="custom-radio"></span>
+														</label></td>
+														<td><label class="label-radio inline"> <input
+																id="interno" type="radio" name="inline-radio1">
+																<span class="custom-radio"></span>
+														</label></td>
+														<td><label class="label-radio inline"> <input
+																id="interno" type="radio" name="inline-radio1">
+																<span class="custom-radio"></span>
+														</label></td>
+														<td><label class="label-radio inline"> <input
+																id="interno" type="radio" name="inline-radio1">
+																<span class="custom-radio"></span>
+														</label></td>
+													</tr>
+													<tr>
+														<td>Profundidade</td>
+														<td><label class="label-radio inline"> <input
+																id="interno" type="radio" name="inline-radio2">
+																<span class="custom-radio"></span>
+														</label></td>
+														<td><label class="label-radio inline"> <input
+																id="interno" type="radio" name="inline-radio2">
+																<span class="custom-radio"></span>
+														</label></td>
+														<td><label class="label-radio inline"> <input
+																id="interno" type="radio" name="inline-radio2">
+																<span class="custom-radio"></span>
+														</label></td>
+														<td><label class="label-radio inline"> <input
+																id="interno" type="radio" name="inline-radio2">
+																<span class="custom-radio"></span>
+														</label></td>
+													</tr>
+													<tr>
+														<td>Planejamento</td>
+														<td><label class="label-radio inline"> <input
+																id="interno" type="radio" name="inline-radio3">
+																<span class="custom-radio"></span>
+														</label></td>
+														<td><label class="label-radio inline"> <input
+																id="interno" type="radio" name="inline-radio3">
+																<span class="custom-radio"></span>
+														</label></td>
+														<td><label class="label-radio inline"> <input
+																id="interno" type="radio" name="inline-radio3">
+																<span class="custom-radio"></span>
+														</label></td>
+														<td><label class="label-radio inline"> <input
+																id="interno" type="radio" name="inline-radio3">
+																<span class="custom-radio"></span>
+														</label></td>
+													</tr>
+													<tr>
+														<td>Execução e Entrega</td>
+														<td><label class="label-radio inline"> <input
+																id="interno" type="radio" name="inline-radio5">
+																<span class="custom-radio"></span>
+														</label></td>
+														<td><label class="label-radio inline"> <input
+																id="interno" type="radio" name="inline-radio5">
+																<span class="custom-radio"></span>
+														</label></td>
+														<td><label class="label-radio inline"> <input
+																id="interno" type="radio" name="inline-radio5">
+																<span class="custom-radio"></span>
+														</label></td>
+														<td><label class="label-radio inline"> <input
+																id="interno" type="radio" name="inline-radio5">
+																<span class="custom-radio"></span>
+														</label></td>
+													</tr>
+													<tr>
+														<td>Relacionamento</td>
+														<td><label class="label-radio inline"> <input
+																id="interno" type="radio" name="inline-radio4">
+																<span class="custom-radio"></span>
+														</label></td>
+														<td><label class="label-radio inline"> <input
+																id="interno" type="radio" name="inline-radio4">
+																<span class="custom-radio"></span>
+														</label></td>
+														<td><label class="label-radio inline"> <input
+																id="interno" type="radio" name="inline-radio4">
+																<span class="custom-radio"></span>
+														</label></td>
+														<td><label class="label-radio inline"> <input
+																id="interno" type="radio" name="inline-radio"> <span
+																class="custom-radio"></span>
+														</label></td>
+													</tr>
+													<tr>
+														<td>Pessoas</td>
+														<td><label class="label-radio inline"> <input
+																id="interno" type="radio" name="inline-radio6">
+																<span class="custom-radio"></span>
+														</label></td>
+														<td><label class="label-radio inline"> <input
+																id="interno" type="radio" name="inline-radio6">
+																<span class="custom-radio"></span>
+														</label></td>
+														<td><label class="label-radio inline"> <input
+																id="interno" type="radio" name="inline-radio6">
+																<span class="custom-radio"></span>
+														</label></td>
+														<td><label class="label-radio inline"> <input
+																id="interno" type="radio" name="inline-radio6">
+																<span class="custom-radio"></span>
+														</label></td>
+													</tr>
+													<tr>
+														<td>Comercial</td>
+														<td><label class="label-radio inline"> <input
+																id="interno" type="radio" name="inline-radio7">
+																<span class="custom-radio"></span>
+														</label></td>
+														<td><label class="label-radio inline"> <input
+																id="interno" type="radio" name="inline-radio7">
+																<span class="custom-radio"></span>
+														</label></td>
+														<td><label class="label-radio inline"> <input
+																id="interno" type="radio" name="inline-radio7">
+																<span class="custom-radio"></span>
+														</label></td>
+														<td><label class="label-radio inline"> <input
+																id="interno" type="radio" name="inline-radio7">
+																<span class="custom-radio"></span>
+														</label></td>
+													</tr>
+													<tr>
+														<td>Financeiro</td>
+														<td><label class="label-radio inline"> <input
+																id="interno" type="radio" name="inline-radio8">
+																<span class="custom-radio"></span>
+														</label></td>
+														<td><label class="label-radio inline"> <input
+																id="interno" type="radio" name="inline-radio8">
+																<span class="custom-radio"></span>
+														</label></td>
+														<td><label class="label-radio inline"> <input
+																id="interno" type="radio" name="inline-radio8">
+																<span class="custom-radio"></span>
+														</label></td>
+														<td><label class="label-radio inline"> <input
+																id="interno" type="radio" name="inline-radio8">
+																<span class="custom-radio"></span>
+														</label></td>
+													</tr>
+												</tbody>
+											</table>
 									</div>
 									</section>
 								</div>
@@ -705,7 +706,7 @@
 										<div class="search-block">
 											<div class="input-group">
 												<input type="text" class="form-control input-sm"
-													placeholder="Nome">
+													placeholder="Nome" name="nome">
 											</div>
 											<!-- /input-group -->
 										</div>
@@ -713,7 +714,7 @@
 									</div>
 									<div class="col-md-2">
 										<label for="exampleInputEmail1">Cargo</label> <select
-											class="form-control inline">
+											class="form-control inline" name="">
 											<option value="0">Selecione:</option>
 											<option value="1">Desenvolvedor</option>
 											<option value="2">Analista</option>
@@ -762,6 +763,38 @@
 									</tr>
 								</thead>
 								<tbody class="text-center">
+									<c:forEach var="candidato" items="${candidatos}">
+										<tr>
+											<td>${candidato.nome}</td>
+											<td>${candidato.vagas})</td>
+											<td>${candidato.valorPretensao}</td>
+											<td>${candidato.dataAbertura}</td>
+											<td>${candidato.dataFechamento}</td>
+											<td>${candidato.status}</td>
+											<td><span class="label label-analiseRH">Em análise do RH</span></td>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  çtd><span class="line"></span>
+												<div class="btn-group">
+													
+													<!-- comeco do botao -->
+													<button type="button"
+														class="btn btn-info dropdown-toggle btn-sm"
+														data-toggle="dropdown" aria-haspopup="true"
+														aria-expanded="false">
+														<i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
+													</button>
+													<ul class="dropdown-menu slidedown btnAlinhado">
+														<li><a href="#aprovado-modal" data-toggle="modal"
+															data-toggle="modal" data-target=".bs-example-modal-lg"><i
+																class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
+														<li class="divider"></li>
+														<li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
+
+														<li class="divider"></li>
+														<li><a href="#delete-modal" data-toggle="modal"><i
+																class="fa fa-trash-o fa-lg">&nbsp;</i>Fechar vaga</a></li>
+													</ul>
+												</div> <!-- /fim botao --></td>
+										</tr>
+									</c:forEach>
 									<tr>
 										<td>Kobe Bryant</td>
 										<td>Gerente</td>
@@ -772,7 +805,8 @@
 												do RH</span></td>
 										<td><span class="line"></span>
 											<div class="btn-group">
-												<!-- começo botao -->
+											
+												<!-- começo do botao -->
 												<button type="button"
 													class="btn btn-info dropdown-toggle btn-sm"
 													data-toggle="dropdown" aria-haspopup="true"
@@ -790,9 +824,11 @@
 													<li><a href="#delete-modal" data-toggle="modal"><i
 															class="fa fa-trash-o fa-lg">&nbsp;</i>Fechar vaga</a></li>
 												</ul>
-											</div> <!-- /fim botao --></td>
+											</div> 
+											</td>
 									</tr>
-									<tr>
+									<!-- fim do botao -->
+									<!-- <tr>
 										<td>Kevin Durant</td>
 										<td>Diretor</td>
 										<td>R$7.500</td>
@@ -802,7 +838,7 @@
 												análise técnica</span></td>
 										<td class="text-center"><span class="line"></span>
 											<div class="btn-group">
-												<!-- começo botao -->
+												começo botao
 												<button type="button"
 													class="btn btn-info dropdown-toggle btn-sm"
 													data-toggle="dropdown" aria-haspopup="true"
@@ -820,9 +856,9 @@
 													<li><a href="#delete-modal" data-toggle="modal"><i
 															class="fa fa-trash-o fa-lg">&nbsp;</i>Fechar vaga</a></li>
 												</ul>
-											</div> <!-- /fim botao --></td>
-									</tr>
-									<tr class="text-center">
+											</div> /fim botao</td>
+									</tr> -->
+									<!-- <tr class="text-center">
 										<td>James Harden</td>
 										<td>Desenvolvedor</td>
 										<td>R$1000</td>
@@ -831,7 +867,7 @@
 										<td><span class="label label-reprovado">Reprovado</span></td>
 										<td class="text-center"><span class="line"></span>
 											<div class="btn-group">
-												<!-- começo botao -->
+												começo botao
 												<button type="button"
 													class="btn btn-info dropdown-toggle btn-sm"
 													data-toggle="dropdown" aria-haspopup="true"
@@ -848,7 +884,7 @@
 													<li><a href="#delete-modal" data-toggle="modal"><i
 															class="fa fa-trash-o fa-lg">&nbsp;</i>Fechar vaga</a></li>
 												</ul>
-											</div> <!-- /fim botao --></td>
+											</div> /fim botao</td>
 									</tr>
 									<tr class="text-center">
 										<td>Michael Jordan</td>
@@ -859,7 +895,7 @@
 										<td><span class="label label-stand">Candidatura</span></td>
 										<td class="text-center"><span class="line"></span>
 											<div class="btn-group">
-												<!-- começo botao -->
+												começo botao
 												<button type="button"
 													class="btn btn-info dropdown-toggle btn-sm"
 													data-toggle="dropdown" aria-haspopup="true"
@@ -876,7 +912,7 @@
 													<li><a href="#delete-modal" data-toggle="modal"><i
 															class="fa fa-trash-o fa-lg">&nbsp;</i>Fechar vaga</a></li>
 												</ul>
-											</div> <!-- /fim botao --></td>
+											</div> /fim botao</td>
 									</tr>
 									<tr>
 										<td>Kyrie Irving</td>
@@ -888,7 +924,7 @@
 										</td>
 										<td>
 											<div class="btn-group">
-												<!-- começo botao -->
+												começo botao
 												<button type="button"
 													class="btn btn-info dropdown-toggle btn-sm"
 													data-toggle="dropdown" aria-haspopup="true"
@@ -905,7 +941,7 @@
 													<li><a href="#delete-modal" data-toggle="modal"><i
 															class="fa fa-trash-o fa-lg">&nbsp;</i>Fechar vaga</a></li>
 												</ul>
-											</div> <!-- /fim botao -->
+											</div> /fim botao
 										</td>
 									</tr>
 									<tr>
@@ -917,9 +953,8 @@
 										<td><span class="label label-aprovadoPendente" style="">Proposta</span>
 										</td>
 										<td>
-
 											<div class="btn-group">
-												<!-- começo botao -->
+												começo botao
 												<button type="button"
 													class="btn btn-info dropdown-toggle btn-sm"
 													data-toggle="dropdown" aria-haspopup="true"
@@ -936,8 +971,8 @@
 													<li><a href="#delete-modal" data-toggle="modal"><i
 															class="fa fa-trash-o fa-lg">&nbsp;</i>Fechar vaga</a></li>
 												</ul>
-											</div> <!-- /fim botao -->
-										</td>
+											</div> /fim botao -->
+									</td>
 									</tr>
 								</tbody>
 							</table>
