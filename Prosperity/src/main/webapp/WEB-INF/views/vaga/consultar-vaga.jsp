@@ -11,7 +11,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<c:import url="shared/stylesheet.jsp"></c:import>
+<c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
 
 <style>
 .label-stand, .badge-stand {
@@ -82,204 +82,15 @@
 						<div id="home" class="tab-pane fade in active">
 							<form>
 								<section class="panel panel-default panel-body">
-								<div class="row">
-									<div class="col-md-4">
-										<div class="form-group">
-											<label class="control-label">Data de abertura</label>
+									<div class="row">
+										<div class="col-md-4">
 											<div class="form-group">
-												<div class="input-group">
-													<input type="text" value="01/01/2017"
-														class="datepicker form-control" readonly> <span
-														class="input-group-addon"><i class="fa fa-calendar"></i></span>
-												</div>
-											</div>
-											<!-- /.col -->
-										</div>
-										<!-- /form-group -->
-									</div>
-									<div class="col-md-4">
-										<div class="form-group">
-											<label class="control-label">Data de aprovação</label>
-											<div class="form-group">
-												<div class="input-group">
-													<input type="text" value="01/01/2017"
-														class="datepicker form-control" readonly> <span
-														class="input-group-addon"><i class="fa fa-calendar"></i></span>
-												</div>
-											</div>
-											<!-- /.col -->
-										</div>
-										<!-- /form-group -->
-									</div>
-									<div class="col-md-4">
-										<div class="form-group">
-											<label class="control-label">Data de fechamento</label>
-											<div class="form-group">
-												<div class="input-group">
-													<input type="text" value="01/01/2017"
-														class="datepicker form-control" readonly> <span
-														class="input-group-addon"><i class="fa fa-calendar"></i></span>
-												</div>
-											</div>
-											<!-- /.col -->
-										</div>
-										<!-- /form-group -->
-									</div>
-								</div>
-								<div class="row">
-									<div class="form-group col-md-3">
-										<label for="">Candidatos</label> <input type="number"
-											class="form-control input-sm" id="" min="0" value="123">
-									</div>
-									<!-- /form-group -->
-								</div>
-								</section>
-							</form>
-						</div>
-						<div id="menu1" class="tab-pane fade">
-							<section class="panel panel-default">
-							<div class="panel-heading">Informações básicas</div>
-							<div class="panel-body">
-								<form>
-									<div class="form-group row">
-										<div>
-											<div class="form-group col-md-6" style="margin-bottom: 0px">
-												<label for="exampleInputEmail1">Solicitante</label> <input
-													type="name" class="form-control input-sm"
-													id="exampleInputEmail1" placeholder="Solicitante"
-													data-required="true">
-											</div>
-											<!-- /form-group -->
-
-											<div class="form-group col-md-6" style="margin-bottom: 0px">
-												<label for="exampleInputEmail1">Local de trabalho</label>
-												<div>
-													<label class="label-radio inline"> <input
-														id="interno" type="radio" name="inline-radio2" checked>
-														<span class="custom-radio"></span> Interno
-													</label> <label class="label-radio inline"> <input
-														id="cliente" type="radio" name="inline-radio2"> <span
-														class="custom-radio"></span> Cliente
-													</label>
-												</div>
-												<!-- /.col -->
-											</div>
-										</div>
-									</div>
-
-									<div class="form-group row">
-										<div>
-											<div class="form-group col-md-6" style="margin-bottom: 0px">
-												<label for="exampleInputEmail1">Cargo</label> <select
-													class="form-control chzn-select">
-													<option>Analista de testes</option>
-													<option>Analista de sistemas</option>
-													<option>Desenvolvedor</option>
-													<option>Gerente de projetos</option>
-												</select>
-											</div>
-											<!-- /form-group -->
-
-											<div class="form-group col-md-6" style="margin-bottom: 0px">
-												<label for="exampleInputEmail1">Tipo de vaga</label>
-												<div>
-													<label class="label-radio inline"> <input
-														type="radio" name="inline-radio3" checked> <span
-														class="custom-radio"></span> Real
-													</label> <label class="label-radio inline"> <input
-														type="radio" name="inline-radio3"> <span
-														class="custom-radio"></span> Prospecção
-													</label> <label class="label-radio inline"> <input
-														type="radio" name="inline-radio3"> <span
-														class="custom-radio"></span> Hunting
-													</label>
-												</div>
-												<!-- /.col -->
-											</div>
-										</div>
-									</div>
-
-									<div class="form-group row">
-										<div class="form-group col-md-4" style="margin-bottom: 0px">
-											<label for="exampleInputEmail1">Senioridade da vaga</label> <select
-												class="form-control chzn-select">
-												<option>Estágio</option>
-												<option>Júnior</option>
-												<option>Pleno</option>
-												<option>Senior</option>
-											</select>
-										</div>
-										<!-- /form-group -->
-
-										<div class="form-group" style="margin-bottom: 0px">
-											<label class="control-label">Horário</label>
-
-											<div>
-												<div class="form-group col-md-3">
-													<div class="input-group bootstrap-timepicker"
-														style="width: 105%;">
-														<input class="timepicker form-control" type="text"
-															/ value="08:00 AM"> <span
-															class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-													</div>
-												</div>
-
-												<div class="form-group col-md-1">
-													<label style="margin-top: 7px">Às</label>
-												</div>
-
-												<div class="form-group col-md-3">
-													<div class="input-group bootstrap-timepicker"
-														style="width: 105%;">
-														<input class="timepicker form-control" type="text"
-															/ value="05:00 PM"> <span
-															class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-													</div>
-												</div>
-											</div>
-
-										</div>
-									</div>
-
-									<div class="form-group row">
-
-										<div class="">
-											<div class="form-group col-md-6" style="margin-bottom: 0px">
-												<label for="exampleInputPassword1">Faixa salarial</label> <input
-													type="password" class="form-control input-sm"
-													id="exampleInputPassword1" placeholder="Faixa Salarial"
-													disabled>
-											</div>
-											<!-- /form-group -->
-
-											<div class="form-group col-md-6" style="margin-bottom: 0px">
-												<label for="exampleInputEmail1">Aumento de quadro</label>
-												<div>
-													<label class="label-radio inline"> <input id="novo"
-														type="radio" name="inline-radio" checked> <span
-														class="custom-radio"> </span> Novo
-													</label> <label class="label-radio inline"> <input id="sub"
-														type="radio" name="inline-radio"> <span
-														class="custom-radio"> </span> Substituição
-													</label>
-
-												</div>
-												<!-- /.col -->
-											</div>
-										</div>
-									</div>
-
-									<div class="form-group row">
-
-										<div class="form-group col-md-6" style="margin-bottom: 0px">
-
-											<div class="form-group">
-												<label class="control-label">Data para inicio</label>
+												<label class="control-label">Data de abertura</label>
 												<div class="form-group">
 													<div class="input-group">
 														<input type="text" value="01/01/2017"
-															class="datepicker form-control"> <span
-															class="input-group-addon"><i
+															class="datepicker form-control" name="dataAbertura"
+															readonly> <span class="input-group-addon"><i
 															class="fa fa-calendar"></i></span>
 													</div>
 												</div>
@@ -287,55 +98,253 @@
 											</div>
 											<!-- /form-group -->
 										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<label class="control-label">Data de aprovação</label>
+												<div class="form-group">
+													<div class="input-group">
+														<input type="text" value="01/01/2017"
+															class="datepicker form-control" name="dataAprovacao"
+															readonly> <span class="input-group-addon"><i
+															class="fa fa-calendar"></i></span>
+													</div>
+												</div>
+												<!-- /.col -->
+											</div>
+											<!-- /form-group -->
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<label class="control-label">Data de fechamento</label>
+												<div class="form-group">
+													<div class="input-group">
+														<input type="text" value="01/01/2017"
+															class="datepicker form-control" name="dataFechamento"
+															readonly> <span class="input-group-addon"><i
+															class="fa fa-calendar"></i></span>
+													</div>
+												</div>
+												<!-- /.col -->
+											</div>
+											<!-- /form-group -->
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group col-md-3">
+											<label for="">Candidatos</label> <input type="number"
+												class="form-control input-sm" id="" min="0" value="123"
+												name="numeroCandidatos">
+										</div>
+										<!-- /form-group -->
+									</div>
+								</section>
+							</form>
+						</div>
+						<div id="menu1" class="tab-pane fade">
+							<section class="panel panel-default">
+								<div class="panel-heading">Informações básicas</div>
+								<div class="panel-body">
+									<form>
+										<div class="form-group row">
+											<div>
+												<div class="form-group col-md-6" style="margin-bottom: 0px">
+													<label for="exampleInputEmail1">Solicitante</label> <input
+														type="name" class="form-control input-sm"
+														id="exampleInputEmail1" placeholder="Solicitante"
+														data-required="true" name="nomeSolicitante">
+												</div>
+												<!-- /form-group -->
 
-										<div class="form-group col-md-6" style="margin-bottom: 0px">
-											<div id="" class="">
-												<label>Nome do substituido</label> <input type="text"
-													class="form-control input-sm"
-													placeholder="Nome do substituido">
+												<div class="form-group col-md-6" style="margin-bottom: 0px">
+													<label for="exampleInputEmail1">Local de trabalho</label>
+													<div class="radiogroup" name="localTrabalho">
+														<label class="label-radio inline"> <input
+															id="interno" type="radio" name="inline-radio2" checked>
+															<span class="custom-radio"></span> Interno
+														</label> <label class="label-radio inline"> <input
+															id="cliente" type="radio" name="inline-radio2"> <span
+															class="custom-radio"></span> Cliente
+														</label>
+													</div>
+													<!-- /.col -->
+												</div>
 											</div>
 										</div>
 
-									</div>
+										<div class="form-group row">
+											<div>
+												<div class="form-group col-md-6" style="margin-bottom: 0px">
+													<label for="exampleInputEmail1">Cargo</label> <select
+														class="form-control chzn-select" name="cargoBean">
+														<option>Analista de testes</option>
+														<option>Analista de sistemas</option>
+														<option>Desenvolvedor</option>
+														<option>Gerente de projetos</option>
+													</select>
+												</div>
+												<!-- /form-group -->
 
-								</form>
-							</div>
+												<div class="form-group col-md-6" style="margin-bottom: 0px">
+													<label for="exampleInputEmail1">Tipo de vaga</label>
+													<div class="radiogroup" name="idTipoVaga">
+														<label class="label-radio inline"> <input
+															type="radio" name="inline-radio3" checked> <span
+															class="custom-radio"></span> Real
+														</label> <label class="label-radio inline"> <input
+															type="radio" name="inline-radio3"> <span
+															class="custom-radio"></span> Prospecção
+														</label> <label class="label-radio inline"> <input
+															type="radio" name="inline-radio3"> <span
+															class="custom-radio"></span> Hunting
+														</label>
+													</div>
+													<!-- /.col -->
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<div class="form-group col-md-4" style="margin-bottom: 0px">
+												<label for="exampleInputEmail1">Senioridade da vaga</label>
+												<select class="form-control chzn-select"
+													name="senioridadeBean">
+													<option>Estágio</option>
+													<option>Júnior</option>
+													<option>Pleno</option>
+													<option>Senior</option>
+												</select>
+											</div>
+											<!-- /form-group -->
+
+											<div class="form-group" style="margin-bottom: 0px">
+												<label class="control-label">Horário</label>
+
+												<div>
+													<div class="form-group col-md-3">
+														<div class="input-group bootstrap-timepicker"
+															style="width: 105%;">
+															<input class="timepicker form-control" type="text"
+																/ value="08:00 AM" name="horarioEntrada"> <span
+																class="input-group-addon"><i
+																class="fa fa-clock-o"></i></span>
+														</div>
+													</div>
+
+													<div class="form-group col-md-1">
+														<label style="margin-top: 7px">Às</label>
+													</div>
+
+													<div class="form-group col-md-3">
+														<div class="input-group bootstrap-timepicker"
+															style="width: 105%;">
+															<input class="timepicker form-control" type="text"
+																/ value="05:00 PM" name="horarioSaida"> <span
+																class="input-group-addon"><i
+																class="fa fa-clock-o"></i></span>
+														</div>
+													</div>
+												</div>
+
+											</div>
+										</div>
+
+										<div class="form-group row">
+
+											<div class="">
+												<div class="form-group col-md-6" style="margin-bottom: 0px">
+													<label for="exampleInputPassword1">Faixa salarial</label> <input
+														type="password" class="form-control input-sm"
+														id="exampleInputPassword1" placeholder="Faixa Salarial"
+														disabled name="valorPretensao">
+												</div>
+												<!-- /form-group -->
+
+												<div class="form-group col-md-6" style="margin-bottom: 0px">
+													<label for="exampleInputEmail1">Aumento de quadro</label>
+													<div class="radiogroup" name="aumentoQuadro">
+														<label class="label-radio inline"> <input
+															id="novo" type="radio" name="inline-radio" checked>
+															<span class="custom-radio"> </span> Novo
+														</label> <label class="label-radio inline"> <input
+															id="sub" type="radio" name="inline-radio"> <span
+															class="custom-radio"> </span> Substituição
+														</label>
+
+													</div>
+													<!-- /.col -->
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group row">
+
+											<div class="form-group col-md-6" style="margin-bottom: 0px">
+
+												<div class="form-group">
+													<label class="control-label">Data para inicio</label>
+													<div class="form-group">
+														<div class="input-group">
+															<input type="text" value="01/01/2017"
+																class="datepicker form-control" name="dataInicio">
+															<span class="input-group-addon"> <i
+																class="fa fa-calendar"></i></span>
+														</div>
+													</div>
+													<!-- /.col -->
+												</div>
+												<!-- /form-group -->
+											</div>
+
+											<div class="form-group col-md-6" style="margin-bottom: 0px">
+												<div id="" class="">
+													<label>Nome do substituido</label> <input type="text"
+														class="form-control input-sm"
+														placeholder="Nome do substituido" name="nomeSubstituido">
+												</div>
+											</div>
+
+										</div>
+
+									</form>
+								</div>
 							</section>
 							<!-- /Section -->
 							<section class="panel panel-default">
-							<div class="panel-heading">Formação acadêmica</div>
-							<div class="panel-body relative">
-								<div class="form-group">
-									<textarea class="form-control" rows="3"></textarea>
-								</div>
-								<!-- /form-group -->
+								<div class="panel-heading">Formação acadêmica</div>
+								<div class="panel-body relative">
+									<div class="form-group">
+										<textarea class="form-control" rows="3"
+											name="formacaoAcademica"></textarea>
+									</div>
+									<!-- /form-group -->
 
-							</div>
+								</div>
 							</section>
 							<!-- /panel -->
 
 							<section class="panel panel-default">
-							<div class="panel-heading">Perfil comportamental</div>
-							<div class="panel-body relative">
-								<div class="form-group">
-									<textarea class="form-control" rows="3"></textarea>
-								</div>
-								<!-- /form-group -->
+								<div class="panel-heading">Perfil comportamental</div>
+								<div class="panel-body relative">
+									<div class="form-group">
+										<textarea class="form-control" rows="3"
+											name="perfilComportamental"></textarea>
+									</div>
+									<!-- /form-group -->
 
-							</div>
+								</div>
 							</section>
 							<!-- /panel -->
 
 							<section class="panel panel-default">
-							<div class="panel-heading">Perfil técnico</div>
-							<div class="panel-body relative">
+								<div class="panel-heading">Perfil técnico</div>
+								<div class="panel-body relative">
 
-								<div class="form-group">
-									<textarea class="form-control" rows="3"></textarea>
+									<div class="form-group">
+										<textarea class="form-control" rows="3" name="perfilTecnico"></textarea>
+									</div>
+									<!-- /form-group -->
+
 								</div>
-								<!-- /form-group -->
-
-							</div>
 							</section>
 							<!-- /panel -->
 							<div class="modal-footer">
@@ -400,7 +409,7 @@
 	</div>
 	<!-- /.modal delete-->
 
-	<c:import url="shared/dashboard.jsp"></c:import>
+	<c:import url="/WEB-INF/views/shared/dashboard.jsp"></c:import>
 
 	<!--corpo -->
 	<div id="main-container">
@@ -423,7 +432,7 @@
 							<div class="row ">
 								<div class="col-md-4">
 									<div class="form-group">
-										<label>Vaga</label> <select class="form-control">
+										<label>Vaga</label> <select class="form-control" name="">
 											<!--chzn-select-->
 											<option>Selecione:</option>
 											<option>Desenvolvedor .Net Junior</option>
@@ -436,7 +445,7 @@
 
 								<div class="col-md-5">
 									<label for="">Data</label>
-									<div class="input-group">
+									<div class="input-group" name="dataAbertura">
 										<input type="date" class="form-control"> <span
 											class="input-group-addon">até</span> <input type="date"
 											class="form-control">
@@ -445,7 +454,7 @@
 
 								<div class="col-md-2">
 									<label for="cargo">Status</label> <select id="cargo"
-										class="form-control" style="width: 130px;">
+										class="form-control" style="width: 130px;" name="">
 										<option value="0">Selecione:</option>
 										<option value="1">Ativo</option>
 										<option value="2">Fechado</option>
@@ -476,8 +485,9 @@
 								</tr>
 							</thead>
 							<tbody class="text-center">
-								<tr>
-									<td>Desenvolvedor .Net Junior</td>
+								<c:forEach var="vagas" items="${vagas}">
+									<tr>
+									<td>${vagas.descricaoFormacaoAcademica}</td>
 									<td>Carrefour</td>
 									<td>Alocado</td>
 									<td>15/02/2017</td>
@@ -502,7 +512,8 @@
 										</div> <!-- /btn-group -->
 									</td>
 								</tr>
-								<tr>
+								</c:forEach>
+								<!-- <tr>
 									<td>Analista de sistema</td>
 									<td>Carrefour</td>
 									<td>Interno</td>
@@ -524,10 +535,10 @@
 												<li><a href="#delete-modal" data-toggle="modal"><i
 														class="fa fa-trash-o ">&nbsp</i>Excluir</a></li>
 											</ul>
-										</div> <!-- /btn-group -->
+										</div> /btn-group
 									</td>
-								</tr>
-								<tr>
+								</tr> -->
+								<!-- <tr>
 									<td>Analista .NET Pleno</td>
 									<td>Carrefour</td>
 									<td>Alocado</td>
@@ -549,9 +560,9 @@
 												<li><a href="#delete-modal" data-toggle="modal"><i
 														class="fa fa-trash-o ">&nbsp</i>Excluir</a></li>
 											</ul>
-										</div> <!-- /btn-group -->
+										</div> /btn-group
 									</td>
-								</tr>
+								</tr> -->
 							</tbody>
 						</table>
 					</div>
@@ -582,8 +593,8 @@
 	<!--</main container>-->
 	<!--corpo -->
 
-	<c:import url="shared/footer.jsp"></c:import>
-	<c:import url="shared/js.jsp"></c:import>
+	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
+	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
 
 	<script>
 		$("#fechaVaga").click(

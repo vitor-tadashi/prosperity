@@ -2,29 +2,44 @@ package br.com.prosperity.bean;
 
 import java.util.Calendar;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class VagaBean {
-	private int id;
+	private Integer id; // 
 	private String nomeSolicitante;
-	private Double valorPretensao;
+	private int numeroCandidatos; //
+	private double valorPretensao;
 	private Calendar dataInicio;
-	private String localTrabalho;
+	private char localTrabalho;
 	private String idTipoVaga;
-	private String horarioEntrada;
-	private String horarioSaida;
+	private Calendar horarioEntrada;
+	private Calendar horarioSaida;
 	private String aumentaQuadro;
 	private ProjetoBean projetoBean;
 	private CargoBean cargoBean;
-	private SenioridadeBean senioridadeBean;
+	private SenioridadeBean senioridadeBean; 
+	private String nomeSubstituido; // 
+	private String descricaoFormacaoAcademica; //
+	private String descricaoPerfilComportamental; //
+	private String descricaoPerfilTecnico; //
+	private Calendar dataAbertura; //
+	private Calendar dataAprovacao; //
+	private Calendar dataFechamento; //
 
 	public VagaBean() {
 
 	}
+	
 
-	public VagaBean(int id, String nomeSolicitante, Double valorPretensao, Calendar dataInicio, String localTrabalho,
-			String idTipoVaga, String horarioEntrada, String horarioSaida, String aumentaQuadro,
-			ProjetoBean projetoBean, CargoBean cargoBean, SenioridadeBean senioridadeBean) {
+	public VagaBean(Integer id, String nomeSolicitante, int numeroCandidatos, Double valorPretensao,
+			Calendar dataInicio, char localTrabalho, String idTipoVaga, Calendar horarioEntrada, Calendar horarioSaida,
+			String aumentaQuadro, ProjetoBean projetoBean, CargoBean cargoBean, SenioridadeBean senioridadeBean,
+			String nomeSubstituido, String descricaoFormacaoAcademica, String descricaoPerfilComportamental,
+			String descricaoPerfilTecnico, Calendar dataAbertura, Calendar dataAprovacao, Calendar dataFechamento) {
 		this.id = id;
 		this.nomeSolicitante = nomeSolicitante;
+		this.numeroCandidatos = numeroCandidatos;
 		this.valorPretensao = valorPretensao;
 		this.dataInicio = dataInicio;
 		this.localTrabalho = localTrabalho;
@@ -35,13 +50,106 @@ public class VagaBean {
 		this.projetoBean = projetoBean;
 		this.cargoBean = cargoBean;
 		this.senioridadeBean = senioridadeBean;
+		this.nomeSubstituido = nomeSubstituido;
+		this.descricaoFormacaoAcademica = descricaoFormacaoAcademica;
+		this.descricaoPerfilComportamental = descricaoPerfilComportamental;
+		this.descricaoPerfilTecnico = descricaoPerfilTecnico;
+		this.dataAbertura = dataAbertura;
+		this.dataAprovacao = dataAprovacao;
+		this.dataFechamento = dataFechamento;
 	}
 
-	public int getId() {
+
+
+
+
+
+
+	public Calendar getDataAbertura() {
+		return dataAbertura;
+	}
+
+
+
+	public void setDataAbertura(Calendar dataAbertura) {
+		this.dataAbertura = dataAbertura;
+	}
+
+
+
+	public Calendar getDataAprovacao() {
+		return dataAprovacao;
+	}
+
+
+
+	public void setDataAprovacao(Calendar dataAprovacao) {
+		this.dataAprovacao = dataAprovacao;
+	}
+
+
+
+	public Calendar getDataFechamento() {
+		return dataFechamento;
+	}
+
+
+
+	public void setDataFechamento(Calendar dataFechamento) {
+		this.dataFechamento = dataFechamento;
+	}
+
+	public String getDescricaoFormacaoAcademica() {
+		return descricaoFormacaoAcademica;
+	}
+
+
+	public void setDescricaoFormacaoAcademica(String descricaoFormacaoAcademica) {
+		this.descricaoFormacaoAcademica = descricaoFormacaoAcademica;
+	}
+
+
+	public String getDescricaoPerfilComportamental() {
+		return descricaoPerfilComportamental;
+	}
+
+
+	public void setDescricaoPerfilComportamental(String descricaoPerfilComportamental) {
+		this.descricaoPerfilComportamental = descricaoPerfilComportamental;
+	}
+
+
+	public String getDescricaoPerfilTecnico() {
+		return descricaoPerfilTecnico;
+	}
+
+
+	public void setDescricaoPerfilTecnico(String descricaoPerfilTecnico) {
+		this.descricaoPerfilTecnico = descricaoPerfilTecnico;
+	}
+
+
+	public int getNumeroCandidatos() {
+		return numeroCandidatos;
+	}
+
+	public void setNumeroCandidatos(int numeroCandidatos) {
+		this.numeroCandidatos = numeroCandidatos;
+	}
+
+	public String getNomeSubstituido() {
+		return nomeSubstituido;
+	}
+
+	public void setNomeSubstituido(String nomeSubstituido) {
+		this.nomeSubstituido = nomeSubstituido;
+	}
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -69,11 +177,11 @@ public class VagaBean {
 		this.dataInicio = dataInicio;
 	}
 
-	public String getLocalTrabalho() {
+	public char getLocalTrabalho() {
 		return localTrabalho;
 	}
 
-	public void setLocalTrabalho(String localTrabalho) {
+	public void setLocalTrabalho(char localTrabalho) {
 		this.localTrabalho = localTrabalho;
 	}
 
@@ -85,21 +193,30 @@ public class VagaBean {
 		this.idTipoVaga = tipoVaga;
 	}
 
-	public String getHorarioEntrada() {
+	public Calendar getHorarioEntrada() {
 		return horarioEntrada;
 	}
 
-	public void setHorarioEntrada(String horarioEntrada) {
+
+	public void setHorarioEntrada(Calendar horarioEntrada) {
 		this.horarioEntrada = horarioEntrada;
 	}
 
-	public String getHorarioSaida() {
+
+	public Calendar getHorarioSaida() {
 		return horarioSaida;
 	}
 
-	public void setHorarioSaida(String horarioSaida) {
+
+	public void setHorarioSaida(Calendar horarioSaida) {
 		this.horarioSaida = horarioSaida;
 	}
+
+
+	public void setValorPretensao(double valorPretensao) {
+		this.valorPretensao = valorPretensao;
+	}
+
 
 	public String getAumentaQuadro() {
 		return aumentaQuadro;
