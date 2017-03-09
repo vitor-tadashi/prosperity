@@ -1,11 +1,16 @@
 package br.com.prosperity.entity;
 
 
-import java.io.File;
-import java.util.Calendar;
-import java.util.List;
-
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
 
 /**
@@ -19,7 +24,7 @@ public class UsuarioEntity {
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
 	@Column(name="idUsuario", unique = true, nullable = false)
-	private int id;
+	private Integer id;
 	
 	@ManyToOne (cascade = CascadeType.ALL)
 	private PerfilEntity perfilEntity;
@@ -34,11 +39,11 @@ public class UsuarioEntity {
 	@Column(name = "senha")
 	private String senha;
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

@@ -23,12 +23,20 @@ public class PerfilEntity {
 /* Mapeamento de Relacionamentos Tudo o que estiver ligado na tabela Vaga 1-N*/
 	
 	@ManyToOne (cascade = CascadeType.ALL)
-	private PerfilEntity avaliadorEntity;
+	private PerfilEntity perfilEntity;
 	
 	// relacionamento avaliadores
 	/* fim dos mapeamentos */
 	
 
+
+	public PerfilEntity getPerfilEntity() {
+		return perfilEntity;
+	}
+
+	public void setPerfilEntity(PerfilEntity perfilEntity) {
+		this.perfilEntity = perfilEntity;
+	}
 
 	public PerfilEntity(int idPerfil, String nome) {
 		this.idPerfil = idPerfil;

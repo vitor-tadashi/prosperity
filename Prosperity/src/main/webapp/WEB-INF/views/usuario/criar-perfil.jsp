@@ -316,56 +316,71 @@
 
 	<!-- Corpo da pagina aqui -->
 	<div id="main-container">
-                <div id="breadcrumb">
-                    <ul class="breadcrumb">
-                         <li><i class="fa fa-home"></i><a href="index.html"> Home</a></li>
-                         <li class="active">Criar perfil</li>     
-                    </ul>
-                </div><!--breadcrumb-->
-                <div class="container">
-                    <div class="padding-md">
-                        <div class="row">   
-                            <div class="form-group col-md-12">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <label>Criação de perfil</label>
-                                    </div>
-                                    <div class="panel-body col-md-5">
-                                        <label>Perfil</label>
-                                        <input type="text" class="form-control" id="usuario"data-required="true">
-                                    </div>
-                                    <div class="row"></div>
-                                    <div class="panel-body relative">
-                                        <select multiple="multiple" id="selectedBox1" class="select-box pull-left form-control">
-                                            <option value="1">Aprovar vaga</option>
-                                            <option value="2">Cadastrar vaga</option>
-                                            <option value="3">Consultar vaga</option>
-                                        </select>       
+		<div id="breadcrumb">
+			<ul class="breadcrumb">
+				<li><i class="fa fa-home"></i><a href="index.html"> Home</a></li>
+				<li class="active">Criar perfil</li>
+			</ul>
+		</div>
+		<!--breadcrumb-->
+		<div class="container">
+			<form action="salvar-perfil" method="get">
+			<div class="padding-md">
+				<div class="row">
+					<div class="form-group col-md-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<label>Criação de perfil</label>
+							</div>
+							<div class="panel-body col-md-5">
+								<label>Perfil</label> <input type="text" class="form-control"
+									id="usuario" data-required="true" name="nome">
+							</div>
+							<div class="row"></div>
+							<div class="panel-body relative">
+								<select multiple="multiple" id="selectedBox1"
+									class="select-box pull-left form-control">
+									<c:forEach var="funcionalidade" items="${funcionalidades}"
+										varStatus="i">
+										<option value="i">${funcionalidade.nome }</option>
+									</c:forEach>
+								</select>
 
-                                        <div class="select-box-option">
-                                            <a class="btn btn-sm btn-default" id="btnRemove"><i class="fa fa-angle-left"></i></a>
-                                            <a class="btn btn-sm btn-default" id="btnSelect"><i class="fa fa-angle-right"></i></a>
-                                            <div class="seperator"></div>
-                                            <a class="btn btn-sm btn-default" id="btnRemoveAll"><i class="fa fa-angle-double-left"></i></a>
-                                            <a class="btn btn-sm btn-default" id="btnSelectAll"><i class="fa fa-angle-double-right"></i></a>
-                                        </div>
+								<div class="select-box-option">
+									<a class="btn btn-sm btn-default" id="btnRemove"><i
+										class="fa fa-angle-left"></i></a> <a
+										class="btn btn-sm btn-default" id="btnSelect"><i
+										class="fa fa-angle-right"></i></a>
+									<div class="seperator"></div>
+									<a class="btn btn-sm btn-default" id="btnRemoveAll"><i
+										class="fa fa-angle-double-left"></i></a> <a
+										class="btn btn-sm btn-default" id="btnSelectAll"><i
+										class="fa fa-angle-double-right"></i></a>
+								</div>
 
-                                        <select multiple="multiple" id="selectedBox2" class="select-box pull-right form-control">
-                                            <option>Alterar candidato</option>
-                                            <option>Cadastrar usuário</option>
-                                            <option>Excluir usuário</option>
-                                            <option>Consultar usuário</option>
-                                        </select>       
-                                    </div>
-                                </div><!-- /panel -->
-                            </div><!-- /form-group -->
-                        </div>
-                        <div class="btn-group pull-right" >
-                            <a class="btn btn-success" href="#salvo" data-toggle="modal">Salvar</a>
-                        </div>
-                    </div>
-                </div>
-        </div>
+								<select multiple="multiple" id="selectedBox2"
+									class="select-box pull-right form-control"
+									>
+									<option value="Alterar candidato">Alterar candidato</option>
+									<option>Cadastrar usuário</option>
+									<option>Excluir usuário</option>
+									<option>Consultar usuário</option>
+								</select>
+								<input type="text" class="form-control"
+									id="usuario" data-required="true" >
+							</div>
+						</div>
+						<!-- /panel -->
+					</div>
+					<!-- /form-group -->
+				</div>
+				<div class="btn-group pull-right">
+					<button class="btn btn-success" type="submit" data-toggle="modal">Salvar</button>
+				</div>
+			</div>
+			</form>
+		</div>
+	</div>
 
 	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
 	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
