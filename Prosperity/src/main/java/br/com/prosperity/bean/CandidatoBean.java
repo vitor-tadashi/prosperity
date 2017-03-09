@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CandidatoBean {
-	private int id;
+	private Integer id;
 	private String cpf;
 	private String nome;
 	private String rg;
@@ -30,10 +30,11 @@ public class CandidatoBean {
 		
 	}
 	
-	public CandidatoBean(String cpf, String nome, String rg, Calendar dataNascimento, double valorPretensao,
+	public CandidatoBean(Integer id,String cpf, String nome, String rg, Calendar dataNascimento, double valorPretensao,
 			Calendar dataAbertura, Calendar dataFechamento, String email, Calendar dataAlteracao, File curriculo,
 			ContatoBean contato, EnderecoBean endereco, FormacaoBean formacao, UsuarioBean usuario,
 			List<StatusBean> status, List<VagaBean> vagas) {
+		this.id = id;
 		this.cpf = cpf;
 		this.nome = nome;
 		this.rg = rg;
@@ -51,116 +52,142 @@ public class CandidatoBean {
 		this.status = status;
 		this.vagas = vagas;
 	}
-	
-	
-	
-	public int getId() {
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
 	public String getCpf() {
 		return cpf;
 	}
-	public File getCurriculo() {
-		return curriculo;
-	}
-	public void setCurriculo(File curriculo) {
-		this.curriculo = curriculo;
-	}
-	public List<StatusBean> getStatus() {
-		return status;
-	}
-	public void setStatus(List<StatusBean> status) {
-		this.status = status;
-	}
-	public List<VagaBean> getVagas() {
-		return vagas;
-	}
-	public void setVagas(List<VagaBean> vagas) {
-		this.vagas = vagas;
-	}
+
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public String getRg() {
 		return rg;
 	}
+
 	public void setRg(String rg) {
 		this.rg = rg;
 	}
+
 	public Calendar getDataNascimento() {
 		return dataNascimento;
 	}
-	public void setDataNascimento(Calendar dtNascimento) {
-		this.dataNascimento = dtNascimento;
-	}
 
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setDataNascimento(Calendar dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
 	public double getValorPretensao() {
 		return valorPretensao;
 	}
+
 	public void setValorPretensao(double valorPretensao) {
 		this.valorPretensao = valorPretensao;
 	}
+
 	public Calendar getDataAbertura() {
 		return dataAbertura;
 	}
+
 	public void setDataAbertura(Calendar dataAbertura) {
 		this.dataAbertura = dataAbertura;
 	}
+
 	public Calendar getDataFechamento() {
 		return dataFechamento;
 	}
+
 	public void setDataFechamento(Calendar dataFechamento) {
 		this.dataFechamento = dataFechamento;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public Calendar getDataAlteracao() {
 		return dataAlteracao;
 	}
+
 	public void setDataAlteracao(Calendar dataAlteracao) {
 		this.dataAlteracao = dataAlteracao;
 	}
+
+	public File getCurriculo() {
+		return curriculo;
+	}
+
+	public void setCurriculo(File curriculo) {
+		this.curriculo = curriculo;
+	}
+
 	public ContatoBean getContato() {
 		return contato;
 	}
+
 	public void setContato(ContatoBean contato) {
 		this.contato = contato;
 	}
+
 	public EnderecoBean getEndereco() {
 		return endereco;
 	}
+
 	public void setEndereco(EnderecoBean endereco) {
 		this.endereco = endereco;
 	}
+
 	public FormacaoBean getFormacao() {
 		return formacao;
 	}
+
 	public void setFormacao(FormacaoBean formacao) {
 		this.formacao = formacao;
 	}
+
 	public UsuarioBean getUsuario() {
 		return usuario;
 	}
+
 	public void setUsuario(UsuarioBean usuario) {
 		this.usuario = usuario;
 	}
-	
+
+	public List<StatusBean> getStatus() {
+		return status;
+	}
+
+	public void setStatus(List<StatusBean> status) {
+		this.status = status;
+	}
+
+	public List<VagaBean> getVagas() {
+		return vagas;
+	}
+
+	public void setVagas(List<VagaBean> vagas) {
+		this.vagas = vagas;
+	}
 	
 	
 }
