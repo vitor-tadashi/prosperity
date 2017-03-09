@@ -13,8 +13,11 @@ public class UsuarioBean {
 	public UsuarioBean() {
 		
 	}
-	public PerfilBean getPerfil() {
-		return perfil;
+	public UsuarioBean(PerfilBean perfil, FuncionarioBean funcionario, String nome, String senha) {
+		this.perfil = perfil;
+		this.funcionario = funcionario;
+		this.nome = nome;
+		this.senha = senha;
 	}
 	public int getIdUsuario() {
 		return IdUsuario;
@@ -22,25 +25,22 @@ public class UsuarioBean {
 	public void setIdUsuario(int idUsuario) {
 		IdUsuario = idUsuario;
 	}
+	public PerfilBean getPerfil() {
+		return perfil;
+	}
 	public void setPerfil(PerfilBean perfil) {
 		this.perfil = perfil;
 	}
 	public FuncionarioBean getFuncionario() {
 		return funcionario;
 	}
-	public UsuarioBean(PerfilBean perfil, FuncionarioBean funcionario, String nome	, String senha) {
-		this.perfil = perfil;
-		this.funcionario = funcionario;
-		this.nome = nome;
-		this.senha = senha;
-	}
 	public void setFuncionario(FuncionarioBean funcionario) {
 		this.funcionario = funcionario;
 	}
-	public String getnome() {
+	public String getNome() {
 		return nome;
 	}
-	public void setUsuario(String nome) {
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
 	public String getSenha() {
@@ -49,5 +49,6 @@ public class UsuarioBean {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+
 
 }

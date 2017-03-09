@@ -1,9 +1,24 @@
 package br.com.prosperity.business;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import br.com.prosperity.bean.UsuarioBean;
+import br.com.prosperity.converter.UsuarioConverter;
+import br.com.prosperity.dao.UsuarioDAO;
 
 @Component
 public class UsuarioBusiness {
+
+	@Autowired
+	private UsuarioDAO usuarioDAO;
+	
+	@Autowired
+	private UsuarioConverter usuarioConverter;
+
+	public void inserir(UsuarioBean usuarioBean) {
+		usuarioDAO.adicionar(usuarioConverter.convertBeanToEntity(usuarioBean));
+	}
 	/*
 	@Autowired
 	private UsuarioDAO usuarioDAO;

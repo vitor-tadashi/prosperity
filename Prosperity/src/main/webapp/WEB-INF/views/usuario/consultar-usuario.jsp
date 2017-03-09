@@ -40,12 +40,12 @@
 				<div class="modal-body">
 					<div class="padding-md">
 						<div class="row">
-							<form>
+							<form action="cadastrar" method="POST">
 								<div class="row">
 									<div class="form-group col-md-6">
 										<label for="funcionario">Funcionário</label> <select
 											class="form-control">
-											<option value="0">Selecionar funcionário</option>
+											<option value="">Selecionar funcionário</option>
 											<option value="1">André</option>
 											<option value="2">Daniel</option>
 											<option value="3">Fabio</option>
@@ -64,20 +64,20 @@
 										<div class="input-group">
 											<span class="input-group-addon"><i class="fa fa-user"></i></span>
 											<input type="text" class="form-control" id="usuario"
-												data-required="true">
+												data-required="true" name="nome">
 										</div>
 									</div>
 									<div class="form-group col-md-6 cold-md-offset-6">
 										<label for="email">E-mail corporativo</label>
 										<div class="input-group">
 											<span class="input-group-addon">@</span> <input type="email"
-												class="form-control" id="email" data-required="true">
+												class="form-control" id="email" data-required="true" >
 										</div>
 									</div>
 									<div class="form-group open col-md-6">
 										<label for="permissao">Perfil</label> <select
 											class="form-control">
-											<option value="0">Selecionar</option>
+											<option value="">Selecionar</option>
 											<option value="1">Administrador</option>
 											<option value="2">RH</option>
 											<option value="3">Gestor Administrativo</option>
@@ -90,6 +90,7 @@
 										</select>
 									</div>
 								</div>
+								<input type="submit" class="btn btn-danger" />
 							</form>
 						</div>
 						<!--close row-->
