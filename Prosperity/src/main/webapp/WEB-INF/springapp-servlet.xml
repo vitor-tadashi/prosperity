@@ -24,7 +24,7 @@
 
 	<task:annotation-driven />
 
-	<tx:annotation-driven />
+	<tx:annotation-driven transaction-manager="entityManagerFactory" />
 
 	<!-- MVC -->
 	<mvc:annotation-driven />
@@ -79,7 +79,7 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
 		<property name="url"
-			value="jdbc:sqlserver://192.168.2.20/mssql2012:1433;instanceName=Prosperity;Database=Prosperity" />
+			value="jdbc:sqlserver://192.168.2.20\MSSQL2012:1433;instanceName=Prosperity;Database=Prosperity" />
 		<property name="username" value="axa_developers" />
 		<property name="password" value="axa@123" />
 	</bean>
