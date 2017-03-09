@@ -1,8 +1,11 @@
 package br.com.prosperity.converter;
 
+import org.springframework.stereotype.Component;
+
 import br.com.prosperity.bean.TipoCursoBean;
 import br.com.prosperity.entity.TipoCursoEntity;
 
+@Component
 public class TipoCursoConverter implements Converter<TipoCursoEntity, TipoCursoBean> {
 
 	@Override
