@@ -2,6 +2,7 @@ package br.com.prosperity.business;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.prosperity.bean.PerfilBean;
 import br.com.prosperity.converter.PerfilConverter;
@@ -24,7 +25,7 @@ public class PerfilBusiness {
 		
 		return perfilBean;
 	}
-
+	@Transactional
 	public void inserir(PerfilBean perfilBean) {
 		PerfilEntity perfilEntity = perfilConverter.convertBeanToEntity(perfilBean);
 		perfilDAO.adicionar(perfilEntity);
