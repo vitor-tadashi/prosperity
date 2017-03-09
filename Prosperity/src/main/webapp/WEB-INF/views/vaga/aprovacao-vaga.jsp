@@ -101,7 +101,8 @@
 											<div class="form-group col-md-4" style="margin-bottom: 0px">
 												<label for="exampleInputEmail1">Senioridade da vaga</label>
 												<input type="name" class="form-control input-sm"
-													id="exampleInputEmail1" placeholder="Estágio" value="Senioridade
+													id="exampleInputEmail1" placeholder="Estágio"
+													value="Senioridade
 													da Vaga" disabled>
 											</div>
 											<!-- /form-group -->
@@ -245,7 +246,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- CORPO DA PÁGINA -->
 	<div id="main-container">
 		<div id="breadcrumb">
@@ -281,8 +282,8 @@
 							</tr>
 						</thead>
 						<tbody class="text-center">
-							<!-- <tr>
-								<td>Desenvolvedor</td>
+							<tr>
+								<td>${nomevaga}</td>
 								<td>Vitor Tadashi</td>
 								<td>Senior</td>
 								<td>Projeto Web</td>
@@ -292,7 +293,7 @@
 								<td>01/03/2017</td>
 								<td>
 									<div class="btn-group">
-										Começo Botão
+										<!-- <-- ! Começo Botão -->
 										<button class="btn btn-sm dropdown-toggle btn-info"
 											data-toggle="dropdown" aria-haspopup="true"
 											aria-expanded="false">
@@ -308,9 +309,9 @@
 											<li><a href="#"><i class="fa fa-times fa-lg"></i>
 													Reprovar</a></li>
 										</ul>
-									</div> Fim Botão
+									</div> <!-- Fim Botão -->
 								</td>
-							</tr> -->
+							</tr>
 							<!-- <tr>
 								<td>Desenvolvedor</td>
 								<td>Vitor Tadashi</td>
