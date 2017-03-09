@@ -14,6 +14,7 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 
 	@Autowired
 	EnderecoConverter enderecoConverter;
+	
 	@Autowired
 	FormacaoConverter formacaoConverter;
 
