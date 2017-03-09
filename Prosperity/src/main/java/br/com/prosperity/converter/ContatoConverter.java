@@ -25,6 +25,6 @@ public class ContatoConverter implements Converter<ContatoEntity, ContatoBean> {
 		bean.setCandidato(new CandidatoConverter().convertEntityToBean(entity.getCandidato()));
 		bean.setCelular(entity.getCelular());
 		bean.setTelefone(entity.getTelefone());
-		return null;
+		return bean;
 	}
 }
