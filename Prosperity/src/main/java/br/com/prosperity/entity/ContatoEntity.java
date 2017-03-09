@@ -20,7 +20,7 @@ public class ContatoEntity {
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
 	@Column(name = "idContato", unique = true, nullable = false)
-	private int id;
+	private Integer id;
 	/* fim */
 
 	@Column(name = "telefone")
