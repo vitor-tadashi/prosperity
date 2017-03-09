@@ -2,6 +2,7 @@ package br.com.prosperity.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -14,6 +15,9 @@ public class CandidatoController {
 	
 	@Autowired
 	private CandidatoBusiness candidatoBusiness;
+
+
+	private String teste;
 	
 	@RequestMapping(value ="cadastrar", method = RequestMethod.GET)
 	public String cadastrarCandidato() {
@@ -21,7 +25,8 @@ public class CandidatoController {
 	}
 	
 	@RequestMapping(value ="consultar-rh", method = RequestMethod.GET)
-	public String consultarCandidatoRH() {
+	public String consultarCandidatoRH(Model model) {
+		model.addAttribute("candidato", candidato);
 		return "candidato/consulta-rh";
 	}
 	
@@ -31,9 +36,10 @@ public class CandidatoController {
 	}
 	
 	@RequestMapping(value ="historico", method = RequestMethod.GET)
-	public String historicoCandidato() {
-		CandidatoBean candidatoBean = null;
+	public String historicoCandidato(Model model) {
+		CandidatoBean candidatoBean = new CandidatoBean();
 		candidatoBean = candidatoBusiness.obter(1);
+		model.addAttribute("candidato", candidatoBean);
 		
 		return "candidato/historico-candidato";
 	}

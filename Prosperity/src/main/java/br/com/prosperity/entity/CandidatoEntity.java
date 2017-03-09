@@ -24,7 +24,7 @@ public class CandidatoEntity {
 	/* Mapeamento do ID */
 	@Id
 	@Column(name = "idCandidato", unique = true, nullable = false)
-	private int Id;
+	private Integer id;
 	/* fim Id */
 
 	@Column(name = "nmCandidato")
@@ -87,12 +87,12 @@ public class CandidatoEntity {
 	/* fim dos mapeamentos */
 
 	
-	public int getId() {
-		return Id;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setId(int id) {
-		Id = id;
+	public void setId(Integer id) {
+		id = id;
 	}
 
 	public String getNome() {
