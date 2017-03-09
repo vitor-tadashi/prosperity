@@ -10,14 +10,24 @@ public class UsuarioBean {
 	private String nome;
 	private String senha;
 	
-	public PerfilBean getPerfil() {
-		return perfil;
+	//métodos
+	public UsuarioBean() {
+		
+	}
+	public UsuarioBean(PerfilBean perfil, FuncionarioBean funcionario, String nome, String senha) {
+		this.perfil = perfil;
+		this.funcionario = funcionario;
+		this.nome = nome;
+		this.senha = senha;
 	}
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	public PerfilBean getPerfil() {
+		return perfil;
 	}
 	public void setPerfil(PerfilBean perfil) {
 		this.perfil = perfil;

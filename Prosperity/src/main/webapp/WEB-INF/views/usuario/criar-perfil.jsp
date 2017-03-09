@@ -337,9 +337,9 @@
                                     <div class="row"></div>
                                     <div class="panel-body relative">
                                         <select multiple="multiple" id="selectedBox1" class="select-box pull-left form-control">
-                                            <option value="1">Aprovar vaga</option>
-                                            <option value="2">Cadastrar vaga</option>
-                                            <option value="3">Consultar vaga</option>
+                                            <c:forEach var="funcionalidade" items="${funcionalidades}" varStatus="i">
+                                            	 <option value="i">${funcionalidade.nome }</option>
+                                            </c:forEach>
                                         </select>       
 
                                         <div class="select-box-option">

@@ -12,7 +12,7 @@
 <meta name="author" content="">
 
 <c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
-
+</head>
 <style>
 .page-header h1 {
 	font-size: 3.26em;
@@ -263,7 +263,7 @@
 	margin-left: 20px;
 }
 </style>
-</head>
+
 <body>
 	<c:import url="/WEB-INF/views/shared/dashboard.jsp"></c:import>
 	<div id="main-container">

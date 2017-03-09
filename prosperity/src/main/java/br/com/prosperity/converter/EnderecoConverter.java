@@ -12,6 +12,12 @@ public class EnderecoConverter implements Converter<EnderecoEntity, EnderecoBean
 	public EnderecoEntity convertBeanToEntity(EnderecoBean bean) {
 		EnderecoEntity entity = new EnderecoEntity();
 		entity.setId(bean.getId());
+		entity.setCep(bean.getCep());
+		entity.setComplemento(bean.getComplemento());
+		entity.setNumero(bean.getNumero());
+		entity.setCidade(bean.getCidade());
+		entity.setEstado(bean.getEstado());
+		entity.setLogradouro(bean.getLogradouro());
 		return entity;
 	}
 
@@ -19,6 +25,13 @@ public class EnderecoConverter implements Converter<EnderecoEntity, EnderecoBean
 	public EnderecoBean convertEntityToBean(EnderecoEntity entity) {
 		EnderecoBean bean = new EnderecoBean();
 		bean.setId(entity.getId());
+		bean.setCep(entity.getCep());
+		bean.setCidade(entity.getCidade());
+		bean.setComplemento(entity.getComplemento());
+		bean.setNumero(entity.getNumero());
+		bean.setEstado(entity.getEstado());
+		bean.setLogradouro(entity.getLogradouro());
+		
 		return bean;
 	}
 }

@@ -10,7 +10,7 @@ import br.com.prosperity.entity.UsuarioEntity;
 
 @Component
 public class UsuarioBusiness {
-	
+
 	@Autowired
 	private UsuarioDAO usuarioDAO;
 	
@@ -18,6 +18,10 @@ public class UsuarioBusiness {
 	private UsuarioConverter usuarioConverter;
 	
 	private UsuarioEntity usuarioEntity;
+
+	public void inserir(UsuarioBean usuarioBean) {
+		usuarioDAO.adicionar(usuarioConverter.convertBeanToEntity(usuarioBean));
+	}
 
 	public UsuarioBean logar(UsuarioBean usuarioBean) {
 		try {
