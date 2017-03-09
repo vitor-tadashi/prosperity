@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.Calendar;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+@Component
 public class CandidatoBean {
 	private int id;
 	private String cpf;
