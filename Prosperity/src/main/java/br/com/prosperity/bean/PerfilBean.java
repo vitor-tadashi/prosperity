@@ -7,12 +7,12 @@ public class PerfilBean {
 
 	private int id;
 	private String nome;
-	//private List<FuncionalidadeBean> listaFuncionalidades;
+	private List<FuncionalidadeBean> listaFuncionalidades = new ArrayList<>();
 
 	public PerfilBean(int id, String nome, List<FuncionalidadeBean> listaFuncionalidades) {
 		this.id = id;
 		this.nome = nome;
-		//this.listaFuncionalidades = listaFuncionalidades;
+		this.listaFuncionalidades = listaFuncionalidades;
 	}
 
 	public PerfilBean() {
@@ -34,12 +34,12 @@ public class PerfilBean {
 		this.nome = nome;
 	}
 
-	/*public List<FuncionalidadeBean> getListaFuncionalidades() {
+	public List<FuncionalidadeBean> getListaFuncionalidades() {
 		return listaFuncionalidades;
 	}
 
 	public void setListaFuncionalidades(List<FuncionalidadeBean> listaFuncionalidades) {
 		this.listaFuncionalidades = listaFuncionalidades;
-	}*/
+	}
 
 }
