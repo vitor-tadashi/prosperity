@@ -29,24 +29,24 @@
 					</div>
 				</div>
 				<div class="panel-body">
-					<form class="form-login">
+					<form class="form-login" action="login" method="post">
 						<div class="form-group bounceIn animation-delay2">
 							<label>Usuário</label>
 							<div class="input-group input-sm">
 								<span class="input-group-addon"><i class="fa fa-user"></i></span>
-								<input type="text" placeholder="Usuário" class="form-control">
+								<input type="text" placeholder="Usuário" class="form-control" id="nome" name="nome"
+													data-required="true">
 							</div>
 						</div>
 						<div class="form-group bounceIn animation-delay3">
 							<label>Senha</label>
 							<div class="input-group input-sm">
 								<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-								<input type="password" placeholder="Senha" class="form-control">
+								<input type="password" placeholder="Senha" class="form-control" id="senha" name="senha"
+													data-required="true">
 							</div>
 						</div>
-						<a
-							class="btn btn-success btn-sm bounceIn animation-delay4 login-link pull-right"
-							href="dashboard.html"><i class="fa fa-sign-in"></i> Entrar</a>
+						<button class="btn btn-success btn-sm"><i class="fa fa-sign-in"></i> Entrar</button>
 					</form>
 				</div>
 			</div>
