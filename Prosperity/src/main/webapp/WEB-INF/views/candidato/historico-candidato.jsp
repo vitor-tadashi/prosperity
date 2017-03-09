@@ -287,91 +287,91 @@
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Nome do candidato</label>
 							<div class="col-xs-7">
-								<p class="form-control-static">João da Silva</p>
+								<p class="form-control-static" id="nome" name="nome">${candidato.nome}</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Email</label>
 							<div class="col-xs-7">
-								<p class="form-control-static">joaosilva@verity.com</p>
+								<p class="form-control-static" id="email" name="email">joaosilva@verity.com</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">CPF</label>
 							<div class="col-xs-7">
-								<p class="form-control-static">123.456.789-10</p>
+								<p class="form-control-static" id="cpf" name="cpf">123.456.789-10</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">RG</label>
 							<div class="col-xs-7">
-								<p class="form-control-static">15.124.234</p>
+								<p class="form-control-static" id="rg" name="rg">15.124.234</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Data nascimento</label>
 							<div class="col-xs-7">
-								<p class="form-control-static">01/01/2000</p>
+								<p class="form-control-static" id="dtNascimento" name="dtNascimento">01/01/2000</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Idade</label>
 							<div class="col-xs-7">
-								<p class="form-control-static">27</p>
+								<p class="form-control-static" id="idade" name="idade">27</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Telefone</label>
 							<div class="col-xs-7">
-								<p class="form-control-static">(99) 99999-9999</p>
+								<p class="form-control-static" id="telefone" name="telefone">(99) 99999-9999</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Cidade</label>
 							<div class="col-xs-7">
-								<p class="form-control-static">São Paulo</p>
+								<p class="form-control-static" id="cidade" name="cidade">São Paulo</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Estado</label>
 							<div class="col-xs-7">
-								<p class="form-control-static">SP</p>
+								<p class="form-control-static" id="estado" name="estado">SP</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Curso</label>
 							<div class="col-xs-7">
-								<p class="form-control-static">Engenharia da Computação</p>
+								<p class="form-control-static" id="nomeCurso" name="nomeCurso">Engenharia da Computação</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Instituição</label>
 							<div class="col-xs-7">
-								<p class="form-control-static">UNASP</p>
+								<p class="form-control-static" id="instituicao" name="instituicao">UNASP</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Tipo de curso</label>
 							<div class="col-xs-7">
-								<p class="form-control-static">Graduação</p>
+								<p class="form-control-static" id="tipoCurso" name="tipoCurso">Graduação</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Situação atual</label>
 							<div class="col-xs-7">
-								<p class="form-control-static">Cursando</p>
+								<p class="form-control-static" id="situacaoAtual" name="situacaoAtual">Cursando</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Mês/Ano conclusão</label>
 							<div class="col-xs-7">
-								<p class="form-control-static">07/2018</p>
+								<p class="form-control-static" id="conclusao" name="conclusao">07/2018</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Pretensão salarial</label>
 							<div class="col-xs-7">
-								<p class="form-control-static">R$ 1200,00</p>
+								<p class="form-control-static" id="pretensao" name="pretensao">R$ 1200,00</p>
 							</div>
 						</div>
 						<div class="form-group col-xs-12">

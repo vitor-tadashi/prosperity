@@ -11,8 +11,9 @@ public class FuncionalidadeConverter implements Converter<FuncionalidadeEntity, 
 	@Override
 	public FuncionalidadeEntity convertBeanToEntity(FuncionalidadeBean bean) {
 		FuncionalidadeEntity entity = new FuncionalidadeEntity();
-
+		
 		entity.setId(bean.getId());
+		entity.setNome(bean.getNome());
 
 		return entity;
 	}
@@ -22,6 +23,7 @@ public class FuncionalidadeConverter implements Converter<FuncionalidadeEntity, 
 		FuncionalidadeBean bean = new FuncionalidadeBean();
 
 		bean.setId(entity.getId());
+		bean.setNome(entity.getNome());
 
 		return bean;
 	}

@@ -36,9 +36,10 @@ public class CandidatoController {
 	}
 	
 	@RequestMapping(value ="historico", method = RequestMethod.GET)
-	public String historicoCandidato() {
-		CandidatoBean candidatoBean = null;
+	public String historicoCandidato(Model model) {
+		CandidatoBean candidatoBean = new CandidatoBean();
 		candidatoBean = candidatoBusiness.obter(1);
+		model.addAttribute("candidato", candidatoBean);
 		
 		return "candidato/historico-candidato";
 	}

@@ -1,26 +1,33 @@
 package br.com.prosperity.bean;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class UsuarioBean {
-	private int IdUsuario;
+	private Integer id;
 	private PerfilBean perfil;
 	private FuncionarioBean funcionario;
-	//classes
 	private String nome;
 	private String senha;
 	
 	//métodos
-	
 	public UsuarioBean() {
 		
 	}
+	public UsuarioBean(PerfilBean perfil, FuncionarioBean funcionario, String nome, String senha) {
+		this.perfil = perfil;
+		this.funcionario = funcionario;
+		this.nome = nome;
+		this.senha = senha;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public PerfilBean getPerfil() {
 		return perfil;
-	}
-	public int getIdUsuario() {
-		return IdUsuario;
-	}
-	public void setIdUsuario(int idUsuario) {
-		IdUsuario = idUsuario;
 	}
 	public void setPerfil(PerfilBean perfil) {
 		this.perfil = perfil;
@@ -28,19 +35,13 @@ public class UsuarioBean {
 	public FuncionarioBean getFuncionario() {
 		return funcionario;
 	}
-	public UsuarioBean(PerfilBean perfil, FuncionarioBean funcionario, String nome	, String senha) {
-		this.perfil = perfil;
-		this.funcionario = funcionario;
-		this.nome = nome;
-		this.senha = senha;
-	}
 	public void setFuncionario(FuncionarioBean funcionario) {
 		this.funcionario = funcionario;
 	}
-	public String getnome() {
+	public String getNome() {
 		return nome;
 	}
-	public void setUsuario(String nome) {
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
 	public String getSenha() {
@@ -49,5 +50,4 @@ public class UsuarioBean {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
 }

@@ -1,9 +1,13 @@
 package br.com.prosperity.entity;
 
 
-import java.util.List;
-
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name= "tbPerfil")
@@ -13,8 +17,8 @@ public class PerfilEntity {
 	/* Mapeamento do ID */
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-	@Column(name="idUsuario", unique = true, nullable = false)
-	private int idPerfil;
+	@Column(name="idPerfil", unique = true, nullable = false)
+	private Integer id;
 	/* fim Id */
 
 	@Column(name = "nmPerfil")
@@ -22,16 +26,24 @@ public class PerfilEntity {
 	
 /* Mapeamento de Relacionamentos Tudo o que estiver ligado na tabela Vaga 1-N*/
 	
-	@ManyToOne (cascade = CascadeType.ALL)
-	private PerfilEntity avaliadorEntity;
+	/*@ManyToOne (cascade = CascadeType.ALL)
+	private PerfilEntity perfilEntity;*/
 	
 	// relacionamento avaliadores
 	/* fim dos mapeamentos */
 	
 
 
-	public PerfilEntity(int idPerfil, String nome) {
-		this.idPerfil = idPerfil;
+	/*public PerfilEntity getPerfilEntity() {
+		return perfilEntity;
+	}
+
+	public void setPerfilEntity(PerfilEntity perfilEntity) {
+		this.perfilEntity = perfilEntity;
+	}*/
+
+	public PerfilEntity(Integer id, String nome) {
+		this.id = id;
 		this.nome = nome;
 	}
 	
@@ -39,12 +51,12 @@ public class PerfilEntity {
 		
 	}
 
-	public int getId() {
-		return idPerfil;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setId(int id) {
-		this.idPerfil = id;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getNome() {

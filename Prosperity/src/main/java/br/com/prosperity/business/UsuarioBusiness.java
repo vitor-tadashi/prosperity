@@ -1,24 +1,33 @@
 package br.com.prosperity.business;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import br.com.prosperity.bean.UsuarioBean;
+import br.com.prosperity.converter.UsuarioConverter;
+import br.com.prosperity.dao.UsuarioDAO;
+import br.com.prosperity.entity.UsuarioEntity;
 
 @Component
 public class UsuarioBusiness {
-	/*
+
 	@Autowired
 	private UsuarioDAO usuarioDAO;
-
+	
 	@Autowired
-	private UsuarioBean usuarioBean;
-
-	@Autowired
+	private UsuarioConverter usuarioConverter;
+	
 	private UsuarioEntity usuarioEntity;
 
-	public UsuarioBean logar(String login, String senha) {
+	public void inserir(UsuarioBean usuarioBean) {
+		usuarioDAO.adicionar(usuarioConverter.convertBeanToEntity(usuarioBean));
+	}
+
+	public UsuarioBean logar(UsuarioBean usuarioBean) {
 		try {
-			UsuarioBean usuarioIgual = usuarioDAO.obterPorUsuario(login, senha);
-			if (usuarioIgual != null) {
-				return usuarioIgual;
+			usuarioEntity = usuarioDAO.obterPorUsuario(usuarioConverter.convertBeanToEntity(usuarioBean));
+			if (usuarioEntity != null) {
+				return usuarioBean;
 			} else {
 				 return null;
 			}
@@ -26,5 +35,4 @@ public class UsuarioBusiness {
 			throw (e);
 		}
 	}
-	*/
 }

@@ -1,22 +1,25 @@
 package br.com.prosperity.dao;
 
+import javax.persistence.TypedQuery;
+
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
+import br.com.prosperity.entity.UsuarioEntity;
 
 @Repository
-public class UsuarioDAO/* extends GenericDAOImpl<UsuarioEntity, Integer> */{
-/*
-	public UsuarioEntity obterPorUsuario(String nmUsuario, String senha) {
+public class UsuarioDAO extends GenericDAOImpl<UsuarioEntity, Integer> {
+	
+	public UsuarioEntity obterPorUsuario(UsuarioEntity usuarioEntity) {
 		TypedQuery<UsuarioEntity> query = entityManager.createQuery(
-				"SELECT u FROM tbUsuario AS u WHERE u.nmUsuario = :nmUsuario AND u.senha = :senha",
-				UsuarioEntity.class);
-		query.setParameter("nmUsuario", nmUsuario);
-		query.setParameter("senha", senha);
+				"SELECT u.nome, u.senha FROM UsuarioEntity AS u WHERE u.nome = :nome", UsuarioEntity.class);
+		query.setParameter("nome", usuarioEntity.getNome());
 		
-		UsuarioEntity usuarioEntity = new UsuarioEntity();
-		usuarioEntity.setNome(nmUsuario);
-		usuarioEntity.setSenha(senha);
-		return usuarioEntity;
+		if(query.getSingleResult()!=null){
+			return usuarioEntity;
+		}
+		else{
+			return null;
+		}
 	}
-	*/
 }
