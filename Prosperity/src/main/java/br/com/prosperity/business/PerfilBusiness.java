@@ -24,4 +24,9 @@ public class PerfilBusiness {
 		
 		return perfilBean;
 	}
+
+	public void inserir(PerfilBean perfilBean) {
+		PerfilEntity perfilEntity = perfilConverter.convertBeanToEntity(perfilBean);
+		perfilDAO.adicionar(perfilEntity);
+	}
 }
