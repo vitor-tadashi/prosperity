@@ -13,7 +13,6 @@ public class TipoStatusConverter implements Converter <TipoStatusEntity, TipoSta
 		// TODO Auto-generated method stub
 		TipoStatusEntity entity = new TipoStatusEntity();
 		entity.setId(bean.getId());
-		entity.setStatus(bean.getStatus());
 		return null;
 	}
 
@@ -21,7 +20,6 @@ public class TipoStatusConverter implements Converter <TipoStatusEntity, TipoSta
 	public TipoStatusBean convertEntityToBean(TipoStatusEntity entity) {
 		TipoStatusBean bean = new TipoStatusBean();
 		bean.setId(entity.getId());
-		bean.setStatus(entity.getStatus());
 		return null;
 	}
 }

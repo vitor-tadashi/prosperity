@@ -1,7 +1,7 @@
 package br.com.prosperity.bean;
 
 import java.io.File;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -12,12 +12,12 @@ public class CandidatoBean {
 	private String cpf;
 	private String nome;
 	private String rg;
-	private Calendar dataNascimento;
-	private double valorPretensao;
-	private Calendar dataAbertura;
-	private Calendar dataFechamento;
+	private Date dataNascimento;
+	private Double valorPretensao;
+	private Date dataAbertura;
+	private Date dataFechamento;
 	private String email;
-	private Calendar dataAlteracao;
+	private Date dataAlteracao;
 	private File curriculo;
 	private List<ContatoBean> contatos;
 	private EnderecoBean endereco;
@@ -63,35 +63,35 @@ public class CandidatoBean {
 		this.rg = rg;
 	}
 
-	public Calendar getDataNascimento() {
+	public Date getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Calendar dataNascimento) {
+	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public double getValorPretensao() {
+	public Double getValorPretensao() {
 		return valorPretensao;
 	}
 
-	public void setValorPretensao(double valorPretensao) {
+	public void setValorPretensao(Double valorPretensao) {
 		this.valorPretensao = valorPretensao;
 	}
 
-	public Calendar getDataAbertura() {
+	public Date getDataAbertura() {
 		return dataAbertura;
 	}
 
-	public void setDataAbertura(Calendar dataAbertura) {
+	public void setDataAbertura(Date dataAbertura) {
 		this.dataAbertura = dataAbertura;
 	}
 
-	public Calendar getDataFechamento() {
+	public Date getDataFechamento() {
 		return dataFechamento;
 	}
 
-	public void setDataFechamento(Calendar dataFechamento) {
+	public void setDataFechamento(Date dataFechamento) {
 		this.dataFechamento = dataFechamento;
 	}
 
@@ -103,11 +103,11 @@ public class CandidatoBean {
 		this.email = email;
 	}
 
-	public Calendar getDataAlteracao() {
+	public Date getDataAlteracao() {
 		return dataAlteracao;
 	}
 
-	public void setDataAlteracao(Calendar dataAlteracao) {
+	public void setDataAlteracao(Date dataAlteracao) {
 		this.dataAlteracao = dataAlteracao;
 	}
 

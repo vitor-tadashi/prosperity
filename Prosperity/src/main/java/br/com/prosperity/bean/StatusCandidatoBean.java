@@ -4,22 +4,13 @@ import java.util.Date;
 
 public class StatusCandidatoBean {
 	
-	private int id;
+	private Integer id;
 	private String cpf;
 	private Date dataAlteracao;
 	private String descricaoParecer;
 	
 	
-	public StatusCandidatoBean(int id, String cpf, Date dataAlteracao, String descricaoParecer) {
-		this.id = id;
-		this.cpf = cpf;
-		this.dataAlteracao = dataAlteracao;
-		this.descricaoParecer = descricaoParecer;
-	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getCpf() {

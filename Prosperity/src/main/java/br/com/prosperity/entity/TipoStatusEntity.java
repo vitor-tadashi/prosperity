@@ -8,34 +8,34 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-	@Table(name = "tbTpStatus")
-	
-	public class TipoStatusEntity {
+@Table(name = "tbTpStatus")
+public class TipoStatusEntity {
 	/* Mapeamento dos Atributos */
 
 	/* Mapeamento do Id */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idTpStatus", unique = true, nullable = false)
-	private int id;
+	private Integer id;
 	/* fim */
-	
-	@Column(name = "TpStatus")
-	private String Status;
 
-	public int getId() {
+	@Column(name = "nmTpStatus")
+	private String nome;
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public String getStatus() {
-		return Status;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setStatus(String status) {
-		Status = status;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
+
 }

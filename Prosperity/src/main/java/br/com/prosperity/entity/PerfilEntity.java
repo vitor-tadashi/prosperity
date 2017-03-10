@@ -1,13 +1,14 @@
 package br.com.prosperity.entity;
 
 
-import javax.persistence.CascadeType;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 
@@ -21,7 +22,7 @@ public class PerfilEntity {
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
 
 //	@Column(name = "idPerfil", unique = true, nullable = false)
-//	private int idPerfil;
+//	private Integer idPerfil;
 
 	@Column(name="idPerfil", unique = true, nullable = false)
 	private Integer id;
@@ -37,60 +38,37 @@ public class PerfilEntity {
 	 * 1-N
 	 */
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToMany()
 	@JoinColumn(name="idFuncionalidade")
-	private FuncionalidadeEntity funcionalidadeEntity;
+	private List<FuncionalidadeEntity> funcionalidades;
 
-
-	
-/* Mapeamento de Relacionamentos Tudo o que estiver ligado na tabela Vaga 1-N*/
-	
-	/*@ManyToOne (cascade = CascadeType.ALL)
-	private PerfilEntity perfilEntity;*/
-	
-
-	// relacionamento avaliadores
-	/* fim dos mapeamentos */
-
-
-	public PerfilEntity() {
-
-	}
-
-	public FuncionalidadeEntity getFuncionalidadeEntity() {
-		return funcionalidadeEntity;
-	}
-	/*public PerfilEntity getPerfilEntity() {
-		return perfilEntity;
-	}
-
-	public void setPerfilEntity(PerfilEntity perfilEntity) {
-		this.perfilEntity = perfilEntity;
-	}*/
-
-	public PerfilEntity(Integer id, String nome) {
-		this.id = id;
-		this.nome = nome;
-
-	}
-
-	public void setFuncionalidadeEntity(FuncionalidadeEntity funcionalidadeEntity) {
-		this.funcionalidadeEntity = funcionalidadeEntity;
-	}
 
 	public Integer getId() {
 		return id;
 	}
 
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 
 	public String getNome() {
 		return nome;
 	}
 
+
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+
+	public List<FuncionalidadeEntity> getFuncionalidades() {
+		return funcionalidades;
+	}
+
+
+	public void setFuncionalidades(List<FuncionalidadeEntity> funcionalidades) {
+		this.funcionalidades = funcionalidades;
 	}
 }
