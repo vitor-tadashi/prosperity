@@ -1,6 +1,5 @@
 package br.com.prosperity.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.com.prosperity.bean.FuncionalidadeBean;
+import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.PerfilBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.business.FuncionalidadeBusiness;
+import br.com.prosperity.business.FuncionarioBusiness;
+import br.com.prosperity.business.PerfilBusiness;
 import br.com.prosperity.business.UsuarioBusiness;
 
 @Controller
@@ -22,21 +24,25 @@ public class UsuarioController {
 	private FuncionalidadeBusiness funcionalidadeBusiness;
 
 	@Autowired
+	private PerfilBusiness perfilBusiness;
+	
+	@Autowired
+	private FuncionarioBusiness funcionarioBusiness;
+	
+	@Autowired
 	private UsuarioBusiness usuarioBusiness;
 
 	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
-	public String consultaUsuario() {
+	public String consultaUsuario(Model model) {
+		List<FuncionarioBean> funcionarios = funcionarioBusiness.getFuncionarios();
+		model.addAttribute("funcionarios", funcionarios);
+		
 		return "usuario/consultar-usuario";
 	}
 
 	@RequestMapping(value = "/criar-perfil", method = RequestMethod.GET)
 	public String criaPerfil(Model model) {
-		// List<FuncionalidadeBean> funcionalidades =
-		// funcionalidadeBusiness.obterTodos();
-		List<FuncionalidadeBean> funcionalidades = new ArrayList<>();
-		FuncionalidadeBean b = new FuncionalidadeBean();
-		b.setNome("igor");
-		funcionalidades.add(b);
+		List<FuncionalidadeBean> funcionalidades = funcionalidadeBusiness.obterTodos();
 		model.addAttribute("funcionalidades", funcionalidades);
 
 		return "usuario/criar-perfil";
@@ -44,13 +50,14 @@ public class UsuarioController {
 
 	@RequestMapping(value = "/salvar-perfil", method = RequestMethod.GET)
 	public String salvarPerfil(PerfilBean perfilBean) {
-		// perfilBusiness.inserir(perfilBean);
-		/*
-		 * if (perfilBean.getListaFuncionalidades().isEmpty()) {
-		 * System.out.println("erro"); } else {
-		 * System.out.println(perfilBean.getListaFuncionalidades().get(0));
-		 * System.out.println(perfilBean.getListaFuncionalidades().get(1)); }
-		 */
+		
+		 if (perfilBean.getListaFuncionalidades().isEmpty()) {
+		 System.out.println("erro"); } else {
+		 System.out.println(perfilBean.getListaFuncionalidades().get(0));
+		 System.out.println(perfilBean.getListaFuncionalidades().get(1)); }
+		 
+		perfilBusiness.inserir(perfilBean);
+		System.out.println(perfilBean.getNome());
 
 		return "redirect:criar-perfil";
 	}

@@ -6,7 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -16,26 +18,31 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name="tbUsuario")
+@Table(name = "tbUsuario")
+@NamedQuery(name = "obterPorUsuario", query = "SELECT u FROM UsuarioEntity u WHERE u.nome = ?1")
 public class UsuarioEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-	@Column(name="idUsuario", unique = true, nullable = false)
+	@Column(name = "idUsuario", unique = true, nullable = false)
 	private Integer id;
-	
-	@ManyToOne (cascade = CascadeType.ALL)
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "idPerfil")
 	private PerfilEntity perfilEntity;
-	
-	@OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER, orphanRemoval = true)
-	@PrimaryKeyJoinColumn
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "idFuncionario")
 	private FuncionarioEntity funcionarioEntity;
-	
+
 	@Column(name = "nmUsuario")
 	private String nome;
-	
+
 	@Column(name = "senha")
 	private String senha;
+
+	@Column(name = "flPrimeiroAcesso")
+	private Boolean primeiroAcesso;
 	
 	public Integer getId() {
 		return id;
@@ -76,4 +83,14 @@ public class UsuarioEntity {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+
+	public Boolean getPrimeiroAcesso() {
+		return primeiroAcesso;
+	}
+
+	public void setPrimeiroAcesso(Boolean primeiroAcesso) {
+		this.primeiroAcesso = primeiroAcesso;
+	}
+	
+	
 }
