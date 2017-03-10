@@ -316,8 +316,9 @@
 										<!-- /form-group -->
 										<div class="row">
 											<div class="form-group col-md-6">
-												<label for="exampleInputEmail1">Vaga:</label> <select
-													class="form-control chzn-select">
+												<label for="exampleInputEmail1">Vaga:</label> 
+												<select
+													class="form-control chzn-select" name="vagas">
 													<option>Selecione:</option>
 													<option>Analista de testes</option>
 													<option>Analista de sistemas</option>
@@ -329,7 +330,7 @@
 											<!-- /form-group -->
 											<div class="form-group col-md-6">
 												<label for="exampleInputEmail1">Senioridade da vaga:</label>
-												<select class="form-control chzn-select">
+												<select class="form-control chzn-select" name="senioridade">
 													<option>Selecione:</option>
 													<option>Analista de testes</option>
 													<option>Analista de sistemas</option>
@@ -346,7 +347,7 @@
 													<div class="panel-heading">
 														<label for="exampleInputEmail1">Avaliadores:</label>
 													</div>
-													<div class="panel-body relative">
+													<div class="panel-body relative"name="">
 														<select multiple="multiple" id="selectedBox1"
 															class="select-box pull-left form-control">
 															<option value="1">Taiama</option>
@@ -369,7 +370,7 @@
 														</div>
 
 														<select multiple="multiple" id="selectedBox2"
-															class="select-box pull-right form-control">
+															class="select-box pull-right form-control" >
 															<option>Vitor</option>
 															<option>Evandro</option>
 															<option>Suelen</option>
@@ -384,7 +385,7 @@
 										<div class="form-group col-md-6">
 											<div class="form-group">
 												<label class="control-label">Data do último contato:</label>
-												<div class="form-group">
+												<div class="form-group" name="">
 													<div class="input-group">
 														<input type="text" value="01/01/2017"
 															class="datepicker form-control"> <span
@@ -401,10 +402,10 @@
 											<div class="form-group col-md-6">
 												<div class="form-group">
 													<label class="control-label">Data de entrevista:</label>
-													<div class="form-group">
+													<div class="form-group" name="">
 														<div class="input-group">
-															<input type="text" value="01/01/2017"
-																class="datepicker form-control"> <span
+															<input type="text" value="00/00/0000"
+																class="datepicker form-control" name=""> <span
 																class="input-group-addon"><i
 																class="fa fa-calendar"></i></span>
 														</div>
@@ -421,7 +422,7 @@
 												<label class="control-label">Parecer:</label>
 												<div class="form-group">
 													<textarea class="form-control" id="message-text"
-														style="margin-left: 10px; width: 570px"></textarea>
+														style="margin-left: 10px; width: 570px" name="parecer"></textarea>
 												</div>
 												<!-- /.col -->
 											</div>
@@ -436,7 +437,7 @@
 												<!-- SOMENTE ALTERAR DAQUI PARA BAIXO -->
 												<form name="form1" action="paginaPHPouASP" method="post">
 													<input class="btn btn-xs btn-success" type="button"
-														value="Adicionar etapa" onclick="AddCampos()"> <br>
+														value="Adicionar etapa" onclick="AddCampos()" name=""> <br>
 													<br>
 													<script type="text/javascript">
 														//Escrevendo o código-fonte HTML e ocultando os campos criados:
@@ -453,7 +454,7 @@
 													<!-- SOMENTE ALTERAR DAQUI PARA CIMA -->
 													<label>Parecer técnico: </label>
 													<textarea class="form-control" id="message-text"
-														style="margin-left: 10px; width: 570px"></textarea>
+														style="margin-left: 10px; width: 570px" name="parecer"></textarea>
 												</div>
 											</div>
 										</section>
@@ -463,8 +464,8 @@
 											<div class="panel-heading">
 												<label for="exampleInputEmail1">Proposta:</label>
 												<textarea id="wysihtml5-textarea"
-													placeholder="Enter your text ..." class="form-control"
-													rows="6"></textarea>
+													placeholder="Digite ..." class="form-control"
+													rows="6" name=""></textarea>
 											</div>
 										</section>
 										<!-- /panel -->
@@ -472,8 +473,7 @@
 									<div class="tab-pane fade" id="third">
 										<section class="panel panel-default">
 											<div class="panel-heading text-center">
-												<label for="exampleInputEmail1">Avaliação de
-													competências</label>
+												<label for="exampleInputEmail1">Avaliação de competências</label>
 											</div>
 											<table class="table" style="font-size: 10px">
 												<thead class="text-center">
@@ -771,7 +771,8 @@
 											<td>${candidato.dataAbertura}</td>
 											<td>${candidato.dataFechamento}</td>
 											<td>${candidato.status}</td>
-											<td><span class="label label-analiseRH">Em análise do RH</span></td>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  çtd><span class="line"></span>
+											<td><span class="label label-analiseRH">Em análise do RH</span></td>
+											<td><span class="line"></span>
 												<div class="btn-group">
 													
 													<!-- comeco do botao -->
