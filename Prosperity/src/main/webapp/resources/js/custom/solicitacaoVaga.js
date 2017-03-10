@@ -3,7 +3,7 @@ $(function() {
     $("#novo").click(function(){
         $("div#nome").addClass("hide");	
     });
-    $("#sub").click(function(){
+    $("#substituicao").click(function(){
         $("div#nome").removeClass("hide");
     });
     

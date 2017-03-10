@@ -1,18 +1,13 @@
 package br.com.prosperity.bean;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class CargoBean {
+	
 	private Integer id;
 	private String nome;
 	
-	public CargoBean(){
-		
-	}
-	
-	public CargoBean(Integer id, String nome){
-		this.id=id;
-		this.nome=nome;
-	}
-
 	public Integer getId() {
 		return id;
 	}

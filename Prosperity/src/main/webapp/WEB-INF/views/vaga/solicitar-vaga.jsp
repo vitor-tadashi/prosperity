@@ -11,9 +11,10 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<c:import url="shared/stylesheet.jsp"></c:import>
+<c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
+
 <body>
-	<c:import url="shared/dashboard.jsp"></c:import>
+	<c:import url="/WEB-INF/views/shared/dashboard.jsp"></c:import>
 	<div id="main-container">
 		<div id="breadcrumb">
 			<ul class="breadcrumb">
@@ -75,10 +76,11 @@
 											<div class="form-group col-md-6">
 												<label for="cmbCargo">Cargo</label>
 												<select class="form-control chzn-select" id="cmbCargo">
-													<option>Analista de testes</option>
-													<option>Analista de sistemas</option>
-													<option>Desenvolvedor</option>
-													<option>Gerente de projetos</option>
+													
+													<c:forEach var="cargoBean" items="${cargoBean}" varStatus="i">
+														<option value="i">${cargoBean.nome}</option>
+													</c:forEach>
+													
 												</select>
 											</div>
 											<!-- /form-group -->
@@ -107,10 +109,11 @@
 											<div class="form-group col-md-6">
 												<label for="cmbSenioridade">Senioridade da vaga</label>
 												<select class="form-control chzn-select" id="cmbSenioridade">
-													<option>Estágio</option>
-													<option>Júnior</option>
-													<option>Pleno</option>
-													<option>Senior</option>
+												
+													<c:forEach var="senioridadeBean" items="${senioridadeBean}" varStatus="i">
+														<option value="i">${senioridadeBean.nome}</option>
+													</c:forEach>
+													
 												</select>
 											</div>
 											<!-- /form-group -->
@@ -169,19 +172,14 @@
 										<!-- /form-group -->
 										<div class="row">
 											<div class="form-group col-md-6">
-												<div class="form-group">
-													<label class="control-label" for="txtDataInicio">Data para início</label>
-													<div class="form-group">
-														<div class="input-group">
-															<input type="text" value="01/01/2017"
-																class="datepicker form-control" id="txtDataInicio"> <span
-																class="input-group-addon"><i
-																class="fa fa-calendar"></i></span>
-														</div>
-													</div>
-													<!-- /.col -->
+												<label class="control-label" for="txtDataInicio">Data para início</label>
+												<div class="input-group">
+													<input type="text" value="01/01/2017"
+														class="datepicker form-control" id="txtDataInicio"> <span
+														class="input-group-addon"><i
+														class="fa fa-calendar"></i></span>
 												</div>
-												<!-- /form-group -->
+												<!-- /.col -->
 											</div>
 											<!-- /form-group -->
 											<div id="nome" class="form-group col-md-6 hide">
@@ -198,12 +196,11 @@
 											<div class="form-group col-md-4" style="padding-left: 0px;">
 												<label for="exampleInputEmail1">Nome do projeto</label> <select
 													class="form-control chzn-select">
-													<option>P20150806_001 - Biometria Facial no Front
-														único</option>
-													<option>P20160120_001 - Melhorias na abertura de
-														Conta via internet</option>
-													<option>P20160805_001 - Cartão Gold</option>
-													<option>P20150226_001 - Migração Servidores 2012</option>
+													
+													<c:forEach var="cargoBean" items="${projetoBean}" varStatus="i">
+														<option value="i">${projetoBean.nome}</option>
+													</c:forEach>
+
 												</select>
 											</div>
 											<!-- /form-group -->
@@ -343,7 +340,13 @@
 		</div>
 		<!-- /wrapper -->
 	</div>
-	<c:import url="shared/footer.jsp"></c:import>
-	<c:import url="shared/js.jsp"></c:import>
+	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
+    <c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
+    
+    <!-- Custom -->
+		<script src="/resources/js/custom/solicitacaoVaga.js"></script>
+		
 </body>
+
+		
 </html>

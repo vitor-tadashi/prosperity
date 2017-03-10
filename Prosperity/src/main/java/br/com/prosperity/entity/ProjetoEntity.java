@@ -1,15 +1,13 @@
 package br.com.prosperity.entity;
 
-import java.util.List;
 import javax.persistence.*;
 
 @Entity
 @Table(name="tbProjeto")
-
 public class ProjetoEntity {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
 	@Column(name="idProjeto", unique = true, nullable = false)
 	private Integer id;
 	
