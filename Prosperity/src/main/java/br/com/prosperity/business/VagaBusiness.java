@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
 
 import br.com.prosperity.bean.SenioridadeBean;
@@ -15,6 +16,8 @@ import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.converter.VagaConverter;
 import br.com.prosperity.dao.VagaDAO;
 import br.com.prosperity.entity.VagaEntity;
+import br.com.prosperity.exception.BusinessException;
+
 
 @Component
 public class VagaBusiness {
@@ -24,6 +27,18 @@ public class VagaBusiness {
 
 	@Autowired
 	private VagaConverter vagaConverter;
+
+	/*public void vagaBean(VagaBean vagaBean) {
+		vagaDAO.adicionar(vagaConverter.convertBeanToEntity(vagaBean));
+	}
+*/
+	@Transactional
+	public List<VagaBean> obterTodos() {
+		List<VagaEntity> aprovar = vagaDAO.findByNamedQuery("obterAprovacao");
+		List<VagaEntity> vagaEntity = vagaDAO.listar();
+		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
+		return vagaBean;
+	}
 
 	private VagaBean obter(int idVaga) {
 
@@ -38,10 +53,10 @@ public class VagaBusiness {
 		vagaDAO.adicionar(vagaConverter.convertBeanToEntity(vagaBean));
 	}
 
-	public List<VagaBean> obterTodos() {
-		List<VagaEntity> entities = vagaDAO.listar();
-		List<VagaBean> beans = vagaConverter.convertEntityToBean(entities);
-		return beans;
-	}
-
 }
+
+// criar método consultarVagasAprovacao
+// chamar o dao e acionar o método findByNamedQuery
+// pegar todas as vagas que estão disponíves por perfil para aprovação (ou por
+// enquanto pegue todas as vagas disponíveis)
+// retornar uma lista de VagaBean
