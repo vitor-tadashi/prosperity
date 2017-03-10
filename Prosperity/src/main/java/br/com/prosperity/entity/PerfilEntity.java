@@ -1,12 +1,15 @@
 package br.com.prosperity.entity;
 
 
-import javax.persistence.CascadeType;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 
@@ -18,10 +21,7 @@ public class PerfilEntity {
 	/* Mapeamento do ID */
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-	@Column(name = "idUsuario", unique = true, nullable = false)
-	private int idPerfil;
-
-	@Column(name="idPerfil", unique = true, nullable = false)
+	@Column(name="idPerfil", unique = true)
 	private Integer id;
 
 	/* fim Id */
@@ -34,9 +34,9 @@ public class PerfilEntity {
 	 * Mapeamento de Relacionamentos Tudo o que estiver ligado na tabela Vaga
 	 * 1-N
 	 */
-
-	@ManyToOne(cascade = CascadeType.ALL)
-	private FuncionalidadeEntity funcionalidadeEntity;
+	@ManyToMany
+	 @JoinTable(name="tbPerfilFuncionalidade", joinColumns={@JoinColumn(name="idPerfil")}, inverseJoinColumns={@JoinColumn(name="idFuncionalidade")})
+	 private List<FuncionalidadeEntity> funcionalidadeEntity;
 
 
 	
@@ -50,35 +50,14 @@ public class PerfilEntity {
 	/* fim dos mapeamentos */
 
 
-	public PerfilEntity(int idPerfil, String nome, FuncionalidadeEntity funcionalidadeEntity) {
-		this.idPerfil = idPerfil;
+	public PerfilEntity(Integer idPerfil, String nome, List<FuncionalidadeEntity> funcionalidadeEntity) {
+		this.id = idPerfil;
 		this.nome = nome;
 		this.funcionalidadeEntity = funcionalidadeEntity;
 	}
 
 	public PerfilEntity() {
 
-	}
-
-	public FuncionalidadeEntity getFuncionalidadeEntity() {
-		return funcionalidadeEntity;
-	}
-	/*public PerfilEntity getPerfilEntity() {
-		return perfilEntity;
-	}
-
-	public void setPerfilEntity(PerfilEntity perfilEntity) {
-		this.perfilEntity = perfilEntity;
-	}*/
-
-	public PerfilEntity(Integer id, String nome) {
-		this.id = id;
-		this.nome = nome;
-
-	}
-
-	public void setFuncionalidadeEntity(FuncionalidadeEntity funcionalidadeEntity) {
-		this.funcionalidadeEntity = funcionalidadeEntity;
 	}
 
 	public Integer getId() {
@@ -96,4 +75,13 @@ public class PerfilEntity {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	public List<FuncionalidadeEntity> getFuncionalidadeEntity() {
+		return funcionalidadeEntity;
+	}
+
+	public void setFuncionalidadeEntity(List<FuncionalidadeEntity> funcionalidade) {
+		this.funcionalidadeEntity = funcionalidade;
+	}
+	
 }

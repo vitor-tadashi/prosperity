@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
 <!DOCTYPE html>
@@ -284,11 +284,6 @@
 				<div class="modal-body">
 					<div class="padding-md">
 						<div class="row">
-							<form>
-								<div class="row">
-									<label>hashaushuahduashduahd</label>
-								</div>
-							</form>
 						</div>
 						<!--close row-->
 					</div>
@@ -324,7 +319,7 @@
 		</div>
 		<!--breadcrumb-->
 		<div class="container">
-			<form action="salvar-perfil" method="get">
+			<form action="salvar-perfil" method="post">
 				<div class="padding-md">
 					<div class="row">
 						<div class="form-group col-md-12">
@@ -333,23 +328,24 @@
 									<label>Criação de perfil</label>
 								</div>
 								<div class="panel-body col-md-5">
-									<label>Perfil</label> <input type="text" class="form-control"
-										id="usuario" data-required="true" name="nome">
+									<label>Perfil</label> 
+									<input class="form-control" name="nome" type="text" required/>
 								</div>
 								<div class="row"></div>
 								<div class="panel-body relative">
-									<select multiple="multiple" id="selectedBox1"
-										class="select-box pull-left form-control" name="listaFuncionalidades[].nome">
+									<select multiple="multiple" id="selectedBox1" class="select-box pull-left form-control">
 										<c:forEach var="funcionalidade" items="${funcionalidades}"
 											varStatus="i">
-											<option value="${funcionalidade.nome }">${funcionalidade.nome }</option>
+											<option value="${funcionalidade.id }" >${funcionalidade.nome }</option>
 										</c:forEach>
 									</select>
 
 									<div class="select-box-option">
 										<a class="btn btn-sm btn-default" id="btnRemove"><i
 											class="fa fa-angle-left"></i></a> <a
-											class="btn btn-sm btn-default" id="btnSelect"><i
+											class="btn btn-sm b
+											
+											tn-default" id="btnSelect"><i
 											class="fa fa-angle-right"></i></a>
 										<div class="seperator"></div>
 										<a class="btn btn-sm btn-default" id="btnRemoveAll"><i
@@ -358,10 +354,14 @@
 											class="fa fa-angle-double-right"></i></a>
 									</div>
 
-									<select multiple="multiple" id="selectedBox2"
-										class="select-box pull-right form-control" name="listaFuncionalidades[].nome">
-
-									</select> <input type="text" class="form-control" data-required="true">
+									<select id="selectedBox2" class="select-box pull-right form-control" name="listaFuncionalidades">
+									</select> 
+									<script>
+									var id = []
+									for (var int = 0; int < $("#selectedBox2").find("option").length; int++) {
+										id.push($("#selectedBox2").find("option")[int].value)
+									}
+									</script>
 								</div>
 							</div>
 							<!-- /panel -->

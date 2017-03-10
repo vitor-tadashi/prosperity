@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class FuncionalidadeEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idFuncionalidade", unique = true, nullable = false)
+	@Column(name="idFuncionalidade", unique = true)
 	private int id;
 	@Column(name = "nmFuncionalidade")
 	private String nome;
