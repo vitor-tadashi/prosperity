@@ -19,14 +19,21 @@ import br.com.prosperity.business.SenioridadeBusiness;
 
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.VagaBusiness;
+
 import br.com.prosperity.converter.VagaConverter;
 import br.com.prosperity.dao.VagaDAO;
 
 @Controller
-@RequestMapping ("vaga")
+@RequestMapping("vaga")
 public class VagaController {
-	
+
+
 	@Autowired
+	private VagaBusiness vagaBusiness;
+
+	@Autowired
+	private List<VagaBean> vagaBean;
+
 	private SenioridadeBusiness preencherSenioridade;
 	
 	@Autowired
@@ -44,9 +51,6 @@ public class VagaController {
 	@Autowired
 	private List<ProjetoBean> projetoBean;
 	
-	@Autowired
-	private VagaBusiness vagaBusiness;
-	
 	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
 	public String cliente(Model model) {
 		List<VagaBean> vagas = vagaBusiness.obterTodos();
@@ -57,8 +61,10 @@ public class VagaController {
 		return "vaga/consultar-vaga";
 	}
 
-	@RequestMapping(value = "/aprovar", method = RequestMethod.GET)
-	public String aprovacaoVaga() {
+	@RequestMapping(value = "aprovar", method = RequestMethod.GET)
+	public String aprovacaoVaga(Model model) {
+		vagaBean = vagaBusiness.obterTodos();
+		model.addAttribute("vagaBean", vagaBean);
 		return "vaga/aprovacao-vaga";
 	}
 	
@@ -72,6 +78,7 @@ public class VagaController {
 		model.addAttribute("projetoBean", projetoBean);
 		return "vaga/solicitar-vaga";
 	}
+
 	@RequestMapping (value = "idAvaliador", method = RequestMethod.GET)
 	public String idAvaliador(){
 	return "idAvaliador";

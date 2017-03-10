@@ -2,7 +2,11 @@ package br.com.prosperity.bean;
 
 import java.util.Date;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class VagaBean {
+
 	private Integer id;
 	private String nomeVaga;
 	private String nomeSolicitante;
@@ -16,6 +20,7 @@ public class VagaBean {
 	private ProjetoBean projetoBean;
 	private CargoBean cargoBean;
 	private SenioridadeBean senioridadeBean;
+
 	private String nomeSubstituido; //
 	private String descricaoFormacaoAcademica; //
 	private String descricaoPerfilComportamental; //
@@ -26,6 +31,7 @@ public class VagaBean {
 	private int numeroCandidatos; //
 	private UsuarioBean usuarioBean;
 	
+
 
 	public Integer getId() {
 		return id;

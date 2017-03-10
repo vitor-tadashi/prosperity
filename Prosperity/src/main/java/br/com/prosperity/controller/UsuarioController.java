@@ -25,10 +25,10 @@ public class UsuarioController {
 
 	@Autowired
 	private PerfilBusiness perfilBusiness;
-	
+
 	@Autowired
 	private FuncionarioBusiness funcionarioBusiness;
-	
+
 	@Autowired
 	private UsuarioBusiness usuarioBusiness;
 
@@ -36,7 +36,7 @@ public class UsuarioController {
 	public String consultaUsuario(Model model) {
 		List<FuncionarioBean> funcionarios = funcionarioBusiness.getFuncionarios();
 		model.addAttribute("funcionarios", funcionarios);
-		
+
 		return "usuario/consultar-usuario";
 	}
 
@@ -50,12 +50,14 @@ public class UsuarioController {
 
 	@RequestMapping(value = "/salvar-perfil", method = RequestMethod.GET)
 	public String salvarPerfil(PerfilBean perfilBean) {
-		
-		 if (perfilBean.getListaFuncionalidades().isEmpty()) {
-		 System.out.println("erro"); } else {
-		 System.out.println(perfilBean.getListaFuncionalidades().get(0));
-		 System.out.println(perfilBean.getListaFuncionalidades().get(1)); }
-		 
+
+		if (perfilBean.getListaFuncionalidades().isEmpty()) {
+			System.out.println("erro");
+		} else {
+			System.out.println(perfilBean.getListaFuncionalidades().get(0));
+			System.out.println(perfilBean.getListaFuncionalidades().get(1));
+		}
+
 		perfilBusiness.inserir(perfilBean);
 		System.out.println(perfilBean.getNome());
 
