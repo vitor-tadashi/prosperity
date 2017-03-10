@@ -12,6 +12,7 @@ public class FuncionarioConverter implements Converter<FuncionarioEntity, Funcio
 	public FuncionarioEntity convertBeanToEntity(FuncionarioBean bean) {
 		FuncionarioEntity entity = new FuncionarioEntity();
 		entity.setId(bean.getId());
+		entity.setNome(bean.getNome());
 		return entity;
 	}
 
@@ -19,6 +20,7 @@ public class FuncionarioConverter implements Converter<FuncionarioEntity, Funcio
 	public FuncionarioBean convertEntityToBean(FuncionarioEntity entity) {
 		FuncionarioBean bean = new FuncionarioBean();
 		bean.setId(entity.getId());
+		bean.setNome(entity.getNome());
 		return bean;
 	}
 }

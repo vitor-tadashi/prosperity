@@ -26,7 +26,7 @@ public class CandidatoController {
 	
 	@RequestMapping(value ="consultar-rh", method = RequestMethod.GET)
 	public String consultarCandidatoRH(Model model) {
-		model.addAttribute("candidato", candidato);
+		//model.addAttribute("candidato", candidato);
 		return "candidato/consulta-rh";
 	}
 	

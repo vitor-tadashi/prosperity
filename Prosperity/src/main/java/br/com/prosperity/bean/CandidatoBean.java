@@ -19,7 +19,7 @@ public class CandidatoBean {
 	private String email;
 	private Calendar dataAlteracao;
 	private File curriculo;
-	private ContatoBean contato;
+	private List<ContatoBean> contatos;
 	private EnderecoBean endereco;
 	private FormacaoBean formacao;
 	private UsuarioBean usuario;
@@ -30,28 +30,6 @@ public class CandidatoBean {
 		
 	}
 	
-	public CandidatoBean(Integer id,String cpf, String nome, String rg, Calendar dataNascimento, double valorPretensao,
-			Calendar dataAbertura, Calendar dataFechamento, String email, Calendar dataAlteracao, File curriculo,
-			ContatoBean contato, EnderecoBean endereco, FormacaoBean formacao, UsuarioBean usuario,
-			List<StatusBean> status, List<VagaBean> vagas) {
-		this.id = id;
-		this.cpf = cpf;
-		this.nome = nome;
-		this.rg = rg;
-		this.dataNascimento = dataNascimento;
-		this.valorPretensao = valorPretensao;
-		this.dataAbertura = dataAbertura;
-		this.dataFechamento = dataFechamento;
-		this.email = email;
-		this.dataAlteracao = dataAlteracao;
-		this.curriculo = curriculo;
-		this.contato = contato;
-		this.endereco = endereco;
-		this.formacao = formacao;
-		this.usuario = usuario;
-		this.status = status;
-		this.vagas = vagas;
-	}
 
 	public Integer getId() {
 		return id;
@@ -141,12 +119,12 @@ public class CandidatoBean {
 		this.curriculo = curriculo;
 	}
 
-	public ContatoBean getContato() {
-		return contato;
+	public List<ContatoBean> getContatos() {
+		return contatos;
 	}
 
-	public void setContato(ContatoBean contato) {
-		this.contato = contato;
+	public void setContatos(List<ContatoBean> contatos) {
+		this.contatos = contatos;
 	}
 
 	public EnderecoBean getEndereco() {
@@ -188,6 +166,5 @@ public class CandidatoBean {
 	public void setVagas(List<VagaBean> vagas) {
 		this.vagas = vagas;
 	}
-	
-	
+
 }
