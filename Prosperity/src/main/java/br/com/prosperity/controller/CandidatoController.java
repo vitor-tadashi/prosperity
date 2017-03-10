@@ -19,6 +19,9 @@ public class CandidatoController {
 	
 	@Autowired
 	private CandidatoBusiness candidatoBusiness;
+
+
+	private String teste;
 	
 	@RequestMapping(value ="cadastrar", method = RequestMethod.GET)
 	public String cadastrarCandidato() {
@@ -26,7 +29,8 @@ public class CandidatoController {
 	}
 	
 	@RequestMapping(value ="consultar-rh", method = RequestMethod.GET)
-	public String consultarCandidatoRH() {
+	public String consultarCandidatoRH(Model model) {
+		//model.addAttribute("candidato", candidato);
 		return "candidato/consulta-rh";
 	}
 	

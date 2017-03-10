@@ -17,5 +17,14 @@ public interface Converter<E, B> {
 		}
 		return beans;
 	}
+	
+	default List<E> convertBeanToEntity(List<B> beans) {
+		List<E> entities = new ArrayList<E>();
+		
+		for(B bean : beans){
+			entities.add(convertBeanToEntity(bean));
+		}
+		return entities;
+	}
 
 }
