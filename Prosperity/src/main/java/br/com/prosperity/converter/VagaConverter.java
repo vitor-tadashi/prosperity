@@ -28,6 +28,7 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 	public VagaEntity convertBeanToEntity(VagaBean bean) {
 		VagaEntity entity = new VagaEntity();
 		entity.setId(bean.getId());
+		entity.setNomeVaga(bean.getNomeVaga());
 		entity.setAumentoQuadro(bean.getAumentaQuadro());
 		entity.setCargoEntity(cargoConverter.convertBeanToEntity(bean.getCargoBean()));
 		entity.setDataAbertura(bean.getDataAbertura());
@@ -54,6 +55,7 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 	public VagaBean convertEntityToBean(VagaEntity entity) {
 		VagaBean bean = new VagaBean();
 		bean.setId(entity.getId());
+		bean.setNomeVaga(entity.getNomeVaga());
 		bean.setAumentaQuadro(entity.getAumentoQuadro());
 		bean.setCargoBean(cargoConverter.convertEntityToBean(entity.getCargoEntity()));
 		bean.setDataAbertura(entity.getDataAbertura());
@@ -66,6 +68,11 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 		bean.setHorarioEntrada(entity.getHoraEntrada());
 		bean.setHorarioSaida(entity.getHoraSaida());
 		bean.setLocalTrabalho(entity.getLocalTrabalho());
+		bean.setNomeSolicitante(entity.getNomeSolicitante());
+		bean.setNomeSubstituido(entity.getNomeSubstituido());
+		bean.setNumeroCandidatos(entity.getNumeroCandidatos());
+		bean.setProjetoBean(projetoConverter.convertEntityToBean(entity.getProjetoEntity()));
+		
 		
 		return bean;
 	}
