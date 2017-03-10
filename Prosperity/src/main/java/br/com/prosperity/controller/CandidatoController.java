@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.com.prosperity.bean.CandidatoBean;
+import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.business.CandidatoBusiness;
 
 @Controller
@@ -28,7 +29,6 @@ public class CandidatoController {
 	
 	@RequestMapping(value ="consultar-rh", method = RequestMethod.GET)
 	public String consultarCandidatoRH(Model model) {
-		
 		List<CandidatoBean> candidatos = new ArrayList<>();
 		candidatoBusiness.obterTodos();
 		model.addAttribute("candidatos", candidatos);
@@ -48,4 +48,17 @@ public class CandidatoController {
 		
 		return "candidato/historico-candidato";
 	}
+	@RequestMapping (value="/cadastrar-candidato", method= RequestMethod.GET)
+	public String cadastrarCandidato (Model model){
+		List<FuncionalidadeBean> funcionalidade = new ArrayList<>();
+		FuncionalidadeBean b = new FuncionalidadeBean();
+		b.setNome("teste");
+		funcionalidade.add(b);
+		model.addAttribute("funcionalidades", funcionalidade);
+		
+		return "candidato/cadastrar-candidato";
+	}
+	
+	
+	
 }

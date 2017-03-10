@@ -2,39 +2,48 @@ package br.com.prosperity.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.business.UsuarioBusiness;
+import br.com.prosperity.exception.BusinessException;
 
 @Controller
+@RequestMapping(value = "login")
 public class LoginController {
-	
+
 	@Autowired
 	private UsuarioBusiness usuarioBusiness;
-	
+
 	@Autowired
 	private UsuarioBean usuario;
-	
-	@RequestMapping(value ="login", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String indexLogin() {
 		return "login/acesso";
 	}
 
-	@RequestMapping(value ="login", method = RequestMethod.POST)
-	public String Logar(UsuarioBean usuarioBean) {
-		usuario = usuarioBusiness.logar(usuarioBean);
-		if (usuario!=null){
-		return "login/primeiro-acesso";
+	@RequestMapping(value = "/autenticar", method = RequestMethod.POST)
+	public String autenticar(UsuarioBean usuarioBean, Model model) {
+		try {
+			usuario = usuarioBusiness.autenticar(usuarioBean);
+
+			if (usuario.getPrimeiroAcesso()) {
+				return "login/primeiro-acesso";
+			} else {
+				return "login/acesso";
+			}
+		} catch (BusinessException ex) {
+			model.addAttribute("log", ex.getMessage());
 		}
-		else{
-			return "login/acesso";
-		}
+		
+		return "login/acesso";
 	}
-	
-	@RequestMapping(value ="primeiro-acesso", method = RequestMethod.GET)
-	public String primeiroAcessoUsuario(){
+
+	@RequestMapping(value = "primeiro-acesso", method = RequestMethod.GET)
+	public String primeiroAcessoUsuario() {
 		return "login/primeiro-acesso";
 	}
 }
