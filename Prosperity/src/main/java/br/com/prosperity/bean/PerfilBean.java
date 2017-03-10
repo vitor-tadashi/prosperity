@@ -8,15 +8,6 @@ public class PerfilBean {
 	private String nome;
 	private List<FuncionalidadeBean> listaFuncionalidades;
 
-	public PerfilBean(Integer id, String nome, List<FuncionalidadeBean> listaFuncionalidades) {
-		this.id = id;
-		this.nome = nome;
-		this.listaFuncionalidades = listaFuncionalidades;
-	}
-
-	public PerfilBean() {
-	}
-
 	public Integer getId() {
 		return id;
 	}

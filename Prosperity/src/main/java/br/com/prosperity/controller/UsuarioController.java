@@ -30,14 +30,17 @@ public class UsuarioController{
 
 	@Autowired
 	private FuncionarioBusiness funcionarioBusiness;
-	
+
 	@Autowired
 	private UsuarioBusiness usuarioBusiness;
 
 	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
 	public String consultaUsuario(Model model) {
 		List<FuncionarioBean> funcionarios = funcionarioBusiness.getFuncionarios();
+		List<PerfilBean> perfis = perfilBusiness.getPerfis();
 		model.addAttribute("funcionarios", funcionarios);
+		model.addAttribute("perfis", perfis);
+		model.addAttribute("usuario", new UsuarioBean());
 		
 		return "usuario/consultar-usuario";
 	}
@@ -69,8 +72,8 @@ public class UsuarioController{
 	}
 
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
-	public String inserirUsuario(UsuarioBean usuarioBean) {
-		usuarioBusiness.inserir(usuarioBean);
+	public String inserirUsuario(@ModelAttribute("usuario") UsuarioBean usuario) {
+		usuarioBusiness.inserir(usuario);
 		return "usuario/consultar-usuario";
 	}
 }

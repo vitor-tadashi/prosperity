@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.com.prosperity.bean.CandidatoBean;
+import br.com.prosperity.bean.EnderecoBean;
 import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.business.CandidatoBusiness;
 
@@ -19,6 +20,9 @@ public class CandidatoController {
 	
 	@Autowired
 	private CandidatoBusiness candidatoBusiness;
+	
+	@Autowired
+	private EnderecoBean enderecoBean;
 
 
 	private String teste;
@@ -30,7 +34,9 @@ public class CandidatoController {
 	
 	@RequestMapping(value ="consultar-rh", method = RequestMethod.GET)
 	public String consultarCandidatoRH(Model model) {
-		//model.addAttribute("candidato", candidato);
+		List<CandidatoBean> candidatos = new ArrayList<>();
+		candidatoBusiness.obterTodos();
+		model.addAttribute("candidatos", candidatos);
 		return "candidato/consulta-rh";
 	}
 	
@@ -42,8 +48,14 @@ public class CandidatoController {
 	@RequestMapping(value ="historico", method = RequestMethod.GET)
 	public String historicoCandidato(Model model) {
 		CandidatoBean candidatoBean = new CandidatoBean();
-		candidatoBean = candidatoBusiness.obter(1);
+		candidatoBean = candidatoBusiness.obter(2);
+		
+		enderecoBean = candidatoBean.getEndereco();
+		
+		System.out.println(enderecoBean.getEstado());
+		
 		model.addAttribute("candidato", candidatoBean);
+		model.addAttribute("endereco", enderecoBean);
 		
 		return "candidato/historico-candidato";
 	}

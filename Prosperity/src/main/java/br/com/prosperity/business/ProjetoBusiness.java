@@ -1,8 +1,30 @@
 package br.com.prosperity.business;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+import br.com.prosperity.bean.ProjetoBean;
+import br.com.prosperity.converter.ProjetoConverter;
+import br.com.prosperity.dao.ProjetoDAO;
+import br.com.prosperity.entity.ProjetoEntity;
 
 @Component
 public class ProjetoBusiness {
+	
+	@Autowired
+	private ProjetoDAO projetoDAO;
+			
+	@Autowired
+	private ProjetoConverter projetoConverter;
+	
+	@Transactional
+	public List<ProjetoBean> obterTodos(){
+		List<ProjetoEntity> projetoEntity = projetoDAO.listar();
+		List<ProjetoBean> projetoBean = projetoConverter.convertEntityToBean(projetoEntity);
+		return projetoBean;
+	}
 
 }

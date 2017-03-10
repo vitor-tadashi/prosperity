@@ -1,100 +1,113 @@
 package br.com.prosperity.entity;
 
-import java.io.File;
-import java.util.Calendar;
-import java.util.List;
-
-import javax.persistence.*;
-
+import java.util.Date;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
 @Entity
 @Table(name= "tbVaga")	
+@NamedQuery (name = "obterAprovacao", query = "SELECT u FROM UsuarioEntity u WHERE u.nome = ?1")
 public class VagaEntity {
-	/* Mapeamento dos Atributos */
-	
-	/* Mapeamento do ID */
+
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-	@Column(name="idVaga", unique = true, nullable = false)
-	private int id;
-	/* fim Id */
+	@Column(name = "idVaga", unique = true, nullable = false)
+	private Integer id;
+	
+	@Column(name = "nmVaga")
+	private String nomeVaga;
 	
 	@Column(name = "nmSolicitante")
 	private String nomeSolicitante;
-	
+
 	@Column(name = "vlPretensao")
-	private double valorPretensao;
-	
+	private Double valorPretensao;
+
 	@Column(name = "dtInicio")
-	private Calendar dataInicio;
-	
+	private Date dataInicio;
+
 	@Column(name = "flLocalTrabalho")
-	private char localTrabalho;
-	
+	private String localTrabalho;
+
 	@Column(name = "idTpVaga")
-	private char tipoVaga;
-	
+	private String tipoVaga;
+
 	@Column(name = "hrEntrada")
-	private Calendar horaEntrada;
-	
+	private Date horaEntrada;
+
 	@Column(name = "hrSaida")
-	private Calendar horaSaida;
-		
+	private Date horaSaida;
+
 	@Column(name = "flAumentoQuadro")
 	private String aumentoQuadro;
+
+	@Column(name = "numCandidatos")
+	private int numeroCandidatos; //
 	
-	/* Mapeamento de Relacionamentos Tudo o que estiver ligado na tabela Vaga 1-N*/
+	@Column(name = "nmSubstituido")
+	private String nomeSubstituido; // 
 	
+	@Column(name = "dsFormacaoAcademica")
+	private String descricaoFormacaoAcademica; //
+	
+	@Column(name = "dsPerfilComportamental")
+	private String descricaoPerfilComportamental; //
+	
+	@Column(name = "dsPerfilTecnico")
+	private String descricaoPerfilTecnico; //
+	
+	@Column(name = "dtAbertura")
+	private Date dataAbertura; //
+	
+	@Column(name = "dtAprovacao")
+	private Date dataAprovacao; //
+	
+	@Column(name = "dtFechamento")
+	private Date dataFechamento; //
+
 	@OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER, orphanRemoval = true)
 	@PrimaryKeyJoinColumn
 	private ProjetoEntity projetoEntity;
-	
-	@ManyToOne (cascade = CascadeType.ALL)
+
+	@ManyToOne(cascade = CascadeType.ALL)
 	private CargoEntity cargoEntity;
-	
-	@ManyToOne (cascade = CascadeType.ALL)	
+
+	@ManyToOne(cascade = CascadeType.ALL)
 	private SenioridadeEntity senioridadeEntity;
-	
-	@ManyToOne (cascade = CascadeType.ALL)
+
+	@ManyToOne(cascade = CascadeType.ALL)
 	private UsuarioEntity usuarioEntity;
+
+	//@ManyToOne(cascade = CascadeType.ALL)
+	//private AvaliadorEntity avaliadorEntity;
 	
-	@ManyToOne (cascade = CascadeType.ALL)
-	private AvaliadorEntity avaliadorEntity;
 	
-	// relacionamento avaliadores
-			/* fim dos mapeamentos */
-	public VagaEntity() {
 
-	}
-     
-	public VagaEntity(int id, String nomeSolicitante, double valorPretensao, Calendar dataInicio, char localTrabalho,
-			char tipoVaga, Calendar horaEntrada, Calendar horaSaida, String aumentoQuadro, ProjetoEntity projetoEntity,
-			CargoEntity cargoEntity, SenioridadeEntity senioridadeEntity, UsuarioEntity usuarioEntity,
-			AvaliadorEntity avaliadorEntity) {
-		super();
-		this.id = id;
-		this.nomeSolicitante = nomeSolicitante;
-		this.valorPretensao = valorPretensao;
-		this.dataInicio = dataInicio;
-		this.localTrabalho = localTrabalho;
-		this.tipoVaga = tipoVaga;
-		this.horaEntrada = horaEntrada;
-		this.horaSaida = horaSaida;
-		this.aumentoQuadro = aumentoQuadro;
-		this.projetoEntity = projetoEntity;
-		this.cargoEntity = cargoEntity;
-		this.senioridadeEntity = senioridadeEntity;
-		this.usuarioEntity = usuarioEntity;
-		this.avaliadorEntity = avaliadorEntity;
-	}
-
-
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	
+	
+	public String getNomeVaga() {
+		return nomeVaga;
+	}
+
+	public void setNomeVaga(String nomeVaga) {
+		this.nomeVaga = nomeVaga;
 	}
 
 	public String getNomeSolicitante() {
@@ -105,51 +118,51 @@ public class VagaEntity {
 		this.nomeSolicitante = nomeSolicitante;
 	}
 
-	public double getValorPretensao() {
+	public Double getValorPretensao() {
 		return valorPretensao;
 	}
 
-	public void setValorPretensao(double valorPretensao) {
+	public void setValorPretensao(Double valorPretensao) {
 		this.valorPretensao = valorPretensao;
 	}
 
-	public Calendar getDataInicio() {
+	public Date getDataInicio() {
 		return dataInicio;
 	}
 
-	public void setDataInicio(Calendar dataInicio) {
+	public void setDataInicio(Date dataInicio) {
 		this.dataInicio = dataInicio;
 	}
 
-	public char getLocalTrabalho() {
+	public String getLocalTrabalho() {
 		return localTrabalho;
 	}
 
-	public void setLocalTrabalho(char localTrabalho) {
+	public void setLocalTrabalho(String localTrabalho) {
 		this.localTrabalho = localTrabalho;
 	}
 
-	public char getTipoVaga() {
+	public String getTipoVaga() {
 		return tipoVaga;
 	}
 
-	public void setTipoVaga(char tipoVaga) {
+	public void setTipoVaga(String tipoVaga) {
 		this.tipoVaga = tipoVaga;
 	}
 
-	public Calendar getHoraEntrada() {
+	public Date getHoraEntrada() {
 		return horaEntrada;
 	}
 
-	public void setHoraEntrada(Calendar horaEntrada) {
+	public void setHoraEntrada(Date horaEntrada) {
 		this.horaEntrada = horaEntrada;
 	}
 
-	public Calendar getHoraSaida() {
+	public Date getHoraSaida() {
 		return horaSaida;
 	}
 
-	public void setHoraSaida(Calendar horaSaida) {
+	public void setHoraSaida(Date horaSaida) {
 		this.horaSaida = horaSaida;
 	}
 
@@ -159,6 +172,70 @@ public class VagaEntity {
 
 	public void setAumentoQuadro(String aumentoQuadro) {
 		this.aumentoQuadro = aumentoQuadro;
+	}
+
+	public int getNumeroCandidatos() {
+		return numeroCandidatos;
+	}
+
+	public void setNumeroCandidatos(int numeroCandidatos) {
+		this.numeroCandidatos = numeroCandidatos;
+	}
+
+	public String getNomeSubstituido() {
+		return nomeSubstituido;
+	}
+
+	public void setNomeSubstituido(String nomeSubstituido) {
+		this.nomeSubstituido = nomeSubstituido;
+	}
+
+	public String getDescricaoFormacaoAcademica() {
+		return descricaoFormacaoAcademica;
+	}
+
+	public void setDescricaoFormacaoAcademica(String descricaoFormacaoAcademica) {
+		this.descricaoFormacaoAcademica = descricaoFormacaoAcademica;
+	}
+
+	public String getDescricaoPerfilComportamental() {
+		return descricaoPerfilComportamental;
+	}
+
+	public void setDescricaoPerfilComportamental(String descricaoPerfilComportamental) {
+		this.descricaoPerfilComportamental = descricaoPerfilComportamental;
+	}
+
+	public String getDescricaoPerfilTecnico() {
+		return descricaoPerfilTecnico;
+	}
+
+	public void setDescricaoPerfilTecnico(String descricaoPerfilTecnico) {
+		this.descricaoPerfilTecnico = descricaoPerfilTecnico;
+	}
+
+	public Date getDataAbertura() {
+		return dataAbertura;
+	}
+
+	public void setDataAbertura(Date dataAbertura) {
+		this.dataAbertura = dataAbertura;
+	}
+
+	public Date getDataAprovacao() {
+		return dataAprovacao;
+	}
+
+	public void setDataAprovacao(Date dataAprovacao) {
+		this.dataAprovacao = dataAprovacao;
+	}
+
+	public Date getDataFechamento() {
+		return dataFechamento;
+	}
+
+	public void setDataFechamento(Date dataFechamento) {
+		this.dataFechamento = dataFechamento;
 	}
 
 	public ProjetoEntity getProjetoEntity() {
@@ -193,13 +270,15 @@ public class VagaEntity {
 		this.usuarioEntity = usuarioEntity;
 	}
 
-	public AvaliadorEntity getAvaliadorEntity() {
-		return avaliadorEntity;
-	}
+	//public AvaliadorEntity getAvaliadorEntity() {
+		//return avaliadorEntity;
+	//}
 
-	public void setAvaliadorEntity(AvaliadorEntity avaliadorEntity) {
-		this.avaliadorEntity = avaliadorEntity;
-	}
+	//public void setAvaliadorEntity(AvaliadorEntity avaliadorEntity) {
+		//this.avaliadorEntity = avaliadorEntity;
+	//}
 
+	
+	
 
 }

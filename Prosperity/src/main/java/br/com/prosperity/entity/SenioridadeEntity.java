@@ -6,12 +6,14 @@ import javax.persistence.*;
 @Entity
 @Table(name="tbSenioridade")
 public class SenioridadeEntity {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idSenioridade", unique = true, nullable = false)
-	private int id;
+	private Integer id;
+
 	@Column(name="nmSenioridade")
-	private String descricao;
+	private String nome;
 	
 	 @ManyToMany
 	 @JoinTable(name="tbCargoSenioridade", joinColumns={@JoinColumn(name="idCargo")}, inverseJoinColumns={@JoinColumn(name="idSenioridade")})
@@ -25,30 +27,20 @@ public class SenioridadeEntity {
 		this.senioridade = senioridade;
 	}
 
-	public SenioridadeEntity(int id, String descricao) {
-
-		this.id = id;
-		this.descricao = descricao;
-	}
-
-	public SenioridadeEntity() {
-
-	}
-
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 }

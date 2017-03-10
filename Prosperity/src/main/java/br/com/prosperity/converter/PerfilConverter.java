@@ -9,9 +9,6 @@ import br.com.prosperity.entity.PerfilEntity;
 public class PerfilConverter implements Converter<PerfilEntity, PerfilBean> {
 	
 	private FuncionalidadeConverter funcionalidadeConverter;
-	/* (non-Javadoc)
-	 * @see br.com.prosperity.converter.Converter#convertBeanToEntity(br.com.prosperity.bean.AvaliadorBean)
-	 */
 	
 	@Override
 	public PerfilEntity convertBeanToEntity(PerfilBean bean) {
@@ -19,22 +16,18 @@ public class PerfilConverter implements Converter<PerfilEntity, PerfilBean> {
 		
 		entity.setId(bean.getId());
 		entity.setNome(bean.getNome());
-		entity.setFuncionalidadeEntity(funcionalidadeConverter.convertBeanToEntity(bean.getListaFuncionalidades()));
+		entity.setFuncionalidades(funcionalidadeConverter.convertBeanToEntity(bean.getListaFuncionalidades()));
 
 		return entity;
 	}
 
-	
-	/* (non-Javadoc)
-	 * @see br.com.prosperity.converter.Converter#convertBeanToEntity(br.com.prosperity.entity.AvaliadorEntity)
-	 */
 	@Override
 	public PerfilBean convertEntityToBean(PerfilEntity entity) {
 		PerfilBean bean = new PerfilBean();
 		
 		bean.setId(entity.getId());
 		bean.setNome(entity.getNome());
-		bean.setListaFuncionalidades(funcionalidadeConverter.convertEntityToBean(entity.getFuncionalidadeEntity()));
+		bean.setListaFuncionalidades(funcionalidadeConverter.convertEntityToBean(entity.getFuncionalidades()));
 
 		return bean;
 	}

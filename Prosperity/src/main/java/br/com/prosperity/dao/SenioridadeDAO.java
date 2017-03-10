@@ -8,5 +8,5 @@ import br.com.prosperity.entity.SenioridadeEntity;
 
 @Repository
 public class SenioridadeDAO extends GenericDAOImpl<SenioridadeEntity, Serializable> {
-
+		
 }
