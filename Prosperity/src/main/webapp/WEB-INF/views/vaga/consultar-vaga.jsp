@@ -487,7 +487,7 @@
 							<tbody class="text-center">
 								<c:forEach var="vagas" items="${vagas}">
 									<tr>
-									<td>${vagas.descricaoFormacaoAcademica}</td>
+									<td>${vagas.nomeVaga}</td>
 									<td>Carrefour</td>
 									<td>Alocado</td>
 									<td>15/02/2017</td>
