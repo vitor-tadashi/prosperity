@@ -1,9 +1,15 @@
 package br.com.prosperity.business;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import java.util.*;
+
+import br.com.prosperity.bean.SenioridadeBean;
+import br.com.prosperity.converter.SenioridadeConverter;
+import br.com.prosperity.dao.SenioridadeDAO;
 
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.converter.VagaConverter;
@@ -17,7 +23,7 @@ public class VagaBusiness {
 	private VagaDAO vagaDAO;
 
 	@Autowired
-	VagaConverter vagaConverter;
+	private VagaConverter vagaConverter;
 
 	private VagaBean obter(int idVaga) {
 
