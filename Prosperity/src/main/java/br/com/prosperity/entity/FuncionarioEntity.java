@@ -3,6 +3,7 @@ package br.com.prosperity.entity;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,11 +23,11 @@ public class FuncionarioEntity {
 	@Column(name="nmFuncionario")
 	private String nome;
 	
-	@ManyToOne (cascade = CascadeType.ALL)
+	@ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name="idCargo")
 	private CargoEntity cargo;
 	
-	@ManyToOne (cascade = CascadeType.ALL)
+	@ManyToOne (cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JoinColumn(name="idSenioridade")
 	private SenioridadeEntity senioridade;
 

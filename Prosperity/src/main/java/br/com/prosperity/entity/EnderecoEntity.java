@@ -25,7 +25,7 @@ public class EnderecoEntity {
 	private String cep;
 	
 	@Column(name="vlNumero")
-	private int numero;
+	private Integer numero;
 	
 	@Column(name="dsComplemento")
 	private String complemento;
@@ -55,11 +55,11 @@ public class EnderecoEntity {
 		this.cep = cep;
 	}
 
-	public int getNumero() {
+	public Integer getNumero() {
 		return numero;
 	}
 
-	public void setNumero(int numero) {
+	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
 

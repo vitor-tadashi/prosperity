@@ -1,24 +1,15 @@
 package br.com.prosperity.bean;
 
 public class RelatorioBean {
-	private int id;
+	private Integer id;
 	private String nome;
 	private String caminho;
 	
-	public RelatorioBean(){
-		
-	}
 	
-	public RelatorioBean(int id, String nome, String caminho){
-		this.id = id;
-		this.nome = nome;
-		this.caminho = caminho;
-	}
-	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getNome() {

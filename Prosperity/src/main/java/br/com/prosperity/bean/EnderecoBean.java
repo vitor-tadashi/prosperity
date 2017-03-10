@@ -1,31 +1,19 @@
 package br.com.prosperity.bean;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class EnderecoBean {
 	private Integer id;
 	
 	private String cep;
-	private int numero;
+	private Integer numero;
 	private String complemento;
 	private String cidade;
 	private String estado;
 	private String logradouro;
 	
 	
-	public EnderecoBean() {
-		
-	}
-	
-	public EnderecoBean(Integer id, String cep, int numero, String complemento, String cidade,String estado, String logradouro) {
-		super();
-		this.setId(id);
-		this.cep = cep;
-		this.numero = numero;
-		this.complemento = complemento;
-		this.cidade = cidade;
-		this.estado = estado;
-		this.logradouro = logradouro;
-		
-	}
 	
 	public String getCep() {
 		return cep;
@@ -33,10 +21,10 @@ public class EnderecoBean {
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
-	public int getNumero() {
+	public Integer getNumero() {
 		return numero;
 	}
-	public void setNumero(int numero) {
+	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
 	public String getComplemento() {

@@ -43,4 +43,9 @@ public class UsuarioBusiness {
 
 		return usuarioBean;
 	}
+
+	public void alterar(UsuarioBean usuarioBean) {
+		UsuarioEntity usuarioEntity = usuarioDAO.alterar(usuarioConverter.convertBeanToEntity(usuarioBean));
+	}
+
 }
