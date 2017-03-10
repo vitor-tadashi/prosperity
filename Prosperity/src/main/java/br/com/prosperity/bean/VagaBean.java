@@ -1,24 +1,33 @@
 package br.com.prosperity.bean;
 
-import java.util.Calendar;
+import java.util.Date;
 
 import org.springframework.stereotype.Component;
 
 @Component
 public class VagaBean {
-	
+
 	private Integer id;
 	private String nomeSolicitante;
 	private Double valorPretensao;
-	private Calendar dataInicio;
+	private Date dataInicio;
 	private String localTrabalho;
 	private String idTipoVaga;
-	private String horarioEntrada;
-	private String horarioSaida;
+	private Date horarioEntrada;
+	private Date horarioSaida;
 	private String aumentaQuadro;
 	private ProjetoBean projetoBean;
 	private CargoBean cargoBean;
 	private SenioridadeBean senioridadeBean;
+
+	private String nomeSubstituido; //
+	private String descricaoFormacaoAcademica; //
+	private String descricaoPerfilComportamental; //
+	private String descricaoPerfilTecnico; //
+	private Date dataAbertura; //
+	private Date dataAprovacao; //
+	private Date dataFechamento; //
+	private int numeroCandidatos; //
 
 
 	public Integer getId() {
@@ -45,11 +54,11 @@ public class VagaBean {
 		this.valorPretensao = valorPretensao;
 	}
 
-	public Calendar getDataInicio() {
+	public Date getDataInicio() {
 		return dataInicio;
 	}
 
-	public void setDataInicio(Calendar dataInicio) {
+	public void setDataInicio(Date dataInicio) {
 		this.dataInicio = dataInicio;
 	}
 
@@ -65,23 +74,23 @@ public class VagaBean {
 		return idTipoVaga;
 	}
 
-	public void setIdTipoVaga(String tipoVaga) {
-		this.idTipoVaga = tipoVaga;
+	public void setIdTipoVaga(String idTipoVaga) {
+		this.idTipoVaga = idTipoVaga;
 	}
 
-	public String getHorarioEntrada() {
+	public Date getHorarioEntrada() {
 		return horarioEntrada;
 	}
 
-	public void setHorarioEntrada(String horarioEntrada) {
+	public void setHorarioEntrada(Date horarioEntrada) {
 		this.horarioEntrada = horarioEntrada;
 	}
 
-	public String getHorarioSaida() {
+	public Date getHorarioSaida() {
 		return horarioSaida;
 	}
 
-	public void setHorarioSaida(String horarioSaida) {
+	public void setHorarioSaida(Date horarioSaida) {
 		this.horarioSaida = horarioSaida;
 	}
 
@@ -116,4 +125,69 @@ public class VagaBean {
 	public void setSenioridadeBean(SenioridadeBean senioridadeBean) {
 		this.senioridadeBean = senioridadeBean;
 	}
+
+	public String getNomeSubstituido() {
+		return nomeSubstituido;
+	}
+
+	public void setNomeSubstituido(String nomeSubstituido) {
+		this.nomeSubstituido = nomeSubstituido;
+	}
+
+	public String getDescricaoFormacaoAcademica() {
+		return descricaoFormacaoAcademica;
+	}
+
+	public void setDescricaoFormacaoAcademica(String descricaoFormacaoAcademica) {
+		this.descricaoFormacaoAcademica = descricaoFormacaoAcademica;
+	}
+
+	public String getDescricaoPerfilComportamental() {
+		return descricaoPerfilComportamental;
+	}
+
+	public void setDescricaoPerfilComportamental(String descricaoPerfilComportamental) {
+		this.descricaoPerfilComportamental = descricaoPerfilComportamental;
+	}
+
+	public String getDescricaoPerfilTecnico() {
+		return descricaoPerfilTecnico;
+	}
+
+	public void setDescricaoPerfilTecnico(String descricaoPerfilTecnico) {
+		this.descricaoPerfilTecnico = descricaoPerfilTecnico;
+	}
+
+	public Date getDataAbertura() {
+		return dataAbertura;
+	}
+
+	public void setDataAbertura(Date dataAbertura) {
+		this.dataAbertura = dataAbertura;
+	}
+
+	public Date getDataAprovacao() {
+		return dataAprovacao;
+	}
+
+	public void setDataAprovacao(Date dataAprovacao) {
+		this.dataAprovacao = dataAprovacao;
+	}
+
+	public Date getDataFechamento() {
+		return dataFechamento;
+	}
+
+	public void setDataFechamento(Date dataFechamento) {
+		this.dataFechamento = dataFechamento;
+	}
+
+	public int getNumeroCandidatos() {
+		return numeroCandidatos;
+	}
+
+	public void setNumeroCandidatos(int numeroCandidatos) {
+		this.numeroCandidatos = numeroCandidatos;
+	}
+
 }

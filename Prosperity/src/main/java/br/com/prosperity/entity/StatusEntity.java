@@ -21,7 +21,7 @@ public class StatusEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idStatus", unique = true, nullable = false)
-	private int id;
+	private Integer id;
 	/* fim */
 
 	@Column(name = "nmStatus")
@@ -35,11 +35,11 @@ public class StatusEntity {
 	private TipoStatusEntity tipoStatus;
 
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

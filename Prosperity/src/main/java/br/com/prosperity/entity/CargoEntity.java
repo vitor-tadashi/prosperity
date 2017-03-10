@@ -11,24 +11,16 @@ public class CargoEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	
 	@Column(name="idCargo", unique = true, nullable = false)
-	private int id;
+	private Integer id;
 	@Column(name = "nmCargo")
 	private String nome;
 	
-	public CargoEntity(){
-		
-	}
-	
-	public CargoEntity(int id, String nome){
-		this.id=id;
-		this.nome=nome;
-	}
-	
-	public int getId() {
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

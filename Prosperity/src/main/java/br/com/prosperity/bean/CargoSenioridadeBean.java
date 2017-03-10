@@ -4,46 +4,37 @@ import java.util.List;
 
 public class CargoSenioridadeBean {
 
-	private int id;
-	private double valorMinSalario;
-	private double valorMaxSalario;
+	private Integer id;
+	private Double valorMinSalario;
+	private Double valorMaxSalario;
 	private List<CargoBean> cargos;
 	private List<SenioridadeBean> senioridades;
 
-	public CargoSenioridadeBean(int id, double valorMinSalario, double valorMaxSalario, List<CargoBean> cargos,
-			List<SenioridadeBean> senioridades) {
-		this.id = id;
-		this.valorMinSalario = valorMinSalario;
-		this.valorMaxSalario = valorMaxSalario;
-		this.cargos = cargos;
-		this.senioridades = senioridades;
-	}
-	
 	public CargoSenioridadeBean(){
 		
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public double getValorMinSalario() {
+	public Double getValorMinSalario() {
 		return valorMinSalario;
 	}
 
-	public void setValorMinSalario(double valorMinSalario) {
+	public void setValorMinSalario(Double valorMinSalario) {
 		this.valorMinSalario = valorMinSalario;
 	}
 
-	public double getValorMaxSalario() {
+	public Double getValorMaxSalario() {
 		return valorMaxSalario;
 	}
 
-	public void setValorMaxSalario(double valorMaxSalario) {
+	public void setValorMaxSalario(Double valorMaxSalario) {
 		this.valorMaxSalario = valorMaxSalario;
 	}
 

@@ -11,9 +11,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.VagaBusiness;
 
+import br.com.prosperity.converter.VagaConverter;
+import br.com.prosperity.dao.VagaDAO;
+
+
 @Controller
 @RequestMapping("vaga")
 public class VagaController {
+
 
 	@Autowired
 	private VagaBusiness vagaBusiness;
@@ -21,11 +26,13 @@ public class VagaController {
 	@Autowired
 	private List<VagaBean> vagaBean;
 
-	@RequestMapping(value = "consultar", method = RequestMethod.GET)
-	public String consultar() {
-		// chamar a business acionando o método de consultar vagas para
-		// aprovação
-
+	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
+	public String cliente(Model model) {
+		List<VagaBean> vagas = vagaBusiness.obterTodos();
+		
+		/*vagas.add(b);*/
+		model.addAttribute("vagas", vagas);
+		
 		return "vaga/consultar-vaga";
 	}
 
@@ -39,5 +46,9 @@ public class VagaController {
 	@RequestMapping(value = "solicitar", method = RequestMethod.GET)
 	public String solicitarVaga() {
 		return "vaga/solicitar-vaga";
+	}
+	@RequestMapping (value = "idAvaliador", method = RequestMethod.GET)
+	public String idAvaliador(){
+	return "idAvaliador";
 	}
 }

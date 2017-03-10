@@ -1,23 +1,23 @@
 package br.com.prosperity.bean;
 
 public class CargoBean {
-	private int id;
+	private Integer id;
 	private String nome;
 	
 	public CargoBean(){
 		
 	}
 	
-	public CargoBean(int id, String nome){
+	public CargoBean(Integer id, String nome){
 		this.id=id;
 		this.nome=nome;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

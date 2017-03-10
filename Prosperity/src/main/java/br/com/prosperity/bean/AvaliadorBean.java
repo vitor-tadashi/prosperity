@@ -3,22 +3,22 @@ package br.com.prosperity.bean;
 import java.io.File;
 
 public class AvaliadorBean {
-	private int idAvaliador;
+	private Integer idAvaliador;
 	
 	public AvaliadorBean() {
 		
 	}
 	
-	public AvaliadorBean(int idAvaliador) {
+	public AvaliadorBean(Integer idAvaliador) {
 		super();
 		this.idAvaliador = idAvaliador;
 	}
 
-	public int getIdAvaliador() {
+	public Integer getIdAvaliador() {
 		return idAvaliador;
 	}
 
-	public void setIdAvaliador(int idAvaliador) {
+	public void setIdAvaliador(Integer idAvaliador) {
 		this.idAvaliador = idAvaliador;
 	}
 	

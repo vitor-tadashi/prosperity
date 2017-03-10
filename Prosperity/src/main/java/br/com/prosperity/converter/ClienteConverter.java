@@ -13,6 +13,7 @@ public class ClienteConverter implements Converter <ClienteEntity, ClienteBean> 
 		ClienteEntity entity = new ClienteEntity();
 		
 		entity.setId(bean.getId());
+		entity.setNome(bean.getNome());
 		
 		return entity;
 	}
@@ -22,7 +23,7 @@ public class ClienteConverter implements Converter <ClienteEntity, ClienteBean> 
 		ClienteBean bean = new ClienteBean();
 		
 		bean.setId(entity.getId());
-		
+		bean.setNome(entity.getNome());
 		return bean;
 	}
 

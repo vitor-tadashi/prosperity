@@ -1,33 +1,20 @@
 package br.com.prosperity.bean;
 
-import java.util.Calendar;
+import java.util.Date;
 
 public class FormacaoBean {
-	private int id;
+	private Integer id;
 	private String nomeInstituicao;
-	private Calendar dataConclusao;
+	private Date dataConclusao;
 	private TipoCursoBean tipoCursoBean;
 	private SituacaoAtualBean situacaoAtualBean;
 
-	public FormacaoBean() {
-
-	}
-
-	public FormacaoBean(int id, String nomeInstituicao, Calendar dataConclusao, TipoCursoBean tipoCursoBean,
-			SituacaoAtualBean situacaoAtualBean) {
-		this.id = id;
-		this.nomeInstituicao = nomeInstituicao;
-		this.dataConclusao = dataConclusao;
-		this.tipoCursoBean = tipoCursoBean;
-		this.situacaoAtualBean = situacaoAtualBean;
-
-	}
-
-	public int getId() {
+	
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -39,11 +26,11 @@ public class FormacaoBean {
 		this.nomeInstituicao = nomeInstituicao;
 	}
 
-	public Calendar getDataConclusao() {
+	public Date getDataConclusao() {
 		return dataConclusao;
 	}
 
-	public void setDataConclusao(Calendar dataConclusao) {
+	public void setDataConclusao(Date dataConclusao) {
 		this.dataConclusao = dataConclusao;
 	}
 

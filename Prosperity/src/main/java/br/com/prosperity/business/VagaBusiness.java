@@ -12,6 +12,7 @@ import br.com.prosperity.dao.VagaDAO;
 import br.com.prosperity.entity.VagaEntity;
 import br.com.prosperity.exception.BusinessException;
 
+
 @Component
 public class VagaBusiness {
 
@@ -27,11 +28,23 @@ public class VagaBusiness {
 */
 	@Transactional
 	public List<VagaBean> obterTodos() {
-
 		List<VagaEntity> aprovar = vagaDAO.findByNamedQuery("obterAprovacao");
 		List<VagaEntity> vagaEntity = vagaDAO.listar();
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 		return vagaBean;
+	}
+
+	private VagaBean obter(int idVaga) {
+
+		VagaEntity vagaEntity = vagaDAO.obterPorId(idVaga);
+
+		VagaBean vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
+
+		return vagaBean;
+	}
+
+	public void inserir(VagaBean vagaBean) {
+		vagaDAO.adicionar(vagaConverter.convertBeanToEntity(vagaBean));
 	}
 
 }

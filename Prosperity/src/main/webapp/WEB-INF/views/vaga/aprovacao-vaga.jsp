@@ -283,8 +283,8 @@
 						</thead>
 						<tbody class="text-center">
 							<tr>
-								<td>${nomevaga}</td>
-								<td>Vitor Tadashi</td>
+								<td>Nome da Vaga</td>
+								<td>${vagaBean.nomeSolicitante}</td>
 								<td>Senior</td>
 								<td>Projeto Web</td>
 								<td>Carrefour</td>

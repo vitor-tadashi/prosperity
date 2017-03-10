@@ -11,7 +11,7 @@ public class ProjetoEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	
 	@Column(name="idProjeto", unique = true, nullable = false)
-	private int id;
+	private Integer id;
 	
 	@Column(name="nmProjeto")
 	private String nome;
@@ -24,10 +24,10 @@ public class ProjetoEntity {
 	@JoinColumn(name="idCliente")
 	private ClienteEntity cliente;
 		
-	public int getIdProjeto() {
+	public Integer getIdProjeto() {
 		return id;
 	}
-	public void setIdProjeto(int idProjeto) {
+	public void setIdProjeto(Integer idProjeto) {
 		this.id = idProjeto;
 	}
 	public String getNmProjeto() {
