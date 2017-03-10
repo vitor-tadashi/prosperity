@@ -26,10 +26,6 @@ public class CandidatoBean {
 	private List<StatusBean> status;
 	private List<VagaBean> vagas;
 	
-	public CandidatoBean(){
-		
-	}
-	
 
 	public Integer getId() {
 		return id;

@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>  
+ 
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -293,55 +296,56 @@
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Email</label>
 							<div class="col-xs-7">
-								<p class="form-control-static" id="email" name="email">joaosilva@verity.com</p>
+								<p class="form-control-static" id="email" name="email">${candidato.email}</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">CPF</label>
 							<div class="col-xs-7">
-								<p class="form-control-static" id="cpf" name="cpf">123.456.789-10</p>
+								<p class="form-control-static" id="cpf" name="cpf">${candidato.cpf}</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">RG</label>
 							<div class="col-xs-7">
-								<p class="form-control-static" id="rg" name="rg">15.124.234</p>
+								<p class="form-control-static" id="rg" name="rg">${candidato.rg}</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Data nascimento</label>
 							<div class="col-xs-7">
-								<p class="form-control-static" id="dtNascimento" name="dtNascimento">01/01/2000</p>
+								<p class="form-control-static" id="dtNascimento" name="dtNascimento"><fmt:formatDate value="${candidato.dataNascimento}"
+						pattern="dd/MM/yyyy" /></p>
 							</div>
 						</div>
-						<div class="form-group col-md-6">
-							<label class="col-xs-5 control-label">Idade</label>
-							<div class="col-xs-7">
-								<p class="form-control-static" id="idade" name="idade">27</p>
-							</div>
-						</div>
+<!-- 						<div class="form-group col-md-6"> -->
+<!-- 							<label class="col-xs-5 control-label">Idade</label> -->
+<!-- 							<div class="col-xs-7"> -->
+<!-- 								<p class="form-control-static" id="idade" name="idade">placeholder</p> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Telefone</label>
 							<div class="col-xs-7">
-								<p class="form-control-static" id="telefone" name="telefone">(99) 99999-9999</p>
+								<p class="form-control-static" id="telefone" name="telefone">placeholder</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Cidade</label>
 							<div class="col-xs-7">
-								<p class="form-control-static" id="cidade" name="cidade">São Paulo</p>
+								<p class="form-control-static" id="cidade" name="cidade">placeholder</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Estado</label>
 							<div class="col-xs-7">
-								<p class="form-control-static" id="estado" name="estado">SP</p>
+								<p class="form-control-static" id="estado" name="estado">placeholder</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Curso</label>
 							<div class="col-xs-7">
-								<p class="form-control-static" id="nomeCurso" name="nomeCurso">Engenharia da Computação</p>
+								<p class="form-control-static" id="nomeCurso" name="nomeCurso">placeholder</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
@@ -371,7 +375,7 @@
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Pretensão salarial</label>
 							<div class="col-xs-7">
-								<p class="form-control-static" id="pretensao" name="pretensao">R$ 1200,00</p>
+								<p class="form-control-static" id="pretensao" name="pretensao"><fmt:formatNumber value="${candidato.valorPretensao}" minFractionDigits="2" type="currency" /></p>
 							</div>
 						</div>
 						<div class="form-group col-xs-12">
