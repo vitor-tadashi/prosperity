@@ -43,7 +43,10 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 		entity.setNomeSolicitante(bean.getNomeSolicitante());
 		entity.setNomeSubstituido(bean.getNomeSubstituido());
 		entity.setNumeroCandidatos(bean.getNumeroCandidatos());
-	
+		entity.setProjetoEntity(projetoConverter.convertBeanToEntity(bean.getProjetoBean()));
+		entity.setSenioridadeEntity(senioridadeConverter.convertBeanToEntity(bean.getSenioridadeBean()));
+		entity.setTipoVaga(bean.getIdTipoVaga());
+		entity.setValorPretensao(bean.getValorPretensao());
 		return entity;
 	}
 
@@ -51,7 +54,19 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 	public VagaBean convertEntityToBean(VagaEntity entity) {
 		VagaBean bean = new VagaBean();
 		bean.setId(entity.getId());
+		bean.setAumentaQuadro(entity.getAumentoQuadro());
+		bean.setCargoBean(cargoConverter.convertEntityToBean(entity.getCargoEntity()));
+		bean.setDataAbertura(entity.getDataAbertura());
+		bean.setDataAprovacao(entity.getDataAprovacao());
+		bean.setDataFechamento(entity.getDataFechamento());
+		bean.setDataInicio(entity.getDataInicio());
 		bean.setDescricaoFormacaoAcademica(entity.getDescricaoFormacaoAcademica());
+		bean.setDescricaoPerfilComportamental(entity.getDescricaoPerfilComportamental());
+		bean.setDescricaoPerfilTecnico(entity.getDescricaoPerfilTecnico());
+		bean.setHorarioEntrada(entity.getHoraEntrada());
+		bean.setHorarioSaida(entity.getHoraSaida());
+		bean.setLocalTrabalho(entity.getLocalTrabalho());
+		
 		return bean;
 	}
 	

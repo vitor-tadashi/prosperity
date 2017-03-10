@@ -38,7 +38,7 @@ public class VagaEntity {
 	private char localTrabalho;
 	
 	@Column(name = "idTpVaga")
-	private char tipoVaga;
+	private String tipoVaga;
 	
 	@Column(name = "hrEntrada")
 	private Calendar horaEntrada;
@@ -100,7 +100,7 @@ public class VagaEntity {
      
 	
 	public VagaEntity(Integer id, String nomeSolicitante, double valorPretensao, Calendar dataInicio,
-			char localTrabalho, char tipoVaga, Calendar horaEntrada, Calendar horaSaida, String aumentoQuadro,
+			char localTrabalho, String tipoVaga, Calendar horaEntrada, Calendar horaSaida, String aumentoQuadro,
 			int numeroCandidatos, String nomeSubstituido, String descricaoFormacaoAcademica,
 			String descricaoPerfilComportamental, String descricaoPerfilTecnico, Calendar dataAbertura,
 			Calendar dataAprovacao, Calendar dataFechamento, ProjetoEntity projetoEntity, CargoEntity cargoEntity,
@@ -271,11 +271,11 @@ public class VagaEntity {
 		this.localTrabalho = localTrabalho;
 	}
 
-	public char getTipoVaga() {
+	public String getTipoVaga() {
 		return tipoVaga;
 	}
 
-	public void setTipoVaga(char tipoVaga) {
+	public void setTipoVaga(String tipoVaga) {
 		this.tipoVaga = tipoVaga;
 	}
 

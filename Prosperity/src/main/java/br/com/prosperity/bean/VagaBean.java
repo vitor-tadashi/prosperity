@@ -4,6 +4,8 @@ import java.util.Calendar;
 
 import org.springframework.stereotype.Component;
 
+import br.com.prosperity.entity.UsuarioEntity;
+
 @Component
 public class VagaBean {
 	private Integer id; // 
@@ -26,6 +28,7 @@ public class VagaBean {
 	private Calendar dataAbertura; //
 	private Calendar dataAprovacao; //
 	private Calendar dataFechamento; //
+	private UsuarioBean usuarioBean;
 
 	public VagaBean() {
 
@@ -36,7 +39,8 @@ public class VagaBean {
 			Calendar dataInicio, char localTrabalho, String idTipoVaga, Calendar horarioEntrada, Calendar horarioSaida,
 			String aumentaQuadro, ProjetoBean projetoBean, CargoBean cargoBean, SenioridadeBean senioridadeBean,
 			String nomeSubstituido, String descricaoFormacaoAcademica, String descricaoPerfilComportamental,
-			String descricaoPerfilTecnico, Calendar dataAbertura, Calendar dataAprovacao, Calendar dataFechamento) {
+			String descricaoPerfilTecnico, Calendar dataAbertura, Calendar dataAprovacao, Calendar dataFechamento,
+			UsuarioBean usuarioBean) {
 		this.id = id;
 		this.nomeSolicitante = nomeSolicitante;
 		this.numeroCandidatos = numeroCandidatos;
@@ -57,12 +61,23 @@ public class VagaBean {
 		this.dataAbertura = dataAbertura;
 		this.dataAprovacao = dataAprovacao;
 		this.dataFechamento = dataFechamento;
+		this.usuarioBean = usuarioBean;
 	}
 
 
 
 
+	
 
+
+	public UsuarioBean getUsuarioBean() {
+		return usuarioBean;
+	}
+
+
+	public void setUsuarioBean(UsuarioBean usuarioBean) {
+		this.usuarioBean = usuarioBean;
+	}
 
 
 	public Calendar getDataAbertura() {
