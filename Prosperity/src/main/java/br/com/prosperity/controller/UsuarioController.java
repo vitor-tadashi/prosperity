@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.prosperity.bean.FuncionalidadeBean;
+import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.PerfilBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.business.FuncionalidadeBusiness;
+import br.com.prosperity.business.FuncionarioBusiness;
 import br.com.prosperity.business.PerfilBusiness;
 import br.com.prosperity.business.UsuarioBusiness;
 
@@ -26,10 +28,16 @@ public class UsuarioController {
 	private PerfilBusiness perfilBusiness;
 
 	@Autowired
+	private FuncionarioBusiness funcionarioBusiness;
+	
+	@Autowired
 	private UsuarioBusiness usuarioBusiness;
 
 	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
-	public String consultaUsuario() {
+	public String consultaUsuario(Model model) {
+		List<FuncionarioBean> funcionarios = funcionarioBusiness.getFuncionarios();
+		model.addAttribute("funcionarios", funcionarios);
+		
 		return "usuario/consultar-usuario";
 	}
 
