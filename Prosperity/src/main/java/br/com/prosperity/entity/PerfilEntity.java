@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -25,19 +24,9 @@ public class PerfilEntity {
 	@Column(name="nmPerfil")
 	private String nome;
 
-	@ManyToMany
-	@JoinTable(name="tbFuncionalidade", joinColumns={@JoinColumn(name="idFuncionalidade")}, inverseJoinColumns={@JoinColumn(name="idPerfil")})
-	private List<FuncionalidadeEntity> funcionalidade;
-
-	public PerfilEntity() {
-
-	}
-
-	public PerfilEntity(Integer id, String nome) {
-		this.id = id;
-		this.nome = nome;
-
-	}
+	@ManyToMany()
+	@JoinColumn(name="idFuncionalidade")
+	private List<FuncionalidadeEntity> funcionalidades;
 
 	public Integer getId() {
 		return id;
@@ -55,12 +44,12 @@ public class PerfilEntity {
 		this.nome = nome;
 	}
 
-	public List<FuncionalidadeEntity> getFuncionalidade() {
-		return funcionalidade;
+	public List<FuncionalidadeEntity> getFuncionalidades() {
+		return funcionalidades;
 	}
 
-	public void setFuncionalidade(List<FuncionalidadeEntity> funcionalidade) {
-		this.funcionalidade = funcionalidade;
+	public void setFuncionalidades(List<FuncionalidadeEntity> funcionalidades) {
+		this.funcionalidades = funcionalidades;
 	}
 	
 }

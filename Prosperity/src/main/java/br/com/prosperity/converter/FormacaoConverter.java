@@ -11,6 +11,7 @@ import br.com.prosperity.entity.FormacaoEntity;
 
 @Component
 public class FormacaoConverter implements Converter<FormacaoEntity, FormacaoBean> {
+	
 	@Autowired
 	SituacaoAtualConverter SituacaoAtual;
 	@Autowired
@@ -24,8 +25,6 @@ public class FormacaoConverter implements Converter<FormacaoEntity, FormacaoBean
 		entity.setDataConclusao(bean.getDataConclusao());
 		entity.setSituacaoAtualEntity(SituacaoAtual.convertBeanToEntity(bean.getSituacaoAtualBean()));
 		entity.setTipoCursoEntity(tipoCurso.convertBeanToEntity(bean.getTipoCursoBean()));
-	
- 
 		return entity;
 	}
 

@@ -19,7 +19,7 @@ public class PerfilBusiness {
 	@Autowired
 	private PerfilConverter perfilConverter;
 	
-	private PerfilBean obter(int idPerfil){
+	private PerfilBean obter(Integer idPerfil){
 		
 		PerfilEntity perfilEntity = perfilDAO.obterPorId(idPerfil);
 		

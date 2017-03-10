@@ -25,7 +25,7 @@ public class StatusVagaEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idStatusVaga", unique = true, nullable = false)
-	private int id;
+	private Integer id;
 	/* fim */
 	
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -37,18 +37,18 @@ public class StatusVagaEntity {
 	private VagaEntity vaga;
 	
 	@Column (name = "dtAlteracao")
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataAlteracao;
 	
 
 	/* fim dos mapeamentos */
 
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

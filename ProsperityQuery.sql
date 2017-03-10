@@ -199,3 +199,6 @@ CREATE TABLE tbCompetencias (
 	compFinanceiro NUMERIC,
 	dsParecer VARCHAR(500)
 );
+
+alter table tbVaga add nmVaga varchar(50)
+select * from tbVaga

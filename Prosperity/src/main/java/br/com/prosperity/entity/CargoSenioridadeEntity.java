@@ -15,7 +15,7 @@ public class CargoSenioridadeEntity{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idCargoSenioridade", unique = true)
-	private int id;
+	private Integer id;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="idCargo")
@@ -26,15 +26,15 @@ public class CargoSenioridadeEntity{
 	private SenioridadeEntity idSenioridade;
 	
 	@Column(name="vlMinSalario")
-	private double vlMinSalario;
+	private Double vlMinSalario;
 	
 	@Column(name="vlMaxSalario")
-	private double vlMaxSalario;
+	private Double vlMaxSalario;
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -50,16 +50,16 @@ public class CargoSenioridadeEntity{
 	public void setIdSenioridade(SenioridadeEntity idSenioridade) {
 		this.idSenioridade = idSenioridade;
 	}
-	public double getVlMinSalario() {
+	public Double getVlMinSalario() {
 		return vlMinSalario;
 	}
-	public void setVlMinSalario(double vlMinSalario) {
+	public void setVlMinSalario(Double vlMinSalario) {
 		this.vlMinSalario = vlMinSalario;
 	}
-	public double getVlMaxSalario() {
+	public Double getVlMaxSalario() {
 		return vlMaxSalario;
 	}
-	public void setVlMaxSalario(double vlMaxSalario) {
+	public void setVlMaxSalario(Double vlMaxSalario) {
 		this.vlMaxSalario = vlMaxSalario;
 	}
 	

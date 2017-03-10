@@ -2,27 +2,17 @@ package br.com.prosperity.bean;
 
 public class StatusBean {
 
-	private int id;
+	private Integer id;
 	private String nome;
 	private String Css;
-	private int tipo;
+	private Integer tipo;
 
-	public StatusBean() {
-	}
 
-	public StatusBean(int id, String nome, String Css, int tipo) {
-		this.id = id;
-
-		this.nome = nome;
-		this.Css = Css;
-		this.tipo = tipo;
-	}
-
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -42,11 +32,11 @@ public class StatusBean {
 		Css = css;
 	}
 
-	public int getTipo() {
+	public Integer getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(int tipo) {
+	public void setTipo(Integer tipo) {
 		this.tipo = tipo;
 	}
 }

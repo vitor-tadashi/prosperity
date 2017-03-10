@@ -1,7 +1,7 @@
 package br.com.prosperity.entity;
 
 import java.io.File;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -38,26 +38,26 @@ public class CandidatoEntity {
 	private String rg;
 
 	@Column(name = "dtNascimento")
-	@Temporal(TemporalType.DATE)
-	private Calendar dataNascimento;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataNascimento;
 
 	@Column(name = "vlPretensao")
-	private double valorPretensaoSalarial;
+	private Double valorPretensaoSalarial;
 
 	@Column(name = "dtAbertura")
-	@Temporal(TemporalType.DATE)
-	private Calendar dataAbertura;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataAbertura;
 
 	@Column(name = "dtFechamento")
-	@Temporal(TemporalType.DATE)
-	private Calendar dataFechamento;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataFechamento;
 
 	@Column(name = "nmEmail")
 	private String email;
 
 	@Column(name = "dtAlteracao")
-	@Temporal(TemporalType.DATE)
-	private Calendar dataAlteracao;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataAlteracao;
 
 	@Column(name = "cmCurriculo")
 	private File curriculo;
@@ -116,35 +116,35 @@ public class CandidatoEntity {
 		this.rg = rg;
 	}
 
-	public Calendar getDataNascimento() {
+	public Date getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Calendar dataNascimento) {
+	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public double getValorPretensaoSalarial() {
+	public Double getValorPretensaoSalarial() {
 		return valorPretensaoSalarial;
 	}
 
-	public void setValorPretensaoSalarial(double valorPretensaoSalarial) {
+	public void setValorPretensaoSalarial(Double valorPretensaoSalarial) {
 		this.valorPretensaoSalarial = valorPretensaoSalarial;
 	}
 
-	public Calendar getDataAbertura() {
+	public Date getDataAbertura() {
 		return dataAbertura;
 	}
 
-	public void setDataAbertura(Calendar dataAbertura) {
+	public void setDataAbertura(Date dataAbertura) {
 		this.dataAbertura = dataAbertura;
 	}
 
-	public Calendar getDataFechamento() {
+	public Date getDataFechamento() {
 		return dataFechamento;
 	}
 
-	public void setDataFechamento(Calendar dataFechamento) {
+	public void setDataFechamento(Date dataFechamento) {
 		this.dataFechamento = dataFechamento;
 	}
 
@@ -156,11 +156,11 @@ public class CandidatoEntity {
 		this.email = email;
 	}
 
-	public Calendar getDataAlteracao() {
+	public Date getDataAlteracao() {
 		return dataAlteracao;
 	}
 
-	public void setDataAlteracao(Calendar dataAlteracao) {
+	public void setDataAlteracao(Date dataAlteracao) {
 		this.dataAlteracao = dataAlteracao;
 	}
 

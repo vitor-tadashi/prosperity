@@ -1,6 +1,6 @@
 package br.com.prosperity.entity;
 
-import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,38 +14,38 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@Table(name= "tbVaga")	
+@Table(name = "tbVaga")
 public class VagaEntity {
-	/* Mapeamento dos Atributos */
-	
-	/* Mapeamento do ID */
+
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-	@Column(name="idVaga", unique = true, nullable = false)
+	@Column(name = "idVaga", unique = true, nullable = false)
 	private Integer id;
-	/* fim Id */
+	
+	@Column(name = "nmVaga")
+	private String nomeVaga;
 	
 	@Column(name = "nmSolicitante")
 	private String nomeSolicitante;
-	
+
 	@Column(name = "vlPretensao")
-	private double valorPretensao;
-	
+	private Double valorPretensao;
+
 	@Column(name = "dtInicio")
-	private Calendar dataInicio;
-	
+	private Date dataInicio;
+
 	@Column(name = "flLocalTrabalho")
-	private char localTrabalho;
-	
+	private String localTrabalho;
+
 	@Column(name = "idTpVaga")
 	private String tipoVaga;
-	
+
 	@Column(name = "hrEntrada")
-	private Calendar horaEntrada;
-	
+	private Date horaEntrada;
+
 	@Column(name = "hrSaida")
-	private Calendar horaSaida;
-		
+	private Date horaSaida;
+
 	@Column(name = "flAumentoQuadro")
 	private String aumentoQuadro;
 
@@ -65,179 +65,49 @@ public class VagaEntity {
 	private String descricaoPerfilTecnico; //
 	
 	@Column(name = "dtAbertura")
-	private Calendar dataAbertura; //
+	private Date dataAbertura; //
 	
 	@Column(name = "dtAprovacao")
-	private Calendar dataAprovacao; //
+	private Date dataAprovacao; //
 	
 	@Column(name = "dtFechamento")
-	private Calendar dataFechamento; //
-	
-	
-	
-	
-	
-	/* Mapeamento de Relacionamentos Tudo o que estiver ligado na tabela Vaga 1-N*/
-	
+	private Date dataFechamento; //
+
 	@OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER, orphanRemoval = true)
 	@PrimaryKeyJoinColumn
 	private ProjetoEntity projetoEntity;
-	
-	@ManyToOne (cascade = CascadeType.ALL)
+
+	@ManyToOne(cascade = CascadeType.ALL)
 	private CargoEntity cargoEntity;
-	
-	@ManyToOne (cascade = CascadeType.ALL)	
+
+	@ManyToOne(cascade = CascadeType.ALL)
 	private SenioridadeEntity senioridadeEntity;
-	
-	@ManyToOne (cascade = CascadeType.ALL)
+
+	@ManyToOne(cascade = CascadeType.ALL)
 	private UsuarioEntity usuarioEntity;
-	
-	// relacionamento avaliadores
-			/* fim dos mapeamentos */
-	public VagaEntity() {
 
-	}
-     
-	
-	public VagaEntity(Integer id, String nomeSolicitante, double valorPretensao, Calendar dataInicio,
-			char localTrabalho, String tipoVaga, Calendar horaEntrada, Calendar horaSaida, String aumentoQuadro,
-			int numeroCandidatos, String nomeSubstituido, String descricaoFormacaoAcademica,
-			String descricaoPerfilComportamental, String descricaoPerfilTecnico, Calendar dataAbertura,
-			Calendar dataAprovacao, Calendar dataFechamento, ProjetoEntity projetoEntity, CargoEntity cargoEntity,
-			SenioridadeEntity senioridadeEntity, UsuarioEntity usuarioEntity, AvaliadorEntity avaliadorEntity) {
-		super();
-		this.id = id;
-		this.nomeSolicitante = nomeSolicitante;
-		this.valorPretensao = valorPretensao;
-		this.dataInicio = dataInicio;
-		this.localTrabalho = localTrabalho;
-		this.tipoVaga = tipoVaga;
-		this.horaEntrada = horaEntrada;
-		this.horaSaida = horaSaida;
-		this.aumentoQuadro = aumentoQuadro;
-		this.numeroCandidatos = numeroCandidatos;
-		this.nomeSubstituido = nomeSubstituido;
-		this.descricaoFormacaoAcademica = descricaoFormacaoAcademica;
-		this.descricaoPerfilComportamental = descricaoPerfilComportamental;
-		this.descricaoPerfilTecnico = descricaoPerfilTecnico;
-		this.dataAbertura = dataAbertura;
-		this.dataAprovacao = dataAprovacao;
-		this.dataFechamento = dataFechamento;
-		this.projetoEntity = projetoEntity;
-		this.cargoEntity = cargoEntity;
-		this.senioridadeEntity = senioridadeEntity;
-		this.usuarioEntity = usuarioEntity;
-	}
-
+	//@ManyToOne(cascade = CascadeType.ALL)
+	//private AvaliadorEntity avaliadorEntity;
 	
 	
-	
-	public int getNumeroCandidatos() {
-		return numeroCandidatos;
+
+	public Integer getId() {
+		return id;
 	}
-
-
-
-	public void setNumeroCandidatos(int numeroCandidatos) {
-		this.numeroCandidatos = numeroCandidatos;
-	}
-
-
-
-	public String getNomeSubstituido() {
-		return nomeSubstituido;
-	}
-
-
-
-	public void setNomeSubstituido(String nomeSubstituido) {
-		this.nomeSubstituido = nomeSubstituido;
-	}
-
-
-
-	public String getDescricaoFormacaoAcademica() {
-		return descricaoFormacaoAcademica;
-	}
-
-
-
-	public void setDescricaoFormacaoAcademica(String descricaoFormacaoAcademica) {
-		this.descricaoFormacaoAcademica = descricaoFormacaoAcademica;
-	}
-
-
-
-	public String getDescricaoPerfilComportamental() {
-		return descricaoPerfilComportamental;
-	}
-
-
-
-	public void setDescricaoPerfilComportamental(String descricaoPerfilComportamental) {
-		this.descricaoPerfilComportamental = descricaoPerfilComportamental;
-	}
-
-
-
-	public String getDescricaoPerfilTecnico() {
-		return descricaoPerfilTecnico;
-	}
-
-
-
-	public void setDescricaoPerfilTecnico(String descricaoPerfilTecnico) {
-		this.descricaoPerfilTecnico = descricaoPerfilTecnico;
-	}
-
-
-
-	public Calendar getDataAbertura() {
-		return dataAbertura;
-	}
-
-
-
-	public void setDataAbertura(Calendar dataAbertura) {
-		this.dataAbertura = dataAbertura;
-	}
-
-
-
-	public Calendar getDataAprovacao() {
-		return dataAprovacao;
-	}
-
-
-
-	public void setDataAprovacao(Calendar dataAprovacao) {
-		this.dataAprovacao = dataAprovacao;
-	}
-
-
-
-	public Calendar getDataFechamento() {
-		return dataFechamento;
-	}
-
-
-
-	public void setDataFechamento(Calendar dataFechamento) {
-		this.dataFechamento = dataFechamento;
-	}
-
-
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-
-
-	public Integer getId() {
-		return this.id;
+	
+	
+	
+	public String getNomeVaga() {
+		return nomeVaga;
 	}
 
+	public void setNomeVaga(String nomeVaga) {
+		this.nomeVaga = nomeVaga;
+	}
 
 	public String getNomeSolicitante() {
 		return nomeSolicitante;
@@ -247,27 +117,27 @@ public class VagaEntity {
 		this.nomeSolicitante = nomeSolicitante;
 	}
 
-	public double getValorPretensao() {
+	public Double getValorPretensao() {
 		return valorPretensao;
 	}
 
-	public void setValorPretensao(double valorPretensao) {
+	public void setValorPretensao(Double valorPretensao) {
 		this.valorPretensao = valorPretensao;
 	}
 
-	public Calendar getDataInicio() {
+	public Date getDataInicio() {
 		return dataInicio;
 	}
 
-	public void setDataInicio(Calendar dataInicio) {
+	public void setDataInicio(Date dataInicio) {
 		this.dataInicio = dataInicio;
 	}
 
-	public char getLocalTrabalho() {
+	public String getLocalTrabalho() {
 		return localTrabalho;
 	}
 
-	public void setLocalTrabalho(char localTrabalho) {
+	public void setLocalTrabalho(String localTrabalho) {
 		this.localTrabalho = localTrabalho;
 	}
 
@@ -279,19 +149,19 @@ public class VagaEntity {
 		this.tipoVaga = tipoVaga;
 	}
 
-	public Calendar getHoraEntrada() {
+	public Date getHoraEntrada() {
 		return horaEntrada;
 	}
 
-	public void setHoraEntrada(Calendar horaEntrada) {
+	public void setHoraEntrada(Date horaEntrada) {
 		this.horaEntrada = horaEntrada;
 	}
 
-	public Calendar getHoraSaida() {
+	public Date getHoraSaida() {
 		return horaSaida;
 	}
 
-	public void setHoraSaida(Calendar horaSaida) {
+	public void setHoraSaida(Date horaSaida) {
 		this.horaSaida = horaSaida;
 	}
 
@@ -301,6 +171,70 @@ public class VagaEntity {
 
 	public void setAumentoQuadro(String aumentoQuadro) {
 		this.aumentoQuadro = aumentoQuadro;
+	}
+
+	public int getNumeroCandidatos() {
+		return numeroCandidatos;
+	}
+
+	public void setNumeroCandidatos(int numeroCandidatos) {
+		this.numeroCandidatos = numeroCandidatos;
+	}
+
+	public String getNomeSubstituido() {
+		return nomeSubstituido;
+	}
+
+	public void setNomeSubstituido(String nomeSubstituido) {
+		this.nomeSubstituido = nomeSubstituido;
+	}
+
+	public String getDescricaoFormacaoAcademica() {
+		return descricaoFormacaoAcademica;
+	}
+
+	public void setDescricaoFormacaoAcademica(String descricaoFormacaoAcademica) {
+		this.descricaoFormacaoAcademica = descricaoFormacaoAcademica;
+	}
+
+	public String getDescricaoPerfilComportamental() {
+		return descricaoPerfilComportamental;
+	}
+
+	public void setDescricaoPerfilComportamental(String descricaoPerfilComportamental) {
+		this.descricaoPerfilComportamental = descricaoPerfilComportamental;
+	}
+
+	public String getDescricaoPerfilTecnico() {
+		return descricaoPerfilTecnico;
+	}
+
+	public void setDescricaoPerfilTecnico(String descricaoPerfilTecnico) {
+		this.descricaoPerfilTecnico = descricaoPerfilTecnico;
+	}
+
+	public Date getDataAbertura() {
+		return dataAbertura;
+	}
+
+	public void setDataAbertura(Date dataAbertura) {
+		this.dataAbertura = dataAbertura;
+	}
+
+	public Date getDataAprovacao() {
+		return dataAprovacao;
+	}
+
+	public void setDataAprovacao(Date dataAprovacao) {
+		this.dataAprovacao = dataAprovacao;
+	}
+
+	public Date getDataFechamento() {
+		return dataFechamento;
+	}
+
+	public void setDataFechamento(Date dataFechamento) {
+		this.dataFechamento = dataFechamento;
 	}
 
 	public ProjetoEntity getProjetoEntity() {
@@ -334,4 +268,16 @@ public class VagaEntity {
 	public void setUsuarioEntity(UsuarioEntity usuarioEntity) {
 		this.usuarioEntity = usuarioEntity;
 	}
+
+	//public AvaliadorEntity getAvaliadorEntity() {
+		//return avaliadorEntity;
+	//}
+
+	//public void setAvaliadorEntity(AvaliadorEntity avaliadorEntity) {
+		//this.avaliadorEntity = avaliadorEntity;
+	//}
+
+	
+	
+
 }

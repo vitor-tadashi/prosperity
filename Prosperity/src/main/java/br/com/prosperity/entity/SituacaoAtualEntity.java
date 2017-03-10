@@ -9,7 +9,7 @@ public class SituacaoAtualEntity {
 	
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-	private int idSituacaoAtual;
+	private Integer idSituacaoAtual;
 	
 	@Column(name="nmSituacaoAtual")
 	private String descricao;
@@ -24,10 +24,10 @@ public class SituacaoAtualEntity {
 	public void setFormacao(List<FormacaoEntity> formacao) {
 		this.formacao = formacao;
 	}
-	public int getIdSituacaoAtual() {
+	public Integer getIdSituacaoAtual() {
 		return idSituacaoAtual;
 	}
-	public void setIdSituacaoAtual(int idSituacaoAtual) {
+	public void setIdSituacaoAtual(Integer idSituacaoAtual) {
 		this.idSituacaoAtual = idSituacaoAtual;
 	}
 	public String getDescricao() {
