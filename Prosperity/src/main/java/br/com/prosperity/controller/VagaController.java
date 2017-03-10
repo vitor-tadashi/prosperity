@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+
 import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.ProjetoBean;
 import br.com.prosperity.bean.SenioridadeBean;
@@ -16,18 +17,23 @@ import br.com.prosperity.business.CargoBusiness;
 import br.com.prosperity.business.ProjetoBusiness;
 import br.com.prosperity.business.SenioridadeBusiness;
 
+import br.com.prosperity.bean.VagaBean;
+import br.com.prosperity.business.VagaBusiness;
+import br.com.prosperity.converter.VagaConverter;
+import br.com.prosperity.dao.VagaDAO;
+
 @Controller
 @RequestMapping ("vaga")
 public class VagaController {
 	
 	@Autowired
-	SenioridadeBusiness preencherSenioridade;
+	private SenioridadeBusiness preencherSenioridade;
 	
 	@Autowired
-	CargoBusiness preencherCargo;
+	private CargoBusiness preencherCargo;
 	
 	@Autowired
-	ProjetoBusiness preencherProjeto;
+	private ProjetoBusiness preencherProjeto;
 	
 	@Autowired
 	private List<SenioridadeBean> senioridadeBean;
@@ -38,8 +44,16 @@ public class VagaController {
 	@Autowired
 	private List<ProjetoBean> projetoBean;
 	
+	@Autowired
+	private VagaBusiness vagaBusiness;
+	
 	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
-	public String cliente() {
+	public String cliente(Model model) {
+		List<VagaBean> vagas = vagaBusiness.obterTodos();
+		
+		/*vagas.add(b);*/
+		model.addAttribute("vagas", vagas);
+		
 		return "vaga/consultar-vaga";
 	}
 
@@ -57,5 +71,9 @@ public class VagaController {
 		model.addAttribute("senioridadeBean", senioridadeBean);
 		model.addAttribute("projetoBean", projetoBean);
 		return "vaga/solicitar-vaga";
+	}
+	@RequestMapping (value = "idAvaliador", method = RequestMethod.GET)
+	public String idAvaliador(){
+	return "idAvaliador";
 	}
 }

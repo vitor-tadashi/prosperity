@@ -3,63 +3,72 @@ package br.com.prosperity.entity;
 
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
 
 @Entity
-@Table(name= "tbPerfil")
+@Table(name = "tbPerfil")
 public class PerfilEntity {
-/* Mapeamento dos Atributos */
-	
+	/* Mapeamento dos Atributos */
+
 	/* Mapeamento do ID */
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-	@Column(name="idUsuario", unique = true, nullable = false)
-	private int idPerfil;
+
+//	@Column(name = "idPerfil", unique = true, nullable = false)
+//	private Integer idPerfil;
+
+	@Column(name="idPerfil", unique = true, nullable = false)
+	private Integer id;
+
 	/* fim Id */
 
 	@Column(name = "nmPerfil")
 	private String nome;
-	
-/* Mapeamento de Relacionamentos Tudo o que estiver ligado na tabela Vaga 1-N*/
-	
-	@ManyToOne (cascade = CascadeType.ALL)
-	private PerfilEntity perfilEntity;
-	
-	// relacionamento avaliadores
-	/* fim dos mapeamentos */
-	
 
 
-	public PerfilEntity getPerfilEntity() {
-		return perfilEntity;
+	/*
+	 * Mapeamento de Relacionamentos Tudo o que estiver ligado na tabela Vaga
+	 * 1-N
+	 */
+
+	@ManyToMany()
+	@JoinColumn(name="idFuncionalidade")
+	private List<FuncionalidadeEntity> funcionalidades;
+
+
+	public Integer getId() {
+		return id;
 	}
 
-	public void setPerfilEntity(PerfilEntity perfilEntity) {
-		this.perfilEntity = perfilEntity;
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public PerfilEntity(int idPerfil, String nome) {
-		this.idPerfil = idPerfil;
-		this.nome = nome;
-	}
-	
-	public PerfilEntity(){
-		
-	}
-
-	public int getId() {
-		return idPerfil;
-	}
-
-	public void setId(int id) {
-		this.idPerfil = id;
-	}
 
 	public String getNome() {
 		return nome;
 	}
 
+
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+
+	public List<FuncionalidadeEntity> getFuncionalidades() {
+		return funcionalidades;
+	}
+
+
+	public void setFuncionalidades(List<FuncionalidadeEntity> funcionalidades) {
+		this.funcionalidades = funcionalidades;
 	}
 }

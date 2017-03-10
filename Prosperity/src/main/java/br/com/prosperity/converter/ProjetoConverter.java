@@ -7,31 +7,32 @@ import br.com.prosperity.bean.ProjetoBean;
 import br.com.prosperity.entity.ProjetoEntity;
 
 @Component
-public class ProjetoConverter  implements Converter<ProjetoEntity, ProjetoBean>  {
+public class ProjetoConverter implements Converter<ProjetoEntity,ProjetoBean> {
 	
 	@Autowired
-	ClienteConverter cliente;
-	
+	private FuncionarioConverter funcionarioConverter;
 	@Autowired
-	FuncionarioConverter funcionario;
+	private ClienteConverter clienteConverter;
 	
 	@Override
 	public ProjetoEntity convertBeanToEntity(ProjetoBean bean) {
 		ProjetoEntity entity = new ProjetoEntity();
 		entity.setIdProjeto(bean.getId());
 		entity.setNmProjeto(bean.getNome());
-		//entity.setClienteProjeto(cliente.convertBeanToEntity(bean.getCliente()));
-		//entity.setFuncionario(funcionario.convertBeanToEntity(bean.getFuncionario()));
+		entity.setClienteProjeto(clienteConverter.convertBeanToEntity(bean.getCliente()));
+		entity.setFuncionario(funcionarioConverter.convertBeanToEntity(bean.getFuncionario()));
+		//entity.setPerfilEntity(perfilConverter.convertBeanToEntity(bean.getPerfil()));
 		return entity;
 	}
 
 	@Override
 	public ProjetoBean convertEntityToBean(ProjetoEntity entity) {
 		ProjetoBean bean = new ProjetoBean();
+		
 		bean.setId(entity.getIdProjeto());
 		bean.setNome(entity.getNmProjeto());
-		//bean.setCliente(cliente.convertEntityToBean(entity.getClienteProjeto()));
-		//bean.setFuncionario(funcionario.convertEntityToBean(entity.getFuncionario()));
+		bean.setCliente(clienteConverter.convertEntityToBean(entity.getClienteProjeto()));
+		bean.setFuncionario(funcionarioConverter.convertEntityToBean(entity.getFuncionario()));
 		return bean;
 	}
 }

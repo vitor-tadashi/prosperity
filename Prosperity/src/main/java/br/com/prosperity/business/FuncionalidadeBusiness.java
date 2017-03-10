@@ -18,7 +18,7 @@ public class FuncionalidadeBusiness {
 
 	@Autowired
 	private FuncionalidadeConverter funcionalidadeConverter;
-
+	
 	@Transactional
 	public List<FuncionalidadeBean> obterTodos() {
 		List<FuncionalidadeEntity> funcionalidadeEntity = funcionalidadeDAO.listar();

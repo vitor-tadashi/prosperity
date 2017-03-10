@@ -20,14 +20,12 @@ public class ContatoEntity {
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
 	@Column(name = "idContato", unique = true, nullable = false)
-	private int id;
+	private Integer id;
 	/* fim */
 
 	@Column(name = "telefone")
 	private String telefone;
 
-	private String celular;
-	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	@JoinColumn(name = "idCandidato")
 	private CandidatoEntity candidato;
@@ -40,11 +38,11 @@ public class ContatoEntity {
 		this.candidato = candidato;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -56,11 +54,5 @@ public class ContatoEntity {
 		this.telefone = telefone;
 	}
 
-	public String getCelular() {
-		return celular;
-	}
 
-	public void setCelular(String celular) {
-		this.celular = celular;
-	}
 }

@@ -1,7 +1,7 @@
 package br.com.prosperity.entity;
 
 import java.io.File;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -24,7 +25,7 @@ public class CandidatoEntity {
 	/* Mapeamento do ID */
 	@Id
 	@Column(name = "idCandidato", unique = true, nullable = false)
-	private int Id;
+	private Integer id;
 	/* fim Id */
 
 	@Column(name = "nmCandidato")
@@ -37,62 +38,58 @@ public class CandidatoEntity {
 	private String rg;
 
 	@Column(name = "dtNascimento")
-	@Temporal(TemporalType.DATE)
-	private Calendar dataNascimento;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataNascimento;
 
 	@Column(name = "vlPretensao")
-	private double valorPretensaoSalarial;
+	private Double valorPretensaoSalarial;
 
 	@Column(name = "dtAbertura")
-	@Temporal(TemporalType.DATE)
-	private Calendar dataAbertura;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataAbertura;
 
 	@Column(name = "dtFechamento")
-	@Temporal(TemporalType.DATE)
-	private Calendar dataFechamento;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataFechamento;
 
 	@Column(name = "nmEmail")
 	private String email;
 
 	@Column(name = "dtAlteracao")
-	@Temporal(TemporalType.DATE)
-	private Calendar dataAlteracao;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataAlteracao;
 
 	@Column(name = "cmCurriculo")
 	private File curriculo;
 
 	/* Mapeamento de Relacionamentos */
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	@JoinColumn(name = "idContato")
-	private ContatoEntity contato;
+	private List<ContatoEntity> contatos;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	@JoinColumn(name = "idEndereco")
 	private EnderecoEntity endereco;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-	@JoinColumn(name = "idCurso")
+	@JoinColumn(name = "idFormacao")
 	private FormacaoEntity formacao;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	@JoinColumn(name = "idCandidato")
-	private List<StatusCandidatoEntity> statusCandidato;
+	private List<StatusCandidatoEntity> statusCandidatos;
 
-
-	/* fim dos mapeamentos */
-
-	
-	public int getId() {
-		return Id;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setId(int id) {
-		Id = id;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -119,35 +116,35 @@ public class CandidatoEntity {
 		this.rg = rg;
 	}
 
-	public Calendar getDataNascimento() {
+	public Date getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Calendar dataNascimento) {
+	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public double getValorPretensaoSalarial() {
+	public Double getValorPretensaoSalarial() {
 		return valorPretensaoSalarial;
 	}
 
-	public void setValorPretensaoSalarial(double valorPretensaoSalarial) {
+	public void setValorPretensaoSalarial(Double valorPretensaoSalarial) {
 		this.valorPretensaoSalarial = valorPretensaoSalarial;
 	}
 
-	public Calendar getDataAbertura() {
+	public Date getDataAbertura() {
 		return dataAbertura;
 	}
 
-	public void setDataAbertura(Calendar dataAbertura) {
+	public void setDataAbertura(Date dataAbertura) {
 		this.dataAbertura = dataAbertura;
 	}
 
-	public Calendar getDataFechamento() {
+	public Date getDataFechamento() {
 		return dataFechamento;
 	}
 
-	public void setDataFechamento(Calendar dataFechamento) {
+	public void setDataFechamento(Date dataFechamento) {
 		this.dataFechamento = dataFechamento;
 	}
 
@@ -159,11 +156,11 @@ public class CandidatoEntity {
 		this.email = email;
 	}
 
-	public Calendar getDataAlteracao() {
+	public Date getDataAlteracao() {
 		return dataAlteracao;
 	}
 
-	public void setDataAlteracao(Calendar dataAlteracao) {
+	public void setDataAlteracao(Date dataAlteracao) {
 		this.dataAlteracao = dataAlteracao;
 	}
 
@@ -175,12 +172,12 @@ public class CandidatoEntity {
 		this.curriculo = curriculo;
 	}
 
-	public ContatoEntity getContato() {
-		return contato;
+	public List<ContatoEntity> getContatos() {
+		return contatos;
 	}
 
-	public void setContato(ContatoEntity contato) {
-		this.contato = contato;
+	public void setContatos(List<ContatoEntity> contatos) {
+		this.contatos = contatos;
 	}
 
 	public EnderecoEntity getEndereco() {
@@ -207,12 +204,12 @@ public class CandidatoEntity {
 		this.usuario = usuario;
 	}
 
-	public List<StatusCandidatoEntity> getStatusCandidato() {
-		return statusCandidato;
+	public List<StatusCandidatoEntity> getStatusCandidatos() {
+		return statusCandidatos;
 	}
 
-	public void setStatusCandidato(List<StatusCandidatoEntity> statusCandidato) {
-		this.statusCandidato = statusCandidato;
+	public void setStatusCandidatos(List<StatusCandidatoEntity> statusCandidatos) {
+		this.statusCandidatos = statusCandidatos;
 	}
 
 }

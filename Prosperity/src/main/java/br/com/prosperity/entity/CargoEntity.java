@@ -13,8 +13,9 @@ public class CargoEntity {
 	
 	@Column(name = "nmCargo")
 	private String nome;
+	
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 

@@ -7,7 +7,7 @@ public class FuncionarioBean {
 	public FuncionarioBean() {
 		
 	}
-	public FuncionarioBean(int id, String nome, CargoBean cargo,
+	public FuncionarioBean(Integer id, String nome, CargoBean cargo,
 			SenioridadeBean senioridade, List<ProjetoBean> projeto) {
 		this.id = id;
 		this.nome = nome;
@@ -15,7 +15,7 @@ public class FuncionarioBean {
 		this.senioridade = senioridade;
 		this.projeto = projeto;
 	}
-	private int id;
+	private Integer id;
 	private String nome;
 	private CargoBean cargo;
 	private SenioridadeBean senioridade;
@@ -27,10 +27,10 @@ public class FuncionarioBean {
 	public void setProjeto(List<ProjetoBean> projeto) {
 		this.projeto = projeto;
 	}
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setIdFuncionario(int id) {
+	public void setIdFuncionario(Integer id) {
 		this.id = id;
 	}
 	public String getNome() {
@@ -42,7 +42,7 @@ public class FuncionarioBean {
 	public CargoBean getCargo() {
 		return cargo;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public void setCargo(CargoBean cargo) {

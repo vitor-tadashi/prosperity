@@ -11,7 +11,7 @@ public class SenioridadeEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idSenioridade", unique = true, nullable = false)
 	private Integer id;
-	
+
 	@Column(name="nmSenioridade")
 	private String nome;
 	

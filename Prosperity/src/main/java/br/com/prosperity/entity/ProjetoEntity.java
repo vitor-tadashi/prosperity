@@ -22,7 +22,7 @@ public class ProjetoEntity {
 	@JoinColumn(name="idCliente")
 	private ClienteEntity cliente;
 		
-	public int getIdProjeto() {
+	public Integer getIdProjeto() {
 		return id;
 	}
 	public void setIdProjeto(Integer idProjeto) {

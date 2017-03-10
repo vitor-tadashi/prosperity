@@ -15,7 +15,7 @@ public class RelatorioEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idRelatorio", unique = true)
-	private int id;
+	private Integer id;
 	
 	@Column(name="nmRelatorio")
 	private String nome;
@@ -23,10 +23,10 @@ public class RelatorioEntity {
 	@Column(name="cmRelatorio")
 	private String caminho;
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getNome() {
