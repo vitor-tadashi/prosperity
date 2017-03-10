@@ -4,82 +4,46 @@ package br.com.prosperity.entity;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 
 @Entity
 @Table(name = "tbPerfil")
+@NamedQuery(name="Perfil.findAll", query="SELECT p FROM PerfilEntity p")
 public class PerfilEntity {
-	/* Mapeamento dos Atributos */
 
-	/* Mapeamento do ID */
 	@Id
-	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-
-	@Column(name = "idUsuario", unique = true, nullable = false)
-	private int idPerfil;
-
-	@Column(name="idPerfil", unique = true, nullable = false)
+	@GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
+	@Column(name="idPerfil", unique=true, nullable=false)
 	private Integer id;
 
-	/* fim Id */
-
-	@Column(name = "nmPerfil")
+	@Column(name="nmPerfil")
 	private String nome;
 
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinColumn(name="idFuncionalidade")
+	private FuncionalidadeEntity funcionalidade;
 
-	/*
-	 * Mapeamento de Relacionamentos Tudo o que estiver ligado na tabela Vaga
-	 * 1-N
-	 */
-
-	@ManyToOne(cascade = CascadeType.ALL)
-	private FuncionalidadeEntity funcionalidadeEntity;
-
-
-	
-/* Mapeamento de Relacionamentos Tudo o que estiver ligado na tabela Vaga 1-N*/
-	
-	/*@ManyToOne (cascade = CascadeType.ALL)
-	private PerfilEntity perfilEntity;*/
-	
-
-	// relacionamento avaliadores
-	/* fim dos mapeamentos */
-
-
-	public PerfilEntity(int idPerfil, String nome, FuncionalidadeEntity funcionalidadeEntity) {
-		this.idPerfil = idPerfil;
+	public PerfilEntity(Integer id, String nome, FuncionalidadeEntity funcionalidade) {
+		this.id = id;
 		this.nome = nome;
-		this.funcionalidadeEntity = funcionalidadeEntity;
+		this.funcionalidade = funcionalidade;
 	}
 
 	public PerfilEntity() {
 
 	}
 
-	public FuncionalidadeEntity getFuncionalidadeEntity() {
-		return funcionalidadeEntity;
-	}
-	/*public PerfilEntity getPerfilEntity() {
-		return perfilEntity;
-	}
-
-	public void setPerfilEntity(PerfilEntity perfilEntity) {
-		this.perfilEntity = perfilEntity;
-	}*/
-
 	public PerfilEntity(Integer id, String nome) {
 		this.id = id;
 		this.nome = nome;
 
-	}
-
-	public void setFuncionalidadeEntity(FuncionalidadeEntity funcionalidadeEntity) {
-		this.funcionalidadeEntity = funcionalidadeEntity;
 	}
 
 	public Integer getId() {
@@ -97,4 +61,14 @@ public class PerfilEntity {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	public FuncionalidadeEntity getFuncionalidade() {
+		return funcionalidade;
+	}
+
+	public void setFuncionalidade(FuncionalidadeEntity funcionalidade) {
+		this.funcionalidade = funcionalidade;
+	}
+
+	
 }

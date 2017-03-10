@@ -71,15 +71,9 @@
 										<label for="permissao">Perfil</label> <select
 											class="form-control">
 											<option value="">Selecionar</option>
-											<option value="1">Administrador</option>
-											<option value="2">RH</option>
-											<option value="3">Gestor Administrativo</option>
-											<option value="4">Gestor de Desenvolvimento</option>
-											<option value="5">Gestor de Teste</option>
-											<option value="6">Gestor de Projetos</option>
-											<option value="7">Arquiteto</option>
-											<option value="8">Diretor de Operação</option>
-											<option value="9">CEO</option>
+											<c:forEach var="perfil" items="${perfis}">
+												<option value="${perfil.id}">${perfil.nome}</option>
+											</c:forEach>
 										</select>
 									</div>
 								</div>

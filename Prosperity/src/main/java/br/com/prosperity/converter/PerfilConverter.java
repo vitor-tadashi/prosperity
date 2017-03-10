@@ -18,15 +18,15 @@ public class PerfilConverter implements Converter<PerfilEntity, PerfilBean> {
 	@Override
 	public PerfilEntity convertBeanToEntity(PerfilBean bean) {
 		PerfilEntity entity = new PerfilEntity();
-		FuncionalidadeEntity funcionalidadeEntity = new FuncionalidadeEntity();
+		FuncionalidadeEntity funcionalidade = new FuncionalidadeEntity();
 		
 		for(FuncionalidadeBean e : bean.getListaFuncionalidades()){
-			funcionalidadeEntity = funcionalidadeConverter.convertBeanToEntity(e);
+			funcionalidade = funcionalidadeConverter.convertBeanToEntity(e);
 		}
 		
 		entity.setId(bean.getId());
 		entity.setNome(bean.getNome());
-		entity.setFuncionalidadeEntity(funcionalidadeEntity);
+		entity.setFuncionalidade(funcionalidade);
 
 		return entity;
 	}

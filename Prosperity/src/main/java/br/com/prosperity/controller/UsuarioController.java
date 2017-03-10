@@ -35,7 +35,9 @@ public class UsuarioController {
 	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
 	public String consultaUsuario(Model model) {
 		List<FuncionarioBean> funcionarios = funcionarioBusiness.getFuncionarios();
+		List<PerfilBean> perfis = perfilBusiness.getPerfis();
 		model.addAttribute("funcionarios", funcionarios);
+		model.addAttribute("perfis", perfis);
 		
 		return "usuario/consultar-usuario";
 	}
