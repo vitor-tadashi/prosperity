@@ -1,5 +1,8 @@
 package br.com.prosperity.business;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,5 +27,10 @@ public class CandidatoBusiness {
 		CandidatoEntity candidatoEntity = candidatoDAO.obterPorId(id);
 		candidatoBean = candidatoConverter.convertEntityToBean(candidatoEntity);
 		return candidatoBean;
+	}
+
+	public void obterTodos() {
+		List<CandidatoEntity> entities = new ArrayList<>();
+		entities = candidatoDAO.listar();
 	}
 }
