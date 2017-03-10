@@ -10,7 +10,7 @@ public class FuncionalidadeEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idFuncionalidade", unique = true, nullable = false)
-	private int id;
+	private Integer id;
 	@Column(name = "nmFuncionalidade")
 	private String nome;
 	

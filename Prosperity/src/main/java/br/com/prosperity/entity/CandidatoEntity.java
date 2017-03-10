@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -72,16 +73,16 @@ public class CandidatoEntity {
 	private EnderecoEntity endereco;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-	@JoinColumn(name = "idCurso")
+	@JoinColumn(name = "idFormacao")
 	private FormacaoEntity formacao;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	@JoinColumn(name = "idCandidato")
-	private List<StatusCandidatoEntity> statusCandidato;
+	private List<StatusCandidatoEntity> statusCandidatos;
 
 	public Integer getId() {
 		return id;
@@ -203,16 +204,12 @@ public class CandidatoEntity {
 		this.usuario = usuario;
 	}
 
-	public List<StatusCandidatoEntity> getStatusCandidato() {
-		return statusCandidato;
+	public List<StatusCandidatoEntity> getStatusCandidatos() {
+		return statusCandidatos;
 	}
 
-	public void setStatusCandidato(List<StatusCandidatoEntity> statusCandidato) {
-		this.statusCandidato = statusCandidato;
+	public void setStatusCandidatos(List<StatusCandidatoEntity> statusCandidatos) {
+		this.statusCandidatos = statusCandidatos;
 	}
 
-
-	/* fim dos mapeamentos */
-
-	
 }
