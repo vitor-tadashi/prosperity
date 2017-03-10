@@ -1,17 +1,16 @@
 package br.com.prosperity.entity;
 
+import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-
 
 @Entity
 @Table(name = "tbPerfil")
@@ -26,15 +25,9 @@ public class PerfilEntity {
 	@Column(name="nmPerfil")
 	private String nome;
 
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="idFuncionalidade")
-	private FuncionalidadeEntity funcionalidade;
-
-	public PerfilEntity(Integer id, String nome, FuncionalidadeEntity funcionalidade) {
-		this.id = id;
-		this.nome = nome;
-		this.funcionalidade = funcionalidade;
-	}
+	@ManyToMany
+	@JoinTable(name="tbFuncionalidade", joinColumns={@JoinColumn(name="idFuncionalidade")}, inverseJoinColumns={@JoinColumn(name="idPerfil")})
+	private List<FuncionalidadeEntity> funcionalidade;
 
 	public PerfilEntity() {
 
@@ -62,13 +55,12 @@ public class PerfilEntity {
 		this.nome = nome;
 	}
 
-	public FuncionalidadeEntity getFuncionalidade() {
+	public List<FuncionalidadeEntity> getFuncionalidade() {
 		return funcionalidade;
 	}
 
-	public void setFuncionalidade(FuncionalidadeEntity funcionalidade) {
+	public void setFuncionalidade(List<FuncionalidadeEntity> funcionalidade) {
 		this.funcionalidade = funcionalidade;
 	}
-
 	
 }

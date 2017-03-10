@@ -35,8 +35,7 @@ public class PerfilBusiness {
 	
 	@Transactional
 	public List<PerfilBean> getPerfis() {
-		List<PerfilEntity> listaEntity = perfilDAO.listar();
-		List<PerfilBean> listaBean = perfilConverter.convertEntityToBean(listaEntity);
-		return listaBean;
+		List<PerfilBean> perfis = perfilConverter.convertEntityToBean(perfilDAO.listar());
+		return perfis;
 	}
 }

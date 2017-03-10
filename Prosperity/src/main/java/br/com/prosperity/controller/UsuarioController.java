@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -38,6 +40,7 @@ public class UsuarioController {
 		List<PerfilBean> perfis = perfilBusiness.getPerfis();
 		model.addAttribute("funcionarios", funcionarios);
 		model.addAttribute("perfis", perfis);
+		model.addAttribute("usuario", new UsuarioBean());
 		
 		return "usuario/consultar-usuario";
 	}
@@ -65,8 +68,8 @@ public class UsuarioController {
 	}
 
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
-	public String inserirUsuario(UsuarioBean usuarioBean) {
-		usuarioBusiness.inserir(usuarioBean);
+	public String inserirUsuario(@ModelAttribute("usuario") UsuarioBean usuario) {
+		usuarioBusiness.inserir(usuario);
 		return "usuario/consultar-usuario";
 	}
 }
