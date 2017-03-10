@@ -18,7 +18,6 @@ public class PerfilEntity {
 	/* Mapeamento do ID */
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-
 	@Column(name = "idUsuario", unique = true, nullable = false)
 	private int idPerfil;
 

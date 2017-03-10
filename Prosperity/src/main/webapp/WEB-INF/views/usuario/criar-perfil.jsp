@@ -339,7 +339,7 @@
 								<div class="row"></div>
 								<div class="panel-body relative">
 									<select multiple="multiple" id="selectedBox1"
-										class="select-box pull-left form-control">
+										class="select-box pull-left form-control" name="listaFuncionalidades[].nome">
 										<c:forEach var="funcionalidade" items="${funcionalidades}"
 											varStatus="i">
 											<option value="${funcionalidade.nome }">${funcionalidade.nome }</option>
@@ -359,9 +359,8 @@
 									</div>
 
 									<select multiple="multiple" id="selectedBox2"
-										class="select-box pull-right form-control" name="listaFuncionalidades">
-										<option>Excluir usuário</option>
-										<option>Consultar usuário</option>
+										class="select-box pull-right form-control" name="listaFuncionalidades[].nome">
+
 									</select> <input type="text" class="form-control" data-required="true">
 								</div>
 							</div>

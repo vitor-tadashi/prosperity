@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.PerfilBean;
@@ -23,7 +24,7 @@ public class UsuarioController {
 
 	@Autowired
 	private PerfilBusiness perfilBusiness;
-	
+
 	@Autowired
 	private UsuarioBusiness usuarioBusiness;
 
@@ -42,12 +43,13 @@ public class UsuarioController {
 
 	@RequestMapping(value = "/salvar-perfil", method = RequestMethod.GET)
 	public String salvarPerfil(PerfilBean perfilBean) {
-		
-		 if (perfilBean.getListaFuncionalidades().isEmpty()) {
-		 System.out.println("erro"); } else {
-		 System.out.println(perfilBean.getListaFuncionalidades().get(0));
-		 System.out.println(perfilBean.getListaFuncionalidades().get(1)); }
-		 
+
+		if (perfilBean.getListaFuncionalidades().isEmpty()) {
+			System.out.println("erro");
+		} else {
+			System.out.println(perfilBean.getListaFuncionalidades().get(1).getId());
+		}
+
 		perfilBusiness.inserir(perfilBean);
 		System.out.println(perfilBean.getNome());
 
