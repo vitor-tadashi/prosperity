@@ -11,6 +11,7 @@ public class UsuarioBean {
 	private String senha;
 	private Boolean autenticado;
 	private Boolean primeiroAcesso;
+	private String email;
 	
 	public UsuarioBean() {
 		autenticado = false;
@@ -59,6 +60,14 @@ public class UsuarioBean {
 
 	public void setPrimeiroAcesso(Boolean primeiroAcesso) {
 		this.primeiroAcesso = primeiroAcesso;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	

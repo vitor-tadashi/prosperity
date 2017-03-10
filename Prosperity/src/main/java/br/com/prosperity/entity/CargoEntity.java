@@ -4,14 +4,13 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "tbCargo")
-
-
 public class CargoEntity {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
 	@Column(name="idCargo", unique = true, nullable = false)
 	private Integer id;
+	
 	@Column(name = "nmCargo")
 	private String nome;
 	

@@ -1,8 +1,5 @@
 package br.com.prosperity.converter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +20,9 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 	
 	@Autowired
 	private VagaConverter vagaConverter;
+	
+	@Autowired
+	private UsuarioConverter usuarioConverter;
 	
 	@Override
 	public VagaEntity convertBeanToEntity(VagaBean bean) {
@@ -48,6 +48,7 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 		entity.setSenioridadeEntity(senioridadeConverter.convertBeanToEntity(bean.getSenioridadeBean()));
 		entity.setTipoVaga(bean.getIdTipoVaga());
 		entity.setValorPretensao(bean.getValorPretensao());
+		entity.setUsuarioEntity(usuarioConverter.convertBeanToEntity(bean.getUsuarioBean()));
 		return entity;
 	}
 
@@ -72,8 +73,11 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 		bean.setNomeSubstituido(entity.getNomeSubstituido());
 		bean.setNumeroCandidatos(entity.getNumeroCandidatos());
 		bean.setProjetoBean(projetoConverter.convertEntityToBean(entity.getProjetoEntity()));
-		
-		
+		bean.setSenioridadeBean(senioridadeConverter.convertEntityToBean(entity.getSenioridadeEntity()));
+		bean.setIdTipoVaga(entity.getTipoVaga());
+		bean.setValorPretensao(entity.getValorPretensao());
+		bean.setUsuarioBean(usuarioConverter.convertEntityToBean(entity.getUsuarioEntity()));
+				
 		return bean;
 	}
 	

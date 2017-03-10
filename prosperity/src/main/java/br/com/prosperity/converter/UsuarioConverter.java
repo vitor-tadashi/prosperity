@@ -23,7 +23,8 @@ public class UsuarioConverter implements Converter<UsuarioEntity,UsuarioBean>{
 		entity.setNome(bean.getNome());
 		entity.setSenha(bean.getSenha());
 		entity.setPrimeiroAcesso(bean.getPrimeiroAcesso());
-
+		entity.setEmail(bean.getEmail());
+		
 		return entity;
 	}
 
@@ -35,6 +36,7 @@ public class UsuarioConverter implements Converter<UsuarioEntity,UsuarioBean>{
 		bean.setNome(entity.getNome());
 		bean.setSenha(entity.getSenha());
 		bean.setPrimeiroAcesso(entity.getPrimeiroAcesso());
+		bean.setEmail(entity.getEmail());
 
 		return bean;
 	}

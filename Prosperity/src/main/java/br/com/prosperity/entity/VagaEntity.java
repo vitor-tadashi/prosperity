@@ -1,7 +1,6 @@
 package br.com.prosperity.entity;
 
 import java.util.Date;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,19 +8,24 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tbVaga")
+@Table(name= "tbVaga")	
+@NamedQuery (name = "obterAprovacao", query = "SELECT u FROM UsuarioEntity u WHERE u.nome = ?1")
 public class VagaEntity {
 
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
 	@Column(name = "idVaga", unique = true, nullable = false)
 	private Integer id;
-
+	
+	@Column(name = "nmVaga")
+	private String nomeVaga;
+	
 	@Column(name = "nmSolicitante")
 	private String nomeSolicitante;
 
@@ -83,8 +87,8 @@ public class VagaEntity {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private UsuarioEntity usuarioEntity;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	private AvaliadorEntity avaliadorEntity;
+	//@ManyToOne(cascade = CascadeType.ALL)
+	//private AvaliadorEntity avaliadorEntity;
 	
 	
 
@@ -94,6 +98,16 @@ public class VagaEntity {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	
+	
+	public String getNomeVaga() {
+		return nomeVaga;
+	}
+
+	public void setNomeVaga(String nomeVaga) {
+		this.nomeVaga = nomeVaga;
 	}
 
 	public String getNomeSolicitante() {
@@ -256,13 +270,13 @@ public class VagaEntity {
 		this.usuarioEntity = usuarioEntity;
 	}
 
-	public AvaliadorEntity getAvaliadorEntity() {
-		return avaliadorEntity;
-	}
+	//public AvaliadorEntity getAvaliadorEntity() {
+		//return avaliadorEntity;
+	//}
 
-	public void setAvaliadorEntity(AvaliadorEntity avaliadorEntity) {
-		this.avaliadorEntity = avaliadorEntity;
-	}
+	//public void setAvaliadorEntity(AvaliadorEntity avaliadorEntity) {
+		//this.avaliadorEntity = avaliadorEntity;
+	//}
 
 	
 	

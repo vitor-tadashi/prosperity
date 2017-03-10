@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -41,12 +42,67 @@
 				<div class="modal-body">
 					<div class="padding-md">
 						<div class="row">
+						<form:form action="cadastrar" commandName="usuario">
+							<table>
+								<tr>
+									<td>
+										<form:label path="nome">
+											<spring:message text="Nome"/>
+										</form:label>
+									</td>
+									<td>
+										<form:input path="nome" />
+									</td> 
+								</tr>
+								<tr>
+									<td>
+										<form:label path="funcionario">
+											<spring:message text="Funcionario"/>
+										</form:label>
+									</td>
+									<td>
+										<form:select path="funcionario">
+										    <form:option value="-1">Selecione...</form:option>
+										    <form:options items="${funcionarios}" itemLabel="nome" itemValue="id" />
+										</form:select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<form:label path="email">
+											<spring:message text="E-mail"/>
+										</form:label>
+									</td>
+									<td>
+										<form:input path="email" />
+									</td> 
+								</tr>
+								<tr>
+									<td>
+										<form:label path="perfil">
+											<spring:message text="Perfil"/>
+										</form:label>
+									</td>
+									<td>
+										<form:select path="perfil">
+										    <form:option value="-1">Selecione...</form:option>
+										    <form:options items="${perfis}" itemLabel="nome" itemValue="id" />
+										</form:select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<input type="submit" value="<spring:message text="Submit"/>" />
+									</td>
+								</tr>
+							</table>	
+							</form:form>
 							<form action="cadastrar" method="POST">
 								<div class="row">
 									<div class="form-group col-md-6">
 										<label for="funcionario">Funcionário</label> <select
 											class="form-control" name="funcionario">
-											<option value="">Selecionar funcionário</option>
+											<option value="">Selecione...</option>
 											<c:forEach var="funcionario" items="${funcionarios}">
 												<option value="${funcionario.id}">${funcionario.nome}</option>
 											</c:forEach>
@@ -64,26 +120,20 @@
 										<label for="email">E-mail corporativo</label>
 										<div class="input-group">
 											<span class="input-group-addon">@</span> <input type="email"
-												class="form-control" id="email" data-required="true" >
+												class="form-control" id="email" data-required="true" name="email">
 										</div>
 									</div>
 									<div class="form-group open col-md-6">
 										<label for="permissao">Perfil</label> <select
-											class="form-control">
-											<option value="">Selecionar</option>
-											<option value="1">Administrador</option>
-											<option value="2">RH</option>
-											<option value="3">Gestor Administrativo</option>
-											<option value="4">Gestor de Desenvolvimento</option>
-											<option value="5">Gestor de Teste</option>
-											<option value="6">Gestor de Projetos</option>
-											<option value="7">Arquiteto</option>
-											<option value="8">Diretor de Operação</option>
-											<option value="9">CEO</option>
+											class="form-control" name="perfil">
+											<option value="">Selecione...</option>
+											<c:forEach var="perfil" items="${perfis}">
+												<option value="${perfil.id}">${perfil.nome}</option>
+											</c:forEach>
 										</select>
 									</div>
 								</div>
-								<input type="submit" class="btn btn-danger" />
+								<input type="submit" class="btn btn-danger" value=""/>
 							</form>
 						</div>
 						<!--close row-->
