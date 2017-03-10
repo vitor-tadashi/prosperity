@@ -27,16 +27,19 @@ public class UsuarioEntity {
 	@Column(name = "idUsuario", unique = true, nullable = false)
 	private Integer id;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "idPerfil")
 	private PerfilEntity perfilEntity;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "idFuncionario")
 	private FuncionarioEntity funcionarioEntity;
 
 	@Column(name = "nmUsuario")
 	private String nome;
+	
+	@Column(name = "email")
+	private String email;
 
 	@Column(name = "senha")
 	private String senha;
@@ -90,6 +93,14 @@ public class UsuarioEntity {
 
 	public void setPrimeiroAcesso(Boolean primeiroAcesso) {
 		this.primeiroAcesso = primeiroAcesso;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	
