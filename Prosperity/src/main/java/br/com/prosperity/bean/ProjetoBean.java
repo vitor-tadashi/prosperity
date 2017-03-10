@@ -3,7 +3,7 @@ package br.com.prosperity.bean;
 public class ProjetoBean {
 	private Integer id;
 	private String nome;
-	private String cliente;
+	private ClienteBean cliente;
 	private FuncionarioBean funcionario;
 	
 
@@ -19,10 +19,10 @@ public class ProjetoBean {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getCliente() {
+	public ClienteBean getCliente() {
 		return cliente;
 	}
-	public void setCliente(String cliente) {
+	public void setCliente(ClienteBean cliente) {
 		this.cliente = cliente;
 	}
 	public FuncionarioBean getFuncionario() {

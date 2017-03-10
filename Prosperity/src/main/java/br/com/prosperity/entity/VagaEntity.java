@@ -16,14 +16,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tbVaga")
 public class VagaEntity {
-	/* Mapeamento dos Atributos */
 
-	/* Mapeamento do ID */
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
 	@Column(name = "idVaga", unique = true, nullable = false)
 	private Integer id;
-	/* fim Id */
 
 	@Column(name = "nmSolicitante")
 	private String nomeSolicitante;
@@ -35,10 +32,10 @@ public class VagaEntity {
 	private Date dataInicio;
 
 	@Column(name = "flLocalTrabalho")
-	private char localTrabalho;
+	private String localTrabalho;
 
 	@Column(name = "idTpVaga")
-	private char tipoVaga;
+	private String tipoVaga;
 
 	@Column(name = "hrEntrada")
 	private Date horaEntrada;
@@ -49,10 +46,29 @@ public class VagaEntity {
 	@Column(name = "flAumentoQuadro")
 	private String aumentoQuadro;
 
-	/*
-	 * Mapeamento de Relacionamentos Tudo o que estiver ligado na tabela Vaga
-	 * 1-N
-	 */
+	@Column(name = "numCandidatos")
+	private int numeroCandidatos; //
+	
+	@Column(name = "nmSubstituido")
+	private String nomeSubstituido; // 
+	
+	@Column(name = "dsFormacaoAcademica")
+	private String descricaoFormacaoAcademica; //
+	
+	@Column(name = "dsPerfilComportamental")
+	private String descricaoPerfilComportamental; //
+	
+	@Column(name = "dsPerfilTecnico")
+	private String descricaoPerfilTecnico; //
+	
+	@Column(name = "dtAbertura")
+	private Date dataAbertura; //
+	
+	@Column(name = "dtAprovacao")
+	private Date dataAprovacao; //
+	
+	@Column(name = "dtFechamento")
+	private Date dataFechamento; //
 
 	@OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER, orphanRemoval = true)
 	@PrimaryKeyJoinColumn
@@ -69,6 +85,8 @@ public class VagaEntity {
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	private AvaliadorEntity avaliadorEntity;
+	
+	
 
 	public Integer getId() {
 		return id;
@@ -102,19 +120,19 @@ public class VagaEntity {
 		this.dataInicio = dataInicio;
 	}
 
-	public char getLocalTrabalho() {
+	public String getLocalTrabalho() {
 		return localTrabalho;
 	}
 
-	public void setLocalTrabalho(char localTrabalho) {
+	public void setLocalTrabalho(String localTrabalho) {
 		this.localTrabalho = localTrabalho;
 	}
 
-	public char getTipoVaga() {
+	public String getTipoVaga() {
 		return tipoVaga;
 	}
 
-	public void setTipoVaga(char tipoVaga) {
+	public void setTipoVaga(String tipoVaga) {
 		this.tipoVaga = tipoVaga;
 	}
 
@@ -140,6 +158,70 @@ public class VagaEntity {
 
 	public void setAumentoQuadro(String aumentoQuadro) {
 		this.aumentoQuadro = aumentoQuadro;
+	}
+
+	public int getNumeroCandidatos() {
+		return numeroCandidatos;
+	}
+
+	public void setNumeroCandidatos(int numeroCandidatos) {
+		this.numeroCandidatos = numeroCandidatos;
+	}
+
+	public String getNomeSubstituido() {
+		return nomeSubstituido;
+	}
+
+	public void setNomeSubstituido(String nomeSubstituido) {
+		this.nomeSubstituido = nomeSubstituido;
+	}
+
+	public String getDescricaoFormacaoAcademica() {
+		return descricaoFormacaoAcademica;
+	}
+
+	public void setDescricaoFormacaoAcademica(String descricaoFormacaoAcademica) {
+		this.descricaoFormacaoAcademica = descricaoFormacaoAcademica;
+	}
+
+	public String getDescricaoPerfilComportamental() {
+		return descricaoPerfilComportamental;
+	}
+
+	public void setDescricaoPerfilComportamental(String descricaoPerfilComportamental) {
+		this.descricaoPerfilComportamental = descricaoPerfilComportamental;
+	}
+
+	public String getDescricaoPerfilTecnico() {
+		return descricaoPerfilTecnico;
+	}
+
+	public void setDescricaoPerfilTecnico(String descricaoPerfilTecnico) {
+		this.descricaoPerfilTecnico = descricaoPerfilTecnico;
+	}
+
+	public Date getDataAbertura() {
+		return dataAbertura;
+	}
+
+	public void setDataAbertura(Date dataAbertura) {
+		this.dataAbertura = dataAbertura;
+	}
+
+	public Date getDataAprovacao() {
+		return dataAprovacao;
+	}
+
+	public void setDataAprovacao(Date dataAprovacao) {
+		this.dataAprovacao = dataAprovacao;
+	}
+
+	public Date getDataFechamento() {
+		return dataFechamento;
+	}
+
+	public void setDataFechamento(Date dataFechamento) {
+		this.dataFechamento = dataFechamento;
 	}
 
 	public ProjetoEntity getProjetoEntity() {
@@ -181,5 +263,8 @@ public class VagaEntity {
 	public void setAvaliadorEntity(AvaliadorEntity avaliadorEntity) {
 		this.avaliadorEntity = avaliadorEntity;
 	}
+
+	
+	
 
 }
