@@ -1,6 +1,5 @@
 package br.com.prosperity.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,30 +12,32 @@ import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.VagaBusiness;
 
 @Controller
-@RequestMapping ("vaga")
+@RequestMapping("vaga")
 public class VagaController {
+
 	@Autowired
-private VagaBusiness vagaBusiness;
+	private VagaBusiness vagaBusiness;
+
+	@Autowired
+	private List<VagaBean> vagaBean;
 
 	@RequestMapping(value = "consultar", method = RequestMethod.GET)
-	public String cliente() {
+	public String consultar() {
+		// chamar a business acionando o método de consultar vagas para
+		// aprovação
+
 		return "vaga/consultar-vaga";
 	}
 
 	@RequestMapping(value = "aprovar", method = RequestMethod.GET)
 	public String aprovacaoVaga(Model model) {
-	/*List<VagaBean> vaga = vagaBusiness.obterTodos();
-				List<VagaBean> vagas = new ArrayList<>();
-				VagaBean v = new VagaBean();
-				v.setNomeSolicitante("Daniel");
-				vagas.add(v);*/
-				model.addAttribute("nomevaga", "Desenvolvedor");
-				
-		return "vaga/aprovacao-vaga";		
+		vagaBean = vagaBusiness.obterTodos();
+		model.addAttribute("vagaBean", vagaBean);
+		return "vaga/aprovacao-vaga";
 	}
 
-	@RequestMapping (value= "solicitar", method = RequestMethod.GET)
-	public String solicitarVaga(){
+	@RequestMapping(value = "solicitar", method = RequestMethod.GET)
+	public String solicitarVaga() {
 		return "vaga/solicitar-vaga";
 	}
 }

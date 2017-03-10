@@ -2,8 +2,12 @@ package br.com.prosperity.bean;
 
 import java.util.Calendar;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class VagaBean {
-	private int id;
+	
+	private Integer id;
 	private String nomeSolicitante;
 	private Double valorPretensao;
 	private Calendar dataInicio;
@@ -16,32 +20,12 @@ public class VagaBean {
 	private CargoBean cargoBean;
 	private SenioridadeBean senioridadeBean;
 
-	public VagaBean() {
 
-	}
-
-	public VagaBean(int id, String nomeSolicitante, Double valorPretensao, Calendar dataInicio, String localTrabalho,
-			String idTipoVaga, String horarioEntrada, String horarioSaida, String aumentaQuadro,
-			ProjetoBean projetoBean, CargoBean cargoBean, SenioridadeBean senioridadeBean) {
-		this.id = id;
-		this.nomeSolicitante = nomeSolicitante;
-		this.valorPretensao = valorPretensao;
-		this.dataInicio = dataInicio;
-		this.localTrabalho = localTrabalho;
-		this.idTipoVaga = idTipoVaga;
-		this.horarioEntrada = horarioEntrada;
-		this.horarioSaida = horarioSaida;
-		this.aumentaQuadro = aumentaQuadro;
-		this.projetoBean = projetoBean;
-		this.cargoBean = cargoBean;
-		this.senioridadeBean = senioridadeBean;
-	}
-
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
