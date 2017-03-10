@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class VagaBean {
 	private Integer id;
+	private String nomeVaga;
 	private String nomeSolicitante;
 	private Double valorPretensao;
 	private Date dataInicio;
@@ -23,6 +24,8 @@ public class VagaBean {
 	private Date dataAprovacao; //
 	private Date dataFechamento; //
 	private int numeroCandidatos; //
+	private UsuarioBean usuarioBean;
+	
 
 	public Integer getId() {
 		return id;
@@ -30,6 +33,16 @@ public class VagaBean {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	
+	
+	public String getNomeVaga() {
+		return nomeVaga;
+	}
+
+	public void setNomeVaga(String nomeVaga) {
+		this.nomeVaga = nomeVaga;
 	}
 
 	public String getNomeSolicitante() {
@@ -184,4 +197,13 @@ public class VagaBean {
 		this.numeroCandidatos = numeroCandidatos;
 	}
 
+	public UsuarioBean getUsuarioBean() {
+		return usuarioBean;
+	}
+
+	public void setUsuarioBean(UsuarioBean usuarioBean) {
+		this.usuarioBean = usuarioBean;
+	}
+
+	
 }
