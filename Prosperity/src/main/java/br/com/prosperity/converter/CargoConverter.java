@@ -12,6 +12,7 @@ public class CargoConverter implements Converter<CargoEntity, CargoBean> {
 	public CargoEntity convertBeanToEntity(CargoBean bean) {
 		CargoEntity entity = new CargoEntity();
 		entity.setId(bean.getId());
+		entity.setNome(bean.getNome());
 		return entity;
 	}
 
@@ -19,6 +20,7 @@ public class CargoConverter implements Converter<CargoEntity, CargoBean> {
 	public CargoBean convertEntityToBean(CargoEntity entity) {
 		CargoBean bean = new CargoBean();
 		bean.setId(entity.getId());
+		bean.setNome(entity.getNome());
 		return bean;
 
 	}

@@ -5,18 +5,16 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "tbFuncionario")
-
-
 public class FuncionarioEntity {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="idFuncionario", unique = true, nullable = false)
+	private int id;
 	
 	public int getId() {
 		return id;
 	}
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
-	@Column(name="idFuncionario", unique = true, nullable = false)
-	private int id;
 	
 	public void setId(int id) {
 		this.id = id;
