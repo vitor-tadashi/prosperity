@@ -5,24 +5,14 @@ import java.util.List;
 
 public class SenioridadeBean {
 
-	private int id;
+	private Integer id;
 	private String nome;
 
-	public SenioridadeBean(int id, String nome) {
-
-		this.id = id;
-		this.nome = nome;
-	}
-
-	public SenioridadeBean() {
-
-	}
-
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

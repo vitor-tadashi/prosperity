@@ -9,7 +9,7 @@ public class SenioridadeEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idSenioridade", unique = true, nullable = false)
-	private int id;
+	private Integer id;
 	@Column(name="nmSenioridade")
 	private String descricao;
 	
@@ -25,7 +25,7 @@ public class SenioridadeEntity {
 		this.senioridade = senioridade;
 	}
 
-	public SenioridadeEntity(int id, String descricao) {
+	public SenioridadeEntity(Integer id, String descricao) {
 
 		this.id = id;
 		this.descricao = descricao;
@@ -35,11 +35,11 @@ public class SenioridadeEntity {
 
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

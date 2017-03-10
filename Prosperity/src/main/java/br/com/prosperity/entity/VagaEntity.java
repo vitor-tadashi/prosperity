@@ -1,99 +1,80 @@
 package br.com.prosperity.entity;
 
-import java.io.File;
-import java.util.Calendar;
-import java.util.List;
+import java.util.Date;
 
-import javax.persistence.*;
-
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
 @Entity
-@Table(name= "tbVaga")	
+@Table(name = "tbVaga")
 public class VagaEntity {
 	/* Mapeamento dos Atributos */
-	
+
 	/* Mapeamento do ID */
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-	@Column(name="idVaga", unique = true, nullable = false)
-	private int id;
+	@Column(name = "idVaga", unique = true, nullable = false)
+	private Integer id;
 	/* fim Id */
-	
+
 	@Column(name = "nmSolicitante")
 	private String nomeSolicitante;
-	
+
 	@Column(name = "vlPretensao")
-	private double valorPretensao;
-	
+	private Double valorPretensao;
+
 	@Column(name = "dtInicio")
-	private Calendar dataInicio;
-	
+	private Date dataInicio;
+
 	@Column(name = "flLocalTrabalho")
 	private char localTrabalho;
-	
+
 	@Column(name = "idTpVaga")
 	private char tipoVaga;
-	
+
 	@Column(name = "hrEntrada")
-	private Calendar horaEntrada;
-	
+	private Date horaEntrada;
+
 	@Column(name = "hrSaida")
-	private Calendar horaSaida;
-		
+	private Date horaSaida;
+
 	@Column(name = "flAumentoQuadro")
 	private String aumentoQuadro;
-	
-	/* Mapeamento de Relacionamentos Tudo o que estiver ligado na tabela Vaga 1-N*/
-	
+
+	/*
+	 * Mapeamento de Relacionamentos Tudo o que estiver ligado na tabela Vaga
+	 * 1-N
+	 */
+
 	@OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER, orphanRemoval = true)
 	@PrimaryKeyJoinColumn
 	private ProjetoEntity projetoEntity;
-	
-	@ManyToOne (cascade = CascadeType.ALL)
+
+	@ManyToOne(cascade = CascadeType.ALL)
 	private CargoEntity cargoEntity;
-	
-	@ManyToOne (cascade = CascadeType.ALL)	
+
+	@ManyToOne(cascade = CascadeType.ALL)
 	private SenioridadeEntity senioridadeEntity;
-	
-	@ManyToOne (cascade = CascadeType.ALL)
+
+	@ManyToOne(cascade = CascadeType.ALL)
 	private UsuarioEntity usuarioEntity;
-	
-	@ManyToOne (cascade = CascadeType.ALL)
+
+	@ManyToOne(cascade = CascadeType.ALL)
 	private AvaliadorEntity avaliadorEntity;
-	
-	// relacionamento avaliadores
-			/* fim dos mapeamentos */
-	public VagaEntity() {
 
-	}
-     
-	public VagaEntity(int id, String nomeSolicitante, double valorPretensao, Calendar dataInicio, char localTrabalho,
-			char tipoVaga, Calendar horaEntrada, Calendar horaSaida, String aumentoQuadro, ProjetoEntity projetoEntity,
-			CargoEntity cargoEntity, SenioridadeEntity senioridadeEntity, UsuarioEntity usuarioEntity,
-			AvaliadorEntity avaliadorEntity) {
-		super();
-		this.id = id;
-		this.nomeSolicitante = nomeSolicitante;
-		this.valorPretensao = valorPretensao;
-		this.dataInicio = dataInicio;
-		this.localTrabalho = localTrabalho;
-		this.tipoVaga = tipoVaga;
-		this.horaEntrada = horaEntrada;
-		this.horaSaida = horaSaida;
-		this.aumentoQuadro = aumentoQuadro;
-		this.projetoEntity = projetoEntity;
-		this.cargoEntity = cargoEntity;
-		this.senioridadeEntity = senioridadeEntity;
-		this.usuarioEntity = usuarioEntity;
-		this.avaliadorEntity = avaliadorEntity;
-	}
-
-
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -105,19 +86,19 @@ public class VagaEntity {
 		this.nomeSolicitante = nomeSolicitante;
 	}
 
-	public double getValorPretensao() {
+	public Double getValorPretensao() {
 		return valorPretensao;
 	}
 
-	public void setValorPretensao(double valorPretensao) {
+	public void setValorPretensao(Double valorPretensao) {
 		this.valorPretensao = valorPretensao;
 	}
 
-	public Calendar getDataInicio() {
+	public Date getDataInicio() {
 		return dataInicio;
 	}
 
-	public void setDataInicio(Calendar dataInicio) {
+	public void setDataInicio(Date dataInicio) {
 		this.dataInicio = dataInicio;
 	}
 
@@ -137,19 +118,19 @@ public class VagaEntity {
 		this.tipoVaga = tipoVaga;
 	}
 
-	public Calendar getHoraEntrada() {
+	public Date getHoraEntrada() {
 		return horaEntrada;
 	}
 
-	public void setHoraEntrada(Calendar horaEntrada) {
+	public void setHoraEntrada(Date horaEntrada) {
 		this.horaEntrada = horaEntrada;
 	}
 
-	public Calendar getHoraSaida() {
+	public Date getHoraSaida() {
 		return horaSaida;
 	}
 
-	public void setHoraSaida(Calendar horaSaida) {
+	public void setHoraSaida(Date horaSaida) {
 		this.horaSaida = horaSaida;
 	}
 
@@ -200,6 +181,5 @@ public class VagaEntity {
 	public void setAvaliadorEntity(AvaliadorEntity avaliadorEntity) {
 		this.avaliadorEntity = avaliadorEntity;
 	}
-
 
 }

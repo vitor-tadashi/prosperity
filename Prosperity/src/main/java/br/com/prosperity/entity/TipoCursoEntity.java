@@ -11,7 +11,7 @@ public class TipoCursoEntity {
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
 	@Column(name = "idTipoCurso", unique = true, nullable = false)
-	private int id;
+	private Integer id;
 
 	@Column(name = "nmTipoCurso")
 	private String descricao;
@@ -30,7 +30,7 @@ public class TipoCursoEntity {
 		this.formacao = formacao;
 	}
 
-	public TipoCursoEntity(int id, String descricao) {
+	public TipoCursoEntity(Integer id, String descricao) {
 		this.id = id;
 		this.descricao = descricao;
 	}
@@ -39,11 +39,11 @@ public class TipoCursoEntity {
 
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

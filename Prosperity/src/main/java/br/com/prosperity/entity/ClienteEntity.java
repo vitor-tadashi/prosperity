@@ -15,24 +15,16 @@ public class ClienteEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idCliente", unique = true)
-	private int id;
+	private Integer id;
 	
 	@Column(name="nmCliente")
 	private String nome;
 
-	public ClienteEntity() {
-	}
-	
-	public ClienteEntity(int id, String nmCliente) {
-		this.id = id;
-		this.nome = nmCliente;
-	}
-
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

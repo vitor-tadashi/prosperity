@@ -4,20 +4,14 @@ import java.util.Date;
 
 public class StatusVagaBean {
 
-	private int idStatus;
+	private Integer idStatus;
 	private String idVaga;
 	private Date dataAlteracao;
 	
-	
-	public StatusVagaBean(int idStatus, String idVaga, Date dataAlteracao) {
-		this.idStatus = idStatus;
-		this.idVaga = idVaga;
-		this.dataAlteracao = dataAlteracao;
-	}
-	public int getIdStatus() {
+	public Integer getIdStatus() {
 		return idStatus;
 	}
-	public void setIdStatus(int idStatus) {
+	public void setIdStatus(Integer idStatus) {
 		this.idStatus = idStatus;
 	}
 	public String getIdVaga() {
