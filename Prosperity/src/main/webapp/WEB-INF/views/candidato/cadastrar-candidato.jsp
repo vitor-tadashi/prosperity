@@ -198,20 +198,14 @@
 
 										<div class="form-group col-md-3">
 											<label for="tipoDeCurso">Tipo de curso</label> <select
-												class="form-control" id="tipoDeCurso">
-												<option value="0">Selecione</option>
-												<option value="1">Formação Escolar Fundamental
-													(1°Grau) e Média (3°Grau)</option>
-												<option value="2">Curso Técnico - Médio (2°Grau)</option>
-												<option value="3">Graduação</option>
-												<option value="4">Pós Graduação - Especialização</option>
-												<option value="5">Pós Graduação - MBA</option>
-												<option value="6">Mestrado</option>
-												<option value="7">Doutorado</option>
-												<option value="8">Cursos Complemetares</option>
+												class="form-control" id="tipoDeCurso">												
+											<c:forEach var="funcionalidade" items="${funcionalidade}"
+										varStatus="i">
+										<option value="i">${funcionalidade.nome }</option>
+										</c:forEach>
 											</select>
 										</div>
-										<div class="form-group col-md-2">
+										<div class="form-group col-md-2" >
 											<label for="situacaoAtual">Situação atual</label> <select
 												class="form-control" id="situacaoAtual">
 												<option value="0">Selecione</option>
