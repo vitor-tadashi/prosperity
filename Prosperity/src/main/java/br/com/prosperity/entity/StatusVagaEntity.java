@@ -24,7 +24,7 @@ public class StatusVagaEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", unique = true, nullable = false)
+	@Column(name = "idStatusVaga", unique = true, nullable = false)
 	private int id;
 	/* fim */
 	

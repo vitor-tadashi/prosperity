@@ -47,7 +47,7 @@ public class StatusCandidatoEntity {
 	private StatusEntity status;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "idcpf")
+	@JoinColumn(name = "idCandidato")
 	private CandidatoEntity candidato ;
 
 	/* fim dos mapeamentos */

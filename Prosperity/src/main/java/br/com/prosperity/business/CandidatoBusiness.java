@@ -20,7 +20,7 @@ public class CandidatoBusiness {
 	@Autowired
 	private CandidatoConverter candidatoConverter;
 
-	public CandidatoBean obter(int id) {
+	public CandidatoBean obter(Integer id) {
 		CandidatoEntity candidatoEntity = candidatoDAO.obterPorId(id);
 		candidatoBean = candidatoConverter.convertEntityToBean(candidatoEntity);
 		return candidatoBean;

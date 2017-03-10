@@ -27,19 +27,7 @@ public class FormacaoEntity {
 	@JoinColumn(name = "idSituacaoAtual")
 	private SituacaoAtualEntity situacaoAtualEntity;
 
-	public FormacaoEntity() {
-
-	}
-
-	public FormacaoEntity(int id, String nome, Calendar dataConclusao, TipoCursoEntity tipoCursoEntity,
-			SituacaoAtualEntity situacaoAtualEntity) {
-		this.id = id;
-		this.nome = nome;
-		this.dataConclusao = dataConclusao;
-		this.tipoCursoEntity = tipoCursoEntity;
-		this.situacaoAtualEntity = situacaoAtualEntity;
-
-	}
+	
 
 	public int getId() {
 		return id;

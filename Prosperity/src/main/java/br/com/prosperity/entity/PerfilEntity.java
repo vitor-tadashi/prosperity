@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -19,8 +20,8 @@ public class PerfilEntity {
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
 
-	@Column(name = "idUsuario", unique = true, nullable = false)
-	private int idPerfil;
+//	@Column(name = "idPerfil", unique = true, nullable = false)
+//	private int idPerfil;
 
 	@Column(name="idPerfil", unique = true, nullable = false)
 	private Integer id;
@@ -37,6 +38,7 @@ public class PerfilEntity {
 	 */
 
 	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="idFuncionalidade")
 	private FuncionalidadeEntity funcionalidadeEntity;
 
 
@@ -50,12 +52,6 @@ public class PerfilEntity {
 	// relacionamento avaliadores
 	/* fim dos mapeamentos */
 
-
-	public PerfilEntity(int idPerfil, String nome, FuncionalidadeEntity funcionalidadeEntity) {
-		this.idPerfil = idPerfil;
-		this.nome = nome;
-		this.funcionalidadeEntity = funcionalidadeEntity;
-	}
 
 	public PerfilEntity() {
 
