@@ -3,31 +3,25 @@ package br.com.prosperity.converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.ProjetoBean;
-import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.entity.ProjetoEntity;
-import br.com.prosperity.entity.UsuarioEntity;
 
 @Component
 public class ProjetoConverter implements Converter<ProjetoEntity,ProjetoBean> {
 	
 	@Autowired
-	FuncionarioConverter funcionarioConverter;
+	private FuncionarioConverter funcionarioConverter;
 	@Autowired
-	ClienteConverter clienteConverter;
+	private ClienteConverter clienteConverter;
 	
-
 	@Override
 	public ProjetoEntity convertBeanToEntity(ProjetoBean bean) {
 		ProjetoEntity entity = new ProjetoEntity();
-		
 		entity.setIdProjeto(bean.getId());
 		entity.setNmProjeto(bean.getNome());
 		entity.setClienteProjeto(clienteConverter.convertBeanToEntity(bean.getCliente()));
 		entity.setFuncionario(funcionarioConverter.convertBeanToEntity(bean.getFuncionario()));
 		//entity.setPerfilEntity(perfilConverter.convertBeanToEntity(bean.getPerfil()));
-	
 		return entity;
 	}
 
@@ -41,5 +35,4 @@ public class ProjetoConverter implements Converter<ProjetoEntity,ProjetoBean> {
 		bean.setFuncionario(funcionarioConverter.convertEntityToBean(entity.getFuncionario()));
 		return bean;
 	}
-
 }

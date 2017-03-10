@@ -1,27 +1,19 @@
 package br.com.prosperity.bean;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ProjetoBean {
-	private int id;
+
+	private Integer id;
 	private String nome;
 	private ClienteBean cliente;
 	private FuncionarioBean funcionario;
 	
-	public ProjetoBean() {
-		
-	}
-	
-	public ProjetoBean(int id, String nome, ClienteBean cliente,
-			FuncionarioBean funcionario) {
-		this.id = id;
-		this.nome = nome;
-		this.cliente = cliente;
-		this.funcionario = funcionario;
-	}
-
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getNome() {

@@ -25,7 +25,11 @@ public class CandidatoBusiness {
 
 	public CandidatoBean obter(Integer id) {
 		CandidatoEntity candidatoEntity = candidatoDAO.obterPorId(id);
-		candidatoBean = candidatoConverter.convertEntityToBean(candidatoEntity);
+		
+		if (candidatoEntity != null) {
+			candidatoBean = candidatoConverter.convertEntityToBean(candidatoEntity);
+		}
+		
 		return candidatoBean;
 	}
 

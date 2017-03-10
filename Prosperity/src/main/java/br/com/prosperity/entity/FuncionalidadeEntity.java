@@ -11,6 +11,7 @@ public class FuncionalidadeEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idFuncionalidade", unique = true, nullable = false)
 	private Integer id;
+	
 	@Column(name = "nmFuncionalidade")
 	private String nome;
 	
@@ -18,10 +19,10 @@ public class FuncionalidadeEntity {
 	 @JoinTable(name="tbPerfilFuncionalidade", joinColumns={@JoinColumn(name="idPerfil")}, inverseJoinColumns={@JoinColumn(name="idFuncionalidade")})
 	private List<PerfilEntity> perfil;
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getNome() {

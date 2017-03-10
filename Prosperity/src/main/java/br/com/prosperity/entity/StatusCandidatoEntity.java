@@ -26,14 +26,12 @@ public class StatusCandidatoEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idStatusCandidato", unique = true, nullable = false)
-	private int id;
+	private Integer id;
 	/* fim */
-	
-	@Column (name = "cpf")
-	private String cpf;
+
 	
 	@Column (name = "dtAlteracao")
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataAlteracao;
 	
 	@Column(name = "dsParecer")
@@ -53,21 +51,14 @@ public class StatusCandidatoEntity {
 	/* fim dos mapeamentos */
 
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
 
 	public Date getDataAlteracao() {
 		return dataAlteracao;

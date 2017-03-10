@@ -17,7 +17,7 @@ public class AvaliadorBusiness {
 	@Autowired
 	private AvaliadorConverter avaliadorConverter;
 
-	private AvaliadorBean obter(int idAvaliador) {
+	private AvaliadorBean obter(Integer idAvaliador) {
 		
 		AvaliadorEntity avaliadorEntity = avaliadorDAO.obterPorId(idAvaliador);
 		

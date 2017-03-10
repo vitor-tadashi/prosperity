@@ -1,7 +1,16 @@
 package br.com.prosperity.entity;
 
-import java.util.Calendar;
-import javax.persistence.*;
+import java.util.Date;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbFormacao")
@@ -11,13 +20,13 @@ public class FormacaoEntity {
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
 	@Column(name = "idFormacao", unique = true, nullable = false)
-	private int id;
+	private Integer id;
 
 	@Column(name = "nmInstituicao")
 	private String nome;
 
 	@Column(name = "dtConclusao")
-	private Calendar dataConclusao;
+	private Date dataConclusao;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	@JoinColumn(name = "idTipoCurso")
@@ -29,11 +38,11 @@ public class FormacaoEntity {
 
 	
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -45,11 +54,11 @@ public class FormacaoEntity {
 		this.nome = nome;
 	}
 
-	public Calendar getDataConclusao() {
+	public Date getDataConclusao() {
 		return dataConclusao;
 	}
 
-	public void setDataConclusao(Calendar dataConclusao) {
+	public void setDataConclusao(Date dataConclusao) {
 		this.dataConclusao = dataConclusao;
 	}
 

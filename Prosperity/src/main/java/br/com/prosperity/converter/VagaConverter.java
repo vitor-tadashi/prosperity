@@ -1,8 +1,5 @@
 package br.com.prosperity.converter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,10 +21,14 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 	@Autowired
 	private VagaConverter vagaConverter;
 	
+	@Autowired
+	private UsuarioConverter usuarioConverter;
+	
 	@Override
 	public VagaEntity convertBeanToEntity(VagaBean bean) {
 		VagaEntity entity = new VagaEntity();
 		entity.setId(bean.getId());
+		entity.setNomeVaga(bean.getNomeVaga());
 		entity.setAumentoQuadro(bean.getAumentaQuadro());
 		entity.setCargoEntity(cargoConverter.convertBeanToEntity(bean.getCargoBean()));
 		entity.setDataAbertura(bean.getDataAbertura());
@@ -47,6 +48,7 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 		entity.setSenioridadeEntity(senioridadeConverter.convertBeanToEntity(bean.getSenioridadeBean()));
 		entity.setTipoVaga(bean.getIdTipoVaga());
 		entity.setValorPretensao(bean.getValorPretensao());
+		entity.setUsuarioEntity(usuarioConverter.convertBeanToEntity(bean.getUsuarioBean()));
 		return entity;
 	}
 
@@ -54,6 +56,7 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 	public VagaBean convertEntityToBean(VagaEntity entity) {
 		VagaBean bean = new VagaBean();
 		bean.setId(entity.getId());
+		bean.setNomeVaga(entity.getNomeVaga());
 		bean.setAumentaQuadro(entity.getAumentoQuadro());
 		bean.setCargoBean(cargoConverter.convertEntityToBean(entity.getCargoEntity()));
 		bean.setDataAbertura(entity.getDataAbertura());
@@ -66,7 +69,15 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 		bean.setHorarioEntrada(entity.getHoraEntrada());
 		bean.setHorarioSaida(entity.getHoraSaida());
 		bean.setLocalTrabalho(entity.getLocalTrabalho());
-		
+		bean.setNomeSolicitante(entity.getNomeSolicitante());
+		bean.setNomeSubstituido(entity.getNomeSubstituido());
+		bean.setNumeroCandidatos(entity.getNumeroCandidatos());
+		bean.setProjetoBean(projetoConverter.convertEntityToBean(entity.getProjetoEntity()));
+		bean.setSenioridadeBean(senioridadeConverter.convertEntityToBean(entity.getSenioridadeEntity()));
+		bean.setIdTipoVaga(entity.getTipoVaga());
+		bean.setValorPretensao(entity.getValorPretensao());
+		bean.setUsuarioBean(usuarioConverter.convertEntityToBean(entity.getUsuarioEntity()));
+				
 		return bean;
 	}
 	
