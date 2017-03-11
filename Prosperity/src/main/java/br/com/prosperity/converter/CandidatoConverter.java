@@ -10,13 +10,13 @@ import br.com.prosperity.entity.CandidatoEntity;
 public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoBean> {
 
 	@Autowired
-	ContatoConverter contatoConverter;
+	private ContatoConverter contatoConverter;
 
 	@Autowired
-	EnderecoConverter enderecoConverter;
+	private EnderecoConverter enderecoConverter;
 	
 	@Autowired
-	FormacaoConverter formacaoConverter;
+	private FormacaoConverter formacaoConverter;
 
 	@Override
 	public CandidatoEntity convertBeanToEntity(CandidatoBean bean) {
