@@ -52,8 +52,6 @@ public class CandidatoController {
 		
 		enderecoBean = candidatoBean.getEndereco();
 		
-		System.out.println(enderecoBean.getEstado());
-		
 		model.addAttribute("candidato", candidatoBean);
 		model.addAttribute("endereco", enderecoBean);
 		
