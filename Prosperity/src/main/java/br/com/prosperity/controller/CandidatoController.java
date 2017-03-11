@@ -50,12 +50,7 @@ public class CandidatoController {
 		CandidatoBean candidatoBean = new CandidatoBean();
 		candidatoBean = candidatoBusiness.obter(2);
 		
-		enderecoBean = candidatoBean.getEndereco();
-		
-		System.out.println(enderecoBean.getEstado());
-		
 		model.addAttribute("candidato", candidatoBean);
-		model.addAttribute("endereco", enderecoBean);
 		
 		return "candidato/historico-candidato";
 	}

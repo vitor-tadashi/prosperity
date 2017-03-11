@@ -302,7 +302,7 @@
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">CPF</label>
 							<div class="col-xs-7">
-								<p class="form-control-static" id="cpf" name="cpf">placeholder</p>
+								<p class="form-control-static" id="cpf" name="cpf">${candidato.cpf}</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
@@ -339,7 +339,7 @@
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Estado</label>
 							<div class="col-xs-7">
-								<p class="form-control-static" id="estado" name="estado">${endereco.estado}</p>
+								<p class="form-control-static" id="estado" name="estado">placeholder</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
