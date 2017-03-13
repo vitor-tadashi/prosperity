@@ -198,11 +198,12 @@
 
 										<div class="form-group col-md-3">
 											<label for="tipoDeCurso">Tipo de curso</label> <select
-												class="form-control" id="tipoDeCurso">												
-											<c:forEach var="funcionalidade" items="${funcionalidade}"
-										varStatus="i">
-										<option value="i">${funcionalidade.nome }</option>
-										</c:forEach>
+											class="form-control" id="tipoDeCurso">												
+								<!-- FAZER FOREACH  -->
+											<c:forEach var="tipoCurso" items="${tiposCurso}">
+												<option value="${tipoCurso.id}">${tipoCurso.nome}</option>
+											</c:forEach>
+										
 											</select>
 										</div>
 										<div class="form-group col-md-2" >

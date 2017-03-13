@@ -1,8 +1,5 @@
 package br.com.prosperity.bean;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class TipoCursoBean {
 
 	private Integer id;
