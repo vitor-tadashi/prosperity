@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.converter.UsuarioConverter;
@@ -20,8 +21,10 @@ public class UsuarioBusiness {
 	@Autowired
 	private UsuarioConverter usuarioConverter;
 
+	@Transactional
 	public void inserir(UsuarioBean usuarioBean) {
-		usuarioDAO.adicionar(usuarioConverter.convertBeanToEntity(usuarioBean));
+		UsuarioEntity entity = usuarioConverter.convertBeanToEntity(usuarioBean);
+		usuarioDAO.adicionar(entity);
 	}
 
 	public UsuarioBean autenticar(UsuarioBean usuarioBean) throws BusinessException {
@@ -48,4 +51,10 @@ public class UsuarioBusiness {
 		UsuarioEntity usuarioEntity = usuarioDAO.alterar(usuarioConverter.convertBeanToEntity(usuarioBean));
 	}
 
+	@Transactional
+	public List<UsuarioBean> getUsuarios() {
+		List<UsuarioBean> usuarios = usuarioConverter.convertEntityToBean(usuarioDAO.findByNamedQuery("populaTabela", UsuarioEntity.class));
+		
+		return usuarios;
+	}
 }
