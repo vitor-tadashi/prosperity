@@ -12,7 +12,7 @@ import br.com.prosperity.dao.CandidatoDAO;
 import br.com.prosperity.entity.CandidatoEntity;
 
 @Component
-public class CandidatoBusiness {
+public class CandidatoBusiness{
 
 	@Autowired
 	private CandidatoDAO candidatoDAO;
@@ -28,6 +28,8 @@ public class CandidatoBusiness {
 		
 		if (candidatoEntity != null) {
 			candidatoBean = candidatoConverter.convertEntityToBean(candidatoEntity);
+			candidatoBean.cpfFormat(candidatoBean);
+			candidatoBean.rgFormat(candidatoBean);
 		}
 		
 		return candidatoBean;

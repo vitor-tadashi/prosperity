@@ -64,9 +64,13 @@ public class CandidatoEntity {
 
 	/* Mapeamento de Relacionamentos */
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+
+	//@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+
 	@JoinColumn(name = "idContato")
-	private List<ContatoEntity> contatos;
+	private ContatoEntity contato;
 
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "idEndereco")
@@ -172,12 +176,12 @@ public class CandidatoEntity {
 		this.curriculo = curriculo;
 	}
 
-	public List<ContatoEntity> getContatos() {
-		return contatos;
+	public ContatoEntity getContato() {
+		return contato;
 	}
 
-	public void setContatos(List<ContatoEntity> contatos) {
-		this.contatos = contatos;
+	public void setContato(ContatoEntity contato) {
+		this.contato = contato;
 	}
 
 	public EnderecoEntity getEndereco() {
