@@ -26,18 +26,6 @@ public class ContatoEntity {
 	@Column(name = "telefone")
 	private String telefone;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-	@JoinColumn(name = "idCandidato")
-	private CandidatoEntity candidato;
-
-	public CandidatoEntity getCandidato() {
-		return candidato;
-	}
-
-	public void setCandidato(CandidatoEntity candidato) {
-		this.candidato = candidato;
-	}
-
 	public Integer getId() {
 		return id;
 	}

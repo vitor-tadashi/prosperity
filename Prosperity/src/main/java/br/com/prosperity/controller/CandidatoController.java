@@ -1,19 +1,15 @@
 package br.com.prosperity.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.EnderecoBean;
-import br.com.prosperity.bean.FuncionalidadeBean;
-import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.TipoCursoBean;
 import br.com.prosperity.business.CandidatoBusiness;
 import br.com.prosperity.business.TipoCursoBusiness;

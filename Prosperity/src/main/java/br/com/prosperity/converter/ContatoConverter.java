@@ -12,7 +12,6 @@ public class ContatoConverter implements Converter<ContatoEntity, ContatoBean> {
 	public ContatoEntity convertBeanToEntity(ContatoBean bean) {
 		ContatoEntity entity = new ContatoEntity();
 		entity.setId(bean.getId());
-		entity.setCandidato(new CandidatoConverter().convertBeanToEntity(bean.getCandidato()));
 		entity.setTelefone(bean.getTelefone());
 		return entity;
 	}
@@ -21,7 +20,6 @@ public class ContatoConverter implements Converter<ContatoEntity, ContatoBean> {
 	public ContatoBean convertEntityToBean(ContatoEntity entity) {
 		ContatoBean bean = new ContatoBean();
 		bean.setId(entity.getId());
-		bean.setCandidato(new CandidatoConverter().convertEntityToBean(entity.getCandidato()));
 		bean.setTelefone(entity.getTelefone());
 		return bean;
 	}

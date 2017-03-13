@@ -52,7 +52,7 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		bean.setDataAlteracao(entity.getDataAlteracao());
 		bean.setDataFechamento(entity.getDataFechamento());
 		bean.setDataNascimento(entity.getDataNascimento());
-		//bean.setFormacao(formacaoConverter.convertEntityToBean(entity.getFormacao()));
+		bean.setFormacao(formacaoConverter.convertEntityToBean(entity.getFormacao()));
 		bean.setContatos(contatoConverter.convertEntityToBean(entity.getContatos()));
 		bean.setEndereco(enderecoConverter.convertEntityToBean(entity.getEndereco()));
 		return bean;
