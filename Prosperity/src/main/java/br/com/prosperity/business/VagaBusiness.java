@@ -52,6 +52,7 @@ public class VagaBusiness {
 	public void inserir(VagaBean vagaBean) {
 		vagaDAO.adicionar(vagaConverter.convertBeanToEntity(vagaBean));
 	}
+	
 
 }
 
