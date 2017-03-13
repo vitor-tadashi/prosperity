@@ -1,7 +1,9 @@
 package br.com.prosperity.bean;
 
 import java.util.List;
+import org.springframework.stereotype.Component;
 
+@Component
 public class SituacaoAtualBean {
 
 	private Integer id;

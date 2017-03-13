@@ -9,14 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.com.prosperity.bean.CandidatoBean;
+import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.EnderecoBean;
+import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
 import br.com.prosperity.bean.TipoCursoBean;
-import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.CandidatoBusiness;
+import br.com.prosperity.business.CargoBusiness;
+import br.com.prosperity.business.SenioridadeBusiness;
 import br.com.prosperity.business.SituacaoAtualBusiness;
 import br.com.prosperity.business.TipoCursoBusiness;
-import br.com.prosperity.business.VagaBusiness;
 
 @Controller
 @RequestMapping(value="candidato")
@@ -33,8 +35,13 @@ public class CandidatoController {
 	
 	@Autowired
 	private SituacaoAtualBusiness situacaoAtualBusiness;
+	@Autowired
+	private CargoBusiness cargoBusiness;
+	@Autowired
+	private SenioridadeBusiness senioridadeBusiness;
 	
-	
+	@Autowired
+	private CargoBean cargoBean;
 	
 	
 	@RequestMapping(value ="cadastrar", method = RequestMethod.GET)
@@ -45,7 +52,11 @@ public class CandidatoController {
 		List<SituacaoAtualBean> listaSituacaoAtual = situacaoAtualBusiness.getSituacaoAtual();
 		model.addAttribute("listaSituacaoAtual", listaSituacaoAtual);
 		
+		List<CargoBean> listaCargo = cargoBusiness.getCargo();
+		model.addAttribute("listaCargo", listaCargo);
 		
+		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.getSenioridade();
+		model.addAttribute("listaSenioridade", listaSenioridade);
 		
 		return "candidato/cadastrar-candidato";
 	}
@@ -75,11 +86,4 @@ public class CandidatoController {
 		
 		return "candidato/historico-candidato";
 	}
-
-
-
-	
-	
-	
-	
 }

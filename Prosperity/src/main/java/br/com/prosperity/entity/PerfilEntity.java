@@ -4,16 +4,15 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbPerfil")
-@NamedQuery(name="Perfil.findAll", query="SELECT p FROM PerfilEntity p")
 public class PerfilEntity {
 
 	@Id
@@ -25,7 +24,7 @@ public class PerfilEntity {
 	private String nome;
 
 
-	@ManyToMany()
+	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinColumn(name="idFuncionalidade")
 	private List<FuncionalidadeEntity> funcionalidades;
 

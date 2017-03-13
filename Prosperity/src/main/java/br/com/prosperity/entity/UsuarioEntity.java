@@ -8,9 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 /**
@@ -19,7 +18,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "tbUsuario")
-@NamedQuery(name = "obterPorUsuario", query = "SELECT u FROM UsuarioEntity u WHERE u.nome = ?1")
+@NamedQueries({
+	@NamedQuery(name = "obterPorUsuario", query = "SELECT u FROM UsuarioEntity u WHERE u.nome = ?1"),
+	@NamedQuery(name="populaTabela", query="SELECT u FROM UsuarioEntity u")
+	})
 public class UsuarioEntity {
 
 	@Id
@@ -27,11 +29,11 @@ public class UsuarioEntity {
 	@Column(name = "idUsuario", unique = true, nullable = false)
 	private Integer id;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idPerfil")
 	private PerfilEntity perfilEntity;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idFuncionario")
 	private FuncionarioEntity funcionarioEntity;
 
