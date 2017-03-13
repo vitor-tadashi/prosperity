@@ -21,8 +21,10 @@ public class UsuarioBusiness {
 	@Autowired
 	private UsuarioConverter usuarioConverter;
 
+	@Transactional
 	public void inserir(UsuarioBean usuarioBean) {
-		usuarioDAO.adicionar(usuarioConverter.convertBeanToEntity(usuarioBean));
+		UsuarioEntity entity = usuarioConverter.convertBeanToEntity(usuarioBean);
+		usuarioDAO.adicionar(entity);
 	}
 
 	public UsuarioBean autenticar(UsuarioBean usuarioBean) throws BusinessException {
@@ -45,9 +47,14 @@ public class UsuarioBusiness {
 		return usuarioBean;
 	}
 
-	@Transactional
 	public void alterar(UsuarioBean usuarioBean) {
-		usuarioBean.setId(1);
 		UsuarioEntity usuarioEntity = usuarioDAO.alterar(usuarioConverter.convertBeanToEntity(usuarioBean));
+	}
+
+	@Transactional
+	public List<UsuarioBean> getUsuarios() {
+		List<UsuarioBean> usuarios = usuarioConverter.convertEntityToBean(usuarioDAO.findByNamedQuery("populaTabela", UsuarioEntity.class));
+		
+		return usuarios;
 	}
 }

@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -42,7 +42,7 @@
 				<div class="modal-body">
 					<div class="padding-md">
 						<div class="row">
-						<form:form action="cadastrar" commandName="usuario">
+						<%-- <form:form action="cadastrar" commandName="usuario">
 							<table>
 								<tr>
 									<td>
@@ -56,12 +56,12 @@
 								</tr>
 								<tr>
 									<td>
-										<form:label path="funcionario">
+										<form:label path="funcionarioEntity">
 											<spring:message text="Funcionario"/>
 										</form:label>
 									</td>
 									<td>
-										<form:select path="funcionario">
+										<form:select path="funcionarioEntity">
 										    <form:option value="-1">Selecione...</form:option>
 										    <form:options items="${funcionarios}" itemLabel="nome" itemValue="id" />
 										</form:select>
@@ -79,12 +79,12 @@
 								</tr>
 								<tr>
 									<td>
-										<form:label path="perfil">
+										<form:label path="perfilEntity">
 											<spring:message text="Perfil"/>
 										</form:label>
 									</td>
 									<td>
-										<form:select path="perfil">
+										<form:select path="perfilEntity">
 										    <form:option value="-1">Selecione...</form:option>
 										    <form:options items="${perfis}" itemLabel="nome" itemValue="id" />
 										</form:select>
@@ -96,12 +96,12 @@
 									</td>
 								</tr>
 							</table>	
-							</form:form>
+							</form:form> --%>
 							<form action="cadastrar" method="POST">
 								<div class="row">
 									<div class="form-group col-md-6">
 										<label for="funcionario">Funcionário</label> <select
-											class="form-control" name="funcionario">
+											class="form-control" name="funcionario.id">
 											<option value="">Selecione...</option>
 											<c:forEach var="funcionario" items="${funcionarios}">
 												<option value="${funcionario.id}">${funcionario.nome}</option>
@@ -125,7 +125,7 @@
 									</div>
 									<div class="form-group open col-md-6">
 										<label for="permissao">Perfil</label> <select
-											class="form-control" name="perfil">
+											class="form-control" name="perfil.id">
 											<option value="">Selecione...</option>
 											<c:forEach var="perfil" items="${perfis}">
 												<option value="${perfil.id}">${perfil.nome}</option>
