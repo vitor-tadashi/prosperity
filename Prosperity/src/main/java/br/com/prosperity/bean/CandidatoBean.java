@@ -6,8 +6,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import br.com.prosperity.util.Formatar;
+
 @Component
-public class CandidatoBean {
+public class CandidatoBean extends Formatar {
 	private Integer id;
 	private String cpf;
 	private String nome;
@@ -19,13 +21,12 @@ public class CandidatoBean {
 	private String email;
 	private Date dataAlteracao;
 	private File curriculo;
-	private List<ContatoBean> contatos;
+	private ContatoBean contato;
 	private EnderecoBean endereco;
 	private FormacaoBean formacao;
 	private UsuarioBean usuario;
 	private List<StatusBean> status;
 	private List<VagaBean> vagas;
-	
 
 	public Integer getId() {
 		return id;
@@ -115,12 +116,12 @@ public class CandidatoBean {
 		this.curriculo = curriculo;
 	}
 
-	public List<ContatoBean> getContatos() {
-		return contatos;
+	public ContatoBean getContato() {
+		return contato;
 	}
 
-	public void setContatos(List<ContatoBean> contatos) {
-		this.contatos = contatos;
+	public void setContato(ContatoBean contato) {
+		this.contato = contato;
 	}
 
 	public EnderecoBean getEndereco() {

@@ -1,19 +1,18 @@
 package br.com.prosperity.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.com.prosperity.bean.CandidatoBean;
+import br.com.prosperity.bean.ContatoBean;
 import br.com.prosperity.bean.EnderecoBean;
-import br.com.prosperity.bean.FuncionalidadeBean;
-import br.com.prosperity.bean.FuncionarioBean;
+import br.com.prosperity.bean.FormacaoBean;
+import br.com.prosperity.bean.SituacaoAtualBean;
 import br.com.prosperity.bean.TipoCursoBean;
 import br.com.prosperity.business.CandidatoBusiness;
 import br.com.prosperity.business.TipoCursoBusiness;
@@ -24,6 +23,18 @@ public class CandidatoController {
 	
 	@Autowired
 	private CandidatoBusiness candidatoBusiness;
+	
+	@Autowired
+	private CandidatoBean candidatoBean;
+	
+	@Autowired
+	private ContatoBean contatoBean;
+	
+	@Autowired
+	private FormacaoBean formacaoBean;
+	
+	@Autowired
+	private SituacaoAtualBean situacaoBean;
 	
 	@Autowired
 	private EnderecoBean enderecoBean;
@@ -56,13 +67,16 @@ public class CandidatoController {
 	
 	@RequestMapping(value ="historico", method = RequestMethod.GET)
 	public String historicoCandidato(Model model) {
-		CandidatoBean candidatoBean = new CandidatoBean();
-		candidatoBean = candidatoBusiness.obter(2);
 		
+		candidatoBean = candidatoBusiness.obter(3);
 		enderecoBean = candidatoBean.getEndereco();
+		contatoBean = candidatoBean.getContato();
 		
 		model.addAttribute("candidato", candidatoBean);
 		model.addAttribute("endereco", enderecoBean);
+		model.addAttribute("contato", contatoBean);
+		model.addAttribute("formacao", formacaoBean);
+		model.addAttribute("situacaoAtual", situacaoBean);
 		
 		return "candidato/historico-candidato";
 	}
