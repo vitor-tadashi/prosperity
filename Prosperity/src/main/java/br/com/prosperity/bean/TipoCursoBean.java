@@ -1,8 +1,8 @@
 package br.com.prosperity.bean;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TipoCursoBean {
 
 	private Integer id;
@@ -23,5 +23,4 @@ public class TipoCursoBean {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 }
