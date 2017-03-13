@@ -1,5 +1,6 @@
 package br.com.prosperity.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FuncionarioBean {
@@ -8,7 +9,7 @@ public class FuncionarioBean {
 	private String nome;
 	private CargoBean cargo;
 	private SenioridadeBean senioridade;
-	private List<ProjetoBean> projeto;
+	private List<ProjetoBean> projeto = new ArrayList<>();
 	
 	public Integer getId() {
 		return id;

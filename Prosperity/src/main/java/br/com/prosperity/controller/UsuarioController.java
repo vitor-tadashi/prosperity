@@ -38,12 +38,12 @@ public class UsuarioController{
 
 	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
 	public String consultaUsuario(Model model) {
-		//List<UsuarioBean> usuarios = usuarioBusiness.getUsuarios();
+		List<UsuarioBean> usuarios = usuarioBusiness.getUsuarios();
 		List<FuncionarioBean> funcionarios = funcionarioBusiness.getFuncionarios();
 		List<PerfilEntity> perfis = perfilBusiness.getPerfis();
 		model.addAttribute("funcionarios", funcionarios);
 		model.addAttribute("perfis", perfis);
-		//model.addAttribute("usuarios", usuarios);
+		model.addAttribute("usuarios", usuarios);
 		
 		return "usuario/consultar-usuario";
 	}

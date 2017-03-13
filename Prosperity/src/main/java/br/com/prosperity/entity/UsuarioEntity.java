@@ -1,6 +1,5 @@
 package br.com.prosperity.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,10 +11,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-/**
- * Entity implementation class for Entity: PerfilFuncionalidadeEntity
- *
- */
 @Entity
 @Table(name = "tbUsuario")
 @NamedQueries({
@@ -29,11 +24,11 @@ public class UsuarioEntity {
 	@Column(name = "idUsuario", unique = true, nullable = false)
 	private Integer id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "idPerfil")
 	private PerfilEntity perfilEntity;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "idFuncionario")
 	private FuncionarioEntity funcionarioEntity;
 

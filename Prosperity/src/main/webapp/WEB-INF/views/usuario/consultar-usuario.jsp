@@ -42,61 +42,6 @@
 				<div class="modal-body">
 					<div class="padding-md">
 						<div class="row">
-						<%-- <form:form action="cadastrar" commandName="usuario">
-							<table>
-								<tr>
-									<td>
-										<form:label path="nome">
-											<spring:message text="Nome"/>
-										</form:label>
-									</td>
-									<td>
-										<form:input path="nome" />
-									</td> 
-								</tr>
-								<tr>
-									<td>
-										<form:label path="funcionarioEntity">
-											<spring:message text="Funcionario"/>
-										</form:label>
-									</td>
-									<td>
-										<form:select path="funcionarioEntity">
-										    <form:option value="-1">Selecione...</form:option>
-										    <form:options items="${funcionarios}" itemLabel="nome" itemValue="id" />
-										</form:select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<form:label path="email">
-											<spring:message text="E-mail"/>
-										</form:label>
-									</td>
-									<td>
-										<form:input path="email" />
-									</td> 
-								</tr>
-								<tr>
-									<td>
-										<form:label path="perfilEntity">
-											<spring:message text="Perfil"/>
-										</form:label>
-									</td>
-									<td>
-										<form:select path="perfilEntity">
-										    <form:option value="-1">Selecione...</form:option>
-										    <form:options items="${perfis}" itemLabel="nome" itemValue="id" />
-										</form:select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<input type="submit" value="<spring:message text="Submit"/>" />
-									</td>
-								</tr>
-							</table>	
-							</form:form> --%>
 							<form action="cadastrar" method="POST">
 								<div class="row">
 									<div class="form-group col-md-6">
@@ -283,35 +228,15 @@
 											</div>
 										</td>
 									</tr>
-									<tr class="text-center">
-										<td>Vitor</td>
-										<td>vitor.verity</td>
-										<td>vitor@verity.com.br</td>
-										<td>Gestor</td>
-										<td><span class="label label-success status">Ativo</span>
-										</td>
-										<td>
-											<div class="btn-group">
-												<a class="btn btn-info" href="#editar-usuario-modal"
-													data-toggle="modal"><i class="fa fa-edit"></i> Editar</a>
-											</div>
-										</td>
-									</tr>
-									<tr class="text-center">
-										<td>Alexandro</td>
-										<td>alexandro.verity</td>
-										<td>alexandro@verity.com.br</td>
-										<td>CEO</td>
-
-										<td><span class="label label-success status">Ativo</span>
-										</td>
-										<td>
-											<div class="btn-group">
-												<a class="btn btn-info" href="#editar-usuario-modal"
-													data-toggle="modal"><i class="fa fa-edit"></i> Editar</a>
-											</div>
-										</td>
-									</tr>
+									<c:forEach var="usuario" items="${usuarios}">
+										<tr class="text-center">
+											<td>${usuario.funcionario.nome}</td>
+											<td>${usuario.nome}</td>
+											<td>${usuario.email}</td>
+											<td>${usuario.perfil.nome}</td>
+											<td>${usuario.situacao}</td>
+										</tr>
+									</c:forEach>
 								</tbody>
 							</table>
 							<br>

@@ -24,7 +24,7 @@ public class PerfilEntity {
 	private String nome;
 
 
-	@ManyToMany(fetch=FetchType.LAZY)
+	@ManyToMany
 	@JoinColumn(name="idFuncionalidade")
 	private List<FuncionalidadeEntity> funcionalidades;
 
