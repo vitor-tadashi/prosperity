@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.FuncionarioBean;
@@ -18,13 +17,14 @@ import br.com.prosperity.business.FuncionalidadeBusiness;
 import br.com.prosperity.business.FuncionarioBusiness;
 import br.com.prosperity.business.PerfilBusiness;
 import br.com.prosperity.business.UsuarioBusiness;
+import br.com.prosperity.exception.BusinessException;
 
 @Controller
 @RequestMapping("usuario")
-public class UsuarioController{
+public class UsuarioController {
 	@Autowired
 	private FuncionalidadeBusiness funcionalidadeBusiness;
-	
+
 	@Autowired
 	private PerfilBusiness perfilBusiness;
 
@@ -41,7 +41,7 @@ public class UsuarioController{
 		model.addAttribute("funcionarios", funcionarios);
 		model.addAttribute("perfis", perfis);
 		model.addAttribute("usuario", new UsuarioBean());
-		
+
 		return "usuario/consultar-usuario";
 	}
 
@@ -54,19 +54,8 @@ public class UsuarioController{
 	}
 
 	@RequestMapping(value = "/salvar-perfil", method = RequestMethod.POST)
-	public String salvarPerfil(@ModelAttribute("perfilBean") PerfilBean perfilBean, Model model, ModelAndView modelAndView) {
-		try {
-			if (perfilBean.getListaFuncionalidades().isEmpty()) {
-				System.out.println("erro   " + perfilBean.getNome());
-			} else {
-				System.out.println(perfilBean.getListaFuncionalidades().get(1).getId());
-			}
-		} catch (Exception e) {
-			System.out.println("Exception! " + e.getLocalizedMessage() + perfilBean.getNome());
-		}
-
+	public String salvarPerfil(@ModelAttribute("perfilBean") PerfilBean perfilBean) throws BusinessException {
 		perfilBusiness.inserir(perfilBean);
-		System.out.println(perfilBean.getNome());
 
 		return "redirect:criar-perfil";
 	}
