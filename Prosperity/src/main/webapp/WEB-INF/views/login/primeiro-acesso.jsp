@@ -33,26 +33,28 @@
 					</div>
 				</div>
 				<div class="panel-body">
-					<form class="form-login">
+					<form class="form-login" action="primeiro-acesso" method="POST">
 						<div class="form-group bounceIn animation-delay2">
 							<label>Usuário</label>
-                            <p class="form-control-static">guilherme.oliveira</p>
+                            <input type="text" placeholder="Senha" class="form-control input-sm" name="nome">
 						</div>			
 						<div class="form-group bounceIn animation-delay3">
 							<label>Nova senha</label>
                             <div class="input-group input-sm">
                                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-				                <input type="password" placeholder="Senha" class="form-control input-sm" >
+				                <input type="password" placeholder="Senha" class="form-control input-sm" name="senha">
                             </div>
 						</div>
 						<div class="form-group bounceIn animation-delay4">
 							<label>Confirmar nova senha</label>
                             <div class="input-group input-sm">
                                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-				                <input type="password" placeholder="Confirmar nova senha" class="form-control input-sm" >
+				                <input type="password" placeholder="Confirmar nova senha" class="form-control input-sm">
                             </div>
 						</div>					
-						<a class="btn btn-success btn-sm bounceIn animation-delay5 login-link pull-right" href="index.html"><i class="fa fa-sign-in"></i> Entrar</a>
+						<button class="btn btn-success btn-sm">
+							<i class="fa fa-sign-in"></i> Entrar
+						</button>
 					</form>
 				</div>
 			</div><!-- /panel -->

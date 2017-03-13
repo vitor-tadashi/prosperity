@@ -24,6 +24,7 @@ public class PerfilEntity {
 	@Column(name="nmPerfil")
 	private String nome;
 
+
 	@ManyToMany()
 	@JoinColumn(name="idFuncionalidade")
 	private List<FuncionalidadeEntity> funcionalidades;
@@ -43,7 +44,6 @@ public class PerfilEntity {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 	public List<FuncionalidadeEntity> getFuncionalidades() {
 		return funcionalidades;
 	}

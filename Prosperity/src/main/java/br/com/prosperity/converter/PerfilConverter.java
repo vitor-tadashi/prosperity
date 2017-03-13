@@ -2,9 +2,7 @@ package br.com.prosperity.converter;
 
 import org.springframework.stereotype.Component;
 
-import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.PerfilBean;
-import br.com.prosperity.entity.FuncionalidadeEntity;
 import br.com.prosperity.entity.PerfilEntity;
 
 @Component
@@ -15,15 +13,10 @@ public class PerfilConverter implements Converter<PerfilEntity, PerfilBean> {
 	@Override
 	public PerfilEntity convertBeanToEntity(PerfilBean bean) {
 		PerfilEntity entity = new PerfilEntity();
-		FuncionalidadeEntity funcionalidade = new FuncionalidadeEntity();
-		
-		for(FuncionalidadeBean e : bean.getListaFuncionalidades()){
-			funcionalidade = funcionalidadeConverter.convertBeanToEntity(e);
-		}
 		
 		entity.setId(bean.getId());
 		entity.setNome(bean.getNome());
-		//entity.setFuncionalidade(funcionalidade);
+		entity.setFuncionalidades(funcionalidadeConverter.convertBeanToEntity(bean.getListaFuncionalidades()));
 
 		return entity;
 	}
@@ -34,7 +27,8 @@ public class PerfilConverter implements Converter<PerfilEntity, PerfilBean> {
 		
 		bean.setId(entity.getId());
 		bean.setNome(entity.getNome());
-		//bean.setListaFuncionalidades();
+		bean.setListaFuncionalidades(funcionalidadeConverter.convertEntityToBean(entity.getFuncionalidades()));
+
 		return bean;
 	}
 }

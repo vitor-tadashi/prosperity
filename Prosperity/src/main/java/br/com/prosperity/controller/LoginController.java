@@ -33,7 +33,7 @@ public class LoginController {
 			if (usuario.getPrimeiroAcesso()) {
 				return "login/primeiro-acesso";
 			} else {
-				return "login/acesso";
+				return "dashboard/pagina-inicial";
 			}
 		} catch (BusinessException ex) {
 			model.addAttribute("log", ex.getMessage());
@@ -43,7 +43,12 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "primeiro-acesso", method = RequestMethod.GET)
-	public String primeiroAcessoUsuario() {
+	public String primeiroAcessoUsuario(){
 		return "login/primeiro-acesso";
+	}
+	@RequestMapping(value = "primeiro-acesso", method = RequestMethod.POST)
+	public String primeiroAcessoUsuario(UsuarioBean usuarioBean) throws BusinessException {
+		usuarioBusiness.alterar(usuarioBean);
+		return "dashboard/pagina-inicial";
 	}
 }

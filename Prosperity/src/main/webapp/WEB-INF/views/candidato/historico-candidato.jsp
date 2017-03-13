@@ -363,7 +363,7 @@
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Situação atual</label>
 							<div class="col-xs-7">
-								<p class="form-control-static" id="situacaoAtual" name="situacaoAtual">Cursando</p>
+								<p class="form-control-static" id="situacaoAtual" name="situacaoAtual">placeholder</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
