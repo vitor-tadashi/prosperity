@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.prosperity.bean.CandidatoBean;
+import br.com.prosperity.bean.ContatoBean;
 import br.com.prosperity.converter.CandidatoConverter;
 import br.com.prosperity.dao.CandidatoDAO;
 import br.com.prosperity.entity.CandidatoEntity;
@@ -21,6 +22,9 @@ public class CandidatoBusiness{
 	private CandidatoBean candidatoBean;
 	
 	@Autowired
+	private ContatoBean contatoBean;
+	
+	@Autowired
 	private CandidatoConverter candidatoConverter;
 
 	public CandidatoBean obter(Integer id) {
@@ -30,6 +34,7 @@ public class CandidatoBusiness{
 			candidatoBean = candidatoConverter.convertEntityToBean(candidatoEntity);
 			candidatoBean.cpfFormat(candidatoBean);
 			candidatoBean.rgFormat(candidatoBean);
+			candidatoBean.telefoneFormat(contatoBean = candidatoBean.getContato());
 		}
 		
 		return candidatoBean;

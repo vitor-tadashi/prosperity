@@ -1,6 +1,7 @@
 package br.com.prosperity.util;
 
 import br.com.prosperity.bean.CandidatoBean;
+import br.com.prosperity.bean.ContatoBean;
 
 public abstract class Formatar {
 
@@ -14,7 +15,7 @@ public abstract class Formatar {
 		candidatoBean.setCpf(String.format("%s.%s.%s-%s", bloco1, bloco2, bloco3, bloco4));
 		return candidatoBean;
 	}
-	
+
 	public CandidatoBean rgFormat(CandidatoBean candidatoBean) {
 
 		String bloco1 = candidatoBean.getRg().substring(0, 2);
@@ -24,5 +25,15 @@ public abstract class Formatar {
 
 		candidatoBean.setRg(String.format("%s.%s.%s-%s", bloco1, bloco2, bloco3, bloco4));
 		return candidatoBean;
+	}
+
+	public ContatoBean telefoneFormat(ContatoBean contatoBean) {
+
+		String bloco1 = contatoBean.getTelefone().substring(0, 2);
+		String bloco2 = contatoBean.getTelefone().substring(2, 7);
+		String bloco3 = contatoBean.getTelefone().substring(7, 11);
+
+		contatoBean.setTelefone(String.format("(%s) %s-%s", bloco1, bloco2, bloco3));
+		return contatoBean;
 	}
 }
