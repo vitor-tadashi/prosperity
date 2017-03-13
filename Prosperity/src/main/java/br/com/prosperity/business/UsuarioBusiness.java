@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.converter.UsuarioConverter;
@@ -44,8 +45,9 @@ public class UsuarioBusiness {
 		return usuarioBean;
 	}
 
+	@Transactional
 	public void alterar(UsuarioBean usuarioBean) {
+		usuarioBean.setId(1);
 		UsuarioEntity usuarioEntity = usuarioDAO.alterar(usuarioConverter.convertBeanToEntity(usuarioBean));
 	}
-
 }

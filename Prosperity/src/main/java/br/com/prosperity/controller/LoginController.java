@@ -42,10 +42,6 @@ public class LoginController {
 		return "login/acesso";
 	}
 
-	@RequestMapping(value = "primeiro-acesso", method = RequestMethod.GET)
-	public String primeiroAcessoUsuario(){
-		return "login/primeiro-acesso";
-	}
 	@RequestMapping(value = "primeiro-acesso", method = RequestMethod.POST)
 	public String primeiroAcessoUsuario(UsuarioBean usuarioBean) throws BusinessException {
 		usuarioBusiness.alterar(usuarioBean);
