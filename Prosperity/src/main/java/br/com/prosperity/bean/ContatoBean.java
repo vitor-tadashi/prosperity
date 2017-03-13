@@ -2,8 +2,10 @@ package br.com.prosperity.bean;
 
 import org.springframework.stereotype.Component;
 
+import br.com.prosperity.util.Formatar;
+
 @Component
-public class ContatoBean {
+public class ContatoBean extends Formatar{
 	
 	private Integer id;
 	private String telefone;

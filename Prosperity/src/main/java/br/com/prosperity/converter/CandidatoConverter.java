@@ -31,7 +31,7 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		entity.setDataAbertura(bean.getDataAbertura());
 		entity.setDataAlteracao(bean.getDataAlteracao());
 		entity.setDataNascimento(bean.getDataNascimento());
-//		entity.setFormacao(formacaoConverter.convertBeanToEntity(bean.getFormacao()));
+		entity.setFormacao(formacaoConverter.convertBeanToEntity(bean.getFormacao()));
 		entity.setContato(contatoConverter.convertBeanToEntity(bean.getContato()));
 		entity.setEndereco(enderecoConverter.convertBeanToEntity(bean.getEndereco()));
 
@@ -52,8 +52,10 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		bean.setDataAlteracao(entity.getDataAlteracao());
 		bean.setDataFechamento(entity.getDataFechamento());
 		bean.setDataNascimento(entity.getDataNascimento());
-//		bean.setFormacao(formacaoConverter.convertEntityToBean(entity.getFormacao()));
+
+		bean.setFormacao(formacaoConverter.convertEntityToBean(entity.getFormacao()));
 		bean.setContato(contatoConverter.convertEntityToBean(entity.getContato()));
+
 		bean.setEndereco(enderecoConverter.convertEntityToBean(entity.getEndereco()));
 		return bean;
 	}

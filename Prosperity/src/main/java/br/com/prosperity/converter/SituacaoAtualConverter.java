@@ -12,13 +12,15 @@ public class SituacaoAtualConverter implements Converter<SituacaoAtualEntity, Si
 	public SituacaoAtualEntity convertBeanToEntity(SituacaoAtualBean bean) {
 		SituacaoAtualEntity entity = new SituacaoAtualEntity();
 		entity.setIdSituacaoAtual(bean.getId());
+		entity.setDescricao(bean.getDescricao());
 		return entity;
 	}
 
 	@Override
 	public SituacaoAtualBean convertEntityToBean(SituacaoAtualEntity entity) {
 		SituacaoAtualBean bean = new SituacaoAtualBean();
-		bean.setIdSituacaoAtual(entity.getIdSituacaoAtual());
+		bean.setId(entity.getIdSituacaoAtual());
+		bean.setDescricao(entity.getDescricao());
 		return bean;
 	}
 }
