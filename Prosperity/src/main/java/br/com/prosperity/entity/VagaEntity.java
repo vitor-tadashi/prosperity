@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name= "tbVaga")	
-@NamedQuery (name = "obterAprovacao", query = "SELECT u FROM UsuarioEntity u WHERE u.nome = ?1")
+@NamedQuery (name = "obterAprovacao", query = "SELECT u FROM VagaEntity u WHERE u.nomeVaga = ?1")
 public class VagaEntity {
 
 	@Id

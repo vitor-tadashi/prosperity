@@ -17,6 +17,7 @@ import br.com.prosperity.business.FuncionalidadeBusiness;
 import br.com.prosperity.business.FuncionarioBusiness;
 import br.com.prosperity.business.PerfilBusiness;
 import br.com.prosperity.business.UsuarioBusiness;
+import br.com.prosperity.entity.PerfilEntity;
 import br.com.prosperity.exception.BusinessException;
 
 @Controller
@@ -36,8 +37,9 @@ public class UsuarioController {
 
 	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
 	public String consultaUsuario(Model model) {
+		// List<UsuarioBean> usuarios = usuarioBusiness.getUsuarios();
 		List<FuncionarioBean> funcionarios = funcionarioBusiness.getFuncionarios();
-		List<PerfilBean> perfis = perfilBusiness.getPerfis();
+		List<PerfilEntity> perfis = perfilBusiness.getPerfis();
 		model.addAttribute("funcionarios", funcionarios);
 		model.addAttribute("perfis", perfis);
 		model.addAttribute("usuario", new UsuarioBean());
@@ -63,6 +65,6 @@ public class UsuarioController {
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
 	public String inserirUsuario(@ModelAttribute("usuario") UsuarioBean usuario) {
 		usuarioBusiness.inserir(usuario);
-		return "usuario/consultar-usuario";
+		return "redirect:consultar";
 	}
 }

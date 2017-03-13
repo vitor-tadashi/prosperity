@@ -302,7 +302,7 @@
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">CPF</label>
 							<div class="col-xs-7">
-								<p class="form-control-static" id="cpf" name="cpf">placeholder</p>
+								<p class="form-control-static" id="cpf" name="cpf">${candidato.cpf}</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
@@ -318,22 +318,16 @@
 						pattern="dd/MM/yyyy" /></p>
 							</div>
 						</div>
-<!-- 						<div class="form-group col-md-6"> -->
-<!-- 							<label class="col-xs-5 control-label">Idade</label> -->
-<!-- 							<div class="col-xs-7"> -->
-<!-- 								<p class="form-control-static" id="idade" name="idade">placeholder</p> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Telefone</label>
 							<div class="col-xs-7">
-								<p class="form-control-static" id="telefone" name="telefone">placeholder</p>
+								<p class="form-control-static" id="telefone" name="telefone">${contato.telefone}</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Cidade</label>
 							<div class="col-xs-7">
-								<p class="form-control-static" id="cidade" name="cidade">placeholder</p>
+								<p class="form-control-static" id="cidade" name="cidade">${endereco.cidade}</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
@@ -345,31 +339,31 @@
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Curso</label>
 							<div class="col-xs-7">
-								<p class="form-control-static" id="nomeCurso" name="nomeCurso">placeholder</p>
+								<p class="form-control-static" id="nomeCurso" name="nomeCurso">{tipoCursoBean.nome}</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Instituição</label>
 							<div class="col-xs-7">
-								<p class="form-control-static" id="instituicao" name="instituicao">UNASP</p>
+								<p class="form-control-static" id="instituicao" name="instituicao">${formacao.nomeInstituicao}</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Tipo de curso</label>
 							<div class="col-xs-7">
-								<p class="form-control-static" id="tipoCurso" name="tipoCurso">Graduação</p>
+								<p class="form-control-static" id="tipoCurso" name="tipoCurso">${tipoCursoBean.nome}</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Situação atual</label>
 							<div class="col-xs-7">
-								<p class="form-control-static" id="situacaoAtual" name="situacaoAtual">placeholder</p>
+								<p class="form-control-static" id="situacaoAtual" name="situacaoAtual">${situacaoAtual.descricao}</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
 							<label class="col-xs-5 control-label">Mês/Ano conclusão</label>
 							<div class="col-xs-7">
-								<p class="form-control-static" id="conclusao" name="conclusao">07/2018</p>
+								<p class="form-control-static" id="conclusao" name="conclusao">${formacao.dataConclusao}</p>
 							</div>
 						</div>
 						<div class="form-group col-md-6">

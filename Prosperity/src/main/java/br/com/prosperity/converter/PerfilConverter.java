@@ -8,6 +8,7 @@ import br.com.prosperity.entity.PerfilEntity;
 
 @Component
 public class PerfilConverter implements Converter<PerfilEntity, PerfilBean> {
+
 	@Autowired
 	private FuncionalidadeConverter funcionalidadeConverter;
 
