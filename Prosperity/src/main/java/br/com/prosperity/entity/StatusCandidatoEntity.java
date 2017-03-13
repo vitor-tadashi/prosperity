@@ -44,9 +44,7 @@ public class StatusCandidatoEntity {
 	@JoinColumn(name = "idStatus")
 	private StatusEntity status;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "idCandidato")
-	private CandidatoEntity candidato ;
+
 
 	/* fim dos mapeamentos */
 

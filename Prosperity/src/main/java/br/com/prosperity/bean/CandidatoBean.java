@@ -1,6 +1,7 @@
 package br.com.prosperity.bean;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,12 +22,13 @@ public class CandidatoBean extends Formatar {
 	private String email;
 	private Date dataAlteracao;
 	private File curriculo;
-	private ContatoBean contato;
+
+   private ContatoBean contato;
 	private EnderecoBean endereco;
 	private FormacaoBean formacao;
 	private UsuarioBean usuario;
-	private List<StatusBean> status;
-	private List<VagaBean> vagas;
+	private List<StatusBean> status = new ArrayList<>();;
+	private List<VagaBean> vagas = new ArrayList<>();;
 
 	public Integer getId() {
 		return id;

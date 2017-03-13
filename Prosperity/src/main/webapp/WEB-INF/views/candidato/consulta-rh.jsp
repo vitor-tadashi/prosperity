@@ -796,38 +796,6 @@
 												</div> <!-- /fim botao --></td>
 										</tr>
 									</c:forEach>
-									<tr>
-										<td>Kobe Bryant</td>
-										<td>Gerente</td>
-										<td>R$10.000</td>
-										<td>17/02/2015</td>
-										<td>31/04/2017</td>
-										<td><span class="label label-analiseRH">Em análise
-												do RH</span></td>
-										<td><span class="line"></span>
-											<div class="btn-group">
-											
-												<!-- começo do botao -->
-												<button type="button"
-													class="btn btn-info dropdown-toggle btn-sm"
-													data-toggle="dropdown" aria-haspopup="true"
-													aria-expanded="false">
-													<i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
-												</button>
-												<ul class="dropdown-menu slidedown btnAlinhado">
-													<li><a href="#aprovado-modal" data-toggle="modal"
-														data-toggle="modal" data-target=".bs-example-modal-lg"><i
-															class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
-													<li class="divider"></li>
-													<li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
-
-													<li class="divider"></li>
-													<li><a href="#delete-modal" data-toggle="modal"><i
-															class="fa fa-trash-o fa-lg">&nbsp;</i>Fechar vaga</a></li>
-												</ul>
-											</div> 
-											</td>
-									</tr>
 									<!-- fim do botao -->
 									<!-- <tr>
 										<td>Kevin Durant</td>

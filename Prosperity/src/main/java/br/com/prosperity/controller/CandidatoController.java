@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.ContatoBean;
 import br.com.prosperity.bean.EnderecoBean;
+
 import br.com.prosperity.bean.FormacaoBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
+
 import br.com.prosperity.bean.TipoCursoBean;
 import br.com.prosperity.business.CandidatoBusiness;
 import br.com.prosperity.business.TipoCursoBusiness;
@@ -34,7 +36,7 @@ public class CandidatoController {
 	private FormacaoBean formacaoBean;
 	
 	@Autowired
-	private SituacaoAtualBean situacaoBean;
+	private SituacaoAtualBean situacaoAtualBean;
 	
 	@Autowired
 	private EnderecoBean enderecoBean;
@@ -71,12 +73,15 @@ public class CandidatoController {
 		candidatoBean = candidatoBusiness.obter(3);
 		enderecoBean = candidatoBean.getEndereco();
 		contatoBean = candidatoBean.getContato();
+		formacaoBean = candidatoBean.getFormacao();
+		System.out.println(formacaoBean.getSituacaoAtualBean());
+		situacaoAtualBean = formacaoBean.getSituacaoAtualBean();
 		
 		model.addAttribute("candidato", candidatoBean);
 		model.addAttribute("endereco", enderecoBean);
 		model.addAttribute("contato", contatoBean);
 		model.addAttribute("formacao", formacaoBean);
-		model.addAttribute("situacaoAtual", situacaoBean);
+		model.addAttribute("situacaoAtual", situacaoAtualBean);
 		
 		return "candidato/historico-candidato";
 	}
