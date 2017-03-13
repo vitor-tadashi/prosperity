@@ -1,6 +1,5 @@
 package br.com.prosperity.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +12,10 @@ import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.ContatoBean;
 import br.com.prosperity.bean.EnderecoBean;
 import br.com.prosperity.bean.FormacaoBean;
-import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
+import br.com.prosperity.bean.TipoCursoBean;
 import br.com.prosperity.business.CandidatoBusiness;
+import br.com.prosperity.business.TipoCursoBusiness;
 
 @Controller
 @RequestMapping(value="candidato")
@@ -39,11 +39,16 @@ public class CandidatoController {
 	@Autowired
 	private EnderecoBean enderecoBean;
 
+	@Autowired
+	private TipoCursoBusiness tipoCursoBusiness;
+	
 
 	private String teste;
 	
 	@RequestMapping(value ="cadastrar", method = RequestMethod.GET)
-	public String cadastrarCandidato() {
+	public String cadastrarCandidato(Model model) {
+		List<TipoCursoBean> tiposCurso = tipoCursoBusiness.getTipoCurso();
+		model.addAttribute("tiposCurso", tiposCurso);
 		return "candidato/cadastrar-candidato";
 	}
 	
@@ -75,16 +80,10 @@ public class CandidatoController {
 		
 		return "candidato/historico-candidato";
 	}
-	@RequestMapping (value="/cadastrar-candidato", method= RequestMethod.GET)
-	public String cadastrarCandidato (Model model){
-		List<FuncionalidadeBean> funcionalidade = new ArrayList<>();
-		FuncionalidadeBean b = new FuncionalidadeBean();
-		b.setNome("teste");
-		funcionalidade.add(b);
-		model.addAttribute("funcionalidades", funcionalidade);
-		
-		return "candidato/cadastrar-candidato";
-	}
+
+
+
+	
 	
 	
 	
