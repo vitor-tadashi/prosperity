@@ -82,5 +82,4 @@
 		<property name="username" value="axa_developers" />
 		<property name="password" value="axa@123" />
 	</bean>
-
 </beans>
