@@ -12,11 +12,11 @@ public class VagaBean {
 	private String nomeSolicitante;
 	private Double valorPretensao;
 	private Date dataInicio;
-	private String localTrabalho;
-	private String idTipoVaga;
+	private Character localTrabalho;
+	private Character idTipoVaga;
 	private Date horarioEntrada;
 	private Date horarioSaida;
-	private String aumentaQuadro;
+	private Character aumentaQuadro;
 	private ProjetoBean projetoBean;
 	private CargoBean cargoBean;
 	private SenioridadeBean senioridadeBean;
@@ -28,7 +28,7 @@ public class VagaBean {
 	private Date dataAbertura; //
 	private Date dataAprovacao; //
 	private Date dataFechamento; //
-	private int numeroCandidatos; //
+	private Integer numeroCandidatos; //
 	private UsuarioBean usuarioBean;
 	
 
@@ -75,19 +75,19 @@ public class VagaBean {
 		this.dataInicio = dataInicio;
 	}
 
-	public String getLocalTrabalho() {
+	public char getLocalTrabalho() {
 		return localTrabalho;
 	}
 
-	public void setLocalTrabalho(String localTrabalho) {
+	public void setLocalTrabalho(char localTrabalho) {
 		this.localTrabalho = localTrabalho;
 	}
 
-	public String getIdTipoVaga() {
+	public char getIdTipoVaga() {
 		return idTipoVaga;
 	}
 
-	public void setIdTipoVaga(String idTipoVaga) {
+	public void setIdTipoVaga(char idTipoVaga) {
 		this.idTipoVaga = idTipoVaga;
 	}
 
@@ -107,11 +107,11 @@ public class VagaBean {
 		this.horarioSaida = horarioSaida;
 	}
 
-	public String getAumentaQuadro() {
+	public char getAumentaQuadro() {
 		return aumentaQuadro;
 	}
 
-	public void setAumentaQuadro(String aumentaQuadro) {
+	public void setAumentaQuadro(char aumentaQuadro) {
 		this.aumentaQuadro = aumentaQuadro;
 	}
 
@@ -195,11 +195,11 @@ public class VagaBean {
 		this.dataFechamento = dataFechamento;
 	}
 
-	public int getNumeroCandidatos() {
+	public Integer getNumeroCandidatos() {
 		return numeroCandidatos;
 	}
 
-	public void setNumeroCandidatos(int numeroCandidatos) {
+	public void setNumeroCandidatos(Integer numeroCandidatos) {
 		this.numeroCandidatos = numeroCandidatos;
 	}
 

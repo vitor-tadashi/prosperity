@@ -1,25 +1,25 @@
 package br.com.prosperity.entity;
 
 import java.util.Date;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name= "tbVaga")	
-@NamedQuery (name = "obterAprovacao", query = "SELECT u FROM VagaEntity u WHERE u.nomeVaga = ?1")
+@NamedQuery (name = "obterTodos", query = "SELECT u FROM VagaEntity u WHERE u.nomeVaga = ?1")
 public class VagaEntity {
 
 	@Id
-	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idVaga", unique = true, nullable = false)
 	private Integer id;
 	
@@ -33,25 +33,28 @@ public class VagaEntity {
 	private Double valorPretensao;
 
 	@Column(name = "dtInicio")
+	@Temporal(value=TemporalType.DATE)
 	private Date dataInicio;
 
 	@Column(name = "flLocalTrabalho")
-	private String localTrabalho;
+	private Character localTrabalho;
 
 	@Column(name = "idTpVaga")
-	private String tipoVaga;
+	private Character tipoVaga;
 
 	@Column(name = "hrEntrada")
+	@Temporal(value=TemporalType.DATE)
 	private Date horaEntrada;
 
 	@Column(name = "hrSaida")
+	@Temporal(value=TemporalType.DATE)
 	private Date horaSaida;
 
-	@Column(name = "flAumentoQuadro")
-	private String aumentoQuadro;
+	@Column(name = "flAumentoQuadra")
+	private Character aumentoQuadro;
 
 	@Column(name = "numCandidatos")
-	private int numeroCandidatos; //
+	private Integer numeroCandidatos; //
 	
 	@Column(name = "nmSubstituido")
 	private String nomeSubstituido; // 
@@ -66,25 +69,31 @@ public class VagaEntity {
 	private String descricaoPerfilTecnico; //
 	
 	@Column(name = "dtAbertura")
+	@Temporal(value=TemporalType.DATE)
 	private Date dataAbertura; //
 	
 	@Column(name = "dtAprovacao")
+	@Temporal(value=TemporalType.DATE)
 	private Date dataAprovacao; //
 	
 	@Column(name = "dtFechamento")
+	@Temporal(value=TemporalType.DATE)
 	private Date dataFechamento; //
 
-	@OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER, orphanRemoval = true)
-	@PrimaryKeyJoinColumn
+	@ManyToOne
+	@JoinColumn(name="idProjeto")
 	private ProjetoEntity projetoEntity;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
+	@JoinColumn(name="idCargo")
 	private CargoEntity cargoEntity;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
+	@JoinColumn(name="idSenioridade")
 	private SenioridadeEntity senioridadeEntity;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
+	@JoinColumn(name="idUsuario")
 	private UsuarioEntity usuarioEntity;
 
 	//@ManyToOne(cascade = CascadeType.ALL)
@@ -134,19 +143,19 @@ public class VagaEntity {
 		this.dataInicio = dataInicio;
 	}
 
-	public String getLocalTrabalho() {
+	public Character getLocalTrabalho() {
 		return localTrabalho;
 	}
 
-	public void setLocalTrabalho(String localTrabalho) {
+	public void setLocalTrabalho(Character localTrabalho) {
 		this.localTrabalho = localTrabalho;
 	}
 
-	public String getTipoVaga() {
+	public Character getTipoVaga() {
 		return tipoVaga;
 	}
 
-	public void setTipoVaga(String tipoVaga) {
+	public void setTipoVaga(Character tipoVaga) {
 		this.tipoVaga = tipoVaga;
 	}
 
@@ -166,19 +175,19 @@ public class VagaEntity {
 		this.horaSaida = horaSaida;
 	}
 
-	public String getAumentoQuadro() {
+	public Character getAumentoQuadro() {
 		return aumentoQuadro;
 	}
 
-	public void setAumentoQuadro(String aumentoQuadro) {
+	public void setAumentoQuadro(Character aumentoQuadro) {
 		this.aumentoQuadro = aumentoQuadro;
 	}
 
-	public int getNumeroCandidatos() {
+	public Integer getNumeroCandidatos() {
 		return numeroCandidatos;
 	}
 
-	public void setNumeroCandidatos(int numeroCandidatos) {
+	public void setNumeroCandidatos(Integer numeroCandidatos) {
 		this.numeroCandidatos = numeroCandidatos;
 	}
 

@@ -1,13 +1,15 @@
 package br.com.prosperity.bean;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class PerfilBean {
 
 	private Integer id;
 	private String nome;
-	private List<FuncionalidadeBean> listaFuncionalidades = new ArrayList<>();
+	private List<FuncionalidadeBean> listaFuncionalidades;
 
 	public Integer getId() {
 		return id;

@@ -1,5 +1,8 @@
 package br.com.prosperity.bean;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ClienteBean {
 	private Integer id;
 	private String nome;

@@ -7,8 +7,9 @@ public class ProjetoBean {
 
 	private Integer id;
 	private String nome;
-	private ClienteBean cliente;
 	private FuncionarioBean funcionario;
+	private ClienteBean cliente;
+
 	
 	public Integer getId() {
 		return id;
@@ -22,17 +23,19 @@ public class ProjetoBean {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public ClienteBean getCliente() {
-		return cliente;
-	}
-	public void setCliente(ClienteBean cliente) {
-		this.cliente = cliente;
-	}
+	
 	public FuncionarioBean getFuncionario() {
 		return funcionario;
 	}
 	public void setFuncionario(FuncionarioBean funcionario) {
 		this.funcionario = funcionario;
+	}
+	
+	public ClienteBean getCliente() {
+		return cliente;
+	}
+	public void setCliente(ClienteBean cliente) {
+		this.cliente = cliente;
 	}
 
 }
