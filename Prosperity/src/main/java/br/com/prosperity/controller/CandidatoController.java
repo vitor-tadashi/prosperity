@@ -9,81 +9,73 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.com.prosperity.bean.CandidatoBean;
-import br.com.prosperity.bean.CargoBean;
+
 import br.com.prosperity.bean.EnderecoBean;
-import br.com.prosperity.bean.SenioridadeBean;
+
 import br.com.prosperity.bean.SituacaoAtualBean;
 import br.com.prosperity.bean.TipoCursoBean;
+import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.CandidatoBusiness;
-import br.com.prosperity.business.CargoBusiness;
-import br.com.prosperity.business.SenioridadeBusiness;
+
 import br.com.prosperity.business.SituacaoAtualBusiness;
 import br.com.prosperity.business.TipoCursoBusiness;
+import br.com.prosperity.business.VagaBusiness;
 
 @Controller
-@RequestMapping(value="candidato")
+@RequestMapping(value = "candidato")
 public class CandidatoController {
-	
+
 	@Autowired
 	private CandidatoBusiness candidatoBusiness;
-	
+
 	@Autowired
 	private EnderecoBean enderecoBean;
 
 	@Autowired
 	private TipoCursoBusiness tipoCursoBusiness;
-	
+
 	@Autowired
 	private SituacaoAtualBusiness situacaoAtualBusiness;
 	@Autowired
-	private CargoBusiness cargoBusiness;
-	@Autowired
-	private SenioridadeBusiness senioridadeBusiness;
-	
-	@Autowired
-	private CargoBean cargoBean;
-	
-	
-	@RequestMapping(value ="cadastrar", method = RequestMethod.GET)
+	private VagaBusiness vagaBusiness;
+
+	@RequestMapping(value = "cadastrar", method = RequestMethod.GET)
 	public String cadastrarCandidato(Model model) {
 		List<TipoCursoBean> tiposCurso = tipoCursoBusiness.getTipoCurso();
 		model.addAttribute("tiposCurso", tiposCurso);
-		
+
 		List<SituacaoAtualBean> listaSituacaoAtual = situacaoAtualBusiness.getSituacaoAtual();
 		model.addAttribute("listaSituacaoAtual", listaSituacaoAtual);
-		
-		//List<CargoBean> listaCargo = cargoBusiness.getCargo();
-		//model.addAttribute("listaCargo", listaCargo);
-		
-		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.getSenioridade();
-		model.addAttribute("listaSenioridade", listaSenioridade);
-		
+
+		List<VagaBean> listaVaga = vagaBusiness.getVaga();
+		model.addAttribute("listaVaga", listaVaga);
+
 		return "candidato/cadastrar-candidato";
 	}
-	
-	@RequestMapping(value ="consultar-rh", method = RequestMethod.GET)
+
+	@RequestMapping(value = "consultar-rh", method = RequestMethod.GET)
 	public String consultarCandidatoRH(Model model) {
 		List<CandidatoBean> candidatos = candidatoBusiness.obterTodos();
 		model.addAttribute("candidatos", candidatos);
 		return "candidato/consulta-rh";
-	
+
 	}
-	
-	@RequestMapping(value ="consultar-gestor", method = RequestMethod.GET)
+
+	@RequestMapping(value = "consultar-gestor", method = RequestMethod.GET)
 	public String consultarCandidatoGestor() {
 		return "candidato/consulta-gestor";
 	}
-	
-	@RequestMapping(value ="historico", method = RequestMethod.GET)
+
+	@RequestMapping(value = "historico", method = RequestMethod.GET)
 	public String historicoCandidato(Model model) {
 		CandidatoBean candidatoBean = new CandidatoBean();
 		candidatoBean = candidatoBusiness.obter(2);
-		
+
 		enderecoBean = candidatoBean.getEndereco();
-		
+
 		model.addAttribute("candidato", candidatoBean);
 		model.addAttribute("endereco", enderecoBean);
-		
+
 		return "candidato/historico-candidato";
 	}
 }

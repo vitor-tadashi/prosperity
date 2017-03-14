@@ -19,8 +19,12 @@ public class ClienteConverter implements Converter <ClienteEntity, ClienteBean> 
 	@Override
 	public ClienteBean convertEntityToBean(ClienteEntity entity) {
 		ClienteBean bean = new ClienteBean();
+		if (entity!=null){
 		bean.setId(entity.getId());
 		bean.setNome(entity.getNome());
+		} else {
+			bean = null;
+		}
 		return bean;
 	}
 

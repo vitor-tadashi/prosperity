@@ -56,7 +56,7 @@ public class VagaController {
 		List<VagaBean> vagas = vagaBusiness.obterTodos();
 		
 		/*vagas.add(b);*/
-		model.addAttribute("vagas", vagas);
+		model.addAttribute("vagaBean", vagas);
 		
 		return "vaga/consultar-vaga";
 	}
@@ -64,7 +64,7 @@ public class VagaController {
 	@RequestMapping(value = "aprovar", method = RequestMethod.GET)
 	public String aprovacaoVaga(Model model) {
 		vagaBean = vagaBusiness.obterTodos();
-		model.addAttribute("vagaBean", vagaBean);
+		model.addAttribute("vagas", vagaBean);
 		return "vaga/aprovacao-vaga";
 	}
 	
