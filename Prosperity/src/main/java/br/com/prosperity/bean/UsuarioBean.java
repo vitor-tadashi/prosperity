@@ -13,6 +13,7 @@ public class UsuarioBean {
 	private Boolean autenticado;
 	private Boolean primeiroAcesso = true;
 	private String email;
+	private Boolean ativo;
 	
 	public UsuarioBean() {
 		autenticado = false;
@@ -69,5 +70,13 @@ public class UsuarioBean {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 }

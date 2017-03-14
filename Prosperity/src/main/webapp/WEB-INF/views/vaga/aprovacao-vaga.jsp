@@ -282,15 +282,17 @@
 							</tr>
 						</thead>
 						<tbody class="text-center">
-							<tr>
-								<td>Nome da Vaga</td>
-								<td>${vagaBean.nomeSolicitante}</td>
-								<td>Senior</td>
-								<td>Projeto Web</td>
+						<c:forEach var="vaga" items="${vagaBean}" varStatus="i">
+						
+						<tr>
+								<td>${vaga.nomeVaga}</td>
+								<td>${vaga.nomeSolicitante}</td>
+								<td>${vaga.senioridadeBean}</td>
+								<td>${vaga.projetoBean}</td>
 								<td>Carrefour</td>
-								<td>Interno</td>
-								<td>17/02/2017</td>
-								<td>01/03/2017</td>
+								<td>${vaga.localTrabalho}</td>
+								<td>${vaga.dataAbertura }</td>
+								<td>${vaga.dataFechamento }</td>
 								<td>
 									<div class="btn-group">
 										<!-- <-- ! Começo Botão -->
@@ -312,7 +314,9 @@
 									</div> <!-- Fim Botão -->
 								</td>
 							</tr>
-							<!-- <tr>
+						
+						</c:forEach>
+														<!-- <tr>
 								<td>Desenvolvedor</td>
 								<td>Vitor Tadashi</td>
 								<td>Senior</td>
