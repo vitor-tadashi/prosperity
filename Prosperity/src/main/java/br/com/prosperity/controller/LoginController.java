@@ -38,13 +38,13 @@ public class LoginController {
 		} catch (BusinessException ex) {
 			model.addAttribute("log", ex.getMessage());
 		}
-		
+
 		return "login/acesso";
 	}
-	
-	@RequestMapping(value = "primeiro-acesso", method = RequestMethod.POST)
+
+	@RequestMapping(value = "/primeiro-acesso", method = RequestMethod.POST)
 	public String primeiroAcessoUsuario(UsuarioBean usuarioBean) throws BusinessException {
- 		usuario.setSenha(usuarioBean.getSenha());
+		usuario.setSenha(usuarioBean.getSenha());
 		usuarioBusiness.alterar(usuario);
 		return "dashboard/pagina-inicial";
 	}
