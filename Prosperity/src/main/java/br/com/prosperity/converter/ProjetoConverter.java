@@ -19,8 +19,8 @@ public class ProjetoConverter implements Converter<ProjetoEntity,ProjetoBean> {
 		ProjetoEntity entity = new ProjetoEntity();
 		entity.setIdProjeto(bean.getId());
 		entity.setNmProjeto(bean.getNome());
-		entity.setClienteProjeto(clienteConverter.convertBeanToEntity(bean.getCliente()));
 		entity.setFuncionario(funcionarioConverter.convertBeanToEntity(bean.getFuncionario()));
+		entity.setClienteProjeto(clienteConverter.convertBeanToEntity(bean.getCliente()));
 		//entity.setPerfilEntity(perfilConverter.convertBeanToEntity(bean.getPerfil()));
 		return entity;
 	}
@@ -31,8 +31,8 @@ public class ProjetoConverter implements Converter<ProjetoEntity,ProjetoBean> {
 		
 		bean.setId(entity.getIdProjeto());
 		bean.setNome(entity.getNmProjeto());
-		bean.setCliente(clienteConverter.convertEntityToBean(entity.getClienteProjeto()));
 		bean.setFuncionario(funcionarioConverter.convertEntityToBean(entity.getFuncionario()));
+		bean.setCliente(clienteConverter.convertEntityToBean(entity.getClienteProjeto()));
 		return bean;
 	}
 }
