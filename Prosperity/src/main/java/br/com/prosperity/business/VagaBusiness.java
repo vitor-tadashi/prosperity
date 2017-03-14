@@ -1,23 +1,14 @@
 package br.com.prosperity.business;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.*;
-
-import br.com.prosperity.bean.SenioridadeBean;
-import br.com.prosperity.converter.SenioridadeConverter;
-import br.com.prosperity.dao.SenioridadeDAO;
-
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.converter.VagaConverter;
 import br.com.prosperity.dao.VagaDAO;
 import br.com.prosperity.entity.VagaEntity;
-import br.com.prosperity.exception.BusinessException;
-
 
 @Component
 public class VagaBusiness {
@@ -28,10 +19,10 @@ public class VagaBusiness {
 	@Autowired
 	private VagaConverter vagaConverter;
 
-	/*public void vagaBean(VagaBean vagaBean) {
-		vagaDAO.adicionar(vagaConverter.convertBeanToEntity(vagaBean));
-	}
-*/
+	/*
+	 * public void vagaBean(VagaBean vagaBean) {
+	 * vagaDAO.adicionar(vagaConverter.convertBeanToEntity(vagaBean)); }
+	 */
 	@Transactional
 	public List<VagaBean> obterTodos() {
 		List<VagaEntity> aprovar = vagaDAO.findByNamedQuery("obterAprovacao");
@@ -39,7 +30,7 @@ public class VagaBusiness {
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 		return vagaBean;
 	}
-
+	@Transactional
 	private VagaBean obter(int idVaga) {
 
 		VagaEntity vagaEntity = vagaDAO.obterPorId(idVaga);
@@ -52,7 +43,14 @@ public class VagaBusiness {
 	public void inserir(VagaBean vagaBean) {
 		vagaDAO.adicionar(vagaConverter.convertBeanToEntity(vagaBean));
 	}
-	
+
+
+	@Transactional
+	public List<VagaBean> getVaga() {
+		List<VagaBean> listaVaga = vagaConverter.convertEntityToBean(vagaDAO.listar());
+
+		return listaVaga;
+	}
 
 }
 
