@@ -44,16 +44,32 @@ public class UsuarioBusiness {
 		}
 		return usuarioBean;
 	}
-	
+
+	public UsuarioBean consultar(UsuarioBean usuarioBean) throws BusinessException {
+		List<UsuarioEntity> usuarios = usuarioDAO.findByNamedQuery("obterPorUsuario", usuarioBean.getNome());
+
+		if (usuarios != null) {
+			for (UsuarioEntity usuarioEntity : usuarios) {
+				usuarioBean = usuarioConverter.convertEntityToBean(usuarioEntity);
+			}
+		}
+
+		if (!usuarioBean.getAutenticado()) {
+			throw new BusinessException("Usuário ou senha inválidos");
+		}
+		return usuarioBean;
+	}
+
 	@Transactional
 	public void alterar(UsuarioBean usuarioBean) {
 		UsuarioEntity usuarioEntity = usuarioDAO.alterar(usuarioConverter.convertBeanToEntity(usuarioBean));
 	}
-	
+
 	@Transactional
 	public List<UsuarioBean> getUsuarios() {
-		List<UsuarioBean> usuarios = usuarioConverter.convertEntityToBean(usuarioDAO.findByNamedQuery("populaTabela", UsuarioEntity.class));
-		
+		List<UsuarioBean> usuarios = usuarioConverter
+				.convertEntityToBean(usuarioDAO.findByNamedQuery("populaTabela", UsuarioEntity.class));
+
 		return usuarios;
 	}
 }

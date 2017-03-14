@@ -44,11 +44,9 @@ public class LoginController {
 	
 	@RequestMapping(value = "primeiro-acesso", method = RequestMethod.POST)
 	public String primeiroAcessoUsuario(UsuarioBean usuarioBean) throws BusinessException {
-		usuarioBean.setEmail(usuario.getEmail());
-		usuarioBean.setFuncionario(usuario.getFuncionario());
-		usuarioBean.setPerfil(usuario.getPerfil());
-		usuarioBean.setPrimeiroAcesso(false);
-		usuarioBusiness.alterar(usuarioBean);
+		usuario = usuarioBusiness.consultar(usuarioBean);
+		usuario.setSenha(usuarioBean.getSenha());
+		usuarioBusiness.alterar(usuario);
 		return "dashboard/pagina-inicial";
 	}
 }
