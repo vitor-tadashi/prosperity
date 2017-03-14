@@ -1,18 +1,22 @@
 package br.com.prosperity.converter;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.prosperity.bean.ContatoBean;
 import br.com.prosperity.entity.ContatoEntity;
 
+
 @Component
 public class ContatoConverter implements Converter<ContatoEntity, ContatoBean> {
 
+	@Autowired
+	CandidatoConverter candidatoConverter;
+	
 	@Override
 	public ContatoEntity convertBeanToEntity(ContatoBean bean) {
 		ContatoEntity entity = new ContatoEntity();
 		entity.setId(bean.getId());
-		entity.setCandidato(new CandidatoConverter().convertBeanToEntity(bean.getCandidato()));
 		entity.setTelefone(bean.getTelefone());
 		return entity;
 	}
@@ -21,7 +25,6 @@ public class ContatoConverter implements Converter<ContatoEntity, ContatoBean> {
 	public ContatoBean convertEntityToBean(ContatoEntity entity) {
 		ContatoBean bean = new ContatoBean();
 		bean.setId(entity.getId());
-		bean.setCandidato(new CandidatoConverter().convertEntityToBean(entity.getCandidato()));
 		bean.setTelefone(entity.getTelefone());
 		return bean;
 	}

@@ -52,14 +52,6 @@
 
 			//Valida o formato do CEP.
 			if (validacep.test(cep)) {
-
-				//Preenche os campos com "..." enquanto consulta webservice.
-				document.getElementById('rua').value = "...";
-				document.getElementById('bairro').value = "...";
-				document.getElementById('cidade').value = "...";
-				document.getElementById('uf').value = "...";
-
-				//Cria um elemento javascript.
 				var script = document.createElement('script');
 
 				//Sincroniza com o callback.
@@ -198,20 +190,20 @@
 
 										<div class="form-group col-md-3">
 											<label for="tipoDeCurso">Tipo de curso</label> <select
-												class="form-control" id="tipoDeCurso">												
-											<c:forEach var="funcionalidade" items="${funcionalidade}"
-										varStatus="i">
-										<option value="i">${funcionalidade.nome }</option>
-										</c:forEach>
+											class="form-control" id="tipoDeCurso">												
+								<!-- FAZER FOREACH  -->
+											<c:forEach var="tipoCurso" items="${tiposCurso}">
+												<option value="${tipoCurso.id}">${tipoCurso.nome}</option>
+											</c:forEach>
+										
 											</select>
 										</div>
 										<div class="form-group col-md-2" >
 											<label for="situacaoAtual">Situação atual</label> <select
 												class="form-control" id="situacaoAtual">
-												<option value="0">Selecione</option>
-												<option value="1">Concluído</option>
-												<option value="2">Cursando</option>
-												<option value="3">Interrompido</option>
+												<c:forEach var="situacaoAtual" items="${listaSituacaoAtual}">
+													<option value="${situacaoAtual.id}">${situacaoAtual.descricao}</option>
+												</c:forEach>
 											</select>
 										</div>
 										<div class="form-group col-md-2">
@@ -243,12 +235,9 @@
 											<label for="vagaASerAplicado">Vaga a ser aplicado</label> <select
 												class="form-control" id="vagaASerAplicado"
 												data-required="true">
-												<option value="">Selecione</option>
-												<option value="1">Desenvolvedor Java</option>
-												<option value="2">Desenvolvedor C#</option>
-												<option value="3">Analista de Sistemas</option>
-												<option value="4">Gerente de Projetos</option>
-												<option value="5">Banco de Talentos</option>
+														<c:forEach var="Vaga" items="${listaVaga}">
+													<option value="${vaga.id}">${vaga.nome}</option>
+												</c:forEach>
 											</select>
 										</div>
 										<div class="form-group col-md-4">

@@ -1,6 +1,5 @@
 package br.com.prosperity.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,19 +8,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+
+
 import javax.persistence.Table;
 
-/**
- * Entity implementation class for Entity: PerfilFuncionalidadeEntity
- *
- */
 @Entity
 @Table(name = "tbUsuario")
-@NamedQuery(name = "obterPorUsuario", query = "SELECT u FROM UsuarioEntity u WHERE u.nome = ?1")
+@NamedQueries({
+	@NamedQuery(name = "obterPorUsuario", query = "SELECT u FROM UsuarioEntity u WHERE u.nome = ?1"),
+	@NamedQuery(name="populaTabela", query="SELECT u FROM UsuarioEntity u")
+	})
 public class UsuarioEntity {
 
 	@Id

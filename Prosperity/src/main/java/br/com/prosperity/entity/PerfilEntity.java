@@ -16,19 +16,24 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbPerfil")
-@NamedQuery(name="Perfil.findAll", query="SELECT p FROM PerfilEntity p")
+@NamedQuery(name = "obterNomePerfil", query = "SELECT p FROM PerfilEntity p WHERE p .nome = ?1")
 public class PerfilEntity {
 
 	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	@Column(name="idPerfil", unique=true, nullable=false)
+
+	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+	@Column(name = "idPerfil", unique = true, nullable = false)
+
 	private Integer id;
 
-	@Column(name="nmPerfil")
+	@Column(name = "nmPerfil")
 	private String nome;
 
 	@ManyToMany
-	@JoinTable(name="tbPerfilFuncionalidade", joinColumns={@JoinColumn(name="idFuncionalidade")}, inverseJoinColumns={@JoinColumn(name="idPerfil")})
+
+	@JoinTable(name = "tbPerfilFuncionalidade", joinColumns = { @JoinColumn(name = "idPerfil") }, inverseJoinColumns = {
+		@JoinColumn(name = "idFuncionalidade") })
+
 	private List<FuncionalidadeEntity> funcionalidades;
 
 	public Integer getId() {
@@ -46,6 +51,7 @@ public class PerfilEntity {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public List<FuncionalidadeEntity> getFuncionalidades() {
 		return funcionalidades;
 	}
@@ -53,5 +59,5 @@ public class PerfilEntity {
 	public void setFuncionalidades(List<FuncionalidadeEntity> funcionalidades) {
 		this.funcionalidades = funcionalidades;
 	}
-	
+
 }

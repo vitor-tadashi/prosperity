@@ -1,8 +1,11 @@
 package br.com.prosperity.bean;
 
 import java.util.List;
+import org.springframework.stereotype.Component;
+
 
 import org.springframework.stereotype.Component;
+
 
 @Component
 public class SituacaoAtualBean {
@@ -20,7 +23,7 @@ public class SituacaoAtualBean {
 	public Integer getId() {
 		return id;
 	}
-	public void setIdSituacaoAtual(Integer id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getDescricao() {
