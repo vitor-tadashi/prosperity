@@ -330,14 +330,13 @@
                                 <div class="panel-body col-md-7">
                                     <label>Perfil</label>
                                     <div class="" id="none2">
-                                    <input class="form-control" name="nome" type="text" placeholder="Insira um nome para o perfil" />
+                                    <input class="form-control" id="none3" name="nome" type="text" placeholder="Insira um nome para o perfil" required/>
                                     </div>
                                     <div class="hide" id="none1">
                                     <select class="form-control chzn-select hide">
-                                                            <option>RH</option>
-                                                            <option>Adm</option>
-                                                            <option>Pleno</option>
-                                                            <option>Senior</option>
+                                                          <c:forEach var="perfil" items="${perfis }" varStatus="i">
+                                                            <option value="${perfil.id }">${perfil.nome }</option>
+                                                          </c:forEach>
                                                         </select>
                                     </div>
                                     <br>
@@ -371,7 +370,7 @@
                                                                 <input type="checkbox" class="chk-row" name="listaFuncionalidades[${i.index }].id" value="${funcionalidade.id }">
                                                                 <span class="custom-checkbox"></span>
                                                             </label>
-                                                            <input type="hidden" value="${funcionalidade.nome }" name="listaFuncionalidades[${i.index }].nome">
+                                                            <%-- <input type="hidden" value="${funcionalidade.nome }" name="listaFuncionalidades[${i.index }].nome"> --%>
                                                         </td>
                                                         <td>${funcionalidade.nome }</td>
                                                     </tr>
@@ -411,10 +410,12 @@
     $("#sub").click(function(){
         $("#none2").addClass("hide");
         $("#none1").removeClass("hide");
+        $("#none3").attr('required',false);
     });
     $("#novo").click(function(){
         $("#none1").addClass("hide");
         $("#none2").removeClass("hide");
+        $("#none3").attr('required',true);
     });
     </script>
 

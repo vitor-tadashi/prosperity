@@ -347,7 +347,7 @@
 													<div class="panel-heading">
 														<label for="exampleInputEmail1">Avaliadores:</label>
 													</div>
-													<div class="panel-body relative"name="">
+													<div class="panel-body relative"name="nmPerfil">
 														<select multiple="multiple" id="selectedBox1"
 															class="select-box pull-left form-control">
 															<option value="1">Taiama</option>
@@ -385,7 +385,7 @@
 										<div class="form-group col-md-6">
 											<div class="form-group">
 												<label class="control-label">Data do último contato:</label>
-												<div class="form-group" name="">
+												<div class="form-group" name="dtUltimoContato">
 													<div class="input-group">
 														<input type="text" value="01/01/2017"
 															class="datepicker form-control"> <span
@@ -402,7 +402,7 @@
 											<div class="form-group col-md-6">
 												<div class="form-group">
 													<label class="control-label">Data de entrevista:</label>
-													<div class="form-group" name="">
+													<div class="form-group" name="dtEntrevista">
 														<div class="input-group">
 															<input type="text" value="00/00/0000"
 																class="datepicker form-control" name=""> <span

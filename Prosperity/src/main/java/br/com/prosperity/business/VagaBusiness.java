@@ -34,9 +34,9 @@ public class VagaBusiness {
 
 		List<VagaEntity> vagaEntity = vagaDAO.listar();
         List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
-		vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 		return vagaBean;
 	}
+	
 	@Transactional
 	private VagaBean obter(int idVaga) {
 
@@ -58,8 +58,7 @@ public class VagaBusiness {
 
 		return listaVaga;
 	}
-
-
+	
 }
 
 // criar método consultarVagasAprovacao
