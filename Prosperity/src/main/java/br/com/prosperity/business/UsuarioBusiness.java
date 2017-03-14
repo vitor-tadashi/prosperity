@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.converter.UsuarioConverter;
 import br.com.prosperity.dao.UsuarioDAO;
+import br.com.prosperity.entity.PerfilEntity;
 import br.com.prosperity.entity.UsuarioEntity;
 import br.com.prosperity.exception.BusinessException;
 
@@ -56,5 +57,12 @@ public class UsuarioBusiness {
 		List<UsuarioBean> usuarios = usuarioConverter.convertEntityToBean(usuarioDAO.listar());
 		
 		return usuarios;
+	}
+	
+	@Transactional
+	public List<UsuarioBean> buscarGestor(){
+		List<UsuarioEntity> usuariosEntity = usuarioDAO.findByNamedQuery("obterGestor");
+		List<UsuarioBean> usuariosBean = usuarioConverter.convertEntityToBean(usuariosEntity);
+		return usuariosBean;
 	}
 }

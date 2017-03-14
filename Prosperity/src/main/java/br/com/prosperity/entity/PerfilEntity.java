@@ -25,7 +25,7 @@ public class PerfilEntity {
 	@Column(name = "idPerfil", unique = true, nullable = false)
 
 	private Integer id;
-
+	
 	@Column(name = "nmPerfil")
 	private String nome;
 
