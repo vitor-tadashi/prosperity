@@ -282,14 +282,14 @@
 							</tr>
 						</thead>
 						<tbody class="text-center">
-						<c:forEach var="vaga" items="${vagaBean}" varStatus="i">
+						<c:forEach var="vaga" items="${vagas}" varStatus="i">
 						
 						<tr>
 								<td>${vaga.nomeVaga}</td>
 								<td>${vaga.nomeSolicitante}</td>
-								<td>${vaga.senioridadeBean}</td>
-								<td>${vaga.projetoBean}</td>
-								<td>Carrefour</td>
+								<td>${senioridade.nome}</td>
+								<td>${projeto.nome}</td>
+								<td>${projeto.cliente.nome}</td>
 								<td>${vaga.localTrabalho}</td>
 								<td>${vaga.dataAbertura }</td>
 								<td>${vaga.dataFechamento }</td>

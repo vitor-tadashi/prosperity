@@ -28,7 +28,6 @@ public class UsuarioBusiness {
 	}
 
 	public UsuarioBean autenticar(UsuarioBean usuarioBean) throws BusinessException {
-
 		List<UsuarioEntity> usuarios = usuarioDAO.findByNamedQuery("obterPorUsuario", usuarioBean.getNome());
 
 		if (usuarios != null) {
@@ -43,10 +42,25 @@ public class UsuarioBusiness {
 		if (!usuarioBean.getAutenticado()) {
 			throw new BusinessException("Usuário ou senha inválidos");
 		}
-
 		return usuarioBean;
 	}
 
+	public UsuarioBean consultar(UsuarioBean usuarioBean) throws BusinessException {
+		List<UsuarioEntity> usuarios = usuarioDAO.findByNamedQuery("obterPorUsuario", usuarioBean.getNome());
+
+		if (usuarios != null) {
+			for (UsuarioEntity usuarioEntity : usuarios) {
+				usuarioBean = usuarioConverter.convertEntityToBean(usuarioEntity);
+			}
+		}
+
+		if (!usuarioBean.getAutenticado()) {
+			throw new BusinessException("Erro a alterar senha: ");
+		}
+		return usuarioBean;
+	}
+
+	@Transactional
 	public void alterar(UsuarioBean usuarioBean) {
 		UsuarioEntity usuarioEntity = usuarioDAO.alterar(usuarioConverter.convertBeanToEntity(usuarioBean));
 	}
@@ -54,7 +68,6 @@ public class UsuarioBusiness {
 	@Transactional
 	public List<UsuarioBean> getUsuarios() {
 		List<UsuarioBean> usuarios = usuarioConverter.convertEntityToBean(usuarioDAO.listar());
-		
 		return usuarios;
 	}
 }

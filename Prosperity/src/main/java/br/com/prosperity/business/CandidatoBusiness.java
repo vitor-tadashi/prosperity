@@ -30,6 +30,7 @@ public class CandidatoBusiness{
 	public CandidatoBean obter(Integer id) {
 		CandidatoEntity candidatoEntity = candidatoDAO.obterPorId(id);
 		
+		
 		if (candidatoEntity != null) {
 			candidatoBean = candidatoConverter.convertEntityToBean(candidatoEntity);
 			candidatoBean.cpfFormat(candidatoBean);
