@@ -67,9 +67,7 @@ public class UsuarioBusiness {
 
 	@Transactional
 	public List<UsuarioBean> getUsuarios() {
-		List<UsuarioBean> usuarios = usuarioConverter
-				.convertEntityToBean(usuarioDAO.findByNamedQuery("populaTabela", UsuarioEntity.class));
-
+		List<UsuarioBean> usuarios = usuarioConverter.convertEntityToBean(usuarioDAO.listar());
 		return usuarios;
 	}
 }

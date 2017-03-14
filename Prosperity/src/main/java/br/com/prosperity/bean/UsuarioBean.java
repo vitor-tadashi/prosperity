@@ -8,9 +8,9 @@ public class UsuarioBean {
 	private PerfilBean perfil;
 	private FuncionarioBean funcionario;
 	private String nome;
-	private String senha;
+	private String senha = "verity@123";
 	private Boolean autenticado;
-	private Boolean primeiroAcesso;
+	private Boolean primeiroAcesso = true;
 	private String email;
 
 	public UsuarioBean() {

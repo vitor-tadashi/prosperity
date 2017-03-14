@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.entity.UsuarioEntity;
+import br.com.prosperity.util.EncriptaDecriptaApacheCodec;
 
 @Component
 public class UsuarioConverter implements Converter<UsuarioEntity,UsuarioBean>{
@@ -22,8 +23,8 @@ public class UsuarioConverter implements Converter<UsuarioEntity,UsuarioBean>{
 		try {
 			entity.setId(bean.getId());
 			entity.setNome(bean.getNome());
-			entity.setSenha(bean.getSenha());
-			//entity.setFuncionarioEntity(funcionarioConverter.convertBeanToEntity(bean.getFuncionario()));
+			entity.setSenha(new EncriptaDecriptaApacheCodec().codificaBase64Encoder(bean.getSenha()));
+			entity.setFuncionarioEntity(funcionarioConverter.convertBeanToEntity(bean.getFuncionario()));
 			entity.setPerfilEntity(perfilConverter.convertBeanToEntity(bean.getPerfil()));
 			entity.setPrimeiroAcesso(bean.getPrimeiroAcesso());
 			entity.setEmail(bean.getEmail());
@@ -42,7 +43,7 @@ public class UsuarioConverter implements Converter<UsuarioEntity,UsuarioBean>{
 			bean.setId(entity.getId());
 			bean.setNome(entity.getNome());
 			bean.setSenha(entity.getSenha());
-			//bean.setFuncionario(funcionarioConverter.convertEntityToBean(entity.getFuncionarioEntity()));
+			bean.setFuncionario(funcionarioConverter.convertEntityToBean(entity.getFuncionarioEntity()));
 			bean.setPerfil(perfilConverter.convertEntityToBean(entity.getPerfilEntity()));
 			bean.setPrimeiroAcesso(entity.getPrimeiroAcesso());
 			bean.setEmail(entity.getEmail());
