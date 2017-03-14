@@ -13,7 +13,8 @@ public class UsuarioBean {
 	private Boolean autenticado;
 	private Boolean primeiroAcesso = true;
 	private String email;
-
+	private Boolean ativo;
+	
 	public UsuarioBean() {
 		autenticado = false;
 	}
@@ -21,47 +22,36 @@ public class UsuarioBean {
 	public Integer getId() {
 		return id;
 	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
 	public PerfilBean getPerfil() {
 		return perfil;
 	}
-
 	public void setPerfil(PerfilBean perfil) {
 		this.perfil = perfil;
 	}
-
 	public FuncionarioBean getFuncionario() {
 		return funcionario;
 	}
-
 	public void setFuncionario(FuncionarioBean funcionario) {
 		this.funcionario = funcionario;
 	}
-
 	public String getNome() {
 		return nome;
 	}
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 	public String getSenha() {
 		return senha;
 	}
-
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
 	public Boolean getAutenticado() {
 		return autenticado;
 	}
-
 	public void setAutenticado(Boolean autenticado) {
 		this.autenticado = autenticado;
 	}
@@ -80,5 +70,13 @@ public class UsuarioBean {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 }

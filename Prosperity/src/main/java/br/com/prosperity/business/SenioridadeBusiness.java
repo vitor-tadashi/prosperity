@@ -1,6 +1,5 @@
 package br.com.prosperity.business;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +30,6 @@ public class SenioridadeBusiness {
 		return senioridadeBean;
 	}
 
-	@Transactional
-	public List<SenioridadeBean> getSenioridade() {
-		List<SenioridadeBean> senioridadeVaga = senioridadeConverter.convertEntityToBean(senioridadeDAO.listar());
 
-		return senioridadeVaga;
-	}
 
 }
