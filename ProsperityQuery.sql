@@ -202,3 +202,10 @@ CREATE TABLE tbCompetencias (
 
 alter table tbVaga add nmVaga varchar(50)
 select * from tbVaga
+
+-- Adicionado coluna situação na tabela de usuarios
+ALTER TABLE dbo.tbUsuario ADD
+	ativo bit NULL
+GO
+ALTER TABLE dbo.tbUsuario SET (LOCK_ESCALATION = TABLE)
+GO

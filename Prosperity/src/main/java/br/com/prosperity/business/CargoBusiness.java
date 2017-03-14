@@ -11,21 +11,22 @@ import br.com.prosperity.converter.CargoConverter;
 import br.com.prosperity.dao.CargoDAO;
 import br.com.prosperity.entity.CargoEntity;
 
-
 @Component
 public class CargoBusiness {
-	
+
 	@Autowired
 	private CargoDAO cargoDAO;
-			
+
 	@Autowired
 	private CargoConverter cargoConverter;
-	
+
 	@Transactional
-	public List<CargoBean> obterTodos(){
+	public List<CargoBean> obterTodos() {
 		List<CargoEntity> cargoEntity = cargoDAO.listar();
 		List<CargoBean> cargoBean = cargoConverter.convertEntityToBean(cargoEntity);
 		return cargoBean;
 	}
+
+
 
 }

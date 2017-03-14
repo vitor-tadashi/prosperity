@@ -20,17 +20,14 @@ public class UsuarioConverter implements Converter<UsuarioEntity,UsuarioBean>{
 	public UsuarioEntity convertBeanToEntity(UsuarioBean bean) {
 		UsuarioEntity entity = new UsuarioEntity();
 		
-		try {
-			entity.setId(bean.getId());
-			entity.setNome(bean.getNome());
-			entity.setSenha(new EncriptaDecriptaApacheCodec().codificaBase64Encoder(bean.getSenha()));
-			entity.setFuncionarioEntity(funcionarioConverter.convertBeanToEntity(bean.getFuncionario()));
-			entity.setPerfilEntity(perfilConverter.convertBeanToEntity(bean.getPerfil()));
-			entity.setPrimeiroAcesso(bean.getPrimeiroAcesso());
-			entity.setEmail(bean.getEmail());
-		} catch (Exception e) {
-			throw new RuntimeException("ERRO NO CONVERTER :" + e);
-		}
+		entity.setId(bean.getId());
+		entity.setNome(bean.getNome());
+		entity.setSenha(new EncriptaDecriptaApacheCodec().codificaBase64Encoder(bean.getSenha()));
+		entity.setFuncionarioEntity(funcionarioConverter.convertBeanToEntity(bean.getFuncionario()));
+		entity.setPerfilEntity(perfilConverter.convertBeanToEntity(bean.getPerfil()));
+		entity.setPrimeiroAcesso(bean.getPrimeiroAcesso());
+		entity.setAtivo(bean.getAtivo());
+		entity.setEmail(bean.getEmail());
 		
 		return entity;
 	}
@@ -39,17 +36,14 @@ public class UsuarioConverter implements Converter<UsuarioEntity,UsuarioBean>{
 	public UsuarioBean convertEntityToBean(UsuarioEntity entity) {
 		UsuarioBean bean = new UsuarioBean();
 		
-		try {
-			bean.setId(entity.getId());
-			bean.setNome(entity.getNome());
-			bean.setSenha(entity.getSenha());
-			bean.setFuncionario(funcionarioConverter.convertEntityToBean(entity.getFuncionarioEntity()));
-			bean.setPerfil(perfilConverter.convertEntityToBean(entity.getPerfilEntity()));
-			bean.setPrimeiroAcesso(entity.getPrimeiroAcesso());
-			bean.setEmail(entity.getEmail());
-		} catch (Exception e) {
-			throw new RuntimeException("ERRO NO CONVERTER :" + e);
-		}
+		bean.setId(entity.getId());
+		bean.setNome(entity.getNome());
+		bean.setSenha(entity.getSenha());
+		bean.setFuncionario(funcionarioConverter.convertEntityToBean(entity.getFuncionarioEntity()));
+		bean.setPerfil(perfilConverter.convertEntityToBean(entity.getPerfilEntity()));
+		bean.setPrimeiroAcesso(entity.getPrimeiroAcesso());
+		bean.setAtivo(entity.getAtivo());
+		bean.setEmail(entity.getEmail());
 		
 		return bean;
 	}
