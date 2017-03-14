@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UsuarioBean {
+	
 	private Integer id;
 	private PerfilBean perfil;
 	private FuncionarioBean funcionario;

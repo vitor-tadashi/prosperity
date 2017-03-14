@@ -1,6 +1,15 @@
 package br.com.prosperity.entity;
 
-import javax.persistence.*;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * Entity implementation class for Entity: CargoSenioridade
@@ -17,13 +26,13 @@ public class CargoSenioridadeEntity{
 	@Column(name="idCargoSenioridade", unique = true)
 	private Integer id;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="idCargo")
-	private CargoEntity cargo;
+	@OneToMany
+	@JoinColumn(name = "idCargo")
+	private List<CargoEntity> idCargo;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@OneToMany
 	@JoinColumn(name = "idSenioridade")
-	private SenioridadeEntity idSenioridade;
+	private List<SenioridadeEntity> idSenioridade;
 	
 	@Column(name="vlMinSalario")
 	private Double vlMinSalario;
@@ -38,16 +47,16 @@ public class CargoSenioridadeEntity{
 		this.id = id;
 	}
 
-	public CargoEntity getCargo() {
-		return cargo;
+	public List<CargoEntity> getCargo() {
+		return idCargo;
 	}
-	public void setCargo(CargoEntity cargo) {
-		this.cargo = cargo;
+	public void setCargo(List<CargoEntity> idCargo) {
+		this.idCargo = idCargo;
 	}
-	public SenioridadeEntity getIdSenioridade() {
+	public List<SenioridadeEntity> getIdSenioridade() {
 		return idSenioridade;
 	}
-	public void setIdSenioridade(SenioridadeEntity idSenioridade) {
+	public void setIdSenioridade(List<SenioridadeEntity> idSenioridade) {
 		this.idSenioridade = idSenioridade;
 	}
 	public Double getVlMinSalario() {

@@ -19,8 +19,12 @@ public class FuncionarioConverter implements Converter<FuncionarioEntity, Funcio
 	@Override
 	public FuncionarioBean convertEntityToBean(FuncionarioEntity entity) {
 		FuncionarioBean bean = new FuncionarioBean();
-		bean.setId(entity.getId());
-		bean.setNome(entity.getNome());
+		if (entity!=null){
+			bean.setId(entity.getId());
+			bean.setNome(entity.getNome());
+		} else {
+			bean = null;
+		}
 		return bean;
 	}
 }

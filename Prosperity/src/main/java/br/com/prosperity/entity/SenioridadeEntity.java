@@ -10,29 +10,29 @@ public class SenioridadeEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idSenioridade", unique = true, nullable = false)
-	private Integer id;
+	private Integer idSenioridade;
 
 	@Column(name="nmSenioridade")
 	private String nome;
 	
-	 @ManyToMany
-	 @JoinTable(name="tbCargoSenioridade", joinColumns={@JoinColumn(name="idCargo")}, inverseJoinColumns={@JoinColumn(name="idSenioridade")})
-	private List<CargoEntity> senioridade; //relacionamento entre Senioridade e CargoBeana
-
-	public List<CargoEntity> getSenioridade() {
-		return senioridade;
-	}
-
-	public void setSenioridade(List<CargoEntity> senioridade) {
-		this.senioridade = senioridade;
-	}
+//	@ManyToOne
+//	@JoinColumn(name = "idCargoSenoridade")
+//	private CargoSenioridadeEntity senioridade; //relacionamento entre Senioridade e CargoBean
+//
+//	public CargoSenioridadeEntity getSenioridade() {
+//		return senioridade;
+//	}
+//
+//	public void setSenioridade(CargoSenioridadeEntity senioridade) {
+//		this.senioridade = senioridade;
+//	}
 
 	public Integer getId() {
-		return id;
+		return idSenioridade;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId(Integer idSenioridade) {
+		this.idSenioridade = idSenioridade;
 	}
 
 	public String getNome() {
