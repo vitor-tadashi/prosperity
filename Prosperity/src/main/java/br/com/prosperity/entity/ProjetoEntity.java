@@ -14,11 +14,11 @@ public class ProjetoEntity {
 	@Column(name="nmProjeto")
 	private String nome;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="idFuncionario")
 	private FuncionarioEntity funcionario;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="idCliente")
 	private ClienteEntity cliente;
 		

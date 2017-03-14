@@ -2,6 +2,9 @@ package br.com.prosperity.bean;
 
 import java.util.Date;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class StatusCandidatoBean {
 	
 	private Integer id;

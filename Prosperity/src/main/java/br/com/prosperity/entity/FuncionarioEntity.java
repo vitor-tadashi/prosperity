@@ -23,11 +23,11 @@ public class FuncionarioEntity {
 	@Column(name="nmFuncionario")
 	private String nome;
 	
-	@ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="idCargo")
 	private CargoEntity cargo;
 	
-	@ManyToOne (cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="idSenioridade")
 	private SenioridadeEntity senioridade;
 
