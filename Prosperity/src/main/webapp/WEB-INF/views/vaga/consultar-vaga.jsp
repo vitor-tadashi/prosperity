@@ -485,12 +485,12 @@
 								</tr>
 							</thead>
 							<tbody class="text-center">
-								<c:forEach var="vagas" items="${vagas}">
+								<c:forEach var="vagaBean" items="${vagaBean}">
 									<tr>
-									<td>${vagas.nomeVaga}</td>
-									<td>Carrefour</td>
-									<td>Alocado</td>
-									<td>15/02/2017</td>
+									<td>${vagaBean.nomeVaga}</td>
+									<td>${vagaBean.projetoBean}</td>
+									<td>${vagaBean.localTrabalho}</td>
+									<td>${vagaBean.dataAbertura}</td>
 									<td><span id="tdStatus" class="label label-contratado">Ativo</span></td>
 									<td>
 										<div class="btn-group">
