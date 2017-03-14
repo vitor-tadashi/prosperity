@@ -27,7 +27,7 @@
 <body>
 	<!-- Modais aqui-->
 	<!-- Modal -->
-	<div class="modal fade" id="novo-usuario-modal"
+	<div class="modal fade" id="usuario-modal"
 		data-target="#novo-usuario-modal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
@@ -37,12 +37,18 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Novo usuário</h4>
+					<c:if test="${usuario.id.length}">
+						<h4 class="modal-title" id="myModalLabel">Alterar usuário</h4>
+					</c:if>
+					<c:if test="${!usuario.id.length}">
+						<h4 class="modal-title" id="myModalLabel">Novo usuário</h4>
+					</c:if>
 				</div>
 				<div class="modal-body">
 					<div class="padding-md">
 						<div class="row">
 							<form action="cadastrar" method="POST">
+								<input type="hidden" name="id" />
 								<div class="row">
 									<div class="form-group col-md-6">
 										<label for="funcionario">Funcionário</label> <select
@@ -58,7 +64,7 @@
 										<div class="input-group">
 											<span class="input-group-addon"><i class="fa fa-user"></i></span>
 											<input type="text" class="form-control" id="usuario"
-												data-required="true" name="nome">
+												data-required="true" name="nome" value="${usuarios[1].nome}">
 										</div>
 									</div>
 									<div class="form-group col-md-6 cold-md-offset-6">
@@ -222,16 +228,15 @@
 											<td>${usuario.perfil.nome}</td>
 											<td>
 												<c:if test="${usuario.ativo}">
-													<span class="label label-success status ">Ativo</span>
+													<span class="label label-success status">Ativo</span>
 												</c:if>
 												<c:if test="${!usuario.ativo}">
-													<span class="label label-danger status ">Inativo</span>
+													<span class="label label-danger status">Inativo</span>
 												</c:if>
 											</td>
 											<td>
 												<div class="btn-group">
-													<a class="btn btn-info" href="#editar-usuario-modal"
-														data-toggle="modal"><i class="fa fa-edit"></i> Editar</a>
+													<a class="btn btn-info" data-toggle="modal" onclick="testeModal(${usuario.id})"><i class="fa fa-edit"></i> Editar</a>
 												</div>
 											</td>
 										</tr>
@@ -242,8 +247,7 @@
 						</div>
 						<!-- /.col -->
 						<div class="pull-right">
-							<a class="btn btn-primary" href="#novo-usuario-modal"
-								data-toggle="modal">Criar novo usuário</a> <a
+							<a class="btn btn-primary" onclick="testeModal()" data-toggle="modal">Criar novo usuário</a> <a
 								class="btn btn-warning" href="criar-perfil">Criar
 								perfil</a>
 						</div>
@@ -266,7 +270,29 @@
 
 	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
 	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
-
+	
 	<!-- javaScript aqui -->
+	<script>
+		function testeModal(id) {
+			if(id) {
+				$.get("carrega-usuario?id="+id);
+			} else {
+				//$.get("carrega-usuario");
+				$.get(
+						"carrega-usuario",
+						function(data) {
+							alert('page content: ' + data);
+							$('#usuario-modal').modal('show');
+						});
+			}
+			/* $.get(
+				"teste",
+				{paramOne : 1, paramX : 'abc'},
+				function(data) {
+					alert('page content: ' + data);
+				}); */
+			
+		}
+	</script>
 </body>
 </html>

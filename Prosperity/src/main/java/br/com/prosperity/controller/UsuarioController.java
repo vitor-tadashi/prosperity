@@ -38,13 +38,27 @@ public class UsuarioController {
 	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
 	public String consultaUsuario(Model model) {
 		List<UsuarioBean> usuarios = usuarioBusiness.getUsuarios();
+		/*List<FuncionarioBean> funcionarios = funcionarioBusiness.getFuncionarios();
+		List<PerfilEntity> perfis = perfilBusiness.getPerfis();
+		model.addAttribute("funcionarios", funcionarios);
+		model.addAttribute("perfis", perfis);*/
+		model.addAttribute("usuarios", usuarios);
+		//model.addAttribute("usuario", new UsuarioBean());
+		
+		return "usuario/consultar-usuario";
+	}
+	
+	@RequestMapping(value = "/carrega-usuario", method = RequestMethod.GET)
+	public Model carregaUsuario(Integer id, Model model) {
+		//TODO metodo de carregar combo
 		List<FuncionarioBean> funcionarios = funcionarioBusiness.getFuncionarios();
 		List<PerfilEntity> perfis = perfilBusiness.getPerfis();
 		model.addAttribute("funcionarios", funcionarios);
 		model.addAttribute("perfis", perfis);
-		model.addAttribute("usuarios", usuarios);
-		
-		return "usuario/consultar-usuario";
+		if(id != null) {
+			System.out.println("asd");
+		}
+		return model;
 	}
 
 	@RequestMapping(value = "/criar-perfil", method = RequestMethod.GET)
@@ -63,8 +77,21 @@ public class UsuarioController {
 	}
 
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
-	public String inserirUsuario(@ModelAttribute("usuario") UsuarioBean usuario) {
-		usuarioBusiness.inserir(usuario);
+	public String inserirUsuario(UsuarioBean usuario) {
+		if(usuario.getId() == null) {
+			usuarioBusiness.inserir(usuario);
+		}
+		else {
+			usuarioBusiness.alterar(usuario);
+		}
+		
 		return "redirect:consultar";
 	}
+	
+	@RequestMapping(value = "/teste", method=RequestMethod.GET)
+	public String teste(Model model) {
+		System.out.println("tESTE");
+		return "redirect:criar-perfil";
+	}
+	
 }
