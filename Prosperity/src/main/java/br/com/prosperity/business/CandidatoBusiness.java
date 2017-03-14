@@ -42,7 +42,8 @@ public class CandidatoBusiness{
 
 	@Transactional
 	public List<CandidatoBean> obterTodos() {
-		List<CandidatoBean> entities =candidatoConverter.convertEntityToBean(candidatoDAO.listar());
-		return entities;
+		List<CandidatoEntity> entities = candidatoDAO.listar();
+		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(entities);
+		return beans;
 	}
 }

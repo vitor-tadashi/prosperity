@@ -7,16 +7,16 @@ import br.com.prosperity.entity.FuncionalidadeEntity;
 
 @Component
 public class FuncionalidadeConverter implements Converter<FuncionalidadeEntity, FuncionalidadeBean> {
-	
+
 	private PerfilConverter perfilConverter;
-	
+
 	@Override
 	public FuncionalidadeEntity convertBeanToEntity(FuncionalidadeBean bean) {
 		FuncionalidadeEntity entity = new FuncionalidadeEntity();
-		
+
 		entity.setId(bean.getId());
 		entity.setNome(bean.getNome());
-		entity.setPerfil(perfilConverter.convertBeanToEntity(bean.getPerfil()));
+		// entity.setPerfil(perfilConverter.convertBeanToEntity(bean.getPerfil()));
 
 		return entity;
 	}
@@ -27,7 +27,7 @@ public class FuncionalidadeConverter implements Converter<FuncionalidadeEntity, 
 
 		bean.setId(entity.getId());
 		bean.setNome(entity.getNome());
-		//bean.setPerfil(perfilConverter.convertEntityToBean(entity.getPerfil()));
+		// bean.setPerfil(perfilConverter.convertEntityToBean(entity.getPerfil()));
 
 		return bean;
 	}
