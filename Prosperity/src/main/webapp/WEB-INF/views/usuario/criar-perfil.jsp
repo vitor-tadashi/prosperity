@@ -334,10 +334,9 @@
                                     </div>
                                     <div class="hide" id="none1">
                                     <select class="form-control chzn-select hide">
-                                                            <option>RH</option>
-                                                            <option>Adm</option>
-                                                            <option>Pleno</option>
-                                                            <option>Senior</option>
+                                                          <c:forEach var="perfil" items="${perfis }" varStatus="i">
+                                                            <option value="${perfil.id }">${perfil.nome }</option>
+                                                          </c:forEach>
                                                         </select>
                                     </div>
                                     <br>
@@ -371,7 +370,7 @@
                                                                 <input type="checkbox" class="chk-row" name="listaFuncionalidades[${i.index }].id" value="${funcionalidade.id }">
                                                                 <span class="custom-checkbox"></span>
                                                             </label>
-                                                            <input type="hidden" value="${funcionalidade.nome }" name="listaFuncionalidades[${i.index }].nome">
+                                                            <%-- <input type="hidden" value="${funcionalidade.nome }" name="listaFuncionalidades[${i.index }].nome"> --%>
                                                         </td>
                                                         <td>${funcionalidade.nome }</td>
                                                     </tr>
