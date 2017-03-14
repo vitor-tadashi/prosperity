@@ -15,7 +15,7 @@ public class StatusConverter implements Converter<StatusEntity, StatusBean> {
 		entity.setId(bean.getId());
 		entity.setNome(bean.getNome());
 		entity.setTipoCss(bean.getCss());
-		return null;
+		return entity;
 	}
 
 	@Override
@@ -25,6 +25,6 @@ public class StatusConverter implements Converter<StatusEntity, StatusBean> {
 		bean.setNome(entity.getNome());
 		bean.setCss(entity.getTipoCss());
 	
-		return null;
+		return bean;
 	}
 }
