@@ -55,7 +55,7 @@ public class UsuarioBusiness {
 		}
 
 		if (!usuarioBean.getAutenticado()) {
-			throw new BusinessException("Usuário ou senha inválidos");
+			throw new BusinessException("Erro a alterar senha: ");
 		}
 		return usuarioBean;
 	}
