@@ -5,10 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbFuncionalidade")
+@NamedQuery(name = "obterPerfilFuncionalidade", query = "SELECT f FROM FuncionalidadeEntity f WHERE f.id IN (?1)")
 public class FuncionalidadeEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

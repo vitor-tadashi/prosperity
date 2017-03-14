@@ -43,7 +43,13 @@ public class VagaController {
 	private ProjetoBusiness preencherProjeto;
 	
 	@Autowired
+	private ProjetoBean projeto;
+	
+	@Autowired
 	private List<SenioridadeBean> senioridadeBean;
+	
+	@Autowired
+	private SenioridadeBean senioridade;
 	
 	@Autowired
 	private List<CargoBean> cargoBean;
@@ -81,6 +87,9 @@ public class VagaController {
 	public String aprovacaoVaga(Model model) {
 		vagaBean = vagaBusiness.obterTodos();
 		model.addAttribute("vagas", vagaBean);
+		model.addAttribute("projeto", vagaBean.get(0).getProjetoBean());
+		model.addAttribute("senioridade", vagaBean.get(0).getSenioridadeBean());
+		model.addAttribute("cliente", vagaBean.get(0).getProjetoBean().getCliente());
 		return "vaga/aprovacao-vaga";
 	}
 	

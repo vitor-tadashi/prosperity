@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tbUsuario")
 @NamedQueries({
-	@NamedQuery(name = "obterPorUsuario", query = "SELECT u FROM UsuarioEntity u WHERE u.nome = ?1"),
+	@NamedQuery(name = "obterPorUsuario", query = "SELECT u FROM UsuarioEntity u WHERE u.nome = ?1 AND u.ativo = true"),
 	@NamedQuery(name="populaTabela", query="SELECT u FROM UsuarioEntity u")
 	})
 public class UsuarioEntity {
