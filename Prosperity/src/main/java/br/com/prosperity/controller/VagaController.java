@@ -51,12 +51,28 @@ public class VagaController {
 	@Autowired
 	private List<ProjetoBean> projetoBean;
 	
+	@Autowired
+	private CargoBusiness cargoBusiness;
+	
+	@Autowired
+	private SenioridadeBusiness senioridadeBusiness;
+	
 	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
 	public String cliente(Model model) {
 		List<VagaBean> vagas = vagaBusiness.obterTodos();
 		
 		/*vagas.add(b);*/
 		model.addAttribute("vagaBean", vagas);
+		
+		
+		List<CargoBean> listaCargo = cargoBusiness.getCargo();
+		model.addAttribute("listaCargo", listaCargo);
+		
+		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.getSenioridade();
+		model.addAttribute("listaSenioridade", listaSenioridade);
+		
+		List<VagaBean> listaVaga = vagaBusiness.getVaga();
+		model.addAttribute("listaVaga", listaVaga);
 		
 		return "vaga/consultar-vaga";
 	}

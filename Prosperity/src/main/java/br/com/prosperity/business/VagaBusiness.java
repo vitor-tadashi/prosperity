@@ -62,7 +62,9 @@ public class VagaBusiness {
 
 		return listaVaga;
 	}
+	
 
+	
 }
 
 // criar método consultarVagasAprovacao
