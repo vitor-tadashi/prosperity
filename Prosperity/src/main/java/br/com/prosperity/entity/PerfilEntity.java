@@ -2,6 +2,7 @@ package br.com.prosperity.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +26,7 @@ public class PerfilEntity {
 	@Column(name = "nmPerfil")
 	private String nome;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "tbPerfilFuncionalidade", joinColumns = { @JoinColumn(name = "idPerfil") }, inverseJoinColumns = {
 			@JoinColumn(name = "idFuncionalidade") })
 	private List<FuncionalidadeEntity> funcionalidades;
