@@ -64,7 +64,9 @@ public class UsuarioController {
 	@RequestMapping(value = "/criar-perfil", method = RequestMethod.GET)
 	public String criaPerfil(Model model) {
 		List<FuncionalidadeBean> funcionalidades = funcionalidadeBusiness.obterTodos();
+		List<PerfilBean> perfis = perfilBusiness.obterTodos();
 		model.addAttribute("funcionalidades", funcionalidades);
+		model.addAttribute("perfis", perfis);
 
 		return "usuario/criar-perfil";
 	}

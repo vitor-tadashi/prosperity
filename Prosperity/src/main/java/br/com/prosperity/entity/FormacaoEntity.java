@@ -24,6 +24,9 @@ public class FormacaoEntity {
 
 	@Column(name = "nmInstituicao")
 	private String nome;
+	
+	@Column(name = "nmCurso")
+	private String nomeCurso;
 
 	@Column(name = "dtConclusao")
 	private Date dataConclusao;
@@ -77,5 +80,14 @@ public class FormacaoEntity {
 	public void setSituacaoAtualEntity(SituacaoAtualEntity situacaoAtualEntity) {
 		this.situacaoAtualEntity = situacaoAtualEntity;
 	}
+
+	public String getNomeCurso() {
+		return nomeCurso;
+	}
+
+	public void setNomeCurso(String nomeCurso) {
+		this.nomeCurso = nomeCurso;
+	}
+	
 
 }

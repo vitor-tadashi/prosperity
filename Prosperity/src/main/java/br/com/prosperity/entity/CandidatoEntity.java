@@ -19,6 +19,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import br.com.prosperity.bean.ContatoBean;
+
 @Entity
 @Table(name = "tbCandidato")
 public class CandidatoEntity {
@@ -64,6 +66,15 @@ public class CandidatoEntity {
 
 	@Column(name = "cmCurriculo")
 	private File curriculo;
+	
+	@Column(name = "dtUltimoContato")
+	private Date dataultimoContato;
+	
+	@Column(name = "dtEntrevista")
+	private Date dataEntrevista;
+	
+	@Column(name = "dsProposta")
+	private String proposta;
 
 	/* Mapeamento de Relacionamentos */
 
@@ -179,6 +190,30 @@ public class CandidatoEntity {
 		this.curriculo = curriculo;
 	}
 
+	public Date getDataUltimoContato() {
+		return dataultimoContato;
+	}
+
+	public void setDataUltimoContato(Date contatoBean) {
+		this.dataultimoContato = contatoBean;
+	}
+
+	public Date getDataEntrevista() {
+		return dataEntrevista;
+	}
+
+	public void setDataEntrevista(Date dataEntrevista) {
+		this.dataEntrevista = dataEntrevista;
+	}
+
+	public String getProposta() {
+		return proposta;
+	}
+
+	public void setProposta(String proposta) {
+		this.proposta = proposta;
+	}
+
 	public ContatoEntity getContato() {
 		return contato;
 	}
@@ -218,5 +253,5 @@ public class CandidatoEntity {
 	public void setStatusCandidatos(List<StatusCandidatoEntity> statusCandidatos) {
 		this.statusCandidatos = statusCandidatos;
 	}
-
 }
+	

@@ -22,6 +22,7 @@ public class FormacaoConverter implements Converter<FormacaoEntity, FormacaoBean
 		FormacaoEntity entity = new FormacaoEntity();
 		entity.setId(bean.getId());
 		entity.setNome(bean.getNomeInstituicao());
+		entity.setNomeCurso(bean.getNomeCurso());
 		entity.setDataConclusao(bean.getDataConclusao());
 		entity.setSituacaoAtualEntity(SituacaoAtual.convertBeanToEntity(bean.getSituacaoAtualBean()));
 		entity.setTipoCursoEntity(tipoCurso.convertBeanToEntity(bean.getTipoCursoBean()));
@@ -33,6 +34,7 @@ public class FormacaoConverter implements Converter<FormacaoEntity, FormacaoBean
 		FormacaoBean bean = new FormacaoBean();
 		bean.setId(entity.getId());
 		bean.setNomeInstituicao(entity.getNome());
+		bean.setNomeCurso(entity.getNomeCurso());
 		bean.setDataConclusao(entity.getDataConclusao());
 		bean.setSituacaoAtualBean(SituacaoAtual.convertEntityToBean(entity.getSituacaoAtualEntity()));
 		bean.setTipoCursoBean(tipoCurso.convertEntityToBean(entity.getTipoCursoEntity()));
