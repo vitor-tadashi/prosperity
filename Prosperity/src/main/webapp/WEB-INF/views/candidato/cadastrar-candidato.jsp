@@ -52,14 +52,6 @@
 
 			//Valida o formato do CEP.
 			if (validacep.test(cep)) {
-
-				//Preenche os campos com "..." enquanto consulta webservice.
-				document.getElementById('rua').value = "...";
-				document.getElementById('bairro').value = "...";
-				document.getElementById('cidade').value = "...";
-				document.getElementById('uf').value = "...";
-
-				//Cria um elemento javascript.
 				var script = document.createElement('script');
 
 				//Sincroniza com o callback.
@@ -134,8 +126,7 @@
 											<div class="form-group col-md-3">
 												<label for="cpf" class="control-label">CPF</label> <input
 													type="text" class="form-control" id="cpf"
-													data-required="true" placeholder="Informe seu CPF"
-													value="">
+													data-required="true" placeholder="Informe seu CPF" value="">
 											</div>
 											<div class="form-group col-md-2">
 												<label for="rg" class="control-label">RG</label> <input
@@ -145,8 +136,7 @@
 											<div class="form-group col-md-2 col-sm-4">
 												<label for="dataNascimento" class="control-label">Data
 													nascimento</label> <input type="text" class="form-control"
-													id="dataNascimento" data-required="true"
-													value="">
+													id="dataNascimento" data-required="true" value="">
 											</div>
 											<div class="form-group col-md-2">
 												<label for="telefone" class="control-label">Telefone</label>
@@ -161,7 +151,8 @@
 											<div class="form-group col-md-6">
 												<label for="endereco" class="control-label">Endereço</label>
 
-												<input name="rua" type="text" class="form-control" id="rua" value="" />
+												<input name="rua" type="text" class="form-control" id="rua"
+													value="" />
 
 											</div>
 											<div class="form-group col-md-2">
@@ -175,12 +166,14 @@
 											</div>
 											<div class="form-group col-md-3">
 												<label for="estado" class="control-label">Estado</label> <input
-													name="estado" type="text" class="form-control" id="uf" value="" />
+													name="estado" type="text" class="form-control" id="uf"
+													value="" />
 
 											</div>
 											<div class="form-group col-md-4">
 												<label for="cidade" class="control-label">Cidade</label> <input
-													name="cidade" type="text" class="form-control" id="cidade" value=""/>
+													name="cidade" type="text" class="form-control" id="cidade"
+													value="" />
 											</div>
 										</div>
 									</div>
@@ -198,21 +191,20 @@
 
 										<div class="form-group col-md-3">
 											<label for="tipoDeCurso">Tipo de curso</label> <select
-											class="form-control" id="tipoDeCurso">												
-								<!-- FAZER FOREACH  -->
-											<c:forEach var="tipoCurso" items="${tiposCurso}">
-												<option value="${tipoCurso.id}">${tipoCurso.nome}</option>
-											</c:forEach>
-										
+												class="form-control" id="tipoDeCurso">
+												<!-- FAZER FOREACH  -->
+												<c:forEach var="tipoCurso" items="${tiposCurso}">
+													<option value="${tipoCurso.id}">${tipoCurso.nome}</option>
+												</c:forEach>
+
 											</select>
 										</div>
-										<div class="form-group col-md-2" >
+										<div class="form-group col-md-2">
 											<label for="situacaoAtual">Situação atual</label> <select
 												class="form-control" id="situacaoAtual">
-												<option value="0">Selecione</option>
-												<option value="1">Concluído</option>
-												<option value="2">Cursando</option>
-												<option value="3">Interrompido</option>
+												<c:forEach var="situacaoAtual" items="${listaSituacaoAtual}">
+													<option value="${situacaoAtual.id}">${situacaoAtual.descricao}</option>
+												</c:forEach>
 											</select>
 										</div>
 										<div class="form-group col-md-2">
@@ -244,12 +236,9 @@
 											<label for="vagaASerAplicado">Vaga a ser aplicado</label> <select
 												class="form-control" id="vagaASerAplicado"
 												data-required="true">
-												<option value="">Selecione</option>
-												<option value="1">Desenvolvedor Java</option>
-												<option value="2">Desenvolvedor C#</option>
-												<option value="3">Analista de Sistemas</option>
-												<option value="4">Gerente de Projetos</option>
-												<option value="5">Banco de Talentos</option>
+												<c:forEach var="Vaga" items="${listaVaga}">
+													<option value="${vaga.id}">${vaga.nomeVaga}</option>
+												</c:forEach>
 											</select>
 										</div>
 										<div class="form-group col-md-4">
