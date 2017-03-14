@@ -13,10 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.ProjetoBean;
 import br.com.prosperity.bean.SenioridadeBean;
+import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.business.CargoBusiness;
 import br.com.prosperity.business.ProjetoBusiness;
 import br.com.prosperity.business.SenioridadeBusiness;
-
+import br.com.prosperity.business.UsuarioBusiness;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.VagaBusiness;
 
@@ -34,6 +35,7 @@ public class VagaController {
 	@Autowired
 	private List<VagaBean> vagaBean;
 
+	@Autowired
 	private SenioridadeBusiness preencherSenioridade;
 	
 	@Autowired
@@ -41,6 +43,18 @@ public class VagaController {
 	
 	@Autowired
 	private ProjetoBusiness preencherProjeto;
+	
+	@Autowired
+	private UsuarioBusiness preencherUsuario;
+	
+	@Autowired
+	private List<SenioridadeBean> senioridades;
+	
+	@Autowired
+	private List<CargoBean> cargos;
+	
+	@Autowired
+	private List<ProjetoBean> projetos;
 	
 	@Autowired
 	private ProjetoBean projeto;
@@ -55,7 +69,7 @@ public class VagaController {
 	private List<CargoBean> cargoBean;
 	
 	@Autowired
-	private List<ProjetoBean> projetoBean;
+	private List<UsuarioBean> usuarios;
 	
 	@Autowired
 	private CargoBusiness cargoBusiness;
@@ -95,12 +109,14 @@ public class VagaController {
 	
 	@RequestMapping (value= "/solicitar", method = RequestMethod.GET)
 	public String solicitarVaga(Model model){
-		senioridadeBean = preencherSenioridade.obterTodos();
-		cargoBean = preencherCargo.obterTodos();
-		projetoBean = preencherProjeto.obterTodos();
-		model.addAttribute("cargoBean", cargoBean);
-		model.addAttribute("senioridadeBean", senioridadeBean);
-		model.addAttribute("projetoBean", projetoBean);
+		senioridades = preencherSenioridade.obterTodos();
+		cargos = preencherCargo.obterTodos();
+		projetos = preencherProjeto.obterTodos();
+		usuarios = preencherUsuario.buscarGestor(); //Buscar somente Gestores
+		model.addAttribute("senioridades", senioridades);
+		model.addAttribute("cargos", cargos);
+		model.addAttribute("projetos", projetos);
+		model.addAttribute("usuarios", usuarios);
 		return "vaga/solicitar-vaga";
 	}
 
