@@ -34,7 +34,6 @@ public class VagaBusiness {
 */
 	@Transactional
 	public List<VagaBean> obterTodos() {
-		List<VagaEntity> aprovar = vagaDAO.findByNamedQuery("obterAprovacao");
 		List<VagaEntity> vagaEntity = vagaDAO.listar();
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 		return vagaBean;
