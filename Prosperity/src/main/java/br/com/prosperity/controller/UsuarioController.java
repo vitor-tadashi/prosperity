@@ -43,7 +43,7 @@ public class UsuarioController {
 		model.addAttribute("funcionarios", funcionarios);
 		model.addAttribute("perfis", perfis);
 		model.addAttribute("usuarios", usuarios);
-		
+
 		return "usuario/consultar-usuario";
 	}
 

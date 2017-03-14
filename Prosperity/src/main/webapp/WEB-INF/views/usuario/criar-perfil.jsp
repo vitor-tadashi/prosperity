@@ -330,7 +330,7 @@
                                 <div class="panel-body col-md-7">
                                     <label>Perfil</label>
                                     <div class="" id="none2">
-                                    <input class="form-control" name="nome" type="text" placeholder="Insira um nome para o perfil" />
+                                    <input class="form-control" id="none3" name="nome" type="text" placeholder="Insira um nome para o perfil" required/>
                                     </div>
                                     <div class="hide" id="none1">
                                     <select class="form-control chzn-select hide">
@@ -410,10 +410,12 @@
     $("#sub").click(function(){
         $("#none2").addClass("hide");
         $("#none1").removeClass("hide");
+        $("#none3").attr('required',false);
     });
     $("#novo").click(function(){
         $("#none1").addClass("hide");
         $("#none2").removeClass("hide");
+        $("#none3").attr('required',true);
     });
     </script>
 
