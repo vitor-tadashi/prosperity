@@ -78,7 +78,7 @@
 										</select>
 									</div>
 								</div>
-								<input type="submit" class="btn btn-danger" value=""/>
+								<input type="submit" class="btn btn-danger" value="Submit"/>
 							</form>
 						</div>
 						<!--close row-->
@@ -214,27 +214,26 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr class="text-center">
-										<td>André</td>
-										<td>Andre.Verity</td>
-										<td>andre@verity.com.br</td>
-										<td>RH</td>
-										<td><span class="label label-success status ">Ativo</span>
-										</td>
-										<td>
-											<div class="btn-group">
-												<a class="btn btn-info" href="#editar-usuario-modal"
-													data-toggle="modal"><i class="fa fa-edit"></i> Editar</a>
-											</div>
-										</td>
-									</tr>
 									<c:forEach var="usuario" items="${usuarios}">
 										<tr class="text-center">
 											<td>${usuario.funcionario.nome}</td>
 											<td>${usuario.nome}</td>
 											<td>${usuario.email}</td>
 											<td>${usuario.perfil.nome}</td>
-											<td>${usuario.situacao}</td>
+											<td>
+												<c:if test="${usuario.ativo}">
+													<span class="label label-success status ">Ativo</span>
+												</c:if>
+												<c:if test="${!usuario.ativo}">
+													<span class="label label-danger status ">Inativo</span>
+												</c:if>
+											</td>
+											<td>
+												<div class="btn-group">
+													<a class="btn btn-info" href="#editar-usuario-modal"
+														data-toggle="modal"><i class="fa fa-edit"></i> Editar</a>
+												</div>
+											</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -245,7 +244,7 @@
 						<div class="pull-right">
 							<a class="btn btn-primary" href="#novo-usuario-modal"
 								data-toggle="modal">Criar novo usuário</a> <a
-								class="btn btn-warning" href="controlar-perfil.html">Criar
+								class="btn btn-warning" href="criar-perfil">Criar
 								perfil</a>
 						</div>
 					</div>

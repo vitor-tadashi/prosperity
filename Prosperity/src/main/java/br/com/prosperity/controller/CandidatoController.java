@@ -52,8 +52,8 @@ public class CandidatoController {
 		List<SituacaoAtualBean> listaSituacaoAtual = situacaoAtualBusiness.getSituacaoAtual();
 		model.addAttribute("listaSituacaoAtual", listaSituacaoAtual);
 		
-		List<CargoBean> listaCargo = cargoBusiness.getCargo();
-		model.addAttribute("listaCargo", listaCargo);
+		//List<CargoBean> listaCargo = cargoBusiness.getCargo();
+		//model.addAttribute("listaCargo", listaCargo);
 		
 		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.getSenioridade();
 		model.addAttribute("listaSenioridade", listaSenioridade);

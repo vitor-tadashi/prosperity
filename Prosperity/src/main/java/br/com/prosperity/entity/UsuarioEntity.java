@@ -44,6 +44,9 @@ public class UsuarioEntity {
 	@Column(name = "flPrimeiroAcesso")
 	private Boolean primeiroAcesso;
 	
+	@Column(name = "ativo")
+	private Boolean ativo;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -98,6 +101,14 @@ public class UsuarioEntity {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 	
 	
