@@ -37,6 +37,9 @@ public class CandidatoController {
 	private SituacaoAtualBean situacaoAtualBean;
 	
 	@Autowired
+	private TipoCursoBean tipoCursoBean;
+	
+	@Autowired
 	private EnderecoBean enderecoBean;
 
 	@Autowired
@@ -72,14 +75,15 @@ public class CandidatoController {
 		enderecoBean = candidatoBean.getEndereco();
 		contatoBean = candidatoBean.getContato();
 		formacaoBean = candidatoBean.getFormacao();
-		System.out.println(formacaoBean.getSituacaoAtualBean());
 		situacaoAtualBean = formacaoBean.getSituacaoAtualBean();
+		tipoCursoBean = formacaoBean.getTipoCursoBean();		
 		
 		model.addAttribute("candidato", candidatoBean);
 		model.addAttribute("endereco", enderecoBean);
 		model.addAttribute("contato", contatoBean);
 		model.addAttribute("formacao", formacaoBean);
-		model.addAttribute("situacaoAtual", situacaoAtualBean);
+		model.addAttribute("situacaoAtual", formacaoBean.getSituacaoAtualBean());
+		model.addAttribute("tipoCurso", tipoCursoBean);
 		
 		return "candidato/historico-candidato";
 	}
