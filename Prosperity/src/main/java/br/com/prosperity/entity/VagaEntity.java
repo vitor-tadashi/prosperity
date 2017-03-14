@@ -13,6 +13,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import br.com.prosperity.bean.ClienteBean;
+
 @Entity
 @Table(name= "tbVaga")	
 @NamedQuery (name = "obterTodos", query = "SELECT u FROM VagaEntity u WHERE u.nomeVaga = ?1")
@@ -95,7 +97,7 @@ public class VagaEntity {
 	@ManyToOne
 	@JoinColumn(name="idUsuario")
 	private UsuarioEntity usuarioEntity;
-
+	
 	//@ManyToOne(cascade = CascadeType.ALL)
 	//private AvaliadorEntity avaliadorEntity;
 	

@@ -57,7 +57,25 @@ public class VagaController {
 	private List<ProjetoBean> projetos;
 	
 	@Autowired
+	private ProjetoBean projeto;
+	
+	@Autowired
+	private List<SenioridadeBean> senioridadeBean;
+	
+	@Autowired
+	private SenioridadeBean senioridade;
+	
+	@Autowired
+	private List<CargoBean> cargoBean;
+	
+	@Autowired
 	private List<UsuarioBean> usuarios;
+	
+	@Autowired
+	private CargoBusiness cargoBusiness;
+	
+	@Autowired
+	private SenioridadeBusiness senioridadeBusiness;
 	
 	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
 	public String cliente(Model model) {
@@ -66,6 +84,16 @@ public class VagaController {
 		/*vagas.add(b);*/
 		model.addAttribute("vagaBean", vagas);
 		
+		
+		List<CargoBean> listaCargo = cargoBusiness.getCargo();
+		model.addAttribute("listaCargo", listaCargo);
+		
+		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.getSenioridade();
+		model.addAttribute("listaSenioridade", listaSenioridade);
+		
+		List<VagaBean> listaVaga = vagaBusiness.getVaga();
+		model.addAttribute("listaVaga", listaVaga);
+		
 		return "vaga/consultar-vaga";
 	}
 
@@ -73,6 +101,9 @@ public class VagaController {
 	public String aprovacaoVaga(Model model) {
 		vagaBean = vagaBusiness.obterTodos();
 		model.addAttribute("vagas", vagaBean);
+		model.addAttribute("projeto", vagaBean.get(0).getProjetoBean());
+		model.addAttribute("senioridade", vagaBean.get(0).getSenioridadeBean());
+		model.addAttribute("cliente", vagaBean.get(0).getProjetoBean().getCliente());
 		return "vaga/aprovacao-vaga";
 	}
 	

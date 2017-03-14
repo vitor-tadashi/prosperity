@@ -2,16 +2,15 @@ package br.com.prosperity.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,20 +19,16 @@ import javax.persistence.Table;
 public class PerfilEntity {
 
 	@Id
-
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
 	@Column(name = "idPerfil", unique = true, nullable = false)
-
 	private Integer id;
 	
 	@Column(name = "nmPerfil")
 	private String nome;
 
-	@ManyToMany
-
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "tbPerfilFuncionalidade", joinColumns = { @JoinColumn(name = "idPerfil") }, inverseJoinColumns = {
-		@JoinColumn(name = "idFuncionalidade") })
-
+			@JoinColumn(name = "idFuncionalidade") })
 	private List<FuncionalidadeEntity> funcionalidades;
 
 	public Integer getId() {

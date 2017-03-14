@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 public class FormacaoBean {
 	private Integer id;
 	private String nomeInstituicao;
+	private String nomeCurso;
 	private Date dataConclusao;
 	private TipoCursoBean tipoCursoBean;
 	private SituacaoAtualBean situacaoAtualBean;
@@ -51,6 +52,14 @@ public class FormacaoBean {
 
 	public void setSituacaoAtualBean(SituacaoAtualBean situacaoAtualBean) {
 		this.situacaoAtualBean = situacaoAtualBean;
+	}
+
+	public String getNomeCurso() {
+		return nomeCurso;
+	}
+
+	public void setNomeCurso(String nomeCurso) {
+		this.nomeCurso = nomeCurso;
 	}
 
 }
