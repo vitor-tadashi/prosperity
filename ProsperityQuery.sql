@@ -59,6 +59,12 @@ CREATE TABLE tbUsuario(
 
 );
 
+
+CREATE TABLE tbAvaliacao(
+	idAvaliacao  INT NOT NULL PRIMARY KEY IDENTITY (1,1),
+	nmAvaliacao VARCHAR(200)
+	)
+
 CREATE TABLE tbVaga (
 	idVaga INT IDENTITY(1,1) PRIMARY KEY,
 	idProjeto INT FOREIGN KEY REFERENCES tbProjeto(idProjeto),
@@ -113,6 +119,13 @@ CREATE TABLE tbPerfilFuncionalidade (
 	idPerfil INT FOREIGN KEY REFERENCES tbPerfil(idPerfil),
 	idFuncionalidade INT FOREIGN KEY REFERENCES tbFuncionalidade(idFuncionalidade)
 );
+
+CREATE TABLE tbCandidatoCompetencia (
+	idCandidatoCompetencia INT PRIMARY KEY IDENTITY (1,1),
+	idCandidato INT FOREIGN KEY REFERENCES tbCandidato(idCandidato),
+	idAvaliacao INT FOREIGN KEY REFERENCES tbAvaliacao(idAvaliacao)
+);
+
 
 CREATE TABLE tbStatusVaga (
 	idStatusVaga INT PRIMARY KEY IDENTITY (1,1),
