@@ -24,7 +24,7 @@ public class FormacaoEntity {
 
 	@Column(name = "nmInstituicao")
 	private String nome;
-	
+
 	@Column(name = "nmCurso")
 	private String nomeCurso;
 
@@ -33,13 +33,11 @@ public class FormacaoEntity {
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	@JoinColumn(name = "idTipoCurso")
-	private TipoCursoEntity tipoCursoEntity;
-	
+	private TipoCursoEntity tipoCurso;
+
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	@JoinColumn(name = "idSituacaoAtual")
-	private SituacaoAtualEntity situacaoAtualEntity;
-
-	
+	private SituacaoAtualEntity situacaoAtual;
 
 	public Integer getId() {
 		return id;
@@ -65,20 +63,20 @@ public class FormacaoEntity {
 		this.dataConclusao = dataConclusao;
 	}
 
-	public TipoCursoEntity getTipoCursoEntity() {
-		return tipoCursoEntity;
+	public TipoCursoEntity getTipoCurso() {
+		return tipoCurso;
 	}
 
-	public void setTipoCursoEntity(TipoCursoEntity tipoCursoEntity) {
-		this.tipoCursoEntity = tipoCursoEntity;
+	public void setTipoCurso(TipoCursoEntity tipoCurso) {
+		this.tipoCurso = tipoCurso;
 	}
 
-	public SituacaoAtualEntity getSituacaoAtualEntity() {
-		return situacaoAtualEntity;
+	public SituacaoAtualEntity getSituacaoAtual() {
+		return situacaoAtual;
 	}
 
-	public void setSituacaoAtualEntity(SituacaoAtualEntity situacaoAtualEntity) {
-		this.situacaoAtualEntity = situacaoAtualEntity;
+	public void setSituacaoAtual(SituacaoAtualEntity situacaoAtual) {
+		this.situacaoAtual = situacaoAtual;
 	}
 
 	public String getNomeCurso() {
@@ -88,6 +86,5 @@ public class FormacaoEntity {
 	public void setNomeCurso(String nomeCurso) {
 		this.nomeCurso = nomeCurso;
 	}
-	
 
 }

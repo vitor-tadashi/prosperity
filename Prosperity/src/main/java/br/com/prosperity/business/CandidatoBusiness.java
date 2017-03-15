@@ -11,33 +11,28 @@ import br.com.prosperity.bean.ContatoBean;
 import br.com.prosperity.converter.CandidatoConverter;
 import br.com.prosperity.dao.CandidatoDAO;
 import br.com.prosperity.entity.CandidatoEntity;
+import br.com.prosperity.util.FormatUtil;
 
 @Component
-public class CandidatoBusiness{
+public class CandidatoBusiness {
 
 	@Autowired
 	private CandidatoDAO candidatoDAO;
 
 	@Autowired
 	private CandidatoBean candidatoBean;
-	
-	@Autowired
-	private ContatoBean contatoBean;
-	
+
 	@Autowired
 	private CandidatoConverter candidatoConverter;
 
+	@Transactional 
 	public CandidatoBean obter(Integer id) {
 		CandidatoEntity candidatoEntity = candidatoDAO.obterPorId(id);
-		
-		
+
 		if (candidatoEntity != null) {
 			candidatoBean = candidatoConverter.convertEntityToBean(candidatoEntity);
-			candidatoBean.cpfFormat(candidatoBean);
-			candidatoBean.rgFormat(candidatoBean);
-			candidatoBean.telefoneFormat(contatoBean = candidatoBean.getContato());
 		}
-		
+
 		return candidatoBean;
 	}
 
