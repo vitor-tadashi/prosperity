@@ -38,24 +38,27 @@ public class UsuarioController {
 	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
 	public String consultaUsuario(Model model) {
 		List<UsuarioBean> usuarios = usuarioBusiness.getUsuarios();
-		/*List<FuncionarioBean> funcionarios = funcionarioBusiness.getFuncionarios();
-		List<PerfilEntity> perfis = perfilBusiness.getPerfis();
-		model.addAttribute("funcionarios", funcionarios);
-		model.addAttribute("perfis", perfis);*/
+		/*
+		 * List<FuncionarioBean> funcionarios =
+		 * funcionarioBusiness.getFuncionarios(); List<PerfilEntity> perfis =
+		 * perfilBusiness.getPerfis(); model.addAttribute("funcionarios",
+		 * funcionarios); model.addAttribute("perfis", perfis);
+		 */
 		model.addAttribute("usuarios", usuarios);
-		//model.addAttribute("usuario", new UsuarioBean());
-		
+
+		// model.addAttribute("usuario", new UsuarioBean());
+
 		return "usuario/consultar-usuario";
 	}
-	
+
 	@RequestMapping(value = "/carrega-usuario", method = RequestMethod.GET)
 	public Model carregaUsuario(Integer id, Model model) {
-		//TODO metodo de carregar combo
+		// TODO metodo de carregar combo
 		List<FuncionarioBean> funcionarios = funcionarioBusiness.getFuncionarios();
 		List<PerfilEntity> perfis = perfilBusiness.getPerfis();
 		model.addAttribute("funcionarios", funcionarios);
 		model.addAttribute("perfis", perfis);
-		if(id != null) {
+		if (id != null) {
 			System.out.println("asd");
 		}
 		return model;
@@ -80,20 +83,19 @@ public class UsuarioController {
 
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
 	public String inserirUsuario(UsuarioBean usuario) {
-		if(usuario.getId() == null) {
+		if (usuario.getId() == null) {
 			usuarioBusiness.inserir(usuario);
-		}
-		else {
+		} else {
 			usuarioBusiness.alterar(usuario);
 		}
-		
+
 		return "redirect:consultar";
 	}
-	
-	@RequestMapping(value = "/teste", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/teste", method = RequestMethod.GET)
 	public String teste(Model model) {
 		System.out.println("tESTE");
 		return "redirect:criar-perfil";
 	}
-	
+
 }

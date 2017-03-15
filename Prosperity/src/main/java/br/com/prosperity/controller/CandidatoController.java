@@ -8,19 +8,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import br.com.prosperity.bean.AvaliacaoBean;
+import br.com.prosperity.bean.CanalInformacaoBean;
 import br.com.prosperity.bean.CandidatoBean;
+import br.com.prosperity.bean.CandidatoCompetenciaBean;
 import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.ContatoBean;
 import br.com.prosperity.bean.EnderecoBean;
 import br.com.prosperity.bean.FormacaoBean;
-import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
 import br.com.prosperity.bean.TipoCursoBean;
+import br.com.prosperity.bean.VagaBean;
+import br.com.prosperity.business.CanalInformacaoBusiness;
 import br.com.prosperity.business.CandidatoBusiness;
 import br.com.prosperity.business.CargoBusiness;
 import br.com.prosperity.business.SenioridadeBusiness;
 import br.com.prosperity.business.SituacaoAtualBusiness;
 import br.com.prosperity.business.TipoCursoBusiness;
+import br.com.prosperity.business.VagaBusiness;
 
 @Controller
 @RequestMapping(value = "candidato")
@@ -37,6 +42,12 @@ public class CandidatoController {
 
 	@Autowired
 	private ContatoBean contatoBean;
+
+	@Autowired
+	private AvaliacaoBean avaliacaoBean;
+
+	@Autowired
+	private List<CandidatoCompetenciaBean> competencias;
 
 	@Autowired
 	private TipoCursoBusiness tipoCursoBusiness;
@@ -58,6 +69,12 @@ public class CandidatoController {
 
 	@Autowired
 	private CargoBean cargoBean;
+	@Autowired
+	private VagaBusiness vagaBusiness;
+	@Autowired
+	private CanalInformacaoBusiness canalInformacaoBusiness;
+	@Autowired
+	private CanalInformacaoBean canalInformacaoBean;
 
 	@RequestMapping(value = "cadastrar", method = RequestMethod.GET)
 	public String cadastrarCandidato(Model model) {
@@ -67,11 +84,10 @@ public class CandidatoController {
 		List<SituacaoAtualBean> listaSituacaoAtual = situacaoAtualBusiness.getSituacaoAtual();
 		model.addAttribute("listaSituacaoAtual", listaSituacaoAtual);
 
-//		List<CargoBean> listaCargo = cargoBusiness.getCargo();
-//		model.addAttribute("listaCargo", listaCargo);
-
-//		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.getSenioridade();
-//		model.addAttribute("listaSenioridade", listaSenioridade);
+		List<VagaBean> listaVaga = vagaBusiness.getVaga();
+		model.addAttribute("listaVaga", listaVaga);
+		List<CanalInformacaoBean> listaCanal = canalInformacaoBusiness.getCanal();
+		model.addAttribute("listaCanal", listaCanal);
 
 		return "candidato/cadastrar-candidato";
 	}
@@ -81,7 +97,6 @@ public class CandidatoController {
 		List<CandidatoBean> candidatos = candidatoBusiness.obterTodos();
 		model.addAttribute("candidatos", candidatos);
 		return "candidato/consulta-rh";
-
 	}
 
 	@RequestMapping(value = "consultar-gestor", method = RequestMethod.GET)
@@ -99,6 +114,7 @@ public class CandidatoController {
 		formacaoBean = candidatoBean.getFormacao();
 		situacaoAtualBean = formacaoBean.getSituacaoAtualBean();
 		tipoCursoBean = formacaoBean.getTipoCursoBean();
+		competencias = candidatoBean.getCompetencias();
 
 		model.addAttribute("candidato", candidatoBean);
 		model.addAttribute("endereco", enderecoBean);
@@ -106,9 +122,9 @@ public class CandidatoController {
 		model.addAttribute("formacao", formacaoBean);
 		model.addAttribute("situacaoAtual", formacaoBean.getSituacaoAtualBean());
 		model.addAttribute("tipoCurso", tipoCursoBean);
-
 		model.addAttribute("candidato", candidatoBean);
 		model.addAttribute("endereco", enderecoBean);
+		model.addAttribute("competencia", competencias);
 
 		return "candidato/historico-candidato";
 	}

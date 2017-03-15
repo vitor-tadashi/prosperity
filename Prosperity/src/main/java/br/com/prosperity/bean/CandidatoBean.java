@@ -11,6 +11,7 @@ import br.com.prosperity.util.Formatar;
 
 @Component
 public class CandidatoBean extends Formatar {
+	
 	private Integer id;
 	private String cpf;
 	private String nome;
@@ -26,8 +27,9 @@ public class CandidatoBean extends Formatar {
 	private EnderecoBean endereco;
 	private FormacaoBean formacao;
 	private UsuarioBean usuario;
-	private List<StatusBean> status = new ArrayList<>();;
-	private List<VagaBean> vagas = new ArrayList<>();;
+	private List<StatusBean> status = new ArrayList<>();
+	private List<VagaBean> vagas = new ArrayList<>();
+	private List<CandidatoCompetenciaBean> competencias = new ArrayList<>();
     private Date DataultimoContato;
     private Date entrevista;
     private String proposta;
@@ -55,6 +57,18 @@ public class CandidatoBean extends Formatar {
 	}
 	public void setRg(String rg) {
 		this.rg = rg;
+	}
+	public List<CandidatoCompetenciaBean> getCompetencias() {
+		return competencias;
+	}
+	public void setCompetencias(List<CandidatoCompetenciaBean> competencias) {
+		this.competencias = competencias;
+	}
+	public Date getDataultimoContato() {
+		return DataultimoContato;
+	}
+	public void setDataultimoContato(Date dataultimoContato) {
+		DataultimoContato = dataultimoContato;
 	}
 	public Date getDataNascimento() {
 		return dataNascimento;

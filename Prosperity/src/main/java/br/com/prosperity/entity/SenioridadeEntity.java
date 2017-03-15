@@ -15,18 +15,6 @@ public class SenioridadeEntity {
 	@Column(name="nmSenioridade")
 	private String nome;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "idCargoSenoridade")
-//	private CargoSenioridadeEntity senioridade; //relacionamento entre Senioridade e CargoBean
-//
-//	public CargoSenioridadeEntity getSenioridade() {
-//		return senioridade;
-//	}
-//
-//	public void setSenioridade(CargoSenioridadeEntity senioridade) {
-//		this.senioridade = senioridade;
-//	}
-
 	public Integer getId() {
 		return idSenioridade;
 	}

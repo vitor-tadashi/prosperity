@@ -176,10 +176,9 @@
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
 													<label for="exampleInputEmail1">Cargo</label> <select
 														class="form-control chzn-select" name="cargoBean">
-														<option>Analista de testes</option>
-														<option>Analista de sistemas</option>
-														<option>Desenvolvedor</option>
-														<option>Gerente de projetos</option>
+														<c:forEach var="cargo" items="${listaCargo}">
+															<option value="${cargo.id}">${cargo.nome}</option>
+														</c:forEach>
 													</select>
 												</div>
 												<!-- /form-group -->
@@ -207,11 +206,10 @@
 											<div class="form-group col-md-4" style="margin-bottom: 0px">
 												<label for="exampleInputEmail1">Senioridade da vaga</label>
 												<select class="form-control chzn-select"
-													name="senioridadeBean">
-													<option>Estágio</option>
-													<option>Júnior</option>
-													<option>Pleno</option>
-													<option>Senior</option>
+												name="senioridadeBean">
+													<c:forEach var="senioridade" items="${listaSenioridade}">
+															<option value="${senioridade.id}">${senioridade.nome}</option>
+														</c:forEach>
 												</select>
 											</div>
 											<!-- /form-group -->
@@ -433,12 +431,9 @@
 								<div class="col-md-4">
 									<div class="form-group">
 										<label>Vaga</label> <select class="form-control" name="">
-											<!--chzn-select-->
-											<option>Selecione:</option>
-											<option>Desenvolvedor .Net Junior</option>
-											<option>Desenvolvedor .Net Pleno</option>
-											<option>Desenvolvedor .Net Sênior</option>
-											<option>Analista Java Junior</option>
+											<c:forEach var="vaga" items="${listaVaga}">
+												<option value="${vaga.id}">${vaga.nomeVaga}</option>
+											</c:forEach>
 										</select>
 									</div>
 								</div>

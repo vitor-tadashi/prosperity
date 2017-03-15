@@ -210,6 +210,5 @@ public class VagaBean {
 	public void setUsuarioBean(UsuarioBean usuarioBean) {
 		this.usuarioBean = usuarioBean;
 	}
-
 	
 }

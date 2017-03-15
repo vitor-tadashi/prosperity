@@ -126,6 +126,12 @@ CREATE TABLE tbCandidatoCompetencia (
 	idAvaliacao INT FOREIGN KEY REFERENCES tbAvaliacao(idAvaliacao)
 );
 
+CREATE TABLE tbCanalInformacao (
+	idCanalInformacao INT PRIMARY KEY IDENTITY (1,1),
+	nmCanal VARCHAR(200),
+);
+
+
 
 CREATE TABLE tbStatusVaga (
 	idStatusVaga INT PRIMARY KEY IDENTITY (1,1),
@@ -198,20 +204,20 @@ CREATE TABLE tbStatusCandidato (
 	dsParecer VARCHAR(500) 
 );
 
+CREATE TABLE tbCompetencia(
+	idCompetencia INT PRIMARY KEY IDENTITY (1,1),
+	nmCompetencia VARCHAR(200)
+)
 
-CREATE TABLE tbCompetencias (
-	idCompetencias INT PRIMARY KEY IDENTITY (1,1),
+CREATE TABLE tbCandidatoCompetencia (
+	idCandidatoCompetencia INT PRIMARY KEY IDENTITY (1,1),
+	idAvaliacao INT FOREIGN KEY REFERENCES tbAvaliacao(idAvaliacao),
 	idCandidato INT FOREIGN KEY REFERENCES tbCandidato(idCandidato),
-	compDesenvolvimento NUMERIC,
-	compProfundidade NUMERIC,
-	compPlanejamento NUMERIC,
-	compExecucaoEntrega NUMERIC,
-	compRelacionamento NUMERIC,
-	compPessoas NUMERIC,
-	compComercial NUMERIC,
-	compFinanceiro NUMERIC,
-	dsParecer VARCHAR(500)
+	idCompetencia INT FOREIGN KEY REFERENCES tbCompetencia(idCompetencia)
 );
+
+
+
 
 alter table tbVaga add nmVaga varchar(50)
 select * from tbVaga
@@ -222,3 +228,7 @@ ALTER TABLE dbo.tbUsuario ADD
 GO
 ALTER TABLE dbo.tbUsuario SET (LOCK_ESCALATION = TABLE)
 GO
+
+select * from tbCandidato
+
+UPDATE tbCandidato set dtAprovacao = '01-01-2017' where idCandidato = 

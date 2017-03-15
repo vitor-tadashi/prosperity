@@ -12,7 +12,6 @@ import br.com.prosperity.bean.PerfilBean;
 import br.com.prosperity.converter.PerfilConverter;
 import br.com.prosperity.dao.FuncionalidadeDAO;
 import br.com.prosperity.dao.PerfilDAO;
-import br.com.prosperity.entity.FuncionalidadeEntity;
 import br.com.prosperity.entity.PerfilEntity;
 import br.com.prosperity.exception.BusinessException;
 
@@ -39,18 +38,32 @@ public class PerfilBusiness {
 
 	@Transactional
 	public void inserir(PerfilBean perfilBean) throws BusinessException {
-		List<PerfilEntity> listaPerfil = perfilDAO.findByNamedQuery("obterNomePerfil", perfilBean.getNome());
-		if (listaPerfil.isEmpty()) {
-			PerfilEntity perfilEntity = perfilConverter.convertBeanToEntity(perfilBean);
+		if (perfilBean.getId() == null) {
+			List<PerfilEntity> listaPerfil = perfilDAO.findByNamedQuery("obterNomePerfil", perfilBean.getNome());
+			if (listaPerfil.isEmpty()) {
+				PerfilEntity perfilEntity = perfilConverter.convertBeanToEntity(perfilBean);
 
-			List<FuncionalidadeEntity> listaFuncionalidade = new ArrayList<>();
-			for (FuncionalidadeBean f : perfilBean.getListaFuncionalidades()) {
-				listaFuncionalidade.add(funcionalidadeDAO.obterPorId(f.getId()));
+				List<Integer> idFuncionalidades = new ArrayList<>();
+				for (FuncionalidadeBean f : perfilBean.getListaFuncionalidades()) {
+					idFuncionalidades.add(f.getId());
+				}
+				perfilEntity.setFuncionalidades(
+						funcionalidadeDAO.findByNamedQuery("obterPerfilFuncionalidade", idFuncionalidades));
+				perfilDAO.adicionar(perfilEntity);
+			} else {
+				throw new BusinessException("Este perfil já existe");
 			}
-			perfilEntity.setFuncionalidades(listaFuncionalidade);
-			perfilDAO.adicionar(perfilEntity);
 		} else {
-			throw new BusinessException("Este perfil já existe");
+			PerfilEntity perfilEntity = perfilDAO.obterPorId(perfilBean.getId());
+
+			List<Integer> idFuncionalidades = new ArrayList<>();
+			for (FuncionalidadeBean f : perfilBean.getListaFuncionalidades()) {
+				idFuncionalidades.add(f.getId());
+			}
+			perfilEntity.setFuncionalidades(
+					funcionalidadeDAO.findByNamedQuery("obterPerfilFuncionalidade", idFuncionalidades));
+
+			perfilDAO.alterar(perfilEntity);
 		}
 	}
 

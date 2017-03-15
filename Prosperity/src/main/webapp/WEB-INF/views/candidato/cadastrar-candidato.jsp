@@ -234,9 +234,9 @@
 										</div>
 										<div class="form-group col-md-4">
 											<label for="vagaASerAplicado">Vaga a ser aplicado</label> <select
-												class="form-control" id="vagaASerAplicado"
+												class="form-control" id="vaga"
 												data-required="true">
-												<c:forEach var="Vaga" items="${listaVaga}">
+												<c:forEach var="vaga" items="${listaVaga}">
 													<option value="${vaga.id}">${vaga.nomeVaga}</option>
 												</c:forEach>
 											</select>
@@ -245,15 +245,10 @@
 											<label for="exampleInputEmail1">Como ficou sabendo
 												desta vaga?</label> <select class="form-control"
 												data-required="true">
-												<option value="">Selecione</option>
-												<option value="1">Site Verity</option>
-												<option value="2">Facebook</option>
-												<option value="3">Linkedin</option>
-												<option value="4">ApInfo</option>
-												<option value="5">Catho</option>
-												<option value="6">Outros sites de oportunidades</option>
-												<option value="7">Indicação de colegas</option>
-												<option value="8">Outros</option>
+												<c:forEach var="canalInformacao" items="${listaCanal}">
+													<option value="${canalInformacao.id}">${canalInformacao.nome}</option>
+													</c:forEach>
+													
 											</select>
 										</div>
 										<div class="form-group col-xs-12">
