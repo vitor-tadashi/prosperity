@@ -81,7 +81,6 @@ public class CandidatoController {
 		List<CandidatoBean> candidatos = candidatoBusiness.obterTodos();
 		model.addAttribute("candidatos", candidatos);
 		return "candidato/consulta-rh";
-
 	}
 
 	@RequestMapping(value = "consultar-gestor", method = RequestMethod.GET)

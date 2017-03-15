@@ -234,9 +234,9 @@
 										</div>
 										<div class="form-group col-md-4">
 											<label for="vagaASerAplicado">Vaga a ser aplicado</label> <select
-												class="form-control" id="vagaASerAplicado"
+												class="form-control" id="vaga"
 												data-required="true">
-												<c:forEach var="Vaga" items="${listaVaga}">
+												<c:forEach var="vaga" items="${listaVaga}">
 													<option value="${vaga.id}">${vaga.nomeVaga}</option>
 												</c:forEach>
 											</select>

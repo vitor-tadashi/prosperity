@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.converter.SenioridadeConverter;
 import br.com.prosperity.dao.SenioridadeDAO;
@@ -29,6 +30,14 @@ public class SenioridadeBusiness {
 		senioridadeBean = senioridadeConverter.convertEntityToBean(senioridadeEntity);
 		return senioridadeBean;
 	}
+	
+	@Transactional
+	public List<SenioridadeBean> getSenioridade() {
+		List<SenioridadeBean> listaSenioridade = senioridadeConverter.convertEntityToBean(senioridadeDAO.listar());
+		return listaSenioridade;
+	}
+	
+	
 
 
 

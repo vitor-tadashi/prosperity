@@ -228,3 +228,7 @@ ALTER TABLE dbo.tbUsuario ADD
 GO
 ALTER TABLE dbo.tbUsuario SET (LOCK_ESCALATION = TABLE)
 GO
+
+select * from tbCandidato
+
+UPDATE tbCandidato set dtAprovacao = '01-01-2017' where idCandidato = 

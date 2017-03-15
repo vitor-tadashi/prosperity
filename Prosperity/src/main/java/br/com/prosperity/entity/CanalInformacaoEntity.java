@@ -5,19 +5,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tbFuncionalidade")
-@NamedQuery(name = "obterPerfilFuncionalidade", query = "SELECT f FROM FuncionalidadeEntity f WHERE f.id IN (?1)")
-public class FuncionalidadeEntity {
+@Table(name = "tbCanalInformacao")
+public class CanalInformacaoEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idFuncionalidade", unique = true, nullable = false)
+	@Column(name = "idCanal", unique = true, nullable = false)
 	private Integer id;
-
-	@Column(name = "nmFuncionalidade")
+	
+	@Column(name = "nmCanal", unique = false, nullable = false)
 	private String nome;
 
 	public Integer getId() {
@@ -35,4 +33,5 @@ public class FuncionalidadeEntity {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 }
