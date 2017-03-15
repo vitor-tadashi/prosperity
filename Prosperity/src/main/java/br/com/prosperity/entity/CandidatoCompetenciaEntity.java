@@ -20,12 +20,13 @@ public class CandidatoCompetenciaEntity {
 	private Integer idCandidatoCompetencia;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-	@JoinColumn(name = "idCandidato")
-	private CandidatoEntity candidatoEntity;
+	@JoinColumn(name = "idAvaliacao")
+	private AvaliacaoEntity avaliacao;
+	
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-	@JoinColumn(name = "idAvaliacao")
-	private AvaliacaoEntity avaliacaoEntity;
+	@JoinColumn(name = "idCompetencia")
+	private CompetenciaEntity competencia;
 
 	public Integer getIdCandidatoCompetencia() {
 		return idCandidatoCompetencia;
@@ -35,20 +36,21 @@ public class CandidatoCompetenciaEntity {
 		this.idCandidatoCompetencia = idCandidatoCompetencia;
 	}
 
-	public CandidatoEntity getCandidatoEntity() {
-		return candidatoEntity;
+	public AvaliacaoEntity getAvaliacao() {
+		return avaliacao;
 	}
 
-	public void setCandidatoEntity(CandidatoEntity candidatoEntity) {
-		this.candidatoEntity = candidatoEntity;
+	public void setAvaliacao(AvaliacaoEntity avaliacao) {
+		this.avaliacao = avaliacao;
 	}
 
-	public AvaliacaoEntity getAvaliacaoEntity() {
-		return avaliacaoEntity;
+	public CompetenciaEntity getCompetencia() {
+		return competencia;
 	}
 
-	public void setAvaliacaoEntity(AvaliacaoEntity avaliacaoEntity) {
-		this.avaliacaoEntity = avaliacaoEntity;
+	public void setCompetencia(CompetenciaEntity competencia) {
+		this.competencia = competencia;
 	}
+
 
 }
