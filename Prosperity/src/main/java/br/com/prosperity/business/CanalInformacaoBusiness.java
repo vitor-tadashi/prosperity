@@ -21,8 +21,7 @@ public class CanalInformacaoBusiness {
 	public List<CanalInformacaoBean> getCanal(){
 
 		List<CanalInformacaoBean> listaCanal = canalInformacaoConverter.convertEntityToBean(canalInformacaoDAO.listar());
-		
-		
+
 		return listaCanal;
 	}
 	
