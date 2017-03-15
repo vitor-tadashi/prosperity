@@ -58,7 +58,9 @@ public class PerfilBusiness {
 
 			List<Integer> idFuncionalidades = new ArrayList<>();
 			for (FuncionalidadeBean f : perfilBean.getListaFuncionalidades()) {
-				idFuncionalidades.add(f.getId());
+				if (f.getId() != null) {
+					idFuncionalidades.add(f.getId());
+				}
 			}
 			perfilEntity.setFuncionalidades(
 					funcionalidadeDAO.findByNamedQuery("obterPerfilFuncionalidade", idFuncionalidades));

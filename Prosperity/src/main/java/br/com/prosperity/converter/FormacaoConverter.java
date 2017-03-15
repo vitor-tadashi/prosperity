@@ -4,9 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.prosperity.bean.FormacaoBean;
-import br.com.prosperity.bean.SituacaoAtualBean;
-import br.com.prosperity.bean.TipoCursoBean;
-import br.com.prosperity.dao.TipoCursoDAO;
 import br.com.prosperity.entity.FormacaoEntity;
 
 @Component
@@ -24,8 +21,8 @@ public class FormacaoConverter implements Converter<FormacaoEntity, FormacaoBean
 		entity.setNome(bean.getNomeInstituicao());
 		entity.setNomeCurso(bean.getNomeCurso());
 		entity.setDataConclusao(bean.getDataConclusao());
-		entity.setSituacaoAtualEntity(SituacaoAtual.convertBeanToEntity(bean.getSituacaoAtualBean()));
-		entity.setTipoCursoEntity(tipoCurso.convertBeanToEntity(bean.getTipoCursoBean()));
+		entity.setSituacaoAtual(SituacaoAtual.convertBeanToEntity(bean.getSituacaoAtual()));
+		entity.setTipoCurso(tipoCurso.convertBeanToEntity(bean.getTipoCurso()));
 		return entity;
 	}
 
@@ -36,8 +33,8 @@ public class FormacaoConverter implements Converter<FormacaoEntity, FormacaoBean
 		bean.setNomeInstituicao(entity.getNome());
 		bean.setNomeCurso(entity.getNomeCurso());
 		bean.setDataConclusao(entity.getDataConclusao());
-		bean.setSituacaoAtualBean(SituacaoAtual.convertEntityToBean(entity.getSituacaoAtualEntity()));
-		bean.setTipoCursoBean(tipoCurso.convertEntityToBean(entity.getTipoCursoEntity()));
+		bean.setSituacaoAtual(SituacaoAtual.convertEntityToBean(entity.getSituacaoAtual()));
+		bean.setTipoCurso(tipoCurso.convertEntityToBean(entity.getTipoCurso()));
 		return bean;
 	}
 }
