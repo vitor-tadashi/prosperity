@@ -412,7 +412,7 @@
 								<div class="tl-circ"></div>
 								<div class="timeline-panel">
 									<div class="tl-heading">
-										<h4>Contratação</h4>
+										<h4>Parecer</h4>
 										<p>
 											<small class="text-muted"><i class="fa fa-calendar"></i>
 												01/02/2017</small>
@@ -421,6 +421,7 @@
 									<div class="tl-body">
 										<p>O candidato foi considerado apto para as funções da
 											vaga.</p>
+										<p><label>Status: </label> Aprovado</p>
 									</div>
 								</div>
 							</li>
