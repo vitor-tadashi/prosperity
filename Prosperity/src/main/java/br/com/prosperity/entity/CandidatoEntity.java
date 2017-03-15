@@ -97,7 +97,7 @@ public class CandidatoEntity {
 	private List<StatusCandidatoEntity> statusCandidatos;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "idCandidatoCompetencia")
+	@JoinColumn(name = "idCandidato")
 	private List<CandidatoCompetenciaEntity> competencias;
 
 	public Integer getId() {

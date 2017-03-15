@@ -11,13 +11,17 @@ public class CandidatoCompetenciaConverter implements Converter<CandidatoCompete
 
 	@Autowired
 	AvaliacaoConverter avaliacaoConverter;
+	
+	@Autowired
+	CompetenciaConverter competenciaConverter;
 
 	@Override
 	public CandidatoCompetenciaEntity convertBeanToEntity(CandidatoCompetenciaBean bean) {
 		CandidatoCompetenciaEntity entity = new CandidatoCompetenciaEntity();
 
 		entity.setIdCandidatoCompetencia(bean.getId());
-		
+		entity.setCompetencia(competenciaConverter.convertBeanToEntity(bean.getCompetencia()));
+		entity.setAvaliacao(avaliacaoConverter.convertBeanToEntity(bean.getAvaliacao()));
 		return entity;
 	}
 
@@ -26,7 +30,9 @@ public class CandidatoCompetenciaConverter implements Converter<CandidatoCompete
 		CandidatoCompetenciaBean bean = new CandidatoCompetenciaBean();
 
 		bean.setId(entity.getIdCandidatoCompetencia());
-
+		bean.setCompetencia(competenciaConverter.convertEntityToBean(entity.getCompetencia()));
+		bean.setAvaliacao(avaliacaoConverter.convertEntityToBean(entity.getAvaliacao()));
+		
 		return bean;
 	}
 

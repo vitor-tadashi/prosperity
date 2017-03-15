@@ -38,7 +38,7 @@ public class CandidatoController {
 
 	@Autowired
 	private ContatoBean contatoBean;
-	
+
 	@Autowired
 	private AvaliacaoBean avaliacaoBean;
 
@@ -98,25 +98,7 @@ public class CandidatoController {
 
 	@RequestMapping(value = "historico", method = RequestMethod.GET)
 	public String historicoCandidato(Model model) {
-		CandidatoBean candidatoBean = new CandidatoBean();
-		candidatoBean = candidatoBusiness.obter(3);
-
-		enderecoBean = candidatoBean.getEndereco();
-		contatoBean = candidatoBean.getContato();
-		formacaoBean = candidatoBean.getFormacao();
-		situacaoAtualBean = formacaoBean.getSituacaoAtualBean();
-		tipoCursoBean = formacaoBean.getTipoCursoBean();
-		competencias = candidatoBean.getCompetencias();
-
-		model.addAttribute("candidato", candidatoBean);
-		model.addAttribute("endereco", enderecoBean);
-		model.addAttribute("contato", contatoBean);
-		model.addAttribute("formacao", formacaoBean);
-		model.addAttribute("situacaoAtual", formacaoBean.getSituacaoAtualBean());
-		model.addAttribute("tipoCurso", tipoCursoBean);
-		model.addAttribute("candidato", candidatoBean);
-		model.addAttribute("endereco", enderecoBean);
-		model.addAttribute("competencia", competencias);
+		model.addAttribute("candidato", candidatoBusiness.obter(2));
 
 		return "candidato/historico-candidato";
 	}

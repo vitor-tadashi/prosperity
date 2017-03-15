@@ -204,11 +204,26 @@ CREATE TABLE tbStatusCandidato (
 	dsParecer VARCHAR(500) 
 );
 
+select * from tbCompetencia
+
+insert into tbCompetencia values ('Desenvolvimento')
+insert into tbCompetencia values ('Profundidade')
+insert into tbCompetencia values ('Planejamento')
+insert into tbCompetencia values ('Execução e entrega')
+insert into tbCompetencia values ('Pessoas')
+insert into tbCompetencia values ('Comercial e financeiro')
+select * from tbCandidatoCompetencia
+insert into tbCandidatoCompetencia values (1, 2, 1)
+insert into tbCandidatoCompetencia values (4, 2, 2)
+insert into tbCandidatoCompetencia values (2, 2, 3)
+insert into tbCandidatoCompetencia values (3, 2, 4)
+insert into tbCandidatoCompetencia values (4, 2, 5)
+insert into tbCandidatoCompetencia values (3, 2, 6)
 CREATE TABLE tbCompetencia(
 	idCompetencia INT PRIMARY KEY IDENTITY (1,1),
 	nmCompetencia VARCHAR(200)
 )
-
+select * from tbCandidatoCompetencia
 CREATE TABLE tbCandidatoCompetencia (
 	idCandidatoCompetencia INT PRIMARY KEY IDENTITY (1,1),
 	idAvaliacao INT FOREIGN KEY REFERENCES tbAvaliacao(idAvaliacao),
