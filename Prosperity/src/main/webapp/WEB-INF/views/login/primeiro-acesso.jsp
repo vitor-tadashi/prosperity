@@ -13,17 +13,6 @@
 
 <c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
 
-<script>
-	function validarSenha(){
-		senha = document.FormSenha.senha.value;
-		confirmarSenha = document.FormSenha.confirmarSenha.value;
-		if (senha != confirmarSenha) {
-			alert("Senhas diferentes.");
-			return false;
-		}
-		return true;
-	}
-</script>
 </head>
 
 <body>
@@ -75,6 +64,16 @@
 	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
 
 	<!-- javaScript aqui -->
-
+	<script>
+		function validarSenha() {
+			senha = document.FormSenha.senha.value;
+			confirmarSenha = document.FormSenha.confirmarSenha.value;
+			if (senha != confirmarSenha) {
+				alert("Senhas diferentes.");
+				return false;
+			}
+			return true;
+		}
+	</script>
 </body>
 </html>
