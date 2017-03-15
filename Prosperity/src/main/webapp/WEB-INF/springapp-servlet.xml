@@ -34,6 +34,7 @@
 	<context:component-scan base-package="br.com.prosperity.dao" />
 	<context:component-scan base-package="br.com.prosperity.entity" />
 	<context:component-scan base-package="br.com.prosperity.rest" />
+	<context:component-scan base-package="br.com.prosperity.interceptor" />
 	
 
 	<mvc:resources mapping="/resources/**" location="/resources/" />
@@ -81,5 +82,38 @@
 			value="jdbc:sqlserver://192.168.2.20\MSSQL2012:1433;instanceName=Prosperity;Database=Prosperity" />
 		<property name="username" value="axa_developers" />
 		<property name="password" value="axa@123" />
+	</bean>
+	
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/welcome.htm">loginController</prop>
+			</props>
+		</property>
+		<property name="interceptors">
+			<list>
+				<ref bean="maintenanceInterceptor" />
+				<ref bean="executeTimeInterceptor" />
+			</list>
+		</property>
+	</bean>
+
+	<bean
+	class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="executeTimeInterceptor" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="executeTimeInterceptor"
+                 class="br.com.prosperity.interceptor.ExecuteTimeInterceptor" />
+
+	<bean id="maintenanceInterceptor"
+                class="br.com.prosperity.interceptor.MaintenanceInterceptor">
+		<property name="maintenanceStartTime" value="23" />
+		<property name="maintenanceEndTime" value="24" />
+		<property name="maintenanceMapping" value="/SpringMVC/maintenance.htm" />
 	</bean>
 </beans>
