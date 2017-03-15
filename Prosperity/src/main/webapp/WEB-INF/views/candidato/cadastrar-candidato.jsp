@@ -94,7 +94,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">Informações do candidato</div>
 					<div class="panel-body">
-						<form class="form-border" id="formCadastro" novalidate="">
+						<form class="form-border" id="formCadastro" method="post" novalidate="">
 							<div class="panel-tab clearfix">
 								<ul class="tab-bar wizard-demo" id="wizardDemo">
 									<li class="active tab-verity"><a href="#first"
@@ -113,60 +113,60 @@
 										<div class="row">
 											<div class="form-group col-md-4">
 												<label class="control-label" for="nome">Nome</label> <input
-													type="text" class="form-control" id="nome"
+													type="text" class="form-control" id="nome" name="nome"
 													data-required="true" placeholder="Informe seu nome"
 													value="">
 											</div>
 											<div class="form-group col-md-3">
 												<label for="email" class="control-label">E-mail</label> <input
-													type="text" class="form-control" id="email"
+													type="text" class="form-control" id="email" name="email"
 													data-required="true" placeholder="email@dominio.com"
 													value="">
 											</div>
 											<div class="form-group col-md-3">
 												<label for="cpf" class="control-label">CPF</label> <input
-													type="text" class="form-control" id="cpf"
+													type="text" class="form-control" id="cpf" name="cpf"
 													data-required="true" placeholder="Informe seu CPF" value="">
 											</div>
 											<div class="form-group col-md-2">
 												<label for="rg" class="control-label">RG</label> <input
-													type="text" class="form-control" id="rg"
+													type="text" class="form-control" id="rg" name=""
 													data-required="true" value="">
 											</div>
 											<div class="form-group col-md-2 col-sm-4">
 												<label for="dataNascimento" class="control-label">Data
 													nascimento</label> <input type="text" class="form-control"
-													id="dataNascimento" data-required="true" value="">
+													id="dataNascimento" name="dataNascimento" data-required="true" value="">
 											</div>
 											<div class="form-group col-md-2">
 												<label for="telefone" class="control-label">Telefone</label>
-												<input type="text" class="form-control" id="telefone"
+												<input type="text" class="form-control" id="telefone" name="telefone"
 													data-required="true" value="">
 											</div>
 											<div class="form-group col-md-2">
 												<label for="cep" class="control-label">CEP</label> <input
-													name="cep" type="text" class="form-control" id="cep"
+													name="cep" type="text" class="form-control" id="cep" name="cep"
 													value="" onblur="pesquisacep(this.value);" />
 											</div>
 											<div class="form-group col-md-6">
 												<label for="endereco" class="control-label">Endereço</label>
 
-												<input name="rua" type="text" class="form-control" id="rua"
+												<input name="logradouro" type="text" class="form-control" id="rua"
 													value="" />
 
 											</div>
 											<div class="form-group col-md-2">
 												<label for="numero" class="control-label">Número</label> <input
-													type="text" class="form-control" id="numero"
+													type="text" class="form-control" id="numero" name="numero"
 													data-required="true" value="">
 											</div>
 											<div class="form-group col-md-3">
 												<label for="complemento" class="control-label">Complemento</label>
-												<input type="text" class="form-control" id="complemento">
+												<input type="text" class="form-control" id="complemento" name="complemento">
 											</div>
 											<div class="form-group col-md-3">
 												<label for="estado" class="control-label">Estado</label> <input
-													name="estado" type="text" class="form-control" id="uf"
+													name="estado" type="text" class="form-control" id="uf" 
 													value="" />
 
 											</div>
@@ -180,18 +180,18 @@
 									<div class="tab-pane fade" id="second">
 										<div class="form-group col-md-4">
 											<label for="curso">Curso</label> <input type="text"
-												class="form-control" id="curso" data-required="true"
+												class="form-control" id="curso" data-required="true" name="nomeCurso"
 												placeholder="Informe seu curso">
 										</div>
 										<div class="form-group col-md-5">
 											<label for="instituicao">Instituição</label> <input
-												type="text" class="form-control" id="instituicao"
+												type="text" class="form-control" id="instituicao" name="nomeInstituicao"
 												data-required="true" placeholder="Instituição">
 										</div>
 
 										<div class="form-group col-md-3">
 											<label for="tipoDeCurso">Tipo de curso</label> <select
-												class="form-control" id="tipoDeCurso">
+												class="form-control" id="tipoDeCurso" name="TipoCurso">
 												<!-- FAZER FOREACH  -->
 												<c:forEach var="tipoCurso" items="${tiposCurso}">
 													<option value="${tipoCurso.id}">${tipoCurso.nome}</option>
@@ -201,7 +201,7 @@
 										</div>
 										<div class="form-group col-md-2">
 											<label for="situacaoAtual">Situação atual</label> <select
-												class="form-control" id="situacaoAtual">
+												class="form-control" id="situacaoAtual" name="situacaoAtual">
 												<c:forEach var="situacaoAtual" items="${listaSituacaoAtual}">
 													<option value="${situacaoAtual.id}">${situacaoAtual.descricao}</option>
 												</c:forEach>
@@ -209,7 +209,7 @@
 										</div>
 										<div class="form-group col-md-2">
 											<label for="mesAnoConclusao">Mês/Ano de conclusão</label> <input
-												type="text" class="form-control" id="mesAnoConclusao"
+												type="text" class="form-control" id="mesAnoConclusao" name="dataConclusao"
 												data-required="true">
 										</div>
 									</div>
@@ -222,7 +222,7 @@
 												</div>
 												<div class="col-md-2">
 													<input type="text" class="form-control"
-														id="pretensaoSalarial" placeholder="R$" />
+														id="pretensaoSalarial" name="valorPretensao" placeholder="R$" />
 												</div>
 												<div class="col-sm-1">
 													<p class="text-center">até</p>
@@ -234,7 +234,7 @@
 										</div>
 										<div class="form-group col-md-4">
 											<label for="vagaASerAplicado">Vaga a ser aplicado</label> <select
-												class="form-control" id="vaga"
+												class="form-control" id="vaga" name="vaga"
 												data-required="true">
 												<c:forEach var="vaga" items="${listaVaga}">
 													<option value="${vaga.id}">${vaga.nomeVaga}</option>
@@ -243,7 +243,7 @@
 										</div>
 										<div class="form-group col-md-4">
 											<label for="exampleInputEmail1">Como ficou sabendo
-												desta vaga?</label> <select class="form-control"
+												desta vaga?</label> <select class="form-control" name="canalInformacao"
 												data-required="true">
 												<c:forEach var="canalInformacao" items="${listaCanal}">
 													<option value="${canalInformacao.id}">${canalInformacao.nome}</option>
@@ -254,7 +254,7 @@
 										<div class="form-group col-xs-12">
 											<label class="control-label">Currículo</label>
 											<div class="upload-file" style="width: 356px;">
-												<input type="file" id="upload-curriculo" class="upload-demo">
+												<input type="file" id="upload-curriculo" name="curriculo" class="upload-demo">
 												<label data-title="Selecione" for="upload-curriculo">
 													<span data-title="Nenhum arquivo selecionado..."></span>
 												</label>
