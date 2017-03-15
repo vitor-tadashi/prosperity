@@ -346,6 +346,8 @@ projeto.getElementById("textCliente").value("");
     
     <!-- Custom -->
 		<script src="/resources/js/custom/solicitacaoVaga.js"></script>
+		<script src="/resources/js/parsley.min.js"></script>
+		<script src="/resources/js/custom/custom.js"></script>
 		
 </body>
 
