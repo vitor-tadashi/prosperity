@@ -102,7 +102,7 @@ public class CandidatoController {
 		formacaoBean = candidatoBean.getFormacao();
 		situacaoAtualBean = formacaoBean.getSituacaoAtualBean();
 		tipoCursoBean = formacaoBean.getTipoCursoBean();
-		candidatoCompetenciaBean = candidatoBean.getCompetencias();
+//		candidatoCompetenciaBean = candidatoBean.getCompetencias();
 
 		model.addAttribute("candidato", candidatoBean);
 		model.addAttribute("endereco", enderecoBean);
