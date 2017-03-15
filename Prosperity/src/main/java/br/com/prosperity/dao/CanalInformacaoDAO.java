@@ -1,7 +1,9 @@
 package br.com.prosperity.dao;
 
-import br.com.prosperity.entity.ExampleEntity;
+import org.springframework.stereotype.Repository;
 
-public class CanalInformacaoDAO extends GenericDAOImpl<ExampleEntity, Integer>{
+import br.com.prosperity.entity.CanalInformacaoEntity;
+@Repository
+public class CanalInformacaoDAO extends GenericDAOImpl<CanalInformacaoEntity, Integer>{
 
 }
