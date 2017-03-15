@@ -19,8 +19,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import br.com.prosperity.bean.ContatoBean;
-
 @Entity
 @Table(name = "tbCandidato")
 public class CandidatoEntity {
@@ -101,6 +99,10 @@ public class CandidatoEntity {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "idStatusCandidato")
 	private List<StatusCandidatoEntity> statusCandidatos;
+	
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "idCandidatoCompetencia")
+	private List<CandidatoCompetenciaEntity> candidatoCompetencia;
 
 	public Integer getId() {
 		return id;

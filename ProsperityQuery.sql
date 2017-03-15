@@ -126,6 +126,12 @@ CREATE TABLE tbCandidatoCompetencia (
 	idAvaliacao INT FOREIGN KEY REFERENCES tbAvaliacao(idAvaliacao)
 );
 
+CREATE TABLE tbCanalInformacao (
+	idCanalInformacao INT PRIMARY KEY IDENTITY (1,1),
+	nmCanal VARCHAR(200),
+);
+
+
 
 CREATE TABLE tbStatusVaga (
 	idStatusVaga INT PRIMARY KEY IDENTITY (1,1),
