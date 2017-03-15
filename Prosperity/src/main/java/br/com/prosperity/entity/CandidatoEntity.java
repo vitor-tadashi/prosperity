@@ -255,5 +255,15 @@ public class CandidatoEntity {
 	public void setStatusCandidatos(List<StatusCandidatoEntity> statusCandidatos) {
 		this.statusCandidatos = statusCandidatos;
 	}
+
+	public List<CandidatoCompetenciaEntity> getCandidatoCompetencia() {
+		return candidatoCompetencia;
+	}
+
+	public void setCandidatoCompetencia(List<CandidatoCompetenciaEntity> candidatoCompetencia) {
+		this.candidatoCompetencia = candidatoCompetencia;
+	}
+	
+	
 }
 	

@@ -8,23 +8,21 @@ public class CompetenciaConverter implements Converter<CompetenciaEntity, Compet
 	@Override
 	public CompetenciaEntity convertBeanToEntity(CompetenciaBean bean) {
 		CompetenciaEntity entity = new CompetenciaEntity();
-		
+
 		entity.setId(bean.getId());
 		entity.setNome(bean.getNome());
-		
+
 		return entity;
 	}
 
 	@Override
 	public CompetenciaBean convertEntityToBean(CompetenciaEntity entity) {
 		CompetenciaBean bean = new CompetenciaBean();
-		
+
 		bean.setId(entity.getId());
 		bean.setNome(entity.getNome());
-		
+
 		return bean;
 	}
-	
-	
 
 }
