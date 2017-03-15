@@ -287,9 +287,9 @@
 						<tr>
 								<td>${vaga.nomeVaga}</td>
 								<td>${vaga.nomeSolicitante}</td>
-								<td>${senioridade.nome}</td>
-								<td>${projeto.nome}</td>
-								<td>${projeto.cliente.nome}</td>
+								<td>${vaga.senioridadeBean.nome}</td>
+								<td>${vaga.projetoBean.nome}</td>
+								<td>${vaga.projetoBean.cliente.nome}</td>
 								<td>${vaga.localTrabalho}</td>
 								<td>${vaga.dataAbertura }</td>
 								<td>${vaga.dataFechamento }</td>

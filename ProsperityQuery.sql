@@ -126,6 +126,12 @@ CREATE TABLE tbCandidatoCompetencia (
 	idAvaliacao INT FOREIGN KEY REFERENCES tbAvaliacao(idAvaliacao)
 );
 
+CREATE TABLE tbCanalInformacao (
+	idCanalInformacao INT PRIMARY KEY IDENTITY (1,1),
+	nmCanal VARCHAR(200),
+);
+
+
 
 CREATE TABLE tbStatusVaga (
 	idStatusVaga INT PRIMARY KEY IDENTITY (1,1),
@@ -198,20 +204,35 @@ CREATE TABLE tbStatusCandidato (
 	dsParecer VARCHAR(500) 
 );
 
+select * from tbCompetencia
 
-CREATE TABLE tbCompetencias (
-	idCompetencias INT PRIMARY KEY IDENTITY (1,1),
+insert into tbCompetencia values ('Desenvolvimento')
+insert into tbCompetencia values ('Profundidade')
+insert into tbCompetencia values ('Planejamento')
+insert into tbCompetencia values ('Execução e entrega')
+insert into tbCompetencia values ('Pessoas')
+insert into tbCompetencia values ('Comercial e financeiro')
+select * from tbCandidatoCompetencia
+insert into tbCandidatoCompetencia values (1, 2, 1)
+insert into tbCandidatoCompetencia values (4, 2, 2)
+insert into tbCandidatoCompetencia values (2, 2, 3)
+insert into tbCandidatoCompetencia values (3, 2, 4)
+insert into tbCandidatoCompetencia values (4, 2, 5)
+insert into tbCandidatoCompetencia values (3, 2, 6)
+CREATE TABLE tbCompetencia(
+	idCompetencia INT PRIMARY KEY IDENTITY (1,1),
+	nmCompetencia VARCHAR(200)
+)
+select * from tbCandidatoCompetencia
+CREATE TABLE tbCandidatoCompetencia (
+	idCandidatoCompetencia INT PRIMARY KEY IDENTITY (1,1),
+	idAvaliacao INT FOREIGN KEY REFERENCES tbAvaliacao(idAvaliacao),
 	idCandidato INT FOREIGN KEY REFERENCES tbCandidato(idCandidato),
-	compDesenvolvimento NUMERIC,
-	compProfundidade NUMERIC,
-	compPlanejamento NUMERIC,
-	compExecucaoEntrega NUMERIC,
-	compRelacionamento NUMERIC,
-	compPessoas NUMERIC,
-	compComercial NUMERIC,
-	compFinanceiro NUMERIC,
-	dsParecer VARCHAR(500)
+	idCompetencia INT FOREIGN KEY REFERENCES tbCompetencia(idCompetencia)
 );
+
+
+
 
 alter table tbVaga add nmVaga varchar(50)
 select * from tbVaga

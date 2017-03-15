@@ -22,7 +22,7 @@ public class PerfilEntity {
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
 	@Column(name = "idPerfil", unique = true, nullable = false)
 	private Integer id;
-
+	
 	@Column(name = "nmPerfil")
 	private String nome;
 

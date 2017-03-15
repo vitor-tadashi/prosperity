@@ -13,10 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.ProjetoBean;
 import br.com.prosperity.bean.SenioridadeBean;
+import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.business.CargoBusiness;
 import br.com.prosperity.business.ProjetoBusiness;
 import br.com.prosperity.business.SenioridadeBusiness;
-
+import br.com.prosperity.business.UsuarioBusiness;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.VagaBusiness;
 
@@ -34,6 +35,7 @@ public class VagaController {
 	@Autowired
 	private List<VagaBean> vagaBean;
 
+	@Autowired
 	private SenioridadeBusiness preencherSenioridade;
 	
 	@Autowired
@@ -41,6 +43,18 @@ public class VagaController {
 	
 	@Autowired
 	private ProjetoBusiness preencherProjeto;
+	
+	@Autowired
+	private UsuarioBusiness preencherUsuario;
+	
+	@Autowired
+	private List<SenioridadeBean> senioridades;
+	
+	@Autowired
+	private List<CargoBean> cargos;
+	
+	@Autowired
+	private List<ProjetoBean> projetos;
 	
 	@Autowired
 	private ProjetoBean projeto;
@@ -55,7 +69,13 @@ public class VagaController {
 	private List<CargoBean> cargoBean;
 	
 	@Autowired
-	private List<ProjetoBean> projetoBean;
+	private List<UsuarioBean> usuarios;
+	
+	@Autowired
+	private CargoBusiness cargoBusiness;
+	
+	@Autowired
+	private SenioridadeBusiness senioridadeBusiness;
 	
 	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
 	public String cliente(Model model) {
@@ -64,27 +84,35 @@ public class VagaController {
 		/*vagas.add(b);*/
 		model.addAttribute("vagaBean", vagas);
 		
+		
+		List<CargoBean> listaCargo = cargoBusiness.getCargo();
+		model.addAttribute("listaCargo", listaCargo);
+		
+		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.getSenioridade();
+		model.addAttribute("listaSenioridade", listaSenioridade);
+		
+		List<VagaBean> listaVaga = vagaBusiness.getVaga();
+		model.addAttribute("listaVaga", listaVaga);
+		
 		return "vaga/consultar-vaga";
 	}
 
 	@RequestMapping(value = "aprovar", method = RequestMethod.GET)
 	public String aprovacaoVaga(Model model) {
-		vagaBean = vagaBusiness.obterTodos();
-		model.addAttribute("vagas", vagaBean);
-		model.addAttribute("projeto", vagaBean.get(0).getProjetoBean());
-		model.addAttribute("senioridade", vagaBean.get(0).getSenioridadeBean());
-		model.addAttribute("cliente", vagaBean.get(0).getProjetoBean().getCliente());
+		model.addAttribute("vagas", vagaBusiness.obterTodos());
 		return "vaga/aprovacao-vaga";
 	}
 	
 	@RequestMapping (value= "/solicitar", method = RequestMethod.GET)
 	public String solicitarVaga(Model model){
-		senioridadeBean = preencherSenioridade.obterTodos();
-		cargoBean = preencherCargo.obterTodos();
-		projetoBean = preencherProjeto.obterTodos();
-		model.addAttribute("cargoBean", cargoBean);
-		model.addAttribute("senioridadeBean", senioridadeBean);
-		model.addAttribute("projetoBean", projetoBean);
+		senioridades = preencherSenioridade.obterTodos();
+		cargos = preencherCargo.obterTodos();
+		projetos = preencherProjeto.obterTodos();
+		usuarios = preencherUsuario.buscarGestor(); //Buscar somente Gestores
+		model.addAttribute("senioridades", senioridades);
+		model.addAttribute("cargos", cargos);
+		model.addAttribute("projetos", projetos);
+		model.addAttribute("usuarios", usuarios);
 		return "vaga/solicitar-vaga";
 	}
 

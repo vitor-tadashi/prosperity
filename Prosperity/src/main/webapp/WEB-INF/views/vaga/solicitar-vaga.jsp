@@ -13,6 +13,11 @@
 
 <c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
 
+<script type="text/javascript">
+function cliente()
+projeto.getElementById("textCliente").value("");
+</script>
+
 <body>
 	<c:import url="/WEB-INF/views/shared/dashboard.jsp"></c:import>
 	<div id="main-container">
@@ -77,8 +82,8 @@
 												<label for="cmbCargo">Cargo</label>
 												<select class="form-control chzn-select" id="cmbCargo">
 													
-													<c:forEach var="cargoBean" items="${cargoBean}" varStatus="i">
-														<option value="i">${cargoBean.nome}</option>
+													<c:forEach var="cargo" items="${cargos}" varStatus="i">
+														<option value="i">${cargo.nome}</option>
 													</c:forEach>
 													
 												</select>
@@ -110,8 +115,8 @@
 												<label for="cmbSenioridade">Senioridade da vaga</label>
 												<select class="form-control chzn-select" id="cmbSenioridade">
 												
-													<c:forEach var="senioridadeBean" items="${senioridadeBean}" varStatus="i">
-														<option value="i">${senioridadeBean.nome}</option>
+													<c:forEach var="senioridade" items="${senioridades}" varStatus="i">
+														<option value="i">${senioridade.nome}</option>
 													</c:forEach>
 													
 												</select>
@@ -197,29 +202,27 @@
 												<label for="exampleInputEmail1">Nome do projeto</label> <select
 													class="form-control chzn-select">
 													
-													<c:forEach var="cargoBean" items="${projetoBean}" varStatus="i">
-														<option value="i">${projetoBean.nome}</option>
+													<c:forEach var="projeto" items="${projetos}" varStatus="i">
+														<option value="i">${projeto.nome}</option>
 													</c:forEach>
 
 												</select>
 											</div>
 											<!-- /form-group -->
 											<div class="form-group col-md-4" style="padding-left: 0px;">
-												<label for="exampleInputEmail1">Cliente</label> <select
-													class="form-control chzn-select">
-													<option>Cliente A</option>
-													<option>Cliente B</option>
-													<option>Cliente C</option>
-												</select>
+												<label for="exampleInputEmail1">Cliente</label> 
+												<input type="text" class="form-control input-sm"
+														id="textCliente" placeholder="Cliente"
+														data-required="false" disabled="disabled" onblur="cliente">
+												
 											</div>
 											<!-- /form-group -->
 											<div class="form-group col-md-4" style="padding-left: 0px;">
 												<label for="exampleInputEmail1">Gestor imediato</label> <select
 													class="form-control chzn-select">
-													<option>Gabriela Nascimento</option>
-													<option>Michela Senario</option>
-													<option>Vitor Tadashi</option>
-													<option>Vera Tavares</option>
+														<c:forEach var="usuario" items="${usuarios}" varStatus="i">
+															<option value="i">${usuario.nome}</option>
+														</c:forEach>
 												</select>
 											</div>
 											<!-- /form-group -->
@@ -229,32 +232,30 @@
 										<section id="dadosAlocacao" class="panel panel-default hide">
 										<div class="panel-body">
 											<div class="col-md-6">
-												<div class="form-group" style="padding-left: 0px;">
-													<label for="exampleInputEmail1">Nome do Projeto</label> <select
-														class="form-control chzn-select">
-														<option>P20150806_001 - Biometria Facial no Front
-															único</option>
-														<option>P20160120_001 - Melhorias na abertura de
-															Conta via internet</option>
-														<option>P20160805_001 - Cartão Gold</option>
-														<option>P20150226_001 - Migração Servidores 2012</option>
+												<div class="form-group" style="padding-left: 0px;"> 
+													<label for="exampleInputEmail1">Nome do projeto</label>
+													 <select class="form-control chzn-select">
+													 
+														<c:forEach var="projeto" items="${projetos}" varStatus="i">
+															<option value="i">${projeto.nome}</option>
+														</c:forEach>
+														
 													</select>
 												</div>
 												<!-- /form-group -->
 												<div class="form-group">
-													<label for="exampleInputEmail1">Cliente</label> <input
-														type="text" class="form-control input-sm"
-														id="exampleInputEmail1" placeholder="Cliente"
-														data-required="true">
+													<label for="exampleInputEmail1">Cliente</label> 
+													<input type="text" class="form-control input-sm"
+														id="textCliente" placeholder="Cliente"
+														data-required="false" disabled="disabled" onblur="cliente">
 												</div>
 												<!-- /form-group -->
 												<div class="form-group" style="padding-left: 0px;">
-													<label for="exampleInputEmail1">Gestor imediato</label> <select
-														class="form-control chzn-select">
-														<option>Gabriela Nascimento</option>
-														<option>Michela Senario</option>
-														<option>Vitor Tadashi</option>
-														<option>Vera Tavares</option>
+													<label for="exampleInputEmail1">Gestor imediato</label> 
+													<select	class="form-control chzn-select">
+														<c:forEach var="usuario" items="${usuarios}" varStatus="i">
+															<option value="i">${usuario.nome}</option>
+														</c:forEach>
 													</select>
 												</div>
 												<!-- /form-group -->
@@ -303,24 +304,24 @@
 									</div>
 									<div class="tab-pane fade" id="third">
 										<section class="panel panel-default">
-										<div class="panel-heading">Formação acadêmica</div>
-										<div class="panel-body relative">
-											<textarea class="form-control" rows="3"></textarea>
-										</div>
+											<div class="panel-heading">Formação acadêmica</div>
+											<div class="panel-body relative">
+												<textarea class="form-control" rows="3"></textarea>
+											</div>
 										</section>
 										<!-- /panel -->
 										<section class="panel panel-default">
-										<div class="panel-heading">Perfil comportamental</div>
-										<div class="panel-body relative">
-											<textarea class="form-control" rows="3"></textarea>
-										</div>
+											<div class="panel-heading">Perfil comportamental</div>
+											<div class="panel-body relative">
+												<textarea class="form-control" rows="3"></textarea>
+											</div>
 										</section>
 										<!-- /panel -->
 										<section class="panel panel-default">
-										<div class="panel-heading">Perfil técnico</div>
-										<div class="panel-body relative">
-											<textarea class="form-control" rows="3"></textarea>
-										</div>
+											<div class="panel-heading">Perfil técnico</div>
+											<div class="panel-body relative">
+												<textarea class="form-control" rows="3"></textarea>
+											</div>
 										</section>
 										<!-- /panel -->
 									</div>
@@ -345,6 +346,8 @@
     
     <!-- Custom -->
 		<script src="/resources/js/custom/solicitacaoVaga.js"></script>
+		<script src="/resources/js/parsley.min.js"></script>
+		<script src="/resources/js/custom/custom.js"></script>
 		
 </body>
 

@@ -1,0 +1,39 @@
+package br.com.prosperity.converter;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import br.com.prosperity.bean.CandidatoCompetenciaBean;
+import br.com.prosperity.entity.CandidatoCompetenciaEntity;
+
+@Component
+public class CandidatoCompetenciaConverter implements Converter<CandidatoCompetenciaEntity, CandidatoCompetenciaBean> {
+
+	@Autowired
+	AvaliacaoConverter avaliacaoConverter;
+	
+	@Autowired
+	CompetenciaConverter competenciaConverter;
+
+	@Override
+	public CandidatoCompetenciaEntity convertBeanToEntity(CandidatoCompetenciaBean bean) {
+		CandidatoCompetenciaEntity entity = new CandidatoCompetenciaEntity();
+
+		entity.setIdCandidatoCompetencia(bean.getId());
+		entity.setCompetencia(competenciaConverter.convertBeanToEntity(bean.getCompetencia()));
+		entity.setAvaliacao(avaliacaoConverter.convertBeanToEntity(bean.getAvaliacao()));
+		return entity;
+	}
+
+	@Override
+	public CandidatoCompetenciaBean convertEntityToBean(CandidatoCompetenciaEntity entity) {
+		CandidatoCompetenciaBean bean = new CandidatoCompetenciaBean();
+
+		bean.setId(entity.getIdCandidatoCompetencia());
+		bean.setCompetencia(competenciaConverter.convertEntityToBean(entity.getCompetencia()));
+		bean.setAvaliacao(avaliacaoConverter.convertEntityToBean(entity.getAvaliacao()));
+		
+		return bean;
+	}
+
+}

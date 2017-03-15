@@ -19,19 +19,14 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import br.com.prosperity.bean.ContatoBean;
-
 @Entity
 @Table(name = "tbCandidato")
 public class CandidatoEntity {
-	/* Mapeamento dos Atributos */
 
-	/* Mapeamento do ID */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idCandidato", unique = true, nullable = false)
 	private Integer id;
-	/* fim Id */
 
 	@Column(name = "nmCandidato")
 	private String nome;
@@ -66,20 +61,19 @@ public class CandidatoEntity {
 
 	@Column(name = "cmCurriculo")
 	private File curriculo;
-	
+
 	@Column(name = "dtUltimoContato")
 	private Date dataultimoContato;
-	
+
 	@Column(name = "dtEntrevista")
 	private Date dataEntrevista;
-	
+
 	@Column(name = "dsProposta")
 	private String proposta;
 
 	/* Mapeamento de Relacionamentos */
 
-
-	//@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	// @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 
@@ -101,6 +95,10 @@ public class CandidatoEntity {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "idStatusCandidato")
 	private List<StatusCandidatoEntity> statusCandidatos;
+
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "idCandidato")
+	private List<CandidatoCompetenciaEntity> competencias;
 
 	public Integer getId() {
 		return id;
@@ -253,5 +251,13 @@ public class CandidatoEntity {
 	public void setStatusCandidatos(List<StatusCandidatoEntity> statusCandidatos) {
 		this.statusCandidatos = statusCandidatos;
 	}
+
+	public List<CandidatoCompetenciaEntity> getCompetencias() {
+		return competencias;
+	}
+
+	public void setCompetencias(List<CandidatoCompetenciaEntity> competencias) {
+		this.competencias = competencias;
+	}
+
 }
-	

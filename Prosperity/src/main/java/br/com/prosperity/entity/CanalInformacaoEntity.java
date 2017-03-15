@@ -7,22 +7,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 @Entity
-@Table(name = "tbCompetencia")
-public class CompetenciaEntity {
-	
+@Table(name = "tbCanalInformacao")
+public class CanalInformacaoEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idCompetencia", unique = true, nullable = false)
+	@Column(name = "idCanal", unique = true, nullable = false)
 	private Integer id;
-	/* fim Id */
-
-	@Column(name = "nmCompetencia")
+	
+	@Column(name = "nmCanal", unique = false, nullable = false)
 	private String nome;
 
 	public Integer getId() {
-		return id;	}
+		return id;
+	}
 
 	public void setId(Integer id) {
 		this.id = id;
@@ -35,6 +33,5 @@ public class CompetenciaEntity {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
 
 }
