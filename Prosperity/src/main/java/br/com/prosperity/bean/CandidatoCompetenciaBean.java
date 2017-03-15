@@ -1,5 +1,8 @@
 package br.com.prosperity.bean;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class CandidatoCompetenciaBean {
 	
 	private Integer id;

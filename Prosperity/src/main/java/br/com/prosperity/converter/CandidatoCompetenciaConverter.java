@@ -1,10 +1,12 @@
 package br.com.prosperity.converter;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import br.com.prosperity.bean.CandidatoCompetenciaBean;
 import br.com.prosperity.entity.CandidatoCompetenciaEntity;
 
+@Component
 public class CandidatoCompetenciaConverter implements Converter<CandidatoCompetenciaEntity, CandidatoCompetenciaBean> {
 
 	@Autowired

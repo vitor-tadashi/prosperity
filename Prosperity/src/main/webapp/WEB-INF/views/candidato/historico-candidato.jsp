@@ -373,6 +373,7 @@
 								<p class="form-control-static" id="pretensao" name="pretensao"><fmt:formatNumber value="${candidato.valorPretensao}" minFractionDigits="2" type="currency" /></p>
 							</div>
 						</div>
+						
 						<div class="form-group col-xs-12">
 							<label class="col-xs-2 control-label">Competências</label>
 							<div class="col-xs-4"
