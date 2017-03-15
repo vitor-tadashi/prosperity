@@ -99,11 +99,7 @@ public class VagaController {
 
 	@RequestMapping(value = "aprovar", method = RequestMethod.GET)
 	public String aprovacaoVaga(Model model) {
-		vagaBean = vagaBusiness.obterTodos();
-		model.addAttribute("vagas", vagaBean);
-		model.addAttribute("projeto", vagaBean.get(0).getProjetoBean());
-		model.addAttribute("senioridade", vagaBean.get(0).getSenioridadeBean());
-		model.addAttribute("cliente", vagaBean.get(0).getProjetoBean().getCliente());
+		model.addAttribute("vagas", vagaBusiness.obterTodos());
 		return "vaga/aprovacao-vaga";
 	}
 	
