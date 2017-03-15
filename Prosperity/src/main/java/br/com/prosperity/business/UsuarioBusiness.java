@@ -9,9 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.converter.UsuarioConverter;
 import br.com.prosperity.dao.UsuarioDAO;
-import br.com.prosperity.entity.PerfilEntity;
 import br.com.prosperity.entity.UsuarioEntity;
 import br.com.prosperity.exception.BusinessException;
+import br.com.prosperity.util.EncriptaDecriptaApacheCodec;
 
 @Component
 public class UsuarioBusiness {
@@ -24,6 +24,10 @@ public class UsuarioBusiness {
 
 	@Transactional
 	public void inserir(UsuarioBean usuarioBean) {
+		EncriptaDecriptaApacheCodec codec = new EncriptaDecriptaApacheCodec();
+		
+		usuarioBean.setSenha(codec.codificaBase64Encoder(usuarioBean.getSenha()));
+		
 		UsuarioEntity entity = usuarioConverter.convertBeanToEntity(usuarioBean);
 		usuarioDAO.adicionar(entity);
 	}
@@ -63,11 +67,11 @@ public class UsuarioBusiness {
 
 	@Transactional
 	public void alterar(UsuarioBean usuarioBean) {
-		UsuarioEntity usuarioEntity = usuarioDAO.alterar(usuarioConverter.convertBeanToEntity(usuarioBean));
+		usuarioDAO.alterar(usuarioConverter.convertBeanToEntity(usuarioBean));
 	}
 
 	@Transactional
-	public List<UsuarioBean> getUsuarios() {
+	public List<UsuarioBean> obterTodos() {
 		List<UsuarioBean> usuarios = usuarioConverter.convertEntityToBean(usuarioDAO.listar());
 		return usuarios;
 	}
@@ -78,4 +82,11 @@ public class UsuarioBusiness {
 		List<UsuarioBean> usuariosBean = usuarioConverter.convertEntityToBean(usuariosEntity);
 		return usuariosBean;
 	}
+
+	@Transactional
+	public UsuarioBean obterUsuarioPorId(Integer id) {
+		UsuarioBean bean = usuarioConverter.convertEntityToBean(usuarioDAO.obterPorId(id));
+		return bean;
+	}
+
 }

@@ -85,13 +85,13 @@ public class VagaController {
 		model.addAttribute("vagaBean", vagas);
 		
 		
-		List<CargoBean> listaCargo = cargoBusiness.getCargo();
+		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
 		model.addAttribute("listaCargo", listaCargo);
 		
-		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.getSenioridade();
+		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.obterTodos();
 		model.addAttribute("listaSenioridade", listaSenioridade);
 		
-		List<VagaBean> listaVaga = vagaBusiness.getVaga();
+		List<VagaBean> listaVaga = vagaBusiness.obterTodos();
 		model.addAttribute("listaVaga", listaVaga);
 		
 		return "vaga/consultar-vaga";

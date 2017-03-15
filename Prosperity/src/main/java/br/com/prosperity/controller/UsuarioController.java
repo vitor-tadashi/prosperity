@@ -17,7 +17,6 @@ import br.com.prosperity.business.FuncionalidadeBusiness;
 import br.com.prosperity.business.FuncionarioBusiness;
 import br.com.prosperity.business.PerfilBusiness;
 import br.com.prosperity.business.UsuarioBusiness;
-import br.com.prosperity.entity.PerfilEntity;
 import br.com.prosperity.exception.BusinessException;
 
 @Controller
@@ -34,34 +33,35 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioBusiness usuarioBusiness;
+	
+	@Autowired
+	private UsuarioBean usuario;
 
-	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
-	public String consultaUsuario(Model model) {
-		List<UsuarioBean> usuarios = usuarioBusiness.getUsuarios();
-		/*
-		 * List<FuncionarioBean> funcionarios =
-		 * funcionarioBusiness.getFuncionarios(); List<PerfilEntity> perfis =
-		 * perfilBusiness.getPerfis(); model.addAttribute("funcionarios",
-		 * funcionarios); model.addAttribute("perfis", perfis);
-		 */
+	@RequestMapping(value = "/listar", method = RequestMethod.GET)
+	public String carregaTabela(Model model) {
+		List<UsuarioBean> usuarios = usuarioBusiness.obterTodos();
 		model.addAttribute("usuarios", usuarios);
-
-		// model.addAttribute("usuario", new UsuarioBean());
 
 		return "usuario/consultar-usuario";
 	}
 
-	@RequestMapping(value = "/carrega-usuario", method = RequestMethod.GET)
-	public Model carregaUsuario(Integer id, Model model) {
-		// TODO metodo de carregar combo
-		List<FuncionarioBean> funcionarios = funcionarioBusiness.getFuncionarios();
-		List<PerfilEntity> perfis = perfilBusiness.getPerfis();
+	@RequestMapping(value = {"/inserir-usuario", "/alterar-usuario"}, method = RequestMethod.GET)
+	public String carregaCombos(Integer id, Model model) {
+		List<FuncionarioBean> funcionarios = funcionarioBusiness.obterTodos();
+		List<PerfilBean> perfis = perfilBusiness.obterTodos();
 		model.addAttribute("funcionarios", funcionarios);
 		model.addAttribute("perfis", perfis);
+		
 		if (id != null) {
-			System.out.println("asd");
+			model.addAttribute("title", "Alterar");
+			
+			usuario = usuarioBusiness.obterUsuarioPorId(id);
+			model.addAttribute("usuario", usuario);
+		} else {
+			model.addAttribute("title", "Inserir");
 		}
-		return model;
+		
+		return "usuario/formulario";
 	}
 
 	@RequestMapping(value = "/criar-perfil", method = RequestMethod.GET)
@@ -89,13 +89,15 @@ public class UsuarioController {
 			usuarioBusiness.alterar(usuario);
 		}
 
-		return "redirect:consultar";
+		return "redirect:listar";
 	}
+	
+	@RequestMapping(value = "/mudar-status", method = RequestMethod.GET)
+	public String mudarStatus(Boolean ativo) {
+		usuario.setAtivo(!ativo);
+		usuarioBusiness.alterar(usuario);
 
-	@RequestMapping(value = "/teste", method = RequestMethod.GET)
-	public String teste(Model model) {
-		System.out.println("tESTE");
-		return "redirect:criar-perfil";
+		return "redirect:alterar-usuario?id=" + usuario.getId();
 	}
 
 }

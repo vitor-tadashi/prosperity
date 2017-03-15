@@ -27,13 +27,5 @@ public class CargoBusiness {
 		List<CargoBean> cargoBean = cargoConverter.convertEntityToBean(cargoEntity);
 		return cargoBean;
 	}
-	
-	@Transactional
-	public List<CargoBean> getCargo() {
-		List<CargoBean> listaCargo = cargoConverter.convertEntityToBean(cargoDAO.listar());
-		return listaCargo;
-	}
-
-
 
 }
