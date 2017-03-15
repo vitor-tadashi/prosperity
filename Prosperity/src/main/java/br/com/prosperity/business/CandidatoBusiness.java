@@ -42,4 +42,11 @@ public class CandidatoBusiness {
 		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(entities);
 		return beans;
 	}
+
+
+	public void inserir(CandidatoBean candiatoBean) {
+		
+		candidatoDAO.adicionar(candidatoConverter.convertBeanToEntity(candidatoBean));
+		
+	}
 }

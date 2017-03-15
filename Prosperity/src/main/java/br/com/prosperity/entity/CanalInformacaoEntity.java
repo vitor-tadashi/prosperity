@@ -12,10 +12,10 @@ import javax.persistence.Table;
 public class CanalInformacaoEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idCanal", unique = true, nullable = false)
+	@Column(name = "idCanalInformacao", unique = true, nullable = false)
 	private Integer id;
 	
-	@Column(name = "nmCanal", unique = false, nullable = false)
+	@Column(name = "nmCanalInformacao", unique = false, nullable = false)
 	private String nome;
 
 	public Integer getId() {

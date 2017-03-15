@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -16,6 +17,7 @@ import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.ContatoBean;
 import br.com.prosperity.bean.EnderecoBean;
 import br.com.prosperity.bean.FormacaoBean;
+import br.com.prosperity.bean.PerfilBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
 import br.com.prosperity.bean.TipoCursoBean;
 import br.com.prosperity.bean.VagaBean;
@@ -26,11 +28,15 @@ import br.com.prosperity.business.SenioridadeBusiness;
 import br.com.prosperity.business.SituacaoAtualBusiness;
 import br.com.prosperity.business.TipoCursoBusiness;
 import br.com.prosperity.business.VagaBusiness;
+import br.com.prosperity.exception.BusinessException;
 
 @Controller
 @RequestMapping(value = "candidato")
 public class CandidatoController {
 
+	@Autowired
+	private CandidatoBean candidatoBean;
+	
 	@Autowired
 	private CandidatoBusiness candidatoBusiness;
 
@@ -66,15 +72,11 @@ public class CandidatoController {
 
 	@Autowired
 	private SituacaoAtualBean situacaoAtualBean;
-
-	@Autowired
-	private CargoBean cargoBean;
 	@Autowired
 	private VagaBusiness vagaBusiness;
 	@Autowired
 	private CanalInformacaoBusiness canalInformacaoBusiness;
-	@Autowired
-	private CanalInformacaoBean canalInformacaoBean;
+	
 
 	@RequestMapping(value = "cadastrar", method = RequestMethod.GET)
 	public String cadastrarCandidato(Model model) {
@@ -89,7 +91,15 @@ public class CandidatoController {
 		List<CanalInformacaoBean> listaCanal = canalInformacaoBusiness.getCanal();
 		model.addAttribute("listaCanal", listaCanal);
 
+	
+		
 		return "candidato/cadastrar-candidato";
+	}
+	@RequestMapping(value="salvar", method=RequestMethod.POST)
+	public String salvarCandidato(@ModelAttribute("candidatoBean") CandidatoBean candiatoBean) throws BusinessException{
+		candidatoBusiness.inserir(candiatoBean);
+	
+		return"candidato/salvar-candidato";
 	}
 
 	@RequestMapping(value = "consultar-rh", method = RequestMethod.GET)
