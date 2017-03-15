@@ -87,7 +87,7 @@
 
 						</ul></li>
 
-					<li><a href="dashboard.html"> <span class="menu-icon">
+					<li><a href="/pagina-inicial/"> <span class="menu-icon">
 								<i class="fa fa-home fa-lg"></i>
 						</span> <span class="text"> Página inicial </span> <span
 							class="menu-hover"></span>
@@ -108,7 +108,7 @@
 						</span> <span class="text"> Consultar </span> <span class="menu-hover"></span>
 					</a>
 						<ul class="submenu">
-							<li><a href="/candidato/consulta-rh"><span
+							<li><a href="/candidato/consultar-rh"><span
 									class="submenu-label">Candidato</span></a></li>
 							<li><a href="/vaga/consultar"><span
 									class="submenu-label">Vaga</span></a></li>
@@ -132,7 +132,7 @@
 						</span> <span class="text"> Relatório </span> <span class="menu-hover"></span>
 					</a></li>
 
-					<li class="openable"><a href="#"> <span class="menu-icon">
+					<li class="openable"><a href="/usuario/consultar"> <span class="menu-icon">
 								<i class="fa fa-cogs fa-lg"></i>
 						</span> <span class="text"> Configurações </span> <span
 							class="menu-hover"></span>
