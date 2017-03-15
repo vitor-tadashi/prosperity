@@ -11,6 +11,9 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 
 	@Autowired
 	private ContatoConverter contatoConverter;
+	
+	@Autowired
+	private AvaliacaoConverter avalicaoConverter;
 
 	@Autowired
 	private EnderecoConverter enderecoConverter;
