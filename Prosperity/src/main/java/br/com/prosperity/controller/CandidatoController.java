@@ -96,16 +96,17 @@ public class CandidatoController {
 		return "candidato/cadastrar-candidato";
 	}
 	@RequestMapping(value="salvar", method=RequestMethod.POST)
-	public String salvarCandidato(@ModelAttribute("candidatoBean") CandidatoBean candiatoBean) throws BusinessException{
-		candidatoBusiness.inserir(candiatoBean);
+	public String salvarCandidato(@ModelAttribute("candidatoBean")CandidatoBean candidatoBean) throws BusinessException{
+		candidatoBusiness.inserir(candidatoBean);
 	
-		return"candidato/salvar-candidato";
+		return"candidato/cadastrar-candidato";
 	}
 
 	@RequestMapping(value = "consultar-rh", method = RequestMethod.GET)
 	public String consultarCandidatoRH(Model model) {
 		List<CandidatoBean> candidatos = candidatoBusiness.obterTodos();
 		model.addAttribute("candidatos", candidatos);
+		
 		return "candidato/consulta-rh";
 	}
 

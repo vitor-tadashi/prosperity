@@ -76,7 +76,7 @@ public class PerfilBusiness {
 
 		return perfisBean;
 	}
-
+	@Transactional
 	public List<FuncionalidadeBean> obterFuncionalidades(Integer id) {
 		PerfilEntity entity = perfilDAO.obterPorId(id);
 		PerfilBean bean = perfilConverter.convertEntityToBean(entity);

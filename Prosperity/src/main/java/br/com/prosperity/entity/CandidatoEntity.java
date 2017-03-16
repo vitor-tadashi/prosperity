@@ -70,6 +70,13 @@ public class CandidatoEntity {
 
 	@Column(name = "dsProposta")
 	private String proposta;
+	
+	@Column(name="vlPretencaoMin")
+	private Double valorMin;
+	
+	@Column(name="vlPretencaoMax")
+	private Double valorMax;
+	
 
 	/* Mapeamento de Relacionamentos */
 
@@ -258,6 +265,22 @@ public class CandidatoEntity {
 
 	public void setCompetencias(List<CandidatoCompetenciaEntity> competencias) {
 		this.competencias = competencias;
+	}
+
+	public  double getValorMin() {
+		return valorMin;
+	}
+
+	public void setValorMin(double valorMin) {
+		this.valorMin = valorMin;
+	}
+
+	public  double getValorMax() {
+		return valorMax;
+	}
+
+	public void setValorMax(double valorMax) {
+		this.valorMax = valorMax;
 	}
 
 }

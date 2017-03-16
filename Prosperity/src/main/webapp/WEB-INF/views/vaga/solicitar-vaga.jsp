@@ -30,7 +30,7 @@
 					<div class="panel-heading">Informações da vaga</div>
 					<div class="panel-body">
 						<form class="form-border" id="formCadastro2" action="cadastrar"
-							method="post">
+							method="POST">
 							<div class="panel-tab clearfix">
 								<ul class="tab-bar wizard-demo" id="wizardDemo">
 									<li class="active tab-verity"><a href="#first"
@@ -60,10 +60,10 @@
 													<label>Local de trabalho</label>
 													<div>
 														<label class="label-radio inline"> <input
-															id="interno" type="radio" name="localTrabalho" checked>
+															id="interno" name="localTrabalho" value="I" type="radio" checked>
 															<span class="custom-radio"></span> Interno
 														</label> <label class="label-radio inline"> <input
-															id="cliente" type="radio" name="localTrabalho"> <span
+															id="cliente" name="localTrabalho" value="C" type="radio"> <span
 															class="custom-radio"></span> Cliente
 														</label>
 													</div>
@@ -75,10 +75,10 @@
 										<div class="row">
 											<div class="form-group col-md-6">
 												<label for="cmbCargo">Cargo</label> <select
-													class="form-control chzn-select" id="cmbCargo">
+													class="form-control chzn-select" id="cmbCargo" name="cargoBean.id">
 
 													<c:forEach var="cargo" items="${cargos}" varStatus="i">
-														<option value="i">${cargo.nome}</option>
+														<option value="${cargo.id}">${cargo.nome}</option>
 													</c:forEach>
 
 												</select>
@@ -88,13 +88,13 @@
 												<label>Tipo de vaga</label>
 												<div>
 													<label class="label-radio inline"> <input
-														type="radio" name="idTipoVaga" checked> <span
+														name="idTipoVaga" value="R" type="radio" checked> <span
 														class="custom-radio"></span> Real
 													</label> <label class="label-radio inline"> <input
-														type="radio" name="idTipoVaga"> <span
+														 name="idTipoVaga" value="P" type="radio" > <span
 														class="custom-radio"></span> Prospecção
 													</label> <label class="label-radio inline"> <input
-														type="radio" name="idTipoVaga"> <span
+														name="idTipoVaga" value="H" type="radio" > <span
 														class="custom-radio"></span> Hunting
 													</label>
 												</div>
@@ -106,11 +106,11 @@
 										<div class="row">
 											<div class="form-group col-md-6">
 												<label for="cmbSenioridade">Senioridade da vaga</label> <select
-													class="form-control chzn-select" id="cmbSenioridade">
+													id="cmbSenioridade" name="senioridadeBean.id" class="form-control chzn-select" >
 
 													<c:forEach var="senioridade" items="${senioridades}"
 														varStatus="i">
-														<option value="i">${senioridade.nome}</option>
+														<option value="${senioridade.id}">${senioridade.nome}</option>
 													</c:forEach>
 
 												</select>
@@ -121,9 +121,8 @@
 												<div>
 													<div class="form-group col-md-5">
 														<div class="input-group bootstrap-timepicker">
-															<input class="timepicker form-control" type="text"
-																name="horarioEntrada" value="08:00 AM"
-																id="txtHorarioInicial"> <span
+															<input id="txtHorarioInicial" class="timepicker form-control" type="text"
+																 value="08:00 AM"> <span
 																class="input-group-addon"><i
 																class="fa fa-clock-o"></i></span>
 														</div>
@@ -135,9 +134,8 @@
 													<!-- /form-group -->
 													<div class="form-group col-md-5">
 														<div class="input-group bootstrap-timepicker">
-															<input class="timepicker form-control"
-																name="horarioSaida" type="text" value="05:00 PM"
-																id="txtHorarioFinal"> <span
+															<input id="txtHorarioFinal" class="timepicker form-control"
+																 type="text" value="05:00 PM"> <span
 																class="input-group-addon"> <i
 																class="fa fa-clock-o"></i>
 															</span>
@@ -150,20 +148,19 @@
 										</div>
 										<div class="row">
 											<div class="form-group col-md-6">
-												<label for="txtPropostaSalarial">Proposta salarial</label> <input
-													type="text" name="valorPretensao"
-													class="form-control input-sm" id="txtPropostaSalarial"
-													placeholder="R$" data-required="true">
+												<label for="txtPropostaSalarial">Proposta salarial</label> 
+												<input id="txtPropostaSalarial" name="valorPretensao" type="text" class="form-control input-sm" 
+												placeholder="R$" data-required="true">
 											</div>
 											<!-- /form-group -->
 											<div class="form-group col-md-6">
 												<label>Aumento de quadro</label>
 												<div>
-													<label class="label-radio inline"> <input id="novo"
-														type="radio" name="radAumentoQuadro" checked> <span
+													<label class="label-radio inline"> <input id="novo" name="aumentaQuadro" value="N"
+														type="radio" checked> <span
 														class="custom-radio"> </span> Novo
 													</label> <label class="label-radio inline"> <input
-														id="substituicao" type="radio" name="radAumentoQuadro">
+														id="substituicao" name="aumentaQuadro" value="S" type="radio">
 														<span class="custom-radio"> </span> Substituição
 													</label>
 												</div>
@@ -177,7 +174,7 @@
 												<label class="control-label" for="txtDataInicio">Data
 													para início</label>
 												<div class="input-group">
-													<input type="text" name="dataInicio" value="01/01/2017"
+													<input name="dataInicio" type="text"  value="01/01/2017"
 														class="datepicker form-control" id="txtDataInicio">
 													<span class="input-group-addon"><i
 														class="fa fa-calendar"></i></span>
@@ -186,8 +183,8 @@
 											</div>
 											<!-- /form-group -->
 											<div id="nome" class="form-group col-md-6 hide">
-												<label>Nome do substituido</label> <input type="text"
-													name="nomeSubstituido" class="form-control input-sm"
+												<label>Nome do substituido</label> <input name="nomeSubstituido" type="text"
+													class="form-control input-sm"
 													placeholder="Nome do Substituido">
 											</div>
 										</div>
@@ -197,11 +194,11 @@
 										<section id="dadosInterno" class="panel panel-default">
 											<div class="panel-body">
 												<div class="form-group col-md-4" style="padding-left: 0px;">
-													<label for="exampleInputEmail1">Nome do projeto</label> <select
+													<label for="exampleInputEmail1">Nome do projeto</label> <select name="projetoBean.id"
 														class="form-control chzn-select">
 
 														<c:forEach var="projeto" items="${projetos}" varStatus="i">
-															<option value="i">${projeto.nome}</option>
+															<option value="${projeto.id}">${projeto.nome}</option>
 														</c:forEach>
 
 													</select>
@@ -216,10 +213,10 @@
 												</div>
 												<!-- /form-group -->
 												<div class="form-group col-md-4" style="padding-left: 0px;">
-													<label for="exampleInputEmail1">Gestor imediato</label> <select
+													<label for="exampleInputEmail1">Gestor imediato</label> <select name="usuarioBean.id"
 														class="form-control chzn-select">
 														<c:forEach var="usuario" items="${usuarios}" varStatus="i">
-															<option value="i">${usuario.nome}</option>
+															<option value="${usuario.id}">${usuario.nome}</option>
 														</c:forEach>
 													</select>
 												</div>
@@ -231,12 +228,12 @@
 											<div class="panel-body">
 												<div class="col-md-6">
 													<div class="form-group" style="padding-left: 0px;">
-														<label for="exampleInputEmail1">Nome do projeto</label> <select
+														<label for="exampleInputEmail1">Nome do projeto</label> <select name="projetoBean.id"
 															class="form-control chzn-select">
 
 															<c:forEach var="projeto" items="${projetos}"
 																varStatus="i">
-																<option value="i">${projeto.nome}</option>
+																<option value="${projeto.id}">${projeto.nome}</option>
 															</c:forEach>
 
 														</select>
@@ -251,11 +248,11 @@
 													</div>
 													<!-- /form-group -->
 													<div class="form-group" style="padding-left: 0px;">
-														<label for="exampleInputEmail1">Gestor imediato</label> <select
+														<label for="exampleInputEmail1">Gestor imediato</label> <select name="usuarioBean.id"
 															class="form-control chzn-select">
 															<c:forEach var="usuario" items="${usuarios}"
 																varStatus="i">
-																<option value="i">${usuario.nome}</option>
+																<option value="${usuario.id}">${usuario.nome}</option>
 															</c:forEach>
 														</select>
 													</div>
@@ -307,16 +304,16 @@
 										<section class="panel panel-default">
 											<div class="panel-heading">Formação acadêmica</div>
 											<div class="panel-body relative">
-												<textarea class="form-control"
-													name="descricaoFormacaoAcademica" rows="3"></textarea>
+												<textarea class="form-control" name="descricaoFormacaoAcademica"
+													rows="3"></textarea>
 											</div>
 										</section>
 										<!-- /panel -->
 										<section class="panel panel-default">
 											<div class="panel-heading">Perfil comportamental</div>
 											<div class="panel-body relative">
-												<textarea class="form-control"
-													name="descricaoPerfilComportamental" rows="3"></textarea>
+												<textarea class="form-control" name="descricaoPerfilComportamental"
+													rows="3"></textarea>
 											</div>
 										</section>
 										<!-- /panel -->
