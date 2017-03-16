@@ -58,7 +58,9 @@ public class PerfilBusiness {
 
 			List<Integer> idFuncionalidades = new ArrayList<>();
 			for (FuncionalidadeBean f : perfilBean.getListaFuncionalidades()) {
-				idFuncionalidades.add(f.getId());
+				if (f.getId() != null) {
+					idFuncionalidades.add(f.getId());
+				}
 			}
 			perfilEntity.setFuncionalidades(
 					funcionalidadeDAO.findByNamedQuery("obterPerfilFuncionalidade", idFuncionalidades));
@@ -79,5 +81,13 @@ public class PerfilBusiness {
 		List<PerfilBean> perfisBean = perfilConverter.convertEntityToBean(perfisEntity);
 
 		return perfisBean;
+	}
+
+	public List<FuncionalidadeBean> obterFuncionalidades(Integer id) {
+		PerfilEntity entity = perfilDAO.obterPorId(id);
+		PerfilBean bean = perfilConverter.convertEntityToBean(entity);
+		List<FuncionalidadeBean> listaFunc = bean.getListaFuncionalidades();
+		
+		return listaFunc;
 	}
 }

@@ -333,7 +333,7 @@
                                     <input class="form-control" id="none3" name="nome" type="text" placeholder="Insira um nome para o perfil" required/>
                                     </div>
                                     <div class="hide" id="none1">
-                                    <select class="form-control chzn-select hide">
+                                    <select class="form-control chzn-select hide" id="fid" name="">
                                                           <c:forEach var="perfil" items="${perfis }" varStatus="i">
                                                             <option value="${perfil.id }">${perfil.nome }</option>
                                                           </c:forEach>
@@ -367,10 +367,9 @@
                                                     <tr>
                                                         <td>
                                                             <label class="label-checkbox">
-                                                                <input type="checkbox" class="chk-row" name="listaFuncionalidades[${i.index }].id" value="${funcionalidade.id }">
+                                                                <input type="checkbox" class="chk-row" id="${i.index }" name="listaFuncionalidades[${i.index }].id" value="${funcionalidade.id }">
                                                                 <span class="custom-checkbox"></span>
                                                             </label>
-                                                            <%-- <input type="hidden" value="${funcionalidade.nome }" name="listaFuncionalidades[${i.index }].nome"> --%>
                                                         </td>
                                                         <td>${funcionalidade.nome }</td>
                                                     </tr>
@@ -397,26 +396,38 @@
 
     <!-- javaScript aqui -->
     <script type="text/javascript">
-    /* $(function() {
-        $("#novo").on('click', function(){
-            $("#nome1").addClass("hide");
-            $("#nome2").removeClass("hide");
-        });
-        $("#sub").on('click',function(){
-            $("#nome2").addClass("hide");
-            $("#nome1").removeClass("hide");
-        });
-    }); */
     $("#sub").click(function(){
         $("#none2").addClass("hide");
         $("#none1").removeClass("hide");
         $("#none3").attr('required',false);
+        $("#fid").attr("name","id");
     });
     $("#novo").click(function(){
         $("#none1").addClass("hide");
         $("#none2").removeClass("hide");
         $("#none3").attr('required',true);
+        $("#fid").attr("name","");
     });
+    
+    $("#fid").change(function(id){
+    	var id = $("#fid option:selected").val();
+    	$.ajax({
+    		url: "obter-perfil-funcionalidade?id="+id,
+    		type: "GET",
+    		dataType: "JSON",
+    		data: {},
+    		success: function(lista){
+    			if(lista != null){
+    				$.each(lista,function(i,item){
+    					if(item.id == $("#"+i).val()){
+    						$("#"+i).attr("checked","checked")
+    					}
+    				})
+    			}
+    		}
+    	})
+    })
+    
     </script>
 
 </body>
