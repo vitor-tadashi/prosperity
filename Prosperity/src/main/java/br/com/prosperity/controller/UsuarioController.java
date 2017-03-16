@@ -50,9 +50,9 @@ public class UsuarioController {
 	}
 
 	@RequestMapping(value = {"/carregar-usuario"}, method = RequestMethod.GET)
-	public @ResponseBody void carregaUsuarioAjax(Model model, @ModelAttribute("id") Integer id) {
+	public @ResponseBody UsuarioBean carregaUsuarioAjax(Model model, @ModelAttribute("id") Integer id) {
 		usuario = usuarioBusiness.obterUsuarioPorId(id);
-		model.addAttribute("usuario", usuario);
+		return usuario;
 	}
 	
 	@RequestMapping(value = {"/carregar-combos"}, method = RequestMethod.GET)
@@ -119,8 +119,9 @@ public class UsuarioController {
 		usuario.setAtivo(!ativo);
 		usuarioBusiness.alterar(usuario);
 
-		return "redirect:alterar-usuario?id=" + usuario.getId();
+		return "redirect:listar";
 	}
+	
 	@RequestMapping(value = "obter-perfil-funcionalidade", method=RequestMethod.GET)
 	public @ResponseBody List<FuncionalidadeBean> obterPerfilFuncionalidade(Model model,@ModelAttribute("id")Integer id){
 		List<FuncionalidadeBean> listaFunc = perfilBusiness.obterFuncionalidades(id);
