@@ -80,15 +80,15 @@ public class CandidatoController {
 
 	@RequestMapping(value = "cadastrar", method = RequestMethod.GET)
 	public String cadastrarCandidato(Model model) {
-		List<TipoCursoBean> tiposCurso = tipoCursoBusiness.getTipoCurso();
+		List<TipoCursoBean> tiposCurso = tipoCursoBusiness.obterTodos();
 		model.addAttribute("tiposCurso", tiposCurso);
 
-		List<SituacaoAtualBean> listaSituacaoAtual = situacaoAtualBusiness.getSituacaoAtual();
+		List<SituacaoAtualBean> listaSituacaoAtual = situacaoAtualBusiness.obterTodos();
 		model.addAttribute("listaSituacaoAtual", listaSituacaoAtual);
 
-		List<VagaBean> listaVaga = vagaBusiness.getVaga();
+		List<VagaBean> listaVaga = vagaBusiness.obterTodos();
 		model.addAttribute("listaVaga", listaVaga);
-		List<CanalInformacaoBean> listaCanal = canalInformacaoBusiness.getCanal();
+		List<CanalInformacaoBean> listaCanal = canalInformacaoBusiness.obterTodos();
 		model.addAttribute("listaCanal", listaCanal);
 
 	
@@ -116,7 +116,9 @@ public class CandidatoController {
 
 	@RequestMapping(value = "historico", method = RequestMethod.GET)
 	public String historicoCandidato(Model model) {
-		model.addAttribute("candidato", candidatoBusiness.obter(2));
+		candidatoBean = candidatoBusiness.obter(2);
+		
+		model.addAttribute("candidato", candidatoBean);
 
 		return "candidato/historico-candidato";
 	}

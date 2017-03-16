@@ -387,5 +387,27 @@
 	</div>
 	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
 	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
+	
+	<!-- JavaScript --> 
+	
+	<script type="text/javascript">
+	$("#fid").change(function(id){
+    	var Visualizar = $("#fid option:selected").val();
+    	$.ajax({
+    		url: "vaga/aprovar?id="+id,
+    		type: "GET",
+    		dataType: "JSON",
+    		data: {
+    			id: $(this).attr("lista-id")
+    		},
+    		success: function(lista){
+    			if(lista != null){
+    				$("#1").attr("checked","checked")
+    			}
+    		}
+    	})
+    }) 
+
+	</script>
 </body>
 </html>
