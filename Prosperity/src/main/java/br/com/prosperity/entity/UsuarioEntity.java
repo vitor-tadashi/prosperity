@@ -11,9 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
-
 import javax.persistence.Table;
-
 
 @Entity
 @Table(name = "tbUsuario")
@@ -38,7 +36,7 @@ public class UsuarioEntity {
 
 	@Column(name = "nmUsuario")
 	private String nome;
-	
+
 	@Column(name = "email")
 	private String email;
 
@@ -47,10 +45,10 @@ public class UsuarioEntity {
 
 	@Column(name = "flPrimeiroAcesso")
 	private Boolean primeiroAcesso;
-	
+
 	@Column(name = "ativo")
 	private Boolean ativo;
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -114,6 +112,4 @@ public class UsuarioEntity {
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
-	
-	
 }
