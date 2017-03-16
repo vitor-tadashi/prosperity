@@ -367,7 +367,7 @@
                                                     <tr>
                                                         <td>
                                                             <label class="label-checkbox">
-                                                                <input type="checkbox" class="chk-row" name="listaFuncionalidades[${i.index }].id" value="${funcionalidade.id }">
+                                                                <input type="checkbox" class="chk-row" id="${i.index }" name="listaFuncionalidades[${i.index }].id" value="${funcionalidade.id }">
                                                                 <span class="custom-checkbox"></span>
                                                             </label>
                                                         </td>
@@ -409,7 +409,24 @@
         $("#fid").attr("name","");
     });
     
-    var id = $("#fid option:selected").val();
+    $("#fid").change(function(id){
+    	var id = $("#fid option:selected").val();
+    	$.ajax({
+    		url: "obter-perfil-funcionalidade?id="+id,
+    		type: "GET",
+    		dataType: "JSON",
+    		data: {},
+    		success: function(lista){
+    			if(lista != null){
+    				$.each(lista,function(i,item){
+    					if(item.id == $("#"+i).val()){
+    						$("#"+i).attr("checked","checked")
+    					}
+    				})
+    			}
+    		}
+    	})
+    })
     
     </script>
 

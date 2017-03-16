@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.FuncionarioBean;
@@ -98,6 +99,11 @@ public class UsuarioController {
 		usuarioBusiness.alterar(usuario);
 
 		return "redirect:alterar-usuario?id=" + usuario.getId();
+	}
+	@RequestMapping(value = "obter-perfil-funcionalidade", method=RequestMethod.GET)
+	public @ResponseBody List<FuncionalidadeBean> obterPerfilFuncionalidade(Model model,@ModelAttribute("id")Integer id){
+		List<FuncionalidadeBean> listaFunc = perfilBusiness.obterFuncionalidades(id);
+		return listaFunc;
 	}
 
 }

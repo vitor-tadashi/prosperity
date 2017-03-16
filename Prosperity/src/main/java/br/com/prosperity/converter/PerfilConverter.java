@@ -18,7 +18,7 @@ public class PerfilConverter implements Converter<PerfilEntity, PerfilBean> {
 
 		entity.setId(bean.getId());
 		entity.setNome(bean.getNome());
-		//entity.setFuncionalidades(funcionalidadeConverter.convertBeanToEntity(bean.getListaFuncionalidades()));
+		entity.setFuncionalidades(funcionalidadeConverter.convertBeanToEntity(bean.getListaFuncionalidades()));
 
 		return entity;
 	}
@@ -29,7 +29,7 @@ public class PerfilConverter implements Converter<PerfilEntity, PerfilBean> {
 
 		bean.setId(entity.getId());
 		bean.setNome(entity.getNome());
-		//bean.setListaFuncionalidades(funcionalidadeConverter.convertEntityToBean(entity.getFuncionalidades()));
+		bean.setListaFuncionalidades(funcionalidadeConverter.convertEntityToBean(entity.getFuncionalidades()));
 
 		return bean;
 	}
