@@ -229,6 +229,24 @@ GO
 ALTER TABLE dbo.tbUsuario SET (LOCK_ESCALATION = TABLE)
 GO
 
-select * from tbCandidato
+
+select * from tbTpStatus
+
+alter table tbVaga add idStatusVaga int 
+
+alter table tbVaga add foreign key(idStatusVaga) references tbStatusVaga(idStatusVaga)
+
+select * from tbFuncionario
+select * from tbStatusvaga
+
+insert into tbStatus(nmStatus, tpCss, idTpStatus) values ('Fechado', 'css', 2)
 
 UPDATE tbCandidato set dtAprovacao = '01-01-2017' where idCandidato = 
+
+select * from tbStatus
+select * from tbProjeto
+
+select * from tbVaga
+
+alter table tbVaga add idStatus int
+alter table tbVaga add foreign key (idStatus) references tbStatus(idStatus)

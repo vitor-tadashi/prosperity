@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.ProjetoBean;
 import br.com.prosperity.bean.SenioridadeBean;
+import br.com.prosperity.bean.StatusBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.business.CargoBusiness;
 import br.com.prosperity.business.ProjetoBusiness;
 import br.com.prosperity.business.SenioridadeBusiness;
+import br.com.prosperity.business.StatusBusiness;
 import br.com.prosperity.business.UsuarioBusiness;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.VagaBusiness;
@@ -77,6 +79,9 @@ public class VagaController {
 	@Autowired
 	private SenioridadeBusiness senioridadeBusiness;
 	
+	@Autowired
+	private StatusBusiness statusBusiness;
+	
 	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
 	public String cliente(Model model) {
 		List<VagaBean> vagas = vagaBusiness.obterTodos();
@@ -84,6 +89,7 @@ public class VagaController {
 		/*vagas.add(b);*/
 		model.addAttribute("vagaBean", vagas);
 		
+		model.addAttribute("vagas", vagaBusiness.obterTodos());
 		
 		List<CargoBean> listaCargo = cargoBusiness.getCargo();
 		model.addAttribute("listaCargo", listaCargo);
@@ -93,6 +99,10 @@ public class VagaController {
 		
 		List<VagaBean> listaVaga = vagaBusiness.getVaga();
 		model.addAttribute("listaVaga", listaVaga);
+		
+		List<StatusBean> listaStatus = statusBusiness.getStatus();
+		model.addAttribute("listaStatus", listaStatus);
+		
 		
 		return "vaga/consultar-vaga";
 	}
