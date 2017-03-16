@@ -19,6 +19,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 	      }
 		
 		if (request.getSession().getAttribute("autenticado") != null) {
+			request.setAttribute("autenticado", request.getSession().getAttribute("autenticado"));
 			return true;
 		}else{
 		response.sendRedirect(request.getContextPath() + "/login/");
