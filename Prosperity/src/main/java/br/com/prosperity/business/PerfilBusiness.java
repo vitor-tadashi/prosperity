@@ -82,4 +82,12 @@ public class PerfilBusiness {
 
 		return perfisBean;
 	}
+
+	public List<FuncionalidadeBean> obterFuncionalidades(Integer id) {
+		PerfilEntity entity = perfilDAO.obterPorId(id);
+		PerfilBean bean = perfilConverter.convertEntityToBean(entity);
+		List<FuncionalidadeBean> listaFunc = bean.getListaFuncionalidades();
+		
+		return listaFunc;
+	}
 }

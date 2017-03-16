@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -26,7 +27,7 @@ public class PerfilEntity {
 	@Column(name = "nmPerfil")
 	private String nome;
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "tbPerfilFuncionalidade", joinColumns = { @JoinColumn(name = "idPerfil") }, inverseJoinColumns = {
 			@JoinColumn(name = "idFuncionalidade") })
 	private List<FuncionalidadeEntity> funcionalidades;
