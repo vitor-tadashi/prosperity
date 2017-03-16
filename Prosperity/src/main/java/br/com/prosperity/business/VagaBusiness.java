@@ -21,6 +21,7 @@ public class VagaBusiness {
 
 	@Autowired
 	private VagaDAO vagaDAO;
+	
 	@Autowired
 	private VagaConverter vagaConverter;
 	

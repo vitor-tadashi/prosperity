@@ -1,14 +1,14 @@
 $(function	()	{
 	
-	//#formCadastro
+	// #formCadastro
 	var currentStep = 1; 
 	 
     // Desativa navegação por tabs
-    /*$('.wizard-demo li a').click(function()	{
-		return false;
-	});*/
+    /*
+	 * $('.wizard-demo li a').click(function() { return false; });
+	 */
     
-	//Form Validation
+	// Form Validation
 	$('#basic-constraint').parsley( { listeners: {
         onFormSubmit: function ( isFormValid, event ) {
             if(isFormValid)	{
@@ -54,25 +54,25 @@ $(function	()	{
 		},
         onFormSubmit: function ( isFormValid, event ) {
             if(isFormValid)	{
-					
-				currentStep++;
-				
-				if(currentStep == 2)	{
-					$('#wizardDemo li:eq(1) a').tab('show');
-					
-					$('#prevStep').attr('disabled',false);
-					$('#prevStep').removeClass('disabled');
-                    $('#nextStep').text('Próximo');
-				}
-				else if(currentStep == 3)	{
-					$('#wizardDemo li:eq(2) a').tab('show');
-					$('#nextStep').text('Cadastrar');
-				}
-				
+            	
+	            	currentStep++ ;
+	            	 if(currentStep == 2)	{
+						$('#wizardDemo li:eq(1) a').tab('show');
+						
+						$('#prevStep').attr('disabled',false);
+						$('#prevStep').removeClass('disabled');
+	                    $('#nextStep').text('Próximo');
+	            	 }
+					else if(currentStep == 3)	{
+						$('#wizardDemo li:eq(2) a').tab('show');
+						$('#nextStep').addClass('disabled')
+						$('#btnCadastrar').removeClass('hide');
+					}
+            	}
 				return false;
-			}
+			
         }
-    }});
+	}});
 	
 	$('#prevStep').click(function()	{
 		
@@ -89,6 +89,8 @@ $(function	()	{
 		else if(currentStep == 2)	{
 			$('#wizardDemo li:eq(1) a').tab('show');
 			$('#nextStep').text('Próximo');
+			$('#btnCadastrar').addClass('hide');
+			$('#nextStep').removeClass('disabled')
 		}
 		
 		else if(currentStep == 3)	{
@@ -97,4 +99,5 @@ $(function	()	{
 		
 		return false;
 	});
+	
 });

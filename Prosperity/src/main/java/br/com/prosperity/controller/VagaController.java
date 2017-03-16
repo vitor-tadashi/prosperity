@@ -6,11 +6,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
 import br.com.prosperity.bean.CargoBean;
+import br.com.prosperity.bean.PerfilBean;
 import br.com.prosperity.bean.ProjetoBean;
 import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.UsuarioBean;
@@ -123,5 +125,13 @@ public class VagaController {
 	@RequestMapping (value = "idAvaliador", method = RequestMethod.GET)
 	public String idAvaliador(){
 	return "idAvaliador";
+	}
+	
+	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
+	public String inserirVaga(@ModelAttribute("vagaBean") VagaBean vagaBean) {
+		vagaBusiness.inserir(vagaBean);
+		System.out.println("\n\n\nCadastrado\n\n\n");
+		return "redirect:solicitar";
+		
 	}
 }
