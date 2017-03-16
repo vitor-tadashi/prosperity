@@ -204,7 +204,7 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="panel panel-default">
-							<div class="panel-heading">Consultar usuário</div>
+							<div class="panel-heading">Controle de usuários</div>
 							<table
 								class="table table-bordered table-condensed table-hover table-striped"
 								id=""
@@ -236,7 +236,7 @@
 											</td>
 											<td>
 												<div class="btn-group">
-													<a class="btn btn-info" data-toggle="modal" onclick="testeModal(${usuario.id})"><i class="fa fa-edit"></i> Editar</a>
+													<a class="btn btn-info" href="alterar-usuario?id=${usuario.id}"><i class="fa fa-edit"></i> Editar</a>
 												</div>
 											</td>
 										</tr>
@@ -247,9 +247,8 @@
 						</div>
 						<!-- /.col -->
 						<div class="pull-right">
-							<a class="btn btn-primary" onclick="testeModal()" data-toggle="modal">Criar novo usuário</a> <a
-								class="btn btn-warning" href="criar-perfil">Criar
-								perfil</a>
+							<a class="btn btn-primary" href="inserir-usuario">Criar novo usuário</a>
+							<a class="btn btn-warning" href="criar-perfil">Criar perfil</a>
 						</div>
 					</div>
 				</div>
@@ -273,25 +272,66 @@
 	
 	<!-- javaScript aqui -->
 	<script>
+		jQuery(document).ready(function($) {
+			$("#search-form").submit(function(event) {
+	
+				// Prevent the form from submitting via the browser.
+				event.preventDefault();
+				searchViaAjax();
+	
+			});
+		});
+	
+		function searchAjax() {
+			var data = {}
+			data["query"] = $("#query").val();
+	
+			$.ajax({
+				type : "POST",
+				contentType : "application/json",
+				url : "${home}search/api/getSearchResult",
+				data : JSON.stringify(data),
+				dataType : 'json',
+				timeout : 100000,
+				success : function(data) {
+					console.log("SUCCESS: ", data);
+					display(data);
+				},
+				error : function(e) {
+					console.log("ERROR: ", e);
+					display(e);
+				},
+				done : function(e) {
+					console.log("DONE");
+				}
+			});
+		}
+	
 		function testeModal(id) {
-			if(id) {
-				$.get("carrega-usuario?id="+id);
-			} else {
-				//$.get("carrega-usuario");
-				$.get(
-						"carrega-usuario",
-						function(data) {
-							alert('page content: ' + data);
-							$('#usuario-modal').modal('show');
-						});
-			}
-			/* $.get(
-				"teste",
-				{paramOne : 1, paramX : 'abc'},
-				function(data) {
-					alert('page content: ' + data);
-				}); */
+			var url = "carrega-usuario";
 			
+			if(id) {
+				$.ajax({
+					  url: url,
+					  type: 'GET',
+					  data: {id : id},
+					  success: function(data) {
+						console.log(data);
+						
+					},
+					error : function() {
+						alert("deu ruim");
+					}
+					  
+					});
+				
+			} else {
+				$.get(
+					url,
+					function() {
+						$('#usuario-modal').modal('show');
+					});
+			}
 		}
 	</script>
 </body>

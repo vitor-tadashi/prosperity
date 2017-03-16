@@ -1,6 +1,7 @@
 package br.com.prosperity.bean;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 
@@ -30,8 +31,19 @@ public class VagaBean {
 	private Date dataFechamento; //
 	private Integer numeroCandidatos; //
 	private UsuarioBean usuarioBean;
+	private List<StatusBean> statusBean;
+	
+	
+	
 	
 
+	public List<StatusBean> getStatusBean() {
+		return statusBean;
+	}
+
+	public void setStatusBean(List<StatusBean> statusBean) {
+		this.statusBean = statusBean;
+	}
 
 	public Integer getId() {
 		return id;

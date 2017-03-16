@@ -133,7 +133,7 @@
 										<div class="form-group col-md-3">
 											<label for="">Candidatos</label> <input type="number"
 												class="form-control input-sm" id="" min="0" value="123"
-												name="numeroCandidatos">
+												name="numeroCandidatos" disabled>
 										</div>
 										<!-- /form-group -->
 									</div>
@@ -151,18 +151,18 @@
 													<label for="exampleInputEmail1">Solicitante</label> <input
 														type="name" class="form-control input-sm"
 														id="exampleInputEmail1" placeholder="Solicitante"
-														data-required="true" name="nomeSolicitante">
+														data-required="true" name="nomeSolicitante" readonly>
 												</div>
 												<!-- /form-group -->
-
+'
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
 													<label for="exampleInputEmail1">Local de trabalho</label>
 													<div class="radiogroup" name="localTrabalho">
 														<label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio2" checked>
+															id="interno" type="radio" name="inline-radio2" checked disabled>
 															<span class="custom-radio"></span> Interno
 														</label> <label class="label-radio inline"> <input
-															id="cliente" type="radio" name="inline-radio2"> <span
+															id="cliente" type="radio" name="inline-radio2" disabled> <span
 															class="custom-radio"></span> Cliente
 														</label>
 													</div>
@@ -175,7 +175,7 @@
 											<div>
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
 													<label for="exampleInputEmail1">Cargo</label> <select
-														class="form-control chzn-select" name="cargoBean">
+														class="form-control chzn-select" name="cargoBean" disabled>
 														<c:forEach var="cargo" items="${listaCargo}">
 															<option value="${cargo.id}">${cargo.nome}</option>
 														</c:forEach>
@@ -187,13 +187,13 @@
 													<label for="exampleInputEmail1">Tipo de vaga</label>
 													<div class="radiogroup" name="idTipoVaga">
 														<label class="label-radio inline"> <input
-															type="radio" name="inline-radio3" checked> <span
+															type="radio" name="inline-radio3" checked disabled> <span
 															class="custom-radio"></span> Real
 														</label> <label class="label-radio inline"> <input
-															type="radio" name="inline-radio3"> <span
+															type="radio" name="inline-radio3" disabled> <span
 															class="custom-radio"></span> Prospecção
 														</label> <label class="label-radio inline"> <input
-															type="radio" name="inline-radio3"> <span
+															type="radio" name="inline-radio3" disabled> <span
 															class="custom-radio"></span> Hunting
 														</label>
 													</div>
@@ -206,7 +206,7 @@
 											<div class="form-group col-md-4" style="margin-bottom: 0px">
 												<label for="exampleInputEmail1">Senioridade da vaga</label>
 												<select class="form-control chzn-select"
-												name="senioridadeBean">
+												name="senioridadeBean" disabled>
 													<c:forEach var="senioridade" items="${listaSenioridade}">
 															<option value="${senioridade.id}">${senioridade.nome}</option>
 														</c:forEach>
@@ -222,7 +222,7 @@
 														<div class="input-group bootstrap-timepicker"
 															style="width: 105%;">
 															<input class="timepicker form-control" type="text"
-																/ value="08:00 AM" name="horarioEntrada"> <span
+																/ value="08:00 AM" name="horarioEntrada" disabled> <span
 																class="input-group-addon"><i
 																class="fa fa-clock-o"></i></span>
 														</div>
@@ -236,7 +236,7 @@
 														<div class="input-group bootstrap-timepicker"
 															style="width: 105%;">
 															<input class="timepicker form-control" type="text"
-																/ value="05:00 PM" name="horarioSaida"> <span
+																/ value="05:00 PM" name="horarioSaida" disabled> <span
 																class="input-group-addon"><i
 																class="fa fa-clock-o"></i></span>
 														</div>
@@ -261,10 +261,10 @@
 													<label for="exampleInputEmail1">Aumento de quadro</label>
 													<div class="radiogroup" name="aumentoQuadro">
 														<label class="label-radio inline"> <input
-															id="novo" type="radio" name="inline-radio" checked>
+															id="novo" type="radio" name="inline-radio" checked disabled>
 															<span class="custom-radio"> </span> Novo
 														</label> <label class="label-radio inline"> <input
-															id="sub" type="radio" name="inline-radio"> <span
+															id="sub" type="radio" name="inline-radio" disabled> <span
 															class="custom-radio"> </span> Substituição
 														</label>
 
@@ -283,7 +283,7 @@
 													<div class="form-group">
 														<div class="input-group">
 															<input type="text" value="01/01/2017"
-																class="datepicker form-control" name="dataInicio">
+																class="datepicker form-control" name="dataInicio" disabled>
 															<span class="input-group-addon"> <i
 																class="fa fa-calendar"></i></span>
 														</div>
@@ -297,7 +297,7 @@
 												<div id="" class="">
 													<label>Nome do substituido</label> <input type="text"
 														class="form-control input-sm"
-														placeholder="Nome do substituido" name="nomeSubstituido">
+														placeholder="Nome do substituido" name="nomeSubstituido" disabled>
 												</div>
 											</div>
 
@@ -312,7 +312,7 @@
 								<div class="panel-body relative">
 									<div class="form-group">
 										<textarea class="form-control" rows="3"
-											name="formacaoAcademica"></textarea>
+											name="formacaoAcademica" disabled></textarea>
 									</div>
 									<!-- /form-group -->
 
@@ -325,7 +325,7 @@
 								<div class="panel-body relative">
 									<div class="form-group">
 										<textarea class="form-control" rows="3"
-											name="perfilComportamental"></textarea>
+											name="perfilComportamental" disabled></textarea>
 									</div>
 									<!-- /form-group -->
 
@@ -338,7 +338,7 @@
 								<div class="panel-body relative">
 
 									<div class="form-group">
-										<textarea class="form-control" rows="3" name="perfilTecnico"></textarea>
+										<textarea class="form-control" rows="3" name="perfilTecnico" disabled></textarea>
 									</div>
 									<!-- /form-group -->
 
@@ -448,12 +448,11 @@
 								</div>
 
 								<div class="col-md-2">
-									<label for="cargo">Status</label> <select id="cargo"
-										class="form-control" style="width: 130px;" name="">
-										<option value="0">Selecione:</option>
-										<option value="1">Ativo</option>
-										<option value="2">Fechado</option>
-										<option value="3">Cancelado</option>
+									<label for="cargo">Status</label> 
+									<select class="form-control" style="width: 130px;" name="">
+										<c:forEach var="status" items="${listaStatus}">
+												<option value="${status.id}">${status.nome}</option>
+										</c:forEach>
 									</select>
 								</div>
 
@@ -472,6 +471,7 @@
 							<thead>
 								<tr>
 									<th class="text-center">Vaga</th>
+									<th class="text-center">Solicitante</th>
 									<th class="text-center">Cliente</th>
 									<th class="text-center">Local de trabalho</th>
 									<th class="text-center">Data de abertura</th>
@@ -483,7 +483,8 @@
 								<c:forEach var="vagaBean" items="${vagaBean}">
 									<tr>
 									<td>${vagaBean.nomeVaga}</td>
-									<td>${vagaBean.projetoBean}</td>
+									<td>${vagaBean.nomeSolicitante}</td>
+									<td>${vagaBean.projetoBean.cliente.nome}</td>
 									<td>${vagaBean.localTrabalho}</td>
 									<td>${vagaBean.dataAbertura}</td>
 									<td><span id="tdStatus" class="label label-contratado">Ativo</span></td>
@@ -602,6 +603,7 @@
 			$("#tdStatus").toggleClass("label-contratado label-reprovado");
 			$("#tdStatus").html("Cancelado")
 		});
+		
 	</script>
 </body>
 </html>

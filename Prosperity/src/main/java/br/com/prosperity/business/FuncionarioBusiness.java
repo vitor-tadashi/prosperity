@@ -21,7 +21,7 @@ public class FuncionarioBusiness {
 	private FuncionarioConverter funcionarioConverter;
 	
 	@Transactional
-	public List<FuncionarioBean> getFuncionarios() {
+	public List<FuncionarioBean> obterTodos() {
 		List<FuncionarioEntity> funcionarioEntity = funcionarioDAO.listar();
 		List<FuncionarioBean> funcionarioBean = funcionarioConverter.convertEntityToBean(funcionarioEntity);
 

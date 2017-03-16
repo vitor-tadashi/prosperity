@@ -1,12 +1,17 @@
 package br.com.prosperity.entity;
 
 import java.util.Date;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -98,6 +103,12 @@ public class VagaEntity {
 	@JoinColumn(name="idUsuario")
 	private UsuarioEntity usuarioEntity;
 	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "tbStatusVaga", joinColumns = { @JoinColumn(name = "idVaga") }, inverseJoinColumns = {
+			@JoinColumn(name = "idStatus") })
+	private List<StatusEntity> statusEntity;
+
+	
 	//@ManyToOne(cascade = CascadeType.ALL)
 	//private AvaliadorEntity avaliadorEntity;
 	
@@ -106,6 +117,17 @@ public class VagaEntity {
 	public Integer getId() {
 		return id;
 	}
+
+
+	public List<StatusEntity> getStatusEntity() {
+		return statusEntity;
+	}
+
+
+	public void setStatusEntity(List<StatusEntity> statusEntity) {
+		this.statusEntity = statusEntity;
+	}
+
 
 	public void setId(Integer id) {
 		this.id = id;

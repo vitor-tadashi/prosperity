@@ -13,13 +13,15 @@ public class TipoStatusConverter implements Converter <TipoStatusEntity, TipoSta
 		// TODO Auto-generated method stub
 		TipoStatusEntity entity = new TipoStatusEntity();
 		entity.setId(bean.getId());
-		return null;
+		entity.setNome(bean.getStatus());
+		return entity;
 	}
 
 	@Override
 	public TipoStatusBean convertEntityToBean(TipoStatusEntity entity) {
 		TipoStatusBean bean = new TipoStatusBean();
 		bean.setId(entity.getId());
-		return null;
+		bean.setStatus(entity.getNome());
+		return bean;
 	}
 }

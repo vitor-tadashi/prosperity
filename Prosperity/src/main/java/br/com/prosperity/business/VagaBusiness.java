@@ -28,7 +28,7 @@ public class VagaBusiness {
 	private List<VagaBean> vagaBean;
 
 	@Transactional
-	public List<VagaBean> obterTodos(Integer id) {
+	public List<VagaBean> obterTodos() {
 
 		//List<VagaEntity> aprovar = vagaDAO.findByNamedQuery("obterAprovacao");
 
@@ -49,19 +49,6 @@ public class VagaBusiness {
 
 	public void inserir(VagaBean vagaBean) {
 		vagaDAO.adicionar(vagaConverter.convertBeanToEntity(vagaBean));
-	}
-
-
-	@Transactional
-	public List<VagaBean> getVaga() {
-		List<VagaBean> listaVaga = vagaConverter.convertEntityToBean(vagaDAO.listar());
-
-		return listaVaga;
-	}
-
-	public List<VagaBean> obterTodos() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 }
