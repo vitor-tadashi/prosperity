@@ -6,21 +6,20 @@ import org.springframework.stereotype.Component;
 import br.com.prosperity.bean.StatusCandidatoBean;
 import br.com.prosperity.entity.StatusCandidatoEntity;
 
-
 @Component
 public class StatusCandidatoConverter implements Converter<StatusCandidatoEntity, StatusCandidatoBean> {
 
 	@Autowired
-	StatusConverter	statusConverter;
-	
+	StatusConverter statusConverter;
+
 	@Autowired
 	UsuarioConverter usuarioConverter;
-	
+
 	@Override
 	public StatusCandidatoEntity convertBeanToEntity(StatusCandidatoBean bean) {
 		StatusCandidatoEntity entity = new StatusCandidatoEntity();
 
-		entity.setIdSatusCandidato(bean.getId());
+		entity.setIdStatusCandidato(bean.getId());
 		entity.setDsParecer(bean.getDescricaoParecer());
 		entity.setDtAlteracao(bean.getDataAlteracao());
 		entity.setStatus(statusConverter.convertBeanToEntity(bean.getStatus()));
@@ -32,13 +31,13 @@ public class StatusCandidatoConverter implements Converter<StatusCandidatoEntity
 	@Override
 	public StatusCandidatoBean convertEntityToBean(StatusCandidatoEntity entity) {
 		StatusCandidatoBean bean = new StatusCandidatoBean();
-		
-		bean.setId(entity.getIdSatusCandidato());
+
+		bean.setId(entity.getIdStatusCandidato());
 		bean.setDescricaoParecer(entity.getDsParecer());
 		bean.setDataAlteracao(entity.getDtAlteracao());
 		bean.setStatus(statusConverter.convertEntityToBean(entity.getStatus()));
 		bean.setUsuario(usuarioConverter.convertEntityToBean(entity.getUsuario()));
-		
+
 		return bean;
 	}
 }

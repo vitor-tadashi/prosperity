@@ -404,25 +404,30 @@
 						<hr>
 
 						<h3 class="text-center">Linha do tempo</h3>
-						<c:forEach var="competencia" items="${candidato.status}">
+						<c:forEach var="status" items="${candidato.status}">
 							<ul class="timeline">
 
-								<li><div class="tldate">Fev 2017</div></li>
+								<li><div class="tldate">
+										<fmt:formatDate value="${status.dataAlteracao}"
+											dateStyle="long" pattern="MMMM  -  yyyy" />
+										</small>
+									</div></li>
 
 								<li>
 									<div class="tl-circ"></div>
 									<div class="timeline-panel">
 										<div class="tl-heading">
-											<h4>${competencia.status.nome}</h4>
+											<h4>Status: ${status.status.nome}</h4>
 											<p>
 												<small class="text-muted"><i class="fa fa-calendar"></i>
-													01/02/2017</small>
+													<fmt:formatDate value="${status.dataAlteracao}"
+														pattern="dd/MM/yyyy" /></small>
 											</p>
 										</div>
 										<div class="tl-body">
-											<p>${competencia.status.nome}</p>
+											<p>${status.descricaoParecer}</p>
 											<p>
-												<label>Status:</label> Aprovado
+												<label></label>
 											</p>
 										</div>
 									</div>
