@@ -23,4 +23,8 @@ public class CanalInformacaoBean {
 		this.id = id;
 	}
 
+
+
+
+
 }

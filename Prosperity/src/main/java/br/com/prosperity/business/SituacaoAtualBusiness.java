@@ -18,7 +18,7 @@ public class SituacaoAtualBusiness {
 	private SituacaoAtualConverter situacaoAtualConverter;
 
 	@Transactional
-	public List<SituacaoAtualBean> getSituacaoAtual() {
+	public List<SituacaoAtualBean> obterTodos() {
 		List<SituacaoAtualBean> situacaoAtual = situacaoAtualConverter.convertEntityToBean(situacaoAtualDAO.listar());
 		
 		return situacaoAtual;

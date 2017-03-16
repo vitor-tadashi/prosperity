@@ -1,5 +1,7 @@
 package br.com.prosperity.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,13 +28,15 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/autenticar", method = RequestMethod.POST)
-	public String autenticar(UsuarioBean usuarioBean, Model model) {
+	public String autenticar(UsuarioBean usuarioBean, Model model, HttpSession session) {
 		try {
 			usuario = usuarioBusiness.autenticar(usuarioBean);
 
 			if (usuario.getPrimeiroAcesso()) {
+				session.setAttribute("autenticado", usuario);
 				return "login/primeiro-acesso";
 			} else {
+				session.setAttribute("autenticado", usuario);
 				return "dashboard/pagina-inicial";
 			}
 		} catch (BusinessException ex) {
@@ -47,5 +51,10 @@ public class LoginController {
 		usuario.setSenha(usuarioBean.getSenha());
 		usuarioBusiness.alterar(usuario);
 		return "dashboard/pagina-inicial";
+	}
+	
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout() {
+	  return "/acesso";
 	}
 }
