@@ -41,8 +41,8 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		entity.setDataEntrevista(bean.getEntrevista());
 		entity.setDataUltimoContato(bean.getUltimoContato());
 		entity.setProposta(bean.getProposta());
-		
-
+		entity.setValorMax(bean.getValorMax());
+		entity.setValorMin(bean.getValorMin());
 		return entity;
 	}
 
@@ -67,7 +67,8 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		bean.setEntrevista(entity.getDataEntrevista());
 		bean.setUltimoContato(entity.getDataUltimoContato());
 		bean.setProposta(entity.getProposta());
-		
+		bean.setValorMax(entity.getValorMax());
+		bean.setValorMin(entity.getValorMin());
 		return bean;
 	}
 }

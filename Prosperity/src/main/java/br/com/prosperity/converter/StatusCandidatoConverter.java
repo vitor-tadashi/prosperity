@@ -1,38 +1,43 @@
 package br.com.prosperity.converter;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.prosperity.bean.StatusBean;
-import br.com.prosperity.entity.StatusEntity;
+import br.com.prosperity.bean.StatusCandidatoBean;
+import br.com.prosperity.entity.StatusCandidatoEntity;
 
 @Component
-public class StatusCandidatoConverter implements Converter<StatusEntity, StatusBean> {
+public class StatusCandidatoConverter implements Converter<StatusCandidatoEntity, StatusCandidatoBean> {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see br.com.prosperity.converter.Converter#convertBeanToEntity(br.com.
-	 * prosperity.bean.AvaliadorBean)
-	 */
+	@Autowired
+	StatusConverter statusConverter;
+
+	@Autowired
+	UsuarioConverter usuarioConverter;
+
 	@Override
-	public StatusEntity convertBeanToEntity(StatusBean bean) {
-		StatusEntity entity = new StatusEntity();
+	public StatusCandidatoEntity convertBeanToEntity(StatusCandidatoBean bean) {
+		StatusCandidatoEntity entity = new StatusCandidatoEntity();
 
-		entity.setId(bean.getId());
-		return null;
+		entity.setIdStatusCandidato(bean.getId());
+		entity.setDsParecer(bean.getDescricaoParecer());
+		entity.setDtAlteracao(bean.getDataAlteracao());
+		entity.setStatus(statusConverter.convertBeanToEntity(bean.getStatus()));
+		entity.setUsuario(usuarioConverter.convertBeanToEntity(bean.getUsuario()));
+
+		return entity;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see br.com.prosperity.converter.Converter#convertBeanToEntity(br.com.
-	 * prosperity.entity.AvaliadorEntity)
-	 */
 	@Override
-	public StatusBean convertEntityToBean(StatusEntity entity) {
-		StatusBean bean = new StatusBean();
-		bean.setId(entity.getId());
+	public StatusCandidatoBean convertEntityToBean(StatusCandidatoEntity entity) {
+		StatusCandidatoBean bean = new StatusCandidatoBean();
 
-		return null;
+		bean.setId(entity.getIdStatusCandidato());
+		bean.setDescricaoParecer(entity.getDsParecer());
+		bean.setDataAlteracao(entity.getDtAlteracao());
+		bean.setStatus(statusConverter.convertEntityToBean(entity.getStatus()));
+		bean.setUsuario(usuarioConverter.convertEntityToBean(entity.getUsuario()));
+
+		return bean;
 	}
 }
