@@ -1,5 +1,8 @@
 package br.com.prosperity.controller;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +49,24 @@ public class UsuarioController {
 		return "usuario/consultar-usuario";
 	}
 
+	@RequestMapping(value = {"/carregar-usuario"}, method = RequestMethod.GET)
+	public @ResponseBody void carregaUsuarioAjax(Model model, @ModelAttribute("id") Integer id) {
+		usuario = usuarioBusiness.obterUsuarioPorId(id);
+		model.addAttribute("usuario", usuario);
+	}
+	
+	@RequestMapping(value = {"/carregar-combos"}, method = RequestMethod.GET)
+	public @ResponseBody List<Object> carregaCombosAjax(Model model) {
+		List<Object> lista = new ArrayList<>();
+		List<FuncionarioBean> funcionarios = funcionarioBusiness.obterTodos();
+		List<PerfilBean> perfis = perfilBusiness.obterTodos();
+		
+		lista.add(perfis);
+		lista.add(funcionarios);
+		
+		return lista;
+	}
+	
 	@RequestMapping(value = {"/inserir-usuario", "/alterar-usuario"}, method = RequestMethod.GET)
 	public String carregaCombos(Integer id, Model model) {
 		List<FuncionarioBean> funcionarios = funcionarioBusiness.obterTodos();
@@ -93,8 +114,8 @@ public class UsuarioController {
 		return "redirect:listar";
 	}
 	
-	@RequestMapping(value = "/mudar-status", method = RequestMethod.GET)
-	public String mudarStatus(Boolean ativo) {
+	@RequestMapping(value = "/mudar-status", method = RequestMethod.POST)
+	public String mudarStatus(@ModelAttribute("ativo") Boolean ativo) {
 		usuario.setAtivo(!ativo);
 		usuarioBusiness.alterar(usuario);
 

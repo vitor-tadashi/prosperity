@@ -52,11 +52,7 @@
 								<div class="row">
 									<div class="form-group col-md-6">
 										<label for="funcionario">Funcionário</label> <select
-											class="form-control" name="funcionario.id">
-											<option value="">Selecione...</option>
-											<c:forEach var="funcionario" items="${funcionarios}">
-												<option value="${funcionario.id}">${funcionario.nome}</option>
-											</c:forEach>
+											class="form-control" name="funcionario.id" id="cmbFuncionario">
 										</select>
 									</div>
 									<div class="form-group col-md-6">
@@ -64,7 +60,7 @@
 										<div class="input-group">
 											<span class="input-group-addon"><i class="fa fa-user"></i></span>
 											<input type="text" class="form-control" id="usuario"
-												data-required="true" name="nome" value="${usuarios[1].nome}">
+												data-required="true" name="nome">
 										</div>
 									</div>
 									<div class="form-group col-md-6 cold-md-offset-6">
@@ -76,11 +72,7 @@
 									</div>
 									<div class="form-group open col-md-6">
 										<label for="permissao">Perfil</label> <select
-											class="form-control" name="perfil.id">
-											<option value="">Selecione...</option>
-											<c:forEach var="perfil" items="${perfis}">
-												<option value="${perfil.id}">${perfil.nome}</option>
-											</c:forEach>
+											class="form-control" name="perfil.id" id="cmbPerfil">
 										</select>
 									</div>
 								</div>
@@ -236,7 +228,7 @@
 											</td>
 											<td>
 												<div class="btn-group">
-													<a class="btn btn-info" href="alterar-usuario?id=${usuario.id}"><i class="fa fa-edit"></i> Editar</a>
+													<a class="btn btn-info" onclick="testeModal(${usuario.id})"><i class="fa fa-edit"></i> Editar</a>
 												</div>
 											</td>
 										</tr>
@@ -247,7 +239,7 @@
 						</div>
 						<!-- /.col -->
 						<div class="pull-right">
-							<a class="btn btn-primary" href="inserir-usuario">Criar novo usuário</a>
+							<a class="btn btn-primary" onclick="testeModal()" data-toggle="modal">Criar novo usuário</a>
 							<a class="btn btn-warning" href="criar-perfil">Criar perfil</a>
 						</div>
 					</div>
@@ -307,32 +299,49 @@
 			});
 		}
 	
-		function testeModal(id) {
-			var url = "carrega-usuario";
-			
-			if(id) {
-				$.ajax({
-					  url: url,
-					  type: 'GET',
-					  data: {id : id},
-					  success: function(data) {
-						console.log(data);
-						
-					},
-					error : function() {
-						alert("deu ruim");
-					}
-					  
-					});
-				
-			} else {
-				$.get(
-					url,
-					function() {
-						$('#usuario-modal').modal('show');
-					});
-			}
-		}
+		function testeModal(id){
+			if(id != undefined) {
+				alert(id);
+	    		$.ajax({
+		    		url: "carregar-usuario",
+		    		type: "GET",
+		    		dataType: "JSON",
+		    		data: {id : id},
+		    		success: function(data){
+		    			console.log(data);
+		    			$('select#cmbFuncionario').val(${usuario.funcionario.id});
+		    			$('select#cmbPerfil').val(${usuario.perfil.id});
+		    		}
+		    	});
+	    	}
+	    	$.ajax({
+	    		url: "carregar-combos",
+	    		type: "GET",
+	    		dataType: "JSON",
+	    		data: {},
+	    		success: function(data){
+	    			$('#cmbPerfil').empty();
+	    			$('#cmbFuncionario').empty();
+	    			var perfis = data[0];
+	    			var funcionarios = data[1];
+	    			
+	    			$('#cmbPerfil').append('<option value="">Selecione</option>');
+	    			$('#cmbFuncionario').append('<option value="">Selecione</option>');
+	    			for(var i = 0; i < perfis.length; i++) {
+	    				var newOption = $('<option value=' + perfis[i].id + '>' +  perfis[i].nome + '</option>');
+	    				$('#cmbPerfil').append(newOption);
+	    			}
+	    			for(var i = 0; i < funcionarios.length; i++) {
+	    				var newOption = $('<option value=' + funcionarios[i].id + '>' +  funcionarios[i].nome + '</option>');
+	    				$('#cmbFuncionario').append(newOption);
+	    			}
+	    			$('#usuario-modal').modal('show');
+	    		},
+	    		error: function(erro) {
+	    			console.log(erro);
+	    		}
+	    	});
+	    };
 	</script>
 </body>
 </html>
