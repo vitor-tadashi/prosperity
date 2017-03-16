@@ -24,6 +24,10 @@ public class UsuarioBusiness {
 
 	@Transactional
 	public void inserir(UsuarioBean usuarioBean) {
+		if(usuarioBean.getNome().isEmpty()) {
+			System.out.println("erro");
+		}
+		
 		EncriptaDecriptaApacheCodec codec = new EncriptaDecriptaApacheCodec();
 		
 		usuarioBean.setSenha(codec.codificaBase64Encoder(usuarioBean.getSenha()));
