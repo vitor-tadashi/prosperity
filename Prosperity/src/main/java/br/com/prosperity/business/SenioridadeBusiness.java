@@ -31,14 +31,4 @@ public class SenioridadeBusiness {
 		return senioridadeBean;
 	}
 	
-	@Transactional
-	public List<SenioridadeBean> getSenioridade() {
-		List<SenioridadeBean> listaSenioridade = senioridadeConverter.convertEntityToBean(senioridadeDAO.listar());
-		return listaSenioridade;
-	}
-	
-	
-
-
-
 }

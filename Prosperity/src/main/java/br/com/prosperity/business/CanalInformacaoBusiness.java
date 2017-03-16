@@ -18,7 +18,7 @@ public class CanalInformacaoBusiness {
 	private CanalInformacaoDAO canalInformacaoDAO;
 	
 	@Transactional
-	public List<CanalInformacaoBean> getCanal(){
+	public List<CanalInformacaoBean> obterTodos(){
 
 		List<CanalInformacaoBean> listaCanal = canalInformacaoConverter.convertEntityToBean(canalInformacaoDAO.listar());
 

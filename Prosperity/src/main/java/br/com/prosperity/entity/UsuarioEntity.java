@@ -16,11 +16,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tbUsuario")
 @NamedQueries({
-
-		@NamedQuery(name = "obterPorUsuario", query = "SELECT u FROM UsuarioEntity u WHERE u.nome = ?1 AND u.ativo = true"),
-		@NamedQuery(name = "populaTabela", query = "SELECT u FROM UsuarioEntity u"),
-		@NamedQuery(name = "obterGestor", query = "SELECT u FROM UsuarioEntity u LEFT OUTER JOIN u.perfilEntity p WHERE p.nome like 'Gestor%'")
-
+	@NamedQuery(name = "obterPorUsuario", query = "SELECT u FROM UsuarioEntity u WHERE u.nome = ?1 AND u.ativo = true"),
+	@NamedQuery(name="obterGestor", query="SELECT u FROM UsuarioEntity u LEFT OUTER JOIN u.perfilEntity p WHERE p.nome like 'Gestor%'")
 })
 public class UsuarioEntity {
 

@@ -54,5 +54,14 @@ public class StatusEntity {
 		this.tipoCss = tipoCss;
 	}
 
+	public TipoStatusEntity getTipoStatus() {
+		return tipoStatus;
+	}
+
+	public void setTipoStatus(TipoStatusEntity tipoStatus) {
+		this.tipoStatus = tipoStatus;
+	}
+	
+	
 
 }
