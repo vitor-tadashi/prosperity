@@ -61,13 +61,7 @@ public class VagaController {
 	private List<ProjetoBean> projetos;
 	
 	@Autowired
-	private ProjetoBean projeto;
-	
-	@Autowired
 	private List<SenioridadeBean> senioridadeBean;
-	
-	@Autowired
-	private SenioridadeBean senioridade;
 	
 	@Autowired
 	private List<CargoBean> cargoBean;
@@ -110,10 +104,9 @@ public class VagaController {
 	}
 
 	@RequestMapping(value = "aprovar", method = RequestMethod.GET)
-	public @ResponseBody List<VagaBean> obterTodos(Model model, @ModelAttribute("id") Integer id) {
-		List<VagaBean> listaVaga = vagaBusiness.obterTodos(id);
-		//model.addAttribute("vagas", vagaBusiness.obterTodos());
-		return listaVaga;
+	public String aprovacaoVaga(Model model) {
+		model.addAttribute("vagas", vagaBusiness.obterTodos());
+		return "vaga/aprovacao-vaga";
 	}
 	
 	@RequestMapping (value= "/solicitar", method = RequestMethod.GET)
@@ -141,4 +134,10 @@ public class VagaController {
 		return "redirect:solicitar";
 		
 	}
+	/*@RequestMapping(value = "obter-vaga", method=RequestMethod.GET)
+	public @ResponseBody List<VagaBean> obterVaga(Model model,@ModelAttribute("Visualizar")Integer id){
+		List<VagaBean> listaVaga = vagaBusiness.obterTodos(id);
+		return listaVaga;	
+	}*/
+
 }
