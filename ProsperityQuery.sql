@@ -246,4 +246,9 @@ GO
 
 select * from tbCandidato
 
-UPDATE tbCandidato set dtAprovacao = '01-01-2017' where idCandidato = 
+UPDATE tbCandidato set dtAprovacao = '01-01-2017' where idCandidato =
+
+select * from tbCandidato 
+
+alter table tbCandidato add idVaga int
+alter table tbCandidato add foreign key (idVaga) references tbVaga(idVaga)

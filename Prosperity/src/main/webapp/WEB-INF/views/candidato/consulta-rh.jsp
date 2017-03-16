@@ -319,23 +319,18 @@
 												<label for="exampleInputEmail1">Vaga:</label> 
 												<select
 													class="form-control chzn-select" name="vagas">
-													<option>Selecione:</option>
-													<option>Analista de testes</option>
-													<option>Analista de sistemas</option>
-													<option>Desenvolvedor</option>
-													<option>Gerente de projetos</option>
+													<c:forEach var="vaga" items="${listaVaga}">
+														<option value="${vaga.id}">${vaga.nomeVaga}</option>
+													</c:forEach>
 												</select>
-
 											</div>
 											<!-- /form-group -->
 											<div class="form-group col-md-6">
 												<label for="exampleInputEmail1">Senioridade da vaga:</label>
 												<select class="form-control chzn-select" name="senioridade">
-													<option>Selecione:</option>
-													<option>Analista de testes</option>
-													<option>Analista de sistemas</option>
-													<option>Desenvolvedor</option>
-													<option>Gerente de projetos</option>
+													<c:forEach var="senioridade" items="${listaSenioridade}">
+														<option value="${senioridade.id}" ${senioridade.nome}></option>
+													</c:forEach>
 												</select>
 											</div>
 											<!-- /form-group -->
@@ -714,11 +709,10 @@
 									</div>
 									<div class="col-md-2">
 										<label for="exampleInputEmail1">Cargo</label> <select
-											class="form-control inline" name="">
-											<option value="0">Selecione:</option>
-											<option value="1">Desenvolvedor</option>
-											<option value="2">Analista</option>
-											<option value="3">Arquiteto</option>
+											class="form-control inline" name="cargo">							
+											<c:forEach var="cargo" items="${listaCargo}">
+															<option value="${cargo.id}">${cargo.nome}</option>
+														</c:forEach>
 										</select>
 									</div>
 									<div class="col-md-1">
@@ -766,11 +760,11 @@
 									<c:forEach var="candidato" items="${candidatos}">
 										<tr>
 											<td>${candidato.nome}</td>
-											<td>${candidato.vagas})</td>
+											<td>${candidato.vagas[0].nome}</td>
 											<td>${candidato.valorPretensao}</td>
 											<td>${candidato.dataAbertura}</td>
 											<td>${candidato.dataFechamento}</td>
-											<td>${candidato.status}</td>
+											<td>${candidato.ultimoStatus.status.nome}</td>
 											<td><span class="label label-analiseRH">Em análise do RH</span></td>
 											<td><span class="line"></span>
 												<div class="btn-group">

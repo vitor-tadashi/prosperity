@@ -26,11 +26,17 @@ public class CandidatoBean {
 	private FormacaoBean formacao;
 	private UsuarioBean usuario;
 	private List<StatusCandidatoBean> status = new ArrayList<>();
-	private List<VagaBean> vagas = new ArrayList<>();
+	private List<VagaBean> vagas;
 	private List<CandidatoCompetenciaBean> competencias = new ArrayList<>();
-	private Date DataultimoContato;
+	private Date dataUltimoContato;
 	private Date entrevista;
 	private String proposta;
+
+	public StatusCandidatoBean getUltimoStatus() {
+		Date dataUltimoStatus = status.stream().map(StatusCandidatoBean::getDataAlteracao).max(Date::compareTo).get();
+
+		return status.stream().filter(st -> st.getDataAlteracao().equals(dataUltimoStatus)).findFirst().get();
+	}
 
 	public Integer getId() {
 		return id;
@@ -70,14 +76,6 @@ public class CandidatoBean {
 
 	public void setCompetencias(List<CandidatoCompetenciaBean> competencias) {
 		this.competencias = competencias;
-	}
-
-	public Date getDataultimoContato() {
-		return DataultimoContato;
-	}
-
-	public void setDataultimoContato(Date dataultimoContato) {
-		DataultimoContato = dataultimoContato;
 	}
 
 	public Date getDataNascimento() {
@@ -184,12 +182,12 @@ public class CandidatoBean {
 		this.vagas = vagas;
 	}
 
-	public Date getUltimoContato() {
-		return DataultimoContato;
+	public Date getDataUltimoContato() {
+		return dataUltimoContato;
 	}
 
-	public void setUltimoContato(Date DataultimoContato) {
-		this.DataultimoContato = DataultimoContato;
+	public void setDataUltimoContato(Date dataUltimoContato) {
+		this.dataUltimoContato = dataUltimoContato;
 	}
 
 	public Date getEntrevista() {

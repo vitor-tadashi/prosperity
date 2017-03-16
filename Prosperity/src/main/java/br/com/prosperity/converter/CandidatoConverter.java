@@ -20,6 +20,9 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 	
 	@Autowired
 	private FormacaoConverter formacaoConverter;
+	
+	@Autowired
+	private VagaConverter vagaConverter;
 
 	@Override
 	public CandidatoEntity convertBeanToEntity(CandidatoBean bean) {
@@ -39,8 +42,9 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		entity.setEndereco(enderecoConverter.convertBeanToEntity(bean.getEndereco()));
 		entity.setCompetencias(candidatoCompetenciaConverter.convertBeanToEntity(bean.getCompetencias()));
 		entity.setDataEntrevista(bean.getEntrevista());
-		entity.setDataUltimoContato(bean.getUltimoContato());
+		entity.setDataUltimoContato(bean.getDataUltimoContato());
 		entity.setProposta(bean.getProposta());
+		entity.setVagaEntity(vagaConverter.convertBeanToEntity(bean.getVagas()));
 		
 
 		return entity;
@@ -65,8 +69,9 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		bean.setEndereco(enderecoConverter.convertEntityToBean(entity.getEndereco()));
 		bean.setCompetencias(candidatoCompetenciaConverter.convertEntityToBean(entity.getCompetencias()));
 		bean.setEntrevista(entity.getDataEntrevista());
-		bean.setUltimoContato(entity.getDataUltimoContato());
+		bean.setDataUltimoContato(entity.getDataUltimoContato());
 		bean.setProposta(entity.getProposta());
+		bean.setVagas(vagaConverter.convertEntityToBean(entity.getVagaEntity()));
 		
 		return bean;
 	}

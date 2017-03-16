@@ -12,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -99,6 +101,22 @@ public class CandidatoEntity {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "idCandidato")
 	private List<CandidatoCompetenciaEntity> competencias;
+	
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "tbVagaCandidato", joinColumns = { @JoinColumn(name = "idCandidato") }, inverseJoinColumns = {
+			@JoinColumn(name = "idVaga") })
+	private List<VagaEntity> vagaEntity;
+	
+	
+	
+	public List<VagaEntity> getVagaEntity() {
+		return vagaEntity;
+	}
+
+	public void setVagaEntity(List<VagaEntity> vagaEntity) {
+		this.vagaEntity = vagaEntity;
+	}
 
 	public Integer getId() {
 		return id;

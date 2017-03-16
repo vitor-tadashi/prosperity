@@ -17,7 +17,7 @@ import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.ContatoBean;
 import br.com.prosperity.bean.EnderecoBean;
 import br.com.prosperity.bean.FormacaoBean;
-import br.com.prosperity.bean.PerfilBean;
+import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
 import br.com.prosperity.bean.TipoCursoBean;
 import br.com.prosperity.bean.VagaBean;
@@ -71,6 +71,9 @@ public class CandidatoController {
 	private SenioridadeBusiness senioridadeBusiness;
 
 	@Autowired
+	private SenioridadeBean senioridadeBean;
+	
+	@Autowired
 	private SituacaoAtualBean situacaoAtualBean;
 	@Autowired
 	private VagaBusiness vagaBusiness;
@@ -102,12 +105,26 @@ public class CandidatoController {
 		return"candidato/salvar-candidato";
 	}
 
+	//////////////////////////////////////////
+	
 	@RequestMapping(value = "consultar-rh", method = RequestMethod.GET)
 	public String consultarCandidatoRH(Model model) {
 		List<CandidatoBean> candidatos = candidatoBusiness.obterTodos();
 		model.addAttribute("candidatos", candidatos);
+		
+		List<VagaBean> listaVaga = vagaBusiness.getVaga();
+		model.addAttribute("listaVaga", listaVaga);
+		
+		List<CargoBean> listaCargo = cargoBusiness.getCargo();
+		model.addAttribute("listaCargo", listaCargo);
+		
+		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.getSenioridade();
+		model.addAttribute("listaSenioridade", listaSenioridade);
+		
 		return "candidato/consulta-rh";
-	}
+	} 
+	
+	/////////////////////
 
 	@RequestMapping(value = "consultar-gestor", method = RequestMethod.GET)
 	public String consultarCandidatoGestor() {
