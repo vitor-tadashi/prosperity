@@ -11,19 +11,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
-
 import javax.persistence.Table;
-
 
 @Entity
 @Table(name = "tbUsuario")
 @NamedQueries({
-
 	@NamedQuery(name = "obterPorUsuario", query = "SELECT u FROM UsuarioEntity u WHERE u.nome = ?1 AND u.ativo = true"),
-	@NamedQuery(name="populaTabela", query="SELECT u FROM UsuarioEntity u"),
 	@NamedQuery(name="obterGestor", query="SELECT u FROM UsuarioEntity u LEFT OUTER JOIN u.perfilEntity p WHERE p.nome like 'Gestor%'")
-
-	})
+})
 public class UsuarioEntity {
 
 	@Id
@@ -41,7 +36,7 @@ public class UsuarioEntity {
 
 	@Column(name = "nmUsuario")
 	private String nome;
-	
+
 	@Column(name = "email")
 	private String email;
 
@@ -50,10 +45,10 @@ public class UsuarioEntity {
 
 	@Column(name = "flPrimeiroAcesso")
 	private Boolean primeiroAcesso;
-	
+
 	@Column(name = "ativo")
 	private Boolean ativo;
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -117,6 +112,4 @@ public class UsuarioEntity {
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
-	
-	
 }

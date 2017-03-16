@@ -10,10 +10,9 @@ public class FormacaoBean {
 	private String nomeInstituicao;
 	private String nomeCurso;
 	private Date dataConclusao;
-	private TipoCursoBean tipoCursoBean;
-	private SituacaoAtualBean situacaoAtualBean;
+	private TipoCursoBean tipoCurso;
+	private SituacaoAtualBean situacaoAtual;
 
-	
 	public Integer getId() {
 		return id;
 	}
@@ -38,20 +37,20 @@ public class FormacaoBean {
 		this.dataConclusao = dataConclusao;
 	}
 
-	public TipoCursoBean getTipoCursoBean() {
-		return tipoCursoBean;
+	public TipoCursoBean getTipoCurso() {
+		return tipoCurso;
 	}
 
-	public void setTipoCursoBean(TipoCursoBean tipoCursoBean) {
-		this.tipoCursoBean = tipoCursoBean;
+	public void setTipoCurso(TipoCursoBean tipoCurso) {
+		this.tipoCurso = tipoCurso;
 	}
 
-	public SituacaoAtualBean getSituacaoAtualBean() {
-		return situacaoAtualBean;
+	public SituacaoAtualBean getSituacaoAtual() {
+		return situacaoAtual;
 	}
 
-	public void setSituacaoAtualBean(SituacaoAtualBean situacaoAtualBean) {
-		this.situacaoAtualBean = situacaoAtualBean;
+	public void setSituacaoAtual(SituacaoAtualBean situacaoAtual) {
+		this.situacaoAtual = situacaoAtual;
 	}
 
 	public String getNomeCurso() {

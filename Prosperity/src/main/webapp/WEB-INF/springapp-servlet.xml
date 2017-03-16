@@ -34,7 +34,8 @@
 	<context:component-scan base-package="br.com.prosperity.dao" />
 	<context:component-scan base-package="br.com.prosperity.entity" />
 	<context:component-scan base-package="br.com.prosperity.rest" />
-	
+	<context:component-scan base-package="br.com.prosperity.interceptor" />
+
 
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 
@@ -53,7 +54,7 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<tx:annotation-driven/>
+	<tx:annotation-driven />
 
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
@@ -82,4 +83,8 @@
 		<property name="username" value="axa_developers" />
 		<property name="password" value="axa@123" />
 	</bean>
+
+	<!-- <mvc:interceptors>
+		<bean class="br.com.prosperity.interceptor.AutorizadorInterceptor" />
+	</mvc:interceptors> -->
 </beans>

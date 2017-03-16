@@ -287,9 +287,9 @@
 						<tr>
 								<td>${vaga.nomeVaga}</td>
 								<td>${vaga.nomeSolicitante}</td>
-								<td>${senioridade.nome}</td>
-								<td>${projeto.nome}</td>
-								<td>${projeto.cliente.nome}</td>
+								<td>${vaga.senioridadeBean.nome}</td>
+								<td>${vaga.projetoBean.nome}</td>
+								<td>${vaga.projetoBean.cliente.nome}</td>
 								<td>${vaga.localTrabalho}</td>
 								<td>${vaga.dataAbertura }</td>
 								<td>${vaga.dataFechamento }</td>
@@ -387,5 +387,24 @@
 	</div>
 	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
 	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
+	
+	<-- JavaScript -->
+	<script type="text/javascript">
+	$("#fid").change(function(id){
+    	var Visualizar = $("#fid option:selected").val();
+    	$.ajax({
+    		url: "aprovar?id="+Visualizar,
+    		type: "GET",
+    		dataType: "JSON",
+    		data: {},
+    		success: function(lista){
+    			if(lista != null){
+    				$("#1").attr("checked","checked")
+    			}
+    		}
+    	})
+    })
+
+	</script>
 </body>
 </html>

@@ -4,30 +4,33 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CandidatoCompetenciaBean {
-	
+
 	private Integer id;
-	private Integer idCandidato;
-	private Integer idAvaliacao;
-	
-	
+	private CompetenciaBean competencia;
+	private AvaliacaoBean avaliacao;
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Integer getIdCandidato() {
-		return idCandidato;
+
+	public CompetenciaBean getCompetencia() {
+		return competencia;
 	}
-	public void setIdCandidato(Integer idCandidato) {
-		this.idCandidato = idCandidato;
+
+	public void setCompetencia(CompetenciaBean competencia) {
+		this.competencia = competencia;
 	}
-	public Integer getIdAvaliacao() {
-		return idAvaliacao;
+
+	public AvaliacaoBean getAvaliacao() {
+		return avaliacao;
 	}
-	public void setIdAvaliacao(Integer idAvaliacao) {
-		this.idAvaliacao = idAvaliacao;
+
+	public void setAvaliacao(AvaliacaoBean avaliacao) {
+		this.avaliacao = avaliacao;
 	}
-	
 
 }
