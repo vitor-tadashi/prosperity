@@ -6,9 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.ProjetoBean;
@@ -98,9 +99,10 @@ public class VagaController {
 	}
 
 	@RequestMapping(value = "aprovar", method = RequestMethod.GET)
-	public String aprovacaoVaga(Model model) {
-		model.addAttribute("vagas", vagaBusiness.obterTodos());
-		return "vaga/aprovacao-vaga";
+	public @ResponseBody List<VagaBean> obterTodos(Model model, @ModelAttribute("id") Integer id) {
+		List<VagaBean> listaVaga = vagaBusiness.obterTodos(id);
+		//model.addAttribute("vagas", vagaBusiness.obterTodos());
+		return listaVaga;
 	}
 	
 	@RequestMapping (value= "/solicitar", method = RequestMethod.GET)
