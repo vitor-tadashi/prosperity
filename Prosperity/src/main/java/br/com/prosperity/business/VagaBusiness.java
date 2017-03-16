@@ -21,6 +21,7 @@ public class VagaBusiness {
 
 	@Autowired
 	private VagaDAO vagaDAO;
+	
 	@Autowired
 	private VagaConverter vagaConverter;
 	
@@ -49,14 +50,6 @@ public class VagaBusiness {
 
 	public void inserir(VagaBean vagaBean) {
 		vagaDAO.adicionar(vagaConverter.convertBeanToEntity(vagaBean));
-	}
-
-
-	@Transactional
-	public List<VagaBean> getVaga() {
-		List<VagaBean> listaVaga = vagaConverter.convertEntityToBean(vagaDAO.listar());
-
-		return listaVaga;
 	}
 	
 }

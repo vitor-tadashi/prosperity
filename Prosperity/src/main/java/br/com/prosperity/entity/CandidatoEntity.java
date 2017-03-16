@@ -100,7 +100,7 @@ public class CandidatoEntity {
 	private UsuarioEntity usuario;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "idStatusCandidato")
+	@JoinColumn(name = "idCandidato")
 	private List<StatusCandidatoEntity> statusCandidatos;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)

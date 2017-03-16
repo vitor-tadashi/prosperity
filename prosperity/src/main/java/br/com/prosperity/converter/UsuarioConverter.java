@@ -22,7 +22,7 @@ public class UsuarioConverter implements Converter<UsuarioEntity,UsuarioBean>{
 		
 		entity.setId(bean.getId());
 		entity.setNome(bean.getNome());
-		entity.setSenha(new EncriptaDecriptaApacheCodec().codificaBase64Encoder(bean.getSenha()));
+		entity.setSenha(bean.getSenha());
 		entity.setFuncionarioEntity(funcionarioConverter.convertBeanToEntity(bean.getFuncionario()));
 		entity.setPerfilEntity(perfilConverter.convertBeanToEntity(bean.getPerfil()));
 		entity.setPrimeiroAcesso(bean.getPrimeiroAcesso());
@@ -38,7 +38,7 @@ public class UsuarioConverter implements Converter<UsuarioEntity,UsuarioBean>{
 		
 		bean.setId(entity.getId());
 		bean.setNome(entity.getNome());
-		bean.setSenha(new EncriptaDecriptaApacheCodec().codificaBase64Encoder(entity.getSenha()));
+		bean.setSenha(entity.getSenha());
 		bean.setFuncionario(funcionarioConverter.convertEntityToBean(entity.getFuncionarioEntity()));
 		bean.setPerfil(perfilConverter.convertEntityToBean(entity.getPerfilEntity()));
 		bean.setPrimeiroAcesso(entity.getPrimeiroAcesso());

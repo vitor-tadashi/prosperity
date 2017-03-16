@@ -70,16 +70,18 @@ public class PerfilBusiness {
 	}
 
 	@Transactional
-	public List<PerfilEntity> getPerfis() {
-		List<PerfilEntity> perfis = perfilDAO.listar();
-		return perfis;
-	}
-
-	@Transactional
 	public List<PerfilBean> obterTodos() {
 		List<PerfilEntity> perfisEntity = perfilDAO.listar();
 		List<PerfilBean> perfisBean = perfilConverter.convertEntityToBean(perfisEntity);
 
 		return perfisBean;
+	}
+	@Transactional
+	public List<FuncionalidadeBean> obterFuncionalidades(Integer id) {
+		PerfilEntity entity = perfilDAO.obterPorId(id);
+		PerfilBean bean = perfilConverter.convertEntityToBean(entity);
+		List<FuncionalidadeBean> listaFunc = bean.getListaFuncionalidades();
+		
+		return listaFunc;
 	}
 }
