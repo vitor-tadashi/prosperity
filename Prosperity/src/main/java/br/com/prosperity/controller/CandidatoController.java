@@ -116,7 +116,9 @@ public class CandidatoController {
 
 	@RequestMapping(value = "historico", method = RequestMethod.GET)
 	public String historicoCandidato(Model model) {
-		model.addAttribute("candidato", candidatoBusiness.obter(2));
+		candidatoBean = candidatoBusiness.obter(2);
+		
+		model.addAttribute("candidato", candidatoBean);
 
 		return "candidato/historico-candidato";
 	}
