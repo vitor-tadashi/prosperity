@@ -404,62 +404,37 @@
 						<hr>
 
 						<h3 class="text-center">Linha do tempo</h3>
-						<ul class="timeline">
+						<c:forEach var="status" items="${candidato.status}">
+							<ul class="timeline">
 
-							<li><div class="tldate">Fev 2017</div></li>
+								<li><div class="tldate">
+										<fmt:formatDate value="${status.dataAlteracao}"
+											dateStyle="long" pattern="MMMM  -  yyyy" />
+										</small>
+									</div></li>
 
-							<li>
-								<div class="tl-circ"></div>
-								<div class="timeline-panel">
-									<div class="tl-heading">
-										<h4>Parecer</h4>
-										<p>
-											<small class="text-muted"><i class="fa fa-calendar"></i>
-												01/02/2017</small>
-										</p>
+								<li>
+									<div class="tl-circ"></div>
+									<div class="timeline-panel">
+										<div class="tl-heading">
+											<h4>Status: ${status.status.nome}</h4>
+											<p>
+												<small class="text-muted"><i class="fa fa-calendar"></i>
+													<fmt:formatDate value="${status.dataAlteracao}"
+														pattern="dd/MM/yyyy" /></small>
+											</p>
+										</div>
+										<div class="tl-body">
+											<p>${status.descricaoParecer}</p>
+											<p>
+												<label></label>
+											</p>
+										</div>
 									</div>
-									<div class="tl-body">
-										<p>O candidato foi considerado apto para as funções da
-											vaga.</p>
-										<p><label>Status: </label> Aprovado</p>
-									</div>
-								</div>
-							</li>
+								</li>
 
-							<li><div class="tldate">Jan 2017</div></li>
-
-							<li class="timeline-inverted">
-								<div class="tl-circ"></div>
-								<div class="timeline-panel">
-									<div class="tl-heading">
-										<h4>Aprovado pelo Gestor de Projetos</h4>
-										<p>
-											<small class="text-muted"><i class="fa fa-calendar"></i>
-												27/01/2017</small>
-										</p>
-									</div>
-									<div class="tl-body">
-										<p>O candidato possui boa comunicação, aparenta ser
-											pró-ativo e possui vasto conhecimento na linguagem JAVA.</p>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="timeline-panel">
-									<div class="tl-heading">
-										<h4>Aprovado pelo RH</h4>
-										<p>
-											<small class="text-muted"><i class="fa fa-calendar"></i>
-												20/01/2017</small>
-										</p>
-									</div>
-									<div class="tl-body">
-										<p>Realizado última etapa do processo seletivo, a próxima
-											etapa será a entrevista com o gestor.</p>
-									</div>
-								</div>
-							</li>
-						</ul>
+							</ul>
+						</c:forEach>
 					</div>
 				</section>
 				<!-- /Section -->
