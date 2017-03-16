@@ -404,36 +404,72 @@
 						<hr>
 
 						<h3 class="text-center">Linha do tempo</h3>
-						<c:forEach var="status" items="${candidato.status}">
-							<ul class="timeline">
+						<c:forEach var="status" items="${candidato.status}"
+							varStatus="loop">
+							<c:choose>
+								<c:when test="${loop.index}%2 eq 0">
 
-								<li><div class="tldate">
-										<fmt:formatDate value="${status.dataAlteracao}"
-											dateStyle="long" pattern="MMMM  -  yyyy" />
-										</small>
-									</div></li>
+									<ul class="timeline">
 
-								<li>
-									<div class="tl-circ"></div>
-									<div class="timeline-panel">
-										<div class="tl-heading">
-											<h4>Status: ${status.status.nome}</h4>
-											<p>
-												<small class="text-muted"><i class="fa fa-calendar"></i>
-													<fmt:formatDate value="${status.dataAlteracao}"
-														pattern="dd/MM/yyyy" /></small>
-											</p>
-										</div>
-										<div class="tl-body">
-											<p>${status.descricaoParecer}</p>
-											<p>
-												<label></label>
-											</p>
-										</div>
-									</div>
-								</li>
+										<li><div class="tldate">
+												<fmt:formatDate value="${status.dataAlteracao}"
+													dateStyle="long" pattern="MMMM  -  yyyy" />
+												</small>
+											</div></li>
 
-							</ul>
+										<li>
+											<div class="tl-circ"></div>
+											<div class="timeline-panel">
+												<div class="tl-heading">
+													<h4>Status: ${status.status.nome}</h4>
+													<p>
+														<small class="text-muted"><i
+															class="fa fa-calendar"></i> <fmt:formatDate
+																value="${status.dataAlteracao}" pattern="dd/MM/yyyy" /></small>
+													</p>
+												</div>
+												<div class="tl-body">
+													<p>${status.descricaoParecer}</p>
+													<p>
+														<label></label>
+													</p>
+												</div>
+											</div>
+										</li>
+									</ul>
+								</c:when>
+
+								<c:otherwise>
+									<ul class="timeline-inverted">
+
+										<li><div class="tldate">
+												<fmt:formatDate value="${status.dataAlteracao}"
+													dateStyle="long" pattern="MMMM  -  yyyy" />
+												</small>
+											</div></li>
+
+										<li>
+											<div class="tl-circ"></div>
+											<div class="timeline-panel">
+												<div class="tl-heading">
+													<h4>Status: ${status.status.nome}</h4>
+													<p>
+														<small class="text-muted"><i
+															class="fa fa-calendar"></i> <fmt:formatDate
+																value="${status.dataAlteracao}" pattern="dd/MM/yyyy" /></small>
+													</p>
+												</div>
+												<div class="tl-body">
+													<p>${status.descricaoParecer}</p>
+													<p>
+														<label></label>
+													</p>
+												</div>
+											</div>
+										</li>
+									</ul>
+								</c:otherwise>
+							</c:choose>
 						</c:forEach>
 					</div>
 				</section>
