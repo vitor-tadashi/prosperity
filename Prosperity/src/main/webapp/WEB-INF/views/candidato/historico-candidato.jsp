@@ -404,7 +404,7 @@
 						<hr>
 
 						<h3 class="text-center">Linha do tempo</h3>
-						<c:forEach var="status" items="${candidato.status}">
+						<c:forEach var="competencia" items="${candidato.status}">
 							<ul class="timeline">
 
 								<li><div class="tldate">Fev 2017</div></li>
@@ -413,15 +413,14 @@
 									<div class="tl-circ"></div>
 									<div class="timeline-panel">
 										<div class="tl-heading">
-											<h4>${status.status.nome}</h4>
+											<h4>${competencia.status.nome}</h4>
 											<p>
 												<small class="text-muted"><i class="fa fa-calendar"></i>
 													01/02/2017</small>
 											</p>
 										</div>
 										<div class="tl-body">
-											<p>O candidato foi considerado apto para as funções da
-												vaga.${status.status.id}</p>
+											<p>${competencia.status.nome}</p>
 											<p>
 												<label>Status:</label> Aprovado
 											</p>

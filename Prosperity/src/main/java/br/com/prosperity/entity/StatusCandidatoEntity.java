@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,12 +21,12 @@ import javax.persistence.TemporalType;
 @Table(name = "tbStatusCandidato")
 
 public class StatusCandidatoEntity {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idStatusCandidato", unique = true, nullable = false)
-	private Integer idSatusCandidato;
-	/* fim */
+	//
+	// @Id
+	// @GeneratedValue(strategy = GenerationType.AUTO)
+	// @Column(name = "idStatusCandidato", unique = true, nullable = false)
+	// private Integer idSatusCandidato;
+	// /* fim */
 
 	@Column(name = "dtAlteracao")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -33,22 +34,27 @@ public class StatusCandidatoEntity {
 
 	@Column(name = "dsParecer")
 	private String dsParecer;
+	//
+	// @ManyToOne(cascade = CascadeType.ALL)
+	// @JoinColumn(name = "idStatus")
+	// private StatusEntity status;
+	//
+	// @OneToOne(cascade = CascadeType.ALL)
+	// @JoinColumn(name = "idUsuario")
+	// private UsuarioEntity usuario;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@Id
+	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+	@Column(name = "idStatusCandidato", unique = true, nullable = false)
+	private Integer idStatusCandidato;
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "idStatus")
 	private StatusEntity status;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
-
-	public Integer getIdSatusCandidato() {
-		return idSatusCandidato;
-	}
-
-	public void setIdSatusCandidato(Integer idSatusCandidato) {
-		this.idSatusCandidato = idSatusCandidato;
-	}
 
 	public Date getDtAlteracao() {
 		return dtAlteracao;
@@ -64,6 +70,14 @@ public class StatusCandidatoEntity {
 
 	public void setDsParecer(String dsParecer) {
 		this.dsParecer = dsParecer;
+	}
+
+	public Integer getIdStatusCandidato() {
+		return idStatusCandidato;
+	}
+
+	public void setIdStatusCandidato(Integer idStatusCandidato) {
+		this.idStatusCandidato = idStatusCandidato;
 	}
 
 	public StatusEntity getStatus() {

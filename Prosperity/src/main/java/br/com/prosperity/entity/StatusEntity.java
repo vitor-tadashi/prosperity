@@ -13,9 +13,7 @@ import javax.persistence.Table;
 @Table(name = "tbStatus")
 
 public class StatusEntity {
-	/* Mapeamento dos Atributos */
 
-	/* Mapeamento do Id */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idStatus", unique = true, nullable = false)

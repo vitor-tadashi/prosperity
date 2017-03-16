@@ -10,7 +10,6 @@ public class StatusCandidatoBean {
 	private Integer id;
 	private Date dataAlteracao;
 	private String descricaoParecer;
-	//private CandidatoBean candidato;
 	private UsuarioBean usuario;
 	private StatusBean status;
 
@@ -37,14 +36,6 @@ public class StatusCandidatoBean {
 	public void setDescricaoParecer(String descricaoParecer) {
 		this.descricaoParecer = descricaoParecer;
 	}
-
-//	public CandidatoBean getCandidato() {
-//		return candidato;
-//	}
-//
-//	public void setCandidato(CandidatoBean candidato) {
-//		this.candidato = candidato;
-//	}
 
 	public UsuarioBean getUsuario() {
 		return usuario;
