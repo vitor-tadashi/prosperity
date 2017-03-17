@@ -13,11 +13,6 @@
 
 <c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
 
-<script type="text/javascript">
-function cliente()
-projeto.getElementById("textCliente").value("");
-</script>
-
 <body>
 	<c:import url="/WEB-INF/views/shared/dashboard.jsp"></c:import>
 	<div id="main-container">
@@ -34,7 +29,8 @@ projeto.getElementById("textCliente").value("");
 				<div class="panel panel-default">
 					<div class="panel-heading">Informações da vaga</div>
 					<div class="panel-body">
-						<form class="form-border" id="formCadastro" novalidate="">
+						<form class="form-border" id="formCadastro2" action="cadastrar"
+							method="POST">
 							<div class="panel-tab clearfix">
 								<ul class="tab-bar wizard-demo" id="wizardDemo">
 									<li class="active tab-verity"><a href="#first"
@@ -55,21 +51,20 @@ projeto.getElementById("textCliente").value("");
 											<div>
 												<div class="form-group col-md-6">
 													<label for="txtSolicitante">Solicitante</label> <input
-														type="text" class="form-control input-sm"
-														id="txtSolicitante" placeholder="Solicitante"
-														data-required="true">
+														type="text" name="nomeSolicitante"
+														class="form-control input-sm" id="txtSolicitante"
+														placeholder="Solicitante" data-required="true">
 												</div>
 												<!-- /form-group -->
 												<div class="form-group col-md-6">
 													<label>Local de trabalho</label>
 													<div>
-														<label class="label-radio inline">
-															<input id="interno" type="radio" name="radLocalTrabalho" checked>
+														<label class="label-radio inline"> <input
+															id="interno" name="localTrabalho" value="I" type="radio" checked>
 															<span class="custom-radio"></span> Interno
-														</label>
-														<label class="label-radio inline">
-															<input id="cliente" type="radio" name="radLocalTrabalho">
-															<span class="custom-radio"></span> Cliente
+														</label> <label class="label-radio inline"> <input
+															id="cliente" name="localTrabalho" value="C" type="radio"> <span
+															class="custom-radio"></span> Cliente
 														</label>
 													</div>
 												</div>
@@ -79,30 +74,28 @@ projeto.getElementById("textCliente").value("");
 										<!-- /form-group -->
 										<div class="row">
 											<div class="form-group col-md-6">
-												<label for="cmbCargo">Cargo</label>
-												<select class="form-control chzn-select" id="cmbCargo">
-													
+												<label for="cmbCargo">Cargo</label> <select
+													class="form-control chzn-select" id="cmbCargo" name="cargoBean.id">
+
 													<c:forEach var="cargo" items="${cargos}" varStatus="i">
-														<option value="i">${cargo.nome}</option>
+														<option value="${cargo.id}">${cargo.nome}</option>
 													</c:forEach>
-													
+
 												</select>
 											</div>
 											<!-- /form-group -->
 											<div class="form-group col-md-6">
 												<label>Tipo de vaga</label>
 												<div>
-													<label class="label-radio inline">
-														<input type="radio" name="radTipoVaga" checked>
-														<span class="custom-radio"></span> Real
-													</label>
-													<label class="label-radio inline">
-														<input type="radio" name="radTipoVaga">
-														<span class="custom-radio"></span> Prospecção
-													</label>
-													<label class="label-radio inline">
-														<input type="radio" name="radTipoVaga">
-														<span class="custom-radio"></span> Hunting
+													<label class="label-radio inline"> <input
+														name="idTipoVaga" value="R" type="radio" checked> <span
+														class="custom-radio"></span> Real
+													</label> <label class="label-radio inline"> <input
+														 name="idTipoVaga" value="P" type="radio" > <span
+														class="custom-radio"></span> Prospecção
+													</label> <label class="label-radio inline"> <input
+														name="idTipoVaga" value="H" type="radio" > <span
+														class="custom-radio"></span> Hunting
 													</label>
 												</div>
 											</div>
@@ -112,13 +105,14 @@ projeto.getElementById("textCliente").value("");
 										<!-- /form-group -->
 										<div class="row">
 											<div class="form-group col-md-6">
-												<label for="cmbSenioridade">Senioridade da vaga</label>
-												<select class="form-control chzn-select" id="cmbSenioridade">
-												
-													<c:forEach var="senioridade" items="${senioridades}" varStatus="i">
-														<option value="i">${senioridade.nome}</option>
+												<label for="cmbSenioridade">Senioridade da vaga</label> <select
+													id="cmbSenioridade" name="senioridadeBean.id" class="form-control chzn-select" >
+
+													<c:forEach var="senioridade" items="${senioridades}"
+														varStatus="i">
+														<option value="${senioridade.id}">${senioridade.nome}</option>
 													</c:forEach>
-													
+
 												</select>
 											</div>
 											<!-- /form-group -->
@@ -127,8 +121,8 @@ projeto.getElementById("textCliente").value("");
 												<div>
 													<div class="form-group col-md-5">
 														<div class="input-group bootstrap-timepicker">
-															<input class="timepicker form-control" type="text"
-																value="08:00 AM" id="txtHorarioInicial"> <span
+															<input id="txtHorarioInicial" class="timepicker form-control" type="text"
+																 value="08:00 AM"> <span
 																class="input-group-addon"><i
 																class="fa fa-clock-o"></i></span>
 														</div>
@@ -140,9 +134,10 @@ projeto.getElementById("textCliente").value("");
 													<!-- /form-group -->
 													<div class="form-group col-md-5">
 														<div class="input-group bootstrap-timepicker">
-															<input class="timepicker form-control" type="text" value="05:00 PM" id="txtHorarioFinal">
-															<span class="input-group-addon">
-																<i class="fa fa-clock-o"></i>
+															<input id="txtHorarioFinal" class="timepicker form-control"
+																 type="text" value="05:00 PM"> <span
+																class="input-group-addon"> <i
+																class="fa fa-clock-o"></i>
 															</span>
 														</div>
 													</div>
@@ -153,21 +148,20 @@ projeto.getElementById("textCliente").value("");
 										</div>
 										<div class="row">
 											<div class="form-group col-md-6">
-												<label for="txtPropostaSalarial">Proposta salarial</label> <input
-													type="text" class="form-control input-sm"
-													id="txtPropostaSalarial" placeholder="R$"
-													data-required="true">
+												<label for="txtPropostaSalarial">Proposta salarial</label> 
+												<input id="txtPropostaSalarial" name="valorPretensao" type="text" class="form-control input-sm" 
+												placeholder="R$" data-required="true">
 											</div>
 											<!-- /form-group -->
 											<div class="form-group col-md-6">
 												<label>Aumento de quadro</label>
 												<div>
-													<label class="label-radio inline"> <input id="novo"
-														type="radio" name="radAumentoQuadro" checked> <span
+													<label class="label-radio inline"> <input id="novo" name="aumentaQuadro" value="N"
+														type="radio" checked> <span
 														class="custom-radio"> </span> Novo
-													</label> <label class="label-radio inline"> <input id="substituicao"
-														type="radio" name="radAumentoQuadro"> <span
-														class="custom-radio"> </span> Substituição
+													</label> <label class="label-radio inline"> <input
+														id="substituicao" name="aumentaQuadro" value="S" type="radio">
+														<span class="custom-radio"> </span> Substituição
 													</label>
 												</div>
 												<!-- /.col -->
@@ -177,18 +171,19 @@ projeto.getElementById("textCliente").value("");
 										<!-- /form-group -->
 										<div class="row">
 											<div class="form-group col-md-6">
-												<label class="control-label" for="txtDataInicio">Data para início</label>
+												<label class="control-label" for="txtDataInicio">Data
+													para início</label>
 												<div class="input-group">
-													<input type="text" value="01/01/2017"
-														class="datepicker form-control" id="txtDataInicio"> <span
-														class="input-group-addon"><i
+													<input name="dataInicio" type="text"  value="01/01/2017"
+														class="datepicker form-control" id="txtDataInicio">
+													<span class="input-group-addon"><i
 														class="fa fa-calendar"></i></span>
 												</div>
 												<!-- /.col -->
 											</div>
 											<!-- /form-group -->
 											<div id="nome" class="form-group col-md-6 hide">
-												<label>Nome do substituido</label> <input type="text"
+												<label>Nome do substituido</label> <input name="nomeSubstituido" type="text"
 													class="form-control input-sm"
 													placeholder="Nome do Substituido">
 											</div>
@@ -197,108 +192,111 @@ projeto.getElementById("textCliente").value("");
 									</div>
 									<div class="tab-pane fade" id="second">
 										<section id="dadosInterno" class="panel panel-default">
-										<div class="panel-body">
-											<div class="form-group col-md-4" style="padding-left: 0px;">
-												<label for="exampleInputEmail1">Nome do projeto</label> <select
-													class="form-control chzn-select">
-													
-													<c:forEach var="projeto" items="${projetos}" varStatus="i">
-														<option value="i">${projeto.nome}</option>
-													</c:forEach>
+											<div class="panel-body">
+												<div class="form-group col-md-4" style="padding-left: 0px;">
+													<label for="exampleInputEmail1">Nome do projeto</label> <select name="projetoBean.id"
+														class="form-control chzn-select">
 
-												</select>
-											</div>
-											<!-- /form-group -->
-											<div class="form-group col-md-4" style="padding-left: 0px;">
-												<label for="exampleInputEmail1">Cliente</label> 
-												<input type="text" class="form-control input-sm"
-														id="textCliente" placeholder="Cliente"
-														data-required="false" disabled="disabled" onblur="cliente">
-												
-											</div>
-											<!-- /form-group -->
-											<div class="form-group col-md-4" style="padding-left: 0px;">
-												<label for="exampleInputEmail1">Gestor imediato</label> <select
-													class="form-control chzn-select">
-														<c:forEach var="usuario" items="${usuarios}" varStatus="i">
-															<option value="i">${usuario.nome}</option>
+														<c:forEach var="projeto" items="${projetos}" varStatus="i">
+															<option value="${projeto.id}">${projeto.nome}</option>
 														</c:forEach>
-												</select>
+
+													</select>
+												</div>
+												<!-- /form-group -->
+												<div class="form-group col-md-4" style="padding-left: 0px;">
+													<label for="exampleInputEmail1">Cliente</label> <input
+														type="text" class="form-control input-sm" id="textCliente"
+														placeholder="Cliente" data-required="false"
+														disabled="disabled" onblur="cliente">
+
+												</div>
+												<!-- /form-group -->
+												<div class="form-group col-md-4" style="padding-left: 0px;">
+													<label for="exampleInputEmail1">Gestor imediato</label> <select name="usuarioBean.id"
+														class="form-control chzn-select">
+														<c:forEach var="usuario" items="${usuarios}" varStatus="i">
+															<option value="${usuario.id}">${usuario.nome}</option>
+														</c:forEach>
+													</select>
+												</div>
+												<!-- /form-group -->
 											</div>
-											<!-- /form-group -->
-										</div>
 										</section>
 										<!-- /Section-->
 										<section id="dadosAlocacao" class="panel panel-default hide">
-										<div class="panel-body">
-											<div class="col-md-6">
-												<div class="form-group" style="padding-left: 0px;"> 
-													<label for="exampleInputEmail1">Nome do projeto</label>
-													 <select class="form-control chzn-select">
-													 
-														<c:forEach var="projeto" items="${projetos}" varStatus="i">
-															<option value="i">${projeto.nome}</option>
-														</c:forEach>
-														
-													</select>
+											<div class="panel-body">
+												<div class="col-md-6">
+													<div class="form-group" style="padding-left: 0px;">
+														<label for="exampleInputEmail1">Nome do projeto</label> <select name="projetoBean.id"
+															class="form-control chzn-select">
+
+															<c:forEach var="projeto" items="${projetos}"
+																varStatus="i">
+																<option value="${projeto.id}">${projeto.nome}</option>
+															</c:forEach>
+
+														</select>
+													</div>
+													<!-- /form-group -->
+													<div class="form-group">
+														<label for="exampleInputEmail1">Cliente</label> <input
+															type="text" class="form-control input-sm"
+															id="textCliente" placeholder="Cliente"
+															data-required="false" disabled="disabled"
+															onblur="cliente">
+													</div>
+													<!-- /form-group -->
+													<div class="form-group" style="padding-left: 0px;">
+														<label for="exampleInputEmail1">Gestor imediato</label> <select name="usuarioBean.id"
+															class="form-control chzn-select">
+															<c:forEach var="usuario" items="${usuarios}"
+																varStatus="i">
+																<option value="${usuario.id}">${usuario.nome}</option>
+															</c:forEach>
+														</select>
+													</div>
+													<!-- /form-group -->
+													<div class="form-group">
+														<label for="exampleInputEmail1">Telefone 1</label> <input
+															id="phone-mask" type="text"
+															class=" form-control input-sm phone">
+													</div>
+													<!-- /form-group -->
 												</div>
-												<!-- /form-group -->
-												<div class="form-group">
-													<label for="exampleInputEmail1">Cliente</label> 
-													<input type="text" class="form-control input-sm"
-														id="textCliente" placeholder="Cliente"
-														data-required="false" disabled="disabled" onblur="cliente">
+												<div class="col-md-6">
+													<div class="form-group">
+														<label for="exampleInputEmail1">Nome do
+															responsável</label> <input type="name"
+															class="form-control input-sm" id="exampleInputEmail1"
+															placeholder="Nome do Cliente Responsável"
+															data-required="true">
+													</div>
+													<!-- /form-group -->
+													<div class="form-group">
+														<label for="exampleInputEmail1">Área do
+															responsável</label> <input type="text"
+															class="form-control input-sm" id="exampleInputEmail1"
+															placeholder="Área do Cliente Responsável"
+															data-required="true">
+													</div>
+													<!-- /form-group -->
+													<div class="form-group">
+														<label for="exampleInputEmail1">E-mail</label> <input
+															type="email" class="form-control input-sm"
+															id="exampleInputEmail1"
+															placeholder="E-mail do Cliente Responsável"
+															data-required="true">
+													</div>
+													<!-- /form-group -->
+													<div class="form-group">
+														<label for="exampleInputEmail1">Telefone 2</label> <input
+															id="phone-mask" type="text"
+															class=" form-control input-sm phone">
+													</div>
+													<!-- /form-group -->
 												</div>
-												<!-- /form-group -->
-												<div class="form-group" style="padding-left: 0px;">
-													<label for="exampleInputEmail1">Gestor imediato</label> 
-													<select	class="form-control chzn-select">
-														<c:forEach var="usuario" items="${usuarios}" varStatus="i">
-															<option value="i">${usuario.nome}</option>
-														</c:forEach>
-													</select>
-												</div>
-												<!-- /form-group -->
-												<div class="form-group">
-													<label for="exampleInputEmail1">Telefone 1</label> <input
-														id="phone-mask" type="text"
-														class=" form-control input-sm phone">
-												</div>
-												<!-- /form-group -->
 											</div>
-											<div class="col-md-6">
-												<div class="form-group">
-													<label for="exampleInputEmail1">Nome do responsável</label>
-													<input type="name" class="form-control input-sm"
-														id="exampleInputEmail1"
-														placeholder="Nome do Cliente Responsável"
-														data-required="true">
-												</div>
-												<!-- /form-group -->
-												<div class="form-group">
-													<label for="exampleInputEmail1">Área do responsável</label>
-													<input type="text" class="form-control input-sm"
-														id="exampleInputEmail1"
-														placeholder="Área do Cliente Responsável"
-														data-required="true">
-												</div>
-												<!-- /form-group -->
-												<div class="form-group">
-													<label for="exampleInputEmail1">E-mail</label> <input
-														type="email" class="form-control input-sm"
-														id="exampleInputEmail1"
-														placeholder="E-mail do Cliente Responsável"
-														data-required="true">
-												</div>
-												<!-- /form-group -->
-												<div class="form-group">
-													<label for="exampleInputEmail1">Telefone 2</label> <input
-														id="phone-mask" type="text"
-														class=" form-control input-sm phone">
-												</div>
-												<!-- /form-group -->
-											</div>
-										</div>
 										</section>
 										<!-- /Section -->
 									</div>
@@ -306,34 +304,41 @@ projeto.getElementById("textCliente").value("");
 										<section class="panel panel-default">
 											<div class="panel-heading">Formação acadêmica</div>
 											<div class="panel-body relative">
-												<textarea class="form-control" rows="3"></textarea>
+												<textarea class="form-control" name="descricaoFormacaoAcademica"
+													rows="3"></textarea>
 											</div>
 										</section>
 										<!-- /panel -->
 										<section class="panel panel-default">
 											<div class="panel-heading">Perfil comportamental</div>
 											<div class="panel-body relative">
-												<textarea class="form-control" rows="3"></textarea>
+												<textarea class="form-control" name="descricaoPerfilComportamental"
+													rows="3"></textarea>
 											</div>
 										</section>
 										<!-- /panel -->
 										<section class="panel panel-default">
 											<div class="panel-heading">Perfil técnico</div>
 											<div class="panel-body relative">
-												<textarea class="form-control" rows="3"></textarea>
+												<textarea class="form-control" name="descricaoPerfilTecnico"
+													rows="3"></textarea>
 											</div>
 										</section>
 										<!-- /panel -->
 									</div>
 								</div>
 							</div>
-							<div class="panel-footer text-right">
-								<button class="btn btn-success btn-sm disabled" id="prevStep"
-									disabled="">Anterior</button>
-								<button type="submit" class="btn btn-sm btn-success"
-									id="nextStep">Próximo</button>
+							<div class="panel-footer text-right pull-right">
+								<input class="btn btn-sm btn-success hide"
+									id="btnCadastrar2" value="Cadastrar"/>
 							</div>
 						</form>
+							<div class="panel-footer text-right pull-right">
+								<button class="btn btn-success btn-sm disabled" id="prevStep2"
+									disabled="">Anterior</button>
+								<button class="btn btn-sm btn-success" id="nextStep2">Próximo</button>
+							</div>
+							
 					</div>
 				</div>
 			</div>
@@ -342,14 +347,14 @@ projeto.getElementById("textCliente").value("");
 		<!-- /wrapper -->
 	</div>
 	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
-    <c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
-    
-    <!-- Custom -->
-		<script src="/resources/js/custom/solicitacaoVaga.js"></script>
-		<script src="/resources/js/parsley.min.js"></script>
-		<script src="/resources/js/custom/custom.js"></script>
+	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
+
+	<!-- Custom -->
+	<script src="/resources/js/custom/solicitacaoVaga.js"></script>
+	<script src="/resources/js/parsley.min.js"></script>
+	<script src="/resources/js/custom/custom.js"></script>
 		
 </body>
 
-		
+
 </html>

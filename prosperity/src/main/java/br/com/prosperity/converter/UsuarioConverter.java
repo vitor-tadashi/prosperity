@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.entity.UsuarioEntity;
-import br.com.prosperity.util.EncriptaDecriptaApacheCodec;
 
 @Component
 public class UsuarioConverter implements Converter<UsuarioEntity,UsuarioBean>{
@@ -38,7 +37,7 @@ public class UsuarioConverter implements Converter<UsuarioEntity,UsuarioBean>{
 		
 		bean.setId(entity.getId());
 		bean.setNome(entity.getNome());
-		bean.setSenha(new EncriptaDecriptaApacheCodec().codificaBase64Encoder(entity.getSenha()));
+		bean.setSenha(entity.getSenha());
 		bean.setFuncionario(funcionarioConverter.convertEntityToBean(entity.getFuncionarioEntity()));
 		bean.setPerfil(perfilConverter.convertEntityToBean(entity.getPerfilEntity()));
 		bean.setPrimeiroAcesso(entity.getPrimeiroAcesso());

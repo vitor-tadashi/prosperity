@@ -1,7 +1,10 @@
 package br.com.prosperity.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.prosperity.bean.CargoBean;
+import br.com.prosperity.bean.PerfilBean;
 import br.com.prosperity.bean.ProjetoBean;
 import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.StatusBean;
@@ -122,9 +126,24 @@ public class VagaController {
 	return "idAvaliador";
 	}
 	
+	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
+	public String inserirVaga(@ModelAttribute("vagaBean") VagaBean vagaBean, HttpSession session) {
+		String cargo = vagaBean.getCargoBean().getNome();
+		String senioridade = vagaBean.getSenioridadeBean().getNome();
+		Date data = new Date(System.currentTimeMillis());
+		//String usuario = session.getAttribute("autenticado").getNome();
+		vagaBean.setNomeVaga(cargo + senioridade);
+		vagaBean.setDataAbertura(data);
+		//vagaBean.setUsuarioBean(usuario);
+		vagaBusiness.inserir(vagaBean);
+		System.out.println("\n\n\nCadastrado\n\n\n");
+		return "redirect:solicitar";
+		
+	}
 	/*@RequestMapping(value = "obter-vaga", method=RequestMethod.GET)
 	public @ResponseBody List<VagaBean> obterVaga(Model model,@ModelAttribute("Visualizar")Integer id){
 		List<VagaBean> listaVaga = vagaBusiness.obterTodos(id);
 		return listaVaga;	
 	}*/
+
 }
