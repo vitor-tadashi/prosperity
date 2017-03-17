@@ -33,6 +33,8 @@
 				</div>
 				<div class="panel-body">
 					<form class="form-login" action="primeiro-acesso" method="POST" id="FormSenha" name="FormSenha" onsubmit="return validarSenha()">
+				        <div id="textDiv"></div>
+
 						<div class="form-group bounceIn animation-delay2">
 							<label>Nova senha</label>
 							<div class="input-group input-sm">
@@ -69,7 +71,11 @@
 			senha = document.FormSenha.senha.value;
 			confirmarSenha = document.FormSenha.confirmarSenha.value;
 			if (senha != confirmarSenha) {
-				alert("Senhas diferentes.");
+				var div = document.getElementById("textDiv").className = "alert alert-danger text-center";
+
+                textDiv.textContent = "Senhas diferentes";
+
+                var text = "[" + div.textContent + "]";
 				return false;
 			}
 			return true;

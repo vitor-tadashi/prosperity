@@ -56,6 +56,6 @@ public class LoginController {
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "/acesso";
+		return "login/acesso";
 	}
 }
