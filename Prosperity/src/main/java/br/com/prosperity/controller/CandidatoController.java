@@ -68,7 +68,7 @@ public class CandidatoController {
 		List<SituacaoAtualBean> listaSituacaoAtual = situacaoAtualBusiness.obterTodos();
 		model.addAttribute("listaSituacaoAtual", listaSituacaoAtual);
 
-		List<VagaBean> listaVaga = vagaBusiness.obterTodos();
+		List<VagaBean> listaVaga = vagaBusiness.listar();
 		model.addAttribute("listaVaga", listaVaga);
 		List<CanalInformacaoBean> listaCanal = canalInformacaoBusiness.obterTodos();
 		model.addAttribute("listaCanal", listaCanal);

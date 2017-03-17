@@ -25,22 +25,16 @@ public class VagaBusiness {
 	
 	@Autowired
 	private VagaConverter vagaConverter;
-	
-	@Autowired
-	private List<VagaBean> vagaBean;
 
 	@Transactional
-	public List<VagaBean> obterTodos() {
-
-		//List<VagaEntity> aprovar = vagaDAO.findByNamedQuery("obterAprovacao");
-
+	public List<VagaBean> listar() {
 		List<VagaEntity> vagaEntity = vagaDAO.listar();
         List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 		return vagaBean;
 	}
 	
 	@Transactional
-	private VagaBean obter(int idVaga) {
+	public VagaBean obter(int idVaga) {
 
 		VagaEntity vagaEntity = vagaDAO.obterPorId(idVaga);
 
@@ -56,7 +50,8 @@ public class VagaBusiness {
 	public VagaBean obterVagaPorId(Integer id) {
 		VagaBean bean = vagaConverter.convertEntityToBean(vagaDAO.obterPorId(id));
 		return bean;
-}}
+}
+}
 
 // criar método consultarVagasAprovacao
 // chamar o dao e acionar o método findByNamedQuery
