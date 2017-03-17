@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.prosperity.bean.CanalInformacaoBean;
 import br.com.prosperity.bean.CandidatoBean;
+import br.com.prosperity.bean.ContatoBean;
 import br.com.prosperity.converter.CanalInformacaoConverter;
 import br.com.prosperity.converter.CandidatoConverter;
 import br.com.prosperity.dao.CanalInformacaoDAO;
@@ -18,10 +19,11 @@ import br.com.prosperity.entity.CanalInformacaoEntity;
 import br.com.prosperity.entity.CandidatoEntity;
 import br.com.prosperity.entity.FormacaoEntity;
 import br.com.prosperity.entity.VagaEntity;
-import sun.net.www.content.text.plain;
+import br.com.prosperity.util.FormatUtil;
 
 @Component
-public class CandidatoBusiness {
+public class CandidatoBusiness extends FormatUtil{
+
 	@Autowired
 	private FormacaoDAO formacaoDAO;
 	@Autowired
@@ -42,7 +44,11 @@ public class CandidatoBusiness {
 
 		CandidatoBean candidatoBean = null;
 		if (candidatoEntity != null) {
+			ContatoBean contatoBean;
 			candidatoBean = candidatoConverter.convertEntityToBean(candidatoEntity);
+			candidatoBean = formatCPF(candidatoBean);
+			candidatoBean = formatRG(candidatoBean);
+			candidatoBean.setContato(formatPhone(candidatoBean.getContato()));
 		}
 
 		return candidatoBean;

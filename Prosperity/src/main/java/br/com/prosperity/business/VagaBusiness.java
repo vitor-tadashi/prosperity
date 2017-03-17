@@ -8,9 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.converter.VagaConverter;
-import br.com.prosperity.dao.CanalInformacaoDAO;
 import br.com.prosperity.dao.VagaDAO;
-import br.com.prosperity.entity.CanalInformacaoEntity;
 import br.com.prosperity.entity.VagaEntity;
 
 @Component
@@ -22,19 +20,15 @@ public class VagaBusiness {
 	@Autowired
 	private VagaConverter vagaConverter;
 
-
 	@Transactional
-	public List<VagaBean> obterTodos() {
-
-		//List<VagaEntity> aprovar = vagaDAO.findByNamedQuery("obterAprovacao");
-
+	public List<VagaBean> listar() {
 		List<VagaEntity> vagaEntity = vagaDAO.listar();
         List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 		return vagaBean;
 	}
 	
 	@Transactional
-	private VagaBean obter(int idVaga) {
+	public VagaBean obter(int idVaga) {
 
 		VagaEntity vagaEntity = vagaDAO.obterPorId(idVaga);
 
@@ -46,7 +40,11 @@ public class VagaBusiness {
 	public void inserir(VagaBean vagaBean) {
 		vagaDAO.adicionar(vagaConverter.convertBeanToEntity(vagaBean));
 	}
-	
+	@Transactional
+	public VagaBean obterVagaPorId(Integer id) {
+		VagaBean bean = vagaConverter.convertEntityToBean(vagaDAO.obterPorId(id));
+		return bean;
+}
 }
 
 // criar método consultarVagasAprovacao
