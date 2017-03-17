@@ -7,8 +7,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import br.com.prosperity.util.FormatUtil;
+
 @Component
-public class CandidatoBean {
+public class CandidatoBean  extends FormatUtil {
 
 	private Integer id;
 	private String cpf;
