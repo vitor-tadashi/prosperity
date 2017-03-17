@@ -28,6 +28,22 @@ public class CandidatoEntity {
 	@Column(name = "idCandidato", unique = true, nullable = false)
 	private Integer id;
 
+	public Date getDataultimoContato() {
+		return dataultimoContato;
+	}
+
+	public void setDataultimoContato(Date dataultimoContato) {
+		this.dataultimoContato = dataultimoContato;
+	}
+
+	public void setValorMin(Double valorMin) {
+		this.valorMin = valorMin;
+	}
+
+	public void setValorMax(Double valorMax) {
+		this.valorMax = valorMax;
+	}
+
 	@Column(name = "nmCandidato")
 	private String nome;
 
@@ -83,7 +99,6 @@ public class CandidatoEntity {
 	// @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-
 	@JoinColumn(name = "idContato")
 	private ContatoEntity contato;
 

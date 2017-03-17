@@ -10,6 +10,9 @@ public interface Converter<E, B> {
 	B convertEntityToBean(E entity);
 	
 	default List<B> convertEntityToBean(List<E> entities) {
+		if (entities == null)
+			return null;
+		
 		List<B> beans = new ArrayList<B>();
 		
 		for(E entity : entities){
@@ -19,6 +22,9 @@ public interface Converter<E, B> {
 	}
 	
 	default List<E> convertBeanToEntity(List<B> beans) {
+		if (beans == null)
+			return null;
+		
 		List<E> entities = new ArrayList<E>();
 		
 		for(B bean : beans){

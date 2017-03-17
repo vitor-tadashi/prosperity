@@ -48,6 +48,10 @@ public class CandidatoBean {
 		return cpf;
 	}
 
+	public void setValorMin(Double valorMin) {
+		this.valorMin = valorMin;
+	}
+
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}

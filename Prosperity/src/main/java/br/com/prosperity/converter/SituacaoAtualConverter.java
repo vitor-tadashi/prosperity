@@ -10,6 +10,9 @@ public class SituacaoAtualConverter implements Converter<SituacaoAtualEntity, Si
 
 	@Override
 	public SituacaoAtualEntity convertBeanToEntity(SituacaoAtualBean bean) {
+		if (bean == null) {
+			return null;
+		}
 		SituacaoAtualEntity entity = new SituacaoAtualEntity();
 		entity.setIdSituacaoAtual(bean.getId());
 		entity.setDescricao(bean.getDescricao());
@@ -18,6 +21,10 @@ public class SituacaoAtualConverter implements Converter<SituacaoAtualEntity, Si
 
 	@Override
 	public SituacaoAtualBean convertEntityToBean(SituacaoAtualEntity entity) {
+		if (entity == null) {
+			return null;
+		}
+		
 		SituacaoAtualBean bean = new SituacaoAtualBean();
 		bean.setId(entity.getIdSituacaoAtual());
 		bean.setDescricao(entity.getDescricao());
