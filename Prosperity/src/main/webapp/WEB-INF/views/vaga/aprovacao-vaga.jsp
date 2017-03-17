@@ -28,8 +28,7 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Desenvolvedor .Net
-						Pleno</h4>
+					<h4 class="modal-title" id="titulo"><script></script></h4>
 				</div>
 				<div class="modal-body">
 					<div class="panel-tab clearfix">
@@ -47,10 +46,10 @@
 										<div class="form-group row">
 											<div>
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
-													<label for="exampleInputEmail1">Solicitante</label> <input
-														type="name" class="form-control input-sm"
-														id="exampleInputEmail1" placeholder="Vitor Tadashi"
-														value="Solicitante" disabled>
+													<label for="solicitante">Solicitante</label> <input
+														class="form-control input-sm" disabled
+														name="solicitante.id" id="solicitante"
+														data-required="true" name="solicitante">
 												</div>
 												<!-- /form-group -->
 
@@ -72,10 +71,9 @@
 										<div class="form-group row">
 											<div>
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
-													<label for="exampleInputEmail1">Cargo</label> <input
-														type="name" class="form-control input-sm"
-														id="exampleInputEmail1" placeholder="Analista de testes"
-														value="Cargo" disabled>
+													<label for="cargo"></label> <input type="name"
+														class="form-control input-sm" id="cargo" value="Cargo"
+														disabled>
 												</div>
 												<!-- /form-group -->
 
@@ -99,9 +97,9 @@
 										</div>
 										<div class="form-group row">
 											<div class="form-group col-md-4" style="margin-bottom: 0px">
-												<label for="exampleInputEmail1">Senioridade da vaga</label>
+												<label for="vagaSenioridade">Senioridade da vaga</label>
 												<input type="name" class="form-control input-sm"
-													id="exampleInputEmail1" placeholder="Estágio"
+													id="vagaSenioridade" placeholder="Estágio"
 													value="Senioridade
 													da Vaga" disabled>
 											</div>
@@ -112,7 +110,7 @@
 													<div class="form-group col-md-3">
 														<div class="input-group bootstrap-timepicker"
 															style="width: 105%;">
-															<input class="timepicker form-control" type="text"
+															<input class="timepicker form-control" id="vagaHorario" type="text"
 																/ value="08:00 AM" disabled> <span
 																class="input-group-addon"><i
 																class="fa fa-clock-o"></i></span>
@@ -124,7 +122,7 @@
 													<div class="form-group col-md-3">
 														<div class="input-group bootstrap-timepicker"
 															style="width: 105%;">
-															<input class="timepicker form-control" type="text"
+															<input class="timepicker form-control" id="vagaHorario1" type="text"
 																value="05:00 PM" disabled> <span
 																class="input-group-addon"><i
 																class="fa fa-clock-o"></i></span>
@@ -282,41 +280,41 @@
 							</tr>
 						</thead>
 						<tbody class="text-center">
-						<c:forEach var="vaga" items="${vagas}" varStatus="i">
-						
-						<tr>
-								<td>${vaga.nomeVaga}</td>
-								<td>${vaga.nomeSolicitante}</td>
-								<td>${vaga.senioridadeBean.nome}</td>
-								<td>${vaga.projetoBean.nome}</td>
-								<td>${vaga.projetoBean.cliente.nome}</td>
-								<td>${vaga.localTrabalho}</td>
-								<td>${vaga.dataAbertura }</td>
-								<td>${vaga.dataFechamento }</td>
-								<td>
-									<div class="btn-group">
-										<!-- <-- ! Começo Botão -->
-										<button class="btn btn-sm dropdown-toggle btn-info"
-											data-toggle="dropdown" aria-haspopup="true"
-											aria-expanded="false">
-											<i class="fa fa-cogs fa-lg"></i> <span class="caret"></span>
-										</button>
-										<ul class="dropdown-menu">
-											<li><a href="#vaga-modal" data-toggle="modal"><i
-													class="fa fa-eye">&nbsp</i>Visualizar</a></li>
-											<li role="separator" class="divider"></li>
-											<li><a href="#"><i class="fa fa-check fa-lg"></i>
-													Aprovar</a></li>
-											<li role="separator" class="divider"></li>
-											<li><a href="#"><i class="fa fa-times fa-lg"></i>
-													Reprovar</a></li>
-										</ul>
-									</div> <!-- Fim Botão -->
-								</td>
-							</tr>
-						
-						</c:forEach>
-														<!-- <tr>
+							<c:forEach var="vaga" items="${vagas}" varStatus="i">
+
+								<tr>
+									<td>${vaga.nomeVaga}</td>
+									<td>${vaga.nomeSolicitante}</td>
+									<td>${vaga.senioridadeBean.nome}</td>
+									<td>${vaga.projetoBean.nome}</td>
+									<td>${vaga.projetoBean.cliente.nome}</td>
+									<td>${vaga.localTrabalho}</td>
+									<td>${vaga.dataAbertura }</td>
+									<td>${vaga.dataFechamento }</td>
+									<td>
+										<div class="btn-group">
+											<!-- <-- ! Começo Botão -->
+											<button class="btn btn-sm dropdown-toggle btn-info"
+												data-toggle="dropdown" aria-haspopup="true"
+												aria-expanded="false">
+												<i class="fa fa-cogs fa-lg"></i> <span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu">
+												<li><a onclick="info(${vaga.id})"><i
+														class="fa fa-eye">&nbsp</i>Visualizar</a></li>
+												<li role="separator" class="divider"></li>
+												<li><a href="#"><i class="fa fa-check fa-lg"></i>
+														Aprovar</a></li>
+												<li role="separator" class="divider"></li>
+												<li><a href="#"><i class="fa fa-times fa-lg"></i>
+														Reprovar</a></li>
+											</ul>
+										</div> <!-- Fim Botão -->
+									</td>
+								</tr>
+
+							</c:forEach>
+							<!-- <tr>
 								<td>Desenvolvedor</td>
 								<td>Vitor Tadashi</td>
 								<td>Senior</td>
@@ -387,26 +385,35 @@
 	</div>
 	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
 	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
-	
-	<!-- JavaScript --> 
-	
+
+	<!-- JavaScript -->
+
 	<script type="text/javascript">
-	$("#fid").change(function(id){
-    	var Visualizar = $("#fid option:selected").val();
+	
+	function info(listaId){
+		
+    	//var Visualizar = $("#fid option:selected").val();
+    	var Solicitante;
+    	var Titulo;
+    	
+    	//
     	$.ajax({
-    		url: "vaga/aprovar?id="+id,
+    		url: "visualizar",
     		type: "GET",
     		dataType: "JSON",
-    		data: {
-    			id: $(this).attr("lista-id")
-    		},
+    		data: { 'id' : listaId},
     		success: function(lista){
-    			if(lista != null){
-    				$("#1").attr("checked","checked")
-    			}
+    			console.log(lista);
+    			$('input#titulo').val(lista.nomeVaga);
+    			$('input#cargo').val(lista.cargoBean.nome);
+    			$('input#vagaSenioridade').val(lista.senioridadeBean.nome);
+    			$('input#vagaHorario').val(lista.horarioEntrada);
+    			$('input#vagaHorario1').val(lista.horarioSaida);
+    			$('input#solicitante').val(lista.nomeSolicitante);
+    			$('#vaga-modal').modal('show');
     		}
     	})
-    }) 
+    } 
 
 	</script>
 </body>

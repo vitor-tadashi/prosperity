@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.prosperity.bean.CanalInformacaoBean;
+import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.converter.CanalInformacaoConverter;
 import br.com.prosperity.converter.VagaConverter;
@@ -51,8 +52,11 @@ public class VagaBusiness {
 	public void inserir(VagaBean vagaBean) {
 		vagaDAO.adicionar(vagaConverter.convertBeanToEntity(vagaBean));
 	}
-	
-}
+	@Transactional
+	public VagaBean obterVagaPorId(Integer id) {
+		VagaBean bean = vagaConverter.convertEntityToBean(vagaDAO.obterPorId(id));
+		return bean;
+}}
 
 // criar método consultarVagasAprovacao
 // chamar o dao e acionar o método findByNamedQuery
