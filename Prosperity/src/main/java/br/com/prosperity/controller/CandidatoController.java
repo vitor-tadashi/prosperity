@@ -35,25 +35,7 @@ import br.com.prosperity.exception.BusinessException;
 public class CandidatoController {
 
 	@Autowired
-	private CandidatoBean candidatoBean;
-	
-	@Autowired
 	private CandidatoBusiness candidatoBusiness;
-
-	@Autowired
-	private EnderecoBean enderecoBean;
-
-	@Autowired
-	private FormacaoBean formacaoBean;
-
-	@Autowired
-	private ContatoBean contatoBean;
-
-	@Autowired
-	private AvaliacaoBean avaliacaoBean;
-
-	@Autowired
-	private List<CandidatoCompetenciaBean> competencias;
 
 	@Autowired
 	private TipoCursoBusiness tipoCursoBusiness;
@@ -117,6 +99,7 @@ public class CandidatoController {
 
 	@RequestMapping(value = "historico", method = RequestMethod.GET)
 	public String historicoCandidato(Model model) {
+		CandidatoBean candidatoBean;
 		candidatoBean = candidatoBusiness.obter(2);
 		
 		model.addAttribute("candidato", candidatoBean);

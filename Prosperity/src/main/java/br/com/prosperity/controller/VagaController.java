@@ -83,6 +83,9 @@ public class VagaController {
 	@Autowired
 	private StatusBusiness statusBusiness;
 	
+	@Autowired
+	private VagaBean vaga;
+	
 	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
 	public String cliente(Model model) {
 		
@@ -104,6 +107,7 @@ public class VagaController {
 		return "vaga/consultar-vaga";
 	}
 	
+
 	@RequestMapping(value= {"/visualizar-vaga"}, method = RequestMethod.GET)
 	public @ResponseBody VagaBean carregaVagaAjax(Model model, @ModelAttribute("id") Integer id) {
 		VagaBean vaga = new VagaBean();
@@ -111,6 +115,14 @@ public class VagaController {
 		return vaga;
 	}
 	
+
+
+	@RequestMapping(value = {"visualizar"}, method = RequestMethod.GET)
+	public @ResponseBody VagaBean visualizarVagaAjax(Model model, @ModelAttribute("id") Integer id) {
+		VagaBean vaga = new VagaBean();
+		vaga = vagaBusiness.obterVagaPorId(id);
+		return vaga;
+		}
 
 
 	@RequestMapping(value = "aprovar", method = RequestMethod.GET)
