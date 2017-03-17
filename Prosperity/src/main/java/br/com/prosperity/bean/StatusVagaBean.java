@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class StatusVagaBean {
 
 	private Integer idStatus;
-	private String idVaga;
+	
 	private Date dataAlteracao;
 	
 	public Integer getIdStatus() {
@@ -17,12 +17,7 @@ public class StatusVagaBean {
 	public void setIdStatus(Integer idStatus) {
 		this.idStatus = idStatus;
 	}
-	public String getIdVaga() {
-		return idVaga;
-	}
-	public void setIdVaga(String idVaga) {
-		this.idVaga = idVaga;
-	}
+	
 	public Date getDataAlteracao() {
 		return dataAlteracao;
 	}

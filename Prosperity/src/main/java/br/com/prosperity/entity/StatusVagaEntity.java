@@ -32,9 +32,9 @@ public class StatusVagaEntity {
 	@JoinColumn(name="idStatus")
 	private StatusEntity status;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="idVaga")
-	private VagaEntity vaga;
+	//@ManyToOne(cascade = CascadeType.ALL)
+	//@JoinColumn(name="idVaga")
+	//private VagaEntity vaga;
 	
 	@Column (name = "dtAlteracao")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -68,13 +68,7 @@ public class StatusVagaEntity {
 		this.status = status;
 	}
 
-	public VagaEntity getVaga() {
-		return vaga;
-	}
 
-	public void setVaga(VagaEntity vaga) {
-		this.vaga = vaga;
-	}
 	
 	
 	
