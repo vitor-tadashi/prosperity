@@ -12,6 +12,9 @@ public class StatusConverter implements Converter<StatusEntity, StatusBean> {
 	@Autowired
 	private TipoStatusConverter tipoStatusConverter;
 	
+	@Autowired
+	private StatusCandidatoConverter statusCandidatoConverter;
+	
 	@Override
 	public StatusEntity convertBeanToEntity(StatusBean bean) {
 		// TODO Auto-generated method stub
@@ -20,6 +23,8 @@ public class StatusConverter implements Converter<StatusEntity, StatusBean> {
 		entity.setNome(bean.getNome());
 		entity.setTipoCss(bean.getCss());
 		entity.setTipoStatus(tipoStatusConverter.convertBeanToEntity(bean.getTipo()));
+		entity.setStatusCandidatoEntity(statusCandidatoConverter.convertBeanToEntity(bean.getStatusCandidato()));
+		
 		return entity;
 	}
 
@@ -30,6 +35,8 @@ public class StatusConverter implements Converter<StatusEntity, StatusBean> {
 		bean.setNome(entity.getNome());
 		bean.setCss(entity.getTipoCss());
 		bean.setTipo(tipoStatusConverter.convertEntityToBean(entity.getTipoStatus()));
+		bean.setStatusCandidato(statusCandidatoConverter.convertEntityToBean(entity.getStatusCandidatoEntity()));
+		
 		return bean;
 	}
 }

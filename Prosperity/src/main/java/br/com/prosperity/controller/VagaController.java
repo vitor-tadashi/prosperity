@@ -84,7 +84,7 @@ public class VagaController {
 	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
 	public String cliente(Model model) {
 		
-		model.addAttribute("vagas", vagaBusiness.obterTodos());
+		model.addAttribute("vagas", vagaBusiness.listar());
 		
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
 		model.addAttribute("listaCargo", listaCargo);
@@ -92,7 +92,7 @@ public class VagaController {
 		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.obterTodos();
 		model.addAttribute("listaSenioridade", listaSenioridade);
 		
-		List<VagaBean> listaVaga = vagaBusiness.obterTodos();
+		List<VagaBean> listaVaga = vagaBusiness.listar();
 		model.addAttribute("listaVaga", listaVaga);
 		
 		List<StatusBean> listaStatus = statusBusiness.obterTodos();
@@ -104,7 +104,7 @@ public class VagaController {
 
 	@RequestMapping(value = "aprovar", method = RequestMethod.GET)
 	public String aprovacaoVaga(Model model) {
-		model.addAttribute("vagas", vagaBusiness.obterTodos());
+		model.addAttribute("vagas", vagaBusiness.listar());
 		return "vaga/aprovacao-vaga";
 	}
 	

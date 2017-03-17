@@ -29,7 +29,7 @@ public class VagaBusiness {
 	private List<VagaBean> vagaBean;
 
 	@Transactional
-	public List<VagaBean> obterTodos() {
+	public List<VagaBean> listar() {
 
 		//List<VagaEntity> aprovar = vagaDAO.findByNamedQuery("obterAprovacao");
 
@@ -39,7 +39,7 @@ public class VagaBusiness {
 	}
 	
 	@Transactional
-	private VagaBean obter(int idVaga) {
+	private VagaBean obterPorId(int idVaga) {
 
 		VagaEntity vagaEntity = vagaDAO.obterPorId(idVaga);
 

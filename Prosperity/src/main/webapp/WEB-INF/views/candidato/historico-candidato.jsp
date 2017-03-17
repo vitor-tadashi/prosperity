@@ -404,7 +404,7 @@
 						<hr>
 
 						<h3 class="text-center">Linha do tempo</h3>
-						<c:forEach var="status" items="${candidato.status}"
+						<c:forEach var="status" items="${candidato..}"
 							varStatus="loop">
 							<c:choose>
 								<c:when test="${loop.index}%2 eq 0">
