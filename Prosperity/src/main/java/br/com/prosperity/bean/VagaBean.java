@@ -1,5 +1,6 @@
 package br.com.prosperity.bean;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -31,19 +32,7 @@ public class VagaBean {
 	private Date dataFechamento; //
 	private Integer numeroCandidatos; //
 	private UsuarioBean usuarioBean;
-	private List<StatusBean> statusBean;
-	
-	
-	
-	
-
-	public List<StatusBean> getStatusBean() {
-		return statusBean;
-	}
-
-	public void setStatusBean(List<StatusBean> statusBean) {
-		this.statusBean = statusBean;
-	}
+	private List<StatusVagaBean> statusVagaBean = new ArrayList<>();
 
 	public Integer getId() {
 		return id;
@@ -52,9 +41,7 @@ public class VagaBean {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	
-	
+
 	public String getNomeVaga() {
 		return nomeVaga;
 	}
@@ -222,5 +209,25 @@ public class VagaBean {
 	public void setUsuarioBean(UsuarioBean usuarioBean) {
 		this.usuarioBean = usuarioBean;
 	}
-	
+
+	public List<StatusVagaBean> getStatusVagaBean() {
+		return statusVagaBean;
+	}
+
+	public void setStatusVagaBean(List<StatusVagaBean> statusVagaBean) {
+		this.statusVagaBean = statusVagaBean;
+	}
+
+	public void setLocalTrabalho(Character localTrabalho) {
+		this.localTrabalho = localTrabalho;
+	}
+
+	public void setIdTipoVaga(Character idTipoVaga) {
+		this.idTipoVaga = idTipoVaga;
+	}
+
+	public void setAumentaQuadro(Character aumentaQuadro) {
+		this.aumentaQuadro = aumentaQuadro;
+	}
+
 }

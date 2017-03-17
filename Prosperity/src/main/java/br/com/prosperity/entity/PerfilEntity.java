@@ -11,12 +11,17 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbPerfil")
-@NamedQuery(name = "obterNomePerfil", query = "SELECT p FROM PerfilEntity p WHERE p .nome = ?1")
+
+@NamedQueries({
+	@NamedQuery(name = "obterPerfis", query = "SELECT distinct p FROM PerfilEntity p"),
+	@NamedQuery(name = "obterNomePerfil", query = "SELECT p FROM PerfilEntity p WHERE p .nome = ?1")
+})
 public class PerfilEntity {
 
 	@Id
@@ -27,7 +32,7 @@ public class PerfilEntity {
 	@Column(name = "nmPerfil")
 	private String nome;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "tbPerfilFuncionalidade", joinColumns = { @JoinColumn(name = "idPerfil") }, inverseJoinColumns = {
 			@JoinColumn(name = "idFuncionalidade") })
 	private List<FuncionalidadeEntity> funcionalidades;

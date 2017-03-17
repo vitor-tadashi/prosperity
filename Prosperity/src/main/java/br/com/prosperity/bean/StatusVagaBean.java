@@ -7,27 +7,41 @@ import org.springframework.stereotype.Component;
 @Component
 public class StatusVagaBean {
 
-	private Integer idStatus;
-	private String idVaga;
+	private Integer id;
+	private StatusBean statusBean;
 	private Date dataAlteracao;
-	
-	public Integer getIdStatus() {
-		return idStatus;
+	private VagaBean vagaBean;
+
+	public Integer getId() {
+		return id;
 	}
-	public void setIdStatus(Integer idStatus) {
-		this.idStatus = idStatus;
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
-	public String getIdVaga() {
-		return idVaga;
-	}
-	public void setIdVaga(String idVaga) {
-		this.idVaga = idVaga;
-	}
+
 	public Date getDataAlteracao() {
 		return dataAlteracao;
 	}
+
 	public void setDataAlteracao(Date dataAlteracao) {
 		this.dataAlteracao = dataAlteracao;
 	}
+
+	public StatusBean getStatusBean() {
+		return statusBean;
+	}
+
+	public void setStatusBean(StatusBean statusBean) {
+		this.statusBean = statusBean;
+	}
 	
+	public VagaBean getVagaBean() {
+		return vagaBean;
+	}
+
+	public void setVagaBean(VagaBean vagaBean) {
+		this.vagaBean = vagaBean;
+	}
+
 }

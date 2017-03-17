@@ -10,6 +10,9 @@ public class CompetenciaConverter implements Converter<CompetenciaEntity, Compet
 
 	@Override
 	public CompetenciaEntity convertBeanToEntity(CompetenciaBean bean) {
+		if (bean == null) {
+			return null;
+		}
 		CompetenciaEntity entity = new CompetenciaEntity();
 
 		entity.setId(bean.getId());
@@ -20,6 +23,9 @@ public class CompetenciaConverter implements Converter<CompetenciaEntity, Compet
 
 	@Override
 	public CompetenciaBean convertEntityToBean(CompetenciaEntity entity) {
+		if (entity == null) {
+			return null;
+		}
 		CompetenciaBean bean = new CompetenciaBean();
 
 		bean.setId(entity.getId());

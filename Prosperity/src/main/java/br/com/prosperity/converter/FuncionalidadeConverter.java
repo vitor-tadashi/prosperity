@@ -13,22 +13,26 @@ public class FuncionalidadeConverter implements Converter<FuncionalidadeEntity, 
 	@Override
 	public FuncionalidadeEntity convertBeanToEntity(FuncionalidadeBean bean) {
 		FuncionalidadeEntity entity = new FuncionalidadeEntity();
-
+		if (bean == null){
+			entity = null;
+		} else {
 		entity.setId(bean.getId());
 		entity.setNome(bean.getNome());
 		// entity.setPerfil(perfilConverter.convertBeanToEntity(bean.getPerfil()));
-
+		}
 		return entity;
 	}
 
 	@Override
 	public FuncionalidadeBean convertEntityToBean(FuncionalidadeEntity entity) {
 		FuncionalidadeBean bean = new FuncionalidadeBean();
-
+		if (entity == null){
+			bean = null;
+		} else {
 		bean.setId(entity.getId());
 		bean.setNome(entity.getNome());
 		// bean.setPerfil(perfilConverter.convertEntityToBean(entity.getPerfil()));
-
+		}
 		return bean;
 	}
 }

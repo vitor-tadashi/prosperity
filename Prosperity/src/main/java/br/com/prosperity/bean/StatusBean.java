@@ -9,8 +9,8 @@ public class StatusBean {
 	private String nome;
 	private String Css;
 	private TipoStatusBean tipo;
-
-
+	private StatusCandidatoBean statusCandidato;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -41,5 +41,13 @@ public class StatusBean {
 
 	public void setTipo(TipoStatusBean tipo) {
 		this.tipo = tipo;
+	}
+
+	public StatusCandidatoBean getStatusCandidato() {
+		return statusCandidato;
+	}
+
+	public void setStatusCandidato(StatusCandidatoBean statusCandidato) {
+		this.statusCandidato = statusCandidato;
 	}
 }

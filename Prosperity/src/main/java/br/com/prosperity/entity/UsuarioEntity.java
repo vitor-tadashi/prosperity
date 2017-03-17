@@ -26,7 +26,7 @@ public class UsuarioEntity {
 	@Column(name = "idUsuario", unique = true, nullable = false)
 	private Integer id;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idPerfil")
 	private PerfilEntity perfilEntity;
 
