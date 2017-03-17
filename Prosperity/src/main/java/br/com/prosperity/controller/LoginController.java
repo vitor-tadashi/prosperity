@@ -52,9 +52,10 @@ public class LoginController {
 		usuarioBusiness.alterar(usuario);
 		return "dashboard/pagina-inicial";
 	}
-	
+
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout() {
-	  return "/acesso";
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "/acesso";
 	}
 }
