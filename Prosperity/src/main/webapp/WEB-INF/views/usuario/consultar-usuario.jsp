@@ -42,31 +42,39 @@
 					<div class="padding-md">
 						<div class="row">
 							<form action="cadastrar" method="POST" id="frmUsuario">
-								<input type="hidden" name="id" id="txtId" />
+								<input type="hidden" name="id" id="id" />
 								<div class="row">
 									<div class="form-group col-md-6">
-										<label for="funcionario">Funcionário</label> <select
-											class="form-control" name="funcionario.id" id="cmbFuncionario">
+										<label for="funcionario">Funcionário</label>
+										<select class="form-control" name="funcionario.id" id="cmbFuncionario">
+											<option value="">Selecione</option>
+											<c:forEach var="funcionario" items="${funcionarios}">
+												<option value="${funcionario.id}">${funcionario.nome}</option>
+											</c:forEach>
 										</select>
 									</div>
 									<div class="form-group col-md-6">
 										<label for="usuario">Usuário</label>
 										<div class="input-group">
 											<span class="input-group-addon"><i class="fa fa-user"></i></span>
-											<input type="text" class="form-control" id="txtUsuario"
-												data-required="true" name="nome">
+											<input type="text" class="form-control" id="usuario"
+												data-required="true" name="nome" placeholder="Informe o usuário">
 										</div>
 									</div>
 									<div class="form-group col-md-6 cold-md-offset-6">
 										<label for="email">E-mail corporativo</label>
 										<div class="input-group">
 											<span class="input-group-addon">@</span> <input type="email"
-												class="form-control" id="txtEmail" data-required="true" name="email">
+												class="form-control" id="email" data-required="true" name="email" placeholder="Informe o e-mail">
 										</div>
 									</div>
 									<div class="form-group open col-md-6">
-										<label for="permissao">Perfil</label> <select
-											class="form-control" name="perfil.id" id="cmbPerfil">
+										<label for="permissao">Perfil</label>
+										<select class="form-control" name="perfil.id" id="cmbPerfil">
+											<option value="">Selecione</option>
+											<c:forEach var="perfil" items="${perfis}">
+												<option value="${perfil.id}">${perfil.nome}</option>
+											</c:forEach>
 										</select>
 									</div>
 								</div>
@@ -80,7 +88,7 @@
 					<button class="btn btn-danger" id="btnMudarStatus">
 						<span class="fa fa-power-off"></span> Desativar
 					</button>
-					<button class="btn btn-warning">
+					<button class="btn btn-warning" id="btnRedefinirSenha">
 						<i class="fa fa-edit"></i> Redefinir senha
 					</button>
 					<button class="btn btn-success" id="btnSalvar">
@@ -140,7 +148,7 @@
 											</td>
 											<td>
 												<div class="btn-group">
-													<a class="btn btn-info btn-xs" onclick="testeModal(${usuario.id})"><i class="fa fa-edit"></i> Editar</a>
+													<a class="btn btn-info btn-xs" onclick="abrirModal('editar', ${usuario.id})"><i class="fa fa-edit"></i> Editar</a>
 												</div>
 											</td>
 										</tr>
@@ -151,7 +159,7 @@
 						</div>
 						<!-- /.col -->
 						<div class="pull-right">
-							<a class="btn btn-primary" onclick="testeModal()">Criar novo usuário</a>
+							<a class="btn btn-primary" onclick="abrirModal('incluir')">Criar novo usuário</a>
 							<a class="btn btn-warning" href="criar-perfil">Criar perfil</a>
 						</div>
 					</div>
@@ -176,58 +184,41 @@
 	
 	<!-- javaScript aqui -->
 	<script>
-		var funcionario;
-		var perfil;
 		var ativo;
+		var idUsuario;
 		
-		function testeModal(id){
+		function abrirModal(action, id){
+			var idFuncionario;
+			var idPerfil;
+			
+			$("#frmUsuario")[0].reset();
 			
 			if(id != undefined) {
-	    		$.ajax({
+				$('#myModalLabel').text('Alterar usuário');
+				$('#btnRedefinirSenha').show();
+	    		$('#btnMudarStatus').show();
+	    		idUsuario = id;
+				$.ajax({
 		    		url: "carregar-usuario",
 		    		type: "GET",
 		    		dataType: "JSON",
 		    		data: {id : id},
 		    		success: function(data){
 		    			console.log(data);
-		    			$('input#txtId').val(data.id);
-		    			$('input#txtUsuario').val(data.nome);
-		    			$('input#txtEmail').val(data.email);
-		    			funcionario = data.funcionario.id;
-		    			perfil = data.perfil.id;
+		    			$('#id').val(data.id);
+		    			$('#usuario').val(data.nome);
+		    			$('#email').val(data.email);
 		    			ativo = data.ativo;
+		    			$('select#cmbFuncionario').val(data.funcionario.id);
+		    			$('select#cmbPerfil').val(data.perfil.id);
 		    		}
 		    	});
+	    	} else {
+	    		$('#myModalLabel').text('Incluir usuário');
+	    		$('#btnRedefinirSenha').hide();
+	    		$('#btnMudarStatus').hide();
 	    	}
-	    	$.ajax({
-	    		url: "carregar-combos",
-	    		type: "GET",
-	    		dataType: "JSON",
-	    		data: {},
-	    		success: function(data){
-	    			$('#cmbPerfil').empty();
-	    			$('#cmbFuncionario').empty();
-	    			var perfis = data[0];
-	    			var funcionarios = data[1];
-	    			
-	    			$('#cmbPerfil').append('<option value="">Selecione</option>');
-	    			$('#cmbFuncionario').append('<option value="">Selecione</option>');
-	    			for(var i = 0; i < perfis.length; i++) {
-	    				var newOption = $('<option value=' + perfis[i].id + '>' +  perfis[i].nome + '</option>');
-	    				$('#cmbPerfil').append(newOption);
-	    			}
-	    			for(var i = 0; i < funcionarios.length; i++) {
-	    				var newOption = $('<option value=' + funcionarios[i].id + '>' +  funcionarios[i].nome + '</option>');
-	    				$('#cmbFuncionario').append(newOption);
-	    			}
-	    			if(funcionario != undefined) {
-	    				$('select#cmbFuncionario').val(funcionario);
-		    			$('select#cmbPerfil').val(perfil);
-	    			}
-	    			
-	    			$('#usuario-modal').modal('show');
-	    		}
-	    	});
+			$('#usuario-modal').modal('show');
 		}
 		
 		$("#btnSalvar").click(function() {
@@ -239,9 +230,13 @@
 	    		url: "mudar-status",
 	    		type: "POST",
 	    		dataType: "JSON",
-	    		data: {ativo : ativo}
+	    		data: {id : idUsuario},
+	    		success: function(data) {
+	    		},
+	    		error: function(erro) {
+	    			location.reload();
+	    		}
 	    	});
-			location.reload();
 		});
 		
 		

@@ -37,13 +37,14 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioBusiness usuarioBusiness;
-	
-	@Autowired
-	private UsuarioBean usuario;
 
 	@RequestMapping(value = "/listar", method = RequestMethod.GET)
 	public String carregaTabela(Model model) {
-		List<UsuarioBean> usuarios = usuarioBusiness.obterTodos();
+		List<UsuarioBean> usuarios = usuarioBusiness.listar();
+		List<FuncionarioBean> funcionarios = funcionarioBusiness.obterTodos();
+		List<PerfilBean> perfis = perfilBusiness.obterTodos();
+		model.addAttribute("funcionarios", funcionarios);
+		model.addAttribute("perfis", perfis);
 		model.addAttribute("usuarios", usuarios);
 
 		return "usuario/consultar-usuario";
@@ -51,7 +52,7 @@ public class UsuarioController {
 
 	@RequestMapping(value = {"/carregar-usuario"}, method = RequestMethod.GET)
 	public @ResponseBody UsuarioBean carregaUsuarioAjax(Model model, @ModelAttribute("id") Integer id) {
-		usuario = usuarioBusiness.obterUsuarioPorId(id);
+		UsuarioBean usuario = usuarioBusiness.obterPorId(id);
 		return usuario;
 	}
 	
@@ -67,7 +68,7 @@ public class UsuarioController {
 		return lista;
 	}
 	
-	@RequestMapping(value = {"/inserir-usuario", "/alterar-usuario"}, method = RequestMethod.GET)
+/*	@RequestMapping(value = {"/inserir-usuario", "/alterar-usuario"}, method = RequestMethod.GET)
 	public String carregaCombos(Integer id, Model model) {
 		List<FuncionarioBean> funcionarios = funcionarioBusiness.obterTodos();
 		List<PerfilBean> perfis = perfilBusiness.obterTodos();
@@ -84,7 +85,7 @@ public class UsuarioController {
 		}
 		
 		return "usuario/formulario";
-	}
+	}*/
 
 	@RequestMapping(value = "/criar-perfil", method = RequestMethod.GET)
 	public String criaPerfil(Model model) {
@@ -115,11 +116,11 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping(value = "/mudar-status", method = RequestMethod.POST)
-	public String mudarStatus(@ModelAttribute("ativo") Boolean ativo) {
-		usuario.setAtivo(!ativo);
-		usuarioBusiness.alterar(usuario);
-
-		return "redirect:listar";
+	public @ResponseBody String mudarStatusAjax(Integer id) {
+		UsuarioBean usuario = usuarioBusiness.obterPorId(id);
+		usuarioBusiness.mudarStatus(usuario);
+		
+		return "ok";
 	}
 	
 	@RequestMapping(value = "obter-perfil-funcionalidade", method=RequestMethod.GET)
