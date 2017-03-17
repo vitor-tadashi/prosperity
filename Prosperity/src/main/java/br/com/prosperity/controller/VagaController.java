@@ -79,10 +79,6 @@ public class VagaController {
 	
 	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
 	public String cliente(Model model) {
-		List<VagaBean> vagas = vagaBusiness.obterTodos();
-		
-		/*vagas.add(b);*/
-		model.addAttribute("vagaBean", vagas);
 		
 		model.addAttribute("vagas", vagaBusiness.obterTodos());
 		
@@ -95,7 +91,7 @@ public class VagaController {
 		List<VagaBean> listaVaga = vagaBusiness.obterTodos();
 		model.addAttribute("listaVaga", listaVaga);
 		
-		List<StatusBean> listaStatus = statusBusiness.getStatus();
+		List<StatusBean> listaStatus = statusBusiness.obterTodos();
 		model.addAttribute("listaStatus", listaStatus);
 		
 		
