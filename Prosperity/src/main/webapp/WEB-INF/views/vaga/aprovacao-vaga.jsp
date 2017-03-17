@@ -28,8 +28,7 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Desenvolvedor .Net
-						Pleno</h4>
+					<h4 class="modal-title" id="titulo" > Vaga</h4>
 				</div>
 				<div class="modal-body">
 					<div class="panel-tab clearfix">
@@ -47,10 +46,10 @@
 										<div class="form-group row">
 											<div>
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
-													<label for="exampleInputEmail1">Solicitante</label> <input
-														type="name" class="form-control input-sm"
-														id="exampleInputEmail1" placeholder="Vitor Tadashi"
-														value="Solicitante" disabled>
+													<label for="solicitante">Solicitante</label> <input
+														class="form-control input-sm" disabled
+														name="solicitante.id" id="solicitante"
+														data-required="true" name="solicitante">
 												</div>
 												<!-- /form-group -->
 
@@ -60,8 +59,9 @@
 														<label class="label-radio inline"> <input
 															id="interno" type="radio" name="inline-radio2" checked>
 															<span class="custom-radio"></span> Interno
-														</label> <label class="label-radio inline"> <input
-															id="cliente" type="radio" name="inline-radio2" disabled>
+														</label> 
+														<label class="label-radio inline" > <input
+															 type="radio" name="inline-radio2" disabled>
 															<span class="custom-radio"></span> Cliente
 														</label>
 													</div>
@@ -72,10 +72,9 @@
 										<div class="form-group row">
 											<div>
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
-													<label for="exampleInputEmail1">Cargo</label> <input
-														type="name" class="form-control input-sm"
-														id="exampleInputEmail1" placeholder="Analista de testes"
-														value="Cargo" disabled>
+													<label for="cargo"></label> <input type="name"
+														class="form-control input-sm" id="cargo" value="Cargo"
+														disabled>
 												</div>
 												<!-- /form-group -->
 
@@ -99,9 +98,9 @@
 										</div>
 										<div class="form-group row">
 											<div class="form-group col-md-4" style="margin-bottom: 0px">
-												<label for="exampleInputEmail1">Senioridade da vaga</label>
+												<label for="vagaSenioridade">Senioridade da vaga</label>
 												<input type="name" class="form-control input-sm"
-													id="exampleInputEmail1" placeholder="Estágio"
+													id="vagaSenioridade" placeholder="Estágio"
 													value="Senioridade
 													da Vaga" disabled>
 											</div>
@@ -112,7 +111,7 @@
 													<div class="form-group col-md-3">
 														<div class="input-group bootstrap-timepicker"
 															style="width: 105%;">
-															<input class="timepicker form-control" type="text"
+															<input class="timepicker form-control" id="vagaHorario" type="text"
 																/ value="08:00 AM" disabled> <span
 																class="input-group-addon"><i
 																class="fa fa-clock-o"></i></span>
@@ -124,7 +123,7 @@
 													<div class="form-group col-md-3">
 														<div class="input-group bootstrap-timepicker"
 															style="width: 105%;">
-															<input class="timepicker form-control" type="text"
+															<input class="timepicker form-control" id="vagaHorario1" type="text"
 																value="05:00 PM" disabled> <span
 																class="input-group-addon"><i
 																class="fa fa-clock-o"></i></span>
@@ -136,16 +135,16 @@
 										<div class="form-group row">
 											<div class="">
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
-													<label for="exampleInputPassword1">Faixa salarial</label> <input
-														type="password" class="form-control input-sm"
-														id="exampleInputPassword1" placeholder="Faixa Salarial"
+													<label for="vagaSalario">Faixa salarial</label> <input
+														class="form-control input-sm"
+														id="vagaSalario" placeholder="Faixa Salarial"
 														disabled>
 												</div>
 												<!-- /form-group -->
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
-													<label for="exampleInputEmail1">Aumento de quadro</label>
+													<label for="vagaQuadro">Aumento de quadro</label>
 													<div>
-														<label class="label-radio inline"> <input
+														<label class="label-radio inline" id="vagaQuadro"> <input
 															id="novo" type="radio" name="inline-radio" checked>
 															<span class="custom-radio"> </span> Novo
 														</label> <label class="label-radio inline"> <input
@@ -160,11 +159,11 @@
 										<div class="form-group row">
 											<div class="form-group col-md-6" style="margin-bottom: 0px">
 												<div class="form-group">
-													<label class="control-label">Data para inicio</label>
+													<label class="control-label"> Data para inicio</label>
 													<div class="form-group">
 														<div class="input-group">
 															<input type="text" value="01/01/2017"
-																class="datepicker form-control" disabled> <span
+																class="datepicker form-control" id="vagaInicio" disabled> <span
 																class="input-group-addon"><i
 																class="fa fa-calendar"></i></span>
 														</div>
@@ -176,8 +175,7 @@
 											<div class="form-group col-md-6" style="margin-bottom: 0px">
 												<div id="" class="">
 													<label>Nome do substituido</label> <input type="text"
-														class="form-control input-sm" placeholder="Evandro"
-														disabled>
+														class="form-control input-sm" id="vagaSubstituto" disabled>
 												</div>
 											</div>
 										</div>
@@ -192,15 +190,15 @@
 									<!-- /form-group -->
 									<div class="form-group col-md-4">
 										<label class="control-label">Projeto</label> <input readonly
-											class="form-control default-cursor" value="Mobile">
+											class="form-control default-cursor" id="vagaProjeto" value="Mobile">
 									</div>
 									<div class="form-group col-md-4">
 										<label class="control-label">Cliente</label> <input readonly
-											class="form-control" value="Carrefour">
+											class="form-control" id="vagaCiente" value="Carrefour">
 									</div>
 									<div class="form-group col-md-4">
 										<label class="control-label">Gestor imediato</label> <input
-											readonly class="form-control" value="Vitor Tadashi">
+											readonly class="form-control" id="vagaGestor"value="Vitor Tadashi">
 									</div>
 								</div>
 							</section>
@@ -209,7 +207,8 @@
 								<div class="panel-heading">Formação acadêmica</div>
 								<div class="panel-body relative">
 									<div class="form-group">
-										<textarea class="form-control" rows="3"></textarea>
+										<textarea class="form-control" rows="3" name= "vagaFormacao" id=vagaFormacao disabled >
+										</textarea>
 									</div>
 									<!-- /form-group -->
 								</div>
@@ -219,7 +218,7 @@
 								<div class="panel-heading">Perfil comportamental</div>
 								<div class="panel-body relative">
 									<div class="form-group">
-										<textarea class="form-control" rows="3"></textarea>
+										<textarea class="form-control" rows="3"  name= "vagaPerfil" id=vagaPerfil disabled></textarea>
 									</div>
 									<!-- /form-group -->
 								</div>
@@ -230,7 +229,7 @@
 								<div class="panel-heading">Perfil técnico</div>
 								<div class="panel-body relative">
 									<div class="form-group">
-										<textarea class="form-control" rows="3"></textarea>
+										<textarea class="form-control" rows="3"  name= "vagaPerfilTecnico" id=vagaPerfilTecnico disabled></textarea>
 									</div>
 									<!-- /form-group -->
 								</div>
@@ -282,41 +281,41 @@
 							</tr>
 						</thead>
 						<tbody class="text-center">
-						<c:forEach var="vaga" items="${vagas}" varStatus="i">
-						
-						<tr>
-								<td>${vaga.nomeVaga}</td>
-								<td>${vaga.nomeSolicitante}</td>
-								<td>${vaga.senioridadeBean.nome}</td>
-								<td>${vaga.projetoBean.nome}</td>
-								<td>${vaga.projetoBean.cliente.nome}</td>
-								<td>${vaga.localTrabalho}</td>
-								<td>${vaga.dataAbertura }</td>
-								<td>${vaga.dataFechamento }</td>
-								<td>
-									<div class="btn-group">
-										<!-- <-- ! Começo Botão -->
-										<button class="btn btn-sm dropdown-toggle btn-info"
-											data-toggle="dropdown" aria-haspopup="true"
-											aria-expanded="false">
-											<i class="fa fa-cogs fa-lg"></i> <span class="caret"></span>
-										</button>
-										<ul class="dropdown-menu">
-											<li><a href="#vaga-modal" data-toggle="modal"><i
-													class="fa fa-eye">&nbsp</i>Visualizar</a></li>
-											<li role="separator" class="divider"></li>
-											<li><a href="#"><i class="fa fa-check fa-lg"></i>
-													Aprovar</a></li>
-											<li role="separator" class="divider"></li>
-											<li><a href="#"><i class="fa fa-times fa-lg"></i>
-													Reprovar</a></li>
-										</ul>
-									</div> <!-- Fim Botão -->
-								</td>
-							</tr>
-						
-						</c:forEach>
-														<!-- <tr>
+							<c:forEach var="vaga" items="${vagas}" varStatus="i">
+
+								<tr>
+									<td>${vaga.nomeVaga}</td>
+									<td>${vaga.nomeSolicitante}</td>
+									<td>${vaga.senioridadeBean.nome}</td>
+									<td>${vaga.projetoBean.nome}</td>
+									<td>${vaga.projetoBean.cliente.nome}</td>
+									<td>${vaga.localTrabalho}</td>
+									<td>${vaga.dataAbertura }</td>
+									<td>${vaga.dataFechamento }</td>
+									<td>
+										<div class="btn-group">
+											<!-- <-- ! Começo Botão -->
+											<button class="btn btn-sm dropdown-toggle btn-info"
+												data-toggle="dropdown" aria-haspopup="true"
+												aria-expanded="false">
+												<i class="fa fa-cogs fa-lg"></i> <span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu">
+												<li><a onclick="info(${vaga.id})"> <i
+														class="fa fa-eye">&nbsp</i>Visualizar</a></li>
+												<li role="separator" class="divider"></li>
+												<li><a href="#"><i class="fa fa-check fa-lg"></i>
+														Aprovar</a></li>
+												<li role="separator" class="divider"></li>
+												<li><a href="#"><i class="fa fa-times fa-lg"></i>
+														Reprovar</a></li>
+											</ul>
+										</div> <!-- Fim Botão -->
+									</td>
+								</tr>
+
+							</c:forEach>
+							<!-- <tr>
 								<td>Desenvolvedor</td>
 								<td>Vitor Tadashi</td>
 								<td>Senior</td>
@@ -387,26 +386,44 @@
 	</div>
 	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
 	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
-	
-	<!-- JavaScript --> 
-	
+
+	<!-- JavaScript -->
+
 	<script type="text/javascript">
-	$("#fid").change(function(id){
-    	var Visualizar = $("#fid option:selected").val();
+	
+	function info(listaId){
+		
+    	//var Visualizar = $("#fid option:selected").val();
+    	var Solicitante;
+    	var Titulo;
+    	
+    	//
     	$.ajax({
-    		url: "vaga/aprovar?id="+id,
+    		url: "visualizar",
     		type: "GET",
     		dataType: "JSON",
-    		data: {
-    			id: $(this).attr("lista-id")
-    		},
+    		data: { 'id' : listaId},
     		success: function(lista){
-    			if(lista != null){
-    				$("#1").attr("checked","checked")
-    			}
+    			console.log(lista);
+    			$('#titulo').html(lista.nomeVaga);
+    			$('input#vagaSalario').val(lista.valorPretensao);
+    			$('input#cargo').val(lista.cargoBean.nome);
+    			$('input#vagaSenioridade').val(lista.senioridadeBean.nome);
+    			$('input#vagaHorario').val(lista.horarioEntrada);
+    			$('input#vagaHorario1').val(lista.horarioSaida);
+    			$('input#solicitante').val(lista.nomeSolicitante);
+    			$('input#vagaQuadro').val(lista.aumentaQuadro);
+    			$('input#vagaSubstituto').val(lista.nomeSubstituido);
+    			$('input#vagaInicio').val(lista.dataInicio);
+    			$('input#vagaCiente').val(lista.projetoBean.cliente.nome);
+    			$('input#vagaProjeto').val(lista.projetoBean.nome);
+    			$('#vagaPerfil').val(lista.descricaoPerfilComportamental);
+    			$('#vagaFormacao').val(lista.descricaoFormacaoAcademica);
+    			$('#vagaPerfilTecnico').val(lista.descricaoPerfilTecnico);
+    			$('#vaga-modal').modal('show');
     		}
     	})
-    }) 
+    } 
 
 	</script>
 </body>

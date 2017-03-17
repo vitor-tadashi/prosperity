@@ -7,8 +7,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import br.com.prosperity.util.FormatUtil;
+
 @Component
-public class CandidatoBean {
+public class CandidatoBean  extends FormatUtil {
 
 	private Integer id;
 	private String cpf;
@@ -238,5 +240,12 @@ public class CandidatoBean {
 	public void setValorMax(Double valorMax) {
 		this.valorMax = valorMax;
 	}
+
+	public void setUltimoStatus(StatusCandidatoBean ultimoStatus) {
+		this.ultimoStatus = ultimoStatus;
+	}
+
+
+	
 
 }

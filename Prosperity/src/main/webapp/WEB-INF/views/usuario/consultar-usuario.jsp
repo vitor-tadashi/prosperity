@@ -176,7 +176,7 @@
 	
 	<!-- javaScript aqui -->
 	<script>
-		var funcionario;
+		var Funcionario;
 		var perfil;
 		var ativo;
 		

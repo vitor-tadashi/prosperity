@@ -38,7 +38,7 @@ public class CandidatoController {
 
 	@Autowired
 	private CandidatoBean candidatoBean;
-	
+
 	@Autowired
 	private CandidatoBusiness candidatoBusiness;
 
@@ -85,7 +85,6 @@ public class CandidatoController {
 	@Autowired
 	private CanalInformacaoBusiness canalInformacaoBusiness;
 
-
 	@RequestMapping(value = "cadastrar", method = RequestMethod.GET)
 	public String cadastrarCandidato(Model model) {
 		List<TipoCursoBean> tiposCurso = tipoCursoBusiness.obterTodos();
@@ -99,21 +98,22 @@ public class CandidatoController {
 		List<CanalInformacaoBean> listaCanal = canalInformacaoBusiness.obterTodos();
 		model.addAttribute("listaCanal", listaCanal);
 
-	
-		
 		return "candidato/cadastrar-candidato";
 	}
-	@RequestMapping(value="salvar", method=RequestMethod.POST)
-	public String salvarCandidato(@ModelAttribute("candidatoBean") CandidatoBean candiatoBean) throws BusinessException{
-		candidatoBusiness.inserir(candiatoBean);
 	
-		return"candidato/salvar-candidato";	
+	@RequestMapping(value = "salvar", method = RequestMethod.POST)
+	public String salvarCandidato(@ModelAttribute("candidatoBean") CandidatoBean candidatoBean)
+			throws BusinessException {
+		candidatoBusiness.inserir(candidatoBean);
+
+		return "candidato/cadastrar-candidato";
 	}
 	
 	@RequestMapping(value = "consultar-rh", method = RequestMethod.GET)
 	public String consultarCandidatoRH(Model model) {
 		List<CandidatoBean> candidatos = candidatoBusiness.listar();
 		model.addAttribute("candidatos", candidatos);
+
 		
 		List<VagaBean> listaVaga = vagaBusiness.listar();
 		model.addAttribute("listaVaga", listaVaga);
@@ -126,7 +126,7 @@ public class CandidatoController {
 		
 		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.obterTodos();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
-		
+
 		return "candidato/consulta-rh";
 	} 
 	
@@ -138,7 +138,7 @@ public class CandidatoController {
 	@RequestMapping(value = "historico", method = RequestMethod.GET)
 	public String historicoCandidato(Model model) {
 		candidatoBean = candidatoBusiness.obter(2);
-		
+
 		model.addAttribute("candidato", candidatoBean);
 
 		return "candidato/historico-candidato";
