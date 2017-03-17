@@ -24,22 +24,16 @@ public class VagaBusiness {
 	
 	@Autowired
 	private VagaConverter vagaConverter;
-	
-	@Autowired
-	private List<VagaBean> vagaBean;
 
 	@Transactional
-	public List<VagaBean> obterTodos() {
-
-		//List<VagaEntity> aprovar = vagaDAO.findByNamedQuery("obterAprovacao");
-
+	public List<VagaBean> listar() {
 		List<VagaEntity> vagaEntity = vagaDAO.listar();
         List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 		return vagaBean;
 	}
 	
 	@Transactional
-	private VagaBean obter(int idVaga) {
+	public VagaBean obter(int idVaga) {
 
 		VagaEntity vagaEntity = vagaDAO.obterPorId(idVaga);
 

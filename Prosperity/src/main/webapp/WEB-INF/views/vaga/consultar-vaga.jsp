@@ -89,7 +89,7 @@
 												<div class="form-group">
 													<div class="input-group">
 														<input type="text" value="01/01/2017"
-															class="datepicker form-control" name="dataAbertura"
+															class="datepicker form-control" id="dataAbertura" name="dataAbertura"
 															readonly> <span class="input-group-addon"><i
 															class="fa fa-calendar"></i></span>
 													</div>
@@ -104,7 +104,7 @@
 												<div class="form-group">
 													<div class="input-group">
 														<input type="text" value="01/01/2017"
-															class="datepicker form-control" name="dataAprovacao"
+															class="datepicker form-control" id="dataAprovacao" name="dataAprovacao"
 															readonly> <span class="input-group-addon"><i
 															class="fa fa-calendar"></i></span>
 													</div>
@@ -119,7 +119,7 @@
 												<div class="form-group">
 													<div class="input-group">
 														<input type="text" value="01/01/2017"
-															class="datepicker form-control" name="dataFechamento"
+															class="datepicker form-control" id="dataFechamento" name="dataFechamento"
 															readonly> <span class="input-group-addon"><i
 															class="fa fa-calendar"></i></span>
 													</div>
@@ -132,7 +132,7 @@
 									<div class="row">
 										<div class="form-group col-md-3">
 											<label for="">Candidatos</label> <input type="number"
-												class="form-control input-sm" id="" min="0" value="123"
+												class="form-control input-sm" id="candidatos" min="0" value="123"
 												name="numeroCandidatos" disabled>
 										</div>
 										<!-- /form-group -->
@@ -150,14 +150,14 @@
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
 													<label for="exampleInputEmail1">Solicitante</label> <input
 														type="name" class="form-control input-sm"
-														id="exampleInputEmail1" placeholder="Solicitante"
+														id="solicitante" placeholder="Solicitante"
 														data-required="true" name="nomeSolicitante" readonly>
 												</div>
 												<!-- /form-group -->
 '
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
 													<label for="exampleInputEmail1">Local de trabalho</label>
-													<div class="radiogroup" name="localTrabalho">
+													<div class="radiogroup" name="localTrabalho" id="local">
 														<label class="label-radio inline"> <input
 															id="interno" type="radio" name="inline-radio2" checked disabled>
 															<span class="custom-radio"></span> Interno
@@ -175,7 +175,7 @@
 											<div>
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
 													<label for="exampleInputEmail1">Cargo</label> <select
-														class="form-control chzn-select" name="cargoBean" disabled>
+														class="form-control chzn-select" name="cargoBean" id ="cargo" disabled>
 														<c:forEach var="cargo" items="${listaCargo}">
 															<option value="${cargo.id}">${cargo.nome}</option>
 														</c:forEach>
@@ -185,7 +185,7 @@
 
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
 													<label for="exampleInputEmail1">Tipo de vaga</label>
-													<div class="radiogroup" name="idTipoVaga">
+													<div class="radiogroup" name="idTipoVaga" id="tipo">
 														<label class="label-radio inline"> <input
 															type="radio" name="inline-radio3" checked disabled> <span
 															class="custom-radio"></span> Real
@@ -206,7 +206,7 @@
 											<div class="form-group col-md-4" style="margin-bottom: 0px">
 												<label for="exampleInputEmail1">Senioridade da vaga</label>
 												<select class="form-control chzn-select"
-												name="senioridadeBean" disabled>
+												name="senioridadeBean" id="senioridade" disabled>
 													<c:forEach var="senioridade" items="${listaSenioridade}">
 															<option value="${senioridade.id}">${senioridade.nome}</option>
 														</c:forEach>
@@ -222,7 +222,7 @@
 														<div class="input-group bootstrap-timepicker"
 															style="width: 105%;">
 															<input class="timepicker form-control" type="text"
-																/ value="08:00 AM" name="horarioEntrada" disabled> <span
+																/ value="08:00 AM" id="horaEntrada" name="horarioEntrada" disabled> <span
 																class="input-group-addon"><i
 																class="fa fa-clock-o"></i></span>
 														</div>
@@ -236,7 +236,7 @@
 														<div class="input-group bootstrap-timepicker"
 															style="width: 105%;">
 															<input class="timepicker form-control" type="text"
-																/ value="05:00 PM" name="horarioSaida" disabled> <span
+																/ value="05:00 PM" id="horaSaida" name="horarioSaida" disabled> <span
 																class="input-group-addon"><i
 																class="fa fa-clock-o"></i></span>
 														</div>
@@ -252,14 +252,14 @@
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
 													<label for="exampleInputPassword1">Faixa salarial</label> <input
 														type="password" class="form-control input-sm"
-														id="exampleInputPassword1" placeholder="Faixa Salarial"
+														id="pretensao" placeholder="Faixa Salarial"
 														disabled name="valorPretensao">
 												</div>
 												<!-- /form-group -->
 
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
 													<label for="exampleInputEmail1">Aumento de quadro</label>
-													<div class="radiogroup" name="aumentoQuadro">
+													<div class="radiogroup" name="aumentoQuadro" id="aumento">
 														<label class="label-radio inline"> <input
 															id="novo" type="radio" name="inline-radio" checked disabled>
 															<span class="custom-radio"> </span> Novo
@@ -283,7 +283,7 @@
 													<div class="form-group">
 														<div class="input-group">
 															<input type="text" value="01/01/2017"
-																class="datepicker form-control" name="dataInicio" disabled>
+																class="datepicker form-control" name="dataInicio" id="dataInicio" disabled>
 															<span class="input-group-addon"> <i
 																class="fa fa-calendar"></i></span>
 														</div>
@@ -297,7 +297,7 @@
 												<div id="" class="">
 													<label>Nome do substituido</label> <input type="text"
 														class="form-control input-sm"
-														placeholder="Nome do substituido" name="nomeSubstituido" disabled>
+														placeholder="Nome do substituido" name="nomeSubstituido" id="substituido" disabled>
 												</div>
 											</div>
 
@@ -312,7 +312,7 @@
 								<div class="panel-body relative">
 									<div class="form-group">
 										<textarea class="form-control" rows="3"
-											name="formacaoAcademica" disabled></textarea>
+											name="formacaoAcademica" id="formacaoAcademica" disabled></textarea>
 									</div>
 									<!-- /form-group -->
 
@@ -325,7 +325,7 @@
 								<div class="panel-body relative">
 									<div class="form-group">
 										<textarea class="form-control" rows="3"
-											name="perfilComportamental" disabled></textarea>
+											name="perfilComportamental" id="perfilComportamental" disabled></textarea>
 									</div>
 									<!-- /form-group -->
 
@@ -338,7 +338,7 @@
 								<div class="panel-body relative">
 
 									<div class="form-group">
-										<textarea class="form-control" rows="3" name="perfilTecnico" disabled></textarea>
+										<textarea class="form-control" rows="3" name="perfilTecnico" id="perfilTecnico" disabled></textarea>
 									</div>
 									<!-- /form-group -->
 
@@ -480,13 +480,13 @@
 								</tr>
 							</thead>
 							<tbody class="text-center">
-								<c:forEach var="vagaBean" items="${vagaBean}">
+								<c:forEach var="vaga" items="${vagas}">
 									<tr>
-									<td>${vagaBean.nomeVaga}</td>
-									<td>${vagaBean.nomeSolicitante}</td>
-									<td>${vagaBean.projetoBean.cliente.nome}</td>
-									<td>${vagaBean.localTrabalho}</td>
-									<td>${vagaBean.dataAbertura}</td>
+									<td>${vaga.nomeVaga}</td>
+									<td>${vaga.nomeSolicitante}</td>
+									<td>${vaga.projetoBean.cliente.nome}</td>
+									<td>${vaga.localTrabalho}</td>
+									<td>${vaga.dataAbertura}</td>
 									<td><span id="tdStatus" class="label label-contratado">Ativo</span></td>
 									<td>
 										<div class="btn-group">
@@ -591,19 +591,52 @@
 
 	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
 	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
-
-	<script>
-		$("#fechaVaga").click(
-				function() {
-					$("#tdStatus").toggleClass(
-							"label-contratado label-analiseTecnica");
-					$("#tdStatus").html("Fechado")
-				});
-		$("#excluiVaga").click(function() {
-			$("#tdStatus").toggleClass("label-contratado label-reprovado");
-			$("#tdStatus").html("Cancelado")
-		});
+	
+	
+	<script type="text/javascript">
+	
+	function info(listaId){
 		
+    	//var Visualizar = $("#fid option:selected").val();
+    	var Solicitante;
+    	var Titulo;
+    	
+    	//
+    	$.ajax({
+    		url: "visualizar-vaga",
+    		type: "GET",
+    		dataType: "JSON",
+    		data: { 'id' : listaId},
+    		success: function(lista){
+    			console.log(lista);
+    			$('input#titulo').val(lista.nomeVaga);
+    			$('input#dataAbertura').val(lista.dataAbertura);
+    			$('input#dataAprovacao').val(lista.dataAprovacao);
+    			$('input#dataFechamento').val(lista.dataFechamento);
+    			$('input#candidatos').val(lista.numeroCandidatos);
+    			$('input#solicitante').val(lista.nomeSolicitante);
+    			
+    			$('input#local').val(lista.localTrabalho);
+    			$('input#cargo').val(lista.cargoBean);
+    			$('input#tipo').val(lista.idTipoVaga);
+    			$('input#senioridade').val(lista.senioridadeBean);
+    			$('input#horaEntrada').val(lista.horarioEntrada);
+    			$('input#horaSaida').val(lista.horarioSaida);
+    			$('input#pretensao').val(lista.valorPretensao);
+    			$('input#aumento').val(lista.aumentaQuadro);
+    			$('input#dataInicio').val(lista.dataInicio);
+    			$('input#substituido').val(lista.nomeSubstituido);
+    			$('input#formacaoAcademica').val(lista.descricaoFormacaoAcademica);
+    			$('input#perfilComportamental').val(lista.descricaoPerfilComportamental);
+    			$('input#perfiTecnico').val(lista.descricaoPerfilTecnico);
+    			$('#vaga-modal').modal('show');
+    		}
+    	})
+    } 
+
 	</script>
+	
+	
+	
 </body>
 </html>

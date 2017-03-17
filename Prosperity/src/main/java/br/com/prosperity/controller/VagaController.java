@@ -41,6 +41,8 @@ public class VagaController {
 
 	@Autowired
 	private List<VagaBean> vagaBean;
+	
+	
 
 	@Autowired
 	private SenioridadeBusiness preencherSenioridade;
@@ -84,7 +86,7 @@ public class VagaController {
 	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
 	public String cliente(Model model) {
 		
-		model.addAttribute("vagas", vagaBusiness.obterTodos());
+		model.addAttribute("vagas", vagaBusiness.listar());
 		
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
 		model.addAttribute("listaCargo", listaCargo);
@@ -92,7 +94,7 @@ public class VagaController {
 		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.obterTodos();
 		model.addAttribute("listaSenioridade", listaSenioridade);
 		
-		List<VagaBean> listaVaga = vagaBusiness.obterTodos();
+		List<VagaBean> listaVaga = vagaBusiness.listar();
 		model.addAttribute("listaVaga", listaVaga);
 		
 		List<StatusBean> listaStatus = statusBusiness.obterTodos();
@@ -101,10 +103,19 @@ public class VagaController {
 		
 		return "vaga/consultar-vaga";
 	}
+	
+	@RequestMapping(value= {"/visualizar-vaga"}, method = RequestMethod.GET)
+	public @ResponseBody VagaBean carregaVagaAjax(Model model, @ModelAttribute("id") Integer id) {
+		VagaBean vaga = new VagaBean();
+		vaga = vagaBusiness.obter(id);
+		return vaga;
+	}
+	
+
 
 	@RequestMapping(value = "aprovar", method = RequestMethod.GET)
 	public String aprovacaoVaga(Model model) {
-		model.addAttribute("vagas", vagaBusiness.obterTodos());
+		model.addAttribute("vagas", vagaBusiness.listar());
 		return "vaga/aprovacao-vaga";
 	}
 	
