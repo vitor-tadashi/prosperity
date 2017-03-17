@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.entity.UsuarioEntity;
-import br.com.prosperity.util.EncriptaDecriptaApacheCodec;
 
 @Component
 public class UsuarioConverter implements Converter<UsuarioEntity,UsuarioBean>{

@@ -19,7 +19,6 @@
 	function limpa_formulário_cep() {
 		//Limpa valores do formulário de cep.
 		document.getElementById('rua').value = ("");
-		document.getElementById('bairro').value = ("");
 		document.getElementById('cidade').value = ("");
 		document.getElementById('uf').value = ("");
 	}
@@ -27,8 +26,7 @@
 	function meu_callback(conteudo) {
 		if (!("erro" in conteudo)) {
 			//Atualiza os campos com os valores.
-			document.getElementById('rua').value = (conteudo.logradouro);
-			document.getElementById('bairro').value = (conteudo.bairro);
+			document.getElementById('rua').value = (conteudo.rua);
 			document.getElementById('cidade').value = (conteudo.localidade);
 			document.getElementById('uf').value = (conteudo.uf);
 		} //end if.
@@ -94,7 +92,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">Informações do candidato</div>
 					<div class="panel-body">
-						<form class="form-border" id="formCadastro" method="post" novalidate="">
+						<form class="form-border" action="salvar" method="post">
 							<div class="panel-tab clearfix">
 								<ul class="tab-bar wizard-demo" id="wizardDemo">
 									<li class="active tab-verity"><a href="#first"
@@ -130,49 +128,49 @@
 											</div>
 											<div class="form-group col-md-2">
 												<label for="rg" class="control-label">RG</label> <input
-													type="text" class="form-control" id="rg" name=""
+													type="text" class="form-control" id="rg" name="rg"
 													data-required="true" value="">
 											</div>
 											<div class="form-group col-md-2 col-sm-4">
 												<label for="dataNascimento" class="control-label">Data
-													nascimento</label> <input type="text" class="form-control"
-													id="dataNascimento" name="dataNascimento" data-required="true" value="">
+													nascimento</label> <input type="text" class="form-control" name="dataNascimento"
+													id="dataNascimento" value="">
 											</div>
 											<div class="form-group col-md-2">
 												<label for="telefone" class="control-label">Telefone</label>
-												<input type="text" class="form-control" id="telefone" name="telefone"
-													data-required="true" value="">
+												<input type="text" class="form-control" id="contato" name="contato.telefone"
+													 value="">
 											</div>
 											<div class="form-group col-md-2">
 												<label for="cep" class="control-label">CEP</label> <input
-													name="cep" type="text" class="form-control" id="cep" name="cep"
+													 type="text" class="form-control" id="cep" name="endereco.cep"
 													value="" onblur="pesquisacep(this.value);" />
 											</div>
 											<div class="form-group col-md-6">
-												<label for="endereco" class="control-label">Endereço</label>
+												<label for="Endereco" class="control-label">Endereço</label>
 
-												<input name="logradouro" type="text" class="form-control" id="rua"
+												<input  type="text" class="form-control" id="rua" name="endereco.logradouro"
 													value="" />
 
 											</div>
 											<div class="form-group col-md-2">
 												<label for="numero" class="control-label">Número</label> <input
-													type="text" class="form-control" id="numero" name="numero"
-													data-required="true" value="">
+													type="text" class="form-control" id="numero" name="endereco.numero"
+													 value="">
 											</div>
 											<div class="form-group col-md-3">
-												<label for="complemento" class="control-label">Complemento</label>
-												<input type="text" class="form-control" id="complemento" name="complemento">
+												<label for="Endereco.complemento" class="control-label">Complemento</label>
+												<input type="text" class="form-control" id="complemento" name="endereco.complemento" >
 											</div>
 											<div class="form-group col-md-3">
 												<label for="estado" class="control-label">Estado</label> <input
-													name="estado" type="text" class="form-control" id="uf" 
+													 type="text" class="form-control" id="uf" name="endereco.estado"
 													value="" />
 
 											</div>
 											<div class="form-group col-md-4">
 												<label for="cidade" class="control-label">Cidade</label> <input
-													name="cidade" type="text" class="form-control" id="cidade"
+													 type="text" class="form-control" id="cidade" name="endereco.cidade"
 													value="" />
 											</div>
 										</div>
@@ -180,18 +178,18 @@
 									<div class="tab-pane fade" id="second">
 										<div class="form-group col-md-4">
 											<label for="curso">Curso</label> <input type="text"
-												class="form-control" id="curso" data-required="true" name="nomeCurso"
+												class="form-control" id="curso" name="formacao.nomeCurso"
 												placeholder="Informe seu curso">
 										</div>
 										<div class="form-group col-md-5">
 											<label for="instituicao">Instituição</label> <input
-												type="text" class="form-control" id="instituicao" name="nomeInstituicao"
-												data-required="true" placeholder="Instituição">
+												type="text" class="form-control" id="instituicao" name="formacao.nomeInstituicao" 
+												placeholder="Instituição">
 										</div>
 
 										<div class="form-group col-md-3">
 											<label for="tipoDeCurso">Tipo de curso</label> <select
-												class="form-control" id="tipoDeCurso" name="TipoCurso">
+												class="form-control" id="tipoDeCurso" name="formacao.tipoCurso.id" >
 												<!-- FAZER FOREACH  -->
 												<c:forEach var="tipoCurso" items="${tiposCurso}">
 													<option value="${tipoCurso.id}">${tipoCurso.nome}</option>
@@ -201,7 +199,7 @@
 										</div>
 										<div class="form-group col-md-2">
 											<label for="situacaoAtual">Situação atual</label> <select
-												class="form-control" id="situacaoAtual" name="situacaoAtual">
+												class="form-control" id="situacaoAtual" name="formacao.situacaoAtual.id" >
 												<c:forEach var="situacaoAtual" items="${listaSituacaoAtual}">
 													<option value="${situacaoAtual.id}">${situacaoAtual.descricao}</option>
 												</c:forEach>
@@ -209,8 +207,8 @@
 										</div>
 										<div class="form-group col-md-2">
 											<label for="mesAnoConclusao">Mês/Ano de conclusão</label> <input
-												type="text" class="form-control" id="mesAnoConclusao" name="dataConclusao"
-												data-required="true">
+												type="text" class="form-control" id="mesAnoConclusao"  name="formacao.dataConclusao"
+												>
 										</div>
 									</div>
 									<div class="tab-pane fade" id="third">
@@ -222,29 +220,28 @@
 												</div>
 												<div class="col-md-2">
 													<input type="text" class="form-control"
-														id="pretensaoSalarial" name="valorPretensao" placeholder="R$" />
+														id="pretensaoSalarial" placeholder="R$"  name="valorMin"/>
 												</div>
 												<div class="col-sm-1">
 													<p class="text-center">até</p>
 												</div>
 												<div class="col-md-2">
-													<input type="text" class="form-control" placeholder="R$" />
+													<input  type="text" class="form-control" placeholder="R$" name="valorMax" />
 												</div>
 											</div>
 										</div>
 										<div class="form-group col-md-4">
 											<label for="vagaASerAplicado">Vaga a ser aplicado</label> <select
-												class="form-control" id="vaga" name="vaga"
-												data-required="true">
+												class="form-control" id="vaga" name="vaga.nomeVaga.id"	>
 												<c:forEach var="vaga" items="${listaVaga}">
 													<option value="${vaga.id}">${vaga.nomeVaga}</option>
 												</c:forEach>
-											</select>
+											</select> 
 										</div>
 										<div class="form-group col-md-4">
 											<label for="exampleInputEmail1">Como ficou sabendo
-												desta vaga?</label> <select class="form-control" name="canalInformacao"
-												data-required="true">
+												desta vaga?</label> <select class="form-control" name="vaga.vagaCandidato.canalInformacao.id"
+												>
 												<c:forEach var="canalInformacao" items="${listaCanal}">
 													<option value="${canalInformacao.id}">${canalInformacao.nome}</option>
 													</c:forEach>
@@ -254,7 +251,7 @@
 										<div class="form-group col-xs-12">
 											<label class="control-label">Currículo</label>
 											<div class="upload-file" style="width: 356px;">
-												<input type="file" id="upload-curriculo" name="curriculo" class="upload-demo">
+												<input type="file" id="upload-curriculo"  class="upload-demo">
 												<label data-title="Selecione" for="upload-curriculo">
 													<span data-title="Nenhum arquivo selecionado..."></span>
 												</label>
@@ -263,12 +260,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="panel-footer text-right">
-								<button class="btn btn-success btn-sm disabled" id="prevStep"
-									disabled="">Anterior</button>
-								<button type="submit" class="btn btn-sm btn-success"
-									id="nextStep">Próximo</button>
-							</div>
+							<button class="btn btn-success btn-sm">Salvar</button>
 						</form>
 					</div>
 				</div>
