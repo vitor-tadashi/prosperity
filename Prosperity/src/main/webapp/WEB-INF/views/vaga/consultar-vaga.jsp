@@ -148,10 +148,10 @@
 										<div class="form-group row">
 											<div>
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
-													<label for="exampleInputEmail1">Solicitante</label> <input
-														type="name" class="form-control input-sm"
-														id="solicitante" placeholder="Solicitante"
-														data-required="true" name="nomeSolicitante" readonly>
+													<label for="solicitante">Solicitante</label> <input
+														class="form-control input-sm" disabled
+														name="solicitante.id" id="solicitante"
+														data-required="true" name="solicitante">
 												</div>
 												<!-- /form-group -->
 '
@@ -174,13 +174,13 @@
 										<div class="form-group row">
 											<div>
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
-													<label for="exampleInputEmail1">Cargo</label> <select
-														class="form-control chzn-select" name="cargoBean" id ="cargo" disabled>
-														<c:forEach var="cargo" items="${listaCargo}">
-															<option value="${cargo.id}">${cargo.nome}</option>
-														</c:forEach>
-													</select>
+													<label for="cargo">Cargo</label> <input
+														class="form-control input-sm" disabled
+														name="cargo.id" id="cargo"
+														data-required="true" name="cargo">
 												</div>
+												
+									
 												<!-- /form-group -->
 
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
@@ -203,15 +203,12 @@
 										</div>
 
 										<div class="form-group row">
-											<div class="form-group col-md-4" style="margin-bottom: 0px">
-												<label for="exampleInputEmail1">Senioridade da vaga</label>
-												<select class="form-control chzn-select"
-												name="senioridadeBean" id="senioridade" disabled>
-													<c:forEach var="senioridade" items="${listaSenioridade}">
-															<option value="${senioridade.id}">${senioridade.nome}</option>
-														</c:forEach>
-												</select>
-											</div>
+											<div class="form-group col-md-5" style="margin-bottom: 0px">
+													<label for="senioridade">Senioridade da vaga</label> <input
+														class="form-control input-sm" disabled
+														name="senioridade.id" id="senioridade"
+														data-required="true" name="senioridade">
+												</div>
 											<!-- /form-group -->
 
 											<div class="form-group" style="margin-bottom: 0px">
@@ -251,7 +248,7 @@
 											<div class="">
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
 													<label for="exampleInputPassword1">Faixa salarial</label> <input
-														type="password" class="form-control input-sm"
+														 class="form-control input-sm"
 														id="pretensao" placeholder="Faixa Salarial"
 														disabled name="valorPretensao">
 												</div>
@@ -496,7 +493,7 @@
 												<i class="fa fa-cogs fa-lg">&nbsp;</i> <span class="caret"></span>
 											</button>
 											<ul class="dropdown-menu dropdown-menu-right slidedown">
-												<li><a href="#vaga-modal" data-toggle="modal"><i
+												<li><a onclick="info(${vaga.id})"><i
 														class="fa fa-eye">&nbsp</i>Visualizar</a></li>
 												<li class="divider"></li>
 												<li><a href="#fecha-modal" data-toggle="modal"><i
@@ -603,7 +600,7 @@
     	
     	//
     	$.ajax({
-    		url: "visualizar-vaga",
+    		url: "abrir",
     		type: "GET",
     		dataType: "JSON",
     		data: { 'id' : listaId},
@@ -614,21 +611,22 @@
     			$('input#dataAprovacao').val(lista.dataAprovacao);
     			$('input#dataFechamento').val(lista.dataFechamento);
     			$('input#candidatos').val(lista.numeroCandidatos);
+    			
     			$('input#solicitante').val(lista.nomeSolicitante);
     			
     			$('input#local').val(lista.localTrabalho);
-    			$('input#cargo').val(lista.cargoBean);
+    			$('input#cargo').val(lista.cargoBean.nome);
     			$('input#tipo').val(lista.idTipoVaga);
-    			$('input#senioridade').val(lista.senioridadeBean);
+    			$('input#senioridade').val(lista.senioridadeBean.nome);
     			$('input#horaEntrada').val(lista.horarioEntrada);
     			$('input#horaSaida').val(lista.horarioSaida);
     			$('input#pretensao').val(lista.valorPretensao);
     			$('input#aumento').val(lista.aumentaQuadro);
     			$('input#dataInicio').val(lista.dataInicio);
     			$('input#substituido').val(lista.nomeSubstituido);
-    			$('input#formacaoAcademica').val(lista.descricaoFormacaoAcademica);
-    			$('input#perfilComportamental').val(lista.descricaoPerfilComportamental);
-    			$('input#perfiTecnico').val(lista.descricaoPerfilTecnico);
+    			$('#formacaoAcademica').val(lista.descricaoFormacaoAcademica);
+    			$('#perfilComportamental').val(lista.descricaoPerfilComportamental);
+    			$('#perfilTecnico').val(lista.descricaoPerfilTecnico);
     			$('#vaga-modal').modal('show');
     		}
     	})

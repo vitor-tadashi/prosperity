@@ -50,7 +50,8 @@ public class VagaBusiness {
 	public VagaBean obterVagaPorId(Integer id) {
 		VagaBean bean = vagaConverter.convertEntityToBean(vagaDAO.obterPorId(id));
 		return bean;
-}}
+}
+}
 
 // criar método consultarVagasAprovacao
 // chamar o dao e acionar o método findByNamedQuery

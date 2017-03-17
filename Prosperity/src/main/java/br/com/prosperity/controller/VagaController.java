@@ -108,10 +108,10 @@ public class VagaController {
 	}
 	
 
-	@RequestMapping(value= {"/visualizar-vaga"}, method = RequestMethod.GET)
-	public @ResponseBody VagaBean carregaVagaAjax(Model model, @ModelAttribute("id") Integer id) {
+	@RequestMapping(value= {"abrir"}, method = RequestMethod.GET)
+	public @ResponseBody VagaBean abrirVagaAjax(Model model, @ModelAttribute("id") Integer id) {
 		VagaBean vaga = new VagaBean();
-		vaga = vagaBusiness.obter(id);
+		vaga = vagaBusiness.obterVagaPorId(id);
 		return vaga;
 	}
 	
