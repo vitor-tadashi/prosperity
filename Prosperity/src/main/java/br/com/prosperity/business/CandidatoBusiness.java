@@ -12,7 +12,7 @@ import br.com.prosperity.dao.CandidatoDAO;
 import br.com.prosperity.entity.CandidatoEntity;
 
 @Component
-public class CandidatoBusiness {
+public class CandidatoBusiness extends FormatUtil{
 
 	@Autowired
 	private CandidatoDAO candidatoDAO;
@@ -28,7 +28,11 @@ public class CandidatoBusiness {
 		CandidatoEntity candidatoEntity = candidatoDAO.obterPorId(id);
 
 		if (candidatoEntity != null) {
+			ContatoBean contatoBean;
 			candidatoBean = candidatoConverter.convertEntityToBean(candidatoEntity);
+			candidatoBean = formatCPF(candidatoBean);
+			candidatoBean = formatRG(candidatoBean);
+			candidatoBean.setContato(formatPhone(candidatoBean.getContato()));
 		}
 
 		return candidatoBean;

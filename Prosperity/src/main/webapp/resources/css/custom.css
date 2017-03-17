@@ -41,6 +41,7 @@ footer {
     list-style: none;
     padding: 20px 0 20px;
     position: relative;
+    margin-bottom: 0;
 }
 
 .timeline:before {
