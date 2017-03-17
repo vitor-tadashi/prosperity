@@ -1,7 +1,10 @@
 package br.com.prosperity.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -80,10 +83,6 @@ public class VagaController {
 	
 	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
 	public String cliente(Model model) {
-		List<VagaBean> vagas = vagaBusiness.obterTodos();
-		
-		/*vagas.add(b);*/
-		model.addAttribute("vagaBean", vagas);
 		
 		model.addAttribute("vagas", vagaBusiness.obterTodos());
 		
@@ -96,7 +95,7 @@ public class VagaController {
 		List<VagaBean> listaVaga = vagaBusiness.obterTodos();
 		model.addAttribute("listaVaga", listaVaga);
 		
-		List<StatusBean> listaStatus = statusBusiness.getStatus();
+		List<StatusBean> listaStatus = statusBusiness.obterTodos();
 		model.addAttribute("listaStatus", listaStatus);
 		
 		
@@ -128,7 +127,14 @@ public class VagaController {
 	}
 	
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
-	public String inserirVaga(@ModelAttribute("vagaBean") VagaBean vagaBean) {
+	public String inserirVaga(@ModelAttribute("vagaBean") VagaBean vagaBean, HttpSession session) {
+		String cargo = vagaBean.getCargoBean().getNome();
+		String senioridade = vagaBean.getSenioridadeBean().getNome();
+		Date data = new Date(System.currentTimeMillis());
+		//String usuario = session.getAttribute("autenticado").getNome();
+		vagaBean.setNomeVaga(cargo + senioridade);
+		vagaBean.setDataAbertura(data);
+		//vagaBean.setUsuarioBean(usuario);
 		vagaBusiness.inserir(vagaBean);
 		System.out.println("\n\n\nCadastrado\n\n\n");
 		return "redirect:solicitar";
