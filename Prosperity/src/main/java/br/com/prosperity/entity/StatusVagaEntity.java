@@ -18,7 +18,6 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "tbStatusVaga")
-
 public class StatusVagaEntity {
 	/* Mapeamento dos Atributos */
 
@@ -30,14 +29,14 @@ public class StatusVagaEntity {
 	private Integer id;
 	/* fim */
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idStatus")
 	private StatusEntity status;
 
 	@Column(name = "dtAlteracao")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataAlteracao;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "idVaga")
 	private VagaEntity vagas;

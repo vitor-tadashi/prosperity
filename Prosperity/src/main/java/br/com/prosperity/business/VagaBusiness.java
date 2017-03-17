@@ -9,11 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.prosperity.bean.CanalInformacaoBean;
 import br.com.prosperity.bean.VagaBean;
-import br.com.prosperity.converter.CanalInformacaoConverter;
 import br.com.prosperity.converter.VagaConverter;
-import br.com.prosperity.dao.CanalInformacaoDAO;
 import br.com.prosperity.dao.VagaDAO;
 import br.com.prosperity.entity.CanalInformacaoEntity;
 import br.com.prosperity.entity.CargoEntity;
@@ -25,31 +22,33 @@ public class VagaBusiness {
 
 	@Autowired
 	private VagaDAO vagaDAO;
-	
+
 	@Autowired
 	private VagaConverter vagaConverter;
-	
+
 	@Autowired
 	private List<VagaBean> vagaBean;
-	
+
 	@Autowired
 	private SenioridadeBusiness senioridadeBusinness;
-	
+
 	@Autowired
 	private CargoBusiness cargoBusinness;
-	
-	@Transactional
-	public List<VagaBean> obterTodos() {
 
-		//List<VagaEntity> aprovar = vagaDAO.findByNamedQuery("obterAprovacao");
+	@Transactional
+	public List<VagaBean> listar() {
+
+		// List<VagaEntity> aprovar =
+		// vagaDAO.findByNamedQuery("obterAprovacao");
 
 		List<VagaEntity> vagaEntity = vagaDAO.listar();
-        List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
+		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 		return vagaBean;
 	}
-	
+
 	@Transactional
-	private VagaBean obter(int idVaga) {
+
+	public VagaBean obter(int idVaga) {
 
 		VagaEntity vagaEntity = vagaDAO.obterPorId(idVaga);
 
@@ -57,22 +56,27 @@ public class VagaBusiness {
 
 		return vagaBean;
 	}
-	
+
 	@Transactional
-	public void inserir(VagaBean vagaBean /*, HttpSession session*/) {
-		
+	public void inserir(VagaBean vagaBean /* , HttpSession session */) {
+
 		SenioridadeEntity senioridadeEntity = senioridadeBusinness.obterPorId(vagaBean.getSenioridadeBean().getId());
 		String senioridade = senioridadeEntity.getNome();
-		
+
 		CargoEntity cargoEntity = cargoBusinness.obterPorId(vagaBean.getCargoBean().getId());
 		String cargo = cargoEntity.getNome();
 
-		//String usuario = session.getAttribute("autenticado").getNome();
+		// String usuario = session.getAttribute("autenticado").getNome();
 		vagaBean.setNomeVaga(cargo + " " + senioridade);
-		//vagaBean.setUsuarioBean(usuario);
+		// vagaBean.setUsuarioBean(usuario);
 		vagaDAO.adicionar(vagaConverter.convertBeanToEntity(vagaBean));
 	}
-	
+
+	@Transactional
+	public VagaBean obterVagaPorId(Integer id) {
+		VagaBean bean = vagaConverter.convertEntityToBean(vagaDAO.obterPorId(id));
+		return bean;
+	}
 }
 
 // criar método consultarVagasAprovacao

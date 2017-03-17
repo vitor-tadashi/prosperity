@@ -110,6 +110,24 @@ public class VagaEntity {
 	public Integer getId() {
 		return id;
 	}
+/*=======
+
+	@OneToMany()
+	@JoinColumn(name = "idVaga")
+	private List<StatusVagaEntity> statusEntity;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public List<StatusVagaEntity> getStatusEntity() {
+		return statusEntity;
+	}
+
+	public void setStatusEntity(List<StatusVagaEntity> statusEntity) {
+		this.statusEntity = statusEntity;
+>>>>>>> 6177abe9dacbea6ac3a7b401caace31a61a978f4
+	}*/
 
 	public void setId(Integer id) {
 		this.id = id;

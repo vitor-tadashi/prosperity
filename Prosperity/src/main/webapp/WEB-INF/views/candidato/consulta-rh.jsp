@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -15,256 +15,6 @@
 
 <!-- Link e style aqui -->
 
-<style>
-.page-header h1 {
-	font-size: 3.26em;
-	text-align: center;
-	color: #efefef;
-	text-shadow: 1px 1px 0 #000;
-}
-
-/** timeline box structure **/
-.timeline {
-	list-style: none;
-	padding: 20px 0 20px;
-	position: relative;
-}
-
-.timeline:before {
-	top: 0;
-	bottom: 0;
-	position: absolute;
-	content: " ";
-	width: 3px;
-	background-color: #eee;
-	left: 50%;
-	margin-left: -1.5px;
-}
-
-.tldate {
-	display: block;
-	width: 200px;
-	background: #414141;
-	border: 3px solid #212121;
-	color: #ededed;
-	margin: 0 auto;
-	padding: 3px 0;
-	font-weight: bold;
-	text-align: center;
-	-webkit-box-shadow: 0 0 11px rgba(0, 0, 0, 0.35);
-}
-
-.timeline li {
-	margin-bottom: 25px;
-	position: relative;
-}
-
-.timeline li:before, .timeline li:after {
-	content: " ";
-	display: table;
-}
-
-.timeline li:after {
-	clear: both;
-}
-
-.timeline li:before, .timeline li:after {
-	content: " ";
-	display: table;
-}
-
-/** timeline panels **/
-.timeline li .timeline-panel {
-	width: 46%;
-	float: left;
-	background: #fff;
-	border: 1px solid #d4d4d4;
-	padding: 20px;
-	position: relative;
-	-webkit-border-radius: 8px;
-	-moz-border-radius: 8px;
-	border-radius: 8px;
-	-webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
-	-moz-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
-	box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
-}
-
-/** panel arrows **/
-.timeline li .timeline-panel:before {
-	position: absolute;
-	top: 26px;
-	right: -15px;
-	display: inline-block;
-	border-top: 15px solid transparent;
-	border-left: 15px solid #ccc;
-	border-right: 0 solid #ccc;
-	border-bottom: 15px solid transparent;
-	content: " ";
-}
-
-.timeline li .timeline-panel:after {
-	position: absolute;
-	top: 27px;
-	right: -14px;
-	display: inline-block;
-	border-top: 14px solid transparent;
-	border-left: 14px solid #fff;
-	border-right: 0 solid #fff;
-	border-bottom: 14px solid transparent;
-	content: " ";
-}
-
-.timeline li .timeline-panel.noarrow:before, .timeline li .timeline-panel.noarrow:after
-	{
-	top: 0;
-	right: 0;
-	display: none;
-	border: 0;
-}
-
-.timeline li.timeline-inverted .timeline-panel {
-	float: right;
-}
-
-.timeline li.timeline-inverted .timeline-panel:before {
-	border-left-width: 0;
-	border-right-width: 15px;
-	left: -15px;
-	right: auto;
-}
-
-.timeline li.timeline-inverted .timeline-panel:after {
-	border-left-width: 0;
-	border-right-width: 14px;
-	left: -14px;
-	right: auto;
-}
-
-/** timeline circle icons **/
-.timeline li .tl-circ {
-	position: absolute;
-	top: 23px;
-	left: 50%;
-	text-align: center;
-	background: #6a8db3;
-	color: #fff;
-	width: 35px;
-	height: 35px;
-	line-height: 35px;
-	margin-left: -16px;
-	border: 3px solid #90acc7;
-	border-top-right-radius: 50%;
-	border-top-left-radius: 50%;
-	border-bottom-right-radius: 50%;
-	border-bottom-left-radius: 50%;
-	z-index: 99999;
-}
-
-/** timeline content **/
-.tl-heading h4 {
-	margin: 0;
-	color: #c25b4e;
-}
-
-.tl-body p, .tl-body ul {
-	margin-bottom: 0;
-}
-
-.tl-body>p+p {
-	margin-top: 5px;
-}
-
-/** media queries **/
-@media ( max-width : 991px) {
-	.timeline li .timeline-panel {
-		width: 44%;
-	}
-}
-
-@media ( max-width : 700px) {
-	.page-header h1 {
-		font-size: 1.8em;
-	}
-	ul.timeline:before {
-		left: 40px;
-	}
-	.tldate {
-		width: 140px;
-	}
-	ul.timeline li .timeline-panel {
-		width: calc(100% - 90px);
-		width: -moz-calc(100% - 90px);
-		width: -webkit-calc(100% - 90px);
-	}
-	ul.timeline li .tl-circ {
-		top: 22px;
-		left: 22px;
-		margin-left: 0;
-	}
-	ul.timeline>li>.tldate {
-		margin: 0;
-	}
-	ul.timeline>li>.timeline-panel {
-		float: right;
-	}
-	ul.timeline>li>.timeline-panel:before {
-		border-left-width: 0;
-		border-right-width: 15px;
-		left: -15px;
-		right: auto;
-	}
-	ul.timeline>li>.timeline-panel:after {
-		border-left-width: 0;
-		border-right-width: 14px;
-		left: -14px;
-		right: auto;
-	}
-}
-
-.timeline-title {
-	font-size: 16px;
-}
-
-.label-stand, .badge-stand {
-	background-color: #9b59b6;
-	color: #fff;
-}
-
-.label-aprovadoPendente, .badge-stand {
-	background-color: #2980b9;
-	color: #fff;
-}
-
-.label-analiseRH, .badge-stand {
-	background-color: #e67e22;
-	color: #fff;
-}
-
-.label-analiseTecnica, .badge-stand {
-	background-color: #f1c40f;
-	color: #fff;
-}
-
-.label-reprovado, .badge-stand {
-	background-color: #e74c3c;
-	color: #fff;
-}
-
-.label-contratado, .badge-stand {
-	background-color: #2ecc71;
-	color: #fff;
-}
-
-.dropdown-menu {
-	/*left: -115px !important;*/
-	z-index: 1050;
-}
-
-.col-md-9 .label-radio {
-	margin-right: 58px;
-	margin-left: 20px;
-}
-</style>
 </head>
 <body>
 
@@ -316,26 +66,20 @@
 										<!-- /form-group -->
 										<div class="row">
 											<div class="form-group col-md-6">
-												<label for="exampleInputEmail1">Vaga:</label> 
-												<select
+												<label for="exampleInputEmail1">Vaga:</label> <select
 													class="form-control chzn-select" name="vagas">
-													<option>Selecione:</option>
-													<option>Analista de testes</option>
-													<option>Analista de sistemas</option>
-													<option>Desenvolvedor</option>
-													<option>Gerente de projetos</option>
+													<c:forEach var="vaga" items="${listaVaga}">
+														<option value="${vaga.id}">${vaga.nomeVaga}</option>
+													</c:forEach>
 												</select>
-
 											</div>
 											<!-- /form-group -->
 											<div class="form-group col-md-6">
 												<label for="exampleInputEmail1">Senioridade da vaga:</label>
 												<select class="form-control chzn-select" name="senioridade">
-													<option>Selecione:</option>
-													<option>Analista de testes</option>
-													<option>Analista de sistemas</option>
-													<option>Desenvolvedor</option>
-													<option>Gerente de projetos</option>
+													<c:forEach var="senioridade" items="${listaSenioridade}">
+														<option value="${senioridade.id}" ${senioridade.nome}></option>
+													</c:forEach>
 												</select>
 											</div>
 											<!-- /form-group -->
@@ -347,12 +91,12 @@
 													<div class="panel-heading">
 														<label for="exampleInputEmail1">Avaliadores:</label>
 													</div>
-													<div class="panel-body relative"name="nmPerfil">
+													<div class="panel-body relative" name="nmPerfil">
 														<select multiple="multiple" id="selectedBox1"
 															class="select-box pull-left form-control">
-															<option value="1">Taiama</option>
-															<option value="2">Melissa</option>
-															<option value="3">Juliana</option>
+															<c:forEach var="funcionario" items="${listaFuncionarios}">
+														<option value="${funcionario.id}">${funcionario.nome}</option>
+													</c:forEach>
 														</select>
 
 														<div class="select-box-option">
@@ -370,11 +114,8 @@
 														</div>
 
 														<select multiple="multiple" id="selectedBox2"
-															class="select-box pull-right form-control" >
-															<option>Vitor</option>
-															<option>Evandro</option>
-															<option>Suelen</option>
-															<option>Rodrigo</option>
+															class="select-box pull-right form-control">
+															
 														</select>
 													</div>
 												</div>
@@ -437,8 +178,8 @@
 												<!-- SOMENTE ALTERAR DAQUI PARA BAIXO -->
 												<form name="form1" action="paginaPHPouASP" method="post">
 													<input class="btn btn-xs btn-success" type="button"
-														value="Adicionar etapa" onclick="AddCampos()" name=""> <br>
-													<br>
+														value="Adicionar etapa" onclick="AddCampos()" name="">
+													<br> <br>
 													<script type="text/javascript">
 														//Escrevendo o código-fonte HTML e ocultando os campos criados:
 														for (iLoop = 1; iLoop <= totalCampos; iLoop++) {
@@ -463,9 +204,8 @@
 										<section class="panel panel-default">
 											<div class="panel-heading">
 												<label for="exampleInputEmail1">Proposta:</label>
-												<textarea id="wysihtml5-textarea"
-													placeholder="Digite ..." class="form-control"
-													rows="6" name=""></textarea>
+												<textarea id="wysihtml5-textarea" placeholder="Digite ..."
+													class="form-control" rows="6" name=""></textarea>
 											</div>
 										</section>
 										<!-- /panel -->
@@ -473,7 +213,8 @@
 									<div class="tab-pane fade" id="third">
 										<section class="panel panel-default">
 											<div class="panel-heading text-center">
-												<label for="exampleInputEmail1">Avaliação de competências</label>
+												<label for="exampleInputEmail1">Avaliação de
+													competências</label>
 											</div>
 											<table class="table" style="font-size: 10px">
 												<thead class="text-center">
@@ -714,11 +455,10 @@
 									</div>
 									<div class="col-md-2">
 										<label for="exampleInputEmail1">Cargo</label> <select
-											class="form-control inline" name="">
-											<option value="0">Selecione:</option>
-											<option value="1">Desenvolvedor</option>
-											<option value="2">Analista</option>
-											<option value="3">Arquiteto</option>
+											class="form-control inline" name="cargo">
+											<c:forEach var="cargo" items="${listaCargo}">
+												<option value="${cargo.id}">${cargo.nome}</option>
+											</c:forEach>
 										</select>
 									</div>
 									<div class="col-md-1">
@@ -766,15 +506,16 @@
 									<c:forEach var="candidato" items="${candidatos}">
 										<tr>
 											<td>${candidato.nome}</td>
-											<td>${candidato.vagas})</td>
+											<td>${candidato.vaga.nomeVaga}</td>
 											<td>${candidato.valorPretensao}</td>
-											<td>${candidato.dataAbertura}</td>
-											<td>${candidato.dataFechamento}</td>
-											<td>${candidato.status}</td>
-											<td><span class="label label-analiseRH">Em análise do RH</span></td>
+											<td><fmt:formatDate value="${candidato.dataAbertura}" pattern="dd/MM/yyyy"/></td>
+											<td><fmt:formatDate value="${candidato.dataFechamento}" pattern="dd/MM/yyyy"/></td>
+ 											<td>${candidato.ultimoStatus.status.nome}</td>
+											<td><span class="label label-analiseRH">Em
+													análise do RH</span></td>
 											<td><span class="line"></span>
 												<div class="btn-group">
-													
+
 													<!-- comeco do botao -->
 													<button type="button"
 														class="btn btn-info dropdown-toggle btn-sm"
@@ -1034,6 +775,7 @@
 					});
 		});
 	</script>
+
 	<script type="text/javascript">
 		//Total máximo de campos que você permitirá criar em seu site:
 		var totalCampos = 4;
@@ -1119,6 +861,15 @@
 					hidden1.value = "";
 				}
 			}
+		}
+	</script>
+	<script type="text/javascript">
+		//Escrevendo o código-fonte HTML e ocultando os campos criados:
+		for (iLoop = 1; iLoop <= totalCampos; iLoop++) {
+			document
+					.write("<span id='linha"+iLoop+"' style='display:none'> <select class='btn btn-default btn-xs dropdown-toggle' style='width: 160px;'><option value='0'>Selecione etapa</option><option value='1'>Prova Prática</option><option value='2'>Prova teórica</option><option value='3'>Dinâmica de Grupo</option></select> <input type='text' id='arq"+iLoop+"' name='arq"+iLoop+"'> <input class='btn btn-xs btn-danger' type='button' value='Remover' onclick='RemoverCampos(\""
+							+ iLoop + "\")'></span><br>");
+
 		}
 	</script>
 </body>

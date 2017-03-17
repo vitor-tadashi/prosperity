@@ -17,8 +17,10 @@ public class CandidatoCompetenciaConverter implements Converter<CandidatoCompete
 
 	@Override
 	public CandidatoCompetenciaEntity convertBeanToEntity(CandidatoCompetenciaBean bean) {
+		if (bean == null) {
+			return null;
+		}
 		CandidatoCompetenciaEntity entity = new CandidatoCompetenciaEntity();
-
 		entity.setIdCandidatoCompetencia(bean.getId());
 		entity.setCompetencia(competenciaConverter.convertBeanToEntity(bean.getCompetencia()));
 		entity.setAvaliacao(avaliacaoConverter.convertBeanToEntity(bean.getAvaliacao()));
@@ -27,8 +29,10 @@ public class CandidatoCompetenciaConverter implements Converter<CandidatoCompete
 
 	@Override
 	public CandidatoCompetenciaBean convertEntityToBean(CandidatoCompetenciaEntity entity) {
+		if (entity == null) {
+			return null;
+		}
 		CandidatoCompetenciaBean bean = new CandidatoCompetenciaBean();
-
 		bean.setId(entity.getIdCandidatoCompetencia());
 		bean.setCompetencia(competenciaConverter.convertEntityToBean(entity.getCompetencia()));
 		bean.setAvaliacao(avaliacaoConverter.convertEntityToBean(entity.getAvaliacao()));

@@ -56,6 +56,7 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 		entity.setStatusVagaEntity(statusVagaConverter.convertBeanToEntity(bean.getStatusVagaBean()));
 
 		return entity;
+
 	}
 
 	@Override

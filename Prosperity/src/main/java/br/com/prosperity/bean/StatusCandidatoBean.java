@@ -7,11 +7,29 @@ import org.springframework.stereotype.Component;
 @Component
 public class StatusCandidatoBean {
 
+	public StatusCandidatoBean() {
+		
+	}
+	
+	public StatusCandidatoBean(String mensagem) {
+		status = new StatusBean();
+		status.setNome(mensagem);
+	}
+
 	private Integer id;
 	private Date dataAlteracao;
 	private String descricaoParecer;
 	private UsuarioBean usuario;
 	private StatusBean status;
+	private String mensagem;
+
+	public String getMensagem() {
+		return mensagem;
+	}
+
+	public void setMensagem(String mensagem) {
+		this.mensagem = mensagem;
+	}
 
 	public Integer getId() {
 		return id;
