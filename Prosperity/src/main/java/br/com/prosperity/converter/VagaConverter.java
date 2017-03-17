@@ -19,10 +19,10 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 	private ProjetoConverter projetoConverter;
 	
 	@Autowired
-	private VagaConverter vagaConverter;
+	private UsuarioConverter usuarioConverter;
 	
 	@Autowired
-	private UsuarioConverter usuarioConverter;
+	private StatusConverter statusConverter;
 	
 	@Override
 	public VagaEntity convertBeanToEntity(VagaBean bean) {
@@ -79,7 +79,6 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 		bean.setIdTipoVaga(entity.getTipoVaga());
 		bean.setValorPretensao(entity.getValorPretensao());
 		bean.setUsuarioBean(usuarioConverter.convertEntityToBean(entity.getUsuarioEntity()));
-				
 		return bean;
 	}
 	

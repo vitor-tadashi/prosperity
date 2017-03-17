@@ -316,8 +316,7 @@
 										<!-- /form-group -->
 										<div class="row">
 											<div class="form-group col-md-6">
-												<label for="exampleInputEmail1">Vaga:</label> 
-												<select
+												<label for="exampleInputEmail1">Vaga:</label> <select
 													class="form-control chzn-select" name="vagas">
 													<c:forEach var="vaga" items="${listaVaga}">
 														<option value="${vaga.id}">${vaga.nomeVaga}</option>
@@ -342,7 +341,7 @@
 													<div class="panel-heading">
 														<label for="exampleInputEmail1">Avaliadores:</label>
 													</div>
-													<div class="panel-body relative"name="nmPerfil">
+													<div class="panel-body relative" name="nmPerfil">
 														<select multiple="multiple" id="selectedBox1"
 															class="select-box pull-left form-control">
 															<option value="1">Taiama</option>
@@ -365,7 +364,7 @@
 														</div>
 
 														<select multiple="multiple" id="selectedBox2"
-															class="select-box pull-right form-control" >
+															class="select-box pull-right form-control">
 															<option>Vitor</option>
 															<option>Evandro</option>
 															<option>Suelen</option>
@@ -432,8 +431,8 @@
 												<!-- SOMENTE ALTERAR DAQUI PARA BAIXO -->
 												<form name="form1" action="paginaPHPouASP" method="post">
 													<input class="btn btn-xs btn-success" type="button"
-														value="Adicionar etapa" onclick="AddCampos()" name=""> <br>
-													<br>
+														value="Adicionar etapa" onclick="AddCampos()" name="">
+													<br> <br>
 													<script type="text/javascript">
 														//Escrevendo o código-fonte HTML e ocultando os campos criados:
 														for (iLoop = 1; iLoop <= totalCampos; iLoop++) {
@@ -458,9 +457,8 @@
 										<section class="panel panel-default">
 											<div class="panel-heading">
 												<label for="exampleInputEmail1">Proposta:</label>
-												<textarea id="wysihtml5-textarea"
-													placeholder="Digite ..." class="form-control"
-													rows="6" name=""></textarea>
+												<textarea id="wysihtml5-textarea" placeholder="Digite ..."
+													class="form-control" rows="6" name=""></textarea>
 											</div>
 										</section>
 										<!-- /panel -->
@@ -468,7 +466,8 @@
 									<div class="tab-pane fade" id="third">
 										<section class="panel panel-default">
 											<div class="panel-heading text-center">
-												<label for="exampleInputEmail1">Avaliação de competências</label>
+												<label for="exampleInputEmail1">Avaliação de
+													competências</label>
 											</div>
 											<table class="table" style="font-size: 10px">
 												<thead class="text-center">
@@ -709,10 +708,10 @@
 									</div>
 									<div class="col-md-2">
 										<label for="exampleInputEmail1">Cargo</label> <select
-											class="form-control inline" name="cargo">							
+											class="form-control inline" name="cargo">
 											<c:forEach var="cargo" items="${listaCargo}">
-															<option value="${cargo.id}">${cargo.nome}</option>
-														</c:forEach>
+												<option value="${cargo.id}">${cargo.nome}</option>
+											</c:forEach>
 										</select>
 									</div>
 									<div class="col-md-1">
@@ -764,11 +763,14 @@
 											<td>${candidato.valorPretensao}</td>
 											<td>${candidato.dataAbertura}</td>
 											<td>${candidato.dataFechamento}</td>
-											<td>${candidato.ultimoStatus.status.nome}</td>
-											<td><span class="label label-analiseRH">Em análise do RH</span></td>
+<%-- 											<td><c:if test="${not empty candidato.ultimoStatus}"> --%>
+<%-- 													${candidato.ultimoStatus.status.nome}	 --%>
+<%-- 												</c:if></td> --%>
+											<td><span class="label label-analiseRH">Em
+													análise do RH</span></td>
 											<td><span class="line"></span>
 												<div class="btn-group">
-													
+
 													<!-- comeco do botao -->
 													<button type="button"
 														class="btn btn-info dropdown-toggle btn-sm"
@@ -1028,6 +1030,7 @@
 					});
 		});
 	</script>
+
 	<script type="text/javascript">
 		//Total máximo de campos que você permitirá criar em seu site:
 		var totalCampos = 4;
@@ -1113,6 +1116,15 @@
 					hidden1.value = "";
 				}
 			}
+		}
+	</script>
+	<script type="text/javascript">
+		//Escrevendo o código-fonte HTML e ocultando os campos criados:
+		for (iLoop = 1; iLoop <= totalCampos; iLoop++) {
+			document
+					.write("<span id='linha"+iLoop+"' style='display:none'> <select class='btn btn-default btn-xs dropdown-toggle' style='width: 160px;'><option value='0'>Selecione etapa</option><option value='1'>Prova Prática</option><option value='2'>Prova teórica</option><option value='3'>Dinâmica de Grupo</option></select> <input type='text' id='arq"+iLoop+"' name='arq"+iLoop+"'> <input class='btn btn-xs btn-danger' type='button' value='Remover' onclick='RemoverCampos(\""
+							+ iLoop + "\")'></span><br>");
+
 		}
 	</script>
 </body>

@@ -8,7 +8,7 @@ public class StatusBean {
 	private Integer id;
 	private String nome;
 	private String Css;
-	private Integer tipo;
+	private TipoStatusBean tipo;
 
 
 	public Integer getId() {
@@ -35,11 +35,11 @@ public class StatusBean {
 		Css = css;
 	}
 
-	public Integer getTipo() {
+	public TipoStatusBean getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(Integer tipo) {
+	public void setTipo(TipoStatusBean tipo) {
 		this.tipo = tipo;
 	}
 }

@@ -1,6 +1,8 @@
 package br.com.prosperity.entity;
 
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,25 +11,24 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import br.com.prosperity.bean.ClienteBean;
-
 @Entity
-@Table(name= "tbVaga")	
-@NamedQuery (name = "obterTodos", query = "SELECT u FROM VagaEntity u WHERE u.nomeVaga = ?1")
+@Table(name = "tbVaga")
+@NamedQuery(name = "obterTodos", query = "SELECT u FROM VagaEntity u WHERE u.nomeVaga = ?1")
 public class VagaEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idVaga", unique = true, nullable = false)
 	private Integer id;
-	
+
 	@Column(name = "nmVaga")
 	private String nomeVaga;
-	
+
 	@Column(name = "nmSolicitante")
 	private String nomeSolicitante;
 
@@ -35,7 +36,7 @@ public class VagaEntity {
 	private Double valorPretensao;
 
 	@Column(name = "dtInicio")
-	@Temporal(value=TemporalType.DATE)
+	@Temporal(value = TemporalType.DATE)
 	private Date dataInicio;
 
 	@Column(name = "flLocalTrabalho")
@@ -45,11 +46,11 @@ public class VagaEntity {
 	private Character tipoVaga;
 
 	@Column(name = "hrEntrada")
-	@Temporal(value=TemporalType.DATE)
+	@Temporal(value = TemporalType.DATE)
 	private Date horaEntrada;
 
 	@Column(name = "hrSaida")
-	@Temporal(value=TemporalType.DATE)
+	@Temporal(value = TemporalType.DATE)
 	private Date horaSaida;
 
 	@Column(name = "flAumentoQuadra")
@@ -57,62 +58,67 @@ public class VagaEntity {
 
 	@Column(name = "numCandidatos")
 	private Integer numeroCandidatos; //
-	
+
 	@Column(name = "nmSubstituido")
-	private String nomeSubstituido; // 
-	
+	private String nomeSubstituido; //
+
 	@Column(name = "dsFormacaoAcademica")
 	private String descricaoFormacaoAcademica; //
-	
+
 	@Column(name = "dsPerfilComportamental")
 	private String descricaoPerfilComportamental; //
-	
+
 	@Column(name = "dsPerfilTecnico")
 	private String descricaoPerfilTecnico; //
-	
+
 	@Column(name = "dtAbertura")
-	@Temporal(value=TemporalType.DATE)
+	@Temporal(value = TemporalType.DATE)
 	private Date dataAbertura; //
-	
+
 	@Column(name = "dtAprovacao")
-	@Temporal(value=TemporalType.DATE)
+	@Temporal(value = TemporalType.DATE)
 	private Date dataAprovacao; //
-	
+
 	@Column(name = "dtFechamento")
-	@Temporal(value=TemporalType.DATE)
+	@Temporal(value = TemporalType.DATE)
 	private Date dataFechamento; //
 
 	@ManyToOne
-	@JoinColumn(name="idProjeto")
+	@JoinColumn(name = "idProjeto")
 	private ProjetoEntity projetoEntity;
 
 	@ManyToOne
-	@JoinColumn(name="idCargo")
+	@JoinColumn(name = "idCargo")
 	private CargoEntity cargoEntity;
 
 	@ManyToOne
-	@JoinColumn(name="idSenioridade")
+	@JoinColumn(name = "idSenioridade")
 	private SenioridadeEntity senioridadeEntity;
 
 	@ManyToOne
-	@JoinColumn(name="idUsuario")
+	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuarioEntity;
-	
-	//@ManyToOne(cascade = CascadeType.ALL)
-	//private AvaliadorEntity avaliadorEntity;
-	
-	
+
+	@OneToMany()
+	@JoinColumn(name = "idVaga")
+	private List<StatusVagaEntity> statusEntity;
 
 	public Integer getId() {
 		return id;
 	}
 
+	public List<StatusVagaEntity> getStatusEntity() {
+		return statusEntity;
+	}
+
+	public void setStatusEntity(List<StatusVagaEntity> statusEntity) {
+		this.statusEntity = statusEntity;
+	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	
-	
+
 	public String getNomeVaga() {
 		return nomeVaga;
 	}
@@ -281,15 +287,12 @@ public class VagaEntity {
 		this.usuarioEntity = usuarioEntity;
 	}
 
-	//public AvaliadorEntity getAvaliadorEntity() {
-		//return avaliadorEntity;
-	//}
+	// public AvaliadorEntity getAvaliadorEntity() {
+	// return avaliadorEntity;
+	// }
 
-	//public void setAvaliadorEntity(AvaliadorEntity avaliadorEntity) {
-		//this.avaliadorEntity = avaliadorEntity;
-	//}
-
-	
-	
+	// public void setAvaliadorEntity(AvaliadorEntity avaliadorEntity) {
+	// this.avaliadorEntity = avaliadorEntity;
+	// }
 
 }

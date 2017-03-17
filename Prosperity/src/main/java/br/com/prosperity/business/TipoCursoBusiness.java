@@ -21,7 +21,7 @@ public class TipoCursoBusiness {
 	private TipoCursoConverter tipoCursoConverter;
 	
 	@Transactional
-	public List<TipoCursoBean> getTipoCurso(){
+	public List<TipoCursoBean> obterTodos(){
 	
 		List<TipoCursoBean> tiposCurso = tipoCursoConverter.convertEntityToBean(tipoCursoDAO.listar()) ;
 		

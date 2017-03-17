@@ -16,33 +16,26 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "tbStatusVaga")
-
 public class StatusVagaEntity {
 	/* Mapeamento dos Atributos */
 
 	/* Mapeamento do Id */
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idStatusVaga", unique = true, nullable = false)
 	private Integer id;
 	/* fim */
-	
+
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="idStatus")
+	@JoinColumn(name = "idStatus")
 	private StatusEntity status;
-	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="idVaga")
-	private VagaEntity vaga;
-	
-	@Column (name = "dtAlteracao")
+
+	@Column(name = "dtAlteracao")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataAlteracao;
-	
 
 	/* fim dos mapeamentos */
-
 
 	public Integer getId() {
 		return id;
@@ -68,14 +61,4 @@ public class StatusVagaEntity {
 		this.status = status;
 	}
 
-	public VagaEntity getVaga() {
-		return vaga;
-	}
-
-	public void setVaga(VagaEntity vaga) {
-		this.vaga = vaga;
-	}
-	
-	
-	
 }

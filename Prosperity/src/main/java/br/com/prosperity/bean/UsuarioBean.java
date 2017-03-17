@@ -13,7 +13,7 @@ public class UsuarioBean {
 	private Boolean autenticado;
 	private Boolean primeiroAcesso = true;
 	private String email;
-	private Boolean ativo;
+	private Boolean ativo = true;
 	
 	public UsuarioBean() {
 		autenticado = false;

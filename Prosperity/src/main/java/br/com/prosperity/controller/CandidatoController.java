@@ -83,15 +83,15 @@ public class CandidatoController {
 
 	@RequestMapping(value = "cadastrar", method = RequestMethod.GET)
 	public String cadastrarCandidato(Model model) {
-		List<TipoCursoBean> tiposCurso = tipoCursoBusiness.getTipoCurso();
+		List<TipoCursoBean> tiposCurso = tipoCursoBusiness.obterTodos();
 		model.addAttribute("tiposCurso", tiposCurso);
 
-		List<SituacaoAtualBean> listaSituacaoAtual = situacaoAtualBusiness.getSituacaoAtual();
+		List<SituacaoAtualBean> listaSituacaoAtual = situacaoAtualBusiness.obterTodos();
 		model.addAttribute("listaSituacaoAtual", listaSituacaoAtual);
 
-		List<VagaBean> listaVaga = vagaBusiness.getVaga();
+		List<VagaBean> listaVaga = vagaBusiness.obterTodos();
 		model.addAttribute("listaVaga", listaVaga);
-		List<CanalInformacaoBean> listaCanal = canalInformacaoBusiness.getCanal();
+		List<CanalInformacaoBean> listaCanal = canalInformacaoBusiness.obterTodos();
 		model.addAttribute("listaCanal", listaCanal);
 
 	
@@ -105,26 +105,26 @@ public class CandidatoController {
 		return"candidato/salvar-candidato";
 	}
 
-	//////////////////////////////////////////
+	
 	
 	@RequestMapping(value = "consultar-rh", method = RequestMethod.GET)
 	public String consultarCandidatoRH(Model model) {
 		List<CandidatoBean> candidatos = candidatoBusiness.obterTodos();
 		model.addAttribute("candidatos", candidatos);
 		
-		List<VagaBean> listaVaga = vagaBusiness.getVaga();
+		List<VagaBean> listaVaga = vagaBusiness.obterTodos();
 		model.addAttribute("listaVaga", listaVaga);
 		
-		List<CargoBean> listaCargo = cargoBusiness.getCargo();
+		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
 		model.addAttribute("listaCargo", listaCargo);
 		
-		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.getSenioridade();
+		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.obterTodos();
 		model.addAttribute("listaSenioridade", listaSenioridade);
 		
 		return "candidato/consulta-rh";
 	} 
 	
-	/////////////////////
+
 
 	@RequestMapping(value = "consultar-gestor", method = RequestMethod.GET)
 	public String consultarCandidatoGestor() {
@@ -133,7 +133,9 @@ public class CandidatoController {
 
 	@RequestMapping(value = "historico", method = RequestMethod.GET)
 	public String historicoCandidato(Model model) {
-		model.addAttribute("candidato", candidatoBusiness.obter(2));
+		candidatoBean = candidatoBusiness.obter(2);
+		
+		model.addAttribute("candidato", candidatoBean);
 
 		return "candidato/historico-candidato";
 	}

@@ -31,12 +31,17 @@ public class CandidatoBean {
 	private Date dataUltimoContato;
 	private Date entrevista;
 	private String proposta;
+	private StatusCandidatoBean ultimoStatus;
 
+	
 	public StatusCandidatoBean getUltimoStatus() {
 		Date dataUltimoStatus = status.stream().map(StatusCandidatoBean::getDataAlteracao).max(Date::compareTo).get();
+		ultimoStatus = status.stream().filter(st -> st.getDataAlteracao().equals(dataUltimoStatus)).findFirst().get();
 
-		return status.stream().filter(st -> st.getDataAlteracao().equals(dataUltimoStatus)).findFirst().get();
+	
+		return ultimoStatus;
 	}
+
 
 	public Integer getId() {
 		return id;
