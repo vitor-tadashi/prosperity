@@ -1,6 +1,9 @@
 package br.com.prosperity.util;
 
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.text.MaskFormatter;
 
@@ -39,4 +42,5 @@ public class FormatUtil {
 		}
 		return input;
 	}
+	
 }

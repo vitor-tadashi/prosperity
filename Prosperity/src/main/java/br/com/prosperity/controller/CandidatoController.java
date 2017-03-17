@@ -77,7 +77,6 @@ public class CandidatoController {
 	@Autowired
 	private CanalInformacaoBusiness canalInformacaoBusiness;
 	
-
 	@RequestMapping(value = "cadastrar", method = RequestMethod.GET)
 	public String cadastrarCandidato(Model model) {
 		List<TipoCursoBean> tiposCurso = tipoCursoBusiness.obterTodos();
@@ -90,8 +89,6 @@ public class CandidatoController {
 		model.addAttribute("listaVaga", listaVaga);
 		List<CanalInformacaoBean> listaCanal = canalInformacaoBusiness.obterTodos();
 		model.addAttribute("listaCanal", listaCanal);
-
-	
 		
 		return "candidato/cadastrar-candidato";
 	}

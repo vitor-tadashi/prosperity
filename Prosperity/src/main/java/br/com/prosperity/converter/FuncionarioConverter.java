@@ -6,16 +6,16 @@ import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.entity.FuncionarioEntity;
 
 @Component
-public class FuncionarioConverter implements Converter<FuncionarioEntity, FuncionarioBean>{
+public class FuncionarioConverter implements Converter<FuncionarioEntity, FuncionarioBean> {
 
 	@Override
 	public FuncionarioEntity convertBeanToEntity(FuncionarioBean bean) {
 		FuncionarioEntity entity = new FuncionarioEntity();
-		try {
+		if (bean == null) {
+			entity = null;
+		} else {
 			entity.setId(bean.getId());
 			entity.setNome(bean.getNome());
-		} catch (Exception e) {
-			throw new RuntimeException("Erro no FuncionarioConverter" + e);
 		}
 		return entity;
 	}
@@ -24,11 +24,12 @@ public class FuncionarioConverter implements Converter<FuncionarioEntity, Funcio
 	public FuncionarioBean convertEntityToBean(FuncionarioEntity entity) {
 		FuncionarioBean bean = new FuncionarioBean();
 
-		if (entity!=null){
+		if (entity == null) {
+			bean = null;
+		} else {
 			bean.setId(entity.getId());
 			bean.setNome(entity.getNome());
-		} else {
-			bean = null;
+
 		}
 		return bean;
 	}

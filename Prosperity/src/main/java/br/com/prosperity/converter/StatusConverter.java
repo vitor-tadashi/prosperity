@@ -14,22 +14,30 @@ public class StatusConverter implements Converter<StatusEntity, StatusBean> {
 	
 	@Override
 	public StatusEntity convertBeanToEntity(StatusBean bean) {
-		// TODO Auto-generated method stub
+		
 		StatusEntity entity = new StatusEntity();
+		if (bean == null){
+			entity = null;
+		} else {
 		entity.setId(bean.getId());
 		entity.setNome(bean.getNome());
 		entity.setTipoCss(bean.getCss());
 		entity.setTipoStatus(tipoStatusConverter.convertBeanToEntity(bean.getTipo()));
+		}
 		return entity;
 	}
 
 	@Override
 	public StatusBean convertEntityToBean(StatusEntity entity) {
 		StatusBean bean = new StatusBean();
+		if (entity == null){
+			bean = null;
+		} else {
 		bean.setId(entity.getId());
 		bean.setNome(entity.getNome());
 		bean.setCss(entity.getTipoCss());
 		bean.setTipo(tipoStatusConverter.convertEntityToBean(entity.getTipoStatus()));
+		}
 		return bean;
 	}
 }

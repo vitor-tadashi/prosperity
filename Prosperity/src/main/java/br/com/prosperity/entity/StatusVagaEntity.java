@@ -1,5 +1,6 @@
 package br.com.prosperity.entity;
 
+import java.awt.List;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,28 +23,26 @@ public class StatusVagaEntity {
 	/* Mapeamento dos Atributos */
 
 	/* Mapeamento do Id */
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idStatusVaga", unique = true, nullable = false)
 	private Integer id;
 	/* fim */
-	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="idStatus")
+
+	@ManyToOne
+	@JoinColumn(name = "idStatus")
 	private StatusEntity status;
-	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="idVaga")
-	private VagaEntity vaga;
-	
-	@Column (name = "dtAlteracao")
+
+	@Column(name = "dtAlteracao")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataAlteracao;
 	
+	@ManyToOne
+	@JoinColumn(name = "idVaga")
+	private VagaEntity vagas;
 
 	/* fim dos mapeamentos */
-
 
 	public Integer getId() {
 		return id;
@@ -67,15 +67,13 @@ public class StatusVagaEntity {
 	public void setStatus(StatusEntity status) {
 		this.status = status;
 	}
-
-	public VagaEntity getVaga() {
-		return vaga;
+	
+	public VagaEntity getVagas() {
+		return vagas;
 	}
 
-	public void setVaga(VagaEntity vaga) {
-		this.vaga = vaga;
+	public void setVagas(VagaEntity vagas) {
+		this.vagas = vagas;
 	}
-	
-	
-	
+
 }
