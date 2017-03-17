@@ -7,9 +7,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.prosperity.bean.CandidatoBean;
+import br.com.prosperity.bean.ContatoBean;
 import br.com.prosperity.converter.CandidatoConverter;
 import br.com.prosperity.dao.CandidatoDAO;
 import br.com.prosperity.entity.CandidatoEntity;
+import br.com.prosperity.util.FormatUtil;
 
 @Component
 public class CandidatoBusiness extends FormatUtil{
