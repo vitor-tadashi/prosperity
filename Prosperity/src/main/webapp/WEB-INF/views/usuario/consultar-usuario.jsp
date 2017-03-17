@@ -27,8 +27,7 @@
 <body>
 	<!-- Modais aqui-->
 	<!-- Modal -->
-	<div class="modal fade" id="usuario-modal"
-		data-target="#novo-usuario-modal" tabindex="-1" role="dialog"
+	<div class="modal fade" id="usuario-modal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -37,132 +36,37 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<c:if test="${usuario.id.length}">
-						<h4 class="modal-title" id="myModalLabel">Alterar usuário</h4>
-					</c:if>
-					<c:if test="${!usuario.id.length}">
-						<h4 class="modal-title" id="myModalLabel">Novo usuário</h4>
-					</c:if>
+					<h4 class="modal-title" id="myModalLabel">Novo usuário</h4>
 				</div>
 				<div class="modal-body">
 					<div class="padding-md">
 						<div class="row">
-							<form action="cadastrar" method="POST">
-								<input type="hidden" name="id" />
+							<form action="cadastrar" method="POST" id="frmUsuario">
+								<input type="hidden" name="id" id="txtId" />
 								<div class="row">
 									<div class="form-group col-md-6">
 										<label for="funcionario">Funcionário</label> <select
-											class="form-control" name="funcionario.id">
-											<option value="">Selecione...</option>
-											<c:forEach var="funcionario" items="${funcionarios}">
-												<option value="${funcionario.id}">${funcionario.nome}</option>
-											</c:forEach>
+											class="form-control" name="funcionario.id" id="cmbFuncionario">
 										</select>
 									</div>
 									<div class="form-group col-md-6">
 										<label for="usuario">Usuário</label>
 										<div class="input-group">
 											<span class="input-group-addon"><i class="fa fa-user"></i></span>
-											<input type="text" class="form-control" id="usuario"
-												data-required="true" name="nome" value="${usuarios[1].nome}">
+											<input type="text" class="form-control" id="txtUsuario"
+												data-required="true" name="nome">
 										</div>
 									</div>
 									<div class="form-group col-md-6 cold-md-offset-6">
 										<label for="email">E-mail corporativo</label>
 										<div class="input-group">
 											<span class="input-group-addon">@</span> <input type="email"
-												class="form-control" id="email" data-required="true" name="email">
+												class="form-control" id="txtEmail" data-required="true" name="email">
 										</div>
 									</div>
 									<div class="form-group open col-md-6">
 										<label for="permissao">Perfil</label> <select
-											class="form-control" name="perfil.id">
-											<option value="">Selecione...</option>
-											<c:forEach var="perfil" items="${perfis}">
-												<option value="${perfil.id}">${perfil.nome}</option>
-											</c:forEach>
-										</select>
-									</div>
-								</div>
-								<input type="submit" class="btn btn-danger" value="Submit"/>
-							</form>
-						</div>
-						<!--close row-->
-					</div>
-					<!--close padding-->
-				</div>
-				<div class="modal-footer">
-					<button class="btn btn-success">
-						<i class="fa fa-check"></i> Salvar
-					</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Modal -->
-	<div class="modal fade" id="editar-usuario-modal"
-		data-target="#editar-usuario-modal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">Editar usuário</h4>
-				</div>
-				<div class="modal-body">
-					<div class="padding-md">
-						<div class="row">
-							<form>
-								<div class="row">
-									<div class="form-group col-md-6">
-										<label for="funcionario">Funcionário</label> <select
-											class="form-control">
-											<option value="0">Selecionar funcionário</option>
-											<option value="1">André</option>
-											<option value="2">Daniel</option>
-											<option value="3">Fabio</option>
-											<option value="4">Graziela</option>
-											<option value="5">Guilherme</option>
-											<option value="6">Iago</option>
-											<option value="7">Leonardo</option>
-											<option value="8">Stephen</option>
-											<option value="9">Thamires</option>
-											<option value="10">Vitor</option>
-											<option value="11">Yuri</option>
-										</select>
-									</div>
-									<div class="form-group col-md-6">
-										<label for="usuario">Usuário</label>
-										<div class="input-group">
-											<span class="input-group-addon"><i class="fa fa-user"></i></span>
-											<input type="text" class="form-control" id="usuario"
-												data-required="true">
-										</div>
-									</div>
-									<div class="form-group col-md-6 cold-md-offset-6">
-										<label for="email">E-mail corporativo</label>
-										<div class="input-group">
-											<span class="input-group-addon">@</span> <input type="email"
-												class="form-control" id="email" data-required="true">
-										</div>
-									</div>
-									<div class="form-group open col-md-6">
-										<label for="permissao">Perfil</label> <select
-											class="form-control">
-											<option value="0">Selecionar</option>
-											<option value="1">Administrador</option>
-											<option value="2">RH</option>
-											<option value="3">Gestor Administrativo</option>
-											<option value="4">Gestor de Desenvolvimento</option>
-											<option value="5">Gestor de Teste</option>
-											<option value="6">Gestor de Projetos</option>
-											<option value="7">Arquiteto</option>
-											<option value="8">Diretor de Operação</option>
-											<option value="9">CEO</option>
+											class="form-control" name="perfil.id" id="cmbPerfil">
 										</select>
 									</div>
 								</div>
@@ -173,14 +77,14 @@
 					<!--close padding-->
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-success">
-						<i class="fa fa-check"></i> Salvar
+					<button class="btn btn-danger" id="btnMudarStatus">
+						<span class="fa fa-power-off"></span> Desativar
 					</button>
 					<button class="btn btn-warning">
 						<i class="fa fa-edit"></i> Redefinir senha
 					</button>
-					<button class="btn btn-danger">
-						<span class="fa fa-power-off"></span> Desativar
+					<button class="btn btn-success" id="btnSalvar">
+						<i class="fa fa-check"></i> Salvar
 					</button>
 				</div>
 			</div>
@@ -236,7 +140,7 @@
 											</td>
 											<td>
 												<div class="btn-group">
-													<a class="btn btn-info" href="alterar-usuario?id=${usuario.id}"><i class="fa fa-edit"></i> Editar</a>
+													<a class="btn btn-info btn-xs" onclick="testeModal(${usuario.id})"><i class="fa fa-edit"></i> Editar</a>
 												</div>
 											</td>
 										</tr>
@@ -247,7 +151,7 @@
 						</div>
 						<!-- /.col -->
 						<div class="pull-right">
-							<a class="btn btn-primary" href="inserir-usuario">Criar novo usuário</a>
+							<a class="btn btn-primary" onclick="testeModal()">Criar novo usuário</a>
 							<a class="btn btn-warning" href="criar-perfil">Criar perfil</a>
 						</div>
 					</div>
@@ -272,67 +176,75 @@
 	
 	<!-- javaScript aqui -->
 	<script>
-		jQuery(document).ready(function($) {
-			$("#search-form").submit(function(event) {
-	
-				// Prevent the form from submitting via the browser.
-				event.preventDefault();
-				searchViaAjax();
-	
-			});
-		});
-	
-		function searchAjax() {
-			var data = {}
-			data["query"] = $("#query").val();
-	
-			$.ajax({
-				type : "POST",
-				contentType : "application/json",
-				url : "${home}search/api/getSearchResult",
-				data : JSON.stringify(data),
-				dataType : 'json',
-				timeout : 100000,
-				success : function(data) {
-					console.log("SUCCESS: ", data);
-					display(data);
-				},
-				error : function(e) {
-					console.log("ERROR: ", e);
-					display(e);
-				},
-				done : function(e) {
-					console.log("DONE");
-				}
-			});
-		}
-	
-		function testeModal(id) {
-			var url = "carrega-usuario";
+		var Funcionario;
+		var perfil;
+		var ativo;
+		
+		function testeModal(id){
 			
-			if(id) {
-				$.ajax({
-					  url: url,
-					  type: 'GET',
-					  data: {id : id},
-					  success: function(data) {
-						console.log(data);
-						
-					},
-					error : function() {
-						alert("deu ruim");
-					}
-					  
-					});
-				
-			} else {
-				$.get(
-					url,
-					function() {
-						$('#usuario-modal').modal('show');
-					});
-			}
+			if(id != undefined) {
+	    		$.ajax({
+		    		url: "carregar-usuario",
+		    		type: "GET",
+		    		dataType: "JSON",
+		    		data: {id : id},
+		    		success: function(data){
+		    			console.log(data);
+		    			$('input#txtId').val(data.id);
+		    			$('input#txtUsuario').val(data.nome);
+		    			$('input#txtEmail').val(data.email);
+		    			funcionario = data.funcionario.id;
+		    			perfil = data.perfil.id;
+		    			ativo = data.ativo;
+		    		}
+		    	});
+	    	}
+	    	$.ajax({
+	    		url: "carregar-combos",
+	    		type: "GET",
+	    		dataType: "JSON",
+	    		data: {},
+	    		success: function(data){
+	    			$('#cmbPerfil').empty();
+	    			$('#cmbFuncionario').empty();
+	    			var perfis = data[0];
+	    			var funcionarios = data[1];
+	    			
+	    			$('#cmbPerfil').append('<option value="">Selecione</option>');
+	    			$('#cmbFuncionario').append('<option value="">Selecione</option>');
+	    			for(var i = 0; i < perfis.length; i++) {
+	    				var newOption = $('<option value=' + perfis[i].id + '>' +  perfis[i].nome + '</option>');
+	    				$('#cmbPerfil').append(newOption);
+	    			}
+	    			for(var i = 0; i < funcionarios.length; i++) {
+	    				var newOption = $('<option value=' + funcionarios[i].id + '>' +  funcionarios[i].nome + '</option>');
+	    				$('#cmbFuncionario').append(newOption);
+	    			}
+	    			if(funcionario != undefined) {
+	    				$('select#cmbFuncionario').val(funcionario);
+		    			$('select#cmbPerfil').val(perfil);
+	    			}
+	    			
+	    			$('#usuario-modal').modal('show');
+	    		}
+	    	});
 		}
+		
+		$("#btnSalvar").click(function() {
+			$("#frmUsuario").submit();
+		});
+		
+		$("#btnMudarStatus").click(function() {
+			$.ajax({
+	    		url: "mudar-status",
+	    		type: "POST",
+	    		dataType: "JSON",
+	    		data: {ativo : ativo}
+	    	});
+			location.reload();
+		});
+		
+		
 	</script>
 </body>
 </html>

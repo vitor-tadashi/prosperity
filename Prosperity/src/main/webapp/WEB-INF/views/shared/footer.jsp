@@ -28,7 +28,7 @@
 	</div>
 
 	<div class="text-center">
-		<a class="btn btn-success m-right-sm" href="/usuario">Sair</a> <a
+		<a class="btn btn-success m-right-sm" href="/login/logout">Sair</a> <a
 			class="btn btn-danger logoutConfirm_close">Cancelar</a>
 	</div>
 </div>

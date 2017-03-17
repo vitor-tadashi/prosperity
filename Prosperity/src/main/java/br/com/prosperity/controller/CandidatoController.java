@@ -35,25 +35,7 @@ import br.com.prosperity.exception.BusinessException;
 public class CandidatoController {
 
 	@Autowired
-	private CandidatoBean candidatoBean;
-	
-	@Autowired
 	private CandidatoBusiness candidatoBusiness;
-
-	@Autowired
-	private EnderecoBean enderecoBean;
-
-	@Autowired
-	private FormacaoBean formacaoBean;
-
-	@Autowired
-	private ContatoBean contatoBean;
-
-	@Autowired
-	private AvaliacaoBean avaliacaoBean;
-
-	@Autowired
-	private List<CandidatoCompetenciaBean> competencias;
 
 	@Autowired
 	private TipoCursoBusiness tipoCursoBusiness;
@@ -86,7 +68,7 @@ public class CandidatoController {
 		List<SituacaoAtualBean> listaSituacaoAtual = situacaoAtualBusiness.obterTodos();
 		model.addAttribute("listaSituacaoAtual", listaSituacaoAtual);
 
-		List<VagaBean> listaVaga = vagaBusiness.obterTodos();
+		List<VagaBean> listaVaga = vagaBusiness.listar();
 		model.addAttribute("listaVaga", listaVaga);
 		List<CanalInformacaoBean> listaCanal = canalInformacaoBusiness.obterTodos();
 		model.addAttribute("listaCanal", listaCanal);
@@ -96,16 +78,17 @@ public class CandidatoController {
 		return "candidato/cadastrar-candidato";
 	}
 	@RequestMapping(value="salvar", method=RequestMethod.POST)
-	public String salvarCandidato(@ModelAttribute("candidatoBean") CandidatoBean candiatoBean) throws BusinessException{
-		candidatoBusiness.inserir(candiatoBean);
+	public String salvarCandidato(@ModelAttribute("candidatoBean")CandidatoBean candidatoBean) throws BusinessException{
+		candidatoBusiness.inserir(candidatoBean);
 	
-		return"candidato/salvar-candidato";
+		return"candidato/cadastrar-candidato";
 	}
 
 	@RequestMapping(value = "consultar-rh", method = RequestMethod.GET)
 	public String consultarCandidatoRH(Model model) {
 		List<CandidatoBean> candidatos = candidatoBusiness.obterTodos();
 		model.addAttribute("candidatos", candidatos);
+		
 		return "candidato/consulta-rh";
 	}
 
@@ -116,6 +99,7 @@ public class CandidatoController {
 
 	@RequestMapping(value = "historico", method = RequestMethod.GET)
 	public String historicoCandidato(Model model) {
+		CandidatoBean candidatoBean;
 		candidatoBean = candidatoBusiness.obter(2);
 		
 		model.addAttribute("candidato", candidatoBean);
