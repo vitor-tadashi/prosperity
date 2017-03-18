@@ -3,7 +3,9 @@ package br.com.prosperity.bean;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
@@ -27,27 +29,13 @@ public class CandidatoBean  extends FormatUtil {
 	private EnderecoBean endereco;
 	private FormacaoBean formacao;
 	private UsuarioBean usuario;
-	private VagaBean vaga;
 	private List<StatusCandidatoBean> status = new ArrayList<>();
-	private VagaCandidatoBean vagaCandidatoBean;
+	private List<VagaBean> vagas = new ArrayList<>();
 	private List<CandidatoCompetenciaBean> competencias = new ArrayList<>();
-	private Date dataUltimoContato;
+	private Map<String, List<StatusCandidatoBean>> statusPorMesAno;
+	private Date DataultimoContato;
 	private Date entrevista;
 	private String proposta;
-	private Double valorMin;
-	private Double valorMax;
-	private StatusCandidatoBean ultimoStatus;
-
-	public StatusCandidatoBean getUltimoStatus() {
-		if (status != null && status.size() > 0) {
-			Date dataUltimoStatus = status.stream().map(StatusCandidatoBean::getDataAlteracao).max(Date::compareTo).get();
-			ultimoStatus = status.stream().filter(st -> st.getDataAlteracao().equals(dataUltimoStatus)).findFirst().get();	
-		} else {
-			ultimoStatus = new StatusCandidatoBean("Não possui status");
-		}
-		
-		return ultimoStatus;
-	}
 
 	public Integer getId() {
 		return id;
@@ -79,6 +67,22 @@ public class CandidatoBean  extends FormatUtil {
 
 	public void setRg(String rg) {
 		this.rg = rg;
+	}
+
+	public List<CandidatoCompetenciaBean> getCompetencias() {
+		return competencias;
+	}
+
+	public void setCompetencias(List<CandidatoCompetenciaBean> competencias) {
+		this.competencias = competencias;
+	}
+
+	public Date getDataultimoContato() {
+		return DataultimoContato;
+	}
+
+	public void setDataultimoContato(Date dataultimoContato) {
+		DataultimoContato = dataultimoContato;
 	}
 
 	public Date getDataNascimento() {
@@ -169,14 +173,6 @@ public class CandidatoBean  extends FormatUtil {
 		this.usuario = usuario;
 	}
 
-	public VagaBean getVaga() {
-		return vaga;
-	}
-
-	public void setVaga(VagaBean vaga) {
-		this.vaga = vaga;
-	}
-
 	public List<StatusCandidatoBean> getStatus() {
 		return status;
 	}
@@ -185,28 +181,20 @@ public class CandidatoBean  extends FormatUtil {
 		this.status = status;
 	}
 
-	public VagaCandidatoBean getVagaCandidatoBean() {
-		return vagaCandidatoBean;
+	public List<VagaBean> getVagas() {
+		return vagas;
 	}
 
-	public void setVagaCandidatoBean(VagaCandidatoBean vagaCandidatoBean) {
-		this.vagaCandidatoBean = vagaCandidatoBean;
+	public void setVagas(List<VagaBean> vagas) {
+		this.vagas = vagas;
 	}
 
-	public List<CandidatoCompetenciaBean> getCompetencias() {
-		return competencias;
+	public Date getUltimoContato() {
+		return DataultimoContato;
 	}
 
-	public void setCompetencias(List<CandidatoCompetenciaBean> competencias) {
-		this.competencias = competencias;
-	}
-
-	public Date getDataUltimoContato() {
-		return dataUltimoContato;
-	}
-
-	public void setDataUltimoContato(Date dataUltimoContato) {
-		this.dataUltimoContato = dataUltimoContato;
+	public void setUltimoContato(Date DataultimoContato) {
+		this.DataultimoContato = DataultimoContato;
 	}
 
 	public Date getEntrevista() {
@@ -225,27 +213,12 @@ public class CandidatoBean  extends FormatUtil {
 		this.proposta = proposta;
 	}
 
-	public Double getValorMin() {
-		return valorMin;
+	public Map<String, List<StatusCandidatoBean>> getStatusPorMesAno() {
+		return statusPorMesAno;
 	}
 
-	public void setValorMin(Double valorMin) {
-		this.valorMin = valorMin;
+	public void setStatusPorMesAno(Map<String, List<StatusCandidatoBean>> statusPorMesAno) {
+		this.statusPorMesAno = statusPorMesAno;
 	}
-
-	public Double getValorMax() {
-		return valorMax;
-	}
-
-	public void setValorMax(Double valorMax) {
-		this.valorMax = valorMax;
-	}
-
-	public void setUltimoStatus(StatusCandidatoBean ultimoStatus) {
-		this.ultimoStatus = ultimoStatus;
-	}
-
-
-	
 
 }

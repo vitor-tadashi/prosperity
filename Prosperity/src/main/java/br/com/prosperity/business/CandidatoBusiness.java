@@ -1,77 +1,55 @@
 package br.com.prosperity.business;
 
+import java.text.SimpleDateFormat;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.prosperity.bean.CanalInformacaoBean;
 import br.com.prosperity.bean.CandidatoBean;
-import br.com.prosperity.bean.ContatoBean;
-import br.com.prosperity.converter.CanalInformacaoConverter;
+import br.com.prosperity.bean.StatusCandidatoBean;
 import br.com.prosperity.converter.CandidatoConverter;
-import br.com.prosperity.dao.CanalInformacaoDAO;
 import br.com.prosperity.dao.CandidatoDAO;
-import br.com.prosperity.dao.FormacaoDAO;
-import br.com.prosperity.dao.VagaDAO;
-import br.com.prosperity.entity.CanalInformacaoEntity;
 import br.com.prosperity.entity.CandidatoEntity;
-import br.com.prosperity.entity.FormacaoEntity;
-import br.com.prosperity.entity.VagaEntity;
 import br.com.prosperity.util.FormatUtil;
 
 @Component
-public class CandidatoBusiness extends FormatUtil{
+public class CandidatoBusiness extends FormatUtil {
 
 	@Autowired
-	private FormacaoDAO formacaoDAO;
-	@Autowired
 	private CandidatoDAO candidatoDAO;
+
 	@Autowired
 	private CandidatoConverter candidatoConverter;
-	@Autowired
-	private CanalInformacaoDAO canalInformacaoDAO;
-	@Autowired
-	private VagaDAO vagaDAO;
-	@Autowired
-	private CanalInformacaoConverter canalInformacaoConverter;
-	
 
 	@Transactional
 	public CandidatoBean obter(Integer id) {
 		CandidatoEntity candidatoEntity = candidatoDAO.obterPorId(id);
+		CandidatoBean candidatoBean = new CandidatoBean();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM/yyyy");
 
-		CandidatoBean candidatoBean = null;
 		if (candidatoEntity != null) {
-			ContatoBean contatoBean;
 			candidatoBean = candidatoConverter.convertEntityToBean(candidatoEntity);
 			candidatoBean = formatCPF(candidatoBean);
 			candidatoBean = formatRG(candidatoBean);
 			candidatoBean.setContato(formatPhone(candidatoBean.getContato()));
 		}
 
+		Map<String, List<StatusCandidatoBean>> listaStatusOrdenada = groupByOrdered(candidatoBean.getStatus(),
+				StatusCandidatoBean::getMesAno);
+		
+		candidatoBean.setStatusPorMesAno(listaStatusOrdenada);
+		
 		return candidatoBean;
 	}
 
-	@Transactional
-
-	//public List<CandidatoBean> listar() {
-
-	public FormacaoEntity obterPorId(Integer id) {
-		FormacaoEntity formacaoEntity = formacaoDAO.obterPorId(id);
-		return formacaoEntity;
-
-	}
-	@Transactional
-	public CanalInformacaoEntity obterCanal(Integer id){
-		CanalInformacaoEntity canalInformacaoEntity = canalInformacaoDAO.obterPorId(id);
-		return canalInformacaoEntity;
-	}
-	@Transactional
-	public VagaEntity obterNomeVaga(Integer id){
-		VagaEntity vagaEntity = vagaDAO.obterPorId(id);
-		return vagaEntity;
+	private static <K, V> Map<K, List<V>> groupByOrdered(List<V> list, Function<V, K> keyFunction) {
+		return list.stream().collect(Collectors.groupingBy(keyFunction, LinkedHashMap::new, Collectors.toList()));
 	}
 
 	@Transactional
@@ -81,16 +59,9 @@ public class CandidatoBusiness extends FormatUtil{
 		return beans;
 	}
 
-	@Transactional
-	public void inserir(CandidatoBean candidatoBean) {
+	public void inserir(CandidatoBean candiatoBean) {
+		CandidatoBean candidatoBean = new CandidatoBean();
 		candidatoDAO.adicionar(candidatoConverter.convertBeanToEntity(candidatoBean));
 
-	}
-	@Transactional
-	public List<CanalInformacaoBean> obterLista(){
-
-		List<CanalInformacaoBean> listaCanal = canalInformacaoConverter.convertEntityToBean(canalInformacaoDAO.listar());
-
-		return listaCanal;
 	}
 }

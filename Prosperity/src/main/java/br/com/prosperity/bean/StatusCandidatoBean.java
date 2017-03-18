@@ -1,5 +1,6 @@
 package br.com.prosperity.bean;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.stereotype.Component;
@@ -21,6 +22,12 @@ public class StatusCandidatoBean {
 	private String descricaoParecer;
 	private UsuarioBean usuario;
 	private StatusBean status;
+	
+	public String getMesAno() {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM/yyyy");
+		return dateFormat.format(dataAlteracao);
+	}
+	
 	private String mensagem;
 
 	public String getMensagem() {
