@@ -52,6 +52,60 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 				response.sendRedirect(request.getContextPath() + "/pagina-inicial/");
 				return false;
 			}
+			if(uri.endsWith("vaga/consultar")){
+				for(FuncionalidadeBean f : user.getPerfil().getListaFuncionalidades()){
+					if(f.getId() == 2 ){
+						return true;
+					}
+				}
+				response.sendRedirect(request.getContextPath() + "/pagina-inicial/");
+				return false;
+			}
+			if(uri.endsWith("usuario/listar")){
+				for(FuncionalidadeBean f : user.getPerfil().getListaFuncionalidades()){
+					if(f.getId() == 22){
+						return true;
+					}
+				}
+				response.sendRedirect(request.getContextPath() + "/pagina-inicial/");
+				return false;
+			}
+			if(uri.endsWith("candidato/cadastrar")){
+				for(FuncionalidadeBean f : user.getPerfil().getListaFuncionalidades()){
+					if(f.getId() == 17){
+						return true;
+					}
+				}
+				response.sendRedirect(request.getContextPath() + "/pagina-inicial/");
+				return false;
+			}
+			if(uri.endsWith("candidato/consultar-gestor")){
+				for(FuncionalidadeBean f : user.getPerfil().getListaFuncionalidades()){
+					if(f.getId() == 19){
+						return true;
+					}
+				}
+				response.sendRedirect(request.getContextPath() + "/pagina-inicial/");
+				return false;
+			}
+			if(uri.endsWith("candidato/consultar-rh")){
+				for(FuncionalidadeBean f : user.getPerfil().getListaFuncionalidades()){
+					if(f.getId() == 20){
+						return true;
+					}
+				}
+				response.sendRedirect(request.getContextPath() + "/pagina-inicial/");
+				return false;
+			}
+			if(uri.endsWith("candidato/historico")){
+				for(FuncionalidadeBean f : user.getPerfil().getListaFuncionalidades()){
+					if(f.getId() == 18){
+						return true;
+					}
+				}
+				response.sendRedirect(request.getContextPath() + "/pagina-inicial/");
+				return false;
+			}
 			
 			return true;
 		}else{

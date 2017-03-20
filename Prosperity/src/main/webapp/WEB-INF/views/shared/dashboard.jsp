@@ -57,8 +57,8 @@
 							class="menu-hover"></span>
 					</a>
 						<ul class="submenu">
-							<li><a href="/usuario"><span class="submenu-label">Acesso</span></a></li>
-							<li><a href="/usuario/primeiro-acesso"><span
+							<li><a href="/login/"><span class="submenu-label">Acesso</span></a></li>
+							<li><a href="/login/autenticar"><span
 									class="submenu-label">Primeiro acesso</span></a></li>
 
 						</ul></li>
@@ -97,7 +97,7 @@
 						</span> <span class="text"> Aprovar </span> <span class="menu-hover"></span>
 					</a>
 						<ul class="submenu">
-							<li><a href=""><span class="submenu-label">Candidato</span></a></li>
+							<li><a href="/candidato/consultar-rh"><span class="submenu-label">Candidato</span></a></li>
 							<li><a href="/vaga/aprovar"><span class="submenu-label">Vaga</span></a></li>
 
 						</ul></li>
@@ -107,7 +107,7 @@
 						</span> <span class="text"> Relatório </span> <span class="menu-hover"></span>
 					</a></li>
 
-					<li class="openable"><a href="/usuario/consultar"> <span
+					<li><a href="/ usuario/listar"> <span
 							class="menu-icon"> <i class="fa fa-cogs fa-lg"></i>
 						</span> <span class="text"> Configurações </span> <span
 							class="menu-hover"></span>

@@ -84,7 +84,7 @@
 		<property name="password" value="axa@123" />
 	</bean>
 
-	<!-- <mvc:interceptors>
+	<mvc:interceptors>
 		<bean class="br.com.prosperity.interceptor.AutorizadorInterceptor" />
-	</mvc:interceptors> -->
+	</mvc:interceptors>
 </beans>
