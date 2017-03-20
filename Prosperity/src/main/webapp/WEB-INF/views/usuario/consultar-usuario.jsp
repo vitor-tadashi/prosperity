@@ -2,13 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Consulta de usuário</title>
+<title>Controle de usuários</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -41,12 +39,12 @@
 				<div class="modal-body">
 					<div class="padding-md">
 						<div class="row">
-							<form action="cadastrar" method="POST" id="frmUsuario">
+							<form action="cadastrar" method="POST" id="frmUsuario" data-validate="parsley" novalidate>
 								<input type="hidden" name="id" id="id" />
 								<div class="row">
 									<div class="form-group col-md-6">
 										<label for="funcionario">Funcionário</label>
-										<select class="form-control" name="funcionario.id" id="cmbFuncionario">
+										<select class="form-control" name="funcionario.id" id="cmbFuncionario" data-required="true">
 											<option value="">Selecione</option>
 											<c:forEach var="funcionario" items="${funcionarios}">
 												<option value="${funcionario.id}">${funcionario.nome}</option>
@@ -70,7 +68,7 @@
 									</div>
 									<div class="form-group open col-md-6">
 										<label for="permissao">Perfil</label>
-										<select class="form-control" name="perfil.id" id="cmbPerfil">
+										<select class="form-control" name="perfil.id" id="cmbPerfil" data-required="true">
 											<option value="">Selecione</option>
 											<c:forEach var="perfil" items="${perfis}">
 												<option value="${perfil.id}">${perfil.nome}</option>
@@ -86,7 +84,6 @@
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-danger" id="btnMudarStatus">
-						<span class="fa fa-power-off"></span> Desativar
 					</button>
 					<button class="btn btn-warning" id="btnRedefinirSenha">
 						<i class="fa fa-edit"></i> Redefinir senha
@@ -107,7 +104,7 @@
 			<ul class="breadcrumb">
 				<li><i class="fa fa-home"></i><a href="dashboard.html">
 						Início</a></li>
-				<li class="active">Consultar usuário</li>
+				<li class="active">Controle de usuários</li>
 			</ul>
 		</div>
 		<!--breadcrumb-->
@@ -116,46 +113,45 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="panel panel-default">
-							<div class="panel-heading">Controle de usuários</div>
-							<table
-								class="table table-bordered table-condensed table-hover table-striped"
-								id=""
-								style="font-size: 12px !important; vertical-align: middle !important;">
-								<thead>
-									<tr class="text-center">
-										<th class="text-center">Funcionário</th>
-										<th class="text-center">Usuário</th>
-										<th class="text-center">E-mail</th>
-										<th class="text-center">Perfil</th>
-										<th class="text-center">Situação</th>
-										<th class="text-center">Ações</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach var="usuario" items="${usuarios}">
-										<tr class="text-center">
-											<td>${usuario.funcionario.nome}</td>
-											<td>${usuario.nome}</td>
-											<td>${usuario.email}</td>
-											<td>${usuario.perfil.nome}</td>
-											<td>
-												<c:if test="${usuario.ativo}">
-													<span class="label label-success status">Ativo</span>
-												</c:if>
-												<c:if test="${!usuario.ativo}">
-													<span class="label label-danger status">Inativo</span>
-												</c:if>
-											</td>
-											<td>
-												<div class="btn-group">
-													<a class="btn btn-info btn-xs" onclick="abrirModal('editar', ${usuario.id})"><i class="fa fa-edit"></i> Editar</a>
-												</div>
-											</td>
+							<div class="panel-heading">Usuários cadastrados:</div>
+							<div class="panel-body">
+								<div id="divAlert"></div>
+								<table class="table table-bordered table-condensed table-hover table-striped">
+									<thead>
+										<tr>
+											<th class="text-center">Funcionário</th>
+											<th class="text-center">Usuário</th>
+											<th class="text-center">E-mail</th>
+											<th class="text-center">Perfil</th>
+											<th class="text-center">Situação</th>
+											<th class="text-center">Editar</th>
 										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-							<br>
+									</thead>
+									<tbody>
+										<c:forEach var="usuario" items="${usuarios}">
+											<tr class="text-center">
+												<td>${usuario.funcionario.nome}</td>
+												<td>${usuario.nome}</td>
+												<td>${usuario.email}</td>
+												<td>${usuario.perfil.nome}</td>
+												<td id="status_${usuario.id}">
+													<c:if test="${usuario.ativo}">
+														<span class="label label-success status">Ativo</span>
+													</c:if>
+													<c:if test="${!usuario.ativo}">
+														<span class="label label-danger status">Inativo</span>
+													</c:if>
+												</td>
+												<td>
+													<div class="btn-group">
+														<a class="btn btn-info btn-xs" onclick="abrirModal('editar', ${usuario.id})"><i class="fa fa-edit"></i></a>
+													</div>
+												</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
 						</div>
 						<!-- /.col -->
 						<div class="pull-right">
@@ -165,7 +161,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="panel-footer clearfix">
+			<!-- <div class="panel-footer clearfix">
 				<ul class="pagination pagination-xs m-top-none pull-right">
 					<li class="disabled"><a href="#">Anterior</a></li>
 					<li class="active"><a href="#">1</a></li>
@@ -175,7 +171,7 @@
 					<li><a href="#">5</a></li>
 					<li><a href="#">Próxima</a></li>
 				</ul>
-			</div>
+			</div> -->
 		</div>
 	</div>
 
@@ -183,63 +179,7 @@
 	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
 	
 	<!-- javaScript aqui -->
-	<script>
-		var ativo;
-		var idUsuario;
-		
-		function abrirModal(action, id){
-			var idFuncionario;
-			var idPerfil;
-			
-			$("#frmUsuario")[0].reset();
-			
-			if(id != undefined) {
-				$('#myModalLabel').text('Alterar usuário');
-				$('#btnRedefinirSenha').show();
-	    		$('#btnMudarStatus').show();
-	    		idUsuario = id;
-				$.ajax({
-		    		url: "carregar-usuario",
-		    		type: "GET",
-		    		dataType: "JSON",
-		    		data: {id : id},
-		    		success: function(data){
-		    			console.log(data);
-		    			$('#id').val(data.id);
-		    			$('#usuario').val(data.nome);
-		    			$('#email').val(data.email);
-		    			ativo = data.ativo;
-		    			$('select#cmbFuncionario').val(data.funcionario.id);
-		    			$('select#cmbPerfil').val(data.perfil.id);
-		    		}
-		    	});
-	    	} else {
-	    		$('#myModalLabel').text('Incluir usuário');
-	    		$('#btnRedefinirSenha').hide();
-	    		$('#btnMudarStatus').hide();
-	    	}
-			$('#usuario-modal').modal('show');
-		}
-		
-		$("#btnSalvar").click(function() {
-			$("#frmUsuario").submit();
-		});
-		
-		$("#btnMudarStatus").click(function() {
-			$.ajax({
-	    		url: "mudar-status",
-	    		type: "POST",
-	    		dataType: "JSON",
-	    		data: {id : idUsuario},
-	    		success: function(data) {
-	    		},
-	    		error: function(erro) {
-	    			location.reload();
-	    		}
-	    	});
-		});
-		
-		
-	</script>
+	<script src="/resources/js/api/usuario-api.js"></script>
+	<script src='/resources/js/parsley.min.js'></script>
 </body>
 </html>

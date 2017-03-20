@@ -1,17 +1,19 @@
 package br.com.prosperity.controller;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.FuncionarioBean;
@@ -67,25 +69,6 @@ public class UsuarioController {
 		
 		return lista;
 	}
-	
-/*	@RequestMapping(value = {"/inserir-usuario", "/alterar-usuario"}, method = RequestMethod.GET)
-	public String carregaCombos(Integer id, Model model) {
-		List<FuncionarioBean> funcionarios = funcionarioBusiness.obterTodos();
-		List<PerfilBean> perfis = perfilBusiness.obterTodos();
-		model.addAttribute("funcionarios", funcionarios);
-		model.addAttribute("perfis", perfis);
-		
-		if (id != null) {
-			model.addAttribute("title", "Alterar");
-			
-			usuario = usuarioBusiness.obterUsuarioPorId(id);
-			model.addAttribute("usuario", usuario);
-		} else {
-			model.addAttribute("title", "Inserir");
-		}
-		
-		return "usuario/formulario";
-	}*/
 
 	@RequestMapping(value = "/criar-perfil", method = RequestMethod.GET)
 	public String criaPerfil(Model model) {
@@ -116,11 +99,13 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping(value = "/mudar-status", method = RequestMethod.POST)
-	public @ResponseBody String mudarStatusAjax(Integer id) {
-		UsuarioBean usuario = usuarioBusiness.obterPorId(id);
-		usuarioBusiness.mudarStatus(usuario);
-		
-		return "ok";
+	public void mudarStatusAjax(Integer id, HttpServletResponse response) {
+		usuarioBusiness.mudarStatus(id);
+	}
+	
+	@RequestMapping(value = "/redefinir-senha", method = RequestMethod.POST)
+	public void redefinirSenhaAjax(Integer id, HttpServletResponse response) {
+		usuarioBusiness.redefinirSenha(id);
 	}
 	
 	@RequestMapping(value = "obter-perfil-funcionalidade", method=RequestMethod.GET)
