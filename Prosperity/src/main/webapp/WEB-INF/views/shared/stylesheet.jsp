@@ -1,3 +1,6 @@
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/ico" href="/resources/img/favicon.ico"/>
+        
         <!-- Bootstrap core CSS -->
         <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         

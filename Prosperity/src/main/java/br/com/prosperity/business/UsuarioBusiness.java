@@ -101,8 +101,17 @@ public class UsuarioBusiness {
 	}
 
 	@Transactional
-	public void mudarStatus(UsuarioBean usuario) {
+	public void mudarStatus(Integer id) {
+		UsuarioBean usuario = this.obterPorId(id);
 		usuario.setAtivo(!usuario.getAtivo());
+		usuarioDAO.alterar(usuarioConverter.convertBeanToEntity(usuario));
+	}
+
+	@Transactional
+	public void redefinirSenha(Integer id) {
+		UsuarioBean usuario = this.obterPorId(id);
+		EncriptaDecriptaApacheCodec codec = new EncriptaDecriptaApacheCodec();
+		usuario.setSenha(codec.codificaBase64Encoder(usuario.getSENHA_PADRAO()));
 		usuarioDAO.alterar(usuarioConverter.convertBeanToEntity(usuario));
 	}
 
