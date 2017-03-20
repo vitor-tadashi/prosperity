@@ -26,11 +26,11 @@ public class UsuarioEntity {
 	@Column(name = "idUsuario", unique = true, nullable = false)
 	private Integer id;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idPerfil")
 	private PerfilEntity perfilEntity;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idFuncionario")
 	private FuncionarioEntity funcionarioEntity;
 
