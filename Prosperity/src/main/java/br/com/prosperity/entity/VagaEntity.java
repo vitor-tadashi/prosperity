@@ -44,7 +44,7 @@ public class VagaEntity {
 	private Date dataInicio;
 
 	@Column(name = "flLocalTrabalho")
-	private Character localTrabalho;
+	private char localTrabalho;
 
 	@Column(name = "idTpVaga")
 	private Character tipoVaga;
