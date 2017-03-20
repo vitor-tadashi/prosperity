@@ -10,6 +10,9 @@ public class EnderecoConverter implements Converter<EnderecoEntity, EnderecoBean
 
 	@Override
 	public EnderecoEntity convertBeanToEntity(EnderecoBean bean) {
+		if (bean == null) {
+			return null;
+		}
 		EnderecoEntity entity = new EnderecoEntity();
 		entity.setId(bean.getId());
 		entity.setCep(bean.getCep());
@@ -23,6 +26,9 @@ public class EnderecoConverter implements Converter<EnderecoEntity, EnderecoBean
 
 	@Override
 	public EnderecoBean convertEntityToBean(EnderecoEntity entity) {
+		if (entity == null) {
+			return null;
+		}
 		EnderecoBean bean = new EnderecoBean();
 		bean.setId(entity.getId());
 		bean.setCep(entity.getCep());

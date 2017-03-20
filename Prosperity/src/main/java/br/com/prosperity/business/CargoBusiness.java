@@ -28,4 +28,10 @@ public class CargoBusiness {
 		return cargoBean;
 	}
 
+	@Transactional(readOnly=true)
+	public CargoEntity obterPorId(Integer id) {
+		CargoEntity entity = cargoDAO.obterPorId(id);
+		return entity;
+	}
+
 }

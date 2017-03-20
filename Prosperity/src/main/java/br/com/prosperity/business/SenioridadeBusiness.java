@@ -30,5 +30,11 @@ public class SenioridadeBusiness {
 		senioridadeBean = senioridadeConverter.convertEntityToBean(senioridadeEntity);
 		return senioridadeBean;
 	}
+
+	@Transactional(readOnly=true)
+	public SenioridadeEntity obterPorId(Integer id) {
+		SenioridadeEntity entity = senioridadeDAO.obterPorId(id);
+		return entity;
+	}
 	
 }

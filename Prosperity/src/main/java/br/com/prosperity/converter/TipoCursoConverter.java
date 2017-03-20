@@ -10,6 +10,9 @@ public class TipoCursoConverter implements Converter<TipoCursoEntity, TipoCursoB
 
 	@Override
 	public TipoCursoEntity convertBeanToEntity(TipoCursoBean bean) {
+		if (bean == null) {
+			return null;
+		}
 		TipoCursoEntity entity = new TipoCursoEntity();
 		entity.setId(bean.getId());
 		entity.setDescricao(bean.getNome());
@@ -18,6 +21,10 @@ public class TipoCursoConverter implements Converter<TipoCursoEntity, TipoCursoB
 
 	@Override
 	public TipoCursoBean convertEntityToBean(TipoCursoEntity entity) {
+		
+		if (entity == null) {
+			return null;
+		}
 		TipoCursoBean bean = new TipoCursoBean();
 		bean.setId(entity.getId());
 		bean.setNome(entity.getDescricao());

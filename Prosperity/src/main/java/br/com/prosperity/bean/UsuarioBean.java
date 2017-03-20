@@ -4,12 +4,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UsuarioBean {
+	private final String SENHA_PADRAO = "verity@123";
 	
 	private Integer id;
 	private PerfilBean perfil;
 	private FuncionarioBean funcionario;
 	private String nome;
-	private String senha = "verity@123";
+	private String senha = SENHA_PADRAO;
 	private Boolean autenticado;
 	private Boolean primeiroAcesso = true;
 	private String email;
@@ -78,5 +79,9 @@ public class UsuarioBean {
 
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public String getSENHA_PADRAO() {
+		return SENHA_PADRAO;
 	}
 }

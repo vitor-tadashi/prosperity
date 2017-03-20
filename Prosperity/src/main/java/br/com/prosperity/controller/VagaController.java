@@ -150,14 +150,8 @@ public class VagaController {
 	}
 	
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
-	public String inserirVaga(@ModelAttribute("vagaBean") VagaBean vagaBean, HttpSession session) {
-		String cargo = vagaBean.getCargoBean().getNome();
-		String senioridade = vagaBean.getSenioridadeBean().getNome();
-		Date data = new Date(System.currentTimeMillis());
-		//String usuario = session.getAttribute("autenticado").getNome();
-		vagaBean.setNomeVaga(cargo + senioridade);
-		vagaBean.setDataAbertura(data);
-		//vagaBean.setUsuarioBean(usuario);
+	public String inserirVaga(@ModelAttribute("vagaBean") VagaBean vagaBean) {
+		
 		vagaBusiness.inserir(vagaBean);
 		System.out.println("\n\n\nCadastrado\n\n\n");
 		return "redirect:solicitar";

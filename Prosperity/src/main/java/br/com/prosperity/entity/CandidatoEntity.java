@@ -12,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -27,6 +29,22 @@ public class CandidatoEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idCandidato", unique = true, nullable = false)
 	private Integer id;
+
+	public Date getDataultimoContato() {
+		return dataultimoContato;
+	}
+
+	public void setDataultimoContato(Date dataultimoContato) {
+		this.dataultimoContato = dataultimoContato;
+	}
+
+	public void setValorMin(Double valorMin) {
+		this.valorMin = valorMin;
+	}
+
+	public void setValorMax(Double valorMax) {
+		this.valorMax = valorMax;
+	}
 
 	@Column(name = "nmCandidato")
 	private String nome;
@@ -83,7 +101,6 @@ public class CandidatoEntity {
 	// @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-
 	@JoinColumn(name = "idContato")
 	private ContatoEntity contato;
 
@@ -106,6 +123,22 @@ public class CandidatoEntity {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "idCandidato")
 	private List<CandidatoCompetenciaEntity> competencias;
+	
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "tbVagaCandidato", joinColumns = { @JoinColumn(name = "idCandidato") }, inverseJoinColumns = {
+			@JoinColumn(name = "idVaga") })
+	private List<VagaEntity> vagaEntity;
+	
+	
+	
+	public List<VagaEntity> getVagaEntity() {
+		return vagaEntity;
+	}
+
+	public void setVagaEntity(List<VagaEntity> vagaEntity) {
+		this.vagaEntity = vagaEntity;
+	}
 
 	public Integer getId() {
 		return id;
