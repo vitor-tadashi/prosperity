@@ -112,6 +112,7 @@ public class UsuarioBusiness {
 		UsuarioBean usuario = this.obterPorId(id);
 		EncriptaDecriptaApacheCodec codec = new EncriptaDecriptaApacheCodec();
 		usuario.setSenha(codec.codificaBase64Encoder(usuario.getSENHA_PADRAO()));
+		usuario.setPrimeiroAcesso(false);
 		usuarioDAO.alterar(usuarioConverter.convertBeanToEntity(usuario));
 	}
 
