@@ -35,7 +35,7 @@ public class UsuarioBusiness {
 		UsuarioEntity entity = usuarioConverter.convertBeanToEntity(usuarioBean);
 		usuarioDAO.adicionar(entity);
 	}
-
+	@Transactional
 	public UsuarioBean autenticar(UsuarioBean usuarioBean) throws BusinessException {
 		List<UsuarioEntity> usuarios = usuarioDAO.findByNamedQuery("obterPorUsuario", usuarioBean.getNome());
 
