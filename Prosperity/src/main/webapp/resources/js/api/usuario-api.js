@@ -39,14 +39,15 @@
 					
 					$('select#cmbFuncionario').val(data.funcionario.id);
 					$('select#cmbPerfil').val(data.perfil.id);
+					$('#usuario-modal').modal('show');
 				}
 			});
 		} else {
 			$('#myModalLabel').text('Incluir usuário');
 			$('#btnRedefinirSenha').hide();
 			$('#btnMudarStatus').hide();
+			$('#usuario-modal').modal('show');
 		}
-		$('#usuario-modal').modal('show');
 	}
 
 	$("#btnSalvar").click(function() {
