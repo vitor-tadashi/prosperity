@@ -14,7 +14,7 @@ public class VagaBean {
 	private String nomeSolicitante;
 	private Double valorPretensao;
 	private Date dataInicio;
-	private Character localTrabalho;
+	private char localTrabalho;
 	private Character idTipoVaga;
 	private Date horarioEntrada;
 	private Date horarioSaida;
