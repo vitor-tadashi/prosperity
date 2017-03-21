@@ -36,6 +36,7 @@ public class CandidatoBean  extends FormatUtil {
 	private Date dataUltimoContato;
 	private Date entrevista;
 	private String proposta;
+
 	private Double valorMin;
 	private Double valorMax;
 	public Integer getId() {
