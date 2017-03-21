@@ -55,14 +55,13 @@
 
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
 													<label for="exampleInputEmail1">Local de trabalho</label>
-													<div>
+													<div class="radiogroup" name="localTrabalho" id="local">
 														<label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio2" checked>
+															id="interno" type="radio" value="I" name="radLocalTrabalho" disabled>
 															<span class="custom-radio"></span> Interno
-														</label> 
-														<label class="label-radio inline" > <input
-															 type="radio" name="inline-radio2" disabled>
-															<span class="custom-radio"></span> Cliente
+														</label> <label class="label-radio inline"> <input
+															id="cliente" type="radio" value="C" name="radLocalTrabalho" disabled> <span
+															class="custom-radio"></span> Cliente
 														</label>
 													</div>
 													<!-- /.col -->
@@ -80,15 +79,15 @@
 
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
 													<label for="exampleInputEmail1">Tipo de vaga</label>
-													<div>
+													<div class="radiogroup" name="idTipoVaga" id="tipo">
 														<label class="label-radio inline"> <input
-															type="radio" name="inline-radio3" checked> <span
+															type="radio" id="real" value="R" name="inline-radio3" checked disabled> <span
 															class="custom-radio"></span> Real
 														</label> <label class="label-radio inline"> <input
-															type="radio" name="inline-radio3" disabled> <span
+															type="radio" id="prospeccao" value="P" name="inline-radio3" disabled> <span
 															class="custom-radio"></span> Prospecção
 														</label> <label class="label-radio inline"> <input
-															type="radio" name="inline-radio3" disabled> <span
+															type="radio" id="hunting" value="H" name="inline-radio3" disabled> <span
 															class="custom-radio"></span> Hunting
 														</label>
 													</div>
@@ -143,14 +142,15 @@
 												<!-- /form-group -->
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
 													<label for="vagaQuadro">Aumento de quadro</label>
-													<div>
-														<label class="label-radio inline" id="vagaQuadro"> <input
-															id="novo" type="radio" name="inline-radio" checked>
+													<div class="radiogroup" name="aumentoQuadro" id="aumento">
+														<label class="label-radio inline"> <input
+															id="novo" type="radio" value="N" name="novoQuadro" disabled>
 															<span class="custom-radio"> </span> Novo
 														</label> <label class="label-radio inline"> <input
-															id="sub" type="radio" name="inline-radio" disabled>
-															<span class="custom-radio"> </span> Substituição
+															id="sub" type="radio" value="S" name="novoQuadro" disabled> <span
+															class="custom-radio"> </span> Substituição
 														</label>
+
 													</div>
 													<!-- /.col -->
 												</div>
@@ -289,7 +289,14 @@
 									<td>${vaga.senioridadeBean.nome}</td>
 									<td>${vaga.projetoBean.nome}</td>
 									<td>${vaga.projetoBean.cliente.nome}</td>
-									<td>${vaga.localTrabalho}</td>
+									<td>
+									<c:if test="${vaga.localTrabalho == 73}" >
+										     Interno
+										</c:if>
+										<c:if test="${vaga.localTrabalho == 67}" >
+										     Cliente
+										</c:if>
+									</td>
 									<td>${vaga.dataAbertura }</td>
 									<td>${vaga.dataFechamento }</td>
 									<td>
@@ -392,11 +399,6 @@
 	<script type="text/javascript">
 	
 	function info(listaId){
-		
-    	//var Visualizar = $("#fid option:selected").val();
-    	var Solicitante;
-    	var Titulo;
-    	
     	//
     	$.ajax({
     		url: "visualizar",
@@ -406,6 +408,24 @@
     		success: function(lista){
     			console.log(lista);
     			$('#titulo').html(lista.nomeVaga);
+    			$('input#vagaGestor').val(lista.nomeSolicitante);
+    			if(lista.localTrabalho == 'C') {
+    				$("#cliente").attr('checked', 'checked');
+    			} else {
+    				$("#interno").attr('checked', 'checked');
+    			}
+    			if(lista.idTipoVaga == 'H') {
+    				$("#hunting").attr('checked', 'checked');
+    			} else if(lista.idTipoVaga == 'P') {
+    				$("#prospeccao").attr('checked', 'checked');
+    			} else {
+    				$("#real").attr('checked', 'checked');
+    			}
+    			if(lista.aumentaQuadro == 'S') {
+    				$("#sub").attr('checked', 'checked');
+    			} else {
+    				$("#novo").attr('checked', 'checked');
+    			}
     			$('input#vagaSalario').val(lista.valorPretensao);
     			$('input#cargo').val(lista.cargoBean.nome);
     			$('input#vagaSenioridade').val(lista.senioridadeBean.nome);
