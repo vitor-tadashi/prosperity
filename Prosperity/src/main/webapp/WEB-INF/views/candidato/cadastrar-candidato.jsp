@@ -117,7 +117,7 @@
 											</div>
 											<div class="form-group col-md-3">
 												<label for="email" class="control-label">E-mail</label> <input
-													type="text" class="form-control" id="email" name="email"
+													type="email" class="form-control" id="email" name="email"
 													data-required="true" placeholder="email@dominio.com"
 													value="">
 											</div>
@@ -133,7 +133,7 @@
 											</div>
 											<div class="form-group col-md-2 col-sm-4">
 												<label for="dataNascimento" class="control-label">Data
-													nascimento</label> <input type="text" class="form-control" name="dataNascimento"
+													nascimento</label> <input type="date" class="form-control" name="dataNascimento"
 													id="dataNascimento" value="">
 											</div>
 											<div class="form-group col-md-2">
@@ -206,8 +206,8 @@
 											</select>
 										</div>
 										<div class="form-group col-md-2">
-											<label for="mesAnoConclusao">Mês/Ano de conclusão</label> <input
-												type="text" class="form-control" id="mesAnoConclusao"  name="formacao.dataConclusao"
+											<label for="mesAnoConclusao">Data de conclusão</label> <input
+												type="date" class="form-control" id="mesAnoConclusao"  name="formacao.dataConclusao"
 												>
 										</div>
 									</div>

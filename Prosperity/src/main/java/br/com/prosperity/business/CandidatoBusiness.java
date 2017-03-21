@@ -58,9 +58,8 @@ public class CandidatoBusiness extends FormatUtil {
 		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(entities);
 		return beans;
 	}
-
-	public void inserir(CandidatoBean candiatoBean) {
-		CandidatoBean candidatoBean = new CandidatoBean();
+	@Transactional
+	public void inserir(CandidatoBean candidatoBean) {
 		candidatoDAO.adicionar(candidatoConverter.convertBeanToEntity(candidatoBean));
 
 	}
