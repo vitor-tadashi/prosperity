@@ -28,6 +28,12 @@ public class UsuarioBusiness {
 			System.out.println("erro");
 		}
 		
+		boolean existeUsuario = !usuarioDAO.findByNamedQuery("existeUsuario", usuarioBean.getNome()).isEmpty();
+		
+		if(existeUsuario) {
+			throw new RuntimeException("Usuário já existe");
+		}
+		
 		EncriptaDecriptaApacheCodec codec = new EncriptaDecriptaApacheCodec();
 		
 		usuarioBean.setSenha(codec.codificaBase64Encoder(usuarioBean.getSenha()));

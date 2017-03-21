@@ -10,6 +10,7 @@ import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.converter.FuncionarioConverter;
 import br.com.prosperity.dao.FuncionarioDAO;
 import br.com.prosperity.entity.FuncionarioEntity;
+import br.com.prosperity.entity.UsuarioEntity;
 
 @Component
 public class FuncionarioBusiness {
@@ -20,9 +21,17 @@ public class FuncionarioBusiness {
 	@Autowired
 	private FuncionarioConverter funcionarioConverter;
 	
-	@Transactional
-	public List<FuncionarioBean> obterTodos() {
+	@Transactional(readOnly=true)
+	public List<FuncionarioBean> listar() {
 		List<FuncionarioEntity> funcionarioEntity = funcionarioDAO.listar();
+		List<FuncionarioBean> funcionarioBean = funcionarioConverter.convertEntityToBean(funcionarioEntity);
+
+		return funcionarioBean;
+	}
+	
+	@Transactional(readOnly=true)
+	public List<FuncionarioBean> listarApenasNaoCadastrados() {
+		List<FuncionarioEntity> funcionarioEntity = funcionarioDAO.findByNamedQuery("listarApenasNaoCadastrados");
 		List<FuncionarioBean> funcionarioBean = funcionarioConverter.convertEntityToBean(funcionarioEntity);
 
 		return funcionarioBean;

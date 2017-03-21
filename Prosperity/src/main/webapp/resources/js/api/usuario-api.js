@@ -15,7 +15,7 @@
 			$('#btnMudarStatus').show();
 			idUsuario = id;
 			$.ajax({
-				url : "carregar-usuario",
+				url : "carregar-usuario-api",
 				type : "GET",
 				dataType : "JSON",
 				data : {
@@ -57,7 +57,7 @@
 	$("#btnMudarStatus").click(function() {
 		var mensagem;
 		$.ajax({
-			url : "mudar-status",
+			url : "mudar-status-api",
 			type : "POST",
 			dataType : "JSON",
 			data : {'id' : idUsuario},
@@ -69,7 +69,7 @@
 	            	$('#status_'+idUsuario).find('span').text('Inativo').removeClass('label-success').addClass('label-danger');
 	            	mensagem = "Usuário <strong>" + nomeFuncionario + "</strong> DESATIVADO com sucesso!";
 	            }
-	            $('#divAlert').html(mensagem).addClass('alert alert-success');
+	            $('#divAlert').html(mensagem).addClass('alert alert-success').show();
 	            
 	            $('#usuario-modal').modal('hide');
 	            escondeMensagem();
@@ -80,14 +80,14 @@
 	$("#btnRedefinirSenha").click(function() {
 		var mensagem;
 		$.ajax({
-			url : "redefinir-senha",
+			url : "redefinir-senha-api",
 			type : "POST",
 			dataType : "JSON",
 			data : {'id' : idUsuario},
 			error : function() {
 	            $('#usuario-modal').modal('hide');
 	            mensagem = 'A senha do usuário <strong>' + nomeFuncionario + '</strong> foi redefinida com sucesso!'
-	            $('#divAlert').html(mensagem).addClass('alert alert-success');
+	            $('#divAlert').html(mensagem).addClass('alert alert-success').show();
 	            escondeMensagem();
 	        }
 		})
@@ -96,6 +96,6 @@
 	function escondeMensagem() {
 		window.setTimeout(
 		        function () {
-		            $("#divAlert").html('').removeClass('alert alert-success');
+		            $("#divAlert").hide();
 		        }, 5000);
 	}

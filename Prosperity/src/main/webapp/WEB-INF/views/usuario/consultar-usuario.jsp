@@ -14,12 +14,6 @@
 <c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
 
 <!-- Link e style aqui -->
-<style>
-.status {
-	font-size: 12px;
-}
-</style>
-
 </head>
 
 <body>

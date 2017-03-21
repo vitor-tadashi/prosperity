@@ -260,5 +260,10 @@ footer {
         left: -125px !important;
 }
      
-     
-     
+.status {
+	font-size: 12px;
+}
+
+.padding-md {
+    margin-bottom: 40px !important;
+}

@@ -43,31 +43,13 @@ public class UsuarioController {
 	@RequestMapping(value = "/listar", method = RequestMethod.GET)
 	public String carregaTabela(Model model) {
 		List<UsuarioBean> usuarios = usuarioBusiness.listar();
-		List<FuncionarioBean> funcionarios = funcionarioBusiness.obterTodos();
+		List<FuncionarioBean> funcionarios = funcionarioBusiness.listarApenasNaoCadastrados();
 		List<PerfilBean> perfis = perfilBusiness.obterTodos();
 		model.addAttribute("funcionarios", funcionarios);
 		model.addAttribute("perfis", perfis);
 		model.addAttribute("usuarios", usuarios);
 
 		return "usuario/consultar-usuario";
-	}
-
-	@RequestMapping(value = {"/carregar-usuario"}, method = RequestMethod.GET)
-	public @ResponseBody UsuarioBean carregaUsuarioAjax(Model model, @ModelAttribute("id") Integer id) {
-		UsuarioBean usuario = usuarioBusiness.obterPorId(id);
-		return usuario;
-	}
-	
-	@RequestMapping(value = {"/carregar-combos"}, method = RequestMethod.GET)
-	public @ResponseBody List<Object> carregaCombosAjax(Model model) {
-		List<Object> lista = new ArrayList<>();
-		List<FuncionarioBean> funcionarios = funcionarioBusiness.obterTodos();
-		List<PerfilBean> perfis = perfilBusiness.obterTodos();
-		
-		lista.add(perfis);
-		lista.add(funcionarios);
-		
-		return lista;
 	}
 
 	@RequestMapping(value = "/criar-perfil", method = RequestMethod.GET)
@@ -98,13 +80,24 @@ public class UsuarioController {
 		return "redirect:listar";
 	}
 	
-	@RequestMapping(value = "/mudar-status", method = RequestMethod.POST)
-	public void mudarStatusAjax(Integer id, HttpServletResponse response) {
+	@RequestMapping(value = "/cadastrar", method = RequestMethod.GET)
+	public String redirecionaLista(UsuarioBean usuario) {
+		return "redirect:listar";
+	}
+	
+	@RequestMapping(value = {"/carregar-usuario-api"}, method = RequestMethod.GET)
+	public @ResponseBody UsuarioBean carregaUsuarioAjax(Integer id) {
+		UsuarioBean usuario = usuarioBusiness.obterPorId(id);
+		return usuario;
+	}
+	
+	@RequestMapping(value = "/mudar-status-api", method = RequestMethod.POST)
+	public void mudarStatusAjax(Integer id) {
 		usuarioBusiness.mudarStatus(id);
 	}
 	
-	@RequestMapping(value = "/redefinir-senha", method = RequestMethod.POST)
-	public void redefinirSenhaAjax(Integer id, HttpServletResponse response) {
+	@RequestMapping(value = "/redefinir-senha-api", method = RequestMethod.POST)
+	public void redefinirSenhaAjax(Integer id) {
 		usuarioBusiness.redefinirSenha(id);
 	}
 	
