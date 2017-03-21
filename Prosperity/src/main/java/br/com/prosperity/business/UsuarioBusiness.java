@@ -81,23 +81,39 @@ public class UsuarioBusiness {
 		usuarioDAO.alterar(usuarioConverter.convertBeanToEntity(usuarioBean));
 	}
 
-	@Transactional
-	public List<UsuarioBean> obterTodos() {
+	@Transactional(readOnly=true)
+	public List<UsuarioBean> listar() {
 		List<UsuarioBean> usuarios = usuarioConverter.convertEntityToBean(usuarioDAO.listar());
 		return usuarios;
 	}
 	
-	@Transactional
+	@Transactional(readOnly=true)
 	public List<UsuarioBean> buscarGestor(){
 		List<UsuarioEntity> usuariosEntity = usuarioDAO.findByNamedQuery("obterGestor");
 		List<UsuarioBean> usuariosBean = usuarioConverter.convertEntityToBean(usuariosEntity);
 		return usuariosBean;
 	}
 
-	@Transactional
-	public UsuarioBean obterUsuarioPorId(Integer id) {
+	@Transactional(readOnly=true)
+	public UsuarioBean obterPorId(Integer id) {
 		UsuarioBean bean = usuarioConverter.convertEntityToBean(usuarioDAO.obterPorId(id));
 		return bean;
+	}
+
+	@Transactional
+	public void mudarStatus(Integer id) {
+		UsuarioBean usuario = this.obterPorId(id);
+		usuario.setAtivo(!usuario.getAtivo());
+		usuarioDAO.alterar(usuarioConverter.convertBeanToEntity(usuario));
+	}
+
+	@Transactional
+	public void redefinirSenha(Integer id) {
+		UsuarioBean usuario = this.obterPorId(id);
+		EncriptaDecriptaApacheCodec codec = new EncriptaDecriptaApacheCodec();
+		usuario.setSenha(codec.codificaBase64Encoder(usuario.getSENHA_PADRAO()));
+		usuario.setPrimeiroAcesso(true);
+		usuarioDAO.alterar(usuarioConverter.convertBeanToEntity(usuario));
 	}
 
 }

@@ -1,5 +1,6 @@
 package br.com.prosperity.util;
 
+import javax.swing.text.MaskFormatter;
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.ContatoBean;
 
@@ -42,4 +43,5 @@ public class FormatUtil {
 		}
 		return contatoBean;
 	}
+	
 }

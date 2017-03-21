@@ -16,18 +16,22 @@ public class FormacaoConverter implements Converter<FormacaoEntity, FormacaoBean
 
 	@Override
 	public FormacaoEntity convertBeanToEntity(FormacaoBean bean) {
+		if (bean == null) {
+			return null;
+		}
 		FormacaoEntity entity = new FormacaoEntity();
 		entity.setId(bean.getId());
 		entity.setNome(bean.getNomeInstituicao());
 		entity.setNomeCurso(bean.getNomeCurso());
 		entity.setDataConclusao(bean.getDataConclusao());
-		entity.setSituacaoAtual(SituacaoAtual.convertBeanToEntity(bean.getSituacaoAtual()));
-		entity.setTipoCurso(tipoCurso.convertBeanToEntity(bean.getTipoCurso()));
 		return entity;
 	}
 
 	@Override
 	public FormacaoBean convertEntityToBean(FormacaoEntity entity) {
+		if (entity == null) {
+			return null;
+		}
 		FormacaoBean bean = new FormacaoBean();
 		bean.setId(entity.getId());
 		bean.setNomeInstituicao(entity.getNome());

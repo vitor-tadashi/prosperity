@@ -261,11 +261,17 @@ UPDATE tbCandidato set dtAprovacao = '01-01-2017' where idCandidato =
 select * from tbStatus
 select * from tbProjeto
 
-select * from tbStatusVaga
 select * from tbVaga
 
 alter table tbVaga add idStatus int
 alter table tbVaga add foreign key (idStatus) references tbStatus(idStatus)
 
-alter table tbStatusVaga add idVaga int
-alter table tbStatusVaga add foreign key (idVaga) references tbVaga(idVaga)
+--- Removendo idStatus e adicionando idStatusVaga, pois ela que é a tabela associativa.
+
+DELETE tbStatusVaga;
+
+ALTER TABLE tbVaga
+DROP COLUMN idStatus;
+
+ALTER TABLE tbVaga ADD idStatusVaga INT FOREIGN KEY REFERENCES tbStatusVaga(idStatusVaga);
+
