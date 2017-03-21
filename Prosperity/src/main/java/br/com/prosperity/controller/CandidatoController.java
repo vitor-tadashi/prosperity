@@ -100,7 +100,7 @@ public class CandidatoController {
 		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.obterTodos();
 		model.addAttribute("listaSenioridade", listaSenioridade);
 
-		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.obterTodos();
+		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.listar();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
 
 		return "candidato/consulta-rh";
