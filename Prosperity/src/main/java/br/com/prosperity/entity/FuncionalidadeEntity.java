@@ -19,6 +19,9 @@ public class FuncionalidadeEntity {
 
 	@Column(name = "nmFuncionalidade")
 	private String nome;
+	
+	@Column(name = "url")
+	private String url;
 
 	public Integer getId() {
 		return id;
@@ -35,4 +38,13 @@ public class FuncionalidadeEntity {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	
 }
