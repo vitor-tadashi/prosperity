@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.converter.VagaConverter;
 import br.com.prosperity.dao.VagaDAO;
-import br.com.prosperity.entity.CanalInformacaoEntity;
 import br.com.prosperity.entity.CargoEntity;
 import br.com.prosperity.entity.SenioridadeEntity;
 import br.com.prosperity.entity.VagaEntity;
@@ -25,9 +24,6 @@ public class VagaBusiness {
 
 	@Autowired
 	private VagaConverter vagaConverter;
-
-	@Autowired
-	private List<VagaBean> vagaBean;
 
 	@Autowired
 	private SenioridadeBusiness senioridadeBusinness;
