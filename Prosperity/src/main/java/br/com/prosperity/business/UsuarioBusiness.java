@@ -35,7 +35,7 @@ public class UsuarioBusiness {
 		UsuarioEntity entity = usuarioConverter.convertBeanToEntity(usuarioBean);
 		usuarioDAO.adicionar(entity);
 	}
-
+	@Transactional
 	public UsuarioBean autenticar(UsuarioBean usuarioBean) throws BusinessException {
 		List<UsuarioEntity> usuarios = usuarioDAO.findByNamedQuery("obterPorUsuario", usuarioBean.getNome());
 
@@ -112,6 +112,7 @@ public class UsuarioBusiness {
 		UsuarioBean usuario = this.obterPorId(id);
 		EncriptaDecriptaApacheCodec codec = new EncriptaDecriptaApacheCodec();
 		usuario.setSenha(codec.codificaBase64Encoder(usuario.getSENHA_PADRAO()));
+		usuario.setPrimeiroAcesso(true);
 		usuarioDAO.alterar(usuarioConverter.convertBeanToEntity(usuario));
 	}
 

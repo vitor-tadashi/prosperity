@@ -13,22 +13,45 @@
 
 <c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
 
+<style type="text/css">
+@media screen {
+    #printSection {
+        display: none;
+    }
+}
+@media print {
+    body * {
+        visibility:hidden;
+    }
+    #printSection, #printSection * {
+        visibility:visible;
+    }
+    #printSection {
+        position:absolute;
+        left:0;
+        top:0;
+    }
+}
+</style>
+
 </head>
 <body>
 
 	<c:import url="/WEB-INF/views/shared/dashboard.jsp"></c:import>
 
+
 	<!-- Modal visualizar-->
 	<div class="modal fade" id="vaga-modal" data-target="#vaga-modal"
 		tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
-			<div class="modal-content">
+			<div class="modal-content">	
+			<div id="printThis">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="titulo" > Vaga</h4>
+					<h4 class="modal-title" id="titulo">Vaga</h4>
 				</div>
 				<div class="modal-body">
 					<div class="panel-tab clearfix">
@@ -55,14 +78,15 @@
 
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
 													<label for="exampleInputEmail1">Local de trabalho</label>
-													<div>
+													<div class="radiogroup" name="localTrabalho" id="local">
 														<label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio2" checked>
-															<span class="custom-radio"></span> Interno
-														</label> 
-														<label class="label-radio inline" > <input
-															 type="radio" name="inline-radio2" disabled>
-															<span class="custom-radio"></span> Cliente
+															id="interno" type="radio" value="I"
+															name="radLocalTrabalho" disabled> <span
+															class="custom-radio"></span> Interno
+														</label> <label class="label-radio inline"> <input
+															id="cliente" type="radio" value="C"
+															name="radLocalTrabalho" disabled> <span
+															class="custom-radio"></span> Cliente
 														</label>
 													</div>
 													<!-- /.col -->
@@ -80,16 +104,19 @@
 
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
 													<label for="exampleInputEmail1">Tipo de vaga</label>
-													<div>
+													<div class="radiogroup" name="idTipoVaga" id="tipo">
 														<label class="label-radio inline"> <input
-															type="radio" name="inline-radio3" checked> <span
-															class="custom-radio"></span> Real
+															type="radio" id="real" value="R" name="inline-radio3"
+															checked disabled> <span class="custom-radio"></span>
+															Real
 														</label> <label class="label-radio inline"> <input
-															type="radio" name="inline-radio3" disabled> <span
+															type="radio" id="prospeccao" value="P"
+															name="inline-radio3" disabled> <span
 															class="custom-radio"></span> Prospecção
 														</label> <label class="label-radio inline"> <input
-															type="radio" name="inline-radio3" disabled> <span
-															class="custom-radio"></span> Hunting
+															type="radio" id="hunting" value="H" name="inline-radio3"
+															disabled> <span class="custom-radio"></span>
+															Hunting
 														</label>
 													</div>
 													<!-- /.col -->
@@ -98,8 +125,8 @@
 										</div>
 										<div class="form-group row">
 											<div class="form-group col-md-4" style="margin-bottom: 0px">
-												<label for="vagaSenioridade">Senioridade da vaga</label>
-												<input type="name" class="form-control input-sm"
+												<label for="vagaSenioridade">Senioridade da vaga</label> <input
+													type="name" class="form-control input-sm"
 													id="vagaSenioridade" placeholder="Estágio"
 													value="Senioridade
 													da Vaga" disabled>
@@ -111,8 +138,8 @@
 													<div class="form-group col-md-3">
 														<div class="input-group bootstrap-timepicker"
 															style="width: 105%;">
-															<input class="timepicker form-control" id="vagaHorario" type="text"
-																/ value="08:00 AM" disabled> <span
+															<input class="timepicker form-control" id="vagaHorario"
+																type="text" value="08:00 AM" disabled> <span
 																class="input-group-addon"><i
 																class="fa fa-clock-o"></i></span>
 														</div>
@@ -123,8 +150,8 @@
 													<div class="form-group col-md-3">
 														<div class="input-group bootstrap-timepicker"
 															style="width: 105%;">
-															<input class="timepicker form-control" id="vagaHorario1" type="text"
-																value="05:00 PM" disabled> <span
+															<input class="timepicker form-control" id="vagaHorario1"
+																type="text" value="05:00 PM" disabled> <span
 																class="input-group-addon"><i
 																class="fa fa-clock-o"></i></span>
 														</div>
@@ -136,21 +163,23 @@
 											<div class="">
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
 													<label for="vagaSalario">Faixa salarial</label> <input
-														class="form-control input-sm"
-														id="vagaSalario" placeholder="Faixa Salarial"
-														disabled>
+														class="form-control input-sm" id="vagaSalario"
+														placeholder="Faixa Salarial" disabled>
 												</div>
 												<!-- /form-group -->
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
 													<label for="vagaQuadro">Aumento de quadro</label>
-													<div>
-														<label class="label-radio inline" id="vagaQuadro"> <input
-															id="novo" type="radio" name="inline-radio" checked>
-															<span class="custom-radio"> </span> Novo
+													<div class="radiogroup" name="aumentoQuadro" id="aumento">
+														<label class="label-radio inline"> <input
+															id="novo" type="radio" value="N" name="novoQuadro"
+															disabled> <span class="custom-radio"> </span>
+															Novo
 														</label> <label class="label-radio inline"> <input
-															id="sub" type="radio" name="inline-radio" disabled>
-															<span class="custom-radio"> </span> Substituição
+															id="sub" type="radio" value="S" name="novoQuadro"
+															disabled> <span class="custom-radio"> </span>
+															Substituição
 														</label>
+
 													</div>
 													<!-- /.col -->
 												</div>
@@ -163,8 +192,8 @@
 													<div class="form-group">
 														<div class="input-group">
 															<input type="text" value="01/01/2017"
-																class="datepicker form-control" id="vagaInicio" disabled> <span
-																class="input-group-addon"><i
+																class="datepicker form-control" id="vagaInicio" disabled>
+															<span class="input-group-addon"><i
 																class="fa fa-calendar"></i></span>
 														</div>
 													</div>
@@ -190,7 +219,8 @@
 									<!-- /form-group -->
 									<div class="form-group col-md-4">
 										<label class="control-label">Projeto</label> <input readonly
-											class="form-control default-cursor" id="vagaProjeto" value="Mobile">
+											class="form-control default-cursor" id="vagaProjeto"
+											value="Mobile">
 									</div>
 									<div class="form-group col-md-4">
 										<label class="control-label">Cliente</label> <input readonly
@@ -198,7 +228,8 @@
 									</div>
 									<div class="form-group col-md-4">
 										<label class="control-label">Gestor imediato</label> <input
-											readonly class="form-control" id="vagaGestor"value="Vitor Tadashi">
+											readonly class="form-control" id="vagaGestor"
+											value="Vitor Tadashi">
 									</div>
 								</div>
 							</section>
@@ -207,7 +238,8 @@
 								<div class="panel-heading">Formação acadêmica</div>
 								<div class="panel-body relative">
 									<div class="form-group">
-										<textarea class="form-control" rows="3" name= "vagaFormacao" id=vagaFormacao disabled >
+										<textarea class="form-control" rows="3" name="vagaFormacao"
+											id=vagaFormacao disabled>
 										</textarea>
 									</div>
 									<!-- /form-group -->
@@ -218,7 +250,8 @@
 								<div class="panel-heading">Perfil comportamental</div>
 								<div class="panel-body relative">
 									<div class="form-group">
-										<textarea class="form-control" rows="3"  name= "vagaPerfil" id=vagaPerfil disabled></textarea>
+										<textarea class="form-control" rows="3" name="vagaPerfil"
+											id=vagaPerfil disabled></textarea>
 									</div>
 									<!-- /form-group -->
 								</div>
@@ -229,22 +262,26 @@
 								<div class="panel-heading">Perfil técnico</div>
 								<div class="panel-body relative">
 									<div class="form-group">
-										<textarea class="form-control" rows="3"  name= "vagaPerfilTecnico" id=vagaPerfilTecnico disabled></textarea>
+										<textarea class="form-control" rows="3"
+											name="vagaPerfilTecnico" id=vagaPerfilTecnico disabled></textarea>
 									</div>
 									<!-- /form-group -->
 								</div>
 							</section>
-							<!-- /panel -->
-							<div class="modal-footer">
-								<button type="button" class="btn btn-primary">Imprimir</button>
+							
 							</div>
+							
 						</div>
 					</div>
+					</div>
 					<!-- /tab-content -->
+					<!-- /panel -->
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary" id="Print" >Imprimir</button>
+							</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
 	<!-- CORPO DA PÁGINA -->
 	<div id="main-container">
@@ -289,20 +326,26 @@
 									<td>${vaga.senioridadeBean.nome}</td>
 									<td>${vaga.projetoBean.nome}</td>
 									<td>${vaga.projetoBean.cliente.nome}</td>
-									<td>${vaga.localTrabalho}</td>
+									<td><c:if test="${vaga.localTrabalho == 73}">
+										     Interno
+										</c:if> <c:if test="${vaga.localTrabalho == 67}">
+										     Cliente
+										</c:if></td>
 									<td>${vaga.dataAbertura }</td>
 									<td>${vaga.dataFechamento }</td>
 									<td>
 										<div class="btn-group">
 											<!-- <-- ! Começo Botão -->
-											<button class="btn btn-sm dropdown-toggle btn-info"
+											<button button type="button"
+												class="btn btn-info dropdown-toggle btn-sm"
 												data-toggle="dropdown" aria-haspopup="true"
 												aria-expanded="false">
-												<i class="fa fa-cogs fa-lg"></i> <span class="caret"></span>
+												<i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
 											</button>
-											<ul class="dropdown-menu">
+											<ul class="dropdown-menu slidedown btnAlinhado">
 												<li><a onclick="info(${vaga.id})"> <i
-														class="fa fa-eye">&nbsp</i>Visualizar</a></li>
+														class="fa fa-eye">&nbsp</i>Visualizar
+												</a></li>
 												<li role="separator" class="divider"></li>
 												<li><a href="#"><i class="fa fa-check fa-lg"></i>
 														Aprovar</a></li>
@@ -392,11 +435,6 @@
 	<script type="text/javascript">
 	
 	function info(listaId){
-		
-    	//var Visualizar = $("#fid option:selected").val();
-    	var Solicitante;
-    	var Titulo;
-    	
     	//
     	$.ajax({
     		url: "visualizar",
@@ -406,6 +444,24 @@
     		success: function(lista){
     			console.log(lista);
     			$('#titulo').html(lista.nomeVaga);
+    			$('input#vagaGestor').val(lista.nomeSolicitante);
+    			if(lista.localTrabalho == 'C') {
+    				$("#cliente").attr('checked', 'checked');
+    			} else {
+    				$("#interno").attr('checked', 'checked');
+    			}
+    			if(lista.idTipoVaga == 'H') {
+    				$("#hunting").attr('checked', 'checked');
+    			} else if(lista.idTipoVaga == 'P') {
+    				$("#prospeccao").attr('checked', 'checked');
+    			} else {
+    				$("#real").attr('checked', 'checked');
+    			}
+    			if(lista.aumentaQuadro == 'S') {
+    				$("#sub").attr('checked', 'checked');
+    			} else {
+    				$("#novo").attr('checked', 'checked');
+    			}
     			$('input#vagaSalario').val(lista.valorPretensao);
     			$('input#cargo').val(lista.cargoBean.nome);
     			$('input#vagaSenioridade').val(lista.senioridadeBean.nome);
@@ -424,7 +480,26 @@
     		}
     	})
     } 
+	
+	document.getElementById("Print").onclick = function () {
+	    printElement(document.getElementById("printThis"));
+	};
 
+	function printElement(elem) {
+	    var domClone = elem.cloneNode(true);
+
+	    var $printSection = document.getElementById("printSection");
+
+	    if (!$printSection) {
+	        var $printSection = document.createElement("div");
+	        $printSection.id = "printSection";
+	        document.body.appendChild($printSection);
+	    }
+
+	    $printSection.innerHTML = "";
+	    $printSection.appendChild(domClone);
+	    window.print();
+	}
 	</script>
 </body>
 </html>

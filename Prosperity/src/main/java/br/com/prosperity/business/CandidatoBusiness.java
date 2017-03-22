@@ -73,7 +73,7 @@ public class CandidatoBusiness extends FormatUtil {
 		
 		return candidatoBean;
 	}
-
+	
 	private static <K, V> Map<K, List<V>> groupByOrdered(List<V> list, Function<V, K> keyFunction) {
 		return list.stream().collect(Collectors.groupingBy(keyFunction, LinkedHashMap::new, Collectors.toList()));
 	}
@@ -84,9 +84,8 @@ public class CandidatoBusiness extends FormatUtil {
 		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(entities);
 		return beans;
 	}
-
-	public void inserir(CandidatoBean candiatoBean) {
-		CandidatoBean candidatoBean = new CandidatoBean();
+	@Transactional
+	public void inserir(CandidatoBean candidatoBean) {
 		candidatoDAO.adicionar(candidatoConverter.convertBeanToEntity(candidatoBean));
 
 	}

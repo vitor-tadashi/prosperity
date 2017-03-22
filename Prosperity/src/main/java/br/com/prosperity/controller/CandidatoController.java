@@ -37,22 +37,7 @@ import br.com.prosperity.exception.BusinessException;
 public class CandidatoController {
 
 	@Autowired
-	private CandidatoBean candidatoBean;
-
-	@Autowired
 	private CandidatoBusiness candidatoBusiness;
-
-	@Autowired
-	private EnderecoBean enderecoBean;
-
-	@Autowired
-	private FormacaoBean formacaoBean;
-
-	@Autowired
-	private ContatoBean contatoBean;
-
-	@Autowired
-	private AvaliacaoBean avaliacaoBean;
 
 	@Autowired
 	private List<CandidatoCompetenciaBean> competencias;
@@ -62,7 +47,7 @@ public class CandidatoController {
 
 	@Autowired
 	private SituacaoAtualBusiness situacaoAtualBusiness;
-	
+
 	@Autowired
 	private FuncionarioBusiness funcionarioBusiness;
 
@@ -70,16 +55,8 @@ public class CandidatoController {
 	private CargoBusiness cargoBusiness;
 
 	@Autowired
-	private TipoCursoBean tipoCursoBean;
-
-	@Autowired
 	private SenioridadeBusiness senioridadeBusiness;
 
-	@Autowired
-	private SenioridadeBean senioridadeBean;
-	
-	@Autowired
-	private SituacaoAtualBean situacaoAtualBean;
 	@Autowired
 	private VagaBusiness vagaBusiness;
 	@Autowired
@@ -100,7 +77,7 @@ public class CandidatoController {
 
 		return "candidato/cadastrar-candidato";
 	}
-	
+
 	@RequestMapping(value = "salvar", method = RequestMethod.POST)
 	public String salvarCandidato(@ModelAttribute("candidatoBean") CandidatoBean candidatoBean)
 			throws BusinessException {
@@ -108,28 +85,27 @@ public class CandidatoController {
 
 		return "candidato/cadastrar-candidato";
 	}
-	
+
 	@RequestMapping(value = "consultar-rh", method = RequestMethod.GET)
 	public String consultarCandidatoRH(Model model) {
 		List<CandidatoBean> candidatos = candidatoBusiness.listar();
 		model.addAttribute("candidatos", candidatos);
 
-		
 		List<VagaBean> listaVaga = vagaBusiness.listar();
 		model.addAttribute("listaVaga", listaVaga);
-		
+
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
 		model.addAttribute("listaCargo", listaCargo);
-		
+
 		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.obterTodos();
 		model.addAttribute("listaSenioridade", listaSenioridade);
-		
+
 		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.obterTodos();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
 
 		return "candidato/consulta-rh";
-	} 
-	
+	}
+
 	@RequestMapping(value = "consultar-gestor", method = RequestMethod.GET)
 	public String consultarCandidatoGestor() {
 		return "candidato/consulta-gestor";
@@ -137,10 +113,18 @@ public class CandidatoController {
 
 	@RequestMapping(value = "historico", method = RequestMethod.GET)
 	public String historicoCandidato(Model model) {
-		candidatoBean = candidatoBusiness.obter(2);
+		CandidatoBean candidatoBean = candidatoBusiness.obter(2);
 
 		model.addAttribute("candidato", candidatoBean);
 
 		return "candidato/historico-candidato";
+	}
+
+	@RequestMapping(value = "aprovar-candidato", method = RequestMethod.GET)
+	public String aprovarCandidato(Model model) {
+		CandidatoBean candidatoBean = candidatoBusiness.obter(2);
+		model.addAttribute("candidato", candidatoBean);
+		
+		return "candidato/aprovar-candidato";
 	}
 }

@@ -66,7 +66,7 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Desenvolvedor .Net
+					<h4 class="modal-title" id="titulo">Desenvolvedor .Net
 						Pleno</h4>
 				</div>
 				<div class="modal-body">
@@ -159,10 +159,10 @@
 													<label for="exampleInputEmail1">Local de trabalho</label>
 													<div class="radiogroup" name="localTrabalho" id="local">
 														<label class="label-radio inline"> <input
-															id="interno" type="radio" name="inline-radio2" checked disabled>
+															id="interno" type="radio" value="I" name="radLocalTrabalho" disabled>
 															<span class="custom-radio"></span> Interno
 														</label> <label class="label-radio inline"> <input
-															id="cliente" type="radio" name="inline-radio2" disabled> <span
+															id="cliente" type="radio" value="C" name="radLocalTrabalho" disabled> <span
 															class="custom-radio"></span> Cliente
 														</label>
 													</div>
@@ -187,13 +187,13 @@
 													<label for="exampleInputEmail1">Tipo de vaga</label>
 													<div class="radiogroup" name="idTipoVaga" id="tipo">
 														<label class="label-radio inline"> <input
-															type="radio" name="inline-radio3" checked disabled> <span
+															type="radio" id="real" value="R" name="inline-radio3" checked disabled> <span
 															class="custom-radio"></span> Real
 														</label> <label class="label-radio inline"> <input
-															type="radio" name="inline-radio3" disabled> <span
+															type="radio" id="prospeccao" value="P" name="inline-radio3" disabled> <span
 															class="custom-radio"></span> Prospecção
 														</label> <label class="label-radio inline"> <input
-															type="radio" name="inline-radio3" disabled> <span
+															type="radio" id="hunting" value="H" name="inline-radio3" disabled> <span
 															class="custom-radio"></span> Hunting
 														</label>
 													</div>
@@ -258,10 +258,10 @@
 													<label for="exampleInputEmail1">Aumento de quadro</label>
 													<div class="radiogroup" name="aumentoQuadro" id="aumento">
 														<label class="label-radio inline"> <input
-															id="novo" type="radio" name="inline-radio" checked disabled>
+															id="novo" type="radio" value="N" name="novoQuadro" disabled>
 															<span class="custom-radio"> </span> Novo
 														</label> <label class="label-radio inline"> <input
-															id="sub" type="radio" name="inline-radio" disabled> <span
+															id="sub" type="radio" value="S" name="novoQuadro" disabled> <span
 															class="custom-radio"> </span> Substituição
 														</label>
 
@@ -482,7 +482,15 @@
 									<td>${vaga.nomeVaga}</td>
 									<td>${vaga.nomeSolicitante}</td>
 									<td>${vaga.projetoBean.cliente.nome}</td>
-									<td>${vaga.localTrabalho}</td>
+									<td>
+										<c:if test="${vaga.localTrabalho == 73}" >
+										     Interno
+										</c:if>
+										<c:if test="${vaga.localTrabalho == 67}" >
+										     Cliente
+										</c:if>
+
+									</td>
 									<td>${vaga.dataAbertura}</td>
 									<td><span id="tdStatus" class="label label-contratado">Ativo</span></td>
 									<td>
@@ -606,7 +614,7 @@
     		data: { 'id' : listaId},
     		success: function(lista){
     			console.log(lista);
-    			$('input#titulo').val(lista.nomeVaga);
+    			$('#titulo').html(lista.nomeVaga);
     			$('input#dataAbertura').val(lista.dataAbertura);
     			$('input#dataAprovacao').val(lista.dataAprovacao);
     			$('input#dataFechamento').val(lista.dataFechamento);
@@ -614,14 +622,35 @@
     			
     			$('input#solicitante').val(lista.nomeSolicitante);
     			
-    			$('input#local').val(lista.localTrabalho);
+    			if(lista.localTrabalho == 'C') {
+    				$("#cliente").attr('checked', 'checked');
+    			} else {
+    				$("#interno").attr('checked', 'checked');
+    			}
+    			
     			$('input#cargo').val(lista.cargoBean.nome);
-    			$('input#tipo').val(lista.idTipoVaga);
+    			
+    			//$('input#tipo').val(lista.idTipoVaga);
+    			if(lista.idTipoVaga == 'H') {
+    				$("#hunting").attr('checked', 'checked');
+    			} else if(lista.idTipoVaga == 'P') {
+    				$("#prospeccao").attr('checked', 'checked');
+    			} else {
+    				$("#real").attr('checked', 'checked');
+    			}
+    			
     			$('input#senioridade').val(lista.senioridadeBean.nome);
     			$('input#horaEntrada').val(lista.horarioEntrada);
     			$('input#horaSaida').val(lista.horarioSaida);
     			$('input#pretensao').val(lista.valorPretensao);
-    			$('input#aumento').val(lista.aumentaQuadro);
+    			
+    			
+    			if(lista.aumentaQuadro == 'S') {
+    				$("#sub").attr('checked', 'checked');
+    			} else {
+    				$("#novo").attr('checked', 'checked');
+    			}
+    			
     			$('input#dataInicio').val(lista.dataInicio);
     			$('input#substituido').val(lista.nomeSubstituido);
     			$('#formacaoAcademica').val(lista.descricaoFormacaoAcademica);
@@ -631,7 +660,9 @@
     		}
     	})
     } 
-
+	
+	
+	
 	</script>
 	
 	
