@@ -30,18 +30,23 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 		if (request.getSession().getAttribute("autenticado") != null) {
 			request.setAttribute("autenticado", request.getSession().getAttribute("autenticado"));
 			UsuarioBean user = (UsuarioBean) request.getSession().getAttribute("autenticado");
+			
+			if(uri.endsWith("obter-perfil-funcionalidade"))
+				return true;
 	
-			/*for(FuncionalidadeBean fun : funcionalidadeBusiness.obterTodos()){
+			for(FuncionalidadeBean fun : funcionalidadeBusiness.obterTodos()){
 				if(uri.endsWith(fun.getUrl())){
 					for(FuncionalidadeBean f : user.getPerfil().getListaFuncionalidades()){
 						if(f.getId() == fun.getId()){
 							return true;
 						}
 					}
+					response.sendRedirect(request.getContextPath() + "/pagina-inicial/");
+					return false;
 				}
-			}*/
+			}
 			
-			if(uri.endsWith("usuario/criar-perfil")){
+			/*if(uri.endsWith("usuario/criar-perfil")){
 				for(FuncionalidadeBean f : user.getPerfil().getListaFuncionalidades()){
 					if(f.getId() == 16){
 						return true;
@@ -121,7 +126,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 				}
 				response.sendRedirect(request.getContextPath() + "/pagina-inicial/");
 				return false;
-			}
+			}*/
 			
 			return true;
 			//return false;
