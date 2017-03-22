@@ -32,8 +32,9 @@
 					</div>
 				</div>
 				<div class="panel-body">
-					<form class="form-login" action="primeiro-acesso" method="POST" id="FormSenha" name="FormSenha" onsubmit="return validarSenha()">
-				        <div id="textDiv"></div>
+					<form class="form-login" action="primeiro-acesso" method="POST"
+						id="FormSenha" name="FormSenha" onsubmit="return validarSenha()">
+						<div id="textDiv"></div>
 
 						<div class="form-group bounceIn animation-delay2">
 							<label>Nova senha</label>
@@ -48,7 +49,8 @@
 							<div class="input-group input-sm">
 								<span class="input-group-addon"><i class="fa fa-lock"></i></span>
 								<input type="password" placeholder="Confirmar nova senha"
-									class="form-control input-sm" id="confirmarSenha" name="confirmarSenha">
+									class="form-control input-sm" id="confirmarSenha"
+									name="confirmarSenha">
 							</div>
 						</div>
 						<button class="btn btn-success btn-sm">
@@ -66,20 +68,6 @@
 	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
 
 	<!-- javaScript aqui -->
-	<script>
-		function validarSenha() {
-			senha = document.FormSenha.senha.value;
-			confirmarSenha = document.FormSenha.confirmarSenha.value;
-			if (senha != confirmarSenha) {
-				var div = document.getElementById("textDiv").className = "alert alert-danger text-center";
-
-                textDiv.textContent = "Senhas diferentes";
-
-                var text = "[" + div.textContent + "]";
-				return false;
-			}
-			return true;
-		}
-	</script>
+	<script src="/resources/js/custom/primeiro-acesso.js"></script>
 </body>
 </html>
