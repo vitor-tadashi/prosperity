@@ -87,7 +87,4 @@
 	<mvc:interceptors>
 		<bean class="br.com.prosperity.interceptor.AutorizadorInterceptor" />
 	</mvc:interceptors> 
-	<mvc:interceptors> 		<bean class="br.com.prosperity.interceptor.AutorizadorInterceptor" /> -->
-<	</mvc:interceptors>
-
 </beans>
