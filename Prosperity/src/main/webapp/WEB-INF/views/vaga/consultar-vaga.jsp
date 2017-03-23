@@ -514,6 +514,7 @@
 									</td>
 								</tr>
 								</c:forEach>
+								
 								<!-- <tr>
 									<td>Analista de sistema</td>
 									<td>Carrefour</td>
