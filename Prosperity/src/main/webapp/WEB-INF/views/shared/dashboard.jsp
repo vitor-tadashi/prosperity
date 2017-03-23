@@ -35,6 +35,7 @@
 				</ul></li>
 		</ul>
 	</div>
+	<input type="hidden" id="idPerfil" value="${autenticado.perfil.id }">
 	<!-- /top-nav-->
 
 	<aside class="fixed skin-6">
@@ -51,7 +52,7 @@
 			<div class="main-menu">
 				<ul>
 
-					<li class="openable"><a href="#"> <span class="menu-icon">
+					<li class="openable menu-opcao hide" value="22"><a href="#"> <span class="menu-icon">
 								<i class="fa fa-desktop fa-lg"></i>
 						</span> <span class="text"> Tela de acesso </span> <span
 							class="menu-hover"></span>
@@ -68,12 +69,12 @@
 						</span> <span class="text"> Página inicial </span> <span
 							class="menu-hover"></span>
 					</a></li>
-					<li><a href="/vaga/solicitar"> <span class="menu-icon">
+					<li class="menu-opcao hide" value="3"><a href="/vaga/solicitar"> <span class="menu-icon">
 								<i class="fa fa-plus fa-lg"></i>
 						</span> <span class="text"> Solicitar vaga </span> <span
 							class="menu-hover"></span>
 					</a></li>
-					<li><a href="/candidato/cadastrar"> <span
+					<li class="menu-opcao hide" value="17"><a href="/candidato/cadastrar"> <span
 							class="menu-icon"> <i class="fa fa-edit fa-lg"></i>
 						</span> <span class="text"> Cadastrar candidato </span> <span
 							class="menu-hover"></span>
@@ -84,11 +85,13 @@
 						</span> <span class="text"> Consultar </span> <span class="menu-hover"></span>
 					</a>
 						<ul class="submenu">
-							<li><a href="/candidato/consultar-rh"><span
+							<li class="menu-opcao hide" value="20"><a href="/candidato/consultar-rh"><span
 									class="submenu-label">Candidato</span></a></li>
-							<li><a href="/vaga/consultar"><span
+							<li class="menu-opcao hide" value="19"><a href="/candidato/consultar-gestor"><span
+									class="submenu-label">Candidato</span></a></li>
+							<li class="menu-opcao hide" value="2"><a href="/vaga/consultar"><span
 									class="submenu-label">Vaga</span></a></li>
-							<li><a href="/candidato/historico"><span
+							<li class="menu-opcao hide" value="18"><a href="/candidato/historico"><span
 									class="submenu-label">Histórico</span></a></li>
 						</ul></li>
 
@@ -97,8 +100,8 @@
 						</span> <span class="text"> Aprovar </span> <span class="menu-hover"></span>
 					</a>
 						<ul class="submenu">
-							<li><a href="/candidato/consultar-rh"><span class="submenu-label">Candidato</span></a></li>
-							<li><a href="/vaga/aprovar"><span class="submenu-label">Vaga</span></a></li>
+							<li class="menu-opcao hide" value="20"><a href="/candidato/consultar-rh"><span class="submenu-label">Candidato</span></a></li>
+							<li class="menu-opcao hide" value="1"><a href="/vaga/aprovar"><span class="submenu-label">Vaga</span></a></li>
 
 						</ul></li>
 
@@ -107,7 +110,7 @@
 						</span> <span class="text"> Relatório </span> <span class="menu-hover"></span>
 					</a></li>
 
-					<li><a href="/ usuario/listar"> <span
+					<li class="menu-opcao hide" value="22"><a href="/usuario/listar"> <span
 							class="menu-icon"> <i class="fa fa-cogs fa-lg"></i>
 						</span> <span class="text"> Configurações </span> <span
 							class="menu-hover"></span>
