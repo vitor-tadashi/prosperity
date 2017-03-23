@@ -30,20 +30,6 @@ public class StatusEntity {
 	@ManyToOne
 	@JoinColumn(name="idTpStatus")
 	private TipoStatusEntity tipoStatus;
-	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "idStatusCandidato")
-	private StatusCandidatoEntity statusCandidatoEntity;
-
-	
-	
-	public StatusCandidatoEntity getStatusCandidatoEntity() {
-		return statusCandidatoEntity;
-	}
-
-	public void setStatusCandidatoEntity(StatusCandidatoEntity statusCandidatoEntity) {
-		this.statusCandidatoEntity = statusCandidatoEntity;
-	}
 
 	public Integer getId() {
 		return id;

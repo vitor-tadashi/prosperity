@@ -50,3 +50,6 @@
 <!-- Perfect -->
 <script src="/resources/js/app/app_form.js"></script>
 <script src="/resources/js/app/app.js"></script>
+
+<!-- menu lateral -->
+<script src="/resources/js/custom/menu.js"></script>

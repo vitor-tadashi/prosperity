@@ -15,63 +15,7 @@
 
 <c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
 
-<script type="text/javascript">
-	function limpa_formulário_cep() {
-		//Limpa valores do formulário de cep.
-		document.getElementById('rua').value = ("");
-		document.getElementById('cidade').value = ("");
-		document.getElementById('uf').value = ("");
-	}
 
-	function meu_callback(conteudo) {
-		if (!("erro" in conteudo)) {
-			//Atualiza os campos com os valores.
-			document.getElementById('rua').value = (conteudo.rua);
-			document.getElementById('cidade').value = (conteudo.localidade);
-			document.getElementById('uf').value = (conteudo.uf);
-		} //end if.
-		else {
-			//CEP não Encontrado.
-			limpa_formulário_cep();
-			alert("CEP não encontrado.");
-		}
-	}
-
-	function pesquisacep(valor) {
-
-		//Nova variável "cep" somente com dígitos.
-		var cep = valor.replace(/\D/g, '');
-
-		//Verifica se campo cep possui valor informado.
-		if (cep != "") {
-
-			//Expressão regular para validar o CEP.
-			var validacep = /^[0-9]{8}$/;
-
-			//Valida o formato do CEP.
-			if (validacep.test(cep)) {
-				var script = document.createElement('script');
-
-				//Sincroniza com o callback.
-				script.src = '//viacep.com.br/ws/' + cep
-						+ '/json/?callback=meu_callback';
-
-				//Insere script no documento e carrega o conteúdo.
-				document.body.appendChild(script);
-
-			} //end if.
-			else {
-				//cep é inválido.
-				limpa_formulário_cep();
-				alert("Formato de CEP inválido.");
-			}
-		} //end if.
-		else {
-			//cep sem valor, limpa formulário.
-			limpa_formulário_cep();
-		}
-	};
-</script>
 </head>
 <body>
 	<c:import url="/WEB-INF/views/shared/dashboard.jsp"></c:import>
@@ -117,33 +61,33 @@
 											</div>
 											<div class="form-group col-md-3">
 												<label for="email" class="control-label">E-mail</label> <input
-													type="text" class="form-control" id="email" name="email"
+													type="email" class="form-control" id="email" name="email"
 													data-required="true" placeholder="email@dominio.com"
 													value="">
 											</div>
 											<div class="form-group col-md-3">
 												<label for="cpf" class="control-label">CPF</label> <input
-													type="text" class="form-control" id="cpf" name="cpf"
-													data-required="true" placeholder="Informe seu CPF" value="">
+													type="text" class="form-control cpf" id="cpf" name="cpf"
+													 placeholder="Informe seu CPF" value="">
 											</div>
 											<div class="form-group col-md-2">
 												<label for="rg" class="control-label">RG</label> <input
-													type="text" class="form-control" id="rg" name="rg"
+													type="text" class="form-control rg" id="rg" name="rg"
 													data-required="true" value="">
 											</div>
 											<div class="form-group col-md-2 col-sm-4">
 												<label for="dataNascimento" class="control-label">Data
-													nascimento</label> <input type="text" class="form-control" name="dataNascimento"
+													nascimento</label> <input type="date" class="form-control" name="dataNascimento"
 													id="dataNascimento" value="">
 											</div>
 											<div class="form-group col-md-2">
 												<label for="telefone" class="control-label">Telefone</label>
-												<input type="text" class="form-control" id="contato" name="contato.telefone"
+												<input type="text" class="form-control telefone" id="contato" name="contato.telefone"
 													 value="">
 											</div>
 											<div class="form-group col-md-2">
 												<label for="cep" class="control-label">CEP</label> <input
-													 type="text" class="form-control" id="cep" name="endereco.cep"
+													 type="text" class="form-control cep" id="cep" name="endereco.cep"
 													value="" onblur="pesquisacep(this.value);" />
 											</div>
 											<div class="form-group col-md-6">
@@ -206,8 +150,8 @@
 											</select>
 										</div>
 										<div class="form-group col-md-2">
-											<label for="mesAnoConclusao">Mês/Ano de conclusão</label> <input
-												type="text" class="form-control" id="mesAnoConclusao"  name="formacao.dataConclusao"
+											<label for="mesAnoConclusao">Data de conclusão</label> <input
+												type="date" class="form-control" id="mesAnoConclusao"  name="formacao.dataConclusao"
 												>
 										</div>
 									</div>
@@ -219,14 +163,14 @@
 														salarial</label>
 												</div>
 												<div class="col-md-2">
-													<input type="text" class="form-control"
+													<input type="text" class="form-control dinheiro"
 														id="pretensaoSalarial" placeholder="R$"  name="valorMin"/>
 												</div>
 												<div class="col-sm-1">
 													<p class="text-center">até</p>
 												</div>
 												<div class="col-md-2">
-													<input  type="text" class="form-control" placeholder="R$" name="valorMax" />
+													<input  type="text" class="form-control dinheiro" placeholder="R$" name="valorMax" />
 												</div>
 											</div>
 										</div>
@@ -272,5 +216,72 @@
 
 	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
 	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
+	<script type="text/javascript">
+ $(document).ready(function(){
+	 $('.cpf').mask('999.999.999-99', {reverse: true});
+	 $('.telefone').mask('(99) 99999-9999');
+	 $('#rg').mask('99.999.999-9');
+	 $("#cep").mask("99999-999");
+	 $('.dinheiro').mask('999.999.999.999.999,99', {reverse: true});
+	 
+ })
+
+
+	function limpa_formulário_cep() {
+		//Limpa valores do formulário de cep.
+		document.getElementById('rua').value = ("");
+		document.getElementById('cidade').value = ("");
+		document.getElementById('uf').value = ("");
+	}
+
+	function meu_callback(conteudo) {
+		if (!("erro" in conteudo)) {
+			//Atualiza os campos com os valores.
+			document.getElementById('rua').value = (conteudo.logradouro);
+			document.getElementById('cidade').value = (conteudo.localidade);
+			document.getElementById('uf').value = (conteudo.uf);
+		} //end if.
+		else {
+			//CEP não Encontrado.
+			limpa_formulário_cep();
+			alert("CEP não encontrado.");
+		}
+	}
+
+	function pesquisacep(valor) {
+
+		//Nova variável "cep" somente com dígitos.
+		var cep = valor.replace(/\D/g, '');
+
+		//Verifica se campo cep possui valor informado.
+		if (cep != "") {
+
+			//Expressão regular para validar o CEP.
+			var validacep = /^[0-9]{8}$/;
+
+			//Valida o formato do CEP.
+			if (validacep.test(cep)) {
+				var script = document.createElement('script');
+
+				//Sincroniza com o callback.
+				script.src = '//viacep.com.br/ws/' + cep
+						+ '/json/?callback=meu_callback';
+
+				//Insere script no documento e carrega o conteúdo.
+				document.body.appendChild(script);
+
+			} //end if.
+			else {
+				//cep é inválido.
+				limpa_formulário_cep();
+				alert("Formato de CEP inválido.");
+			}
+		} //end if.
+		else {
+			//cep sem valor, limpa formulário.
+			limpa_formulário_cep();
+		}
+	};
+</script>
 </body>
 </html>

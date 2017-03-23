@@ -2,13 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Consulta de usuário</title>
+<title>Controle de usuários</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -41,32 +39,40 @@
 				<div class="modal-body">
 					<div class="padding-md">
 						<div class="row">
-							<form action="cadastrar" method="POST" id="frmUsuario">
-								<input type="hidden" name="id" id="txtId" />
+							<form action="cadastrar" method="POST" id="frmUsuario" data-validate="parsley" novalidate>
+								<input type="hidden" name="id" id="id" />
 								<div class="row">
 									<div class="form-group col-md-6">
-										<label for="funcionario">Funcionário</label> <select
-											class="form-control" name="funcionario.id" id="cmbFuncionario">
+										<label for="funcionario">Funcionário</label>
+										<select class="form-control" name="funcionario.id" id="cmbFuncionario" data-required="true">
+											<option value="">Selecione</option>
+											<c:forEach var="funcionario" items="${funcionarios}">
+												<option value="${funcionario.id}">${funcionario.nome}</option>
+											</c:forEach>
 										</select>
 									</div>
 									<div class="form-group col-md-6">
 										<label for="usuario">Usuário</label>
 										<div class="input-group">
 											<span class="input-group-addon"><i class="fa fa-user"></i></span>
-											<input type="text" class="form-control" id="txtUsuario"
-												data-required="true" name="nome">
+											<input type="text" class="form-control" id="usuario"
+												data-required="true" name="nome" placeholder="Informe o usuário">
 										</div>
 									</div>
 									<div class="form-group col-md-6 cold-md-offset-6">
 										<label for="email">E-mail corporativo</label>
 										<div class="input-group">
 											<span class="input-group-addon">@</span> <input type="email"
-												class="form-control" id="txtEmail" data-required="true" name="email">
+												class="form-control" id="email" data-required="true" name="email" placeholder="Informe o e-mail">
 										</div>
 									</div>
 									<div class="form-group open col-md-6">
-										<label for="permissao">Perfil</label> <select
-											class="form-control" name="perfil.id" id="cmbPerfil">
+										<label for="permissao">Perfil</label>
+										<select class="form-control" name="perfil.id" id="cmbPerfil" data-required="true">
+											<option value="">Selecione</option>
+											<c:forEach var="perfil" items="${perfis}">
+												<option value="${perfil.id}">${perfil.nome}</option>
+											</c:forEach>
 										</select>
 									</div>
 								</div>
@@ -78,9 +84,8 @@
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-danger" id="btnMudarStatus">
-						<span class="fa fa-power-off"></span> Desativar
 					</button>
-					<button class="btn btn-warning">
+					<button class="btn btn-warning" id="btnRedefinirSenha">
 						<i class="fa fa-edit"></i> Redefinir senha
 					</button>
 					<button class="btn btn-success" id="btnSalvar">
@@ -99,7 +104,7 @@
 			<ul class="breadcrumb">
 				<li><i class="fa fa-home"></i><a href="dashboard.html">
 						Início</a></li>
-				<li class="active">Consultar usuário</li>
+				<li class="active">Controle de usuários</li>
 			</ul>
 		</div>
 		<!--breadcrumb-->
@@ -108,56 +113,55 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="panel panel-default">
-							<div class="panel-heading">Controle de usuários</div>
-							<table
-								class="table table-bordered table-condensed table-hover table-striped"
-								id=""
-								style="font-size: 12px !important; vertical-align: middle !important;">
-								<thead>
-									<tr class="text-center">
-										<th class="text-center">Funcionário</th>
-										<th class="text-center">Usuário</th>
-										<th class="text-center">E-mail</th>
-										<th class="text-center">Perfil</th>
-										<th class="text-center">Situação</th>
-										<th class="text-center">Ações</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach var="usuario" items="${usuarios}">
-										<tr class="text-center">
-											<td>${usuario.funcionario.nome}</td>
-											<td>${usuario.nome}</td>
-											<td>${usuario.email}</td>
-											<td>${usuario.perfil.nome}</td>
-											<td>
-												<c:if test="${usuario.ativo}">
-													<span class="label label-success status">Ativo</span>
-												</c:if>
-												<c:if test="${!usuario.ativo}">
-													<span class="label label-danger status">Inativo</span>
-												</c:if>
-											</td>
-											<td>
-												<div class="btn-group">
-													<a class="btn btn-info btn-xs" onclick="testeModal(${usuario.id})"><i class="fa fa-edit"></i> Editar</a>
-												</div>
-											</td>
+							<div class="panel-heading">Usuários cadastrados:</div>
+							<div class="panel-body">
+								<div id="divAlert"></div>
+								<table class="table table-bordered table-condensed table-hover table-striped">
+									<thead>
+										<tr>
+											<th class="text-center">Funcionário</th>
+											<th class="text-center">Usuário</th>
+											<th class="text-center">E-mail</th>
+											<th class="text-center">Perfil</th>
+											<th class="text-center">Situação</th>
+											<th class="text-center">Editar</th>
 										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-							<br>
+									</thead>
+									<tbody>
+										<c:forEach var="usuario" items="${usuarios}">
+											<tr class="text-center">
+												<td>${usuario.funcionario.nome}</td>
+												<td>${usuario.nome}</td>
+												<td>${usuario.email}</td>
+												<td>${usuario.perfil.nome}</td>
+												<td id="status_${usuario.id}">
+													<c:if test="${usuario.ativo}">
+														<span class="label label-success status">Ativo</span>
+													</c:if>
+													<c:if test="${!usuario.ativo}">
+														<span class="label label-danger status">Inativo</span>
+													</c:if>
+												</td>
+												<td>
+													<div class="btn-group">
+														<a class="btn btn-info btn-xs" onclick="abrirModal('editar', ${usuario.id})"><i class="fa fa-edit"></i></a>
+													</div>
+												</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
 						</div>
 						<!-- /.col -->
 						<div class="pull-right">
-							<a class="btn btn-primary" onclick="testeModal()">Criar novo usuário</a>
+							<a class="btn btn-primary" onclick="abrirModal('incluir')">Criar novo usuário</a>
 							<a class="btn btn-warning" href="criar-perfil">Criar perfil</a>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="panel-footer clearfix">
+			<!-- <div class="panel-footer clearfix">
 				<ul class="pagination pagination-xs m-top-none pull-right">
 					<li class="disabled"><a href="#">Anterior</a></li>
 					<li class="active"><a href="#">1</a></li>
@@ -167,7 +171,7 @@
 					<li><a href="#">5</a></li>
 					<li><a href="#">Próxima</a></li>
 				</ul>
-			</div>
+			</div> -->
 		</div>
 	</div>
 
@@ -175,76 +179,7 @@
 	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
 	
 	<!-- javaScript aqui -->
-	<script>
-		var Funcionario;
-		var perfil;
-		var ativo;
-		
-		function testeModal(id){
-			
-			if(id != undefined) {
-	    		$.ajax({
-		    		url: "carregar-usuario",
-		    		type: "GET",
-		    		dataType: "JSON",
-		    		data: {id : id},
-		    		success: function(data){
-		    			console.log(data);
-		    			$('input#txtId').val(data.id);
-		    			$('input#txtUsuario').val(data.nome);
-		    			$('input#txtEmail').val(data.email);
-		    			funcionario = data.funcionario.id;
-		    			perfil = data.perfil.id;
-		    			ativo = data.ativo;
-		    		}
-		    	});
-	    	}
-	    	$.ajax({
-	    		url: "carregar-combos",
-	    		type: "GET",
-	    		dataType: "JSON",
-	    		data: {},
-	    		success: function(data){
-	    			$('#cmbPerfil').empty();
-	    			$('#cmbFuncionario').empty();
-	    			var perfis = data[0];
-	    			var funcionarios = data[1];
-	    			
-	    			$('#cmbPerfil').append('<option value="">Selecione</option>');
-	    			$('#cmbFuncionario').append('<option value="">Selecione</option>');
-	    			for(var i = 0; i < perfis.length; i++) {
-	    				var newOption = $('<option value=' + perfis[i].id + '>' +  perfis[i].nome + '</option>');
-	    				$('#cmbPerfil').append(newOption);
-	    			}
-	    			for(var i = 0; i < funcionarios.length; i++) {
-	    				var newOption = $('<option value=' + funcionarios[i].id + '>' +  funcionarios[i].nome + '</option>');
-	    				$('#cmbFuncionario').append(newOption);
-	    			}
-	    			if(funcionario != undefined) {
-	    				$('select#cmbFuncionario').val(funcionario);
-		    			$('select#cmbPerfil').val(perfil);
-	    			}
-	    			
-	    			$('#usuario-modal').modal('show');
-	    		}
-	    	});
-		}
-		
-		$("#btnSalvar").click(function() {
-			$("#frmUsuario").submit();
-		});
-		
-		$("#btnMudarStatus").click(function() {
-			$.ajax({
-	    		url: "mudar-status",
-	    		type: "POST",
-	    		dataType: "JSON",
-	    		data: {ativo : ativo}
-	    	});
-			location.reload();
-		});
-		
-		
-	</script>
+	<script src="/resources/js/api/usuario-api.js"></script>
+	<script src='/resources/js/parsley.min.js'></script>
 </body>
 </html>

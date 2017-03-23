@@ -8,20 +8,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import br.com.prosperity.bean.AvaliacaoBean;
 import br.com.prosperity.bean.CanalInformacaoBean;
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CandidatoCompetenciaBean;
 import br.com.prosperity.bean.CargoBean;
-import br.com.prosperity.bean.ContatoBean;
-import br.com.prosperity.bean.EnderecoBean;
-import br.com.prosperity.bean.FormacaoBean;
+import br.com.prosperity.bean.AvaliacaoBean;
 import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
 import br.com.prosperity.bean.TipoCursoBean;
 import br.com.prosperity.bean.VagaBean;
+import br.com.prosperity.bean.ContatoBean;
+import br.com.prosperity.bean.EnderecoBean;
+import br.com.prosperity.bean.FormacaoBean;
+
+import br.com.prosperity.business.AvaliadorBusiness;
 import br.com.prosperity.business.CanalInformacaoBusiness;
 import br.com.prosperity.business.CandidatoBusiness;
 import br.com.prosperity.business.CargoBusiness;
@@ -38,7 +41,7 @@ public class CandidatoController {
 
 	@Autowired
 	private CandidatoBean candidatoBean;
-
+	
 	@Autowired
 	private CandidatoBusiness candidatoBusiness;
 
@@ -62,16 +65,16 @@ public class CandidatoController {
 
 	@Autowired
 	private SituacaoAtualBusiness situacaoAtualBusiness;
-	
+
 	@Autowired
 	private FuncionarioBusiness funcionarioBusiness;
 
 	@Autowired
 	private CargoBusiness cargoBusiness;
-
+	
 	@Autowired
 	private TipoCursoBean tipoCursoBean;
-
+	
 	@Autowired
 	private SenioridadeBusiness senioridadeBusiness;
 
@@ -80,10 +83,14 @@ public class CandidatoController {
 	
 	@Autowired
 	private SituacaoAtualBean situacaoAtualBean;
+	
 	@Autowired
 	private VagaBusiness vagaBusiness;
 	@Autowired
 	private CanalInformacaoBusiness canalInformacaoBusiness;
+	
+	@Autowired
+	private AvaliadorBusiness avaliadorBusiness;
 
 	@RequestMapping(value = "cadastrar", method = RequestMethod.GET)
 	public String cadastrarCandidato(Model model) {
@@ -100,7 +107,7 @@ public class CandidatoController {
 
 		return "candidato/cadastrar-candidato";
 	}
-	
+
 	@RequestMapping(value = "salvar", method = RequestMethod.POST)
 	public String salvarCandidato(@ModelAttribute("candidatoBean") CandidatoBean candidatoBean)
 			throws BusinessException {
@@ -108,24 +115,25 @@ public class CandidatoController {
 
 		return "candidato/cadastrar-candidato";
 	}
-	
+
 	@RequestMapping(value = "consultar-rh", method = RequestMethod.GET)
 	public String consultarCandidatoRH(Model model) {
 		List<CandidatoBean> candidatos = candidatoBusiness.listar();
 		model.addAttribute("candidatos", candidatos);
 
-		
 		List<VagaBean> listaVaga = vagaBusiness.listar();
 		model.addAttribute("listaVaga", listaVaga);
-		
+
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
 		model.addAttribute("listaCargo", listaCargo);
-		
+
 		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.obterTodos();
 		model.addAttribute("listaSenioridade", listaSenioridade);
-		
+
 		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.obterTodos();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
+		
+		avaliadorBusiness.listar();
 
 		return "candidato/consulta-rh";
 	} 
@@ -137,10 +145,27 @@ public class CandidatoController {
 
 	@RequestMapping(value = "historico", method = RequestMethod.GET)
 	public String historicoCandidato(Model model) {
-		candidatoBean = candidatoBusiness.obter(2);
+		CandidatoBean candidatoBean = candidatoBusiness.obter(2);
 
 		model.addAttribute("candidato", candidatoBean);
 
 		return "candidato/historico-candidato";
+	}
+
+	@RequestMapping(value = "aprovar-candidato", method = RequestMethod.GET)
+	public String aprovarCandidato(Model model) {
+
+		List<CandidatoBean> candidatos = candidatoBusiness.listar();
+
+		model.addAttribute("candidatos", candidatos);
+		
+		return "candidato/aprovar-candidato";
+	}
+	
+	@RequestMapping(value= {"gerenciar"}, method = RequestMethod.GET)
+	public @ResponseBody CandidatoBean gerenciarAjax(Model model, @ModelAttribute("id") Integer id) {
+		CandidatoBean candidato = new CandidatoBean();
+		candidato = candidatoBusiness.obterCandidatoPorId(id);
+		return candidato;
 	}
 }
