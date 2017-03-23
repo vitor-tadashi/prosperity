@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.jpa.criteria.expression.function.SubstringFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -136,7 +137,7 @@ public class VagaController {
 		senioridades = preencherSenioridade.obterTodos();
 		cargos = preencherCargo.obterTodos();
 		projetos = preencherProjeto.obterTodos();
-		usuarios = preencherUsuario.buscarGestor(); //Buscar somente Gestores
+		usuarios = preencherUsuario.obterTodos();
 		model.addAttribute("senioridades", senioridades);
 		model.addAttribute("cargos", cargos);
 		model.addAttribute("projetos", projetos);
@@ -151,7 +152,6 @@ public class VagaController {
 	
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
 	public String inserirVaga(@ModelAttribute("vagaBean") VagaBean vagaBean) {
-		
 		vagaBusiness.inserir(vagaBean);
 		System.out.println("\n\n\nCadastrado\n\n\n");
 		return "redirect:solicitar";

@@ -47,11 +47,11 @@ public class VagaEntity {
 	private Character tipoVaga;
 
 	@Column(name = "hrEntrada")
-	@Temporal(value = TemporalType.DATE)
+	@Temporal(value = TemporalType.TIME)
 	private Date horaEntrada;
 
 	@Column(name = "hrSaida")
-	@Temporal(value = TemporalType.DATE)
+	@Temporal(value = TemporalType.TIME)
 	private Date horaSaida;
 
 	@Column(name = "flAumentoQuadra")
