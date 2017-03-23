@@ -36,9 +36,10 @@ public class CandidatoBean  extends FormatUtil {
 	private Date dataUltimoContato;
 	private Date entrevista;
 	private String proposta;
-	private VagaCandidatoBean vagaCandidatoBean;
-	private Double valorMin;
-	private Double valorMax;
+	private Double valorMin = 0.0;
+	private Double valorMax = 0.0;
+	
+	
 	
 	public Integer getId() {
 		return id;
@@ -187,13 +188,6 @@ public class CandidatoBean  extends FormatUtil {
 	public void setValorMax(Double valorMax) {
 		this.valorMax = valorMax;
 	}
-	public VagaCandidatoBean getVagaCandidatoBean() {
-		return vagaCandidatoBean;
-	}
-	public void setVagaCandidatoBean(VagaCandidatoBean vagaCandidatoBean) {
-		this.vagaCandidatoBean = vagaCandidatoBean;
-	}
-
-
+	
 
 }

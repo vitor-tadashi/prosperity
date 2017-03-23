@@ -17,6 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.StatusCandidatoBean;
+import br.com.prosperity.bean.ContatoBean;
+import br.com.prosperity.bean.VagaBean;
+import br.com.prosperity.converter.CanalInformacaoConverter;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.converter.CandidatoConverter;
 import br.com.prosperity.dao.CandidatoDAO;
@@ -85,10 +88,17 @@ public class CandidatoBusiness extends FormatUtil {
 		return beans;
 	}
 	@Transactional
-	public void inserir(CandidatoBean candidatoBean) {
+	public void inserir(CandidatoBean candiatoBean) {
+		CandidatoBean candidatoBean = new CandidatoBean();
 		candidatoDAO.adicionar(candidatoConverter.convertBeanToEntity(candidatoBean));
 
 	}
+	
+	@Transactional
+	public CandidatoBean obterCandidatoPorId(Integer id) {
+		CandidatoBean bean = candidatoConverter.convertEntityToBean(candidatoDAO.obterPorId(id));
+		return bean;
+}
 
 	@Transactional
 	public void alterarStatus(SituacaoCandidatoBean situacaoCandidato, HttpSession session) {
@@ -122,4 +132,5 @@ public class CandidatoBusiness extends FormatUtil {
 		statusCandidatoDAO.adicionar(statusCandidatoEntity);
 		// PASSO 2 - PEGAR O STATUSFUTURO e SALVAR NO BANCO
 	}
+
 }
