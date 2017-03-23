@@ -8,11 +8,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,27 +19,16 @@ import javax.persistence.TemporalType;
 @Table(name = "tbStatusCandidato")
 
 public class StatusCandidatoEntity {
-	//
-	// @Id
-	// @GeneratedValue(strategy = GenerationType.AUTO)
-	// @Column(name = "idStatusCandidato", unique = true, nullable = false)
-	// private Integer idSatusCandidato;
-	// /* fim */
-
+	
+	@Column(name = "idCandidato")
+	private Integer idCandidato;
+	
 	@Column(name = "dtAlteracao")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dtAlteracao;
 
 	@Column(name = "dsParecer")
 	private String dsParecer;
-	//
-	// @ManyToOne(cascade = CascadeType.ALL)
-	// @JoinColumn(name = "idStatus")
-	// private StatusEntity status;
-	//
-	// @OneToOne(cascade = CascadeType.ALL)
-	// @JoinColumn(name = "idUsuario")
-	// private UsuarioEntity usuario;
 
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
@@ -95,5 +82,15 @@ public class StatusCandidatoEntity {
 	public void setUsuario(UsuarioEntity usuario) {
 		this.usuario = usuario;
 	}
+
+	public Integer getIdCandidato() {
+		return idCandidato;
+	}
+
+	public void setIdCandidato(Integer idCandidato) {
+		this.idCandidato = idCandidato;
+	}
+	
+	
 
 }

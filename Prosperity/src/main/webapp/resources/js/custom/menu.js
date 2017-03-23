@@ -1,0 +1,20 @@
+$(function(){
+	var id = $("input#idPerfil").val();
+	$.ajax({
+		url: "http://localhost:8080/usuario/obter-perfil-funcionalidade",
+		type: "GET",
+		dataType: "JSON",
+		data: {id : id},
+		success: function(listaFunc){
+			if(listaFunc != null){
+				$("li.menu-opcao").each(function(index,li){
+    				$.each(listaFunc,function(i,item){
+    					if(item.id == $(li).val()){
+    						$(li).removeClass("hide")
+    					}
+    				});
+				});	
+			} 
+		}
+	});
+});
