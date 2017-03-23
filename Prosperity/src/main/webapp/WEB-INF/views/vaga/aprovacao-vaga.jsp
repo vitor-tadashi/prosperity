@@ -20,18 +20,30 @@
     }
 }
 @media print {
+
     body * {
         visibility:hidden;
     }
-    #printSection, #printSection * {
+    #printSection * {
         visibility:visible;
     }
     #printSection {
-        position:absolute;
-        left:0;
-        top:0;
+        position: absolute;
+        left: 0;
+        top: 0;
+        
     }
 }
+/* @media print {
+    .modal {
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin: 0;
+        padding: 0;
+        overflow: visible!important;
+    }
+} */
 </style>
 
 </head>
@@ -500,6 +512,8 @@
 	    $printSection.appendChild(domClone);
 	    window.print();
 	}
+	
+</script>
 	</script>
 </body>
 </html>
