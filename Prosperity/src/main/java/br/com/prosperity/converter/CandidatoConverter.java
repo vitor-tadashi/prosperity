@@ -99,8 +99,6 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		bean.setValorMin(entity.getValorMin());
 		bean.setStatus(statusCandidatoConverter.convertEntityToBean(entity.getStatusCandidatos()));
 		bean.setVagas(vagaConverter.convertEntityToBean(entity.getVagaEntity()));
-		bean.setValorMax(entity.getValorMax());
-		bean.setValorMin(entity.getValorMin());
 
 
 		return bean;
