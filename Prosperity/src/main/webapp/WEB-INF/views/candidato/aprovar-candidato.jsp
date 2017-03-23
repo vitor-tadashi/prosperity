@@ -458,8 +458,9 @@
 								</thead>
 								<tbody class="text-center">
 										<tr>
+										<c:forEach var="candidato" items="${candidatos}">
 											<td>${candidato.nome}</td>
-<%-- 											<td>${candidato.vagas.nomeVaga}</td> --%>
+											<td>${candidato.vagas.nomeVaga}</td>
 											<td>${candidato.valorPretensao}</td>
 											<td><fmt:formatDate value="${candidato.dataAbertura}" pattern="dd/MM/yyyy"/></td>
 <%-- 											<td><fmt:formatDate value="${candidato.dataFechamento}" pattern="dd/MM/yyyy"/></td> --%>
@@ -489,6 +490,7 @@
 												</div> <!-- /fim botao --></td>
 										</tr>
 									</td>
+									</c:forEach>
 									</tr>
 								</tbody>
 							</table>
