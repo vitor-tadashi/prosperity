@@ -30,22 +30,6 @@ public class CandidatoEntity {
 	@Column(name = "idCandidato", unique = true, nullable = false)
 	private Integer id;
 
-	public Date getDataultimoContato() {
-		return dataultimoContato;
-	}
-
-	public void setDataultimoContato(Date dataultimoContato) {
-		this.dataultimoContato = dataultimoContato;
-	}
-
-	public void setValorMin(Double valorMin) {
-		this.valorMin = valorMin;
-	}
-
-	public void setValorMax(Double valorMax) {
-		this.valorMax = valorMax;
-	}
-
 	@Column(name = "nmCandidato")
 	private String nome;
 
@@ -124,8 +108,8 @@ public class CandidatoEntity {
 	@JoinColumn(name = "idCandidato")
 	private List<CandidatoCompetenciaEntity> competencias;
 	
-
-	@ManyToMany(cascade = CascadeType.ALL)
+//TODO 
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "tbVagaCandidato", joinColumns = { @JoinColumn(name = "idCandidato") }, inverseJoinColumns = {
 			@JoinColumn(name = "idVaga") })
 	private List<VagaEntity> vagaEntity;
@@ -313,6 +297,22 @@ public class CandidatoEntity {
 	}
 
 	public void setValorMax(double valorMax) {
+		this.valorMax = valorMax;
+	}
+	
+	public Date getDataultimoContato() {
+		return dataultimoContato;
+	}
+
+	public void setDataultimoContato(Date dataultimoContato) {
+		this.dataultimoContato = dataultimoContato;
+	}
+
+	public void setValorMin(Double valorMin) {
+		this.valorMin = valorMin;
+	}
+
+	public void setValorMax(Double valorMax) {
 		this.valorMax = valorMax;
 	}
 

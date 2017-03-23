@@ -38,7 +38,7 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 		entity.setDataAbertura(bean.getDataAbertura());
 		entity.setDataAprovacao(bean.getDataAprovacao());
 		entity.setDataFechamento(bean.getDataFechamento());
-		entity.setDataInicio(bean.getDataFechamento());
+		entity.setDataInicio(bean.getDataInicio());
 		entity.setDescricaoFormacaoAcademica(bean.getDescricaoFormacaoAcademica());
 		entity.setDescricaoPerfilComportamental(bean.getDescricaoPerfilComportamental());
 		entity.setDescricaoPerfilTecnico(bean.getDescricaoPerfilTecnico());
