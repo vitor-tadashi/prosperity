@@ -19,7 +19,7 @@ public class AvaliadorBusiness {
 
 	private AvaliadorBean obter(Integer idAvaliador) {
 		
-		AvaliadorEntity avaliadorEntity = avaliadorDAO.obterPorId(idAvaliador);
+		AvaliadorEntity avaliadorEntity = avaliadorDAO.findById(idAvaliador);
 		
 		AvaliadorBean avaliadorBean = avaliadorConverter.convertEntityToBean(avaliadorEntity);
 		

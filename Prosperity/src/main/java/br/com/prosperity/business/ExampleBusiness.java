@@ -18,6 +18,6 @@ public class ExampleBusiness {
 	private ExampleConverter exampleConverter;
 
 	public void inserir(ExampleBean exampleBean) {
-		exampleDAO.adicionar(exampleConverter.convertBeanToEntity(exampleBean));
+		exampleDAO.insert(exampleConverter.convertBeanToEntity(exampleBean));
 	}
 }

@@ -29,7 +29,7 @@ public class CandidatoBusiness extends FormatUtil {
 
 	@Transactional
 	public CandidatoBean obter(Integer id) {
-		CandidatoEntity candidatoEntity = candidatoDAO.obterPorId(id);
+		CandidatoEntity candidatoEntity = candidatoDAO.findById(id);
 		CandidatoBean candidatoBean = new CandidatoBean();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM/yyyy");
 
@@ -54,14 +54,14 @@ public class CandidatoBusiness extends FormatUtil {
 
 	@Transactional
 	public List<CandidatoBean> listar() {
-		List<CandidatoEntity> entities = candidatoDAO.listar();
+		List<CandidatoEntity> entities = candidatoDAO.findAll();
 		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(entities);
 		return beans;
 	}
 
 	public void inserir(CandidatoBean candiatoBean) {
 		CandidatoBean candidatoBean = new CandidatoBean();
-		candidatoDAO.adicionar(candidatoConverter.convertBeanToEntity(candidatoBean));
+		candidatoDAO.insert(candidatoConverter.convertBeanToEntity(candidatoBean));
 
 	}
 }
