@@ -1,4 +1,4 @@
-package br.com.prosperity.controller;
+	package br.com.prosperity.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
