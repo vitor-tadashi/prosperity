@@ -38,6 +38,7 @@
 					<div class="panel-heading">Informações do candidato</div>
 					<div class="panel-body">
 						<div id="textDiv">
+					
 							<br><form:errors path="candidatoBean.nome"/>
 							<form:errors path="candidatoBean.email"/>
 							<br><form:errors path="candidatoBean.cpf"/>
