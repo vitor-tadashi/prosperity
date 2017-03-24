@@ -137,7 +137,7 @@
 													<div class="form-group col-md-2">
 														<div class="input-group bootstrap-timepicker">
 															<input id="txtHorarioFinal" name="horarioEntrada"
-																 type="time" value="17:00">
+																 type="text" value="17:00">
 														</div>
 													</div>
 													<!-- /form-group -->
