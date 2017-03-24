@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -33,6 +34,28 @@ public class VagaBean {
 	private Integer numeroCandidatos; //
 	private UsuarioBean usuarioBean;
 	private List<StatusVagaBean> statusVagaBean = new ArrayList<>();
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date dataAberturaDe;
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date dataAberturaPara;
+
+	public Date getDataAberturaDe() {
+		return dataAberturaDe;
+	}
+
+	public void setDataAberturaDe(Date dataAberturaDe) {
+		this.dataAberturaDe = dataAberturaDe;
+	}
+
+	public Date getDataAberturaPara() {
+		return dataAberturaPara;
+	}
+
+	public void setDataAberturaPara(Date dataAberturaPara) {
+		this.dataAberturaPara = dataAberturaPara;
+	}
 
 	public Integer getId() {
 		return id;

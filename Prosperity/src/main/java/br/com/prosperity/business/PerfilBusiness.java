@@ -42,12 +42,12 @@ public class PerfilBusiness {
 				}
 				perfilEntity.setFuncionalidades(
 						funcionalidadeDAO.findByNamedQuery("obterPerfilFuncionalidade", idFuncionalidades));
-				perfilDAO.adicionar(perfilEntity);
+				perfilDAO.insert(perfilEntity);
 			} else {
 				throw new BusinessException("Este perfil já existe");
 			}
 		} else {
-			PerfilEntity perfilEntity = perfilDAO.obterPorId(perfilBean.getId());
+			PerfilEntity perfilEntity = perfilDAO.findById(perfilBean.getId());
 
 			List<Integer> idFuncionalidades = new ArrayList<>();
 			for (FuncionalidadeBean f : perfilBean.getListaFuncionalidades()) {
@@ -58,7 +58,7 @@ public class PerfilBusiness {
 			perfilEntity.setFuncionalidades(
 					funcionalidadeDAO.findByNamedQuery("obterPerfilFuncionalidade", idFuncionalidades));
 
-			perfilDAO.alterar(perfilEntity);
+			perfilDAO.update(perfilEntity);
 		}
 	}
 
@@ -71,8 +71,9 @@ public class PerfilBusiness {
 	}
 
 	@Transactional
-	public List<FuncionalidadeBean> obterPerfilFuncionalidades(Integer id) {
-		PerfilEntity entity = perfilDAO.obterPorId(id);
+	public List<FuncionalidadeBean> obterFuncionalidades(Integer id) {
+		PerfilEntity entity = perfilDAO.findById(id);
+
 		PerfilBean bean = perfilConverter.convertEntityToBean(entity);
 		List<FuncionalidadeBean> listaFunc = bean.getListaFuncionalidades();
 

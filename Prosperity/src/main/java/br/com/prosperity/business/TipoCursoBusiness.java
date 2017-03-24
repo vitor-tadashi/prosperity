@@ -23,7 +23,7 @@ public class TipoCursoBusiness {
 	@Transactional
 	public List<TipoCursoBean> obterTodos(){
 	
-		List<TipoCursoBean> tiposCurso = tipoCursoConverter.convertEntityToBean(tipoCursoDAO.listar()) ;
+		List<TipoCursoBean> tiposCurso = tipoCursoConverter.convertEntityToBean(tipoCursoDAO.findAll()) ;
 		
 		return tiposCurso;
 		

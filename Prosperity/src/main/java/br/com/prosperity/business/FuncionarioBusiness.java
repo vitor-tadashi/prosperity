@@ -22,7 +22,7 @@ public class FuncionarioBusiness {
 	
 	@Transactional
 	public List<FuncionarioBean> obterTodos() {
-		List<FuncionarioEntity> funcionarioEntity = funcionarioDAO.listar();
+		List<FuncionarioEntity> funcionarioEntity = funcionarioDAO.findAll();
 		List<FuncionarioBean> funcionarioBean = funcionarioConverter.convertEntityToBean(funcionarioEntity);
 
 		return funcionarioBean;
