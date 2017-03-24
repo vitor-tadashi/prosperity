@@ -6,7 +6,7 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Consulta RH</title>
+<title>Aprovação de candidatos</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -33,7 +33,7 @@
 				</div>
 				<div class="modal-body">
 					<div class="panel-body">
-						<form class="form-border" id="formCadastro">
+						<form class="form-border" id="formCadastro" novalidate="">
 							<div class="panel-tab clearfix">
 								<ul class="tab-bar wizard-demo" id="wizardDemo">
 									<li class="active tab-verity"><a href="#first"
@@ -56,8 +56,8 @@
 											<div>
 												<div class="form-group col-md-6">
 													<label for="exampleInputEmail1">Nome do candidato:</label>
-													<input class="form-control input-sm" 
-														name="candidato.id" id="nomeCandidato"
+													<input type="text" class="form-control input-sm"
+														id="exampleInputEmail1" placeholder="Nome do candidato"
 														data-required="true" name="nome">
 												</div>
 												<!-- /form-group -->
@@ -67,7 +67,7 @@
 										<div class="row">
 											<div class="form-group col-md-6">
 												<label for="exampleInputEmail1">Vaga:</label> <select
-													class="form-control chzn-select" id="nomeVaga" name="vagas">
+													class="form-control chzn-select" name="vagas">
 													<c:forEach var="vaga" items="${listaVaga}">
 														<option value="${vaga.id}">${vaga.nomeVaga}</option>
 													</c:forEach>
@@ -76,7 +76,7 @@
 											<!-- /form-group -->
 											<div class="form-group col-md-6">
 												<label for="exampleInputEmail1">Senioridade da vaga:</label>
-												<select class="form-control chzn-select"										id="nomeSenioridade" name="senioridade">
+												<select class="form-control chzn-select" name="senioridade">
 													<c:forEach var="senioridade" items="${listaSenioridade}">
 														<option value="${senioridade.id}" ${senioridade.nome}></option>
 													</c:forEach>
@@ -91,12 +91,12 @@
 													<div class="panel-heading">
 														<label for="exampleInputEmail1">Avaliadores:</label>
 													</div>
-													<div class="panel-body relative" id="nmPerfil">
+													<div class="panel-body relative" name="nmPerfil">
 														<select multiple="multiple" id="selectedBox1"
 															class="select-box pull-left form-control">
 															<c:forEach var="funcionario" items="${listaFuncionarios}">
-																<option value="${funcionario.id}">${funcionario.nome}</option>
-															</c:forEach>
+														<option value="${funcionario.id}">${funcionario.nome}</option>
+													</c:forEach>
 														</select>
 
 														<div class="select-box-option">
@@ -126,11 +126,11 @@
 										<div class="form-group col-md-6">
 											<div class="form-group">
 												<label class="control-label">Data do último contato:</label>
-												<div class="form-group">
+												<div class="form-group" name="dtUltimoContato">
 													<div class="input-group">
 														<input type="text" value="01/01/2017"
-															class="datepicker form-control" id="dataUltimoContato">
-														<span class="input-group-addon"><i
+															class="datepicker form-control"> <span
+															class="input-group-addon"><i
 															class="fa fa-calendar"></i></span>
 													</div>
 												</div>
@@ -143,11 +143,11 @@
 											<div class="form-group col-md-6">
 												<div class="form-group">
 													<label class="control-label">Data de entrevista:</label>
-													<div class="form-group">
+													<div class="form-group" name="dtEntrevista">
 														<div class="input-group">
 															<input type="text" value="00/00/0000"
-																class="datepicker form-control" name="dtEntrevista">
-															<span class="input-group-addon"><i
+																class="datepicker form-control" name=""> <span
+																class="input-group-addon"><i
 																class="fa fa-calendar"></i></span>
 														</div>
 													</div>
@@ -176,21 +176,21 @@
 											<div class="panel-body">
 												<label>Etapas dos processos de seleção: </label>
 												<!-- SOMENTE ALTERAR DAQUI PARA BAIXO -->
-
-												<input class="btn btn-xs btn-success" type="button"
-													value="Adicionar etapa" onclick="AddCampos()" name="">
-												<br> <br>
-												<script type="text/javascript">
-													//Escrevendo o código-fonte HTML e ocultando os campos criados:
-													for (iLoop = 1; iLoop <= totalCampos; iLoop++) {
-														document
-																.write("<span id='linha"+iLoop+"' style='display:none'> <select class='btn btn-default btn-xs dropdown-toggle' style='width: 160px;'><option value='0'>Selecione etapa</option><option value='1'>Prova Prática</option><option value='2'>Prova teórica</option><option value='3'>Dinâmica de Grupo</option></select> <input type='text' id='arq"+iLoop+"' name='arq"+iLoop+"'> <input class='btn btn-xs btn-danger' type='button' value='Remover' onclick='RemoverCampos(\""
-																		+ iLoop
-																		+ "\")'></span><br>");
-													}
-												</script>
-												<input type="hidden" name="hidden2" id="hidden2">
-
+												<form name="form1" action="paginaPHPouASP" method="post">
+													<input class="btn btn-xs btn-success" type="button"
+														value="Adicionar etapa" onclick="AddCampos()" name="">
+													<br> <br>
+													<script type="text/javascript">
+														//Escrevendo o código-fonte HTML e ocultando os campos criados:
+														for (iLoop = 1; iLoop <= totalCampos; iLoop++) {
+															document
+																	.write("<span id='linha"+iLoop+"' style='display:none'> <select class='btn btn-default btn-xs dropdown-toggle' style='width: 160px;'><option value='0'>Selecione etapa</option><option value='1'>Prova Prática</option><option value='2'>Prova teórica</option><option value='3'>Dinâmica de Grupo</option></select> <input type='text' id='arq"+iLoop+"' name='arq"+iLoop+"'> <input class='btn btn-xs btn-danger' type='button' value='Remover' onclick='RemoverCampos(\""
+																			+ iLoop
+																			+ "\")'></span><br>");
+														}
+													</script>
+													<input type="hidden" name="hidden2" id="hidden2">
+												</form>
 												<div class="form-group">
 													<!-- SOMENTE ALTERAR DAQUI PARA CIMA -->
 													<label>Parecer técnico: </label>
@@ -220,7 +220,7 @@
 												<thead class="text-center">
 													<tr class="text-center">
 														<th class="text-center">Competências</th>
-														<th id="">Insatisfatório</th>
+														<th>Insatisfatório</th>
 														<th>Em Desenvolvimento</th>
 														<th>Atende as Expectativas</th>
 														<th>Supera as Expectativas</th>
@@ -230,9 +230,8 @@
 													<tr>
 														<td>Desenvolvimento</td>
 														<td><label class="label-radio inline"> <input
-																id="desenvolvimento_insatisfatorio" type="radio"
-																name="inline-radio1" value="1"> <span
-																class="custom-radio"></span>
+																id="interno" type="radio" name="inline-radio1">
+																<span class="custom-radio"></span>
 														</label></td>
 														<td><label class="label-radio inline"> <input
 																id="interno" type="radio" name="inline-radio1">
@@ -382,11 +381,10 @@
 													</tr>
 												</tbody>
 											</table>
-
-										</section>
 									</div>
+									</section>
 								</div>
-								</div>
+							</div>
 						</form>
 					</div>
 					<div class="panel-footer ">
@@ -432,66 +430,21 @@
 			<ul class="breadcrumb">
 				<li><i class="fa fa-home"></i><a href="index.html"> Home</a></li>
 				<li>Consultar</li>
-				<li class="active">Candidatos - RH</li>
+				<li class="active">Aprovação de candidatos</li>
 			</ul>
 		</div>
 		<!--breadcrumb-->
 		<div class="container">
 			<div class="padding-md">
 				<div class="row">
-					<div class="col-sm-12">
+					<div>
 						<div class="panel panel-default">
-							<div class="panel-heading">Consultar candidatos - RH</div>
+							<div class="panel-heading">Aprovação de candidatos</div>
 							<div class="panel-body">
-								<div class="row">
-									<div class="col-md-2">
-										<label for="exampleInputEmail1">Nome: </label>
-										<div class="search-block">
-											<div class="input-group">
-												<input type="text" class="form-control input-sm"
-													placeholder="Nome" name="nome">
-											</div>
-											<!-- /input-group -->
-										</div>
-										<!-- /search-block -->
-									</div>
-									<div class="col-md-2">
-										<label for="exampleInputEmail1">Cargo</label> <select
-											class="form-control inline" name="cargo">
-											<c:forEach var="cargo" items="${listaCargo}">
-												<option value="${cargo.id}">${cargo.nome}</option>
-											</c:forEach>
-										</select>
-									</div>
-									<div class="col-md-1">
-										<label for="exampleInputEmail1">Salário</label> <input
-											type="text" class="form-control" placeholder="De"
-											style="width: 80px">
-									</div>
-									<div class="col-md-1">
-										<label for="exampleInputEmail1">&nbsp;</label> <input
-											type="text" class="form-control" placeholder="Até"
-											style="width: 80px">
-									</div>
-									<div class="col-md-3">
-										<label for="exampleInputEmail1">Data:</label>
-										<div class="input-group">
-											<input type="date" class="form-control"> <span
-												class="input-group-addon">até</span> <input type="date"
-												class="form-control">
-										</div>
-									</div>
-									<div class="col-md-2 col-md-offset-1">
-										<a class="btn btn-primary pull-right "
-											style="margin-top: 22px">Filtrar</a>
-									</div>
-								</div>
-								<!-- /.row -->
-							</div>
-							<!-- /.panel-body -->
-							
-							<table class="table table-bordered table-condensed table-hover table-striped"
-								style= "font-size: 12px; vertical-align: middle">
+							<table
+								class="table table-bordered table-condensed table-hover table-striped"
+								id=""
+								style="font-size: 12px !important; vertical-align: middle !important;">
 								<thead>
 									<tr>
 										<th class="text-center">Nome do candidato</th>
@@ -504,25 +457,25 @@
 									</tr>
 								</thead>
 								<tbody class="text-center">
-									<c:forEach var="candidato" items="${candidatos}">
 										<tr>
+										<c:forEach var="candidato" items="${candidatos}">
 											<td>${candidato.nome}</td>
-											<td></td> 	
+											<td>${candidato.vagas.nomeVaga}</td>
 											<td>${candidato.valorPretensao}</td>
-											<td><fmt:formatDate value="${candidato.dataAbertura}"
-													pattern="dd/MM/yyyy" /></td>
-											<td><fmt:formatDate value="${candidato.dataFechamento}"
-													pattern="dd/MM/yyyy" /></td>
-											<td></td>
+											<td><fmt:formatDate value="${candidato.dataAbertura}" pattern="dd/MM/yyyy"/></td>
+<%-- 											<td><fmt:formatDate value="${candidato.dataFechamento}" pattern="dd/MM/yyyy"/></td> --%>
+<%--  											<td>${candidato.ultimoStatus.status.nome}</td> --%>
+											<td><span class="label label-analiseRH"></span></td>
 											<td><span class="line"></span>
 												<div class="btn-group">
-												
+
 													<!-- comeco do botao -->
-													<button class="btn btn-sm btn-info dropdown-toggle"
-												data-toggle="dropdown" aria-haspopup="true"
-												aria-expanded="false">
-												<i class="fa fa-cogs fa-lg">&nbsp;</i> <span class="caret"></span>
-											</button>
+													<button type="button"
+														class="btn btn-info dropdown-toggle btn-sm"
+														data-toggle="dropdown" aria-haspopup="true"
+														aria-expanded="false">
+														<i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
+													</button>
 													<ul class="dropdown-menu slidedown btnAlinhado">
 														<li><a href="#aprovado-modal" data-toggle="modal"
 															data-toggle="modal" data-target=".bs-example-modal-lg"><i
@@ -534,13 +487,19 @@
 														<li><a href="#delete-modal" data-toggle="modal"><i
 																class="fa fa-trash-o fa-lg">&nbsp;</i>Fechar vaga</a></li>
 													</ul>
-													</div>
-												 <!-- /fim botao --></td>
+												</div> <!-- /fim botao --></td>
 										</tr>
+									</td>
 									</c:forEach>
-
+									</tr>
 								</tbody>
 							</table>
+							
+								</div>
+								<!-- /.row -->
+							</div>
+							<!-- /.panel-body -->
+							
 						</div>
 						<!-- fim da div panel -->
 						<div class="panel-footer clearfix">
@@ -603,30 +562,6 @@
 	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
 	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
 
-	<!-- JavaScript -->
-
-	<script type="text/javascript">
-		function info(listaId) {
-			//
-			$.ajax({
-				url : "gerenciar",
-				type : "GET",
-				dataType : "JSON",
-				data : {
-					'id' : listaId
-				},
-				success : function(lista) {
-					console.log(lista);
-					//$('#titulo').html(lista.);
-					$('input#nomeCandidato').val(lista.nome);
-					$('input#nomeVaga').val(lista.vaga);
-					$('input#nomeSenioridade').val(lista.senioridadeBean.nome);
-				}
-			})
-		}
-	</script>
-
-
 	<script>
 		$(function() {
 			$('#dataTable').dataTable({
@@ -655,101 +590,6 @@
 		});
 	</script>
 
-	 <script type="text/javascript">
-		//Total máximo de campos que você permitirá criar em seu site:
-		var totalCampos = 4;
-
-		//Não altere os valores abaixo, pois são variáveis controle;
-		var iLoop = 1;
-		var iCount = 0;
-		var linhaAtual;
-
-		function AddCampos() {
-			var hidden1 = document.getElementById("hidden1");
-			var hidden2 = document.getElementById("hidden2");
-
-			//Executar apenas se houver possibilidade de inserção de novos campos:
-			if (iCount < totalCampos) {
-
-				//Limpar hidden1, para atualizar a lista dos campos que ainda estão vazios:
-				hidden2.value = "";
-
-				//Atualizando a lista dos campos que estão ocultos.
-				//Essa lista ficará armazenada temporiariamente em hidden2;
-				for (iLoop = 1; iLoop <= totalCampos; iLoop++) {
-					if (document.getElementById("linha" + iLoop).style.display == "none") {
-						if (hidden2.value == "") {
-							hidden2.value = "linha" + iLoop;
-						} else {
-							hidden2.value += ",linha" + iLoop;
-						}
-					}
-				}
-				//Quebrando a lista que foi armazenada em hidden2 em array:
-
-				linhasOcultas = hidden2.value.split(",");
-
-				if (linhasOcultas.length > 0) {
-					//Tornar visível o primeiro elemento de linhasOcultas:
-					document.getElementById(linhasOcultas[0]).style.display = "block";
-					iCount++;
-
-					//Acrescentando o índice zero a hidden1:
-					if (hidden1.value == "") {
-						hidden1.value = linhasOcultas[0];
-					} else {
-						hidden1.value += "," + linhasOcultas[0];
-					}
-
-					/*Retirar a opção acima da lista de itens ocultos: <-------- OPCIONAL!!!
-					if (hidden2.value.indexOf(","+linhasOcultas[0]) != -1) {
-					        hidden2.value = hidden2.value.replace(linhasOcultas[0]+",","");
-					}else if (hidden2.indexOf(linhasOcultas[0]+",") == 0) {
-					        hidden2.value = hidden2.value.replace(linhasOcultas[0]+",","");
-					}else{
-					        hidden2.value = "";
-					}
-					 */
-				}
-			}
-		}
-
-		function RemoverCampos(id) {
-			//Criando ponteiro para hidden1:        
-			var hidden1 = document.getElementById("hidden1");
-
-			//Pegar o valor do campo que será excluído:
-			var campoValor = document.getElementById("arq" + id).value;
-			//Se o campo não tiver nenhum valor, atribuir a string: vazio:
-			if (campoValor == "") {
-				campoValor = "vazio";
-			}
-
-			if (confirm("O campo que contém o valor:\n» " + campoValor
-					+ "\nserá excluído!\n\nDeseja prosseguir?")) {
-				document.getElementById("linha" + id).style.display = "none";
-				iCount--;
-
-				//Removendo o valor de hidden1:
-				if (hidden1.value.indexOf(",linha" + id) != -1) {
-					hidden1.value = hidden1.value.replace(",linha" + id, "");
-				} else if (hidden1.value.indexOf("linha" + id + ",") == 0) {
-					hidden1.value = hidden1.value.replace("linha" + id + ",",
-							"");
-				} else {
-					hidden1.value = "";
-				}
-			}
-		}
-	</script> 
-	<script type="text/javascript">
-		//Escrevendo o código-fonte HTML e ocultando os campos criados:
-		for (iLoop = 1; iLoop <= totalCampos; iLoop++) {
-			document
-					.write("<span id='linha"+iLoop+"' style='display:none'> <select class='btn btn-default btn-xs dropdown-toggle' style='width: 160px;'><option value='0'>Selecione etapa</option><option value='1'>Prova Prática</option><option value='2'>Prova teórica</option><option value='3'>Dinâmica de Grupo</option></select> <input type='text' id='arq"+iLoop+"' name='arq"+iLoop+"'> <input class='btn btn-xs btn-danger' type='button' value='Remover' onclick='RemoverCampos(\""
-							+ iLoop + "\")'></span><br>");
-
-		}
-	</script> 
+	
 </body>
 </html>

@@ -32,9 +32,6 @@ public class VagaBusiness {
 	private VagaConverter vagaConverter;
 
 	@Autowired
-	private List<VagaBean> vagaBean;
-
-	@Autowired
 	private SenioridadeBusiness senioridadeBusinness;
 
 	@Autowired

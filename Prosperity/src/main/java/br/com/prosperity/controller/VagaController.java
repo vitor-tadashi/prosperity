@@ -2,8 +2,6 @@ package br.com.prosperity.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,8 +32,6 @@ public class VagaController {
 	@Autowired
 	private VagaBusiness vagaBusiness;
 
-	@Autowired
-	private List<VagaBean> vagaBean;
 
 	@Autowired
 	private SenioridadeBusiness preencherSenioridade;
@@ -58,11 +54,6 @@ public class VagaController {
 	@Autowired
 	private List<ProjetoBean> projetos;
 
-	@Autowired
-	private List<SenioridadeBean> senioridadeBean;
-
-	@Autowired
-	private List<CargoBean> cargoBean;
 
 	@Autowired
 	private List<UsuarioBean> usuarios;
@@ -153,7 +144,9 @@ public class VagaController {
 		senioridades = preencherSenioridade.obterTodos();
 		cargos = preencherCargo.obterTodos();
 		projetos = preencherProjeto.obterTodos();
-		usuarios = preencherUsuario.buscarGestor(); // Buscar somente Gestores
+
+		usuarios = preencherUsuario.listar();
+
 		model.addAttribute("senioridades", senioridades);
 		model.addAttribute("cargos", cargos);
 		model.addAttribute("projetos", projetos);
