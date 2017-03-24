@@ -54,6 +54,8 @@
 }
 </style>
 
+	
+
 </head>
 <body>
 	<!-- Modal visualizar-->
@@ -424,31 +426,27 @@
 						<!--<form class="form-inline">-->
 						<div class="panel-body">
 
-							<div class="row ">
+							<form action="filtrar" method="GET" class="row">
 								<div class="col-md-4">
 									<div class="form-group">
-										<label>Vaga</label> <select class="form-control" name="">
-											<c:forEach var="vaga" items="${listaVaga}">
-												<option value="${vaga.id}">${vaga.nomeVaga}</option>
-											</c:forEach>
-										</select>
+										<label>Vaga</label> <input class="form-control" id="filtro1" name="nomeVaga" placeholder="Digite o nome de uma vaga">
 									</div>
 								</div>
 
 								<div class="col-md-5">
 									<label for="">Data</label>
-									<div class="input-group" name="dataAbertura">
-										<input type="date" class="form-control"> <span
+									<div class="input-group">
+										<input type="date" id="data1" class="form-control" name="dataAberturaDe"> <span
 											class="input-group-addon">até</span> <input type="date"
-											class="form-control">
+											class="form-control" name="dataAberturaPara" id="data2">
 									</div>
 								</div>
 
 								<div class="col-md-2">
 									<label for="cargo">Status</label> 
-									<select class="form-control" style="width: 130px;" name="">
-										<c:forEach var="status" items="${listaStatus}">
-												<option value="${status.id}">${status.nome}</option>
+									<select class="form-control" style="width: 130px;" id="status" name="statusVagaBean[0].id">
+										<c:forEach var="status" items="${listaStatusVaga}">
+												<option value="${status.id}">${status.statusBean.nome}</option>
 										</c:forEach>
 									</select>
 								</div>
@@ -456,13 +454,14 @@
 								<div class="text-right">
 									<a href="#" style="text-decoration: none; color: #ffffff">
 										<button class="btn btn-primary"
-											style="margin-top: 22px; margin-right: 22px;">Filtrar</button>
+											style="margin-top: 22px; margin-right: 22px;" type="submit">Filtrar</button>
 									</a>
 								</div>
-							</div>
+							</form>
 						</div>
 						<!--</panel body>-->
 						<table
+							id="tabelaVaga"
 							class="table table-bordered table-condensed table-hover table-striped"
 							style="font-size: 12px; vertical-align: middle;">
 							<thead>
@@ -478,8 +477,8 @@
 							</thead>
 							<tbody class="text-center">
 								<c:forEach var="vaga" items="${vagas}">
-									<tr>
-									<td>${vaga.nomeVaga}</td>
+									<tr position="infoVaga">
+									<td id="linhaNome">${vaga.nomeVaga}</td>
 									<td>${vaga.nomeSolicitante}</td>
 									<td>${vaga.projetoBean.cliente.nome}</td>
 									<td>
@@ -491,8 +490,8 @@
 										</c:if>
 
 									</td>
-									<td>${vaga.dataAbertura}</td>
-									<td><span id="tdStatus" class="label label-contratado">Ativo</span></td>
+									<td id="linhaData">${vaga.dataAbertura}</td>
+									<td id="linhaStatus"><span id="tdStatus" class="label label-contratado">Ativo</span></td>
 									<td>
 										<div class="btn-group">
 											<button class="btn btn-sm btn-info dropdown-toggle"
@@ -600,6 +599,8 @@
 	
 	<script type="text/javascript">
 	
+
+	
 	function info(listaId){
 		
     	//var Visualizar = $("#fid option:selected").val();
@@ -664,8 +665,5 @@
 	
 	
 	</script>
-	
-	
-	
-</body>
-</html>
+	</body>
+	</html>
