@@ -27,15 +27,6 @@ public class PerfilBusiness {
 	@Autowired
 	private FuncionalidadeDAO funcionalidadeDAO;
 
-	private PerfilBean obter(Integer idPerfil) {
-
-		PerfilEntity perfilEntity = perfilDAO.obterPorId(idPerfil);
-
-		PerfilBean perfilBean = perfilConverter.convertEntityToBean(perfilEntity);
-
-		return perfilBean;
-	}
-
 	@Transactional
 	public void inserir(PerfilBean perfilBean) throws BusinessException {
 		if (perfilBean.getId() == null) {
@@ -80,7 +71,7 @@ public class PerfilBusiness {
 	}
 
 	@Transactional
-	public List<FuncionalidadeBean> obterFuncionalidades(Integer id) {
+	public List<FuncionalidadeBean> obterPerfilFuncionalidades(Integer id) {
 		PerfilEntity entity = perfilDAO.obterPorId(id);
 		PerfilBean bean = perfilConverter.convertEntityToBean(entity);
 		List<FuncionalidadeBean> listaFunc = bean.getListaFuncionalidades();

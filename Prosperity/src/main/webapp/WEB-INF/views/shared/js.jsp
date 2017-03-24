@@ -1,6 +1,9 @@
 <!-- Le javascript ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 
+<!-- Parsley -->
+<script src="js/parsley.min.js"></script>
+
 <!-- Jquery -->
 <script src="/resources/js/jquery-1.10.2.min.js"></script>
 
@@ -51,5 +54,32 @@
 <script src="/resources/js/app/app_form.js"></script>
 <script src="/resources/js/app/app.js"></script>
 
+
+<script type="text/javascript">
+	$(function() {
+		var id = $("#idPerfil").val();
+		$.ajax({
+			url : "http://localhost:8080/usuario/obter-perfil-funcionalidade",
+			type : "GET",
+			dataType : "JSON",
+			data : {
+				id : id
+			},
+			success : function(lista) {
+				if (lista != null) {
+					$(".listFunci").each(function(index, li) {
+						$.each(lista, function(i, item) {
+							if (item.id == $(li).val()) {
+								$(li).removeClass("hide")
+							}
+						});
+					});
+				}
+			}
+		});
+	});
+</script>
+
 <!-- menu lateral -->
 <script src="/resources/js/custom/menu.js"></script>
+
