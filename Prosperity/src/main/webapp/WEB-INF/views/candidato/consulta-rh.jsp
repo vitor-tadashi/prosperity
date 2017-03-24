@@ -15,6 +15,8 @@
 
 <!-- Link e style aqui -->
 
+
+
 </head>
 <body>
 
@@ -498,7 +500,7 @@
 										<th class="text-center">Vaga</th>
 										<th class="text-center">Pretensão</th>
 										<th class="text-center">Data de abertura</th>
-										<th class="text-center">Data de aprovação</th>
+										<!-- <th class="text-center">Data de aprovação</th> -->
 										<th class="text-center">Status</th>
 										<th class="text-center">Ações</th>
 									</tr>
@@ -511,8 +513,8 @@
 											<td>${candidato.valorPretensao}</td>
 											<td><fmt:formatDate value="${candidato.dataAbertura}"
 													pattern="dd/MM/yyyy" /></td>
-											<td><fmt:formatDate value="${candidato.dataFechamento}"
-													pattern="dd/MM/yyyy" /></td>
+											<!-- <td><fmt:formatDate value="${candidato.dataFechamento}"
+													pattern="dd/MM/yyyy" /></td> -->
 											<td></td>
 											<td><span class="line"></span>
 												<div class="btn-group">
@@ -524,15 +526,16 @@
 												<i class="fa fa-cogs fa-lg">&nbsp;</i> <span class="caret"></span>
 											</button>
 													<ul class="dropdown-menu slidedown btnAlinhado">
-														<li><a href="#aprovado-modal" data-toggle="modal"
+														<li> <a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Histórico do Candidato</a></li> 
+														 <li class="divider"></li> <!-- <a href="#aprovado-modal" data-toggle="modal"
 															data-toggle="modal" data-target=".bs-example-modal-lg"><i
-																class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
-														<li class="divider"></li>
+																class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a>  --> </li>
+														
 														<li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
 
-														<li class="divider"></li>
-														<li><a href="#delete-modal" data-toggle="modal"><i
-																class="fa fa-trash-o fa-lg">&nbsp;</i>Fechar vaga</a></li>
+														<!--<li class="divider"></li>
+														 <li><a href="#delete-modal" data-toggle="modal"><i
+																class="fa fa-trash-o fa-lg">&nbsp;</i>Fechar vaga</a></li> <!--
 													</ul>
 													</div>
 												 <!-- /fim botao --></td>
