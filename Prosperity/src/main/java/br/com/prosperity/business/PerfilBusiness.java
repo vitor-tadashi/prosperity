@@ -63,7 +63,7 @@ public class PerfilBusiness {
 	}
 
 	@Transactional
-	public List<PerfilBean> obterTodos() {
+	public List<PerfilBean> listar() {
 		List<PerfilEntity> perfisEntity = perfilDAO.findByNamedQuery("obterPerfis");
 		List<PerfilBean> perfisBean = perfilConverter.convertEntityToBean(perfisEntity);
 
@@ -71,7 +71,7 @@ public class PerfilBusiness {
 	}
 
 	@Transactional
-	public List<FuncionalidadeBean> obterFuncionalidades(Integer id) {
+	public List<FuncionalidadeBean> obterPerfilFuncionalidades(Integer id) {
 		PerfilEntity entity = perfilDAO.findById(id);
 
 		PerfilBean bean = perfilConverter.convertEntityToBean(entity);

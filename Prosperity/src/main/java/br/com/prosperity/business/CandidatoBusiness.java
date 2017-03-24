@@ -17,9 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.StatusCandidatoBean;
-import br.com.prosperity.bean.ContatoBean;
-import br.com.prosperity.bean.VagaBean;
-import br.com.prosperity.converter.CanalInformacaoConverter;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.converter.CandidatoConverter;
 import br.com.prosperity.dao.CandidatoDAO;
@@ -105,12 +102,12 @@ public class CandidatoBusiness extends FormatUtil {
 		return bean;
 }
 
-/*	@Transactional
+	@Transactional
 	public void alterarStatus(SituacaoCandidatoBean situacaoCandidato) {
 		StatusCandidatoEntity statusCandidatoEntity = alterarStatus1(situacaoCandidato);
 		List<StatusFuturoEntity> statusFuturoEntity = null;
 
-		statusCandidatoDAO.adicionar(statusCandidatoEntity);
+		statusCandidatoDAO.insert(statusCandidatoEntity);
 
 		statusFuturoEntity = statusFuturoDAO.findByNamedQuery("obterStatusFuturos",
 				situacaoCandidato.getStatus().getValue());
@@ -120,7 +117,7 @@ public class CandidatoBusiness extends FormatUtil {
 				situacaoCandidato.setStatus(StatusCandidatoEnum.valueOf(statusFuturoEntity.get(0).getIdStatusFuturo()));
 				alterarStatus1(situacaoCandidato);
 			} else {
-				// LOGICA COM AVALIADORES
+				
 			}
 		}
 		// PASSO 2 - PEGAR O STATUSFUTURO e SALVAR NO BANCO
@@ -130,13 +127,13 @@ public class CandidatoBusiness extends FormatUtil {
 		StatusCandidatoEntity statusCandidatoEntity = new StatusCandidatoEntity();
 		
 		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
-		statusCandidatoEntity.setStatus(statusDAO.obterPorId(situacaoCandidato.getStatus().getValue()));
+		statusCandidatoEntity.setStatus(statusDAO.findById(situacaoCandidato.getStatus().getValue()));
 		statusCandidatoEntity.setIdCandidato(situacaoCandidato.getIdCandidato());
 		statusCandidatoEntity.setDsParecer(situacaoCandidato.getParecer());
 		statusCandidatoEntity.setDtAlteracao(new Date());
-		statusCandidatoEntity.setUsuario(usuarioDAO.obterPorId(usuarioBean.getId()));
+		statusCandidatoEntity.setUsuario(usuarioDAO.findById(usuarioBean.getId()));
 		return statusCandidatoEntity;
 
-	}*/
+	}
 
 }

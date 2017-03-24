@@ -38,7 +38,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 			if(uri.endsWith("obter-perfil-funcionalidade"))
 				return true;
 	
-			for(FuncionalidadeBean fun : funcionalidadeBusiness.obterTodos()){
+			for(FuncionalidadeBean fun : funcionalidadeBusiness.listar()){
 				if(uri.endsWith(fun.getUrl())){
 					for(FuncionalidadeBean f : user.getPerfil().getListaFuncionalidades()){
 						if(f.getId() == fun.getId()){

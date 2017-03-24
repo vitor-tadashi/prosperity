@@ -42,7 +42,7 @@ public class UsuarioController {
 	public String carregaTabela(Model model) {
 		List<UsuarioBean> usuarios = usuarioBusiness.listar();
 		List<FuncionarioBean> funcionarios = funcionarioBusiness.obterTodos();
-		List<PerfilBean> perfis = perfilBusiness.obterTodos();
+		List<PerfilBean> perfis = perfilBusiness.listar();
 		model.addAttribute("funcionarios", funcionarios);
 		model.addAttribute("perfis", perfis);
 		model.addAttribute("usuarios", usuarios);
@@ -60,7 +60,7 @@ public class UsuarioController {
 	public @ResponseBody List<Object> carregaCombosAjax(Model model) {
 		List<Object> lista = new ArrayList<>();
 		List<FuncionarioBean> funcionarios = funcionarioBusiness.obterTodos();
-		List<PerfilBean> perfis = perfilBusiness.obterTodos();
+		List<PerfilBean> perfis = perfilBusiness.listar();
 		
 		lista.add(perfis);
 		lista.add(funcionarios);
@@ -70,8 +70,8 @@ public class UsuarioController {
 
 	@RequestMapping(value = "/criar-perfil", method = RequestMethod.GET)
 	public String criaPerfil(Model model) {
-		List<FuncionalidadeBean> funcionalidades = funcionalidadeBusiness.obterTodos();
-		List<PerfilBean> perfis = perfilBusiness.obterTodos();
+		List<FuncionalidadeBean> funcionalidades = funcionalidadeBusiness.listar();
+		List<PerfilBean> perfis = perfilBusiness.listar();
 		model.addAttribute("funcionalidades", funcionalidades);
 		model.addAttribute("perfis", perfis);
 
@@ -106,10 +106,10 @@ public class UsuarioController {
 		usuarioBusiness.redefinirSenha(id);
 	}
 	
-/*	@RequestMapping(value = "obter-perfil-funcionalidade", method=RequestMethod.GET)
+	@RequestMapping(value = "obter-perfil-funcionalidade", method=RequestMethod.GET)
 	public @ResponseBody List<FuncionalidadeBean> obterPerfilFuncionalidade(Model model,@ModelAttribute("id")Integer id){
 		List<FuncionalidadeBean> listaFunc = perfilBusiness.obterPerfilFuncionalidades(id);
 		return listaFunc;
-	}*/
+	}
 
 }
