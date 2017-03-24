@@ -106,10 +106,10 @@ public class UsuarioController {
 		usuarioBusiness.redefinirSenha(id);
 	}
 	
-	@RequestMapping(value = "obter-perfil-funcionalidade", method=RequestMethod.GET)
+/*	@RequestMapping(value = "obter-perfil-funcionalidade", method=RequestMethod.GET)
 	public @ResponseBody List<FuncionalidadeBean> obterPerfilFuncionalidade(Model model,@ModelAttribute("id")Integer id){
 		List<FuncionalidadeBean> listaFunc = perfilBusiness.obterPerfilFuncionalidades(id);
 		return listaFunc;
-	}
+	}*/
 
 }
