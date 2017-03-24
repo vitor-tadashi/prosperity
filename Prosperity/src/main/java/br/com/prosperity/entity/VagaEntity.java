@@ -11,17 +11,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import br.com.prosperity.bean.VagaBean;
+
 @Entity
 @Table(name = "tbVaga")
-@NamedQuery(name = "obterTodos", query = "SELECT u FROM VagaEntity u WHERE u.nomeVaga = ?1")
+@NamedQueries({ @NamedQuery(name = "obterTodos", query = "SELECT u FROM VagaEntity u WHERE u.nomeVaga = ?1"),
+	@NamedQuery(name="obterFiltro", query="SELECT u FROM VagaEntity u WHERE lower(u.nomeVaga) like ?1")
+	
+})
 public class VagaEntity {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idVaga", unique = true, nullable = false)
@@ -110,24 +115,21 @@ public class VagaEntity {
 	public Integer getId() {
 		return id;
 	}
-/*=======
-
-	@OneToMany()
-	@JoinColumn(name = "idVaga")
-	private List<StatusVagaEntity> statusEntity;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public List<StatusVagaEntity> getStatusEntity() {
-		return statusEntity;
-	}
-
-	public void setStatusEntity(List<StatusVagaEntity> statusEntity) {
-		this.statusEntity = statusEntity;
->>>>>>> 6177abe9dacbea6ac3a7b401caace31a61a978f4
-	}*/
+	/*
+	 * =======
+	 * 
+	 * @OneToMany()
+	 * 
+	 * @JoinColumn(name = "idVaga") private List<StatusVagaEntity> statusEntity;
+	 * 
+	 * public Integer getId() { return id; }
+	 * 
+	 * public List<StatusVagaEntity> getStatusEntity() { return statusEntity; }
+	 * 
+	 * public void setStatusEntity(List<StatusVagaEntity> statusEntity) {
+	 * this.statusEntity = statusEntity; >>>>>>>
+	 * 6177abe9dacbea6ac3a7b401caace31a61a978f4 }
+	 */
 
 	public void setId(Integer id) {
 		this.id = id;

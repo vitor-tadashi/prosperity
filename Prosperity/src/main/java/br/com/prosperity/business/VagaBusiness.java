@@ -1,10 +1,14 @@
 package br.com.prosperity.business;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+
+import org.hibernate.Session;
+import org.hibernate.criterion.CriteriaQuery;
+import org.hibernate.criterion.Example;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +18,9 @@ import br.com.prosperity.converter.VagaConverter;
 import br.com.prosperity.dao.VagaDAO;
 import br.com.prosperity.entity.CargoEntity;
 import br.com.prosperity.entity.SenioridadeEntity;
+import br.com.prosperity.entity.UsuarioEntity;
 import br.com.prosperity.entity.VagaEntity;
+
 
 @Component
 public class VagaBusiness {
@@ -34,19 +40,26 @@ public class VagaBusiness {
 	@Transactional
 	public List<VagaBean> listar() {
 
-		// List<VagaEntity> aprovar =
-		// vagaDAO.findByNamedQuery("obterAprovacao");
-
-		List<VagaEntity> vagaEntity = vagaDAO.listar();
+		List<VagaEntity> vagaEntity = vagaDAO.findAll();  //PENSAR
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 		return vagaBean;
 	}
-
+	
+	@Transactional
+	public List<VagaBean> filtrarVagas(VagaBean vagao){
+		List<VagaEntity> vagas = vagaDAO.findByNamedQuery("obterFiltro", vagao.getNomeVaga());
+		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagas);
+			return vagaBean;
+		
+		/*List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("pesquisar", vaga);
+		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
+		return vagaBean;*/
+	}
 	@Transactional
 
 	public VagaBean obter(int idVaga) {
 
-		VagaEntity vagaEntity = vagaDAO.obterPorId(idVaga);
+		VagaEntity vagaEntity = vagaDAO.findById(idVaga);
 
 		VagaBean vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 
@@ -65,12 +78,12 @@ public class VagaBusiness {
 		// String usuario = session.getAttribute("autenticado").getNome();
 		vagaBean.setNomeVaga(cargo + " " + senioridade);
 		// vagaBean.setUsuarioBean(usuario);
-		vagaDAO.adicionar(vagaConverter.convertBeanToEntity(vagaBean));
+		vagaDAO.insert(vagaConverter.convertBeanToEntity(vagaBean));
 	}
 
 	@Transactional
 	public VagaBean obterVagaPorId(Integer id) {
-		VagaBean bean = vagaConverter.convertEntityToBean(vagaDAO.obterPorId(id));
+		VagaBean bean = vagaConverter.convertEntityToBean(vagaDAO.findById(id));
 		return bean;
 	}
 }
