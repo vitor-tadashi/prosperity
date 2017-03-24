@@ -105,12 +105,12 @@ public class CandidatoBusiness extends FormatUtil {
 		return bean;
 }
 
-/*	@Transactional
+	@Transactional
 	public void alterarStatus(SituacaoCandidatoBean situacaoCandidato) {
 		StatusCandidatoEntity statusCandidatoEntity = alterarStatus1(situacaoCandidato);
 		statusFuturoEntity = null;
 
-		statusCandidatoDAO.adicionar(statusCandidatoEntity);
+		statusCandidatoDAO.insert(statusCandidatoEntity);
 
 		statusFuturoEntity = statusFuturoDAO.findByNamedQuery("obterStatusFuturos",
 				situacaoCandidato.getStatus().getValue());
@@ -130,13 +130,13 @@ public class CandidatoBusiness extends FormatUtil {
 		StatusCandidatoEntity statusCandidatoEntity = new StatusCandidatoEntity();
 		
 		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
-		statusCandidatoEntity.setStatus(statusDAO.obterPorId(situacaoCandidato.getStatus().getValue()));
+		statusCandidatoEntity.setStatus(statusDAO.findById(situacaoCandidato.getStatus().getValue()));
 		statusCandidatoEntity.setIdCandidato(situacaoCandidato.getIdCandidato());
 		statusCandidatoEntity.setDsParecer(situacaoCandidato.getParecer());
 		statusCandidatoEntity.setDtAlteracao(new Date());
-		statusCandidatoEntity.setUsuario(usuarioDAO.obterPorId(usuarioBean.getId()));
+		statusCandidatoEntity.setUsuario(usuarioDAO.findById(usuarioBean.getId()));
 		return statusCandidatoEntity;
 
-	}*/
+	}
 
 }
