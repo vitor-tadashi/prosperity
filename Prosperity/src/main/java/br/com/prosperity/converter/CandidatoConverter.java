@@ -17,16 +17,16 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 
 	@Autowired
 	private EnderecoConverter enderecoConverter;
-	
+
 	@Autowired
 	private FormacaoConverter formacaoConverter;
-	
+
 	@Autowired
 	private UsuarioConverter usuarioConverter;
-	
+
 	@Autowired
 	private VagaConverter vagaConverter;
-	
+
 	@Autowired
 	private StatusCandidatoConverter statusCandidatoConverter;
 
@@ -35,7 +35,7 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		if (bean == null) {
 			return null;
 		}
-		
+
 		CandidatoEntity entity = new CandidatoEntity();
 
 		entity.setId(bean.getId());
@@ -56,12 +56,9 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		entity.setDataUltimoContato(bean.getDataUltimoContato());
 		entity.setProposta(bean.getProposta());
 		entity.setVagaEntity(vagaConverter.convertBeanToEntity(bean.getVagas()));
-//		entity.setValorMax(bean.getValorMax());
-//		entity.setValorMin(bean.getValorMin());
-		entity.setVagaEntity(vagaConverter.convertBeanToEntity(bean.getVagas()));
-	
+		entity.setValorMax(bean.getValorMax());
+		entity.setValorMin(bean.getValorMin());
 
-		
 		return entity;
 	}
 
@@ -70,9 +67,9 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		if (entity == null) {
 			return null;
 		}
-		
+
 		CandidatoBean bean = new CandidatoBean();
-		
+
 		bean.setId(entity.getId());
 		bean.setCpf(entity.getCpf());
 		bean.setCurriculo(entity.getCurriculo());
@@ -94,10 +91,8 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		bean.setDataUltimoContato(entity.getDataUltimoContato());
 		bean.setProposta(entity.getProposta());
 		bean.setVagas(vagaConverter.convertEntityToBean(entity.getVagaEntity()));
-//		bean.setValorMax(entity.getValorMax());
-//		bean.setValorMin(entity.getValorMin());
-//		bean.setVagas(vagaConverter.convertEntityToBean(entity.getVagaEntity()));
-
+		bean.setValorMax(entity.getValorMax());
+		bean.setValorMin(entity.getValorMin());
 
 		return bean;
 	}

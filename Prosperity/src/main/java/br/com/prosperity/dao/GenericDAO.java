@@ -8,18 +8,18 @@ public interface GenericDAO<T, K extends Serializable> {
 
 	Class<T> getEntityClass();
 
-	T obterPorId(final K id);
+	T findById(final K id);
 
-	List<T> listar();
+	List<T> findAll();
 
 	List<T> findAll(String propertyOrder, Boolean isDesc);
 
 	List<T> findByNamedQuery(final String queryName, Object... params);
 
-	T adicionar(final T entity);
+	T insert(final T entity);
 
-	void remover(final T entity);
+	void remove(final T entity);
 
-	public T alterar(T entity);
+	public T update(T entity);
 
 }

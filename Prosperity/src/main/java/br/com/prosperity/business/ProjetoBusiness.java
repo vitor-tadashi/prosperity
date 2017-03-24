@@ -22,7 +22,7 @@ public class ProjetoBusiness {
 	
 	@Transactional
 	public List<ProjetoBean> obterTodos(){
-		List<ProjetoEntity> projetoEntity = projetoDAO.listar();
+		List<ProjetoEntity> projetoEntity = projetoDAO.findAll();
 		List<ProjetoBean> projetoBean = projetoConverter.convertEntityToBean(projetoEntity);
 		return projetoBean;
 	}
