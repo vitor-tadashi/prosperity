@@ -22,16 +22,16 @@ public class CandidatoBean extends FormatUtil {
 	private Integer id;
 
 	@NotNull
-	@NotEmpty(message = " O campo CPF deve ser preenchido")
+	@NotEmpty(message ="O campo CPF deve ser preenchido")
 	private String cpf;
 	@NotNull
-	@NotEmpty(message = "O campo nome deve ser prenchido")
+	@NotEmpty(message ="O campo nome deve ser prenchido")
 	private String nome;
 	@NotNull
-	@NotEmpty(message = "O campo RG  deve ser prenchido")
+	@NotEmpty(message ="O campo RG  deve ser prenchido")
 	private String rg;
 	@NotNull
-	@NotEmpty(message = "O campo data de nascimento deve ser prenchido")
+	@NotEmpty(message ="O campo data de nascimento deve ser prenchido")
 	private Date dataNascimento;
 	private Double valorPretensao;
 	private Date dataAbertura;
