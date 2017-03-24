@@ -21,6 +21,9 @@ public class LoginController {
 
 	@Autowired
 	private UsuarioBean usuario;
+	
+	@Autowired
+	private HttpSession session;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String indexLogin() {
@@ -28,7 +31,7 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/autenticar", method = RequestMethod.POST)
-	public String autenticar(UsuarioBean usuarioBean, Model model, HttpSession session) {
+	public String autenticar(UsuarioBean usuarioBean, Model model) {
 		try {
 			usuario = usuarioBusiness.autenticar(usuarioBean);
 
@@ -43,6 +46,11 @@ public class LoginController {
 			model.addAttribute("log", ex.getMessage());
 		}
 
+		return "login/acesso";
+	}
+	
+	@RequestMapping(value = "/primeiro-acesso", method = RequestMethod.GET)
+	public String primeiroAcessoUsuario() throws BusinessException {
 		return "login/acesso";
 	}
 

@@ -13,7 +13,7 @@
         <meta name="author" content="">
         <c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
         <!-- Link e style aqui -->
-        <link href="/resources/css/custom/criar-perfil.css" rel="stylesheet"/>
+        <!-- <link href="/resources/css/custom/criar-perfil.css" rel="stylesheet"/> -->
     </head>
     <body>
         <!-- Modais aqui-->

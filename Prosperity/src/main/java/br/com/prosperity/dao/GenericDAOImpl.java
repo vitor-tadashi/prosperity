@@ -22,7 +22,7 @@ public class GenericDAOImpl<T, ID extends Serializable> implements GenericDAO<T,
 	private Class<T> entityClass;
 
 	@PersistenceContext
-	protected EntityManager entityManager;
+	public EntityManager entityManager;
 
 	@SuppressWarnings("unchecked")
 	public GenericDAOImpl() {
@@ -45,7 +45,7 @@ public class GenericDAOImpl<T, ID extends Serializable> implements GenericDAO<T,
 	}
 
 	@Override
-	public List<T> listar() {
+	public List<T> findAll() {
 		List<T> ret = null;
 		try {
 			ret = findByCriteria();
@@ -69,7 +69,7 @@ public class GenericDAOImpl<T, ID extends Serializable> implements GenericDAO<T,
 	}
 
 	@Override
-	public T obterPorId(final ID id) {
+	public T findById(final ID id) {
 		T result = null;
 		try {
 			result = entityManager.find(entityClass, id);
@@ -116,7 +116,7 @@ public class GenericDAOImpl<T, ID extends Serializable> implements GenericDAO<T,
 	/**
 	 * Use this inside subclasses as a convenience method.
 	 */
-	protected List<T> findByCriteria(String propertyOrder, Boolean isDesc, final Criterion... criterion) {
+	public List<T> findByCriteria(String propertyOrder, Boolean isDesc, final Criterion... criterion) {
 		List<T> ret = null;
 		try {
 			ret = findByCriteria(propertyOrder, isDesc, -1, -1, criterion);
@@ -183,7 +183,7 @@ public class GenericDAOImpl<T, ID extends Serializable> implements GenericDAO<T,
 	}
 
 	@Override
-	public void remover(T entity) {
+	public void remove(T entity) {
 		try {
 			entityManager.merge(entity);
 		} catch (Exception e) {
@@ -192,7 +192,7 @@ public class GenericDAOImpl<T, ID extends Serializable> implements GenericDAO<T,
 	}
 
 	@Override
-	public T adicionar(T entity) {
+	public T insert(T entity) {
 		try {
 			entityManager.persist(entity);
 		} catch (Exception e) {
@@ -202,7 +202,7 @@ public class GenericDAOImpl<T, ID extends Serializable> implements GenericDAO<T,
 	}
 
 	@Override
-	public T alterar(T entity) {
+	public T update(T entity) {
 		try {
 			entityManager.merge(entity);
 		} catch (Exception e) {

@@ -21,7 +21,7 @@ public class FuncionalidadeBusiness {
 	
 	@Transactional
 	public List<FuncionalidadeBean> obterTodos() {
-		List<FuncionalidadeEntity> funcionalidadeEntity = funcionalidadeDAO.listar();
+		List<FuncionalidadeEntity> funcionalidadeEntity = funcionalidadeDAO.findAll();
 		List<FuncionalidadeBean> funcionalidadeBean = funcionalidadeConverter.convertEntityToBean(funcionalidadeEntity);
 
 		return funcionalidadeBean;

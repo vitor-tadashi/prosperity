@@ -13,6 +13,8 @@
 
 <c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
 
+<link href="/resources/css/custom/acesso.css" rel="stylesheet"/>
+
 </head>
 
 <body>
@@ -22,7 +24,7 @@
 	<div class="login-wrapper">
 		<div class="text-center">
 			<img src="/resources/img/png_colorido_slogan.png" alt="Second slide"
-				class="m-bottom-md" style="width: 400px;">
+				class="m-bottom-md tamanho">
 		</div>
 		<div class="login-widget animation-delay1">
 			<div class="panel panel-default">

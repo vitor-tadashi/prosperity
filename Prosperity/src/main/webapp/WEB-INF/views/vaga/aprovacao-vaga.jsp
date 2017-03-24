@@ -89,16 +89,9 @@
 												<!-- /form-group -->
 
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
-													<label for="exampleInputEmail1">Local de trabalho</label>
+													<label for="exampleInputEmail1">Local de trabalho:</label>
 													<div class="radiogroup" name="localTrabalho" id="local">
-														<label class="label-radio inline"> <input
-															id="interno" type="radio" value="I"
-															name="radLocalTrabalho" disabled> <span
-															class="custom-radio"></span> Interno
-														</label> <label class="label-radio inline"> <input
-															id="cliente" type="radio" value="C"
-															name="radLocalTrabalho" disabled> <span
-															class="custom-radio"></span> Cliente
+														<label id="lblLocal" class="label-radio inline" value = "">
 														</label>
 													</div>
 													<!-- /.col -->
@@ -115,20 +108,9 @@
 												<!-- /form-group -->
 
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
-													<label for="exampleInputEmail1">Tipo de vaga</label>
+													<label for="exampleInputEmail1">Tipo de vaga:</label>
 													<div class="radiogroup" name="idTipoVaga" id="tipo">
-														<label class="label-radio inline"> <input
-															type="radio" id="real" value="R" name="inline-radio3"
-															checked disabled> <span class="custom-radio"></span>
-															Real
-														</label> <label class="label-radio inline"> <input
-															type="radio" id="prospeccao" value="P"
-															name="inline-radio3" disabled> <span
-															class="custom-radio"></span> Prospecção
-														</label> <label class="label-radio inline"> <input
-															type="radio" id="hunting" value="H" name="inline-radio3"
-															disabled> <span class="custom-radio"></span>
-															Hunting
+														<label id="tpVaga" class="label-radio inline" value = "">
 														</label>
 													</div>
 													<!-- /.col -->
@@ -146,31 +128,36 @@
 											<!-- /form-group -->
 											<div class="form-group" style="margin-bottom: 0px">
 												<label class="control-label">Horário</label>
+
 												<div>
 													<div class="form-group col-md-3">
 														<div class="input-group bootstrap-timepicker"
-															style="width: 105%;">
-															<input class="timepicker form-control" id="vagaHorario"
-																type="text" value="08:00 AM" disabled> <span
+															>
+															<input class="timepicker form-control" type="text"
+																/ value="08:00 AM" id="horaEntrada" name="horarioEntrada" disabled> <span
 																class="input-group-addon"><i
 																class="fa fa-clock-o"></i></span>
 														</div>
 													</div>
+
 													<div class="form-group col-md-1">
 														<label style="margin-top: 7px">Às</label>
 													</div>
+
 													<div class="form-group col-md-3">
 														<div class="input-group bootstrap-timepicker"
-															style="width: 105%;">
-															<input class="timepicker form-control" id="vagaHorario1"
-																type="text" value="05:00 PM" disabled> <span
+															>
+															<input class="timepicker form-control" type="text"
+																value="05:00 PM" id="horaSaida" name="horarioSaida" disabled> <span
 																class="input-group-addon"><i
 																class="fa fa-clock-o"></i></span>
 														</div>
 													</div>
 												</div>
+
 											</div>
 										</div>
+											
 										<div class="form-group row">
 											<div class="">
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
@@ -180,16 +167,9 @@
 												</div>
 												<!-- /form-group -->
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
-													<label for="vagaQuadro">Aumento de quadro</label>
+													<label for="vagaQuadro">Aumento de quadro:</label>
 													<div class="radiogroup" name="aumentoQuadro" id="aumento">
-														<label class="label-radio inline"> <input
-															id="novo" type="radio" value="N" name="novoQuadro"
-															disabled> <span class="custom-radio"> </span>
-															Novo
-														</label> <label class="label-radio inline"> <input
-															id="sub" type="radio" value="S" name="novoQuadro"
-															disabled> <span class="custom-radio"> </span>
-															Substituição
+														<label id="lblQuadro" class="label-radio inline" value = "">
 														</label>
 
 													</div>
@@ -224,7 +204,7 @@
 								</div>
 							</section>
 							<!-- /Section -->
-							<section class="panel panel-default">
+							<!-- <section class="panel panel-default"> -->
 								<div class="row">
 									<div class="panel-heading">Informações de projeto</div>
 									<div class="form-group row"></div>
@@ -244,7 +224,7 @@
 											value="Vitor Tadashi">
 									</div>
 								</div>
-							</section>
+						<!-- </section> -->
 							<!-- /panel -->
 							<section class="panel panel-default">
 								<div class="panel-heading">Formação acadêmica</div>
@@ -319,8 +299,8 @@
 						<thead>
 							<tr class="text-center">
 								<th class="text-center">Nome da vaga</th>
-								<th class="text-center">Solicitante</th>
 								<th class="text-center">Senioridade</th>
+								<th class="text-center">Solicitante</th>								
 								<th class="text-center">Projeto</th>
 								<th class="text-center">Cliente</th>
 								<th class="text-center">Local de trabalho</th>
@@ -333,9 +313,9 @@
 							<c:forEach var="vaga" items="${vagas}" varStatus="i">
 
 								<tr>
-									<td>${vaga.nomeVaga}</td>
-									<td>${vaga.nomeSolicitante}</td>
+									<td>${vaga.cargoBean.nome}</td>
 									<td>${vaga.senioridadeBean.nome}</td>
+									<td>${vaga.nomeSolicitante}</td>
 									<td>${vaga.projetoBean.nome}</td>
 									<td>${vaga.projetoBean.cliente.nome}</td>
 									<td><c:if test="${vaga.localTrabalho == 73}">
@@ -458,21 +438,23 @@
     			$('#titulo').html(lista.nomeVaga);
     			$('input#vagaGestor').val(lista.nomeSolicitante);
     			if(lista.localTrabalho == 'C') {
-    				$("#cliente").attr('checked', 'checked');
+    				//$("#cliente").attr('checked', 'checked');
+    				$("#lblLocal").text('Cliente')
     			} else {
-    				$("#interno").attr('checked', 'checked');
+    				//$("#interno").attr('checked', 'checked');
+    				$("#lblLocal").text('Interno')
     			}
-    			if(lista.idTipoVaga == 'H') {
-    				$("#hunting").attr('checked', 'checked');
+    			if(lista.idTipoVaga == 'H') { 
+    				$("#tpVaga").text('Hunting')
     			} else if(lista.idTipoVaga == 'P') {
-    				$("#prospeccao").attr('checked', 'checked');
+    				$("#tpVaga").text('Prospecção')
     			} else {
-    				$("#real").attr('checked', 'checked');
+    				$("#tpVaga").text('Real')
     			}
     			if(lista.aumentaQuadro == 'S') {
-    				$("#sub").attr('checked', 'checked');
-    			} else {
-    				$("#novo").attr('checked', 'checked');
+    				$("#lblQuadro").text('Substituição')
+       			} else {
+       				$("#lblQuadro").text('Novo')
     			}
     			$('input#vagaSalario').val(lista.valorPretensao);
     			$('input#cargo').val(lista.cargoBean.nome);
@@ -512,6 +494,7 @@
 	    $printSection.appendChild(domClone);
 	    window.print();
 	}
+	
 	
 </script>
 	</script>

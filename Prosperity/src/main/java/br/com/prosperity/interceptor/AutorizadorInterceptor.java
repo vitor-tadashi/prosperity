@@ -4,21 +4,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.business.FuncionalidadeBusiness;
 
+@Component
 public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 
 	@Autowired
 	private FuncionalidadeBusiness funcionalidadeBusiness;
 	
+	@Autowired
+	public UsuarioBean user;
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object controller)
 			throws Exception {
-		
 		String uri = request.getRequestURI();
 		
 	      if(uri.endsWith("login/") || 
@@ -29,7 +33,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 	      
 		if (request.getSession().getAttribute("autenticado") != null) {
 			request.setAttribute("autenticado", request.getSession().getAttribute("autenticado"));
-			UsuarioBean user = (UsuarioBean) request.getSession().getAttribute("autenticado");
+			user = (UsuarioBean) request.getSession().getAttribute("autenticado");
 			
 			if(uri.endsWith("obter-perfil-funcionalidade"))
 				return true;
