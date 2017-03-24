@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import br.com.prosperity.util.FormatUtil;
@@ -31,6 +32,7 @@ public class CandidatoBean extends FormatUtil {
 	@NotEmpty(message ="O campo RG  deve ser prenchido")
 	private String rg;
 	@NotNull
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	@NotEmpty(message ="O campo data de nascimento deve ser prenchido")
 	private Date dataNascimento;
 	private Double valorPretensao;
