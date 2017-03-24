@@ -56,9 +56,6 @@ public class CandidatoBusiness extends FormatUtil {
 	
 	@Autowired
 	private HttpSession session;
-	
-	@Autowired
-	List<StatusFuturoEntity> statusFuturoEntity;
 
 	@Transactional
 	public CandidatoBean obter(Integer id) {
@@ -108,7 +105,7 @@ public class CandidatoBusiness extends FormatUtil {
 	@Transactional
 	public void alterarStatus(SituacaoCandidatoBean situacaoCandidato) {
 		StatusCandidatoEntity statusCandidatoEntity = alterarStatus1(situacaoCandidato);
-		statusFuturoEntity = null;
+		List<StatusFuturoEntity> statusFuturoEntity = null;
 
 		statusCandidatoDAO.insert(statusCandidatoEntity);
 
