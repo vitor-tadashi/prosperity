@@ -1,5 +1,6 @@
 package br.com.prosperity.entity;
 
+import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
@@ -46,18 +47,18 @@ public class VagaEntity {
 	private Date dataInicio;
 
 	@Column(name = "flLocalTrabalho")
-	private char localTrabalho;
+	private Character localTrabalho;
 
 	@Column(name = "idTpVaga")
 	private Character tipoVaga;
 
 	@Column(name = "hrEntrada")
-	@Temporal(value = TemporalType.TIME)
-	private Date horaEntrada;
+	//@Temporal(value = TemporalType.TIME)
+	private String horaEntrada;
 
 	@Column(name = "hrSaida")
-	@Temporal(value = TemporalType.TIME)
-	private Date horaSaida;
+	//@Temporal(value = TemporalType.TIME)
+	private String horaSaida;
 
 	@Column(name = "flAumentoQuadra")
 	private Character aumentoQuadro;
@@ -183,19 +184,19 @@ public class VagaEntity {
 		this.tipoVaga = tipoVaga;
 	}
 
-	public Date getHoraEntrada() {
+	public String getHoraEntrada() {
 		return horaEntrada;
 	}
 
-	public void setHoraEntrada(Date horaEntrada) {
+	public void setHoraEntrada(String horaEntrada) {
 		this.horaEntrada = horaEntrada;
 	}
 
-	public Date getHoraSaida() {
+	public String getHoraSaida() {
 		return horaSaida;
 	}
 
-	public void setHoraSaida(Date horaSaida) {
+	public void setHoraSaida(String horaSaida) {
 		this.horaSaida = horaSaida;
 	}
 
