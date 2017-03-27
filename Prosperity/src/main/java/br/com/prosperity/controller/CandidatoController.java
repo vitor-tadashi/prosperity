@@ -150,7 +150,7 @@ public class CandidatoController {
 		List<CandidatoBean> candidatos = candidatoBusiness.obterFiltro(candidato);
 		model.addAttribute("candidatos", candidatos);
 
-		/*List<VagaBean> listaVaga = vagaBusiness.listar();
+		List<VagaBean> listaVaga = vagaBusiness.listar();
 		model.addAttribute("listaVaga", listaVaga);
 
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
@@ -160,7 +160,7 @@ public class CandidatoController {
 		model.addAttribute("listaSenioridade", listaSenioridade);
 
 		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.obterTodos();
-		model.addAttribute("listaFuncionarios", listaFuncionarios);*/
+		model.addAttribute("listaFuncionarios", listaFuncionarios);
 		
 		//avaliadorBusiness.listar();
 

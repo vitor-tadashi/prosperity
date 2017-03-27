@@ -1,6 +1,5 @@
 package br.com.prosperity.entity;
 
-import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
@@ -19,13 +18,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import br.com.prosperity.bean.VagaBean;
-
 @Entity
 @Table(name = "tbVaga")
-@NamedQueries({ @NamedQuery(name = "obterTodos", query = "SELECT u FROM VagaEntity u WHERE u.nomeVaga = ?1"),
-	@NamedQuery(name="obterFiltro", query="SELECT u FROM VagaEntity u WHERE lower(u.nomeVaga) like ?1")
-	
+@NamedQueries({ @NamedQuery(name = "listarVagaFiltrado", query = "SELECT u FROM VagaEntity u WHERE u.nomeVaga LIKE ?1")
+
 })
 public class VagaEntity {
 	@Id
@@ -53,11 +49,11 @@ public class VagaEntity {
 	private Character tipoVaga;
 
 	@Column(name = "hrEntrada")
-	//@Temporal(value = TemporalType.TIME)
+	// @Temporal(value = TemporalType.TIME)
 	private String horaEntrada;
 
 	@Column(name = "hrSaida")
-	//@Temporal(value = TemporalType.TIME)
+	// @Temporal(value = TemporalType.TIME)
 	private String horaSaida;
 
 	@Column(name = "flAumentoQuadra")
