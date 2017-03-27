@@ -145,6 +145,28 @@ public class CandidatoController {
 		return "candidato/consulta-rh";
 	} 
 	
+	@RequestMapping(value = "filtrar", method = RequestMethod.GET)
+	public String filtrarCandidatoRH(Model model, CandidatoBean candidato) {
+		List<CandidatoBean> candidatos = candidatoBusiness.obterFiltro(candidato);
+		model.addAttribute("candidatos", candidatos);
+
+		/*List<VagaBean> listaVaga = vagaBusiness.listar();
+		model.addAttribute("listaVaga", listaVaga);
+
+		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
+		model.addAttribute("listaCargo", listaCargo);
+
+		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.obterTodos();
+		model.addAttribute("listaSenioridade", listaSenioridade);
+
+		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.obterTodos();
+		model.addAttribute("listaFuncionarios", listaFuncionarios);*/
+		
+		//avaliadorBusiness.listar();
+
+		return "candidato/consulta-rh";
+	} 
+	
 	@RequestMapping(value = "consultar-gestor", method = RequestMethod.GET)
 	public String consultarCandidatoGestor() {
 		return "candidato/consulta-gestor";

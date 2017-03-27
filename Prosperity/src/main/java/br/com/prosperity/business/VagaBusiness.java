@@ -1,6 +1,12 @@
 package br.com.prosperity.business;
 
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.persistence.criteria.CriteriaBuilder;
 
@@ -69,6 +75,8 @@ public class VagaBusiness {
 	@Transactional
 	public void inserir(VagaBean vagaBean /* , HttpSession session */) {
 
+		Date dateNow = new Date();		
+		
 		SenioridadeEntity senioridadeEntity = senioridadeBusinness.obterPorId(vagaBean.getSenioridadeBean().getId());
 		String senioridade = senioridadeEntity.getNome();
 
@@ -77,6 +85,9 @@ public class VagaBusiness {
 
 		// String usuario = session.getAttribute("autenticado").getNome();
 		vagaBean.setNomeVaga(cargo + " " + senioridade);
+
+		vagaBean.setDataAbertura(dateNow);
+		
 		// vagaBean.setUsuarioBean(usuario);
 		vagaDAO.insert(vagaConverter.convertBeanToEntity(vagaBean));
 	}
@@ -86,6 +97,14 @@ public class VagaBusiness {
 		VagaBean bean = vagaConverter.convertEntityToBean(vagaDAO.findById(id));
 		return bean;
 	}
+	
+	public Date formatarHora(String hora) throws ParseException{
+		String myDateString = hora;
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+		Date date = sdf.parse(myDateString); 
+	    return date;
+	}
+	
 }
 
 // criar método consultarVagasAprovacao

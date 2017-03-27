@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -23,6 +24,10 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "tbCandidato")
+//@NamedQuery(name="fazerFiltro", query="SELECT u FROM CandidatoEntity u WHERE u.nome = ?1")
+
+@NamedQuery(name="pesquisarNome", query="SELECT u FROM CandidatoEntity u WHERE u.nome like '%?1%'")
+
 public class CandidatoEntity {
 
 	@Id
@@ -40,7 +45,7 @@ public class CandidatoEntity {
 	private String rg;
 
 	@Column(name = "dtNascimento")
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
 
 	@Column(name = "vlPretensao")

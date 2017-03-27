@@ -2,14 +2,18 @@ package br.com.prosperity.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.ProjetoBean;
 import br.com.prosperity.bean.SenioridadeBean;
@@ -160,8 +164,13 @@ public class VagaController {
 	}
 
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
-	public String inserirVaga(@ModelAttribute("vagaBean") VagaBean vagaBean) {
+	public String inserirVaga(@ModelAttribute("vagaBean") @Valid VagaBean vagaBean, BindingResult result, Model model) {
 
+		/*if(result.hasErrors()) {
+			model.addAttribute("erro",result.getErrorCount());
+			  return "vaga/solicitar-vaga";
+			}
+		*/
 		vagaBusiness.inserir(vagaBean);
 		System.out.println("\n\n\nCadastrado\n\n\n");
 		return "redirect:solicitar";
