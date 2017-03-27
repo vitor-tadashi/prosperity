@@ -96,7 +96,7 @@
 	<div id="main-container">
 		<div id="breadcrumb">
 			<ul class="breadcrumb">
-				<li><i class="fa fa-home"></i><a href="dashboard.html">
+				<li><i class="fa fa-home"></i><a href="pagina-inicial">
 						Início</a></li>
 				<li class="active">Controle de usuários</li>
 			</ul>

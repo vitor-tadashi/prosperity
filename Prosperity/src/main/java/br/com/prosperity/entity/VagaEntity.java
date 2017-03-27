@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -19,7 +20,10 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "tbVaga")
-@NamedQuery(name = "obterTodos", query = "SELECT u FROM VagaEntity u WHERE u.nomeVaga = ?1")
+@NamedQueries({
+	@NamedQuery(name = "obterTodos", query = "SELECT u FROM VagaEntity u WHERE u.nomeVaga = ?1"),
+	@NamedQuery(name = "listarParaRelatorio", query = "SELECT v.id, v.nomeVaga FROM VagaEntity v")
+	})
 public class VagaEntity {
 
 	@Id

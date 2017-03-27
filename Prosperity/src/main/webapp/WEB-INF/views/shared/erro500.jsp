@@ -24,7 +24,7 @@
 	<div id="main-container">
 		<div id="breadcrumb">
 			<ul class="breadcrumb">
-				<li><i class="fa fa-home"></i><a href="dashboard.html">
+				<li><i class="fa fa-home"></i><a href="pagina-inicial">
 						Início</a></li>
 				<li class="active">Erro 500</li>
 			</ul>
@@ -39,7 +39,7 @@
 						
 						<p class="font-14">The server encountered an unexpected condition which prevented it from fulfilling the request.</p>
 						<h4 class="text-danger"><i class="fa fa-wrench"></i> But we are working on it!</h4>
-						<a class="btn btn-success m-bottom-sm" href="index.html"><i class="fa fa-home"></i> Ir para a página inicial</a>
+						<a class="btn btn-success m-bottom-sm" href="pagina-inicial"><i class="fa fa-home"></i> Ir para a página inicial</a>
 					</div><!-- /.col -->
 				</div><!-- /.row -->
 			</div><!-- /.padding-md -->

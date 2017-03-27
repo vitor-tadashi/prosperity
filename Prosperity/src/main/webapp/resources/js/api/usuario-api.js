@@ -3,8 +3,6 @@
 	var nomeFuncionario;
 
 	function abrirModal(action, id) {
-		var idFuncionario;
-		var idPerfil;
 
 		$("#frmUsuario")[0].reset();
 		$('#frmUsuario').parsley().reset();
@@ -22,7 +20,6 @@
 					'id' : id
 				},
 				success : function(data) {
-					console.log(data);
 					$('input#id').val(data.id);
 					$('input#usuario').val(data.nome);
 					$('input#email').val(data.email);
@@ -36,8 +33,8 @@
 						$('#btnMudarStatus').removeClass("btn-danger").addClass("btn-primary");
 						ativo = false;
 					}
-					
-					$('select#cmbFuncionario').val(data.funcionario.id);
+					//$('select#cmbFuncionario').val(data.funcionario.id);
+					//$('select#cmbFuncionario').attr("disabled", "disabled").attr("selected", "selected").html("<option value="+data.funcionario.id+">"+data.funcionario.nome+"</option>");
 					$('select#cmbPerfil').val(data.perfil.id);
 					$('#usuario-modal').modal('show');
 				}

@@ -24,7 +24,7 @@
 	<div id="main-container">
 		<div id="breadcrumb">
 			<ul class="breadcrumb">
-				<li><i class="fa fa-home"></i><a href="dashboard.html">
+				<li><i class="fa fa-home"></i><a href="pagina-inicial">
 						Início</a></li>
 				<li class="active">Erro 404</li>
 			</ul>
@@ -39,7 +39,7 @@
 						
 						<h4>Search Our Website</h4>
 						<div>Can't find what you need?</div>
-						<a class="btn btn-success m-bottom-sm" href="#"><i class="fa fa-home"></i> Ir para a página inicial</a>
+						<a class="btn btn-success m-bottom-sm" href="pagina-inicial"><i class="fa fa-home"></i> Ir para a página inicial</a>
 					</div><!-- /.col -->
 				</div><!-- /.row -->
 			</div><!-- /.padding-md -->
