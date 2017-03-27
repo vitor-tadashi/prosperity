@@ -26,14 +26,14 @@ public class SenioridadeBusiness {
 
 	@Transactional
 	public List<SenioridadeBean> obterTodos() {
-		List<SenioridadeEntity> senioridadeEntity = senioridadeDAO.listar();
+		List<SenioridadeEntity> senioridadeEntity = senioridadeDAO.findAll();
 		senioridadeBean = senioridadeConverter.convertEntityToBean(senioridadeEntity);
 		return senioridadeBean;
 	}
 
 	@Transactional(readOnly=true)
 	public SenioridadeEntity obterPorId(Integer id) {
-		SenioridadeEntity entity = senioridadeDAO.obterPorId(id);
+		SenioridadeEntity entity = senioridadeDAO.findById(id);
 		return entity;
 	}
 	

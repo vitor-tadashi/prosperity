@@ -1,6 +1,9 @@
 <!-- Le javascript ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 
+<!-- Parsley -->
+<script src="js/parsley.min.js"></script>
+
 <!-- Jquery -->
 <script src="/resources/js/jquery-1.10.2.min.js"></script>
 
@@ -53,3 +56,4 @@
 
 <!-- menu lateral -->
 <script src="/resources/js/custom/menu.js"></script>
+

@@ -105,12 +105,12 @@
 
 						</ul></li>
 
-					<li><a href="/relatorio"> <span class="menu-icon">
+					<li class="menu-opcao hide" value="21"><a href="/relatorio"> <span class="menu-icon">
 								<i class="fa fa-print fa-lg"></i>
 						</span> <span class="text"> Relatório </span> <span class="menu-hover"></span>
 					</a></li>
 
-					<li class="menu-opcao hide" value="22"><a href="/usuario/listar"> <span
+					<li class="menu-opcao hide" value="15"><a href="/usuario/listar"> <span
 							class="menu-icon"> <i class="fa fa-cogs fa-lg"></i>
 						</span> <span class="text"> Configurações </span> <span
 							class="menu-hover"></span>

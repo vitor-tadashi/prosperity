@@ -1,9 +1,15 @@
 package br.com.prosperity.bean;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,16 +17,25 @@ public class VagaBean {
 
 	private Integer id;
 	private String nomeVaga;
+	
+	@NotNull
+	@NotEmpty(message ="O campo Solicitante deve ser preenchido")
 	private String nomeSolicitante;
+	
 	private Double valorPretensao;
+	
 	private Date dataInicio;
-	private char localTrabalho;
+	
+	private Character localTrabalho;
 	private Character idTipoVaga;
-	private Date horarioEntrada;
-	private Date horarioSaida;
+	private String horarioEntrada;
+	private String horarioSaida;
 	private Character aumentaQuadro;
+	
 	private ProjetoBean projetoBean;
+	
 	private CargoBean cargoBean;
+	
 	private SenioridadeBean senioridadeBean;
 
 	private String nomeSubstituido; //
@@ -33,6 +48,28 @@ public class VagaBean {
 	private Integer numeroCandidatos; //
 	private UsuarioBean usuarioBean;
 	private List<StatusVagaBean> statusVagaBean = new ArrayList<>();
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date dataAberturaDe;
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date dataAberturaPara;
+
+	public Date getDataAberturaDe() {
+		return dataAberturaDe;
+	}
+
+	public void setDataAberturaDe(Date dataAberturaDe) {
+		this.dataAberturaDe = dataAberturaDe;
+	}
+
+	public Date getDataAberturaPara() {
+		return dataAberturaPara;
+	}
+
+	public void setDataAberturaPara(Date dataAberturaPara) {
+		this.dataAberturaPara = dataAberturaPara;
+	}
 
 	public Integer getId() {
 		return id;
@@ -90,19 +127,19 @@ public class VagaBean {
 		this.idTipoVaga = idTipoVaga;
 	}
 
-	public Date getHorarioEntrada() {
+	public String getHorarioEntrada() {
 		return horarioEntrada;
 	}
 
-	public void setHorarioEntrada(Date horarioEntrada) {
+	public void setHorarioEntrada(String horarioEntrada) {
 		this.horarioEntrada = horarioEntrada;
 	}
 
-	public Date getHorarioSaida() {
+	public String getHorarioSaida() {
 		return horarioSaida;
 	}
 
-	public void setHorarioSaida(Date horarioSaida) {
+	public void setHorarioSaida(String horarioSaida) {
 		this.horarioSaida = horarioSaida;
 	}
 

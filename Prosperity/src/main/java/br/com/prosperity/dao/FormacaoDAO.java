@@ -21,7 +21,7 @@ public class FormacaoDAO extends GenericDAOImpl<FormacaoEntity, Integer> {
 	 * @return listaCliente (retorna a lista de formação)
 	 */
 	@Override
-	public List<FormacaoEntity> listar() {
+	public List<FormacaoEntity> findAll() {
 		TypedQuery<FormacaoEntity> query = entityManager.createQuery("SELECT formacao FROM tbFormacao AS formacao",
 				FormacaoEntity.class);
 		List<FormacaoEntity> listaFormacao = query.getResultList();
@@ -36,7 +36,7 @@ public class FormacaoDAO extends GenericDAOImpl<FormacaoEntity, Integer> {
 	 * @return List<FormacaoEntity>
 	 */
 	@Override
-	public FormacaoEntity obterPorId(Integer idCurso) {
+	public FormacaoEntity findById(Integer idCurso) {
 		TypedQuery<FormacaoEntity> query = entityManager.createQuery(
 				"SELECT formacao FROM tbFormacao AS formacao WHERE formacao.id = :id", FormacaoEntity.class);
 		return query.setParameter("id", idCurso).getResultList().get(0);

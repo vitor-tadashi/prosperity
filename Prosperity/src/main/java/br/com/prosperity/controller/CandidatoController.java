@@ -1,29 +1,31 @@
-package br.com.prosperity.controller;
+	package br.com.prosperity.controller;
 
 import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import br.com.prosperity.bean.AvaliacaoBean;
 import br.com.prosperity.bean.CanalInformacaoBean;
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CandidatoCompetenciaBean;
 import br.com.prosperity.bean.CargoBean;
-import br.com.prosperity.bean.AvaliacaoBean;
+import br.com.prosperity.bean.ContatoBean;
+import br.com.prosperity.bean.EnderecoBean;
+import br.com.prosperity.bean.FormacaoBean;
 import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
 import br.com.prosperity.bean.TipoCursoBean;
 import br.com.prosperity.bean.VagaBean;
-import br.com.prosperity.bean.ContatoBean;
-import br.com.prosperity.bean.EnderecoBean;
-import br.com.prosperity.bean.FormacaoBean;
-
 import br.com.prosperity.business.AvaliadorBusiness;
 import br.com.prosperity.business.CanalInformacaoBusiness;
 import br.com.prosperity.business.CandidatoBusiness;
@@ -109,8 +111,13 @@ public class CandidatoController {
 	}
 
 	@RequestMapping(value = "salvar", method = RequestMethod.POST)
-	public String salvarCandidato(@ModelAttribute("candidatoBean") CandidatoBean candidatoBean)
+	public String salvarCandidato(@ModelAttribute("candidatoBean") @Valid CandidatoBean candidatoBean, BindingResult result, Model model)
 			throws BusinessException {
+		
+		if(result.hasErrors()) {
+			model.addAttribute("erro",result.getErrorCount());
+			  return "candidato/cadastrar-candidato";
+			}
 		candidatoBusiness.inserir(candidatoBean);
 
 		return "candidato/cadastrar-candidato";
@@ -133,7 +140,7 @@ public class CandidatoController {
 		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.obterTodos();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
 		
-		avaliadorBusiness.listar();
+		//avaliadorBusiness.listar();
 
 		return "candidato/consulta-rh";
 	} 
