@@ -16,6 +16,8 @@ $(function() {
         $("section#dadosAlocacao").addClass("hide");
     });
     
+    
+    
     var currentStep = 1; 
     
     $("#prevStep2").click(function(){
@@ -44,8 +46,9 @@ $(function() {
     });
     
     $("#nextStep2").click(function(){
+    	
     	//Validação da primeira WizardTab
-    	if (document.getElementById("txtSolicitante").value == ""){
+    	/*if (document.getElementById("txtSolicitante").value == ""){
     		alert("Nome do solicitante é obrigatório");
     		return false;
     		
@@ -67,7 +70,7 @@ $(function() {
 		
 		}//Validação segunda WizardTab projetos Internos
 		 
-		 else{	 //WizardTab de próxima página
+		 else{	*/ //WizardTab de próxima página
 			 	if (currentStep == 1){
 				    currentStep++;
 				    $('#wizardDemo li:eq(1) a').tab('show');
@@ -77,42 +80,45 @@ $(function() {
 		            return false;
 			 	}
 			 	else if(currentStep == 2)	{
-			         if(document.getElementById("cliente").checked == true){
+			        /* if(document.getElementById("cliente").checked == true){
 							if(document.getElementById("cmbProjetoCliente").value == 0 ){
 								alert("Projeto é obrigatório");
 							return false;
 							}else if(document.getElementById("cmbGestorCliente").value == 0){
 								alert("Gestor é obrigatório");
 							return false;
-							}else{
-						         alert("testeAlocado");
-						         $('#wizardDemo li:eq(2) a').tab('show');
+							}else{*/
+						   /*      $('#wizardDemo li:eq(2) a').tab('show');
 						         $('#nextStep2').addClass('disabled');
 						         $('#btnCadastrar2').removeClass('hide');
 						         currentStep++;
-							}
-		 			}
-			         else if(document.getElementById("interno").checked == true){
-							if(document.getElementById("cmbProjetoInterno").value == 0 ){
+							//}
+		 			}*/
+			         //else if(document.getElementById("interno").checked == true){
+							/*if(document.getElementById("cmbProjetoInterno").value == 0 ){
 								alert("Projeto é obrigatório");
 							return false;
 							}else if(document.getElementById("cmbGestorInterno").value == 0){
 								alert("Gestor é obrigatório");
 							return false;
-							}else{
-						         alert("testeInterno");
+							}else{*/
 						         $('#wizardDemo li:eq(2) a').tab('show');
 						         $('#nextStep2').addClass('disabled');
 						         $('#btnCadastrar2').removeClass('hide');
 						         currentStep++;
-							}
+							//}
 		 			}
-			   	 }
-    		}
+			   	// }
+    		//}
 	 });
 		
     $("#btnCadastrar2").click(function(){
     	$('#formCadastro2').submit();
+    	$(document).ready(function() {
+    		if($("input#contErro").val()>0){
+    			$('#textDiv').addClass("alert alert-danger text-center");
+    		}
+    	})
     });
     
     

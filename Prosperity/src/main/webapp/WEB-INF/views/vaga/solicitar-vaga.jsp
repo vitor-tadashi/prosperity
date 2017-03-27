@@ -31,6 +31,11 @@
 					<div class="panel-body">
 						<form class="form-border" id="formCadastro2" action="cadastrar"
 							method="POST">
+							<div id="textDiv">
+					
+							<br><form:errors path="vagaBean.nomeSolicitante"/>
+							
+							</div>
 							<div class="panel-tab clearfix">
 								<ul class="tab-bar wizard-demo" id="wizardDemo">
 									<li class="active tab-verity"><a href="#first"
@@ -125,7 +130,7 @@
 												<div>
 													<div class="form-group col-md-2">
 														<div class="input-group bootstrap-timepicker">
-															<input id="txtHorarioInicial" name="horarioEntrada" type="time"
+															<input id="txtHorarioInicial" name="horarioEntrada" type="text"
 																 value="08:00">
 														</div>
 													</div>
@@ -136,7 +141,7 @@
 													<!-- /form-group -->
 													<div class="form-group col-md-2">
 														<div class="input-group bootstrap-timepicker">
-															<input id="txtHorarioFinal" name="horarioEntrada"
+															<input id="txtHorarioFinal" name="horarioSaida"
 																 type="text" value="17:00">
 														</div>
 													</div>
@@ -360,6 +365,7 @@
 	</div>
 	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
 	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
+	<input value="${erro}" id="contErro">
 
 	<!-- Custom -->
 	<script src="/resources/js/custom/solicitacaoVaga.js"></script>

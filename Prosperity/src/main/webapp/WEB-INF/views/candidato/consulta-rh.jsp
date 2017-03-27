@@ -445,7 +445,7 @@
 						<div class="panel panel-default">
 							<div class="panel-heading">Consultar candidatos - RH</div>
 							<div class="panel-body">
-								<div class="row">
+								<form action="filtrar" method="GET"  class="row">
 									<div class="col-md-2">
 										<label for="exampleInputEmail1">Nome: </label>
 										<div class="search-block">
@@ -484,13 +484,13 @@
 										</div>
 									</div>
 									<div class="col-md-2 col-md-offset-1">
-										<a class="btn btn-primary pull-right "
-											style="margin-top: 22px">Filtrar</a>
+										<button class="btn btn-primary pull-right "
+											style="margin-top: 22px">Pesquisar</button>
 									</div>
-								</div>
+								</form>
 								<!-- /.row -->
 							</div>
-							<!-- /.panel-body -->
+							<!-- /.panel-body - ATE AQUI O FILTRAR-->
 							
 							<table class="table table-bordered table-condensed table-hover table-striped"
 								style= "font-size: 12px; vertical-align: middle">

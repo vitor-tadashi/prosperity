@@ -21,12 +21,12 @@ public class CandidatoBean extends FormatUtil {
 	
 	@NotEmpty(message ="O campo CPF deve ser preenchido")
 	private String cpf;
-	
 	@NotEmpty(message ="O campo nome deve ser prenchido")
 	private String nome;
 	
 	@NotEmpty(message ="O campo RG  deve ser prenchido")
 	private String rg;
+
 	@NotNull(message="O campo data de nascimento deve ser preenchido")
 	@DateTimeFormat(pattern="dd/MM/YYYY")
 	private Date dataNascimento;
@@ -36,10 +36,13 @@ public class CandidatoBean extends FormatUtil {
 	private String email;
 	private Date dataAlteracao;
 	private File curriculo;
+	
 	@Valid
 	private ContatoBean contato;
+	
 	@Valid
 	private EnderecoBean endereco;
+	
 	private FormacaoBean formacao;
 	private UsuarioBean usuario;
 	private List<StatusCandidatoBean> status = new ArrayList<>();
