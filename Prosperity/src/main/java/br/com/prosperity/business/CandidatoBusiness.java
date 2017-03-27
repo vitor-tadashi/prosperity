@@ -20,11 +20,13 @@ import br.com.prosperity.bean.StatusCandidatoBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.converter.CandidatoConverter;
+import br.com.prosperity.dao.AvaliadorDAO;
 import br.com.prosperity.dao.CandidatoDAO;
 import br.com.prosperity.dao.StatusCandidatoDAO;
 import br.com.prosperity.dao.StatusDAO;
 import br.com.prosperity.dao.StatusFuturoDAO;
 import br.com.prosperity.dao.UsuarioDAO;
+import br.com.prosperity.entity.AvaliadorEntity;
 import br.com.prosperity.entity.CandidatoEntity;
 import br.com.prosperity.entity.StatusCandidatoEntity;
 import br.com.prosperity.entity.StatusFuturoEntity;
@@ -55,6 +57,9 @@ public class CandidatoBusiness extends FormatUtil {
 
 	@Autowired
 	private StatusFuturoDAO statusFuturoDAO;
+	
+	@Autowired
+	private AvaliadorDAO avaliadorDAO;
 	
 	@Autowired
 	private HttpSession session;
@@ -127,7 +132,20 @@ public class CandidatoBusiness extends FormatUtil {
 				situacaoCandidato.setStatus(StatusCandidatoEnum.valueOf(statusFuturoEntity.get(0).getIdStatusFuturo()));
 				alterarStatus1(situacaoCandidato);
 			} else {
-				
+				List<AvaliadorEntity> avaliadorEntity = avaliadorDAO.findByNamedQuery("obterAvaliadores");
+				if(avaliadorEntity.size() == 1){
+					situacaoCandidato.setStatus(StatusCandidatoEnum.valueOf(statusFuturoEntity.get(1).getIdStatusFuturo()));
+					situacaoCandidato.setParecer(null);
+
+					statusCandidatoDAO.insert(alterarStatus1(situacaoCandidato));
+				}else{
+					situacaoCandidato.setStatus(StatusCandidatoEnum.valueOf(statusFuturoEntity.get(0).getIdStatusFuturo()));
+					situacaoCandidato.setParecer(null);
+			
+					statusCandidatoDAO.insert(alterarStatus1(situacaoCandidato));
+				}
+				avaliadorEntity.get(0).setStatus(true);
+				avaliadorDAO.update(avaliadorEntity.get(0));
 			}
 		}
 		// PASSO 2 - PEGAR O STATUSFUTURO e SALVAR NO BANCO
