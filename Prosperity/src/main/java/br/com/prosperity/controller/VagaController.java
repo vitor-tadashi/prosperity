@@ -9,11 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.ProjetoBean;
 import br.com.prosperity.bean.SenioridadeBean;
@@ -36,7 +36,6 @@ public class VagaController {
 	@Autowired
 	private VagaBusiness vagaBusiness;
 
-
 	@Autowired
 	private SenioridadeBusiness preencherSenioridade;
 
@@ -58,7 +57,6 @@ public class VagaController {
 	@Autowired
 	private List<ProjetoBean> projetos;
 
-
 	@Autowired
 	private List<UsuarioBean> usuarios;
 
@@ -76,10 +74,10 @@ public class VagaController {
 
 	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
 	public String cliente(Model model, VagaBean vaga) {
-		
-		//FAZ APARECER A TABELA
+
+		// FAZ APARECER A TABELA
 		model.addAttribute("vagas", vagaBusiness.listar());
-		
+
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
 		model.addAttribute("listaCargo", listaCargo);
 
@@ -97,12 +95,12 @@ public class VagaController {
 
 		return "vaga/consultar-vaga";
 	}
-	
-	@RequestMapping(value={"filtrar"}, method = RequestMethod.GET)
+
+	@RequestMapping(value = { "filtrar" }, method = RequestMethod.GET)
 	public String filtrar(Model model, VagaBean vaga) {
 		List<VagaBean> listaVagaFiltro = vagaBusiness.filtrarVagas(vaga);
 		model.addAttribute("vagas", listaVagaFiltro);
-		
+
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
 		model.addAttribute("listaCargo", listaCargo);
 
@@ -114,15 +112,13 @@ public class VagaController {
 
 		List<StatusBean> listaStatus = statusBusiness.obterTodos();
 		model.addAttribute("listaStatus", listaStatus);
-		
+
 		List<StatusVagaBean> listaStatusVaga = statusVagaBusiness.obterTodos();
 		model.addAttribute("listaStatusVaga", listaStatusVaga);
-		
-		
-		
+
 		return "vaga/consultar-vaga";
 	}
-	
+
 	@RequestMapping(value = { "abrir" }, method = RequestMethod.GET)
 	public @ResponseBody VagaBean abrirVagaAjax(Model model, @ModelAttribute("id") Integer id) {
 		VagaBean vaga = new VagaBean();
@@ -145,6 +141,11 @@ public class VagaController {
 
 	@RequestMapping(value = "/solicitar", method = RequestMethod.GET)
 	public String solicitarVaga(Model model) {
+		obterDominiosVaga(model);
+		return "vaga/solicitar-vaga";
+	}
+
+	private void obterDominiosVaga(Model model) {
 		senioridades = preencherSenioridade.obterTodos();
 		cargos = preencherCargo.obterTodos();
 		projetos = preencherProjeto.obterTodos();
@@ -155,6 +156,16 @@ public class VagaController {
 		model.addAttribute("cargos", cargos);
 		model.addAttribute("projetos", projetos);
 		model.addAttribute("usuarios", usuarios);
+	}
+
+	@RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
+	public String solicitarVaga(Model model, @PathVariable Integer id) {
+		VagaBean vaga = null;
+		vaga = vagaBusiness.obterVagaPorId(id);
+		
+		obterDominiosVaga(model);
+		model.addAttribute("vaga", vaga);
+		
 		return "vaga/solicitar-vaga";
 	}
 
@@ -166,11 +177,11 @@ public class VagaController {
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
 	public String inserirVaga(@ModelAttribute("vagaBean") @Valid VagaBean vagaBean, BindingResult result, Model model) {
 
-		/*if(result.hasErrors()) {
-			model.addAttribute("erro",result.getErrorCount());
-			  return "vaga/solicitar-vaga";
-			}
-		*/
+		/*
+		 * if(result.hasErrors()) {
+		 * model.addAttribute("erro",result.getErrorCount()); return
+		 * "vaga/solicitar-vaga"; }
+		 */
 		vagaBusiness.inserir(vagaBean);
 		System.out.println("\n\n\nCadastrado\n\n\n");
 		return "redirect:solicitar";

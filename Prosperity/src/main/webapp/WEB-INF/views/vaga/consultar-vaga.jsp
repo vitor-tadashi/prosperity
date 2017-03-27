@@ -480,7 +480,7 @@
 									<tr position="infoVaga">
 									<td id="linhaNome">${vaga.nomeVaga}</td>
 									<td>${vaga.nomeSolicitante}</td>
-									<td>${vaga.projetoBean.cliente.nome}</td>
+									<td>${vaga.projeto.cliente.nome}</td>
 									<td>
 										<c:if test="${vaga.localTrabalho == 73}" >
 										     Interno

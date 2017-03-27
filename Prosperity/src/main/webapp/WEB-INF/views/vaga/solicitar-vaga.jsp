@@ -56,7 +56,7 @@
 											<div>
 												<div class="form-group col-md-6">
 													<label for="txtSolicitante">Solicitante</label> <input
-														type="text" name="nomeSolicitante"
+														type="text" name="nomeSolicitante" value="${vaga.nomeSolicitante}"
 														class="form-control input-sm" id="txtSolicitante"
 														placeholder="Solicitante" data-required="true">
 												</div>
@@ -198,7 +198,7 @@
 										<section id="dadosInterno" class="panel panel-default">
 											<div class="panel-body">
 												<div class="form-group col-md-4" style="padding-left: 0px;">
-													<label for="exampleInputEmail1">Nome do projeto</label> <select id ="cmbProjetoInterno"  name="projetoBean.id"
+													<label for="exampleInputEmail1">Nome do projeto</label> <select id ="cmbProjetoInterno"  name="projeto.id"
 														class="form-control chzn-select">
 														
 														<option value="0">Selecione o projeto</option>
@@ -240,7 +240,7 @@
 											<div class="panel-body">
 												<div class="col-md-6">
 													<div class="form-group" style="padding-left: 0px;">
-														<label for="exampleInputEmail1">Nome do projeto</label> <select id ="cmbProjetoCliente"  name="projetoBean.id"
+														<label for="exampleInputEmail1">Nome do projeto</label> <select id ="cmbProjetoCliente"  name="projeto.id"
 															class="form-control chzn-select">
 															
 															<option value="0">Selecione o projeto</option>
@@ -258,6 +258,7 @@
 															type="text" class="form-control input-sm"
 															id="textCliente" placeholder="Cliente"
 															data-required="false" disabled="disabled"
+															value="${vaga.projeto.cliente.nome}"
 															onblur="cliente">
 													</div>
 													<!-- /form-group -->

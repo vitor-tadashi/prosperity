@@ -48,7 +48,7 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 		entity.setNomeSolicitante(bean.getNomeSolicitante());
 		entity.setNomeSubstituido(bean.getNomeSubstituido());
 		entity.setNumeroCandidatos(bean.getNumeroCandidatos());
-		entity.setProjetoEntity(projetoConverter.convertBeanToEntity(bean.getProjetoBean()));
+		entity.setProjetoEntity(projetoConverter.convertBeanToEntity(bean.getProjeto()));
 		entity.setSenioridadeEntity(senioridadeConverter.convertBeanToEntity(bean.getSenioridadeBean()));
 		entity.setTipoVaga(bean.getIdTipoVaga());
 		entity.setValorPretensao(bean.getValorPretensao());
@@ -83,7 +83,7 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 		bean.setNomeSolicitante(entity.getNomeSolicitante());
 		bean.setNomeSubstituido(entity.getNomeSubstituido());
 		bean.setNumeroCandidatos(entity.getNumeroCandidatos());
-		bean.setProjetoBean(projetoConverter.convertEntityToBean(entity.getProjetoEntity()));
+		bean.setProjeto(projetoConverter.convertEntityToBean(entity.getProjetoEntity()));
 		bean.setSenioridadeBean(senioridadeConverter.convertEntityToBean(entity.getSenioridadeEntity()));
 		bean.setIdTipoVaga(entity.getTipoVaga());
 		bean.setValorPretensao(entity.getValorPretensao());

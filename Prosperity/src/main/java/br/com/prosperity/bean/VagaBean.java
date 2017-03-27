@@ -32,7 +32,7 @@ public class VagaBean {
 	private String horarioSaida;
 	private Character aumentaQuadro;
 	
-	private ProjetoBean projetoBean;
+	private ProjetoBean projeto;
 	
 	private CargoBean cargoBean;
 	
@@ -151,12 +151,12 @@ public class VagaBean {
 		this.aumentaQuadro = aumentaQuadro;
 	}
 
-	public ProjetoBean getProjetoBean() {
-		return projetoBean;
+	public ProjetoBean getProjeto() {
+		return projeto;
 	}
 
-	public void setProjetoBean(ProjetoBean projetoBean) {
-		this.projetoBean = projetoBean;
+	public void setProjeto(ProjetoBean projetoBean) {
+		this.projeto = projetoBean;
 	}
 
 	public CargoBean getCargoBean() {
