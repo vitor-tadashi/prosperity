@@ -261,7 +261,9 @@ UPDATE tbCandidato set dtAprovacao = '01-01-2017' where idCandidato =
 select * from tbStatus
 select * from tbProjeto
 
-select * from tbVaga
+
+
+select * from tbCandidato
 
 alter table tbVaga add idStatus int
 alter table tbVaga add foreign key (idStatus) references tbStatus(idStatus)
@@ -275,3 +277,20 @@ DROP COLUMN idStatus;
 
 ALTER TABLE tbVaga ADD idStatusVaga INT FOREIGN KEY REFERENCES tbStatusVaga(idStatusVaga);
 
+<<<<<<< HEAD
+SELECT * FROM tbVaga WHERE nmVaga like '%Anal%'
+=======
+--- Alterando colunas da tabela vaga para tipo TIME 
+
+ALTER TABLE tbVaga
+DROP COLUMN hrEntrada;
+
+ALTER TABLE tbVaga
+DROP COLUMN hrsaida;
+
+ALTER TABLE tbVaga
+ADD hrEntrada time(0);
+
+ALTER TABLE tbVaga
+ADD hrSaida time(0);
+>>>>>>> 8089cece931b468ac2be1a247800cc7750c57c2f

@@ -31,6 +31,11 @@
 					<div class="panel-body">
 						<form class="form-border" id="formCadastro2" action="cadastrar"
 							method="POST">
+							<div id="textDiv">
+					
+							<br><form:errors path="vagaBean.nomeSolicitante"/>
+							
+							</div>
 							<div class="panel-tab clearfix">
 								<ul class="tab-bar wizard-demo" id="wizardDemo">
 									<li class="active tab-verity"><a href="#first"
@@ -51,7 +56,7 @@
 											<div>
 												<div class="form-group col-md-6">
 													<label for="txtSolicitante">Solicitante</label> <input
-														type="text" name="nomeSolicitante"
+														type="text" name="nomeSolicitante" value="${vaga.nomeSolicitante}"
 														class="form-control input-sm" id="txtSolicitante"
 														placeholder="Solicitante" data-required="true">
 												</div>
@@ -125,7 +130,7 @@
 												<div>
 													<div class="form-group col-md-2">
 														<div class="input-group bootstrap-timepicker">
-															<input id="txtHorarioInicial" name="horarioEntrada" type="time"
+															<input id="txtHorarioInicial" name="horarioEntrada" type="text"
 																 value="08:00">
 														</div>
 													</div>
@@ -136,7 +141,7 @@
 													<!-- /form-group -->
 													<div class="form-group col-md-2">
 														<div class="input-group bootstrap-timepicker">
-															<input id="txtHorarioFinal" name="horarioEntrada"
+															<input id="txtHorarioFinal" name="horarioSaida"
 																 type="text" value="17:00">
 														</div>
 													</div>
@@ -193,7 +198,7 @@
 										<section id="dadosInterno" class="panel panel-default">
 											<div class="panel-body">
 												<div class="form-group col-md-4" style="padding-left: 0px;">
-													<label for="exampleInputEmail1">Nome do projeto</label> <select id ="cmbProjetoInterno"  name="projetoBean.id"
+													<label for="exampleInputEmail1">Nome do projeto</label> <select id ="cmbProjetoInterno"  name="projeto.id"
 														class="form-control chzn-select">
 														
 														<option value="0">Selecione o projeto</option>
@@ -235,7 +240,7 @@
 											<div class="panel-body">
 												<div class="col-md-6">
 													<div class="form-group" style="padding-left: 0px;">
-														<label for="exampleInputEmail1">Nome do projeto</label> <select id ="cmbProjetoCliente"  name="projetoBean.id"
+														<label for="exampleInputEmail1">Nome do projeto</label> <select id ="cmbProjetoCliente"  name="projeto.id"
 															class="form-control chzn-select">
 															
 															<option value="0">Selecione o projeto</option>
@@ -253,6 +258,7 @@
 															type="text" class="form-control input-sm"
 															id="textCliente" placeholder="Cliente"
 															data-required="false" disabled="disabled"
+															value="${vaga.projeto.cliente.nome}"
 															onblur="cliente">
 													</div>
 													<!-- /form-group -->
@@ -360,6 +366,7 @@
 	</div>
 	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
 	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
+	<input value="${erro}" id="contErro">
 
 	<!-- Custom -->
 	<script src="/resources/js/custom/solicitacaoVaga.js"></script>
