@@ -1,3 +1,4 @@
+
 package br.com.prosperity.converter;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,7 +89,7 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 		bean.setIdTipoVaga(entity.getTipoVaga());
 		bean.setValorPretensao(entity.getValorPretensao());
 		bean.setUsuarioBean(usuarioConverter.convertEntityToBean(entity.getUsuarioEntity()));
-		bean.setStatusVagaBean(statusVagaConverter.convertEntityToBean(entity.getStatusVagaEntity()));
+//		bean.setStatusVagaBean(statusVagaConverter.convertEntityToBean(entity.getStatusVagaEntity()));
 
 		return bean;
 	}

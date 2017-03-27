@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -38,21 +38,13 @@
 					<div class="panel-heading">Informações do candidato</div>
 					<div class="panel-body">
 						<div id="textDiv">
-					
-							<br><form:errors path="candidatoBean.nome"/>
-							<form:errors path="candidatoBean.email"/>
-							<br><form:errors path="candidatoBean.cpf"/>
-							<form:errors path="candidatoBean.rg"/>
-							<br><form:errors path="candidatoBean.contato"/>
-							<form:errors path="candidatoBean.endereco.cep"/>
-							<br><form:errors path="candidatoBean.endereco.estado"/>
-							<form:errors path="candidatoBean.endereco.cidade"/>
-							<br><form:errors path="candidatoBean.endereco.logradouro" />
-							<form:errors path="candidatoBean.endereco.numero" />
-							
+							<c:forEach var="erro" items="${listaErros}">
+								<p>${erro}</p>
+
+							</c:forEach>
 						</div>
 						<form class="form-border" action="salvar" method="post"
-							id=formCadastro onsubmit="return Validar()">
+							id=formCadastro onsubmit="return Validar()"<%--data-validate="parsley" --%>>
 							<div class="panel-tab clearfix">
 								<ul class="tab-bar wizard-demo" id="wizardDemo">
 									<li class="active tab-verity"><a href="#first"
@@ -71,68 +63,80 @@
 										<div class="row">
 											<div class="form-group col-md-4">
 												<label class="control-label" for="nome">Nome</label> <input
-													type="text"  class="form-control"
-													data-minlength="8" id="nome" name="nome">
+													value="${candidato.nome}" type="text"
+													class="form-control parsley-validated" data-minlength="8"
+													id="nome" name="nome">
 											</div>
 											<div class="form-group col-md-3">
 												<label for="email" class="control-label">E-mail</label> <input
-													type="email" class="form-control" id="email" name="email"
-													data-required="true" placeholder="email@dominio.com"
-													value="">
+													type="email" class="form-control parsley-validated"
+													id="email" name="email" data-required="true"
+													placeholder="email@dominio.com" value="${candidato.email}">
 											</div>
 											<div class="form-group col-md-3">
 												<label for="cpf" class="control-label">CPF</label> <input
-													type="text" class="form-control cpf" id="cpf" name="cpf"
-													data-required="true" placeholder="Informe seu CPF" value="">
+													type="text" class="form-control cpf parsley-validated"
+													id="cpf" name="cpf" data-required="true"
+													placeholder="Informe seu CPF" value="${candidato.cpf}"
+													onblur="verificarCPF(this.value)">
 											</div>
 											<div class="form-group col-md-2">
 												<label for="rg" class="control-label">RG</label> <input
-													type="text" class="form-control rg" id="rg" name="rg"
-													data-required="true" data-required="true" value="">
+													type="text" class="form-control rg parsley-validated"
+													id="rg" name="rg" data-required="true" data-required="true"
+													value="${candidato.rg}">
 											</div>
 											<div class="form-group col-md-2 col-sm-4">
 												<label for="dataNascimento" class="control-label">Data
-													nascimento</label> <input type="text" class="form-control date"
+													nascimento</label> <input type="text"
+													class="form-control date parsley-validated"
 													data-required="true" name="dataNascimento"
-													id="dataNascimento" value="">
+													id="dataNascimento" value="${candidato.dataNascimento}">
 											</div>
 											<div class="form-group col-md-2">
 												<label for="telefone" class="control-label">Telefone</label>
-												<input type="text" class="form-control telefone"
+												<input type="text"
+													class="form-control telefone parsley-validated"
 													data-required="true" id="contato" name="contato.telefone"
-													value="">
+													value="${candidato.contato.telefone}">
 											</div>
 											<div class="form-group col-md-2">
 												<label for="cep" class="control-label">CEP</label> <input
-													type="text" class="form-control cep" id="cep"
-													name="endereco.cep" value="" data-required="true"
+													type="text" class="form-control cep parsley-validated"
+													id="cep" name="endereco.cep"
+													value="${candidato.endereco.cep}" data-required="true"
 													onblur="pesquisacep(this.value);" />
 											</div>
 											<div class="form-group col-md-6">
 												<label for="Endereco" class="control-label">Endereço</label>
-												<input type="text" class="form-control" id="rua"
-													data-required="true" name="endereco.logradouro" value="" />
+												<input type="text" class="form-control parsley-validated"
+													id="rua" data-required="true" name="endereco.logradouro"
+													value="${candidato.endereco.logradouro}" />
 											</div>
 											<div class="form-group col-md-2">
 												<label for="numero" class="control-label">Número</label> <input
-													type="text" class="form-control" id="numero"
-													data-required="true" name="endereco.numero" value="">
+													type="text" class="form-control parsley-validated"
+													id="numero" data-required="true" name="endereco.numero"
+													value="${candidato.endereco.numero}">
 											</div>
 											<div class="form-group col-md-3">
 												<label for="Endereco.complemento" class="control-label">Complemento</label>
 												<input type="text" class="form-control" id="complemento"
-													data-required="true" name="endereco.complemento">
+													data-required="true" name="endereco.complemento"
+													value="${candidato.endereco.complemento}">
 											</div>
 											<div class="form-group col-md-3">
 												<label for="estado" class="control-label">Estado</label> <input
-													type="text" class="form-control" id="uf"
-													data-required="true" name="endereco.estado" value="" />
+													type="text" class="form-control parsley-validated" id="uf"
+													data-required="true" name="endereco.estado"
+													value="${candidato.endereco.estado}" />
 
 											</div>
 											<div class="form-group col-md-4">
 												<label for="cidade" class="control-label">Cidade</label> <input
-													type="text" class="form-control" id="cidade"
-													data-required="true" name="endereco.cidade" value="" />
+													type="text" class="form-control parsley-validated"
+													id="cidade" data-required="true" name="endereco.cidade"
+													value="${candidato.endereco.cidade}" />
 											</div>
 											<div class="form-group col-xs-12">
 												<label class="control-label">Currículo</label>
@@ -150,21 +154,22 @@
 										<div class="form-group col-md-4">
 											<label for="curso">Curso</label> <input type="text"
 												class="form-control" id="curso" name="formacao.curso"
-												placeholder="Informe seu curso">
+												placeholder="Informe seu curso"
+												value="">
 										</div>
 										<div class="form-group col-md-5">
 											<label for="instituicao">Instituição</label> <input
 												type="text" class="form-control" id="instituicao"
-												name="formacao.nomeInstituicao" placeholder="Instituição">
+												name="formacao.nomeInstituicao" placeholder="Instituição"
+												value="">
 										</div>
-
 										<div class="form-group col-md-3">
 											<label for="tipoDeCurso">Tipo de curso</label> <select
 												class="form-control" id="tipoDeCurso"
 												name="formacao.tipoCurso.id">
 												<!-- FAZER FOREACH  -->
 												<c:forEach var="tipoCurso" items="${tiposCurso}">
-													<option value="${tipoCurso.id}">${tipoCurso.nome}</option>
+													<option>${tipoCurso.nome}</option>
 												</c:forEach>
 
 											</select>
@@ -173,15 +178,17 @@
 											<label for="situacaoAtual">Situação atual</label> <select
 												class="form-control" id="situacaoAtual"
 												name="formacao.SituacaoAtual.id">
-												<c:forEach var="situacaoAtual" items="${listaSituacaoAtual}">
-													<option value="${situacaoAtual.id}">${situacaoAtual.descricao}</option>
+												<c:forEach var="situacaoAtual" items="${listaSituacaoAtual}"
+>
+													<option>${situacaoAtual.descricao}${situacaoAtual.id == candidato.formacao.situacaoAtual.id ? 'selected="selected"' : ''}</option>
 												</c:forEach>
 											</select>
 										</div>
 										<div class="form-group col-md-2">
 											<label for="mesAnoConclusao">Data de conclusão</label> <input
 												type="text" class="form-control date" id="mesAnoConclusao"
-												name="formacao.dataConclusao">
+												data-required="false" name="formacao.dataConclusao"
+												value="">
 										</div>
 									</div>
 									<div class="tab-pane fade" id="third">
@@ -193,14 +200,15 @@
 												</div>
 												<div class="col-md-2">
 													<input type="text" class="form-control dinheiro"
-														id="pretensaoSalarial" placeholder="R$" name="valorMin" />
+														id="pretensaoSalarial" placeholder="R$" name="valorMin"
+														value="" />
 												</div>
 												<div class="col-sm-1">
 													<p class="text-center">até</p>
 												</div>
 												<div class="col-md-2">
 													<input type="text" class="form-control dinheiro"
-														placeholder="R$" name="valorMax" />
+														placeholder="R$" name="valorMax" value="" />
 												</div>
 											</div>
 										</div>
@@ -208,7 +216,7 @@
 											<label for="vagaASerAplicado">Vaga a ser aplicado</label> <select
 												class="form-control" id="vaga" name="vaga.nomeVaga.id">
 												<c:forEach var="vaga" items="${listaVaga}">
-													<option value="${vaga.id}">${vaga.nomeVaga}</option>
+													<option value="">${vaga.nomeVaga}</option>
 												</c:forEach>
 											</select>
 										</div>
@@ -217,7 +225,8 @@
 												desta vaga?</label> <select class="form-control"
 												name="vaga.vagaCandidato.canalInformacao.id">
 												<c:forEach var="canalInformacao" items="${listaCanal}">
-													<option value="${canalInformacao.id}">${canalInformacao.nome}</option>
+													<option value="${canalInformacao.id}"
+														${canalInformacao.id == candidato.vagaCandidato.canalInformacao.id ? 'selected="selected"' : ''}>${canalInformacao.nome}</option>
 												</c:forEach>
 											</select>
 										</div>
@@ -226,12 +235,13 @@
 												<label for="dataUltimoContato" class="control-label">Data
 													de ultimo contato</label> <input type="text"
 													class="form-control date" name="dataConclusao"
-													id="dataUltimoContato" value="">
+													data-required="false" id="dataUltimoContato" value="">
 											</div>
 											<div class="form-group col-md-2 col-sm-4">
 												<label for="entrevista" class="control-label">Data
 													de Entrevista</label> <input type="text" class="form-control date"
-													name="entrevista" id="entrevista" value="">
+													data-required="false" name="entrevista" id="entrevista"
+													value="">
 											</div>
 										</div>
 
@@ -268,19 +278,6 @@
 
 		})
 
-		/* function validarSenha() {
-			senha = document.FormSenha.senha.value;
-			confirmarSenha = document.FormSenha.confirmarSenha.value;
-			if (senha != confirmarSenha) {
-				var div = document.getElementById("textDiv").className = "alert alert-danger text-center";
-
-		        textDiv.textContent = "Senhas diferentes";
-
-		        var text = "[" + div.textContent + "]";
-				return false;
-			}
-			return true;
-		} */
 		function limpa_formulário_cep() {
 			//Limpa valores do formulário de cep.
 			document.getElementById('rua').value = ("");
@@ -337,38 +334,76 @@
 			}
 		};
 	</script>
-	
+
 	<script>
-/* 	function ValidaCampo() {
-		nome = document.formCadastro.nome.value;
-		if (nome == '' || nome == null) {
-			var div = document.getElementById("textDiv").className = "alert alert-danger text-center";
-			textDiv.textContent = "Preencha o campo";
+		$(document).ready(function() {
+			if ($("input#contErro").val() > 0) {
+				$('#textDiv').addClass("alert alert-danger");
+			}
+		})
+	</script>
+	<script>
+		function verificarCPF(strCPF) {
+			var Soma;
+			var Resto;
+			strCPF = strCPF.substring(0, 3) + strCPF.substring(4, 7)
+					+ strCPF.substring(8, 11) + strCPF.substring(12, 14);
+			Soma = 0;
+			if (strCPF == "00000000000") {
+				var div = document.getElementById("textDiv").className = "alert alert-danger text-center";
+
+				textDiv.textContent = "CPF inválido.";
+
+				var text = "[" + div.textContent + "]";
+				return false;
+			}
+
+			for (i = 1; i <= 9; i++)
+				Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
+			Resto = Soma % 11;
+
+			if ((Resto == 0) || (Resto == 1)) {
+				Resto = 0;
+			} else {
+				Resto = 11 - Resto;
+			}
+
+			if (Resto != parseInt(strCPF.substring(9, 10))) {
+				var div = document.getElementById("textDiv").className = "alert alert-danger text-center";
+
+				textDiv.textContent = "CPF inválido.";
+
+				var text = "[" + div.textContent + "]";
+				return false
+			}
+
+			Soma = 0;
+			for (i = 1; i <= 10; i++)
+				Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (12 - i);
+			Resto = Soma % 11;
+
+			if ((Resto == 0) || (Resto == 1)) {
+				Resto = 0;
+			} else {
+				Resto = 11 - Resto;
+			}
+
+			if (Resto != parseInt(strCPF.substring(10, 11))) {
+				var div = document.getElementById("textDiv").className = "alert alert-danger text-center";
+
+				textDiv.textContent = "CPF inválido.";
+
+				var text = "[" + div.textContent + "]";
+				return false;
+			}
+			var div = document.getElementById("textDiv").className = "";
+
+			textDiv.textContent = "";
 
 			var text = "[" + div.textContent + "]";
-			return false;
-
+			return true;
 		}
-		return true;
-	} */
-/* 	function Validar(){
-		var valor = $('input#nome').val();
-		if(valor === '' || valor == undefined){
-			$('#textDiv').addClass("alert alert-danger text-center")
-			$('#textDiv').textContent = "Preencha este campo";
-			
-			return false;
-		}
-		return true;
-	}
-	 */
-	
-	$(document).ready(function() {
-		if($("input#contErro").val()>0){
-			$('#textDiv').addClass("alert alert-danger text-center");
-		}
-	})
-	
 	</script>
+
 </body>
 </html>

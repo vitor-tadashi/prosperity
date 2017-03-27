@@ -3,13 +3,11 @@ package br.com.prosperity.bean;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -19,21 +17,18 @@ import br.com.prosperity.util.FormatUtil;
 
 @Component
 public class CandidatoBean extends FormatUtil {
-
 	private Integer id;
-
-	@NotNull
+	
 	@NotEmpty(message ="O campo CPF deve ser preenchido")
 	private String cpf;
-	
-	@NotNull
 	@NotEmpty(message ="O campo nome deve ser prenchido")
 	private String nome;
 	
-	@NotNull
 	@NotEmpty(message ="O campo RG  deve ser prenchido")
 	private String rg;
-	
+
+	@NotNull(message="O campo data de nascimento deve ser preenchido")
+	@DateTimeFormat(pattern="dd/MM/YYYY")
 	private Date dataNascimento;
 	private Double valorPretensao;
 	private Date dataAbertura;
