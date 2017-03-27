@@ -44,7 +44,7 @@
 							</c:forEach>
 						</div>
 						<form class="form-border" action="salvar" method="post"
-							id=formCadastro onsubmit="return Validar()" <%--data-validate="parsley" --%>>
+							id=formCadastro onsubmit="return Validar()"<%--data-validate="parsley" --%>>
 							<div class="panel-tab clearfix">
 								<ul class="tab-bar wizard-demo" id="wizardDemo">
 									<li class="active tab-verity"><a href="#first"
@@ -63,69 +63,80 @@
 										<div class="row">
 											<div class="form-group col-md-4">
 												<label class="control-label" for="nome">Nome</label> <input
-													type="text" class="form-control parsley-validated" data-minlength="8"
+													value="${candidato.nome}" type="text"
+													class="form-control parsley-validated" data-minlength="8"
 													id="nome" name="nome">
 											</div>
 											<div class="form-group col-md-3">
 												<label for="email" class="control-label">E-mail</label> <input
-													type="email" class="form-control parsley-validated" id="email" name="email"
-													data-required="true" placeholder="email@dominio.com"
-													value="">
+													type="email" class="form-control parsley-validated"
+													id="email" name="email" data-required="true"
+													placeholder="email@dominio.com" value="${candidato.email}">
 											</div>
 											<div class="form-group col-md-3">
 												<label for="cpf" class="control-label">CPF</label> <input
-													type="text" class="form-control cpf parsley-validated" id="cpf" name="cpf"
-													data-required="true" placeholder="Informe seu CPF" value=""
+													type="text" class="form-control cpf parsley-validated"
+													id="cpf" name="cpf" data-required="true"
+													placeholder="Informe seu CPF" value="${candidato.cpf}"
 													onblur="verificarCPF(this.value)">
 											</div>
 											<div class="form-group col-md-2">
 												<label for="rg" class="control-label">RG</label> <input
-													type="text" class="form-control rg parsley-validated" id="rg" name="rg"
-													data-required="true" data-required="true" value="">
+													type="text" class="form-control rg parsley-validated"
+													id="rg" name="rg" data-required="true" data-required="true"
+													value="${candidato.rg}">
 											</div>
 											<div class="form-group col-md-2 col-sm-4">
 												<label for="dataNascimento" class="control-label">Data
-													nascimento</label> <input type="text" class="form-control date parsley-validated"
+													nascimento</label> <input type="text"
+													class="form-control date parsley-validated"
 													data-required="true" name="dataNascimento"
-													id="dataNascimento" value="">
+													id="dataNascimento" value="${candidato.dataNascimento}">
 											</div>
 											<div class="form-group col-md-2">
 												<label for="telefone" class="control-label">Telefone</label>
-												<input type="text" class="form-control telefone parsley-validated"
+												<input type="text"
+													class="form-control telefone parsley-validated"
 													data-required="true" id="contato" name="contato.telefone"
-													value="">
+													value="${candidato.contato.telefone}">
 											</div>
 											<div class="form-group col-md-2">
 												<label for="cep" class="control-label">CEP</label> <input
-													type="text" class="form-control cep parsley-validated" id="cep"
-													name="endereco.cep" value="" data-required="true"
+													type="text" class="form-control cep parsley-validated"
+													id="cep" name="endereco.cep"
+													value="${candidato.endereco.cep}" data-required="true"
 													onblur="pesquisacep(this.value);" />
 											</div>
 											<div class="form-group col-md-6">
 												<label for="Endereco" class="control-label">Endereço</label>
-												<input type="text" class="form-control parsley-validated" id="rua"
-													data-required="true" name="endereco.logradouro" value="" />
+												<input type="text" class="form-control parsley-validated"
+													id="rua" data-required="true" name="endereco.logradouro"
+													value="${candidato.endereco.logradouro}" />
 											</div>
 											<div class="form-group col-md-2">
 												<label for="numero" class="control-label">Número</label> <input
-													type="text" class="form-control parsley-validated" id="numero"
-													data-required="true" name="endereco.numero" value="">
+													type="text" class="form-control parsley-validated"
+													id="numero" data-required="true" name="endereco.numero"
+													value="${candidato.endereco.numero}">
 											</div>
 											<div class="form-group col-md-3">
 												<label for="Endereco.complemento" class="control-label">Complemento</label>
 												<input type="text" class="form-control" id="complemento"
-													data-required="true" name="endereco.complemento">
+													data-required="true" name="endereco.complemento"
+													value="${candidato.endereco.complemento}">
 											</div>
 											<div class="form-group col-md-3">
 												<label for="estado" class="control-label">Estado</label> <input
 													type="text" class="form-control parsley-validated" id="uf"
-													data-required="true" name="endereco.estado" value="" />
+													data-required="true" name="endereco.estado"
+													value="${candidato.endereco.estado}" />
 
 											</div>
 											<div class="form-group col-md-4">
 												<label for="cidade" class="control-label">Cidade</label> <input
-													type="text" class="form-control parsley-validated" id="cidade"
-													data-required="true" name="endereco.cidade" value="" />
+													type="text" class="form-control parsley-validated"
+													id="cidade" data-required="true" name="endereco.cidade"
+													value="${candidato.endereco.cidade}" />
 											</div>
 											<div class="form-group col-xs-12">
 												<label class="control-label">Currículo</label>
@@ -143,21 +154,22 @@
 										<div class="form-group col-md-4">
 											<label for="curso">Curso</label> <input type="text"
 												class="form-control" id="curso" name="formacao.curso"
-												placeholder="Informe seu curso">
+												placeholder="Informe seu curso"
+												value="">
 										</div>
 										<div class="form-group col-md-5">
 											<label for="instituicao">Instituição</label> <input
 												type="text" class="form-control" id="instituicao"
-												name="formacao.nomeInstituicao" placeholder="Instituição">
+												name="formacao.nomeInstituicao" placeholder="Instituição"
+												value="">
 										</div>
-
 										<div class="form-group col-md-3">
 											<label for="tipoDeCurso">Tipo de curso</label> <select
 												class="form-control" id="tipoDeCurso"
 												name="formacao.tipoCurso.id">
 												<!-- FAZER FOREACH  -->
 												<c:forEach var="tipoCurso" items="${tiposCurso}">
-													<option value="${tipoCurso.id}">${tipoCurso.nome}</option>
+													<option>${tipoCurso.nome}</option>
 												</c:forEach>
 
 											</select>
@@ -166,15 +178,17 @@
 											<label for="situacaoAtual">Situação atual</label> <select
 												class="form-control" id="situacaoAtual"
 												name="formacao.SituacaoAtual.id">
-												<c:forEach var="situacaoAtual" items="${listaSituacaoAtual}">
-													<option value="${situacaoAtual.id}">${situacaoAtual.descricao}</option>
+												<c:forEach var="situacaoAtual" items="${listaSituacaoAtual}"
+>
+													<option>${situacaoAtual.descricao}${situacaoAtual.id == candidato.formacao.situacaoAtual.id ? 'selected="selected"' : ''}</option>
 												</c:forEach>
 											</select>
 										</div>
 										<div class="form-group col-md-2">
 											<label for="mesAnoConclusao">Data de conclusão</label> <input
 												type="text" class="form-control date" id="mesAnoConclusao"
-												data-required="false" name="formacao.dataConclusao">
+												data-required="false" name="formacao.dataConclusao"
+												value="">
 										</div>
 									</div>
 									<div class="tab-pane fade" id="third">
@@ -186,14 +200,15 @@
 												</div>
 												<div class="col-md-2">
 													<input type="text" class="form-control dinheiro"
-														id="pretensaoSalarial" placeholder="R$" name="valorMin" />
+														id="pretensaoSalarial" placeholder="R$" name="valorMin"
+														value="" />
 												</div>
 												<div class="col-sm-1">
 													<p class="text-center">até</p>
 												</div>
 												<div class="col-md-2">
 													<input type="text" class="form-control dinheiro"
-														placeholder="R$" name="valorMax" />
+														placeholder="R$" name="valorMax" value="" />
 												</div>
 											</div>
 										</div>
@@ -201,7 +216,7 @@
 											<label for="vagaASerAplicado">Vaga a ser aplicado</label> <select
 												class="form-control" id="vaga" name="vaga.nomeVaga.id">
 												<c:forEach var="vaga" items="${listaVaga}">
-													<option value="${vaga.id}">${vaga.nomeVaga}</option>
+													<option value="">${vaga.nomeVaga}</option>
 												</c:forEach>
 											</select>
 										</div>
@@ -210,7 +225,8 @@
 												desta vaga?</label> <select class="form-control"
 												name="vaga.vagaCandidato.canalInformacao.id">
 												<c:forEach var="canalInformacao" items="${listaCanal}">
-													<option value="${canalInformacao.id}">${canalInformacao.nome}</option>
+													<option value="${canalInformacao.id}"
+														${canalInformacao.id == candidato.vagaCandidato.canalInformacao.id ? 'selected="selected"' : ''}>${canalInformacao.nome}</option>
 												</c:forEach>
 											</select>
 										</div>
@@ -252,9 +268,9 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
- 			$('.cpf').mask('999.999.999-99', {
+			$('.cpf').mask('999.999.999-99', {
 				reverse : true
-			}); 
+			});
 			$('.telefone').mask('(99) 99999-9999');
 			$('#rg').mask('99.999.999-9');
 			$("#cep").mask("99999-999");
@@ -330,16 +346,17 @@
 		function verificarCPF(strCPF) {
 			var Soma;
 			var Resto;
-	strCPF = strCPF.substring(0, 3)+strCPF.substring(4, 7)+strCPF.substring(8, 11)+strCPF.substring(12, 14);
+			strCPF = strCPF.substring(0, 3) + strCPF.substring(4, 7)
+					+ strCPF.substring(8, 11) + strCPF.substring(12, 14);
 			Soma = 0;
-			if (strCPF == "00000000000"){
+			if (strCPF == "00000000000") {
 				var div = document.getElementById("textDiv").className = "alert alert-danger text-center";
 
 				textDiv.textContent = "CPF inválido.";
 
 				var text = "[" + div.textContent + "]";
 				return false;
-				}
+			}
 
 			for (i = 1; i <= 9; i++)
 				Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
@@ -351,7 +368,7 @@
 				Resto = 11 - Resto;
 			}
 
-			if (Resto != parseInt(strCPF.substring(9, 10))){
+			if (Resto != parseInt(strCPF.substring(9, 10))) {
 				var div = document.getElementById("textDiv").className = "alert alert-danger text-center";
 
 				textDiv.textContent = "CPF inválido.";
@@ -371,7 +388,7 @@
 				Resto = 11 - Resto;
 			}
 
-			if (Resto != parseInt(strCPF.substring(10, 11))){
+			if (Resto != parseInt(strCPF.substring(10, 11))) {
 				var div = document.getElementById("textDiv").className = "alert alert-danger text-center";
 
 				textDiv.textContent = "CPF inválido.";

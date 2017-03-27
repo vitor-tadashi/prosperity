@@ -11,11 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.ProjetoBean;
 import br.com.prosperity.bean.SenioridadeBean;
@@ -143,6 +143,11 @@ public class VagaController {
 
 	@RequestMapping(value = "/solicitar", method = RequestMethod.GET)
 	public String solicitarVaga(Model model) {
+		obterDominiosVaga(model);
+		return "vaga/solicitar-vaga";
+	}
+
+	private void obterDominiosVaga(Model model) {
 		senioridades = preencherSenioridade.obterTodos();
 		cargos = preencherCargo.obterTodos();
 		projetos = preencherProjeto.obterTodos();
@@ -152,6 +157,16 @@ public class VagaController {
 		model.addAttribute("cargos", cargos);
 		model.addAttribute("projetos", projetos);
 		model.addAttribute("usuarios", usuarios);
+	}
+
+	@RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
+	public String solicitarVaga(Model model, @PathVariable Integer id) {
+		VagaBean vaga = null;
+		vaga = vagaBusiness.obterVagaPorId(id);
+		
+		obterDominiosVaga(model);
+		model.addAttribute("vaga", vaga);
+		
 		return "vaga/solicitar-vaga";
 	}
 

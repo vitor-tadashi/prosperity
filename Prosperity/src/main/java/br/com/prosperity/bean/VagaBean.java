@@ -36,7 +36,8 @@ public class VagaBean {
 	private Character aumentaQuadro;
 	
 	@Valid
-	private ProjetoBean projetoBean;
+	private ProjetoBean projeto;
+	
 	@Valid
 	private CargoBean cargoBean;
 	@Valid
@@ -155,12 +156,12 @@ public class VagaBean {
 		this.aumentaQuadro = aumentaQuadro;
 	}
 
-	public ProjetoBean getProjetoBean() {
-		return projetoBean;
+	public ProjetoBean getProjeto() {
+		return projeto;
 	}
 
-	public void setProjetoBean(ProjetoBean projetoBean) {
-		this.projetoBean = projetoBean;
+	public void setProjeto(ProjetoBean projetoBean) {
+		this.projeto = projetoBean;
 	}
 
 	public CargoBean getCargoBean() {
