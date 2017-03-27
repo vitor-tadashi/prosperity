@@ -18,6 +18,7 @@ import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.StatusCandidatoBean;
 import br.com.prosperity.bean.UsuarioBean;
+import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.converter.CandidatoConverter;
 import br.com.prosperity.dao.CandidatoDAO;
 import br.com.prosperity.dao.StatusCandidatoDAO;
@@ -27,6 +28,7 @@ import br.com.prosperity.dao.UsuarioDAO;
 import br.com.prosperity.entity.CandidatoEntity;
 import br.com.prosperity.entity.StatusCandidatoEntity;
 import br.com.prosperity.entity.StatusFuturoEntity;
+import br.com.prosperity.entity.VagaEntity;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.util.FormatUtil;
 
@@ -76,6 +78,14 @@ public class CandidatoBusiness extends FormatUtil {
 		candidatoBean.setStatusPorMesAno(listaStatusOrdenada);
 
 		return candidatoBean;
+	}
+	
+	@Transactional
+	public List<CandidatoBean> obterFiltro(CandidatoBean candidatao){
+		List<CandidatoEntity> candidatos = candidatoDAO.findByNamedQuery("pesquisarNome", candidatao.getNome());
+		List<CandidatoBean> candidatoBean = candidatoConverter.convertEntityToBean(candidatos);
+			return candidatoBean;
+		
 	}
 
 	private static <K, V> Map<K, List<V>> groupByOrdered(List<V> list, Function<V, K> keyFunction) {
