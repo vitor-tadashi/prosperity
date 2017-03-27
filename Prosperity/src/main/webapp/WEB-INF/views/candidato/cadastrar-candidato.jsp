@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -38,21 +38,13 @@
 					<div class="panel-heading">Informações do candidato</div>
 					<div class="panel-body">
 						<div id="textDiv">
-					
-							<br><form:errors path="candidatoBean.nome"/>
-							<form:errors path="candidatoBean.email"/>
-							<br><form:errors path="candidatoBean.cpf"/>
-							<form:errors path="candidatoBean.rg"/>
-							<br><form:errors path="candidatoBean.contato"/>
-							<form:errors path="candidatoBean.endereco.cep"/>
-							<br><form:errors path="candidatoBean.endereco.estado"/>
-							<form:errors path="candidatoBean.endereco.cidade"/>
-							<br><form:errors path="candidatoBean.endereco.logradouro" />
-							<form:errors path="candidatoBean.endereco.numero" />
-							
+							<c:forEach var="erro" items="${listaErros}">
+								<p>${erro}</p>
+
+							</c:forEach>
 						</div>
 						<form class="form-border" action="salvar" method="post"
-							id=formCadastro onsubmit="return Validar()">
+							id=formCadastro onsubmit="return Validar()" <%--data-validate="parsley" --%>>
 							<div class="panel-tab clearfix">
 								<ul class="tab-bar wizard-demo" id="wizardDemo">
 									<li class="active tab-verity"><a href="#first"
@@ -71,51 +63,52 @@
 										<div class="row">
 											<div class="form-group col-md-4">
 												<label class="control-label" for="nome">Nome</label> <input
-													type="text"  class="form-control"
-													data-minlength="8" id="nome" name="nome">
+													type="text" class="form-control parsley-validated" data-minlength="8"
+													id="nome" name="nome">
 											</div>
 											<div class="form-group col-md-3">
 												<label for="email" class="control-label">E-mail</label> <input
-													type="email" class="form-control" id="email" name="email"
+													type="email" class="form-control parsley-validated" id="email" name="email"
 													data-required="true" placeholder="email@dominio.com"
 													value="">
 											</div>
 											<div class="form-group col-md-3">
 												<label for="cpf" class="control-label">CPF</label> <input
-													type="text" class="form-control cpf" id="cpf" name="cpf"
-													data-required="true" placeholder="Informe seu CPF" value="">
+													type="text" class="form-control cpf parsley-validated" id="cpf" name="cpf"
+													data-required="true" placeholder="Informe seu CPF" value=""
+													onblur="verificarCPF(this.value)">
 											</div>
 											<div class="form-group col-md-2">
 												<label for="rg" class="control-label">RG</label> <input
-													type="text" class="form-control rg" id="rg" name="rg"
+													type="text" class="form-control rg parsley-validated" id="rg" name="rg"
 													data-required="true" data-required="true" value="">
 											</div>
 											<div class="form-group col-md-2 col-sm-4">
 												<label for="dataNascimento" class="control-label">Data
-													nascimento</label> <input type="text" class="form-control date"
+													nascimento</label> <input type="text" class="form-control date parsley-validated"
 													data-required="true" name="dataNascimento"
 													id="dataNascimento" value="">
 											</div>
 											<div class="form-group col-md-2">
 												<label for="telefone" class="control-label">Telefone</label>
-												<input type="text" class="form-control telefone"
+												<input type="text" class="form-control telefone parsley-validated"
 													data-required="true" id="contato" name="contato.telefone"
 													value="">
 											</div>
 											<div class="form-group col-md-2">
 												<label for="cep" class="control-label">CEP</label> <input
-													type="text" class="form-control cep" id="cep"
+													type="text" class="form-control cep parsley-validated" id="cep"
 													name="endereco.cep" value="" data-required="true"
 													onblur="pesquisacep(this.value);" />
 											</div>
 											<div class="form-group col-md-6">
 												<label for="Endereco" class="control-label">Endereço</label>
-												<input type="text" class="form-control" id="rua"
+												<input type="text" class="form-control parsley-validated" id="rua"
 													data-required="true" name="endereco.logradouro" value="" />
 											</div>
 											<div class="form-group col-md-2">
 												<label for="numero" class="control-label">Número</label> <input
-													type="text" class="form-control" id="numero"
+													type="text" class="form-control parsley-validated" id="numero"
 													data-required="true" name="endereco.numero" value="">
 											</div>
 											<div class="form-group col-md-3">
@@ -125,13 +118,13 @@
 											</div>
 											<div class="form-group col-md-3">
 												<label for="estado" class="control-label">Estado</label> <input
-													type="text" class="form-control" id="uf"
+													type="text" class="form-control parsley-validated" id="uf"
 													data-required="true" name="endereco.estado" value="" />
 
 											</div>
 											<div class="form-group col-md-4">
 												<label for="cidade" class="control-label">Cidade</label> <input
-													type="text" class="form-control" id="cidade"
+													type="text" class="form-control parsley-validated" id="cidade"
 													data-required="true" name="endereco.cidade" value="" />
 											</div>
 											<div class="form-group col-xs-12">
@@ -181,7 +174,7 @@
 										<div class="form-group col-md-2">
 											<label for="mesAnoConclusao">Data de conclusão</label> <input
 												type="text" class="form-control date" id="mesAnoConclusao"
-												name="formacao.dataConclusao">
+												data-required="false" name="formacao.dataConclusao">
 										</div>
 									</div>
 									<div class="tab-pane fade" id="third">
@@ -226,12 +219,13 @@
 												<label for="dataUltimoContato" class="control-label">Data
 													de ultimo contato</label> <input type="text"
 													class="form-control date" name="dataConclusao"
-													id="dataUltimoContato" value="">
+													data-required="false" id="dataUltimoContato" value="">
 											</div>
 											<div class="form-group col-md-2 col-sm-4">
 												<label for="entrevista" class="control-label">Data
 													de Entrevista</label> <input type="text" class="form-control date"
-													name="entrevista" id="entrevista" value="">
+													data-required="false" name="entrevista" id="entrevista"
+													value="">
 											</div>
 										</div>
 
@@ -258,9 +252,9 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('.cpf').mask('999.999.999-99', {
+ 			$('.cpf').mask('999.999.999-99', {
 				reverse : true
-			});
+			}); 
 			$('.telefone').mask('(99) 99999-9999');
 			$('#rg').mask('99.999.999-9');
 			$("#cep").mask("99999-999");
@@ -268,19 +262,6 @@
 
 		})
 
-		/* function validarSenha() {
-			senha = document.FormSenha.senha.value;
-			confirmarSenha = document.FormSenha.confirmarSenha.value;
-			if (senha != confirmarSenha) {
-				var div = document.getElementById("textDiv").className = "alert alert-danger text-center";
-
-		        textDiv.textContent = "Senhas diferentes";
-
-		        var text = "[" + div.textContent + "]";
-				return false;
-			}
-			return true;
-		} */
 		function limpa_formulário_cep() {
 			//Limpa valores do formulário de cep.
 			document.getElementById('rua').value = ("");
@@ -337,38 +318,75 @@
 			}
 		};
 	</script>
-	
+
 	<script>
-/* 	function ValidaCampo() {
-		nome = document.formCadastro.nome.value;
-		if (nome == '' || nome == null) {
-			var div = document.getElementById("textDiv").className = "alert alert-danger text-center";
-			textDiv.textContent = "Preencha o campo";
+		$(document).ready(function() {
+			if ($("input#contErro").val() > 0) {
+				$('#textDiv').addClass("alert alert-danger");
+			}
+		})
+	</script>
+	<script>
+		function verificarCPF(strCPF) {
+			var Soma;
+			var Resto;
+	strCPF = strCPF.substring(0, 3)+strCPF.substring(4, 7)+strCPF.substring(8, 11)+strCPF.substring(12, 14);
+			Soma = 0;
+			if (strCPF == "00000000000"){
+				var div = document.getElementById("textDiv").className = "alert alert-danger text-center";
+
+				textDiv.textContent = "CPF inválido.";
+
+				var text = "[" + div.textContent + "]";
+				return false;
+				}
+
+			for (i = 1; i <= 9; i++)
+				Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
+			Resto = Soma % 11;
+
+			if ((Resto == 0) || (Resto == 1)) {
+				Resto = 0;
+			} else {
+				Resto = 11 - Resto;
+			}
+
+			if (Resto != parseInt(strCPF.substring(9, 10))){
+				var div = document.getElementById("textDiv").className = "alert alert-danger text-center";
+
+				textDiv.textContent = "CPF inválido.";
+
+				var text = "[" + div.textContent + "]";
+				return false
+			}
+
+			Soma = 0;
+			for (i = 1; i <= 10; i++)
+				Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (12 - i);
+			Resto = Soma % 11;
+
+			if ((Resto == 0) || (Resto == 1)) {
+				Resto = 0;
+			} else {
+				Resto = 11 - Resto;
+			}
+
+			if (Resto != parseInt(strCPF.substring(10, 11))){
+				var div = document.getElementById("textDiv").className = "alert alert-danger text-center";
+
+				textDiv.textContent = "CPF inválido.";
+
+				var text = "[" + div.textContent + "]";
+				return false;
+			}
+			var div = document.getElementById("textDiv").className = "";
+
+			textDiv.textContent = "";
 
 			var text = "[" + div.textContent + "]";
-			return false;
-
+			return true;
 		}
-		return true;
-	} */
-/* 	function Validar(){
-		var valor = $('input#nome').val();
-		if(valor === '' || valor == undefined){
-			$('#textDiv').addClass("alert alert-danger text-center")
-			$('#textDiv').textContent = "Preencha este campo";
-			
-			return false;
-		}
-		return true;
-	}
-	 */
-	
-	$(document).ready(function() {
-		if($("input#contErro").val()>0){
-			$('#textDiv').addClass("alert alert-danger text-center");
-		}
-	})
-	
 	</script>
+
 </body>
 </html>
