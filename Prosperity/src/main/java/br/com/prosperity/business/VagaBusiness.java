@@ -1,24 +1,25 @@
 package br.com.prosperity.business;
 
+import java.util.Date;
 import java.util.List;
 
-import javax.persistence.criteria.CriteriaBuilder;
+import javax.servlet.http.HttpSession;
 
-import org.hibernate.Session;
-import org.hibernate.criterion.CriteriaQuery;
-import org.hibernate.criterion.Example;
-import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.prosperity.bean.SituacaoVagaBean;
+import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
+import br.com.prosperity.converter.UsuarioConverter;
 import br.com.prosperity.converter.VagaConverter;
+import br.com.prosperity.dao.StatusDAO;
+import br.com.prosperity.dao.StatusVagaDAO;
 import br.com.prosperity.dao.VagaDAO;
 import br.com.prosperity.entity.CargoEntity;
 import br.com.prosperity.entity.SenioridadeEntity;
-import br.com.prosperity.entity.UsuarioEntity;
+import br.com.prosperity.entity.StatusVagaEntity;
 import br.com.prosperity.entity.VagaEntity;
 
 
@@ -36,6 +37,15 @@ public class VagaBusiness {
 
 	@Autowired
 	private CargoBusiness cargoBusinness;
+
+	@Autowired
+	private StatusDAO statusDAO;
+	
+	@Autowired
+	private StatusVagaDAO statusVagaDAO;
+	
+	@Autowired
+	private HttpSession session;
 
 	@Transactional
 	public List<VagaBean> listar() {
@@ -85,6 +95,17 @@ public class VagaBusiness {
 	public VagaBean obterVagaPorId(Integer id) {
 		VagaBean bean = vagaConverter.convertEntityToBean(vagaDAO.findById(id));
 		return bean;
+	}
+	
+	@Transactional
+	private void alterarStatus(SituacaoVagaBean situacaoVaga) {
+		StatusVagaEntity statusVagaEntity = new StatusVagaEntity();
+		
+		statusVagaEntity.setStatus(statusDAO.findById(situacaoVaga.getStatus().getValue()));
+		statusVagaEntity.setId(situacaoVaga.getIdVaga());
+		statusVagaEntity.setDataAlteracao(new Date()); 
+		
+		statusVagaDAO.insert(statusVagaEntity);
 	}
 }
 

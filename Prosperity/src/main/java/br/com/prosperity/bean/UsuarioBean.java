@@ -42,7 +42,7 @@ public class UsuarioBean {
 		return nome;
 	}
 	public void setNome(String nome) {
-		this.nome = nome;
+		this.nome = nome.toLowerCase();
 	}
 	public String getSenha() {
 		return senha;
