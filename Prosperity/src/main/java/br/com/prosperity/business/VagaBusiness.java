@@ -47,7 +47,7 @@ public class VagaBusiness {
 	
 	@Transactional
 	public List<VagaBean> filtrarVagas(VagaBean vagao){
-		List<VagaEntity> vagas = vagaDAO.findByNamedQuery("obterFiltro", vagao.getNomeVaga());
+		List<VagaEntity> vagas = vagaDAO.findByNamedQuery("obterFiltro", vagao.getNomeVaga()+"%");
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagas);
 			return vagaBean;
 		

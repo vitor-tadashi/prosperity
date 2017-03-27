@@ -261,7 +261,9 @@ UPDATE tbCandidato set dtAprovacao = '01-01-2017' where idCandidato =
 select * from tbStatus
 select * from tbProjeto
 
-select * from tbVaga
+
+
+select * from tbCandidato
 
 alter table tbVaga add idStatus int
 alter table tbVaga add foreign key (idStatus) references tbStatus(idStatus)
@@ -275,3 +277,4 @@ DROP COLUMN idStatus;
 
 ALTER TABLE tbVaga ADD idStatusVaga INT FOREIGN KEY REFERENCES tbStatusVaga(idStatusVaga);
 
+SELECT * FROM tbVaga WHERE nmVaga like '%Anal%'

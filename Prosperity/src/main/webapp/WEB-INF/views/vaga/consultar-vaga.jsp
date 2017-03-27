@@ -13,7 +13,32 @@
 
 <c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
 
+<style type="text/css">
+
+@media screen {
+    #printSection {
+        display: none;
+    }
+}
+@media print {
+
+    body * {
+        visibility:hidden;
+    }
+    #printSection * {
+        visibility:visible;
+    }
+    #printSection {
+        position: absolute;
+        left: 0;
+        top: 0;
+        
+    }
+}
+</style>
+
 <style>
+
 .label-stand, .badge-stand {
 	background-color: #9b59b6;
 	color: #fff;
@@ -63,6 +88,7 @@
 		tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
+				<div id="PrintThis">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
@@ -160,12 +186,7 @@
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
 													<label for="exampleInputEmail1">Local de trabalho</label>
 													<div class="radiogroup" name="localTrabalho" id="local">
-														<label class="label-radio inline"> <input
-															id="interno" type="radio" value="I" name="radLocalTrabalho" disabled>
-															<span class="custom-radio"></span> Interno
-														</label> <label class="label-radio inline"> <input
-															id="cliente" type="radio" value="C" name="radLocalTrabalho" disabled> <span
-															class="custom-radio"></span> Cliente
+														<label id="lblLocal" class="label-radio inline" value="">
 														</label>
 													</div>
 													<!-- /.col -->
@@ -188,15 +209,7 @@
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
 													<label for="exampleInputEmail1">Tipo de vaga</label>
 													<div class="radiogroup" name="idTipoVaga" id="tipo">
-														<label class="label-radio inline"> <input
-															type="radio" id="real" value="R" name="inline-radio3" checked disabled> <span
-															class="custom-radio"></span> Real
-														</label> <label class="label-radio inline"> <input
-															type="radio" id="prospeccao" value="P" name="inline-radio3" disabled> <span
-															class="custom-radio"></span> Prospecção
-														</label> <label class="label-radio inline"> <input
-															type="radio" id="hunting" value="H" name="inline-radio3" disabled> <span
-															class="custom-radio"></span> Hunting
+														<label id="tpVaga" class="label-radio inline" value = "">
 														</label>
 													</div>
 													<!-- /.col -->
@@ -259,12 +272,7 @@
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
 													<label for="exampleInputEmail1">Aumento de quadro</label>
 													<div class="radiogroup" name="aumentoQuadro" id="aumento">
-														<label class="label-radio inline"> <input
-															id="novo" type="radio" value="N" name="novoQuadro" disabled>
-															<span class="custom-radio"> </span> Novo
-														</label> <label class="label-radio inline"> <input
-															id="sub" type="radio" value="S" name="novoQuadro" disabled> <span
-															class="custom-radio"> </span> Substituição
+														<label id="lblQuadro" class="label-radio inline" value = "">
 														</label>
 
 													</div>
@@ -343,17 +351,20 @@
 
 								</div>
 							</section>
-							<!-- /panel -->
-							<div class="modal-footer">
-								<button type="button" class="btn btn-primary">Imprimir</button>
 							</div>
-						</div>
+							</div>
 					</div>
+					
+					</div>
+					<!-- /panel -->
 					<!-- /tab-content -->
+					<div class="modal-footer">
+								<button type="button" class="btn btn-primary" id="Print" onclick="imprimir()">Imprimir</button>
+							</div>
 				</div>
 			</div>
-		</div>
-	</div>
+			</div>
+	
 	<!-- Modal visualizar -->
 
 	<!-- Modal fechar -->
@@ -513,7 +524,6 @@
 									</td>
 								</tr>
 								</c:forEach>
-								
 								<!-- <tr>
 									<td>Analista de sistema</td>
 									<td>Carrefour</td>
@@ -622,36 +632,36 @@
     			$('input#dataFechamento').val(lista.dataFechamento);
     			$('input#candidatos').val(lista.numeroCandidatos);
     			
+    			if(lista.localTrabalho == 'C') {
+    				//$("#cliente").attr('checked', 'checked');
+    				$("#lblLocal").text('Cliente')
+    			} else {
+    				//$("#interno").attr('checked', 'checked');
+    				$("#lblLocal").text('Interno')
+    			}
+    			if(lista.idTipoVaga == 'H') { 
+    				$("#tpVaga").text('Hunting')
+    			} else if(lista.idTipoVaga == 'P') {
+    				$("#tpVaga").text('Prospecção')
+    			} else {
+    				$("#tpVaga").text('Real')
+    			}
+    			if(lista.aumentaQuadro == 'S') {
+    				$("#lblQuadro").text('Substituição')
+       			} else {
+       				$("#lblQuadro").text('Novo')
+    			}
+    			
     			$('input#solicitante').val(lista.nomeSolicitante);
     			
-    			if(lista.localTrabalho == 'C') {
-    				$("#cliente").attr('checked', 'checked');
-    			} else {
-    				$("#interno").attr('checked', 'checked');
-    			}
     			
     			$('input#cargo').val(lista.cargoBean.nome);
     			
-    			//$('input#tipo').val(lista.idTipoVaga);
-    			if(lista.idTipoVaga == 'H') {
-    				$("#hunting").attr('checked', 'checked');
-    			} else if(lista.idTipoVaga == 'P') {
-    				$("#prospeccao").attr('checked', 'checked');
-    			} else {
-    				$("#real").attr('checked', 'checked');
-    			}
     			
     			$('input#senioridade').val(lista.senioridadeBean.nome);
     			$('input#horaEntrada').val(lista.horarioEntrada);
     			$('input#horaSaida').val(lista.horarioSaida);
     			$('input#pretensao').val(lista.valorPretensao);
-    			
-    			
-    			if(lista.aumentaQuadro == 'S') {
-    				$("#sub").attr('checked', 'checked');
-    			} else {
-    				$("#novo").attr('checked', 'checked');
-    			}
     			
     			$('input#dataInicio').val(lista.dataInicio);
     			$('input#substituido').val(lista.nomeSubstituido);
@@ -662,7 +672,27 @@
     		}
     	})
     } 
-	
+	function imprimir(){
+	//document.getElementById("Print").onclick = function() {
+	    printElement(document.getElementById("PrintThis"));
+	//};
+	}
+
+	function printElement(elem) {
+	    var domClone = elem.cloneNode(true);
+
+	    var $printSection = document.getElementById("printSection");
+
+	    if (!$printSection) {
+	        var $printSection = document.createElement("div");
+	        $printSection.id = "printSection";
+	        document.body.appendChild($printSection);
+	    }
+
+	    $printSection.innerHTML = "";
+	    $printSection.appendChild(domClone);
+	    window.print();
+	}
 	
 	
 	</script>
