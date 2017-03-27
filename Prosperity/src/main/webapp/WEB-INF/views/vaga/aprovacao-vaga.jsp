@@ -204,7 +204,7 @@
 								</div>
 							</section>
 							<!-- /Section -->
-							<!-- <section class="panel panel-default"> -->
+							<section class="panel panel-default">
 								<div class="row">
 									<div class="panel-heading">Informações de projeto</div>
 									<div class="form-group row"></div>
@@ -224,7 +224,7 @@
 											value="Vitor Tadashi">
 									</div>
 								</div>
-						<!-- </section> -->
+							</section>
 							<!-- /panel -->
 							<section class="panel panel-default">
 								<div class="panel-heading">Formação acadêmica</div>
@@ -336,14 +336,18 @@
 											</button>
 											<ul class="dropdown-menu slidedown btnAlinhado">
 												<li><a onclick="info(${vaga.id})"> <i
-														class="fa fa-eye">&nbsp</i>Visualizar
+														class="fa fa-eye fa-lg">&nbsp</i>Visualizar
 												</a></li>
 												<li role="separator" class="divider"></li>
-												<li><a href="#"><i class="fa fa-check fa-lg"></i>
+												<li><a href="#"><i class="fa fa-pencil"></i>
+														Editar</a></li>
+												<!-- <li role="separator" class="divider"></li>
+												<li><a href="#"><i class="fa fa-check"></i>
 														Aprovar</a></li>
 												<li role="separator" class="divider"></li>
-												<li><a href="#"><i class="fa fa-times fa-lg"></i>
-														Reprovar</a></li>
+												<li><a href="#"><i class="fa fa-times"></i>
+														Reprovar</a></li> -->
+														
 											</ul>
 										</div> <!-- Fim Botão -->
 									</td>
