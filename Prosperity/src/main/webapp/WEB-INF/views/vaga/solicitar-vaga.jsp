@@ -31,11 +31,16 @@
 					<div class="panel-body">
 						<form class="form-border" id="formCadastro2" action="cadastrar"
 							method="POST">
+							
 							<div id="textDiv">
-					
-							<br><form:errors path="vagaBean.nomeSolicitante"/>
+							
+							<c:forEach var="erro" items="${listaErros}">
+								<p>${erro}</p>
+
+							</c:forEach>
 							
 							</div>
+							
 							<div class="panel-tab clearfix">
 								<ul class="tab-bar wizard-demo" id="wizardDemo">
 									<li class="active tab-verity"><a href="#first"
@@ -371,7 +376,14 @@
 	<script src="/resources/js/custom/solicitacaoVaga.js"></script>
 	<script src="/resources/js/parsley.min.js"></script>
 	<script src="/resources/js/custom/custom.js"></script>
-		
+	
+	<script>
+	$(document).ready(function() {
+			if ($("input#contErro").val() > 0) {
+				$('#textDiv').addClass("alert alert-danger text-center");
+			}
+		})
+	</script>	
 </body>
 
 

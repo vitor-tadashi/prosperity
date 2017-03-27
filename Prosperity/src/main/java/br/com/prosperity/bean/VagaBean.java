@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -24,6 +26,7 @@ public class VagaBean {
 	
 	private Double valorPretensao;
 	
+	@Future
 	private Date dataInicio;
 	
 	private Character localTrabalho;
@@ -32,12 +35,13 @@ public class VagaBean {
 	private String horarioSaida;
 	private Character aumentaQuadro;
 	
+	@Valid
 	private ProjetoBean projetoBean;
-	
+	@Valid
 	private CargoBean cargoBean;
-	
+	@Valid
 	private SenioridadeBean senioridadeBean;
-
+	
 	private String nomeSubstituido; //
 	private String descricaoFormacaoAcademica; //
 	private String descricaoPerfilComportamental; //
