@@ -77,6 +77,7 @@
 	margin-right: 58px;
 	margin-left: 20px;
 }
+
 </style>
 
 	
@@ -218,7 +219,7 @@
 										</div>
 
 										<div class="form-group row">
-											<div class="form-group col-md-5" style="margin-bottom: 0px">
+											<div class="form-group col-md-5 col-xs-5" style="margin-bottom: 0px">
 													<label for="senioridade">Senioridade da vaga</label> <input
 														class="form-control input-sm" disabled
 														name="senioridade.id" id="senioridade"
