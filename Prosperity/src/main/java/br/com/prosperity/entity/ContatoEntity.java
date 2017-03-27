@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tbContato")
 public class ContatoEntity {
-	
+
 	/* Mapeamento dos Atributos */
 
 	/* Mapeamento do Id */
@@ -26,17 +26,17 @@ public class ContatoEntity {
 	@Column(name = "telefone")
 	private String telefone;
 
-//	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-//	@JoinColumn(name = "idCandidato")
-//	private CandidatoEntity candidato;
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@JoinColumn(name = "idCandidato")
+	private CandidatoEntity candidato;
 
-//	public CandidatoEntity getCandidato() {
-//		return candidato;
-//	}
-//
-//	public void setCandidato(CandidatoEntity candidato) {
-//		this.candidato = candidato;
-//	}
+	public CandidatoEntity getCandidato() {
+		return candidato;
+	}
+
+	public void setCandidato(CandidatoEntity candidato) {
+
+	}
 
 	public Integer getId() {
 		return id;
@@ -53,6 +53,5 @@ public class ContatoEntity {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-
 
 }
