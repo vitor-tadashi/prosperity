@@ -19,12 +19,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import br.com.prosperity.bean.VagaBean;
 
 @Entity
 @Table(name = "tbVaga")
 @NamedQueries({ @NamedQuery(name = "obterTodos", query = "SELECT u FROM VagaEntity u WHERE u.nomeVaga = ?1"),
-	@NamedQuery(name="obterFiltro", query="SELECT u FROM VagaEntity u WHERE lower(u.nomeVaga) like ?1")
+	@NamedQuery(name="listarVagaFiltrado", query="SELECT u FROM VagaEntity u WHERE u.nomeVaga like ?1 AND u.dataAbertura BETWEEN ?1 AND ?1")
 	
 })
 public class VagaEntity {

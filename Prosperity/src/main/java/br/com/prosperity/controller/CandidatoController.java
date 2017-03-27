@@ -161,6 +161,21 @@ public class CandidatoController {
 
 		// avaliadorBusiness.listar();
 
+		List<VagaBean> listaVaga = vagaBusiness.listar();
+		model.addAttribute("listaVaga", listaVaga);
+
+		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
+		model.addAttribute("listaCargo", listaCargo);
+
+		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.obterTodos();
+		model.addAttribute("listaSenioridade", listaSenioridade);
+
+		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.obterTodos();
+		model.addAttribute("listaFuncionarios", listaFuncionarios);
+		
+		//avaliadorBusiness.listar();
+
+
 		return "candidato/consulta-rh";
 	}
 

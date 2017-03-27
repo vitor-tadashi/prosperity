@@ -26,7 +26,7 @@ import javax.persistence.TemporalType;
 @Table(name = "tbCandidato")
 //@NamedQuery(name="fazerFiltro", query="SELECT u FROM CandidatoEntity u WHERE u.nome = ?1")
 
-@NamedQuery(name="pesquisarNome", query="SELECT u FROM CandidatoEntity u WHERE u.nome like '%?1%'")
+@NamedQuery(name="pesquisarNome", query="SELECT u FROM CandidatoEntity u WHERE u.nome like ?1")
 
 public class CandidatoEntity {
 

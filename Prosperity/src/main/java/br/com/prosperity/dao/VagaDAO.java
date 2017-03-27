@@ -14,11 +14,6 @@ import br.com.prosperity.entity.VagaEntity;
 @Repository
 public class VagaDAO extends GenericDAOImpl<VagaEntity, Integer> {
 
-	public List<VagaEntity> filtrar(VagaBean bean) {
-		
-		
-		return null;
-	}
 
 	 
 	

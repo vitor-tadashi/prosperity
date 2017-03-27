@@ -1,20 +1,10 @@
 package br.com.prosperity.business;
 
-import java.sql.Time;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
-import javax.persistence.criteria.CriteriaBuilder;
-
-import org.hibernate.Session;
-import org.hibernate.criterion.CriteriaQuery;
-import org.hibernate.criterion.Example;
-import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +14,6 @@ import br.com.prosperity.converter.VagaConverter;
 import br.com.prosperity.dao.VagaDAO;
 import br.com.prosperity.entity.CargoEntity;
 import br.com.prosperity.entity.SenioridadeEntity;
-import br.com.prosperity.entity.UsuarioEntity;
 import br.com.prosperity.entity.VagaEntity;
 
 
@@ -53,7 +42,7 @@ public class VagaBusiness {
 	
 	@Transactional
 	public List<VagaBean> filtrarVagas(VagaBean vagao){
-		List<VagaEntity> vagas = vagaDAO.findByNamedQuery("obterFiltro", vagao.getNomeVaga());
+		List<VagaEntity> vagas = vagaDAO.findByNamedQuery("listarVagaFiltrado", "%" + vagao.getNomeVaga() + "%", vagao.getDataAberturaDe(), vagao.getDataAberturaPara());
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagas);
 			return vagaBean;
 		
