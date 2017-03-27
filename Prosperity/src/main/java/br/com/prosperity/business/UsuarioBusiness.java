@@ -39,7 +39,7 @@ public class UsuarioBusiness {
 		usuarioBean.setSenha(codec.codificaBase64Encoder(usuarioBean.getSenha()));
 		
 		UsuarioEntity entity = usuarioConverter.convertBeanToEntity(usuarioBean);
-		usuarioDAO.adicionar(entity);
+		usuarioDAO.insert(entity);
 	}
 	@Transactional
 	public UsuarioBean autenticar(UsuarioBean usuarioBean) throws BusinessException {
@@ -84,12 +84,12 @@ public class UsuarioBusiness {
 		
 		usuarioBean.setPrimeiroAcesso(false);
 		
-		usuarioDAO.alterar(usuarioConverter.convertBeanToEntity(usuarioBean));
+		usuarioDAO.update(usuarioConverter.convertBeanToEntity(usuarioBean));
 	}
 
 	@Transactional(readOnly=true)
 	public List<UsuarioBean> listar() {
-		List<UsuarioBean> usuarios = usuarioConverter.convertEntityToBean(usuarioDAO.listar());
+		List<UsuarioBean> usuarios = usuarioConverter.convertEntityToBean(usuarioDAO.findAll());
 		return usuarios;
 	}
 	
@@ -102,7 +102,7 @@ public class UsuarioBusiness {
 
 	@Transactional(readOnly=true)
 	public UsuarioBean obterPorId(Integer id) {
-		UsuarioBean bean = usuarioConverter.convertEntityToBean(usuarioDAO.obterPorId(id));
+		UsuarioBean bean = usuarioConverter.convertEntityToBean(usuarioDAO.findById(id));
 		return bean;
 	}
 
@@ -110,7 +110,7 @@ public class UsuarioBusiness {
 	public void mudarStatus(Integer id) {
 		UsuarioBean usuario = this.obterPorId(id);
 		usuario.setAtivo(!usuario.getAtivo());
-		usuarioDAO.alterar(usuarioConverter.convertBeanToEntity(usuario));
+		usuarioDAO.update(usuarioConverter.convertBeanToEntity(usuario));
 	}
 
 	@Transactional
@@ -119,7 +119,7 @@ public class UsuarioBusiness {
 		EncriptaDecriptaApacheCodec codec = new EncriptaDecriptaApacheCodec();
 		usuario.setSenha(codec.codificaBase64Encoder(usuario.getSENHA_PADRAO()));
 		usuario.setPrimeiroAcesso(true);
-		usuarioDAO.alterar(usuarioConverter.convertBeanToEntity(usuario));
+		usuarioDAO.update(usuarioConverter.convertBeanToEntity(usuario));
 	}
 
 }

@@ -22,10 +22,10 @@ import javax.persistence.TemporalType;
 @Table(name = "tbVaga")
 @NamedQueries({
 	@NamedQuery(name = "obterTodos", query = "SELECT u FROM VagaEntity u WHERE u.nomeVaga = ?1"),
-	@NamedQuery(name = "listarParaRelatorio", query = "SELECT v.id, v.nomeVaga FROM VagaEntity v")
+	@NamedQuery(name = "listarParaRelatorio", query = "SELECT v.id, v.nomeVaga FROM VagaEntity v"),
+	@NamedQuery(name="obterFiltro", query="SELECT u FROM VagaEntity u WHERE lower(u.nomeVaga) like ?1")
 	})
 public class VagaEntity {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idVaga", unique = true, nullable = false)
@@ -45,18 +45,18 @@ public class VagaEntity {
 	private Date dataInicio;
 
 	@Column(name = "flLocalTrabalho")
-	private char localTrabalho;
+	private Character localTrabalho;
 
 	@Column(name = "idTpVaga")
 	private Character tipoVaga;
 
 	@Column(name = "hrEntrada")
-	@Temporal(value = TemporalType.DATE)
-	private Date horaEntrada;
+	//@Temporal(value = TemporalType.TIME)
+	private String horaEntrada;
 
 	@Column(name = "hrSaida")
-	@Temporal(value = TemporalType.DATE)
-	private Date horaSaida;
+	//@Temporal(value = TemporalType.TIME)
+	private String horaSaida;
 
 	@Column(name = "flAumentoQuadra")
 	private Character aumentoQuadro;
@@ -114,24 +114,21 @@ public class VagaEntity {
 	public Integer getId() {
 		return id;
 	}
-/*=======
-
-	@OneToMany()
-	@JoinColumn(name = "idVaga")
-	private List<StatusVagaEntity> statusEntity;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public List<StatusVagaEntity> getStatusEntity() {
-		return statusEntity;
-	}
-
-	public void setStatusEntity(List<StatusVagaEntity> statusEntity) {
-		this.statusEntity = statusEntity;
->>>>>>> 6177abe9dacbea6ac3a7b401caace31a61a978f4
-	}*/
+	/*
+	 * =======
+	 * 
+	 * @OneToMany()
+	 * 
+	 * @JoinColumn(name = "idVaga") private List<StatusVagaEntity> statusEntity;
+	 * 
+	 * public Integer getId() { return id; }
+	 * 
+	 * public List<StatusVagaEntity> getStatusEntity() { return statusEntity; }
+	 * 
+	 * public void setStatusEntity(List<StatusVagaEntity> statusEntity) {
+	 * this.statusEntity = statusEntity; >>>>>>>
+	 * 6177abe9dacbea6ac3a7b401caace31a61a978f4 }
+	 */
 
 	public void setId(Integer id) {
 		this.id = id;
@@ -185,19 +182,19 @@ public class VagaEntity {
 		this.tipoVaga = tipoVaga;
 	}
 
-	public Date getHoraEntrada() {
+	public String getHoraEntrada() {
 		return horaEntrada;
 	}
 
-	public void setHoraEntrada(Date horaEntrada) {
+	public void setHoraEntrada(String horaEntrada) {
 		this.horaEntrada = horaEntrada;
 	}
 
-	public Date getHoraSaida() {
+	public String getHoraSaida() {
 		return horaSaida;
 	}
 
-	public void setHoraSaida(Date horaSaida) {
+	public void setHoraSaida(String horaSaida) {
 		this.horaSaida = horaSaida;
 	}
 

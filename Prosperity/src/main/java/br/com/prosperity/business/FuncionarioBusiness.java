@@ -10,7 +10,6 @@ import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.converter.FuncionarioConverter;
 import br.com.prosperity.dao.FuncionarioDAO;
 import br.com.prosperity.entity.FuncionarioEntity;
-import br.com.prosperity.entity.UsuarioEntity;
 
 @Component
 public class FuncionarioBusiness {
@@ -22,16 +21,16 @@ public class FuncionarioBusiness {
 	private FuncionarioConverter funcionarioConverter;
 	
 	@Transactional(readOnly=true)
-	public List<FuncionarioBean> listar() {
-		List<FuncionarioEntity> funcionarioEntity = funcionarioDAO.listar();
+	public List<FuncionarioBean> findAll() {
+		List<FuncionarioEntity> funcionarioEntity = funcionarioDAO.findAll();
 		List<FuncionarioBean> funcionarioBean = funcionarioConverter.convertEntityToBean(funcionarioEntity);
 
 		return funcionarioBean;
 	}
 	
 	@Transactional(readOnly=true)
-	public List<FuncionarioBean> listarApenasNaoCadastrados() {
-		List<FuncionarioEntity> funcionarioEntity = funcionarioDAO.findByNamedQuery("listarApenasNaoCadastrados");
+	public List<FuncionarioBean> findNotRegistered() {
+		List<FuncionarioEntity> funcionarioEntity = funcionarioDAO.findByNamedQuery("findNotRegistered");
 		List<FuncionarioBean> funcionarioBean = funcionarioConverter.convertEntityToBean(funcionarioEntity);
 
 		return funcionarioBean;

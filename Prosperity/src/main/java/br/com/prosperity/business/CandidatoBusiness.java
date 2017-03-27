@@ -1,21 +1,35 @@
 package br.com.prosperity.business;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.prosperity.bean.CandidatoBean;
+import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.StatusCandidatoBean;
+import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.converter.CandidatoConverter;
+import br.com.prosperity.dao.AvaliadorDAO;
 import br.com.prosperity.dao.CandidatoDAO;
+import br.com.prosperity.dao.StatusCandidatoDAO;
+import br.com.prosperity.dao.StatusDAO;
+import br.com.prosperity.dao.StatusFuturoDAO;
+import br.com.prosperity.dao.UsuarioDAO;
+import br.com.prosperity.entity.AvaliadorEntity;
 import br.com.prosperity.entity.CandidatoEntity;
+import br.com.prosperity.entity.StatusCandidatoEntity;
+import br.com.prosperity.entity.StatusFuturoEntity;
+import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.util.FormatUtil;
 
 @Component
@@ -27,9 +41,30 @@ public class CandidatoBusiness extends FormatUtil {
 	@Autowired
 	private CandidatoConverter candidatoConverter;
 
+	@Autowired
+	private StatusCandidatoDAO statusCandidatoDAO;
+
+	@Autowired
+	private UsuarioBean usuarioBean;
+
+	@Autowired
+	private UsuarioDAO usuarioDAO;
+
+	@Autowired
+	private StatusDAO statusDAO;
+
+	@Autowired
+	private StatusFuturoDAO statusFuturoDAO;
+	
+	@Autowired
+	private AvaliadorDAO avaliadorDAO;
+	
+	@Autowired
+	private HttpSession session;
+
 	@Transactional
 	public CandidatoBean obter(Integer id) {
-		CandidatoEntity candidatoEntity = candidatoDAO.obterPorId(id);
+		CandidatoEntity candidatoEntity = candidatoDAO.findById(id);
 		CandidatoBean candidatoBean = new CandidatoBean();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM/yyyy");
 
@@ -42,9 +77,9 @@ public class CandidatoBusiness extends FormatUtil {
 
 		Map<String, List<StatusCandidatoBean>> listaStatusOrdenada = groupByOrdered(candidatoBean.getStatus(),
 				StatusCandidatoBean::getMesAno);
-		
+
 		candidatoBean.setStatusPorMesAno(listaStatusOrdenada);
-		
+
 		return candidatoBean;
 	}
 
@@ -54,13 +89,69 @@ public class CandidatoBusiness extends FormatUtil {
 
 	@Transactional
 	public List<CandidatoBean> listar() {
-		List<CandidatoEntity> entities = candidatoDAO.listar();
+		List<CandidatoEntity> entities = candidatoDAO.findAll();
 		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(entities);
 		return beans;
 	}
+
 	@Transactional
-	public void inserir(CandidatoBean candidatoBean) {
-		candidatoDAO.adicionar(candidatoConverter.convertBeanToEntity(candidatoBean));
+	public void inserir(CandidatoBean candiatoBean) {
+		CandidatoBean candidatoBean = new CandidatoBean();
+		candidatoDAO.insert(candidatoConverter.convertBeanToEntity(candidatoBean));
 
 	}
+	
+	@Transactional
+	public CandidatoBean obterCandidatoPorId(Integer id) {
+		CandidatoBean bean = candidatoConverter.convertEntityToBean(candidatoDAO.findById(id));
+		return bean;
+}
+
+	@Transactional
+	public void alterarStatus(SituacaoCandidatoBean situacaoCandidato) {
+		StatusCandidatoEntity statusCandidatoEntity = alterarStatus1(situacaoCandidato);
+		List<StatusFuturoEntity> statusFuturoEntity = null;
+
+		statusCandidatoDAO.insert(statusCandidatoEntity);
+
+		statusFuturoEntity = statusFuturoDAO.findByNamedQuery("obterStatusFuturos",
+				situacaoCandidato.getStatus().getValue());
+
+		if (statusFuturoEntity != null && statusFuturoEntity.size() > 0) {
+			if (statusFuturoEntity.size() == 1) {
+				situacaoCandidato.setStatus(StatusCandidatoEnum.valueOf(statusFuturoEntity.get(0).getIdStatusFuturo()));
+				alterarStatus1(situacaoCandidato);
+			} else {
+				List<AvaliadorEntity> avaliadorEntity = avaliadorDAO.findByNamedQuery("obterAvaliadores");
+				if(avaliadorEntity.size() == 1){
+					situacaoCandidato.setStatus(StatusCandidatoEnum.valueOf(statusFuturoEntity.get(1).getIdStatusFuturo()));
+					situacaoCandidato.setParecer(null);
+
+					statusCandidatoDAO.insert(alterarStatus1(situacaoCandidato));
+				}else{
+					situacaoCandidato.setStatus(StatusCandidatoEnum.valueOf(statusFuturoEntity.get(0).getIdStatusFuturo()));
+					situacaoCandidato.setParecer(null);
+			
+					statusCandidatoDAO.insert(alterarStatus1(situacaoCandidato));
+				}
+				avaliadorEntity.get(0).setStatus(true);
+				avaliadorDAO.update(avaliadorEntity.get(0));
+			}
+		}
+		// PASSO 2 - PEGAR O STATUSFUTURO e SALVAR NO BANCO
+	}
+
+	private StatusCandidatoEntity alterarStatus1(SituacaoCandidatoBean situacaoCandidato) {
+		StatusCandidatoEntity statusCandidatoEntity = new StatusCandidatoEntity();
+		
+		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
+		statusCandidatoEntity.setStatus(statusDAO.findById(situacaoCandidato.getStatus().getValue()));
+		statusCandidatoEntity.setIdCandidato(situacaoCandidato.getIdCandidato());
+		statusCandidatoEntity.setDsParecer(situacaoCandidato.getParecer());
+		statusCandidatoEntity.setDtAlteracao(new Date());
+		statusCandidatoEntity.setUsuario(usuarioDAO.findById(usuarioBean.getId()));
+		return statusCandidatoEntity;
+
+	}
+
 }

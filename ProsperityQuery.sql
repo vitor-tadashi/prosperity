@@ -275,3 +275,16 @@ DROP COLUMN idStatus;
 
 ALTER TABLE tbVaga ADD idStatusVaga INT FOREIGN KEY REFERENCES tbStatusVaga(idStatusVaga);
 
+--- Alterando colunas da tabela vaga para tipo TIME 
+
+ALTER TABLE tbVaga
+DROP COLUMN hrEntrada;
+
+ALTER TABLE tbVaga
+DROP COLUMN hrsaida;
+
+ALTER TABLE tbVaga
+ADD hrEntrada time(0);
+
+ALTER TABLE tbVaga
+ADD hrSaida time(0);

@@ -1,19 +1,14 @@
 package br.com.prosperity.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.FuncionarioBean;
@@ -43,8 +38,8 @@ public class UsuarioController {
 	@RequestMapping(value = "/listar", method = RequestMethod.GET)
 	public String carregaTabela(Model model) {
 		List<UsuarioBean> usuarios = usuarioBusiness.listar();
-		List<FuncionarioBean> funcionarios = funcionarioBusiness.listarApenasNaoCadastrados();
-		List<PerfilBean> perfis = perfilBusiness.obterTodos();
+		List<FuncionarioBean> funcionarios = funcionarioBusiness.findNotRegistered();
+		List<PerfilBean> perfis = perfilBusiness.listar();
 		model.addAttribute("funcionarios", funcionarios);
 		model.addAttribute("perfis", perfis);
 		model.addAttribute("usuarios", usuarios);
@@ -54,8 +49,8 @@ public class UsuarioController {
 
 	@RequestMapping(value = "/criar-perfil", method = RequestMethod.GET)
 	public String criaPerfil(Model model) {
-		List<FuncionalidadeBean> funcionalidades = funcionalidadeBusiness.obterTodos();
-		List<PerfilBean> perfis = perfilBusiness.obterTodos();
+		List<FuncionalidadeBean> funcionalidades = funcionalidadeBusiness.listar();
+		List<PerfilBean> perfis = perfilBusiness.listar();
 		model.addAttribute("funcionalidades", funcionalidades);
 		model.addAttribute("perfis", perfis);
 
@@ -63,7 +58,7 @@ public class UsuarioController {
 	}
 
 	@RequestMapping(value = "/salvar-perfil", method = RequestMethod.POST)
-	public String salvarPerfil(@ModelAttribute("perfilBean") PerfilBean perfilBean) throws BusinessException {
+	public String inserirPerfil(@ModelAttribute("perfilBean") PerfilBean perfilBean) throws BusinessException {
 		perfilBusiness.inserir(perfilBean);
 
 		return "redirect:criar-perfil";
@@ -103,7 +98,7 @@ public class UsuarioController {
 	
 	@RequestMapping(value = "obter-perfil-funcionalidade", method=RequestMethod.GET)
 	public @ResponseBody List<FuncionalidadeBean> obterPerfilFuncionalidade(Model model,@ModelAttribute("id")Integer id){
-		List<FuncionalidadeBean> listaFunc = perfilBusiness.obterFuncionalidades(id);
+		List<FuncionalidadeBean> listaFunc = perfilBusiness.obterPerfilFuncionalidades(id);
 		return listaFunc;
 	}
 

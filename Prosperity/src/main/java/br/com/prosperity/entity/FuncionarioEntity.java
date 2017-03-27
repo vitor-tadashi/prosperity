@@ -1,9 +1,7 @@
 package br.com.prosperity.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbFuncionario")
-@NamedQuery(name="listarApenasNaoCadastrados", query="SELECT f FROM FuncionarioEntity f where f.id not in (SELECT u.funcionarioEntity.id from UsuarioEntity u)")
+@NamedQuery(name="findNotRegistered", query="SELECT f FROM FuncionarioEntity f where f.id not in (SELECT u.funcionarioEntity.id from UsuarioEntity u)")
 public class FuncionarioEntity {
 	
 	@Id

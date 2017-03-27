@@ -15,6 +15,8 @@
 
 <!-- Link e style aqui -->
 
+
+
 </head>
 <body>
 
@@ -33,7 +35,7 @@
 				</div>
 				<div class="modal-body">
 					<div class="panel-body">
-						<form class="form-border" id="formCadastro" novalidate="">
+						<form class="form-border" id="formCadastro">
 							<div class="panel-tab clearfix">
 								<ul class="tab-bar wizard-demo" id="wizardDemo">
 									<li class="active tab-verity"><a href="#first"
@@ -56,8 +58,8 @@
 											<div>
 												<div class="form-group col-md-6">
 													<label for="exampleInputEmail1">Nome do candidato:</label>
-													<input type="text" class="form-control input-sm"
-														id="exampleInputEmail1" placeholder="Nome do candidato"
+													<input class="form-control input-sm" 
+														name="candidato.id" id="nomeCandidato"
 														data-required="true" name="nome">
 												</div>
 												<!-- /form-group -->
@@ -67,7 +69,7 @@
 										<div class="row">
 											<div class="form-group col-md-6">
 												<label for="exampleInputEmail1">Vaga:</label> <select
-													class="form-control chzn-select" name="vagas">
+													class="form-control chzn-select" id="nomeVaga" name="vagas">
 													<c:forEach var="vaga" items="${listaVaga}">
 														<option value="${vaga.id}">${vaga.nomeVaga}</option>
 													</c:forEach>
@@ -76,7 +78,7 @@
 											<!-- /form-group -->
 											<div class="form-group col-md-6">
 												<label for="exampleInputEmail1">Senioridade da vaga:</label>
-												<select class="form-control chzn-select" name="senioridade">
+												<select class="form-control chzn-select"										id="nomeSenioridade" name="senioridade">
 													<c:forEach var="senioridade" items="${listaSenioridade}">
 														<option value="${senioridade.id}" ${senioridade.nome}></option>
 													</c:forEach>
@@ -91,12 +93,12 @@
 													<div class="panel-heading">
 														<label for="exampleInputEmail1">Avaliadores:</label>
 													</div>
-													<div class="panel-body relative" name="nmPerfil">
+													<div class="panel-body relative" id="nmPerfil">
 														<select multiple="multiple" id="selectedBox1"
 															class="select-box pull-left form-control">
 															<c:forEach var="funcionario" items="${listaFuncionarios}">
-														<option value="${funcionario.id}">${funcionario.nome}</option>
-													</c:forEach>
+																<option value="${funcionario.id}">${funcionario.nome}</option>
+															</c:forEach>
 														</select>
 
 														<div class="select-box-option">
@@ -126,11 +128,11 @@
 										<div class="form-group col-md-6">
 											<div class="form-group">
 												<label class="control-label">Data do último contato:</label>
-												<div class="form-group" name="dtUltimoContato">
+												<div class="form-group">
 													<div class="input-group">
 														<input type="text" value="01/01/2017"
-															class="datepicker form-control"> <span
-															class="input-group-addon"><i
+															class="datepicker form-control" id="dataUltimoContato">
+														<span class="input-group-addon"><i
 															class="fa fa-calendar"></i></span>
 													</div>
 												</div>
@@ -143,11 +145,11 @@
 											<div class="form-group col-md-6">
 												<div class="form-group">
 													<label class="control-label">Data de entrevista:</label>
-													<div class="form-group" name="dtEntrevista">
+													<div class="form-group">
 														<div class="input-group">
 															<input type="text" value="00/00/0000"
-																class="datepicker form-control" name=""> <span
-																class="input-group-addon"><i
+																class="datepicker form-control" name="dtEntrevista">
+															<span class="input-group-addon"><i
 																class="fa fa-calendar"></i></span>
 														</div>
 													</div>
@@ -176,21 +178,21 @@
 											<div class="panel-body">
 												<label>Etapas dos processos de seleção: </label>
 												<!-- SOMENTE ALTERAR DAQUI PARA BAIXO -->
-												<form name="form1" action="paginaPHPouASP" method="post">
-													<input class="btn btn-xs btn-success" type="button"
-														value="Adicionar etapa" onclick="AddCampos()" name="">
-													<br> <br>
-													<script type="text/javascript">
-														//Escrevendo o código-fonte HTML e ocultando os campos criados:
-														for (iLoop = 1; iLoop <= totalCampos; iLoop++) {
-															document
-																	.write("<span id='linha"+iLoop+"' style='display:none'> <select class='btn btn-default btn-xs dropdown-toggle' style='width: 160px;'><option value='0'>Selecione etapa</option><option value='1'>Prova Prática</option><option value='2'>Prova teórica</option><option value='3'>Dinâmica de Grupo</option></select> <input type='text' id='arq"+iLoop+"' name='arq"+iLoop+"'> <input class='btn btn-xs btn-danger' type='button' value='Remover' onclick='RemoverCampos(\""
-																			+ iLoop
-																			+ "\")'></span><br>");
-														}
-													</script>
-													<input type="hidden" name="hidden2" id="hidden2">
-												</form>
+
+												<input class="btn btn-xs btn-success" type="button"
+													value="Adicionar etapa" onclick="AddCampos()" name="">
+												<br> <br>
+												<script type="text/javascript">
+													//Escrevendo o código-fonte HTML e ocultando os campos criados:
+													for (iLoop = 1; iLoop <= totalCampos; iLoop++) {
+														document
+																.write("<span id='linha"+iLoop+"' style='display:none'> <select class='btn btn-default btn-xs dropdown-toggle' style='width: 160px;'><option value='0'>Selecione etapa</option><option value='1'>Prova Prática</option><option value='2'>Prova teórica</option><option value='3'>Dinâmica de Grupo</option></select> <input type='text' id='arq"+iLoop+"' name='arq"+iLoop+"'> <input class='btn btn-xs btn-danger' type='button' value='Remover' onclick='RemoverCampos(\""
+																		+ iLoop
+																		+ "\")'></span><br>");
+													}
+												</script>
+												<input type="hidden" name="hidden2" id="hidden2">
+
 												<div class="form-group">
 													<!-- SOMENTE ALTERAR DAQUI PARA CIMA -->
 													<label>Parecer técnico: </label>
@@ -220,7 +222,7 @@
 												<thead class="text-center">
 													<tr class="text-center">
 														<th class="text-center">Competências</th>
-														<th>Insatisfatório</th>
+														<th id="">Insatisfatório</th>
 														<th>Em Desenvolvimento</th>
 														<th>Atende as Expectativas</th>
 														<th>Supera as Expectativas</th>
@@ -230,8 +232,9 @@
 													<tr>
 														<td>Desenvolvimento</td>
 														<td><label class="label-radio inline"> <input
-																id="interno" type="radio" name="inline-radio1">
-																<span class="custom-radio"></span>
+																id="desenvolvimento_insatisfatorio" type="radio"
+																name="inline-radio1" value="1"> <span
+																class="custom-radio"></span>
 														</label></td>
 														<td><label class="label-radio inline"> <input
 																id="interno" type="radio" name="inline-radio1">
@@ -381,10 +384,11 @@
 													</tr>
 												</tbody>
 											</table>
+
+										</section>
 									</div>
-									</section>
 								</div>
-							</div>
+								</div>
 						</form>
 					</div>
 					<div class="panel-footer ">
@@ -487,17 +491,16 @@
 								<!-- /.row -->
 							</div>
 							<!-- /.panel-body -->
-							<table
-								class="table table-bordered table-condensed table-hover table-striped"
-								id=""
-								style="font-size: 12px !important; vertical-align: middle !important;">
+							
+							<table class="table table-bordered table-condensed table-hover table-striped"
+								style= "font-size: 12px; vertical-align: middle">
 								<thead>
 									<tr>
 										<th class="text-center">Nome do candidato</th>
 										<th class="text-center">Vaga</th>
 										<th class="text-center">Pretensão</th>
 										<th class="text-center">Data de abertura</th>
-										<th class="text-center">Data de aprovação</th>
+										<!-- <th class="text-center">Data de aprovação</th> -->
 										<th class="text-center">Status</th>
 										<th class="text-center">Ações</th>
 									</tr>
@@ -506,184 +509,39 @@
 									<c:forEach var="candidato" items="${candidatos}">
 										<tr>
 											<td>${candidato.nome}</td>
-											<td>${candidato.vaga.nomeVaga}</td>
+											<td></td> 	
 											<td>${candidato.valorPretensao}</td>
-											<td><fmt:formatDate value="${candidato.dataAbertura}" pattern="dd/MM/yyyy"/></td>
-											<td><fmt:formatDate value="${candidato.dataFechamento}" pattern="dd/MM/yyyy"/></td>
- 											<td>${candidato.ultimoStatus.status.nome}</td>
-											<td><span class="label label-analiseRH">Em
-													análise do RH</span></td>
+											<td><fmt:formatDate value="${candidato.dataAbertura}"
+													pattern="dd/MM/yyyy" /></td>
+											<!-- <td><fmt:formatDate value="${candidato.dataFechamento}"
+													pattern="dd/MM/yyyy" /></td> -->
+											<td></td>
 											<td><span class="line"></span>
 												<div class="btn-group">
-
+												
 													<!-- comeco do botao -->
-													<button type="button"
-														class="btn btn-info dropdown-toggle btn-sm"
-														data-toggle="dropdown" aria-haspopup="true"
-														aria-expanded="false">
-														<i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
-													</button>
+													<button class="btn btn-sm btn-info dropdown-toggle"
+												data-toggle="dropdown" aria-haspopup="true"
+												aria-expanded="false">
+												<i class="fa fa-cogs fa-lg">&nbsp;</i> <span class="caret"></span>
+											</button>
 													<ul class="dropdown-menu slidedown btnAlinhado">
-														<li><a href="#aprovado-modal" data-toggle="modal"
+														<li> <a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Histórico do Candidato</a></li> 
+														 <li class="divider"></li> <!-- <a href="#aprovado-modal" data-toggle="modal"
 															data-toggle="modal" data-target=".bs-example-modal-lg"><i
-																class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
-														<li class="divider"></li>
+																class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a>  --> </li>
+														
 														<li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
 
-														<li class="divider"></li>
-														<li><a href="#delete-modal" data-toggle="modal"><i
-																class="fa fa-trash-o fa-lg">&nbsp;</i>Fechar vaga</a></li>
+														<!--<li class="divider"></li>
+														 <li><a href="#delete-modal" data-toggle="modal"><i
+																class="fa fa-trash-o fa-lg">&nbsp;</i>Fechar vaga</a></li> <!--
 													</ul>
-												</div> <!-- /fim botao --></td>
+													</div>
+												 <!-- /fim botao --></td>
 										</tr>
 									</c:forEach>
-									<!-- fim do botao -->
-									<!-- <tr>
-										<td>Kevin Durant</td>
-										<td>Diretor</td>
-										<td>R$7.500</td>
-										<td>17/02/2015</td>
-										<td>25/07/2016</td>
-										<td><span class="label label-analiseTecnica">Em
-												análise técnica</span></td>
-										<td class="text-center"><span class="line"></span>
-											<div class="btn-group">
-												começo botao
-												<button type="button"
-													class="btn btn-info dropdown-toggle btn-sm"
-													data-toggle="dropdown" aria-haspopup="true"
-													aria-expanded="false">
-													<i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
-												</button>
-												<ul class="dropdown-menu slidedown btnAlinhado">
-													<li><a href="#aprovado-modal" data-toggle="modal"
-														data-toggle="modal" data-target=".bs-example-modal-lg"><i
-															class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
-													<li class="divider"></li>
-													<li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
 
-													<li class="divider"></li>
-													<li><a href="#delete-modal" data-toggle="modal"><i
-															class="fa fa-trash-o fa-lg">&nbsp;</i>Fechar vaga</a></li>
-												</ul>
-											</div> /fim botao</td>
-									</tr> -->
-									<!-- <tr class="text-center">
-										<td>James Harden</td>
-										<td>Desenvolvedor</td>
-										<td>R$1000</td>
-										<td>17/02/2015</td>
-										<td>09/11/2017</td>
-										<td><span class="label label-reprovado">Reprovado</span></td>
-										<td class="text-center"><span class="line"></span>
-											<div class="btn-group">
-												começo botao
-												<button type="button"
-													class="btn btn-info dropdown-toggle btn-sm"
-													data-toggle="dropdown" aria-haspopup="true"
-													aria-expanded="false">
-													<i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
-												</button>
-												<ul class="dropdown-menu slidedown btnAlinhado">
-													<li><a href="#aprovado-modal" data-toggle="modal"
-														data-toggle="modal" data-target=".bs-example-modal-lg"><i
-															class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
-													<li class="divider"></li>
-													<li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
-													<li class="divider"></li>
-													<li><a href="#delete-modal" data-toggle="modal"><i
-															class="fa fa-trash-o fa-lg">&nbsp;</i>Fechar vaga</a></li>
-												</ul>
-											</div> /fim botao</td>
-									</tr>
-									<tr class="text-center">
-										<td>Michael Jordan</td>
-										<td>Desenvolvedor</td>
-										<td>R$1000</td>
-										<td>17/02/2015</td>
-										<td>09/11/2017</td>
-										<td><span class="label label-stand">Candidatura</span></td>
-										<td class="text-center"><span class="line"></span>
-											<div class="btn-group">
-												começo botao
-												<button type="button"
-													class="btn btn-info dropdown-toggle btn-sm"
-													data-toggle="dropdown" aria-haspopup="true"
-													aria-expanded="false">
-													<i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
-												</button>
-												<ul class="dropdown-menu slidedown btnAlinhado">
-													<li><a href="#aprovado-modal" data-toggle="modal"
-														data-toggle="modal" data-target=".bs-example-modal-lg"><i
-															class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
-													<li class="divider"></li>
-													<li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
-													<li class="divider"></li>
-													<li><a href="#delete-modal" data-toggle="modal"><i
-															class="fa fa-trash-o fa-lg">&nbsp;</i>Fechar vaga</a></li>
-												</ul>
-											</div> /fim botao</td>
-									</tr>
-									<tr>
-										<td>Kyrie Irving</td>
-										<td>Desenvolvedor</td>
-										<td>R$3.000</td>
-										<td>08/11/2016</td>
-										<td>31/12/2016</td>
-										<td><span class="label label-contratado" style="">Contratado</span>
-										</td>
-										<td>
-											<div class="btn-group">
-												começo botao
-												<button type="button"
-													class="btn btn-info dropdown-toggle btn-sm"
-													data-toggle="dropdown" aria-haspopup="true"
-													aria-expanded="false">
-													<i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
-												</button>
-												<ul class="dropdown-menu slidedown btnAlinhado">
-													<li><a href="#aprovado-modal" data-toggle="modal"
-														data-toggle="modal" data-target=".bs-example-modal-lg"><i
-															class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
-													<li class="divider"></li>
-													<li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
-													<li class="divider"></li>
-													<li><a href="#delete-modal" data-toggle="modal"><i
-															class="fa fa-trash-o fa-lg">&nbsp;</i>Fechar vaga</a></li>
-												</ul>
-											</div> /fim botao
-										</td>
-									</tr>
-									<tr>
-										<td>LeBron James</td>
-										<td>Desenvolvedor</td>
-										<td>R$3.000</td>
-										<td>08/11/2016</td>
-										<td>31/04/2017</td>
-										<td><span class="label label-aprovadoPendente" style="">Proposta</span>
-										</td>
-										<td>
-											<div class="btn-group">
-												começo botao
-												<button type="button"
-													class="btn btn-info dropdown-toggle btn-sm"
-													data-toggle="dropdown" aria-haspopup="true"
-													aria-expanded="false">
-													<i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
-												</button>
-												<ul class="dropdown-menu slidedown btnAlinhado">
-													<li><a href="#aprovado-modal" data-toggle="modal"
-														data-toggle="modal" data-target=".bs-example-modal-lg"><i
-															class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a></li>
-													<li class="divider"></li>
-													<li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
-													<li class="divider"></li>
-													<li><a href="#delete-modal" data-toggle="modal"><i
-															class="fa fa-trash-o fa-lg">&nbsp;</i>Fechar vaga</a></li>
-												</ul>
-											</div> /fim botao -->
-									</td>
-									</tr>
 								</tbody>
 							</table>
 						</div>
@@ -748,6 +606,30 @@
 	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
 	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
 
+	<!-- JavaScript -->
+
+	<script type="text/javascript">
+		function info(listaId) {
+			//
+			$.ajax({
+				url : "gerenciar",
+				type : "GET",
+				dataType : "JSON",
+				data : {
+					'id' : listaId
+				},
+				success : function(lista) {
+					console.log(lista);
+					//$('#titulo').html(lista.);
+					$('input#nomeCandidato').val(lista.nome);
+					$('input#nomeVaga').val(lista.vaga);
+					$('input#nomeSenioridade').val(lista.senioridadeBean.nome);
+				}
+			})
+		}
+	</script>
+
+
 	<script>
 		$(function() {
 			$('#dataTable').dataTable({
@@ -776,7 +658,7 @@
 		});
 	</script>
 
-	<script type="text/javascript">
+	 <script type="text/javascript">
 		//Total máximo de campos que você permitirá criar em seu site:
 		var totalCampos = 4;
 
@@ -862,7 +744,7 @@
 				}
 			}
 		}
-	</script>
+	</script> 
 	<script type="text/javascript">
 		//Escrevendo o código-fonte HTML e ocultando os campos criados:
 		for (iLoop = 1; iLoop <= totalCampos; iLoop++) {
@@ -871,6 +753,6 @@
 							+ iLoop + "\")'></span><br>");
 
 		}
-	</script>
+	</script> 
 </body>
 </html>

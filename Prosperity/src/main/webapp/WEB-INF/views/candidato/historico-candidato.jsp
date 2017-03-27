@@ -13,25 +13,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 
 <c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
 
-<script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script type="text/javascript">
-	function formataCpf(evt) {
-		vr = (navigator.appName == 'Netscape') ? evt.target.value
-				: evt.srcElement.value;
-		if (vr.length == 3)
-			vr = vr + ".";
-		if (vr.length == 7)
-			vr = vr + ".";
-		if (vr.length == 11)
-			vr = vr + "-";
 
-		return vr;
-	}
-</script>
 </head>
 
 <body>
@@ -69,8 +55,7 @@
 							<div class="form-group col-md-6">
 								<label class="col-xs-5 control-label">CPF:</label>
 								<div class="col-xs-7">
-									<p class="form-control-static" id="cpf" name="cpf"
-										load"this.value=formataCpf(event)>${candidato.cpf}</p>
+									<p class="form-control-static" id="cpf" name="cpf">38748842877</p>
 								</div>
 							</div>
 							<div class="form-group col-md-6">
@@ -179,7 +164,7 @@
 								<li><div class="tldate">${statusPorMesAno.key}</div></li>
 								<c:forEach var="status" items="${statusPorMesAno.value}"
 									varStatus="count">
-									
+
 									<c:choose>
 										<c:when test="${count.index %2 eq 0}">
 											<c:set value="timeline" var="cssTimeline"></c:set>
@@ -188,7 +173,7 @@
 											<c:set value="timeline-inverted" var="cssTimeline"></c:set>
 										</c:otherwise>
 									</c:choose>
-									
+
 									<li class="${cssTimeline}">
 										<div class="tl-circ"></div>
 										<div class="timeline-panel">
@@ -201,15 +186,18 @@
 												</p>
 											</div>
 											<div class="tl-body">
-												<p>${status.descricaoParecer}</p>
 												<p>
-													<label></label>
+													<label>Parecer:</label> ${status.descricaoParecer}
+												</p>
+												<p>
+													<label>Usuário:</label> ${candidato.usuario.nome}
 												</p>
 											</div>
 										</div>
 									</li>
 								</c:forEach>
 							</c:forEach>
+
 						</ul>
 					</div>
 				</section>

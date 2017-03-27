@@ -38,7 +38,7 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 		entity.setDataAbertura(bean.getDataAbertura());
 		entity.setDataAprovacao(bean.getDataAprovacao());
 		entity.setDataFechamento(bean.getDataFechamento());
-		entity.setDataInicio(bean.getDataFechamento());
+		entity.setDataInicio(bean.getDataInicio());
 		entity.setDescricaoFormacaoAcademica(bean.getDescricaoFormacaoAcademica());
 		entity.setDescricaoPerfilComportamental(bean.getDescricaoPerfilComportamental());
 		entity.setDescricaoPerfilTecnico(bean.getDescricaoPerfilTecnico());
@@ -88,7 +88,7 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 		bean.setIdTipoVaga(entity.getTipoVaga());
 		bean.setValorPretensao(entity.getValorPretensao());
 		bean.setUsuarioBean(usuarioConverter.convertEntityToBean(entity.getUsuarioEntity()));
-		//bean.setStatusVagaBean(statusVagaConverter.convertEntityToBean(entity.getStatusVagaEntity()));
+		bean.setStatusVagaBean(statusVagaConverter.convertEntityToBean(entity.getStatusVagaEntity()));
 
 		return bean;
 	}

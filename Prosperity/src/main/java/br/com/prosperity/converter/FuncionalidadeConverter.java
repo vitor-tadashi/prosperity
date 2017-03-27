@@ -8,8 +8,6 @@ import br.com.prosperity.entity.FuncionalidadeEntity;
 @Component
 public class FuncionalidadeConverter implements Converter<FuncionalidadeEntity, FuncionalidadeBean> {
 
-	private PerfilConverter perfilConverter;
-
 	@Override
 	public FuncionalidadeEntity convertBeanToEntity(FuncionalidadeBean bean) {
 		FuncionalidadeEntity entity = new FuncionalidadeEntity();
@@ -18,7 +16,7 @@ public class FuncionalidadeConverter implements Converter<FuncionalidadeEntity, 
 		} else {
 		entity.setId(bean.getId());
 		entity.setNome(bean.getNome());
-		// entity.setPerfil(perfilConverter.convertBeanToEntity(bean.getPerfil()));
+		entity.setUrl(bean.getUrl());
 		}
 		return entity;
 	}
@@ -31,7 +29,7 @@ public class FuncionalidadeConverter implements Converter<FuncionalidadeEntity, 
 		} else {
 		bean.setId(entity.getId());
 		bean.setNome(entity.getNome());
-		// bean.setPerfil(perfilConverter.convertEntityToBean(entity.getPerfil()));
+		bean.setUrl(entity.getUrl());
 		}
 		return bean;
 	}

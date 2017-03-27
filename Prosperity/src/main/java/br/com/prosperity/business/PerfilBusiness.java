@@ -27,15 +27,6 @@ public class PerfilBusiness {
 	@Autowired
 	private FuncionalidadeDAO funcionalidadeDAO;
 
-	private PerfilBean obter(Integer idPerfil) {
-
-		PerfilEntity perfilEntity = perfilDAO.obterPorId(idPerfil);
-
-		PerfilBean perfilBean = perfilConverter.convertEntityToBean(perfilEntity);
-
-		return perfilBean;
-	}
-
 	@Transactional
 	public void inserir(PerfilBean perfilBean) throws BusinessException {
 		if (perfilBean.getId() == null) {
@@ -51,12 +42,12 @@ public class PerfilBusiness {
 				}
 				perfilEntity.setFuncionalidades(
 						funcionalidadeDAO.findByNamedQuery("obterPerfilFuncionalidade", idFuncionalidades));
-				perfilDAO.adicionar(perfilEntity);
+				perfilDAO.insert(perfilEntity);
 			} else {
 				throw new BusinessException("Este perfil já existe");
 			}
 		} else {
-			PerfilEntity perfilEntity = perfilDAO.obterPorId(perfilBean.getId());
+			PerfilEntity perfilEntity = perfilDAO.findById(perfilBean.getId());
 
 			List<Integer> idFuncionalidades = new ArrayList<>();
 			for (FuncionalidadeBean f : perfilBean.getListaFuncionalidades()) {
@@ -67,21 +58,22 @@ public class PerfilBusiness {
 			perfilEntity.setFuncionalidades(
 					funcionalidadeDAO.findByNamedQuery("obterPerfilFuncionalidade", idFuncionalidades));
 
-			perfilDAO.alterar(perfilEntity);
+			perfilDAO.update(perfilEntity);
 		}
 	}
 
-	@Transactional
-	public List<PerfilBean> obterTodos() {
+	@Transactional(readOnly = true)
+	public List<PerfilBean> listar() {
 		List<PerfilEntity> perfisEntity = perfilDAO.findByNamedQuery("obterPerfis");
 		List<PerfilBean> perfisBean = perfilConverter.convertEntityToBean(perfisEntity);
 
 		return perfisBean;
 	}
 
-	@Transactional
-	public List<FuncionalidadeBean> obterFuncionalidades(Integer id) {
-		PerfilEntity entity = perfilDAO.obterPorId(id);
+	@Transactional(readOnly = true)
+	public List<FuncionalidadeBean> obterPerfilFuncionalidades(Integer id) {
+		PerfilEntity entity = perfilDAO.findById(id);
+
 		PerfilBean bean = perfilConverter.convertEntityToBean(entity);
 		List<FuncionalidadeBean> listaFunc = bean.getListaFuncionalidades();
 
