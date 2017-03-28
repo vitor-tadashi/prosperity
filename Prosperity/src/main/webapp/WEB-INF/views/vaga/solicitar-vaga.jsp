@@ -31,11 +31,16 @@
 					<div class="panel-body">
 						<form class="form-border" id="formCadastro2" action="cadastrar"
 							method="POST">
+							
 							<div id="textDiv">
-					
-							<br><form:errors path="vagaBean.nomeSolicitante"/>
+							
+							<c:forEach var="erro" items="${listaErros}">
+								<p>${erro}</p>
+
+							</c:forEach>
 							
 							</div>
+							
 							<div class="panel-tab clearfix">
 								<ul class="tab-bar wizard-demo" id="wizardDemo">
 									<li class="active tab-verity"><a href="#first"
@@ -56,7 +61,7 @@
 											<div>
 												<div class="form-group col-md-6">
 													<label for="txtSolicitante">Solicitante</label> <input
-														type="text" name="nomeSolicitante"
+														type="text" name="nomeSolicitante" value="${vaga.nomeSolicitante}"
 														class="form-control input-sm" id="txtSolicitante"
 														placeholder="Solicitante" data-required="true">
 												</div>
@@ -198,7 +203,7 @@
 										<section id="dadosInterno" class="panel panel-default">
 											<div class="panel-body">
 												<div class="form-group col-md-4" style="padding-left: 0px;">
-													<label for="exampleInputEmail1">Nome do projeto</label> <select id ="cmbProjetoInterno"  name="projetoBean.id"
+													<label for="exampleInputEmail1">Nome do projeto</label> <select id ="cmbProjetoInterno"  name="projeto.id"
 														class="form-control chzn-select">
 														
 														<option value="0">Selecione o projeto</option>
@@ -240,7 +245,7 @@
 											<div class="panel-body">
 												<div class="col-md-6">
 													<div class="form-group" style="padding-left: 0px;">
-														<label for="exampleInputEmail1">Nome do projeto</label> <select id ="cmbProjetoCliente"  name="projetoBean.id"
+														<label for="exampleInputEmail1">Nome do projeto</label> <select id ="cmbProjetoCliente"  name="projeto.id"
 															class="form-control chzn-select">
 															
 															<option value="0">Selecione o projeto</option>
@@ -258,6 +263,7 @@
 															type="text" class="form-control input-sm"
 															id="textCliente" placeholder="Cliente"
 															data-required="false" disabled="disabled"
+															value="${vaga.projeto.cliente.nome}"
 															onblur="cliente">
 													</div>
 													<!-- /form-group -->
@@ -371,7 +377,14 @@
 	<script src="/resources/js/custom/solicitacaoVaga.js"></script>
 	<script src="/resources/js/parsley.min.js"></script>
 	<script src="/resources/js/custom/custom.js"></script>
-		
+	
+	<script>
+	$(document).ready(function() {
+			if ($("input#contErro").val() > 0) {
+				$('#textDiv').addClass("alert alert-danger text-center");
+			}
+		})
+	</script>	
 </body>
 
 

@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class AvaliadorBean {
 	private Integer idAvaliador;
-	private Boolean status;
 	private UsuarioBean usuario;
 	private VagaBean vaga;
 
@@ -15,14 +14,6 @@ public class AvaliadorBean {
 
 	public void setIdAvaliador(Integer idAvaliador) {
 		this.idAvaliador = idAvaliador;
-	}
-
-	public Boolean getStatus() {
-		return status;
-	}
-
-	public void setStatus(Boolean status) {
-		this.status = status;
 	}
 
 	public UsuarioBean getUsuario() {
