@@ -12,10 +12,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.prosperity.bean.SituacaoVagaBean;
+import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.converter.VagaConverter;
 import br.com.prosperity.dao.StatusDAO;
 import br.com.prosperity.dao.StatusVagaDAO;
+import br.com.prosperity.dao.UsuarioDAO;
 import br.com.prosperity.dao.VagaDAO;
 import br.com.prosperity.entity.CargoEntity;
 import br.com.prosperity.entity.SenioridadeEntity;
@@ -43,6 +45,12 @@ public class VagaBusiness {
 	@Autowired
 	private StatusVagaDAO statusVagaDAO;
 
+	@Autowired
+	private UsuarioBean usuarioBean;
+
+	@Autowired
+	private UsuarioDAO usuarioDAO;
+	
 	@Autowired
 	private HttpSession session;
 
@@ -113,19 +121,15 @@ public class VagaBusiness {
 	}
 
 	@Transactional
-	private void alterarStatus(SituacaoVagaBean situacaoVaga) {
+	public void alterarStatus(SituacaoVagaBean situacaoVaga) {
 		StatusVagaEntity statusVagaEntity = new StatusVagaEntity();
 
+		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
 		statusVagaEntity.setStatus(statusDAO.findById(situacaoVaga.getStatus().getValue()));
-		statusVagaEntity.setId(situacaoVaga.getIdVaga());
+		statusVagaEntity.setVaga(situacaoVaga.getIdVaga());
 		statusVagaEntity.setDataAlteracao(new Date());
+		statusVagaEntity.setUsuario(usuarioDAO.findById(usuarioBean.getId()));
 
 		statusVagaDAO.insert(statusVagaEntity);
 	}
 }
-
-// criar método consultarVagasAprovacao
-// chamar o dao e acionar o método findByNamedQuery
-// pegar todas as vagas que estão disponíves por perfil para aprovação (ou por
-// enquanto pegue todas as vagas disponíveis)
-// retornar uma lista de VagaBean

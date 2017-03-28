@@ -1,5 +1,6 @@
 package br.com.prosperity.entity;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,31 +13,31 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name="tbEndereco")
-
+@Table(name = "tbEndereco")
+@Cacheable
 public class EnderecoEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idEndereco", unique = true)
+	@Column(name = "idEndereco", unique = true)
 	private Integer id;
-	
-	@Column(name="cep")
+
+	@Column(name = "cep")
 	private String cep;
-	
-	@Column(name="vlNumero")
+
+	@Column(name = "vlNumero")
 	private Integer numero;
-	
-	@Column(name="dsComplemento")
+
+	@Column(name = "dsComplemento")
 	private String complemento;
-	
-	@Column(name="nmEstado")
+
+	@Column(name = "nmEstado")
 	private String estado;
-	
-	@Column(name="nmLogradouro")
+
+	@Column(name = "nmLogradouro")
 	private String logradouro;
-	
-	@Column(name="nmCidade")
+
+	@Column(name = "nmCidade")
 	private String cidade;
 
 	public Integer getId() {
@@ -93,5 +94,5 @@ public class EnderecoEntity {
 
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
-	}	
+	}
 }
