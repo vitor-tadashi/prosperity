@@ -134,9 +134,3 @@ public class VagaBusiness {
 		statusVagaDAO.insert(statusVagaEntity);
 	}
 }
-
-// criar método consultarVagasAprovacao
-// chamar o dao e acionar o método findByNamedQuery
-// pegar todas as vagas que estão disponíves por perfil para aprovação (ou por
-// enquanto pegue todas as vagas disponíveis)
-// retornar uma lista de VagaBean

@@ -18,7 +18,6 @@ import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.StatusCandidatoBean;
 import br.com.prosperity.bean.UsuarioBean;
-import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.converter.CandidatoConverter;
 import br.com.prosperity.dao.AvaliadorCandidatoDAO;
 import br.com.prosperity.dao.CandidatoDAO;
@@ -30,7 +29,6 @@ import br.com.prosperity.entity.AvaliadorCandidatoEntity;
 import br.com.prosperity.entity.CandidatoEntity;
 import br.com.prosperity.entity.StatusCandidatoEntity;
 import br.com.prosperity.entity.StatusFuturoEntity;
-import br.com.prosperity.entity.VagaEntity;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.util.FormatUtil;
 
@@ -84,13 +82,14 @@ public class CandidatoBusiness extends FormatUtil {
 
 		return candidatoBean;
 	}
-	
+
 	@Transactional
-	public List<CandidatoBean> obterFiltro(CandidatoBean candidatao){
-		List<CandidatoEntity> candidatos = candidatoDAO.findByNamedQuery("pesquisarNome", "%"+candidatao.getNome()+"%");
+	public List<CandidatoBean> obterFiltro(CandidatoBean candidatao) {
+		List<CandidatoEntity> candidatos = candidatoDAO.findByNamedQuery("pesquisarNome",
+				"%" + candidatao.getNome() + "%");
 		List<CandidatoBean> candidatoBean = candidatoConverter.convertEntityToBean(candidatos);
-			return candidatoBean;
-		
+		return candidatoBean;
+
 	}
 
 	private static <K, V> Map<K, List<V>> groupByOrdered(List<V> list, Function<V, K> keyFunction) {
@@ -130,23 +129,22 @@ public class CandidatoBusiness extends FormatUtil {
 
 		if (statusFuturoEntity != null && statusFuturoEntity.size() > 0) {
 			situacaoCandidato.setParecer(null);
-			
+
 			if (statusFuturoEntity.size() == 1) {
 				situacaoCandidato.setStatus(StatusCandidatoEnum.valueOf(statusFuturoEntity.get(0).getIdStatusFuturo()));
 			} else {
 				avaliadorCandidatoEntity = avaliadorCandidatoDAO.findByNamedQuery("obterAvaliadoresCandidato");
-				if (avaliadorCandidatoEntity.size() == 1) {
-					situacaoCandidato
-							.setStatus(StatusCandidatoEnum.valueOf(statusFuturoEntity.get(1).getIdStatusFuturo()));
-				} else {
-					situacaoCandidato
-							.setStatus(StatusCandidatoEnum.valueOf(statusFuturoEntity.get(0).getIdStatusFuturo()));
-				}
+				
+				StatusCandidatoEnum status = avaliadorCandidatoEntity.size() == 1
+						? StatusCandidatoEnum.PROPOSTACANDIDATO : StatusCandidatoEnum.CANDIDATOEMANALISE;
+
+				situacaoCandidato.setStatus(status);
+				avaliadorCandidatoEntity.get(0).setIdStatus(situacaoCandidato.getStatus().getValue());
+				avaliadorCandidatoDAO.update(avaliadorCandidatoEntity.get(0));
 			}
+
 			statusCandidatoDAO.insert(alterarStatus1(situacaoCandidato));
 		}
-		avaliadorCandidatoEntity.get(0).setIdStatus(situacaoCandidato.getStatus().getValue());
-		avaliadorCandidatoDAO.update(avaliadorCandidatoEntity.get(0));
 	}
 
 	private StatusCandidatoEntity alterarStatus1(SituacaoCandidatoBean situacaoCandidato) {
@@ -158,8 +156,7 @@ public class CandidatoBusiness extends FormatUtil {
 		statusCandidatoEntity.setDsParecer(situacaoCandidato.getParecer());
 		statusCandidatoEntity.setDtAlteracao(new Date());
 		statusCandidatoEntity.setUsuario(usuarioDAO.findById(usuarioBean.getId()));
+
 		return statusCandidatoEntity;
-
 	}
-
 }

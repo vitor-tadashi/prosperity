@@ -1,7 +1,6 @@
 package br.com.prosperity.enumarator;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public enum StatusCandidatoEnum {
 	CANDIDATURA(3),

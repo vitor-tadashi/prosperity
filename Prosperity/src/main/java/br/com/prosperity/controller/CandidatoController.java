@@ -1,6 +1,5 @@
-package br.com.prosperity.controller;
+	package br.com.prosperity.controller;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,24 +42,57 @@ import br.com.prosperity.exception.BusinessException;
 @Controller
 @RequestMapping(value = "candidato")
 public class CandidatoController {
+
+	@Autowired
+	private CandidatoBean candidatoBean;
+	
 	@Autowired
 	private CandidatoBusiness candidatoBusiness;
+
+	@Autowired
+	private EnderecoBean enderecoBean;
+
+	@Autowired
+	private FormacaoBean formacaoBean;
+
+	@Autowired
+	private ContatoBean contatoBean;
+
+	@Autowired
+	private AvaliacaoBean avaliacaoBean;
+
 	@Autowired
 	private List<CandidatoCompetenciaBean> competencias;
+
 	@Autowired
 	private TipoCursoBusiness tipoCursoBusiness;
+
 	@Autowired
 	private SituacaoAtualBusiness situacaoAtualBusiness;
+
 	@Autowired
 	private FuncionarioBusiness funcionarioBusiness;
+
 	@Autowired
 	private CargoBusiness cargoBusiness;
+	
+	@Autowired
+	private TipoCursoBean tipoCursoBean;
+	
 	@Autowired
 	private SenioridadeBusiness senioridadeBusiness;
+
+	@Autowired
+	private SenioridadeBean senioridadeBean;
+	
+	@Autowired
+	private SituacaoAtualBean situacaoAtualBean;
+	
 	@Autowired
 	private VagaBusiness vagaBusiness;
 	@Autowired
 	private CanalInformacaoBusiness canalInformacaoBusiness;
+	
 	@Autowired
 	private AvaliadorBusiness avaliadorBusiness;
 	
@@ -113,6 +145,7 @@ public class CandidatoController {
 		//
 		// candidatoBusiness.alterarStatus(situacaoCandidatoBean);
 
+
 		return "candidato/cadastrar-candidato";
 	}
 
@@ -120,9 +153,6 @@ public class CandidatoController {
 	public String consultarCandidatoRH(Model model) {
 		List<CandidatoBean> candidatos = candidatoBusiness.listar();
 		model.addAttribute("candidatos", candidatos);
-
-		List<VagaBean> listaVaga = vagaBusiness.listar();
-		model.addAttribute("listaVaga", listaVaga);
 
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
 		model.addAttribute("listaCargo", listaCargo);
@@ -132,14 +162,15 @@ public class CandidatoController {
 
 		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.obterTodos();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
-
-		// avaliadorBusiness.listar();
+		
+		//avaliadorBusiness.listar();
 
 		return "candidato/consulta-rh";
-	}
-
+		}
+	
 	@RequestMapping(value = "filtrar", method = RequestMethod.GET)
-	public String filtrarCandidatoRH(Model model, CandidatoBean candidato) {
+	public String filtrarCandidatoRH(Model model, CandidatoBean candidato) 
+	{
 		List<CandidatoBean> candidatos = candidatoBusiness.obterFiltro(candidato);
 		model.addAttribute("candidatos", candidatos);
 
@@ -176,9 +207,8 @@ public class CandidatoController {
 		//avaliadorBusiness.listar();
 
 
-		return "candidato/consulta-rh";
-	}
-
+		return "candidato/consulta-rh";}
+	
 	@RequestMapping(value = "consultar-gestor", method = RequestMethod.GET)
 	public String consultarCandidatoGestor() {
 		return "candidato/consulta-gestor";
@@ -199,16 +229,17 @@ public class CandidatoController {
 		List<CandidatoBean> candidatos = candidatoBusiness.listar();
 
 		model.addAttribute("candidatos", candidatos);
-
+		
 		return "candidato/aprovar-candidato";
 	}
-
-	@RequestMapping(value = { "gerenciar" }, method = RequestMethod.GET)
+	
+	@RequestMapping(value= {"gerenciar"}, method = RequestMethod.GET)
 	public @ResponseBody CandidatoBean gerenciarAjax(Model model, @ModelAttribute("id") Integer id) {
 		CandidatoBean candidato = new CandidatoBean();
 		candidato = candidatoBusiness.obterCandidatoPorId(id);
 		return candidato;
 	}
+
 
 	private List<String> buildErrorMessage(List<FieldError> error) {
 		List<String> novosErros = new ArrayList<>();

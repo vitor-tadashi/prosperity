@@ -19,10 +19,10 @@ import javax.persistence.TemporalType;
 @Table(name = "tbStatusCandidato")
 
 public class StatusCandidatoEntity {
-	
+
 	@Column(name = "idCandidato")
 	private Integer idCandidato;
-	
+
 	@Column(name = "dtAlteracao")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dtAlteracao;
@@ -90,7 +90,5 @@ public class StatusCandidatoEntity {
 	public void setIdCandidato(Integer idCandidato) {
 		this.idCandidato = idCandidato;
 	}
-	
-	
 
 }

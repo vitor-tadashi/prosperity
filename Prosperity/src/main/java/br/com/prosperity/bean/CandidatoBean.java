@@ -1,6 +1,5 @@
 package br.com.prosperity.bean;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,31 +17,31 @@ import br.com.prosperity.util.FormatUtil;
 @Component
 public class CandidatoBean extends FormatUtil {
 	private Integer id;
-	
-	@NotEmpty(message ="O campo CPF deve ser preenchido")
+
+	@NotEmpty(message = "O campo CPF deve ser preenchido")
 	private String cpf;
-	@NotEmpty(message ="O campo nome deve ser prenchido")
+	@NotEmpty(message = "O campo nome deve ser prenchido")
 	private String nome;
-	
-	@NotEmpty(message ="O campo RG  deve ser prenchido")
+
+	@NotEmpty(message = "O campo RG  deve ser prenchido")
 	private String rg;
 
-	@NotNull(message="O campo data de nascimento deve ser preenchido")
-	@DateTimeFormat(pattern="dd/MM/YYYY")
+	@NotNull(message = "O campo data de nascimento deve ser preenchido")
+	@DateTimeFormat(pattern = "dd/MM/YYYY")
 	private Date dataNascimento;
 	private Double valorPretensao;
 	private Date dataAbertura;
 	private Date dataFechamento;
 	private String email;
 	private Date dataAlteracao;
-	private File curriculo;
-	
+	private String curriculo;
+
 	@Valid
 	private ContatoBean contato;
-	
+
 	@Valid
 	private EnderecoBean endereco;
-	
+
 	private FormacaoBean formacao;
 	private UsuarioBean usuario;
 	private List<StatusCandidatoBean> status = new ArrayList<>();
@@ -148,11 +147,11 @@ public class CandidatoBean extends FormatUtil {
 		this.dataAlteracao = dataAlteracao;
 	}
 
-	public File getCurriculo() {
+	public String getCurriculo() {
 		return curriculo;
 	}
 
-	public void setCurriculo(File curriculo) {
+	public void setCurriculo(String curriculo) {
 		this.curriculo = curriculo;
 	}
 

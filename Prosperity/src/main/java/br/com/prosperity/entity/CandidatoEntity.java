@@ -67,12 +67,14 @@ public class CandidatoEntity {
 	private Date dataAlteracao;
 
 	@Column(name = "cmCurriculo")
-	private File curriculo;
+	private String curriculo;
 
 	@Column(name = "dtUltimoContato")
+	@Temporal(TemporalType.DATE)
 	private Date dataultimoContato;
 
 	@Column(name = "dtEntrevista")
+	@Temporal(TemporalType.DATE)
 	private Date dataEntrevista;
 
 	@Column(name = "dsProposta")
@@ -86,7 +88,7 @@ public class CandidatoEntity {
 
 	/* Mapeamento de Relacionamentos */
 
-//	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	// @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	@JoinColumn(name = "idContato")
@@ -111,8 +113,8 @@ public class CandidatoEntity {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "idCandidato")
 	private List<CandidatoCompetenciaEntity> competencias;
-
-	// TODO
+	
+//TODO 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "tbVagaCandidato", joinColumns = { @JoinColumn(name = "idCandidato") }, inverseJoinColumns = {
 			@JoinColumn(name = "idVaga") })
@@ -206,11 +208,12 @@ public class CandidatoEntity {
 		this.dataAlteracao = dataAlteracao;
 	}
 
-	public File getCurriculo() {
+
+	public String getCurriculo() {
 		return curriculo;
 	}
 
-	public void setCurriculo(File curriculo) {
+	public void setCurriculo(String curriculo) {
 		this.curriculo = curriculo;
 	}
 
@@ -286,7 +289,7 @@ public class CandidatoEntity {
 		this.competencias = competencias;
 	}
 
-	public double getValorMin() {
+	public  double getValorMin() {
 		return valorMin;
 	}
 
@@ -294,14 +297,14 @@ public class CandidatoEntity {
 		this.valorMin = valorMin;
 	}
 
-	public double getValorMax() {
+	public  double getValorMax() {
 		return valorMax;
 	}
 
 	public void setValorMax(double valorMax) {
 		this.valorMax = valorMax;
 	}
-
+	
 	public Date getDataultimoContato() {
 		return dataultimoContato;
 	}
