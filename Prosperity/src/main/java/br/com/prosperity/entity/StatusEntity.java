@@ -1,6 +1,5 @@
 package br.com.prosperity.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +27,7 @@ public class StatusEntity {
 	private String tipoCss;
 
 	@ManyToOne
-	@JoinColumn(name="idTpStatus")
+	@JoinColumn(name = "idTpStatus")
 	private TipoStatusEntity tipoStatus;
 
 	public Integer getId() {
@@ -62,7 +61,5 @@ public class StatusEntity {
 	public void setTipoStatus(TipoStatusEntity tipoStatus) {
 		this.tipoStatus = tipoStatus;
 	}
-	
-	
 
 }
