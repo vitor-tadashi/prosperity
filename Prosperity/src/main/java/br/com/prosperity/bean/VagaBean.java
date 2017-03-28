@@ -52,10 +52,10 @@ public class VagaBean {
 	private UsuarioBean usuarioBean;
 	private List<StatusVagaBean> statusVagaBean = new ArrayList<>();
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date dataAberturaDe;
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date dataAberturaPara;
 
 	public Date getDataAberturaDe() {

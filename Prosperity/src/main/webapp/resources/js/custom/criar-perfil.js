@@ -6,6 +6,12 @@
     	});
     }
     
+    $(document).ready(function () {
+        setTimeout(function () {
+            $('#msg-sucesso').fadeOut(1500);
+        }, 5000);
+    });
+    
     $("input#edita-perfil").click(function(){
         $("#nome-perfil").addClass("hide");
         $("#select-perfil").removeClass("hide");
