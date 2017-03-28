@@ -48,18 +48,23 @@ public class UsuarioController {
 	}
 
 	@RequestMapping(value = "/criar-perfil", method = RequestMethod.GET)
-	public String criaPerfil(Model model) {
+	public String criaPerfil(Model model, String erros) {
 		List<FuncionalidadeBean> funcionalidades = funcionalidadeBusiness.listar();
 		List<PerfilBean> perfis = perfilBusiness.listar();
 		model.addAttribute("funcionalidades", funcionalidades);
 		model.addAttribute("perfis", perfis);
-
+		model.addAttribute("erros",erros);
+		
 		return "usuario/criar-perfil";
 	}
 
 	@RequestMapping(value = "/salvar-perfil", method = RequestMethod.POST)
-	public String inserirPerfil(@ModelAttribute("perfilBean") PerfilBean perfilBean) throws BusinessException {
-		perfilBusiness.inserir(perfilBean);
+	public String inserirPerfil(@ModelAttribute("perfilBean") PerfilBean perfilBean, Model model) throws BusinessException {
+		try{
+			perfilBusiness.inserir(perfilBean);
+		}catch(BusinessException e){
+			model.addAttribute("erros", e.getMessage());
+		}
 
 		return "redirect:criar-perfil";
 	}
