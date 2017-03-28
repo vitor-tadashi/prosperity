@@ -13,15 +13,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbAvaliador")
-@NamedQuery(name = "obterAvaliadores", query = "SELECT u FROM AvaliadorEntity u WHERE u.status = false")
+@NamedQuery(name = "obterAvaliadores", query = "SELECT u FROM AvaliadorEntity u ")
 public class AvaliadorEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idAvaliador", unique = true, nullable = false)
 	private Integer id;
-
-	@Column(name = "status")
-	private Boolean status;
 
 	@OneToOne
 	@JoinColumn(name = "idUsuario")
@@ -37,14 +34,6 @@ public class AvaliadorEntity {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public Boolean getStatus() {
-		return status;
-	}
-
-	public void setStatus(Boolean status) {
-		this.status = status;
 	}
 
 	public UsuarioEntity getUsuario() {

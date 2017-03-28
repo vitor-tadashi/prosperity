@@ -12,6 +12,7 @@ import br.com.prosperity.bean.PerfilBean;
 import br.com.prosperity.converter.PerfilConverter;
 import br.com.prosperity.dao.FuncionalidadeDAO;
 import br.com.prosperity.dao.PerfilDAO;
+import br.com.prosperity.entity.FuncionalidadeEntity;
 import br.com.prosperity.entity.PerfilEntity;
 import br.com.prosperity.exception.BusinessException;
 
@@ -29,39 +30,40 @@ public class PerfilBusiness {
 
 	@Transactional
 	public void inserir(PerfilBean perfilBean) throws BusinessException {
+		if (perfilBean.getListaFuncionalidades().isEmpty()) {
+			throw new BusinessException("Selecione uma funcionalidade para o perfil");
+		}
 		if (perfilBean.getId() == null) {
+			if (perfilBean.getNome().isEmpty() || perfilBean.getNome() == null) {
+				throw new BusinessException("Preencha um nome para o perfil");
+			}
 			List<PerfilEntity> listaPerfil = perfilDAO.findByNamedQuery("obterNomePerfil", perfilBean.getNome());
 			if (listaPerfil.isEmpty()) {
 				PerfilEntity perfilEntity = perfilConverter.convertBeanToEntity(perfilBean);
+				perfilEntity.setFuncionalidades(obterPerfilFuncionalidadeEntity(perfilBean.getListaFuncionalidades()));
 
-				List<Integer> idFuncionalidades = new ArrayList<>();
-				for (FuncionalidadeBean f : perfilBean.getListaFuncionalidades()) {
-					if (f.getId() != null) {
-						idFuncionalidades.add(f.getId());
-					}
-				}
-				perfilEntity.setFuncionalidades(
-						funcionalidadeDAO.findByNamedQuery("obterPerfilFuncionalidade", idFuncionalidades));
 				perfilDAO.insert(perfilEntity);
 			} else {
-				throw new BusinessException("Este perfil já existe");
+				throw new BusinessException("Um perfil com este nome ja esta cadastrado");
 			}
 		} else {
 			PerfilEntity perfilEntity = perfilDAO.findById(perfilBean.getId());
-
-			List<Integer> idFuncionalidades = new ArrayList<>();
-			for (FuncionalidadeBean f : perfilBean.getListaFuncionalidades()) {
-				if (f.getId() != null) {
-					idFuncionalidades.add(f.getId());
-				}
-			}
-			perfilEntity.setFuncionalidades(
-					funcionalidadeDAO.findByNamedQuery("obterPerfilFuncionalidade", idFuncionalidades));
+			perfilEntity.setFuncionalidades(obterPerfilFuncionalidadeEntity(perfilBean.getListaFuncionalidades()));
 
 			perfilDAO.update(perfilEntity);
 		}
 	}
-
+	@Transactional(readOnly = true)
+	private List<FuncionalidadeEntity> obterPerfilFuncionalidadeEntity(List<FuncionalidadeBean> lista){
+		List<Integer> idFuncionalidades = new ArrayList<>();
+		for (FuncionalidadeBean f : lista) {
+			if (f.getId() != null) {
+				idFuncionalidades.add(f.getId());
+			}
+		}
+		return funcionalidadeDAO.findByNamedQuery("obterPerfilFuncionalidade", idFuncionalidades);
+	}
+	
 	@Transactional(readOnly = true)
 	public List<PerfilBean> listar() {
 		List<PerfilEntity> perfisEntity = perfilDAO.findByNamedQuery("obterPerfis");

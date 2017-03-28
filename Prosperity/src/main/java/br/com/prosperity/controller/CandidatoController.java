@@ -1,5 +1,6 @@
 	package br.com.prosperity.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -93,9 +95,20 @@ public class CandidatoController {
 	
 	@Autowired
 	private AvaliadorBusiness avaliadorBusiness;
-
+	
+	/**
+	 * @author thamires.miranda
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "cadastrar", method = RequestMethod.GET)
 	public String cadastrarCandidato(Model model) {
+		obterDominiosCandidato(model);
+
+		return "candidato/cadastrar-candidato";
+	}
+
+	private void obterDominiosCandidato(Model model) {
 		List<TipoCursoBean> tiposCurso = tipoCursoBusiness.obterTodos();
 		model.addAttribute("tiposCurso", tiposCurso);
 
@@ -106,19 +119,32 @@ public class CandidatoController {
 		model.addAttribute("listaVaga", listaVaga);
 		List<CanalInformacaoBean> listaCanal = canalInformacaoBusiness.obterTodos();
 		model.addAttribute("listaCanal", listaCanal);
-
-		return "candidato/cadastrar-candidato";
 	}
 
 	@RequestMapping(value = "salvar", method = RequestMethod.POST)
-	public String salvarCandidato(@ModelAttribute("candidatoBean") @Valid CandidatoBean candidatoBean, BindingResult result, Model model)
-			throws BusinessException {
-		
-		if(result.hasErrors()) {
-			model.addAttribute("erro",result.getErrorCount());
-			  return "candidato/cadastrar-candidato";
-			}
-		candidatoBusiness.inserir(candidatoBean);
+	public String salvarCandidato(@ModelAttribute("candidatoBean") @Valid CandidatoBean candidatoBean,
+			BindingResult result, Model model) throws BusinessException {
+
+		if (result.hasErrors()) {
+			model.addAttribute("erro", result.getErrorCount());
+			model.addAttribute("listaErros", buildErrorMessage(result.getFieldErrors()));
+			model.addAttribute("candidato", candidatoBean);
+
+			obterDominiosCandidato(model);
+
+			return "candidato/cadastrar-candidato";
+
+		} else {
+			candidatoBusiness.inserir(candidatoBean);
+		}
+
+		// SituacaoCandidatoBean situacaoCandidatoBean = new
+		// SituacaoCandidatoBean();
+		// situacaoCandidatoBean.setIdCandidato(candidatoBean.getId());
+		// situacaoCandidatoBean.setStatus(StatusCandidatoEnum.CANDIDATURA);
+		//
+		// candidatoBusiness.alterarStatus(situacaoCandidatoBean);
+
 
 		return "candidato/cadastrar-candidato";
 	}
@@ -140,12 +166,31 @@ public class CandidatoController {
 		//avaliadorBusiness.listar();
 
 		return "candidato/consulta-rh";
-	} 
+		}
 	
 	@RequestMapping(value = "filtrar", method = RequestMethod.GET)
-	public String filtrarCandidatoRH(Model model, CandidatoBean candidato) {
+	public String filtrarCandidatoRH(Model model, CandidatoBean candidato) 
+	{
 		List<CandidatoBean> candidatos = candidatoBusiness.obterFiltro(candidato);
 		model.addAttribute("candidatos", candidatos);
+
+		/*
+		 * List<VagaBean> listaVaga = vagaBusiness.listar();
+		 * model.addAttribute("listaVaga", listaVaga);
+		 * 
+		 * List<CargoBean> listaCargo = cargoBusiness.obterTodos();
+		 * model.addAttribute("listaCargo", listaCargo);
+		 * 
+		 * List<SenioridadeBean> listaSenioridade =
+		 * senioridadeBusiness.obterTodos();
+		 * model.addAttribute("listaSenioridade", listaSenioridade);
+		 * 
+		 * List<FuncionarioBean> listaFuncionarios =
+		 * funcionarioBusiness.obterTodos();
+		 * model.addAttribute("listaFuncionarios", listaFuncionarios);
+		 */
+
+		// avaliadorBusiness.listar();
 
 		List<VagaBean> listaVaga = vagaBusiness.listar();
 		model.addAttribute("listaVaga", listaVaga);
@@ -161,8 +206,8 @@ public class CandidatoController {
 		
 		//avaliadorBusiness.listar();
 
-		return "candidato/consulta-rh";
-	} 
+
+		return "candidato/consulta-rh";}
 	
 	@RequestMapping(value = "consultar-gestor", method = RequestMethod.GET)
 	public String consultarCandidatoGestor() {
@@ -194,4 +239,32 @@ public class CandidatoController {
 		candidato = candidatoBusiness.obterCandidatoPorId(id);
 		return candidato;
 	}
+
+
+	private List<String> buildErrorMessage(List<FieldError> error) {
+		List<String> novosErros = new ArrayList<>();
+
+		for (FieldError data : error) {
+
+			switch (data.getField()) {
+
+			case "dataNascimento":
+				novosErros.add(" A data de nascimento deve ser preenchida ");
+				break;
+			case "entrevista":
+				novosErros.add(" A data da entrevista deve ser preenchida ");
+				break;
+			case "formacao.dataConclusao":
+				novosErros.add(" A data da conclusão do curso deve ser preenchida ");
+				break;
+			default:
+				novosErros.add(data.getDefaultMessage());
+
+			}
+
+		}
+
+		return novosErros;
+	}
+
 }

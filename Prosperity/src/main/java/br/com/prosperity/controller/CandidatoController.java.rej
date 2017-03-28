@@ -1,0 +1,9 @@
+diff a/Prosperity/src/main/java/br/com/prosperity/controller/CandidatoController.java b/Prosperity/src/main/java/br/com/prosperity/controller/CandidatoController.java	(rejected hunks)
+@@ -24,6 +24,7 @@
+ import br.com.prosperity.bean.FuncionarioBean;
+ import br.com.prosperity.bean.SenioridadeBean;
+ import br.com.prosperity.bean.SituacaoAtualBean;
++import br.com.prosperity.bean.SituacaoCandidatoBean;
+ import br.com.prosperity.bean.TipoCursoBean;
+ import br.com.prosperity.bean.VagaBean;
+ import br.com.prosperity.business.AvaliadorBusiness;

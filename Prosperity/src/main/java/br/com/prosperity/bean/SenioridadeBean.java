@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SenioridadeBean {
 
-
+	@Min(value = 1, message = "Senioridade Inválido")
 	private Integer id;
 	
 	private String nome;
