@@ -1,5 +1,6 @@
 package br.com.prosperity.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -149,7 +151,6 @@ public class VagaController {
 		senioridades = preencherSenioridade.obterTodos();
 		cargos = preencherCargo.obterTodos();
 		projetos = preencherProjeto.obterTodos();
-
 		usuarios = preencherUsuario.listar();
 
 		model.addAttribute("senioridades", senioridades);
@@ -177,15 +178,28 @@ public class VagaController {
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
 	public String inserirVaga(@ModelAttribute("vagaBean") @Valid VagaBean vagaBean, BindingResult result, Model model) {
 
-		/*
-		 * if(result.hasErrors()) {
-		 * model.addAttribute("erro",result.getErrorCount()); return
-		 * "vaga/solicitar-vaga"; }
-		 */
+		if (result.hasErrors()) {
+			model.addAttribute("erro", result.getErrorCount());
+			model.addAttribute("listaErros", buildErrorMessage(result.getFieldErrors()));
+			solicitarVaga(model);
+			return "vaga/solicitar-vaga";
+		}
+
 		vagaBusiness.inserir(vagaBean);
 		System.out.println("\n\n\nCadastrado\n\n\n");
-		return "redirect:solicitar";
+		return "vaga/solicitar-vaga";
 
+	}
+
+	private List<String> buildErrorMessage(List<FieldError> error) {
+		List<String> novosErros = new ArrayList<>();
+
+		for (FieldError data : error) {
+
+				novosErros.add(data.getDefaultMessage());
+
+		}
+		return novosErros;
 	}
 	/*
 	 * @RequestMapping(value = "obter-vaga", method=RequestMethod.GET)
