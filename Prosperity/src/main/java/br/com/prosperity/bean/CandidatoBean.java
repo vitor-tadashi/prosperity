@@ -36,7 +36,6 @@ public class CandidatoBean extends FormatUtil {
 	private String email;
 	private Date dataAlteracao;
 	private File curriculo;
-
 	@Valid
 	private ContatoBean contato;
 
@@ -55,6 +54,18 @@ public class CandidatoBean extends FormatUtil {
 	private VagaCandidatoBean vagaCandidatoBean;
 	private Double valorMin;
 	private Double valorMax;
+	private StatusCandidatoBean ultimoStatus;
+	
+	public StatusCandidatoBean getUltimoStatus() {
+		if (status != null && status.size() > 0) {
+			Date dataUltimoStatus = status.stream().map(StatusCandidatoBean::getDataAlteracao).max(Date::compareTo).get();
+			ultimoStatus = status.stream().filter(st -> st.getDataAlteracao().equals(dataUltimoStatus)).findFirst().get();	
+		} else {
+			ultimoStatus = new StatusCandidatoBean("Não possui status");
+		}
+		
+		return ultimoStatus;
+	}
 
 	public Integer getId() {
 		return id;

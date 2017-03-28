@@ -30,6 +30,13 @@ public class StatusBusiness {
  	}
 	
 	@Transactional
+	public List<StatusBean> obterStatusVaga() {
+		List<StatusEntity> statusEntity = statusDAO.findByNamedQuery("alterarStatus");
+		List<StatusBean> statusBean = statusConverter.convertEntityToBean(statusEntity);
+		return statusBean;
+	}
+	
+	@Transactional
 	public List<StatusBean> getStatus() {
 		List<StatusBean> listaStatus = statusConverter.convertEntityToBean(statusDAO.findAll());
 		return listaStatus;

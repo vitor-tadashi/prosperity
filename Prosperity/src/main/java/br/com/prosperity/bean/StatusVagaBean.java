@@ -7,10 +7,20 @@ import org.springframework.stereotype.Component;
 @Component
 public class StatusVagaBean {
 
+	public StatusVagaBean(String mensagem) {
+		status = new StatusBean();
+		status.setNome(mensagem);
+	}
+	
+	public StatusVagaBean() {
+		
+	}
+	
 	private Integer id;
-	private StatusBean statusBean;
+	private StatusBean status;
 	private Date dataAlteracao;
-	private VagaBean vagaBean;
+	private Integer vagaBean;
+	private UsuarioBean usuarioBean;
 
 	public Integer getId() {
 		return id;
@@ -28,20 +38,27 @@ public class StatusVagaBean {
 		this.dataAlteracao = dataAlteracao;
 	}
 
-	public StatusBean getStatusBean() {
-		return statusBean;
+	public StatusBean getStatus() {
+		return status;
 	}
 
-	public void setStatusBean(StatusBean statusBean) {
-		this.statusBean = statusBean;
+	public void setStatus(StatusBean statusBean) {
+		this.status = statusBean;
 	}
-	
-	public VagaBean getVagaBean() {
+
+	public Integer getVagaBean() {
 		return vagaBean;
 	}
 
-	public void setVagaBean(VagaBean vagaBean) {
+	public void setVagaBean(Integer vagaBean) {
 		this.vagaBean = vagaBean;
 	}
 
+	public UsuarioBean getUsuarioBean() {
+		return usuarioBean;
+	}
+
+	public void setUsuarioBean(UsuarioBean usuarioBean) {
+		this.usuarioBean = usuarioBean;
+	}
 }

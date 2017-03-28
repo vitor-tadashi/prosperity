@@ -143,18 +143,17 @@ public class CandidatoBusiness extends FormatUtil {
 				situacaoCandidato.setStatus(StatusCandidatoEnum.valueOf(statusFuturoEntity.get(0).getIdStatusFuturo()));
 			} else {
 				avaliadorCandidatoEntity = avaliadorCandidatoDAO.findByNamedQuery("obterAvaliadoresCandidato");
-				if (avaliadorCandidatoEntity.size() == 1) {
-					situacaoCandidato
-							.setStatus(StatusCandidatoEnum.valueOf(statusFuturoEntity.get(1).getIdStatusFuturo()));
-				} else {
-					situacaoCandidato
-							.setStatus(StatusCandidatoEnum.valueOf(statusFuturoEntity.get(0).getIdStatusFuturo()));
-				}
+				
+				StatusCandidatoEnum status = avaliadorCandidatoEntity.size() == 1
+						? StatusCandidatoEnum.PROPOSTACANDIDATO : StatusCandidatoEnum.CANDIDATOEMANALISE;
+
+				situacaoCandidato.setStatus(status);
+				avaliadorCandidatoEntity.get(0).setIdStatus(situacaoCandidato.getStatus().getValue());
+				avaliadorCandidatoDAO.update(avaliadorCandidatoEntity.get(0));
 			}
+
 			statusCandidatoDAO.insert(alterarStatus1(situacaoCandidato));
 		}
-		avaliadorCandidatoEntity.get(0).setIdStatus(situacaoCandidato.getStatus().getValue());
-		avaliadorCandidatoDAO.update(avaliadorCandidatoEntity.get(0));
 	}
 
 	private StatusCandidatoEntity alterarStatus1(SituacaoCandidatoBean situacaoCandidato) {
@@ -166,9 +165,10 @@ public class CandidatoBusiness extends FormatUtil {
 		statusCandidatoEntity.setDsParecer(situacaoCandidato.getParecer());
 		statusCandidatoEntity.setDtAlteracao(new Date());
 		statusCandidatoEntity.setUsuario(usuarioDAO.findById(usuarioBean.getId()));
-		return statusCandidatoEntity;
 
+		return statusCandidatoEntity;
 	}
+
 
 	public CandidatoBean obterPorCPF(String cpf) {
 		List<CandidatoEntity> candidatosEntity = null;
@@ -191,5 +191,6 @@ public class CandidatoBusiness extends FormatUtil {
 
 		return candidatoBean;
 	}
+	
 
 }
