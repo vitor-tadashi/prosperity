@@ -457,8 +457,8 @@
 								<div class="col-md-2">
 									<label for="cargo">Status</label> 
 									<select class="form-control" style="width: 130px;" id="status" name="statusVagaBean[0].id">
-										<c:forEach var="status" items="${listaStatusVaga}">
-												<option value="${status.id}">${status.statusBean.nome}</option>
+										<c:forEach var="status" items="${listaStatusDrop}">
+												<option value="${status.id}">${status.nome}</option>
 										</c:forEach>
 									</select>
 								</div>
@@ -503,7 +503,7 @@
 
 									</td>
 									<td id="linhaData">${vaga.dataAbertura}</td>
-									<td id="linhaStatus"><span id="tdStatus" class="label label-contratado">Ativo</span></td>
+									<td id="linhaStatus">${vaga.ultimoStatus.status.nome}</td>
 									<td>
 										<div class="btn-group">
 											<button class="btn btn-sm btn-info dropdown-toggle"
@@ -653,6 +653,8 @@
     				$("#substituidoId").hide();
        			} else {
        				$("#lblQuadro").text('Substituição')
+       				$("#substituido").show();
+    				$("#substituidoId").show();
     			}
     			
     			$('input#solicitante').val(lista.nomeSolicitante);

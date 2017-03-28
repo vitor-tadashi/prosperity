@@ -19,30 +19,30 @@ public class VagaBean {
 
 	private Integer id;
 	private String nomeVaga;
-	
+
 	@NotNull
-	@NotEmpty(message ="O campo Solicitante deve ser preenchido")
+	@NotEmpty(message = "O campo Solicitante deve ser preenchido")
 	private String nomeSolicitante;
-	
+
 	private Double valorPretensao;
-	
+
 	@Future
 	private Date dataInicio;
-	
+
 	private Character localTrabalho;
 	private Character idTipoVaga;
 	private String horarioEntrada;
 	private String horarioSaida;
 	private Character aumentaQuadro;
-	
+
 	@Valid
 	private ProjetoBean projeto;
-	
+
 	@Valid
 	private CargoBean cargoBean;
 	@Valid
 	private SenioridadeBean senioridadeBean;
-	
+
 	private String nomeSubstituido; //
 	private String descricaoFormacaoAcademica; //
 	private String descricaoPerfilComportamental; //
@@ -52,7 +52,22 @@ public class VagaBean {
 	private Date dataFechamento; //
 	private Integer numeroCandidatos; //
 	private UsuarioBean usuarioBean;
-	private List<StatusVagaBean> statusVagaBean = new ArrayList<>();
+	private List<StatusVagaBean> status;
+
+	private StatusVagaBean ultimoStatus;
+
+	public StatusVagaBean getUltimoStatus() {
+		if (status != null && status.size() > 0) {
+			Date dataUltimoStatus = status.stream().map(StatusVagaBean::getDataAlteracao).max(Date::compareTo)
+					.get();
+			ultimoStatus = status.stream().filter(st -> st.getDataAlteracao().equals(dataUltimoStatus)).findFirst()
+					.get();
+		} else { 	
+			ultimoStatus = new StatusVagaBean("Não possui status");
+		}
+
+		return ultimoStatus;
+	}
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataAberturaDe;
@@ -252,12 +267,12 @@ public class VagaBean {
 		this.usuarioBean = usuarioBean;
 	}
 
-	public List<StatusVagaBean> getStatusVagaBean() {
-		return statusVagaBean;
+	public List<StatusVagaBean> getStatus() {
+		return status;
 	}
 
-	public void setStatusVagaBean(List<StatusVagaBean> statusVagaBean) {
-		this.statusVagaBean = statusVagaBean;
+	public void setStatus(List<StatusVagaBean> status) {
+		this.status = status;
 	}
 
 	public void setLocalTrabalho(Character localTrabalho) {
@@ -271,5 +286,4 @@ public class VagaBean {
 	public void setAumentaQuadro(Character aumentaQuadro) {
 		this.aumentaQuadro = aumentaQuadro;
 	}
-
 }
