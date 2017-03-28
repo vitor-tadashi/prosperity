@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CargoBean {
 	
+	@Min(value = 1, message = "Cargo Inválido")
 	private Integer id;
 	
 	private String nome;
