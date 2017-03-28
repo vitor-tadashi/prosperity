@@ -1,6 +1,5 @@
 package br.com.prosperity.controller;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,21 +11,19 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import br.com.prosperity.bean.AvaliacaoBean;
 import br.com.prosperity.bean.CanalInformacaoBean;
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CandidatoCompetenciaBean;
 import br.com.prosperity.bean.CargoBean;
-import br.com.prosperity.bean.ContatoBean;
-import br.com.prosperity.bean.EnderecoBean;
-import br.com.prosperity.bean.FormacaoBean;
 import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
+import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.TipoCursoBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.AvaliadorBusiness;
@@ -38,6 +35,9 @@ import br.com.prosperity.business.SenioridadeBusiness;
 import br.com.prosperity.business.SituacaoAtualBusiness;
 import br.com.prosperity.business.TipoCursoBusiness;
 import br.com.prosperity.business.VagaBusiness;
+import br.com.prosperity.converter.CandidatoConverter;
+import br.com.prosperity.dao.CandidatoDAO;
+import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.exception.BusinessException;
 
 @Controller
@@ -63,7 +63,9 @@ public class CandidatoController {
 	private CanalInformacaoBusiness canalInformacaoBusiness;
 	@Autowired
 	private AvaliadorBusiness avaliadorBusiness;
-	
+	@Autowired
+	private SituacaoCandidatoBean situacaoCandidatoBean;
+
 	/**
 	 * @author thamires.miranda
 	 * @param model
@@ -106,12 +108,24 @@ public class CandidatoController {
 			candidatoBusiness.inserir(candidatoBean);
 		}
 
-		// SituacaoCandidatoBean situacaoCandidatoBean = new
-		// SituacaoCandidatoBean();
-		// situacaoCandidatoBean.setIdCandidato(candidatoBean.getId());
-		// situacaoCandidatoBean.setStatus(StatusCandidatoEnum.CANDIDATURA);
-		//
-		// candidatoBusiness.alterarStatus(situacaoCandidatoBean);
+		/*
+		 * candidatoBean =
+		 * candidatoBusiness.obterPorCPF(candidatoBean.getCpf());
+		 * 
+		 * situacaoCandidatoBean.setIdCandidato(candidatoBean.getId());
+		 * situacaoCandidatoBean.setStatus(StatusCandidatoEnum.CANDIDATURA);
+		 * 
+		 * candidatoBusiness.alterarStatus(situacaoCandidatoBean);
+		 */
+
+		return "candidato/cadastrar-candidato";
+	}
+
+	@RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
+	public String solicitarCandidato(Model model, @PathVariable Integer id) {
+		CandidatoBean candidato = candidatoBusiness.obterCandidatoPorId(id);
+		obterDominiosCandidato(model);
+		model.addAttribute("candidato", candidato);
 
 		return "candidato/cadastrar-candidato";
 	}
@@ -172,9 +186,8 @@ public class CandidatoController {
 
 		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.obterTodos();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
-		
-		//avaliadorBusiness.listar();
 
+		// avaliadorBusiness.listar();
 
 		return "candidato/consulta-rh";
 	}

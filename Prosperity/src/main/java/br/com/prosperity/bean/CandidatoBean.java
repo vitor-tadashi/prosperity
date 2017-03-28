@@ -18,17 +18,17 @@ import br.com.prosperity.util.FormatUtil;
 @Component
 public class CandidatoBean extends FormatUtil {
 	private Integer id;
-	
-	@NotEmpty(message ="O campo CPF deve ser preenchido")
+
+	@NotEmpty(message = "O campo CPF deve ser preenchido")
 	private String cpf;
-	@NotEmpty(message ="O campo nome deve ser prenchido")
+	@NotEmpty(message = "O campo nome deve ser prenchido")
 	private String nome;
-	
-	@NotEmpty(message ="O campo RG  deve ser prenchido")
+
+	@NotEmpty(message = "O campo RG  deve ser prenchido")
 	private String rg;
 
-	@NotNull(message="O campo data de nascimento deve ser preenchido")
-	@DateTimeFormat(pattern="dd/MM/YYYY")
+	@NotNull(message = "O campo data de nascimento deve ser preenchido")
+	@DateTimeFormat(pattern = "dd/MM/YYYY")
 	private Date dataNascimento;
 	private Double valorPretensao;
 	private Date dataAbertura;
@@ -36,13 +36,13 @@ public class CandidatoBean extends FormatUtil {
 	private String email;
 	private Date dataAlteracao;
 	private File curriculo;
-	
+
 	@Valid
 	private ContatoBean contato;
-	
+
 	@Valid
 	private EnderecoBean endereco;
-	
+
 	private FormacaoBean formacao;
 	private UsuarioBean usuario;
 	private List<StatusCandidatoBean> status = new ArrayList<>();
