@@ -303,7 +303,7 @@
 
 											<div class="form-group col-md-6" style="margin-bottom: 0px">
 												<div id="" class="">
-													<label>Nome do substituido</label> <input type="text"
+													<label id="substituidoId">Nome do substituido</label> <input type="text"
 														class="form-control input-sm"
 														placeholder="Nome do substituido" name="nomeSubstituido" id="substituido" disabled>
 												</div>
@@ -647,10 +647,12 @@
     			} else {
     				$("#tpVaga").text('Real')
     			}
-    			if(lista.aumentaQuadro == 'S') {
-    				$("#lblQuadro").text('Substituição')
+    			if(lista.aumentaQuadro == 'N') {
+    				$("#lblQuadro").text('Novo');
+    				$("#substituido").hide();
+    				$("#substituidoId").hide();
        			} else {
-       				$("#lblQuadro").text('Novo')
+       				$("#lblQuadro").text('Substituição')
     			}
     			
     			$('input#solicitante').val(lista.nomeSolicitante);
@@ -693,6 +695,13 @@
 	    $printSection.innerHTML = "";
 	    $printSection.appendChild(domClone);
 	    window.print();
+	}
+	
+	function mudarQuadro() {
+		var $quadro = document.getElementById("lblQuadro");
+		var $sub = document.getElementById("substituido");
+		
+		
 	}
 	
 	
