@@ -37,7 +37,6 @@
 	</div>
 	<input type="hidden" id="idPerfil" value="${autenticado.perfil.id }">
 	<!-- /top-nav-->
-
 	<aside class="fixed skin-6">
 		<div class="sidebar-inner scrollable-sidebar">
 			<div class="size-toggle">
@@ -49,7 +48,7 @@
 			</div>
 			<!-- /size-toggle -->
 
-			<div class="main-menu">
+			<div class="main-menu" id="menu-toggle">
 				<ul>
 
 					<li class="openable menu-opcao hide" value="22"><a href="#"> <span class="menu-icon">
