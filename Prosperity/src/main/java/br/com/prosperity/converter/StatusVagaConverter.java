@@ -25,7 +25,7 @@ public class StatusVagaConverter implements Converter<StatusVagaEntity, StatusVa
 		entity.setId(bean.getId());
 		entity.setDataAlteracao(bean.getDataAlteracao());
 		entity.setStatus(statusConverter.convertBeanToEntity(bean.getStatusBean()));
-		entity.setVagas(vagasConverter.convertBeanToEntity(bean.getVagaBean()));
+		//entity.setVagas(vagasConverter.convertBeanToEntity(bean.getVagaBean()));
 
 		return entity;
 	}

@@ -23,9 +23,10 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "tbVaga")
 @NamedQueries({ @NamedQuery(name = "obterTodos", query = "SELECT u FROM VagaEntity u WHERE u.nomeVaga = ?1"),
-	@NamedQuery(name="listarVagaFiltrado", query="SELECT u FROM VagaEntity u WHERE u.nomeVaga like ?1 AND u.dataAbertura BETWEEN ?1 AND ?1")
-	
+	@NamedQuery(name="listarVagaFiltrado", query="SELECT u FROM VagaEntity u WHERE u.nomeVaga like ?1 AND u.dataAbertura BETWEEN ?1 AND ?1"),
+	@NamedQuery(name="obterPorId", query="SELECT u FROM VagaEntity u WHERE u.id = ?1")
 })
+
 public class VagaEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -106,7 +107,7 @@ public class VagaEntity {
 	private UsuarioEntity usuarioEntity;
 
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "idStatusVaga")
+	@JoinColumn(name = "idVaga")
 	private List<StatusVagaEntity> statusVagaEntity;
 
 	// @ManyToOne(cascade = CascadeType.ALL)
