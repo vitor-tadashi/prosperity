@@ -27,6 +27,7 @@ import br.com.prosperity.dao.StatusFuturoDAO;
 import br.com.prosperity.dao.UsuarioDAO;
 import br.com.prosperity.entity.AvaliadorCandidatoEntity;
 import br.com.prosperity.entity.CandidatoEntity;
+import br.com.prosperity.entity.PerfilEntity;
 import br.com.prosperity.entity.StatusCandidatoEntity;
 import br.com.prosperity.entity.StatusFuturoEntity;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
@@ -34,6 +35,9 @@ import br.com.prosperity.util.FormatUtil;
 
 @Component
 public class CandidatoBusiness extends FormatUtil {
+
+	@Autowired
+	private CandidatoBean candidatoBean;
 
 	@Autowired
 	private CandidatoDAO candidatoDAO;
@@ -104,10 +108,15 @@ public class CandidatoBusiness extends FormatUtil {
 	}
 
 	@Transactional
-	public void inserir(CandidatoBean candiatoBean) {
-		CandidatoBean candidatoBean = new CandidatoBean();
-		candidatoDAO.insert(candidatoConverter.convertBeanToEntity(candidatoBean));
+	public void inserir(CandidatoBean candidatoBean) {
+	/*	if(candidatoBean.getId()== null){
 
+			candidatoDAO.insert(candidatoConverter.convertBeanToEntity(candidatoBean));	
+		}else{
+			CandidatoEntity candidatoEntity = candidatoDAO.findById(candidatoBean.getId());
+			candidatoDAO.update(candidatoEntity);
+		}*/
+		candidatoDAO.insert(candidatoConverter.convertBeanToEntity(candidatoBean));	
 	}
 
 	@Transactional
@@ -159,4 +168,29 @@ public class CandidatoBusiness extends FormatUtil {
 
 		return statusCandidatoEntity;
 	}
+
+
+	public CandidatoBean obterPorCPF(String cpf) {
+		List<CandidatoEntity> candidatosEntity = null;
+
+		candidatosEntity = candidatoDAO.findByNamedQuery("obterPorCPF", cpf);
+
+//		Integer idDoCara = candidatosEntity.get(0).getId();
+//		for (int i = 0; i < candidatosEntity.size(); i++) {
+//			
+//		}
+		
+		for (CandidatoEntity candidatoEntity : candidatosEntity) {
+			
+			candidatoBean = candidatoConverter.convertEntityToBean(candidatoEntity);
+		}
+		
+//		for (CandidatoEntity candidatoEntity : candidatosEntity) {
+//			candidatoBean = candidatoConverter.convertEntityToBean(candidatoEntity);
+//		}
+
+		return candidatoBean;
+	}
+	
+
 }

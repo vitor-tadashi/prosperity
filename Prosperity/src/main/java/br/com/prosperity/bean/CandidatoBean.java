@@ -1,5 +1,6 @@
 package br.com.prosperity.bean;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,8 +35,7 @@ public class CandidatoBean extends FormatUtil {
 	private Date dataFechamento;
 	private String email;
 	private Date dataAlteracao;
-	private String curriculo;
-
+	private File curriculo;
 	@Valid
 	private ContatoBean contato;
 
@@ -147,11 +147,11 @@ public class CandidatoBean extends FormatUtil {
 		this.dataAlteracao = dataAlteracao;
 	}
 
-	public String getCurriculo() {
+	public File getCurriculo() {
 		return curriculo;
 	}
 
-	public void setCurriculo(String curriculo) {
+	public void setCurriculo(File curriculo) {
 		this.curriculo = curriculo;
 	}
 

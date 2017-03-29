@@ -3,6 +3,7 @@ package br.com.prosperity.entity;
 import java.io.File;
 import java.util.Date;
 import java.util.List;
+import java.lang.Integer;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -24,9 +26,11 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "tbCandidato")
-//@NamedQuery(name="fazerFiltro", query="SELECT u FROM CandidatoEntity u WHERE u.nome = ?1")
+// @NamedQuery(name="fazerFiltro", query="SELECT u FROM CandidatoEntity u WHERE
+// u.nome = ?1")
 
-@NamedQuery(name="pesquisarNome", query="SELECT u FROM CandidatoEntity u WHERE u.nome like ?1")
+@NamedQueries({ @NamedQuery(name = "pesquisarNome", query = "SELECT u FROM CandidatoEntity u WHERE u.nome like ?1"),
+		@NamedQuery(name = "obterPorCPF", query = "SELECT u FROM CandidatoEntity u WHERE u.cpf = ?1") })
 
 public class CandidatoEntity {
 
@@ -102,7 +106,7 @@ public class CandidatoEntity {
 	@JoinColumn(name = "idFormacao")
 	private FormacaoEntity formacao;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
 
@@ -213,8 +217,8 @@ public class CandidatoEntity {
 		return curriculo;
 	}
 
-	public void setCurriculo(String curriculo) {
-		this.curriculo = curriculo;
+	public void setCurriculo(String file) {
+		this.curriculo= file;
 	}
 
 	public Date getDataUltimoContato() {
@@ -311,14 +315,6 @@ public class CandidatoEntity {
 
 	public void setDataultimoContato(Date dataultimoContato) {
 		this.dataultimoContato = dataultimoContato;
-	}
-
-	public void setValorMin(Double valorMin) {
-		this.valorMin = valorMin;
-	}
-
-	public void setValorMax(Double valorMax) {
-		this.valorMax = valorMax;
 	}
 
 }

@@ -12,11 +12,10 @@ public enum StatusCandidatoEnum {
 	PROPOSTACANDIDATO(9),
 	PROPOSTAACEITA(10),
 	PROPOSTARECUSADA(11),
-	PROPOSTACANCELADA(12),
 	REFAZERPROPOSTA(13),
 	CONTRATADO(14),
 	ACEITO(15),
-	CANCELADO(17);
+	CANCELADO(21);
 
 	private Integer value;
 	private static HashMap<Integer, StatusCandidatoEnum> map = new HashMap<Integer, StatusCandidatoEnum>();

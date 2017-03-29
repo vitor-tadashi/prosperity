@@ -24,8 +24,14 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "tbVaga")
 @NamedQueries({ @NamedQuery(name = "obterTodos", query = "SELECT u FROM VagaEntity u WHERE u.nomeVaga = ?1"),
+
+	//@NamedQuery(name="listarVagaFiltrado", query="SELECT u FROM VagaEntity u WHERE u.nomeVaga like ?1 AND u.dataAbertura BETWEEN ?1 AND ?1"),
+	@NamedQuery(name="obterPorId", query="SELECT u FROM VagaEntity u WHERE u.id = ?1"),
+
 	@NamedQuery(name="listarVagaFiltrado", query="SELECT u FROM VagaEntity u WHERE u.nomeVaga like ?1 AND u.dataAbertura BETWEEN ?2 AND ?3")
+
 })
+
 public class VagaEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

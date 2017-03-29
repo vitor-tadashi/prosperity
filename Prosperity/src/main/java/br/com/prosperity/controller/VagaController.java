@@ -168,6 +168,7 @@ public class VagaController {
 
 	@RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
 	public String solicitarVaga(Model model, @PathVariable Integer id) {
+		
 		VagaBean vaga = null;
 		vaga = vagaBusiness.obterVagaPorId(id);
 		
@@ -184,6 +185,22 @@ public class VagaController {
 
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
 	public String inserirVaga(@ModelAttribute("vagaBean") @Valid VagaBean vagaBean, BindingResult result, Model model) {
+
+		if (result.hasErrors()) {
+			model.addAttribute("erro", result.getErrorCount());
+			model.addAttribute("listaErros", buildErrorMessage(result.getFieldErrors()));
+			solicitarVaga(model);
+			return "vaga/solicitar-vaga";
+		}
+
+		vagaBusiness.inserir(vagaBean);
+		System.out.println("\n\n\nCadastrado\n\n\n");
+		return "vaga/solicitar-vaga";
+
+	}
+	
+	@RequestMapping(value = "editar/cadastrar", method = RequestMethod.POST)
+	public String inserirVagaa(@ModelAttribute("vagaBean") @Valid VagaBean vagaBean, BindingResult result, Model model) {
 
 		if (result.hasErrors()) {
 			model.addAttribute("erro", result.getErrorCount());
