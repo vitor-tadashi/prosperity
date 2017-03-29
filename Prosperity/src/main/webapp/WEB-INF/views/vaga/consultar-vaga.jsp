@@ -515,7 +515,7 @@
 												<li><a onclick="info(${vaga.id})"><i
 														class="fa fa-eye">&nbsp</i>Visualizar</a></li>
 												<li class="divider"></li>
-												<li><a href="#fecha-modal" data-toggle="modal"><i
+												<li><i
 														class="fa fa-lock">&nbsp</i>Fechar</a></li>
 												<li class="divider "></li>
 												<li><a href="#delete-modal" data-toggle="modal"><i
