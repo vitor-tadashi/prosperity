@@ -1,6 +1,8 @@
 package br.com.prosperity.business;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -143,13 +145,14 @@ public class CandidatoBusiness extends FormatUtil {
 				situacaoCandidato.setStatus(StatusCandidatoEnum.valueOf(statusFuturoEntity.get(0).getIdStatusFuturo()));
 			} else {
 				avaliadorCandidatoEntity = avaliadorCandidatoDAO.findByNamedQuery("obterAvaliadoresCandidato");
-				
-				StatusCandidatoEnum status = avaliadorCandidatoEntity.size() == 1
-						? StatusCandidatoEnum.PROPOSTACANDIDATO : StatusCandidatoEnum.CANDIDATOEMANALISE;
+				if (avaliadorCandidatoEntity != null && avaliadorCandidatoEntity.size() > 0) {
+					StatusCandidatoEnum status = avaliadorCandidatoEntity.size() == 1
+							? StatusCandidatoEnum.PROPOSTACANDIDATO : StatusCandidatoEnum.CANDIDATOEMANALISE;
 
-				situacaoCandidato.setStatus(status);
-				avaliadorCandidatoEntity.get(0).setIdStatus(situacaoCandidato.getStatus().getValue());
-				avaliadorCandidatoDAO.update(avaliadorCandidatoEntity.get(0));
+					situacaoCandidato.setStatus(status);
+					avaliadorCandidatoEntity.get(0).setIdStatus(situacaoCandidato.getStatus().getValue());
+					avaliadorCandidatoDAO.update(avaliadorCandidatoEntity.get(0));
+				}
 			}
 
 			statusCandidatoDAO.insert(alterarStatus1(situacaoCandidato));
