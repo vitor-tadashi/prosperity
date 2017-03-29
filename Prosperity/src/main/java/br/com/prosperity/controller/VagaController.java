@@ -151,7 +151,7 @@ public class VagaController {
 		senioridades = preencherSenioridade.obterTodos();
 		cargos = preencherCargo.obterTodos();
 		projetos = preencherProjeto.obterTodos();
-		usuarios = preencherUsuario.listar();
+		usuarios = preencherUsuario.findAll();
 
 		model.addAttribute("senioridades", senioridades);
 		model.addAttribute("cargos", cargos);

@@ -28,11 +28,12 @@ public class FuncionarioBusiness {
 		return funcionarioBean;
 	}
 	
-	@Transactional(readOnly=true)
+	// Caso deva permitir o sistema ter apenas 1 usuário para 1 funcionário, usar o método abaixo
+	/*@Transactional(readOnly=true)
 	public List<FuncionarioBean> findNotRegistered() {
 		List<FuncionarioEntity> funcionarioEntity = funcionarioDAO.findByNamedQuery("findNotRegistered");
 		List<FuncionarioBean> funcionarioBean = funcionarioConverter.convertEntityToBean(funcionarioEntity);
 
 		return funcionarioBean;
-	}
+	}*/
 }

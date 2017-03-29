@@ -12,11 +12,6 @@
 <meta name="author" content="">
 
 <c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
-<style type="text/css">
-.form-group {
-	padding: 5px;
-}
-</style>
 
 </head>
 <body>
@@ -51,38 +46,53 @@
 							<div class="panel-heading">Relatório</div>
 							<!--<form class="form-inline">-->
 							<div class="panel-body">
-								<form class="form-inline">
+								<form>
 									<div class="row">
-										<div class="form-group">
-											<label for="cmbTipoRelatorio">Tipo</label> <select
-												id="cmbTipoRelatorio" class="form-control">
-												<option value="0">Selecionar</option>
+										<div class="form-group col-md-4">
+											<label for="cmbTipoRelatorio">Tipo</label>
+											<select id="cmbTipoRelatorio" class="form-control input-sm">
+												<option value="">Selecionar</option>
 												<option value="1">Candidatos</option>
 												<option value="2">Vagas</option>
 											</select>
-										</div>
-										<div class="form-group">
+										</div><!-- /form-group -->
+										<div class="form-group col-md-4">
 											<label for="dtInicio">Data</label>
-											<div class="input-group">
-												<input type="date" class="form-control" id="dtInicio" /> <span
-													class="input-group-addon">até</span> <input type="date"
-													class="form-control" id="dtFinal" />
+											<div class="row">
+												<div class="col-xs-5">
+													<input type="date" class="form-control input-sm" id="dtInicio" />
+												</div>							
+												<p class="small col-xs-1">até</p>
+												<div class="col-xs-6">
+													<input type="date" class="form-control input-sm" id="dtFinal" />
+												</div>
 											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group col-xs-12" id="divVagas" style="display:none">
+										</div><!-- /form-group -->
+										<div class="form-group col-md-12" id="divVagas">
 											<label>Vagas desejadas</label>
-											<select class="form-control" multiple style="height: 68px;">
-												<option value="todas">Todas</option>
+											<select multiple class="form-control input-sm">
 												<c:forEach var="vaga" items="${vagas}">
 													<option value="${vaga.id}">${vaga.nomeVaga}</option>
 												</c:forEach>
 											</select>
+										</div><!-- /form-group -->
+										<div class="form-group col-md-12" id="divSituacao">
+											<label>Situação</label>
+											<%-- <select multiple class="form-control input-sm">
+												<c:forEach var="situacao" items="${situacoes}">
+													<option value="${situacao.value}">${situacao}</option>
+												</c:forEach>
+											</select> --%>
+											<c:forEach var="situacao" items="${situacoes}">
+												<label><input type="checkbox" name="teste"> ${situacao}</label>
+											</c:forEach>
+										</div><!-- /form-group -->
+									</div>
+									<div class="row">
+										<div class="col-xs-12">
+											<button type="submit" class="btn btn-success btn-sm pull-right">Gerar</button>
 										</div>
 									</div>
-
-									<button type="submit" class="btn btn-default">Submit</button>
 								</form>
 							</div>
 							<!--</panel body>-->
@@ -101,16 +111,23 @@
 	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
 	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
 	<script>
+		$("#divVagas").css('display', 'none');
+		$("#divSituacao").css('display', 'none');
+		
 		$("#cmbTipoRelatorio").on('change', function() {
 			var element = $("#cmbTipoRelatorio");
 			if (element.val() == "1") {
 				$("#divVagas").css('display', 'none');
+				$("#divSituacao").css('display', 'none');
 			} else if (element.val() == "2") {
 				$("#divVagas").css('display', 'block');
+				$("#divSituacao").css('display', 'block');
 			} else {
 				$("#divVagas").css('display', 'none');
+				$("#divSituacao").css('display', 'none');
 			}
-		})
+		});
+		
 	</script>
 </body>
 </html>

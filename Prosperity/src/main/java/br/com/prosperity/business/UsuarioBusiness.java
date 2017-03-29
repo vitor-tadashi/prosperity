@@ -88,7 +88,7 @@ public class UsuarioBusiness {
 	}
 
 	@Transactional(readOnly=true)
-	public List<UsuarioBean> listar() {
+	public List<UsuarioBean> findAll() {
 		List<UsuarioBean> usuarios = usuarioConverter.convertEntityToBean(usuarioDAO.findAll());
 		return usuarios;
 	}

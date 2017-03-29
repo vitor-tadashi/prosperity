@@ -8,10 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import br.com.prosperity.bean.SituacaoVagaBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.RelatorioBusiness;
 import br.com.prosperity.business.VagaBusiness;
 import br.com.prosperity.entity.VagaEntity;
+import br.com.prosperity.enumarator.StatusVagaEnum;
 
 @Controller
 @RequestMapping("relatorio")
@@ -24,6 +26,8 @@ public class RelatorioController {
 	public String relatorio(Model model) {
 		List<VagaEntity> vagas = relatorioBusiness.listarVagas();
 		model.addAttribute("vagas", vagas);
+		StatusVagaEnum[] situacoes = StatusVagaEnum.values();
+		model.addAttribute("situacoes", situacoes);
 		return "relatorio/gerar-relatorio";
 	}
 	

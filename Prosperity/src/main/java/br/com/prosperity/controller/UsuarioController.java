@@ -36,9 +36,9 @@ public class UsuarioController {
 	private UsuarioBusiness usuarioBusiness;
 
 	@RequestMapping(value = "/listar", method = RequestMethod.GET)
-	public String carregaTabela(Model model) {
-		List<UsuarioBean> usuarios = usuarioBusiness.listar();
-		List<FuncionarioBean> funcionarios = funcionarioBusiness.findNotRegistered();
+	public String carregaUsuarios(Model model) {
+		List<UsuarioBean> usuarios = usuarioBusiness.findAll();
+		List<FuncionarioBean> funcionarios = funcionarioBusiness.findAll();
 		List<PerfilBean> perfis = perfilBusiness.listar();
 		model.addAttribute("funcionarios", funcionarios);
 		model.addAttribute("perfis", perfis);
