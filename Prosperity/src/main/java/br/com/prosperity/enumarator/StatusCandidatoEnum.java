@@ -1,7 +1,6 @@
 package br.com.prosperity.enumarator;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public enum StatusCandidatoEnum {
 	CANDIDATURA(3),
@@ -16,6 +15,7 @@ public enum StatusCandidatoEnum {
 	PROPOSTACANCELADA(12),
 	REFAZERPROPOSTA(13),
 	CONTRATADO(14),
+	ACEITO(15),
 	CANCELADO(17);
 
 	private Integer value;

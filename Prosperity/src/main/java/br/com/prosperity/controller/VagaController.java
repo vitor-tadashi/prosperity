@@ -86,14 +86,21 @@ public class VagaController {
 		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.obterTodos();
 		model.addAttribute("listaSenioridade", listaSenioridade);
 
-		List<VagaBean> listaVaga = vagaBusiness.listar();
-		model.addAttribute("listaVaga", listaVaga);
+		/*List<VagaBean> listaVaga = vagaBusiness.listar();
+		model.addAttribute("listaVaga", listaVaga);*/
 
 		List<StatusBean> listaStatus = statusBusiness.obterTodos();
 		model.addAttribute("listaStatus", listaStatus);
-
-		List<StatusVagaBean> listaStatusVaga = statusVagaBusiness.obterTodos();
-		model.addAttribute("listaStatusVaga", listaStatusVaga);
+		
+		List<StatusBean> listaStatusDrop = statusBusiness.obterStatusVaga();
+		model.addAttribute("listaStatusDrop", listaStatusDrop);
+		
+		/*List<StatusVagaBean> listaStatusVaga = statusVagaBusiness.obterTodos();
+		StatusVagaBean vagaStatus = new StatusVagaBean();
+		for(StatusVagaBean svb : listaStatusVaga){
+			vagaStatus = svb;
+		}
+		model.addAttribute("listaStatusVaga", listaStatusVaga);*/
 
 		return "vaga/consultar-vaga";
 	}

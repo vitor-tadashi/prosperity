@@ -1,3 +1,6 @@
+#menu-toggle{
+	visibility: hidden;
+}
 .logo {
 	width: 100px;
 }

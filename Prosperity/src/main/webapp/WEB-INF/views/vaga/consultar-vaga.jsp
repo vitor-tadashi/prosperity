@@ -303,7 +303,7 @@
 
 											<div class="form-group col-md-6" style="margin-bottom: 0px">
 												<div id="" class="">
-													<label>Nome do substituido</label> <input type="text"
+													<label id="substituidoId">Nome do substituido</label> <input type="text"
 														class="form-control input-sm"
 														placeholder="Nome do substituido" name="nomeSubstituido" id="substituido" disabled>
 												</div>
@@ -457,8 +457,8 @@
 								<div class="col-md-2">
 									<label for="cargo">Status</label> 
 									<select class="form-control" style="width: 130px;" id="status" name="statusVagaBean[0].id">
-										<c:forEach var="status" items="${listaStatusVaga}">
-												<option value="${status.id}">${status.statusBean.nome}</option>
+										<c:forEach var="status" items="${listaStatusDrop}">
+												<option value="${status.id}">${status.nome}</option>
 										</c:forEach>
 									</select>
 								</div>
@@ -503,7 +503,7 @@
 
 									</td>
 									<td id="linhaData">${vaga.dataAbertura}</td>
-									<td id="linhaStatus"><span id="tdStatus" class="label label-contratado">Ativo</span></td>
+									<td id="linhaStatus">${vaga.ultimoStatus.status.nome}</td>
 									<td>
 										<div class="btn-group">
 											<button class="btn btn-sm btn-info dropdown-toggle"
@@ -647,10 +647,14 @@
     			} else {
     				$("#tpVaga").text('Real')
     			}
-    			if(lista.aumentaQuadro == 'S') {
-    				$("#lblQuadro").text('Substituição')
+    			if(lista.aumentaQuadro == 'N') {
+    				$("#lblQuadro").text('Novo');
+    				$("#substituido").hide();
+    				$("#substituidoId").hide();
        			} else {
-       				$("#lblQuadro").text('Novo')
+       				$("#lblQuadro").text('Substituição')
+       				$("#substituido").show();
+    				$("#substituidoId").show();
     			}
     			
     			$('input#solicitante').val(lista.nomeSolicitante);
@@ -693,6 +697,13 @@
 	    $printSection.innerHTML = "";
 	    $printSection.appendChild(domClone);
 	    window.print();
+	}
+	
+	function mudarQuadro() {
+		var $quadro = document.getElementById("lblQuadro");
+		var $sub = document.getElementById("substituido");
+		
+		
 	}
 	
 	
