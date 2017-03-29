@@ -2,9 +2,12 @@ package br.com.prosperity.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -73,18 +76,22 @@ public class UsuarioController {
 	}
 
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
-	public String inserirUsuario(UsuarioBean usuario) {
+	public String inserirUsuario(@Valid UsuarioBean usuario, BindingResult result) {
+		if(result.hasErrors()) {
+			return "redirect:listar";
+		}
+		
 		if (usuario.getId() == null) {
 			usuarioBusiness.inserir(usuario);
 		} else {
 			usuarioBusiness.alterar(usuario);
 		}
-
+		
 		return "redirect:listar";
 	}
 	
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.GET)
-	public String redirecionaLista(UsuarioBean usuario) {
+	public String redirecionaLista() {
 		return "redirect:listar";
 	}
 	

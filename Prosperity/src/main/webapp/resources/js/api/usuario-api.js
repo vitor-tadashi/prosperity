@@ -33,8 +33,8 @@
 						$('#btnMudarStatus').removeClass("btn-danger").addClass("btn-primary");
 						ativo = false;
 					}
-					//$('select#cmbFuncionario').val(data.funcionario.id);
-					//$('select#cmbFuncionario').attr("disabled", "disabled").attr("selected", "selected").html("<option value="+data.funcionario.id+">"+data.funcionario.nome+"</option>");
+					$('select#cmbFuncionario').val(data.funcionario.id);
+					$('select#cmbFuncionario').attr("disabled", "disabled").attr("selected", "selected");
 					$('select#cmbPerfil').val(data.perfil.id);
 					$('#usuario-modal').modal('show');
 				}
