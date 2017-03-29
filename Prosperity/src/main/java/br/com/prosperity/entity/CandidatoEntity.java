@@ -22,6 +22,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+/**
+ * @author andre.posman
+ *
+ */
 @Entity
 @Table(name = "tbCandidato")
 //@NamedQuery(name="fazerFiltro", query="SELECT u FROM CandidatoEntity u WHERE u.nome = ?1")
@@ -289,22 +293,6 @@ public class CandidatoEntity {
 		this.competencias = competencias;
 	}
 
-	public  double getValorMin() {
-		return valorMin;
-	}
-
-	public void setValorMin(double valorMin) {
-		this.valorMin = valorMin;
-	}
-
-	public  double getValorMax() {
-		return valorMax;
-	}
-
-	public void setValorMax(double valorMax) {
-		this.valorMax = valorMax;
-	}
-	
 	public Date getDataultimoContato() {
 		return dataultimoContato;
 	}
@@ -313,12 +301,22 @@ public class CandidatoEntity {
 		this.dataultimoContato = dataultimoContato;
 	}
 
+	public Double getValorMin() {
+		return valorMin;
+	}
+
 	public void setValorMin(Double valorMin) {
 		this.valorMin = valorMin;
+	}
+
+	public Double getValorMax() {
+		return valorMax;
 	}
 
 	public void setValorMax(Double valorMax) {
 		this.valorMax = valorMax;
 	}
+
+
 
 }

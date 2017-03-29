@@ -31,5 +31,8 @@ public class SituacaoCandidatoBean {
 	public void setParecer(String parecer) {
 		this.parecer = parecer;
 	}
-
+	
+	public void setIdStatus(Integer idStatus) {
+		status = StatusCandidatoEnum.valueOf(idStatus);
+	}
 }

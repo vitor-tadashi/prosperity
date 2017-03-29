@@ -26,6 +26,7 @@ import br.com.prosperity.bean.FormacaoBean;
 import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
+import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.TipoCursoBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.AvaliadorBusiness;
@@ -216,7 +217,7 @@ public class CandidatoController {
 
 	@RequestMapping(value = "historico", method = RequestMethod.GET)
 	public String historicoCandidato(Model model) {
-		CandidatoBean candidatoBean = candidatoBusiness.obter(2);
+		CandidatoBean candidatoBean = candidatoBusiness.obter(73);
 
 		model.addAttribute("candidato", candidatoBean);
 
@@ -265,6 +266,12 @@ public class CandidatoController {
 		}
 
 		return novosErros;
+	}
+	
+	@RequestMapping(value= {"alterar-status-candidato"}, method = RequestMethod.POST)
+	public @ResponseBody String alterarStatusCandidato(Model model, @ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato) {
+		candidatoBusiness.alterarStatus(situacaoCandidato);
+		return "vaitomarnocucaralho";
 	}
 
 }

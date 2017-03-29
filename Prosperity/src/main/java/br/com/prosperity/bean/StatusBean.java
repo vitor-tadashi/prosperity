@@ -7,7 +7,7 @@ public class StatusBean {
 
 	private Integer id;
 	private String nome;
-	private String Css;
+	private String css;
 	private TipoStatusBean tipo;
 	private StatusCandidatoBean statusCandidato;
 	
@@ -28,11 +28,11 @@ public class StatusBean {
 	}
 
 	public String getCss() {
-		return Css;
+		return css;
 	}
 
 	public void setCss(String css) {
-		Css = css;
+		css = css;
 	}
 
 	public TipoStatusBean getTipo() {
