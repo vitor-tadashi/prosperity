@@ -7,11 +7,15 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.springframework.stereotype.Component;
 
 import br.com.prosperity.util.FormatUtil;
 
 @Component
+@XmlRootElement(name = "CandidatoBean")
 public class CandidatoBean  extends FormatUtil {
 
 	private Integer id;
@@ -148,9 +152,11 @@ public class CandidatoBean  extends FormatUtil {
 	public void setCompetencias(List<CandidatoCompetenciaBean> competencias) {
 		this.competencias = competencias;
 	}
-	public Map<String, List<StatusCandidatoBean>> getStatusPorMesAno() {
-		return statusPorMesAno;
-	}
+	
+//	@XmlElement(type=StatusCandidatoBean.class)
+//	public Map<String, List<StatusCandidatoBean>> getStatusPorMesAno() {
+//		return statusPorMesAno;
+//	}
 	public void setStatusPorMesAno(Map<String, List<StatusCandidatoBean>> statusPorMesAno) {
 		this.statusPorMesAno = statusPorMesAno;
 	}
