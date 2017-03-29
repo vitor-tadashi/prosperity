@@ -6,14 +6,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.FuncionarioBean;
@@ -44,7 +42,7 @@ public class UsuarioController {
 	public String carregaTabela(Model model) {
 		List<UsuarioBean> usuarios = usuarioBusiness.listar();
 		List<FuncionarioBean> funcionarios = funcionarioBusiness.obterTodos();
-		List<PerfilBean> perfis = perfilBusiness.obterTodos();
+		List<PerfilBean> perfis = perfilBusiness.listar();
 		model.addAttribute("funcionarios", funcionarios);
 		model.addAttribute("perfis", perfis);
 		model.addAttribute("usuarios", usuarios);
@@ -62,7 +60,7 @@ public class UsuarioController {
 	public @ResponseBody List<Object> carregaCombosAjax(Model model) {
 		List<Object> lista = new ArrayList<>();
 		List<FuncionarioBean> funcionarios = funcionarioBusiness.obterTodos();
-		List<PerfilBean> perfis = perfilBusiness.obterTodos();
+		List<PerfilBean> perfis = perfilBusiness.listar();
 		
 		lista.add(perfis);
 		lista.add(funcionarios);
@@ -71,18 +69,26 @@ public class UsuarioController {
 	}
 
 	@RequestMapping(value = "/criar-perfil", method = RequestMethod.GET)
-	public String criaPerfil(Model model) {
-		List<FuncionalidadeBean> funcionalidades = funcionalidadeBusiness.obterTodos();
-		List<PerfilBean> perfis = perfilBusiness.obterTodos();
+	public String criaPerfil(Model model, String erros, String sucesso) {
+		List<FuncionalidadeBean> funcionalidades = funcionalidadeBusiness.listar();
+		List<PerfilBean> perfis = perfilBusiness.listar();
 		model.addAttribute("funcionalidades", funcionalidades);
 		model.addAttribute("perfis", perfis);
-
+		model.addAttribute("erros",erros);
+		model.addAttribute("sucesso", sucesso);
+		
 		return "usuario/criar-perfil";
 	}
 
 	@RequestMapping(value = "/salvar-perfil", method = RequestMethod.POST)
-	public String salvarPerfil(@ModelAttribute("perfilBean") PerfilBean perfilBean) throws BusinessException {
-		perfilBusiness.inserir(perfilBean);
+	public String inserirPerfil(@ModelAttribute("perfilBean") PerfilBean perfilBean, Model model) throws BusinessException {
+		try{
+			perfilBusiness.inserir(perfilBean);
+			model.addAttribute("sucesso", "Perfil salvo com sucesso.");
+			
+		}catch(BusinessException e){
+			model.addAttribute("erros", e.getMessage());
+		}
 
 		return "redirect:criar-perfil";
 	}
@@ -110,7 +116,7 @@ public class UsuarioController {
 	
 	@RequestMapping(value = "obter-perfil-funcionalidade", method=RequestMethod.GET)
 	public @ResponseBody List<FuncionalidadeBean> obterPerfilFuncionalidade(Model model,@ModelAttribute("id")Integer id){
-		List<FuncionalidadeBean> listaFunc = perfilBusiness.obterFuncionalidades(id);
+		List<FuncionalidadeBean> listaFunc = perfilBusiness.obterPerfilFuncionalidades(id);
 		return listaFunc;
 	}
 

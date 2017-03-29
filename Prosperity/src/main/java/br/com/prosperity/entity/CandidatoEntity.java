@@ -3,6 +3,7 @@ package br.com.prosperity.entity;
 import java.io.File;
 import java.util.Date;
 import java.util.List;
+import java.lang.Integer;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,6 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -23,28 +26,18 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "tbCandidato")
+// @NamedQuery(name="fazerFiltro", query="SELECT u FROM CandidatoEntity u WHERE
+// u.nome = ?1")
+
+@NamedQueries({ @NamedQuery(name = "pesquisarNome", query = "SELECT u FROM CandidatoEntity u WHERE u.nome like ?1"),
+		@NamedQuery(name = "obterPorCPF", query = "SELECT u FROM CandidatoEntity u WHERE u.cpf = ?1") })
+
 public class CandidatoEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idCandidato", unique = true, nullable = false)
 	private Integer id;
-
-	public Date getDataultimoContato() {
-		return dataultimoContato;
-	}
-
-	public void setDataultimoContato(Date dataultimoContato) {
-		this.dataultimoContato = dataultimoContato;
-	}
-
-	public void setValorMin(Double valorMin) {
-		this.valorMin = valorMin;
-	}
-
-	public void setValorMax(Double valorMax) {
-		this.valorMax = valorMax;
-	}
 
 	@Column(name = "nmCandidato")
 	private String nome;
@@ -56,45 +49,46 @@ public class CandidatoEntity {
 	private String rg;
 
 	@Column(name = "dtNascimento")
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
 
 	@Column(name = "vlPretensao")
 	private Double valorPretensaoSalarial;
 
 	@Column(name = "dtAbertura")
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date dataAbertura;
 
 	@Column(name = "dtFechamento")
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date dataFechamento;
 
 	@Column(name = "nmEmail")
 	private String email;
 
 	@Column(name = "dtAlteracao")
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date dataAlteracao;
 
 	@Column(name = "cmCurriculo")
-	private File curriculo;
+	private String curriculo;
 
 	@Column(name = "dtUltimoContato")
+	@Temporal(TemporalType.DATE)
 	private Date dataultimoContato;
 
 	@Column(name = "dtEntrevista")
+	@Temporal(TemporalType.DATE)
 	private Date dataEntrevista;
 
 	@Column(name = "dsProposta")
 	private String proposta;
-	
-	@Column(name="vlPretencaoMin")
+
+	@Column(name = "vlPretencaoMin")
 	private Double valorMin;
-	
-	@Column(name="vlPretencaoMax")
+
+	@Column(name = "vlPretencaoMax")
 	private Double valorMax;
-	
 
 	/* Mapeamento de Relacionamentos */
 
@@ -112,7 +106,7 @@ public class CandidatoEntity {
 	@JoinColumn(name = "idFormacao")
 	private FormacaoEntity formacao;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
 
@@ -124,14 +118,12 @@ public class CandidatoEntity {
 	@JoinColumn(name = "idCandidato")
 	private List<CandidatoCompetenciaEntity> competencias;
 	
-
-	@ManyToMany(cascade = CascadeType.ALL)
+//TODO 
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "tbVagaCandidato", joinColumns = { @JoinColumn(name = "idCandidato") }, inverseJoinColumns = {
 			@JoinColumn(name = "idVaga") })
 	private List<VagaEntity> vagaEntity;
-	
-	
-	
+
 	public List<VagaEntity> getVagaEntity() {
 		return vagaEntity;
 	}
@@ -220,12 +212,13 @@ public class CandidatoEntity {
 		this.dataAlteracao = dataAlteracao;
 	}
 
-	public File getCurriculo() {
+
+	public String getCurriculo() {
 		return curriculo;
 	}
 
-	public void setCurriculo(File curriculo) {
-		this.curriculo = curriculo;
+	public void setCurriculo(String file) {
+		this.curriculo= file;
 	}
 
 	public Date getDataUltimoContato() {
@@ -314,6 +307,14 @@ public class CandidatoEntity {
 
 	public void setValorMax(double valorMax) {
 		this.valorMax = valorMax;
+	}
+	
+	public Date getDataultimoContato() {
+		return dataultimoContato;
+	}
+
+	public void setDataultimoContato(Date dataultimoContato) {
+		this.dataultimoContato = dataultimoContato;
 	}
 
 }

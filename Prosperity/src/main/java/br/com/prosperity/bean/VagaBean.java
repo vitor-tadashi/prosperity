@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,16 +17,28 @@ public class VagaBean {
 
 	private Integer id;
 	private String nomeVaga;
+
+	@NotNull
+	@NotEmpty(message = "O campo Solicitante deve ser preenchido")
 	private String nomeSolicitante;
+
 	private Double valorPretensao;
+
+	@Future
 	private Date dataInicio;
-	private char localTrabalho;
+
+	private Character localTrabalho;
 	private Character idTipoVaga;
-	private Date horarioEntrada;
-	private Date horarioSaida;
+	private String horarioEntrada;
+	private String horarioSaida;
 	private Character aumentaQuadro;
-	private ProjetoBean projetoBean;
+
+	@Valid
+	private ProjetoBean projeto;
+
+	@Valid
 	private CargoBean cargoBean;
+	@Valid
 	private SenioridadeBean senioridadeBean;
 
 	private String nomeSubstituido; //
@@ -32,7 +50,44 @@ public class VagaBean {
 	private Date dataFechamento; //
 	private Integer numeroCandidatos; //
 	private UsuarioBean usuarioBean;
-	private List<StatusVagaBean> statusVagaBean = new ArrayList<>();
+	private List<StatusVagaBean> status;
+
+	private StatusVagaBean ultimoStatus;
+
+	public StatusVagaBean getUltimoStatus() {
+		if (status != null && status.size() > 0) {
+			Date dataUltimoStatus = status.stream().map(StatusVagaBean::getDataAlteracao).max(Date::compareTo)
+					.get();
+			ultimoStatus = status.stream().filter(st -> st.getDataAlteracao().equals(dataUltimoStatus)).findFirst()
+					.get();
+		} else { 	
+			ultimoStatus = new StatusVagaBean("Não possui status");
+		}
+
+		return ultimoStatus;
+	}
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date dataAberturaDe;
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date dataAberturaPara;
+
+	public Date getDataAberturaDe() {
+		return dataAberturaDe;
+	}
+
+	public void setDataAberturaDe(Date dataAberturaDe) {
+		this.dataAberturaDe = dataAberturaDe;
+	}
+
+	public Date getDataAberturaPara() {
+		return dataAberturaPara;
+	}
+
+	public void setDataAberturaPara(Date dataAberturaPara) {
+		this.dataAberturaPara = dataAberturaPara;
+	}
 
 	public Integer getId() {
 		return id;
@@ -90,19 +145,19 @@ public class VagaBean {
 		this.idTipoVaga = idTipoVaga;
 	}
 
-	public Date getHorarioEntrada() {
+	public String getHorarioEntrada() {
 		return horarioEntrada;
 	}
 
-	public void setHorarioEntrada(Date horarioEntrada) {
+	public void setHorarioEntrada(String horarioEntrada) {
 		this.horarioEntrada = horarioEntrada;
 	}
 
-	public Date getHorarioSaida() {
+	public String getHorarioSaida() {
 		return horarioSaida;
 	}
 
-	public void setHorarioSaida(Date horarioSaida) {
+	public void setHorarioSaida(String horarioSaida) {
 		this.horarioSaida = horarioSaida;
 	}
 
@@ -114,12 +169,12 @@ public class VagaBean {
 		this.aumentaQuadro = aumentaQuadro;
 	}
 
-	public ProjetoBean getProjetoBean() {
-		return projetoBean;
+	public ProjetoBean getProjeto() {
+		return projeto;
 	}
 
-	public void setProjetoBean(ProjetoBean projetoBean) {
-		this.projetoBean = projetoBean;
+	public void setProjeto(ProjetoBean projetoBean) {
+		this.projeto = projetoBean;
 	}
 
 	public CargoBean getCargoBean() {
@@ -210,12 +265,12 @@ public class VagaBean {
 		this.usuarioBean = usuarioBean;
 	}
 
-	public List<StatusVagaBean> getStatusVagaBean() {
-		return statusVagaBean;
+	public List<StatusVagaBean> getStatus() {
+		return status;
 	}
 
-	public void setStatusVagaBean(List<StatusVagaBean> statusVagaBean) {
-		this.statusVagaBean = statusVagaBean;
+	public void setStatus(List<StatusVagaBean> status) {
+		this.status = status;
 	}
 
 	public void setLocalTrabalho(Character localTrabalho) {
@@ -229,5 +284,4 @@ public class VagaBean {
 	public void setAumentaQuadro(Character aumentaQuadro) {
 		this.aumentaQuadro = aumentaQuadro;
 	}
-
 }

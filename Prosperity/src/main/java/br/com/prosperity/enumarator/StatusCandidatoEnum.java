@@ -1,5 +1,7 @@
 package br.com.prosperity.enumarator;
 
+import java.util.HashMap;
+
 public enum StatusCandidatoEnum {
 	CANDIDATURA(3),
 	CANDIDATOEMANALISE(4),
@@ -10,18 +12,29 @@ public enum StatusCandidatoEnum {
 	PROPOSTACANDIDATO(9),
 	PROPOSTAACEITA(10),
 	PROPOSTARECUSADA(11),
-	PROPOSTACANCELADA(12),
 	REFAZERPROPOSTA(13),
 	CONTRATADO(14),
-	CANCELADO(17);
+	ACEITO(15),
+	CANCELADO(21);
 
-	private int value;
-
-	StatusCandidatoEnum(int newValue) {
+	private Integer value;
+	private static HashMap<Integer, StatusCandidatoEnum> map = new HashMap<Integer, StatusCandidatoEnum>();
+	
+	StatusCandidatoEnum(Integer newValue) {
 		value = newValue;
 	}
+	
+	static {
+        for (StatusCandidatoEnum pageType : StatusCandidatoEnum.values()) {
+            map.put(pageType.value, pageType);
+        }
+    }
 
-	public int getValue() {
+    public static StatusCandidatoEnum valueOf(Integer statusCandidatoEnum) {
+        return map.get(statusCandidatoEnum);
+    }
+
+	public Integer getValue() {
 		return value;
 	}
 

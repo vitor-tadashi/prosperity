@@ -37,7 +37,7 @@
                                     <div class="panel-heading">
                                         <label>Criação de perfil</label>
                                     </div>
-                                    <div class="panel-body col-md-7">
+                                    <div class="panel-body col-md-10">
                                         <label>Perfil</label>
                                         <div class="" id="nome-perfil">
                                             <input class="form-control" id="nm-perfil" name="nome" type="text" placeholder="Insira um nome para o perfil" required/>
@@ -51,6 +51,22 @@
                                             </select>
                                         </div>
                                         <br>
+                                        <c:if test="${not empty erros}">
+	                                        <div class="alert alert-danger">
+												<ul>
+													<c:forEach items="${erros }" var="erro">
+														<li class="li-msg"><strong> ${erro }</strong></li>
+													</c:forEach>
+												</ul>
+											</div>
+										</c:if>
+										<c:if test="${not empty sucesso}">
+											<div id="msg-sucesso" class="alert alert-success">
+												<ul>
+													<li class="li-msg">${sucesso }</li>
+												</ul>
+											</div>
+										</c:if>
                                         <div class="form-group text-center">
                                             <div>
                                                 <label class="label-radio inline">
@@ -69,11 +85,11 @@
                                             <!-- /.col -->
                                         </div>
                                         <!-- /form-group -->
-                                        <div class="panel panel-default table-responsive">
+                                        <div class="panel panel-default">
                                             <div class="panel-heading">
-                                                <span class="fa fa-check"> Selecione as funcionalidades para o perfil:</span>
+                                                <span class="fa fa-check text-primary font14"> Selecione as funcionalidades para o perfil:</span>
                                             </div>
-                                            <table class="table table-striped" id="responsiveTable">
+                                            <table class="table table-responsive" id="responsiveTable">
                                                 <tbody>
                                                     <c:forEach var="funcionalidade" items="${funcionalidades}" varStatus="i">
                                                         <tr>

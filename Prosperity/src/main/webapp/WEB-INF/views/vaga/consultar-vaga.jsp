@@ -13,7 +13,32 @@
 
 <c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
 
+<style type="text/css">
+
+@media screen {
+    #printSection {
+        display: none;
+    }
+}
+@media print {
+
+    body * {
+        visibility:hidden;
+    }
+    #printSection * {
+        visibility:visible;
+    }
+    #printSection {
+        position: absolute;
+        left: 0;
+        top: 0;
+        
+    }
+}
+</style>
+
 <style>
+
 .label-stand, .badge-stand {
 	background-color: #9b59b6;
 	color: #fff;
@@ -52,7 +77,10 @@
 	margin-right: 58px;
 	margin-left: 20px;
 }
+
 </style>
+
+	
 
 </head>
 <body>
@@ -61,6 +89,7 @@
 		tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
+				<div id="PrintThis">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
@@ -158,12 +187,7 @@
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
 													<label for="exampleInputEmail1">Local de trabalho</label>
 													<div class="radiogroup" name="localTrabalho" id="local">
-														<label class="label-radio inline"> <input
-															id="interno" type="radio" value="I" name="radLocalTrabalho" disabled>
-															<span class="custom-radio"></span> Interno
-														</label> <label class="label-radio inline"> <input
-															id="cliente" type="radio" value="C" name="radLocalTrabalho" disabled> <span
-															class="custom-radio"></span> Cliente
+														<label id="lblLocal" class="label-radio inline" value="">
 														</label>
 													</div>
 													<!-- /.col -->
@@ -186,15 +210,7 @@
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
 													<label for="exampleInputEmail1">Tipo de vaga</label>
 													<div class="radiogroup" name="idTipoVaga" id="tipo">
-														<label class="label-radio inline"> <input
-															type="radio" id="real" value="R" name="inline-radio3" checked disabled> <span
-															class="custom-radio"></span> Real
-														</label> <label class="label-radio inline"> <input
-															type="radio" id="prospeccao" value="P" name="inline-radio3" disabled> <span
-															class="custom-radio"></span> Prospecção
-														</label> <label class="label-radio inline"> <input
-															type="radio" id="hunting" value="H" name="inline-radio3" disabled> <span
-															class="custom-radio"></span> Hunting
+														<label id="tpVaga" class="label-radio inline" value = "">
 														</label>
 													</div>
 													<!-- /.col -->
@@ -203,7 +219,7 @@
 										</div>
 
 										<div class="form-group row">
-											<div class="form-group col-md-5" style="margin-bottom: 0px">
+											<div class="form-group col-md-5 col-xs-5" style="margin-bottom: 0px">
 													<label for="senioridade">Senioridade da vaga</label> <input
 														class="form-control input-sm" disabled
 														name="senioridade.id" id="senioridade"
@@ -257,12 +273,7 @@
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
 													<label for="exampleInputEmail1">Aumento de quadro</label>
 													<div class="radiogroup" name="aumentoQuadro" id="aumento">
-														<label class="label-radio inline"> <input
-															id="novo" type="radio" value="N" name="novoQuadro" disabled>
-															<span class="custom-radio"> </span> Novo
-														</label> <label class="label-radio inline"> <input
-															id="sub" type="radio" value="S" name="novoQuadro" disabled> <span
-															class="custom-radio"> </span> Substituição
+														<label id="lblQuadro" class="label-radio inline" value = "">
 														</label>
 
 													</div>
@@ -292,7 +303,7 @@
 
 											<div class="form-group col-md-6" style="margin-bottom: 0px">
 												<div id="" class="">
-													<label>Nome do substituido</label> <input type="text"
+													<label id="substituidoId">Nome do substituido</label> <input type="text"
 														class="form-control input-sm"
 														placeholder="Nome do substituido" name="nomeSubstituido" id="substituido" disabled>
 												</div>
@@ -341,17 +352,20 @@
 
 								</div>
 							</section>
-							<!-- /panel -->
-							<div class="modal-footer">
-								<button type="button" class="btn btn-primary">Imprimir</button>
 							</div>
-						</div>
+							</div>
 					</div>
+					
+					</div>
+					<!-- /panel -->
 					<!-- /tab-content -->
+					<div class="modal-footer">
+								<button type="button" class="btn btn-primary" id="Print" onclick="imprimir()">Imprimir</button>
+							</div>
 				</div>
 			</div>
-		</div>
-	</div>
+			</div>
+	
 	<!-- Modal visualizar -->
 
 	<!-- Modal fechar -->
@@ -424,30 +438,26 @@
 						<!--<form class="form-inline">-->
 						<div class="panel-body">
 
-							<div class="row ">
+							<form action="filtrar" method="GET" class="row">
 								<div class="col-md-4">
 									<div class="form-group">
-										<label>Vaga</label> <select class="form-control" name="">
-											<c:forEach var="vaga" items="${listaVaga}">
-												<option value="${vaga.id}">${vaga.nomeVaga}</option>
-											</c:forEach>
-										</select>
+										<label>Vaga</label> <input class="form-control" id="filtro1" name="nomeVaga" placeholder="Digite o nome de uma vaga">
 									</div>
 								</div>
 
 								<div class="col-md-5">
 									<label for="">Data</label>
-									<div class="input-group" name="dataAbertura">
-										<input type="date" class="form-control"> <span
+									<div class="input-group">
+										<input type="date" id="data1" class="form-control"> <span
 											class="input-group-addon">até</span> <input type="date"
-											class="form-control">
+											class="form-control" id="data2">
 									</div>
 								</div>
 
 								<div class="col-md-2">
 									<label for="cargo">Status</label> 
-									<select class="form-control" style="width: 130px;" name="">
-										<c:forEach var="status" items="${listaStatus}">
+									<select class="form-control" style="width: 130px;" id="status" name="statusVagaBean[0].id">
+										<c:forEach var="status" items="${listaStatusDrop}">
 												<option value="${status.id}">${status.nome}</option>
 										</c:forEach>
 									</select>
@@ -456,13 +466,14 @@
 								<div class="text-right">
 									<a href="#" style="text-decoration: none; color: #ffffff">
 										<button class="btn btn-primary"
-											style="margin-top: 22px; margin-right: 22px;">Filtrar</button>
+											style="margin-top: 22px; margin-right: 22px;" type="submit">Filtrar</button>
 									</a>
 								</div>
-							</div>
+							</form>
 						</div>
 						<!--</panel body>-->
 						<table
+							id="tabelaVaga"
 							class="table table-bordered table-condensed table-hover table-striped"
 							style="font-size: 12px; vertical-align: middle;">
 							<thead>
@@ -478,10 +489,10 @@
 							</thead>
 							<tbody class="text-center">
 								<c:forEach var="vaga" items="${vagas}">
-									<tr>
-									<td>${vaga.nomeVaga}</td>
+									<tr position="infoVaga">
+									<td id="linhaNome">${vaga.nomeVaga}</td>
 									<td>${vaga.nomeSolicitante}</td>
-									<td>${vaga.projetoBean.cliente.nome}</td>
+									<td>${vaga.projeto.cliente.nome}</td>
 									<td>
 										<c:if test="${vaga.localTrabalho == 73}" >
 										     Interno
@@ -491,8 +502,8 @@
 										</c:if>
 
 									</td>
-									<td>${vaga.dataAbertura}</td>
-									<td><span id="tdStatus" class="label label-contratado">Ativo</span></td>
+									<td id="linhaData">${vaga.dataAbertura}</td>
+									<td id="linhaStatus"><span class="label status span-${vaga.ultimoStatus.status.nome}">${vaga.ultimoStatus.status.nome}</span></td>
 									<td>
 										<div class="btn-group">
 											<button class="btn btn-sm btn-info dropdown-toggle"
@@ -599,6 +610,11 @@
 	
 	
 	<script type="text/javascript">
+	//linhaStatus
+	//span-[status]
+	$(".span-Fechado").addClass("label-warning");
+	$(".span-Ativo").addClass("label-success");
+	$(".span-Cancelado").addClass("label-danger");
 	
 	function info(listaId){
 		
@@ -620,36 +636,40 @@
     			$('input#dataFechamento').val(lista.dataFechamento);
     			$('input#candidatos').val(lista.numeroCandidatos);
     			
+    			if(lista.localTrabalho == 'C') {
+    				//$("#cliente").attr('checked', 'checked');
+    				$("#lblLocal").text('Cliente')
+    			} else {
+    				//$("#interno").attr('checked', 'checked');
+    				$("#lblLocal").text('Interno')
+    			}
+    			if(lista.idTipoVaga == 'H') { 
+    				$("#tpVaga").text('Hunting')
+    			} else if(lista.idTipoVaga == 'P') {
+    				$("#tpVaga").text('Prospecção')
+    			} else {
+    				$("#tpVaga").text('Real')
+    			}
+    			if(lista.aumentaQuadro == 'N') {
+    				$("#lblQuadro").text('Novo');
+    				$("#substituido").hide();
+    				$("#substituidoId").hide();
+       			} else {
+       				$("#lblQuadro").text('Substituição')
+       				$("#substituido").show();
+    				$("#substituidoId").show();
+    			}
+    			
     			$('input#solicitante').val(lista.nomeSolicitante);
     			
-    			if(lista.localTrabalho == 'C') {
-    				$("#cliente").attr('checked', 'checked');
-    			} else {
-    				$("#interno").attr('checked', 'checked');
-    			}
     			
     			$('input#cargo').val(lista.cargoBean.nome);
     			
-    			//$('input#tipo').val(lista.idTipoVaga);
-    			if(lista.idTipoVaga == 'H') {
-    				$("#hunting").attr('checked', 'checked');
-    			} else if(lista.idTipoVaga == 'P') {
-    				$("#prospeccao").attr('checked', 'checked');
-    			} else {
-    				$("#real").attr('checked', 'checked');
-    			}
     			
     			$('input#senioridade').val(lista.senioridadeBean.nome);
     			$('input#horaEntrada').val(lista.horarioEntrada);
     			$('input#horaSaida').val(lista.horarioSaida);
     			$('input#pretensao').val(lista.valorPretensao);
-    			
-    			
-    			if(lista.aumentaQuadro == 'S') {
-    				$("#sub").attr('checked', 'checked');
-    			} else {
-    				$("#novo").attr('checked', 'checked');
-    			}
     			
     			$('input#dataInicio').val(lista.dataInicio);
     			$('input#substituido').val(lista.nomeSubstituido);
@@ -660,12 +680,36 @@
     		}
     	})
     } 
+	function imprimir(){
+	//document.getElementById("Print").onclick = function() {
+	    printElement(document.getElementById("PrintThis"));
+	//};
+	}
+
+	function printElement(elem) {
+	    var domClone = elem.cloneNode(true);
+
+	    var $printSection = document.getElementById("printSection");
+
+	    if (!$printSection) {
+	        var $printSection = document.createElement("div");
+	        $printSection.id = "printSection";
+	        document.body.appendChild($printSection);
+	    }
+
+	    $printSection.innerHTML = "";
+	    $printSection.appendChild(domClone);
+	    window.print();
+	}
 	
+	function mudarQuadro() {
+		var $quadro = document.getElementById("lblQuadro");
+		var $sub = document.getElementById("substituido");
+		
+		
+	}
 	
 	
 	</script>
-	
-	
-	
-</body>
-</html>
+	</body>
+	</html>

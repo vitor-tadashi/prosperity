@@ -37,7 +37,6 @@
 	</div>
 	<input type="hidden" id="idPerfil" value="${autenticado.perfil.id }">
 	<!-- /top-nav-->
-
 	<aside class="fixed skin-6">
 		<div class="sidebar-inner scrollable-sidebar">
 			<div class="size-toggle">
@@ -49,7 +48,7 @@
 			</div>
 			<!-- /size-toggle -->
 
-			<div class="main-menu">
+			<div class="main-menu" id="menu-toggle">
 				<ul>
 
 					<li class="openable menu-opcao hide" value="22"><a href="#"> <span class="menu-icon">
@@ -105,12 +104,12 @@
 
 						</ul></li>
 
-					<li><a href="/relatorio"> <span class="menu-icon">
+					<li class="menu-opcao hide" value="21"><a href="/relatorio"> <span class="menu-icon">
 								<i class="fa fa-print fa-lg"></i>
 						</span> <span class="text"> Relatório </span> <span class="menu-hover"></span>
 					</a></li>
 
-					<li class="menu-opcao hide" value="22"><a href="/usuario/listar"> <span
+					<li class="menu-opcao hide" value="15"><a href="/usuario/listar"> <span
 							class="menu-icon"> <i class="fa fa-cogs fa-lg"></i>
 						</span> <span class="text"> Configurações </span> <span
 							class="menu-hover"></span>

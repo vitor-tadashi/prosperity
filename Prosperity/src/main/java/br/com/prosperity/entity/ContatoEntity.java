@@ -1,19 +1,15 @@
 package br.com.prosperity.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbContato")
 public class ContatoEntity {
-	
+
 	/* Mapeamento dos Atributos */
 
 	/* Mapeamento do Id */
@@ -25,18 +21,6 @@ public class ContatoEntity {
 
 	@Column(name = "telefone")
 	private String telefone;
-
-//	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-//	@JoinColumn(name = "idCandidato")
-//	private CandidatoEntity candidato;
-
-//	public CandidatoEntity getCandidato() {
-//		return candidato;
-//	}
-//
-//	public void setCandidato(CandidatoEntity candidato) {
-//		this.candidato = candidato;
-//	}
 
 	public Integer getId() {
 		return id;
@@ -53,6 +37,5 @@ public class ContatoEntity {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-
 
 }

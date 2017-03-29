@@ -1,3 +1,4 @@
+
 package br.com.prosperity.converter;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 		entity.setDataAbertura(bean.getDataAbertura());
 		entity.setDataAprovacao(bean.getDataAprovacao());
 		entity.setDataFechamento(bean.getDataFechamento());
-		entity.setDataInicio(bean.getDataFechamento());
+		entity.setDataInicio(bean.getDataInicio());
 		entity.setDescricaoFormacaoAcademica(bean.getDescricaoFormacaoAcademica());
 		entity.setDescricaoPerfilComportamental(bean.getDescricaoPerfilComportamental());
 		entity.setDescricaoPerfilTecnico(bean.getDescricaoPerfilTecnico());
@@ -48,12 +49,12 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 		entity.setNomeSolicitante(bean.getNomeSolicitante());
 		entity.setNomeSubstituido(bean.getNomeSubstituido());
 		entity.setNumeroCandidatos(bean.getNumeroCandidatos());
-		entity.setProjetoEntity(projetoConverter.convertBeanToEntity(bean.getProjetoBean()));
+		entity.setProjetoEntity(projetoConverter.convertBeanToEntity(bean.getProjeto()));
 		entity.setSenioridadeEntity(senioridadeConverter.convertBeanToEntity(bean.getSenioridadeBean()));
 		entity.setTipoVaga(bean.getIdTipoVaga());
 		entity.setValorPretensao(bean.getValorPretensao());
 		entity.setUsuarioEntity(usuarioConverter.convertBeanToEntity(bean.getUsuarioBean()));
-		entity.setStatusVagaEntity(statusVagaConverter.convertBeanToEntity(bean.getStatusVagaBean()));
+		entity.setStatusVagaEntity(statusVagaConverter.convertBeanToEntity(bean.getStatus()));
 
 		return entity;
 
@@ -83,12 +84,12 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 		bean.setNomeSolicitante(entity.getNomeSolicitante());
 		bean.setNomeSubstituido(entity.getNomeSubstituido());
 		bean.setNumeroCandidatos(entity.getNumeroCandidatos());
-		bean.setProjetoBean(projetoConverter.convertEntityToBean(entity.getProjetoEntity()));
+		bean.setProjeto(projetoConverter.convertEntityToBean(entity.getProjetoEntity()));
 		bean.setSenioridadeBean(senioridadeConverter.convertEntityToBean(entity.getSenioridadeEntity()));
 		bean.setIdTipoVaga(entity.getTipoVaga());
 		bean.setValorPretensao(entity.getValorPretensao());
 		bean.setUsuarioBean(usuarioConverter.convertEntityToBean(entity.getUsuarioEntity()));
-		//bean.setStatusVagaBean(statusVagaConverter.convertEntityToBean(entity.getStatusVagaEntity()));
+		bean.setStatus(statusVagaConverter.convertEntityToBean(entity.getStatusVagaEntity()));
 
 		return bean;
 	}
