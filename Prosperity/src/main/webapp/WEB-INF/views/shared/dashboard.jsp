@@ -63,7 +63,7 @@
 
 						</ul></li>
 
-					<li><a href="/pagina-inicial/"> <span class="menu-icon">
+					<li><a href="/pagina-inicial"> <span class="menu-icon">
 								<i class="fa fa-home fa-lg"></i>
 						</span> <span class="text"> Página inicial </span> <span
 							class="menu-hover"></span>

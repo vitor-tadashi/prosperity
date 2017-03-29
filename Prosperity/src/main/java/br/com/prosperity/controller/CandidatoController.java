@@ -196,7 +196,7 @@ public class CandidatoController {
 		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.obterTodos();
 		model.addAttribute("listaSenioridade", listaSenioridade);
 
-		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.obterTodos();
+		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.findAll();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
 		
 		//avaliadorBusiness.listar();
@@ -237,7 +237,7 @@ public class CandidatoController {
 		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.obterTodos();
 		model.addAttribute("listaSenioridade", listaSenioridade);
 
-		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.obterTodos();
+		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.findAll();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
 
 		// avaliadorBusiness.listar();

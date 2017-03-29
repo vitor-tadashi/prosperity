@@ -3,26 +3,23 @@
 	var nomeFuncionario;
 
 	function abrirModal(action, id) {
-		var idFuncionario;
-		var idPerfil;
 
 		$("#frmUsuario")[0].reset();
 		$('#frmUsuario').parsley().reset();
 
 		if (id != undefined) {
-			$('#myModalLabel').text('Alterar usuário');
+			$('#usuarioLabel').text('Alterar usuário');
 			$('#btnRedefinirSenha').show();
 			$('#btnMudarStatus').show();
 			idUsuario = id;
 			$.ajax({
-				url : "carregar-usuario",
+				url : "carregar-usuario-api",
 				type : "GET",
 				dataType : "JSON",
 				data : {
 					'id' : id
 				},
 				success : function(data) {
-					console.log(data);
 					$('input#id').val(data.id);
 					$('input#usuario').val(data.nome);
 					$('input#email').val(data.email);
@@ -36,14 +33,14 @@
 						$('#btnMudarStatus').removeClass("btn-danger").addClass("btn-primary");
 						ativo = false;
 					}
-					
 					$('select#cmbFuncionario').val(data.funcionario.id);
+					$('select#cmbFuncionario').attr("disabled", "disabled").attr("selected", "selected");
 					$('select#cmbPerfil').val(data.perfil.id);
 					$('#usuario-modal').modal('show');
 				}
 			});
 		} else {
-			$('#myModalLabel').text('Incluir usuário');
+			$('#usuarioLabel').text('Incluir usuário');
 			$('#btnRedefinirSenha').hide();
 			$('#btnMudarStatus').hide();
 			$('#usuario-modal').modal('show');
@@ -57,7 +54,7 @@
 	$("#btnMudarStatus").click(function() {
 		var mensagem;
 		$.ajax({
-			url : "mudar-status",
+			url : "mudar-status-api",
 			type : "POST",
 			dataType : "JSON",
 			data : {'id' : idUsuario},
@@ -69,7 +66,7 @@
 	            	$('#status_'+idUsuario).find('span').text('Inativo').removeClass('label-success').addClass('label-danger');
 	            	mensagem = "Usuário <strong>" + nomeFuncionario + "</strong> DESATIVADO com sucesso!";
 	            }
-	            $('#divAlert').html(mensagem).addClass('alert alert-success');
+	            $('#divAlert').html(mensagem).addClass('alert alert-success').show();
 	            
 	            $('#usuario-modal').modal('hide');
 	            escondeMensagem();
@@ -80,14 +77,14 @@
 	$("#btnRedefinirSenha").click(function() {
 		var mensagem;
 		$.ajax({
-			url : "redefinir-senha",
+			url : "redefinir-senha-api",
 			type : "POST",
 			dataType : "JSON",
 			data : {'id' : idUsuario},
 			error : function() {
 	            $('#usuario-modal').modal('hide');
 	            mensagem = 'A senha do usuário <strong>' + nomeFuncionario + '</strong> foi redefinida com sucesso!'
-	            $('#divAlert').html(mensagem).addClass('alert alert-success');
+	            $('#divAlert').html(mensagem).addClass('alert alert-success').show();
 	            escondeMensagem();
 	        }
 		})
@@ -96,6 +93,6 @@
 	function escondeMensagem() {
 		window.setTimeout(
 		        function () {
-		            $("#divAlert").html('').removeClass('alert alert-success');
+		            $("#divAlert").hide();
 		        }, 5000);
 	}
