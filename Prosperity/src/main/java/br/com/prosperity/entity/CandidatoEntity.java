@@ -217,8 +217,8 @@ public class CandidatoEntity {
 		return curriculo;
 	}
 
-	public void setCurriculo(String curriculo) {
-		this.curriculo = curriculo;
+	public void setCurriculo(String file) {
+		this.curriculo= file;
 	}
 
 	public Date getDataUltimoContato() {
