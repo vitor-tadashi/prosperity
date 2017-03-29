@@ -211,7 +211,7 @@ public class VagaController {
 
 		vagaBusiness.inserir(vagaBean);
 		System.out.println("\n\n\nCadastrado\n\n\n");
-		return "vaga/solicitar-vaga";
+		return "redirect: /solicitar";
 
 	}
 
