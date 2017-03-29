@@ -22,7 +22,6 @@ public class CandidatoCompetenciaEntity {
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "idAvaliacao")
 	private AvaliacaoEntity avaliacao;
-	
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "idCompetencia")
@@ -51,6 +50,5 @@ public class CandidatoCompetenciaEntity {
 	public void setCompetencia(CompetenciaEntity competencia) {
 		this.competencia = competencia;
 	}
-
 
 }
