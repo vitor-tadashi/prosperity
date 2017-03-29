@@ -26,7 +26,7 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	
+
 	<session-config>
 		<session-timeout>60</session-timeout>
 	</session-config>
