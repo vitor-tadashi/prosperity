@@ -8,7 +8,7 @@
 		$('#frmUsuario').parsley().reset();
 
 		if (id != undefined) {
-			$('#myModalLabel').text('Alterar usuário');
+			$('#usuarioLabel').text('Alterar usuário');
 			$('#btnRedefinirSenha').show();
 			$('#btnMudarStatus').show();
 			idUsuario = id;
@@ -40,7 +40,7 @@
 				}
 			});
 		} else {
-			$('#myModalLabel').text('Incluir usuário');
+			$('#usuarioLabel').text('Incluir usuário');
 			$('#btnRedefinirSenha').hide();
 			$('#btnMudarStatus').hide();
 			$('#usuario-modal').modal('show');

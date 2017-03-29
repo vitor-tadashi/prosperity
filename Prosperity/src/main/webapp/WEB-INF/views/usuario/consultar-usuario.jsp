@@ -20,7 +20,7 @@
 	<!-- Modais aqui-->
 	<!-- Modal -->
 	<div class="modal fade" id="usuario-modal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
+		aria-labelledby="usuarioLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -28,7 +28,7 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Novo usuário</h4>
+					<h4 class="modal-title" id="usuarioLabel">Novo usuário</h4>
 				</div>
 				<div class="modal-body">
 					<div class="padding-md">
