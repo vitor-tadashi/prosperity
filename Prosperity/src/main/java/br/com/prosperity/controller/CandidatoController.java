@@ -161,9 +161,29 @@ public class CandidatoController {
 		obterDominiosCandidato(model);
 		model.addAttribute("candidato", candidato);
 
-
 		return "candidato/cadastrar-candidato";
 	}
+	
+	@RequestMapping(value = "editar/salvar", method = RequestMethod.POST)
+	public String salvarEditar(@ModelAttribute("candidatoBean") @Valid CandidatoBean candidatoBean,
+			BindingResult result, Model model) throws BusinessException {
+
+		if (result.hasErrors()) {
+			model.addAttribute("erro", result.getErrorCount());
+			model.addAttribute("listaErros", buildErrorMessage(result.getFieldErrors()));
+			model.addAttribute("candidato", candidatoBean);
+
+			obterDominiosCandidato(model);
+
+			return "candidato/cadastrar-candidato";
+
+		} else {
+			candidatoBusiness.inserir(candidatoBean);
+		}
+		 
+		return "candidato/cadastrar-candidato";
+	}
+	
 
 	@RequestMapping(value = "consultar-rh", method = RequestMethod.GET)
 	public String consultarCandidatoRH(Model model) {
@@ -176,7 +196,7 @@ public class CandidatoController {
 		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.obterTodos();
 		model.addAttribute("listaSenioridade", listaSenioridade);
 
-		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.obterTodos();
+		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.findAll();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
 		
 		//avaliadorBusiness.listar();
@@ -217,7 +237,7 @@ public class CandidatoController {
 		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.obterTodos();
 		model.addAttribute("listaSenioridade", listaSenioridade);
 
-		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.obterTodos();
+		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.findAll();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
 
 		// avaliadorBusiness.listar();

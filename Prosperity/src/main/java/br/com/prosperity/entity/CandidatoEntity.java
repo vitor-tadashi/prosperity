@@ -110,11 +110,11 @@ public class CandidatoEntity {
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "idCandidato")
 	private List<StatusCandidatoEntity> statusCandidatos;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany
 	@JoinColumn(name = "idCandidato")
 	private List<CandidatoCompetenciaEntity> competencias;
 	
@@ -277,7 +277,7 @@ public class CandidatoEntity {
 		this.usuario = usuario;
 	}
 
-	public List<StatusCandidatoEntity> getStatusCandidatos() {
+	/*public List<StatusCandidatoEntity> getStatusCandidatos() {
 		return statusCandidatos;
 	}
 
@@ -292,7 +292,7 @@ public class CandidatoEntity {
 	public void setCompetencias(List<CandidatoCompetenciaEntity> competencias) {
 		this.competencias = competencias;
 	}
-
+*/
 	public  double getValorMin() {
 		return valorMin;
 	}

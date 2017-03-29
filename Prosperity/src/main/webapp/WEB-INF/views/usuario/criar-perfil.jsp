@@ -23,7 +23,7 @@
             <div id="breadcrumb">
                 <ul class="breadcrumb">
                     <li><i class="fa fa-home"></i><a href="/pagina-inicial/"> Home</a></li>
-                    <li>Controle de usuários</li>
+                    <li><a href="listar"> Controle de usuários</a></li>
                     <li class="active">Criar perfil</li>
                 </ul>
             </div>

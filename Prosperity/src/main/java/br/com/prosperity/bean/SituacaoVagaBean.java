@@ -1,7 +1,10 @@
 package br.com.prosperity.bean;
 
+import org.springframework.stereotype.Component;
+
 import br.com.prosperity.enumarator.StatusVagaEnum;
 
+@Component
 public class SituacaoVagaBean {
 	
 	private Integer idVaga;
