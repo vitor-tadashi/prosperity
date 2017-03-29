@@ -258,6 +258,8 @@ insert into tbStatus(nmStatus, tpCss, idTpStatus) values ('Fechado', 'css', 2)
 
 UPDATE tbCandidato set dtAprovacao = '01-01-2017' where idCandidato = 
 
+select * from tbStatusVaga
+select * from tbVaga
 select * from tbStatus
 select * from tbProjeto
 
@@ -277,9 +279,23 @@ DROP COLUMN idStatus;
 
 ALTER TABLE tbVaga ADD idStatusVaga INT FOREIGN KEY REFERENCES tbStatusVaga(idStatusVaga);
 
-<<<<<<< HEAD
-SELECT * FROM tbVaga WHERE nmVaga like '%Anal%'
-=======
+
+<<<<<<< HEAD 
+
+select * from tbVaga
+
+UPDATE tbStatusVaga set idStatus = 17 where idStatusVaga = 8 
+tbVaga.idVaga
+
+SELECT * FROM tbVaga left join tbStatusVaga on tbVaga.idVaga = tbStatusvaga.idVaga
+
+where tbStatusVaga.idStatus = 2  AND tbVaga.idVaga = (SELECT tbVaga.idVaga FROM tbVaga WHERE nmVaga like '%Anal%' AND dtAbertura between '2010-01-01' AND '2017-03-03')
+
+SELECT * FROM tbVaga left join tbStatus
+
+where tbStatus.idTpStatus = 2  AND tbVaga.idVaga = (SELECT tbVaga.idVaga FROM tbVaga WHERE nmVaga like '%Anal%' AND dtAbertura between '2010-01-01' AND '2017-03-03')
+
+select * from tbstatusvaga
 --- Alterando colunas da tabela vaga para tipo TIME 
 
 ALTER TABLE tbVaga
@@ -294,3 +310,15 @@ ADD hrEntrada time(0);
 ALTER TABLE tbVaga
 ADD hrSaida time(0);
 >>>>>>> 8089cece931b468ac2be1a247800cc7750c57c2f
+
+
+select v.idVaga,v.nmVaga,sv.idStatus,s.nmStatus from tbVaga v inner join tbStatusVaga sv on v.idVaga = sv.idVaga
+ inner join tbStatus s on sv.idStatus = s.idStatus
+
+ select * from tbStatus
+
+ select  * from tbStatusVaga
+
+ select * from tbVaga
+
+ update tbStatus set tpCss = '#f2f2f2'

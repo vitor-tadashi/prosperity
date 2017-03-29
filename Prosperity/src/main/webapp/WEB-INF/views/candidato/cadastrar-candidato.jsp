@@ -264,6 +264,7 @@
 
 							</div>
 							<div>
+							<input type="hidden" value="${candidato.id}" name="id">
 								<button class="btn btn-success btn-sm btnAjuste ">Salvar</button>
 							</div>
 						</form>

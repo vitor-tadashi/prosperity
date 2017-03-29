@@ -129,8 +129,8 @@
 													<div>
 														<div class="form-group col-md-2 col-xs-2">
 															<div class="input-group bootstrap-timepicker">
-																	<label id="horaEntrada"
-																	name="horarioEntrada" type="time" style="margin-top: 7px" value=""></label>
+																<label id="horaEntrada" name="horarioEntrada"
+																	type="time" style="margin-top: 7px" value=""></label>
 															</div>
 														</div>
 
@@ -140,8 +140,8 @@
 
 														<div class="form-group col-md-2 col-xs-1">
 															<div class="input-group bootstrap-timepicker">
-																<label id="horaSaida"
-																	name="horaSaida" type="time" style="margin-top: 7px" value=""></label>
+																<label id="horaSaida" name="horaSaida" type="time"
+																	style="margin-top: 7px" value=""></label>
 															</div>
 														</div>
 													</div>
@@ -192,7 +192,8 @@
 													<div id="" class="">
 														<label id="substituidoId">Nome do substituido:</label>
 													</div>
-													<label id="vagaSubstituto" name="nomeSubstituido" style="margin-top: 7px" value=""></label>
+													<label id="vagaSubstituto" name="nomeSubstituido"
+														style="margin-top: 7px" value=""></label>
 												</div>
 											</div>
 										</form>
@@ -276,7 +277,59 @@
 			</div>
 		</div>
 	</div>
+	<!-- Modal aprovar -->
+	<div class="modal fade" id="aprova-modal" data-target="#fecha-modal"
+		tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Fechar">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="modalLabel">Aprovar vaga</h4>
+				</div>
+				<div class="modal-body">Deseja realmente aprovar está vaga?</div>
+				<input class="aprovar-id" type="hidden"> <input
+					class="aprovar-status" type="hidden">
+				<div class="modal-footer">
+					<a href="#">
+						<button id="aprovaVaga" onclick="status()" type="button"
+							class="btn btn-primary" data-dismiss="modal">Sim</button>
+					</a>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /.modal fechar-->
 
+	<!-- Modal reprovar -->
+	<div class="modal fade" id="reprova-modal" data-target="#fecha-modal"
+		tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Fechar">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="modalLabel">Reprovar vaga</h4>
+				</div>
+				<div class="modal-body">Deseja realmente reprovar está vaga?</div>
+				<input class="reprovar-id" type="hidden"> <input
+					class="reprovar-status" type="hidden">
+				<div class="modal-footer">
+					<a href="#">
+						<button id="reprovaVaga" type="button" onclick="status()"
+							class="btn btn-primary" data-dismiss="modal">Sim</button>
+					</a>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /.modal fechar-->
 	<!-- CORPO DA PÁGINA -->
 	<div id="main-container">
 		<div id="breadcrumb">
@@ -341,15 +394,16 @@
 														class="fa fa-eye fa-lg">&nbsp</i>Visualizar
 												</a></li>
 												<li role="separator" class="divider"></li>
-												<li><c:url
-														value="editar/${vaga.id}"
-														var="myURL">
+												<li><c:url value="editar/${vaga.id}" var="myURL">
 													</c:url> <a href="${myURL}"><i class="fa fa-pencil"></i> Editar</a></li>
 												<li role="separator" class="divider"></li>
-												<li><a href="#"><i class="fa fa-check"></i>
-														Aprovar</a></li>
+												<li><a href="#aprova-modal"
+													onclick="alterarStatus(${vaga.id}, 'ACEITO')"
+													data-toggle="modal"><i class="fa fa-check"></i> Aprovar</a></li>
 												<li role="separator" class="divider"></li>
-												<li><a href="#"><i class="fa fa-times"></i>
+												<li><a href="#reprova-modal"
+													onclick="alterarStatus(${vaga.id}, 'RECUSADO')"
+													data-toggle="modal"><i class="fa fa-times"></i>
 														Reprovar</a></li>
 
 											</ul>
@@ -450,8 +504,25 @@
 	    window.print();
 	}
 	
-	
+	function status(){
+    	$.ajax({
+    		url: "status",
+    		type: "POST",
+    		dataType: "JSON",
+    		data: { 'idVaga' : $('.aprovar-id').val(), 'status' : $('.aprovar-status').val()},
+    		success: function(){
+    				location.reload();	
+    			}
+    	});
+    	}
+	function alterarStatus(id,status){
+		$('input.aprovar-id').val(id);
+		$('input.aprovar-status').val(status);
+
+		$('input.reprovar-id').val(id);
+		$('input.reprovar-status').val(status);
+		
+	}
 </script>
-	</script>
 </body>
 </html>
