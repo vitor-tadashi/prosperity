@@ -43,6 +43,10 @@
 
 							</c:forEach>
 						</div>
+							<div id="textDiv1"></div>
+								<div id="textDiv2"></div>
+								<div id="textDiv3"></div>
+								
 						<form class="form-border" action="salvar" method="post"
 							id=formCadastro onsubmit="return Validar()"<%--data-validate="parsley" --%>>
 							<div class="panel-tab clearfix">
@@ -91,7 +95,8 @@
 													nascimento</label> <input type="text"
 													class="form-control date parsley-validated"
 													data-required="true" name="dataNascimento"
-													id="dataNascimento" value="${candidato.dataNascimento}">
+													id="dataNascimento" value="${candidato.dataNascimento}"
+													onblur="validarData(this.value)">
 											</div>
 											<div class="form-group col-md-2">
 												<label for="telefone" class="control-label">Telefone</label>
@@ -155,13 +160,13 @@
 											<label for="curso">Curso</label> <input type="text"
 												class="form-control" id="curso" name="formacao.curso"
 												placeholder="Informe seu curso"
-												value="">
+												value="${candidato.formacao.nomeCurso}">
 										</div>
 										<div class="form-group col-md-5">
 											<label for="instituicao">Instituição</label> <input
 												type="text" class="form-control" id="instituicao"
 												name="formacao.nomeInstituicao" placeholder="Instituição"
-												value="">
+												value="${candidato.formacao.nomeInstituicao}">
 										</div>
 										<div class="form-group col-md-3">
 											<label for="tipoDeCurso">Tipo de curso</label> <select
@@ -169,7 +174,8 @@
 												name="formacao.tipoCurso.id">
 												<!-- FAZER FOREACH  -->
 												<c:forEach var="tipoCurso" items="${tiposCurso}">
-													<option>${tipoCurso.nome}</option>
+													<option value="${tipoCurso.id}"
+														${tipoCurso.id == candidato.formacao.tipoCurso.id ? 'selected="selected"' : ''}>${tipoCurso.nome}</option>
 												</c:forEach>
 
 											</select>
@@ -178,9 +184,9 @@
 											<label for="situacaoAtual">Situação atual</label> <select
 												class="form-control" id="situacaoAtual"
 												name="formacao.SituacaoAtual.id">
-												<c:forEach var="situacaoAtual" items="${listaSituacaoAtual}"
->
-													<option>${situacaoAtual.descricao}${situacaoAtual.id == candidato.formacao.situacaoAtual.id ? 'selected="selected"' : ''}</option>
+												<c:forEach var="situacaoAtual" items="${listaSituacaoAtual}">
+													<option value="${situacaoAtual.id}"
+														${situacaoAtual.id == candidato.formacao.situacaoAtual.id ? 'selected="selected"' : ''}>${situacaoAtual.descricao}</option>
 												</c:forEach>
 											</select>
 										</div>
@@ -188,7 +194,8 @@
 											<label for="mesAnoConclusao">Data de conclusão</label> <input
 												type="text" class="form-control date" id="mesAnoConclusao"
 												data-required="false" name="formacao.dataConclusao"
-												value="">
+												onblur="validarData(this.value)"
+												value="${candidato.formacao.dataConclusao}">
 										</div>
 									</div>
 									<div class="tab-pane fade" id="third">
@@ -201,14 +208,15 @@
 												<div class="col-md-2">
 													<input type="text" class="form-control dinheiro"
 														id="pretensaoSalarial" placeholder="R$" name="valorMin"
-														value="" />
+														value="${candidato.valorMin}" />
 												</div>
 												<div class="col-sm-1">
 													<p class="text-center">até</p>
 												</div>
 												<div class="col-md-2">
 													<input type="text" class="form-control dinheiro"
-														placeholder="R$" name="valorMax" value="" />
+														placeholder="R$" name="valorMax"
+														value="${candidato.valorMax}" />
 												</div>
 											</div>
 										</div>
@@ -216,7 +224,8 @@
 											<label for="vagaASerAplicado">Vaga a ser aplicado</label> <select
 												class="form-control" id="vaga" name="vaga.nomeVaga.id">
 												<c:forEach var="vaga" items="${listaVaga}">
-													<option value="">${vaga.nomeVaga}</option>
+													<option value="${vaga.id}"
+														${vaga.id == candidato.vagaCandidatoBean.vaga.nomeVaga.id ? 'selected="selected"' : ''}>${vaga.nomeVaga}</option>
 												</c:forEach>
 											</select>
 										</div>
@@ -226,7 +235,7 @@
 												name="vaga.vagaCandidato.canalInformacao.id">
 												<c:forEach var="canalInformacao" items="${listaCanal}">
 													<option value="${canalInformacao.id}"
-														${canalInformacao.id == candidato.vagaCandidato.canalInformacao.id ? 'selected="selected"' : ''}>${canalInformacao.nome}</option>
+														${canalInformacao.id == candidato.vagaCandidatoBean.canalInformacao.id ? 'selected="selected"' : ''}>${canalInformacao.nome}</option>
 												</c:forEach>
 											</select>
 										</div>
@@ -235,13 +244,16 @@
 												<label for="dataUltimoContato" class="control-label">Data
 													de ultimo contato</label> <input type="text"
 													class="form-control date" name="dataConclusao"
-													data-required="false" id="dataUltimoContato" value="">
+													onblur="validarData(this.value)" data-required="false"
+													id="dataUltimoContato"
+													value="${candidato.dataUltimoContato }">
 											</div>
 											<div class="form-group col-md-2 col-sm-4">
 												<label for="entrevista" class="control-label">Data
 													de Entrevista</label> <input type="text" class="form-control date"
 													data-required="false" name="entrevista" id="entrevista"
-													value="">
+													onblur="validarData(this.value)"
+													value="${candidato.entrevista}">
 											</div>
 										</div>
 
@@ -295,7 +307,11 @@
 			else {
 				//CEP não Encontrado.
 				limpa_formulário_cep();
-				alert("CEP não encontrado.");
+				var div = document.getElementById("textDiv").className = "alert alert-danger";
+
+				textDiv.textContent = "CEP inválido";
+
+				var text = "[" + div.textContent + "]";
 			}
 		}
 
@@ -325,12 +341,22 @@
 				else {
 					//cep é inválido.
 					limpa_formulário_cep();
-					alert("Formato de CEP inválido.");
+					var div = document.getElementById("textDiv").className = "alert alert-danger";
+
+    				textDiv.textContent = "CEP inválido";
+
+    				var text = "[" + div.textContent + "]";
 				}
+				var div = document.getElementById("textDiv").className = "alert alert-danger";
+
+				textDiv.textContent = "";
+
+				var text = "[" + div.textContent + "]";
 			} //end if.
 			else {
 				//cep sem valor, limpa formulário.
 				limpa_formulário_cep();
+				
 			}
 		};
 	</script>
@@ -350,9 +376,9 @@
 					+ strCPF.substring(8, 11) + strCPF.substring(12, 14);
 			Soma = 0;
 			if (strCPF == "00000000000") {
-				var div = document.getElementById("textDiv").className = "alert alert-danger text-center";
+				var div = document.getElementById("textDiv1").className = "alert alert-danger";
 
-				textDiv.textContent = "CPF inválido.";
+				textDiv1.textContent = "CPF inválido.";
 
 				var text = "[" + div.textContent + "]";
 				return false;
@@ -369,9 +395,9 @@
 			}
 
 			if (Resto != parseInt(strCPF.substring(9, 10))) {
-				var div = document.getElementById("textDiv").className = "alert alert-danger text-center";
+				var div = document.getElementById("textDiv1").className = "alert alert-danger";
 
-				textDiv.textContent = "CPF inválido.";
+				textDiv1.textContent = "CPF inválido.";
 
 				var text = "[" + div.textContent + "]";
 				return false
@@ -389,21 +415,70 @@
 			}
 
 			if (Resto != parseInt(strCPF.substring(10, 11))) {
-				var div = document.getElementById("textDiv").className = "alert alert-danger text-center";
+				var div = document.getElementById("textDiv1").className = "alert alert-danger ";
 
-				textDiv.textContent = "CPF inválido.";
+				textDiv1.textContent = "CPF inválido.";
 
 				var text = "[" + div.textContent + "]";
 				return false;
 			}
-			var div = document.getElementById("textDiv").className = "";
+			var div = document.getElementById("textDiv1").className = "";
 
-			textDiv.textContent = "";
+			textDiv1.textContent = "";
 
 			var text = "[" + div.textContent + "]";
 			return true;
 		}
 	</script>
+	<script type="text/javascript">
+		function validarData(id) {
+			
+			var campo = $('#dataNascimento').val();
+			   if (campo!="")
+			{
+			        erro=0;
+			        hoje = new Date();
+			        anoAtual = hoje.getFullYear();
+			        barras = campo.split("/");
+			        if (barras.length == 3)
+			        {
+			                dia = barras[0];
+			                mes = barras[1];
+			                ano = barras[2];
+			                resultado = (!isNaN(dia) && (dia > 0) && (dia < 32)) && (!isNaN(mes) && (mes > 0) && (mes < 13)) && (!isNaN(ano) && (ano.length == 4) && (ano <= anoAtual && ano >= 1900));
+			                if (!resultado)
+			                {
+			                	var div = document.getElementById("textDiv2").className = "alert alert-danger";
 
+			    				textDiv2.textContent = "Data inválida";
+
+			    				var text = "[" + div.textContent + "]";
+			                        campo.focus();
+			                        return false;
+			                }
+			         }
+			         else
+			         {
+			        		var div = document.getElementById("textDiv").className = "";
+
+			    			textDiv2.textContent = "Data inválida";
+
+			    			var text = "[" + div.textContent + "]";
+			                campo.focus();
+			                return false;
+			         }
+			        var div = document.getElementById("textDiv2").className = "";
+
+	    			textDiv2.textContent = "";
+
+	    			var text = "[" + div.textContent + "]";
+	                campo.focus();
+			return true;
+			
+			}
+		}
+			
+
+	</script>
 </body>
 </html>

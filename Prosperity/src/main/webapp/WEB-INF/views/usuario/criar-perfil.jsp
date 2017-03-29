@@ -23,7 +23,7 @@
             <div id="breadcrumb">
                 <ul class="breadcrumb">
                     <li><i class="fa fa-home"></i><a href="/pagina-inicial/"> Home</a></li>
-                    <li>Controle de usuários</li>
+                    <li><a href="listar"> Controle de usuários</a></li>
                     <li class="active">Criar perfil</li>
                 </ul>
             </div>
@@ -51,13 +51,22 @@
                                             </select>
                                         </div>
                                         <br>
-                                        <div class="form-group">
-											<ul>
-												<c:forEach items="${erros }" var="erro">
-													<li style="color: red;"><strong> ${erro }</strong></li>
-												</c:forEach>
-											</ul>
-										</div>
+                                        <c:if test="${not empty erros}">
+	                                        <div class="alert alert-danger">
+												<ul>
+													<c:forEach items="${erros }" var="erro">
+														<li class="li-msg"><strong> ${erro }</strong></li>
+													</c:forEach>
+												</ul>
+											</div>
+										</c:if>
+										<c:if test="${not empty sucesso}">
+											<div id="msg-sucesso" class="alert alert-success">
+												<ul>
+													<li class="li-msg">${sucesso }</li>
+												</ul>
+											</div>
+										</c:if>
                                         <div class="form-group text-center">
                                             <div>
                                                 <label class="label-radio inline">
