@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,11 +31,11 @@ public class StatusVagaEntity {
 	private Integer id;
 	/* fim */
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "idStatus")
 	private StatusEntity status;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
 

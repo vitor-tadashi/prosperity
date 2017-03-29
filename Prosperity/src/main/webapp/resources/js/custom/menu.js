@@ -1,5 +1,4 @@
 $(function() {
-	$("body").css("visibility","hidden");
 	var id = $("input#idPerfil").val();
 	$.ajax({
 		url : "http://localhost:8080/usuario/obter-perfil-funcionalidade",
@@ -18,7 +17,7 @@ $(function() {
 					});
 				});
 			}
+			$("#menu-toggle").css("visibility", "visible");
 		}
 	});
-	$("body").css("visibility","visible");
 });

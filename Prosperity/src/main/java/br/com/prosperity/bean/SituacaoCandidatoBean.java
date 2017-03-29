@@ -1,7 +1,10 @@
 package br.com.prosperity.bean;
 
+import org.springframework.stereotype.Component;
+
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
 
+@Component
 public class SituacaoCandidatoBean {
 
 	private Integer idCandidato;

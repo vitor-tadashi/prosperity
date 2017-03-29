@@ -1,4 +1,4 @@
-	package br.com.prosperity.controller;
+package br.com.prosperity.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -96,7 +97,9 @@ public class CandidatoController {
 	
 	@Autowired
 	private AvaliadorBusiness avaliadorBusiness;
-	
+	@Autowired
+	private SituacaoCandidatoBean situacaoCandidatoBean;
+
 	/**
 	 * @author thamires.miranda
 	 * @param model
@@ -139,12 +142,24 @@ public class CandidatoController {
 			candidatoBusiness.inserir(candidatoBean);
 		}
 
-		// SituacaoCandidatoBean situacaoCandidatoBean = new
-		// SituacaoCandidatoBean();
-		// situacaoCandidatoBean.setIdCandidato(candidatoBean.getId());
-		// situacaoCandidatoBean.setStatus(StatusCandidatoEnum.CANDIDATURA);
-		//
-		// candidatoBusiness.alterarStatus(situacaoCandidatoBean);
+		/*
+		 * candidatoBean =
+		 * candidatoBusiness.obterPorCPF(candidatoBean.getCpf());
+		 * 
+		 * situacaoCandidatoBean.setIdCandidato(candidatoBean.getId());
+		 * situacaoCandidatoBean.setStatus(StatusCandidatoEnum.CANDIDATURA);
+		 * 
+		 * candidatoBusiness.alterarStatus(situacaoCandidatoBean);
+		 */
+
+		return "candidato/cadastrar-candidato";
+	}
+
+	@RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
+	public String solicitarCandidato(Model model, @PathVariable Integer id) {
+		CandidatoBean candidato = candidatoBusiness.obterCandidatoPorId(id);
+		obterDominiosCandidato(model);
+		model.addAttribute("candidato", candidato);
 
 
 		return "candidato/cadastrar-candidato";
@@ -204,9 +219,8 @@ public class CandidatoController {
 
 		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.obterTodos();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
-		
-		//avaliadorBusiness.listar();
 
+		// avaliadorBusiness.listar();
 
 		return "candidato/consulta-rh";}
 	
