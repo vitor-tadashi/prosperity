@@ -15,6 +15,9 @@ public class ContatoConverter implements Converter<ContatoEntity, ContatoBean> {
 	
 	@Override
 	public ContatoEntity convertBeanToEntity(ContatoBean bean) {
+		if (bean == null) {
+			return null;
+		}
 		ContatoEntity entity = new ContatoEntity();
 		entity.setId(bean.getId());
 		entity.setTelefone(bean.getTelefone());

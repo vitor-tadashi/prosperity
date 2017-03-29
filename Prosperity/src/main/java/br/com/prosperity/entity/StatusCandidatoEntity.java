@@ -25,7 +25,7 @@ public class StatusCandidatoEntity {
 	@Column(name = "idStatusCandidato", unique = true, nullable = false)
 	private Integer idStatusCandidato;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idCandidato")
 	private CandidatoEntity candidato;
 

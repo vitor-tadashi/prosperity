@@ -293,19 +293,19 @@ public class CandidatoEntity {
 		this.competencias = competencias;
 	}
 */
-	public  double getValorMin() {
+	public  Double getValorMin() {
 		return valorMin;
 	}
 
-	public void setValorMin(double valorMin) {
+	public void setValorMin(Double valorMin) {
 		this.valorMin = valorMin;
 	}
 
-	public  double getValorMax() {
+	public  Double getValorMax() {
 		return valorMax;
 	}
 
-	public void setValorMax(double valorMax) {
+	public void setValorMax(Double valorMax) {
 		this.valorMax = valorMax;
 	}
 	

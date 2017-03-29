@@ -162,10 +162,11 @@ public class CandidatoBusiness extends FormatUtil {
 
 	private StatusCandidatoEntity alterarStatus1(SituacaoCandidatoBean situacaoCandidato) {
 		StatusCandidatoEntity statusCandidatoEntity = new StatusCandidatoEntity();
-
+		
 		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
 		statusCandidatoEntity.setStatus(statusDAO.findById(situacaoCandidato.getStatus().getValue()));
-		statusCandidatoEntity.getCandidato().setId(situacaoCandidato.getIdCandidato());
+		candidatoBean.setId(situacaoCandidato.getIdCandidato());
+		statusCandidatoEntity.setCandidato(candidatoConverter.convertBeanToEntity(candidatoBean));
 		statusCandidatoEntity.setDsParecer(situacaoCandidato.getParecer());
 		statusCandidatoEntity.setDtAlteracao(new Date());
 		statusCandidatoEntity.setUsuario(usuarioDAO.findById(usuarioBean.getId()));
