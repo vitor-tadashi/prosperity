@@ -67,10 +67,10 @@ public class VagaBean {
 		return ultimoStatus;
 	}
 
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataAberturaDe;
 
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataAberturaPara;
 
 	public Date getDataAberturaDe() {
