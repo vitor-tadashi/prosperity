@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,9 +24,14 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "tbVaga")
 @NamedQueries({ @NamedQuery(name = "obterTodos", query = "SELECT u FROM VagaEntity u WHERE u.nomeVaga = ?1"),
-	@NamedQuery(name="listarVagaFiltrado", query="SELECT u FROM VagaEntity u WHERE u.nomeVaga like ?1 AND u.dataAbertura BETWEEN ?1 AND ?1")
-	
+
+	//@NamedQuery(name="listarVagaFiltrado", query="SELECT u FROM VagaEntity u WHERE u.nomeVaga like ?1 AND u.dataAbertura BETWEEN ?1 AND ?1"),
+	@NamedQuery(name="obterPorId", query="SELECT u FROM VagaEntity u WHERE u.id = ?1"),
+
+	@NamedQuery(name="listarVagaFiltrado", query="SELECT u FROM VagaEntity u WHERE u.nomeVaga like ?1 AND u.dataAbertura BETWEEN ?2 AND ?3")
+
 })
+
 public class VagaEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -105,8 +111,8 @@ public class VagaEntity {
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuarioEntity;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "idStatusVaga")
+	@OneToMany(cascade = CascadeType.ALL , fetch=FetchType.EAGER)
+	@JoinColumn(name = "idVaga")
 	private List<StatusVagaEntity> statusVagaEntity;
 
 	// @ManyToOne(cascade = CascadeType.ALL)

@@ -7,11 +7,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbStatus")
-
+@NamedQuery(name="alterarStatus", query="SELECT u FROM StatusEntity u LEFT OUTER JOIN u.tipoStatus p WHERE p.id= 2")
 public class StatusEntity {
 
 	@Id

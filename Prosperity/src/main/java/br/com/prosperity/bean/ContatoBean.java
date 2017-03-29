@@ -1,7 +1,5 @@
 package br.com.prosperity.bean;
 
-import javax.validation.constraints.NotNull;
-
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
 
@@ -11,10 +9,9 @@ import br.com.prosperity.util.FormatUtil;
 public class ContatoBean extends FormatUtil {
 
 	private Integer id;
-	
-	@NotEmpty(message="O campo telefone deve ser prenchido")
+
+	@NotEmpty(message = "O campo telefone deve ser prenchido")
 	private String telefone;
-	private CandidatoBean candidato;
 
 	public Integer getId() {
 		return id;
@@ -31,13 +28,4 @@ public class ContatoBean extends FormatUtil {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-
-	public CandidatoBean getCandidato() {
-		return candidato;
-	}
-
-	public void setCandidato(CandidatoBean candidato) {
-		this.candidato = candidato;
-	}
-
 }

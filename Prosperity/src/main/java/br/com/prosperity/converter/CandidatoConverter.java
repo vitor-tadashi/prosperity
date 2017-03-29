@@ -40,7 +40,7 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 
 		entity.setId(bean.getId());
 		entity.setCpf(bean.getCpf());
-		entity.setCurriculo(bean.getCurriculo());
+		//entity.setCurriculo(bean.getCurriculo());
 		entity.setEmail(bean.getEmail());
 		entity.setNome(bean.getNome());
 		entity.setRg(bean.getRg());
@@ -75,7 +75,7 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 
 		bean.setId(entity.getId());
 		bean.setCpf(entity.getCpf());
-		bean.setCurriculo(entity.getCurriculo());
+		//bean.setCurriculo(entity.getCurriculo());
 		bean.setEmail(entity.getEmail());
 		bean.setNome(entity.getNome());
 		bean.setRg(entity.getRg());
