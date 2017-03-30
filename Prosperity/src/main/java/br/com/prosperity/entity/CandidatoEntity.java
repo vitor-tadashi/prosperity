@@ -117,6 +117,22 @@ public class CandidatoEntity {
 	@JoinColumn(name = "idCandidato")
 	private List<StatusCandidatoEntity> statusCandidatos;
 
+	public List<StatusCandidatoEntity> getStatusCandidatos() {
+		return statusCandidatos;
+	}
+
+	public void setStatusCandidatos(List<StatusCandidatoEntity> statusCandidatos) {
+		this.statusCandidatos = statusCandidatos;
+	}
+
+	public List<CandidatoCompetenciaEntity> getCompetencias() {
+		return competencias;
+	}
+
+	public void setCompetencias(List<CandidatoCompetenciaEntity> competencias) {
+		this.competencias = competencias;
+	}
+
 	@OneToMany
 	@JoinColumn(name = "idCandidato")
 	private List<CandidatoCompetenciaEntity> competencias;
