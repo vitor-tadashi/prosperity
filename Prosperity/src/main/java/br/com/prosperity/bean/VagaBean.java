@@ -61,7 +61,7 @@ public class VagaBean {
 			ultimoStatus = status.stream().filter(st -> st.getDataAlteracao().equals(dataUltimoStatus)).findFirst()
 					.get();
 		} else { 	
-			ultimoStatus = new StatusVagaBean("Não possui status");
+			ultimoStatus = new StatusVagaBean("Pendente");
 		}
 
 		return ultimoStatus;

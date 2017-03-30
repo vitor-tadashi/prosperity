@@ -20,11 +20,9 @@ import br.com.prosperity.dao.StatusVagaDAO;
 import br.com.prosperity.dao.UsuarioDAO;
 import br.com.prosperity.dao.VagaDAO;
 import br.com.prosperity.entity.CargoEntity;
-import br.com.prosperity.entity.PerfilEntity;
 import br.com.prosperity.entity.SenioridadeEntity;
 import br.com.prosperity.entity.StatusVagaEntity;
 import br.com.prosperity.entity.VagaEntity;
-import br.com.prosperity.exception.BusinessException;
 
 @Component
 public class VagaBusiness {
@@ -73,7 +71,13 @@ public class VagaBusiness {
 	}
 	@Transactional(readOnly = true)
 	public List<VagaBean> filtrarVagas(VagaBean vagao) {
-		List<VagaEntity> vagas = vagaDAO.findByNamedQuery("listarVagaFiltrado", vagao.getStatus().get(0).getStatus().getNome());
+		Integer idStatus = 0;
+		if(!vagao.getStatus().get(0).getStatus().getNome().equals("")){
+			idStatus = Integer.parseInt(vagao.getStatus().get(0).getStatus().getNome());
+		}
+//		List<VagaEntity> vagas = vagaDAO.findByNamedQuery("listarVagaFiltrado", "%"+vagao.getNomeVaga()+"%", vagao.getDataAberturaDe(), vagao.getDataAberturaPara(), idStatus);
+     	List<VagaEntity> vagas = vagaDAO.findByNamedQuery("listarVagaFiltrado", "%"+vagao.getNomeVaga()+"%",idStatus, parseData(vagao.getDataAberturaDe()), parseData(vagao.getDataAberturaPara()));
+
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagas);
  		return vagaBean;
 
@@ -168,4 +172,20 @@ public class VagaBusiness {
 
 		statusVagaDAO.insert(statusVagaEntity);
 	}
+	
+	private Date parseData(Date dataAntiga){
+		SimpleDateFormat novaData = new SimpleDateFormat("yyyy-MM-dd");
+		
+		String data = "";
+		try{  
+			data = novaData.format(dataAntiga);
+			return novaData.parse(data);
+		}catch(ParseException e) {  
+		    e.printStackTrace();  //imprimi a stack trace
+		}  
+		return dataAntiga;
+	}
+	
 }
+
+
