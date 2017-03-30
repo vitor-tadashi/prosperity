@@ -478,9 +478,9 @@
 									<div class="col-md-3">
 										<label for="exampleInputEmail1">Data:</label>
 										<div class="input-group">
-											<input type="date" class="form-control"> <span
+											<input type="date" name="dataAberturaDe" class="form-control"> <span
 												class="input-group-addon">até</span> <input type="date"
-												class="form-control">
+												name="dataAberturaPara" class="form-control">
 										</div>
 									</div>
 									<div class="col-md-2 col-md-offset-1">
