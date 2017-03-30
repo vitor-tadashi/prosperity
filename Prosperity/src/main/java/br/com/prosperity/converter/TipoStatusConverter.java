@@ -6,30 +6,31 @@ import br.com.prosperity.bean.TipoStatusBean;
 import br.com.prosperity.entity.TipoStatusEntity;
 
 @Component
-public class TipoStatusConverter implements Converter <TipoStatusEntity, TipoStatusBean> {
+public class TipoStatusConverter implements Converter<TipoStatusEntity, TipoStatusBean> {
 
 	@Override
 	public TipoStatusEntity convertBeanToEntity(TipoStatusBean bean) {
-		// TODO Auto-generated method stub
+		if (bean == null) {
+			return null;
+		}
 		TipoStatusEntity entity = new TipoStatusEntity();
-		if (bean == null){
-			entity = null;
-		} else {
+
 		entity.setId(bean.getId());
 		entity.setNome(bean.getStatus());
-		}
+
 		return entity;
 	}
 
 	@Override
 	public TipoStatusBean convertEntityToBean(TipoStatusEntity entity) {
+		if (entity == null) {
+			return null;
+		}
 		TipoStatusBean bean = new TipoStatusBean();
-		if (entity == null){
-			bean = null;
-		} else {
+
 		bean.setId(entity.getId());
 		bean.setStatus(entity.getNome());
-		}
+
 		return bean;
 	}
 }

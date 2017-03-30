@@ -2,7 +2,6 @@ package br.com.prosperity.converter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.entity.CandidatoEntity;
 
@@ -98,10 +97,10 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		bean.setDataNascimento(entity.getDataNascimento());
 		bean.setContato(contatoConverter.convertEntityToBean(entity.getContato()));
 		bean.setEndereco(enderecoConverter.convertEntityToBean(entity.getEndereco()));
-		//bean.setCompetencias(candidatoCompetenciaConverter.convertEntityToBean(entity.getCompetencias()));
+		bean.setCompetencias(candidatoCompetenciaConverter.convertEntityToBean(entity.getCompetencias()));
 		bean.setFormacao(formacaoConverter.convertEntityToBean(entity.getFormacao()));
 		bean.setUsuario(usuarioConverter.convertEntityToBean(entity.getUsuario()));
-		//bean.setStatus(statusCandidatoConverter.convertEntityToBean(entity.getStatusCandidatos()));
+		bean.setStatus(statusCandidatoConverter.convertEntityToBean(entity.getStatusCandidatos()));
 		bean.setEntrevista(entity.getDataEntrevista());
 		bean.setDataUltimoContato(entity.getDataUltimoContato());
 		bean.setProposta(entity.getProposta());

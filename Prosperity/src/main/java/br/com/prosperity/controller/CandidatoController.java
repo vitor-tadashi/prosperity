@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.prosperity.bean.AvaliacaoBean;
+import br.com.prosperity.bean.AvaliadorBean;
 import br.com.prosperity.bean.CanalInformacaoBean;
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CandidatoCompetenciaBean;
@@ -65,6 +66,9 @@ public class CandidatoController {
 
 	@Autowired
 	private List<CandidatoCompetenciaBean> competencias;
+	
+	@Autowired
+	private List<AvaliadorBean> avaliadores;
 
 	@Autowired
 	private TipoCursoBusiness tipoCursoBusiness;
@@ -251,7 +255,7 @@ public class CandidatoController {
 
 	@RequestMapping(value = "historico", method = RequestMethod.GET)
 	public String historicoCandidato(Model model) {
-		CandidatoBean candidatoBean = candidatoBusiness.obter(2);
+		CandidatoBean candidatoBean = candidatoBusiness.obter(73);
 
 		model.addAttribute("candidato", candidatoBean);
 

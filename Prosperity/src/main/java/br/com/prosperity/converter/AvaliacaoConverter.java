@@ -10,6 +10,9 @@ public class AvaliacaoConverter implements Converter<AvaliacaoEntity, AvaliacaoB
 
 	@Override
 	public AvaliacaoEntity convertBeanToEntity(AvaliacaoBean bean) {
+		if (bean == null) {
+			return null;
+		}
 		AvaliacaoEntity entity = new AvaliacaoEntity();
 
 		entity.setId(bean.getId());
@@ -20,6 +23,9 @@ public class AvaliacaoConverter implements Converter<AvaliacaoEntity, AvaliacaoB
 
 	@Override
 	public AvaliacaoBean convertEntityToBean(AvaliacaoEntity entity) {
+		if (entity == null) {
+			return null;
+		}
 		AvaliacaoBean bean = new AvaliacaoBean();
 
 		bean.setId(entity.getId());

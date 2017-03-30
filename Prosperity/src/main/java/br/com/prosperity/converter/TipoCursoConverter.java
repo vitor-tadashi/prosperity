@@ -21,7 +21,6 @@ public class TipoCursoConverter implements Converter<TipoCursoEntity, TipoCursoB
 
 	@Override
 	public TipoCursoBean convertEntityToBean(TipoCursoEntity entity) {
-		
 		if (entity == null) {
 			return null;
 		}

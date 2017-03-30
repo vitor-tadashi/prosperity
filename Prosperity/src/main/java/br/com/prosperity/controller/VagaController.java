@@ -161,14 +161,6 @@ public class VagaController {
 		vagaBusiness.alterarStatus(status);
 		return HttpStatus.OK;
 		}
-	@RequestMapping(value = "reprovar/", method = RequestMethod.POST)
-	public void ReprovarVaga(Model model) {
-		
-		situacaoVaga.setIdVaga(8);
-		situacaoVaga.setStatus(StatusVagaEnum.RECUSADO);
-
-		vagaBusiness.alterarStatus(situacaoVaga);
-	}
 	
 	@RequestMapping(value = "/solicitar", method = RequestMethod.GET)
 	public String solicitarVaga(Model model) {
@@ -233,7 +225,7 @@ public class VagaController {
 
 		vagaBusiness.inserir(vagaBean);
 		System.out.println("\n\n\nCadastrado\n\n\n");
-		return "vaga/solicitar-vaga";
+		return "redirect: /solicitar";
 
 	}
 
