@@ -26,6 +26,9 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "tbCandidato")
+
+//@NamedQuery(name="pesquisarNome", query="SELECT u FROM CandidatoEntity u LEFT OUTER JOIN u.vagaEntity p WHERE p.nomeVaga like ?1")
+
 // @NamedQuery(name="fazerFiltro", query="SELECT u FROM CandidatoEntity u WHERE
 // u.nome = ?1")
 
