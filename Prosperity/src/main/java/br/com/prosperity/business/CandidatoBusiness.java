@@ -92,7 +92,7 @@ public class CandidatoBusiness extends FormatUtil {
 	@Transactional
 	public List<CandidatoBean> obterFiltro(CandidatoBean candidatao) {
 		List<CandidatoEntity> candidatos = candidatoDAO.findByNamedQuery("pesquisarNome",
-				"%" + candidatao.getNome() + "%");
+				"%" + candidatao.getNome() + "%", candidatao.getPretensaoDe(), candidatao.getPretensaoPara());
 		List<CandidatoBean> candidatoBean = candidatoConverter.convertEntityToBean(candidatos);
 		return candidatoBean;
 

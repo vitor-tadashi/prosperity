@@ -64,7 +64,27 @@ public class CandidatoBean  extends FormatUtil {
 	private Double valorMin;
 	private Double valorMax;
 	private StatusCandidatoBean ultimoStatus;
+	private double PretensaoDe;
+	private double PretensaoPara;
 	
+	
+	
+	public double getPretensaoDe() {
+		return PretensaoDe;
+	}
+
+	public void setPretensaoDe(double pretensaoDe) {
+		PretensaoDe = pretensaoDe;
+	}
+
+	public double getPretensaoPara() {
+		return PretensaoPara;
+	}
+
+	public void setPretensaoPara(double pretensaoPara) {
+		PretensaoPara = pretensaoPara;
+	}
+
 	public StatusCandidatoBean getUltimoStatus() {
 		if (status != null && status.size() > 0) {
 			Date dataUltimoStatus = status.stream().map(StatusCandidatoBean::getDataAlteracao).max(Date::compareTo).get();
