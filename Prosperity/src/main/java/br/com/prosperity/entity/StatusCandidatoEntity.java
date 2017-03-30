@@ -19,9 +19,15 @@ import javax.persistence.TemporalType;
 @Table(name = "tbStatusCandidato")
 
 public class StatusCandidatoEntity {
-
-	@Column(name = "idCandidato")
-	private Integer idCandidato;
+	
+	@Id
+	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+	@Column(name = "idStatusCandidato", unique = true, nullable = false)
+	private Integer idStatusCandidato;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "idCandidato")
+	private CandidatoEntity candidato;
 
 	@Column(name = "dtAlteracao")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -29,12 +35,7 @@ public class StatusCandidatoEntity {
 
 	@Column(name = "dsParecer")
 	private String dsParecer;
-
-	@Id
-	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-	@Column(name = "idStatusCandidato", unique = true, nullable = false)
-	private Integer idStatusCandidato;
-
+	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "idStatus")
 	private StatusEntity status;
@@ -83,12 +84,12 @@ public class StatusCandidatoEntity {
 		this.usuario = usuario;
 	}
 
-	public Integer getIdCandidato() {
-		return idCandidato;
+	public CandidatoEntity getCandidato() {
+		return candidato;
 	}
 
-	public void setIdCandidato(Integer idCandidato) {
-		this.idCandidato = idCandidato;
+	public void setCandidato(CandidatoEntity candidato) {
+		this.candidato = candidato;
 	}
 
 }

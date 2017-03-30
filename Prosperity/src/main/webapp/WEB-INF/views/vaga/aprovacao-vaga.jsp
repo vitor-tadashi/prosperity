@@ -114,7 +114,7 @@
 												</div>
 											</div>
 											<div class="form-group row" style="margin-bottom: 0px;">
-												<div class="form-group col-md-4 col-xs-5"
+												<div class="form-group col-md-6 col-xs-5"
 													style="margin-bottom: 0px">
 													<label for="vagaSenioridade">Senioridade da vaga</label> <input
 														type="name" class="form-control input-sm"
@@ -124,16 +124,13 @@
 												</div>
 												<!-- /form-group -->
 												<div class="form-group" style="margin-bottom: 0px">
-													<label for="vagaHorario" style="padding-left: 15px;">Horário</label>
+													<label for="vagaHorario" style="padding-left: 15px;">Horário:</label>
 
 													<div>
-														<div class="form-group col-md-3 col-xs-3">
+														<div class="form-group col-md-2 col-xs-2">
 															<div class="input-group bootstrap-timepicker">
-																<input class="timepicker form-control" type="text"
-																	/ value="08:00 AM" id="horaEntrada"
-																	name="horarioEntrada" disabled> <span
-																	class="input-group-addon"><i
-																	class="fa fa-clock-o"></i></span>
+																<label id="horaEntrada" name="horarioEntrada"
+																	type="time" style="margin-top: 7px" value=""></label>
 															</div>
 														</div>
 
@@ -141,12 +138,10 @@
 															<label style="margin-top: 7px">Às</label>
 														</div>
 
-														<div class="form-group col-md-3 col-xs-3">
+														<div class="form-group col-md-2 col-xs-1">
 															<div class="input-group bootstrap-timepicker">
-																<input class="timepicker form-control" type="text"
-																	value="05:00 PM" id="horaSaida" name="horarioSaida"
-																	disabled> <span class="input-group-addon"><i
-																	class="fa fa-clock-o"></i></span>
+																<label id="horaSaida" name="horaSaida" type="time"
+																	style="margin-top: 7px" value=""></label>
 															</div>
 														</div>
 													</div>
@@ -182,7 +177,7 @@
 														<label class="control-label"> Data para inicio</label>
 														<div class="form-group">
 															<div class="input-group">
-																<input type="text" value="01/01/2017"
+																<input type="date" value="01/01/2017"
 																	class="datepicker form-control" id="vagaInicio"
 																	disabled> <span class="input-group-addon"><i
 																	class="fa fa-calendar"></i></span>
@@ -195,10 +190,10 @@
 												<div class="form-group col-md-6 col-xs-4"
 													style="margin-bottom: 0px">
 													<div id="" class="">
-														<label>Nome do substituido</label> <input type="text"
-															class="form-control input-sm" id="vagaSubstituto"
-															disabled>
+														<label id="substituidoId">Nome do substituido:</label>
 													</div>
+													<label id="vagaSubstituto" name="nomeSubstituido"
+														style="margin-top: 7px" value=""></label>
 												</div>
 											</div>
 										</form>
@@ -210,17 +205,17 @@
 										<div class="panel-heading">Informações de projeto</div>
 										<div class="form-group row"></div>
 										<!-- /form-group -->
-										<div class="form-group col-md-4 " style="margin-bottom: 5px;">
+										<div class="form-group col-md-12 " style="margin-bottom: 5px;">
 											<label class="control-label">Projeto</label> <input readonly
 												class="form-control default-cursor" id="vagaProjeto"
 												value="Mobile">
 										</div>
-										<div class="form-group col-md-4 col-xs-5"
+										<div class="form-group col-md-6 col-xs-6"
 											style="margin-bottom: 5px;">
 											<label class="control-label">Cliente</label> <input readonly
 												class="form-control" id="vagaCiente" value="Carrefour">
 										</div>
-										<div class="form-group col-md-4 col-xs-4"
+										<div class="form-group col-md-6 col-xs-6"
 											style="margin-bottom: 5px;">
 											<label class="control-label">Gestor imediato</label> <input
 												readonly class="form-control" id="vagaGestor"
@@ -282,7 +277,59 @@
 			</div>
 		</div>
 	</div>
+	<!-- Modal aprovar -->
+	<div class="modal fade" id="aprova-modal" data-target="#fecha-modal"
+		tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Fechar">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="modalLabel">Aprovar vaga</h4>
+				</div>
+				<div class="modal-body">Deseja realmente aprovar está vaga?</div>
+				<input class="aprovar-id" type="hidden"> <input
+					class="aprovar-status" type="hidden">
+				<div class="modal-footer">
+					<a href="#">
+						<button id="aprovaVaga" onclick="status()" type="button"
+							class="btn btn-primary" data-dismiss="modal">Sim</button>
+					</a>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /.modal fechar-->
 
+	<!-- Modal reprovar -->
+	<div class="modal fade" id="reprova-modal" data-target="#fecha-modal"
+		tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Fechar">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="modalLabel">Reprovar vaga</h4>
+				</div>
+				<div class="modal-body">Deseja realmente reprovar está vaga?</div>
+				<input class="reprovar-id" type="hidden"> <input
+					class="reprovar-status" type="hidden">
+				<div class="modal-footer">
+					<a href="#">
+						<button id="reprovaVaga" type="button" onclick="status()"
+							class="btn btn-primary" data-dismiss="modal">Sim</button>
+					</a>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /.modal fechar-->
 	<!-- CORPO DA PÁGINA -->
 	<div id="main-container">
 		<div id="breadcrumb">
@@ -347,16 +394,17 @@
 														class="fa fa-eye fa-lg">&nbsp</i>Visualizar
 												</a></li>
 												<li role="separator" class="divider"></li>
-												<li><c:url
-														value="editar/${vaga.id}"
-														var="myURL">
+												<li><c:url value="editar/${vaga.id}" var="myURL">
 													</c:url> <a href="${myURL}"><i class="fa fa-pencil"></i> Editar</a></li>
-												<!-- <li role="separator" class="divider"></li>
-												<li><a href="#"><i class="fa fa-check"></i>
-														Aprovar</a></li>
 												<li role="separator" class="divider"></li>
-												<li><a href="#"><i class="fa fa-times"></i>
-														Reprovar</a></li> -->
+												<li><a href="#aprova-modal"
+													onclick="alterarStatus(${vaga.id}, 'ACEITO')"
+													data-toggle="modal"><i class="fa fa-check"></i> Aprovar</a></li>
+												<li role="separator" class="divider"></li>
+												<li><a href="#reprova-modal"
+													onclick="alterarStatus(${vaga.id}, 'RECUSADO')"
+													data-toggle="modal"><i class="fa fa-times"></i>
+														Reprovar</a></li>
 
 											</ul>
 										</div> <!-- Fim Botão -->
@@ -408,19 +456,23 @@
     			} else {
     				$("#tpVaga").text('Real')
     			}
-    			if(lista.aumentaQuadro == 'S') {
-    				$("#lblQuadro").text('Substituição')
+    			if(lista.aumentaQuadro == 'N') {
+    				$("#lblQuadro").text('Novo')
+    				$("#substituidoId").hide();
+    				$("#vagaSubstituto").hide();
        			} else {
-       				$("#lblQuadro").text('Novo')
+       				$("#lblQuadro").text('Substituição')
+       				$("#substituidoId").show();
+    				$("#vagaSubstituto").show();
     			}
     			$('input#vagaSalario').val(lista.valorPretensao);
     			$('input#cargo').val(lista.cargoBean.nome);
     			$('input#vagaSenioridade').val(lista.senioridadeBean.nome);
-    			$('input#vagaHorario').val(lista.horarioEntrada);
-    			$('input#vagaHorario1').val(lista.horarioSaida);
+    			$('label#horaEntrada').text(lista.horarioEntrada);
+    			$('label#horaSaida').text(lista.horarioSaida);
     			$('input#solicitante').val(lista.nomeSolicitante);
     			$('input#vagaQuadro').val(lista.aumentaQuadro);
-    			$('input#vagaSubstituto').val(lista.nomeSubstituido);
+    			$('label#vagaSubstituto').text(lista.nomeSubstituido);
     			$('input#vagaInicio').val(lista.dataInicio);
     			$('input#vagaCiente').val(lista.projeto.cliente.nome);
     			$('input#vagaProjeto').val(lista.projeto.nome);
@@ -452,8 +504,25 @@
 	    window.print();
 	}
 	
-	
+	function status(){
+    	$.ajax({
+    		url: "status",
+    		type: "POST",
+    		dataType: "JSON",
+    		data: { 'idVaga' : $('.aprovar-id').val(), 'status' : $('.aprovar-status').val()},
+    		success: function(){
+    				location.reload();	
+    			}
+    	});
+    	}
+	function alterarStatus(id,status){
+		$('input.aprovar-id').val(id);
+		$('input.aprovar-status').val(status);
+
+		$('input.reprovar-id').val(id);
+		$('input.reprovar-status').val(status);
+		
+	}
 </script>
-	</script>
 </body>
 </html>

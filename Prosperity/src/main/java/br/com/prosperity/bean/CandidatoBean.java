@@ -1,21 +1,31 @@
 package br.com.prosperity.bean;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
+
 import org.springframework.stereotype.Component;
 
 import br.com.prosperity.util.FormatUtil;
 
 @Component
-public class CandidatoBean extends FormatUtil {
+
+@XmlRootElement(name = "CandidatoBean")
+public class CandidatoBean  extends FormatUtil {
+
+
 	private Integer id;
 
 	@NotEmpty(message = "O campo CPF deve ser preenchido")
@@ -35,7 +45,6 @@ public class CandidatoBean extends FormatUtil {
 	private String email;
 	private Date dataAlteracao;
 	private String curriculo;
-
 	@Valid
 	private ContatoBean contato;
 
@@ -54,6 +63,18 @@ public class CandidatoBean extends FormatUtil {
 	private VagaCandidatoBean vagaCandidatoBean;
 	private Double valorMin;
 	private Double valorMax;
+	private StatusCandidatoBean ultimoStatus;
+	
+	public StatusCandidatoBean getUltimoStatus() {
+		if (status != null && status.size() > 0) {
+			Date dataUltimoStatus = status.stream().map(StatusCandidatoBean::getDataAlteracao).max(Date::compareTo).get();
+			ultimoStatus = status.stream().filter(st -> st.getDataAlteracao().equals(dataUltimoStatus)).findFirst().get();	
+		} else {
+			ultimoStatus = new StatusCandidatoBean("Não possui status");
+		}
+		
+		return ultimoStatus;
+	}
 
 	public Integer getId() {
 		return id;
@@ -199,9 +220,17 @@ public class CandidatoBean extends FormatUtil {
 		this.competencias = competencias;
 	}
 
+	
+//	@XmlElement(type=StatusCandidatoBean.class)
+//	public Map<String, List<StatusCandidatoBean>> getStatusPorMesAno() {
+//		return statusPorMesAno;
+//	}
+
+
 	public Map<String, List<StatusCandidatoBean>> getStatusPorMesAno() {
 		return statusPorMesAno;
 	}
+
 
 	public void setStatusPorMesAno(Map<String, List<StatusCandidatoBean>> statusPorMesAno) {
 		this.statusPorMesAno = statusPorMesAno;

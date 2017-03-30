@@ -1,13 +1,13 @@
 package br.com.prosperity.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,9 +39,9 @@ public class UsuarioController {
 	private UsuarioBusiness usuarioBusiness;
 
 	@RequestMapping(value = "/listar", method = RequestMethod.GET)
-	public String carregaTabela(Model model) {
-		List<UsuarioBean> usuarios = usuarioBusiness.listar();
-		List<FuncionarioBean> funcionarios = funcionarioBusiness.obterTodos();
+	public String carregaUsuarios(Model model) {
+		List<UsuarioBean> usuarios = usuarioBusiness.findAll();
+		List<FuncionarioBean> funcionarios = funcionarioBusiness.findAll();
 		List<PerfilBean> perfis = perfilBusiness.listar();
 		model.addAttribute("funcionarios", funcionarios);
 		model.addAttribute("perfis", perfis);
@@ -50,31 +50,14 @@ public class UsuarioController {
 		return "usuario/consultar-usuario";
 	}
 
-	@RequestMapping(value = {"/carregar-usuario"}, method = RequestMethod.GET)
-	public @ResponseBody UsuarioBean carregaUsuarioAjax(Model model, @ModelAttribute("id") Integer id) {
-		UsuarioBean usuario = usuarioBusiness.obterPorId(id);
-		return usuario;
-	}
-	
-	@RequestMapping(value = {"/carregar-combos"}, method = RequestMethod.GET)
-	public @ResponseBody List<Object> carregaCombosAjax(Model model) {
-		List<Object> lista = new ArrayList<>();
-		List<FuncionarioBean> funcionarios = funcionarioBusiness.obterTodos();
-		List<PerfilBean> perfis = perfilBusiness.listar();
-		
-		lista.add(perfis);
-		lista.add(funcionarios);
-		
-		return lista;
-	}
-
 	@RequestMapping(value = "/criar-perfil", method = RequestMethod.GET)
-	public String criaPerfil(Model model, String erros) {
+	public String criaPerfil(Model model, String erros, String sucesso) {
 		List<FuncionalidadeBean> funcionalidades = funcionalidadeBusiness.listar();
 		List<PerfilBean> perfis = perfilBusiness.listar();
 		model.addAttribute("funcionalidades", funcionalidades);
 		model.addAttribute("perfis", perfis);
 		model.addAttribute("erros",erros);
+		model.addAttribute("sucesso", sucesso);
 		
 		return "usuario/criar-perfil";
 	}
@@ -83,6 +66,8 @@ public class UsuarioController {
 	public String inserirPerfil(@ModelAttribute("perfilBean") PerfilBean perfilBean, Model model) throws BusinessException {
 		try{
 			perfilBusiness.inserir(perfilBean);
+			model.addAttribute("sucesso", "Perfil salvo com sucesso.");
+			
 		}catch(BusinessException e){
 			model.addAttribute("erros", e.getMessage());
 		}
@@ -91,23 +76,38 @@ public class UsuarioController {
 	}
 
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
-	public String inserirUsuario(UsuarioBean usuario) {
+	public String inserirUsuario(@Valid UsuarioBean usuario, BindingResult result) {
+		if(result.hasErrors()) {
+			return "redirect:listar";
+		}
+		
 		if (usuario.getId() == null) {
 			usuarioBusiness.inserir(usuario);
 		} else {
 			usuarioBusiness.alterar(usuario);
 		}
-
+		
 		return "redirect:listar";
 	}
 	
-	@RequestMapping(value = "/mudar-status", method = RequestMethod.POST)
-	public void mudarStatusAjax(Integer id, HttpServletResponse response) {
+	@RequestMapping(value = "/cadastrar", method = RequestMethod.GET)
+	public String redirecionaLista() {
+		return "redirect:listar";
+	}
+	
+	@RequestMapping(value = {"/carregar-usuario-api"}, method = RequestMethod.GET)
+	public @ResponseBody UsuarioBean carregaUsuarioAjax(Integer id) {
+		UsuarioBean usuario = usuarioBusiness.obterPorId(id);
+		return usuario;
+	}
+	
+	@RequestMapping(value = "/mudar-status-api", method = RequestMethod.POST)
+	public void mudarStatusAjax(Integer id) {
 		usuarioBusiness.mudarStatus(id);
 	}
 	
-	@RequestMapping(value = "/redefinir-senha", method = RequestMethod.POST)
-	public void redefinirSenhaAjax(Integer id, HttpServletResponse response) {
+	@RequestMapping(value = "/redefinir-senha-api", method = RequestMethod.POST)
+	public void redefinirSenhaAjax(Integer id) {
 		usuarioBusiness.redefinirSenha(id);
 	}
 	

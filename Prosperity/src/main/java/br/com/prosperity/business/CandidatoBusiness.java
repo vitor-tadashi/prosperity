@@ -1,6 +1,8 @@
 package br.com.prosperity.business;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -18,7 +20,6 @@ import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.StatusCandidatoBean;
 import br.com.prosperity.bean.UsuarioBean;
-import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.converter.CandidatoConverter;
 import br.com.prosperity.dao.AvaliadorCandidatoDAO;
 import br.com.prosperity.dao.CandidatoDAO;
@@ -28,14 +29,17 @@ import br.com.prosperity.dao.StatusFuturoDAO;
 import br.com.prosperity.dao.UsuarioDAO;
 import br.com.prosperity.entity.AvaliadorCandidatoEntity;
 import br.com.prosperity.entity.CandidatoEntity;
+import br.com.prosperity.entity.PerfilEntity;
 import br.com.prosperity.entity.StatusCandidatoEntity;
 import br.com.prosperity.entity.StatusFuturoEntity;
-import br.com.prosperity.entity.VagaEntity;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.util.FormatUtil;
 
 @Component
 public class CandidatoBusiness extends FormatUtil {
+
+	@Autowired
+	private CandidatoBean candidatoBean;
 
 	@Autowired
 	private CandidatoDAO candidatoDAO;
@@ -84,13 +88,14 @@ public class CandidatoBusiness extends FormatUtil {
 
 		return candidatoBean;
 	}
-	
+
 	@Transactional
-	public List<CandidatoBean> obterFiltro(CandidatoBean candidatao){
-		List<CandidatoEntity> candidatos = candidatoDAO.findByNamedQuery("pesquisarNome", "%"+candidatao.getNome()+"%");
+	public List<CandidatoBean> obterFiltro(CandidatoBean candidatao) {
+		List<CandidatoEntity> candidatos = candidatoDAO.findByNamedQuery("pesquisarNome",
+				"%" + candidatao.getNome() + "%");
 		List<CandidatoBean> candidatoBean = candidatoConverter.convertEntityToBean(candidatos);
-			return candidatoBean;
-		
+		return candidatoBean;
+
 	}
 
 	private static <K, V> Map<K, List<V>> groupByOrdered(List<V> list, Function<V, K> keyFunction) {
@@ -105,10 +110,16 @@ public class CandidatoBusiness extends FormatUtil {
 	}
 
 	@Transactional
-	public void inserir(CandidatoBean candiatoBean) {
-		CandidatoBean candidatoBean = new CandidatoBean();
-		candidatoDAO.insert(candidatoConverter.convertBeanToEntity(candidatoBean));
+	public void inserir(CandidatoBean candidatoBean) {
+		if (candidatoBean.getId() == null) {
+			candidatoDAO.insert(candidatoConverter.convertBeanToEntity(candidatoBean));
+		} else {
+			CandidatoEntity candidatoEntity = candidatoDAO.findById(candidatoBean.getId());
 
+			candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoEntity, candidatoBean);
+
+			candidatoDAO.update(candidatoEntity);
+		}
 	}
 
 	@Transactional
@@ -130,36 +141,60 @@ public class CandidatoBusiness extends FormatUtil {
 
 		if (statusFuturoEntity != null && statusFuturoEntity.size() > 0) {
 			situacaoCandidato.setParecer(null);
-			
+
 			if (statusFuturoEntity.size() == 1) {
 				situacaoCandidato.setStatus(StatusCandidatoEnum.valueOf(statusFuturoEntity.get(0).getIdStatusFuturo()));
 			} else {
 				avaliadorCandidatoEntity = avaliadorCandidatoDAO.findByNamedQuery("obterAvaliadoresCandidato");
-				if (avaliadorCandidatoEntity.size() == 1) {
-					situacaoCandidato
-							.setStatus(StatusCandidatoEnum.valueOf(statusFuturoEntity.get(1).getIdStatusFuturo()));
-				} else {
-					situacaoCandidato
-							.setStatus(StatusCandidatoEnum.valueOf(statusFuturoEntity.get(0).getIdStatusFuturo()));
+				if (avaliadorCandidatoEntity != null && avaliadorCandidatoEntity.size() > 0) {
+					StatusCandidatoEnum status = avaliadorCandidatoEntity.size() == 1
+							? StatusCandidatoEnum.PROPOSTACANDIDATO : StatusCandidatoEnum.CANDIDATOEMANALISE;
+
+					situacaoCandidato.setStatus(status);
+					avaliadorCandidatoEntity.get(0).setIdStatus(situacaoCandidato.getStatus().getValue());
+					avaliadorCandidatoDAO.update(avaliadorCandidatoEntity.get(0));
 				}
 			}
+
 			statusCandidatoDAO.insert(alterarStatus1(situacaoCandidato));
 		}
-		avaliadorCandidatoEntity.get(0).setIdStatus(situacaoCandidato.getStatus().getValue());
-		avaliadorCandidatoDAO.update(avaliadorCandidatoEntity.get(0));
 	}
 
 	private StatusCandidatoEntity alterarStatus1(SituacaoCandidatoBean situacaoCandidato) {
 		StatusCandidatoEntity statusCandidatoEntity = new StatusCandidatoEntity();
-
+		
 		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
 		statusCandidatoEntity.setStatus(statusDAO.findById(situacaoCandidato.getStatus().getValue()));
-		statusCandidatoEntity.setIdCandidato(situacaoCandidato.getIdCandidato());
+		candidatoBean.setId(situacaoCandidato.getIdCandidato());
+		statusCandidatoEntity.setCandidato(candidatoConverter.convertBeanToEntity(candidatoBean));
 		statusCandidatoEntity.setDsParecer(situacaoCandidato.getParecer());
 		statusCandidatoEntity.setDtAlteracao(new Date());
 		statusCandidatoEntity.setUsuario(usuarioDAO.findById(usuarioBean.getId()));
-		return statusCandidatoEntity;
 
+		return statusCandidatoEntity;
+	}
+
+	public CandidatoBean obterPorCPF(String cpf) {
+		List<CandidatoEntity> candidatosEntity = null;
+
+		candidatosEntity = candidatoDAO.findByNamedQuery("obterPorCPF", cpf);
+
+		// Integer idDoCara = candidatosEntity.get(0).getId();
+		// for (int i = 0; i < candidatosEntity.size(); i++) {
+		//
+		// }
+
+		for (CandidatoEntity candidatoEntity : candidatosEntity) {
+
+			candidatoBean = candidatoConverter.convertEntityToBean(candidatoEntity);
+		}
+
+		// for (CandidatoEntity candidatoEntity : candidatosEntity) {
+		// candidatoBean =
+		// candidatoConverter.convertEntityToBean(candidatoEntity);
+		// }
+
+		return candidatoBean;
 	}
 
 }

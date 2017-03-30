@@ -17,6 +17,9 @@ public class StatusCandidatoConverter implements Converter<StatusCandidatoEntity
 
 	@Override
 	public StatusCandidatoEntity convertBeanToEntity(StatusCandidatoBean bean) {
+		if (bean == null) {
+			return null;
+		}
 		StatusCandidatoEntity entity = new StatusCandidatoEntity();
 
 		entity.setIdStatusCandidato(bean.getId());
@@ -30,6 +33,9 @@ public class StatusCandidatoConverter implements Converter<StatusCandidatoEntity
 
 	@Override
 	public StatusCandidatoBean convertEntityToBean(StatusCandidatoEntity entity) {
+		if (entity == null) {
+			return null;
+		}
 		StatusCandidatoBean bean = new StatusCandidatoBean();
 
 		bean.setId(entity.getIdStatusCandidato());

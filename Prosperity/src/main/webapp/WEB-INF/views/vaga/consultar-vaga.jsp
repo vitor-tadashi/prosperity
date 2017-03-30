@@ -303,7 +303,7 @@
 
 											<div class="form-group col-md-6" style="margin-bottom: 0px">
 												<div id="" class="">
-													<label>Nome do substituido</label> <input type="text"
+													<label id="substituidoId">Nome do substituido</label> <input type="text"
 														class="form-control input-sm"
 														placeholder="Nome do substituido" name="nomeSubstituido" id="substituido" disabled>
 												</div>
@@ -448,7 +448,7 @@
 								<div class="col-md-5">
 									<label for="">Data</label>
 									<div class="input-group">
-										<input type="date" id="data1" class="form-control" name="dataAberturaDe"> <span
+										<input type="date" name="dataAberturaDe" id="data1" class="form-control"> <span
 											class="input-group-addon">até</span> <input type="date"
 											class="form-control" name="dataAberturaPara" id="data2">
 									</div>
@@ -456,9 +456,9 @@
 
 								<div class="col-md-2">
 									<label for="cargo">Status</label> 
-									<select class="form-control" style="width: 130px;" id="status" name="statusVagaBean[0].id">
-										<c:forEach var="status" items="${listaStatusVaga}">
-												<option value="${status.id}">${status.statusBean.nome}</option>
+									<select class="form-control" style="width: 130px;" id="status" name="status">
+										<c:forEach var="status" items="${listaStatusDrop}">
+												<option id="${status.id}"value="${status.id}">${status.nome}</option>
 										</c:forEach>
 									</select>
 								</div>
@@ -468,9 +468,11 @@
 										<button class="btn btn-primary"
 											style="margin-top: 22px; margin-right: 22px;" type="submit">Filtrar</button>
 									</a>
+								
 								</div>
 							</form>
 						</div>
+						
 						<!--</panel body>-->
 						<table
 							id="tabelaVaga"
@@ -503,7 +505,7 @@
 
 									</td>
 									<td id="linhaData">${vaga.dataAbertura}</td>
-									<td id="linhaStatus"><span id="tdStatus" class="label label-contratado">Ativo</span></td>
+									<td id="linhaStatus"><span class="label status span-${vaga.ultimoStatus.status.nome}">${vaga.ultimoStatus.status.nome}</span></td>
 									<td>
 										<div class="btn-group">
 											<button class="btn btn-sm btn-info dropdown-toggle"
@@ -515,7 +517,7 @@
 												<li><a onclick="info(${vaga.id})"><i
 														class="fa fa-eye">&nbsp</i>Visualizar</a></li>
 												<li class="divider"></li>
-												<li><a href="#fecha-modal" data-toggle="modal"><i
+												<li><i
 														class="fa fa-lock">&nbsp</i>Fechar</a></li>
 												<li class="divider "></li>
 												<li><a href="#delete-modal" data-toggle="modal"><i
@@ -610,8 +612,11 @@
 	
 	
 	<script type="text/javascript">
-	
-
+	//linhaStatus
+	//span-[status]
+	$(".span-Fechado").addClass("label-warning");
+	$(".span-Ativo").addClass("label-success");
+	$(".span-Cancelado").addClass("label-danger");
 	
 	function info(listaId){
 		
@@ -647,10 +652,14 @@
     			} else {
     				$("#tpVaga").text('Real')
     			}
-    			if(lista.aumentaQuadro == 'S') {
-    				$("#lblQuadro").text('Substituição')
+    			if(lista.aumentaQuadro == 'N') {
+    				$("#lblQuadro").text('Novo');
+    				$("#substituido").hide();
+    				$("#substituidoId").hide();
        			} else {
-       				$("#lblQuadro").text('Novo')
+       				$("#lblQuadro").text('Substituição')
+       				$("#substituido").show();
+    				$("#substituidoId").show();
     			}
     			
     			$('input#solicitante').val(lista.nomeSolicitante);
@@ -693,6 +702,13 @@
 	    $printSection.innerHTML = "";
 	    $printSection.appendChild(domClone);
 	    window.print();
+	}
+	
+	function mudarQuadro() {
+		var $quadro = document.getElementById("lblQuadro");
+		var $sub = document.getElementById("substituido");
+		
+		
 	}
 	
 	
