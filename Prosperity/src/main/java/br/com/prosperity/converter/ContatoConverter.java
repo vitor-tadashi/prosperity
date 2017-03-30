@@ -6,13 +6,12 @@ import org.springframework.stereotype.Component;
 import br.com.prosperity.bean.ContatoBean;
 import br.com.prosperity.entity.ContatoEntity;
 
-
 @Component
 public class ContatoConverter implements Converter<ContatoEntity, ContatoBean> {
 
 	@Autowired
 	CandidatoConverter candidatoConverter;
-	
+
 	@Override
 	public ContatoEntity convertBeanToEntity(ContatoBean bean) {
 		if (bean == null) {
@@ -26,6 +25,9 @@ public class ContatoConverter implements Converter<ContatoEntity, ContatoBean> {
 
 	@Override
 	public ContatoBean convertEntityToBean(ContatoEntity entity) {
+		if (entity == null) {
+			return null;
+		}
 		ContatoBean bean = new ContatoBean();
 		bean.setId(entity.getId());
 		bean.setTelefone(entity.getTelefone());

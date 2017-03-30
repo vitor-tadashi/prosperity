@@ -11,12 +11,15 @@ public class CargoSenioridadeConverter implements Converter<CargoSenioridadeEnti
 
 	@Autowired
 	private CargoConverter cargoConverter;
-	
+
 	@Override
 	public CargoSenioridadeEntity convertBeanToEntity(CargoSenioridadeBean bean) {
+		if (bean == null) {
+			return null;
+		}
+
 		CargoSenioridadeEntity entity = new CargoSenioridadeEntity();
 		entity.setId(bean.getId());
-		
 		entity.setVlMaxSalario(bean.getValorMaxSalario());
 		entity.setVlMaxSalario(bean.getValorMinSalario());
 		return entity;
@@ -24,9 +27,12 @@ public class CargoSenioridadeConverter implements Converter<CargoSenioridadeEnti
 
 	@Override
 	public CargoSenioridadeBean convertEntityToBean(CargoSenioridadeEntity entity) {
+		if (entity == null) {
+			return null;
+		}
 		CargoSenioridadeBean bean = new CargoSenioridadeBean();
 		bean.setId(bean.getId());
-		//conversor de conversor		
+		// conversor de conversor
 		bean.setValorMaxSalario(entity.getVlMaxSalario());
 		bean.setValorMaxSalario(entity.getVlMinSalario());
 		return bean;
