@@ -40,31 +40,22 @@ public class CandidatoBusiness extends FormatUtil {
 
 	@Autowired
 	private CandidatoBean candidatoBean;
-
 	@Autowired
 	private CandidatoDAO candidatoDAO;
-
 	@Autowired
 	private CandidatoConverter candidatoConverter;
-
 	@Autowired
 	private StatusCandidatoDAO statusCandidatoDAO;
-
 	@Autowired
 	private UsuarioBean usuarioBean;
-
 	@Autowired
 	private UsuarioDAO usuarioDAO;
-
 	@Autowired
 	private StatusDAO statusDAO;
-
 	@Autowired
 	private StatusFuturoDAO statusFuturoDAO;
-
 	@Autowired
 	private AvaliadorCandidatoDAO avaliadorCandidatoDAO;
-
 	@Autowired
 	private HttpSession session;
 
@@ -90,12 +81,11 @@ public class CandidatoBusiness extends FormatUtil {
 	}
 
 	@Transactional
-	public List<CandidatoBean> obterFiltro(CandidatoBean candidatao) {
+	public List<CandidatoBean> obterFiltro(CandidatoBean candidato) {
 		List<CandidatoEntity> candidatos = candidatoDAO.findByNamedQuery("pesquisarNome",
-				"%" + candidatao.getNome() + "%");
+				"%" + candidato.getNome() + "%");
 		List<CandidatoBean> candidatoBean = candidatoConverter.convertEntityToBean(candidatos);
 		return candidatoBean;
-
 	}
 
 	private static <K, V> Map<K, List<V>> groupByOrdered(List<V> list, Function<V, K> keyFunction) {
@@ -112,7 +102,12 @@ public class CandidatoBusiness extends FormatUtil {
 	@Transactional
 	public void inserir(CandidatoBean candidatoBean) {
 		if (candidatoBean.getId() == null) {
-			candidatoDAO.insert(candidatoConverter.convertBeanToEntity(candidatoBean));
+			if (verificarCandidatura(candidatoBean) == true) {
+				candidatoDAO.insert(candidatoConverter.convertBeanToEntity(candidatoBean));
+			} else {
+				// retornar mensagem de candidato em processo seletivo para vaga
+			}
+
 		} else {
 			CandidatoEntity candidatoEntity = candidatoDAO.findById(candidatoBean.getId());
 
@@ -162,7 +157,7 @@ public class CandidatoBusiness extends FormatUtil {
 
 	private StatusCandidatoEntity alterarStatus1(SituacaoCandidatoBean situacaoCandidato) {
 		StatusCandidatoEntity statusCandidatoEntity = new StatusCandidatoEntity();
-		
+
 		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
 		statusCandidatoEntity.setStatus(statusDAO.findById(situacaoCandidato.getStatus().getValue()));
 		candidatoBean.setId(situacaoCandidato.getIdCandidato());
@@ -195,6 +190,18 @@ public class CandidatoBusiness extends FormatUtil {
 		// }
 
 		return candidatoBean;
+	}
+
+	private Boolean verificarCandidatura(CandidatoBean candidato) {
+		if (candidato.getUltimoStatus().getId() == null || candidato.getUltimoStatus().getId() == 6
+				|| candidato.getUltimoStatus().getId() == 7) {
+			if (candidato.getVagas().get(0).getStatus().get(0).getId() == 17   || candidato.getVagas().get(0).getStatus().get(0).getId() == 2) {
+				return true;
+			}
+			return false;
+
+		}
+		return false;
 	}
 
 }
