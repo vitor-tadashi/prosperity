@@ -1,8 +1,5 @@
 package br.com.prosperity.bean;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
 

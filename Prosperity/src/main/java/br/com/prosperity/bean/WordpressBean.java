@@ -6,8 +6,6 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import br.com.prosperity.bean.CandidatoBean;
-
 @XmlRootElement(name = "WordpressBean")
 public class WordpressBean {
 	private List<CandidatoWordPressBean> candidatosWordPress = new ArrayList<>();
@@ -21,7 +19,7 @@ public class WordpressBean {
 	public WordpressBean() {
 	}
 
-	@XmlElement(type=CandidatoBean.class)
+	@XmlElement(type = CandidatoBean.class)
 	public List<CandidatoBean> getCandidatos() {
 		return candidatos;
 	}
@@ -30,7 +28,7 @@ public class WordpressBean {
 		this.candidatos = candidatos;
 	}
 
-    @XmlElement(type=CandidatoWordPressBean.class)
+	@XmlElement(type = CandidatoWordPressBean.class)
 	public List<CandidatoWordPressBean> getCandidatosWordPress() {
 		return candidatosWordPress;
 	}
@@ -38,6 +36,5 @@ public class WordpressBean {
 	public void setCandidatosWordPress(List<CandidatoWordPressBean> candidatosWordPress) {
 		this.candidatosWordPress = candidatosWordPress;
 	}
-	
-	
+
 }

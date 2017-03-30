@@ -13,8 +13,8 @@ public class CargoSenioridadeBean {
 	private List<CargoBean> cargos;
 	private List<SenioridadeBean> senioridades;
 
-	public CargoSenioridadeBean(){
-		
+	public CargoSenioridadeBean() {
+
 	}
 
 	public Integer getId() {
@@ -56,7 +56,5 @@ public class CargoSenioridadeBean {
 	public void setSenioridades(List<SenioridadeBean> senioridades) {
 		this.senioridades = senioridades;
 	}
-	
-	
 
 }

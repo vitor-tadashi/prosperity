@@ -7,7 +7,7 @@ public class VagaCandidatoBean {
 	private VagaBean vaga;
 	private CanalInformacaoBean canalInformacao;
 	private List<CandidatoBean> candidatoBean;
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -39,6 +39,5 @@ public class VagaCandidatoBean {
 	public void setCandidatoBean(List<CandidatoBean> candidatoBean) {
 		this.candidatoBean = candidatoBean;
 	}
-	
 
 }

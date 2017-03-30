@@ -1,9 +1,7 @@
 package br.com.prosperity.entity;
 
-import java.io.File;
 import java.util.Date;
 import java.util.List;
-import java.lang.Integer;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

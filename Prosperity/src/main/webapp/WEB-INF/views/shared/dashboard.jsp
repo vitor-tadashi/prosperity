@@ -4,7 +4,7 @@
 <div id="wrapper" class="preload">
 	<div id="top-nav" class="skin-6 fixed">
 		<div class="brand">
-			<a href="#"><img src="/resources/img/logo.png" class="logo"></a>
+			<a href="#"><img src="/resources/img/prosperity-logo.png" class="logo"></a>
 		</div>
 		<!-- /brand -->
 		<button type="button" class="navbar-toggle pull-left"
@@ -51,8 +51,8 @@
 			<div class="main-menu" id="menu-toggle">
 				<ul>
 
-					<li class="openable menu-opcao hide" value="22"><a href="#"> <span class="menu-icon">
-								<i class="fa fa-desktop fa-lg"></i>
+					<li class="openable menu-opcao hide" value="22"><a href="#">
+							<span class="menu-icon"> <i class="fa fa-desktop fa-lg"></i>
 						</span> <span class="text"> Tela de acesso </span> <span
 							class="menu-hover"></span>
 					</a>
@@ -68,13 +68,15 @@
 						</span> <span class="text"> Página inicial </span> <span
 							class="menu-hover"></span>
 					</a></li>
-					<li class="menu-opcao hide" value="3"><a href="/vaga/solicitar"> <span class="menu-icon">
-								<i class="fa fa-plus fa-lg"></i>
+					<li class="menu-opcao hide" value="3"><a
+						href="/vaga/solicitar"> <span class="menu-icon"> <i
+								class="fa fa-plus fa-lg"></i>
 						</span> <span class="text"> Solicitar vaga </span> <span
 							class="menu-hover"></span>
 					</a></li>
-					<li class="menu-opcao hide" value="17"><a href="/candidato/cadastrar"> <span
-							class="menu-icon"> <i class="fa fa-edit fa-lg"></i>
+					<li class="menu-opcao hide" value="17"><a
+						href="/candidato/cadastrar"> <span class="menu-icon"> <i
+								class="fa fa-edit fa-lg"></i>
 						</span> <span class="text"> Cadastrar candidato </span> <span
 							class="menu-hover"></span>
 					</a></li>
@@ -84,14 +86,15 @@
 						</span> <span class="text"> Consultar </span> <span class="menu-hover"></span>
 					</a>
 						<ul class="submenu">
-							<li class="menu-opcao hide" value="20"><a href="/candidato/consultar-rh"><span
+							<li class="menu-opcao hide" value="20"><a
+								href="/candidato/consultar-rh"><span class="submenu-label">Candidato</span></a></li>
+							<li class="menu-opcao hide" value="19"><a
+								href="/candidato/consultar-gestor"><span
 									class="submenu-label">Candidato</span></a></li>
-							<li class="menu-opcao hide" value="19"><a href="/candidato/consultar-gestor"><span
-									class="submenu-label">Candidato</span></a></li>
-							<li class="menu-opcao hide" value="2"><a href="/vaga/consultar"><span
-									class="submenu-label">Vaga</span></a></li>
-							<li class="menu-opcao hide" value="18"><a href="/candidato/historico"><span
-									class="submenu-label">Histórico</span></a></li>
+							<li class="menu-opcao hide" value="2"><a
+								href="/vaga/consultar"><span class="submenu-label">Vaga</span></a></li>
+							<li class="menu-opcao hide" value="18"><a
+								href="/candidato/historico"><span class="submenu-label">Histórico</span></a></li>
 						</ul></li>
 
 					<li class="openable"><a href="#"> <span class="menu-icon">
@@ -99,18 +102,21 @@
 						</span> <span class="text"> Aprovar </span> <span class="menu-hover"></span>
 					</a>
 						<ul class="submenu">
-							<li class="menu-opcao hide" value="20"><a href="/candidato/consultar-rh"><span class="submenu-label">Candidato</span></a></li>
-							<li class="menu-opcao hide" value="1"><a href="/vaga/aprovar"><span class="submenu-label">Vaga</span></a></li>
+							<li class="menu-opcao hide" value="20"><a
+								href="/candidato/consultar-rh"><span class="submenu-label">Candidato</span></a></li>
+							<li class="menu-opcao hide" value="1"><a
+								href="/vaga/aprovar"><span class="submenu-label">Vaga</span></a></li>
 
 						</ul></li>
 
-					<li class="menu-opcao hide" value="21"><a href="/relatorio"> <span class="menu-icon">
-								<i class="fa fa-print fa-lg"></i>
+					<li class="menu-opcao hide" value="21"><a href="/relatorio">
+							<span class="menu-icon"> <i class="fa fa-print fa-lg"></i>
 						</span> <span class="text"> Relatório </span> <span class="menu-hover"></span>
 					</a></li>
 
-					<li class="menu-opcao hide" value="15"><a href="/usuario/listar"> <span
-							class="menu-icon"> <i class="fa fa-cogs fa-lg"></i>
+					<li class="menu-opcao hide" value="15"><a
+						href="/usuario/listar"> <span class="menu-icon"> <i
+								class="fa fa-cogs fa-lg"></i>
 						</span> <span class="text"> Configurações </span> <span
 							class="menu-hover"></span>
 					</a></li>
@@ -120,3 +126,4 @@
 		</div>
 		<!-- /sidebar-inner scrollable-sidebar -->
 	</aside>
+</div>

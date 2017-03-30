@@ -8,28 +8,26 @@ import org.springframework.stereotype.Component;
 @Component
 public class StatusCandidatoBean {
 
-
 	private Integer id;
 	private Date dataAlteracao;
 	private String descricaoParecer;
 	private UsuarioBean usuario;
 	private StatusBean status;
-	
+
 	public StatusCandidatoBean() {
-		
+
 	}
-	
+
 	public StatusCandidatoBean(String mensagem) {
 		status = new StatusBean();
 		status.setNome(mensagem);
 	}
 
-	
 	public String getMesAno() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM/yyyy");
 		return dateFormat.format(dataAlteracao);
 	}
-	
+
 	private String mensagem;
 
 	public String getMensagem() {

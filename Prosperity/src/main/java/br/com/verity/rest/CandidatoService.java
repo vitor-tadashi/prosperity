@@ -8,8 +8,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 
-import com.thoughtworks.xstream.XStream;
-
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.WordpressBean;
 import br.com.prosperity.business.CandidatoBusiness;
