@@ -114,15 +114,14 @@ public class VagaBusiness {
 			vagaDAO.insert(vagaEntity);
 		} else {
 			//Date dateNow = new Date();
-			//SenioridadeEntity senioridadeEntity = senioridadeBusinness
-			//		.obterPorId(vagaBean.getSenioridadeBean().getId());
-			//String senioridade = senioridadeEntity.getNome();
-			//CargoEntity cargoEntity = cargoBusinness.obterPorId(vagaBean.getCargoBean().getId());
-			//String cargo = cargoEntity.getNome();
+			SenioridadeEntity senioridadeEntity = senioridadeBusinness
+					.obterPorId(vagaBean.getSenioridadeBean().getId());
+			String senioridade = senioridadeEntity.getNome();
+			CargoEntity cargoEntity = cargoBusinness.obterPorId(vagaBean.getCargoBean().getId());
+			String cargo = cargoEntity.getNome();
 			// String usuario = session.getAttribute("autenticado").getNome();
-			//vagaBean.setNomeVaga(cargo + " " + senioridade);
-			//vagaBean.setDataAbertura(dateNow); // VERIFICAR SE DEVE SER DATA DE
-												// ALTERAÇÂO
+			vagaBean.setNomeVaga(cargo + " " + senioridade);
+			vagaBean.setDataAbertura(vagaBean.getDataAbertura()); // VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
 			// vagaBean.setUsuarioBean(usuario);
 			vagaDAO.update(vagaEntity);
 		}
