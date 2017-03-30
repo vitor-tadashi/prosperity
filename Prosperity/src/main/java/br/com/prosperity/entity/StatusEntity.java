@@ -1,13 +1,18 @@
 package br.com.prosperity.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -30,6 +35,10 @@ public class StatusEntity {
 	@ManyToOne
 	@JoinColumn(name = "idTpStatus")
 	private TipoStatusEntity tipoStatus;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "idStatus")
+	private List<StatusCandidatoEntity> statusCandidatos;
 
 	public Integer getId() {
 		return id;

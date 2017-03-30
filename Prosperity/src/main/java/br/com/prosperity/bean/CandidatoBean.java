@@ -44,7 +44,7 @@ public class CandidatoBean  extends FormatUtil {
 	private Date dataFechamento;
 	private String email;
 	private Date dataAlteracao;
-	private File curriculo;
+	private String curriculo;
 	@Valid
 	private ContatoBean contato;
 
@@ -156,11 +156,11 @@ public class CandidatoBean  extends FormatUtil {
 		this.dataAlteracao = dataAlteracao;
 	}
 
-	public File getCurriculo() {
+	public String getCurriculo() {
 		return curriculo;
 	}
 
-	public void setCurriculo(File curriculo) {
+	public void setCurriculo(String curriculo) {
 		this.curriculo = curriculo;
 	}
 

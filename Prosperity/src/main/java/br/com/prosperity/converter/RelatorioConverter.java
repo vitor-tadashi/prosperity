@@ -10,6 +10,9 @@ public class RelatorioConverter implements Converter<RelatorioEntity, RelatorioB
 
 	@Override
 	public RelatorioEntity convertBeanToEntity(RelatorioBean bean) {
+		if (bean == null) {
+			return null;
+		}
 		RelatorioEntity entity = new RelatorioEntity();
 		entity.setId(bean.getId());
 
@@ -18,6 +21,9 @@ public class RelatorioConverter implements Converter<RelatorioEntity, RelatorioB
 
 	@Override
 	public RelatorioBean convertEntityToBean(RelatorioEntity entity) {
+		if (entity == null) {
+			return null;
+		}
 		RelatorioBean bean = new RelatorioBean();
 		bean.setId(entity.getId());
 

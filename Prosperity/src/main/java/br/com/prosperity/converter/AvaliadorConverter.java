@@ -16,6 +16,9 @@ public class AvaliadorConverter implements Converter<AvaliadorEntity, AvaliadorB
 	 */
 	@Override
 	public AvaliadorEntity convertBeanToEntity(AvaliadorBean bean) {
+		if (bean == null) {
+			return null;
+		}
 		AvaliadorEntity entity = new AvaliadorEntity();
 
 		entity.setId(bean.getIdAvaliador());
@@ -31,6 +34,9 @@ public class AvaliadorConverter implements Converter<AvaliadorEntity, AvaliadorB
 	 */
 	@Override
 	public AvaliadorBean convertEntityToBean(AvaliadorEntity entity) {
+		if (entity == null) {
+			return null;
+		}
 		AvaliadorBean bean = new AvaliadorBean();
 
 		bean.setIdAvaliador(entity.getId());

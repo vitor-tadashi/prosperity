@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -92,10 +93,12 @@
 											</div>
 											<div class="form-group col-md-2 col-sm-4">
 												<label for="dataNascimento" class="control-label">Data
-													nascimento</label> <input type="text"
+													nascimento</label> <fmt:formatDate value="${candidato.dataNascimento}"
+													pattern="dd/MM/yyyy" var="dataNascimento"/>
+													<input type="text"
 													class="form-control date parsley-validated"
 													data-required="true" name="dataNascimento"
-													id="dataNascimento" value="${candidato.dataNascimento}"
+													id="dataNascimento" value="${dataNascimento}"
 													onblur="validarData(this.value)">
 											</div>
 											<div class="form-group col-md-2">
@@ -120,7 +123,7 @@
 											</div>
 											<div class="form-group col-md-2">
 												<label for="numero" class="control-label">Número</label> <input
-													type="text" class="form-control parsley-validated"
+													type="number" class="form-control parsley-validated"
 													id="numero" data-required="true" name="endereco.numero"
 													value="${candidato.endereco.numero}">
 											</div>
@@ -191,11 +194,14 @@
 											</select>
 										</div>
 										<div class="form-group col-md-2">
-											<label for="mesAnoConclusao">Data de conclusão</label> <input
+											<label for="mesAnoConclusao">Data de conclusão</label> 
+											<fmt:formatDate value="${candidato.formacao.dataConclusao}"
+													pattern="dd/MM/yyyy" var="dataConclusao"/>
+											<input
 												type="text" class="form-control date" id="mesAnoConclusao"
 												data-required="false" name="formacao.dataConclusao"
 												onblur="validarData(this.value)"
-												value="${candidato.formacao.dataConclusao}">
+												value="${dataConclusao}">
 										</div>
 									</div>
 									<div class="tab-pane fade" id="third">
@@ -206,7 +212,7 @@
 														salarial</label>
 												</div>
 												<div class="col-md-2">
-													<input type="text" class="form-control dinheiro"
+													<input type="number" class="form-control dinheiro"
 														id="pretensaoSalarial" placeholder="R$" name="valorMin"
 														value="${candidato.valorMin}" />
 												</div>
@@ -214,7 +220,7 @@
 													<p class="text-center">até</p>
 												</div>
 												<div class="col-md-2">
-													<input type="text" class="form-control dinheiro"
+													<input type="number" class="form-control dinheiro"
 														placeholder="R$" name="valorMax"
 														value="${candidato.valorMax}" />
 												</div>
@@ -242,18 +248,22 @@
 										<div>
 											<div class="form-group col-md-2 col-sm-2">
 												<label for="dataUltimoContato" class="control-label">Data
-													de ultimo contato</label> <input type="text"
+													de ultimo contato</label> <fmt:formatDate value="${candidato.dataUltimoContato}"
+													pattern="dd/MM/yyyy" var="dataUltimoContato"/>
+													<input type="text"
 													class="form-control date" name="dataConclusao"
 													onblur="validarData(this.value)" data-required="false"
 													id="dataUltimoContato"
-													value="${candidato.dataUltimoContato }">
+													value="${dataUltimoContato}">
 											</div>
 											<div class="form-group col-md-2 col-sm-4">
 												<label for="entrevista" class="control-label">Data
-													de Entrevista</label> <input type="text" class="form-control date"
+													de Entrevista</label> <fmt:formatDate value="${candidato.entrevista}"
+													pattern="dd/MM/yyyy" var="entrevista"/>
+													<input type="text" class="form-control date"
 													data-required="false" name="entrevista" id="entrevista"
 													onblur="validarData(this.value)"
-													value="${candidato.entrevista}">
+													value="${entrevista}">
 											</div>
 										</div>
 
@@ -264,6 +274,7 @@
 
 							</div>
 							<div>
+							<input type="hidden" value="${candidato.id}" name="id">
 								<button class="btn btn-success btn-sm btnAjuste ">Salvar</button>
 							</div>
 						</form>
@@ -347,7 +358,7 @@
 
     				var text = "[" + div.textContent + "]";
 				}
-				var div = document.getElementById("textDiv").className = "alert alert-danger";
+
 
 				textDiv.textContent = "";
 

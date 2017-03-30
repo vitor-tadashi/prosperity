@@ -21,15 +21,22 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "tbVaga")
-	@NamedQueries({ @NamedQuery(name = "obterTodos", query = "SELECT u FROM VagaEntity u WHERE u.nomeVaga = ?1"),
+
+@NamedQueries({ 
+
+	@NamedQuery(name = "obterTodos", query = "SELECT u FROM VagaEntity u WHERE u.nomeVaga = ?1"),
 	@NamedQuery(name="listarVagaAprovar", query="SELECT v FROM VagaEntity v WHERE NOT EXISTS (SELECT s FROM StatusVagaEntity s WHERE v.id = s.vaga)"),
+
 	//@NamedQuery(name="listarVagaFiltrado", query="SELECT u FROM VagaEntity u WHERE u.nomeVaga like ?1 AND u.dataAbertura BETWEEN ?1 AND ?1"),
 	@NamedQuery(name="obterPorId", query="SELECT u FROM VagaEntity u WHERE u.id = ?1"),
 
-	@NamedQuery(name="listarVagaFiltrado", query="SELECT u FROM VagaEntity u WHERE u.nomeVaga like ?1 AND u.dataAbertura BETWEEN ?2 AND ?3")
+	@NamedQuery(name="listarVagaFiltrado", query="SELECT u FROM VagaEntity u LEFT OUTER JOIN u.statusVagaEntity p WHERE p.id = ?1" ),
 
 
-})
+}) 	
+
+
+
 
 public class VagaEntity {
 	@Id
