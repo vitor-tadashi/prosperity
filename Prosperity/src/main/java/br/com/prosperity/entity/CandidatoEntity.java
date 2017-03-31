@@ -22,15 +22,21 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+/**
+ * @author andre.posman
+ *
+ */
 @Entity
 @Table(name = "tbCandidato")
 
-//@NamedQuery(name="pesquisarNome", query="SELECT u FROM CandidatoEntity u LEFT OUTER JOIN u.vagaEntity p WHERE p.nomeVaga like ?1")
+// @NamedQuery(name="pesquisarNome", query="SELECT u FROM CandidatoEntity u LEFT
+// OUTER JOIN u.vagaEntity p WHERE p.nomeVaga like ?1")
 
 // @NamedQuery(name="fazerFiltro", query="SELECT u FROM CandidatoEntity u WHERE
 // u.nome = ?1")
 
-@NamedQueries({ @NamedQuery(name = "pesquisarNome", query = "SELECT u FROM CandidatoEntity u WHERE u.nome like ?1 AND u.valorPretensaoSalarial BETWEEN ?2 AND ?3 AND u.dataAbertura BETWEEN ?4 AND ?5"),
+@NamedQueries({
+		@NamedQuery(name = "pesquisarNome", query = "SELECT u FROM CandidatoEntity u WHERE u.nome like ?1 AND u.valorPretensaoSalarial BETWEEN ?2 AND ?3 AND u.dataAbertura BETWEEN ?4 AND ?5"),
 		@NamedQuery(name = "obterPorCPF", query = "SELECT u FROM CandidatoEntity u WHERE u.cpf = ?1") })
 
 public class CandidatoEntity {
@@ -95,23 +101,23 @@ public class CandidatoEntity {
 
 	// @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, orphanRemoval = true)
 	@JoinColumn(name = "idContato")
 	private ContatoEntity contato;
 
-	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(cascade = {CascadeType.ALL}, orphanRemoval = true)
 	@JoinColumn(name = "idEndereco")
 	private EnderecoEntity endereco;
 
-	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(cascade = {CascadeType.ALL}, orphanRemoval = true)
 	@JoinColumn(name = "idFormacao")
 	private FormacaoEntity formacao;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "idCandidato")
 	private List<StatusCandidatoEntity> statusCandidatos;
 
@@ -131,11 +137,11 @@ public class CandidatoEntity {
 		this.competencias = competencias;
 	}
 
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "idCandidato")
 	private List<CandidatoCompetenciaEntity> competencias;
-	
-//TODO 
+
+	// TODO
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "tbVagaCandidato", joinColumns = { @JoinColumn(name = "idCandidato") }, inverseJoinColumns = {
 			@JoinColumn(name = "idVaga") })
@@ -229,13 +235,12 @@ public class CandidatoEntity {
 		this.dataAlteracao = dataAlteracao;
 	}
 
-
 	public String getCurriculo() {
 		return curriculo;
 	}
 
 	public void setCurriculo(String file) {
-		this.curriculo= file;
+		this.curriculo = file;
 	}
 
 	public Date getDataUltimoContato() {
@@ -294,23 +299,28 @@ public class CandidatoEntity {
 		this.usuario = usuario;
 	}
 
-	/*public List<StatusCandidatoEntity> getStatusCandidatos() {
-		return statusCandidatos;
-	}
+	/*
+	 * public List<StatusCandidatoEntity> getStatusCandidatos() { return
+	 * statusCandidatos; }
+	 * 
+	 * public void setStatusCandidatos(List<StatusCandidatoEntity>
+	 * statusCandidatos) { this.statusCandidatos = statusCandidatos; }
+	 * 
+	 * public List<CandidatoCompetenciaEntity> getCompetencias() { return
+	 * competencias; }
+	 * 
+	 * public void setCompetencias(List<CandidatoCompetenciaEntity>
+	 * competencias) { this.competencias = competencias; } <<<<<<< HEAD
+	 * 
+	 * public Date getDataultimoContato() { return dataultimoContato; }
+	 * 
+	 * public void setDataultimoContato(Date dataultimoContato) {
+	 * this.dataultimoContato = dataultimoContato; }
+	 * 
+	 * public Double getValorMin() { =======
+	 */
+	public Double getValorMin() {
 
-	public void setStatusCandidatos(List<StatusCandidatoEntity> statusCandidatos) {
-		this.statusCandidatos = statusCandidatos;
-	}
-
-	public List<CandidatoCompetenciaEntity> getCompetencias() {
-		return competencias;
-	}
-
-	public void setCompetencias(List<CandidatoCompetenciaEntity> competencias) {
-		this.competencias = competencias;
-	}
-*/
-	public  Double getValorMin() {
 		return valorMin;
 	}
 
@@ -318,20 +328,13 @@ public class CandidatoEntity {
 		this.valorMin = valorMin;
 	}
 
-	public  Double getValorMax() {
+	public Double getValorMax() {
+
 		return valorMax;
 	}
 
 	public void setValorMax(Double valorMax) {
 		this.valorMax = valorMax;
-	}
-	
-	public Date getDataultimoContato() {
-		return dataultimoContato;
-	}
-
-	public void setDataultimoContato(Date dataultimoContato) {
-		this.dataultimoContato = dataultimoContato;
 	}
 
 }

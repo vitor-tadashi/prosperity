@@ -17,7 +17,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbStatus")
-@NamedQuery(name="alterarStatus", query="SELECT u FROM StatusEntity u LEFT OUTER JOIN u.tipoStatus p WHERE p.id= 2")
+@NamedQuery(name = "alterarStatus", query = "SELECT u FROM StatusEntity u LEFT OUTER JOIN u.tipoStatus p WHERE p.id= 2")
 public class StatusEntity {
 
 	@Id
@@ -39,6 +39,10 @@ public class StatusEntity {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "idStatus")
 	private List<StatusCandidatoEntity> statusCandidatos;
+
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "idStatus")
+	private List<StatusDisponivelEntity> statusDisponiveis;
 
 	public Integer getId() {
 		return id;
@@ -70,6 +74,14 @@ public class StatusEntity {
 
 	public void setTipoStatus(TipoStatusEntity tipoStatus) {
 		this.tipoStatus = tipoStatus;
+	}
+
+	public List<StatusDisponivelEntity> getStatusDisponiveis() {
+		return statusDisponiveis;
+	}
+
+	public void setStatusDisponiveis(List<StatusDisponivelEntity> statusDisponiveis) {
+		this.statusDisponiveis = statusDisponiveis;
 	}
 
 }
