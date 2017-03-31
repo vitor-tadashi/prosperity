@@ -2,8 +2,6 @@ package br.com.prosperity.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,13 +37,14 @@ public class UsuarioController {
 	private UsuarioBusiness usuarioBusiness;
 
 	@RequestMapping(value = "/listar", method = RequestMethod.GET)
-	public String carregaUsuarios(Model model) {
+	public String carregaUsuarios(Model model, String erro) {
 		List<UsuarioBean> usuarios = usuarioBusiness.findAll();
 		List<FuncionarioBean> funcionarios = funcionarioBusiness.findAll();
 		List<PerfilBean> perfis = perfilBusiness.listar();
 		model.addAttribute("funcionarios", funcionarios);
 		model.addAttribute("perfis", perfis);
 		model.addAttribute("usuarios", usuarios);
+		model.addAttribute("erro", erro);
 
 		return "usuario/consultar-usuario";
 	}
@@ -76,17 +75,12 @@ public class UsuarioController {
 	}
 
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
-	public String inserirUsuario(@Valid UsuarioBean usuario, BindingResult result) {
-		if(result.hasErrors()) {
-			return "redirect:listar";
-		}
-		
-		if (usuario.getId() == null) {
+	public String inserirUsuario(UsuarioBean usuario, Model model) {
+		try {
 			usuarioBusiness.inserir(usuario);
-		} else {
-			usuarioBusiness.alterar(usuario);
+		} catch (BusinessException e) {
+			model.addAttribute("erro", e.getMessage());
 		}
-		
 		return "redirect:listar";
 	}
 	

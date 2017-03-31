@@ -36,10 +36,6 @@
 						<div class="row">
 							<form action="cadastrar" method="POST" id="frmUsuario" data-validate="parsley" novalidate>
 								<input type="hidden" name="id" id="id" />
-								<form:errors path="funcionario" />
-								<form:errors path="nome" />
-								<form:errors path="email" />
-								<form:errors path="perfil" />
 								<div class="row">
 									<div class="form-group col-md-6">
 										<label for="funcionario">Funcionário</label>
@@ -50,22 +46,17 @@
 											</c:forEach>
 										</select>
 									</div>
+									
 									<div class="form-group col-md-6">
 										<label for="usuario">Usuário</label>
-										<div class="input-group">
-											<span class="input-group-addon"><i class="fa fa-user"></i></span>
-											<input type="text" class="form-control" id="usuario"
-												data-required="true" name="nome" placeholder="Informe o usuário">
-										</div>
+										<input type="text" data-type="user" class="form-control" id="usuario" data-parsley-errors-container=".errorspannewpassinput" data-required="true" name="nome" placeholder="Informe o usuário">
+										<div class="errorBlock"></div>
 									</div>
-									<div class="form-group col-md-6 cold-md-offset-6">
+									<div class="form-group col-md-6">
 										<label for="email">E-mail corporativo</label>
-										<div class="input-group">
-											<span class="input-group-addon">@</span> <input type="email"
-												class="form-control" id="email" data-required="true" name="email" placeholder="Informe o e-mail">
-										</div>
+										<input type="email" class="form-control" id="email" data-required="true" name="email" placeholder="example@verity.com.br">
 									</div>
-									<div class="form-group open col-md-6">
+									<div class="form-group col-md-6">
 										<label for="permissao">Perfil</label>
 										<select class="form-control" name="perfil.id" id="cmbPerfil" data-required="true">
 											<option value="">Selecione</option>
@@ -101,7 +92,7 @@
 	<div id="main-container">
 		<div id="breadcrumb">
 			<ul class="breadcrumb">
-				<li><i class="fa fa-home"></i><a href="pagina-inicial">
+				<li><i class="fa fa-home"></i><a href="/pagina-inicial">
 						Início</a></li>
 				<li class="active">Controle de usuários</li>
 			</ul>
@@ -115,6 +106,11 @@
 							<div class="panel-heading"><strong>Usuários cadastrados:</strong></div>
 							<div class="panel-body">
 								<div id="divAlert"></div>
+								<c:if test="${not empty erro}">
+									<div class="alert alert-danger alert-dismissible fade in">
+										${erro}
+									</div>
+								</c:if>
 								<table class="table table-bordered table-condensed table-hover table-striped">
 									<thead>
 										<tr>
@@ -160,17 +156,6 @@
 					</div>
 				</div>
 			</div>
-			<!-- <div class="panel-footer clearfix">
-				<ul class="pagination pagination-xs m-top-none pull-right">
-					<li class="disabled"><a href="#">Anterior</a></li>
-					<li class="active"><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
-					<li><a href="#">Próxima</a></li>
-				</ul>
-			</div> -->
 		</div>
 	</div>
 
@@ -180,5 +165,6 @@
 	<!-- javaScript aqui -->
 	<script src="/resources/js/api/usuario-api.js"></script>
 	<script src='/resources/js/parsley.min.js'></script>
+	
 </body>
 </html>

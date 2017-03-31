@@ -13,14 +13,10 @@ public class UsuarioBean {
 	
 	private Integer id;
 	
-	@NotNull
 	private PerfilBean perfil;
 	
-	@NotNull
 	private FuncionarioBean funcionario;
 	
-	@NotNull
-	@Size(min=5, max=20)
 	private String nome;
 	
 	private String senha = SENHA_PADRAO;
@@ -29,8 +25,6 @@ public class UsuarioBean {
 	
 	private Boolean primeiroAcesso = true;
 	
-	@NotNull
-	@Email
 	private String email;
 	
 	private Boolean ativo = true;
