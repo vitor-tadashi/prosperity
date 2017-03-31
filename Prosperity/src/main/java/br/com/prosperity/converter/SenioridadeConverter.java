@@ -10,6 +10,9 @@ public class SenioridadeConverter implements Converter<SenioridadeEntity, Senior
 
 	@Override
 	public SenioridadeEntity convertBeanToEntity(SenioridadeBean bean) {
+		if (bean == null) {
+			return null;
+		}
 		SenioridadeEntity entity = new SenioridadeEntity();
 		entity.setId(bean.getId());
 		entity.setNome(bean.getNome());
@@ -18,6 +21,9 @@ public class SenioridadeConverter implements Converter<SenioridadeEntity, Senior
 
 	@Override
 	public SenioridadeBean convertEntityToBean(SenioridadeEntity entity) {
+		if (entity == null) {
+			return null;
+		}
 		SenioridadeBean bean = new SenioridadeBean();
 		bean.setId(entity.getId());
 		bean.setNome(entity.getNome());

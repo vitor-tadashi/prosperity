@@ -1,9 +1,7 @@
 package br.com.prosperity.entity;
 
-import java.io.File;
 import java.util.Date;
 import java.util.List;
-import java.lang.Integer;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -26,10 +24,13 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "tbCandidato")
+
+//@NamedQuery(name="pesquisarNome", query="SELECT u FROM CandidatoEntity u LEFT OUTER JOIN u.vagaEntity p WHERE p.nomeVaga like ?1")
+
 // @NamedQuery(name="fazerFiltro", query="SELECT u FROM CandidatoEntity u WHERE
 // u.nome = ?1")
 
-@NamedQueries({ @NamedQuery(name = "pesquisarNome", query = "SELECT u FROM CandidatoEntity u WHERE u.nome like ?1"),
+@NamedQueries({ @NamedQuery(name = "pesquisarNome", query = "SELECT u FROM CandidatoEntity u WHERE u.nome like ?1 AND u.valorPretensaoSalarial BETWEEN ?2 AND ?3 AND u.dataAbertura BETWEEN ?4 AND ?5"),
 		@NamedQuery(name = "obterPorCPF", query = "SELECT u FROM CandidatoEntity u WHERE u.cpf = ?1") })
 
 public class CandidatoEntity {
@@ -110,11 +111,27 @@ public class CandidatoEntity {
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "idCandidato")
 	private List<StatusCandidatoEntity> statusCandidatos;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	public List<StatusCandidatoEntity> getStatusCandidatos() {
+		return statusCandidatos;
+	}
+
+	public void setStatusCandidatos(List<StatusCandidatoEntity> statusCandidatos) {
+		this.statusCandidatos = statusCandidatos;
+	}
+
+	public List<CandidatoCompetenciaEntity> getCompetencias() {
+		return competencias;
+	}
+
+	public void setCompetencias(List<CandidatoCompetenciaEntity> competencias) {
+		this.competencias = competencias;
+	}
+
+	@OneToMany
 	@JoinColumn(name = "idCandidato")
 	private List<CandidatoCompetenciaEntity> competencias;
 	
@@ -277,7 +294,7 @@ public class CandidatoEntity {
 		this.usuario = usuario;
 	}
 
-	public List<StatusCandidatoEntity> getStatusCandidatos() {
+	/*public List<StatusCandidatoEntity> getStatusCandidatos() {
 		return statusCandidatos;
 	}
 
@@ -292,20 +309,20 @@ public class CandidatoEntity {
 	public void setCompetencias(List<CandidatoCompetenciaEntity> competencias) {
 		this.competencias = competencias;
 	}
-
-	public  double getValorMin() {
+*/
+	public  Double getValorMin() {
 		return valorMin;
 	}
 
-	public void setValorMin(double valorMin) {
+	public void setValorMin(Double valorMin) {
 		this.valorMin = valorMin;
 	}
 
-	public  double getValorMax() {
+	public  Double getValorMax() {
 		return valorMax;
 	}
 
-	public void setValorMax(double valorMax) {
+	public void setValorMax(Double valorMax) {
 		this.valorMax = valorMax;
 	}
 	

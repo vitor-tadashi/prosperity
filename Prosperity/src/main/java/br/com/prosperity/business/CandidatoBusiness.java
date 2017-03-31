@@ -1,6 +1,8 @@
 package br.com.prosperity.business;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -38,31 +40,22 @@ public class CandidatoBusiness extends FormatUtil {
 
 	@Autowired
 	private CandidatoBean candidatoBean;
-
 	@Autowired
 	private CandidatoDAO candidatoDAO;
-
 	@Autowired
 	private CandidatoConverter candidatoConverter;
-
 	@Autowired
 	private StatusCandidatoDAO statusCandidatoDAO;
-
 	@Autowired
 	private UsuarioBean usuarioBean;
-
 	@Autowired
 	private UsuarioDAO usuarioDAO;
-
 	@Autowired
 	private StatusDAO statusDAO;
-
 	@Autowired
 	private StatusFuturoDAO statusFuturoDAO;
-
 	@Autowired
 	private AvaliadorCandidatoDAO avaliadorCandidatoDAO;
-
 	@Autowired
 	private HttpSession session;
 
@@ -88,12 +81,10 @@ public class CandidatoBusiness extends FormatUtil {
 	}
 
 	@Transactional
-	public List<CandidatoBean> obterFiltro(CandidatoBean candidatao) {
-		List<CandidatoEntity> candidatos = candidatoDAO.findByNamedQuery("pesquisarNome",
-				"%" + candidatao.getNome() + "%");
+	public List<CandidatoBean> obterFiltro(CandidatoBean candidato) {
+		List<CandidatoEntity> candidatos = candidatoDAO.findByNamedQuery("pesquisarNome","%" + candidato.getNome() + "%", candidato.getPretensaoDe(), candidato.getPretensaoPara(), candidato.getDataAberturaDe(), candidato.getDataAberturaPara());
 		List<CandidatoBean> candidatoBean = candidatoConverter.convertEntityToBean(candidatos);
 		return candidatoBean;
-
 	}
 
 	private static <K, V> Map<K, List<V>> groupByOrdered(List<V> list, Function<V, K> keyFunction) {
@@ -109,14 +100,31 @@ public class CandidatoBusiness extends FormatUtil {
 
 	@Transactional
 	public void inserir(CandidatoBean candidatoBean) {
-	/*	if(candidatoBean.getId()== null){
 
-			candidatoDAO.insert(candidatoConverter.convertBeanToEntity(candidatoBean));	
-		}else{
+		/*
+		 * if(candidatoBean.getId()== null){
+		 * 
+		 * candidatoDAO.insert(candidatoConverter.convertBeanToEntity(
+		 * candidatoBean)); }else{ CandidatoEntity candidatoEntity =
+		 * candidatoDAO.findById(candidatoBean.getId());
+		 * candidatoDAO.update(candidatoEntity); }
+		 */
+		candidatoDAO.insert(candidatoConverter.convertBeanToEntity(candidatoBean));
+
+		if (candidatoBean.getId() == null) {
+			if (verificarCandidatura(candidatoBean) == true) {
+				candidatoDAO.insert(candidatoConverter.convertBeanToEntity(candidatoBean));
+			} else {
+				// retornar mensagem de candidato em processo seletivo para vaga
+			}
+
+		} else {
 			CandidatoEntity candidatoEntity = candidatoDAO.findById(candidatoBean.getId());
+
+			candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoEntity, candidatoBean);
+
 			candidatoDAO.update(candidatoEntity);
-		}*/
-		candidatoDAO.insert(candidatoConverter.convertBeanToEntity(candidatoBean));	
+		}
 	}
 
 	@Transactional
@@ -143,13 +151,16 @@ public class CandidatoBusiness extends FormatUtil {
 				situacaoCandidato.setStatus(StatusCandidatoEnum.valueOf(statusFuturoEntity.get(0).getIdStatusFuturo()));
 			} else {
 				avaliadorCandidatoEntity = avaliadorCandidatoDAO.findByNamedQuery("obterAvaliadoresCandidato");
-				
-				StatusCandidatoEnum status = avaliadorCandidatoEntity.size() == 1
-						? StatusCandidatoEnum.PROPOSTACANDIDATO : StatusCandidatoEnum.CANDIDATOEMANALISE;
 
-				situacaoCandidato.setStatus(status);
-				avaliadorCandidatoEntity.get(0).setIdStatus(situacaoCandidato.getStatus().getValue());
-				avaliadorCandidatoDAO.update(avaliadorCandidatoEntity.get(0));
+				if (avaliadorCandidatoEntity != null && avaliadorCandidatoEntity.size() > 0) {
+					StatusCandidatoEnum status = avaliadorCandidatoEntity.size() == 1
+							? StatusCandidatoEnum.PROPOSTACANDIDATO : StatusCandidatoEnum.CANDIDATOEMANALISE;
+
+					situacaoCandidato.setStatus(status);
+					avaliadorCandidatoEntity.get(0).setIdStatus(situacaoCandidato.getStatus().getValue());
+					avaliadorCandidatoDAO.update(avaliadorCandidatoEntity.get(0));
+				}
+
 			}
 
 			statusCandidatoDAO.insert(alterarStatus1(situacaoCandidato));
@@ -161,7 +172,8 @@ public class CandidatoBusiness extends FormatUtil {
 
 		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
 		statusCandidatoEntity.setStatus(statusDAO.findById(situacaoCandidato.getStatus().getValue()));
-		statusCandidatoEntity.setIdCandidato(situacaoCandidato.getIdCandidato());
+		candidatoBean.setId(situacaoCandidato.getIdCandidato());
+		statusCandidatoEntity.setCandidato(candidatoConverter.convertBeanToEntity(candidatoBean));
 		statusCandidatoEntity.setDsParecer(situacaoCandidato.getParecer());
 		statusCandidatoEntity.setDtAlteracao(new Date());
 		statusCandidatoEntity.setUsuario(usuarioDAO.findById(usuarioBean.getId()));
@@ -169,28 +181,38 @@ public class CandidatoBusiness extends FormatUtil {
 		return statusCandidatoEntity;
 	}
 
-
 	public CandidatoBean obterPorCPF(String cpf) {
 		List<CandidatoEntity> candidatosEntity = null;
 
 		candidatosEntity = candidatoDAO.findByNamedQuery("obterPorCPF", cpf);
 
-//		Integer idDoCara = candidatosEntity.get(0).getId();
-//		for (int i = 0; i < candidatosEntity.size(); i++) {
-//			
-//		}
-		
+		// Integer idDoCara = candidatosEntity.get(0).getId();
+		// for (int i = 0; i < candidatosEntity.size(); i++) {
+		//
+		// }
+
 		for (CandidatoEntity candidatoEntity : candidatosEntity) {
-			
+
 			candidatoBean = candidatoConverter.convertEntityToBean(candidatoEntity);
 		}
-		
-//		for (CandidatoEntity candidatoEntity : candidatosEntity) {
-//			candidatoBean = candidatoConverter.convertEntityToBean(candidatoEntity);
-//		}
+
+		// for (CandidatoEntity candidatoEntity : candidatosEntity) {
+		// candidatoBean =
+		// candidatoConverter.convertEntityToBean(candidatoEntity);
+		// }
 
 		return candidatoBean;
 	}
-	
 
+	private Boolean verificarCandidatura(CandidatoBean candidato) {
+		if (candidato.getUltimoStatus().getId() == null || candidato.getUltimoStatus().getId() == 6
+				|| candidato.getUltimoStatus().getId() == 7) {
+			if (candidato.getVagas().get(0).getStatus().get(0).getId() == 17   || candidato.getVagas().get(0).getStatus().get(0).getId() == 2) {
+				return true;
+			}
+			return false;
+
+		}
+		return false;
+	}
 }

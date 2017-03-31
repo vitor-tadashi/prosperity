@@ -27,7 +27,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 		
 	      if(uri.endsWith("login/") || 
 	          uri.endsWith("/autenticar") || 
-	              uri.contains("resources/")){
+	              uri.contains("resources/") || uri.endsWith("/servico")){
 	        return true;
 	      }
 	      

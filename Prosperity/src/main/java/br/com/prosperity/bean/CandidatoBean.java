@@ -1,30 +1,24 @@
 package br.com.prosperity.bean;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
-
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import org.springframework.stereotype.Component;
 
 import br.com.prosperity.util.FormatUtil;
 
 @Component
-
 @XmlRootElement(name = "CandidatoBean")
 public class CandidatoBean  extends FormatUtil {
-
 
 	private Integer id;
 
@@ -44,7 +38,7 @@ public class CandidatoBean  extends FormatUtil {
 	private Date dataFechamento;
 	private String email;
 	private Date dataAlteracao;
-	private File curriculo;
+	private String curriculo;
 	@Valid
 	private ContatoBean contato;
 
@@ -56,6 +50,7 @@ public class CandidatoBean  extends FormatUtil {
 	private List<StatusCandidatoBean> status = new ArrayList<>();
 	private List<VagaBean> vagas = new ArrayList<>();
 	private List<CandidatoCompetenciaBean> competencias = new ArrayList<>();
+	private List<AvaliadorBean> avaliadores = new ArrayList<>(); 
 	private Map<String, List<StatusCandidatoBean>> statusPorMesAno;
 	private Date dataUltimoContato;
 	private Date entrevista;
@@ -64,15 +59,58 @@ public class CandidatoBean  extends FormatUtil {
 	private Double valorMin;
 	private Double valorMax;
 	private StatusCandidatoBean ultimoStatus;
+	private double PretensaoDe;
+	private double PretensaoPara;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date dataAberturaDe;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date dataAberturaPara;
+	
+
+
+	public Date getDataAberturaDe() {
+		return dataAberturaDe;
+	}
+
+	public void setDataAberturaDe(Date dataAberturaDe) {
+		this.dataAberturaDe = dataAberturaDe;
+	}
+
+	public Date getDataAberturaPara() {
+		return dataAberturaPara;
+	}
+
+	public void setDataAberturaPara(Date dataAberturaPara) {
+		this.dataAberturaPara = dataAberturaPara;
+	}
+
+	public double getPretensaoDe() {
+		return PretensaoDe;
+	}
+
+	public void setPretensaoDe(double pretensaoDe) {
+		PretensaoDe = pretensaoDe;
+	}
+
+	public double getPretensaoPara() {
+		return PretensaoPara;
+	}
+
+	public void setPretensaoPara(double pretensaoPara) {
+		PretensaoPara = pretensaoPara;
+	}
+
 	public StatusCandidatoBean getUltimoStatus() {
 		if (status != null && status.size() > 0) {
-			Date dataUltimoStatus = status.stream().map(StatusCandidatoBean::getDataAlteracao).max(Date::compareTo).get();
-			ultimoStatus = status.stream().filter(st -> st.getDataAlteracao().equals(dataUltimoStatus)).findFirst().get();	
+			Date dataUltimoStatus = status.stream().map(StatusCandidatoBean::getDataAlteracao).max(Date::compareTo)
+					.get();
+			ultimoStatus = status.stream().filter(st -> st.getDataAlteracao().equals(dataUltimoStatus)).findFirst()
+					.get();
 		} else {
 			ultimoStatus = new StatusCandidatoBean("Não possui status");
 		}
-		
+
 		return ultimoStatus;
 	}
 
@@ -156,11 +194,11 @@ public class CandidatoBean  extends FormatUtil {
 		this.dataAlteracao = dataAlteracao;
 	}
 
-	public File getCurriculo() {
+	public String getCurriculo() {
 		return curriculo;
 	}
 
-	public void setCurriculo(File curriculo) {
+	public void setCurriculo(String curriculo) {
 		this.curriculo = curriculo;
 	}
 
@@ -220,17 +258,10 @@ public class CandidatoBean  extends FormatUtil {
 		this.competencias = competencias;
 	}
 
-	
-//	@XmlElement(type=StatusCandidatoBean.class)
-//	public Map<String, List<StatusCandidatoBean>> getStatusPorMesAno() {
-//		return statusPorMesAno;
-//	}
-
-
+	@XmlTransient
 	public Map<String, List<StatusCandidatoBean>> getStatusPorMesAno() {
 		return statusPorMesAno;
 	}
-
 
 	public void setStatusPorMesAno(Map<String, List<StatusCandidatoBean>> statusPorMesAno) {
 		this.statusPorMesAno = statusPorMesAno;
@@ -282,6 +313,14 @@ public class CandidatoBean  extends FormatUtil {
 
 	public void setVagaCandidatoBean(VagaCandidatoBean vagaCandidatoBean) {
 		this.vagaCandidatoBean = vagaCandidatoBean;
+	}
+
+	public List<AvaliadorBean> getAvaliadores() {
+		return avaliadores;
+	}
+
+	public void setAvaliadores(List<AvaliadorBean> avaliadores) {
+		this.avaliadores = avaliadores;
 	}
 
 }

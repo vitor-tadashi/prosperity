@@ -1,5 +1,5 @@
 
-package br.com.verity.rest;
+package br.com.prosperity.rest;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
