@@ -158,6 +158,7 @@
 			</div>
 		</div>
 	</div>
+	</div>
 
 	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
 	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
