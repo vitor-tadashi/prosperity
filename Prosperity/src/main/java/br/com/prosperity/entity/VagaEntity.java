@@ -19,6 +19,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "tbVaga")
 
@@ -55,7 +57,8 @@ public class VagaEntity {
 	private Double valorPretensao;
 
 	@Column(name = "dtInicio")
-	@Temporal(value = TemporalType.DATE)
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date dataInicio;
 
 	@Column(name = "flLocalTrabalho")
@@ -102,15 +105,15 @@ public class VagaEntity {
 	@Temporal(value = TemporalType.DATE)
 	private Date dataFechamento; //
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idProjeto")
 	private ProjetoEntity projetoEntity;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idCargo")
 	private CargoEntity cargoEntity;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idSenioridade")
 	private SenioridadeEntity senioridadeEntity;
 

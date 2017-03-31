@@ -2,9 +2,12 @@ package br.com.prosperity.bean;
 
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.springframework.stereotype.Component;
 
 @Component
+@XmlRootElement(name = "FormacaoBean")
 public class FormacaoBean {
 	private Integer id;
 	private String nomeInstituicao;

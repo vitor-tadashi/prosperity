@@ -1,9 +1,7 @@
 package br.com.prosperity.bean;
 
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,7 +9,7 @@ public class SenioridadeBean {
 
 	@Min(value = 1, message = "Senioridade Inválido")
 	private Integer id;
-	
+
 	private String nome;
 
 	public Integer getId() {

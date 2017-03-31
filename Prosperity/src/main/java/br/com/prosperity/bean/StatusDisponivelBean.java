@@ -1,12 +1,9 @@
 package br.com.prosperity.bean;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
 import org.springframework.stereotype.Component;
 
 @Component
-@XmlRootElement(name = "TipoCursoBean")
-public class TipoCursoBean {
+public class StatusDisponivelBean {
 
 	private Integer id;
 	private String nome;
@@ -26,4 +23,5 @@ public class TipoCursoBean {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 }

@@ -1,8 +1,6 @@
 package br.com.prosperity.business;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -29,7 +27,6 @@ import br.com.prosperity.dao.StatusFuturoDAO;
 import br.com.prosperity.dao.UsuarioDAO;
 import br.com.prosperity.entity.AvaliadorCandidatoEntity;
 import br.com.prosperity.entity.CandidatoEntity;
-import br.com.prosperity.entity.PerfilEntity;
 import br.com.prosperity.entity.StatusCandidatoEntity;
 import br.com.prosperity.entity.StatusFuturoEntity;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
@@ -82,7 +79,9 @@ public class CandidatoBusiness extends FormatUtil {
 
 	@Transactional
 	public List<CandidatoBean> obterFiltro(CandidatoBean candidato) {
-		List<CandidatoEntity> candidatos = candidatoDAO.findByNamedQuery("pesquisarNome","%" + candidato.getNome() + "%", candidato.getPretensaoDe(), candidato.getPretensaoPara(), candidato.getDataAberturaDe(), candidato.getDataAberturaPara());
+		List<CandidatoEntity> candidatos = candidatoDAO.findByNamedQuery("pesquisarNome",
+				"%" + candidato.getNome() + "%", candidato.getPretensaoDe(), candidato.getPretensaoPara(),
+				candidato.getDataAberturaDe(), candidato.getDataAberturaPara());
 		List<CandidatoBean> candidatoBean = candidatoConverter.convertEntityToBean(candidatos);
 		return candidatoBean;
 	}
@@ -192,9 +191,14 @@ public class CandidatoBusiness extends FormatUtil {
 	}
 
 	private Boolean verificarCandidatura(CandidatoBean candidato) {
-		if (candidato.getUltimoStatus().getId() == null || candidato.getUltimoStatus().getId() == 6
+		
+		if(candidato.getUltimoStatus().getId() == null)
+			return true;
+		
+		if (candidato.getUltimoStatus().getId() == 6
 				|| candidato.getUltimoStatus().getId() == 7) {
-			if (candidato.getVagas().get(0).getStatus().get(0).getId() == 17   || candidato.getVagas().get(0).getStatus().get(0).getId() == 2) {
+			if (candidato.getVagas().get(0).getStatus().get(0).getId() == 17
+					|| candidato.getVagas().get(0).getStatus().get(0).getId() == 2) {
 				return true;
 			}
 			return false;

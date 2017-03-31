@@ -15,6 +15,9 @@ public class StatusConverter implements Converter<StatusEntity, StatusBean> {
 	@Autowired
 	private StatusCandidatoConverter statusCandidatoConverter;
 
+	@Autowired
+	private StatusDisponivelConverter statusDisponiveisConverter;
+
 	@Override
 	public StatusEntity convertBeanToEntity(StatusBean bean) {
 		if (bean == null) {
@@ -26,6 +29,8 @@ public class StatusConverter implements Converter<StatusEntity, StatusBean> {
 		entity.setNome(bean.getNome());
 		entity.setTipoCss(bean.getCss());
 		entity.setTipoStatus(tipoStatusConverter.convertBeanToEntity(bean.getTipo()));
+		entity.setStatusDisponiveis(statusDisponiveisConverter.convertBeanToEntity(bean.getStatusDisponiveis()));
+		//entity.setStatusCandidatoEntity(statusCandidatoConverter.convertBeanToEntity(bean.getStatusCandidato()));
 
 		// entity.setStatusCandidatoEntity(statusCandidatoConverter.convertBeanToEntity(bean.getStatusCandidato()));
 
@@ -43,7 +48,8 @@ public class StatusConverter implements Converter<StatusEntity, StatusBean> {
 		bean.setNome(entity.getNome());
 		bean.setCss(entity.getTipoCss());
 		bean.setTipo(tipoStatusConverter.convertEntityToBean(entity.getTipoStatus()));
-
+		bean.setStatusDisponiveis(statusDisponiveisConverter.convertEntityToBean(entity.getStatusDisponiveis()));
+		//bean.setStatusCandidato(statusCandidatoConverter.convertEntityToBean(entity.getStatusCandidatoEntity()));
 		// bean.setStatusCandidato(statusCandidatoConverter.convertEntityToBean(entity.getStatusCandidatoEntity()));
 
 		return bean;

@@ -1,30 +1,24 @@
 package br.com.prosperity.bean;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
-
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import org.springframework.stereotype.Component;
 
 import br.com.prosperity.util.FormatUtil;
 
 @Component
-
 @XmlRootElement(name = "CandidatoBean")
 public class CandidatoBean  extends FormatUtil {
-
 
 	private Integer id;
 
@@ -109,12 +103,17 @@ public class CandidatoBean  extends FormatUtil {
 
 	public StatusCandidatoBean getUltimoStatus() {
 		if (status != null && status.size() > 0) {
-			Date dataUltimoStatus = status.stream().map(StatusCandidatoBean::getDataAlteracao).max(Date::compareTo).get();
-			ultimoStatus = status.stream().filter(st -> st.getDataAlteracao().equals(dataUltimoStatus)).findFirst().get();	
+			Integer idUltimoStatus = status.stream().map(StatusCandidatoBean::getId).max(Integer::compareTo).get();
+			ultimoStatus = status.stream().filter(st -> st.getId().equals(idUltimoStatus)).findFirst().get();	
+			Date dataUltimoStatus = status.stream().map(StatusCandidatoBean::getDataAlteracao).max(Date::compareTo)
+					.get();
+			ultimoStatus = status.stream().filter(st -> st.getDataAlteracao().equals(dataUltimoStatus)).findFirst()
+					.get();
+
 		} else {
 			ultimoStatus = new StatusCandidatoBean("Não possui status");
 		}
-		
+
 		return ultimoStatus;
 	}
 
@@ -262,17 +261,10 @@ public class CandidatoBean  extends FormatUtil {
 		this.competencias = competencias;
 	}
 
-	
-//	@XmlElement(type=StatusCandidatoBean.class)
-//	public Map<String, List<StatusCandidatoBean>> getStatusPorMesAno() {
-//		return statusPorMesAno;
-//	}
-
-
+	@XmlTransient
 	public Map<String, List<StatusCandidatoBean>> getStatusPorMesAno() {
 		return statusPorMesAno;
 	}
-
 
 	public void setStatusPorMesAno(Map<String, List<StatusCandidatoBean>> statusPorMesAno) {
 		this.statusPorMesAno = statusPorMesAno;

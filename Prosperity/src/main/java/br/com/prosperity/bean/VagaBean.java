@@ -1,18 +1,21 @@
 package br.com.prosperity.bean;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 @Component
+@XmlRootElement(name = "VagaBean")
 public class VagaBean {
 
 	private Integer id;
@@ -25,6 +28,8 @@ public class VagaBean {
 	private Double valorPretensao;
 
 	@Future
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date dataInicio;
 
 	private Character localTrabalho;
@@ -35,7 +40,6 @@ public class VagaBean {
 
 	@Valid
 	private ProjetoBean projeto;
-
 	@Valid
 	private CargoBean cargoBean;
 	@Valid
@@ -56,8 +60,7 @@ public class VagaBean {
 
 	public StatusVagaBean getUltimoStatus() {
 		if (status != null && status.size() > 0) {
-			Date dataUltimoStatus = status.stream().map(StatusVagaBean::getDataAlteracao).max(Date::compareTo)
-					.get();
+			Date dataUltimoStatus = status.stream().map(StatusVagaBean::getDataAlteracao).max(Date::compareTo).get();
 			ultimoStatus = status.stream().filter(st -> st.getDataAlteracao().equals(dataUltimoStatus)).findFirst()
 					.get();
 		} else { 	

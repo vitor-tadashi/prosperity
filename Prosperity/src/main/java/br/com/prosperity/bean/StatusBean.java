@@ -1,5 +1,8 @@
 package br.com.prosperity.bean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -7,9 +10,14 @@ public class StatusBean {
 
 	private Integer id;
 	private String nome;
-	private String Css;
+	private String css;
 	private TipoStatusBean tipo;
+	private List<StatusDisponivelBean> statusDisponiveis;
 	
+	public StatusBean() {
+		statusDisponiveis = new ArrayList<StatusDisponivelBean>();
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -26,14 +34,6 @@ public class StatusBean {
 		this.nome = nome;
 	}
 
-	public String getCss() {
-		return Css;
-	}
-
-	public void setCss(String css) {
-		Css = css;
-	}
-
 	public TipoStatusBean getTipo() {
 		return tipo;
 	}
@@ -41,4 +41,21 @@ public class StatusBean {
 	public void setTipo(TipoStatusBean tipo) {
 		this.tipo = tipo;
 	}
+
+	public String getCss() {
+		return css;
+	}
+
+	public void setCss(String css) {
+		this.css = css;
+	}
+
+	public List<StatusDisponivelBean> getStatusDisponiveis() {
+		return statusDisponiveis;
+	}
+
+	public void setStatusDisponiveis(List<StatusDisponivelBean> statusDisponiveis) {
+		this.statusDisponiveis = statusDisponiveis;
+	}
+	
 }

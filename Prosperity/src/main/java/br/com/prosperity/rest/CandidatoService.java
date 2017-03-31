@@ -1,34 +1,37 @@
-package br.com.verity.rest;
+package br.com.prosperity.rest;
 
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.core.MediaType;
 
-import com.thoughtworks.xstream.XStream;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.WordpressBean;
 import br.com.prosperity.business.CandidatoBusiness;
 
-@Path("/servico")
+@RestController
 public class CandidatoService {
-
+	@Autowired
+	private CandidatoBusiness b;
+	
 	@POST
-	@Path("/can")
-	@Consumes(MediaType.APPLICATION_XML)
-	public void salvarBean(WordpressBean w) {
+	@RequestMapping("/servico")
+	@Consumes("application/xml")
+	public void salvarBean(@RequestBody WordpressBean w) {
+		
 		System.out.println("Chegou aqui!");
-
-		CandidatoBusiness b = new CandidatoBusiness();
 
 		List<CandidatoBean> candidatos = new ArrayList<>();
 
 		candidatos = w.getCandidatos();
-		
+
 		for (CandidatoBean c : candidatos) {
 			b.inserir(c);
 		}
