@@ -386,6 +386,33 @@
 		</div>
 	</div>
 	<!-- /.modal fechar-->
+	
+	
+	<!-- Modal reabrir -->
+	<div class="modal fade" id="reabre-modal" data-target="#reabre-modal"
+		tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Reabrir">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="modalLabel">Reabrir vaga</h4>
+				</div>
+				<div class="modal-body">Deseja realmente reabrir está vaga?</div>
+				<div class="modal-footer">
+					<a href="#">
+						<button id="reabreVaga" type="button" class="btn btn-primary"
+							data-dismiss="modal">Sim</button>
+					</a>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /.modal fechar-->
+	
 
 	<!-- Modal delete -->
 	<div class="modal fade" id="delete-modal" data-target="#delete-modal"
@@ -434,7 +461,7 @@
 						<!--<form class="form-inline">-->
 						<div class="panel-body">
 
-							<form action="filtrar" method="GET" class="row">
+							<form action="filtro" method="GET" class="row">
 								<div class="col-md-4">
 									<div class="form-group">
 										<label>Vaga</label> <input class="form-control" id="filtro1" name="nomeVaga" placeholder="Digite o nome de uma vaga">
@@ -524,6 +551,10 @@
 												onclick="alterarStatus(${vaga.id}, 'CANCELADO')"
 												data-toggle="modal"><i
 														class="fa fa-times">&nbsp</i>Cancelar</a></li>
+												<li class="divider "></li>			
+												<li><a href="#reabre-modal" data-toggle="modal" id="reabrir"><i
+														class="fa fa-retweet">&nbsp</i>Reabrir</a></li>
+													
 											</ul>
 										</div> <!-- /btn-group -->
 									</td>

@@ -70,13 +70,13 @@ public class VagaBusiness {
 		return vagaBean;
 	}
 	@Transactional(readOnly = true)
-	public List<VagaBean> filtrarVagas(VagaBean vagao) {
+	public List<VagaBean> filtrarVagas(VagaBean vaga) {
 		Integer idStatus = 0;
-		if(!vagao.getStatus().get(0).getStatus().getNome().equals("")){
-			idStatus = Integer.parseInt(vagao.getStatus().get(0).getStatus().getNome());
+		if(!vaga.getStatus().get(0).getStatus().getNome().equals("")){
+			idStatus = Integer.parseInt(vaga.getStatus().get(0).getStatus().getNome());
 		}
 //		List<VagaEntity> vagas = vagaDAO.findByNamedQuery("listarVagaFiltrado", "%"+vagao.getNomeVaga()+"%", vagao.getDataAberturaDe(), vagao.getDataAberturaPara(), idStatus);
-     	List<VagaEntity> vagas = vagaDAO.findByNamedQuery("listarVagaFiltrado", "%"+vagao.getNomeVaga()+"%",idStatus, parseData(vagao.getDataAberturaDe()), parseData(vagao.getDataAberturaPara()));
+     	List<VagaEntity> vagas = vagaDAO.findByNamedQuery("listarVagaFiltrado", "%"+vaga.getNomeVaga()+"%",idStatus, parseData(vaga.getDataAberturaDe()), parseData(vaga.getDataAberturaPara()));
 
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagas);
  		return vagaBean;
