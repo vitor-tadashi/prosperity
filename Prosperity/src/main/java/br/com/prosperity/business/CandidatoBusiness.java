@@ -15,21 +15,16 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.prosperity.bean.CandidatoBean;
-import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.StatusCandidatoBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.converter.CandidatoConverter;
 import br.com.prosperity.dao.AvaliadorCandidatoDAO;
 import br.com.prosperity.dao.CandidatoDAO;
-import br.com.prosperity.dao.StatusCandidatoDAO;
 import br.com.prosperity.dao.StatusDAO;
-import br.com.prosperity.dao.StatusFuturoDAO;
 import br.com.prosperity.dao.UsuarioDAO;
 import br.com.prosperity.entity.AvaliadorCandidatoEntity;
 import br.com.prosperity.entity.CandidatoEntity;
 import br.com.prosperity.entity.StatusCandidatoEntity;
-import br.com.prosperity.entity.StatusFuturoEntity;
-import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.util.FormatUtil;
 
 @Component
@@ -41,16 +36,16 @@ public class CandidatoBusiness extends FormatUtil {
 	private CandidatoDAO candidatoDAO;
 	@Autowired
 	private CandidatoConverter candidatoConverter;
-	@Autowired
-	private StatusCandidatoDAO statusCandidatoDAO;
+	//@Autowired
+	//private StatusCandidatoDAO statusCandidatoDAO;
 	@Autowired
 	private UsuarioBean usuarioBean;
 	@Autowired
 	private UsuarioDAO usuarioDAO;
 	@Autowired
 	private StatusDAO statusDAO;
-	@Autowired
-	private StatusFuturoDAO statusFuturoDAO;
+	//@Autowired
+	//private StatusFuturoDAO statusFuturoDAO;
 	@Autowired
 	private AvaliadorCandidatoDAO avaliadorCandidatoDAO;
 	@Autowired
@@ -121,7 +116,7 @@ public class CandidatoBusiness extends FormatUtil {
 		return bean;
 	}
 
-	@Transactional
+	/*@Transactional
 	public void alterarStatus(SituacaoCandidatoBean situacaoCandidato) {
 		StatusCandidatoEntity statusCandidatoEntity = alterarStatus1(situacaoCandidato);
 		List<StatusFuturoEntity> statusFuturoEntity = null;
@@ -165,7 +160,7 @@ public class CandidatoBusiness extends FormatUtil {
 		statusCandidatoEntity.setUsuario(usuarioDAO.findById(usuarioBean.getId()));
 
 		return statusCandidatoEntity;
-	}
+	}*/
 
 	public CandidatoBean obterPorCPF(String cpf) {
 		List<CandidatoEntity> candidatosEntity = null;
