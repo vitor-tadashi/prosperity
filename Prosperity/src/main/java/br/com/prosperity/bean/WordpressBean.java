@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+
 @XmlRootElement(name = "WordpressBean")
 public class WordpressBean {
 	
@@ -23,7 +24,7 @@ public class WordpressBean {
 	public WordpressBean() {
 	}
 
-	@XmlElement(type=CandidatoBean.class)
+	@XmlElement(type = CandidatoBean.class)
 	public List<CandidatoBean> getCandidatos() {
 		return candidatos;
 	}
@@ -32,6 +33,8 @@ public class WordpressBean {
 		this.candidatos = candidatos;
 	}
 
+
+	@XmlElement(type = CandidatoWordPressBean.class)
 	public List<CandidatoWordPressBean> getCandidatosWordPress() {
 		return candidatosWordPress;
 	}

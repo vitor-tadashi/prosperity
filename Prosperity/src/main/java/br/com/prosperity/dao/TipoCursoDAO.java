@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import br.com.prosperity.entity.TipoCursoEntity;
 
 @Repository
-public class TipoCursoDAO extends  GenericDAOImpl<TipoCursoEntity, Integer> {
+public class TipoCursoDAO extends GenericDAOImpl<TipoCursoEntity, Integer> {
 
 }

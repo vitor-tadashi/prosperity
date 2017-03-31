@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.prosperity.bean.AvaliacaoBean;
+import br.com.prosperity.bean.AvaliadorBean;
 import br.com.prosperity.bean.CanalInformacaoBean;
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CandidatoCompetenciaBean;
@@ -65,6 +66,9 @@ public class CandidatoController {
 
 	@Autowired
 	private List<CandidatoCompetenciaBean> competencias;
+	
+	@Autowired
+	private List<AvaliadorBean> avaliadores;
 
 	@Autowired
 	private TipoCursoBusiness tipoCursoBusiness;
@@ -161,9 +165,29 @@ public class CandidatoController {
 		obterDominiosCandidato(model);
 		model.addAttribute("candidato", candidato);
 
-
 		return "candidato/cadastrar-candidato";
 	}
+	
+	@RequestMapping(value = "editar/salvar", method = RequestMethod.POST)
+	public String salvarEditar(@ModelAttribute("candidatoBean") @Valid CandidatoBean candidatoBean,
+			BindingResult result, Model model) throws BusinessException {
+
+		if (result.hasErrors()) {
+			model.addAttribute("erro", result.getErrorCount());
+			model.addAttribute("listaErros", buildErrorMessage(result.getFieldErrors()));
+			model.addAttribute("candidato", candidatoBean);
+
+			obterDominiosCandidato(model);
+
+			return "candidato/cadastrar-candidato";
+
+		} else {
+			candidatoBusiness.inserir(candidatoBean);
+		}
+		 
+		return "candidato/cadastrar-candidato";
+	}
+	
 
 	@RequestMapping(value = "consultar-rh", method = RequestMethod.GET)
 	public String consultarCandidatoRH(Model model) {
@@ -176,7 +200,7 @@ public class CandidatoController {
 		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.obterTodos();
 		model.addAttribute("listaSenioridade", listaSenioridade);
 
-		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.obterTodos();
+		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.findAll();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
 		
 		//avaliadorBusiness.listar();
@@ -217,7 +241,7 @@ public class CandidatoController {
 		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.obterTodos();
 		model.addAttribute("listaSenioridade", listaSenioridade);
 
-		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.obterTodos();
+		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.findAll();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
 
 		// avaliadorBusiness.listar();
@@ -231,7 +255,7 @@ public class CandidatoController {
 
 	@RequestMapping(value = "historico", method = RequestMethod.GET)
 	public String historicoCandidato(Model model) {
-		CandidatoBean candidatoBean = candidatoBusiness.obter(2);
+		CandidatoBean candidatoBean = candidatoBusiness.obter(73);
 
 		model.addAttribute("candidato", candidatoBean);
 

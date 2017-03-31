@@ -50,6 +50,7 @@ public class CandidatoBean  extends FormatUtil {
 	private List<StatusCandidatoBean> status = new ArrayList<>();
 	private List<VagaBean> vagas = new ArrayList<>();
 	private List<CandidatoCompetenciaBean> competencias = new ArrayList<>();
+	private List<AvaliadorBean> avaliadores = new ArrayList<>(); 
 	private Map<String, List<StatusCandidatoBean>> statusPorMesAno;
 	private Date dataUltimoContato;
 	private Date entrevista;
@@ -58,15 +59,58 @@ public class CandidatoBean  extends FormatUtil {
 	private Double valorMin;
 	private Double valorMax;
 	private StatusCandidatoBean ultimoStatus;
+	private double PretensaoDe;
+	private double PretensaoPara;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date dataAberturaDe;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date dataAberturaPara;
+	
+
+
+	public Date getDataAberturaDe() {
+		return dataAberturaDe;
+	}
+
+	public void setDataAberturaDe(Date dataAberturaDe) {
+		this.dataAberturaDe = dataAberturaDe;
+	}
+
+	public Date getDataAberturaPara() {
+		return dataAberturaPara;
+	}
+
+	public void setDataAberturaPara(Date dataAberturaPara) {
+		this.dataAberturaPara = dataAberturaPara;
+	}
+
+	public double getPretensaoDe() {
+		return PretensaoDe;
+	}
+
+	public void setPretensaoDe(double pretensaoDe) {
+		PretensaoDe = pretensaoDe;
+	}
+
+	public double getPretensaoPara() {
+		return PretensaoPara;
+	}
+
+	public void setPretensaoPara(double pretensaoPara) {
+		PretensaoPara = pretensaoPara;
+	}
+
 	public StatusCandidatoBean getUltimoStatus() {
 		if (status != null && status.size() > 0) {
-			Date dataUltimoStatus = status.stream().map(StatusCandidatoBean::getDataAlteracao).max(Date::compareTo).get();
-			ultimoStatus = status.stream().filter(st -> st.getDataAlteracao().equals(dataUltimoStatus)).findFirst().get();	
+			Date dataUltimoStatus = status.stream().map(StatusCandidatoBean::getDataAlteracao).max(Date::compareTo)
+					.get();
+			ultimoStatus = status.stream().filter(st -> st.getDataAlteracao().equals(dataUltimoStatus)).findFirst()
+					.get();
 		} else {
 			ultimoStatus = new StatusCandidatoBean("Não possui status");
 		}
-		
+
 		return ultimoStatus;
 	}
 
@@ -214,12 +258,6 @@ public class CandidatoBean  extends FormatUtil {
 		this.competencias = competencias;
 	}
 
-	
-//	@XmlElement(type=StatusCandidatoBean.class)
-//	public Map<String, List<StatusCandidatoBean>> getStatusPorMesAno() {
-//		return statusPorMesAno;
-//	}
-
 	@XmlTransient
 	public Map<String, List<StatusCandidatoBean>> getStatusPorMesAno() {
 		return statusPorMesAno;
@@ -275,6 +313,14 @@ public class CandidatoBean  extends FormatUtil {
 
 	public void setVagaCandidatoBean(VagaCandidatoBean vagaCandidatoBean) {
 		this.vagaCandidatoBean = vagaCandidatoBean;
+	}
+
+	public List<AvaliadorBean> getAvaliadores() {
+		return avaliadores;
+	}
+
+	public void setAvaliadores(List<AvaliadorBean> avaliadores) {
+		this.avaliadores = avaliadores;
 	}
 
 }

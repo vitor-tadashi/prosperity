@@ -1,7 +1,5 @@
 package br.com.prosperity.bean;
 
-import java.io.File;
-
 import org.springframework.stereotype.Component;
 
 @Component

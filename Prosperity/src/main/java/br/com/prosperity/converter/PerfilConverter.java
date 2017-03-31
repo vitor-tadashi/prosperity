@@ -14,27 +14,29 @@ public class PerfilConverter implements Converter<PerfilEntity, PerfilBean> {
 
 	@Override
 	public PerfilEntity convertBeanToEntity(PerfilBean bean) {
+		if (bean == null) {
+			return null;
+		}
 		PerfilEntity entity = new PerfilEntity();
-		if (bean == null){
-			entity = null;
-		} else {
+
 		entity.setId(bean.getId());
 		entity.setNome(bean.getNome());
 		entity.setFuncionalidades(funcionalidadeConverter.convertBeanToEntity(bean.getListaFuncionalidades()));
-		}
+
 		return entity;
 	}
 
 	@Override
 	public PerfilBean convertEntityToBean(PerfilEntity entity) {
+		if (entity == null) {
+			return null;
+		}
 		PerfilBean bean = new PerfilBean();
-		if (entity == null){
-			bean = null;
-		} else {
+
 		bean.setId(entity.getId());
 		bean.setNome(entity.getNome());
 		bean.setListaFuncionalidades(funcionalidadeConverter.convertEntityToBean(entity.getFuncionalidades()));
-		}
+
 		return bean;
 	}
 }

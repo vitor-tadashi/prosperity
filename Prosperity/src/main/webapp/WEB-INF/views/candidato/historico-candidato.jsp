@@ -158,10 +158,10 @@
 								<div class="col-xs-4"
 									style="margin-left: 39px; padding-right: 30px">
 									<table class="table table-condensed table-bordered">
-										<c:forEach var="avaliador" items="${avaliador.avaliadores}">
+										<c:forEach var="avaliador" items="${candidato.avaliadores}">
 											<tr>
-												<td>${avaliador.avaliador.}</td>
-												<td><span class="badge badge-info">${avaliadores.usuario.idAvaliador}</span></td>
+												<td>${avaliador.avaliador.nome}</td>
+												<td><span class="badge badge-info">${avaliador.nome}</span></td>
 											</tr>
 										</c:forEach>
 									</table>

@@ -9,7 +9,7 @@ public class StatusBean {
 	private String nome;
 	private String Css;
 	private TipoStatusBean tipo;
-	
+
 	public Integer getId() {
 		return id;
 	}

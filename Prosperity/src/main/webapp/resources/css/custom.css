@@ -255,6 +255,15 @@ footer {
 .btnAlinhado {
 	left: -125px !important;
 }
+     
+.status {
+	font-size: 12px;
+}
+
+.padding-md {
+    margin-bottom: 40px !important;
+}
+
 .btnAjuste {
 	margin-left: 15px;
 }

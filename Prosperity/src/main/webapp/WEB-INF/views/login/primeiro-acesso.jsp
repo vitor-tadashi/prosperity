@@ -23,7 +23,7 @@
 	<!-- Corpo da pagina aqui -->
 	<div class="login-wrapper">
 		<div class="text-center">
-			<img src="/resources/img/png_colorido_slogan.png" alt="Second slide"
+			<img src="/resources/img/logo-prosperity.png" alt="Second slide"
 				class="m-bottom-md tamanho">
 		</div>
 		<div class="login-widget animation-delay1">

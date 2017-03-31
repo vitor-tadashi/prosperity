@@ -1,7 +1,10 @@
 package br.com.prosperity.util;
 
+import java.util.Date;
+
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.ContatoBean;
+import br.com.prosperity.bean.VagaBean;
 
 public class FormatUtil {
 

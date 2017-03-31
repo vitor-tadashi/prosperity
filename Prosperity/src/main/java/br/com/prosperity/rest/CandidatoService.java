@@ -20,7 +20,6 @@ public class CandidatoService {
 	@Autowired
 	private CandidatoBusiness b;
 	
-	
 	@POST
 	@RequestMapping("/servico")
 	@Consumes("application/xml")

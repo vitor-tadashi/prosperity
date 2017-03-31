@@ -14,11 +14,11 @@ public class StatusVagaBean {
 		status = new StatusBean();
 		status.setNome(mensagem);
 	}
-	
+
 	public StatusVagaBean() {
-		
+
 	}
-	
+
 	private Integer id;
 	private StatusBean status;
 	private Date dataAlteracao;
