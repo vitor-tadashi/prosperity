@@ -100,6 +100,7 @@ public class VagaBusiness {
 
 		VagaEntity vagaEntity = vagaConverter.convertBeanToEntity(vagaBean);
 		VagaEntity listaVaga = vagaDAO.findById(vagaEntity.getId());
+		
 		if (listaVaga == null) {
 			Date dateNow = new Date();
 			SenioridadeEntity senioridadeEntity = senioridadeBusinness
