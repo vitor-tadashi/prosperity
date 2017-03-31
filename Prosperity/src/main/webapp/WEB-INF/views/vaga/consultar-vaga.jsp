@@ -176,7 +176,7 @@
 									<form>
 										<div class="form-group row">
 											<div>
-												<div class="form-group col-md-6" style="margin-bottom: 0px">
+												<div class="form-group col-md-6 col-xs-5" style="margin-bottom: 0px">
 													<label for="solicitante">Solicitante</label> <input
 														class="form-control input-sm" disabled
 														name="solicitante.id" id="solicitante"
@@ -184,8 +184,8 @@
 												</div>
 												<!-- /form-group -->
 '
-												<div class="form-group col-md-6" style="margin-bottom: 0px">
-													<label for="exampleInputEmail1">Local de trabalho</label>
+												<div class="form-group col-md-6 col-xs-4" style="margin-bottom: 0px">
+													<label for="exampleInputEmail1">Local de trabalho:</label>
 													<div class="radiogroup" name="localTrabalho" id="local">
 														<label id="lblLocal" class="label-radio inline" value="">
 														</label>
@@ -208,7 +208,7 @@
 												<!-- /form-group -->
 
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
-													<label for="exampleInputEmail1">Tipo de vaga</label>
+													<label for="exampleInputEmail1">Tipo de vaga:</label>
 													<div class="radiogroup" name="idTipoVaga" id="tipo">
 														<label id="tpVaga" class="label-radio inline" value = "">
 														</label>
@@ -219,7 +219,7 @@
 										</div>
 
 										<div class="form-group row">
-											<div class="form-group col-md-5 col-xs-5" style="margin-bottom: 0px">
+											<div class="form-group col-md-6 col-xs-5" style="margin-bottom: 0px">
 													<label for="senioridade">Senioridade da vaga</label> <input
 														class="form-control input-sm" disabled
 														name="senioridade.id" id="senioridade"
@@ -228,30 +228,24 @@
 											<!-- /form-group -->
 
 											<div class="form-group" style="margin-bottom: 0px">
-												<label class="control-label">Horário</label>
+												<label class="control-label" style="padding-left: 15px;">Horário:</label>
 
 												<div>
-													<div class="form-group col-md-3">
-														<div class="input-group bootstrap-timepicker"
-															style="width: 105%;">
-															<input class="timepicker form-control" type="text"
-																/ value="08:00 AM" id="horaEntrada" name="horarioEntrada" disabled> <span
-																class="input-group-addon"><i
-																class="fa fa-clock-o"></i></span>
+													<div class="form-group col-md-2 col-xs-2">
+														<div class="input-group bootstrap-timepicker">
+															<label id="horaEntrada" name="horarioEntrada"
+																	type="time" style="margin-top: 7px" value=""></label>
 														</div>
 													</div>
 
-													<div class="form-group col-md-1">
+													<div class="form-group col-md-1 col-xs-1">
 														<label style="margin-top: 7px">Às</label>
 													</div>
 
 													<div class="form-group col-md-3">
-														<div class="input-group bootstrap-timepicker"
-															style="width: 105%;">
-															<input class="timepicker form-control" type="text"
-																/ value="05:00 PM" id="horaSaida" name="horarioSaida" disabled> <span
-																class="input-group-addon"><i
-																class="fa fa-clock-o"></i></span>
+														<div class="input-group bootstrap-timepicker">
+															<label id="horaSaida" name="horaSaida" type="time"
+																	style="margin-top: 7px" value=""></label>
 														</div>
 													</div>
 												</div>
@@ -271,7 +265,7 @@
 												<!-- /form-group -->
 
 												<div class="form-group col-md-6" style="margin-bottom: 0px">
-													<label for="exampleInputEmail1">Aumento de quadro</label>
+													<label for="exampleInputEmail1">Aumento de quadro:</label>
 													<div class="radiogroup" name="aumentoQuadro" id="aumento">
 														<label id="lblQuadro" class="label-radio inline" value = "">
 														</label>
@@ -303,10 +297,10 @@
 
 											<div class="form-group col-md-6" style="margin-bottom: 0px">
 												<div id="" class="">
-													<label id="substituidoId">Nome do substituido</label> <input type="text"
-														class="form-control input-sm"
-														placeholder="Nome do substituido" name="nomeSubstituido" id="substituido" disabled>
+													<label id="substituidoId">Nome do substituido:</label> 
 												</div>
+												<label id="substituido" name="nomeSubstituido"
+														style="margin-top: 7px" value=""></label>
 											</div>
 
 										</div>
@@ -392,6 +386,33 @@
 		</div>
 	</div>
 	<!-- /.modal fechar-->
+	
+	
+	<!-- Modal reabrir -->
+	<div class="modal fade" id="reabre-modal" data-target="#reabre-modal"
+		tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Reabrir">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="modalLabel">Reabrir vaga</h4>
+				</div>
+				<div class="modal-body">Deseja realmente reabrir está vaga?</div>
+				<div class="modal-footer">
+					<a href="#">
+						<button id="reabreVaga" type="button" class="btn btn-primary"
+							data-dismiss="modal">Sim</button>
+					</a>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /.modal fechar-->
+	
 
 	<!-- Modal delete -->
 	<div class="modal fade" id="delete-modal" data-target="#delete-modal"
@@ -406,9 +427,11 @@
 					<h4 class="modal-title" id="modalLabel">Cancelar vaga</h4>
 				</div>
 				<div class="modal-body">Deseja realmente cancelar está vaga?</div>
+				<input class="cancela-id" type="hidden"> <input
+					class="cancela-status" type="hidden">
 				<div class="modal-footer">
 					<a href="#">
-						<button id="excluiVaga" type="button" class="btn btn-primary"
+						<button id="excluiVaga" onclick="status()" type="button" class="btn btn-primary"
 							data-dismiss="modal">Sim</button>
 					</a>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
@@ -438,7 +461,7 @@
 						<!--<form class="form-inline">-->
 						<div class="panel-body">
 
-							<form action="filtrar" method="GET" class="row">
+							<form action="filtro" method="GET" class="row">
 								<div class="col-md-4">
 									<div class="form-group">
 										<label>Vaga</label> <input class="form-control" id="filtro1" name="nomeVaga" placeholder="Digite o nome de uma vaga">
@@ -516,12 +539,22 @@
 											<ul class="dropdown-menu dropdown-menu-right slidedown">
 												<li><a onclick="info(${vaga.id})"><i
 														class="fa fa-eye">&nbsp</i>Visualizar</a></li>
+														
 												<li class="divider"></li>
-												<li><i
+												
+												<li><a href="#fecha-modal" data-toggle="modal"><i
 														class="fa fa-lock">&nbsp</i>Fechar</a></li>
 												<li class="divider "></li>
-												<li><a href="#delete-modal" data-toggle="modal"><i
+												
+							
+												<li><a href="#delete-modal" 
+												onclick="alterarStatus(${vaga.id}, 'CANCELADO')"
+												data-toggle="modal"><i
 														class="fa fa-times">&nbsp</i>Cancelar</a></li>
+												<li class="divider "></li>			
+												<li><a href="#reabre-modal" data-toggle="modal" id="reabrir"><i
+														class="fa fa-retweet">&nbsp</i>Reabrir</a></li>
+													
 											</ul>
 										</div> <!-- /btn-group -->
 									</td>
@@ -617,6 +650,7 @@
 	$(".span-Fechado").addClass("label-warning");
 	$(".span-Ativo").addClass("label-success");
 	$(".span-Cancelado").addClass("label-danger");
+	$(".span-Pendente").addClass("label-info");
 	
 	function info(listaId){
 		
@@ -669,12 +703,12 @@
     			
     			
     			$('input#senioridade').val(lista.senioridadeBean.nome);
-    			$('input#horaEntrada').val(lista.horarioEntrada);
-    			$('input#horaSaida').val(lista.horarioSaida);
+    			$('label#horaEntrada').text(lista.horarioEntrada);
+    			$('label#horaSaida').text(lista.horarioSaida);
     			$('input#pretensao').val(lista.valorPretensao);
     			
     			$('input#dataInicio').val(lista.dataInicio);
-    			$('input#substituido').val(lista.nomeSubstituido);
+    			$('label#substituido').text(lista.nomeSubstituido);
     			$('#formacaoAcademica').val(lista.descricaoFormacaoAcademica);
     			$('#perfilComportamental').val(lista.descricaoPerfilComportamental);
     			$('#perfilTecnico').val(lista.descricaoPerfilTecnico);
@@ -708,6 +742,26 @@
 		var $quadro = document.getElementById("lblQuadro");
 		var $sub = document.getElementById("substituido");
 		
+		
+	}
+	
+	function status(){
+    	$.ajax({
+    		url: "status",
+    		type: "POST",
+    		dataType: "JSON",
+    		data: { 'idVaga' : $('.cancela-id').val(), 'status' : $('.cancela-status').val()},
+    		success: function(){
+    				location.reload();	
+    			}
+    	});
+    	}
+	function alterarStatus(id,status){
+		$('input.cancela-id').val(id);
+		$('input.cancela-status').val(status);
+
+		$('input.reprovar-id').val(id);
+		$('input.reprovar-status').val(status);
 		
 	}
 	

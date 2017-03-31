@@ -112,7 +112,7 @@ public class VagaController {
 		return "vaga/consultar-vaga";
 	}
 	
-	@RequestMapping(value = { "filtrar" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "filtro" }, method = RequestMethod.GET)
 	public String filtrar(Model model, VagaBean vaga) {
 		List<VagaBean> listaVagaFiltro = vagaBusiness.filtrarVagas(vaga);
 		model.addAttribute("vagas", listaVagaFiltro);
@@ -161,14 +161,6 @@ public class VagaController {
 		vagaBusiness.alterarStatus(status);
 		return HttpStatus.OK;
 		}
-	@RequestMapping(value = "reprovar/", method = RequestMethod.POST)
-	public void ReprovarVaga(Model model) {
-		
-		situacaoVaga.setIdVaga(8);
-		situacaoVaga.setStatus(StatusVagaEnum.RECUSADO);
-
-		vagaBusiness.alterarStatus(situacaoVaga);
-	}
 	
 	@RequestMapping(value = "/solicitar", method = RequestMethod.GET)
 	public String solicitarVaga(Model model) {
