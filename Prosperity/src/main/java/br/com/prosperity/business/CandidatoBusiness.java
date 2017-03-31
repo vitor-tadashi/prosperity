@@ -191,7 +191,11 @@ public class CandidatoBusiness extends FormatUtil {
 	}
 
 	private Boolean verificarCandidatura(CandidatoBean candidato) {
-		if (candidato.getUltimoStatus().getId() == null || candidato.getUltimoStatus().getId() == 6
+		
+		if(candidato.getUltimoStatus().getId() == null)
+			return true;
+		
+		if (candidato.getUltimoStatus().getId() == 6
 				|| candidato.getUltimoStatus().getId() == 7) {
 			if (candidato.getVagas().get(0).getStatus().get(0).getId() == 17
 					|| candidato.getVagas().get(0).getStatus().get(0).getId() == 2) {
