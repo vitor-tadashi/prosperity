@@ -14,6 +14,10 @@
 <c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
 
 <style type="text/css">
+ footer {
+	page-break-before: always;
+	}
+   
 @media screen {
 	#printSection {
 		display: none;
@@ -35,6 +39,7 @@
 	label {
 		font-weight: normal;
 	}
+	#quebra { page-break-inside:avoid; }
 }
 </style>
 
@@ -72,7 +77,7 @@
 										<form>
 											<div class="form-group row">
 												<div>
-													<div class="form-group col-md-6 col-xs-5"
+													<div class="form-group col-md-6 col-xs-6"
 														style="margin-bottom: 0px">
 														<label for="solicitante">Solicitante</label> <input
 															class="form-control input-sm" disabled
@@ -81,7 +86,7 @@
 													</div>
 													<!-- /form-group -->
 
-													<div class="form-group col-md-6 col-xs-4"
+													<div class="form-group col-md-6 col-xs-6"
 														style="margin-bottom: 0px">
 														<label for="exampleInputEmail1">Local de trabalho:</label>
 														<div class="radiogroup" name="localTrabalho" id="local">
@@ -94,7 +99,7 @@
 											</div>
 											<div class="form-group row">
 												<div>
-													<div class="form-group col-md-6 col-xs-5"
+													<div class="form-group col-md-6 col-xs-6"
 														style="margin-bottom: 0px">
 														<label for="cargo">Nome da vaga</label> <input type="name"
 															class="form-control input-sm" id="cargo" value="Cargo"
@@ -102,7 +107,7 @@
 													</div>
 													<!-- /form-group -->
 
-													<div class="form-group col-md-6 col-xs-5"
+													<div class="form-group col-md-6 col-xs-6"
 														style="margin-bottom: 0px">
 														<label for="exampleInputEmail1">Tipo de vaga:</label>
 														<div class="radiogroup" name="idTipoVaga" id="tipo">
@@ -114,7 +119,7 @@
 												</div>
 											</div>
 											<div class="form-group row" style="margin-bottom: 0px;">
-												<div class="form-group col-md-6 col-xs-5"
+												<div class="form-group col-md-6 col-xs-6"
 													style="margin-bottom: 0px">
 													<label for="vagaSenioridade">Senioridade da vaga</label> <input
 														type="name" class="form-control input-sm"
@@ -151,14 +156,14 @@
 
 											<div class="form-group row">
 												<div class="">
-													<div class="form-group col-md-6 col-xs-5"
+													<div class="form-group col-md-6 col-xs-6"
 														style="margin-bottom: 0px">
 														<label for="vagaSalario">Faixa salarial</label> <input
 															class="form-control input-sm" id="vagaSalario"
 															placeholder="Faixa Salarial" disabled>
 													</div>
 													<!-- /form-group -->
-													<div class="form-group col-md-6 col-xs-4"
+													<div class="form-group col-md-6 col-xs-6"
 														style="margin-bottom: 0px">
 														<label for="vagaQuadro">Aumento de quadro:</label>
 														<div class="radiogroup" name="aumentoQuadro" id="aumento">
@@ -171,7 +176,7 @@
 												</div>
 											</div>
 											<div class="form-group row" style="margin-bottom: 0px">
-												<div class="form-group col-md-6 col-xs-5"
+												<div class="form-group col-md-6 col-xs-6"
 													style="margin-bottom: 0px">
 													<div class="form-group">
 														<label class="control-label"> Data para inicio</label>
@@ -187,7 +192,7 @@
 													</div>
 													<!-- /form-group -->
 												</div>
-												<div class="form-group col-md-6 col-xs-4"
+												<div class="form-group col-md-6 col-xs-6"
 													style="margin-bottom: 0px">
 													<div id="" class="">
 														<label id="substituidoId">Nome do substituido:</label>
@@ -200,12 +205,13 @@
 									</div>
 								</section>
 								<!-- /Section -->
-								<section class="panel panel-default" style="margin-bottom: 0px;">
-									<div class="row">
+								
+								<div id="quebra" >
+								<section class="panel panel-default" style="margin-bottom: 5px;">
 										<div class="panel-heading">Informações de projeto</div>
-										<div class="form-group row"></div>
+										<div class="panel-body">
 										<!-- /form-group -->
-										<div class="form-group col-md-12 " style="margin-bottom: 5px;">
+										<div class="form-group col-md-13 " style="margin-bottom: 5px;">
 											<label class="control-label">Projeto</label> <input readonly
 												class="form-control default-cursor" id="vagaProjeto"
 												value="Mobile">
@@ -251,8 +257,7 @@
 								</section>
 								<!-- /panel -->
 
-								<section class="panel panel-default "
-									style="margin-bottom: 0px;">
+								<section class="panel panel-default " style="margin-bottom: 0px;">
 									<div class="panel-heading">Perfil técnico</div>
 									<div class="panel-body relative"
 										style="padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
@@ -263,7 +268,7 @@
 										<!-- /form-group -->
 									</div>
 								</section>
-
+							</div>
 							</div>
 
 						</div>
@@ -390,12 +395,12 @@
 												<i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
 											</button>
 											<ul class="dropdown-menu slidedown btnAlinhado">
-												<li><a onclick="info(${vaga.id})"> <i
+												<li><a href="#visualizar-modal" onclick="info(${vaga.id})"> <i 
 														class="fa fa-eye fa-lg">&nbsp</i>Visualizar
 												</a></li>
 												<li role="separator" class="divider"></li>
 												<li><c:url value="editar/${vaga.id}" var="myURL">
-													</c:url> <a href="${myURL}"><i class="fa fa-pencil"></i> Editar</a></li>
+													</c:url> <a href="${myURL}"><i  class="fa fa-pencil"></i> Editar</a></li>
 												<li role="separator" class="divider"></li>
 												<li><a href="#aprova-modal"
 													onclick="alterarStatus(${vaga.id}, 'ACEITO')"

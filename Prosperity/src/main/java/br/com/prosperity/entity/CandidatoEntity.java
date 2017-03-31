@@ -32,7 +32,7 @@ import javax.persistence.TemporalType;
 // @NamedQuery(name="fazerFiltro", query="SELECT u FROM CandidatoEntity u WHERE
 // u.nome = ?1")
 
-@NamedQueries({ @NamedQuery(name = "pesquisarNome", query = "SELECT u FROM CandidatoEntity u WHERE u.nome like ?1"),
+@NamedQueries({ @NamedQuery(name = "pesquisarNome", query = "SELECT u FROM CandidatoEntity u WHERE u.nome like ?1 AND u.valorPretensaoSalarial BETWEEN ?2 AND ?3 AND u.dataAbertura BETWEEN ?4 AND ?5"),
 		@NamedQuery(name = "obterPorCPF", query = "SELECT u FROM CandidatoEntity u WHERE u.cpf = ?1") })
 
 public class CandidatoEntity {
@@ -116,6 +116,22 @@ public class CandidatoEntity {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "idCandidato")
 	private List<StatusCandidatoEntity> statusCandidatos;
+
+	public List<StatusCandidatoEntity> getStatusCandidatos() {
+		return statusCandidatos;
+	}
+
+	public void setStatusCandidatos(List<StatusCandidatoEntity> statusCandidatos) {
+		this.statusCandidatos = statusCandidatos;
+	}
+
+	public List<CandidatoCompetenciaEntity> getCompetencias() {
+		return competencias;
+	}
+
+	public void setCompetencias(List<CandidatoCompetenciaEntity> competencias) {
+		this.competencias = competencias;
+	}
 
 	@OneToMany
 	@JoinColumn(name = "idCandidato")
