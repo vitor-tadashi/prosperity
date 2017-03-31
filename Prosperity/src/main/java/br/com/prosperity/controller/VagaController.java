@@ -112,7 +112,7 @@ public class VagaController {
 		return "vaga/consultar-vaga";
 	}
 	
-	@RequestMapping(value = { "filtrar" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "filtro" }, method = RequestMethod.GET)
 	public String filtrar(Model model, VagaBean vaga) {
 		List<VagaBean> listaVagaFiltro = vagaBusiness.filtrarVagas(vaga);
 		model.addAttribute("vagas", listaVagaFiltro);
@@ -225,7 +225,7 @@ public class VagaController {
 
 		vagaBusiness.inserir(vagaBean);
 		System.out.println("\n\n\nCadastrado\n\n\n");
-		return "redirect: /solicitar";
+		return "redirect: /cadastrar";
 
 	}
 

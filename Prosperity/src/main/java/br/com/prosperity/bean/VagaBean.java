@@ -3,6 +3,8 @@ package br.com.prosperity.bean;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
@@ -24,6 +26,8 @@ public class VagaBean {
 	private Double valorPretensao;
 
 	@Future
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date dataInicio;
 
 	private Character localTrabalho;
@@ -34,7 +38,6 @@ public class VagaBean {
 
 	@Valid
 	private ProjetoBean projeto;
-
 	@Valid
 	private CargoBean cargoBean;
 	@Valid
@@ -58,8 +61,8 @@ public class VagaBean {
 			Date dataUltimoStatus = status.stream().map(StatusVagaBean::getDataAlteracao).max(Date::compareTo).get();
 			ultimoStatus = status.stream().filter(st -> st.getDataAlteracao().equals(dataUltimoStatus)).findFirst()
 					.get();
-		} else {
-			ultimoStatus = new StatusVagaBean("Não possui status");
+		} else { 	
+			ultimoStatus = new StatusVagaBean("Pendente");
 		}
 
 		return ultimoStatus;

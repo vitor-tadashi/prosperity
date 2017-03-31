@@ -149,6 +149,7 @@ $(function() {
 	});
 
 	$("#btnCadastrar2").click(function() {
+		
 		$('#formCadastro2').submit();
 		
 	});
