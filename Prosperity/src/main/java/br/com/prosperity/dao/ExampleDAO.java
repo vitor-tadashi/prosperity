@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import br.com.prosperity.entity.ExampleEntity;
 
 @Repository
-public class ExampleDAO extends GenericDAOImpl<ExampleEntity, Integer>{
+public class ExampleDAO extends GenericDAOImpl<ExampleEntity, Integer> {
 
 }

@@ -3,7 +3,6 @@ package br.com.prosperity.dao;
 import java.io.Serializable;
 import java.util.List;
 
-
 public interface GenericDAO<T, K extends Serializable> {
 
 	Class<T> getEntityClass();

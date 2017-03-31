@@ -1,9 +1,7 @@
 package br.com.prosperity.entity;
 
-import java.io.File;
 import java.util.Date;
 import java.util.List;
-import java.lang.Integer;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -30,10 +28,15 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "tbCandidato")
+
+// @NamedQuery(name="pesquisarNome", query="SELECT u FROM CandidatoEntity u LEFT
+// OUTER JOIN u.vagaEntity p WHERE p.nomeVaga like ?1")
+
 // @NamedQuery(name="fazerFiltro", query="SELECT u FROM CandidatoEntity u WHERE
 // u.nome = ?1")
 
-@NamedQueries({ @NamedQuery(name = "pesquisarNome", query = "SELECT u FROM CandidatoEntity u WHERE u.nome like ?1"),
+@NamedQueries({
+		@NamedQuery(name = "pesquisarNome", query = "SELECT u FROM CandidatoEntity u WHERE u.nome like ?1 AND u.valorPretensaoSalarial BETWEEN ?2 AND ?3 AND u.dataAbertura BETWEEN ?4 AND ?5"),
 		@NamedQuery(name = "obterPorCPF", query = "SELECT u FROM CandidatoEntity u WHERE u.cpf = ?1") })
 
 public class CandidatoEntity {
@@ -114,15 +117,31 @@ public class CandidatoEntity {
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "idCandidato")
 	private List<StatusCandidatoEntity> statusCandidatos;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	public List<StatusCandidatoEntity> getStatusCandidatos() {
+		return statusCandidatos;
+	}
+
+	public void setStatusCandidatos(List<StatusCandidatoEntity> statusCandidatos) {
+		this.statusCandidatos = statusCandidatos;
+	}
+
+	public List<CandidatoCompetenciaEntity> getCompetencias() {
+		return competencias;
+	}
+
+	public void setCompetencias(List<CandidatoCompetenciaEntity> competencias) {
+		this.competencias = competencias;
+	}
+
+	@OneToMany
 	@JoinColumn(name = "idCandidato")
 	private List<CandidatoCompetenciaEntity> competencias;
-	
-//TODO 
+
+	// TODO
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "tbVagaCandidato", joinColumns = { @JoinColumn(name = "idCandidato") }, inverseJoinColumns = {
 			@JoinColumn(name = "idVaga") })
@@ -216,13 +235,12 @@ public class CandidatoEntity {
 		this.dataAlteracao = dataAlteracao;
 	}
 
-
 	public String getCurriculo() {
 		return curriculo;
 	}
 
 	public void setCurriculo(String file) {
-		this.curriculo= file;
+		this.curriculo = file;
 	}
 
 	public Date getDataUltimoContato() {
@@ -281,31 +299,28 @@ public class CandidatoEntity {
 		this.usuario = usuario;
 	}
 
-	public List<StatusCandidatoEntity> getStatusCandidatos() {
-		return statusCandidatos;
-	}
-
-	public void setStatusCandidatos(List<StatusCandidatoEntity> statusCandidatos) {
-		this.statusCandidatos = statusCandidatos;
-	}
-
-	public List<CandidatoCompetenciaEntity> getCompetencias() {
-		return competencias;
-	}
-
-	public void setCompetencias(List<CandidatoCompetenciaEntity> competencias) {
-		this.competencias = competencias;
-	}
-
-	public Date getDataultimoContato() {
-		return dataultimoContato;
-	}
-
-	public void setDataultimoContato(Date dataultimoContato) {
-		this.dataultimoContato = dataultimoContato;
-	}
-
+	/*
+	 * public List<StatusCandidatoEntity> getStatusCandidatos() { return
+	 * statusCandidatos; }
+	 * 
+	 * public void setStatusCandidatos(List<StatusCandidatoEntity>
+	 * statusCandidatos) { this.statusCandidatos = statusCandidatos; }
+	 * 
+	 * public List<CandidatoCompetenciaEntity> getCompetencias() { return
+	 * competencias; }
+	 * 
+	 * public void setCompetencias(List<CandidatoCompetenciaEntity>
+	 * competencias) { this.competencias = competencias; } <<<<<<< HEAD
+	 * 
+	 * public Date getDataultimoContato() { return dataultimoContato; }
+	 * 
+	 * public void setDataultimoContato(Date dataultimoContato) {
+	 * this.dataultimoContato = dataultimoContato; }
+	 * 
+	 * public Double getValorMin() { =======
+	 */
 	public Double getValorMin() {
+
 		return valorMin;
 	}
 
@@ -314,13 +329,12 @@ public class CandidatoEntity {
 	}
 
 	public Double getValorMax() {
+
 		return valorMax;
 	}
 
 	public void setValorMax(Double valorMax) {
 		this.valorMax = valorMax;
 	}
-
-
 
 }

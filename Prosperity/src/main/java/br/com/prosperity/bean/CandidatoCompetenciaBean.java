@@ -1,8 +1,11 @@
 package br.com.prosperity.bean;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.springframework.stereotype.Component;
 
 @Component
+@XmlRootElement(name = "CandidatoCompetenciaBean")
 public class CandidatoCompetenciaBean {
 
 	private Integer id;

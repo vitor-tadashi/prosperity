@@ -20,11 +20,20 @@ public class FuncionarioBusiness {
 	@Autowired
 	private FuncionarioConverter funcionarioConverter;
 	
-	@Transactional
-	public List<FuncionarioBean> obterTodos() {
+	@Transactional(readOnly=true)
+	public List<FuncionarioBean> findAll() {
 		List<FuncionarioEntity> funcionarioEntity = funcionarioDAO.findAll();
 		List<FuncionarioBean> funcionarioBean = funcionarioConverter.convertEntityToBean(funcionarioEntity);
 
 		return funcionarioBean;
 	}
+	
+	// Caso deva permitir o sistema ter apenas 1 usuário para 1 funcionário, usar o método abaixo
+	/*@Transactional(readOnly=true)
+	public List<FuncionarioBean> findNotRegistered() {
+		List<FuncionarioEntity> funcionarioEntity = funcionarioDAO.findByNamedQuery("findNotRegistered");
+		List<FuncionarioBean> funcionarioBean = funcionarioConverter.convertEntityToBean(funcionarioEntity);
+
+		return funcionarioBean;
+	}*/
 }

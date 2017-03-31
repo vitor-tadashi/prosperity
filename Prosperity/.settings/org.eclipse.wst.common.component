@@ -4,7 +4,8 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-        <property name="context-root" value="Prosperity"/>
         <property name="java-output-path" value="/Prosperity/target/classes"/>
+        <property name="context-root" value="prosperity"/>
+        <property name="context-root" value="prosperity-web"/>
     </wb-module>
 </project-modules>

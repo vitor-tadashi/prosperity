@@ -35,6 +35,10 @@ public class StatusEntity {
 	@ManyToOne
 	@JoinColumn(name = "idTpStatus")
 	private TipoStatusEntity tipoStatus;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "idStatus")
+	private List<StatusCandidatoEntity> statusCandidatos;
 
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idStatus")

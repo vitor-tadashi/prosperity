@@ -20,11 +20,9 @@ import br.com.prosperity.dao.StatusVagaDAO;
 import br.com.prosperity.dao.UsuarioDAO;
 import br.com.prosperity.dao.VagaDAO;
 import br.com.prosperity.entity.CargoEntity;
-import br.com.prosperity.entity.PerfilEntity;
 import br.com.prosperity.entity.SenioridadeEntity;
 import br.com.prosperity.entity.StatusVagaEntity;
 import br.com.prosperity.entity.VagaEntity;
-import br.com.prosperity.exception.BusinessException;
 
 @Component
 public class VagaBusiness {
@@ -64,12 +62,24 @@ public class VagaBusiness {
 		return vagaBean;
 	}
 
-	@Transactional(readOnly = true)
-	public List<VagaBean> filtrarVagas(VagaBean vagao) {
-		List<VagaEntity> vagas = vagaDAO.findByNamedQuery("listarVagaFiltrado", "%" + vagao.getNomeVaga() + "%",
-				vagao.getDataAberturaDe(), vagao.getDataAberturaPara());
-		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagas);
+	@Transactional
+	public List<VagaBean> listarVagaAprovar() {
+
+		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagaAprovar"); // PENSAR
+		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 		return vagaBean;
+	}
+	@Transactional(readOnly = true)
+	public List<VagaBean> filtrarVagas(VagaBean vaga) {
+		Integer idStatus = 0;
+		if(!vaga.getStatus().get(0).getStatus().getNome().equals("")){
+			idStatus = Integer.parseInt(vaga.getStatus().get(0).getStatus().getNome());
+		}
+//		List<VagaEntity> vagas = vagaDAO.findByNamedQuery("listarVagaFiltrado", "%"+vagao.getNomeVaga()+"%", vagao.getDataAberturaDe(), vagao.getDataAberturaPara(), idStatus);
+     	List<VagaEntity> vagas = vagaDAO.findByNamedQuery("listarVagaFiltrado", "%"+vaga.getNomeVaga()+"%",idStatus, parseData(vaga.getDataAberturaDe()), parseData(vaga.getDataAberturaPara()));
+
+		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagas);
+ 		return vagaBean;
 
 		/*
 		 * List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("pesquisar",
@@ -94,6 +104,7 @@ public class VagaBusiness {
 
 		VagaEntity vagaEntity = vagaConverter.convertBeanToEntity(vagaBean);
 		VagaEntity listaVaga = vagaDAO.findById(vagaEntity.getId());
+		
 		if (listaVaga == null) {
 			Date dateNow = new Date();
 			SenioridadeEntity senioridadeEntity = senioridadeBusinness
@@ -108,15 +119,14 @@ public class VagaBusiness {
 			vagaDAO.insert(vagaEntity);
 		} else {
 			//Date dateNow = new Date();
-			//SenioridadeEntity senioridadeEntity = senioridadeBusinness
-			//		.obterPorId(vagaBean.getSenioridadeBean().getId());
-			//String senioridade = senioridadeEntity.getNome();
-			//CargoEntity cargoEntity = cargoBusinness.obterPorId(vagaBean.getCargoBean().getId());
-			//String cargo = cargoEntity.getNome();
+			SenioridadeEntity senioridadeEntity = senioridadeBusinness
+					.obterPorId(vagaBean.getSenioridadeBean().getId());
+			String senioridade = senioridadeEntity.getNome();
+			CargoEntity cargoEntity = cargoBusinness.obterPorId(vagaBean.getCargoBean().getId());
+			String cargo = cargoEntity.getNome();
 			// String usuario = session.getAttribute("autenticado").getNome();
-			//vagaBean.setNomeVaga(cargo + " " + senioridade);
-			//vagaBean.setDataAbertura(dateNow); // VERIFICAR SE DEVE SER DATA DE
-												// ALTERAÇÂO
+			vagaBean.setNomeVaga(cargo + " " + senioridade);
+			vagaBean.setDataAbertura(vagaBean.getDataAbertura()); // VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
 			// vagaBean.setUsuarioBean(usuario);
 			vagaDAO.update(vagaEntity);
 		}
@@ -162,4 +172,20 @@ public class VagaBusiness {
 
 		statusVagaDAO.insert(statusVagaEntity);
 	}
+	
+	private Date parseData(Date dataAntiga){
+		SimpleDateFormat novaData = new SimpleDateFormat("yyyy-MM-dd");
+		
+		String data = "";
+		try{  
+			data = novaData.format(dataAntiga);
+			return novaData.parse(data);
+		}catch(ParseException e) {  
+		    e.printStackTrace();  //imprimi a stack trace
+		}  
+		return dataAntiga;
+	}
+	
 }
+
+

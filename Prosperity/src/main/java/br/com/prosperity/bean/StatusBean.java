@@ -17,7 +17,7 @@ public class StatusBean {
 	public StatusBean() {
 		statusDisponiveis = new ArrayList<StatusDisponivelBean>();
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}

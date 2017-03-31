@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -14,19 +15,13 @@
 <c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
 
 <!-- Link e style aqui -->
-<style>
-.status {
-	font-size: 12px;
-}
-</style>
-
 </head>
 
 <body>
 	<!-- Modais aqui-->
 	<!-- Modal -->
 	<div class="modal fade" id="usuario-modal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
+		aria-labelledby="usuarioLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -34,13 +29,17 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Novo usuário</h4>
+					<h4 class="modal-title" id="usuarioLabel">Novo usuário</h4>
 				</div>
 				<div class="modal-body">
 					<div class="padding-md">
 						<div class="row">
 							<form action="cadastrar" method="POST" id="frmUsuario" data-validate="parsley" novalidate>
 								<input type="hidden" name="id" id="id" />
+								<form:errors path="funcionario" />
+								<form:errors path="nome" />
+								<form:errors path="email" />
+								<form:errors path="perfil" />
 								<div class="row">
 									<div class="form-group col-md-6">
 										<label for="funcionario">Funcionário</label>
@@ -102,7 +101,7 @@
 	<div id="main-container">
 		<div id="breadcrumb">
 			<ul class="breadcrumb">
-				<li><i class="fa fa-home"></i><a href="dashboard.html">
+				<li><i class="fa fa-home"></i><a href="pagina-inicial">
 						Início</a></li>
 				<li class="active">Controle de usuários</li>
 			</ul>
@@ -113,7 +112,7 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="panel panel-default">
-							<div class="panel-heading">Usuários cadastrados:</div>
+							<div class="panel-heading"><strong>Usuários cadastrados:</strong></div>
 							<div class="panel-body">
 								<div id="divAlert"></div>
 								<table class="table table-bordered table-condensed table-hover table-striped">

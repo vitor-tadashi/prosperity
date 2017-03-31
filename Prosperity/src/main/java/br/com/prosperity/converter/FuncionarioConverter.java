@@ -10,27 +10,26 @@ public class FuncionarioConverter implements Converter<FuncionarioEntity, Funcio
 
 	@Override
 	public FuncionarioEntity convertBeanToEntity(FuncionarioBean bean) {
-		FuncionarioEntity entity = new FuncionarioEntity();
 		if (bean == null) {
-			entity = null;
-		} else {
-			entity.setId(bean.getId());
-			entity.setNome(bean.getNome());
+			return null;
 		}
+		FuncionarioEntity entity = new FuncionarioEntity();
+		entity.setId(bean.getId());
+		entity.setNome(bean.getNome());
+
 		return entity;
 	}
 
 	@Override
 	public FuncionarioBean convertEntityToBean(FuncionarioEntity entity) {
+		if (entity == null) {
+			return null;
+		}
 		FuncionarioBean bean = new FuncionarioBean();
 
-		if (entity == null) {
-			bean = null;
-		} else {
-			bean.setId(entity.getId());
-			bean.setNome(entity.getNome());
+		bean.setId(entity.getId());
+		bean.setNome(entity.getNome());
 
-		}
 		return bean;
 	}
 }

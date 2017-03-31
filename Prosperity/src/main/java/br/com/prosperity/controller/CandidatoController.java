@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.prosperity.bean.AvaliacaoBean;
+import br.com.prosperity.bean.AvaliadorBean;
 import br.com.prosperity.bean.CanalInformacaoBean;
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CandidatoCompetenciaBean;
@@ -47,7 +48,7 @@ public class CandidatoController {
 
 	@Autowired
 	private CandidatoBean candidatoBean;
-	
+
 	@Autowired
 	private CandidatoBusiness candidatoBusiness;
 
@@ -67,6 +68,9 @@ public class CandidatoController {
 	private List<CandidatoCompetenciaBean> competencias;
 
 	@Autowired
+	private List<AvaliadorBean> avaliadores;
+
+	@Autowired
 	private TipoCursoBusiness tipoCursoBusiness;
 
 	@Autowired
@@ -77,26 +81,27 @@ public class CandidatoController {
 
 	@Autowired
 	private CargoBusiness cargoBusiness;
-	
+
 	@Autowired
 	private TipoCursoBean tipoCursoBean;
-	
+
 	@Autowired
 	private SenioridadeBusiness senioridadeBusiness;
 
 	@Autowired
 	private SenioridadeBean senioridadeBean;
-	
+
 	@Autowired
 	private SituacaoAtualBean situacaoAtualBean;
-	
+
 	@Autowired
 	private VagaBusiness vagaBusiness;
 	@Autowired
 	private CanalInformacaoBusiness canalInformacaoBusiness;
-	
+
 	@Autowired
 	private AvaliadorBusiness avaliadorBusiness;
+	
 	@Autowired
 	private SituacaoCandidatoBean situacaoCandidatoBean;
 
@@ -161,6 +166,25 @@ public class CandidatoController {
 		obterDominiosCandidato(model);
 		model.addAttribute("candidato", candidato);
 
+		return "candidato/cadastrar-candidato";
+	}
+
+	@RequestMapping(value = "editar/salvar", method = RequestMethod.POST)
+	public String salvarEditar(@ModelAttribute("candidatoBean") @Valid CandidatoBean candidatoBean,
+			BindingResult result, Model model) throws BusinessException {
+
+		if (result.hasErrors()) {
+			model.addAttribute("erro", result.getErrorCount());
+			model.addAttribute("listaErros", buildErrorMessage(result.getFieldErrors()));
+			model.addAttribute("candidato", candidatoBean);
+
+			obterDominiosCandidato(model);
+
+			return "candidato/cadastrar-candidato";
+
+		} else {
+			candidatoBusiness.inserir(candidatoBean);
+		}
 
 		return "candidato/cadastrar-candidato";
 	}
@@ -176,17 +200,16 @@ public class CandidatoController {
 		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.obterTodos();
 		model.addAttribute("listaSenioridade", listaSenioridade);
 
-		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.obterTodos();
+		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.findAll();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
-		
-		//avaliadorBusiness.listar();
+
+		// avaliadorBusiness.listar();
 
 		return "candidato/consulta-rh";
-		}
-	
+	}
+
 	@RequestMapping(value = "filtrar", method = RequestMethod.GET)
-	public String filtrarCandidatoRH(Model model, CandidatoBean candidato) 
-	{
+	public String filtrarCandidatoRH(Model model, CandidatoBean candidato) {
 		List<CandidatoBean> candidatos = candidatoBusiness.obterFiltro(candidato);
 		model.addAttribute("candidatos", candidatos);
 
@@ -217,13 +240,14 @@ public class CandidatoController {
 		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.obterTodos();
 		model.addAttribute("listaSenioridade", listaSenioridade);
 
-		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.obterTodos();
+		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.findAll();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
 
 		// avaliadorBusiness.listar();
 
-		return "candidato/consulta-rh";}
-	
+		return "candidato/consulta-rh";
+	}
+
 	@RequestMapping(value = "consultar-gestor", method = RequestMethod.GET)
 	public String consultarCandidatoGestor() {
 		return "candidato/consulta-gestor";
@@ -244,17 +268,16 @@ public class CandidatoController {
 		List<CandidatoBean> candidatos = candidatoBusiness.listar();
 
 		model.addAttribute("candidatos", candidatos);
-		
+
 		return "candidato/aprovar-candidato";
 	}
-	
-	@RequestMapping(value= {"gerenciar"}, method = RequestMethod.GET)
+
+	@RequestMapping(value = { "gerenciar" }, method = RequestMethod.GET)
 	public @ResponseBody CandidatoBean gerenciarAjax(Model model, @ModelAttribute("id") Integer id) {
 		CandidatoBean candidato = new CandidatoBean();
 		candidato = candidatoBusiness.obterCandidatoPorId(id);
 		return candidato;
 	}
-
 
 	private List<String> buildErrorMessage(List<FieldError> error) {
 		List<String> novosErros = new ArrayList<>();
@@ -280,12 +303,6 @@ public class CandidatoController {
 		}
 
 		return novosErros;
-	}
-	
-	@RequestMapping(value= {"alterar-status-candidato"}, method = RequestMethod.POST)
-	public @ResponseBody String alterarStatusCandidato(Model model, @ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato) {
-		candidatoBusiness.alterarStatus(situacaoCandidato);
-		return "vaitomarnocucaralho";
 	}
 
 }
