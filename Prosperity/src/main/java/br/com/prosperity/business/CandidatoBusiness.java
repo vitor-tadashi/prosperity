@@ -189,7 +189,7 @@ public class CandidatoBusiness extends FormatUtil {
 		// candidatoConverter.convertEntityToBean(candidatoEntity);
 		// }
 
-		return candidatoBean;
+		return candidatoBean; 
 	}
 
 	private Boolean verificarCandidatura(CandidatoBean candidato) {
