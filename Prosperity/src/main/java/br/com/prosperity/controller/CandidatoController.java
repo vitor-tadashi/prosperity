@@ -28,6 +28,7 @@ import br.com.prosperity.bean.FormacaoBean;
 import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
+import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.TipoCursoBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.AvaliadorBusiness;
@@ -100,6 +101,9 @@ public class CandidatoController {
 
 	@Autowired
 	private AvaliadorBusiness avaliadorBusiness;
+
+	@Autowired
+	private SituacaoCandidatoBean situacaoCandidatoBean;
 
 	/**
 	 * @author thamires.miranda
