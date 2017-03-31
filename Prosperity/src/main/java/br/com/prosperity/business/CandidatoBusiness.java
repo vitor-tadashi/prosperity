@@ -27,7 +27,6 @@ import br.com.prosperity.dao.StatusFuturoDAO;
 import br.com.prosperity.dao.UsuarioDAO;
 import br.com.prosperity.entity.AvaliadorCandidatoEntity;
 import br.com.prosperity.entity.CandidatoEntity;
-import br.com.prosperity.entity.PerfilEntity;
 import br.com.prosperity.entity.StatusCandidatoEntity;
 import br.com.prosperity.entity.StatusFuturoEntity;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
@@ -104,6 +103,7 @@ public class CandidatoBusiness extends FormatUtil {
 	public List<CandidatoBean> listar() {
 		List<CandidatoEntity> entities = candidatoDAO.findAll();
 		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(entities);
+		System.out.println(beans.get(0).getUltimoStatus().getStatus().getStatusDisponiveis().get(0).getNome());
 		return beans;
 	}
 
@@ -192,5 +192,8 @@ public class CandidatoBusiness extends FormatUtil {
 		return candidatoBean;
 	}
 	
-
+	public void statusDisponivel (){
+		
+	}
+	
 }

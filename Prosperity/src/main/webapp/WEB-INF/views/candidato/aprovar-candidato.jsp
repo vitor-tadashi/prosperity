@@ -53,7 +53,7 @@
 					<div class="panel-footer ">
 
 						<button type="button" class="btn btn-sm btn-primary"
-							id="btnVaiTomarNoCu">
+							href="#confirm-modal" data-toggle="modal">
 							<i class="fa fa-check fa-lg"></i>&nbsp;Enviar
 						</button>
 					</div>
@@ -61,7 +61,30 @@
 			</div>
 		</div>
 	</div>
-	<!--Modal Feedback-->
+
+	<!-- Modal confirmacao-->
+	<div class="modal fade" id="confirm-modal" data-target="#confirm-modal"
+		tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Fechar">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="modalLabel">Confirmação</h4>
+				</div>
+				<div class="modal-body">Deseja realmente fazer isso?</div>
+				<div class="modal-footer">
+					<a id="excluir" href="#">
+						<button type="button" class="btn btn-success" id="alterarStatus">Sim</button>
+					</a>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /.modal delete-->
 	<!-- Modal delete -->
 	<div class="modal fade" id="delete-modal" data-target="#delete-modal"
 		tabindex="-1" role="dialog" aria-labelledby="modalLabel">
@@ -72,7 +95,7 @@
 						aria-label="Fechar">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="modalLabel">Fechar vaga</h4>
+					<h4 class="modal-title" id="modalLabel">Cancelar vaga</h4>
 				</div>
 				<div class="modal-body">Deseja realmente excluir esta vaga?</div>
 				<div class="modal-footer">
@@ -127,72 +150,40 @@
 														pattern="dd/MM/yyyy" /></td>
 												<td><fmt:formatDate value="${candidato.dataFechamento}"
 														pattern="dd/MM/yyyy" /></td>
-												<td><span class="label" style="color: #fff; background: ${candidato.ultimoStatus.status.css}">${candidato.ultimoStatus.status.nome}</span></td>
-												<td><span class="line"></span>
-													<div class="btn-group">
+												<td><span class="label"
+													style="color: #fff; background-color: ${candidato.ultimoStatus.status.css}">${candidato.ultimoStatus.status.nome}</span></td>
 
-														<!-- comeco do botao -->
-														<button type="button"
-															class="btn btn-info dropdown-toggle btn-sm"
+												<td>
+													<div class="btn-group">
+														<button class="btn btn-sm btn-info dropdown-toggle"
 															data-toggle="dropdown" aria-haspopup="true"
 															aria-expanded="false">
-															<i class="fa fa-cogs fa-lg">&nbsp; </i><span
+															<i class="fa fa-cogs fa-lg">&nbsp;</i> <span
 																class="caret"></span>
 														</button>
-														<ul class="dropdown-menu slidedown btnAlinhado">
-															<li><a data-toggle="modal" data-toggle="modal"
-																data-target=".bs-example-modal-lg"
-																id="aprovar-candidato"
-																onclick="alterarStatus(${candidato.id}, 5)"><i
-																	class="fa fa-check fa-lg"></i>&nbsp;Aprovar candidato</a></li>
-
-															<li class="divider"></li>
-
-															<li><a href="#aprovado-modal" data-toggle="modal"
-																data-toggle="modal" data-target=".bs-example-modal-lg"><i
-																	class="fa fa-times fa-lg"></i>&nbsp;Reprovar candidato</a></li>
-
-
-															<li class="divider"></li>
-
-															<li><a href="#aprovado-modal" data-toggle="modal"
-																data-toggle="modal" data-target=".bs-example-modal-lg"><i
-																	class="fa fa-check fa-lg"></i>&nbsp;Aprovar proposta</a></li>
-
-															<li class="divider"></li>
-
-															<li><a href="#aprovado-modal" data-toggle="modal"
-																data-toggle="modal" data-target=".bs-example-modal-lg"><i
-																	class="fa fa-times fa-lg"></i>&nbsp;Recusar proposta</a></li>
-
-															<li class="divider"></li>
-
-															<li><a href="#aprovado-modal" data-toggle="modal"
-																data-toggle="modal" data-target=".bs-example-modal-lg"><i
-																	class="fa fa-check fa-lg"></i>&nbsp;Proposta aceita</a></li>
-
-															<li class="divider"></li>
-
-															<li><a href="#aprovado-modal" data-toggle="modal"
-																data-toggle="modal" data-target=".bs-example-modal-lg"><i
-																	class="fa fa-times fa-lg"></i>&nbsp;Proposta recusada</a></li>
-
-															<li class="divider"></li>
-
-															<li><a href="#aprovado-modal" data-toggle="modal"
-																data-toggle="modal" data-target=".bs-example-modal-lg"><i
-																	class="fa fa-refresh fa-lg"></i>&nbsp;Refazer proposta</a></li>
-
-															<li class="divider"></li>
-
+														<ul class="dropdown-menu dropdown-menu-right slidedown">
+															<c:forEach var="statusDisponivel"
+																items="${candidato.ultimoStatus.status.statusDisponiveis}">
+																<li><a data-toggle="modal"
+																	data-target=".bs-example-modal-lg"
+																	id="aprovar-candidato"
+																	onclick="alterarStatus(${candidato.id}, ${statusDisponivel.id})"
+																	><i class="fa fa-check fa-lg">&nbsp;</i>${statusDisponivel.nome}
+																</a></li>
+																<li class="divider "></li>
+															</c:forEach>
 															<li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
 
 															<li class="divider"></li>
 
 															<li><a href="#delete-modal" data-toggle="modal"><i
 																	class="fa fa-trash-o fa-lg">&nbsp;</i>Cancelar</a></li>
+															<!-- /fim botao -->
+
 														</ul>
-													</div> <!-- /fim botao --></td>
+													</div>
+													<!-- /btn-group -->
+												</td>
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -265,13 +256,9 @@
 	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
 
 	<script>
-		/* $(function() {
-			$('#dataTable').dataTable({
-				"bJQueryUI" : true,
-				"sPaginationType" : "full_numbers"
-			}); */
 
-			$('#btnVaiTomarNoCu').click(function() {
+
+			$('#alterarStatus').click(function() {
 
 				$.ajax({
 					url : "alterar-status-candidato",
@@ -281,17 +268,19 @@
 						'idCandidato' : $('#hdn-id-candidato').val(),
 						'parecer' : $('#parecer').val(),
 						'idStatus' : $('#hdn-status').val()
+						
 					},
 					success : function(data) {
 						alert(data);
+						
+						// OU SUMIR COM A LINHA
 					}
 				});
+				location.reload(true);//RECARREGAR A TELA
 			});
-		//});
+
 
 		function alterarStatus(idCandidato, idStatus) {
-			alert(idCandidato);
-			alert(idStatus);
 			$('#hdn-id-candidato').val(idCandidato);
 			$('#hdn-status').val(idStatus);
 		}

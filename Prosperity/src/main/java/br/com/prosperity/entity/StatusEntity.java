@@ -1,18 +1,23 @@
 package br.com.prosperity.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbStatus")
-@NamedQuery(name="alterarStatus", query="SELECT u FROM StatusEntity u LEFT OUTER JOIN u.tipoStatus p WHERE p.id= 2")
+@NamedQuery(name = "alterarStatus", query = "SELECT u FROM StatusEntity u LEFT OUTER JOIN u.tipoStatus p WHERE p.id= 2")
 public class StatusEntity {
 
 	@Id
@@ -30,6 +35,10 @@ public class StatusEntity {
 	@ManyToOne
 	@JoinColumn(name = "idTpStatus")
 	private TipoStatusEntity tipoStatus;
+
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "idStatus")
+	private List<StatusDisponivelEntity> statusDisponiveis;
 
 	public Integer getId() {
 		return id;
@@ -61,6 +70,14 @@ public class StatusEntity {
 
 	public void setTipoStatus(TipoStatusEntity tipoStatus) {
 		this.tipoStatus = tipoStatus;
+	}
+
+	public List<StatusDisponivelEntity> getStatusDisponiveis() {
+		return statusDisponiveis;
+	}
+
+	public void setStatusDisponiveis(List<StatusDisponivelEntity> statusDisponiveis) {
+		this.statusDisponiveis = statusDisponiveis;
 	}
 
 }

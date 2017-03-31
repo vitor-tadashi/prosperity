@@ -58,8 +58,8 @@ public class CandidatoBean extends FormatUtil {
 	
 	public StatusCandidatoBean getUltimoStatus() {
 		if (status != null && status.size() > 0) {
-			Date dataUltimoStatus = status.stream().map(StatusCandidatoBean::getDataAlteracao).max(Date::compareTo).get();
-			ultimoStatus = status.stream().filter(st -> st.getDataAlteracao().equals(dataUltimoStatus)).findFirst().get();	
+			Integer idUltimoStatus = status.stream().map(StatusCandidatoBean::getId).max(Integer::compareTo).get();
+			ultimoStatus = status.stream().filter(st -> st.getId().equals(idUltimoStatus)).findFirst().get();	
 		} else {
 			ultimoStatus = new StatusCandidatoBean("Não possui status");
 		}
