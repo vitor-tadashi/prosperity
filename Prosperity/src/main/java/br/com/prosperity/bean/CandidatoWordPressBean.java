@@ -1,5 +1,8 @@
 package br.com.prosperity.bean;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "CandidatoWordPressBean")
 public class CandidatoWordPressBean {
 
 	// Atributos da tabela do wordpress:
@@ -7,7 +10,7 @@ public class CandidatoWordPressBean {
 	private Long lead_id;
 	private Integer form_id;
 
-	// Atributos com nomes espec�ficos:
+	// Atributos com nomes específicos:
 	private String nome;
 	private String email;
 	private String dataNascimento;

@@ -1,18 +1,19 @@
 package br.com.prosperity.bean;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 @Component
+@XmlRootElement(name = "VagaBean")
 public class VagaBean {
 
 	private Integer id;

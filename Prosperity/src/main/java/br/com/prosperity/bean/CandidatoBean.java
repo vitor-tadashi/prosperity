@@ -1,30 +1,24 @@
 package br.com.prosperity.bean;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
-
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import org.springframework.stereotype.Component;
 
 import br.com.prosperity.util.FormatUtil;
 
 @Component
-
 @XmlRootElement(name = "CandidatoBean")
 public class CandidatoBean  extends FormatUtil {
-
 
 	private Integer id;
 
@@ -44,7 +38,7 @@ public class CandidatoBean  extends FormatUtil {
 	private Date dataFechamento;
 	private String email;
 	private Date dataAlteracao;
-	private File curriculo;
+	private String curriculo;
 	@Valid
 	private ContatoBean contato;
 
@@ -156,11 +150,11 @@ public class CandidatoBean  extends FormatUtil {
 		this.dataAlteracao = dataAlteracao;
 	}
 
-	public File getCurriculo() {
+	public String getCurriculo() {
 		return curriculo;
 	}
 
-	public void setCurriculo(File curriculo) {
+	public void setCurriculo(String curriculo) {
 		this.curriculo = curriculo;
 	}
 
@@ -226,11 +220,10 @@ public class CandidatoBean  extends FormatUtil {
 //		return statusPorMesAno;
 //	}
 
-
+	@XmlTransient
 	public Map<String, List<StatusCandidatoBean>> getStatusPorMesAno() {
 		return statusPorMesAno;
 	}
-
 
 	public void setStatusPorMesAno(Map<String, List<StatusCandidatoBean>> statusPorMesAno) {
 		this.statusPorMesAno = statusPorMesAno;

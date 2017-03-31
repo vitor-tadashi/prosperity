@@ -109,14 +109,15 @@ public class CandidatoBusiness extends FormatUtil {
 
 	@Transactional
 	public void inserir(CandidatoBean candidatoBean) {
-	/*	if(candidatoBean.getId()== null){
-
-			candidatoDAO.insert(candidatoConverter.convertBeanToEntity(candidatoBean));	
-		}else{
-			CandidatoEntity candidatoEntity = candidatoDAO.findById(candidatoBean.getId());
-			candidatoDAO.update(candidatoEntity);
-		}*/
-		candidatoDAO.insert(candidatoConverter.convertBeanToEntity(candidatoBean));	
+		/*
+		 * if(candidatoBean.getId()== null){
+		 * 
+		 * candidatoDAO.insert(candidatoConverter.convertBeanToEntity(
+		 * candidatoBean)); }else{ CandidatoEntity candidatoEntity =
+		 * candidatoDAO.findById(candidatoBean.getId());
+		 * candidatoDAO.update(candidatoEntity); }
+		 */
+		candidatoDAO.insert(candidatoConverter.convertBeanToEntity(candidatoBean));
 	}
 
 	@Transactional
@@ -143,7 +144,7 @@ public class CandidatoBusiness extends FormatUtil {
 				situacaoCandidato.setStatus(StatusCandidatoEnum.valueOf(statusFuturoEntity.get(0).getIdStatusFuturo()));
 			} else {
 				avaliadorCandidatoEntity = avaliadorCandidatoDAO.findByNamedQuery("obterAvaliadoresCandidato");
-				
+
 				StatusCandidatoEnum status = avaliadorCandidatoEntity.size() == 1
 						? StatusCandidatoEnum.PROPOSTACANDIDATO : StatusCandidatoEnum.CANDIDATOEMANALISE;
 
@@ -169,28 +170,27 @@ public class CandidatoBusiness extends FormatUtil {
 		return statusCandidatoEntity;
 	}
 
-
 	public CandidatoBean obterPorCPF(String cpf) {
 		List<CandidatoEntity> candidatosEntity = null;
 
 		candidatosEntity = candidatoDAO.findByNamedQuery("obterPorCPF", cpf);
 
-//		Integer idDoCara = candidatosEntity.get(0).getId();
-//		for (int i = 0; i < candidatosEntity.size(); i++) {
-//			
-//		}
-		
+		// Integer idDoCara = candidatosEntity.get(0).getId();
+		// for (int i = 0; i < candidatosEntity.size(); i++) {
+		//
+		// }
+
 		for (CandidatoEntity candidatoEntity : candidatosEntity) {
-			
+
 			candidatoBean = candidatoConverter.convertEntityToBean(candidatoEntity);
 		}
-		
-//		for (CandidatoEntity candidatoEntity : candidatosEntity) {
-//			candidatoBean = candidatoConverter.convertEntityToBean(candidatoEntity);
-//		}
+
+		// for (CandidatoEntity candidatoEntity : candidatosEntity) {
+		// candidatoBean =
+		// candidatoConverter.convertEntityToBean(candidatoEntity);
+		// }
 
 		return candidatoBean;
 	}
-	
 
 }

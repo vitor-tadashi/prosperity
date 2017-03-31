@@ -3,9 +3,12 @@ package br.com.prosperity.bean;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.springframework.stereotype.Component;
 
 @Component
+@XmlRootElement(name = "StatusCandidatoBean")
 public class StatusCandidatoBean {
 
 

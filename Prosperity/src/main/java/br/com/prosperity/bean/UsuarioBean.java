@@ -1,8 +1,11 @@
 package br.com.prosperity.bean;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.springframework.stereotype.Component;
 
 @Component
+@XmlRootElement(name = "UsuarioBean")
 public class UsuarioBean {
 	private final String SENHA_PADRAO = "verity@123";
 	
