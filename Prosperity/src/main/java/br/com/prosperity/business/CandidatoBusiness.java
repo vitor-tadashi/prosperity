@@ -1,6 +1,5 @@
 package br.com.prosperity.business;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -60,7 +59,6 @@ public class CandidatoBusiness extends FormatUtil {
 	public CandidatoBean obter(Integer id) {
 		CandidatoEntity candidatoEntity = candidatoDAO.findById(id);
 		CandidatoBean candidatoBean = new CandidatoBean();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM/yyyy");
 
 		if (candidatoEntity != null) {
 			candidatoBean = candidatoConverter.convertEntityToBean(candidatoEntity);

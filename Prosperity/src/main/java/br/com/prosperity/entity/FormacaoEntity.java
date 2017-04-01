@@ -16,11 +16,6 @@ import javax.persistence.Table;
 @Table(name = "tbFormacao")
 public class FormacaoEntity {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 	/* Mapeamento de Atributos */
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)

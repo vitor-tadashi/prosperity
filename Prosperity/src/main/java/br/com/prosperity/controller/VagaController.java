@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.eclipse.jetty.http.HttpStatus.Code;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -33,7 +32,6 @@ import br.com.prosperity.business.StatusBusiness;
 import br.com.prosperity.business.StatusVagaBusiness;
 import br.com.prosperity.business.UsuarioBusiness;
 import br.com.prosperity.business.VagaBusiness;
-import br.com.prosperity.enumarator.StatusVagaEnum;
 
 @Controller
 @RequestMapping("vaga")
@@ -77,9 +75,6 @@ public class VagaController {
 
 	@Autowired
 	private StatusVagaBusiness statusVagaBusiness;
-	
-	@Autowired
-	private SituacaoVagaBean situacaoVaga;
 
 	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
 	public String cliente(Model model, VagaBean vaga) {

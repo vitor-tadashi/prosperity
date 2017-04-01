@@ -16,22 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import br.com.prosperity.bean.AvaliacaoBean;
-import br.com.prosperity.bean.AvaliadorBean;
 import br.com.prosperity.bean.CanalInformacaoBean;
 import br.com.prosperity.bean.CandidatoBean;
-import br.com.prosperity.bean.CandidatoCompetenciaBean;
 import br.com.prosperity.bean.CargoBean;
-import br.com.prosperity.bean.ContatoBean;
-import br.com.prosperity.bean.EnderecoBean;
-import br.com.prosperity.bean.FormacaoBean;
 import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
-import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.TipoCursoBean;
 import br.com.prosperity.bean.VagaBean;
-import br.com.prosperity.business.AvaliadorBusiness;
 import br.com.prosperity.business.CanalInformacaoBusiness;
 import br.com.prosperity.business.CandidatoBusiness;
 import br.com.prosperity.business.CargoBusiness;
@@ -47,28 +39,7 @@ import br.com.prosperity.exception.BusinessException;
 public class CandidatoController {
 
 	@Autowired
-	private CandidatoBean candidatoBean;
-
-	@Autowired
 	private CandidatoBusiness candidatoBusiness;
-
-	@Autowired
-	private EnderecoBean enderecoBean;
-
-	@Autowired
-	private FormacaoBean formacaoBean;
-
-	@Autowired
-	private ContatoBean contatoBean;
-
-	@Autowired
-	private AvaliacaoBean avaliacaoBean;
-
-	@Autowired
-	private List<CandidatoCompetenciaBean> competencias;
-
-	@Autowired
-	private List<AvaliadorBean> avaliadores;
 
 	@Autowired
 	private TipoCursoBusiness tipoCursoBusiness;
@@ -83,27 +54,13 @@ public class CandidatoController {
 	private CargoBusiness cargoBusiness;
 
 	@Autowired
-	private TipoCursoBean tipoCursoBean;
-
-	@Autowired
 	private SenioridadeBusiness senioridadeBusiness;
 
 	@Autowired
-	private SenioridadeBean senioridadeBean;
-
-	@Autowired
-	private SituacaoAtualBean situacaoAtualBean;
-
-	@Autowired
 	private VagaBusiness vagaBusiness;
+	
 	@Autowired
 	private CanalInformacaoBusiness canalInformacaoBusiness;
-
-	@Autowired
-	private AvaliadorBusiness avaliadorBusiness;
-
-	@Autowired
-	private SituacaoCandidatoBean situacaoCandidatoBean;
 
 	/**
 	 * @author thamires.miranda
