@@ -26,7 +26,9 @@
 		<div id="breadcrumb">
 			<ul class="breadcrumb">
 				<li><i class="fa fa-home"></i><a href=""> Início</a></li>
-				<li class="active">Cadastrar candidato</li>
+				<li><a href=""> Candidato</a></li>
+				<li class="active">Cadastrar</li>
+				
 			</ul>
 		</div>
 		<!--breadcrumb-->

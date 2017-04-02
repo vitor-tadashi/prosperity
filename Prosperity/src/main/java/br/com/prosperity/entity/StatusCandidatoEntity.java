@@ -15,6 +15,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 @Entity
 @Table(name = "tbStatusCandidato")
 
@@ -25,7 +28,7 @@ public class StatusCandidatoEntity {
 	@Column(name = "idStatusCandidato", unique = true, nullable = false)
 	private Integer idStatusCandidato;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "idCandidato")
 	private CandidatoEntity candidato;
 
@@ -40,7 +43,7 @@ public class StatusCandidatoEntity {
 	@JoinColumn(name = "idStatus")
 	private StatusEntity status;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
 
