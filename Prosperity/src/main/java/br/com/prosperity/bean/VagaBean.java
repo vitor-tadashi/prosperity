@@ -27,7 +27,7 @@ public class VagaBean {
 
 	private Double valorPretensao;
 	
-	@Future
+	//@Future(message = "Data para inicio inválido")
 	private Date dataInicio;
 
 	private Character localTrabalho;
@@ -53,6 +53,10 @@ public class VagaBean {
 	private Integer numeroCandidatos; //
 	private UsuarioBean usuarioBean;
 	private List<StatusVagaBean> status;
+	private String nmResponsavel;
+	private String nmAreaResponsavel;
+	private String emailResponsavel;
+	private String telResponsavel;
 
 	private StatusVagaBean ultimoStatus;
 
@@ -285,4 +289,37 @@ public class VagaBean {
 	public void setAumentaQuadro(Character aumentaQuadro) {
 		this.aumentaQuadro = aumentaQuadro;
 	}
+	
+	public String getNmResponsavel() {
+		return nmResponsavel;
+	}
+
+	public void setNmResponsavel(String nmResponsavel) {
+		this.nmResponsavel = nmResponsavel;
+	}
+
+	public String getNmAreaResponsavel() {
+		return nmAreaResponsavel;
+	}
+
+	public void setNmAreaResponsavel(String nmAreaResponsavel) {
+		this.nmAreaResponsavel = nmAreaResponsavel;
+	}
+
+	public String getEmailResponsavel() {
+		return emailResponsavel;
+	}
+
+	public void setEmailResponsavel(String emailResponsavel) {
+		this.emailResponsavel = emailResponsavel;
+	}
+
+	public String getTelResponsavel() {
+		return telResponsavel;
+	}
+
+	public void setTelResponsavel(String telResponsavel) {
+		this.telResponsavel = telResponsavel;
+	}
+
 }

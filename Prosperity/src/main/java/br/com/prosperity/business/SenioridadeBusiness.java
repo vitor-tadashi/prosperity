@@ -23,7 +23,7 @@ public class SenioridadeBusiness {
 	@Autowired
 	private SenioridadeConverter senioridadeConverter;
 
-	@Transactional
+	@Transactional(readOnly=true)
 	public List<SenioridadeBean> obterTodos() {
 		List<SenioridadeEntity> senioridadeEntity = senioridadeDAO.findAll();
 		senioridadeBean = senioridadeConverter.convertEntityToBean(senioridadeEntity);
