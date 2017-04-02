@@ -3,6 +3,7 @@ package br.com.prosperity.bean;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.springframework.stereotype.Component;
@@ -10,10 +11,15 @@ import org.springframework.stereotype.Component;
 @Component
 @XmlRootElement(name = "VagaCandidatoBean")
 public class VagaCandidatoBean {
+	
+
 	private Integer id;
+	
 	@Valid
 	private VagaBean vaga;
+	
 	private CanalInformacaoBean canalInformacao;
+	
 	private List<CandidatoBean> candidatoBean;
 
 	public Integer getId() {

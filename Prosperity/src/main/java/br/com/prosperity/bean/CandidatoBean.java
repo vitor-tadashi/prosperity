@@ -48,6 +48,7 @@ public class CandidatoBean  extends FormatUtil {
 	private FormacaoBean formacao;
 	private UsuarioBean usuario;
 	private List<StatusCandidatoBean> status = new ArrayList<>();
+	@Valid
 	private Set<VagaCandidatoBean> vagas = new HashSet<>();
 	private List<CandidatoCompetenciaBean> competencias = new ArrayList<>();
 	private List<AvaliadorBean> avaliadores = new ArrayList<>(); 
@@ -55,14 +56,13 @@ public class CandidatoBean  extends FormatUtil {
 	private Date dataUltimoContato;
 	private Date entrevista;
 	private String proposta;
-	@Valid
-	private VagaCandidatoBean vagaCandidatoBean;
 	private Double valorMin;
 	private Double valorMax;
 	private StatusCandidatoBean ultimoStatus;
 	private VagaBean ultimaVaga;
-	private double PretensaoDe;
-	private double PretensaoPara;
+	private VagaCandidatoBean vagaCandidato;
+	private Double pretensaoDe;
+	private Double pretensaoPara;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataAberturaDe;
@@ -70,6 +70,27 @@ public class CandidatoBean  extends FormatUtil {
 	private Date dataAberturaPara;
 	
 
+
+
+	public VagaCandidatoBean getVagaCandidato() {
+		if (vagaCandidato == null) {
+			getUltimaVaga();
+		}
+		
+		return vagaCandidato;
+	}
+
+	public void setVagaCandidato(VagaCandidatoBean vagaCandidato) {
+		this.vagaCandidato = vagaCandidato;
+	}
+
+	public void setPretensaoDe(Double pretensaoDe) {
+		this.pretensaoDe = pretensaoDe;
+	}
+
+	public void setPretensaoPara(Double pretensaoPara) {
+		this.pretensaoPara = pretensaoPara;
+	}
 
 	public Date getDataAberturaDe() {
 		return dataAberturaDe;
@@ -88,19 +109,19 @@ public class CandidatoBean  extends FormatUtil {
 	}
 
 	public double getPretensaoDe() {
-		return PretensaoDe;
+		return pretensaoDe;
 	}
 
 	public void setPretensaoDe(double pretensaoDe) {
-		PretensaoDe = pretensaoDe;
+		this.pretensaoDe = pretensaoDe;
 	}
 
 	public double getPretensaoPara() {
-		return PretensaoPara;
+		return pretensaoPara;
 	}
 
 	public void setPretensaoPara(double pretensaoPara) {
-		PretensaoPara = pretensaoPara;
+		this.pretensaoPara = pretensaoPara;
 	}
 
 	public StatusCandidatoBean getUltimoStatus() {
@@ -115,11 +136,10 @@ public class CandidatoBean  extends FormatUtil {
 	}
 	
 	public VagaBean getUltimaVaga() {
-
-		
 		if (vagas != null && vagas.size() > 0) {
 			Integer idUltimaVaga = vagas.stream().map(VagaCandidatoBean::getId).max(Integer::compareTo).get();
-			ultimaVaga = vagas.stream().filter(st -> st.getId().equals(idUltimaVaga)).findFirst().get().getVaga();
+			vagaCandidato = vagas.stream().filter(st -> st.getId().equals(idUltimaVaga)).findFirst().get();
+			ultimaVaga = vagaCandidato.getVaga();
 		} else {
 			ultimaVaga = new VagaBean("Não possui vaga");
 		}
@@ -318,14 +338,6 @@ public class CandidatoBean  extends FormatUtil {
 
 	public void setValorMax(Double valorMax) {
 		this.valorMax = valorMax;
-	}
-
-	public VagaCandidatoBean getVagaCandidatoBean() {
-		return vagaCandidatoBean;
-	}
-
-	public void setVagaCandidatoBean(VagaCandidatoBean vagaCandidatoBean) {
-		this.vagaCandidatoBean = vagaCandidatoBean;
 	}
 
 	public List<AvaliadorBean> getAvaliadores() {
