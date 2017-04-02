@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.prosperity.bean.SituacaoVagaBean;
@@ -69,6 +70,7 @@ public class VagaBusiness {
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 		return vagaBean;
 	}
+	
 	@Transactional(readOnly = true)
 	public List<VagaBean> filtrarVagas(VagaBean vaga) {
 		Integer idStatus = 0;
@@ -99,13 +101,12 @@ public class VagaBusiness {
 		return vagaBean;
 	}
 
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void inserir(VagaBean vagaBean /* , HttpSession session */) {
 
 		VagaEntity vagaEntity = vagaConverter.convertBeanToEntity(vagaBean);
-		VagaEntity listaVaga = vagaDAO.findById(vagaEntity.getId());
 		
-		if (listaVaga == null) {
+		if (vagaEntity.getId() == null) {
 			Date dateNow = new Date();
 			SenioridadeEntity senioridadeEntity = senioridadeBusinness
 					.obterPorId(vagaBean.getSenioridadeBean().getId());
@@ -118,7 +119,6 @@ public class VagaBusiness {
 			// vagaBean.setUsuarioBean(usuario);
 			vagaDAO.insert(vagaEntity);
 		} else {
-			//Date dateNow = new Date();
 			SenioridadeEntity senioridadeEntity = senioridadeBusinness
 					.obterPorId(vagaBean.getSenioridadeBean().getId());
 			String senioridade = senioridadeEntity.getNome();
@@ -129,25 +129,11 @@ public class VagaBusiness {
 			vagaBean.setDataAbertura(vagaBean.getDataAbertura()); // VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
 			// vagaBean.setUsuarioBean(usuario);
 			vagaDAO.update(vagaEntity);
-		}
-		;
+		};
 
-		/*
-		 * Date dateNow = new Date(); SenioridadeEntity senioridadeEntity =
-		 * senioridadeBusinness.obterPorId(vagaBean.getSenioridadeBean().getId()
-		 * ); String senioridade = senioridadeEntity.getNome(); CargoEntity
-		 * cargoEntity =
-		 * cargoBusinness.obterPorId(vagaBean.getCargoBean().getId()); String
-		 * cargo = cargoEntity.getNome(); // String usuario =
-		 * session.getAttribute("autenticado").getNome();
-		 * vagaBean.setNomeVaga(cargo + " " + senioridade);
-		 * vagaBean.setDataAbertura(dateNow); //
-		 * vagaBean.setUsuarioBean(usuario);
-		 * vagaDAO.insert(vagaConverter.convertBeanToEntity(vagaBean));
-		 */
 	}
 
-	@Transactional(readOnly = true)
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public VagaBean obterVagaPorId(Integer id) {
 		VagaBean bean = vagaConverter.convertEntityToBean(vagaDAO.findById(id));
 		return bean;
