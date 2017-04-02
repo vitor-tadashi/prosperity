@@ -244,13 +244,13 @@ public class CandidatoController {
 			switch (data.getField()) {
 
 			case "dataNascimento":
-				novosErros.add(" A data de nascimento deve ser preenchida ");
+				novosErros.add(" O campo de data de nascimento deve ser preenchida ");
 				break;
 			case "entrevista":
-				novosErros.add(" A data da entrevista deve ser preenchida ");
+				novosErros.add("O campo de data da entrevista deve ser preenchida ");
 				break;
 			case "formacao.dataConclusao":
-				novosErros.add(" A data da conclusão do curso deve ser preenchida ");
+				novosErros.add(" O campo de data da conclusão do curso deve ser preenchido ");
 				break;
 			default:
 				novosErros.add(data.getDefaultMessage());

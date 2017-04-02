@@ -98,6 +98,7 @@ public class CandidatoBusiness extends FormatUtil {
 
 	@Transactional
 	public List<CandidatoBean> listar() {
+		List<CandidatoEntity> candidato = candidatoDAO.findByNamedQuery("verificarCanidatura");
 		List<CandidatoEntity> entities = candidatoDAO.findAll();
 		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(entities);
 		return beans;

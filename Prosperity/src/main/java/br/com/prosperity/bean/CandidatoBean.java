@@ -41,13 +41,12 @@ public class CandidatoBean  extends FormatUtil {
 	private String curriculo;
 	@Valid
 	private ContatoBean contato;
-
 	@Valid
 	private EnderecoBean endereco;
-
 	private FormacaoBean formacao;
 	private UsuarioBean usuario;
 	private List<StatusCandidatoBean> status = new ArrayList<>();
+
 	private List<VagaBean> vagas = new ArrayList<>();
 	private List<CandidatoCompetenciaBean> competencias = new ArrayList<>();
 	private List<AvaliadorBean> avaliadores = new ArrayList<>(); 
@@ -55,6 +54,7 @@ public class CandidatoBean  extends FormatUtil {
 	private Date dataUltimoContato;
 	private Date entrevista;
 	private String proposta;
+	@Valid
 	private VagaCandidatoBean vagaCandidatoBean;
 	private Double valorMin;
 	private Double valorMax;

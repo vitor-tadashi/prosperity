@@ -7,6 +7,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.Future;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Component;
 public class VagaBean {
 
 	private Integer id;
+	@Min(value = 1, message = "O campo de vaga a ser aplicado deve ser preenchido")
 	private String nomeVaga;
 
 	@NotNull
