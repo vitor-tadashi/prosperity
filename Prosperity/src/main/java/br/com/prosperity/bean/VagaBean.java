@@ -34,10 +34,8 @@ public class VagaBean {
 	private String nomeSolicitante;
 
 	private Double valorPretensao;
-
+	
 	@Future
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date dataInicio;
 
 	private Character localTrabalho;

@@ -27,9 +27,11 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 
 	@Override
 	public VagaEntity convertBeanToEntity(VagaBean bean) {
+		
 		if (bean == null) {
 			return null;
 		}
+		
 		VagaEntity entity = new VagaEntity();
 
 		entity.setId(bean.getId());
@@ -62,9 +64,11 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 
 	@Override
 	public VagaBean convertEntityToBean(VagaEntity entity) {
+		
 		if (entity == null) {
 			return null;
 		}
+		
 		VagaBean bean = new VagaBean();
 
 		bean.setId(entity.getId());
