@@ -15,6 +15,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 @Entity
 @Table(name = "tbStatus")
 @NamedQuery(name = "alterarStatus", query = "SELECT u FROM StatusEntity u LEFT OUTER JOIN u.tipoStatus p WHERE p.id= 2")
@@ -36,7 +39,7 @@ public class StatusEntity {
 	@JoinColumn(name = "idTpStatus")
 	private TipoStatusEntity tipoStatus;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idStatus")
 	private List<StatusCandidatoEntity> statusCandidatos;
 
