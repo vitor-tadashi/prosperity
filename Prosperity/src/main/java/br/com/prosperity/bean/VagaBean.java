@@ -19,6 +19,14 @@ import org.springframework.stereotype.Component;
 @XmlRootElement(name = "VagaBean")
 public class VagaBean {
 
+	public VagaBean() {
+
+	}
+
+	public VagaBean(String nome) {
+		this.nomeVaga = nome;
+	}
+
 	private Integer id;
 	@Min(value = 1, message = "O campo de vaga a ser aplicado deve ser preenchido")
 	private String nomeVaga;
@@ -28,7 +36,7 @@ public class VagaBean {
 	private String nomeSolicitante;
 
 	private Double valorPretensao;
-	
+
 	@Future
 	private Date dataInicio;
 
@@ -63,7 +71,7 @@ public class VagaBean {
 			Date dataUltimoStatus = status.stream().map(StatusVagaBean::getDataAlteracao).max(Date::compareTo).get();
 			ultimoStatus = status.stream().filter(st -> st.getDataAlteracao().equals(dataUltimoStatus)).findFirst()
 					.get();
-		} else { 	
+		} else {
 			ultimoStatus = new StatusVagaBean("Pendente");
 		}
 

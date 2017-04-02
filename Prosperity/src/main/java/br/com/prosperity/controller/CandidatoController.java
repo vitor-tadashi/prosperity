@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import br.com.prosperity.bean.CanalInformacaoBean;
 import br.com.prosperity.bean.CandidatoBean;
@@ -22,6 +24,7 @@ import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
+import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.TipoCursoBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.CanalInformacaoBusiness;
@@ -261,5 +264,11 @@ public class CandidatoController {
 
 		return novosErros;
 	}
-
+	
+	@RequestMapping(value= {"alterar-status-candidato"}, method = RequestMethod.POST)
+	@ResponseStatus(value = HttpStatus.OK)
+	public @ResponseBody SituacaoCandidatoBean alterarStatusCandidato(Model model, @ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato) {
+		candidatoBusiness.alterarStatus(situacaoCandidato);
+		return situacaoCandidato;
+	}
 }

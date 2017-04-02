@@ -144,7 +144,7 @@
 										<c:forEach var="candidato" items="${candidatos}">
 											<tr>
 												<td>${candidato.nome}</td>
-												<td>placeholder</td>
+												<td>${candidato.ultimaVaga.nomeVaga }</td>
 												<td>${candidato.valorPretensao}</td>
 												<td><fmt:formatDate value="${candidato.dataAbertura}"
 														pattern="dd/MM/yyyy" /></td>
@@ -259,7 +259,6 @@
 
 
 			$('#alterarStatus').click(function() {
-
 				$.ajax({
 					url : "alterar-status-candidato",
 					type : "POST",
@@ -271,12 +270,13 @@
 						
 					},
 					success : function(data) {
-						alert(data);
-						
-						// OU SUMIR COM A LINHA
+						location.reload();
+					},
+					error : function(e) {
+						location.reload();
 					}
 				});
-				location.reload(true);//RECARREGAR A TELA
+				
 			});
 
 

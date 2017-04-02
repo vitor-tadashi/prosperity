@@ -36,7 +36,7 @@ import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.util.FormatUtil;
 
 @Component
-public class CandidatoBusiness extends FormatUtil {
+public class CandidatoBusiness  {
 
 	@Autowired
 	private CandidatoBean candidatoBean;
@@ -70,9 +70,9 @@ public class CandidatoBusiness extends FormatUtil {
 
 		if (candidatoEntity != null) {
 			candidatoBean = candidatoConverter.convertEntityToBean(candidatoEntity);
-			candidatoBean = formatCPF(candidatoBean);
-			candidatoBean = formatRG(candidatoBean);
-			candidatoBean.setContato(formatPhone(candidatoBean.getContato()));
+			candidatoBean = FormatUtil.formatCPF(candidatoBean);
+			candidatoBean = FormatUtil.formatRG(candidatoBean);
+			candidatoBean.setContato(FormatUtil.formatPhone(candidatoBean.getContato()));
 		}
 
 		Map<String, List<StatusCandidatoBean>> listaStatusOrdenada = groupByOrdered(candidatoBean.getStatus(),
@@ -202,15 +202,6 @@ public class CandidatoBusiness extends FormatUtil {
 		if(candidato.getUltimoStatus().getId() == null)
 			return true;
 		
-		if (candidato.getUltimoStatus().getId() == 6
-				|| candidato.getUltimoStatus().getId() == 7) {
-			if (candidato.getVagas().get(0).getStatus().get(0).getId() == 17
-					|| candidato.getVagas().get(0).getStatus().get(0).getId() == 2) {
-				return true;
-			}
-			return false;
-
-		}
 		return false;
 	}
 
