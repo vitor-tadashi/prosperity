@@ -7,5 +7,4 @@ import br.com.prosperity.entity.UsuarioEntity;
 @Repository
 public class UsuarioDAO extends GenericDAOImpl<UsuarioEntity, Integer> {
 
-
 }

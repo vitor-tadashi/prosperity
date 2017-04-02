@@ -2,12 +2,18 @@ package br.com.prosperity.bean;
 
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+import org.springframework.stereotype.Component;
+
+@Component
+@XmlRootElement(name = "VagaCandidatoBean")
 public class VagaCandidatoBean {
 	private Integer id;
 	private VagaBean vaga;
 	private CanalInformacaoBean canalInformacao;
 	private List<CandidatoBean> candidatoBean;
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -39,6 +45,5 @@ public class VagaCandidatoBean {
 	public void setCandidatoBean(List<CandidatoBean> candidatoBean) {
 		this.candidatoBean = candidatoBean;
 	}
-	
 
 }
