@@ -201,7 +201,7 @@ public class VagaController {
 		return "idAvaliador";
 	}
 
-	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
+	@RequestMapping(value = "/salvar", method = RequestMethod.POST)
 	public String inserirVaga(@ModelAttribute("vagaBean") @Valid VagaBean vagaBean, BindingResult result, Model model) {
 
 		if (result.hasErrors()) {
@@ -213,26 +213,10 @@ public class VagaController {
 
 		vagaBusiness.inserir(vagaBean);
 		System.out.println("\n\n\nCadastrado\n\n\n");
-		return "/solicitar-vaga";
+		return "redirect:solicitar";
 
 	}
-
-	@RequestMapping(value = "editar/cadastrar", method = RequestMethod.POST)
-	public String inserirVagaa(@ModelAttribute("vagaBean") @Valid VagaBean vagaBean, BindingResult result,
-			Model model) {
-
-		if (result.hasErrors()) {
-			model.addAttribute("erro", result.getErrorCount());
-			model.addAttribute("listaErros", buildErrorMessage(result.getFieldErrors()));
-			solicitarVaga(model);
-			return "vaga/solicitar-vaga";
-		}
-
-		vagaBusiness.inserir(vagaBean);
-		System.out.println("\n\n\nCadastrado\n\n\n");
-		return "/solicitar-vaga";
-	}
-
+	
 	private List<String> buildErrorMessage(List<FieldError> error) {
 		List<String> novosErros = new ArrayList<>();
 

@@ -71,6 +71,14 @@ public class VagaBusiness {
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 		return vagaBean;
 	}
+	
+	@Transactional(readOnly = true)
+	public List<VagaBean> listarVagasAtivas() {
+
+		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagasAtivas"); // PENSAR
+		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
+		return vagaBean;
+	}
 
 	@Transactional
 	public List<VagaBean> listarVagaAprovar() {
@@ -114,40 +122,39 @@ public class VagaBusiness {
 		return vagaBean;
 	}
 
-	@Transactional(propagation = Propagation.REQUIRES_NEW)
+	@Transactional
 	public void inserir(VagaBean vagaBean /* , HttpSession session */) {
-
+		
 		VagaEntity vagaEntity = vagaConverter.convertBeanToEntity(vagaBean);
 		
 		if (vagaEntity.getId() == null) {
 			Date dateNow = new Date();
-			SenioridadeEntity senioridadeEntity = senioridadeBusinness
+			/*SenioridadeEntity senioridadeEntity = senioridadeBusinness
 					.obterPorId(vagaBean.getSenioridadeBean().getId());
 			String senioridade = senioridadeEntity.getNome();
 			CargoEntity cargoEntity = cargoBusinness.obterPorId(vagaBean.getCargoBean().getId());
 			String cargo = cargoEntity.getNome();
 			// String usuario = session.getAttribute("autenticado").getNome();
-			vagaBean.setNomeVaga(cargo + " " + senioridade);
+			vagaBean.setNomeVaga(cargo + " " + senioridade);*/
 			vagaBean.setDataAbertura(dateNow);
 			// vagaBean.setUsuarioBean(usuario);
 			vagaDAO.insert(vagaEntity);
 		} else {
 			// Date dateNow = new Date();
-			SenioridadeEntity senioridadeEntity = senioridadeBusinness
+			/*SenioridadeEntity senioridadeEntity = senioridadeBusinness
 					.obterPorId(vagaBean.getSenioridadeBean().getId());
 			String senioridade = senioridadeEntity.getNome();
 			CargoEntity cargoEntity = cargoBusinness.obterPorId(vagaBean.getCargoBean().getId());
 			String cargo = cargoEntity.getNome();
 			// String usuario = session.getAttribute("autenticado").getNome();
-			vagaBean.setNomeVaga(cargo + " " + senioridade);
+			vagaBean.setNomeVaga(cargo + " " + senioridade);*/
 			vagaBean.setDataAbertura(vagaBean.getDataAbertura()); // VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
 			// vagaBean.setUsuarioBean(usuario);
 			vagaDAO.update(vagaEntity);
 		}
-
 	}
 
-	@Transactional(propagation = Propagation.REQUIRES_NEW)
+	@Transactional
 	public VagaBean obterVagaPorId(Integer id) {
 		VagaBean bean = vagaConverter.convertEntityToBean(vagaDAO.findById(id));
 		return bean;

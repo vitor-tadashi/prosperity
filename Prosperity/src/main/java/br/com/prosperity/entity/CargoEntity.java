@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -19,19 +21,7 @@ public class CargoEntity {
 	
 	@Column(name = "nmCargo")
 	private String nome;
-	
-/*//	@ManyToOne
-//	@JoinColumn(name = "idCargoSenoridade")
-//	private CargoSenioridadeEntity cargoSenioridade; //relacionamento entre Senioridade e Cargo
-//
-//	public CargoSenioridadeEntity getSenioridade() {
-//		return cargoSenioridade;
-//	}
-//
-//	public void setSenioridade(CargoSenioridadeEntity cargoSenioridade) {
-//		this.cargoSenioridade = cargoSenioridade;
-//	}
-*/
+
 	public Integer getId() {
 		return idCargo;
 	}

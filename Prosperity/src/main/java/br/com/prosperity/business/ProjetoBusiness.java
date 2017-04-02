@@ -20,7 +20,7 @@ public class ProjetoBusiness {
 	@Autowired
 	private ProjetoConverter projetoConverter;
 	
-	@Transactional
+	@Transactional(readOnly=true)
 	public List<ProjetoBean> obterTodos(){
 		List<ProjetoEntity> projetoEntity = projetoDAO.findAll();
 		List<ProjetoBean> projetoBean = projetoConverter.convertEntityToBean(projetoEntity);

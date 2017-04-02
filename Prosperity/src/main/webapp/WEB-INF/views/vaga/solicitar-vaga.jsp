@@ -28,7 +28,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">Informações da vaga</div>
 					<div class="panel-body">
-						<form class="form-border" id="formCadastro2" action="cadastrar"
+						<form class="form-border" id="formCadastro2" action="/vaga/salvar"
 							method="POST">
 							<input id="vagaIdVar" name="id" type="hidden" value="${vaga.id}">
 							<div id="textDiv">
@@ -139,21 +139,21 @@
 											<div class="form-group col-md-6" style="padding-top:0px">
 												<label class="control-label" for="txtHorarioInicial">Horário</label>
 												<div>
-													<div class="form-group col-md-2">
+													<div class="form-group col-md-2" style="padding-top:0px">
 														<div class="input-group bootstrap-timepicker">
 															<input id="txtHorarioInicial" name="horarioEntrada"
-																type="time" value="${vaga.horarioEntrada}" style="width:60px;height:30px;padding-top:0px">
+																type="time" value="${vaga.horarioEntrada}" style="width:70px;height:30px;padding-top:0px">
 														</div>
 													</div>
 													<!-- /form-group -->
-													<div class="form-group col-md-1">
+													<div class="form-group col-md-1" style="padding-top:0px">
 														<label style="margin-top: 0px" >às</label>
 													</div>
 													<!-- /form-group -->
-													<div class="form-group col-md-2">
+													<div class="form-group col-md-2" style="padding-top:0px">
 														<div class="input-group bootstrap-timepicker">
 															<input id="txtHorarioFinal" name="horarioSaida"
-																type="time" value="${vaga.horarioSaida}" style="width:60px;height:30px;padding-top:0px">
+																type="time" value="${vaga.horarioSaida}" style="width:70px;height:30px;padding-top:0px">
 														</div>
 													</div>
 													<!-- /form-group -->
@@ -166,7 +166,7 @@
 												<label for="txtPropostaSalarial">Proposta salarial</label> <input
 													id="txtPropostaSalarial" name="valorPretensao" type="text"
 													class="form-control input-sm" placeholder="R$"
-													value="${vaga.valorPretensao}">
+													value="${vaga.valorPretensao}" style="height:30px">
 											</div>
 											<!-- /form-group -->
 											<div class="form-group col-md-6" style="padding-top:0px">
@@ -195,7 +195,7 @@
 												<div class="input-group">
 													<input id="dataInicio" name="dataInicio" type="text"
 														class="datepicker form-control" data-required="true"
-														value="${vaga.dataInicio}"> <span
+														value="${vaga.dataInicio}" style="height:30px"> <span
 														class="input-group-addon"><i class="fa fa-calendar"></i></span>
 												</div>
 												<!-- /.col -->
@@ -231,13 +231,13 @@
 												</select>
 											</div>
 											<!-- /form-group -->
-											<div class="form-group col-md-6">
+											<div class="form-group col-md-6" style="padding-top:0px">
 												<label for="exampleInputEmail1">Cliente</label> 
 												<input type="text" class="form-control input-sm" id="textCliente"
 													placeholder="Cliente" data-required="false" disabled="disabled" onblur="cliente">
 											</div>
 											<!-- /form-group -->
-											<div class="form-group col-md-6">
+											<div class="form-group col-md-6" style="padding-top:0px">
 												<label for="exampleInputEmail1">Gestor imediato</label> 
 												<select id="cmbGestorInterno" name="usuarioBean.id" class="form-control chzn-select">
 												
@@ -254,25 +254,25 @@
 
 											<!-- Sessão de Projeto Alocado -->
 											
-											<div id="dadosAlocacao" class="col-md-12 hide">
-												<div class="col-md-6">
+											<div id="dadosAlocacao" class="col-md-12 hide" style="padding-top:0px">
+												<div class="col-md-6" style="padding-left:0px">
 											    <label for="exampleInputEmail1">Nome do responsável</label> 
 											    <input type="name" class="form-control input-sm" id="exampleInputEmail1"
-												placeholder="Nome do Cliente Responsável" data-required="true"> 
+												placeholder="Nome do Cliente Responsável" data-required="true" name="nmResponsavel" value="${nmResponsavel.id}"> 
 												</div>
 												<div class="col-md-6">
 												<label for="exampleInputEmail1">Área do responsável</label> 
-												<input type="text" class="form-control input-sm" id="exampleInputEmail1"
+												<input type="text" class="form-control input-sm" id="exampleInputEmail1" name="nmAreaResponsavel" value="${nmAreaResponsavel.id}"
 												placeholder="Área do Cliente Responsável" data-required="true"> 
 												</div>
-												<div class="col-md-6">
-												<label for="exampleInputEmail1">E-mail</label> 
-												<input type="email" class="form-control input-sm" id="exampleInputEmail1"
+												<div class="col-md-6" style="padding-left:0px;padding-top:10px">
+												<label for="exampleInputEmail1">E-mail do responsável</label> 
+												<input type="email" class="form-control input-sm" id="exampleInputEmail1" name="emailResponsavel" value="${emailResponsavel.id}"
 												placeholder="E-mail do Cliente Responsável" data-required="true">
 												</div>
-												<div class="col-md-6">
+												<div class="col-md-6" style="padding-top:10px">
 												<label for="exampleInputEmail1">Telefone 1</label> 
-												<input id="phone-mask" type="text" class=" form-control input-sm phone"> 
+												<input id="phone-mask" type="text" class=" form-control input-sm phone" name="telResponsavel" value="${telResponsavel.id}"> 
 												</div>
 											</div>
 											<!-- /Section -->
