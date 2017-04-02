@@ -6,7 +6,7 @@
 
 		$("#frmUsuario")[0].reset();
 		$('#frmUsuario').parsley().reset();
-
+		
 		if (id != undefined) {
 			$('#usuarioLabel').text('Alterar usuário');
 			$('#btnRedefinirSenha').show();
@@ -34,7 +34,6 @@
 						ativo = false;
 					}
 					$('select#cmbFuncionario').val(data.funcionario.id);
-					$('select#cmbFuncionario').attr("disabled", "disabled").attr("selected", "selected");
 					$('select#cmbPerfil').val(data.perfil.id);
 					$('#usuario-modal').modal('show');
 				}
@@ -42,6 +41,7 @@
 		} else {
 			$('#usuarioLabel').text('Incluir usuário');
 			$('#btnRedefinirSenha').hide();
+			$('select#cmbFuncionario').removeAttr("disabled");
 			$('#btnMudarStatus').hide();
 			$('#usuario-modal').modal('show');
 		}

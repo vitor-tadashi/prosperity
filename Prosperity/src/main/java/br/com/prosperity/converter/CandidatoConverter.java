@@ -2,6 +2,7 @@ package br.com.prosperity.converter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.entity.CandidatoEntity;
 
@@ -24,7 +25,7 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 	private UsuarioConverter usuarioConverter;
 
 	@Autowired
-	private VagaConverter vagaConverter;
+	private VagaCandidatoConverter vagaCandidatoConverter;
 
 	@Autowired
 	private StatusCandidatoConverter statusCandidatoConverter;
@@ -56,7 +57,7 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		entity.setDataEntrevista(bean.getEntrevista());
 		entity.setDataUltimoContato(bean.getDataUltimoContato());
 		entity.setProposta(bean.getProposta());
-		entity.setVagaEntity(vagaConverter.convertBeanToEntity(bean.getVagas()));
+		entity.setVagas(vagaCandidatoConverter.convertBeanToEntity(bean.getVagas()));
 		entity.setValorMax(bean.getValorMax());
 		entity.setValorMin(bean.getValorMin());
 	
@@ -96,14 +97,14 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		entity.setDataNascimento(bean.getDataNascimento());
 		entity.setContato(contatoConverter.convertBeanToEntity(bean.getContato()));
 		entity.setEndereco(enderecoConverter.convertBeanToEntity(bean.getEndereco()));
-		//entity.setCompetencias(candidatoCompetenciaConverter.convertBeanToEntity(bean.getCompetencias()));
+		entity.setCompetencias(candidatoCompetenciaConverter.convertBeanToEntity(bean.getCompetencias()));
 		entity.setFormacao(formacaoConverter.convertBeanToEntity(bean.getFormacao()));
 		entity.setUsuario(usuarioConverter.convertBeanToEntity(bean.getUsuario()));
-		//entity.setStatusCandidatos(statusCandidatoConverter.convertBeanToEntity(bean.getStatus()));
+		entity.setStatusCandidatos(statusCandidatoConverter.convertBeanToEntity(bean.getStatus()));
 		entity.setDataEntrevista(bean.getEntrevista());
 		entity.setDataUltimoContato(bean.getDataUltimoContato());
 		entity.setProposta(bean.getProposta());
-		entity.setVagaEntity(vagaConverter.convertBeanToEntity(bean.getVagas()));
+		entity.setVagas(vagaCandidatoConverter.convertBeanToEntity(bean.getVagas()));
 		entity.setValorMax(bean.getValorMax());
 		entity.setValorMin(bean.getValorMin());
 		
@@ -138,7 +139,7 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		bean.setEntrevista(entity.getDataEntrevista());
 		bean.setDataUltimoContato(entity.getDataUltimoContato());
 		bean.setProposta(entity.getProposta());
-		bean.setVagas(vagaConverter.convertEntityToBean(entity.getVagaEntity()));
+		bean.setVagas(vagaCandidatoConverter.convertEntityToBean(entity.getVagas()));
 		bean.setValorMax(entity.getValorMax());
 		bean.setValorMin(entity.getValorMin());
 

@@ -14,11 +14,14 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.prosperity.bean.SituacaoVagaBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
+import br.com.prosperity.converter.UsuarioConverter;
 import br.com.prosperity.converter.VagaConverter;
+import br.com.prosperity.dao.AvaliadorDAO;
 import br.com.prosperity.dao.StatusDAO;
 import br.com.prosperity.dao.StatusVagaDAO;
 import br.com.prosperity.dao.UsuarioDAO;
 import br.com.prosperity.dao.VagaDAO;
+import br.com.prosperity.entity.AvaliadorEntity;
 import br.com.prosperity.entity.CargoEntity;
 import br.com.prosperity.entity.SenioridadeEntity;
 import br.com.prosperity.entity.StatusVagaEntity;
@@ -32,6 +35,9 @@ public class VagaBusiness {
 
 	@Autowired
 	private VagaConverter vagaConverter;
+	
+	@Autowired
+	private UsuarioConverter usuarioConverter;
 
 	@Autowired
 	private SenioridadeBusiness senioridadeBusinness;
@@ -44,13 +50,16 @@ public class VagaBusiness {
 
 	@Autowired
 	private StatusVagaDAO statusVagaDAO;
+	
+	@Autowired
+	private AvaliadorDAO avaliadorDAO;
 
 	@Autowired
 	private UsuarioBean usuarioBean;
 
 	@Autowired
 	private UsuarioDAO usuarioDAO;
-	
+
 	@Autowired
 	private HttpSession session;
 
@@ -69,17 +78,22 @@ public class VagaBusiness {
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 		return vagaBean;
 	}
+
 	@Transactional(readOnly = true)
 	public List<VagaBean> filtrarVagas(VagaBean vaga) {
 		Integer idStatus = 0;
-		if(!vaga.getStatus().get(0).getStatus().getNome().equals("")){
+		if (!vaga.getStatus().get(0).getStatus().getNome().equals("")) {
 			idStatus = Integer.parseInt(vaga.getStatus().get(0).getStatus().getNome());
 		}
-//		List<VagaEntity> vagas = vagaDAO.findByNamedQuery("listarVagaFiltrado", "%"+vagao.getNomeVaga()+"%", vagao.getDataAberturaDe(), vagao.getDataAberturaPara(), idStatus);
-     	List<VagaEntity> vagas = vagaDAO.findByNamedQuery("listarVagaFiltrado", "%"+vaga.getNomeVaga()+"%",idStatus, parseData(vaga.getDataAberturaDe()), parseData(vaga.getDataAberturaPara()));
+		// List<VagaEntity> vagas =
+		// vagaDAO.findByNamedQuery("listarVagaFiltrado",
+		// "%"+vagao.getNomeVaga()+"%", vagao.getDataAberturaDe(),
+		// vagao.getDataAberturaPara(), idStatus);
+		List<VagaEntity> vagas = vagaDAO.findByNamedQuery("listarVagaFiltrado", "%" + vaga.getNomeVaga() + "%",
+				idStatus, parseData(vaga.getDataAberturaDe()), parseData(vaga.getDataAberturaPara()));
 
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagas);
- 		return vagaBean;
+		return vagaBean;
 
 		/*
 		 * List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("pesquisar",
@@ -104,7 +118,7 @@ public class VagaBusiness {
 
 		VagaEntity vagaEntity = vagaConverter.convertBeanToEntity(vagaBean);
 		VagaEntity listaVaga = vagaDAO.findById(vagaEntity.getId());
-		
+
 		if (listaVaga == null) {
 			Date dateNow = new Date();
 			SenioridadeEntity senioridadeEntity = senioridadeBusinness
@@ -118,7 +132,7 @@ public class VagaBusiness {
 			// vagaBean.setUsuarioBean(usuario);
 			vagaDAO.insert(vagaEntity);
 		} else {
-			//Date dateNow = new Date();
+			// Date dateNow = new Date();
 			SenioridadeEntity senioridadeEntity = senioridadeBusinness
 					.obterPorId(vagaBean.getSenioridadeBean().getId());
 			String senioridade = senioridadeEntity.getNome();
@@ -126,7 +140,11 @@ public class VagaBusiness {
 			String cargo = cargoEntity.getNome();
 			// String usuario = session.getAttribute("autenticado").getNome();
 			vagaBean.setNomeVaga(cargo + " " + senioridade);
-			vagaBean.setDataAbertura(vagaBean.getDataAbertura()); // VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
+			vagaBean.setDataAbertura(vagaBean.getDataAbertura()); // VERIFICAR
+																	// SE DEVE
+																	// SER DATA
+																	// DE
+																	// ALTERAÇÂO
 			// vagaBean.setUsuarioBean(usuario);
 			vagaDAO.update(vagaEntity);
 		}
@@ -172,20 +190,26 @@ public class VagaBusiness {
 
 		statusVagaDAO.insert(statusVagaEntity);
 	}
-	
-	private Date parseData(Date dataAntiga){
+
+	private Date parseData(Date dataAntiga) {
 		SimpleDateFormat novaData = new SimpleDateFormat("yyyy-MM-dd");
-		
+
 		String data = "";
-		try{  
+		try {
 			data = novaData.format(dataAntiga);
 			return novaData.parse(data);
-		}catch(ParseException e) {  
-		    e.printStackTrace();  //imprimi a stack trace
-		}  
+		} catch (ParseException e) {
+			e.printStackTrace(); // imprimi a stack trace
+		}
 		return dataAntiga;
 	}
-	
+
+	private void inserirAvaliadores(VagaEntity vaga, List<UsuarioBean> usuarios) {
+		for (UsuarioBean usuario : usuarios) {
+			AvaliadorEntity avaliadorEntity = new AvaliadorEntity();
+			avaliadorEntity.setUsuario(usuarioConverter.convertBeanToEntity(usuario));
+			avaliadorEntity.setVaga(vaga);
+			avaliadorDAO.insert(avaliadorEntity);
+		}
+	}
 }
-
-

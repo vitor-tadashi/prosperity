@@ -1,10 +1,6 @@
 package br.com.prosperity.bean;
 
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.Email;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,15 +10,11 @@ public class UsuarioBean {
 	private final String SENHA_PADRAO = "verity@123";
 
 	private Integer id;
-
-	@NotNull
+	
 	private PerfilBean perfil;
-
-	@NotNull
+	
 	private FuncionarioBean funcionario;
-
-	@NotNull
-	@Size(min = 5, max = 20)
+	
 	private String nome;
 
 	private String senha = SENHA_PADRAO;
@@ -31,8 +23,6 @@ public class UsuarioBean {
 
 	private Boolean primeiroAcesso = true;
 
-	@NotNull
-	@Email
 	private String email;
 
 	private Boolean ativo = true;

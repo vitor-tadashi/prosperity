@@ -1,14 +1,11 @@
 package br.com.prosperity.util;
 
-import java.util.Date;
-
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.ContatoBean;
-import br.com.prosperity.bean.VagaBean;
 
 public class FormatUtil {
 
-	public CandidatoBean formatCPF(CandidatoBean candidatoBean) {
+	public static CandidatoBean formatCPF(CandidatoBean candidatoBean) {
 		if(candidatoBean != null){
 		String bloco1 = candidatoBean.getCpf().substring(0, 3);
 		String bloco2 = candidatoBean.getCpf().substring(3, 6);
@@ -20,7 +17,7 @@ public class FormatUtil {
 		return candidatoBean;
 	}
 
-	public CandidatoBean formatRG(CandidatoBean candidatoBean) {
+	public static CandidatoBean formatRG(CandidatoBean candidatoBean) {
 		if(candidatoBean != null){
 		String bloco1 = candidatoBean.getRg().substring(0, 2);
 		String bloco2 = candidatoBean.getRg().substring(2, 5);
@@ -32,7 +29,7 @@ public class FormatUtil {
 		return candidatoBean;
 	}
 
-	public ContatoBean formatPhone(ContatoBean contatoBean) {
+	public static ContatoBean formatPhone(ContatoBean contatoBean) {
 		if (contatoBean != null) {
 			//11971245007
 			//(11)97124-5007

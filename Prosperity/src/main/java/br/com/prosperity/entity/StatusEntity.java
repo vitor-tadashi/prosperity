@@ -1,11 +1,11 @@
 package br.com.prosperity.entity;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,14 +38,15 @@ public class StatusEntity {
 	@ManyToOne
 	@JoinColumn(name = "idTpStatus")
 	private TipoStatusEntity tipoStatus;
-	
+
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idStatus")
 	private List<StatusCandidatoEntity> statusCandidatos;
 
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinColumn(name = "idStatus")
-	private List<StatusDisponivelEntity> statusDisponiveis;
+	private Set<StatusDisponivelEntity> statusDisponiveis;
 
 	public Integer getId() {
 		return id;
@@ -79,11 +80,11 @@ public class StatusEntity {
 		this.tipoStatus = tipoStatus;
 	}
 
-	public List<StatusDisponivelEntity> getStatusDisponiveis() {
+	public Set<StatusDisponivelEntity> getStatusDisponiveis() {
 		return statusDisponiveis;
 	}
 
-	public void setStatusDisponiveis(List<StatusDisponivelEntity> statusDisponiveis) {
+	public void setStatusDisponiveis(Set<StatusDisponivelEntity> statusDisponiveis) {
 		this.statusDisponiveis = statusDisponiveis;
 	}
 

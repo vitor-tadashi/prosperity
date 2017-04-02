@@ -23,20 +23,26 @@ public class UsuarioBusiness {
 	private UsuarioConverter usuarioConverter;
 
 	@Transactional
-	public void inserir(UsuarioBean usuarioBean) {
-
-		boolean existeUsuario = !usuarioDAO.findByNamedQuery("existeUsuario", usuarioBean.getNome()).isEmpty();
-		
-		if(existeUsuario) {
-			throw new RuntimeException("Usuário já cadastrado");
-		}
+	public void inserir(UsuarioBean usuarioBean) throws BusinessException {
 		
 		EncriptaDecriptaApacheCodec codec = new EncriptaDecriptaApacheCodec();
 		
 		usuarioBean.setSenha(codec.codificaBase64Encoder(usuarioBean.getSenha()));
 		
 		UsuarioEntity entity = usuarioConverter.convertBeanToEntity(usuarioBean);
-		usuarioDAO.insert(entity);
+		
+		if(usuarioBean.getId() == null) {
+			boolean existeUsuario = !usuarioDAO.findByNamedQuery("existeUsuario", usuarioBean.getNome()).isEmpty();
+			if(existeUsuario) {
+				throw new BusinessException("Não foi possível incluir. Usuário [" + usuarioBean.getNome() + "] já está cadastrado");
+			}
+			
+			usuarioDAO.insert(entity);
+		}
+		else {
+			usuarioDAO.update(entity);
+		}
+		
 	}
 	
 	@Transactional

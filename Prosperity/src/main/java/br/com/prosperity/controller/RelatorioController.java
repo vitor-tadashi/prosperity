@@ -8,10 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import br.com.prosperity.bean.SituacaoVagaBean;
-import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.RelatorioBusiness;
-import br.com.prosperity.business.VagaBusiness;
 import br.com.prosperity.entity.VagaEntity;
 import br.com.prosperity.enumarator.StatusVagaEnum;
 

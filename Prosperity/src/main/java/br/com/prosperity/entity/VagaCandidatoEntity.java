@@ -18,14 +18,13 @@ public class VagaCandidatoEntity {
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
 	@Column(name = "idVagaCandidato", unique = true, nullable = false)
 	private Integer idVagaCandidato;
+	
 	@OneToOne
 	@JoinColumn(name = "idVaga")
 	private VagaEntity vaga;
-	@OneToMany
-	@JoinColumn(name = "idCandidato")
-	private List<CandidatoEntity> candidato;
+
 	@OneToOne
-	@JoinColumn(name = "idCanalInofrmacao")
+	@JoinColumn(name = "idCanalInformacao")
 	private CanalInformacaoEntity canalInformacao;
 
 	public Integer getIdVagaCandidato() {
@@ -42,14 +41,6 @@ public class VagaCandidatoEntity {
 
 	public void setVaga(VagaEntity vaga) {
 		this.vaga = vaga;
-	}
-
-	public List<CandidatoEntity> getCandidato() {
-		return candidato;
-	}
-
-	public void setCandidato(List<CandidatoEntity> candidato) {
-		this.candidato = candidato;
 	}
 
 	public CanalInformacaoEntity getCanalInformacao() {

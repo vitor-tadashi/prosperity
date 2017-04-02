@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.prosperity.bean.CargoBean;
-import br.com.prosperity.bean.TipoCursoBean;
 import br.com.prosperity.converter.CargoConverter;
 import br.com.prosperity.dao.CargoDAO;
 import br.com.prosperity.entity.CargoEntity;

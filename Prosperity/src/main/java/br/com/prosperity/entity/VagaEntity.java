@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,13 +33,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 //	@NamedQuery(name="listarVagaFiltrado", query="SELECT u FROM VagaEntity u LEFT JOIN u.statusVagaEntity p LEFT JOIN p.status e WHERE u.dataAbertura BETWEEN ?1 AND ?2 AND u.nomeVaga like ?3 AND p.status = ?4" )
  	@NamedQuery(name="listarVagaFiltrado", query="SELECT u FROM VagaEntity u LEFT OUTER JOIN u.statusVagaEntity p left join p.status s WHERE u.nomeVaga like ?1 and s.id = ?2 and u.dataAbertura between ?3 and ?4" )
-
-
 }) 	
-
-
-
-
 public class VagaEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -105,15 +98,15 @@ public class VagaEntity {
 	@Temporal(value = TemporalType.DATE)
 	private Date dataFechamento; //
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idProjeto")
 	private ProjetoEntity projetoEntity;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idCargo")
 	private CargoEntity cargoEntity;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idSenioridade")
 	private SenioridadeEntity senioridadeEntity;
 

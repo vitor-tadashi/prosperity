@@ -24,6 +24,7 @@ public class CandidatoService {
 	@RequestMapping("/servico")
 	@Consumes("application/xml")
 	public void salvarBean(@RequestBody WordpressBean w) {
+		
 		System.out.println("Chegou aqui!");
 
 		List<CandidatoBean> candidatos = new ArrayList<>();

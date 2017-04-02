@@ -17,7 +17,15 @@ import org.springframework.stereotype.Component;
 @Component
 @XmlRootElement(name = "VagaBean")
 public class VagaBean {
-
+	
+	public VagaBean() {
+		
+	}
+	
+	public VagaBean(String nome) {
+		this.nomeVaga = nome;
+	}
+	
 	private Integer id;
 	private String nomeVaga;
 
