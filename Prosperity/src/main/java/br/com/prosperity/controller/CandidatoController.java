@@ -25,14 +25,18 @@ import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
+import br.com.prosperity.bean.StatusCandidatoBean;
+import br.com.prosperity.bean.StatusVagaBean;
 import br.com.prosperity.bean.TipoCursoBean;
 import br.com.prosperity.bean.VagaBean;
+import br.com.prosperity.business.AvaliadorBusiness;
 import br.com.prosperity.business.CanalInformacaoBusiness;
 import br.com.prosperity.business.CandidatoBusiness;
 import br.com.prosperity.business.CargoBusiness;
 import br.com.prosperity.business.FuncionarioBusiness;
 import br.com.prosperity.business.SenioridadeBusiness;
 import br.com.prosperity.business.SituacaoAtualBusiness;
+import br.com.prosperity.business.StatusCandidatoBusiness;
 import br.com.prosperity.business.TipoCursoBusiness;
 import br.com.prosperity.business.VagaBusiness;
 import br.com.prosperity.exception.BusinessException;
@@ -61,9 +65,20 @@ public class CandidatoController {
 
 	@Autowired
 	private VagaBusiness vagaBusiness;
+
 	
 	@Autowired
 	private CanalInformacaoBusiness canalInformacaoBusiness;
+	
+	@Autowired
+	private AvaliadorBusiness avaliadorBusiness;
+	
+	@Autowired
+	private SituacaoCandidatoBean situacaoCandidatoBean;
+	
+	@Autowired
+	private StatusCandidatoBean statusCandidatoBean;
+
 
 	/**
 	 * @author thamires.miranda
@@ -150,6 +165,16 @@ public class CandidatoController {
 		return "candidato/cadastrar-candidato";
 	}
 
+	
+	@RequestMapping(value = "/historico/{id}", method = RequestMethod.GET)
+	public String historicoCandidato(Model model, @PathVariable Integer id) {
+		CandidatoBean candidato = candidatoBusiness.obter(id);
+		obterDominiosCandidato(model);
+		model.addAttribute("candidato", candidato);
+
+		return "candidato/historico-candidato";
+	}
+
 	@RequestMapping(value = "consultar-rh", method = RequestMethod.GET)
 	public String consultarCandidatoRH(Model model) {
 		List<CandidatoBean> candidatos = candidatoBusiness.listar();
@@ -194,6 +219,9 @@ public class CandidatoController {
 
 		List<VagaBean> listaVaga = vagaBusiness.listar();
 		model.addAttribute("listaVaga", listaVaga);
+		
+		List<StatusCandidatoBean> listaStatusCandidato = StatusCandidatoBusiness.obterTodos();
+		model.addAttribute("listaStatusCandidato", listaStatusCandidato);
 
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
 		model.addAttribute("listaCargo", listaCargo);
@@ -213,16 +241,7 @@ public class CandidatoController {
 	public String consultarCandidatoGestor() {
 		return "candidato/consulta-gestor";
 	}
-
-	@RequestMapping(value = "historico", method = RequestMethod.GET)
-	public String historicoCandidato(Model model) {
-		CandidatoBean candidatoBean = candidatoBusiness.obter(73);
-
-		model.addAttribute("candidato", candidatoBean);
-
-		return "candidato/historico-candidato";
-	}
-
+	
 	@RequestMapping(value = "aprovar-candidato", method = RequestMethod.GET)
 	public String aprovarCandidato(Model model) {
 
