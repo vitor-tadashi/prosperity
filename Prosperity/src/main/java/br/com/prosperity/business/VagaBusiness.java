@@ -2,11 +2,14 @@ package br.com.prosperity.business;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
@@ -85,6 +88,22 @@ public class VagaBusiness {
 
 		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagaAprovar"); // PENSAR
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
+		return vagaBean;
+	}
+	
+	@Transactional(readOnly = true)
+	public List<VagaBean> filtroVaga(VagaBean vagas) {
+		Integer idStatus = 0;
+		if (!vagas.getStatus().get(0).getStatus().getNome().equals("")) {
+			idStatus = Integer.parseInt(vagas.getStatus().get(0).getStatus().getNome());
+		}
+		//List<Criterion>li = new ArrayList<>();
+		//li.add(Restrictions.between("dataAbertura", null, null));
+		List<VagaEntity> vaga = vagaDAO.findByCriteria("nomeVaga", false, Restrictions.like("nomeVaga", "%" + vagas.getNomeVaga() + "%"),
+				Restrictions.between("dataAbertura", parseData(vagas.getDataAberturaDe()),  parseData(vagas.getDataAberturaPara())),
+				Restrictions.eq("situacao", true)
+				);
+		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vaga);
 		return vagaBean;
 	}
 	

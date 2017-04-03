@@ -43,8 +43,8 @@
                                             <input class="form-control" id="nm-perfil" name="nome" type="text" placeholder="Insira um nome para o perfil" required/>
                                         </div>
                                         <div class="hide" id="select-perfil">
-                                            <select class="form-control chzn-select hide" id="selected-perfil" name="">
-                                                <option value="" id="xq">Selecione</option>
+                                            <select class="form-control" id="selected-perfil" name="">
+                                                <option value="">Selecione</option>
                                                 <c:forEach var="perfil" items="${perfis }" varStatus="i">
                                                     <option value="${perfil.id }">${perfil.nome }</option>
                                                 </c:forEach>
@@ -86,15 +86,21 @@
                                         </div>
                                         <!-- /form-group -->
                                         <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <span class="fa fa-check text-primary font14"> Selecione as funcionalidades para o perfil:</span>
-                                            </div>
-                                            <table class="table table-responsive" id="responsiveTable">
+                                            <!-- <div class="panel-heading">
+                                                <span class="fa fa-check text-primary"></span> <span> Selecione as funcionalidades:</span>
+                                            </div> -->
+                                            <table class="table table-condensed table-hover" id="responsiveTable">
+                                                <thead>
+													<tr>
+														<th class="text-center"><span class="fa fa-check-circle fa-lg text-primary"></span></th>
+														<th><span>Funcionalidades:</span></th>
+													</tr>
+												</thead>
                                                 <tbody>
                                                     <c:forEach var="funcionalidade" items="${funcionalidades}" varStatus="i">
                                                         <tr>
                                                             <td>
-                                                                <label class="label-checkbox">
+                                                                <label class="label-checkbox text-center">
                                                                 <input type="checkbox" class="chk-row listFun" id="${i.index }" name="listaFuncionalidades[${i.index }].id" value="${funcionalidade.id }">
                                                                 <span class="custom-checkbox"></span>
                                                                 </label>
@@ -109,7 +115,7 @@
                                         <!-- /panel -->
                                         <hr>
                                         <div class="pull-right">
-                                            <button class="btn btn-success" type="submit" data-toggle="modal">Salvar</button>
+                                            <button class="btn btn-primary" type="submit" data-toggle="modal">Salvar</button>
                                         </div>
                                     </div>
                                     <div class="row"></div>
