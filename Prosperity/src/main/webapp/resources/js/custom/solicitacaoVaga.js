@@ -43,20 +43,16 @@ $(function() {
 	//Script para alteração da Aba Dados do Projeto e do Radio Button Local de Trabalho
 	
 	if (($("#localTrabalhoVar").val() == "C")) {
-		$("section#dadosInterno").addClass("hide");
-		$("section#dadosAlocacao").removeClass("hide");
+		$("div#dadosAlocacao").removeClass("hide");
 	}else if(($("#localTrabalhoVar").val() == "I")){
-		$("section#dadosInterno").removeClass("hide");
-		$("section#dadosAlocacao").addClass("hide");
+		$("div#dadosAlocacao").addClass("hide");
 	};
 
 	$("#cliente").click(function() {
-		$("section#dadosInterno").addClass("hide");
-		$("section#dadosAlocacao").removeClass("hide");
+		$("div#dadosAlocacao").removeClass("hide");
 	});
 	$("#interno").click(function() {
-		$("section#dadosInterno").removeClass("hide");
-		$("section#dadosAlocacao").addClass("hide");
+		$("div#dadosAlocacao").addClass("hide");
 	});
 	
 	//Script para alternar o WizardTab para proxima aba
@@ -89,28 +85,6 @@ $(function() {
 
 	$("#nextStep2").click(function() {
 		
-		// Validação da primeira WizardTab
-		/*
-		 * if (document.getElementById("txtSolicitante").value == ""){
-		 * alert("Nome do solicitante é obrigatório"); return false;
-		 * 
-		 * }else if(document.getElementById("substituicao").checked == true &&
-		 * document.getElementById("nomeSubstituido").value == ""){ alert("Nome
-		 * do substituido é obrigatório"); return false;
-		 * 
-		 * }else if(document.getElementById("cmbCargo").value == 0){
-		 * alert("Cargo é obrigatório"); return false;
-		 * 
-		 * }else if(document.getElementById("cmbSenioridade").value == 0){
-		 * alert("Senioridade é obrigatório"); return false;
-		 * 
-		 * }else if(document.getElementById("dataInicio").value ==
-		 * "01/01/2017"){ alert("Data de inicio é obrigatório"); return false;
-		 * 
-		 * }//Validação segunda WizardTab projetos Internos
-		 * 
-		 * else{
-		 */// WizardTab de próxima página
 		if (currentStep == 1) {
 			currentStep++;
 			$('#wizardDemo li:eq(1) a').tab('show');
@@ -118,39 +92,20 @@ $(function() {
 			$('#prevStep2').removeClass('disabled');
 			$('#nextStep2').text('Próximo');
 			return false;
+			
 		} else if (currentStep == 2) {
-			/*
-			 * if(document.getElementById("cliente").checked == true){
-			 * if(document.getElementById("cmbProjetoCliente").value == 0 ){
-			 * alert("Projeto é obrigatório"); return false; }else
-			 * if(document.getElementById("cmbGestorCliente").value == 0){
-			 * alert("Gestor é obrigatório"); return false; }else{
-			 */
-			/*
-			 * $('#wizardDemo li:eq(2) a').tab('show');
-			 * $('#nextStep2').addClass('disabled');
-			 * $('#btnCadastrar2').removeClass('hide'); currentStep++; //} }
-			 */
-			// else if(document.getElementById("interno").checked == true){
-			/*
-			 * if(document.getElementById("cmbProjetoInterno").value == 0 ){
-			 * alert("Projeto é obrigatório"); return false; }else
-			 * if(document.getElementById("cmbGestorInterno").value == 0){
-			 * alert("Gestor é obrigatório"); return false; }else{
-			 */
+			
 			$('#wizardDemo li:eq(2) a').tab('show');
 			$('#nextStep2').addClass('disabled');
 			$('#btnCadastrar2').removeClass('hide');
 			currentStep++;
-			// }
 		}
-		// }
-		// }
 	});
 
 	$("#btnCadastrar2").click(function() {
-		$('#formCadastro2').submit();
-		
+		//var data = new Date().toLocaleDateString();
+		$("#dataInicio").val(new Date().toLocaleDateString()); 
+		$("#formCadastro2").submit();
 	});
 
 });

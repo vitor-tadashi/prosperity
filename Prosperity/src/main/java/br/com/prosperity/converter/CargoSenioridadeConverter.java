@@ -1,6 +1,5 @@
 package br.com.prosperity.converter;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.prosperity.bean.CargoSenioridadeBean;
@@ -8,9 +7,6 @@ import br.com.prosperity.entity.CargoSenioridadeEntity;
 
 @Component
 public class CargoSenioridadeConverter implements Converter<CargoSenioridadeEntity, CargoSenioridadeBean> {
-
-	@Autowired
-	private CargoConverter cargoConverter;
 
 	@Override
 	public CargoSenioridadeEntity convertBeanToEntity(CargoSenioridadeBean bean) {

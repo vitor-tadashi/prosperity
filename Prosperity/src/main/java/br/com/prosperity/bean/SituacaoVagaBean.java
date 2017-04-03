@@ -6,7 +6,7 @@ import br.com.prosperity.enumarator.StatusVagaEnum;
 
 @Component
 public class SituacaoVagaBean {
-	
+
 	private Integer idVaga;
 	private StatusVagaEnum status;
 

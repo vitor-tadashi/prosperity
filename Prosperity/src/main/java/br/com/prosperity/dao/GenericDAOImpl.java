@@ -12,8 +12,6 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
-import org.springframework.stereotype.Repository;
-
 
 public class GenericDAOImpl<T, ID extends Serializable> implements GenericDAO<T, ID> {
 
@@ -87,16 +85,15 @@ public class GenericDAOImpl<T, ID extends Serializable> implements GenericDAO<T,
 		try {
 			javax.persistence.Query query = entityManager.createNamedQuery(name);
 
-			for (int i = 0; i < params.length; i++) 
+			for (int i = 0; i < params.length; i++)
 				query.setParameter(i + 1, params[i]);
-			
+
 			result = (List<T>) query.getResultList();
-			
+
 		} catch (Exception e) {
 
 		}
-		
-		
+
 		return result;
 	}
 

@@ -74,7 +74,7 @@
 			</props>
 		</property>
 	</bean>
-
+	
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
@@ -83,7 +83,6 @@
 		<property name="username" value="axa_developers" />
 		<property name="password" value="axa@123" />
 	</bean>
-
 
 	<mvc:interceptors>
 		<bean class="br.com.prosperity.interceptor.AutorizadorInterceptor" />

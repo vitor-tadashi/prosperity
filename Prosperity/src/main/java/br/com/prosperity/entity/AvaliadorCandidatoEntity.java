@@ -29,7 +29,7 @@ public class AvaliadorCandidatoEntity {
 	private CandidatoEntity idCandidato;
 
 	@Column(name = "idStatus")
-	private Integer idStatus;
+	private Integer idStatus = null;
 
 	public Integer getId() {
 		return id;

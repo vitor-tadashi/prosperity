@@ -7,14 +7,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbAvaliador")
-@NamedQuery(name = "obterAvaliadores", query = "SELECT u FROM AvaliadorEntity u ")
+@NamedQueries({ 
+@NamedQuery(name = "obterAvaliadores", query = "SELECT u FROM AvaliadorEntity u "),
+@NamedQuery(name = "obterAvaliadoresDaVaga", query = "SELECT u FROM AvaliadorEntity u WHERE u.vaga = ?1")
+})
 public class AvaliadorEntity {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idAvaliador", unique = true, nullable = false)
