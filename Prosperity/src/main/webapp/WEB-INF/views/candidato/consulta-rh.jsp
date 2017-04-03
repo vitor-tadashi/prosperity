@@ -511,11 +511,9 @@
 											<td>${candidato.nome}</td>
 											<td></td> 	
 											<td>${candidato.valorPretensao}</td>
-											<td><fmt:formatDate value="${candidato.dataAbertura}"
-													pattern="dd/MM/yyyy" /></td>
-											<!-- <td><fmt:formatDate value="${candidato.dataFechamento}"
-													pattern="dd/MM/yyyy" /></td> -->
-											<td></td>
+											<td><fmt:formatDate value="${candidato.dataAbertura}"pattern="dd/MM/yyyy" /></td>
+											<td><span class="label status span-${candidato.ultimoStatus.status.nome}">${candidato.ultimoStatus.status.nome}</span></td>
+									<td>
 											<td><span class="line"></span>
 												<div class="btn-group">
 												
@@ -526,12 +524,18 @@
 												<i class="fa fa-cogs fa-lg">&nbsp;</i> <span class="caret"></span>
 											</button>
 													<ul class="dropdown-menu slidedown btnAlinhado">
-														<li> <a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Histórico do Candidato</a></li> 
-														 <li class="divider"></li> <!-- <a href="#aprovado-modal" data-toggle="modal"
+													
+														<li> <c:url value="historico/${candidato.id}" var="myURL">
+													</c:url> <a href="${myURL}"><i class="fa fa-pencil fa-lg">&nbsp;</i>Histórico do Candidato</a></li> 
+														 <li class="divider"></li> 
+														 
+														 <!-- <a href="#aprovado-modal" data-toggle="modal"
 															data-toggle="modal" data-target=".bs-example-modal-lg"><i
 																class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a>  --> </li>
-														
-														<li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
+													
+												<li><c:url value="editar/${candidato.id}" var="myURL">
+													</c:url> <a href="${myURL}"><i  class="fa fa-pencil"></i> Editar</a></li>
+												<li role="separator" class="divider"></li>
 
 														<!--<li class="divider"></li>
 														 <li><a href="#delete-modal" data-toggle="modal"><i

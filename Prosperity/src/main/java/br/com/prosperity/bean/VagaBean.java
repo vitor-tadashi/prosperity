@@ -57,7 +57,8 @@ public class VagaBean {
 	private String nmAreaResponsavel;
 	private String emailResponsavel;
 	private String telResponsavel;
-
+	
+	
 	private StatusVagaBean ultimoStatus;
 
 	public StatusVagaBean getUltimoStatus() {
@@ -71,6 +72,12 @@ public class VagaBean {
 
 		return ultimoStatus;
 	}
+	
+	
+	
+	
+
+
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataAberturaDe;
