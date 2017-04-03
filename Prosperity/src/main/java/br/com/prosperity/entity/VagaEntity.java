@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,27 +18,28 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Entity
-@Table(name = "tbVaga")
+import org.springframework.format.annotation.DateTimeFormat;
 
-@NamedQueries({ 
+@NamedQueries({
 
-	@NamedQuery(name = "obterTodos", query = "SELECT u FROM VagaEntity u WHERE u.nomeVaga = ?1"),
-	@NamedQuery(name="listarVagaAprovar", query="SELECT v FROM VagaEntity v WHERE NOT EXISTS (SELECT s FROM StatusVagaEntity s WHERE v.id = s.vaga)"),
+		@NamedQuery(name = "obterTodos", query = "SELECT u FROM VagaEntity u WHERE u.nomeVaga = ?1"),
+		@NamedQuery(name = "listarVagaAprovar", query = "SELECT v FROM VagaEntity v WHERE NOT EXISTS (SELECT s FROM StatusVagaEntity s WHERE v.id = s.vaga)"),
 
-	//@NamedQuery(name="listarVagaFiltrado", query="SELECT u FROM VagaEntity u WHERE u.nomeVaga like ?1 AND u.dataAbertura BETWEEN ?1 AND ?1"),
-	@NamedQuery(name="obterPorId", query="SELECT u FROM VagaEntity u WHERE u.id = ?1"),
+		// @NamedQuery(name="listarVagaFiltrado", query="SELECT u FROM VagaEntity u WHERE u.nomeVaga like ?1 AND u.dataAbertura BETWEEN ?1 AND ?1"),
+		@NamedQuery(name = "obterPorId", query = "SELECT u FROM VagaEntity u WHERE u.id = ?1"),
 
-//	@NamedQuery(name="listarVagaFiltrado", query="SELECT u FROM VagaEntity u LEFT JOIN u.statusVagaEntity p LEFT JOIN p.status e WHERE u.dataAbertura BETWEEN ?1 AND ?2 AND u.nomeVaga like ?3 AND p.status = ?4" )
- 	@NamedQuery(name="listarVagaFiltrado", query="SELECT u FROM VagaEntity u LEFT OUTER JOIN u.statusVagaEntity p left join p.status s WHERE u.nomeVaga like ?1 and s.id = ?2 and u.dataAbertura between ?3 and ?4" )
-
-
+		// @NamedQuery(name="listarVagaFiltrado", query="SELECT u FROM
+		// VagaEntity u LEFT JOIN u.statusVagaEntity p LEFT JOIN p.status e
+		// WHERE u.dataAbertura BETWEEN ?1 AND ?2 AND u.nomeVaga like ?3 AND
+		// p.status = ?4" )
+		@NamedQuery(name = "listarVagaFiltrado", query = "SELECT u FROM VagaEntity u LEFT OUTER JOIN u.statusVagaEntity p left join p.status s WHERE u.nomeVaga like ?1 and s.id = ?2 and u.dataAbertura between ?3 and ?4")
+		//@NamedQuery(name="listarVagasAtivas", query="SELECT u FROM VagaEntity u WHERE ")
 }) 	
 
-
-
-
+@Entity
+@Table(name = "tbVaga")
 public class VagaEntity {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idVaga", unique = true, nullable = false)
@@ -55,7 +55,6 @@ public class VagaEntity {
 	private Double valorPretensao;
 
 	@Column(name = "dtInicio")
-	@Temporal(value = TemporalType.DATE)
 	private Date dataInicio;
 
 	@Column(name = "flLocalTrabalho")
@@ -65,11 +64,9 @@ public class VagaEntity {
 	private Character tipoVaga;
 
 	@Column(name = "hrEntrada")
-	//@Temporal(value = TemporalType.TIME)
 	private String horaEntrada;
 
 	@Column(name = "hrSaida")
-	//@Temporal(value = TemporalType.TIME)
 	private String horaSaida;
 
 	@Column(name = "flAumentoQuadra")
@@ -123,8 +120,22 @@ public class VagaEntity {
 	private List<StatusVagaEntity> statusVagaEntity;
 	
 
+
 	// @ManyToOne(cascade = CascadeType.ALL)
 	// private AvaliadorEntity avaliadorEntity;
+
+	@Column(name="nmResponsavel")
+	private String nmResponsavel;
+	
+	@Column(name="nmAreaResponsavel")
+	private String nmAreaResponsavel;
+
+	@Column(name="emailResponsavel")
+	private String emailResponsavel;
+	
+	@Column(name="telResponsavel")
+	private String telResponsavel;
+
 
 	public Integer getId() {
 		return id;
@@ -325,6 +336,38 @@ public class VagaEntity {
 
 	public void setStatusVagaEntity(List<StatusVagaEntity> statusVagaEntity) {
 		this.statusVagaEntity = statusVagaEntity;
+	}
+	
+	public String getNmResponsavel() {
+		return nmResponsavel;
+	}
+
+	public void setNmResponsavel(String nmResponsavel) {
+		this.nmResponsavel = nmResponsavel;
+	}
+
+	public String getNmAreaResponsavel() {
+		return nmAreaResponsavel;
+	}
+
+	public void setNmAreaResponsavel(String nmAreaResponsavel) {
+		this.nmAreaResponsavel = nmAreaResponsavel;
+	}
+
+	public String getEmailResponsavel() {
+		return emailResponsavel;
+	}
+
+	public void setEmailResponsavel(String emailResponsavel) {
+		this.emailResponsavel = emailResponsavel;
+	}
+
+	public String getTelResponsavel() {
+		return telResponsavel;
+	}
+
+	public void setTelResponsavel(String telResponsavel) {
+		this.telResponsavel = telResponsavel;
 	}
 
 	// public AvaliadorEntity getAvaliadorEntity() {

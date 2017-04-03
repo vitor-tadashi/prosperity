@@ -331,3 +331,8 @@ select v.idVaga,v.nmVaga,sv.idStatus,s.nmStatus from tbVaga v inner join tbStatu
  select * from tbVaga
 
  update tbStatus set tpCss = '#f2f2f2'
+
+
+--- Criando colunas para cadastro de informações do Cliente em caso de Alocação
+
+ALTER TABLE tbVaga ADD nmResponsavel VARCHAR(30) NULL, nmAreaResponsavel VARCHAR(30) NULL, emailResponsavel VARCHAR(50) NULL, telResponsavel VARCHAR(20) NULL;

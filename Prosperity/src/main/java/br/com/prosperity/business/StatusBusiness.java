@@ -6,11 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.StatusBean;
 import br.com.prosperity.converter.StatusConverter;
 import br.com.prosperity.dao.StatusDAO;
-import br.com.prosperity.entity.CargoEntity;
 import br.com.prosperity.entity.StatusEntity;
 
 @Component

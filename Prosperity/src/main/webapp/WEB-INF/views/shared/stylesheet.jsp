@@ -1,5 +1,5 @@
         <!-- Favicon -->
-        <link rel="shortcut icon" type="image/ico" href="/resources/img/favicon.ico"/>
+        <link rel="shortcut icon" type="image/ico" href="/resources/img/prosperity.ico"/>
         
         <!-- Bootstrap core CSS -->
         <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">

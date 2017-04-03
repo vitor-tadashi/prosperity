@@ -26,7 +26,9 @@
 		<div id="breadcrumb">
 			<ul class="breadcrumb">
 				<li><i class="fa fa-home"></i><a href=""> Início</a></li>
-				<li class="active">Cadastrar candidato</li>
+				<li><a href=""> Candidato</a></li>
+				<li class="active">Cadastrar</li>
+				
 			</ul>
 		</div>
 		<!--breadcrumb-->
@@ -175,7 +177,7 @@
 											<label for="tipoDeCurso">Tipo de curso</label> <select
 												class="form-control" id="tipoDeCurso"
 												name="formacao.tipoCurso.id">
-												<!-- FAZER FOREACH  -->
+												<option value="0">Selecione</option>
 												<c:forEach var="tipoCurso" items="${tiposCurso}">
 													<option value="${tipoCurso.id}"
 														${tipoCurso.id == candidato.formacao.tipoCurso.id ? 'selected="selected"' : ''}>${tipoCurso.nome}</option>
@@ -187,6 +189,7 @@
 											<label for="situacaoAtual">Situação atual</label> <select
 												class="form-control" id="situacaoAtual"
 												name="formacao.SituacaoAtual.id">
+												<option value="0">Selecione</option>
 												<c:forEach var="situacaoAtual" items="${listaSituacaoAtual}">
 													<option value="${situacaoAtual.id}"
 														${situacaoAtual.id == candidato.formacao.situacaoAtual.id ? 'selected="selected"' : ''}>${situacaoAtual.descricao}</option>
@@ -228,20 +231,22 @@
 										</div>
 										<div class="form-group col-md-4">
 											<label for="vagaASerAplicado">Vaga a ser aplicado</label> <select
-												class="form-control" id="vaga" name="vaga.nomeVaga.id">
+												class="form-control" id="vaga" name="vagaCandidato.vaga.id">
+												<option value="0">Selecione</option>
 												<c:forEach var="vaga" items="${listaVaga}">
 													<option value="${vaga.id}"
-														${vaga.id == candidato.vagaCandidatoBean.vaga.nomeVaga.id ? 'selected="selected"' : ''}>${vaga.nomeVaga}</option>
+														${vaga.id == candidato.vagaCandidato.vaga.id ? 'selected="selected"' : ''}>${vaga.nomeVaga}</option>
 												</c:forEach>
 											</select>
 										</div>
 										<div class="form-group col-md-4">
 											<label for="exampleInputEmail1">Como ficou sabendo
 												desta vaga?</label> <select class="form-control"
-												name="vaga.vagaCandidato.canalInformacao.id">
+												name="vagaCandidato.canalInformacao.id">
+												<option value="canalInformacao">Selecione</option>
 												<c:forEach var="canalInformacao" items="${listaCanal}">
 													<option value="${canalInformacao.id}"
-														${canalInformacao.id == candidato.vagaCandidatoBean.canalInformacao.id ? 'selected="selected"' : ''}>${canalInformacao.nome}</option>
+													${canalInformacao.id == candidato.vagaCandidato.canalInformacao.id ? 'selected="selected"' : ''}>${canalInformacao.nome}</option>
 												</c:forEach>
 											</select>
 										</div>
