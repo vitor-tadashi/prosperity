@@ -455,9 +455,9 @@
 	<div id="main-container">
 		<div id="breadcrumb">
 			<ul class="breadcrumb">
-				<li><i class="fa fa-home"></i><a href="dashboard.html">Início</a></li>
-				<li>Consultar</li>
+				<li><i class="fa fa-home"></i><a href="dashboard.html"> Início</a></li>
 				<li class="active">Vaga</li>
+				<li><a href="consultar">Consultar</a></li>
 			</ul>
 		</div>
 		<!--breadcrumb-->
@@ -488,7 +488,7 @@
 								<div class="col-md-2">
 									<label for="cargo">Status</label> 
 									<select class="form-control" style="width: 130px;" id="status" name="status">
-											<option>Selecione</option>
+											<option value="0">Selecione</option>
 										<c:forEach var="status" items="${listaStatusDrop}">
 												<option id="${status.id}"value="${status.id}">${status.nome}</option>
 										</c:forEach>

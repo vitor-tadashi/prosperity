@@ -32,7 +32,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 		// VagaEntity u LEFT JOIN u.statusVagaEntity p LEFT JOIN p.status e
 		// WHERE u.dataAbertura BETWEEN ?1 AND ?2 AND u.nomeVaga like ?3 AND
 		// p.status = ?4" )
-		@NamedQuery(name = "listarVagaFiltrado", query = "SELECT u FROM VagaEntity u LEFT OUTER JOIN u.statusVagaEntity p left join p.status s WHERE u.nomeVaga like ?1 and s.id = ?2 and u.dataAbertura between ?3 and ?4")
+		@NamedQuery(name = "listarVagaFiltrado", query = "SELECT u FROM VagaEntity u LEFT OUTER JOIN u.statusVagaEntity p left join p.status s "
+				+ "WHERE u.nomeVaga like ?1 and s.id = ?2 and u.dataAbertura between ?3 and ?4")
 		//@NamedQuery(name="listarVagasAtivas", query="SELECT u FROM VagaEntity u WHERE ")
 }) 	
 
@@ -85,7 +86,7 @@ public class VagaEntity {
 	private String descricaoPerfilComportamental; //
 
 	@Column(name = "dsPerfilTecnico")
-	private String descricaoPerfilTecnico; //
+	private String descricaoPerfilTecnico; //	
 
 	@Column(name = "dtAbertura")
 	@Temporal(value = TemporalType.DATE)
@@ -118,8 +119,6 @@ public class VagaEntity {
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idVaga")
 	private List<StatusVagaEntity> statusVagaEntity;
-	
-
 
 	// @ManyToOne(cascade = CascadeType.ALL)
 	// private AvaliadorEntity avaliadorEntity;
@@ -135,7 +134,6 @@ public class VagaEntity {
 	
 	@Column(name="telResponsavel")
 	private String telResponsavel;
-
 
 	public Integer getId() {
 		return id;

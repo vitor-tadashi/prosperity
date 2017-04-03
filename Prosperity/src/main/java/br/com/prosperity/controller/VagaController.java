@@ -121,7 +121,7 @@ public class VagaController {
 					
 		}
 		
-		List<VagaBean> listaVagaFiltro = vagaBusiness.filtrarVagas(vaga);
+		List<VagaBean> listaVagaFiltro = vagaBusiness.filtroVaga(vaga);
 		model.addAttribute("vagas", listaVagaFiltro);
 
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();

@@ -62,7 +62,7 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 		entity.setNmAreaResponsavel(bean.getNmAreaResponsavel());
 		entity.setEmailResponsavel(bean.getEmailResponsavel());
 		entity.setTelResponsavel(bean.getTelResponsavel());
-
+		
 
 		return entity;
 
@@ -104,6 +104,7 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 		bean.setNmAreaResponsavel(entity.getNmAreaResponsavel());
 		bean.setEmailResponsavel(entity.getEmailResponsavel());
 		bean.setTelResponsavel(entity.getTelResponsavel());
+		
 
 		return bean;
 	}

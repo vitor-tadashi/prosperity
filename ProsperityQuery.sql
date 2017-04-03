@@ -332,7 +332,22 @@ select v.idVaga,v.nmVaga,sv.idStatus,s.nmStatus from tbVaga v inner join tbStatu
 
  update tbStatus set tpCss = '#f2f2f2'
 
+select * from tbVaga left join tbStatusVaga on 
+tbvaga.idVaga = tbStatusVaga.idVaga 
+AND tbvaga.dtAbertura between '2013-01-01' and '2018-01-01'
+left join tbstatus on tbstatus.idStatus = tbStatusVaga.idStatus 
+where tbstatus.idTpStatus = 2 AND tbvaga.nmVaga like '%Anal%' AND tbStatusVaga.idStatus = 18
+AND tbStatusVaga.idStatusVaga = (SELECT MAX(tbStatusVaga.idStatusVaga) FROM tbVaga JOIN tbStatusVaga on 
+tbvaga.idVaga = tbStatusVaga.idVaga)
 
---- Criando colunas para cadastro de informações do Cliente em caso de Alocação
+select * from tbVaga left join tbStatusVaga on 
+tbvaga.idVaga = tbStatusVaga.idVaga  
+select * from tbVaga left join tbStatusVaga on 
+tbvaga.idVaga = tbStatusVaga.idVaga 
+where tbvaga.dtAbertura between '2013-01-01' and '2018-01-01' AND tbvaga.nmVaga like '%Anal%' AND tbStatusVaga.idStatus = 18
+AND tbStatusVaga.idStatusVaga = (SELECT MAX(tbStatusVaga.idStatusVaga) FROM tbVaga JOIN tbStatusVaga on 
+tbvaga.idVaga = tbStatusVaga.idVaga)
 
-ALTER TABLE tbVaga ADD nmResponsavel VARCHAR(30) NULL, nmAreaResponsavel VARCHAR(30) NULL, emailResponsavel VARCHAR(50) NULL, telResponsavel VARCHAR(20) NULL;
+select * from tbSVaga
+
+AND sc.idStatusCandidato = (SELECT MAX(sc.idStatusCandidato) FROM CandidatoEntity c JOIN c.statusCandidatos sc)

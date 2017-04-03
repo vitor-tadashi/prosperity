@@ -57,7 +57,6 @@ public class VagaBean {
 	private String nmAreaResponsavel;
 	private String emailResponsavel;
 	private String telResponsavel;
-
 	
 	
 	private StatusVagaBean ultimoStatus;
@@ -77,6 +76,7 @@ public class VagaBean {
 	
 	
 	
+
 
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
