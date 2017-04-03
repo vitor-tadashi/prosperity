@@ -14,10 +14,10 @@
 <c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
 
 <style type="text/css">
- footer {
+footer {
 	page-break-before: always;
-	}
-   
+}
+
 @media screen {
 	#printSection {
 		display: none;
@@ -39,7 +39,9 @@
 	label {
 		font-weight: normal;
 	}
-	#quebra { page-break-inside:avoid; }
+	#quebra {
+		page-break-inside: avoid;
+	}
 }
 </style>
 
@@ -146,7 +148,7 @@
 														<div class="form-group col-md-2 col-xs-1">
 															<div class="input-group bootstrap-timepicker">
 																<label id="horaSaida" name="horaSaida" type="time"
-																	style="margin-top: 7px" value=""></label>
+																	style="margin-top: 7px"></label>
 															</div>
 														</div>
 													</div>
@@ -166,8 +168,8 @@
 													<div class="form-group col-md-6 col-xs-6"
 														style="margin-bottom: 0px">
 														<label for="vagaQuadro">Aumento de quadro:</label>
-														<div class="radiogroup" name="aumentoQuadro" id="aumento">
-															<label id="lblQuadro" class="label-radio inline" value="">
+														<div class="radiogroup" id="aumento">
+															<label id="lblQuadro" class="label-radio inline">
 															</label>
 
 														</div>
@@ -197,78 +199,82 @@
 													<div id="" class="">
 														<label id="substituidoId">Nome do substituido:</label>
 													</div>
-													<label id="vagaSubstituto" name="nomeSubstituido"
-														style="margin-top: 7px" value=""></label>
+													<label id="vagaSubstituto" style="margin-top: 7px"></label>
 												</div>
 											</div>
 										</form>
 									</div>
 								</section>
 								<!-- /Section -->
-								
-								<div id="quebra" >
-								<section class="panel panel-default" style="margin-bottom: 5px;">
+
+								<div id="quebra">
+									<section class="panel panel-default"
+										style="margin-bottom: 5px;">
 										<div class="panel-heading">Informações de projeto</div>
 										<div class="panel-body">
-										<!-- /form-group -->
-										<div class="form-group col-md-13 " style="margin-bottom: 5px;">
-											<label class="control-label">Projeto</label> <input readonly
-												class="form-control default-cursor" id="vagaProjeto"
-												value="Mobile">
+											<!-- /form-group -->
+											<div class="form-group col-md-13 "
+												style="margin-bottom: 5px;">
+												<label class="control-label">Projeto</label> <input readonly
+													class="form-control default-cursor" id="vagaProjeto"
+													value="Mobile">
+											</div>
+											<div class="form-group col-md-6 col-xs-6"
+												style="margin-bottom: 5px;">
+												<label class="control-label">Cliente</label> <input readonly
+													class="form-control" id="vagaCiente" value="Carrefour">
+											</div>
+											<div class="form-group col-md-6 col-xs-6"
+												style="margin-bottom: 5px;">
+												<label class="control-label">Gestor imediato</label> <input
+													readonly class="form-control" id="vagaGestor"
+													value="Vitor Tadashi">
+											</div>
 										</div>
-										<div class="form-group col-md-6 col-xs-6"
-											style="margin-bottom: 5px;">
-											<label class="control-label">Cliente</label> <input readonly
-												class="form-control" id="vagaCiente" value="Carrefour">
-										</div>
-										<div class="form-group col-md-6 col-xs-6"
-											style="margin-bottom: 5px;">
-											<label class="control-label">Gestor imediato</label> <input
-												readonly class="form-control" id="vagaGestor"
-												value="Vitor Tadashi">
-										</div>
-									</div>
-								</section>
-								<!-- /panel -->
-								<section class="panel panel-default" style="margin-bottom: 0px;">
-									<div style="page-break-before: always;"></div>
-									<div class="panel-heading">Formação acadêmica</div>
-									<div class="panel-body relative"
-										style="padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
-										<div class="form-group">
-											<textarea class="form-control" rows="3" name="vagaFormacao"
-												id=vagaFormacao disabled>
+									</section>
+									<!-- /panel -->
+									<section class="panel panel-default"
+										style="margin-bottom: 0px;">
+										<div style="page-break-before: always;"></div>
+										<div class="panel-heading">Formação acadêmica</div>
+										<div class="panel-body relative"
+											style="padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
+											<div class="form-group">
+												<textarea class="form-control" rows="3" name="vagaFormacao"
+													id=vagaFormacao disabled>
 										</textarea>
+											</div>
+											<!-- /form-group -->
 										</div>
-										<!-- /form-group -->
-									</div>
-								</section>
-								<!-- /panel -->
-								<section class="panel panel-default" style="margin-bottom: 0px;">
-									<div class="panel-heading">Perfil comportamental</div>
-									<div class="panel-body relative"
-										style="padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
-										<div class="form-group">
-											<textarea class="form-control" rows="3" name="vagaPerfil"
-												id=vagaPerfil disabled></textarea>
+									</section>
+									<!-- /panel -->
+									<section class="panel panel-default"
+										style="margin-bottom: 0px;">
+										<div class="panel-heading">Perfil comportamental</div>
+										<div class="panel-body relative"
+											style="padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
+											<div class="form-group">
+												<textarea class="form-control" rows="3" name="vagaPerfil"
+													id=vagaPerfil disabled></textarea>
+											</div>
+											<!-- /form-group -->
 										</div>
-										<!-- /form-group -->
-									</div>
-								</section>
-								<!-- /panel -->
+									</section>
+									<!-- /panel -->
 
-								<section class="panel panel-default " style="margin-bottom: 0px;">
-									<div class="panel-heading">Perfil técnico</div>
-									<div class="panel-body relative"
-										style="padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
-										<div class="form-group">
-											<textarea class="form-control" rows="3"
-												name="vagaPerfilTecnico" id=vagaPerfilTecnico disabled></textarea>
+									<section class="panel panel-default "
+										style="margin-bottom: 0px;">
+										<div class="panel-heading">Perfil técnico</div>
+										<div class="panel-body relative"
+											style="padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
+											<div class="form-group">
+												<textarea class="form-control" rows="3"
+													name="vagaPerfilTecnico" id=vagaPerfilTecnico disabled></textarea>
+											</div>
+											<!-- /form-group -->
 										</div>
-										<!-- /form-group -->
-									</div>
-								</section>
-							</div>
+									</section>
+								</div>
 							</div>
 
 						</div>
@@ -395,12 +401,12 @@
 												<i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
 											</button>
 											<ul class="dropdown-menu slidedown btnAlinhado">
-												<li><a href="#visualizar-modal" onclick="info(${vaga.id})"> <i 
-														class="fa fa-eye fa-lg">&nbsp</i>Visualizar
+												<li><a href="#visualizar-modal"
+													onclick="info(${vaga.id})"> <i class="fa fa-eye fa-lg">&nbsp</i>Visualizar
 												</a></li>
 												<li role="separator" class="divider"></li>
 												<li><c:url value="editar/${vaga.id}" var="myURL">
-													</c:url> <a href="${myURL}"><i  class="fa fa-pencil"></i> Editar</a></li>
+													</c:url> <a href="${myURL}"><i class="fa fa-pencil"></i> Editar</a></li>
 												<li role="separator" class="divider"></li>
 												<li><a href="#aprova-modal"
 													onclick="alterarStatus(${vaga.id}, 'ACEITO')"

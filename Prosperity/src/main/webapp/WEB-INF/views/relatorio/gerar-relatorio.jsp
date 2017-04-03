@@ -49,48 +49,52 @@
 								<form>
 									<div class="row">
 										<div class="form-group col-md-4">
-											<label for="cmbTipoRelatorio">Tipo</label>
-											<select id="cmbTipoRelatorio" class="form-control input-sm">
+											<label for="cmbTipoRelatorio">Tipo</label> <select
+												id="cmbTipoRelatorio" class="form-control input-sm">
 												<option value="">Selecionar</option>
 												<option value="1">Candidatos</option>
 												<option value="2">Vagas</option>
 											</select>
-										</div><!-- /form-group -->
+										</div>
+										<!-- /form-group -->
 										<div class="form-group col-md-4">
 											<label for="dtInicio">Data</label>
 											<div class="row">
 												<div class="col-xs-5">
-													<input type="date" class="form-control input-sm" id="dtInicio" />
-												</div>							
+													<input type="date" class="form-control input-sm"
+														id="dtInicio" />
+												</div>
 												<p class="small col-xs-1">até</p>
 												<div class="col-xs-6">
-													<input type="date" class="form-control input-sm" id="dtFinal" />
+													<input type="date" class="form-control input-sm"
+														id="dtFinal" />
 												</div>
 											</div>
-										</div><!-- /form-group -->
+										</div>
+										<!-- /form-group -->
 										<div class="form-group col-md-12" id="divVagas">
-											<label>Vagas desejadas</label>
-											<select multiple class="form-control input-sm">
+											<label>Vagas desejadas</label> <select multiple
+												class="form-control input-sm">
 												<c:forEach var="vaga" items="${vagas}">
 													<option value="${vaga.id}">${vaga.nomeVaga}</option>
 												</c:forEach>
 											</select>
-										</div><!-- /form-group -->
+										</div>
+										<!-- /form-group -->
 										<div class="form-group col-md-12" id="divSituacao">
-											<label>Situação</label>
-											<%-- <select multiple class="form-control input-sm">
+											<label>Situação</label> <select class="form-control input-sm">
+												<option>Selecione</option>
 												<c:forEach var="situacao" items="${situacoes}">
 													<option value="${situacao.value}">${situacao}</option>
 												</c:forEach>
-											</select> --%>
-											<c:forEach var="situacao" items="${situacoes}">
-												<label><input type="checkbox" name="teste"> ${situacao}</label>
-											</c:forEach>
-										</div><!-- /form-group -->
+											</select>
+										</div>
+										<!-- /form-group -->
 									</div>
 									<div class="row">
 										<div class="col-xs-12">
-											<button type="submit" class="btn btn-success btn-sm pull-right">Gerar</button>
+											<button type="submit"
+												class="btn btn-success btn-sm pull-right">Gerar</button>
 										</div>
 									</div>
 								</form>
@@ -113,7 +117,7 @@
 	<script>
 		$("#divVagas").css('display', 'none');
 		$("#divSituacao").css('display', 'none');
-		
+
 		$("#cmbTipoRelatorio").on('change', function() {
 			var element = $("#cmbTipoRelatorio");
 			if (element.val() == "1") {
@@ -127,7 +131,6 @@
 				$("#divSituacao").css('display', 'none');
 			}
 		});
-		
 	</script>
 </body>
 </html>

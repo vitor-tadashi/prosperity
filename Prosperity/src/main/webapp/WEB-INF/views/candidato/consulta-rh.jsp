@@ -467,20 +467,20 @@
 									</div>
 									<div class="col-md-1">
 										<label for="exampleInputEmail1">Salário</label> <input
-											type="text" class="form-control" placeholder="De"
+											type="text" name="PretensaoDe" class="form-control" placeholder="De"
 											style="width: 80px">
 									</div>
 									<div class="col-md-1">
 										<label for="exampleInputEmail1">&nbsp;</label> <input
-											type="text" class="form-control" placeholder="Até"
+											type="text" name="PretensaoPara" class="form-control" placeholder="Até"
 											style="width: 80px">
 									</div>
 									<div class="col-md-3">
 										<label for="exampleInputEmail1">Data:</label>
 										<div class="input-group">
-											<input type="date" class="form-control"> <span
+											<input type="date" name="dataAberturaDe" class="form-control"> <span
 												class="input-group-addon">até</span> <input type="date"
-												class="form-control">
+												name="dataAberturaPara" class="form-control">
 										</div>
 									</div>
 									<div class="col-md-2 col-md-offset-1">

@@ -1,9 +1,8 @@
 package br.com.prosperity.entity;
 
-import java.io.File;
 import java.util.Date;
 import java.util.List;
-import java.lang.Integer;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,8 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -24,17 +21,25 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+/**
+ * @author andre.posman
+ *
+ */
 @Entity
 @Table(name = "tbCandidato")
 
-//@NamedQuery(name="pesquisarNome", query="SELECT u FROM CandidatoEntity u LEFT OUTER JOIN u.vagaEntity p WHERE p.nomeVaga like ?1")
+// @NamedQuery(name="pesquisarNome", query="SELECT u FROM CandidatoEntity u LEFT
+// OUTER JOIN u.vagaEntity p WHERE p.nomeVaga like ?1")
 
 // @NamedQuery(name="fazerFiltro", query="SELECT u FROM CandidatoEntity u WHERE
 // u.nome = ?1")
 
-@NamedQueries({ @NamedQuery(name = "pesquisarNome", query = "SELECT u FROM CandidatoEntity u WHERE u.nome like ?1"),
-		@NamedQuery(name = "obterPorCPF", query = "SELECT u FROM CandidatoEntity u WHERE u.cpf = ?1") })
-
+@NamedQueries({
+		@NamedQuery(name = "pesquisarNome", query = "SELECT u FROM CandidatoEntity u WHERE u.nome like ?1 AND u.valorPretensaoSalarial BETWEEN ?2 AND ?3 AND u.dataAbertura BETWEEN ?4 AND ?5"),
+		@NamedQuery(name = "obterPorCPF", query = "SELECT u FROM CandidatoEntity u WHERE u.cpf = ?1"),
+		@NamedQuery(name = "verificarCanidatura", query = "SELECT c FROM CandidatoEntity c JOIN c.statusCandidatos sc WHERE sc.status in(6,7,14)"
+				+ "AND sc.idStatusCandidato = (SELECT MAX(sc.idStatusCandidato) FROM CandidatoEntity c JOIN c.statusCandidatos sc)")})
+		
 public class CandidatoEntity {
 
 	@Id
@@ -97,23 +102,23 @@ public class CandidatoEntity {
 
 	// @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@OneToOne(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER, orphanRemoval = true)
 	@JoinColumn(name = "idContato")
 	private ContatoEntity contato;
 
-	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(cascade = { CascadeType.ALL }, orphanRemoval = true)
 	@JoinColumn(name = "idEndereco")
 	private EnderecoEntity endereco;
 
-	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(cascade = { CascadeType.ALL }, orphanRemoval = true)
 	@JoinColumn(name = "idFormacao")
 	private FormacaoEntity formacao;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany()
 	@JoinColumn(name = "idCandidato")
 	private List<StatusCandidatoEntity> statusCandidatos;
 
@@ -133,22 +138,20 @@ public class CandidatoEntity {
 		this.competencias = competencias;
 	}
 
-	@OneToMany
+	@OneToMany(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "idCandidato")
 	private List<CandidatoCompetenciaEntity> competencias;
-	
-//TODO 
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinTable(name = "tbVagaCandidato", joinColumns = { @JoinColumn(name = "idCandidato") }, inverseJoinColumns = {
-			@JoinColumn(name = "idVaga") })
-	private List<VagaEntity> vagaEntity;
 
-	public List<VagaEntity> getVagaEntity() {
-		return vagaEntity;
+	@OneToMany()
+	@JoinColumn(name="idCandidato")
+	private Set<VagaCandidatoEntity> vagas;
+
+	public Set<VagaCandidatoEntity> getVagas() {
+		return vagas;
 	}
 
-	public void setVagaEntity(List<VagaEntity> vagaEntity) {
-		this.vagaEntity = vagaEntity;
+	public void setVagas(Set<VagaCandidatoEntity> vagas) {
+		this.vagas = vagas;
 	}
 
 	public Integer getId() {
@@ -231,13 +234,12 @@ public class CandidatoEntity {
 		this.dataAlteracao = dataAlteracao;
 	}
 
-
 	public String getCurriculo() {
 		return curriculo;
 	}
 
 	public void setCurriculo(String file) {
-		this.curriculo= file;
+		this.curriculo = file;
 	}
 
 	public Date getDataUltimoContato() {
@@ -296,23 +298,28 @@ public class CandidatoEntity {
 		this.usuario = usuario;
 	}
 
-	/*public List<StatusCandidatoEntity> getStatusCandidatos() {
-		return statusCandidatos;
-	}
+	/*
+	 * public List<StatusCandidatoEntity> getStatusCandidatos() { return
+	 * statusCandidatos; }
+	 * 
+	 * public void setStatusCandidatos(List<StatusCandidatoEntity>
+	 * statusCandidatos) { this.statusCandidatos = statusCandidatos; }
+	 * 
+	 * public List<CandidatoCompetenciaEntity> getCompetencias() { return
+	 * competencias; }
+	 * 
+	 * public void setCompetencias(List<CandidatoCompetenciaEntity>
+	 * competencias) { this.competencias = competencias; } <<<<<<< HEAD
+	 * 
+	 * public Date getDataultimoContato() { return dataultimoContato; }
+	 * 
+	 * public void setDataultimoContato(Date dataultimoContato) {
+	 * this.dataultimoContato = dataultimoContato; }
+	 * 
+	 * public Double getValorMin() { =======
+	 */
+	public Double getValorMin() {
 
-	public void setStatusCandidatos(List<StatusCandidatoEntity> statusCandidatos) {
-		this.statusCandidatos = statusCandidatos;
-	}
-
-	public List<CandidatoCompetenciaEntity> getCompetencias() {
-		return competencias;
-	}
-
-	public void setCompetencias(List<CandidatoCompetenciaEntity> competencias) {
-		this.competencias = competencias;
-	}
-*/
-	public  Double getValorMin() {
 		return valorMin;
 	}
 
@@ -320,20 +327,13 @@ public class CandidatoEntity {
 		this.valorMin = valorMin;
 	}
 
-	public  Double getValorMax() {
+	public Double getValorMax() {
+
 		return valorMax;
 	}
 
 	public void setValorMax(Double valorMax) {
 		this.valorMax = valorMax;
-	}
-	
-	public Date getDataultimoContato() {
-		return dataultimoContato;
-	}
-
-	public void setDataultimoContato(Date dataultimoContato) {
-		this.dataultimoContato = dataultimoContato;
 	}
 
 }

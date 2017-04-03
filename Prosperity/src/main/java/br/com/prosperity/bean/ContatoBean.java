@@ -1,11 +1,14 @@
 package br.com.prosperity.bean;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
 
 import br.com.prosperity.util.FormatUtil;
 
 @Component
+@XmlRootElement(name = "ContatoBean")
 public class ContatoBean extends FormatUtil {
 
 	private Integer id;

@@ -1,17 +1,14 @@
 package br.com.prosperity.business;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
-import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.StatusVagaBean;
 import br.com.prosperity.converter.StatusVagaConverter;
 import br.com.prosperity.dao.StatusVagaDAO;
-import br.com.prosperity.entity.CargoEntity;
 import br.com.prosperity.entity.StatusVagaEntity;
 
 @Component
