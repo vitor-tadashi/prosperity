@@ -42,6 +42,9 @@ public class StatusVagaEntity {
 
 	@Column(name = "idVaga")
 	private Integer vaga;
+	
+	@Column(name="flSituacao")
+	private boolean situacao;
 
 	/* fim dos mapeamentos */
 
@@ -84,4 +87,14 @@ public class StatusVagaEntity {
 	public void setUsuario(UsuarioEntity usuario) {
 		this.usuario = usuario;
 	}
+
+	public boolean getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(boolean situacao) {
+		this.situacao = situacao;
+	}
+	
+	
 }
