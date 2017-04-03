@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import br.com.prosperity.bean.CanalInformacaoBean;
 import br.com.prosperity.bean.CandidatoBean;
@@ -22,6 +24,7 @@ import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
+import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.TipoCursoBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.CanalInformacaoBusiness;
@@ -83,6 +86,7 @@ public class CandidatoController {
 
 		List<VagaBean> listaVaga = vagaBusiness.listar();
 		model.addAttribute("listaVaga", listaVaga);
+		
 		List<CanalInformacaoBean> listaCanal = canalInformacaoBusiness.obterTodos();
 		model.addAttribute("listaCanal", listaCanal);
 	}
@@ -244,13 +248,13 @@ public class CandidatoController {
 			switch (data.getField()) {
 
 			case "dataNascimento":
-				novosErros.add(" A data de nascimento deve ser preenchida ");
+				novosErros.add(" O campo de data de nascimento deve ser preenchida ");
 				break;
 			case "entrevista":
-				novosErros.add(" A data da entrevista deve ser preenchida ");
+				novosErros.add("O campo de data da entrevista deve ser preenchida ");
 				break;
 			case "formacao.dataConclusao":
-				novosErros.add(" A data da conclusão do curso deve ser preenchida ");
+				novosErros.add(" O campo de data da conclusão do curso deve ser preenchido ");
 				break;
 			default:
 				novosErros.add(data.getDefaultMessage());
@@ -261,5 +265,11 @@ public class CandidatoController {
 
 		return novosErros;
 	}
-
+	
+	@RequestMapping(value= {"alterar-status-candidato"}, method = RequestMethod.POST)
+	@ResponseStatus(value = HttpStatus.OK)
+	public @ResponseBody SituacaoCandidatoBean alterarStatusCandidato(Model model, @ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato) {
+		candidatoBusiness.alterarStatus(situacaoCandidato);
+		return situacaoCandidato;
+	}
 }

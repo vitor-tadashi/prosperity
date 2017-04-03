@@ -1,7 +1,9 @@
 package br.com.prosperity.entity;
 
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,7 +39,11 @@ public class StatusEntity {
 	@JoinColumn(name = "idTpStatus")
 	private TipoStatusEntity tipoStatus;
 
-	@OneToMany()
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "idStatus")
+	private List<StatusCandidatoEntity> statusCandidatos;
+
+	@OneToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinColumn(name = "idStatus")
 	private Set<StatusDisponivelEntity> statusDisponiveis;
