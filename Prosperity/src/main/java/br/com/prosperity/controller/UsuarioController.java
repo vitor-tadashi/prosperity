@@ -3,12 +3,14 @@ package br.com.prosperity.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.FuncionarioBean;
@@ -89,17 +91,20 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping(value = {"/carregar-usuario-api"}, method = RequestMethod.GET)
+	@ResponseStatus(value = HttpStatus.OK)
 	public @ResponseBody UsuarioBean carregaUsuarioAjax(Integer id) {
 		UsuarioBean usuario = usuarioBusiness.obterPorId(id);
 		return usuario;
 	}
 	
 	@RequestMapping(value = "/mudar-status-api", method = RequestMethod.POST)
+	@ResponseStatus(value = HttpStatus.OK)
 	public void mudarStatusAjax(Integer id) {
 		usuarioBusiness.mudarStatus(id);
 	}
 	
 	@RequestMapping(value = "/redefinir-senha-api", method = RequestMethod.POST)
+	@ResponseStatus(value = HttpStatus.OK)
 	public void redefinirSenhaAjax(Integer id) {
 		usuarioBusiness.redefinirSenha(id);
 	}
