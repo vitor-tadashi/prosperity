@@ -26,10 +26,8 @@ public class VagaBean {
 	@Min(value = 1, message = "O campo de vaga a ser aplicado deve ser preenchido")
 	private Integer id;
 	private String nomeVaga;
-
 	private String nomeSolicitante;
 	private Double valorPretensao;
-	@Future
 	//@Future(message = "Data para inicio inválido")
 	private Date dataInicio;
 	private Character localTrabalho;
@@ -51,6 +49,7 @@ public class VagaBean {
 	private Date dataAprovacao; //
 	private Date dataFechamento; //
 	private Integer numeroCandidatos; //
+	@Valid
 	private UsuarioBean usuarioBean;
 	private List<StatusVagaBean> status;
 	private String nmResponsavel;

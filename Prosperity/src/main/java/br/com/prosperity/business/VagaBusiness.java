@@ -129,26 +129,11 @@ public class VagaBusiness {
 		
 		if (vagaEntity.getId() == null) {
 			Date dateNow = new Date();
-			/*SenioridadeEntity senioridadeEntity = senioridadeBusinness
-					.obterPorId(vagaBean.getSenioridadeBean().getId());
-			String senioridade = senioridadeEntity.getNome();
-			CargoEntity cargoEntity = cargoBusinness.obterPorId(vagaBean.getCargoBean().getId());
-			String cargo = cargoEntity.getNome();
-			// String usuario = session.getAttribute("autenticado").getNome();
-			vagaBean.setNomeVaga(cargo + " " + senioridade);*/
-			vagaBean.setDataAbertura(dateNow);
+			vagaEntity.setDataAbertura(dateNow);
 			// vagaBean.setUsuarioBean(usuario);
 			vagaDAO.insert(vagaEntity);
 		} else {
-			// Date dateNow = new Date();
-			/*SenioridadeEntity senioridadeEntity = senioridadeBusinness
-					.obterPorId(vagaBean.getSenioridadeBean().getId());
-			String senioridade = senioridadeEntity.getNome();
-			CargoEntity cargoEntity = cargoBusinness.obterPorId(vagaBean.getCargoBean().getId());
-			String cargo = cargoEntity.getNome();
-			// String usuario = session.getAttribute("autenticado").getNome();
-			vagaBean.setNomeVaga(cargo + " " + senioridade);*/
-			vagaBean.setDataAbertura(vagaBean.getDataAbertura()); // VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
+			//vagaEntity.setDataAbertura(vagaBean.getDataAbertura()); // VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
 			// vagaBean.setUsuarioBean(usuario);
 			vagaDAO.update(vagaEntity);
 		}
