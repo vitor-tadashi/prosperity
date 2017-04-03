@@ -53,7 +53,7 @@ public class VagaBean {
 	private Date dataAprovacao; //
 	private Date dataFechamento; //
 	private Integer numeroCandidatos; //
-	private UsuarioBean usuarioBean;
+	//private UsuarioBean usuarioBean;
 	private List<StatusVagaBean> status;
 
 	private StatusVagaBean ultimoStatus;
@@ -260,13 +260,13 @@ public class VagaBean {
 		this.numeroCandidatos = numeroCandidatos;
 	}
 
-	public UsuarioBean getUsuarioBean() {
-		return usuarioBean;
-	}
-
-	public void setUsuarioBean(UsuarioBean usuarioBean) {
-		this.usuarioBean = usuarioBean;
-	}
+//	public UsuarioBean getUsuarioBean() {
+//		return usuarioBean;
+//	}
+//
+//	public void setUsuarioBean(UsuarioBean usuarioBean) {
+//		this.usuarioBean = usuarioBean;
+//	}
 
 	public List<StatusVagaBean> getStatus() {
 		return status;

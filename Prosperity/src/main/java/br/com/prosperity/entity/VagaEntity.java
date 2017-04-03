@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -116,9 +117,9 @@ public class VagaEntity {
 	@JoinColumn(name = "idSenioridade")
 	private SenioridadeEntity senioridadeEntity;
 
-	@ManyToOne
-	@JoinColumn(name = "idUsuario")
-	private UsuarioEntity usuarioEntity;
+//	@ManyToOne(fetch=FetchType.LAZY)
+//	@JoinColumn(name = "idUsuario")
+//	private UsuarioEntity usuarioEntity;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idVaga")
@@ -310,13 +311,13 @@ public class VagaEntity {
 		this.senioridadeEntity = senioridadeEntity;
 	}
 
-	public UsuarioEntity getUsuarioEntity() {
-		return usuarioEntity;
-	}
-
-	public void setUsuarioEntity(UsuarioEntity usuarioEntity) {
-		this.usuarioEntity = usuarioEntity;
-	}
+//	public UsuarioEntity getUsuarioEntity() {
+//		return usuarioEntity;
+//	}
+//
+//	public void setUsuarioEntity(UsuarioEntity usuarioEntity) {
+//		this.usuarioEntity = usuarioEntity;
+//	}
 
 	public List<StatusVagaEntity> getStatusVagaEntity() {
 		return statusVagaEntity;
