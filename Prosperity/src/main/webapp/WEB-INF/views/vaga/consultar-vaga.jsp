@@ -14,7 +14,9 @@
 <c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
 
 <style type="text/css">
-
+ footer {
+	page-break-before: always;
+	}
 @media screen {
     #printSection {
         display: none;
@@ -34,6 +36,10 @@
         top: 0;
         
     }
+    label {
+		font-weight: normal;
+	}
+	#quebra { page-break-inside:avoid; }
 }
 </style>
 
@@ -176,7 +182,7 @@
 									<form>
 										<div class="form-group row">
 											<div>
-												<div class="form-group col-md-6 col-xs-5" style="margin-bottom: 0px">
+												<div class="form-group col-md-6 col-xs-6" style="margin-bottom: 0px">
 													<label for="solicitante">Solicitante</label> <input
 														class="form-control input-sm" disabled
 														name="solicitante.id" id="solicitante"
@@ -184,7 +190,7 @@
 												</div>
 												<!-- /form-group -->
 '
-												<div class="form-group col-md-6 col-xs-4" style="margin-bottom: 0px">
+												<div class="form-group col-md-6 col-xs-6" style="margin-bottom: 0px">
 													<label for="exampleInputEmail1">Local de trabalho:</label>
 													<div class="radiogroup" name="localTrabalho" id="local">
 														<label id="lblLocal" class="label-radio inline" value="">
@@ -197,7 +203,7 @@
 
 										<div class="form-group row">
 											<div>
-												<div class="form-group col-md-6" style="margin-bottom: 0px">
+												<div class="form-group col-md-6 col-xs-6" style="margin-bottom: 0px">
 													<label for="cargo">Cargo</label> <input
 														class="form-control input-sm" disabled
 														name="cargo.id" id="cargo"
@@ -207,7 +213,7 @@
 									
 												<!-- /form-group -->
 
-												<div class="form-group col-md-6" style="margin-bottom: 0px">
+												<div class="form-group col-md-6 col-xs-6" style="margin-bottom: 0px">
 													<label for="exampleInputEmail1">Tipo de vaga:</label>
 													<div class="radiogroup" name="idTipoVaga" id="tipo">
 														<label id="tpVaga" class="label-radio inline" value = "">
@@ -219,7 +225,7 @@
 										</div>
 
 										<div class="form-group row">
-											<div class="form-group col-md-6 col-xs-5" style="margin-bottom: 0px">
+											<div class="form-group col-md-6 col-xs-6" style="margin-bottom: 0px">
 													<label for="senioridade">Senioridade da vaga</label> <input
 														class="form-control input-sm" disabled
 														name="senioridade.id" id="senioridade"
@@ -242,7 +248,7 @@
 														<label style="margin-top: 7px">Às</label>
 													</div>
 
-													<div class="form-group col-md-3">
+													<div class="form-group col-md-2 col-xs-1">
 														<div class="input-group bootstrap-timepicker">
 															<label id="horaSaida" name="horaSaida" type="time"
 																	style="margin-top: 7px" value=""></label>
@@ -256,7 +262,7 @@
 										<div class="form-group row">
 
 											<div class="">
-												<div class="form-group col-md-6" style="margin-bottom: 0px">
+												<div class="form-group col-md-6 col-xs-6" style="margin-bottom: 0px">
 													<label for="exampleInputPassword1">Faixa salarial</label> <input
 														 class="form-control input-sm"
 														id="pretensao" placeholder="Faixa Salarial"
@@ -264,7 +270,7 @@
 												</div>
 												<!-- /form-group -->
 
-												<div class="form-group col-md-6" style="margin-bottom: 0px">
+												<div class="form-group col-md-6 col-xs-6" style="margin-bottom: 0px">
 													<label for="exampleInputEmail1">Aumento de quadro:</label>
 													<div class="radiogroup" name="aumentoQuadro" id="aumento">
 														<label id="lblQuadro" class="label-radio inline" value = "">
@@ -278,7 +284,7 @@
 
 										<div class="form-group row">
 
-											<div class="form-group col-md-6" style="margin-bottom: 0px">
+											<div class="form-group col-md-6 col-xs-6" style="margin-bottom: 0px">
 
 												<div class="form-group">
 													<label class="control-label">Data para inicio</label>
@@ -295,7 +301,7 @@
 												<!-- /form-group -->
 											</div>
 
-											<div class="form-group col-md-6" style="margin-bottom: 0px">
+											<div class="form-group col-md-6 col-xs-6" style="margin-bottom: 0px">
 												<div id="" class="">
 													<label id="substituidoId">Nome do substituido:</label> 
 												</div>
@@ -401,9 +407,11 @@
 					<h4 class="modal-title" id="modalLabel">Reabrir vaga</h4>
 				</div>
 				<div class="modal-body">Deseja realmente reabrir está vaga?</div>
+				<input class="reabre-id" type="hidden"> <input
+					class="reabre-status" type="hidden">
 				<div class="modal-footer">
 					<a href="#">
-						<button id="reabreVaga" type="button" class="btn btn-primary"
+						<button id="reabreVaga" onclick="status()" type="button" class="btn btn-primary"
 							data-dismiss="modal">Sim</button>
 					</a>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
@@ -480,6 +488,7 @@
 								<div class="col-md-2">
 									<label for="cargo">Status</label> 
 									<select class="form-control" style="width: 130px;" id="status" name="status">
+											<option>Selecione</option>
 										<c:forEach var="status" items="${listaStatusDrop}">
 												<option id="${status.id}"value="${status.id}">${status.nome}</option>
 										</c:forEach>
@@ -491,7 +500,6 @@
 										<button class="btn btn-primary"
 											style="margin-top: 22px; margin-right: 22px;" type="submit">Filtrar</button>
 									</a>
-								
 								</div>
 							</form>
 						</div>
@@ -552,7 +560,10 @@
 												data-toggle="modal"><i
 														class="fa fa-times">&nbsp</i>Cancelar</a></li>
 												<li class="divider "></li>			
-												<li><a href="#reabre-modal" data-toggle="modal" id="reabrir"><i
+												
+												<li><a href="#reabre-modal" 
+												onclick="alterarStatus(${vaga.id}, 'PENDENTE')"
+												data-toggle="modal"><i
 														class="fa fa-retweet">&nbsp</i>Reabrir</a></li>
 													
 											</ul>
@@ -759,6 +770,9 @@
 	function alterarStatus(id,status){
 		$('input.cancela-id').val(id);
 		$('input.cancela-status').val(status);
+		
+		$('input.reabre-id').val(id);
+		$('input.reabre-status').val(status);
 
 		$('input.reprovar-id').val(id);
 		$('input.reprovar-status').val(status);

@@ -260,8 +260,8 @@ UPDATE tbCandidato set dtAprovacao = '01-01-2017' where idCandidato =
 
 select * from tbStatusVaga
 select * from tbVaga
-select * from tbStatus
-select * from tbProjeto
+select * from tbCargo
+select * from tbSenioridade
 
 
 
@@ -287,13 +287,22 @@ select * from tbVaga
 UPDATE tbStatusVaga set idStatus = 17 where idStatusVaga = 8 
 tbVaga.idVaga
 
-SELECT * FROM tbVaga left join tbStatusVaga on tbVaga.idVaga = tbStatusvaga.idVaga
+SELECT * FROM tbVaga left join tbStatusVaga on tbVaga.idVaga = tbStatusVaga.idVaga
 
-where tbStatusVaga.idStatus = 2  AND tbVaga.idVaga = (SELECT tbVaga.idVaga FROM tbVaga WHERE nmVaga like '%Anal%' AND dtAbertura between '2010-01-01' AND '2017-03-03')
+where tbStatusVaga.idStatus = 1  AND tbVaga.idVaga = (SELECT * FROM tbVaga WHERE nmVaga like '%Anal%' and idVaga = 40 AND  dtAbertura between '2010-01-01' AND '2017-03-24'  )
 
-SELECT * FROM tbVaga left join tbStatus
+SELECT * FROM tbVaga
+INNER JOIN tbStatusVaga ON tbStatusVaga.idVaga = tbVaga.idVaga
+INNER JOIN tbStatus ON tbStatus.idStatus = tbStatusVaga.idStatus
+where tbStatus.idTpStatus = 2  AND
+tbVaga.idVaga = (SELECT tbVaga.idVaga FROM tbVaga WHERE nmVaga like '%Anal%' AND dtAbertura between '2010-01-01' AND '2017-03-24')
 
-where tbStatus.idTpStatus = 2  AND tbVaga.idVaga = (SELECT tbVaga.idVaga FROM tbVaga WHERE nmVaga like '%Anal%' AND dtAbertura between '2010-01-01' AND '2017-03-03')
+SELECT * FROM tbVaga
+INNER JOIN tbStatusVaga ON tbStatusVaga.idVaga = tbVaga.idVaga
+where tbVaga.idVaga = (SELECT tbVaga.idVaga FROM tbVaga WHERE nmVaga like '%Anal%' AND dtAbertura between '2010-01-01' AND '2017-03-03')
+
+
+
 
 select * from tbstatusvaga
 --- Alterando colunas da tabela vaga para tipo TIME 

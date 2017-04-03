@@ -52,6 +52,8 @@ public class VagaBean {
 	private UsuarioBean usuarioBean;
 	private List<StatusVagaBean> status;
 
+	
+	
 	private StatusVagaBean ultimoStatus;
 
 	public StatusVagaBean getUltimoStatus() {
@@ -66,6 +68,11 @@ public class VagaBean {
 
 		return ultimoStatus;
 	}
+	
+	
+	
+	
+
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataAberturaDe;

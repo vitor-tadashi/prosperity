@@ -121,6 +121,7 @@ public class VagaEntity {
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idVaga")
 	private List<StatusVagaEntity> statusVagaEntity;
+	
 
 	// @ManyToOne(cascade = CascadeType.ALL)
 	// private AvaliadorEntity avaliadorEntity;
@@ -147,7 +148,9 @@ public class VagaEntity {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
+	
+	
+	
 	public String getNomeVaga() {
 		return nomeVaga;
 	}
