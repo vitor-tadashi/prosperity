@@ -1,6 +1,7 @@
 package br.com.prosperity.bean;
 import java.util.Date;
 import java.util.List;
+
 import javax.validation.Valid;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
@@ -22,7 +23,7 @@ public class VagaBean {
 	public VagaBean(String nome) {
 		this.nomeVaga = nome;
 	}
-	
+	@NotEmpty
 	@Min(value = 1, message = "O campo de vaga a ser aplicado deve ser preenchido")
 	private Integer id;
 	private String nomeVaga;

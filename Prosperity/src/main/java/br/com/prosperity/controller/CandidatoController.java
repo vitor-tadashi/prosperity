@@ -26,7 +26,6 @@ import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.StatusCandidatoBean;
-import br.com.prosperity.bean.StatusVagaBean;
 import br.com.prosperity.bean.TipoCursoBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.AvaliadorBusiness;
@@ -36,7 +35,6 @@ import br.com.prosperity.business.CargoBusiness;
 import br.com.prosperity.business.FuncionarioBusiness;
 import br.com.prosperity.business.SenioridadeBusiness;
 import br.com.prosperity.business.SituacaoAtualBusiness;
-import br.com.prosperity.business.StatusCandidatoBusiness;
 import br.com.prosperity.business.TipoCursoBusiness;
 import br.com.prosperity.business.VagaBusiness;
 import br.com.prosperity.exception.BusinessException;
@@ -220,8 +218,8 @@ public class CandidatoController {
 		List<VagaBean> listaVaga = vagaBusiness.listar();
 		model.addAttribute("listaVaga", listaVaga);
 		
-		List<StatusCandidatoBean> listaStatusCandidato = StatusCandidatoBusiness.obterTodos();
-		model.addAttribute("listaStatusCandidato", listaStatusCandidato);
+		//List<StatusCandidatoBean> listaStatusCandidato = StatusCandidatoBusiness.obterTodos();
+		//model.addAttribute("listaStatusCandidato", listaStatusCandidato);
 
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
 		model.addAttribute("listaCargo", listaCargo);
