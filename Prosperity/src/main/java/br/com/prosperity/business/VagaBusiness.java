@@ -100,8 +100,8 @@ public class VagaBusiness {
 		//List<Criterion>li = new ArrayList<>();
 		//li.add(Restrictions.between("dataAbertura", null, null));
 		List<VagaEntity> vaga = vagaDAO.findByCriteria("nomeVaga", false, Restrictions.like("nomeVaga", "%" + vagas.getNomeVaga() + "%"),
-				Restrictions.between("dataAbertura", parseData(vagas.getDataAberturaDe()),  parseData(vagas.getDataAberturaPara()))
-				
+				Restrictions.between("dataAbertura", parseData(vagas.getDataAberturaDe()),  parseData(vagas.getDataAberturaPara())),
+				Restrictions.eq("situacao", true)
 				);
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vaga);
 		return vagaBean;

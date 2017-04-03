@@ -43,7 +43,7 @@ public class StatusVagaEntity {
 	@Column(name = "idVaga")
 	private Integer vaga;
 	
-	@Column(name="situacao")
+	@Column(name="flSituacao")
 	private boolean situacao;
 
 	/* fim dos mapeamentos */
