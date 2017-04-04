@@ -58,7 +58,6 @@ public class VagaBean {
 	private String emailResponsavel;
 	private String telResponsavel;
 	
-	
 	private StatusVagaBean ultimoStatus;
 
 	public StatusVagaBean getUltimoStatus() {
