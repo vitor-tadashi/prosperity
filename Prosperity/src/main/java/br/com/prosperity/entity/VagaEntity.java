@@ -33,8 +33,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 		// VagaEntity u LEFT JOIN u.statusVagaEntity p LEFT JOIN p.status e
 		// WHERE u.dataAbertura BETWEEN ?1 AND ?2 AND u.nomeVaga like ?3 AND
 		// p.status = ?4" )
-		@NamedQuery(name = "listarVagaFiltrado", query = "SELECT u FROM VagaEntity u LEFT OUTER JOIN u.statusVagaEntity p left join p.status s WHERE u.nomeVaga like ?1 and s.id = ?2 and u.dataAbertura between ?3 and ?4"),
-		@NamedQuery(name="listarVagasAtivas", query="SELECT u.nomeVaga FROM VagaEntity u LEFT OUTER JOIN u.statusVagaEntity sv LEFT JOIN sv.status s WHERE s = ?1")
+		@NamedQuery(name="listarVagasAtivas", query="SELECT u.nomeVaga FROM VagaEntity u LEFT OUTER JOIN u.statusVagaEntity sv LEFT JOIN sv.status s WHERE s = ?1"),
+		@NamedQuery(name = "listarVagaFiltrado", query = "SELECT u FROM VagaEntity u LEFT OUTER JOIN u.statusVagaEntity p left join p.status s "
+				+ "WHERE u.nomeVaga like ?1 and s.id = ?2 and u.dataAbertura between ?3 and ?4")
 }) 	
 
 @Entity
@@ -86,7 +87,7 @@ public class VagaEntity {
 	private String descricaoPerfilComportamental; //
 
 	@Column(name = "dsPerfilTecnico")
-	private String descricaoPerfilTecnico; //
+	private String descricaoPerfilTecnico; //	
 
 	@Column(name = "dtAbertura")
 	@Temporal(value = TemporalType.DATE)
@@ -119,7 +120,10 @@ public class VagaEntity {
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idVaga")
 	private List<StatusVagaEntity> statusVagaEntity;
-	
+
+	// @ManyToOne(cascade = CascadeType.ALL)
+	// private AvaliadorEntity avaliadorEntity;
+
 	@Column(name="nmResponsavel")
 	private String nmResponsavel;
 	
@@ -154,7 +158,9 @@ public class VagaEntity {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
+	
+	
+	
 	public String getNomeVaga() {
 		return nomeVaga;
 	}

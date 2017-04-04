@@ -260,8 +260,8 @@ UPDATE tbCandidato set dtAprovacao = '01-01-2017' where idCandidato =
 
 select * from tbStatusVaga
 select * from tbVaga
-select * from tbStatus
-select * from tbProjeto
+select * from tbCargo
+select * from tbSenioridade
 
 
 
@@ -287,13 +287,22 @@ select * from tbVaga
 UPDATE tbStatusVaga set idStatus = 17 where idStatusVaga = 8 
 tbVaga.idVaga
 
-SELECT * FROM tbVaga left join tbStatusVaga on tbVaga.idVaga = tbStatusvaga.idVaga
+SELECT * FROM tbVaga left join tbStatusVaga on tbVaga.idVaga = tbStatusVaga.idVaga
 
-where tbStatusVaga.idStatus = 2  AND tbVaga.idVaga = (SELECT tbVaga.idVaga FROM tbVaga WHERE nmVaga like '%Anal%' AND dtAbertura between '2010-01-01' AND '2017-03-03')
+where tbStatusVaga.idStatus = 1  AND tbVaga.idVaga = (SELECT * FROM tbVaga WHERE nmVaga like '%Anal%' and idVaga = 40 AND  dtAbertura between '2010-01-01' AND '2017-03-24'  )
 
-SELECT * FROM tbVaga left join tbStatus
+SELECT * FROM tbVaga
+INNER JOIN tbStatusVaga ON tbStatusVaga.idVaga = tbVaga.idVaga
+INNER JOIN tbStatus ON tbStatus.idStatus = tbStatusVaga.idStatus
+where tbStatus.idTpStatus = 2  AND
+tbVaga.idVaga = (SELECT tbVaga.idVaga FROM tbVaga WHERE nmVaga like '%Anal%' AND dtAbertura between '2010-01-01' AND '2017-03-24')
 
-where tbStatus.idTpStatus = 2  AND tbVaga.idVaga = (SELECT tbVaga.idVaga FROM tbVaga WHERE nmVaga like '%Anal%' AND dtAbertura between '2010-01-01' AND '2017-03-03')
+SELECT * FROM tbVaga
+INNER JOIN tbStatusVaga ON tbStatusVaga.idVaga = tbVaga.idVaga
+where tbVaga.idVaga = (SELECT tbVaga.idVaga FROM tbVaga WHERE nmVaga like '%Anal%' AND dtAbertura between '2010-01-01' AND '2017-03-03')
+
+
+
 
 select * from tbstatusvaga
 --- Alterando colunas da tabela vaga para tipo TIME 
@@ -323,7 +332,22 @@ select v.idVaga,v.nmVaga,sv.idStatus,s.nmStatus from tbVaga v inner join tbStatu
 
  update tbStatus set tpCss = '#f2f2f2'
 
+select * from tbVaga left join tbStatusVaga on 
+tbvaga.idVaga = tbStatusVaga.idVaga 
+AND tbvaga.dtAbertura between '2013-01-01' and '2018-01-01'
+left join tbstatus on tbstatus.idStatus = tbStatusVaga.idStatus 
+where tbstatus.idTpStatus = 2 AND tbvaga.nmVaga like '%Anal%' AND tbStatusVaga.idStatus = 18
+AND tbStatusVaga.idStatusVaga = (SELECT MAX(tbStatusVaga.idStatusVaga) FROM tbVaga JOIN tbStatusVaga on 
+tbvaga.idVaga = tbStatusVaga.idVaga)
 
---- Criando colunas para cadastro de informações do Cliente em caso de Alocação
+select * from tbVaga left join tbStatusVaga on 
+tbvaga.idVaga = tbStatusVaga.idVaga  
+select * from tbVaga left join tbStatusVaga on 
+tbvaga.idVaga = tbStatusVaga.idVaga 
+where tbvaga.dtAbertura between '2013-01-01' and '2018-01-01' AND tbvaga.nmVaga like '%Anal%' AND tbStatusVaga.idStatus = 18
+AND tbStatusVaga.idStatusVaga = (SELECT MAX(tbStatusVaga.idStatusVaga) FROM tbVaga JOIN tbStatusVaga on 
+tbvaga.idVaga = tbStatusVaga.idVaga)
 
-ALTER TABLE tbVaga ADD nmResponsavel VARCHAR(30) NULL, nmAreaResponsavel VARCHAR(30) NULL, emailResponsavel VARCHAR(50) NULL, telResponsavel VARCHAR(20) NULL;
+select * from tbSVaga
+
+AND sc.idStatusCandidato = (SELECT MAX(sc.idStatusCandidato) FROM CandidatoEntity c JOIN c.statusCandidatos sc)
