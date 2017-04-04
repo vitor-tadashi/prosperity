@@ -402,7 +402,7 @@ footer {
 											</button>
 											<ul class="dropdown-menu slidedown btnAlinhado">
 												<li><a href="#visualizar-modal"
-													onclick="info(${vaga.id})"> <i class="fa fa-eye fa-lg">&nbsp</i>Visualizar
+												onclick="info(${vaga.id})"> <i class="fa fa-eye fa-lg">&nbsp</i>Visualizar
 												</a></li>
 												<li role="separator" class="divider"></li>
 												<li><c:url value="editar/${vaga.id}" var="myURL">
