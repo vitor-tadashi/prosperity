@@ -2,17 +2,14 @@ package br.com.prosperity.business;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.prosperity.bean.SituacaoVagaBean;
@@ -20,14 +17,12 @@ import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.converter.UsuarioConverter;
 import br.com.prosperity.converter.VagaConverter;
-import br.com.prosperity.dao.AvaliadorDAO;
+import br.com.prosperity.dao.AvaliadorCandidatoDAO;
 import br.com.prosperity.dao.StatusDAO;
 import br.com.prosperity.dao.StatusVagaDAO;
 import br.com.prosperity.dao.UsuarioDAO;
 import br.com.prosperity.dao.VagaDAO;
-import br.com.prosperity.entity.AvaliadorEntity;
-import br.com.prosperity.entity.CargoEntity;
-import br.com.prosperity.entity.SenioridadeEntity;
+import br.com.prosperity.entity.AvaliadorCandidatoEntity;
 import br.com.prosperity.entity.StatusVagaEntity;
 import br.com.prosperity.entity.VagaEntity;
 
@@ -56,7 +51,7 @@ public class VagaBusiness {
 	private StatusVagaDAO statusVagaDAO;
 
 	@Autowired
-	private AvaliadorDAO avaliadorDAO;
+	private AvaliadorCandidatoDAO avaliadorCandidatoDAO;
 
 	@Autowired
 	private UsuarioBean usuarioBean;
@@ -213,10 +208,10 @@ public class VagaBusiness {
 
 	private void inserirAvaliadores(VagaEntity vaga, List<UsuarioBean> usuarios) {
 		for (UsuarioBean usuario : usuarios) {
-			AvaliadorEntity avaliadorEntity = new AvaliadorEntity();
-			avaliadorEntity.setUsuario(usuarioConverter.convertBeanToEntity(usuario));
-			avaliadorEntity.setVaga(vaga);
-			avaliadorDAO.insert(avaliadorEntity);
+			AvaliadorCandidatoEntity avaliadorCandidatoEntity = new AvaliadorCandidatoEntity();
+			avaliadorCandidatoEntity.setUsuario(usuarioConverter.convertBeanToEntity(usuario));
+			avaliadorCandidatoEntity.setVaga(vaga);
+			avaliadorCandidatoDAO.insert(avaliadorCandidatoEntity);
 		}
 	}
 }

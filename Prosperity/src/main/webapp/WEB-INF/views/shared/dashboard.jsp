@@ -58,7 +58,7 @@
 							class="menu-hover"></span>
 					</a></li>
 					<li class="openable"><a href="#"> <span class="menu-icon">
-								<i class="fa fa-file-text fa-lg"></i>
+								<i class="fa fa-user fa-lg"></i>
 						</span> <span class="text"> Candidato </span> <span class="menu-hover"></span>
 					</a>
 						<ul class="submenu">
@@ -71,7 +71,7 @@
 							</a></li>
 						</ul></li>
 					<li class="openable"><a href="#"> <span class="menu-icon">
-								<i class="fa fa-file-text fa-lg"></i>
+								<i class="fa fa-book fa-lg"></i>
 						</span> <span class="text"> Vaga </span> <span class="menu-hover"></span>
 					</a>
 						<ul class="submenu">
@@ -85,7 +85,7 @@
 							</a></li>
 						</ul></li>
 						<li class="openable"><a href="#"> <span class="menu-icon">
-								<i class="fa fa-file-text fa-lg"></i>
+								<i class="fa fa-check fa-lg"></i>
 						</span> <span class="text"> Aprovar / Reprovar </span> <span class="menu-hover"></span>
 					</a>
 						<ul class="submenu">
@@ -102,7 +102,7 @@
 						</span> <span class="text"> Relatório </span> <span class="menu-hover"></span>
 					</a></li>
 					<li class="openable"><a href="#"> <span class="menu-icon">
-								<i class="fa fa-file-text fa-lg"></i>
+								<i class="fa fa-cogs fa-lg"></i>
 						</span> <span class="text"> Gerenciar </span> <span class="menu-hover"></span>
 					</a>
 						<ul class="submenu">

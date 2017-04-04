@@ -51,7 +51,6 @@ public class CandidatoBean  extends FormatUtil {
 	@Valid
 	private Set<VagaCandidatoBean> vagas = new HashSet<>();
 	private List<CandidatoCompetenciaBean> competencias = new ArrayList<>();
-	private List<AvaliadorBean> avaliadores = new ArrayList<>(); 
 	private Map<String, List<StatusCandidatoBean>> statusPorMesAno;
 	private Date dataUltimoContato;
 	private Date entrevista;
@@ -340,13 +339,4 @@ public class CandidatoBean  extends FormatUtil {
 	public void setValorMax(Double valorMax) {
 		this.valorMax = valorMax;
 	}
-
-	public List<AvaliadorBean> getAvaliadores() {
-		return avaliadores;
-	}
-
-	public void setAvaliadores(List<AvaliadorBean> avaliadores) {
-		this.avaliadores = avaliadores;
-	}
-
 }

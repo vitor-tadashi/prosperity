@@ -25,10 +25,8 @@ import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
-import br.com.prosperity.bean.StatusCandidatoBean;
 import br.com.prosperity.bean.TipoCursoBean;
 import br.com.prosperity.bean.VagaBean;
-import br.com.prosperity.business.AvaliadorBusiness;
 import br.com.prosperity.business.CanalInformacaoBusiness;
 import br.com.prosperity.business.CandidatoBusiness;
 import br.com.prosperity.business.CargoBusiness;
@@ -66,15 +64,6 @@ public class CandidatoController {
 
 	@Autowired
 	private CanalInformacaoBusiness canalInformacaoBusiness;
-
-	@Autowired
-	private AvaliadorBusiness avaliadorBusiness;
-
-	@Autowired
-	private SituacaoCandidatoBean situacaoCandidatoBean;
-
-	@Autowired
-	private StatusCandidatoBean statusCandidatoBean;
 
 	/**
 	 * @author thamires.miranda
