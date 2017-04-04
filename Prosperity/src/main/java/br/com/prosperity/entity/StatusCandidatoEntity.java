@@ -47,6 +47,17 @@ public class StatusCandidatoEntity {
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
 
+	@Column(name = "proposta")
+	private String proposta;
+	
+	public String getProposta() {
+		return proposta;
+	}
+
+	public void setProposta(String proposta) {
+		this.proposta = proposta;
+	}
+
 	public Date getDtAlteracao() {
 		return dtAlteracao;
 	}
