@@ -85,12 +85,6 @@ public class CandidatoController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "cadastrar", method = RequestMethod.GET)
-	public String cadastrarCandidato(Model model) {
-		obterDominiosCandidato(model);
-
-		return "candidato/cadastrar-candidato";
-	}
 
 	private void obterDominiosCandidato(Model model) {
 		List<TipoCursoBean> tiposCurso = tipoCursoBusiness.obterTodos();
@@ -106,6 +100,13 @@ public class CandidatoController {
 		model.addAttribute("listaCanal", listaCanal);
 	}
 
+	@RequestMapping(value = "cadastrar", method = RequestMethod.GET)
+	public String cadastrarCandidato(Model model) {
+		obterDominiosCandidato(model);
+
+		return "candidato/cadastrar-candidato";
+	}
+	
 	@RequestMapping(value = "salvar", method = RequestMethod.POST)
 	public String salvarCandidato(@ModelAttribute("candidatoBean") @Valid CandidatoBean candidatoBean,
 			BindingResult result, Model model) throws BusinessException {
@@ -188,6 +189,8 @@ public class CandidatoController {
 
 		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.findAll();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
+		
+		
 
 		// avaliadorBusiness.listar();
 

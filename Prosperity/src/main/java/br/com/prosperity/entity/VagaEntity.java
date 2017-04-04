@@ -99,15 +99,15 @@ public class VagaEntity {
 	@Temporal(value = TemporalType.DATE)
 	private Date dataFechamento; //
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idProjeto")
 	private ProjetoEntity projetoEntity;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idCargo")
 	private CargoEntity cargoEntity;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idSenioridade")
 	private SenioridadeEntity senioridadeEntity;
 

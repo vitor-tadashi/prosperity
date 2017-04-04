@@ -63,6 +63,9 @@ public class CandidatoBusiness  {
 	@Autowired
 	private HttpSession session;
 
+	
+	
+	
 	@Transactional
 	public CandidatoBean obter(Integer id) {
 		CandidatoEntity candidatoEntity = candidatoDAO.findById(id);
@@ -98,7 +101,7 @@ public class CandidatoBusiness  {
 
 	@Transactional
 	public List<CandidatoBean> listar() {
-		List<CandidatoEntity> candidato = candidatoDAO.findByNamedQuery("verificarCanidatura");
+		List<CandidatoEntity> candidato = candidatoDAO.findByNamedQuery("verificarCandidatura");
 		List<CandidatoEntity> entities = candidatoDAO.findAll();
 		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(entities);
 		return beans;

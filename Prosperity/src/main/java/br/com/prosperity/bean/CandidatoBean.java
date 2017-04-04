@@ -63,14 +63,13 @@ public class CandidatoBean  extends FormatUtil {
 	private VagaCandidatoBean vagaCandidato;
 	private Double pretensaoDe;
 	private Double pretensaoPara;
+	private int paginationContext;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataAberturaDe;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date dataAberturaPara;
 	
-
-
 
 	public VagaCandidatoBean getVagaCandidato() {
 		if (vagaCandidato == null) {
@@ -347,5 +346,15 @@ public class CandidatoBean  extends FormatUtil {
 	public void setAvaliadores(List<AvaliadorBean> avaliadores) {
 		this.avaliadores = avaliadores;
 	}
+
+	public int getPaginationContext() {
+		return paginationContext;
+	}
+
+	public void setPaginationContext(int paginationContext) {
+		this.paginationContext = paginationContext;
+	}
+	
+	
 
 }

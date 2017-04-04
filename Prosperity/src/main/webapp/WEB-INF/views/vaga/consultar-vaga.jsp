@@ -616,6 +616,7 @@
 					<!--</panel default>-->
 					<div class="panel-footer clearfix">
 						<div class="row">
+						$ (ElementID) .paginate ()
 							<ul class="pagination pagination-xs m-top-none pull-right">
 								<li class="disabled"><a href="#">Anterior</a></li>
 								<li class="active"><a href="#">1</a></li>

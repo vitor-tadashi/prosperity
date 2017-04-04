@@ -176,7 +176,7 @@
 									<div class="tab-pane fade" id="second">
 										<section id="dadosInterno" class="panel panel-default">
 											<div class="panel-body">
-												<label>Etapas dos processos de seleção: </label>
+												<label>Etapas dos processos de seleção	: </label>
 												<!-- SOMENTE ALTERAR DAQUI PARA BAIXO -->
 
 												<input class="btn btn-xs btn-success" type="button"
@@ -509,15 +509,12 @@
 									<c:forEach var="candidato" items="${candidatos}">
 										<tr>
 											<td>${candidato.nome}</td>
-											<td></td> 	
+											<td>${candidato.vagaCandidato[0].vaga.nomeVaga}</td> 	<!--OU vagas-->
 											<td>${candidato.valorPretensao}</td>
-											<td><fmt:formatDate value="${candidato.dataAbertura}"pattern="dd/MM/yyyy" /></td>
-											<td><span class="label status span-${candidato.ultimoStatus.status.nome}">${candidato.ultimoStatus.status.nome}</span></td>
+											<td><fmt:formatDate value="${candidato.dataAbertura}" pattern="dd/MM/yyyy" /></td>
+											<td><span class="label status span ${candidato.ultimoStatus.status.nome}">${candidato.ultimoStatus.status.nome}</span></td>
 									<td>
-											<td><span class="line"></span>
 												<div class="btn-group">
-												
-													<!-- comeco do botao -->
 													<button class="btn btn-sm btn-info dropdown-toggle"
 												data-toggle="dropdown" aria-haspopup="true"
 												aria-expanded="false">
@@ -531,7 +528,7 @@
 														 
 														 <!-- <a href="#aprovado-modal" data-toggle="modal"
 															data-toggle="modal" data-target=".bs-example-modal-lg"><i
-																class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a>  --> </li>
+																class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a>  -->
 													
 												<li><c:url value="editar/${candidato.id}" var="myURL">
 													</c:url> <a href="${myURL}"><i  class="fa fa-pencil"></i> Editar</a></li>
