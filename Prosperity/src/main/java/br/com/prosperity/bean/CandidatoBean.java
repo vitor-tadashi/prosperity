@@ -108,7 +108,7 @@ public class CandidatoBean  extends FormatUtil {
 	public void setDataAberturaPara(Date dataAberturaPara) {
 		this.dataAberturaPara = dataAberturaPara;
 	}
-
+	@XmlTransient
 	public double getPretensaoDe() {
 		return pretensaoDe;
 	}
@@ -116,7 +116,7 @@ public class CandidatoBean  extends FormatUtil {
 	public void setPretensaoDe(double pretensaoDe) {
 		this.pretensaoDe = pretensaoDe;
 	}
-
+	@XmlTransient
 	public double getPretensaoPara() {
 		return pretensaoPara;
 	}
