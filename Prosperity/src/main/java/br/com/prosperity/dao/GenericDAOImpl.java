@@ -136,7 +136,7 @@ public class GenericDAOImpl<T, ID extends Serializable> implements GenericDAO<T,
 			Criteria crit = session.createCriteria(getEntityClass());
 
 			for (final Criterion c : criterion) {
-				crit.add(c);
+					crit.add(c);
 			}
 
 			if (firstResult > 0) {

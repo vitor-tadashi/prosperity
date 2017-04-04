@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -17,6 +18,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "tbStatusVaga")
+@NamedQuery(name = "obterStatusVaga", query = "SELECT v FROM StatusVagaEntity v WHERE v.vaga = ?1")
 public class StatusVagaEntity {
 	/* Mapeamento dos Atributos */
 

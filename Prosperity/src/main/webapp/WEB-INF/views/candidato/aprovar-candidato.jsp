@@ -13,10 +13,19 @@
 
 <c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
 
-<!-- Link e style aqui -->
+
+
+<!--
+<link rel="stylesheet" href="/resources/css/ckeditor_/ckeditor/samples/css/samples.css">
+-->
+<link rel="stylesheet" href="/resources/css/ckeditor_/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
+
+
+
+<!-- fim dessa merda -->
 
 </head>
-<body>
+<body id="main">
 
 	<c:import url="/WEB-INF/views/shared/dashboard.jsp"></c:import>
 
@@ -34,14 +43,33 @@
 				<div class="modal-body">
 					<div class="panel-body">
 
-						<div class="form-group col-md-6">
+						<div class="form-group col-md-12">
 							<div class="form-group">
-								<label class="control-label">Parecer:</label>
+								<label class="control-label">Parecer :</label>
 								<div class="form-group">
 									<input type="hidden" id="hdn-id-candidato" /> <input
 										type="hidden" id="hdn-status" />
 									<textarea class="form-control" id="parecer"
 										style="margin-left: 0px; width: 770px" name="parecer"></textarea>
+								</div>
+<!-- 									/.col -->
+							</div>
+<!-- 								/form-group -->
+						</div>
+
+						<div class="form-group col-md-12"  style="background-color: #ecf0f1">
+							<div class="form-group">
+								<label class="control-label">Proposta:</label>
+								<div class="adjoined-bottom">
+								<!-- <input type="hidden" id="hdn-id-editor" /> <input
+										type="hidden" id="hdn-editor" /> -->
+									<div class="grid-container"  style="background-color: #ecf0f1">
+										<div class="grid-width-100"   style="background-color: #ecf0f1">
+											<textarea id="editor" name="editor" style="background-color: #ecf0f1">
+												Insira o seu texto aqui...
+											</textarea>
+										</div>
+									</div>
 								</div>
 								<!-- /.col -->
 							</div>
@@ -124,6 +152,7 @@
 						<div class="panel panel-default">
 							<div class="panel-heading">Aprovação de candidatos</div>
 							<div class="panel-body">
+                              
 								<table
 									class="table table-bordered table-condensed table-hover table-striped"
 									id=""
@@ -167,8 +196,8 @@
 																<li><a data-toggle="modal"
 																	data-target=".bs-example-modal-lg"
 																	id="aprovar-candidato"
-																	onclick="alterarStatus(${candidato.id}, ${statusDisponivel.id})"
-																	><i class="fa fa-check fa-lg">&nbsp;</i>${statusDisponivel.nome}
+																	onclick="alterarStatus(${candidato.id}, ${statusDisponivel.id})"><i
+																		class="fa fa-check fa-lg">&nbsp;</i>${statusDisponivel.nome}
 																</a></li>
 																<li class="divider "></li>
 															</c:forEach>
@@ -181,8 +210,7 @@
 															<!-- /fim botao -->
 
 														</ul>
-													</div>
-													<!-- /btn-group -->
+													</div> <!-- /btn-group -->
 												</td>
 											</tr>
 										</c:forEach>
@@ -254,11 +282,17 @@
 	</div>
 	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
 	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
-
+	
+	<!-- import da merda da proposta -->
+	
+	<script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 	<script>
-
-
+		CKEDITOR.replace('editor');
 			$('#alterarStatus').click(function() {
+				
+				var data = CKEDITOR.instances.editor.getData();
+		        console.log(data);
+				
 				$.ajax({
 					url : "alterar-status-candidato",
 					type : "POST",
@@ -266,6 +300,7 @@
 					data : {
 						'idCandidato' : $('#hdn-id-candidato').val(),
 						'parecer' : $('#parecer').val(),
+						'proposta' : CKEDITOR.instances.editor.getData(),
 						'idStatus' : $('#hdn-status').val()
 						
 					},
@@ -280,12 +315,13 @@
 			});
 
 
-		function alterarStatus(idCandidato, idStatus) {
+		function alterarStatus(idCandidato, idStatus, proposta) {
 			$('#hdn-id-candidato').val(idCandidato);
+			$('#hdn-proposta').val(proposta);
 			$('#hdn-status').val(idStatus);
+		
 		}
-	</script>
-
+		</script>
 
 </body>
 </html>

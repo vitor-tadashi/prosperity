@@ -168,6 +168,7 @@ public class CandidatoBusiness  {
 		candidatoBean.setId(situacaoCandidato.getIdCandidato());
 		statusCandidatoEntity.setCandidato(candidatoConverter.convertBeanToEntity(candidatoBean));
 		statusCandidatoEntity.setDsParecer(situacaoCandidato.getParecer());
+		statusCandidatoEntity.setProposta(situacaoCandidato.getProposta());
 		statusCandidatoEntity.setDtAlteracao(new Date());
 		statusCandidatoEntity.setUsuario(usuarioDAO.findById(usuarioBean.getId()));
 
