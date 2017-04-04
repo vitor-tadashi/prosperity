@@ -36,7 +36,7 @@ public class VagaBusiness {
 
 	@Autowired
 	private VagaConverter vagaConverter;
-	
+
 	@Autowired
 	private UsuarioConverter usuarioConverter;
 
@@ -51,7 +51,7 @@ public class VagaBusiness {
 
 	@Autowired
 	private StatusVagaDAO statusVagaDAO;
-	
+
 	@Autowired
 	private AvaliadorDAO avaliadorDAO;
 
@@ -71,7 +71,7 @@ public class VagaBusiness {
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 		return vagaBean;
 	}
-	
+
 	@Transactional(readOnly = true)
 	public List<VagaBean> listarVagasAtivas() {
 
@@ -87,9 +87,10 @@ public class VagaBusiness {
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 		return vagaBean;
 	}
-	
+
 	@Transactional(readOnly = true)
 	public List<VagaBean> filtroVaga(VagaBean vaga) {
+
 		Integer idStatus = 0;
 		if (!vaga.getStatus().get(0).getStatus().getNome().equals("")) {
 			idStatus = Integer.parseInt(vaga.getStatus().get(0).getStatus().getNome());
@@ -126,31 +127,17 @@ public class VagaBusiness {
 
 	@Transactional
 	public void inserir(VagaBean vagaBean /* , HttpSession session */) {
-		
+
 		VagaEntity vagaEntity = vagaConverter.convertBeanToEntity(vagaBean);
-		
+
 		if (vagaEntity.getId() == null) {
 			Date dateNow = new Date();
-			/*SenioridadeEntity senioridadeEntity = senioridadeBusinness
-					.obterPorId(vagaBean.getSenioridadeBean().getId());
-			String senioridade = senioridadeEntity.getNome();
-			CargoEntity cargoEntity = cargoBusinness.obterPorId(vagaBean.getCargoBean().getId());
-			String cargo = cargoEntity.getNome();
-			// String usuario = session.getAttribute("autenticado").getNome();
-			vagaBean.setNomeVaga(cargo + " " + senioridade);*/
-			vagaBean.setDataAbertura(dateNow);
+			vagaEntity.setDataAbertura(dateNow);
 			// vagaBean.setUsuarioBean(usuario);
 			vagaDAO.insert(vagaEntity);
 		} else {
-			// Date dateNow = new Date();
-			/*SenioridadeEntity senioridadeEntity = senioridadeBusinness
-					.obterPorId(vagaBean.getSenioridadeBean().getId());
-			String senioridade = senioridadeEntity.getNome();
-			CargoEntity cargoEntity = cargoBusinness.obterPorId(vagaBean.getCargoBean().getId());
-			String cargo = cargoEntity.getNome();
-			// String usuario = session.getAttribute("autenticado").getNome();
-			vagaBean.setNomeVaga(cargo + " " + senioridade);*/
-			vagaBean.setDataAbertura(vagaBean.getDataAbertura()); // VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
+			// vagaEntity.setDataAbertura(vagaBean.getDataAbertura()); //
+			// VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
 			// vagaBean.setUsuarioBean(usuario);
 			vagaDAO.update(vagaEntity);
 		}
@@ -178,8 +165,21 @@ public class VagaBusiness {
 		statusVagaEntity.setVaga(situacaoVaga.getIdVaga());
 		statusVagaEntity.setDataAlteracao(new Date());
 		statusVagaEntity.setUsuario(usuarioDAO.findById(usuarioBean.getId()));
+		statusVagaEntity.setSituacao(true);
+
+		desativarStatus(statusVagaEntity);
 
 		statusVagaDAO.insert(statusVagaEntity);
+	}
+
+	@Transactional
+	private void desativarStatus(StatusVagaEntity statusVaga) {
+		List<StatusVagaEntity> statusVagas = statusVagaDAO.findByNamedQuery("obterStatusVaga", statusVaga.getVaga());
+		for (StatusVagaEntity status : statusVagas) {
+			status.setSituacao(false);
+			statusVagaDAO.update(status);
+		}
+
 	}
 
 	private Date parseData(Date dataAntiga) {

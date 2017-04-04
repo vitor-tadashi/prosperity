@@ -40,6 +40,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">Informações do candidato</div>
 					<div class="panel-body">
+					<div class="alert.alert-success"></div>
 						<div id="textDiv">
 							<c:forEach var="erro" items="${listaErros}">
 								<p>${erro}</p>
@@ -70,7 +71,7 @@
 										<div class="row">
 											<div class="form-group col-md-4">
 												<label class="control-label" for="nome">Nome</label> <input
-													value="${candidato.nome}" type="text"
+													value="${candidato.nome}" type="text" placeholder="Informe seu nome"
 													class="form-control parsley-validated" data-minlength="8"
 													id="nome" name="nome">
 											</div>
@@ -90,7 +91,7 @@
 											<div class="form-group col-md-2">
 												<label for="rg" class="control-label">RG</label> <input
 													type="text" class="form-control rg parsley-validated"
-													id="rg" name="rg" data-required="true" data-required="true"
+													id="rg" name="rg" data-required="true" data-required="true" placeholder="Informe seu RG"
 													value="${candidato.rg}">
 											</div>
 											<div class="form-group col-md-2 col-sm-4">
@@ -239,11 +240,11 @@
 												</c:forEach>
 											</select>
 										</div>
-										<div class="form-group col-md-4">
+										<div class="form-group col-md-3">
 											<label for="exampleInputEmail1">Como ficou sabendo
 												desta vaga?</label> <select class="form-control"
 												name="vagaCandidato.canalInformacao.id">
-												<option value="canalInformacao">Selecione</option>
+												<option value="0">Selecione</option>
 												<c:forEach var="canalInformacao" items="${listaCanal}">
 													<option value="${canalInformacao.id}"
 													${canalInformacao.id == candidato.vagaCandidato.canalInformacao.id ? 'selected="selected"' : ''}>${canalInformacao.nome}</option>
@@ -280,7 +281,7 @@
 							</div>
 							<div>
 							<input type="hidden" value="${candidato.id}" name="id">
-								<button class="btn btn-success btn-sm btnAjuste ">Salvar</button>
+								<button class="btn btn-success btnAjuste">Salvar</button>
 							</div>
 						</form>
 					</div>

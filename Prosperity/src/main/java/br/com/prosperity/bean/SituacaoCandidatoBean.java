@@ -10,6 +10,7 @@ public class SituacaoCandidatoBean {
 	private Integer idCandidato;
 	private StatusCandidatoEnum status;
 	private String parecer;
+	private String proposta;
 
 	public Integer getIdCandidato() {
 		return idCandidato;
@@ -34,8 +35,17 @@ public class SituacaoCandidatoBean {
 	public void setParecer(String parecer) {
 		this.parecer = parecer;
 	}
-	
+
 	public void setIdStatus(Integer idStatus) {
 		status = StatusCandidatoEnum.valueOf(idStatus);
 	}
+
+	public String getProposta() {
+		return proposta;
+	}
+
+	public void setProposta(String proposta) {
+		this.proposta = proposta;
+	}
+
 }

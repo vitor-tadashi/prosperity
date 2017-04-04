@@ -25,6 +25,7 @@ public class StatusCandidatoConverter implements Converter<StatusCandidatoEntity
 		entity.setIdStatusCandidato(bean.getId());
 		entity.setDsParecer(bean.getDescricaoParecer());
 		entity.setDtAlteracao(bean.getDataAlteracao());
+		entity.setProposta(bean.getProposta());
 		entity.setStatus(statusConverter.convertBeanToEntity(bean.getStatus()));
 		entity.setUsuario(usuarioConverter.convertBeanToEntity(bean.getUsuario()));
 
@@ -41,6 +42,7 @@ public class StatusCandidatoConverter implements Converter<StatusCandidatoEntity
 		bean.setId(entity.getIdStatusCandidato());
 		bean.setDescricaoParecer(entity.getDsParecer());
 		bean.setDataAlteracao(entity.getDtAlteracao());
+		bean.setProposta(entity.getProposta());
 		bean.setStatus(statusConverter.convertEntityToBean(entity.getStatus()));
 		bean.setUsuario(usuarioConverter.convertEntityToBean(entity.getUsuario()));
 
