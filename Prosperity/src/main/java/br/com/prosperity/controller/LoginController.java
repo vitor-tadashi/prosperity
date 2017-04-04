@@ -25,7 +25,7 @@ public class LoginController {
 	@Autowired
 	private HttpSession session;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public String indexLogin() {
 		return "login/acesso";
 	}

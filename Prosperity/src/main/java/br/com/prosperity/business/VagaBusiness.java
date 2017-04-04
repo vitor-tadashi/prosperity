@@ -39,7 +39,7 @@ public class VagaBusiness {
 
 	@Autowired
 	private VagaConverter vagaConverter;
-	
+
 	@Autowired
 	private UsuarioConverter usuarioConverter;
 
@@ -54,7 +54,7 @@ public class VagaBusiness {
 
 	@Autowired
 	private StatusVagaDAO statusVagaDAO;
-	
+
 	@Autowired
 	private AvaliadorDAO avaliadorDAO;
 
@@ -74,7 +74,7 @@ public class VagaBusiness {
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 		return vagaBean;
 	}
-	
+
 	@Transactional(readOnly = true)
 	public List<VagaBean> listarVagasAtivas() {
 
@@ -90,23 +90,23 @@ public class VagaBusiness {
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 		return vagaBean;
 	}
-	
+
 	@Transactional(readOnly = true)
 	public List<VagaBean> filtroVaga(VagaBean vagas) {
 		Integer idStatus = 0;
 		if (!vagas.getStatus().get(0).getStatus().getNome().equals("")) {
 			idStatus = Integer.parseInt(vagas.getStatus().get(0).getStatus().getNome());
 		}
-		//List<Criterion>li = new ArrayList<>();
-		//li.add(Restrictions.between("dataAbertura", null, null));
-		List<VagaEntity> vaga = vagaDAO.findByCriteria("nomeVaga", false, Restrictions.like("nomeVaga", "%" + vagas.getNomeVaga() + "%"),
-				Restrictions.between("dataAbertura", parseData(vagas.getDataAberturaDe()),  parseData(vagas.getDataAberturaPara())),
-				Restrictions.eq("situacao", true)
-				);
+		// List<Criterion>li = new ArrayList<>();
+		// li.add(Restrictions.between("dataAbertura", null, null));
+		List<VagaEntity> vaga = vagaDAO.findByCriteria("nomeVaga", false,
+				Restrictions.like("nomeVaga", "%" + vagas.getNomeVaga() + "%"), Restrictions.between("dataAbertura",
+						parseData(vagas.getDataAberturaDe()), parseData(vagas.getDataAberturaPara())),
+				Restrictions.eq("situacao", true));
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vaga);
 		return vagaBean;
 	}
-	
+
 	@Transactional(readOnly = true)
 	public List<VagaBean> filtrarVagas(VagaBean vaga) {
 		Integer idStatus = 0;
@@ -143,31 +143,41 @@ public class VagaBusiness {
 
 	@Transactional
 	public void inserir(VagaBean vagaBean /* , HttpSession session */) {
-		
+
 		VagaEntity vagaEntity = vagaConverter.convertBeanToEntity(vagaBean);
-		
+
 		if (vagaEntity.getId() == null) {
 			Date dateNow = new Date();
-			/*SenioridadeEntity senioridadeEntity = senioridadeBusinness
-					.obterPorId(vagaBean.getSenioridadeBean().getId());
-			String senioridade = senioridadeEntity.getNome();
-			CargoEntity cargoEntity = cargoBusinness.obterPorId(vagaBean.getCargoBean().getId());
-			String cargo = cargoEntity.getNome();
-			// String usuario = session.getAttribute("autenticado").getNome();
-			vagaBean.setNomeVaga(cargo + " " + senioridade);*/
+			/*
+			 * SenioridadeEntity senioridadeEntity = senioridadeBusinness
+			 * .obterPorId(vagaBean.getSenioridadeBean().getId()); String
+			 * senioridade = senioridadeEntity.getNome(); CargoEntity
+			 * cargoEntity =
+			 * cargoBusinness.obterPorId(vagaBean.getCargoBean().getId());
+			 * String cargo = cargoEntity.getNome(); // String usuario =
+			 * session.getAttribute("autenticado").getNome();
+			 * vagaBean.setNomeVaga(cargo + " " + senioridade);
+			 */
 			vagaBean.setDataAbertura(dateNow);
 			// vagaBean.setUsuarioBean(usuario);
 			vagaDAO.insert(vagaEntity);
 		} else {
 			// Date dateNow = new Date();
-			/*SenioridadeEntity senioridadeEntity = senioridadeBusinness
-					.obterPorId(vagaBean.getSenioridadeBean().getId());
-			String senioridade = senioridadeEntity.getNome();
-			CargoEntity cargoEntity = cargoBusinness.obterPorId(vagaBean.getCargoBean().getId());
-			String cargo = cargoEntity.getNome();
-			// String usuario = session.getAttribute("autenticado").getNome();
-			vagaBean.setNomeVaga(cargo + " " + senioridade);*/
-			vagaBean.setDataAbertura(vagaBean.getDataAbertura()); // VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
+			/*
+			 * SenioridadeEntity senioridadeEntity = senioridadeBusinness
+			 * .obterPorId(vagaBean.getSenioridadeBean().getId()); String
+			 * senioridade = senioridadeEntity.getNome(); CargoEntity
+			 * cargoEntity =
+			 * cargoBusinness.obterPorId(vagaBean.getCargoBean().getId());
+			 * String cargo = cargoEntity.getNome(); // String usuario =
+			 * session.getAttribute("autenticado").getNome();
+			 * vagaBean.setNomeVaga(cargo + " " + senioridade);
+			 */
+			vagaBean.setDataAbertura(vagaBean.getDataAbertura()); // VERIFICAR
+																	// SE DEVE
+																	// SER DATA
+																	// DE
+																	// ALTERAÇÂO
 			// vagaBean.setUsuarioBean(usuario);
 			vagaDAO.update(vagaEntity);
 		}
@@ -195,8 +205,21 @@ public class VagaBusiness {
 		statusVagaEntity.setVaga(situacaoVaga.getIdVaga());
 		statusVagaEntity.setDataAlteracao(new Date());
 		statusVagaEntity.setUsuario(usuarioDAO.findById(usuarioBean.getId()));
+		statusVagaEntity.setSituacao(true);
+
+		desativarStatus(statusVagaEntity);
 
 		statusVagaDAO.insert(statusVagaEntity);
+	}
+	
+	@Transactional
+	private void desativarStatus(StatusVagaEntity statusVaga) {
+		List<StatusVagaEntity> statusVagas = statusVagaDAO.findByNamedQuery("obterStatusVaga", statusVaga.getVaga());
+		for (StatusVagaEntity status : statusVagas) {
+			status.setSituacao(false);
+			statusVagaDAO.update(status);
+		}
+
 	}
 
 	private Date parseData(Date dataAntiga) {

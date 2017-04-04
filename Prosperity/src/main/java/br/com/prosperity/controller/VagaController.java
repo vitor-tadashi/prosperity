@@ -76,9 +76,6 @@ public class VagaController {
 	@Autowired
 	private StatusVagaBusiness statusVagaBusiness;
 
-	@Autowired
-	private SituacaoVagaBean situacaoVaga;
-
 	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
 	public String cliente(Model model, VagaBean vaga) {
 
@@ -115,12 +112,12 @@ public class VagaController {
 
 	@RequestMapping(value = { "filtro" }, method = RequestMethod.GET)
 	public String filtrar(Model model, VagaBean vaga) {
-		if(vaga.getNomeVaga().isEmpty() && vaga.getDataAberturaDe() == null && vaga.getDataAberturaPara() == null &&
-				vaga.getStatus().get(0).getStatus().getNome().equals("Selecione")) {
+		if (vaga.getNomeVaga().isEmpty() && vaga.getDataAberturaDe() == null && vaga.getDataAberturaPara() == null
+				&& vaga.getStatus().get(0).getStatus().getNome().equals("Selecione")) {
 			return "redirect:consultar";
-					
+
 		}
-		
+
 		List<VagaBean> listaVagaFiltro = vagaBusiness.filtroVaga(vaga);
 		model.addAttribute("vagas", listaVagaFiltro);
 
@@ -129,7 +126,6 @@ public class VagaController {
 
 		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.obterTodos();
 		model.addAttribute("listaSenioridade", listaSenioridade);
-
 
 		/*
 		 * List<VagaBean> listaVaga = vagaBusiness.listar();
@@ -158,7 +154,7 @@ public class VagaController {
 	@RequestMapping(value = "aprovar", method = RequestMethod.GET)
 	public String aprovacaoVaga(Model model) {
 		model.addAttribute("vagas", vagaBusiness.listarVagaAprovar());
-		return "vaga/aprovacao-vaga";
+		return "vaga/aprovar-vaga";
 	}
 
 	@RequestMapping(value = { "visualizar" }, method = RequestMethod.GET)
@@ -224,7 +220,7 @@ public class VagaController {
 		return "redirect:solicitar";
 
 	}
-	
+
 	private List<String> buildErrorMessage(List<FieldError> error) {
 		List<String> novosErros = new ArrayList<>();
 

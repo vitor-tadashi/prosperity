@@ -35,7 +35,7 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioBusiness usuarioBusiness;
 
-	@RequestMapping(value = "/listar", method = RequestMethod.GET)
+	@RequestMapping(value = "/gerenciar", method = RequestMethod.GET)
 	public String carregaUsuarios(Model model, String erro) {
 		List<UsuarioBean> usuarios = usuarioBusiness.findAll();
 		List<FuncionarioBean> funcionarios = funcionarioBusiness.findAll();
@@ -45,10 +45,10 @@ public class UsuarioController {
 		model.addAttribute("usuarios", usuarios);
 		model.addAttribute("erro", erro);
 
-		return "usuario/consultar-usuario";
+		return "usuario/gerenciar-usuario";
 	}
 
-	@RequestMapping(value = "/criar-perfil", method = RequestMethod.GET)
+	@RequestMapping(value = "/perfil/gerenciar", method = RequestMethod.GET)
 	public String criaPerfil(Model model, String erros, String sucesso) {
 		List<FuncionalidadeBean> funcionalidades = funcionalidadeBusiness.listar();
 		List<PerfilBean> perfis = perfilBusiness.listar();
@@ -57,7 +57,7 @@ public class UsuarioController {
 		model.addAttribute("erros",erros);
 		model.addAttribute("sucesso", sucesso);
 		
-		return "usuario/criar-perfil";
+		return "usuario/gerenciar-perfil";
 	}
 
 	@RequestMapping(value = "/salvar-perfil", method = RequestMethod.POST)
