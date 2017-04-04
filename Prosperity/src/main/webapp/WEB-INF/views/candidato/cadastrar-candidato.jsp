@@ -79,7 +79,7 @@
 												<label for="email" class="control-label">E-mail</label> <input
 													type="email" class="form-control parsley-validated"
 													id="email" name="email" data-required="true"
-													placeholder="email@dominio.com" value="${candidato.email}">
+													placeholder="Informe seu email" value="${candidato.email}">
 											</div>
 											<div class="form-group col-md-3">
 												<label for="cpf" class="control-label">CPF</label> <input
@@ -105,21 +105,21 @@
 													onblur="validarData(this.value)">
 											</div>
 											<div class="form-group col-md-2">
-												<label for="telefone" class="control-label">Telefone</label>
+												<label for="contato" class="control-label">Telefone</label>
 												<input type="text"
-													class="form-control telefone parsley-validated"
+													class="form-control telefone parsley-validated" placeholder="Informe seu telefone"
 													data-required="true" id="contato" name="contato.telefone"
 													value="${candidato.contato.telefone}">
 											</div>
 											<div class="form-group col-md-2">
 												<label for="cep" class="control-label">CEP</label> <input
 													type="text" class="form-control cep parsley-validated"
-													id="cep" name="endereco.cep"
+													id="cep" name="endereco.cep" placeholder="Informe seu CEP"
 													value="${candidato.endereco.cep}" data-required="true"
 													onblur="pesquisacep(this.value);" />
 											</div>
 											<div class="form-group col-md-6">
-												<label for="Endereco" class="control-label">Endereço</label>
+												<label for="rua" class="control-label">Endereço</label>
 												<input type="text" class="form-control parsley-validated"
 													id="rua" data-required="true" name="endereco.logradouro"
 													value="${candidato.endereco.logradouro}" />
@@ -127,17 +127,17 @@
 											<div class="form-group col-md-2">
 												<label for="numero" class="control-label">Número</label> <input
 													type="number" class="form-control parsley-validated"
-													id="numero" data-required="true" name="endereco.numero"
+													id="numero" data-required="true" name="endereco.numero" 
 													value="${candidato.endereco.numero}">
 											</div>
 											<div class="form-group col-md-3">
-												<label for="Endereco.complemento" class="control-label">Complemento</label>
+												<label for="complemento" class="control-label">Complemento</label>
 												<input type="text" class="form-control" id="complemento"
 													data-required="true" name="endereco.complemento"
 													value="${candidato.endereco.complemento}">
 											</div>
 											<div class="form-group col-md-3">
-												<label for="estado" class="control-label">Estado</label> <input
+												<label for="uf" class="control-label">Estado</label> <input
 													type="text" class="form-control parsley-validated" id="uf"
 													data-required="true" name="endereco.estado"
 													value="${candidato.endereco.estado}" />
@@ -150,7 +150,7 @@
 													value="${candidato.endereco.cidade}" />
 											</div>
 											<div class="form-group col-xs-12">
-												<label class="control-label">Currículo</label>
+												<label  class="control-label">Currículo</label>
 												<div class="upload-file" style="width: 356px;">
 													<input type="file" id="upload-curriculo"
 														class="upload-demo"> <label data-title="Selecione"
@@ -171,11 +171,11 @@
 										<div class="form-group col-md-5">
 											<label for="instituicao">Instituição</label> <input
 												type="text" class="form-control" id="instituicao"
-												name="formacao.nomeInstituicao" placeholder="Instituição"
+												name="formacao.nomeInstituicao" placeholder=" Informe a instituição"
 												value="${candidato.formacao.nomeInstituicao}">
 										</div>
 										<div class="form-group col-md-3">
-											<label for="tipoDeCurso">Tipo de curso</label> <select
+											<label for="tipoDeCurso">Grau de instrução</label> <select
 												class="form-control" id="tipoDeCurso"
 												name="formacao.tipoCurso.id">
 												<option value="0">Selecione</option>
@@ -203,7 +203,7 @@
 													pattern="dd/MM/yyyy" var="dataConclusao"/>
 											<input
 												type="text" class="form-control date" id="mesAnoConclusao"
-												data-required="false" name="formacao.dataConclusao"
+												data-required="false" name="formacao.dataConclusao" 
 												onblur="validarData(this.value)"
 												value="${dataConclusao}">
 										</div>
@@ -231,7 +231,7 @@
 											</div>
 										</div>
 										<div class="form-group col-md-4">
-											<label for="vagaASerAplicado">Vaga a ser aplicado</label> <select
+											<label for="vaga">Vaga a ser aplicado</label> <select
 												class="form-control" id="vaga" name="vagaCandidato.vaga.id">
 												<option value="0">Selecione</option>
 												<c:forEach var="vaga" items="${listaVaga}">
@@ -241,9 +241,9 @@
 											</select>
 										</div>
 										<div class="form-group col-md-3">
-											<label for="exampleInputEmail1">Como ficou sabendo
+											<label for="canalInformacao">Como ficou sabendo
 												desta vaga?</label> <select class="form-control"
-												name="vagaCandidato.canalInformacao.id">
+												name="vagaCandidato.canalInformacao.id" id="canalInformacao">
 												<option value="0">Selecione</option>
 												<c:forEach var="canalInformacao" items="${listaCanal}">
 													<option value="${canalInformacao.id}"
