@@ -19,7 +19,6 @@ import br.com.prosperity.bean.StatusCandidatoBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.converter.CandidatoConverter;
 import br.com.prosperity.dao.AvaliadorCandidatoDAO;
-import br.com.prosperity.dao.AvaliadorDAO;
 import br.com.prosperity.dao.CandidatoDAO;
 import br.com.prosperity.dao.StatusCandidatoDAO;
 import br.com.prosperity.dao.StatusDAO;
@@ -27,7 +26,6 @@ import br.com.prosperity.dao.StatusFuturoDAO;
 import br.com.prosperity.dao.UsuarioDAO;
 import br.com.prosperity.dao.VagaDAO;
 import br.com.prosperity.entity.AvaliadorCandidatoEntity;
-import br.com.prosperity.entity.AvaliadorEntity;
 import br.com.prosperity.entity.CandidatoEntity;
 import br.com.prosperity.entity.StatusCandidatoEntity;
 import br.com.prosperity.entity.StatusFuturoEntity;
@@ -36,30 +34,38 @@ import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.util.FormatUtil;
 
 @Component
-public class CandidatoBusiness  {
+public class CandidatoBusiness {
 
 	@Autowired
 	private CandidatoBean candidatoBean;
+	
 	@Autowired
 	private CandidatoDAO candidatoDAO;
+	
 	@Autowired
 	private CandidatoConverter candidatoConverter;
+	
 	@Autowired
 	private StatusCandidatoDAO statusCandidatoDAO;
+	
 	@Autowired
 	private UsuarioBean usuarioBean;
+	
 	@Autowired
 	private UsuarioDAO usuarioDAO;
+	
 	@Autowired
 	private StatusDAO statusDAO;
+	
 	@Autowired
 	private StatusFuturoDAO statusFuturoDAO;
+	
 	@Autowired
 	private AvaliadorCandidatoDAO avaliadorCandidatoDAO;
-	@Autowired
-	private AvaliadorDAO avaliadorDAO;
+	
 	@Autowired
 	private VagaDAO vagaDAO;
+	
 	@Autowired
 	private HttpSession session;
 
@@ -101,6 +107,7 @@ public class CandidatoBusiness  {
 		List<CandidatoEntity> candidato = candidatoDAO.findByNamedQuery("verificarCanidatura");
 		List<CandidatoEntity> entities = candidatoDAO.findAll();
 		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(entities);
+
 		return beans;
 	}
 
@@ -129,7 +136,7 @@ public class CandidatoBusiness  {
 	}
 
 	@Transactional
-	public void alterarStatus(SituacaoCandidatoBean situacaoCandidato) {		
+	public void alterarStatus(SituacaoCandidatoBean situacaoCandidato) {
 		StatusCandidatoEntity statusCandidatoEntity = statusAlteracao(situacaoCandidato);
 		List<StatusFuturoEntity> statusFuturoEntity = null;
 		List<AvaliadorCandidatoEntity> avaliadorCandidatoEntity = null;
@@ -168,6 +175,7 @@ public class CandidatoBusiness  {
 		candidatoBean.setId(situacaoCandidato.getIdCandidato());
 		statusCandidatoEntity.setCandidato(candidatoConverter.convertBeanToEntity(candidatoBean));
 		statusCandidatoEntity.setDsParecer(situacaoCandidato.getParecer());
+		statusCandidatoEntity.setProposta(situacaoCandidato.getProposta());
 		statusCandidatoEntity.setDtAlteracao(new Date());
 		statusCandidatoEntity.setUsuario(usuarioDAO.findById(usuarioBean.getId()));
 
@@ -194,24 +202,25 @@ public class CandidatoBusiness  {
 		// candidatoConverter.convertEntityToBean(candidatoEntity);
 		// }
 
-		return candidatoBean; 
+		return candidatoBean;
 	}
 
 	private Boolean verificarCandidatura(CandidatoBean candidato) {
-		
+
 		return candidato.getUltimoStatus().getId() == null ? true : false;
-	
+
 	}
 
-	private void inserirAvaliadores(CandidatoEntity idCandidato, Integer idVaga) {
-
+	@Transactional
+	private void inserirAvaliadores(CandidatoEntity candidato, Integer idVaga) {
 		VagaEntity vaga = vagaDAO.findById(idVaga);
-		List<AvaliadorEntity> avaliadoresEntity = avaliadorDAO.findByNamedQuery("obterAvaliadoresDaVaga", vaga);
-		for (AvaliadorEntity avaliadorEntity : avaliadoresEntity) {
-			AvaliadorCandidatoEntity avaliadorCandidatoEnitty = new AvaliadorCandidatoEntity();
-			avaliadorCandidatoEnitty.setIdAvaliador(avaliadorEntity);
-			avaliadorCandidatoEnitty.setIdCandidato(idCandidato);
-			avaliadorCandidatoDAO.insert(avaliadorCandidatoEnitty);
+		List<AvaliadorCandidatoEntity> avaliadoresCandidatoEntity = avaliadorCandidatoDAO
+				.findByNamedQuery("obterAvaliadoresDaVaga", vaga);
+		for (AvaliadorCandidatoEntity avaliadorCandidatoEntity : avaliadoresCandidatoEntity) {
+
+			avaliadorCandidatoEntity.setCandidato(candidato);
+
+			avaliadorCandidatoDAO.update(avaliadorCandidatoEntity);
 		}
 	}
 }
