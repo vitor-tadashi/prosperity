@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.FuncionarioBean;
@@ -49,25 +50,23 @@ public class UsuarioController {
 	}
 
 	@RequestMapping(value = "/criar-perfil", method = RequestMethod.GET)
-	public String criaPerfil(Model model, String erros, String sucesso) {
+	public String criaPerfil(Model model) {
 		List<FuncionalidadeBean> funcionalidades = funcionalidadeBusiness.listar();
 		List<PerfilBean> perfis = perfilBusiness.listar();
 		model.addAttribute("funcionalidades", funcionalidades);
 		model.addAttribute("perfis", perfis);
-		model.addAttribute("erros",erros);
-		model.addAttribute("sucesso", sucesso);
 		
 		return "usuario/criar-perfil";
 	}
 
 	@RequestMapping(value = "/salvar-perfil", method = RequestMethod.POST)
-	public String inserirPerfil(@ModelAttribute("perfilBean") PerfilBean perfilBean, Model model) throws BusinessException {
+	public String inserirPerfil(@ModelAttribute("perfilBean") PerfilBean perfilBean, RedirectAttributes redirectAttributes ) throws BusinessException {
 		try{
 			perfilBusiness.inserir(perfilBean);
-			model.addAttribute("sucesso", "Perfil salvo com sucesso.");
+			redirectAttributes.addFlashAttribute("sucesso", "Perfil salvo com sucesso.");
 			
 		}catch(BusinessException e){
-			model.addAttribute("erros", e.getMessage());
+			redirectAttributes.addFlashAttribute("erros", e.getMessage());
 		}
 
 		return "redirect:criar-perfil";
