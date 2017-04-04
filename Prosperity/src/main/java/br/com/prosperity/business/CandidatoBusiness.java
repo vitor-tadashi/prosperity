@@ -168,6 +168,7 @@ public class CandidatoBusiness  {
 		candidatoBean.setId(situacaoCandidato.getIdCandidato());
 		statusCandidatoEntity.setCandidato(candidatoConverter.convertBeanToEntity(candidatoBean));
 		statusCandidatoEntity.setDsParecer(situacaoCandidato.getParecer());
+		statusCandidatoEntity.setProposta(situacaoCandidato.getProposta());
 		statusCandidatoEntity.setDtAlteracao(new Date());
 		statusCandidatoEntity.setUsuario(usuarioDAO.findById(usuarioBean.getId()));
 
@@ -199,10 +200,8 @@ public class CandidatoBusiness  {
 
 	private Boolean verificarCandidatura(CandidatoBean candidato) {
 		
-		if(candidato.getUltimoStatus().getId() == null)
-			return true;
-		
-		return false;
+		return candidato.getUltimoStatus().getId() == null ? true : false;
+	
 	}
 
 	private void inserirAvaliadores(CandidatoEntity idCandidato, Integer idVaga) {

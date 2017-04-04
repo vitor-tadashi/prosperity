@@ -68,9 +68,8 @@ public class VagaBean {
 		return ultimoStatus;
 	}
 
-	
-
 	public VagaBean() {
+
 
 	}
 
