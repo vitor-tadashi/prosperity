@@ -6,7 +6,7 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Consulta RH</title>
+<title>Consulta de candidatos</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -58,9 +58,8 @@
 											<div>
 												<div class="form-group col-md-6">
 													<label for="exampleInputEmail1">Nome do candidato:</label>
-													<input class="form-control input-sm" 
-														name="candidato.id" id="nomeCandidato"
-														data-required="true" name="nome">
+													<input class="form-control input-sm" name="candidato.id"
+														id="nomeCandidato" data-required="true" name="nome">
 												</div>
 												<!-- /form-group -->
 											</div>
@@ -78,7 +77,8 @@
 											<!-- /form-group -->
 											<div class="form-group col-md-6">
 												<label for="exampleInputEmail1">Senioridade da vaga:</label>
-												<select class="form-control chzn-select"										id="nomeSenioridade" name="senioridade">
+												<select class="form-control chzn-select"
+													id="nomeSenioridade" name="senioridade">
 													<c:forEach var="senioridade" items="${listaSenioridade}">
 														<option value="${senioridade.id}" ${senioridade.nome}></option>
 													</c:forEach>
@@ -117,7 +117,7 @@
 
 														<select multiple="multiple" id="selectedBox2"
 															class="select-box pull-right form-control">
-															
+
 														</select>
 													</div>
 												</div>
@@ -388,7 +388,7 @@
 										</section>
 									</div>
 								</div>
-								</div>
+							</div>
 						</form>
 					</div>
 					<div class="panel-footer ">
@@ -432,9 +432,9 @@
 	<div id="main-container">
 		<div id="breadcrumb">
 			<ul class="breadcrumb">
-				<li><i class="fa fa-home"></i><a href="index.html"> Home</a></li>
-				<li>Consultar</li>
-				<li class="active">Candidatos - RH</li>
+				<li><i class="fa fa-home"></i><a href="/pagina-inicial"> Home</a></li>
+				<li>Candidato</li>
+				<li class="active">Consultar</li>
 			</ul>
 		</div>
 		<!--breadcrumb-->
@@ -443,9 +443,9 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="panel panel-default">
-							<div class="panel-heading">Consultar candidatos - RH</div>
+							<div class="panel-heading">Consultar candidatos</div>
 							<div class="panel-body">
-								<form action="filtrar" method="GET"  class="row">
+								<form action="filtrar" method="GET" class="row">
 									<div class="col-md-2">
 										<label for="exampleInputEmail1">Nome: </label>
 										<div class="search-block">
@@ -467,19 +467,19 @@
 									</div>
 									<div class="col-md-1">
 										<label for="exampleInputEmail1">Salário</label> <input
-											type="text" name="PretensaoDe" class="form-control" placeholder="De"
-											style="width: 80px">
+											type="text" name="PretensaoDe" class="form-control"
+											placeholder="De" style="width: 80px">
 									</div>
 									<div class="col-md-1">
 										<label for="exampleInputEmail1">&nbsp;</label> <input
-											type="text" name="PretensaoPara" class="form-control" placeholder="Até"
-											style="width: 80px">
+											type="text" name="PretensaoPara" class="form-control"
+											placeholder="Até" style="width: 80px">
 									</div>
 									<div class="col-md-3">
 										<label for="exampleInputEmail1">Data:</label>
 										<div class="input-group">
-											<input type="date" name="dataAberturaDe" class="form-control"> <span
-												class="input-group-addon">até</span> <input type="date"
+											<input type="date" name="dataAberturaDe" class="form-control">
+											<span class="input-group-addon">até</span> <input type="date"
 												name="dataAberturaPara" class="form-control">
 										</div>
 									</div>
@@ -491,9 +491,10 @@
 								<!-- /.row -->
 							</div>
 							<!-- /.panel-body - ATE AQUI O FILTRAR-->
-							
-							<table class="table table-bordered table-condensed table-hover table-striped"
-								style= "font-size: 12px; vertical-align: middle">
+
+							<table
+								class="table table-bordered table-condensed table-hover table-striped"
+								style="font-size: 12px; vertical-align: middle">
 								<thead>
 									<tr>
 										<th class="text-center">Nome do candidato</th>
@@ -509,36 +510,37 @@
 									<c:forEach var="candidato" items="${candidatos}">
 										<tr>
 											<td>${candidato.nome}</td>
-											<td></td> 	
+											<td></td>
 											<td>${candidato.valorPretensao}</td>
 											<td><fmt:formatDate value="${candidato.dataAbertura}"
 													pattern="dd/MM/yyyy" /></td>
-											<!-- <td><fmt:formatDate value="${candidato.dataFechamento}"
-													pattern="dd/MM/yyyy" /></td> -->
-											<td></td>
+											<td><span
+												class="label status span-${candidato.ultimoStatus.status.nome}">${candidato.ultimoStatus.status.nome}</span></td>
+											<td>
 											<td><span class="line"></span>
 												<div class="btn-group">
-												
+
 													<!-- comeco do botao -->
 													<button class="btn btn-sm btn-info dropdown-toggle"
-												data-toggle="dropdown" aria-haspopup="true"
-												aria-expanded="false">
-												<i class="fa fa-cogs fa-lg">&nbsp;</i> <span class="caret"></span>
-											</button>
+														data-toggle="dropdown" aria-haspopup="true"
+														aria-expanded="false">
+														<i class="fa fa-cogs fa-lg">&nbsp;</i> <span class="caret"></span>
+													</button>
 													<ul class="dropdown-menu slidedown btnAlinhado">
-														<li> <a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Histórico do Candidato</a></li> 
-														 <li class="divider"></li> <!-- <a href="#aprovado-modal" data-toggle="modal"
-															data-toggle="modal" data-target=".bs-example-modal-lg"><i
-																class="fa fa-tasks fa-lg"></i>&nbsp;Gestão de candidato</a>  --> </li>
-														
-														<li><a href="#"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
 
-														<!--<li class="divider"></li>
-														 <li><a href="#delete-modal" data-toggle="modal"><i
-																class="fa fa-trash-o fa-lg">&nbsp;</i>Fechar vaga</a></li> <!--
+														<li><c:url value="historico/${candidato.id}"
+																var="myURL">
+															</c:url> <a href="${myURL}"><i class="fa fa-pencil fa-lg">&nbsp;</i>Histórico
+																do Candidato</a></li>
+														<li class="divider"></li>
+
+														<li><c:url value="editar/${candidato.id}" var="myURL">
+															</c:url> <a href="${myURL}"><i class="fa fa-pencil"></i>
+																Editar</a></li>
+														<li role="separator" class="divider"></li>
+
 													</ul>
-													</div>
-												 <!-- /fim botao --></td>
+												</div></td>
 										</tr>
 									</c:forEach>
 
@@ -658,7 +660,7 @@
 		});
 	</script>
 
-	 <script type="text/javascript">
+	<script type="text/javascript">
 		//Total máximo de campos que você permitirá criar em seu site:
 		var totalCampos = 4;
 
@@ -744,7 +746,7 @@
 				}
 			}
 		}
-	</script> 
+	</script>
 	<script type="text/javascript">
 		//Escrevendo o código-fonte HTML e ocultando os campos criados:
 		for (iLoop = 1; iLoop <= totalCampos; iLoop++) {
@@ -753,6 +755,6 @@
 							+ iLoop + "\")'></span><br>");
 
 		}
-	</script> 
+	</script>
 </body>
 </html>

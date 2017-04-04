@@ -1,5 +1,6 @@
 package br.com.prosperity.bean;
 
+import javax.validation.constraints.Min;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.springframework.stereotype.Component;
 
@@ -8,7 +9,8 @@ import org.springframework.stereotype.Component;
 public class UsuarioBean {
 
 	private final String SENHA_PADRAO = "verity@123";
-
+	
+	@Min(value = 1, message = "Usuario Inválido")
 	private Integer id;
 	
 	private PerfilBean perfil;

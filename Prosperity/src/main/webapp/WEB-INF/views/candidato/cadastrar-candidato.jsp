@@ -26,7 +26,9 @@
 		<div id="breadcrumb">
 			<ul class="breadcrumb">
 				<li><i class="fa fa-home"></i><a href=""> Início</a></li>
-				<li class="active">Cadastrar candidato</li>
+				<li><a href=""> Candidato</a></li>
+				<li class="active">Cadastrar</li>
+				
 			</ul>
 		</div>
 		<!--breadcrumb-->
@@ -38,6 +40,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">Informações do candidato</div>
 					<div class="panel-body">
+					<div class="alert.alert-success"></div>
 						<div id="textDiv">
 							<c:forEach var="erro" items="${listaErros}">
 								<p>${erro}</p>
@@ -68,7 +71,7 @@
 										<div class="row">
 											<div class="form-group col-md-4">
 												<label class="control-label" for="nome">Nome</label> <input
-													value="${candidato.nome}" type="text"
+													value="${candidato.nome}" type="text" placeholder="Informe seu nome"
 													class="form-control parsley-validated" data-minlength="8"
 													id="nome" name="nome">
 											</div>
@@ -88,7 +91,7 @@
 											<div class="form-group col-md-2">
 												<label for="rg" class="control-label">RG</label> <input
 													type="text" class="form-control rg parsley-validated"
-													id="rg" name="rg" data-required="true" data-required="true"
+													id="rg" name="rg" data-required="true" data-required="true" placeholder="Informe seu RG"
 													value="${candidato.rg}">
 											</div>
 											<div class="form-group col-md-2 col-sm-4">
@@ -175,7 +178,7 @@
 											<label for="tipoDeCurso">Tipo de curso</label> <select
 												class="form-control" id="tipoDeCurso"
 												name="formacao.tipoCurso.id">
-												<option value="tipoCurso">Selecione</option>
+												<option value="0">Selecione</option>
 												<c:forEach var="tipoCurso" items="${tiposCurso}">
 													<option value="${tipoCurso.id}"
 														${tipoCurso.id == candidato.formacao.tipoCurso.id ? 'selected="selected"' : ''}>${tipoCurso.nome}</option>
@@ -187,7 +190,7 @@
 											<label for="situacaoAtual">Situação atual</label> <select
 												class="form-control" id="situacaoAtual"
 												name="formacao.SituacaoAtual.id">
-												<option value="situacaoAtual">Selecione</option>
+												<option value="0">Selecione</option>
 												<c:forEach var="situacaoAtual" items="${listaSituacaoAtual}">
 													<option value="${situacaoAtual.id}"
 														${situacaoAtual.id == candidato.formacao.situacaoAtual.id ? 'selected="selected"' : ''}>${situacaoAtual.descricao}</option>
@@ -229,22 +232,22 @@
 										</div>
 										<div class="form-group col-md-4">
 											<label for="vagaASerAplicado">Vaga a ser aplicado</label> <select
-												class="form-control" id="vaga" name="vaga.nomeVaga.id">
-												<option value="vaga">Selecione</option>
+												class="form-control" id="vaga" name="vagaCandidato.vaga.id">
+												<option value="0">Selecione</option>
 												<c:forEach var="vaga" items="${listaVaga}">
 													<option value="${vaga.id}"
-														${vaga.id == candidato.vagaCandidatoBean.vaga.nomeVaga.id ? 'selected="selected"' : ''}>${vaga.nomeVaga}</option>
+														${vaga.id == candidato.vagaCandidato.vaga.id ? 'selected="selected"' : ''}>${vaga.nomeVaga}</option>
 												</c:forEach>
 											</select>
 										</div>
-										<div class="form-group col-md-4">
+										<div class="form-group col-md-3">
 											<label for="exampleInputEmail1">Como ficou sabendo
 												desta vaga?</label> <select class="form-control"
-												name="vaga.vagaCandidato.canalInformacao.id">
-												<option value="canalInformacao">Selecione</option>
+												name="vagaCandidato.canalInformacao.id">
+												<option value="0">Selecione</option>
 												<c:forEach var="canalInformacao" items="${listaCanal}">
 													<option value="${canalInformacao.id}"
-														${canalInformacao.id == candidato.vagaCandidatoBean.canalInformacao.id ? 'selected="selected"' : ''}>${canalInformacao.nome}</option>
+													${canalInformacao.id == candidato.vagaCandidato.canalInformacao.id ? 'selected="selected"' : ''}>${canalInformacao.nome}</option>
 												</c:forEach>
 											</select>
 										</div>
@@ -278,7 +281,7 @@
 							</div>
 							<div>
 							<input type="hidden" value="${candidato.id}" name="id">
-								<button class="btn btn-success btn-sm btnAjuste ">Salvar</button>
+								<button class="btn btn-success btnAjuste">Salvar</button>
 							</div>
 						</form>
 					</div>

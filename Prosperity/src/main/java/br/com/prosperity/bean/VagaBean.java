@@ -1,12 +1,10 @@
 package br.com.prosperity.bean;
-
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.Future;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -17,40 +15,33 @@ import org.springframework.stereotype.Component;
 @Component
 @XmlRootElement(name = "VagaBean")
 public class VagaBean {
-	
+
 	public VagaBean() {
-		
+
 	}
-	
+
 	public VagaBean(String nome) {
 		this.nomeVaga = nome;
 	}
-	
+	@NotEmpty
+	@Min(value = 1, message = "O campo de vaga a ser aplicado deve ser preenchido")
 	private Integer id;
 	private String nomeVaga;
-
-	@NotNull
-	@NotEmpty(message = "O campo Solicitante deve ser preenchido")
 	private String nomeSolicitante;
-
 	private Double valorPretensao;
-	
-	@Future
+	//@Future(message = "Data para inicio inválido")
 	private Date dataInicio;
-
 	private Character localTrabalho;
 	private Character idTipoVaga;
 	private String horarioEntrada;
 	private String horarioSaida;
 	private Character aumentaQuadro;
-
 	@Valid
 	private ProjetoBean projeto;
 	@Valid
 	private CargoBean cargoBean;
 	@Valid
 	private SenioridadeBean senioridadeBean;
-
 	private String nomeSubstituido; //
 	private String descricaoFormacaoAcademica; //
 	private String descricaoPerfilComportamental; //
@@ -59,9 +50,15 @@ public class VagaBean {
 	private Date dataAprovacao; //
 	private Date dataFechamento; //
 	private Integer numeroCandidatos; //
+	@Valid
 	private UsuarioBean usuarioBean;
 	private List<StatusVagaBean> status;
-
+	private String nmResponsavel;
+	private String nmAreaResponsavel;
+	private String emailResponsavel;
+	private String telResponsavel;
+	
+	
 	private StatusVagaBean ultimoStatus;
 
 	public StatusVagaBean getUltimoStatus() {
@@ -69,12 +66,18 @@ public class VagaBean {
 			Date dataUltimoStatus = status.stream().map(StatusVagaBean::getDataAlteracao).max(Date::compareTo).get();
 			ultimoStatus = status.stream().filter(st -> st.getDataAlteracao().equals(dataUltimoStatus)).findFirst()
 					.get();
-		} else { 	
+		} else {
 			ultimoStatus = new StatusVagaBean("Pendente");
 		}
 
 		return ultimoStatus;
 	}
+	
+	
+	
+	
+
+
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataAberturaDe;
@@ -293,4 +296,37 @@ public class VagaBean {
 	public void setAumentaQuadro(Character aumentaQuadro) {
 		this.aumentaQuadro = aumentaQuadro;
 	}
+	
+	public String getNmResponsavel() {
+		return nmResponsavel;
+	}
+
+	public void setNmResponsavel(String nmResponsavel) {
+		this.nmResponsavel = nmResponsavel;
+	}
+
+	public String getNmAreaResponsavel() {
+		return nmAreaResponsavel;
+	}
+
+	public void setNmAreaResponsavel(String nmAreaResponsavel) {
+		this.nmAreaResponsavel = nmAreaResponsavel;
+	}
+
+	public String getEmailResponsavel() {
+		return emailResponsavel;
+	}
+
+	public void setEmailResponsavel(String emailResponsavel) {
+		this.emailResponsavel = emailResponsavel;
+	}
+
+	public String getTelResponsavel() {
+		return telResponsavel;
+	}
+
+	public void setTelResponsavel(String telResponsavel) {
+		this.telResponsavel = telResponsavel;
+	}
+
 }

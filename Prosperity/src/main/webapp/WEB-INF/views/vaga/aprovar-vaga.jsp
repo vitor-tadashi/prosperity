@@ -103,7 +103,7 @@ footer {
 												<div>
 													<div class="form-group col-md-6 col-xs-6"
 														style="margin-bottom: 0px">
-														<label for="cargo">Nome da vaga</label> <input type="name"
+														<label for="cargo">Nome do cargo</label> <input type="name"
 															class="form-control input-sm" id="cargo" value="Cargo"
 															disabled>
 													</div>
@@ -364,7 +364,7 @@ footer {
 						<!-- Começo Tabela -->
 						<thead>
 							<tr class="text-center">
-								<th class="text-center">Nome da vaga</th>
+								<th class="text-center">Nome do cargo</th>
 								<th class="text-center">Senioridade</th>
 								<th class="text-center">Solicitante</th>
 								<th class="text-center">Projeto</th>
@@ -402,7 +402,7 @@ footer {
 											</button>
 											<ul class="dropdown-menu slidedown btnAlinhado">
 												<li><a href="#visualizar-modal"
-													onclick="info(${vaga.id})"> <i class="fa fa-eye fa-lg">&nbsp</i>Visualizar
+												onclick="info(${vaga.id})"> <i class="fa fa-eye fa-lg">&nbsp</i>Visualizar
 												</a></li>
 												<li role="separator" class="divider"></li>
 												<li><c:url value="editar/${vaga.id}" var="myURL">
