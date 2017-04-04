@@ -12,7 +12,6 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.prosperity.bean.SituacaoVagaBean;
@@ -20,16 +19,15 @@ import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.converter.UsuarioConverter;
 import br.com.prosperity.converter.VagaConverter;
-import br.com.prosperity.dao.AvaliadorDAO;
+import br.com.prosperity.dao.AvaliadorCandidatoDAO;
 import br.com.prosperity.dao.StatusDAO;
 import br.com.prosperity.dao.StatusVagaDAO;
 import br.com.prosperity.dao.UsuarioDAO;
 import br.com.prosperity.dao.VagaDAO;
-import br.com.prosperity.entity.AvaliadorEntity;
-import br.com.prosperity.entity.CargoEntity;
-import br.com.prosperity.entity.SenioridadeEntity;
+import br.com.prosperity.entity.AvaliadorCandidatoEntity;
 import br.com.prosperity.entity.StatusVagaEntity;
 import br.com.prosperity.entity.VagaEntity;
+
 
 @Component
 public class VagaBusiness {
@@ -39,7 +37,7 @@ public class VagaBusiness {
 
 	@Autowired
 	private VagaConverter vagaConverter;
-	
+
 	@Autowired
 	private UsuarioConverter usuarioConverter;
 
@@ -54,9 +52,9 @@ public class VagaBusiness {
 
 	@Autowired
 	private StatusVagaDAO statusVagaDAO;
-	
+
 	@Autowired
-	private AvaliadorDAO avaliadorDAO;
+	private AvaliadorCandidatoDAO avaliadorCandidatoDAO;
 
 	@Autowired
 	private UsuarioBean usuarioBean;
@@ -74,13 +72,13 @@ public class VagaBusiness {
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 		return vagaBean;
 	}
-	
-	@Transactional(readOnly = true)
-	public List<VagaBean> listarVagasAtivas() {
 
-		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagasAtivas"); // PENSAR
-		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
-		return vagaBean;
+	@Transactional(readOnly = true)
+	public List<VagaEntity> listarVagasAtivas() {
+
+		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagasAtivas", 1); // PENSAR
+		//List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
+		return vagaEntity;
 	}
 
 	@Transactional
@@ -90,45 +88,32 @@ public class VagaBusiness {
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 		return vagaBean;
 	}
-	
+
 	@Transactional(readOnly = true)
-	public List<VagaBean> filtroVaga(VagaBean vagas) {
-		Integer idStatus = 0;
-		if (!vagas.getStatus().get(0).getStatus().getNome().equals("")) {
-			idStatus = Integer.parseInt(vagas.getStatus().get(0).getStatus().getNome());
-		}
-		//List<Criterion>li = new ArrayList<>();
-		//li.add(Restrictions.between("dataAbertura", null, null));
-		List<VagaEntity> vaga = vagaDAO.findByCriteria("nomeVaga", false, Restrictions.like("nomeVaga", "%" + vagas.getNomeVaga() + "%"),
-				Restrictions.between("dataAbertura", parseData(vagas.getDataAberturaDe()),  parseData(vagas.getDataAberturaPara())),
-				Restrictions.eq("situacao", true)
-				);
-		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vaga);
-		return vagaBean;
-	}
-	
-	@Transactional(readOnly = true)
-	public List<VagaBean> filtrarVagas(VagaBean vaga) {
+	public List<VagaBean> filtroVaga(VagaBean vaga) {
+
 		Integer idStatus = 0;
 		if (!vaga.getStatus().get(0).getStatus().getNome().equals("")) {
 			idStatus = Integer.parseInt(vaga.getStatus().get(0).getStatus().getNome());
 		}
-		// List<VagaEntity> vagas =
-		// vagaDAO.findByNamedQuery("listarVagaFiltrado",
-		// "%"+vagao.getNomeVaga()+"%", vagao.getDataAberturaDe(),
-		// vagao.getDataAberturaPara(), idStatus);
-		List<VagaEntity> vagas = vagaDAO.findByNamedQuery("listarVagaFiltrado", "%" + vaga.getNomeVaga() + "%",
-				idStatus, parseData(vaga.getDataAberturaDe()), parseData(vaga.getDataAberturaPara()));
-
+		
+		List<Criterion>criterions = new ArrayList<>();
+		if(!vaga.getNomeVaga().isEmpty() || vaga.getNomeVaga() != null){
+			criterions.add(Restrictions.like("nomeVaga", "%" + vaga.getNomeVaga() + "%"));
+		}
+		if(vaga.getDataAberturaDe() != null && vaga.getDataAberturaPara() != null){
+			criterions.add(Restrictions.between("dataAbertura", parseData(vaga.getDataAberturaDe()),  parseData(vaga.getDataAberturaPara())));
+		}
+		
+		if(idStatus != 0) {
+			criterions.add(Restrictions.eq("status.id", idStatus));
+		}
+		List<VagaEntity>vagas = vagaDAO.findByCriteria(criterions);
+		
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagas);
 		return vagaBean;
-
-		/*
-		 * List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("pesquisar",
-		 * vaga); List<VagaBean> vagaBean =
-		 * vagaConverter.convertEntityToBean(vagaEntity); return vagaBean;
-		 */
 	}
+	
 
 	@Transactional(readOnly = true)
 
@@ -143,16 +128,17 @@ public class VagaBusiness {
 
 	@Transactional
 	public void inserir(VagaBean vagaBean /* , HttpSession session */) {
-		
+
 		VagaEntity vagaEntity = vagaConverter.convertBeanToEntity(vagaBean);
-		
+
 		if (vagaEntity.getId() == null) {
 			Date dateNow = new Date();
 			vagaEntity.setDataAbertura(dateNow);
 			// vagaBean.setUsuarioBean(usuario);
 			vagaDAO.insert(vagaEntity);
 		} else {
-			//vagaEntity.setDataAbertura(vagaBean.getDataAbertura()); // VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
+			// vagaEntity.setDataAbertura(vagaBean.getDataAbertura()); //
+			// VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
 			// vagaBean.setUsuarioBean(usuario);
 			vagaDAO.update(vagaEntity);
 		}
@@ -180,8 +166,21 @@ public class VagaBusiness {
 		statusVagaEntity.setVaga(situacaoVaga.getIdVaga());
 		statusVagaEntity.setDataAlteracao(new Date());
 		statusVagaEntity.setUsuario(usuarioDAO.findById(usuarioBean.getId()));
+		statusVagaEntity.setSituacao(true);
+
+		desativarStatus(statusVagaEntity);
 
 		statusVagaDAO.insert(statusVagaEntity);
+	}
+
+	@Transactional
+	private void desativarStatus(StatusVagaEntity statusVaga) {
+		List<StatusVagaEntity> statusVagas = statusVagaDAO.findByNamedQuery("obterStatusVaga", statusVaga.getVaga());
+		for (StatusVagaEntity status : statusVagas) {
+			status.setSituacao(false);
+			statusVagaDAO.update(status);
+		}
+
 	}
 
 	private Date parseData(Date dataAntiga) {
@@ -199,10 +198,10 @@ public class VagaBusiness {
 
 	private void inserirAvaliadores(VagaEntity vaga, List<UsuarioBean> usuarios) {
 		for (UsuarioBean usuario : usuarios) {
-			AvaliadorEntity avaliadorEntity = new AvaliadorEntity();
-			avaliadorEntity.setUsuario(usuarioConverter.convertBeanToEntity(usuario));
-			avaliadorEntity.setVaga(vaga);
-			avaliadorDAO.insert(avaliadorEntity);
+			AvaliadorCandidatoEntity avaliadorCandidatoEntity = new AvaliadorCandidatoEntity();
+			avaliadorCandidatoEntity.setUsuario(usuarioConverter.convertBeanToEntity(usuario));
+			avaliadorCandidatoEntity.setVaga(vaga);
+			avaliadorCandidatoDAO.insert(avaliadorCandidatoEntity);
 		}
 	}
 }

@@ -3,7 +3,6 @@ package br.com.prosperity.bean;
 import java.util.List;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.springframework.stereotype.Component;
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Component;
 @XmlRootElement(name = "VagaCandidatoBean")
 public class VagaCandidatoBean {
 	
-
+	@Min(value = 1, message = "O campo de vaga a ser aplicado deve ser preenchido")
 	private Integer id;
 	
 	@Valid

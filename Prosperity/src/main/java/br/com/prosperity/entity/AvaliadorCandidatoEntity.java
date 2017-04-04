@@ -6,13 +6,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbAvaliadorCandidato")
-@NamedQuery(name = "obterAvaliadoresCandidato", query = "SELECT u FROM AvaliadorCandidatoEntity u WHERE u.idStatus = null")
+@NamedQueries({ 
+@NamedQuery(name = "obterAvaliadoresCandidato", query = "SELECT u FROM AvaliadorCandidatoEntity u WHERE u.idStatus = null"),
+@NamedQuery(name = "obterAvaliadoresDaVaga", query = "SELECT u FROM AvaliadorCandidatoEntity u WHERE u.vaga = ?1")
+})
+
 public class AvaliadorCandidatoEntity {
 
 	@Id
@@ -21,12 +26,16 @@ public class AvaliadorCandidatoEntity {
 	private Integer id;
 
 	@OneToOne
-	@JoinColumn(name = "idAvaliador")
-	private AvaliadorEntity idAvaliador;
+	@JoinColumn(name = "idCandidato")
+	private CandidatoEntity candidato;
 
 	@OneToOne
-	@JoinColumn(name = "idCandidato")
-	private CandidatoEntity idCandidato;
+	@JoinColumn(name = "idVaga")
+	private VagaEntity vaga;
+
+	@OneToOne
+	@JoinColumn(name = "idUsuario")
+	private UsuarioEntity usuario;
 
 	@Column(name = "idStatus")
 	private Integer idStatus = null;
@@ -39,20 +48,28 @@ public class AvaliadorCandidatoEntity {
 		this.id = id;
 	}
 
-	public AvaliadorEntity getIdAvaliador() {
-		return idAvaliador;
+	public CandidatoEntity getCandidato() {
+		return candidato;
 	}
 
-	public void setIdAvaliador(AvaliadorEntity idAvaliador) {
-		this.idAvaliador = idAvaliador;
+	public void setCandidato(CandidatoEntity candidato) {
+		this.candidato = candidato;
 	}
 
-	public CandidatoEntity getIdCandidato() {
-		return idCandidato;
+	public VagaEntity getVaga() {
+		return vaga;
 	}
 
-	public void setIdCandidato(CandidatoEntity idCandidato) {
-		this.idCandidato = idCandidato;
+	public void setVaga(VagaEntity vaga) {
+		this.vaga = vaga;
+	}
+
+	public UsuarioEntity getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(UsuarioEntity usuario) {
+		this.usuario = usuario;
 	}
 
 	public Integer getIdStatus() {
