@@ -14,6 +14,16 @@ public class StatusCandidatoBean {
 	private Integer id;
 	private Date dataAlteracao;
 	private String descricaoParecer;
+	private String proposta;
+
+	public String getProposta() {
+		return proposta;
+	}
+
+	public void setProposta(String proposta) {
+		this.proposta = proposta;
+	}
+
 	private UsuarioBean usuario;
 	private StatusBean status;
 

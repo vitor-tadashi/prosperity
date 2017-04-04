@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -17,6 +18,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "tbStatusVaga")
+@NamedQuery(name = "obterStatusVaga", query = "SELECT v FROM StatusVagaEntity v WHERE v.vaga = ?1")
 public class StatusVagaEntity {
 	/* Mapeamento dos Atributos */
 
@@ -42,6 +44,9 @@ public class StatusVagaEntity {
 
 	@Column(name = "idVaga")
 	private Integer vaga;
+	
+	@Column(name="flSituacao")
+	private boolean situacao;
 
 	/* fim dos mapeamentos */
 
@@ -84,4 +89,14 @@ public class StatusVagaEntity {
 	public void setUsuario(UsuarioEntity usuario) {
 		this.usuario = usuario;
 	}
+
+	public boolean getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(boolean situacao) {
+		this.situacao = situacao;
+	}
+	
+	
 }

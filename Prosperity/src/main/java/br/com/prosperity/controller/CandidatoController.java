@@ -26,7 +26,6 @@ import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.StatusCandidatoBean;
-import br.com.prosperity.bean.StatusVagaBean;
 import br.com.prosperity.bean.TipoCursoBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.AvaliadorBusiness;
@@ -36,7 +35,6 @@ import br.com.prosperity.business.CargoBusiness;
 import br.com.prosperity.business.FuncionarioBusiness;
 import br.com.prosperity.business.SenioridadeBusiness;
 import br.com.prosperity.business.SituacaoAtualBusiness;
-import br.com.prosperity.business.StatusCandidatoBusiness;
 import br.com.prosperity.business.TipoCursoBusiness;
 import br.com.prosperity.business.VagaBusiness;
 import br.com.prosperity.exception.BusinessException;
@@ -66,19 +64,17 @@ public class CandidatoController {
 	@Autowired
 	private VagaBusiness vagaBusiness;
 
-	
 	@Autowired
 	private CanalInformacaoBusiness canalInformacaoBusiness;
-	
+
 	@Autowired
 	private AvaliadorBusiness avaliadorBusiness;
-	
+
 	@Autowired
 	private SituacaoCandidatoBean situacaoCandidatoBean;
-	
+
 	@Autowired
 	private StatusCandidatoBean statusCandidatoBean;
-
 
 	/**
 	 * @author thamires.miranda
@@ -95,7 +91,7 @@ public class CandidatoController {
 
 		List<VagaBean> listaVaga = vagaBusiness.listar();
 		model.addAttribute("listaVaga", listaVaga);
-		
+
 		List<CanalInformacaoBean> listaCanal = canalInformacaoBusiness.obterTodos();
 		model.addAttribute("listaCanal", listaCanal);
 	}
@@ -166,7 +162,6 @@ public class CandidatoController {
 		return "candidato/cadastrar-candidato";
 	}
 
-	
 	@RequestMapping(value = "/historico/{id}", method = RequestMethod.GET)
 	public String historicoCandidato(Model model, @PathVariable Integer id) {
 		CandidatoBean candidato = candidatoBusiness.obter(id);
@@ -176,7 +171,7 @@ public class CandidatoController {
 		return "candidato/historico-candidato";
 	}
 
-	@RequestMapping(value = "consultar-rh", method = RequestMethod.GET)
+	@RequestMapping(value = "consultar", method = RequestMethod.GET)
 	public String consultarCandidatoRH(Model model) {
 		List<CandidatoBean> candidatos = candidatoBusiness.listar();
 		model.addAttribute("candidatos", candidatos);
@@ -194,7 +189,7 @@ public class CandidatoController {
 
 		// avaliadorBusiness.listar();
 
-		return "candidato/consulta-rh";
+		return "candidato/consultar-candidato";
 	}
 
 	@RequestMapping(value = "filtrar", method = RequestMethod.GET)
@@ -222,9 +217,9 @@ public class CandidatoController {
 
 		List<VagaBean> listaVaga = vagaBusiness.listar();
 		model.addAttribute("listaVaga", listaVaga);
-		
-		List<StatusCandidatoBean> listaStatusCandidato = StatusCandidatoBusiness.obterTodos();
-		model.addAttribute("listaStatusCandidato", listaStatusCandidato);
+		// List<StatusCandidatoBean> listaStatusCandidato =
+		// StatusCandidatoBusiness.obterTodos();
+		// model.addAttribute("listaStatusCandidato", listaStatusCandidato);
 
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
 		model.addAttribute("listaCargo", listaCargo);
@@ -240,12 +235,7 @@ public class CandidatoController {
 		return "candidato/consulta-rh";
 	}
 
-	@RequestMapping(value = "consultar-gestor", method = RequestMethod.GET)
-	public String consultarCandidatoGestor() {
-		return "candidato/consulta-gestor";
-	}
-	
-	@RequestMapping(value = "aprovar-candidato", method = RequestMethod.GET)
+	@RequestMapping(value = "aprovar", method = RequestMethod.GET)
 	public String aprovarCandidato(Model model) {
 
 		List<CandidatoBean> candidatos = candidatoBusiness.listar();
@@ -287,10 +277,11 @@ public class CandidatoController {
 
 		return novosErros;
 	}
-	
-	@RequestMapping(value= {"alterar-status-candidato"}, method = RequestMethod.POST)
+
+	@RequestMapping(value = { "alterar-status-candidato" }, method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
-	public @ResponseBody SituacaoCandidatoBean alterarStatusCandidato(Model model, @ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato) {
+	public @ResponseBody SituacaoCandidatoBean alterarStatusCandidato(Model model,
+			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato) {
 		candidatoBusiness.alterarStatus(situacaoCandidato);
 		return situacaoCandidato;
 	}
