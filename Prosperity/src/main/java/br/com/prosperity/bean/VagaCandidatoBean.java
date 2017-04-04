@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @XmlRootElement(name = "VagaCandidatoBean")
 public class VagaCandidatoBean {
 	
-
+	@Min(value = 1, message = "O campo de vaga a ser aplicado deve ser preenchido")
 	private Integer id;
 	
 	@Valid

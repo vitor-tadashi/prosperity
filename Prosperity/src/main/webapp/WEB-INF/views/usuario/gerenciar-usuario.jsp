@@ -49,8 +49,7 @@
 									
 									<div class="form-group col-md-6">
 										<label for="usuario">Usuário</label>
-										<input type="text" data-type="user" class="form-control" id="usuario" data-parsley-errors-container=".errorspannewpassinput" data-required="true" name="nome" placeholder="Informe o usuário">
-										<div class="errorBlock"></div>
+										<input type="text" data-type="user" class="form-control" id="usuario" data-required="true" name="nome" placeholder="Informe o usuário">
 									</div>
 									<div class="form-group col-md-6">
 										<label for="email">E-mail corporativo</label>
@@ -107,7 +106,7 @@
 							<div class="panel-body">
 								<div id="divAlert"></div>
 								<c:if test="${not empty erro}">
-									<div class="alert alert-danger alert-dismissible fade in">
+									<div class="alert alert-danger fade in">
 										${erro}
 									</div>
 								</c:if>
@@ -157,7 +156,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 
 	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>

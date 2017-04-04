@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -52,7 +54,9 @@ public class CandidatoBean  extends FormatUtil {
 	private Set<VagaCandidatoBean> vagas = new HashSet<>();
 	private List<CandidatoCompetenciaBean> competencias = new ArrayList<>();
 	private Map<String, List<StatusCandidatoBean>> statusPorMesAno;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataUltimoContato;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date entrevista;
 	private String proposta;
 	private Double valorMin;
@@ -60,6 +64,7 @@ public class CandidatoBean  extends FormatUtil {
 	private StatusCandidatoBean ultimoStatus;
 	@Valid
 	private VagaBean ultimaVaga;
+	@Valid
 	private VagaCandidatoBean vagaCandidato;
 	private Double pretensaoDe;
 	private Double pretensaoPara;

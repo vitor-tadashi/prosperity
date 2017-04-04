@@ -2,11 +2,13 @@ package br.com.prosperity.business;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,6 +27,7 @@ import br.com.prosperity.dao.VagaDAO;
 import br.com.prosperity.entity.AvaliadorCandidatoEntity;
 import br.com.prosperity.entity.StatusVagaEntity;
 import br.com.prosperity.entity.VagaEntity;
+
 
 @Component
 public class VagaBusiness {
@@ -71,11 +74,11 @@ public class VagaBusiness {
 	}
 
 	@Transactional(readOnly = true)
-	public List<VagaBean> listarVagasAtivas() {
+	public List<VagaEntity> listarVagasAtivas() {
 
-		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagasAtivas"); // PENSAR
-		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
-		return vagaBean;
+		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagasAtivas", 1); // PENSAR
+		//List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
+		return vagaEntity;
 	}
 
 	@Transactional
@@ -87,43 +90,30 @@ public class VagaBusiness {
 	}
 
 	@Transactional(readOnly = true)
-	public List<VagaBean> filtroVaga(VagaBean vagas) {
-		Integer idStatus = 0;
-		if (!vagas.getStatus().get(0).getStatus().getNome().equals("")) {
-			idStatus = Integer.parseInt(vagas.getStatus().get(0).getStatus().getNome());
-		}
-		// List<Criterion>li = new ArrayList<>();
-		// li.add(Restrictions.between("dataAbertura", null, null));
-		List<VagaEntity> vaga = vagaDAO.findByCriteria("nomeVaga", false,
-				Restrictions.like("nomeVaga", "%" + vagas.getNomeVaga() + "%"), Restrictions.between("dataAbertura",
-						parseData(vagas.getDataAberturaDe()), parseData(vagas.getDataAberturaPara())),
-				Restrictions.eq("situacao", true));
-		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vaga);
-		return vagaBean;
-	}
+	public List<VagaBean> filtroVaga(VagaBean vaga) {
 
-	@Transactional(readOnly = true)
-	public List<VagaBean> filtrarVagas(VagaBean vaga) {
 		Integer idStatus = 0;
 		if (!vaga.getStatus().get(0).getStatus().getNome().equals("")) {
 			idStatus = Integer.parseInt(vaga.getStatus().get(0).getStatus().getNome());
 		}
-		// List<VagaEntity> vagas =
-		// vagaDAO.findByNamedQuery("listarVagaFiltrado",
-		// "%"+vagao.getNomeVaga()+"%", vagao.getDataAberturaDe(),
-		// vagao.getDataAberturaPara(), idStatus);
-		List<VagaEntity> vagas = vagaDAO.findByNamedQuery("listarVagaFiltrado", "%" + vaga.getNomeVaga() + "%",
-				idStatus, parseData(vaga.getDataAberturaDe()), parseData(vaga.getDataAberturaPara()));
-
+		
+		List<Criterion>criterions = new ArrayList<>();
+		if(!vaga.getNomeVaga().isEmpty() || vaga.getNomeVaga() != null){
+			criterions.add(Restrictions.like("nomeVaga", "%" + vaga.getNomeVaga() + "%"));
+		}
+		if(vaga.getDataAberturaDe() != null && vaga.getDataAberturaPara() != null){
+			criterions.add(Restrictions.between("dataAbertura", parseData(vaga.getDataAberturaDe()),  parseData(vaga.getDataAberturaPara())));
+		}
+		
+		if(idStatus != 0) {
+			criterions.add(Restrictions.eq("status.id", idStatus));
+		}
+		List<VagaEntity>vagas = vagaDAO.findByCriteria(criterions);
+		
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagas);
 		return vagaBean;
-
-		/*
-		 * List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("pesquisar",
-		 * vaga); List<VagaBean> vagaBean =
-		 * vagaConverter.convertEntityToBean(vagaEntity); return vagaBean;
-		 */
 	}
+	
 
 	@Transactional(readOnly = true)
 

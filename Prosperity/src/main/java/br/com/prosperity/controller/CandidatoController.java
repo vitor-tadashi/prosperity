@@ -241,23 +241,8 @@ public class CandidatoController {
 	private List<String> buildErrorMessage(List<FieldError> error) {
 		List<String> novosErros = new ArrayList<>();
 
-		for (FieldError data : error) {
-
-			switch (data.getField()) {
-
-			case "dataNascimento":
-				novosErros.add(" O campo de data de nascimento deve ser preenchida ");
-				break;
-			case "entrevista":
-				novosErros.add("O campo de data da entrevista deve ser preenchida ");
-				break;
-			case "formacao.dataConclusao":
-				novosErros.add(" O campo de data da conclusão do curso deve ser preenchido ");
-				break;
-			default:
-				novosErros.add(data.getDefaultMessage());
-
-			}
+		for (FieldError erros : error) {
+				novosErros.add(erros.getDefaultMessage());
 
 		}
 

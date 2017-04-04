@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -12,6 +13,7 @@ public class FormacaoBean {
 	private Integer id;
 	private String nomeInstituicao;
 	private String nomeCurso;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataConclusao;
 	private TipoCursoBean tipoCurso;
 	private SituacaoAtualBean situacaoAtual;
