@@ -24,6 +24,7 @@ public class StatusVagaBean {
 	private Date dataAlteracao;
 	private Integer vagaBean;
 	private UsuarioBean usuarioBean;
+	private boolean situacao;
 
 	public Integer getId() {
 		return id;
@@ -64,4 +65,14 @@ public class StatusVagaBean {
 	public void setUsuarioBean(UsuarioBean usuarioBean) {
 		this.usuarioBean = usuarioBean;
 	}
+
+	public boolean getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(boolean situacao) {
+		this.situacao = situacao;
+	}
+	
+	
 }
