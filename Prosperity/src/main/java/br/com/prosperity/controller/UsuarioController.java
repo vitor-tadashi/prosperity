@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.FuncionarioBean;
@@ -47,7 +48,7 @@ public class UsuarioController {
 		model.addAttribute("perfis", perfis);
 		model.addAttribute("usuarios", usuarios);
 		
-		return "usuario/consultar-usuario";
+		return "usuario/gerenciar-usuario";
 	}
 
 	@RequestMapping(value = "/criar-perfil", method = RequestMethod.GET)
@@ -76,14 +77,14 @@ public class UsuarioController {
 	}
 
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
-	public String inserirUsuario(UsuarioBean usuario, Model model) {
+	public String inserirUsuario(UsuarioBean usuario, RedirectAttributes redirectAttrs) {
 		try {
 			usuarioBusiness.inserir(usuario);
 		} catch (BusinessException e) {
-			model.addAttribute("erro", e.getMessage());
+			redirectAttrs.addFlashAttribute("erro", e.getMessage());
 		}
-		carregaUsuarios(model);
-		return "usuario/consultar-usuario";
+		
+		return "redirect:gerenciar";
 	}
 	
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.GET)

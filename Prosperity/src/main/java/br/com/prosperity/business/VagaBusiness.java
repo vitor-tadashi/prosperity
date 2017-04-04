@@ -2,17 +2,14 @@ package br.com.prosperity.business;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.prosperity.bean.SituacaoVagaBean;
@@ -26,8 +23,6 @@ import br.com.prosperity.dao.StatusVagaDAO;
 import br.com.prosperity.dao.UsuarioDAO;
 import br.com.prosperity.dao.VagaDAO;
 import br.com.prosperity.entity.AvaliadorEntity;
-import br.com.prosperity.entity.CargoEntity;
-import br.com.prosperity.entity.SenioridadeEntity;
 import br.com.prosperity.entity.StatusVagaEntity;
 import br.com.prosperity.entity.VagaEntity;
 
@@ -76,11 +71,11 @@ public class VagaBusiness {
 	}
 	
 	@Transactional(readOnly = true)
-	public List<VagaBean> listarVagasAtivas() {
+	public List<VagaEntity> listarVagasAtivas() {
 
 		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagasAtivas", 1); // PENSAR
-		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
-		return vagaBean;
+		//List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
+		return vagaEntity;
 	}
 
 	@Transactional
