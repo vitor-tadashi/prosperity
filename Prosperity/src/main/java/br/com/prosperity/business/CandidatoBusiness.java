@@ -199,10 +199,8 @@ public class CandidatoBusiness  {
 
 	private Boolean verificarCandidatura(CandidatoBean candidato) {
 		
-		if(candidato.getUltimoStatus().getId() == null)
-			return true;
-		
-		return false;
+		return candidato.getUltimoStatus().getId() == null ? true : false;
+	
 	}
 
 	private void inserirAvaliadores(CandidatoEntity idCandidato, Integer idVaga) {

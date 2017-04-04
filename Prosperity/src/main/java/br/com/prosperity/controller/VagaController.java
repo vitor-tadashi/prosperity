@@ -211,7 +211,8 @@ public class VagaController {
 		if (result.hasErrors()) {
 			model.addAttribute("erro", result.getErrorCount());
 			model.addAttribute("listaErros", buildErrorMessage(result.getFieldErrors()));
-			solicitarVaga(model);
+			model.addAttribute("vaga", vagaBean);
+			obterDominiosVaga(model);
 			return "vaga/solicitar-vaga";
 		}
 
