@@ -59,6 +59,7 @@ public class CandidatoBean  extends FormatUtil {
 	private Double valorMin;
 	private Double valorMax;
 	private StatusCandidatoBean ultimoStatus;
+	@Valid
 	private VagaBean ultimaVaga;
 	private VagaCandidatoBean vagaCandidato;
 	private Double pretensaoDe;

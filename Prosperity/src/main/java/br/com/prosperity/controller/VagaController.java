@@ -115,7 +115,13 @@ public class VagaController {
 
 	@RequestMapping(value = { "filtro" }, method = RequestMethod.GET)
 	public String filtrar(Model model, VagaBean vaga) {
-		List<VagaBean> listaVagaFiltro = vagaBusiness.filtrarVagas(vaga);
+		if(vaga.getNomeVaga().isEmpty() && vaga.getDataAberturaDe() == null && vaga.getDataAberturaPara() == null &&
+				vaga.getStatus().get(0).getStatus().getNome().equals("Selecione")) {
+			return "redirect:consultar";
+					
+		}
+		
+		List<VagaBean> listaVagaFiltro = vagaBusiness.filtroVaga(vaga);
 		model.addAttribute("vagas", listaVagaFiltro);
 
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
@@ -124,10 +130,12 @@ public class VagaController {
 		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.obterTodos();
 		model.addAttribute("listaSenioridade", listaSenioridade);
 
+
 		/*
 		 * List<VagaBean> listaVaga = vagaBusiness.listar();
 		 * model.addAttribute("listaVaga", listaVaga);
 		 */
+
 		List<StatusBean> listaStatus = statusBusiness.obterTodos();
 		model.addAttribute("listaStatus", listaStatus);
 
@@ -207,7 +215,8 @@ public class VagaController {
 		if (result.hasErrors()) {
 			model.addAttribute("erro", result.getErrorCount());
 			model.addAttribute("listaErros", buildErrorMessage(result.getFieldErrors()));
-			solicitarVaga(model);
+			model.addAttribute("vaga", vagaBean);
+			obterDominiosVaga(model);
 			return "vaga/solicitar-vaga";
 		}
 
