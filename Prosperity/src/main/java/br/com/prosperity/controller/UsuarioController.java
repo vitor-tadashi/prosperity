@@ -51,7 +51,7 @@ public class UsuarioController {
 		return "usuario/gerenciar-usuario";
 	}
 
-	@RequestMapping(value = "/criar-perfil", method = RequestMethod.GET)
+	@RequestMapping(value = "/perfil/gerenciar", method = RequestMethod.GET)
 	public String criaPerfil(Model model, String erros, String sucesso) {
 		List<FuncionalidadeBean> funcionalidades = funcionalidadeBusiness.listar();
 		List<PerfilBean> perfis = perfilBusiness.listar();
@@ -60,7 +60,7 @@ public class UsuarioController {
 		model.addAttribute("erros",erros);
 		model.addAttribute("sucesso", sucesso);
 		
-		return "usuario/criar-perfil";
+		return "usuario/gerenciar-perfil";
 	}
 
 	@RequestMapping(value = "/salvar-perfil", method = RequestMethod.POST)
