@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,16 +38,15 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioBusiness usuarioBusiness;
 
-	@RequestMapping(value = "/listar", method = RequestMethod.GET)
-	public String carregaUsuarios(Model model, String erro) {
+	@RequestMapping(value = "/gerenciar", method = RequestMethod.GET)
+	public String carregaUsuarios(Model model) {
 		List<UsuarioBean> usuarios = usuarioBusiness.findAll();
 		List<FuncionarioBean> funcionarios = funcionarioBusiness.findAll();
 		List<PerfilBean> perfis = perfilBusiness.listar();
 		model.addAttribute("funcionarios", funcionarios);
 		model.addAttribute("perfis", perfis);
 		model.addAttribute("usuarios", usuarios);
-		model.addAttribute("erro", erro);
-
+		
 		return "usuario/consultar-usuario";
 	}
 
@@ -82,30 +82,31 @@ public class UsuarioController {
 		} catch (BusinessException e) {
 			model.addAttribute("erro", e.getMessage());
 		}
-		return "redirect:listar";
+		carregaUsuarios(model);
+		return "usuario/consultar-usuario";
 	}
 	
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.GET)
 	public String redirecionaLista() {
-		return "redirect:listar";
+		return "redirect:gerenciar";
 	}
 	
-	@RequestMapping(value = {"/carregar-usuario-api"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/carregar-usuario-api/{id}"}, method = RequestMethod.GET)
 	@ResponseStatus(value = HttpStatus.OK)
-	public @ResponseBody UsuarioBean carregaUsuarioAjax(Integer id) {
+	public @ResponseBody UsuarioBean carregaUsuarioAjax(@PathVariable Integer id) {
 		UsuarioBean usuario = usuarioBusiness.obterPorId(id);
 		return usuario;
 	}
 	
-	@RequestMapping(value = "/mudar-status-api", method = RequestMethod.POST)
+	@RequestMapping(value = "/mudar-status-api/{id}", method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
-	public void mudarStatusAjax(Integer id) {
+	public void mudarStatusAjax(@PathVariable Integer id) {
 		usuarioBusiness.mudarStatus(id);
 	}
 	
-	@RequestMapping(value = "/redefinir-senha-api", method = RequestMethod.POST)
+	@RequestMapping(value = "/redefinir-senha-api/{id}", method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
-	public void redefinirSenhaAjax(Integer id) {
+	public void redefinirSenhaAjax(@PathVariable Integer id) {
 		usuarioBusiness.redefinirSenha(id);
 	}
 	

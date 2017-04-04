@@ -22,12 +22,9 @@ public class VagasService {
 	@CrossOrigin
 	@RequestMapping(value="/vagas-api", produces="application/json")
 	public @ResponseBody JSONWithPadding vagasParaJSON() {
-		System.out.println("Chegou aqui!");
-		List<VagaBean> vagas = vagaBusiness.listar();
+		List<VagaBean> vagas = vagaBusiness.listarVagasAtivas();
 		
 		return new JSONWithPadding(vagas);
-		//Gson gson = new Gson();
-		//return gson.toJson(vagas);
 	}
 	
 }

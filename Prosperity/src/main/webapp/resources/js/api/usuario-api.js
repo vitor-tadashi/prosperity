@@ -14,12 +14,9 @@
 			$('#btnMudarStatus').show();
 			idUsuario = id;
 			$.ajax({
-				url : "carregar-usuario-api",
+				url : "carregar-usuario-api/"+idUsuario,
 				type : "GET",
-				dataType : "JSON",
-				data : {
-					'id' : id
-				}
+				dataType : "JSON"
 			}).done(function(data) {
 				$('input#id').val(data.id);
 				$('input#usuario').val(data.nome);
@@ -52,19 +49,15 @@
 
 	// Submit do formulário
 	$("button#btnSalvar").click(function() {
-		$("form#frmUsuario").submit(function(e) {
-			//e.preventDefault();
-			alert('success');
-		});
+		$("form#frmUsuario").submit();
 	});
 
 	// Mudar status
 	$("button#btnMudarStatus").click(function() {
 		var mensagem;
 		$.ajax({
-			url : "mudar-status-api",
-			type : "POST",
-			data : {'id' : idUsuario}
+			url : "mudar-status-api/"+idUsuario,
+			type : "POST"
 		}).done(function() {
 			if(!ativo) {
             	$('#status_'+idUsuario).find('span').text('Ativo').removeClass('label-danger').addClass('label-success');
@@ -88,9 +81,8 @@
 	$("button#btnRedefinirSenha").click(function() {
 		var mensagem;
 		$.ajax({
-			url : "redefinir-senha-api",
-			type : "POST",
-			data : {'id' : idUsuario}
+			url : "redefinir-senha-api/"+idUsuario,
+			type : "POST"
 		}).done(function() {
 			$('#usuario-modal').modal('hide');
 			mensagem = 'A senha do usuário <strong>' + nomeFuncionario + '</strong> foi redefinida com sucesso!'
