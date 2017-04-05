@@ -106,10 +106,10 @@
 						</span> <span class="text"> Gerenciar </span> <span class="menu-hover"></span>
 					</a>
 						<ul class="submenu">
-							<li class="menu-opcao hide" value="20"><a
+							<li class="menu-opcao hide" value="22"><a
 								href="/usuario/gerenciar"> <span class="submenu-label">Usuário</span>
 							</a></li>
-							<li class="menu-opcao hide" value="19"><a
+							<li class="menu-opcao hide" value="16"><a
 								href="/usuario/perfil/gerenciar"> <span
 									class="submenu-label">Perfil</span>
 							</a></li>
