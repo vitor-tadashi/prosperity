@@ -1,11 +1,10 @@
 package br.com.prosperity.bean;
+
 import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -16,20 +15,12 @@ import org.springframework.stereotype.Component;
 @XmlRootElement(name = "VagaBean")
 public class VagaBean {
 
-	public VagaBean() {
-
-	}
-
-	public VagaBean(String nome) {
-		this.nomeVaga = nome;
-	}
-	@NotEmpty
 	@Min(value = 1, message = "O campo de vaga a ser aplicado deve ser preenchido")
 	private Integer id;
 	private String nomeVaga;
 	private String nomeSolicitante;
 	private Double valorPretensao;
-	//@Future(message = "Data para inicio inválido")
+	// @Future(message = "Data para inicio inválido")
 	private Date dataInicio;
 	private Character localTrabalho;
 	private Character idTipoVaga;
@@ -57,8 +48,11 @@ public class VagaBean {
 	private String nmAreaResponsavel;
 	private String emailResponsavel;
 	private String telResponsavel;
-	
 	private StatusVagaBean ultimoStatus;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date dataAberturaDe;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date dataAberturaPara;
 
 	public StatusVagaBean getUltimoStatus() {
 		if (status != null && status.size() > 0) {
@@ -72,11 +66,14 @@ public class VagaBean {
 		return ultimoStatus;
 	}
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date dataAberturaDe;
+	public VagaBean() {
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date dataAberturaPara;
+
+	}
+
+	public VagaBean(String nome) {
+		this.nomeVaga = nome;
+	}
 
 	public Date getDataAberturaDe() {
 		return dataAberturaDe;
@@ -289,7 +286,7 @@ public class VagaBean {
 	public void setAumentaQuadro(Character aumentaQuadro) {
 		this.aumentaQuadro = aumentaQuadro;
 	}
-	
+
 	public String getNmResponsavel() {
 		return nmResponsavel;
 	}

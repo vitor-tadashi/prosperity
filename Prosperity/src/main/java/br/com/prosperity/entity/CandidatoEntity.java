@@ -38,7 +38,9 @@ import javax.persistence.TemporalType;
 		@NamedQuery(name = "pesquisarNome", query = "SELECT u FROM CandidatoEntity u WHERE u.nome like ?1 AND u.valorPretensaoSalarial BETWEEN ?2 AND ?3 AND u.dataAbertura BETWEEN ?4 AND ?5"),
 		@NamedQuery(name = "obterPorCPF", query = "SELECT u FROM CandidatoEntity u WHERE u.cpf = ?1"),
 		@NamedQuery(name = "verificarCanidatura", query = "SELECT c FROM CandidatoEntity c JOIN c.statusCandidatos sc WHERE sc.status in(6,7,14)"
-				+ "AND sc.idStatusCandidato = (SELECT MAX(sc.idStatusCandidato) FROM CandidatoEntity c JOIN c.statusCandidatos sc)")})
+				+ "AND sc.idStatusCandidato = (SELECT MAX(sc.idStatusCandidato) FROM CandidatoEntity c JOIN c.statusCandidatos sc)"),
+		@NamedQuery(name="obterParaCombo", query="SELECT v.id, v.nomeVaga FROM VagaEntity v")
+})
 		
 public class CandidatoEntity {
 

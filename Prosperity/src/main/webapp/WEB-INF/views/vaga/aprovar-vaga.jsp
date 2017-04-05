@@ -16,7 +16,7 @@
 <style type="text/css">
 footer {
 	page-break-before: always;
-}
+	}
 
 @media screen {
 	#printSection {
@@ -39,9 +39,7 @@ footer {
 	label {
 		font-weight: normal;
 	}
-	#quebra {
-		page-break-inside: avoid;
-	}
+	#quebra { page-break-inside:avoid; }
 }
 </style>
 
@@ -274,9 +272,8 @@ footer {
 											<!-- /form-group -->
 										</div>
 									</section>
-								</div>
 							</div>
-
+							</div>
 						</div>
 					</div>
 				</div>
@@ -451,7 +448,7 @@ footer {
     		data: { 'id' : listaId},
     		success: function(lista){
     			console.log(lista);
-    			$('#titulo').html(lista.nomeVaga);
+    			$('#titulo').html(lista.cargoBean.nome);
     			$('input#vagaGestor').val(lista.nomeSolicitante);
     			if(lista.localTrabalho == 'C') {
     				//$("#cliente").attr('checked', 'checked');

@@ -22,7 +22,7 @@ public class VagasService {
 	@CrossOrigin
 	@RequestMapping(value="/vagas-api", produces="application/json")
 	public @ResponseBody JSONWithPadding vagasParaJSON() {
-		List<VagaEntity> vagas = vagaBusiness.listarVagasAtivas();
+	List<VagaEntity> vagas = vagaBusiness.listarVagasAtivas();
 		
 		return new JSONWithPadding(vagas);
 	}
