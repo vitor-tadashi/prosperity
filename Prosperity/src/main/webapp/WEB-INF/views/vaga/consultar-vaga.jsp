@@ -503,12 +503,12 @@
 								</div>
 							</form>
 						</div>
-						
 						<!--</panel body>-->
 						<table
 							id="tabelaVaga"
 							class="table table-bordered table-condensed table-hover table-striped"
-							style="font-size: 12px; vertical-align: middle;">
+							style="font-size: 12px; vertical-align: middle;"
+							id="dataTable">
 							<thead>
 								<tr>
 									<th class="text-center">Vaga</th>
@@ -623,6 +623,8 @@
 								</tr> -->
 							</tbody>
 						</table>
+						
+						
 					</div>
 					<!--</panel default>-->
 					<div class="panel-footer clearfix">
