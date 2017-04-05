@@ -61,7 +61,7 @@ public class UsuarioController {
 		return "usuario/gerenciar-perfil";
 	}
 
-	@RequestMapping(value = "/salvar-perfil", method = RequestMethod.POST)
+	@RequestMapping(value = "/perfil/salvar-perfil", method = RequestMethod.POST)
 	public String inserirPerfil(@ModelAttribute("perfilBean") PerfilBean perfilBean, RedirectAttributes redirectAttributes ) throws BusinessException {
 		try{
 			perfilBusiness.inserir(perfilBean);
@@ -71,7 +71,7 @@ public class UsuarioController {
 			redirectAttributes.addFlashAttribute("erros", e.getMessage());
 		}
 
-		return "redirect:criar-perfil";
+		return "redirect:gerenciar";
 	}
 
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)

@@ -1,6 +1,19 @@
-.font14 {
-	font-size: 14px;
-}
 .li-msg{
 	margin-left: 25px;
+}
+.padding-esq-0{
+	padding-left: 0px;
+}
+.margin-topo-5{
+	margin-top: 5px; 
+}
+.padding-topo-5{
+	padding-top: 5px;
+}
+#txt-larg{
+	width: 255px;
+}
+.msg-margin{
+	margin-bottom: 0px;
+	margin-top: 10px;
 }
