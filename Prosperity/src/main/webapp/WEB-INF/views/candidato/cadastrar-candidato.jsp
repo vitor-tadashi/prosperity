@@ -230,7 +230,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="form-group col-md-4">
+										<div class="form-group col-md-3">
 											<label for="vaga">Vaga a ser aplicado</label> <select
 												class="form-control" id="vaga" name="vagaCandidato.vaga.id">
 												<option value="0">Selecione</option>
