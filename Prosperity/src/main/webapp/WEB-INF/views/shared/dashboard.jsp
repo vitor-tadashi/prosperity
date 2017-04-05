@@ -62,10 +62,10 @@
 						</span> <span class="text"> Candidato </span> <span class="menu-hover"></span>
 					</a>
 						<ul class="submenu">
-							<li class="menu-opcao hide" value="20"><a
+							<li class="menu-opcao hide" value="17"><a
 								href="/candidato/cadastrar"> <span class="submenu-label">Cadastrar</span>
 							</a></li>
-							<li class="menu-opcao hide" value="19"><a
+							<li class="menu-opcao hide" value="18"><a
 								href="/candidato/consultar"> <span
 									class="submenu-label">Consultar</span>
 							</a></li>
@@ -75,11 +75,11 @@
 						</span> <span class="text"> Vaga </span> <span class="menu-hover"></span>
 					</a>
 						<ul class="submenu">
-							<li class="menu-opcao hide" value="20"><a
+							<li class="menu-opcao hide" value="3"><a
 								href="/vaga/solicitar"> <span class="submenu-label">Solicitar
 										abertura</span>
 							</a></li>
-							<li class="menu-opcao hide" value="19"><a
+							<li class="menu-opcao hide" value="2"><a
 								href="/vaga/consultar"> <span
 									class="submenu-label">Consultar</span>
 							</a></li>
@@ -89,10 +89,10 @@
 						</span> <span class="text"> Aprovar / Reprovar </span> <span class="menu-hover"></span>
 					</a>
 						<ul class="submenu">
-							<li class="menu-opcao hide" value="20"><a
+							<li class="menu-opcao hide" value="25"><a
 								href="/candidato/aprovar"> <span class="submenu-label">Candidato</span>
 							</a></li>
-							<li class="menu-opcao hide" value="19"><a
+							<li class="menu-opcao hide" value="1"><a
 								href="/vaga/aprovar"> <span
 									class="submenu-label">Vaga</span>
 							</a></li>
