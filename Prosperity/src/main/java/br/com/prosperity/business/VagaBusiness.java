@@ -74,11 +74,11 @@ public class VagaBusiness {
 	}
 
 	@Transactional(readOnly = true)
-	public List<VagaBean> listarVagasAtivas() {
+	public List<VagaEntity> listarVagasAtivas() {
 
 		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagasAtivas", 1); // PENSAR
-		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
-		return vagaBean;
+		//List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
+		return vagaEntity;
 	}
 
 	@Transactional
