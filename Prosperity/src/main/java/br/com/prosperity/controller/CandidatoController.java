@@ -25,10 +25,8 @@ import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
-import br.com.prosperity.bean.StatusCandidatoBean;
 import br.com.prosperity.bean.TipoCursoBean;
 import br.com.prosperity.bean.VagaBean;
-import br.com.prosperity.business.AvaliadorBusiness;
 import br.com.prosperity.business.CanalInformacaoBusiness;
 import br.com.prosperity.business.CandidatoBusiness;
 import br.com.prosperity.business.CargoBusiness;
@@ -66,15 +64,6 @@ public class CandidatoController {
 
 	@Autowired
 	private CanalInformacaoBusiness canalInformacaoBusiness;
-
-	@Autowired
-	private AvaliadorBusiness avaliadorBusiness;
-
-	@Autowired
-	private SituacaoCandidatoBean situacaoCandidatoBean;
-
-	@Autowired
-	private StatusCandidatoBean statusCandidatoBean;
 
 	/**
 	 * @author thamires.miranda
@@ -153,10 +142,9 @@ public class CandidatoController {
 			obterDominiosCandidato(model);
 
 			return "candidato/cadastrar-candidato";
-
-		} else {
-			candidatoBusiness.inserir(candidatoBean);
 		}
+			candidatoBusiness.inserir(candidatoBean);
+		
 
 		return "candidato/cadastrar-candidato";
 	}
@@ -252,23 +240,8 @@ public class CandidatoController {
 	private List<String> buildErrorMessage(List<FieldError> error) {
 		List<String> novosErros = new ArrayList<>();
 
-		for (FieldError data : error) {
-
-			switch (data.getField()) {
-
-			case "dataNascimento":
-				novosErros.add(" O campo de data de nascimento deve ser preenchida ");
-				break;
-			case "entrevista":
-				novosErros.add("O campo de data da entrevista deve ser preenchida ");
-				break;
-			case "formacao.dataConclusao":
-				novosErros.add(" O campo de data da conclusão do curso deve ser preenchido ");
-				break;
-			default:
-				novosErros.add(data.getDefaultMessage());
-
-			}
+		for (FieldError erros : error) {
+				novosErros.add(erros.getDefaultMessage());
 
 		}
 
