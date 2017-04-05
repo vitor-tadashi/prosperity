@@ -410,7 +410,7 @@ footer {
 													data-toggle="modal"><i class="fa fa-check"></i> Aprovar</a></li>
 												<li role="separator" class="divider"></li>
 												<li><a href="#reprova-modal"
-													onclick="alterarStatus(${vaga.id}, 'RECUSADO')"
+													onclick="alterarStatus(${vaga.id}, 'CANCELADO')"
 													data-toggle="modal"><i class="fa fa-times"></i>
 														Reprovar</a></li>
 

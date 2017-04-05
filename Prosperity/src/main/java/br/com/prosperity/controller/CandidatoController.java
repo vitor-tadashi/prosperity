@@ -142,10 +142,9 @@ public class CandidatoController {
 			obterDominiosCandidato(model);
 
 			return "candidato/cadastrar-candidato";
-
-		} else {
-			candidatoBusiness.inserir(candidatoBean);
 		}
+			candidatoBusiness.inserir(candidatoBean);
+		
 
 		return "candidato/cadastrar-candidato";
 	}
