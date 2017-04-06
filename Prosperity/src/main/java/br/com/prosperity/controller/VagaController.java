@@ -206,7 +206,7 @@ public class VagaController {
 	}
 
 	@RequestMapping(value = "/salvar", method = RequestMethod.POST)
-	public String inserirVaga(@ModelAttribute("vagaBean") @Valid VagaBean vagaBean, BindingResult result, Model model) {
+	public String inserirVaga(@ModelAttribute("vagaBean") @Valid VagaBean vagaBean,@ModelAttribute("usuarioBean") List<UsuarioBean> usuarioBean, BindingResult result, Model model) {
 
 		if (result.hasErrors()) {
 			model.addAttribute("erro", result.getErrorCount());
@@ -216,7 +216,7 @@ public class VagaController {
 			return "vaga/solicitar-vaga";
 		}
 
-		vagaBusiness.inserir(vagaBean);
+		vagaBusiness.inserir(vagaBean,usuarioBean);
 		System.out.println("\n\n\nCadastrado\n\n\n");
 		return "redirect:solicitar";
 

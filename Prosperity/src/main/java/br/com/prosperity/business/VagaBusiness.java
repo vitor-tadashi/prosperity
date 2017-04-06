@@ -131,7 +131,7 @@ public class VagaBusiness {
 	}
 
 	@Transactional
-	public void inserir(VagaBean vagaBean/*,List<UsuarioBean> avaliadores , HttpSession session */) {
+	public void inserir(VagaBean vagaBean, List<UsuarioBean> avaliadores /*, HttpSession session */) {
 
 		VagaEntity vagaEntity = vagaConverter.convertBeanToEntity(vagaBean);
 
@@ -143,11 +143,7 @@ public class VagaBusiness {
 			situacaoVaga.setIdVaga(vagaEntity.getId());
 			situacaoVaga.setStatus(StatusVagaEnum.PENDENTE);
 			alterarStatus(situacaoVaga);
-			/*Integer ultimo;
-			VagaEntity vaga;
-			ultimo = vagaDAO.findByNamedQuery("ultimoCadastro");
-			vaga = vagaDAO.findById(ultimo);
-			inserirAvaliadores(vaga, avaliadores);*/
+			inserirAvaliadores(vagaEntity, avaliadores);
 		} else {
 			// vagaEntity.setDataAbertura(vagaBean.getDataAbertura()); //
 			// VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
