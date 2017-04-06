@@ -438,11 +438,14 @@
 			</ul>
 		</div>
 		<!--breadcrumb-->
+		
 		<div class="container">
-			<div class="padding-md">
+			<div class="padding-md clearfix">
+			
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="panel panel-default">
+			
 							<div class="panel-heading">Consultar candidatos</div>
 							<div class="panel-body">
 								<form action="filtrar" method="GET" class="row">
@@ -492,7 +495,7 @@
 								<!-- /.row -->
 							</div>
 							<!-- /.panel-body - ATE AQUI O FILTRAR-->
-
+							
 							<table
 								class="table table-bordered table-condensed table-hover table-striped"
 								style="font-size: 12px; vertical-align: middle">
@@ -548,12 +551,13 @@
 
 								</tbody>
 							</table>
+							
 						</div>
 						<!-- fim da div panel -->
 						<div class="panel-footer clearfix">
 							<ul class="pagination pagination-xs m-top-none pull-right">
 								<li class="disabled"><a href="#">Anterior</a></li>
-								<li class="active"><a href="#">1</a></li>
+								<li class="active"><a onclick="#">1</a></li>
 								<li><a href="#">2</a></li>
 								<li><a href="#">3</a></li>
 								<li><a href="#">4</a></li>
@@ -562,6 +566,7 @@
 							</ul>
 						</div>
 					</div>
+				
 					<!-- /col-md-12 -->
 				</div>
 				<!-- /.row -->
@@ -748,6 +753,28 @@
 				}
 			}
 		}
+		
+		$(function	()	{
+			$('#dataTable').dataTable( {
+				"bJQueryUI": true,
+				"sPaginationType": "full_numbers"
+			});
+			
+			$('#chk-all').click(function()	{
+				if($(this).is(':checked'))	{
+					$('#responsiveTable').find('.chk-row').each(function()	{
+						$(this).prop('checked', true);
+						$(this).parent().parent().parent().addClass('selected');
+					});
+				}
+				else	{
+					$('#responsiveTable').find('.chk-row').each(function()	{
+						$(this).prop('checked' , false);
+						$(this).parent().parent().parent().removeClass('selected');
+					});
+				}
+			});
+		});
 	</script>
 	<script type="text/javascript">
 		//Escrevendo o código-fonte HTML e ocultando os campos criados:

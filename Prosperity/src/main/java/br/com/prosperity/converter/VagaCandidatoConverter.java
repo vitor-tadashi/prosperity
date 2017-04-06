@@ -2,13 +2,12 @@ package br.com.prosperity.converter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import br.com.prosperity.bean.VagaCandidatoBean;
 import br.com.prosperity.entity.VagaCandidatoEntity;
 
 @Component
-public class VagaCandidatoConverter implements Converter<VagaCandidatoEntity, VagaCandidatoBean> {
-	@Autowired
-	private CandidatoConverter candidatoConverter;
+public class VagaCandidatoConverter implements Converter<VagaCandidatoEntity, VagaCandidatoBean> {	
 	@Autowired
 	private VagaConverter vagaConverter;
 	@Autowired
@@ -23,7 +22,7 @@ public class VagaCandidatoConverter implements Converter<VagaCandidatoEntity, Va
 		entity.setIdVagaCandidato(bean.getId());
 		entity.setCanalInformacao(canalInformacaoConverter.convertBeanToEntity(bean.getCanalInformacao()));
 		entity.setVaga(vagaConverter.convertBeanToEntity(bean.getVaga()));
-
+		
 		return entity;
 	}
 

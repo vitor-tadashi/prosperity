@@ -4,9 +4,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -26,48 +28,65 @@ import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.converter.CandidatoConverter;
 import br.com.prosperity.dao.AvaliadorCandidatoDAO;
-import br.com.prosperity.dao.AvaliadorDAO;
+import br.com.prosperity.dao.CanalInformacaoDAO;
 import br.com.prosperity.dao.CandidatoDAO;
+import br.com.prosperity.dao.SituacaoAtualDAO;
 import br.com.prosperity.dao.StatusCandidatoDAO;
 import br.com.prosperity.dao.StatusDAO;
 import br.com.prosperity.dao.StatusFuturoDAO;
+import br.com.prosperity.dao.TipoCursoDAO;
 import br.com.prosperity.dao.UsuarioDAO;
 import br.com.prosperity.dao.VagaDAO;
 import br.com.prosperity.entity.AvaliadorCandidatoEntity;
-import br.com.prosperity.entity.AvaliadorEntity;
 import br.com.prosperity.entity.CandidatoEntity;
 import br.com.prosperity.entity.StatusCandidatoEntity;
 import br.com.prosperity.entity.StatusFuturoEntity;
+<<<<<<< HEAD
 import br.com.prosperity.entity.StatusVagaEntity;
+=======
+import br.com.prosperity.entity.VagaCandidatoEntity;
+>>>>>>> b55bbb1425056815b41af7dc9ba18dd4ddb821a9
 import br.com.prosperity.entity.VagaEntity;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.util.FormatUtil;
 
 @Component
-public class CandidatoBusiness  {
+public class CandidatoBusiness {
 
 	@Autowired
 	private CandidatoBean candidatoBean;
+	
 	@Autowired
 	private CandidatoDAO candidatoDAO;
+	
 	@Autowired
 	private CandidatoConverter candidatoConverter;
+	
 	@Autowired
 	private StatusCandidatoDAO statusCandidatoDAO;
+	
 	@Autowired
 	private UsuarioBean usuarioBean;
 	@Autowired
+	CanalInformacaoDAO canalInformacaoDAO;
+	@Autowired
 	private UsuarioDAO usuarioDAO;
 	@Autowired
+	private TipoCursoDAO tipoCursoDAO;
+	@Autowired
+	private SituacaoAtualDAO situacaoAtualDAO;
+	@Autowired
 	private StatusDAO statusDAO;
+	
 	@Autowired
 	private StatusFuturoDAO statusFuturoDAO;
+	
 	@Autowired
 	private AvaliadorCandidatoDAO avaliadorCandidatoDAO;
-	@Autowired
-	private AvaliadorDAO avaliadorDAO;
+	
 	@Autowired
 	private VagaDAO vagaDAO;
+	
 	@Autowired
 	private HttpSession session;
 
@@ -119,6 +138,7 @@ public class CandidatoBusiness  {
 		List<CandidatoEntity> candidato = candidatoDAO.findByNamedQuery("verificarCandidatura");
 		List<CandidatoEntity> entities = candidatoDAO.findAll();
 		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(entities);
+
 		return beans;
 	}
 	
@@ -137,7 +157,19 @@ public class CandidatoBusiness  {
 	public void inserir(CandidatoBean candidatoBean) {
 		if (candidatoBean.getId() == null) {
 			if (verificarCandidatura(candidatoBean) == true) {
-				candidatoDAO.insert(candidatoConverter.convertBeanToEntity(candidatoBean));
+				CandidatoEntity candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoBean);
+				candidatoEntity.getFormacao().setTipoCurso(tipoCursoDAO.findById(candidatoBean.getFormacao().getTipoCurso().getId()));
+				candidatoEntity.getFormacao().setSituacaoAtual(situacaoAtualDAO.findById(candidatoBean.getFormacao().getSituacaoAtual().getId()));
+				
+				Set<VagaCandidatoEntity> vagas = new HashSet<>();
+				for(VagaCandidatoEntity v: candidatoEntity.getVagas()){
+					v.setCanalInformacao(canalInformacaoDAO.findById(candidatoBean.getVagaCandidato().getCanalInformacao().getId()));
+			
+				}
+				candidatoEntity.setVagas(vagas);
+				
+				candidatoDAO.insert(candidatoEntity);
+				
 			} else {
 				// retornar mensagem de candidato em processo seletivo para vaga
 			}
@@ -184,7 +216,7 @@ public class CandidatoBusiness  {
 	}
 	
 	@Transactional
-	public void alterarStatus(SituacaoCandidatoBean situacaoCandidato) {		
+	public void alterarStatus(SituacaoCandidatoBean situacaoCandidato) {
 		StatusCandidatoEntity statusCandidatoEntity = statusAlteracao(situacaoCandidato);
 		List<StatusFuturoEntity> statusFuturoEntity = null;
 		List<AvaliadorCandidatoEntity> avaliadorCandidatoEntity = null;
@@ -250,11 +282,11 @@ public class CandidatoBusiness  {
 		// candidatoConverter.convertEntityToBean(candidatoEntity);
 		// }
 
-		return candidatoBean; 
+		return candidatoBean;
 	}
 
 	private Boolean verificarCandidatura(CandidatoBean candidato) {
-		
+
 		return candidato.getUltimoStatus().getId() == null ? true : false;
 	
 	}
@@ -271,17 +303,19 @@ public class CandidatoBusiness  {
 			e.printStackTrace(); // imprimi a stack trace
 		}
 		return dataAntiga;
+
 	}
 
-	private void inserirAvaliadores(CandidatoEntity idCandidato, Integer idVaga) {
-
+	@Transactional
+	private void inserirAvaliadores(CandidatoEntity candidato, Integer idVaga) {
 		VagaEntity vaga = vagaDAO.findById(idVaga);
-		List<AvaliadorEntity> avaliadoresEntity = avaliadorDAO.findByNamedQuery("obterAvaliadoresDaVaga", vaga);
-		for (AvaliadorEntity avaliadorEntity : avaliadoresEntity) {
-			AvaliadorCandidatoEntity avaliadorCandidatoEnitty = new AvaliadorCandidatoEntity();
-			avaliadorCandidatoEnitty.setIdAvaliador(avaliadorEntity);
-			avaliadorCandidatoEnitty.setIdCandidato(idCandidato);
-			avaliadorCandidatoDAO.insert(avaliadorCandidatoEnitty);
+		List<AvaliadorCandidatoEntity> avaliadoresCandidatoEntity = avaliadorCandidatoDAO
+				.findByNamedQuery("obterAvaliadoresDaVaga", vaga);
+		for (AvaliadorCandidatoEntity avaliadorCandidatoEntity : avaliadoresCandidatoEntity) {
+
+			avaliadorCandidatoEntity.setCandidato(candidato);
+
+			avaliadorCandidatoDAO.update(avaliadorCandidatoEntity);
 		}
 	}
 }

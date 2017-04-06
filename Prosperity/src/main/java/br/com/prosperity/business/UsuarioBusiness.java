@@ -32,9 +32,8 @@ public class UsuarioBusiness {
 		UsuarioEntity entity = usuarioConverter.convertBeanToEntity(usuarioBean);
 		
 		if(usuarioBean.getId() == null) {
-			boolean existeUsuario = !usuarioDAO.findByNamedQuery("existeUsuario", usuarioBean.getNome()).isEmpty();
-			if(existeUsuario) {
-				throw new BusinessException("Não foi possível incluir. Usuário [" + usuarioBean.getNome() + "] já está cadastrado");
+			if(usuarioDAO.existeUsuario(usuarioBean.getNome())) {
+				throw new BusinessException("Não foi possível incluir. Usuário " + usuarioBean.getNome() + " já está cadastrado.");
 			}
 			
 			usuarioDAO.insert(entity);

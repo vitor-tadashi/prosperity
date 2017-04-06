@@ -39,8 +39,15 @@ import javax.persistence.TemporalType;
 		//@NamedQuery(name = "status", query = "SELECT u FROM CandidatoEntity u LEFT OUTER JOIN u.statusCandidatoEntity p left join p.status s WHERE u.nomecandidato like ?1 and s.id = ?2 and u.dataAbertura between ?3 and ?4"),
 		@NamedQuery(name = "pesquisarNome", query = "SELECT u FROM CandidatoEntity u WHERE u.nome like ?1 AND u.valorPretensaoSalarial BETWEEN ?2 AND ?3 AND u.dataAbertura BETWEEN ?4 AND ?5"),
 		@NamedQuery(name = "obterPorCPF", query = "SELECT u FROM CandidatoEntity u WHERE u.cpf = ?1"),
+<<<<<<< HEAD
 		@NamedQuery(name = "verificarCandidatura", query = "SELECT c FROM CandidatoEntity c JOIN c.statusCandidatos sc WHERE sc.status in(6,7,14)"
 				+ "AND sc.idStatusCandidato = (SELECT MAX(sc.idStatusCandidato) FROM CandidatoEntity c JOIN c.statusCandidatos sc)")})
+=======
+		@NamedQuery(name = "verificarCanidatura", query = "SELECT c FROM CandidatoEntity c JOIN c.statusCandidatos sc WHERE sc.status in(6,7,14)"
+				+ "AND sc.idStatusCandidato = (SELECT MAX(sc.idStatusCandidato) FROM CandidatoEntity c JOIN c.statusCandidatos sc)"),
+		@NamedQuery(name="obterParaCombo", query="SELECT v.id, v.nomeVaga FROM VagaEntity v")
+})
+>>>>>>> b55bbb1425056815b41af7dc9ba18dd4ddb821a9
 		
 public class CandidatoEntity {
 
@@ -123,6 +130,9 @@ public class CandidatoEntity {
 	@OneToMany()
 	@JoinColumn(name = "idCandidato")
 	private List<StatusCandidatoEntity> statusCandidatos;
+	
+	/*@OneToMany()
+	@JoinColumn(name="")*/
 
 	public List<StatusCandidatoEntity> getStatusCandidatos() {
 		return statusCandidatos;

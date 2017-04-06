@@ -19,14 +19,15 @@ import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.converter.UsuarioConverter;
 import br.com.prosperity.converter.VagaConverter;
-import br.com.prosperity.dao.AvaliadorDAO;
+import br.com.prosperity.dao.AvaliadorCandidatoDAO;
 import br.com.prosperity.dao.StatusDAO;
 import br.com.prosperity.dao.StatusVagaDAO;
 import br.com.prosperity.dao.UsuarioDAO;
 import br.com.prosperity.dao.VagaDAO;
-import br.com.prosperity.entity.AvaliadorEntity;
+import br.com.prosperity.entity.AvaliadorCandidatoEntity;
 import br.com.prosperity.entity.StatusVagaEntity;
 import br.com.prosperity.entity.VagaEntity;
+
 
 @Component
 public class VagaBusiness {
@@ -53,7 +54,7 @@ public class VagaBusiness {
 	private StatusVagaDAO statusVagaDAO;
 
 	@Autowired
-	private AvaliadorDAO avaliadorDAO;
+	private AvaliadorCandidatoDAO avaliadorCandidatoDAO;
 
 	@Autowired
 	private UsuarioBean usuarioBean;
@@ -73,17 +74,17 @@ public class VagaBusiness {
 	}
 
 	@Transactional(readOnly = true)
-	public List<VagaBean> listarVagasAtivas() {
+	public List<VagaEntity> listarVagasAtivas() {
 
-		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagasAtivas"); // PENSAR
-		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
-		return vagaBean;
+		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagasAtivas", 1); // PENSAR
+		//List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
+		return vagaEntity;
 	}
 
 	@Transactional
 	public List<VagaBean> listarVagaAprovar() {
 
-		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagaAprovar"); // PENSAR
+		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagaAprovar", 18, true); // PENSAR
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 		return vagaBean;
 	}
@@ -197,10 +198,10 @@ public class VagaBusiness {
 
 	private void inserirAvaliadores(VagaEntity vaga, List<UsuarioBean> usuarios) {
 		for (UsuarioBean usuario : usuarios) {
-			AvaliadorEntity avaliadorEntity = new AvaliadorEntity();
-			avaliadorEntity.setUsuario(usuarioConverter.convertBeanToEntity(usuario));
-			avaliadorEntity.setVaga(vaga);
-			avaliadorDAO.insert(avaliadorEntity);
+			AvaliadorCandidatoEntity avaliadorCandidatoEntity = new AvaliadorCandidatoEntity();
+			avaliadorCandidatoEntity.setUsuario(usuarioConverter.convertBeanToEntity(usuario));
+			avaliadorCandidatoEntity.setVaga(vaga);
+			avaliadorCandidatoDAO.insert(avaliadorCandidatoEntity);
 		}
 	}
 }

@@ -381,37 +381,11 @@
 					<h4 class="modal-title" id="modalLabel">Fechar vaga</h4>
 				</div>
 				<div class="modal-body">Deseja realmente fechar está vaga?</div>
+				<input class="reprovar-id" type="hidden"> <input
+					class="reprovar-status" type="hidden">
 				<div class="modal-footer">
 					<a href="#">
-						<button id="fechaVaga" type="button" class="btn btn-primary"
-							data-dismiss="modal">Sim</button>
-					</a>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- /.modal fechar-->
-	
-	
-	<!-- Modal reabrir -->
-	<div class="modal fade" id="reabre-modal" data-target="#reabre-modal"
-		tabindex="-1" role="dialog" aria-labelledby="modalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Reabrir">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="modalLabel">Reabrir vaga</h4>
-				</div>
-				<div class="modal-body">Deseja realmente reabrir está vaga?</div>
-				<input class="reabre-id" type="hidden"> <input
-					class="reabre-status" type="hidden">
-				<div class="modal-footer">
-					<a href="#">
-						<button id="reabreVaga" onclick="status()" type="button" class="btn btn-primary"
+						<button id="fechaVaga" onclick="status()" type="button" class="btn btn-primary"
 							data-dismiss="modal">Sim</button>
 					</a>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
@@ -503,12 +477,13 @@
 								</div>
 							</form>
 						</div>
-						
 						<!--</panel body>-->
+						
 						<table
 							id="tabelaVaga"
 							class="table table-bordered table-condensed table-hover table-striped"
-							style="font-size: 12px; vertical-align: middle;">
+							style="font-size: 12px; vertical-align: middle;"
+							id="dataTable">
 							<thead>
 								<tr>
 									<th class="text-center">Vaga</th>
@@ -545,26 +520,24 @@
 												<i class="fa fa-cogs fa-lg">&nbsp;</i> <span class="caret"></span>
 											</button>
 											<ul class="dropdown-menu dropdown-menu-right slidedown">
-											<li><a onclick="info(${vaga.id})"><i
+											<li><a href="#visualizar-modal" 
+													onclick="info(${vaga.id})"><i
 														class="fa fa-eye">&nbsp</i>Visualizar</a></li>
 														
-												<li class="divider"></li>
+												<li id="${vaga.ultimoStatus.status.nome}" class="divider"></li>
 												
-												<li><a href="#fecha-modal" data-toggle="modal"><i
+												<li id="${vaga.ultimoStatus.status.nome}"><a href="#fecha-modal" 
+												onclick="alterarStatus(${vaga.id}, 'RECUSADO')"
+												data-toggle="modal"><i
 														class="fa fa-lock">&nbsp</i>Fechar</a></li>
-												<li class="divider "></li>
+												<li id="${vaga.ultimoStatus.status.nome}" class="divider "></li>
 												
 							
-												<li><a href="#delete-modal" 
+												<li id="${vaga.ultimoStatus.status.nome}"><a href="#delete-modal" 
 												onclick="alterarStatus(${vaga.id}, 'CANCELADO')"
 												data-toggle="modal"><i
 														class="fa fa-times">&nbsp</i>Cancelar</a></li>
-												<li class="divider "></li>			
 												
-												<li><a href="#reabre-modal" 
-												onclick="alterarStatus(${vaga.id}, 'PENDENTE')"
-												data-toggle="modal"><i
-														class="fa fa-retweet">&nbsp</i>Reabrir</a></li>
 													
 											</ul>
 										</div> <!-- /btn-group -->
@@ -623,6 +596,8 @@
 								</tr> -->
 							</tbody>
 						</table>
+						
+						
 					</div>
 					<!--</panel default>-->
 					<div class="panel-footer clearfix">
@@ -633,8 +608,6 @@
 								<li class="active"><a href="#">1</a></li>
 								<li><a href="#">2</a></li>
 								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
 								<li><a href="#">Próximo</a></li>
 							</ul>
 						</div>
@@ -663,6 +636,14 @@
 	$(".span-Ativo").addClass("label-success");
 	$(".span-Cancelado").addClass("label-danger");
 	$(".span-Pendente").addClass("label-info");
+	
+	if($(".span-Fechado") || $(".span-Cancelado") || $(".span-Pendente")) {
+		$('li#Fechado').hide();
+		$('li#Cancelado').hide();
+		$('li#Pendente').hide();
+	}
+	
+	
 	
 	function info(listaId){
 		
@@ -771,10 +752,7 @@
 	function alterarStatus(id,status){
 		$('input.cancela-id').val(id);
 		$('input.cancela-status').val(status);
-		
-		$('input.reabre-id').val(id);
-		$('input.reabre-status').val(status);
-
+	
 		$('input.reprovar-id').val(id);
 		$('input.reprovar-status').val(status);
 		
