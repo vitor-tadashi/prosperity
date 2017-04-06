@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
 @NamedQueries({
 
 		@NamedQuery(name = "obterTodos", query = "SELECT u FROM VagaEntity u WHERE u.nomeVaga = ?1"),
-		@NamedQuery(name = "listarVagaAprovar", query = "SELECT v FROM VagaEntity v WHERE NOT EXISTS (SELECT s FROM StatusVagaEntity s WHERE v.id = s.vaga)"),
+		@NamedQuery(name = "listarVagaAprovar", query = "SELECT u FROM VagaEntity u LEFT OUTER JOIN u.statusVagaEntity p LEFT OUTER JOIN p.status s WHERE s.id = ?1 AND p.situacao = ?2"),
 
 		@NamedQuery(name = "obterPorId", query = "SELECT u FROM VagaEntity u WHERE u.id = ?1"),
 
@@ -32,7 +32,8 @@ import javax.persistence.TemporalType;
 		// p.status = ?4" )
 		@NamedQuery(name="listarVagasAtivas", query="SELECT v.id, v.nomeVaga, v.descricaoFormacaoAcademica, v.descricaoPerfilComportamental, v.descricaoPerfilTecnico, v.tipoVaga FROM VagaEntity v LEFT JOIN v.statusVagaEntity sv where sv.status.id = ?1"),
 		@NamedQuery(name = "listarVagaFiltrado", query = "SELECT u FROM VagaEntity u LEFT OUTER JOIN u.statusVagaEntity p left join p.status s "
-				+ "WHERE u.nomeVaga like ?1 and s.id = ?2 and u.dataAbertura between ?3 and ?4")
+				+ "WHERE u.nomeVaga like ?1 and s.id = ?2 and u.dataAbertura between ?3 and ?4"),
+		@NamedQuery(name="ultimoCadastro", query= "SELECT MAX(u.id) FROM VagaEntity u")
 }) 	
 
 @Entity

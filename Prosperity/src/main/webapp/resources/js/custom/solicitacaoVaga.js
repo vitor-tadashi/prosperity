@@ -56,7 +56,6 @@ $(function() {
 	});
 
 	$("#btnSalvar").click(function() {
-		$("#dataInicio").val(new Date().toLocaleDateString()); 
 		$("#formCadastro2").submit();
 	});
 

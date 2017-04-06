@@ -182,7 +182,7 @@ footer {
 														<label class="control-label"> Data para inicio</label>
 														<div class="form-group">
 															<div class="input-group">
-																<input type="date" value="01/01/2017"
+																<input type="text" value="01/01/2017"
 																	class="datepicker form-control" id="vagaInicio"
 																	disabled> <span class="input-group-addon"><i
 																	class="fa fa-calendar"></i></span>
@@ -361,14 +361,14 @@ footer {
 						<!-- Começo Tabela -->
 						<thead>
 							<tr class="text-center">
-								<th class="text-center">Nome do cargo</th>
+								<th class="text-center">Nome da vaga</th>
+								<th class="text-center">Cargo</th>
 								<th class="text-center">Senioridade</th>
 								<th class="text-center">Solicitante</th>
 								<th class="text-center">Projeto</th>
 								<th class="text-center">Cliente</th>
 								<th class="text-center">Local de trabalho</th>
 								<th class="text-center">Data abertura</th>
-								<th class="text-center">Data encerramento</th>
 								<th class="text-center">Ações</th>
 							</tr>
 						</thead>
@@ -376,6 +376,7 @@ footer {
 							<c:forEach var="vaga" items="${vagas}" varStatus="i">
 
 								<tr>
+									<td>${vaga.nomeVaga}</td>
 									<td>${vaga.cargoBean.nome}</td>
 									<td>${vaga.senioridadeBean.nome}</td>
 									<td>${vaga.nomeSolicitante}</td>
@@ -387,7 +388,6 @@ footer {
 										     Cliente
 										</c:if></td>
 									<td>${vaga.dataAbertura }</td>
-									<td>${vaga.dataFechamento }</td>
 									<td>
 										<div class="btn-group">
 											<!-- <-- ! Começo Botão -->
@@ -410,7 +410,7 @@ footer {
 													data-toggle="modal"><i class="fa fa-check"></i> Aprovar</a></li>
 												<li role="separator" class="divider"></li>
 												<li><a href="#reprova-modal"
-													onclick="alterarStatus(${vaga.id}, 'RECUSADO')"
+													onclick="alterarStatus(${vaga.id}, 'CANCELADO')"
 													data-toggle="modal"><i class="fa fa-times"></i>
 														Reprovar</a></li>
 
@@ -448,7 +448,7 @@ footer {
     		data: { 'id' : listaId},
     		success: function(lista){
     			console.log(lista);
-    			$('#titulo').html(lista.cargoBean.nome);
+    			$('#titulo').html(lista.nomeVaga);
     			$('input#vagaGestor').val(lista.nomeSolicitante);
     			if(lista.localTrabalho == 'C') {
     				//$("#cliente").attr('checked', 'checked');
