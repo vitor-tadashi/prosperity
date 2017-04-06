@@ -80,8 +80,7 @@ public class VagaBusiness {
 
 	@Transactional(readOnly = true)
 	public List<VagaEntity> listarVagasAtivas() {
-
-		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagasAtivas", 1); // PENSAR
+		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagasAtivas", 1);
 		//List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 		return vagaEntity;
 	}
@@ -142,7 +141,7 @@ public class VagaBusiness {
 	}
 
 	@Transactional
-	public void inserir(VagaBean vagaBean/*, List<UsuarioBean> avaliadores , HttpSession session */) {
+	public void inserir(VagaBean vagaBean, List<UsuarioBean> usuarioBean /*, HttpSession session */) {
 
 		VagaEntity vagaEntity = vagaConverter.convertBeanToEntity(vagaBean);
 
@@ -154,7 +153,7 @@ public class VagaBusiness {
 			situacaoVaga.setIdVaga(vagaEntity.getId());
 			situacaoVaga.setStatus(StatusVagaEnum.PENDENTE);
 			alterarStatus(situacaoVaga);
-			/*inserirAvaliadores(vagaEntity, avaliadores);*/
+			inserirAvaliadores(vagaEntity, usuarioBean);
 		} else {
 			// vagaEntity.setDataAbertura(vagaBean.getDataAbertura()); //
 			// VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
