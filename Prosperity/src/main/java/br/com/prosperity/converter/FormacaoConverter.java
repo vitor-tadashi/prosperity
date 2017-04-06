@@ -24,6 +24,8 @@ public class FormacaoConverter implements Converter<FormacaoEntity, FormacaoBean
 		entity.setNome(bean.getNomeInstituicao());
 		entity.setNomeCurso(bean.getNomeCurso());
 		entity.setDataConclusao(bean.getDataConclusao());
+		entity.setTipoCurso(tipoCurso.convertBeanToEntity(bean.getTipoCurso()));
+		entity.setSituacaoAtual(SituacaoAtual.convertBeanToEntity(bean.getSituacaoAtual()));
 		return entity;
 	}
 
