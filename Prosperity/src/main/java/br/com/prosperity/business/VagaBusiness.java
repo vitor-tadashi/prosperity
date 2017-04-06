@@ -131,7 +131,7 @@ public class VagaBusiness {
 	}
 
 	@Transactional
-	public void inserir(VagaBean vagaBean/*, List<UsuarioBean> avaliadores , HttpSession session */) {
+	public void inserir(VagaBean vagaBean, List<UsuarioBean> usuarioBean /*, HttpSession session */) {
 
 		VagaEntity vagaEntity = vagaConverter.convertBeanToEntity(vagaBean);
 
@@ -143,7 +143,7 @@ public class VagaBusiness {
 			situacaoVaga.setIdVaga(vagaEntity.getId());
 			situacaoVaga.setStatus(StatusVagaEnum.PENDENTE);
 			alterarStatus(situacaoVaga);
-			/*inserirAvaliadores(vagaEntity, avaliadores);*/
+			inserirAvaliadores(vagaEntity, usuarioBean);
 		} else {
 			// vagaEntity.setDataAbertura(vagaBean.getDataAbertura()); //
 			// VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
