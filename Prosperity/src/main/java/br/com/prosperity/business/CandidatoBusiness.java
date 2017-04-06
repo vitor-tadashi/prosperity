@@ -1,9 +1,11 @@
 package br.com.prosperity.business;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -19,16 +21,20 @@ import br.com.prosperity.bean.StatusCandidatoBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.converter.CandidatoConverter;
 import br.com.prosperity.dao.AvaliadorCandidatoDAO;
+import br.com.prosperity.dao.CanalInformacaoDAO;
 import br.com.prosperity.dao.CandidatoDAO;
+import br.com.prosperity.dao.SituacaoAtualDAO;
 import br.com.prosperity.dao.StatusCandidatoDAO;
 import br.com.prosperity.dao.StatusDAO;
 import br.com.prosperity.dao.StatusFuturoDAO;
+import br.com.prosperity.dao.TipoCursoDAO;
 import br.com.prosperity.dao.UsuarioDAO;
 import br.com.prosperity.dao.VagaDAO;
 import br.com.prosperity.entity.AvaliadorCandidatoEntity;
 import br.com.prosperity.entity.CandidatoEntity;
 import br.com.prosperity.entity.StatusCandidatoEntity;
 import br.com.prosperity.entity.StatusFuturoEntity;
+import br.com.prosperity.entity.VagaCandidatoEntity;
 import br.com.prosperity.entity.VagaEntity;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.util.FormatUtil;
@@ -50,10 +56,14 @@ public class CandidatoBusiness {
 	
 	@Autowired
 	private UsuarioBean usuarioBean;
-	
+	@Autowired
+	CanalInformacaoDAO canalInformacaoDAO;
 	@Autowired
 	private UsuarioDAO usuarioDAO;
-	
+	@Autowired
+	private TipoCursoDAO tipoCursoDAO;
+	@Autowired
+	private SituacaoAtualDAO situacaoAtualDAO;
 	@Autowired
 	private StatusDAO statusDAO;
 	
@@ -115,7 +125,19 @@ public class CandidatoBusiness {
 	public void inserir(CandidatoBean candidatoBean) {
 		if (candidatoBean.getId() == null) {
 			if (verificarCandidatura(candidatoBean) == true) {
-				candidatoDAO.insert(candidatoConverter.convertBeanToEntity(candidatoBean));
+				CandidatoEntity candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoBean);
+				candidatoEntity.getFormacao().setTipoCurso(tipoCursoDAO.findById(candidatoBean.getFormacao().getTipoCurso().getId()));
+				candidatoEntity.getFormacao().setSituacaoAtual(situacaoAtualDAO.findById(candidatoBean.getFormacao().getSituacaoAtual().getId()));
+				
+				Set<VagaCandidatoEntity> vagas = new HashSet<>();
+				for(VagaCandidatoEntity v: candidatoEntity.getVagas()){
+					v.setCanalInformacao(canalInformacaoDAO.findById(candidatoBean.getVagaCandidato().getCanalInformacao().getId()));
+			
+				}
+				candidatoEntity.setVagas(vagas);
+				
+				candidatoDAO.insert(candidatoEntity);
+				
 			} else {
 				// retornar mensagem de candidato em processo seletivo para vaga
 			}
