@@ -49,8 +49,8 @@
 									<li class="tab-verity"><a href="#third" data-toggle="tab"
 										class="text-success"><i class="fa fa-briefcase"></i>
 											Perfil</a></li>
-									<li class="tab-verity"><a href="#fourth" data-toggle="tab"
-										class="text-success"><i class="fa fa-group"></i>
+									<li class="tab-verity"><a id="abaAvaliadores" href="#fourth" data-toggle="tab"
+										class="text-success hide"><i class="fa fa-group"></i>
 											Avaliadores</a></li>
 								</ul>
 							</div>
@@ -320,14 +320,16 @@
 										<!-- /panel -->
 									</div>
 									
-									<div class="tab-pane fade" id="fourth">
+									<div class="tab-pane fade hide" id="fourth">
 									
 									<div class="panel panel-default">
+									
 										<div class="panel-heading">
 											Avaliadores
 										</div>
+										
 										<div class="panel-body relative">
-											<select multiple="multiple" name="usuarioBean" id="selectedBox1" class="select-box pull-left form-control">
+											<select multiple="multiple" id="selectedBox1" class="select-box pull-left form-control">
 											
 												<c:forEach var="usuario" items="${usuarios}" varStatus="i">
 													<option value="${usuario.id}"
@@ -352,7 +354,7 @@
 												</a>
 											</div>
 					
-											<select multiple="multiple" id="selectedBox2" class="select-box pull-right form-control">
+											<select multiple="multiple" name="avaliadores" id="selectedBox2" class="select-box pull-right form-control">
 												
 											</select>		
 										</div>
