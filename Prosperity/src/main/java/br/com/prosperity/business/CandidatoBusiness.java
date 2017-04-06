@@ -41,15 +41,13 @@ import br.com.prosperity.entity.AvaliadorCandidatoEntity;
 import br.com.prosperity.entity.CandidatoEntity;
 import br.com.prosperity.entity.StatusCandidatoEntity;
 import br.com.prosperity.entity.StatusFuturoEntity;
-<<<<<<< HEAD
 import br.com.prosperity.entity.StatusVagaEntity;
-=======
 import br.com.prosperity.entity.VagaCandidatoEntity;
->>>>>>> b55bbb1425056815b41af7dc9ba18dd4ddb821a9
 import br.com.prosperity.entity.VagaEntity;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.util.FormatUtil;
 
+@SuppressWarnings("unused")
 @Component
 public class CandidatoBusiness {
 
