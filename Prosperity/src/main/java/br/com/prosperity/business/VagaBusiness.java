@@ -27,6 +27,7 @@ import br.com.prosperity.dao.VagaDAO;
 import br.com.prosperity.entity.AvaliadorCandidatoEntity;
 import br.com.prosperity.entity.StatusVagaEntity;
 import br.com.prosperity.entity.VagaEntity;
+import br.com.prosperity.enumarator.StatusVagaEnum;
 
 
 @Component
@@ -64,6 +65,9 @@ public class VagaBusiness {
 
 	@Autowired
 	private HttpSession session;
+	
+	@Autowired
+	private SituacaoVagaBean situacaoVaga;
 
 	@Transactional(readOnly = true)
 	public List<VagaBean> listar() {
@@ -127,7 +131,7 @@ public class VagaBusiness {
 	}
 
 	@Transactional
-	public void inserir(VagaBean vagaBean /* , HttpSession session */) {
+	public void inserir(VagaBean vagaBean, List<UsuarioBean> avaliadores /*, HttpSession session */) {
 
 		VagaEntity vagaEntity = vagaConverter.convertBeanToEntity(vagaBean);
 
@@ -136,6 +140,10 @@ public class VagaBusiness {
 			vagaEntity.setDataAbertura(dateNow);
 			// vagaBean.setUsuarioBean(usuario);
 			vagaDAO.insert(vagaEntity);
+			situacaoVaga.setIdVaga(vagaEntity.getId());
+			situacaoVaga.setStatus(StatusVagaEnum.PENDENTE);
+			alterarStatus(situacaoVaga);
+			inserirAvaliadores(vagaEntity, avaliadores);
 		} else {
 			// vagaEntity.setDataAbertura(vagaBean.getDataAbertura()); //
 			// VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO

@@ -327,7 +327,7 @@
 											Avaliadores
 										</div>
 										<div class="panel-body relative">
-											<select multiple="multiple" id="selectedBox1" class="select-box pull-left form-control">
+											<select multiple="multiple" name="usuarioBean{}.id" id="selectedBox1" class="select-box pull-left form-control">
 											
 												<c:forEach var="usuario" items="${usuarios}" varStatus="i">
 													<option value="${usuario.id}"
@@ -391,6 +391,5 @@
 	</script>
 
 </body>
-
 
 </html>
