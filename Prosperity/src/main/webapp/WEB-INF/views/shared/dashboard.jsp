@@ -101,7 +101,7 @@
 							<span class="menu-icon"> <i class="fa fa-print fa-lg"></i>
 						</span> <span class="text"> Relatório </span> <span class="menu-hover"></span>
 					</a></li>
-					<li class="openable"><a href="#"> <span class="menu-icon">
+					<li class="openable" value=""><a href="#"> <span class="menu-icon">
 								<i class="fa fa-cogs fa-lg"></i>
 						</span> <span class="text"> Gerenciar </span> <span class="menu-hover"></span>
 					</a>

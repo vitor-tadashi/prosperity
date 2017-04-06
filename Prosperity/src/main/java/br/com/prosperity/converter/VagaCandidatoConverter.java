@@ -22,7 +22,7 @@ public class VagaCandidatoConverter implements Converter<VagaCandidatoEntity, Va
 		entity.setIdVagaCandidato(bean.getId());
 		entity.setCanalInformacao(canalInformacaoConverter.convertBeanToEntity(bean.getCanalInformacao()));
 		entity.setVaga(vagaConverter.convertBeanToEntity(bean.getVaga()));
-
+		
 		return entity;
 	}
 

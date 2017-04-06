@@ -520,7 +520,8 @@
 												<i class="fa fa-cogs fa-lg">&nbsp;</i> <span class="caret"></span>
 											</button>
 											<ul class="dropdown-menu dropdown-menu-right slidedown">
-											<li><a onclick="info(${vaga.id})"><i
+											<li><a href="#visualizar-modal" 
+													onclick="info(${vaga.id})"><i
 														class="fa fa-eye">&nbsp</i>Visualizar</a></li>
 														
 												<li id="${vaga.ultimoStatus.status.nome}" class="divider"></li>
