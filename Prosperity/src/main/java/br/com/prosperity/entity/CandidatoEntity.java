@@ -123,6 +123,9 @@ public class CandidatoEntity {
 	@OneToMany()
 	@JoinColumn(name = "idCandidato")
 	private List<StatusCandidatoEntity> statusCandidatos;
+	
+	/*@OneToMany()
+	@JoinColumn(name="")*/
 
 	public List<StatusCandidatoEntity> getStatusCandidatos() {
 		return statusCandidatos;
