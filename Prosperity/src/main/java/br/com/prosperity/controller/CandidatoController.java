@@ -41,7 +41,7 @@ import br.com.prosperity.exception.BusinessException;
 
 @Controller
 @RequestMapping(value = "candidato")
-public class CandidatoController {
+public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private CandidatoBusiness candidatoBusiness;
@@ -94,7 +94,16 @@ public class CandidatoController {
 
 		List<CanalInformacaoBean> listaCanal = canalInformacaoBusiness.obterTodos();
 		model.addAttribute("listaCanal", listaCanal);
+		
 	}
+
+	/*@RequestMapping(method = RequestMethod.GET)
+	public String paginarCandidato() {
+		PaginarCandidato pc = new  PaginarCandidato ();
+		PagedListHolder pagedListHolder = new PagedListHolder(pc.findAll());
+		return "candidato/cadastrar-candidato";
+	}*/
+	
 
 	@RequestMapping(value = "cadastrar", method = RequestMethod.GET)
 	public String cadastrarCandidato(Model model) {
@@ -173,7 +182,7 @@ public class CandidatoController {
 
 	@RequestMapping(value = "consultar", method = RequestMethod.GET)
 	public String consultarCandidatoRH(Model model) {
-		List<CandidatoBean> candidatos = candidatoBusiness.listar();
+		List<CandidatoBean> candidatos = candidatoBusiness.listarTop10();
 		model.addAttribute("candidatos", candidatos);
 
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
@@ -194,32 +203,12 @@ public class CandidatoController {
 
 	@RequestMapping(value = "filtrar", method = RequestMethod.GET)
 	public String filtrarCandidatoRH(Model model, CandidatoBean candidato) {
-		List<CandidatoBean> candidatos = candidatoBusiness.obterFiltro(candidato);
+
+		List<CandidatoBean> candidatos = candidatoBusiness.filtroVaga(candidato);
 		model.addAttribute("candidatos", candidatos);
-
-		/*
-		 * List<VagaBean> listaVaga = vagaBusiness.listar();
-		 * model.addAttribute("listaVaga", listaVaga);
-		 * 
-		 * List<CargoBean> listaCargo = cargoBusiness.obterTodos();
-		 * model.addAttribute("listaCargo", listaCargo);
-		 * 
-		 * List<SenioridadeBean> listaSenioridade =
-		 * senioridadeBusiness.obterTodos();
-		 * model.addAttribute("listaSenioridade", listaSenioridade);
-		 * 
-		 * List<FuncionarioBean> listaFuncionarios =
-		 * funcionarioBusiness.obterTodos();
-		 * model.addAttribute("listaFuncionarios", listaFuncionarios);
-		 */
-
-		// avaliadorBusiness.listar();
-
+		
 		List<VagaBean> listaVaga = vagaBusiness.listar();
 		model.addAttribute("listaVaga", listaVaga);
-		// List<StatusCandidatoBean> listaStatusCandidato =
-		// StatusCandidatoBusiness.obterTodos();
-		// model.addAttribute("listaStatusCandidato", listaStatusCandidato);
 
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
 		model.addAttribute("listaCargo", listaCargo);

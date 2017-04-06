@@ -36,6 +36,9 @@ public class StatusCandidatoEntity {
 	@Column(name = "dsParecer")
 	private String dsParecer;
 	
+	@Column(name = "flSituacao")
+	private Boolean flSituacao;
+	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "idStatus")
 	private StatusEntity status;
@@ -50,11 +53,17 @@ public class StatusCandidatoEntity {
 	public String getProposta() {
 		return proposta;
 	}
-
+	
 	public void setProposta(String proposta) {
 		this.proposta = proposta;
 	}
 
+	public Boolean getFlSituacao() {
+		return flSituacao;
+	}
+	public void setFlSituacao(Boolean flSituacao) {
+		this.flSituacao = flSituacao;
+	}
 	public Date getDtAlteracao() {
 		return dtAlteracao;
 	}

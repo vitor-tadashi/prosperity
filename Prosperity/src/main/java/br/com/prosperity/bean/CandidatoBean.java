@@ -84,14 +84,7 @@ public class CandidatoBean  extends FormatUtil {
 		this.vagaCandidato = vagaCandidato;
 	}
 
-	public void setPretensaoDe(Double pretensaoDe) {
-		this.pretensaoDe = pretensaoDe;
-	}
-
-	public void setPretensaoPara(Double pretensaoPara) {
-		this.pretensaoPara = pretensaoPara;
-	}
-
+	
 	public Date getDataAberturaDe() {
 		return dataAberturaDe;
 	}
@@ -108,19 +101,19 @@ public class CandidatoBean  extends FormatUtil {
 		this.dataAberturaPara = dataAberturaPara;
 	}
 	@XmlTransient
-	public double getPretensaoDe() {
+	public Double getPretensaoDe() {
 		return pretensaoDe;
 	}
 
-	public void setPretensaoDe(double pretensaoDe) {
+	public void setPretensaoDe(Double pretensaoDe) {
 		this.pretensaoDe = pretensaoDe;
 	}
 	@XmlTransient
-	public double getPretensaoPara() {
+	public Double getPretensaoPara() {
 		return pretensaoPara;
 	}
 
-	public void setPretensaoPara(double pretensaoPara) {
+	public void setPretensaoPara(Double pretensaoPara) {
 		this.pretensaoPara = pretensaoPara;
 	}
 

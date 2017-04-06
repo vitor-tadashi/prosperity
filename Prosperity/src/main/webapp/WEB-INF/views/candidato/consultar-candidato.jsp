@@ -460,6 +460,7 @@
 									<div class="col-md-2">
 										<label for="exampleInputEmail1">Cargo</label> <select
 											class="form-control inline" name="cargo">
+											<option>Selecione</option>
 											<c:forEach var="cargo" items="${listaCargo}">
 												<option value="${cargo.id}">${cargo.nome}</option>
 											</c:forEach>
@@ -511,10 +512,12 @@
 										<tr>
 											<td>${candidato.nome}</td>
 
-											<td>${candidato.vagaCandidato[0].vaga.nomeVaga}</td> 	<!--OU vagas-->
+											<td>${candidato.vagaCandidato.vaga.nomeVaga}</td> 	<!--OU vagas-->
 											<td>${candidato.valorPretensao}</td>
 											<td><fmt:formatDate value="${candidato.dataAbertura}" pattern="dd/MM/yyyy" /></td>
-											<td><span class="label status span ${candidato.ultimoStatus.status.nome}">${candidato.ultimoStatus.status.nome}</span></td>
+											<td><span class="label status span-${candidato.ultimoStatus.status.nome}">${candidato.ultimoStatus.status.nome}</span></td>
+									
+									
 									<td>
 												<div class="btn-group">
 
