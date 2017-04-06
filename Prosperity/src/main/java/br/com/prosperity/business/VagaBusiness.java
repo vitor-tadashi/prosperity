@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.taglibs.standard.tag.common.xml.ForEachTag;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,6 +90,16 @@ public class VagaBusiness {
 	public List<VagaBean> listarVagaAprovar() {
 
 		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagaAprovar", 18, true); // PENSAR
+		int aux = 0;
+		for(VagaEntity vaga: vagaEntity)
+		{
+			vaga.setDataInicio(parseData(vaga.getDataInicio()));
+			System.out.println(vaga.getDataInicio());
+			vagaEntity.get(aux).setDataInicio(vaga.getDataInicio());
+			aux++;
+		}
+		//for each para percorrer lista de vagas formantando ela.
+		//vagaEntity.get(0).setDataInicio(parseData(vagaEntity.get(0).getDataInicio()));
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 		return vagaBean;
 	}
@@ -192,7 +203,7 @@ public class VagaBusiness {
 	}
 
 	private Date parseData(Date dataAntiga) {
-		SimpleDateFormat novaData = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat novaData = new SimpleDateFormat("dd-MM-yyyy");
 
 		String data = "";
 		try {
