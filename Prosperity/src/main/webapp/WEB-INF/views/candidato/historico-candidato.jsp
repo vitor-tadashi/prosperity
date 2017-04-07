@@ -145,7 +145,7 @@
 									<table class="table table-condensed table-bordered">
 										<c:forEach var="competencia" items="${candidato.competencias}">
 											<tr>
-												<td>${competencia.competencia.nome}</td>
+												<td>${competencia.nome}</td>
 												<td><span class="badge badge-info">${competencia.avaliacao.nome}</span></td>
 											</tr>
 										</c:forEach>
@@ -160,7 +160,7 @@
 									<table class="table table-condensed table-bordered">
 										<c:forEach var="avaliador" items="${candidato.avaliadores}">
 											<tr>
-												<td>${avaliador.avaliador.nome}</td>
+												<td>${avaliador.nome}</td>
 												<td><span class="badge badge-info">${avaliador.nome}</span></td>
 											</tr>
 										</c:forEach>

@@ -68,7 +68,7 @@
 										<div class="row">
 											<div class="form-group col-md-6">
 												<label for="exampleInputEmail1">Vaga:</label> <select
-													class="form-control chzn-select" id="nomeVaga" name="vagas">
+													class="form-control chzn-select" id="nomeVaga" name="ultimaVaga">
 													<c:forEach var="vaga" items="${listaVaga}">
 														<option value="${vaga.id}">${vaga.nomeVaga}</option>
 													</c:forEach>

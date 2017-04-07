@@ -1,8 +1,5 @@
 package br.com.prosperity.controller;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,10 +17,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.multipart.MultipartFile;
 
 import br.com.prosperity.bean.CanalInformacaoBean;
 import br.com.prosperity.bean.CandidatoBean;
@@ -107,8 +102,9 @@ public class CandidatoController<PaginarCandidato> {
 	}
 	
 	@RequestMapping(value = "salvar", method = RequestMethod.POST)
-	public String salvarCandidato(@ModelAttribute("candidatoBean") @Valid CandidatoBean candidatoBean,@RequestParam("file") MultipartFile file,
+	public String salvarCandidato(@ModelAttribute("candidatoBean") @Valid CandidatoBean candidatoBean,
 			BindingResult result, Model model) throws BusinessException {
+
 		if (result.hasErrors()) {
 			model.addAttribute("erro", result.getErrorCount());
 			model.addAttribute("listaErros", buildErrorMessage(result.getFieldErrors()));
@@ -119,7 +115,6 @@ public class CandidatoController<PaginarCandidato> {
 			return "candidato/cadastrar-candidato";
 
 		} else {
-			candidatoBean.setCurriculo(uploadCurriculo(file, candidatoBean.getCpf()));
 			candidatoBusiness.inserir(candidatoBean);
 		}
 
@@ -146,7 +141,7 @@ public class CandidatoController<PaginarCandidato> {
 	}
 
 	@RequestMapping(value = "editar/salvar", method = RequestMethod.POST)
-	public String salvarEditar(@ModelAttribute("candidatoBean") @Valid CandidatoBean candidatoBean, 
+	public String salvarEditar(@ModelAttribute("candidatoBean") @Valid CandidatoBean candidatoBean,
 			BindingResult result, Model model) throws BusinessException {
 
 		if (result.hasErrors()) {
@@ -156,50 +151,14 @@ public class CandidatoController<PaginarCandidato> {
 
 			obterDominiosCandidato(model);
 
-			
-			
-			
-			/* ** COLOCAR AQUI ***
-			 * 1 - Criar um jeito de pegar o value no seu jsp
-			 * 2 - Verificar se a variavel do caminho do documento esta preenchida
-			 * 3 - Se a varivel estiver preenchida entao chamar a rotina de copiar arquivos
-			 * 4 - Criar o metodo de copiar arquivos na sua bussiness
-			 * */
-			
 			return "candidato/cadastrar-candidato";
 		}
-		candidatoBusiness.inserir(candidatoBean);
+			candidatoBusiness.inserir(candidatoBean);
+		
 
 		return "candidato/cadastrar-candidato";
 	}
-	
-	private String uploadCurriculo(MultipartFile file, String cpf) {
-		if (!file.isEmpty()) {
-			try {
-				byte[] bytes = file.getBytes();
 
-				// Creating the directory to store file
-				File dir = new File("curriculo" + File.separator + cpf);
-				if (!dir.exists())
-					dir.mkdirs();
-	
-				// Create the file on server
-				File serverFile = new File(dir.getAbsolutePath()
-						+ File.separator + "Curriculo_" + cpf + file.getOriginalFilename());
-				BufferedOutputStream stream = new BufferedOutputStream(
-						new FileOutputStream(serverFile));
-				stream.write(bytes);
-				stream.close();
-
-				return serverFile.getAbsolutePath();
-			} catch (Exception e) {
-				return "";
-			}
-		} else {
-			return "";
-		}
-	}
-	
 	@RequestMapping(value = "/historico/{id}", method = RequestMethod.GET)
 	public String historicoCandidato(Model model, @PathVariable Integer id) {
 		CandidatoBean candidato = candidatoBusiness.obter(id);
@@ -234,8 +193,7 @@ public class CandidatoController<PaginarCandidato> {
 	@RequestMapping(value = "filtrar", method = RequestMethod.GET)
 	public String filtrarCandidatoRH(Model model, CandidatoBean candidato) {
 		
-		
-		
+
 		List<CandidatoBean> candidatos = candidatoBusiness.filtroCandidato(candidato);
 		model.addAttribute("candidatos", candidatos);
 		
@@ -259,7 +217,7 @@ public class CandidatoController<PaginarCandidato> {
 	@RequestMapping(value = "aprovar", method = RequestMethod.GET)
 	public String aprovarCandidato(Model model) {
 
-		List<CandidatoBean> candidatos = candidatoBusiness.listarAprovacao();
+		List<CandidatoBean> candidatos = candidatoBusiness.listar();
 
 		model.addAttribute("candidatos", candidatos);
 
@@ -277,7 +235,7 @@ public class CandidatoController<PaginarCandidato> {
 		List<String> novosErros = new ArrayList<>();
 
 		for (FieldError erros : error) {
-			novosErros.add(erros.getDefaultMessage());
+				novosErros.add(erros.getDefaultMessage());
 
 		}
 

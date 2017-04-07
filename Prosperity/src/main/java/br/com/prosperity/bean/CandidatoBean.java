@@ -52,6 +52,7 @@ public class CandidatoBean<AvaliadorBean>  extends FormatUtil {
 	private List<StatusCandidatoBean> status = new ArrayList<>();
 	@Valid
 	private Set<VagaCandidatoBean> vagas = new HashSet<>();
+	
 	private List<CandidatoCompetenciaBean> competencias = new ArrayList<>();
 	private Map<String, List<StatusCandidatoBean>> statusPorMesAno;
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
@@ -90,6 +91,8 @@ public class CandidatoBean<AvaliadorBean>  extends FormatUtil {
 	}
 
 	
+	
+
 	public Date getDataAberturaDe() {
 		return dataAberturaDe;
 	}

@@ -69,6 +69,9 @@ public class VagaBusiness {
 	
 	@Autowired
 	private SituacaoVagaBean situacaoVaga;
+	
+	@Autowired
+	private List<VagaBean> vagaBean;
 
 	@Transactional(readOnly = true)
 	public List<VagaBean> listar() {
@@ -221,5 +224,12 @@ public class VagaBusiness {
 			avaliadorCandidatoEntity.setVaga(vaga);
 			avaliadorCandidatoDAO.insert(avaliadorCandidatoEntity);
 		}
+	}
+	
+	@Transactional(readOnly=true)
+	public List<VagaBean> obterTodos() {
+		List<VagaEntity> vagaEntity = vagaDAO.findAll();
+		vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
+		return vagaBean;
 	}
 }
