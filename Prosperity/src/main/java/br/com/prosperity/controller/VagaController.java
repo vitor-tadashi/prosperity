@@ -117,7 +117,7 @@ public class VagaController {
 			return "redirect:consultar";
 
 		}
-
+		
 		List<VagaBean> listaVagaFiltro = vagaBusiness.filtroVaga(vaga);
 		model.addAttribute("vagas", listaVagaFiltro);
 
