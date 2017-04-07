@@ -1,10 +1,12 @@
 package br.com.prosperity.converter;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import br.com.prosperity.bean.AvaliadorVagaBean;
 import br.com.prosperity.entity.AvaliadorVagaEntity;
 
+@Component
 public class AvaliadorVagaConverter implements Converter<AvaliadorVagaEntity, AvaliadorVagaBean> {
 
 	@Autowired
@@ -20,7 +22,8 @@ public class AvaliadorVagaConverter implements Converter<AvaliadorVagaEntity, Av
 		}
 		AvaliadorVagaEntity entity = new AvaliadorVagaEntity();
 
-		entity.setId(bean.getId());;
+		entity.setId(bean.getId());
+		;
 		entity.setUsuario(usuarioConverter.convertBeanToEntity(bean.getUsuario()));
 		entity.setVaga(vagaConverter.convertBeanToEntity(bean.getVaga()));
 
