@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,16 +30,15 @@ import javax.persistence.TemporalType;
 		// VagaEntity u LEFT JOIN u.statusVagaEntity p LEFT JOIN p.status e
 		// WHERE u.dataAbertura BETWEEN ?1 AND ?2 AND u.nomeVaga like ?3 AND
 		// p.status = ?4" )
-		@NamedQuery(name="listarVagasAtivas", query="SELECT v.id, v.nomeVaga, v.descricaoFormacaoAcademica, v.descricaoPerfilComportamental, v.descricaoPerfilTecnico, v.tipoVaga FROM VagaEntity v LEFT JOIN v.statusVagaEntity sv where sv.status.id = ?1"),
+		@NamedQuery(name = "listarVagasAtivas", query = "SELECT v.id, v.nomeVaga, v.descricaoFormacaoAcademica, v.descricaoPerfilComportamental, v.descricaoPerfilTecnico, v.tipoVaga FROM VagaEntity v LEFT JOIN v.statusVagaEntity sv where sv.status.id = ?1"),
 		@NamedQuery(name = "listarVagaFiltrado", query = "SELECT u FROM VagaEntity u LEFT OUTER JOIN u.statusVagaEntity p left join p.status s "
 				+ "WHERE u.nomeVaga like ?1 and s.id = ?2 and u.dataAbertura between ?3 and ?4"),
-		@NamedQuery(name="ultimoCadastro", query= "SELECT MAX(u.id) FROM VagaEntity u")
-}) 	
+		@NamedQuery(name = "ultimoCadastro", query = "SELECT MAX(u.id) FROM VagaEntity u") })
 
 @Entity
 @Table(name = "tbVaga")
 public class VagaEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idVaga", unique = true, nullable = false)
@@ -54,6 +54,7 @@ public class VagaEntity {
 	private Double valorPretensao;
 
 	@Column(name = "dtInicio")
+	@Temporal(value = TemporalType.DATE)
 	private Date dataInicio;
 
 	@Column(name = "flLocalTrabalho")
@@ -84,7 +85,7 @@ public class VagaEntity {
 	private String descricaoPerfilComportamental; //
 
 	@Column(name = "dsPerfilTecnico")
-	private String descricaoPerfilTecnico; //	
+	private String descricaoPerfilTecnico; //
 
 	@Column(name = "dtAbertura")
 	@Temporal(value = TemporalType.DATE)
@@ -98,7 +99,8 @@ public class VagaEntity {
 	@Temporal(value = TemporalType.DATE)
 	private Date dataFechamento; //
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY)
+
 	@JoinColumn(name = "idProjeto")
 	private ProjetoEntity projetoEntity;
 
@@ -110,9 +112,9 @@ public class VagaEntity {
 	@JoinColumn(name = "idSenioridade")
 	private SenioridadeEntity senioridadeEntity;
 
-//	@ManyToOne(fetch=FetchType.LAZY)
-//	@JoinColumn(name = "idUsuario")
-//	private UsuarioEntity usuarioEntity;
+	// @ManyToOne(fetch=FetchType.LAZY)
+	// @JoinColumn(name = "idUsuario")
+	// private UsuarioEntity usuarioEntity;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idVaga")
@@ -121,16 +123,16 @@ public class VagaEntity {
 	// @ManyToOne(cascade = CascadeType.ALL)
 	// private AvaliadorEntity avaliadorEntity;
 
-	@Column(name="nmResponsavel")
+	@Column(name = "nmResponsavel")
 	private String nmResponsavel;
-	
-	@Column(name="nmAreaResponsavel")
+
+	@Column(name = "nmAreaResponsavel")
 	private String nmAreaResponsavel;
 
-	@Column(name="emailResponsavel")
+	@Column(name = "emailResponsavel")
 	private String emailResponsavel;
-	
-	@Column(name="telResponsavel")
+
+	@Column(name = "telResponsavel")
 	private String telResponsavel;
 
 	public Integer getId() {
@@ -155,9 +157,7 @@ public class VagaEntity {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	
-	
+
 	public String getNomeVaga() {
 		return nomeVaga;
 	}
@@ -318,13 +318,13 @@ public class VagaEntity {
 		this.senioridadeEntity = senioridadeEntity;
 	}
 
-//	public UsuarioEntity getUsuarioEntity() {
-//		return usuarioEntity;
-//	}
-//
-//	public void setUsuarioEntity(UsuarioEntity usuarioEntity) {
-//		this.usuarioEntity = usuarioEntity;
-//	}
+	// public UsuarioEntity getUsuarioEntity() {
+	// return usuarioEntity;
+	// }
+	//
+	// public void setUsuarioEntity(UsuarioEntity usuarioEntity) {
+	// this.usuarioEntity = usuarioEntity;
+	// }
 
 	public List<StatusVagaEntity> getStatusVagaEntity() {
 		return statusVagaEntity;
@@ -333,7 +333,7 @@ public class VagaEntity {
 	public void setStatusVagaEntity(List<StatusVagaEntity> statusVagaEntity) {
 		this.statusVagaEntity = statusVagaEntity;
 	}
-	
+
 	public String getNmResponsavel() {
 		return nmResponsavel;
 	}

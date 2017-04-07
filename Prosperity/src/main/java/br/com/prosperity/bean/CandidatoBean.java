@@ -76,7 +76,6 @@ public class CandidatoBean<AvaliadorBean>  extends FormatUtil {
 	private Date dataAberturaPara;
 
 	private List<AvaliadorBean> avaliadores;
-	
 
 	public VagaCandidatoBean getVagaCandidato() {
 		if (vagaCandidato == null) {

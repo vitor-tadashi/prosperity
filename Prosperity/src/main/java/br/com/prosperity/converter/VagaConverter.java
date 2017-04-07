@@ -1,4 +1,3 @@
-
 package br.com.prosperity.converter;
 
 import org.springframework.beans.factory.annotation.Autowired;

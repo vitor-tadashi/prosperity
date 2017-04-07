@@ -1,8 +1,12 @@
 package br.com.prosperity.business;
 
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.ArrayList;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -11,22 +15,22 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
 import javax.servlet.http.HttpSession;
-
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
+import com.thoughtworks.xstream.io.path.Path;
 import br.com.prosperity.bean.CandidatoBean;
+import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.SituacaoVagaBean;
 import br.com.prosperity.bean.StatusCandidatoBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.converter.CandidatoConverter;
+import br.com.prosperity.converter.VagaConverter;
 import br.com.prosperity.dao.AvaliadorCandidatoDAO;
 import br.com.prosperity.dao.CanalInformacaoDAO;
 import br.com.prosperity.dao.CandidatoDAO;
@@ -53,16 +57,16 @@ public class CandidatoBusiness {
 
 	@Autowired
 	private CandidatoBean candidatoBean;
-	
+
 	@Autowired
 	private CandidatoDAO candidatoDAO;
-	
+
 	@Autowired
 	private CandidatoConverter candidatoConverter;
-	
+
 	@Autowired
 	private StatusCandidatoDAO statusCandidatoDAO;
-	
+
 	@Autowired
 	private UsuarioBean usuarioBean;
 	@Autowired
@@ -75,18 +79,21 @@ public class CandidatoBusiness {
 	private SituacaoAtualDAO situacaoAtualDAO;
 	@Autowired
 	private StatusDAO statusDAO;
-	
+
 	@Autowired
 	private StatusFuturoDAO statusFuturoDAO;
-	
+
 	@Autowired
 	private AvaliadorCandidatoDAO avaliadorCandidatoDAO;
-	
+
 	@Autowired
 	private VagaDAO vagaDAO;
-	
+
 	@Autowired
 	private HttpSession session;
+	
+	@Autowired
+	private VagaConverter vagaConverter;
 
 	
 	
@@ -182,18 +189,28 @@ public class CandidatoBusiness {
 		if (candidatoBean.getId() == null) {
 			if (verificarCandidatura(candidatoBean) == true) {
 				CandidatoEntity candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoBean);
-				candidatoEntity.getFormacao().setTipoCurso(tipoCursoDAO.findById(candidatoBean.getFormacao().getTipoCurso().getId()));
-				candidatoEntity.getFormacao().setSituacaoAtual(situacaoAtualDAO.findById(candidatoBean.getFormacao().getSituacaoAtual().getId()));
-				
+				candidatoEntity.getFormacao()
+						.setTipoCurso(tipoCursoDAO.findById(candidatoBean.getFormacao().getTipoCurso().getId()));
+				candidatoEntity.getFormacao().setSituacaoAtual(
+						situacaoAtualDAO.findById(candidatoBean.getFormacao().getSituacaoAtual().getId()));
+
 				Set<VagaCandidatoEntity> vagas = new HashSet<>();
-				for(VagaCandidatoEntity v: candidatoEntity.getVagas()){
-					v.setCanalInformacao(canalInformacaoDAO.findById(candidatoBean.getVagaCandidato().getCanalInformacao().getId()));
-			
+				for (VagaCandidatoEntity v : candidatoEntity.getVagas()) {
+					v.setCanalInformacao(
+							canalInformacaoDAO.findById(candidatoBean.getVagaCandidato().getCanalInformacao().getId()));
+
 				}
 				candidatoEntity.setVagas(vagas);
+				candidatoEntity.getFormacao().setSituacaoAtual(situacaoAtualDAO.findById(candidatoEntity.getFormacao().getSituacaoAtual().getIdSituacaoAtual()));
+				candidatoEntity.getFormacao().setTipoCurso(tipoCursoDAO.findById(candidatoEntity.getFormacao().getTipoCurso().getId()));
+				VagaEntity vagaEntity = vagaDAO.findById(candidatoBean.getVagaCandidato().getVaga().getId());
+				VagaCandidatoEntity vagaCandidatoEntity = new VagaCandidatoEntity();
 				
+				vagaCandidatoEntity.setVaga(vagaEntity);
+				vagaCandidatoEntity.setCanalInformacao(canalInformacaoDAO.findById(candidatoBean.getVagaCandidato().getCanalInformacao().getId()));
+				candidatoEntity.getVagas().add(vagaCandidatoEntity);
 				candidatoDAO.insert(candidatoEntity);
-				
+
 			} else {
 				// retornar mensagem de candidato em processo seletivo para vaga
 			}
@@ -206,6 +223,7 @@ public class CandidatoBusiness {
 			candidatoDAO.update(candidatoEntity);
 		}
 	}
+	
 
 	@Transactional
 	public CandidatoBean obterCandidatoPorId(Integer id) {
@@ -341,5 +359,41 @@ public class CandidatoBusiness {
 
 			avaliadorCandidatoDAO.update(avaliadorCandidatoEntity);
 		}
+	}
+
+	@Transactional
+	public List<CandidatoBean> listarAprovacao() {
+		List<Integer> listaStatus = obterStatusDisponivelAprovacao();
+		List<CandidatoEntity> entities = candidatoDAO.findByNamedQuery("aprovacao", listaStatus,usuarioBean.getId());
+		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(entities);
+
+		return beans;
+	}
+	
+	/**
+	 * Obtêm os status disponíveis para visualização para o usuário logado
+	 * @return Lista dos id's dos status disponíveis
+	 */
+	private List<Integer> obterStatusDisponivelAprovacao() {
+		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
+		List<Integer> listaStatus = new ArrayList<Integer>();
+		listaStatus.add(4);
+
+		for (FuncionalidadeBean funcionalidadeBean : usuarioBean.getPerfil().getListaFuncionalidades()) {
+			if (funcionalidadeBean.getId() == 27) 
+				listaStatus.add(StatusCandidatoEnum.CANDIDATURA.getValue());
+
+			if (funcionalidadeBean.getId() == 26) 
+				listaStatus.add(StatusCandidatoEnum.GERARPROPOSTA.getValue());
+
+			if (funcionalidadeBean.getId() == 25) 
+				listaStatus.add(StatusCandidatoEnum.PROPOSTACANDIDATO.getValue());
+
+			if (funcionalidadeBean.getId() == 28) {
+				listaStatus.add(StatusCandidatoEnum.PROPOSTAACEITA.getValue());
+				listaStatus.add(StatusCandidatoEnum.PROPOSTARECUSADA.getValue());
+			}
+		}
+		return listaStatus;
 	}
 }

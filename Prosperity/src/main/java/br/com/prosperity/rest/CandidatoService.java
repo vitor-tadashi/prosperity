@@ -19,20 +19,21 @@ import br.com.prosperity.business.CandidatoBusiness;
 public class CandidatoService {
 	@Autowired
 	private CandidatoBusiness b;
-	
+
 	@POST
 	@RequestMapping("/servico")
 	@Consumes("application/xml")
 	public void salvarBean(@RequestBody WordpressBean w) {
-		
+
 		System.out.println("Chegou aqui!");
 
 		List<CandidatoBean> candidatos = new ArrayList<>();
 
 		candidatos = w.getCandidatos();
 
-		for (CandidatoBean c : candidatos) {
-			b.inserir(c);
-		}
+		if (!candidatos.isEmpty())
+			for (CandidatoBean c : candidatos) {
+				b.inserir(c);
+			}
 	}
 }
