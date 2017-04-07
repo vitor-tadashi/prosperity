@@ -13,10 +13,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbAvaliadorCandidato")
-@NamedQueries({ 
-@NamedQuery(name = "obterAvaliadoresCandidato", query = "SELECT u FROM AvaliadorCandidatoEntity u WHERE u.idStatus = null"),
-@NamedQuery(name = "obterAvaliadoresDaVaga", query = "SELECT u FROM AvaliadorCandidatoEntity u WHERE u.vaga = ?1")
-})
+@NamedQueries({
+		@NamedQuery(name = "obterAvaliadoresCandidato", query = "SELECT u FROM AvaliadorCandidatoEntity u WHERE u.status = null")})
 
 public class AvaliadorCandidatoEntity {
 
@@ -30,15 +28,11 @@ public class AvaliadorCandidatoEntity {
 	private CandidatoEntity candidato;
 
 	@OneToOne
-	@JoinColumn(name = "idVaga")
-	private VagaEntity vaga;
-
-	@OneToOne
-	@JoinColumn(name = "idUsuario")
-	private UsuarioEntity usuario;
+	@JoinColumn(name = "idAvaliadorVaga")
+	private AvaliadorVagaEntity avaliadorVaga;
 
 	@Column(name = "idStatus")
-	private Integer idStatus = null;
+	private Integer status = null;
 
 	public Integer getId() {
 		return id;
@@ -56,27 +50,19 @@ public class AvaliadorCandidatoEntity {
 		this.candidato = candidato;
 	}
 
-	public VagaEntity getVaga() {
-		return vaga;
+	public AvaliadorVagaEntity getAvaliadorVaga() {
+		return avaliadorVaga;
 	}
 
-	public void setVaga(VagaEntity vaga) {
-		this.vaga = vaga;
+	public void setAvaliadorVaga(AvaliadorVagaEntity avaliadorVaga) {
+		this.avaliadorVaga = avaliadorVaga;
 	}
 
-	public UsuarioEntity getUsuario() {
-		return usuario;
+	public Integer getStatus() {
+		return status;
 	}
 
-	public void setUsuario(UsuarioEntity usuario) {
-		this.usuario = usuario;
-	}
-
-	public Integer getIdStatus() {
-		return idStatus;
-	}
-
-	public void setIdStatus(Integer idStatus) {
-		this.idStatus = idStatus;
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 }
