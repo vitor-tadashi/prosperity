@@ -8,7 +8,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.taglibs.standard.tag.common.xml.ForEachTag;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +19,12 @@ import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.converter.UsuarioConverter;
 import br.com.prosperity.converter.VagaConverter;
-import br.com.prosperity.dao.AvaliadorCandidatoDAO;
+import br.com.prosperity.dao.AvaliadorVagaDAO;
 import br.com.prosperity.dao.StatusDAO;
 import br.com.prosperity.dao.StatusVagaDAO;
 import br.com.prosperity.dao.UsuarioDAO;
 import br.com.prosperity.dao.VagaDAO;
-import br.com.prosperity.entity.AvaliadorCandidatoEntity;
+import br.com.prosperity.entity.AvaliadorVagaEntity;
 import br.com.prosperity.entity.StatusVagaEntity;
 import br.com.prosperity.entity.VagaEntity;
 import br.com.prosperity.enumarator.StatusVagaEnum;
@@ -56,7 +55,7 @@ public class VagaBusiness {
 	private StatusVagaDAO statusVagaDAO;
 
 	@Autowired
-	private AvaliadorCandidatoDAO avaliadorCandidatoDAO;
+	private AvaliadorVagaDAO avaliadorVagaDAO;
 
 	@Autowired
 	private UsuarioBean usuarioBean;
@@ -219,10 +218,10 @@ public class VagaBusiness {
 
 	private void inserirAvaliadores(VagaEntity vaga, List<UsuarioBean> usuarios) {
 		for (UsuarioBean usuario : usuarios) {
-			AvaliadorCandidatoEntity avaliadorCandidatoEntity = new AvaliadorCandidatoEntity();
-			avaliadorCandidatoEntity.setUsuario(usuarioConverter.convertBeanToEntity(usuario));
-			avaliadorCandidatoEntity.setVaga(vaga);
-			avaliadorCandidatoDAO.insert(avaliadorCandidatoEntity);
+            AvaliadorVagaEntity avaliadorVagaEntity = new AvaliadorVagaEntity();
+            avaliadorVagaEntity.setUsuario(usuarioConverter.convertBeanToEntity(usuario));
+            avaliadorVagaEntity.setVaga(vaga);
+            avaliadorVagaDAO.insert(avaliadorVagaEntity);
 		}
 	}
 	

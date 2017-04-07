@@ -76,10 +76,18 @@ public class UsuarioController {
 
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
 	public String inserirUsuario(UsuarioBean usuario, RedirectAttributes redirectAttrs) {
+		String mensagem;
 		try {
 			usuarioBusiness.inserir(usuario);
+			if(usuario.getId() == null) {
+				mensagem = "Usuário incluido com sucesso!";
+			}
+			else {
+				mensagem = "Usuário alterado com sucesso!";
+			}
+			redirectAttrs.addFlashAttribute("mensagem", mensagem);
 		} catch (BusinessException e) {
-			redirectAttrs.addFlashAttribute("erro", e.getMessage());
+			redirectAttrs.addFlashAttribute("mensagem", e.getMessage());
 		}
 		
 		return "redirect:gerenciar";

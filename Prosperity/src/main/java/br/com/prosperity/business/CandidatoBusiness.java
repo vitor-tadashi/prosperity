@@ -14,13 +14,16 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
+
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.prosperity.bean.CandidatoBean;
+import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.SituacaoVagaBean;
 import br.com.prosperity.bean.StatusCandidatoBean;
@@ -29,6 +32,7 @@ import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.bean.VagaCandidatoBean;
 import br.com.prosperity.converter.CandidatoConverter;
 import br.com.prosperity.dao.AvaliadorCandidatoDAO;
+import br.com.prosperity.dao.AvaliadorVagaDAO;
 import br.com.prosperity.dao.CanalInformacaoDAO;
 import br.com.prosperity.dao.CandidatoDAO;
 import br.com.prosperity.dao.SituacaoAtualDAO;
@@ -39,6 +43,7 @@ import br.com.prosperity.dao.TipoCursoDAO;
 import br.com.prosperity.dao.UsuarioDAO;
 import br.com.prosperity.dao.VagaDAO;
 import br.com.prosperity.entity.AvaliadorCandidatoEntity;
+import br.com.prosperity.entity.AvaliadorVagaEntity;
 import br.com.prosperity.entity.CandidatoEntity;
 import br.com.prosperity.entity.StatusCandidatoEntity;
 import br.com.prosperity.entity.StatusFuturoEntity;
@@ -83,6 +88,11 @@ public class CandidatoBusiness {
 	@Autowired
 	private AvaliadorCandidatoDAO avaliadorCandidatoDAO;
 	
+
+	@Autowired
+	private AvaliadorVagaDAO avaliadorVagaDAO;
+
+
 	@Autowired
 	private VagaDAO vagaDAO;
 	
@@ -269,7 +279,7 @@ public class CandidatoBusiness {
 							? StatusCandidatoEnum.PROPOSTACANDIDATO : StatusCandidatoEnum.CANDIDATOEMANALISE;
 
 					situacaoCandidato.setStatus(status);
-					avaliadorCandidatoEntity.get(0).setIdStatus(situacaoCandidato.getStatus().getValue());
+					avaliadorCandidatoEntity.get(0).setStatus(situacaoCandidato.getStatus().getValue());
 					avaliadorCandidatoDAO.update(avaliadorCandidatoEntity.get(0));
 				}
 			}
@@ -340,13 +350,50 @@ public class CandidatoBusiness {
 	@Transactional
 	private void inserirAvaliadores(CandidatoEntity candidato, Integer idVaga) {
 		VagaEntity vaga = vagaDAO.findById(idVaga);
-		List<AvaliadorCandidatoEntity> avaliadoresCandidatoEntity = avaliadorCandidatoDAO
-				.findByNamedQuery("obterAvaliadoresDaVaga", vaga);
-		for (AvaliadorCandidatoEntity avaliadorCandidatoEntity : avaliadoresCandidatoEntity) {
-
-			avaliadorCandidatoEntity.setCandidato(candidato);
-
-			avaliadorCandidatoDAO.update(avaliadorCandidatoEntity);
+        List<AvaliadorVagaEntity> avaliadoresEntity = avaliadorVagaDAO.findByNamedQuery("obterAvaliadoresDaVaga", vaga);
+        for (AvaliadorVagaEntity avaliadorVagaEntity : avaliadoresEntity) {
+            AvaliadorCandidatoEntity avaliadorCandidatoEnitty = new AvaliadorCandidatoEntity();
+            avaliadorCandidatoEnitty.setAvaliadorVaga(avaliadorVagaEntity);
+            avaliadorCandidatoEnitty.setCandidato(candidato);
+            avaliadorCandidatoDAO.insert(avaliadorCandidatoEnitty);
 		}
 	}
+
+
+	@Transactional
+	public List<CandidatoBean> listarAprovacao() {
+		List<Integer> listaStatus = obterStatusDisponivelAprovacao();
+		List<CandidatoEntity> entities = candidatoDAO.findByNamedQuery("aprovacao", listaStatus,usuarioBean.getId());
+		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(entities);
+
+		return beans;
+	}
+	
+	/**
+	 * Obtêm os status disponíveis para visualização para o usuário logado
+	 * @return Lista dos id's dos status disponíveis
+	 */
+	private List<Integer> obterStatusDisponivelAprovacao() {
+		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
+		List<Integer> listaStatus = new ArrayList<Integer>();
+		listaStatus.add(StatusCandidatoEnum.CANDIDATOEMANALISE.getValue());
+
+		for (FuncionalidadeBean funcionalidadeBean : usuarioBean.getPerfil().getListaFuncionalidades()) {
+			if (funcionalidadeBean.getId() == 27) 
+				listaStatus.add(StatusCandidatoEnum.CANDIDATURA.getValue());
+
+			if (funcionalidadeBean.getId() == 26) 
+				listaStatus.add(StatusCandidatoEnum.GERARPROPOSTA.getValue());
+
+			if (funcionalidadeBean.getId() == 25) 
+				listaStatus.add(StatusCandidatoEnum.PROPOSTACANDIDATO.getValue());
+
+			if (funcionalidadeBean.getId() == 28) {
+				listaStatus.add(StatusCandidatoEnum.PROPOSTAACEITA.getValue());
+				listaStatus.add(StatusCandidatoEnum.PROPOSTARECUSADA.getValue());
+			}
+		}
+		return listaStatus;
+	}
+
 }
