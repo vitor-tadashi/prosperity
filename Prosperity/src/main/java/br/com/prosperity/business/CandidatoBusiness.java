@@ -1,5 +1,7 @@
 package br.com.prosperity.business;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -15,11 +17,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.thoughtworks.xstream.io.path.Path;
+
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.StatusCandidatoBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.converter.CandidatoConverter;
+import br.com.prosperity.converter.VagaConverter;
 import br.com.prosperity.dao.AvaliadorCandidatoDAO;
 import br.com.prosperity.dao.CanalInformacaoDAO;
 import br.com.prosperity.dao.CandidatoDAO;
@@ -78,6 +83,9 @@ public class CandidatoBusiness {
 	
 	@Autowired
 	private HttpSession session;
+	
+	@Autowired
+	private VagaConverter vagaConverter;
 
 	@Transactional
 	public CandidatoBean obter(Integer id) {
@@ -126,15 +134,14 @@ public class CandidatoBusiness {
 		if (candidatoBean.getId() == null) {
 			if (verificarCandidatura(candidatoBean) == true) {
 				CandidatoEntity candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoBean);
-				candidatoEntity.getFormacao().setTipoCurso(tipoCursoDAO.findById(candidatoBean.getFormacao().getTipoCurso().getId()));
-				candidatoEntity.getFormacao().setSituacaoAtual(situacaoAtualDAO.findById(candidatoBean.getFormacao().getSituacaoAtual().getId()));
+				candidatoEntity.getFormacao().setSituacaoAtual(situacaoAtualDAO.findById(candidatoEntity.getFormacao().getSituacaoAtual().getIdSituacaoAtual()));
+				candidatoEntity.getFormacao().setTipoCurso(tipoCursoDAO.findById(candidatoEntity.getFormacao().getTipoCurso().getId()));
+				VagaEntity vagaEntity = vagaDAO.findById(candidatoBean.getVagaCandidato().getVaga().getId());
+				VagaCandidatoEntity vagaCandidatoEntity = new VagaCandidatoEntity();
 				
-				Set<VagaCandidatoEntity> vagas = new HashSet<>();
-				for(VagaCandidatoEntity v: candidatoEntity.getVagas()){
-					v.setCanalInformacao(canalInformacaoDAO.findById(candidatoBean.getVagaCandidato().getCanalInformacao().getId()));
-			
-				}
-				candidatoEntity.setVagas(vagas);
+				vagaCandidatoEntity.setVaga(vagaEntity);
+				vagaCandidatoEntity.setCanalInformacao(canalInformacaoDAO.findById(candidatoBean.getVagaCandidato().getCanalInformacao().getId()));
+				candidatoEntity.getVagas().add(vagaCandidatoEntity);
 				
 				candidatoDAO.insert(candidatoEntity);
 				
@@ -150,6 +157,7 @@ public class CandidatoBusiness {
 			candidatoDAO.update(candidatoEntity);
 		}
 	}
+	
 
 	@Transactional
 	public CandidatoBean obterCandidatoPorId(Integer id) {

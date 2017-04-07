@@ -38,7 +38,7 @@
 
 
 	<mvc:resources mapping="/resources/**" location="/resources/" />
-	
+
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
@@ -74,7 +74,7 @@
 			</props>
 		</property>
 	</bean>
-	
+
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
@@ -87,4 +87,12 @@
 	<mvc:interceptors>
 		<bean class="br.com.prosperity.interceptor.AutorizadorInterceptor" />
 	</mvc:interceptors>
+	
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+
+		<!-- setting maximum upload size -->
+		<beans:property name="maxUploadSize" value="100000" />
+
+	</beans:bean>
 </beans>

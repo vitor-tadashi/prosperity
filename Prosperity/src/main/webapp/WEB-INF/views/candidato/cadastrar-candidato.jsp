@@ -51,7 +51,7 @@
 								<div id="textDiv2"></div>
 								<div id="textDiv3"></div>
 								
-						<form class="form-border" action="salvar" method="post"
+						<form class="form-border" action="salvar" method="post" enctype="multipart/form-data"
 							id=formCadastro onsubmit="return Validar()"<%--data-validate="parsley" --%>>
 							<div class="panel-tab clearfix">
 								<ul class="tab-bar wizard-demo" id="wizardDemo">
@@ -152,10 +152,10 @@
 											<div class="form-group col-xs-12">
 												<label  class="control-label">Currículo</label>
 												<div class="upload-file" style="width: 356px;">
-													<input type="file" id="upload-curriculo"
+													<input type="file" id="upload-curriculo" value="${candidato.curriculo}" name="file"
 														class="upload-demo"> <label data-title="Selecione"
 														for="upload-curriculo"> <span
-														data-title="Nenhum arquivo selecionado..."></span>
+														data-title="Nenhum arquivo selecionado..." onblur="nmCurriculo(id)"></span>
 													</label>
 												</div>
 											</div>
@@ -189,7 +189,7 @@
 										<div class="form-group col-md-2">
 											<label for="situacaoAtual">Situação atual</label> <select
 												class="form-control" id="situacaoAtual"
-												name="formacao.SituacaoAtual.id">
+												name="formacao.situacaoAtual.id">
 												<option value="0">Selecione</option>
 												<c:forEach var="situacaoAtual" items="${listaSituacaoAtual}">
 													<option value="${situacaoAtual.id}"
@@ -232,7 +232,7 @@
 										</div>
 										<div class="form-group col-md-3">
 											<label for="vaga">Vaga a ser aplicado</label> <select
-												class="form-control" id="vaga" name="vagaCandidato.vaga.id">
+												class="form-control" id="vaga" name="vagaCandidato.Vaga.id">
 												<option value="0">Selecione</option>
 												<c:forEach var="vaga" items="${listaVaga}">
 													<option value="${vaga.id}"
@@ -243,7 +243,7 @@
 										<div class="form-group col-md-3">
 											<label for="canalInformacao">Como ficou sabendo
 												desta vaga?</label> <select class="form-control"
-												name="vagaCandidato.canalInformacao.id" id="canalInformacao">
+												name="vagaCandidato.CanalInformacao.id" id="canalInformacao">
 												<option value="0">Selecione</option>
 												<c:forEach var="canalInformacao" items="${listaCanal}">
 													<option value="${canalInformacao.id}"
@@ -496,6 +496,13 @@
 		}
 			
 
+	</script>
+	<script type="text/javascript">
+	function nmCurriculo() {
+		 document.getElementById("upload-curriculo").value =(candidato.curriculo);
+		
+	}
+	
 	</script>
 </body>
 </html>

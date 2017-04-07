@@ -74,9 +74,6 @@ public class CandidatoBean  extends FormatUtil {
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date dataAberturaPara;
 	
-
-
-
 	public VagaCandidatoBean getVagaCandidato() {
 		if (vagaCandidato == null) {
 			getUltimaVaga();
