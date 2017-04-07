@@ -13,6 +13,9 @@ $(function() {
 					$.each(listaFunc, function(i, item) {
 						if (item.id == $(li).val()) {
 							$(li).removeClass("hide")
+							if($(li).hasClass("hasMenu")){
+								$(".menu"+$(li).val()).removeClass("hide");
+							}
 						}
 					});
 				});

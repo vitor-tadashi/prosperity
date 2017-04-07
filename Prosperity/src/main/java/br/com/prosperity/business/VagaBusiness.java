@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.taglibs.standard.tag.common.xml.ForEachTag;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ import br.com.prosperity.dao.VagaDAO;
 import br.com.prosperity.entity.AvaliadorCandidatoEntity;
 import br.com.prosperity.entity.StatusVagaEntity;
 import br.com.prosperity.entity.VagaEntity;
+import br.com.prosperity.enumarator.StatusVagaEnum;
 
 
 @Component
@@ -64,6 +66,9 @@ public class VagaBusiness {
 
 	@Autowired
 	private HttpSession session;
+	
+	@Autowired
+	private SituacaoVagaBean situacaoVaga;
 
 	@Transactional(readOnly = true)
 	public List<VagaBean> listar() {
@@ -75,8 +80,7 @@ public class VagaBusiness {
 
 	@Transactional(readOnly = true)
 	public List<VagaEntity> listarVagasAtivas() {
-
-		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagasAtivas", 1); // PENSAR
+		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagasAtivas", 1);
 		//List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 		return vagaEntity;
 	}
@@ -85,6 +89,16 @@ public class VagaBusiness {
 	public List<VagaBean> listarVagaAprovar() {
 
 		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagaAprovar", 18, true); // PENSAR
+		int aux = 0;
+		for(VagaEntity vaga: vagaEntity)
+		{
+			vaga.setDataInicio(parseData(vaga.getDataInicio()));
+			System.out.println(vaga.getDataInicio());
+			vagaEntity.get(aux).setDataInicio(vaga.getDataInicio());
+			aux++;
+		}
+		//for each para percorrer lista de vagas formantando ela.
+		//vagaEntity.get(0).setDataInicio(parseData(vagaEntity.get(0).getDataInicio()));
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 		return vagaBean;
 	}
@@ -127,7 +141,7 @@ public class VagaBusiness {
 	}
 
 	@Transactional
-	public void inserir(VagaBean vagaBean /* , HttpSession session */) {
+	public void inserir(VagaBean vagaBean, List<UsuarioBean> usuarioBean /*, HttpSession session */) {
 
 		VagaEntity vagaEntity = vagaConverter.convertBeanToEntity(vagaBean);
 
@@ -136,6 +150,10 @@ public class VagaBusiness {
 			vagaEntity.setDataAbertura(dateNow);
 			// vagaBean.setUsuarioBean(usuario);
 			vagaDAO.insert(vagaEntity);
+			situacaoVaga.setIdVaga(vagaEntity.getId());
+			situacaoVaga.setStatus(StatusVagaEnum.PENDENTE);
+			alterarStatus(situacaoVaga);
+			inserirAvaliadores(vagaEntity, usuarioBean);
 		} else {
 			// vagaEntity.setDataAbertura(vagaBean.getDataAbertura()); //
 			// VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
@@ -184,7 +202,7 @@ public class VagaBusiness {
 	}
 
 	private Date parseData(Date dataAntiga) {
-		SimpleDateFormat novaData = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat novaData = new SimpleDateFormat("dd-MM-yyyy");
 
 		String data = "";
 		try {

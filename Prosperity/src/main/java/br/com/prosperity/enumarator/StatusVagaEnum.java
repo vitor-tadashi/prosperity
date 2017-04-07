@@ -5,8 +5,8 @@ import java.util.HashMap;
 public enum StatusVagaEnum {
 	ACEITO(1),
 	RECUSADO(2),
-	CANCELADO(17),
-	PENDENTE(18);
+	CANCELADO(3),
+	PENDENTE(4);
 	
 	private Integer value;
 	private static HashMap<Integer, StatusVagaEnum> map = new HashMap<Integer, StatusVagaEnum>();

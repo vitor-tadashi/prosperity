@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -36,6 +37,8 @@ import br.com.prosperity.business.VagaBusiness;
 @Controller
 @RequestMapping("vaga")
 public class VagaController {
+	
+
 
 	@Autowired
 	private VagaBusiness vagaBusiness;
@@ -215,11 +218,23 @@ public class VagaController {
 			obterDominiosVaga(model);
 			return "vaga/solicitar-vaga";
 		}
-
-		vagaBusiness.inserir(vagaBean);
+		
+		vagaBusiness.inserir(vagaBean,usuarios);
 		System.out.println("\n\n\nCadastrado\n\n\n");
 		return "redirect:solicitar";
 
+	}
+	
+	@RequestMapping(value = "/avaliadores", method = RequestMethod.POST)
+	@ResponseBody
+	public String recebeAvaliadores(List<Integer> avaliadores){
+		
+		for(Integer dados:avaliadores){
+			usuarios.get(0).setId(dados);
+		}
+	    
+		return "ok";
+		
 	}
 
 	private List<String> buildErrorMessage(List<FieldError> error) {
