@@ -34,13 +34,12 @@ public class LoginController {
 	public String autenticar(UsuarioBean usuarioBean, Model model) {
 		try {
 			usuario = usuarioBusiness.autenticar(usuarioBean);
-
 			if (usuario.getPrimeiroAcesso()) {
 				session.setAttribute("autenticado", usuario);
 				return "login/primeiro-acesso";
 			} else {
 				session.setAttribute("autenticado", usuario);
-				return "dashboard/pagina-inicial";
+				return "redirect:/pagina-inicial";
 			}
 		} catch (BusinessException ex) {
 			model.addAttribute("log", ex.getMessage());
@@ -58,7 +57,7 @@ public class LoginController {
 	public String primeiroAcessoUsuario(UsuarioBean usuarioBean) throws BusinessException {
 		usuario.setSenha(usuarioBean.getSenha());
 		usuarioBusiness.alterar(usuario);
-		return "dashboard/pagina-inicial";
+		return "redirect:/pagina-inicial";
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
