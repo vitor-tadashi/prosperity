@@ -124,8 +124,13 @@ public class CandidatoEntity {
 	@JoinColumn(name = "idCandidato")
 	private List<StatusCandidatoEntity> statusCandidatos;
 	
-	/*@OneToMany()
-	@JoinColumn(name="")*/
+	@OneToMany(cascade = { CascadeType.ALL })
+	@JoinColumn(name = "idCandidato")
+	private List<CandidatoCompetenciaEntity> competencias;
+
+	@OneToMany(cascade ={CascadeType.ALL})
+	@JoinColumn(name="idCandidato")
+	private Set<VagaCandidatoEntity> vagas;
 
 	public List<StatusCandidatoEntity> getStatusCandidatos() {
 		return statusCandidatos;
@@ -143,13 +148,7 @@ public class CandidatoEntity {
 		this.competencias = competencias;
 	}
 
-	@OneToMany(cascade = { CascadeType.ALL })
-	@JoinColumn(name = "idCandidato")
-	private List<CandidatoCompetenciaEntity> competencias;
 
-	@OneToMany()
-	@JoinColumn(name="idCandidato")
-	private Set<VagaCandidatoEntity> vagas;
 
 	public Set<VagaCandidatoEntity> getVagas() {
 		return vagas;
