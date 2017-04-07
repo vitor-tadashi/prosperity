@@ -104,7 +104,10 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		entity.setDataEntrevista(bean.getEntrevista());
 		entity.setDataUltimoContato(bean.getDataUltimoContato());
 		entity.setProposta(bean.getProposta());
-		entity.setVagas(vagaCandidatoConverter.convertBeanToEntity(bean.getVagas()));
+		
+		if (entity.getVagas() == null || (entity.getVagas() != null && entity.getVagas().size() == 0))
+			entity.setVagas(vagaCandidatoConverter.convertBeanToEntity(bean.getVagas()));
+		
 		entity.setValorMax(bean.getValorMax());
 		entity.setValorMin(bean.getValorMin());
 		

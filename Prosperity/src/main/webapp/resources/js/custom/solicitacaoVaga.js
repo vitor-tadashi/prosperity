@@ -1,5 +1,24 @@
 $(function() {
 	
+    	var id = $("#idPerfil").val();
+    	$.ajax({
+    		url: "http://localhost:8080/usuario/obter-perfil-funcionalidade",
+    		type: "GET",
+    		dataType: "JSON",
+    		data: {id : id},
+    		success: function(lista){
+    			if(lista != null){
+	    				$.each(lista,function(i,item){
+	    					if(item.id == 24){
+	    						$("#fourth").removeClass('hide')
+	    						$("#abaAvaliadores").removeClass('hide')
+	    					}
+	    				});
+    				
+    			}
+    		}
+    	});
+	
 	//Script para preencher automático o Radio de TipoVaga
 	
 	if(($("#tipoVagaVar").val() == "R")){
@@ -56,8 +75,31 @@ $(function() {
 	});
 
 	$("#btnSalvar").click(function() {
-		$("#dataInicio").val(new Date().toLocaleDateString()); 
+		var info = enviarAvaliadores();
+    	$.ajax({
+    		url: "http://localhost:8080/vaga/avaliadores",
+    		type: "POST",
+    		dataType: "JSON",
+    		data: {id : info},
+    		success: function(dado){
+    			
+    		}
+    	});
+		
 		$("#formCadastro2").submit();
+		
 	});
+	
+	function enviarAvaliadores(){
+		var avaliadores = $('#selectedBox2')[0].length;
+		var dados = [];
+		for(var i=0; i<avaliadores; i++){
+			dados.push($('#selectedBox2')[0][i].value);		
+		}
+			return dados;
+	}
+	
+	
+	
 
 });
