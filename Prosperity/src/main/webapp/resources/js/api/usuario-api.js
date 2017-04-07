@@ -54,19 +54,19 @@
 
 	// Mudar status
 	$("button#btnMudarStatus").click(function() {
-		var mensagem;
+		var msg;
 		$.ajax({
 			url : "mudar-status-api/"+idUsuario,
 			type : "POST"
 		}).done(function() {
 			if(!ativo) {
             	$('#status_'+idUsuario).find('span').text('Ativo').removeClass('label-danger').addClass('label-success');
-            	mensagem = "Usuário <strong>" + nomeFuncionario + "</strong> ATIVADO com sucesso!";
+            	msg = "Usuário <strong>" + nomeFuncionario + "</strong> ATIVADO com sucesso!";
             } else {
             	$('#status_'+idUsuario).find('span').text('Inativo').removeClass('label-success').addClass('label-danger');
-            	mensagem = "Usuário <strong>" + nomeFuncionario + "</strong> DESATIVADO com sucesso!";
+            	msg = "Usuário <strong>" + nomeFuncionario + "</strong> DESATIVADO com sucesso!";
             }
-            $('#divAlert').html(mensagem).addClass('alert alert-success').show();
+            $('#divAlert').html(msg).addClass('alert alert-success').show();
             
             $('#usuario-modal').modal('hide');
             escondeMensagem();
@@ -79,14 +79,14 @@
 	
 	// Redefinir Senha
 	$("button#btnRedefinirSenha").click(function() {
-		var mensagem;
+		var msg;
 		$.ajax({
 			url : "redefinir-senha-api/"+idUsuario,
 			type : "POST"
 		}).done(function() {
 			$('#usuario-modal').modal('hide');
-			mensagem = 'A senha do usuário <strong>' + nomeFuncionario + '</strong> foi redefinida com sucesso!'
-			$('#divAlert').html(mensagem).addClass('alert alert-success').show();
+			msg = 'A senha do usuário <strong>' + nomeFuncionario + '</strong> foi redefinida com sucesso!'
+			$('#divAlert').html(msg).addClass('alert alert-success').show();
 			escondeMensagem();
 		}).fail(function(jqXHR, textStatus) {
 			console.log('Falha ao redefinir senha do usuário');
@@ -101,6 +101,7 @@
 	
 	function escondeMensagem() {
 		window.setTimeout(function () {
-			$(".divAlert").hide();
+			$("#divAlert").hide();
+			$(".mensagem").hide();
 		}, 5000);
 	}

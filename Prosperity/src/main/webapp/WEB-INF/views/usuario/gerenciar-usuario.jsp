@@ -104,9 +104,9 @@
 						<div class="panel panel-default">
 							<div class="panel-heading"><strong>Usuários:</strong></div>
 							<div class="panel-body">
-								<div class="divAlert"></div>
+								<div id="divAlert"></div>
 								<c:if test="${not empty mensagem}">
-									<div class="alert alert-info divAlert">
+									<div class="alert alert-info mensagem">
 										${mensagem}
 									</div>
 								</c:if>
