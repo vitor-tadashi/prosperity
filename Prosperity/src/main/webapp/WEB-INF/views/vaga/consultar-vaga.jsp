@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -10,6 +10,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
+<!-- Bootstrap core CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	
+	<!-- Font Awesome-->
+	<link href="css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Pace -->
+	<link href="css/pace.css" rel="stylesheet">
+	
+	<!-- Datatable -->
+	<link href="css/jquery.dataTables_themeroller.css" rel="stylesheet">
+	
+	<!-- Perfect -->
+	<link href="css/app.min.css" rel="stylesheet">
+	<link href="css/app-skin.css" rel="stylesheet">
 
 <c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
 
@@ -85,8 +100,6 @@
 }
 
 </style>
-
-	
 
 </head>
 <body>
@@ -438,7 +451,7 @@
 		<div class="padding-md">
 			<div class="row">
 				<div class="col-sm-12">
-					<div class="panel panel-default">
+					<div class="panel panel-default table-responsive">
 						<div class="panel-heading">Consulta de vagas</div>
 						<!--<form class="form-inline">-->
 						<div class="panel-body">
@@ -459,7 +472,7 @@
 									</div>
 								</div>
 
-								<div class="col-md-2">
+								<div class="col-md-1">
 									<label for="cargo">Status</label> 
 									<select class="form-control" style="width: 130px;" id="status" name="status">
 											<option value="0">Selecione</option>
@@ -472,13 +485,13 @@
 								<div class="text-right">
 									<a href="#" style="text-decoration: none; color: #ffffff">
 										<button class="btn btn-primary"
-											style="margin-top: 22px; margin-right: 22px;" type="submit">Filtrar</button>
+											style="margin-top: 22px; margin-right: 22px;" type="submit">Pesquisar</button>
 									</a>
 								</div>
 							</form>
 						</div>
 						<!--</panel body>-->
-						
+						<div class="padding-md clearfix">
 						<table
 							id="tabelaVaga"
 							class="table table-bordered table-condensed table-hover table-striped"
@@ -510,7 +523,7 @@
 										</c:if>
 
 									</td>
-									<td id="linhaData">${vaga.dataAbertura}</td>
+									<td><fmt:formatDate value="${vaga.dataAbertura}" pattern="dd/MM/yyyy"/></td>
 									<td id="linhaStatus"><span class="label status span-${vaga.ultimoStatus.status.nome}">${vaga.ultimoStatus.status.nome}</span></td>
 									<td>
 										<div class="btn-group">
@@ -544,64 +557,16 @@
 									</td>
 								</tr>
 								</c:forEach>
-								<!-- <tr>
-									<td>Analista de sistema</td>
-									<td>Carrefour</td>
-									<td>Interno</td>
-									<td>15/02/2017</td>
-									<td><span class="label label-analiseTecnica">Fechado</span></td>
-									<td>
-										<div class="btn-group">
-											<button class="btn btn-sm btn-info dropdown-toggle"
-												data-toggle="dropdown" aria-haspopup="true"
-												aria-expanded="false">
-												<i class="fa fa-cogs fa-lg">&nbsp;</i> <span class="caret"></span>
-											</button>
-											<ul class="dropdown-menu dropdown-menu-right slidedown">
-												<li><a href="#vaga-modal" data-toggle="modal"><i
-														class="fa fa-eye ">&nbsp</i>Visualizar</a></li>
-												<li class="divider "></li>
-												<li><a href="# "><i class="fa fa-pencil ">&nbsp</i>Editar</a></li>
-												<li class="divider "></li>
-												<li><a href="#delete-modal" data-toggle="modal"><i
-														class="fa fa-trash-o ">&nbsp</i>Excluir</a></li>
-											</ul>
-										</div> /btn-group
-									</td>
-								</tr> -->
-								<!-- <tr>
-									<td>Analista .NET Pleno</td>
-									<td>Carrefour</td>
-									<td>Alocado</td>
-									<td>15/02/2017</td>
-									<td><span class="label label-reprovado">Cancelado</span></td>
-									<td>
-										<div class="btn-group">
-											<button class="btn btn-info btn-sm dropdown-toggle"
-												data-toggle="dropdown" aria-haspopup="true"
-												aria-expanded="false">
-												<i class="fa fa-cogs fa-lg">&nbsp;</i> <span class="caret"></span>
-											</button>
-											<ul class="dropdown-menu dropdown-menu-right slidedown">
-												<li><a href="#vaga-modal" data-toggle="modal"><i
-														class="fa fa-eye ">&nbsp</i>Visualizar</a></li>
-												<li class="divider "></li>
-												<li><a href="# "><i class="fa fa-pencil ">&nbsp</i>Editar</a></li>
-												<li class="divider "></li>
-												<li><a href="#delete-modal" data-toggle="modal"><i
-														class="fa fa-trash-o ">&nbsp</i>Excluir</a></li>
-											</ul>
-										</div> /btn-group
-									</td>
-								</tr> -->
 							</tbody>
 						</table>
-						
+						</div>
 						
 					</div>
 					<!--</panel default>-->
+<<<<<<< HEAD
 					<div class="panel-footer clearfix">
 						<div class="row">
+						$ (ElementID) .paginate ()
 							<ul class="pagination pagination-xs m-top-none pull-right">
 								<li class="disabled"><a href="#">Anterior</a></li>
 								<li class="active"><a href="#">1</a></li>
@@ -612,6 +577,9 @@
 						</div>
 						<!--</div row>-->
 					</div>
+=======
+					
+>>>>>>> 59b16c9bbbd105e49d7ad29f9d5a96a7bbb6c142
 					<!--</panel footer>-->
 				</div>
 				<!--</col-sm-12>-->
@@ -620,15 +588,68 @@
 		</div>
 		<!--</padding>-->
 	</div>
+	
+
 	<!--</container>-->
 	<!--</main container>-->
 	<!--corpo -->
 
 	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
 	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
+	<!-- Jquery -->
+	<script src="js/jquery-1.10.2.min.js"></script>
 	
+	<!-- Bootstrap -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+ 
+	<!-- Datatable -->
+	<script src='js/jquery.dataTables.min.js'></script>	
+	
+	<!-- Modernizr -->
+	<script src='js/modernizr.min.js'></script>
+	
+	<!-- Pace -->
+	<script src='js/pace.min.js'></script>
+	
+	<!-- Popup Overlay -->
+	<script src='js/jquery.popupoverlay.min.js'></script>
+	
+	<!-- Slimscroll -->
+	<script src='js/jquery.slimscroll.min.js'></script>
+	
+	<!-- Cookie -->
+	<script src='js/jquery.cookie.min.js'></script>
+
+	<!-- Perfect -->
+	<script src="js/app/app.js"></script>
+	<script>
+	$(function	()	{
+		$('#dataTable').dataTable( {
+			"bJQueryUI": true,
+			"sPaginationType": "full_numbers"
+		});
+		
+		$('#chk-all').click(function()	{
+			if($(this).is(':checked'))	{
+				$('#responsiveTable').find('.chk-row').each(function()	{
+					$(this).prop('checked', true);
+					$(this).parent().parent().parent().addClass('selected');
+				});
+			}
+			else	{
+				$('#responsiveTable').find('.chk-row').each(function()	{
+					$(this).prop('checked' , false);
+					$(this).parent().parent().parent().removeClass('selected');
+				});
+			}
+		});
+	});
+	</script>
 	
 	<script type="text/javascript">
+	
+	
+	
 	//linhaStatus
 	//span-[status]
 	$(".span-Fechado").addClass("label-warning");
@@ -759,5 +780,29 @@
 	
 	
 	</script>
+	<script>
+		$(function	()	{
+			$('#dataTable').dataTable( {
+				"bJQueryUI": true,
+				"sPaginationType": "full_numbers"
+			});
+			
+			$('#chk-all').click(function()	{
+				if($(this).is(':checked'))	{
+					$('#responsiveTable').find('.chk-row').each(function()	{
+						$(this).prop('checked', true);
+						$(this).parent().parent().parent().addClass('selected');
+					});
+				}
+				else	{
+					$('#responsiveTable').find('.chk-row').each(function()	{
+						$(this).prop('checked' , false);
+						$(this).parent().parent().parent().removeClass('selected');
+					});
+				}
+			});
+		});
+	</script>
+	
 	</body>
 	</html>

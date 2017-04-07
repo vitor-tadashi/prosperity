@@ -100,14 +100,15 @@ public class VagaEntity {
 	private Date dataFechamento; //
 
 	@ManyToOne(fetch=FetchType.LAZY)
+
 	@JoinColumn(name = "idProjeto")
 	private ProjetoEntity projetoEntity;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idCargo")
 	private CargoEntity cargoEntity;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idSenioridade")
 	private SenioridadeEntity senioridadeEntity;
 

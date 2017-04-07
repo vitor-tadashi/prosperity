@@ -7,8 +7,12 @@ import br.com.prosperity.entity.UsuarioEntity;
 @Repository
 public class UsuarioDAO extends GenericDAOImpl<UsuarioEntity, Integer> {
 
-	public Boolean existeUsuario(String usuario) {
-		return !this.findByNamedQuery("existeUsuario", usuario).isEmpty();
+	public Boolean existeUsuario(String nome) {
+		return !this.findByNamedQuery("existeUsuario", nome).isEmpty();
+	}
+
+	public boolean existeUsuario(Integer id, String nome) {
+		return !this.findByNamedQuery("existeUsuarioAlterar", id, nome).isEmpty();
 	}
 	
 }

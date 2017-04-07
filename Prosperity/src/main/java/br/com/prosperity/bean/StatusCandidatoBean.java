@@ -15,6 +15,7 @@ public class StatusCandidatoBean {
 	private Date dataAlteracao;
 	private String descricaoParecer;
 	private String proposta;
+	private Boolean situacao;
 
 	public String getProposta() {
 		return proposta;
@@ -39,6 +40,14 @@ public class StatusCandidatoBean {
 	public String getMesAno() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM/yyyy");
 		return dateFormat.format(dataAlteracao);
+	}
+
+	public Boolean getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(Boolean situacao) {
+		this.situacao = situacao;
 	}
 
 	private String mensagem;
