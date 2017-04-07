@@ -11,20 +11,24 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import br.com.prosperity.entity.CandidatoEntity;
+import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.entity.StatusCandidatoEntity;
-import br.com.prosperity.entity.StatusVagaEntity;
 import br.com.prosperity.entity.VagaEntity;
+import br.com.prosperity.entity.CandidatoEntity;
 
 @Repository
 public class CandidatoDAO extends GenericDAOImpl<CandidatoEntity, Integer> {
+	
+	Session session;
+	
+	
 	/**
 	 * Use this inside subclasses as a convenience method.
 	 */
-	public List<CandidatoEntity> findByCriteria() {
+	public List<CandidatoEntity> findByCriteria(final List<Criterion> criterion) {
 		List<CandidatoEntity> ret = null;
 		try {
-			ret = findByCriteria(15);
+			ret = findByCriteria(null, null, -1, 15, criterion);
 		} catch (Exception e) {
 
 		}
@@ -35,17 +39,36 @@ public class CandidatoDAO extends GenericDAOImpl<CandidatoEntity, Integer> {
 	 * Use this inside subclasses as a convenience method.
 	 */
 	@SuppressWarnings("unchecked")
-	protected List<CandidatoEntity> findByCriteria(final int maxResults) {
+	protected List<CandidatoEntity> findByCriteria(String propertyOrder, Boolean isDesc, final int firstResult, final int maxResults,
+			final List<Criterion> criterion) {
 		List<CandidatoEntity> result = null;
 
 		try {
 			Session session = (Session) entityManager.getDelegate();
-			Criteria crit = session.createCriteria(getEntityClass());
+			Criteria crit = session.createCriteria(CandidatoEntity.class, "candidato");
+			
+			for (final Criterion c : criterion) {
+				crit.add(c);
+		}
 
+		if (firstResult > 0) {
+			crit.setFirstResult(firstResult);
+		}
+
+			
 			if (maxResults > 0) {
 				crit.setMaxResults(maxResults);
 			}
+			
+			if (propertyOrder != null && !propertyOrder.isEmpty()) {
+				if (isDesc) {
+					crit.addOrder(Order.desc(propertyOrder));
+				} else {
+					crit.addOrder(Order.asc(propertyOrder));
+				}
+			}
 
+			
 			result = crit.list();
 		} catch (Exception e) {
 			e.printStackTrace();

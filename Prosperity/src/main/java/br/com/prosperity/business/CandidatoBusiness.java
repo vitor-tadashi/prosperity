@@ -126,7 +126,8 @@ public class CandidatoBusiness {
 	
 	@Transactional
 	public List<CandidatoBean> listarTop10() {
-		List<CandidatoEntity> candidato = candidatoDAO.findByCriteria();
+		List<Criterion>criterions = new ArrayList<>();
+		List<CandidatoEntity> candidato = candidatoDAO.findByCriteria(criterions);
 		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(candidato);
 		return beans;
 	}
@@ -141,14 +142,39 @@ public class CandidatoBusiness {
 	}
 	
 	@Transactional
-	public List<CandidatoBean> filtroVaga(CandidatoBean candidato) {
+	public List<CandidatoBean> filtroCandidato(CandidatoBean candidato) {
+		
+		Integer idVaga = 0;
+		if (!candidato.getVagaCandidato().getVaga().getNomeVaga().equals("")) {
+			idVaga = Integer.parseInt(candidato.getVagaCandidato().getVaga().getNomeVaga());
+		}
+		
 		List<Criterion>criterions = new ArrayList<>();
+		
 		if(!candidato.getNome().isEmpty() || candidato.getNome() != null){
 			criterions.add(Restrictions.like("nome", "%" + candidato.getNome() + "%"));
 		}
-		List<CandidatoEntity> candidatos = candidatoDAO.findByCriteria();
+		
+		
+		if(candidato.getDataAberturaDe() != null && candidato.getDataAberturaPara() != null){
+		    criterions.add(Restrictions.between("dataAbertura", parseData(candidato.getDataAberturaDe()), parseData(candidato.getDataAberturaPara())));
+		}
+		
+		if(candidato.getPretensaoDe() != null && candidato.getPretensaoPara() != null){
+		    criterions.add(Restrictions.between("valorPretensaoSalarial", candidato.getPretensaoDe(), candidato.getPretensaoPara()));
+		}
+		
+		if(idVaga != 0) {
+			criterions.add(Restrictions.eq("vaga.id", idVaga));
+		}
+		
+		List<CandidatoEntity> candidatos = candidatoDAO.findByCriteria(criterions);
 		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(candidatos);
 		return beans;
+		
+		
+		
+		
 	}
 
 	@Transactional

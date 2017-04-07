@@ -434,7 +434,7 @@
 			<ul class="breadcrumb">
 				<li><i class="fa fa-home"></i><a href="/pagina-inicial"> Home</a></li>
 				<li>Candidato</li>
-				<li class="active">Consultar</li>
+				<li><a href="consultar">Consultar</a></li>
 			</ul>
 		</div>
 		<!--breadcrumb-->
@@ -461,11 +461,11 @@
 										<!-- /search-block -->
 									</div>
 									<div class="col-md-2">
-										<label for="exampleInputEmail1">Cargo</label> <select
-											class="form-control inline" name="cargo">
+										<label for="exampleInputEmail1">Vaga</label> <select
+											class="form-control inline" id="vaga" name="vaga">
 											<option>Selecione</option>
-											<c:forEach var="cargo" items="${listaCargo}">
-												<option value="${cargo.id}">${cargo.nome}</option>
+											<c:forEach var="vaga" items="${listaVagaDrop}">
+												<option id="${vaga.id}" value="${vaga.id}">${vaga.nomeVaga}</option>
 											</c:forEach>
 										</select>
 									</div>
@@ -541,7 +541,7 @@
 														<li><c:url value="editar/${candidato.id}" var="myURL">
 															</c:url> <a href="${myURL}"><i class="fa fa-pencil"></i>
 																Editar</a></li>
-														<li role="separator" class="divider"></li>
+													
 
 
 													</ul>

@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.hibernate.annotations.Sort;
+import org.hibernate.property.DirectPropertyAccessor.DirectGetter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,7 @@ import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
+import br.com.prosperity.bean.StatusBean;
 import br.com.prosperity.bean.TipoCursoBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.CanalInformacaoBusiness;
@@ -70,6 +73,8 @@ public class CandidatoController<PaginarCandidato> {
 	 * @param model
 	 * @return
 	 */
+	
+	
 
 	private void obterDominiosCandidato(Model model) {
 		List<TipoCursoBean> tiposCurso = tipoCursoBusiness.obterTodos();
@@ -86,12 +91,7 @@ public class CandidatoController<PaginarCandidato> {
 		
 	}
 
-	/*@RequestMapping(method = RequestMethod.GET)
-	public String paginarCandidato() {
-		PaginarCandidato pc = new  PaginarCandidato ();
-		PagedListHolder pagedListHolder = new PagedListHolder(pc.findAll());
-		return "candidato/cadastrar-candidato";
-	}*/
+		
 	
 
 	@RequestMapping(value = "cadastrar", method = RequestMethod.GET)
@@ -182,7 +182,8 @@ public class CandidatoController<PaginarCandidato> {
 		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.findAll();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
 		
-		
+		List<VagaBean> listaVagaDrop = vagaBusiness.obterTodos();
+		model.addAttribute("listaVagaDrop", listaVagaDrop);
 
 		// avaliadorBusiness.listar();
 
@@ -191,8 +192,10 @@ public class CandidatoController<PaginarCandidato> {
 
 	@RequestMapping(value = "filtrar", method = RequestMethod.GET)
 	public String filtrarCandidatoRH(Model model, CandidatoBean candidato) {
-
-		List<CandidatoBean> candidatos = candidatoBusiness.filtroVaga(candidato);
+		
+		
+		
+		List<CandidatoBean> candidatos = candidatoBusiness.filtroCandidato(candidato);
 		model.addAttribute("candidatos", candidatos);
 		
 		List<VagaBean> listaVaga = vagaBusiness.listar();
@@ -209,7 +212,7 @@ public class CandidatoController<PaginarCandidato> {
 
 		// avaliadorBusiness.listar();
 
-		return "candidato/consulta-rh";
+		return "candidato/consultar-candidato";
 	}
 
 	@RequestMapping(value = "aprovar", method = RequestMethod.GET)
