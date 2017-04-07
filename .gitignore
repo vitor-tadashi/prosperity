@@ -1,0 +1,26 @@
+*.class
+Prosperity/.classpath
+.metadata
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
+
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+Prototype/debug.log
+Prosperity/null/tmpFiles/curriculo_teste.docx
