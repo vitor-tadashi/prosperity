@@ -279,7 +279,7 @@ public class CandidatoBusiness {
 	private List<Integer> obterStatusDisponivelAprovacao() {
 		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
 		List<Integer> listaStatus = new ArrayList<Integer>();
-		listaStatus.add(4);
+		listaStatus.add(StatusCandidatoEnum.CANDIDATOEMANALISE.getValue());
 
 		for (FuncionalidadeBean funcionalidadeBean : usuarioBean.getPerfil().getListaFuncionalidades()) {
 			if (funcionalidadeBean.getId() == 27) 
