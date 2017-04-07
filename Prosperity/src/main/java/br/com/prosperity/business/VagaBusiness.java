@@ -88,7 +88,7 @@ public class VagaBusiness {
 	@Transactional
 	public List<VagaBean> listarVagaAprovar() {
 
-		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagaAprovar", 18, true); // PENSAR
+		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagaAprovar", 4, true); // PENSAR
 		int aux = 0;
 		for(VagaEntity vaga: vagaEntity)
 		{
