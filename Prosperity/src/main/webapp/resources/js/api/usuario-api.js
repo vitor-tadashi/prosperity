@@ -95,8 +95,12 @@
 		});
 	});
 
+	$(document).ready(function () {
+		escondeMensagem();
+    });
+	
 	function escondeMensagem() {
 		window.setTimeout(function () {
-			$("div#divAlert").hide();
+			$(".divAlert").hide();
 		}, 5000);
 	}
