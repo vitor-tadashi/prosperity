@@ -39,7 +39,7 @@ footer {
 	label {
 		font-weight: normal;
 	}
-	#quebra { page-break-inside:avoid; }
+	#quebra { page-break-inside: avoid; }
 }
 </style>
 
@@ -182,7 +182,7 @@ footer {
 														<label class="control-label"> Data para inicio</label>
 														<div class="form-group">
 															<div class="input-group">
-															<input type="text" value="${vaga.dataInicio 	}"
+															<input type="text" value="${vaga.dataInicio}"
 																	class="datepicker form-control" id="vagaInicio"
 																	disabled> <span class="input-group-addon"><i
 																	class="fa fa-calendar"></i></span>
@@ -387,7 +387,7 @@ footer {
 										</c:if> <c:if test="${vaga.localTrabalho == 67}">
 										     Cliente
 										</c:if></td>
-									<td>${vaga.dataAbertura }</td>
+									<td><fmt:formatDate value="${vaga.dataAbertura }" pattern="dd/MM/yyyy" /></td>
 									<td>
 										<div class="btn-group">
 											<!-- <-- ! Começo Botão -->
