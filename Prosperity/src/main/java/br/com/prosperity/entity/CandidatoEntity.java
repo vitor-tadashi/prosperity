@@ -120,15 +120,15 @@ public class CandidatoEntity {
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
 
-	@OneToMany()
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idCandidato")
 	private List<StatusCandidatoEntity> statusCandidatos;
 	
-	@OneToMany(cascade = { CascadeType.ALL })
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	@JoinColumn(name = "idCandidato")
 	private List<CandidatoCompetenciaEntity> competencias;
 
-	@OneToMany(cascade ={CascadeType.ALL})
+	@OneToMany(cascade ={CascadeType.ALL}, fetch = FetchType.EAGER)
 	@JoinColumn(name="idCandidato")
 	private Set<VagaCandidatoEntity> vagas;
 

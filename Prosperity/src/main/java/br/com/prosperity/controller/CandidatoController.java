@@ -77,6 +77,7 @@ public class CandidatoController {
 	 */
 	@RequestMapping(value = "cadastrar", method = RequestMethod.GET)
 	public String cadastrarCandidato(Model model) {
+
 		obterDominiosCandidato(model);
 
 		return "candidato/cadastrar-candidato";
@@ -89,7 +90,7 @@ public class CandidatoController {
 		List<SituacaoAtualBean> listaSituacaoAtual = situacaoAtualBusiness.obterTodos();
 		model.addAttribute("listaSituacaoAtual", listaSituacaoAtual);
 
-		List<VagaBean> listaVaga = vagaBusiness.listar();
+		List<VagaBean> listaVaga = vagaBusiness.listarVagasAtivas();
 		model.addAttribute("listaVaga", listaVaga);
 
 		List<CanalInformacaoBean> listaCanal = canalInformacaoBusiness.obterTodos();
@@ -97,8 +98,8 @@ public class CandidatoController {
 	}
 
 	@RequestMapping(value = "salvar", method = RequestMethod.POST)
-	public String salvarCandidato(@ModelAttribute("candidatoBean") @Valid CandidatoBean candidatoBean,@RequestParam("file") MultipartFile file,
-			BindingResult result, Model model) throws BusinessException {
+	public String salvarCandidato(@Valid @ModelAttribute("candidatoBean") CandidatoBean candidatoBean,
+			BindingResult result, @RequestParam("file") MultipartFile file, Model model) throws BusinessException {
 		if (result.hasErrors()) {
 			model.addAttribute("erro", result.getErrorCount());
 			model.addAttribute("listaErros", buildErrorMessage(result.getFieldErrors()));
@@ -113,16 +114,14 @@ public class CandidatoController {
 			candidatoBusiness.inserir(candidatoBean);
 		}
 
-		/*
-		 * candidatoBean =
-		 * candidatoBusiness.obterPorCPF(candidatoBean.getCpf());
-		 * 
-		 * situacaoCandidatoBean.setIdCandidato(candidatoBean.getId());
-		 * situacaoCandidatoBean.setStatus(StatusCandidatoEnum.CANDIDATURA);
-		 * 
-		 * candidatoBusiness.alterarStatus(situacaoCandidatoBean);
-		 */
+	/*	candidatoBean = candidatoBusiness.obterPorCPF(candidatoBean.getCpf());
 
+		SituacaoCandidatoBean situacaoCandidatoBean = null;
+		situacaoCandidatoBean.setIdCandidato(candidatoBean.getId());
+		situacaoCandidatoBean.setStatus(StatusCandidatoEnum.CANDIDATURA);
+
+		candidatoBusiness.alterarStatus(situacaoCandidatoBean);
+*/
 		return "candidato/cadastrar-candidato";
 	}
 
@@ -136,7 +135,7 @@ public class CandidatoController {
 	}
 
 	@RequestMapping(value = "editar/salvar", method = RequestMethod.POST)
-	public String salvarEditar(@ModelAttribute("candidatoBean") @Valid CandidatoBean candidatoBean, 
+	public String salvarEditar(@ModelAttribute("candidatoBean") @Valid CandidatoBean candidatoBean,
 			BindingResult result, Model model) throws BusinessException {
 
 		if (result.hasErrors()) {
@@ -146,23 +145,21 @@ public class CandidatoController {
 
 			obterDominiosCandidato(model);
 
-			
-			
-			
-			/* ** COLOCAR AQUI ***
-			 * 1 - Criar um jeito de pegar o value no seu jsp
-			 * 2 - Verificar se a variavel do caminho do documento esta preenchida
-			 * 3 - Se a varivel estiver preenchida entao chamar a rotina de copiar arquivos
-			 * 4 - Criar o metodo de copiar arquivos na sua bussiness
-			 * */
-			
+			/*
+			 * ** COLOCAR AQUI *** 1 - Criar um jeito de pegar o value no seu
+			 * jsp 2 - Verificar se a variavel do caminho do documento esta
+			 * preenchida 3 - Se a varivel estiver preenchida entao chamar a
+			 * rotina de copiar arquivos 4 - Criar o metodo de copiar arquivos
+			 * na sua bussiness
+			 */
+
 			return "candidato/cadastrar-candidato";
 		}
 		candidatoBusiness.inserir(candidatoBean);
 
 		return "candidato/cadastrar-candidato";
 	}
-	
+
 	private String uploadCurriculo(MultipartFile file, String cpf) {
 		if (!file.isEmpty()) {
 			try {
@@ -172,12 +169,11 @@ public class CandidatoController {
 				File dir = new File("curriculo" + File.separator + cpf);
 				if (!dir.exists())
 					dir.mkdirs();
-	
+
 				// Create the file on server
-				File serverFile = new File(dir.getAbsolutePath()
-						+ File.separator + "Curriculo_" + cpf + file.getOriginalFilename());
-				BufferedOutputStream stream = new BufferedOutputStream(
-						new FileOutputStream(serverFile));
+				File serverFile = new File(
+						dir.getAbsolutePath() + File.separator + "Curriculo_" + cpf + file.getOriginalFilename());
+				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
 				stream.write(bytes);
 				stream.close();
 
@@ -189,7 +185,7 @@ public class CandidatoController {
 			return "";
 		}
 	}
-	
+
 	@RequestMapping(value = "/historico/{id}", method = RequestMethod.GET)
 	public String historicoCandidato(Model model, @PathVariable Integer id) {
 		CandidatoBean candidato = candidatoBusiness.obter(id);

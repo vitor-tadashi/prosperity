@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sun.jersey.api.json.JSONWithPadding;
 
+import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.VagaBusiness;
-import br.com.prosperity.entity.VagaEntity;
 
 @RestController
 public class VagasService {
@@ -22,7 +22,7 @@ public class VagasService {
 	@CrossOrigin
 	@RequestMapping(value="/vagas-api", produces="application/json")
 	public @ResponseBody JSONWithPadding vagasParaJSON() {
-	List<VagaEntity> vagas = vagaBusiness.listarVagasAtivas();
+	List<VagaBean> vagas = vagaBusiness.listarVagasAtivas();
 		
 		return new JSONWithPadding(vagas);
 	}

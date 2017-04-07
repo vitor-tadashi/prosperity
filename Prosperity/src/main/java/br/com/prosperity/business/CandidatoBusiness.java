@@ -227,10 +227,6 @@ public class CandidatoBusiness {
 			candidatoBean = candidatoConverter.convertEntityToBean(candidatoEntity);
 		}
 
-		// for (CandidatoEntity candidatoEntity : candidatosEntity) {
-		// candidatoBean =
-		// candidatoConverter.convertEntityToBean(candidatoEntity);
-		// }
 
 		return candidatoBean;
 	}

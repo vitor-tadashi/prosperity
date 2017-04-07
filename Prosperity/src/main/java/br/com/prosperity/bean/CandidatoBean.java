@@ -40,6 +40,7 @@ public class CandidatoBean  extends FormatUtil {
 	private Double valorPretensao;
 	private Date dataAbertura;
 	private Date dataFechamento;
+	@NotEmpty(message = "O campo email deve ser prenchido")
 	private String email;
 	private Date dataAlteracao;
 	private String curriculo;
@@ -50,7 +51,6 @@ public class CandidatoBean  extends FormatUtil {
 	private FormacaoBean formacao;
 	private UsuarioBean usuario;
 	private List<StatusCandidatoBean> status = new ArrayList<>();
-	@Valid
 	private Set<VagaCandidatoBean> vagas = new HashSet<>();
 	private List<CandidatoCompetenciaBean> competencias = new ArrayList<>();
 	private Map<String, List<StatusCandidatoBean>> statusPorMesAno;
@@ -62,7 +62,6 @@ public class CandidatoBean  extends FormatUtil {
 	private Double valorMin;
 	private Double valorMax;
 	private StatusCandidatoBean ultimoStatus;
-	@Valid
 	private VagaBean ultimaVaga;
 	@Valid
 	private VagaCandidatoBean vagaCandidato;

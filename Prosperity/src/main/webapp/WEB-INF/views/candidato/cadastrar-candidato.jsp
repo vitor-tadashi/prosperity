@@ -52,7 +52,7 @@
 								<div id="textDiv3"></div>
 								
 						<form class="form-border" action="salvar" method="post" enctype="multipart/form-data"
-							id=formCadastro onsubmit="return Validar()"<%--data-validate="parsley" --%>>
+							id=formCadastro onsubmit="return Validar()">
 							<div class="panel-tab clearfix">
 								<ul class="tab-bar wizard-demo" id="wizardDemo">
 									<li class="active tab-verity"><a href="#first"
@@ -152,13 +152,13 @@
 											<div class="form-group col-xs-12">
 												<label  class="control-label">Currículo</label>
 												<div class="upload-file" style="width: 356px;">
-													<input type="file" id="upload-curriculo" value="${candidato.curriculo}" name="file"
+													<input type="file" id="upload-curriculo" name="file"
 														class="upload-demo"> <label data-title="Selecione"
 														for="upload-curriculo"> <span
-														data-title="Nenhum arquivo selecionado..." onblur="nmCurriculo(id)"></span>
+														data-title="Nenhum arquivo selecionado..." ></span>
 													</label>
 												</div>
-											</div>
+											</div> 
 										</div>
 									</div>
 									<div class="tab-pane fade" id="second">
@@ -232,7 +232,7 @@
 										</div>
 										<div class="form-group col-md-3">
 											<label for="vaga">Vaga a ser aplicado</label> <select
-												class="form-control" id="vaga" name="vagaCandidato.Vaga.id">
+												class="form-control" id="vaga" name="vagaCandidato.vaga.id">
 												<option value="0">Selecione</option>
 												<c:forEach var="vaga" items="${listaVaga}">
 													<option value="${vaga.id}"
@@ -498,10 +498,10 @@
 
 	</script>
 	<script type="text/javascript">
-	function nmCurriculo() {
+/* 	function nmCurriculo() {
 		 document.getElementById("upload-curriculo").value =(candidato.curriculo);
 		
-	}
+	} */
 	
 	</script>
 </body>
