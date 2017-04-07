@@ -27,6 +27,8 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "tbCandidato")
 @NamedQueries({
+			
+		//@NamedQuery(name = "status", query = "SELECT u FROM CandidatoEntity u LEFT OUTER JOIN u.statusCandidatoEntity p left join p.status s WHERE u.nomecandidato like ?1 and s.id = ?2 and u.dataAbertura between ?3 and ?4"),
 		@NamedQuery(name = "pesquisarNome", query = "SELECT u FROM CandidatoEntity u WHERE u.nome like ?1 AND u.valorPretensaoSalarial BETWEEN ?2 AND ?3 AND u.dataAbertura BETWEEN ?4 AND ?5"),
 		@NamedQuery(name = "obterPorCPF", query = "SELECT u FROM CandidatoEntity u WHERE u.cpf = ?1"),
 		@NamedQuery(name = "verificarCanidatura", query = "SELECT c FROM CandidatoEntity c JOIN c.statusCandidatos sc WHERE sc.status in(6,7,14)"
@@ -34,8 +36,8 @@ import javax.persistence.TemporalType;
 		@NamedQuery(name = "obterParaCombo", query = "SELECT v.id, v.nomeVaga FROM VagaEntity v"),
 		@NamedQuery(name = "aprovacao", query = "SELECT c FROM CandidatoEntity c, AvaliadorCandidatoEntity ac INNER JOIN c.statusCandidatos sc "
 				+ "WHERE ac.candidato.id = c.id AND sc.idStatusCandidato = (SELECT max(sc.idStatusCandidato)"
-				+ "FROM CandidatoEntity c JOIN c.statusCandidatos sc WHERE sc.candidato.id = c.id AND sc.status.id IN (?1)) AND ac.idStatus is NULL"
-				+ " AND ac.usuario.id = ?2") })
+				+ "FROM CandidatoEntity c JOIN c.statusCandidatos sc WHERE sc.candidato.id = c.id AND sc.status.id IN (?1)) AND ac.status is NULL"
+				+ " AND ac.avaliadorVaga.usuario.id = ?2") })
 
 public class CandidatoEntity {
 

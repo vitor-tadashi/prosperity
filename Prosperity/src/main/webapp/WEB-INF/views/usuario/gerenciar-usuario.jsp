@@ -102,18 +102,18 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="panel panel-default">
-							<div class="panel-heading"><strong>Usuários cadastrados:</strong></div>
+							<div class="panel-heading"><strong>Usuários:</strong></div>
 							<div class="panel-body">
 								<div id="divAlert"></div>
-								<c:if test="${not empty erro}">
-									<div class="alert alert-danger fade in">
-										${erro}
+								<c:if test="${not empty mensagem}">
+									<div class="alert alert-info mensagem">
+										${mensagem}
 									</div>
 								</c:if>
 								<table class="table table-bordered table-condensed table-hover table-striped">
 									<thead>
 										<tr>
-											<th class="text-center">Funcionário</th>
+											<th class="text-center">Nome</th>
 											<th class="text-center">Usuário</th>
 											<th class="text-center">E-mail</th>
 											<th class="text-center">Perfil</th>
@@ -149,8 +149,7 @@
 						</div>
 						<!-- /.col -->
 						<div class="pull-right">
-							<a class="btn btn-primary" onclick="abrirModal('incluir')">Criar novo usuário</a>
-							<a class="btn btn-warning" href="criar-perfil">Criar perfil</a>
+							<a class="btn btn-primary" onclick="abrirModal('incluir')"><span class="fa fa-plus"></span> Novo usuário</a>
 						</div>
 					</div>
 				</div>

@@ -563,7 +563,23 @@
 						
 					</div>
 					<!--</panel default>-->
+<<<<<<< HEAD
+					<div class="panel-footer clearfix">
+						<div class="row">
+						$ (ElementID) .paginate ()
+							<ul class="pagination pagination-xs m-top-none pull-right">
+								<li class="disabled"><a href="#">Anterior</a></li>
+								<li class="active"><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">Próximo</a></li>
+							</ul>
+						</div>
+						<!--</div row>-->
+					</div>
+=======
 					
+>>>>>>> 59b16c9bbbd105e49d7ad29f9d5a96a7bbb6c142
 					<!--</panel footer>-->
 				</div>
 				<!--</col-sm-12>-->
