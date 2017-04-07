@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -182,7 +182,7 @@ footer {
 														<label class="control-label"> Data para inicio</label>
 														<div class="form-group">
 															<div class="input-group">
-																<input type="date" value="01/01/2017"
+															<input type="text" value="${vaga.dataInicio 	}"
 																	class="datepicker form-control" id="vagaInicio"
 																	disabled> <span class="input-group-addon"><i
 																	class="fa fa-calendar"></i></span>
@@ -361,14 +361,14 @@ footer {
 						<!-- Começo Tabela -->
 						<thead>
 							<tr class="text-center">
-								<th class="text-center">Nome do cargo</th>
+								<th class="text-center">Nome da vaga</th>
+								<th class="text-center">Cargo</th>
 								<th class="text-center">Senioridade</th>
 								<th class="text-center">Solicitante</th>
 								<th class="text-center">Projeto</th>
 								<th class="text-center">Cliente</th>
 								<th class="text-center">Local de trabalho</th>
 								<th class="text-center">Data abertura</th>
-								<th class="text-center">Data encerramento</th>
 								<th class="text-center">Ações</th>
 							</tr>
 						</thead>
@@ -376,6 +376,7 @@ footer {
 							<c:forEach var="vaga" items="${vagas}" varStatus="i">
 
 								<tr>
+									<td>${vaga.nomeVaga}</td>
 									<td>${vaga.cargoBean.nome}</td>
 									<td>${vaga.senioridadeBean.nome}</td>
 									<td>${vaga.nomeSolicitante}</td>
@@ -387,7 +388,6 @@ footer {
 										     Cliente
 										</c:if></td>
 									<td>${vaga.dataAbertura }</td>
-									<td>${vaga.dataFechamento }</td>
 									<td>
 										<div class="btn-group">
 											<!-- <-- ! Começo Botão -->
@@ -448,7 +448,7 @@ footer {
     		data: { 'id' : listaId},
     		success: function(lista){
     			console.log(lista);
-    			$('#titulo').html(lista.cargoBean.nome);
+    			$('#titulo').html(lista.nomeVaga);
     			$('input#vagaGestor').val(lista.nomeSolicitante);
     			if(lista.localTrabalho == 'C') {
     				//$("#cliente").attr('checked', 'checked');

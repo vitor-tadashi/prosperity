@@ -57,42 +57,42 @@
 						</span> <span class="text"> Página inicial </span> <span
 							class="menu-hover"></span>
 					</a></li>
-					<li class="openable"><a href="#"> <span class="menu-icon">
+					<li class="openable menu17 menu18 hide"><a href="#"> <span class="menu-icon">
 								<i class="fa fa-user fa-lg"></i>
 						</span> <span class="text"> Candidato </span> <span class="menu-hover"></span>
 					</a>
 						<ul class="submenu">
-							<li class="menu-opcao hide" value="17"><a
+							<li class="menu-opcao hasMenu hide" value="17"><a
 								href="/candidato/cadastrar"> <span class="submenu-label">Cadastrar</span>
 							</a></li>
-							<li class="menu-opcao hide" value="18"><a
+							<li class="menu-opcao hasMenu hide" value="18"><a
 								href="/candidato/consultar"> <span
 									class="submenu-label">Consultar</span>
 							</a></li>
 						</ul></li>
-					<li class="openable"><a href="#"> <span class="menu-icon">
+					<li class="openable menu3 menu2 hide"><a href="#"> <span class="menu-icon">
 								<i class="fa fa-book fa-lg"></i>
 						</span> <span class="text"> Vaga </span> <span class="menu-hover"></span>
 					</a>
 						<ul class="submenu">
-							<li class="menu-opcao hide" value="3"><a
+							<li class="menu-opcao hasMenu hide" value="3"><a
 								href="/vaga/solicitar"> <span class="submenu-label">Solicitar
 										abertura</span>
 							</a></li>
-							<li class="menu-opcao hide" value="2"><a
+							<li class="menu-opcao hasMenu hide" value="2"><a
 								href="/vaga/consultar"> <span
 									class="submenu-label">Consultar</span>
 							</a></li>
 						</ul></li>
-						<li class="openable"><a href="#"> <span class="menu-icon">
+						<li class="openable menu25 menu1 hide"><a href="#"> <span class="menu-icon">
 								<i class="fa fa-check fa-lg"></i>
 						</span> <span class="text"> Aprovar / Reprovar </span> <span class="menu-hover"></span>
 					</a>
 						<ul class="submenu">
-							<li class="menu-opcao hide" value="25"><a
+							<li class="menu-opcao hasMenu hide" value="25"><a
 								href="/candidato/aprovar"> <span class="submenu-label">Candidato</span>
 							</a></li>
-							<li class="menu-opcao hide" value="1"><a
+							<li class="menu-opcao hasMenu hide" value="1"><a
 								href="/vaga/aprovar"> <span
 									class="submenu-label">Vaga</span>
 							</a></li>
@@ -101,15 +101,15 @@
 							<span class="menu-icon"> <i class="fa fa-print fa-lg"></i>
 						</span> <span class="text"> Relatório </span> <span class="menu-hover"></span>
 					</a></li>
-					<li class="openable" value=""><a href="#"> <span class="menu-icon">
+					<li class="openable menu22 menu16 hide" value=""><a href="#"> <span class="menu-icon">
 								<i class="fa fa-cogs fa-lg"></i>
 						</span> <span class="text"> Gerenciar </span> <span class="menu-hover"></span>
 					</a>
 						<ul class="submenu">
-							<li class="menu-opcao hide" value="22"><a
+							<li class="menu-opcao hasMenu hide" value="22"><a
 								href="/usuario/gerenciar"> <span class="submenu-label">Usuário</span>
 							</a></li>
-							<li class="menu-opcao hide" value="16"><a
+							<li class="menu-opcao hasMenu hide" value="16"><a
 								href="/usuario/perfil/gerenciar"> <span
 									class="submenu-label">Perfil</span>
 							</a></li>
