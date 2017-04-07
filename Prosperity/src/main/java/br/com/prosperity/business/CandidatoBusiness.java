@@ -1,5 +1,6 @@
 package br.com.prosperity.business;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.prosperity.bean.CandidatoBean;
+import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.StatusCandidatoBean;
 import br.com.prosperity.bean.UsuarioBean;
@@ -44,16 +46,16 @@ public class CandidatoBusiness {
 
 	@Autowired
 	private CandidatoBean candidatoBean;
-	
+
 	@Autowired
 	private CandidatoDAO candidatoDAO;
-	
+
 	@Autowired
 	private CandidatoConverter candidatoConverter;
-	
+
 	@Autowired
 	private StatusCandidatoDAO statusCandidatoDAO;
-	
+
 	@Autowired
 	private UsuarioBean usuarioBean;
 	@Autowired
@@ -66,16 +68,16 @@ public class CandidatoBusiness {
 	private SituacaoAtualDAO situacaoAtualDAO;
 	@Autowired
 	private StatusDAO statusDAO;
-	
+
 	@Autowired
 	private StatusFuturoDAO statusFuturoDAO;
-	
+
 	@Autowired
 	private AvaliadorCandidatoDAO avaliadorCandidatoDAO;
-	
+
 	@Autowired
 	private VagaDAO vagaDAO;
-	
+
 	@Autowired
 	private HttpSession session;
 
@@ -126,18 +128,21 @@ public class CandidatoBusiness {
 		if (candidatoBean.getId() == null) {
 			if (verificarCandidatura(candidatoBean) == true) {
 				CandidatoEntity candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoBean);
-				candidatoEntity.getFormacao().setTipoCurso(tipoCursoDAO.findById(candidatoBean.getFormacao().getTipoCurso().getId()));
-				candidatoEntity.getFormacao().setSituacaoAtual(situacaoAtualDAO.findById(candidatoBean.getFormacao().getSituacaoAtual().getId()));
-				
+				candidatoEntity.getFormacao()
+						.setTipoCurso(tipoCursoDAO.findById(candidatoBean.getFormacao().getTipoCurso().getId()));
+				candidatoEntity.getFormacao().setSituacaoAtual(
+						situacaoAtualDAO.findById(candidatoBean.getFormacao().getSituacaoAtual().getId()));
+
 				Set<VagaCandidatoEntity> vagas = new HashSet<>();
-				for(VagaCandidatoEntity v: candidatoEntity.getVagas()){
-					v.setCanalInformacao(canalInformacaoDAO.findById(candidatoBean.getVagaCandidato().getCanalInformacao().getId()));
-			
+				for (VagaCandidatoEntity v : candidatoEntity.getVagas()) {
+					v.setCanalInformacao(
+							canalInformacaoDAO.findById(candidatoBean.getVagaCandidato().getCanalInformacao().getId()));
+
 				}
 				candidatoEntity.setVagas(vagas);
-				
+
 				candidatoDAO.insert(candidatoEntity);
-				
+
 			} else {
 				// retornar mensagem de candidato em processo seletivo para vaga
 			}
@@ -244,5 +249,41 @@ public class CandidatoBusiness {
 
 			avaliadorCandidatoDAO.update(avaliadorCandidatoEntity);
 		}
+	}
+
+	@Transactional
+	public List<CandidatoBean> listarAprovacao() {
+		List<Integer> listaStatus = obterStatusDisponivelAprovacao();
+		List<CandidatoEntity> entities = candidatoDAO.findByNamedQuery("aprovacao", listaStatus,usuarioBean.getId());
+		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(entities);
+
+		return beans;
+	}
+	
+	/**
+	 * Obtêm os status disponíveis para visualização para o usuário logado
+	 * @return Lista dos id's dos status disponíveis
+	 */
+	private List<Integer> obterStatusDisponivelAprovacao() {
+		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
+		List<Integer> listaStatus = new ArrayList<Integer>();
+		listaStatus.add(4);
+
+		for (FuncionalidadeBean funcionalidadeBean : usuarioBean.getPerfil().getListaFuncionalidades()) {
+			if (funcionalidadeBean.getId() == 27) 
+				listaStatus.add(StatusCandidatoEnum.CANDIDATURA.getValue());
+
+			if (funcionalidadeBean.getId() == 26) 
+				listaStatus.add(StatusCandidatoEnum.GERARPROPOSTA.getValue());
+
+			if (funcionalidadeBean.getId() == 25) 
+				listaStatus.add(StatusCandidatoEnum.PROPOSTACANDIDATO.getValue());
+
+			if (funcionalidadeBean.getId() == 28) {
+				listaStatus.add(StatusCandidatoEnum.PROPOSTAACEITA.getValue());
+				listaStatus.add(StatusCandidatoEnum.PROPOSTARECUSADA.getValue());
+			}
+		}
+		return listaStatus;
 	}
 }

@@ -27,21 +27,17 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "tbCandidato")
-
-// @NamedQuery(name="pesquisarNome", query="SELECT u FROM CandidatoEntity u LEFT
-// OUTER JOIN u.vagaEntity p WHERE p.nomeVaga like ?1")
-
-// @NamedQuery(name="fazerFiltro", query="SELECT u FROM CandidatoEntity u WHERE
-// u.nome = ?1")
-
 @NamedQueries({
 		@NamedQuery(name = "pesquisarNome", query = "SELECT u FROM CandidatoEntity u WHERE u.nome like ?1 AND u.valorPretensaoSalarial BETWEEN ?2 AND ?3 AND u.dataAbertura BETWEEN ?4 AND ?5"),
 		@NamedQuery(name = "obterPorCPF", query = "SELECT u FROM CandidatoEntity u WHERE u.cpf = ?1"),
 		@NamedQuery(name = "verificarCanidatura", query = "SELECT c FROM CandidatoEntity c JOIN c.statusCandidatos sc WHERE sc.status in(6,7,14)"
 				+ "AND sc.idStatusCandidato = (SELECT MAX(sc.idStatusCandidato) FROM CandidatoEntity c JOIN c.statusCandidatos sc)"),
-		@NamedQuery(name="obterParaCombo", query="SELECT v.id, v.nomeVaga FROM VagaEntity v")
-})
-		
+		@NamedQuery(name = "obterParaCombo", query = "SELECT v.id, v.nomeVaga FROM VagaEntity v"),
+		@NamedQuery(name = "aprovacao", query = "SELECT c FROM CandidatoEntity c, AvaliadorCandidatoEntity ac INNER JOIN c.statusCandidatos sc "
+				+ "WHERE ac.candidato.id = c.id AND sc.idStatusCandidato = (SELECT max(sc.idStatusCandidato)"
+				+ "FROM CandidatoEntity c JOIN c.statusCandidatos sc WHERE sc.candidato.id = c.id AND sc.status.id IN (?1)) AND ac.idStatus is NULL"
+				+ " AND ac.usuario.id = ?2") })
+
 public class CandidatoEntity {
 
 	@Id
@@ -123,9 +119,12 @@ public class CandidatoEntity {
 	@OneToMany()
 	@JoinColumn(name = "idCandidato")
 	private List<StatusCandidatoEntity> statusCandidatos;
-	
-	/*@OneToMany()
-	@JoinColumn(name="")*/
+
+	/*
+	 * @OneToMany()
+	 * 
+	 * @JoinColumn(name="")
+	 */
 
 	public List<StatusCandidatoEntity> getStatusCandidatos() {
 		return statusCandidatos;
@@ -148,7 +147,7 @@ public class CandidatoEntity {
 	private List<CandidatoCompetenciaEntity> competencias;
 
 	@OneToMany()
-	@JoinColumn(name="idCandidato")
+	@JoinColumn(name = "idCandidato")
 	private Set<VagaCandidatoEntity> vagas;
 
 	public Set<VagaCandidatoEntity> getVagas() {
