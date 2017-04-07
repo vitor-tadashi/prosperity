@@ -10,6 +10,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
+<!-- Bootstrap core CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	
+	<!-- Font Awesome-->
+	<link href="css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Pace -->
+	<link href="css/pace.css" rel="stylesheet">
+	
+	<!-- Datatable -->
+	<link href="css/jquery.dataTables_themeroller.css" rel="stylesheet">
+	
+	<!-- Perfect -->
+	<link href="css/app.min.css" rel="stylesheet">
+	<link href="css/app-skin.css" rel="stylesheet">
 
 <c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
 
@@ -85,8 +100,6 @@
 }
 
 </style>
-
-	
 
 </head>
 <body>
@@ -438,7 +451,7 @@
 		<div class="padding-md">
 			<div class="row">
 				<div class="col-sm-12">
-					<div class="panel panel-default">
+					<div class="panel panel-default table-responsive">
 						<div class="panel-heading">Consulta de vagas</div>
 						<!--<form class="form-inline">-->
 						<div class="panel-body">
@@ -459,7 +472,7 @@
 									</div>
 								</div>
 
-								<div class="col-md-2">
+								<div class="col-md-1">
 									<label for="cargo">Status</label> 
 									<select class="form-control" style="width: 130px;" id="status" name="status">
 											<option value="0">Selecione</option>
@@ -472,13 +485,13 @@
 								<div class="text-right">
 									<a href="#" style="text-decoration: none; color: #ffffff">
 										<button class="btn btn-primary"
-											style="margin-top: 22px; margin-right: 22px;" type="submit">Filtrar</button>
+											style="margin-top: 22px; margin-right: 22px;" type="submit">Pesquisar</button>
 									</a>
 								</div>
 							</form>
 						</div>
 						<!--</panel body>-->
-						
+						<div class="padding-md clearfix">
 						<table
 							id="tabelaVaga"
 							class="table table-bordered table-condensed table-hover table-striped"
@@ -544,74 +557,13 @@
 									</td>
 								</tr>
 								</c:forEach>
-								<!-- <tr>
-									<td>Analista de sistema</td>
-									<td>Carrefour</td>
-									<td>Interno</td>
-									<td>15/02/2017</td>
-									<td><span class="label label-analiseTecnica">Fechado</span></td>
-									<td>
-										<div class="btn-group">
-											<button class="btn btn-sm btn-info dropdown-toggle"
-												data-toggle="dropdown" aria-haspopup="true"
-												aria-expanded="false">
-												<i class="fa fa-cogs fa-lg">&nbsp;</i> <span class="caret"></span>
-											</button>
-											<ul class="dropdown-menu dropdown-menu-right slidedown">
-												<li><a href="#vaga-modal" data-toggle="modal"><i
-														class="fa fa-eye ">&nbsp</i>Visualizar</a></li>
-												<li class="divider "></li>
-												<li><a href="# "><i class="fa fa-pencil ">&nbsp</i>Editar</a></li>
-												<li class="divider "></li>
-												<li><a href="#delete-modal" data-toggle="modal"><i
-														class="fa fa-trash-o ">&nbsp</i>Excluir</a></li>
-											</ul>
-										</div> /btn-group
-									</td>
-								</tr> -->
-								<!-- <tr>
-									<td>Analista .NET Pleno</td>
-									<td>Carrefour</td>
-									<td>Alocado</td>
-									<td>15/02/2017</td>
-									<td><span class="label label-reprovado">Cancelado</span></td>
-									<td>
-										<div class="btn-group">
-											<button class="btn btn-info btn-sm dropdown-toggle"
-												data-toggle="dropdown" aria-haspopup="true"
-												aria-expanded="false">
-												<i class="fa fa-cogs fa-lg">&nbsp;</i> <span class="caret"></span>
-											</button>
-											<ul class="dropdown-menu dropdown-menu-right slidedown">
-												<li><a href="#vaga-modal" data-toggle="modal"><i
-														class="fa fa-eye ">&nbsp</i>Visualizar</a></li>
-												<li class="divider "></li>
-												<li><a href="# "><i class="fa fa-pencil ">&nbsp</i>Editar</a></li>
-												<li class="divider "></li>
-												<li><a href="#delete-modal" data-toggle="modal"><i
-														class="fa fa-trash-o ">&nbsp</i>Excluir</a></li>
-											</ul>
-										</div> /btn-group
-									</td>
-								</tr> -->
 							</tbody>
 						</table>
-						
+						</div>
 						
 					</div>
 					<!--</panel default>-->
-					<div class="panel-footer clearfix">
-						<div class="row">
-							<ul class="pagination pagination-xs m-top-none pull-right">
-								<li class="disabled"><a href="#">Anterior</a></li>
-								<li class="active"><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">Próximo</a></li>
-							</ul>
-						</div>
-						<!--</div row>-->
-					</div>
+					
 					<!--</panel footer>-->
 				</div>
 				<!--</col-sm-12>-->
@@ -620,15 +572,160 @@
 		</div>
 		<!--</padding>-->
 	</div>
+	
+	 <div class="panel panel-default table-responsive">
+					
+					<div class="padding-md clearfix">
+						<table class="table table-striped" id="dataTable">
+							<thead>
+								<tr>
+									<th>No</th>
+									<th>Product</th>
+									<th>Price</th>
+									<th>Quantity</th>
+									<th>Sales</th>
+									<th>Date</th>
+									<th>Status</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>#1001</td>
+									<td>Leather Bag</td>
+									<td>$89</td>
+									<td>30</td>
+									<td>187</td>
+									<td>Oct 08,2013</td>
+									<td><span class="label label-success">In Stock</span></td>
+								</tr>
+								<tr>
+									<td>#1002</td>
+									<td>Brown Sunglasses <span class="label label-success m-left-xs">Best Seller</span> </td>
+									<td>$120</td>
+									<td>0</td>
+									<td>861</td>
+									<td>Oct 07,2013</td>
+									<td><span class="label label-danger">Sold Out</span></td>
+								</tr>
+								<tr>
+									<td>#1003</td>
+									<td>Casual Boots</td>
+									<td>$99</td>
+									<td>100</td>
+									<td>12</td>
+									<td>Oct 06,2013</td>
+									<td><span class="label label-success">In Stock</span></td>
+								</tr>
+								<tr>
+									<td>#1004</td>
+									<td>Lambskin Sport Coat</td>
+									<td>$4000</td>
+									<td>7</td>
+									<td>41</td>
+									<td>Oct 06,2013</td>
+									<td><span class="label label-success">In Stock</span></td>
+								</tr>
+								<tr>
+									<td>#1005</td>
+									<td>Summer Dress</td>
+									<td>$310</td>
+									<td>25</td>
+									<td>39</td>
+									<td>Oct 05,2013</td>
+									<td><span class="label label-success">In Stock</span></td>
+								</tr>
+								<tr>
+									<td>#1006</td>
+									<td>Duffle Coat</td>
+									<td>$80</td>
+									<td>0</td>
+									<td>20</td>
+									<td>Sep 30,2013</td>
+									<td><span class="label label-danger">Sold out</span></td>
+								</tr>
+								<tr>
+									<td>#1007</td>
+									<td>Universal Camera Case</td>
+									<td>$35</td>
+									<td>30</td>
+									<td>3</td>
+									<td>Sep 29,2013</td>
+									<td><span class="label label-success">In Stock</span></td>
+								</tr>
+								<tr>
+									<td>#1008</td>
+									<td>Leopard Rose Dress</td>
+									<td>$1500</td>
+									<td>10</td>
+									<td>1</td>
+									<td>Sep 27,2013</td>
+									<td><span class="label label-success">In Stock</span></td>
+								</tr>
+							</tbody>
+						</table>
+					</div><!-- /.padding-md -->
+				</div><!-- /panel -->
+
 	<!--</container>-->
 	<!--</main container>-->
 	<!--corpo -->
 
 	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
 	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
+	<!-- Jquery -->
+	<script src="js/jquery-1.10.2.min.js"></script>
 	
+	<!-- Bootstrap -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+ 
+	<!-- Datatable -->
+	<script src='js/jquery.dataTables.min.js'></script>	
+	
+	<!-- Modernizr -->
+	<script src='js/modernizr.min.js'></script>
+	
+	<!-- Pace -->
+	<script src='js/pace.min.js'></script>
+	
+	<!-- Popup Overlay -->
+	<script src='js/jquery.popupoverlay.min.js'></script>
+	
+	<!-- Slimscroll -->
+	<script src='js/jquery.slimscroll.min.js'></script>
+	
+	<!-- Cookie -->
+	<script src='js/jquery.cookie.min.js'></script>
+
+	<!-- Perfect -->
+	<script src="js/app/app.js"></script>
+	<script>
+	$(function	()	{
+		$('#dataTable').dataTable( {
+			"bJQueryUI": true,
+			"sPaginationType": "full_numbers"
+		});
+		
+		$('#chk-all').click(function()	{
+			if($(this).is(':checked'))	{
+				$('#responsiveTable').find('.chk-row').each(function()	{
+					$(this).prop('checked', true);
+					$(this).parent().parent().parent().addClass('selected');
+				});
+			}
+			else	{
+				$('#responsiveTable').find('.chk-row').each(function()	{
+					$(this).prop('checked' , false);
+					$(this).parent().parent().parent().removeClass('selected');
+				});
+			}
+		});
+	});
+	</script>
 	
 	<script type="text/javascript">
+	
+	
+	
 	//linhaStatus
 	//span-[status]
 	$(".span-Fechado").addClass("label-warning");
@@ -759,5 +856,29 @@
 	
 	
 	</script>
+	<script>
+		$(function	()	{
+			$('#dataTable').dataTable( {
+				"bJQueryUI": true,
+				"sPaginationType": "full_numbers"
+			});
+			
+			$('#chk-all').click(function()	{
+				if($(this).is(':checked'))	{
+					$('#responsiveTable').find('.chk-row').each(function()	{
+						$(this).prop('checked', true);
+						$(this).parent().parent().parent().addClass('selected');
+					});
+				}
+				else	{
+					$('#responsiveTable').find('.chk-row').each(function()	{
+						$(this).prop('checked' , false);
+						$(this).parent().parent().parent().removeClass('selected');
+					});
+				}
+			});
+		});
+	</script>
+	
 	</body>
 	</html>

@@ -264,7 +264,7 @@ public class CandidatoController {
 	@RequestMapping(value = "aprovar", method = RequestMethod.GET)
 	public String aprovarCandidato(Model model) {
 
-		List<CandidatoBean> candidatos = candidatoBusiness.listar();
+		List<CandidatoBean> candidatos = candidatoBusiness.listarAprovacao();
 
 		model.addAttribute("candidatos", candidatos);
 
