@@ -31,14 +31,17 @@ public class UsuarioBusiness {
 		
 		UsuarioEntity entity = usuarioConverter.convertBeanToEntity(usuarioBean);
 		
-		if(usuarioBean.getId() == null) {
-			if(usuarioDAO.existeUsuario(usuarioBean.getNome())) {
-				throw new BusinessException("Não foi possível incluir. Usuário " + usuarioBean.getNome() + " já está cadastrado.");
+		if(entity.getId() == null) {
+			if(usuarioDAO.existeUsuario(entity.getNome())) {
+				throw new BusinessException("Não foi possível incluir. Usuário " + entity.getNome() + " já está cadastrado.");
 			}
 			
 			usuarioDAO.insert(entity);
 		}
 		else {
+			if(usuarioDAO.existeUsuario(entity.getId(), entity.getNome())) {
+				throw new BusinessException("Não foi possível alterar. Usuário " + entity.getNome() + " já está cadastrado.");
+			}
 			usuarioDAO.update(entity);
 		}
 		

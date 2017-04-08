@@ -29,7 +29,7 @@ public class AvaliadorCandidatoConverter implements Converter<AvaliadorCandidato
 		entity.setCandidato(candidatoConverter.convertBeanToEntity(bean.getCandidato()));
 		entity.setUsuario(usuarioConverter.convertBeanToEntity(bean.getUsuario()));
 		entity.setVaga(vagaConverter.convertBeanToEntity(bean.getVaga()));
-		entity.setIdStatus(bean.getIdStatus());
+		entity.setStatus(bean.getStatus());
 
 		return entity;
 	}
@@ -45,7 +45,7 @@ public class AvaliadorCandidatoConverter implements Converter<AvaliadorCandidato
 		bean.setCandidato(candidatoConverter.convertEntityToBean(entity.getCandidato()));
 		bean.setUsuario(usuarioConverter.convertEntityToBean(entity.getUsuario()));
 		bean.setVaga(vagaConverter.convertEntityToBean(entity.getVaga()));
-		bean.setIdStatus(entity.getIdStatus());
+		bean.setStatus(entity.getStatus());
 
 		return bean;
 	}

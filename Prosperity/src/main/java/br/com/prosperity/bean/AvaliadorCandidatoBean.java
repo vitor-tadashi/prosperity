@@ -6,10 +6,10 @@ import org.springframework.stereotype.Component;
 public class AvaliadorCandidatoBean {
 
 	private Integer id;
-	private VagaBean vaga;
-	private UsuarioBean usuario;
 	private CandidatoBean candidato;
-	private Integer idStatus;
+	private UsuarioBean usuario;
+	private VagaBean vaga;
+	private Integer status;
 
 	public Integer getId() {
 		return id;
@@ -17,22 +17,6 @@ public class AvaliadorCandidatoBean {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public VagaBean getVaga() {
-		return vaga;
-	}
-
-	public void setVaga(VagaBean vaga) {
-		this.vaga = vaga;
-	}
-
-	public UsuarioBean getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(UsuarioBean usuario) {
-		this.usuario = usuario;
 	}
 
 	public CandidatoBean getCandidato() {
@@ -43,11 +27,28 @@ public class AvaliadorCandidatoBean {
 		this.candidato = candidato;
 	}
 
-	public Integer getIdStatus() {
-		return idStatus;
+	public Integer getStatus() {
+		return status;
 	}
 
-	public void setIdStatus(Integer idStatus) {
-		this.idStatus = idStatus;
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
+
+	public UsuarioBean getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(UsuarioBean usuario) {
+		this.usuario = usuario;
+	}
+
+	public VagaBean getVaga() {
+		return vaga;
+	}
+
+	public void setVaga(VagaBean vaga) {
+		this.vaga = vaga;
+	}
+
 }

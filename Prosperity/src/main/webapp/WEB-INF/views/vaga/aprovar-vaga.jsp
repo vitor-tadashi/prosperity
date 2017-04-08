@@ -39,7 +39,7 @@ footer {
 	label {
 		font-weight: normal;
 	}
-	#quebra { page-break-inside:avoid; }
+	#quebra { page-break-inside: avoid; }
 }
 </style>
 
@@ -182,8 +182,8 @@ footer {
 														<label class="control-label"> Data para inicio</label>
 														<div class="form-group">
 															<div class="input-group">
-															<input type="text" value="${vaga.dataInicio 	}"
-																	class="datepicker form-control" id="vagaInicio"
+															<input type="text" value="${vaga.dataInicio}"
+																	class="datepicker form-control" id="dataInicio"
 																	disabled> <span class="input-group-addon"><i
 																	class="fa fa-calendar"></i></span>
 															</div>
@@ -338,6 +338,33 @@ footer {
 		</div>
 	</div>
 	<!-- /.modal fechar-->
+	
+	<!-- modal cancelar -->
+	<div class="modal fade" id="cancela-modal" data-target="#cancela-modal"
+		tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Fechar">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="modalLabel">Cancelar vaga</h4>
+				</div>
+				<div class="modal-body">Deseja realmente cancelar está vaga?</div>
+				<input class="cancela-id" type="hidden"> <input
+					class="cancela-status" type="hidden">
+				<div class="modal-footer">
+					<a href="#">
+						<button id="excluiVaga" onclick="status()" type="button" class="btn btn-primary"
+							data-dismiss="modal">Sim</button>
+					</a>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<!-- CORPO DA PÁGINA -->
 	<div id="main-container">
 		<div id="breadcrumb">
@@ -387,7 +414,7 @@ footer {
 										</c:if> <c:if test="${vaga.localTrabalho == 67}">
 										     Cliente
 										</c:if></td>
-									<td>${vaga.dataAbertura }</td>
+									<td><fmt:formatDate value="${vaga.dataAbertura }" pattern="dd/MM/yyyy" /></td>
 									<td>
 										<div class="btn-group">
 											<!-- <-- ! Começo Botão -->
@@ -410,10 +437,13 @@ footer {
 													data-toggle="modal"><i class="fa fa-check"></i> Aprovar</a></li>
 												<li role="separator" class="divider"></li>
 												<li><a href="#reprova-modal"
-													onclick="alterarStatus(${vaga.id}, 'CANCELADO')"
+													onclick="alterarStatus(${vaga.id}, 'RECUSADO')"
 													data-toggle="modal"><i class="fa fa-times"></i>
 														Reprovar</a></li>
-
+														<li role="separator" class="divider"></li>
+														<li><a href="#cancela-modal"
+													onclick="alterarStatus(${vaga.id}, 'CANCELADO')"
+													data-toggle="modal"><i class="fa fa-ban"></i> Cancelar</a></li>
 											</ul>
 										</div> <!-- Fim Botão -->
 									</td>
@@ -481,7 +511,7 @@ footer {
     			$('input#solicitante').val(lista.nomeSolicitante);
     			$('input#vagaQuadro').val(lista.aumentaQuadro);
     			$('label#vagaSubstituto').text(lista.nomeSubstituido);
-    			$('input#vagaInicio').val(lista.dataInicio);
+    			$('#dataInicio').val(dataAtualFormatada);
     			$('input#vagaCiente').val(lista.projeto.cliente.nome);
     			$('input#vagaProjeto').val(lista.projeto.nome);
     			$('#vagaPerfil').val(lista.descricaoPerfilComportamental);
@@ -530,7 +560,22 @@ footer {
 		$('input.reprovar-id').val(id);
 		$('input.reprovar-status').val(status);
 		
+		$('input.cancelar-id').val(id);
+		$('input.cancelar-status').val(status);
+		
 	}
+	function dataAtualFormatada(){
+	    var data = new Date();
+	    var dia = data.getDate();
+	    if (dia.toString().length == 1)
+	      dia = "0"+dia;
+	    var mes = data.getMonth()+1;
+	    if (mes.toString().length == 1)
+	      mes = "0"+mes;
+	    var ano = data.getFullYear();  
+	    return dia+"/"+mes+"/"+ano;
+	}
+
 </script>
 </body>
 </html>
