@@ -349,7 +349,8 @@ public class CandidatoBusiness {
         List<AvaliadorVagaEntity> avaliadoresEntity = avaliadorVagaDAO.findByNamedQuery("obterAvaliadoresDaVaga", vaga);
         for (AvaliadorVagaEntity avaliadorVagaEntity : avaliadoresEntity) {
             AvaliadorCandidatoEntity avaliadorCandidatoEnitty = new AvaliadorCandidatoEntity();
-            avaliadorCandidatoEnitty.setAvaliadorVaga(avaliadorVagaEntity);
+            avaliadorCandidatoEnitty.setVaga(avaliadorVagaEntity.getVaga());
+            avaliadorCandidatoEnitty.setUsuario(avaliadorVagaEntity.getUsuario());
             avaliadorCandidatoEnitty.setCandidato(candidato);
             avaliadorCandidatoDAO.insert(avaliadorCandidatoEnitty);
 		}
