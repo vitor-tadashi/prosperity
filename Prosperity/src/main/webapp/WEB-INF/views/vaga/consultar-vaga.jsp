@@ -741,6 +741,11 @@
 			$("#tabelaVaga_last").attr("href", "#");
 			$("#tabelaVaga_previous").attr("href", "#");
 			$("#tabelaVaga_first").attr("href", "#");
+			$(".fg-button").attr("href", "#");
+			
+	
+			
+			
 			
 		});
 	</script>
