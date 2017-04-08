@@ -68,7 +68,7 @@
 										<div class="row">
 											<div class="form-group col-md-6">
 												<label for="exampleInputEmail1">Vaga:</label> <select
-													class="form-control chzn-select" id="nomeVaga" name="vagas">
+													class="form-control chzn-select" id="nomeVaga" name="ultimaVaga">
 													<c:forEach var="vaga" items="${listaVaga}">
 														<option value="${vaga.id}">${vaga.nomeVaga}</option>
 													</c:forEach>
@@ -176,7 +176,7 @@
 									<div class="tab-pane fade" id="second">
 										<section id="dadosInterno" class="panel panel-default">
 											<div class="panel-body">
-												<label>Etapas dos processos de seleção: </label>
+												<label>Etapas dos processos de seleção	: </label>
 												<!-- SOMENTE ALTERAR DAQUI PARA BAIXO -->
 
 												<input class="btn btn-xs btn-success" type="button"
@@ -434,7 +434,7 @@
 			<ul class="breadcrumb">
 				<li><i class="fa fa-home"></i><a href="/pagina-inicial"> Home</a></li>
 				<li>Candidato</li>
-				<li class="active">Consultar</li>
+				<li><a href="consultar">Consultar</a></li>
 			</ul>
 		</div>
 		<!--breadcrumb-->
@@ -461,10 +461,11 @@
 										<!-- /search-block -->
 									</div>
 									<div class="col-md-2">
-										<label for="exampleInputEmail1">Cargo</label> <select
-											class="form-control inline" name="cargo">
-											<c:forEach var="cargo" items="${listaCargo}">
-												<option value="${cargo.id}">${cargo.nome}</option>
+										<label for="exampleInputEmail1">Vaga</label> <select
+											class="form-control inline" id="vaga" name="vaga">
+											<option>Selecione</option>
+											<c:forEach var="vaga" items="${listaVagaDrop}">
+												<option id="${vaga.id}" value="${vaga.id}">${vaga.nomeVaga}</option>
 											</c:forEach>
 										</select>
 									</div>
@@ -513,23 +514,23 @@
 									<c:forEach var="candidato" items="${candidatos}">
 										<tr>
 											<td>${candidato.nome}</td>
-											<td></td>
+
+											<td>${candidato.vagaCandidato.vaga.nomeVaga}</td> 	<!--OU vagas-->
 											<td>${candidato.valorPretensao}</td>
-											<td><fmt:formatDate value="${candidato.dataAbertura}"
-													pattern="dd/MM/yyyy" /></td>
-											<td><span
-												class="label status span-${candidato.ultimoStatus.status.nome}">${candidato.ultimoStatus.status.nome}</span></td>
-											<td>
-											<td><span class="line"></span>
+											<td><fmt:formatDate value="${candidato.dataAbertura}" pattern="dd/MM/yyyy" /></td>
+											<td><span class="label status span-${candidato.ultimoStatus.status.nome}">${candidato.ultimoStatus.status.nome}</span></td>
+									
+									
+									<td>
 												<div class="btn-group">
 
-													<!-- comeco do botao -->
 													<button class="btn btn-sm btn-info dropdown-toggle"
 														data-toggle="dropdown" aria-haspopup="true"
 														aria-expanded="false">
 														<i class="fa fa-cogs fa-lg">&nbsp;</i> <span class="caret"></span>
 													</button>
 													<ul class="dropdown-menu slidedown btnAlinhado">
+
 
 														<li><c:url value="historico/${candidato.id}"
 																var="myURL">
@@ -540,7 +541,8 @@
 														<li><c:url value="editar/${candidato.id}" var="myURL">
 															</c:url> <a href="${myURL}"><i class="fa fa-pencil"></i>
 																Editar</a></li>
-														<li role="separator" class="divider"></li>
+													
+
 
 													</ul>
 												</div></td>

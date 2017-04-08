@@ -27,6 +27,8 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "tbCandidato")
 @NamedQueries({
+			
+		//@NamedQuery(name = "status", query = "SELECT u FROM CandidatoEntity u LEFT OUTER JOIN u.statusCandidatoEntity p left join p.status s WHERE u.nomecandidato like ?1 and s.id = ?2 and u.dataAbertura between ?3 and ?4"),
 		@NamedQuery(name = "pesquisarNome", query = "SELECT u FROM CandidatoEntity u WHERE u.nome like ?1 AND u.valorPretensaoSalarial BETWEEN ?2 AND ?3 AND u.dataAbertura BETWEEN ?4 AND ?5"),
 		@NamedQuery(name = "obterPorCPF", query = "SELECT u FROM CandidatoEntity u WHERE u.cpf = ?1"),
 		@NamedQuery(name = "verificarCanidatura", query = "SELECT c FROM CandidatoEntity c JOIN c.statusCandidatos sc WHERE sc.status in(6,7,14)"
@@ -115,15 +117,15 @@ public class CandidatoEntity {
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
 
-	@OneToMany()
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idCandidato")
 	private List<StatusCandidatoEntity> statusCandidatos;
-
-	@OneToMany(cascade = { CascadeType.ALL })
+	
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	@JoinColumn(name = "idCandidato")
 	private List<CandidatoCompetenciaEntity> competencias;
 
-	@OneToMany(cascade ={CascadeType.ALL})
+	@OneToMany(cascade ={CascadeType.ALL}, fetch = FetchType.EAGER)
 	@JoinColumn(name="idCandidato")
 	private Set<VagaCandidatoEntity> vagas;
 	

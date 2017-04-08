@@ -68,6 +68,9 @@ public class VagaBusiness {
 	
 	@Autowired
 	private SituacaoVagaBean situacaoVaga;
+	
+	@Autowired
+	private List<VagaBean> vagaBean;
 
 	@Transactional(readOnly = true)
 	public List<VagaBean> listar() {
@@ -78,10 +81,10 @@ public class VagaBusiness {
 	}
 
 	@Transactional(readOnly = true)
-	public List<VagaEntity> listarVagasAtivas() {
+	public List<VagaBean> listarVagasAtivas() {
 		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagasAtivas", 1);
-		//List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
-		return vagaEntity;
+		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
+		return vagaBean;
 	}
 
 	@Transactional
@@ -220,5 +223,12 @@ public class VagaBusiness {
             avaliadorVagaEntity.setVaga(vaga);
             avaliadorVagaDAO.insert(avaliadorVagaEntity);
 		}
+	}
+	
+	@Transactional(readOnly=true)
+	public List<VagaBean> obterTodos() {
+		List<VagaEntity> vagaEntity = vagaDAO.findAll();
+		vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
+		return vagaBean;
 	}
 }
