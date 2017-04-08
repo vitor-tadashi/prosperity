@@ -495,8 +495,7 @@
 						<table
 							id="tabelaVaga"
 							class="table table-bordered table-condensed table-hover table-striped"
-							style="font-size: 12px; vertical-align: middle;"
-							id="dataTable">
+							style="font-size: 12px; vertical-align: middle;">
 							<thead>
 								<tr>
 									<th class="text-center">Vaga</th>
@@ -563,24 +562,6 @@
 						
 					</div>
 					<!--</panel default>-->
-<<<<<<< HEAD
-					<div class="panel-footer clearfix">
-						<div class="row">
-						$ (ElementID) .paginate ()
-							<ul class="pagination pagination-xs m-top-none pull-right">
-								<li class="disabled"><a href="#">Anterior</a></li>
-								<li class="active"><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">Próximo</a></li>
-							</ul>
-						</div>
-						<!--</div row>-->
-					</div>
-=======
-					
->>>>>>> 59b16c9bbbd105e49d7ad29f9d5a96a7bbb6c142
-					<!--</panel footer>-->
 				</div>
 				<!--</col-sm-12>-->
 			</div>
@@ -622,33 +603,8 @@
 
 	<!-- Perfect -->
 	<script src="js/app/app.js"></script>
-	<script>
-	$(function	()	{
-		$('#dataTable').dataTable( {
-			"bJQueryUI": true,
-			"sPaginationType": "full_numbers"
-		});
-		
-		$('#chk-all').click(function()	{
-			if($(this).is(':checked'))	{
-				$('#responsiveTable').find('.chk-row').each(function()	{
-					$(this).prop('checked', true);
-					$(this).parent().parent().parent().addClass('selected');
-				});
-			}
-			else	{
-				$('#responsiveTable').find('.chk-row').each(function()	{
-					$(this).prop('checked' , false);
-					$(this).parent().parent().parent().removeClass('selected');
-				});
-			}
-		});
-	});
-	</script>
 	
 	<script type="text/javascript">
-	
-	
 	
 	//linhaStatus
 	//span-[status]
@@ -780,26 +736,11 @@
 	
 	
 	</script>
-	<script>
+	<script>/* paginação */
 		$(function	()	{
-			$('#dataTable').dataTable( {
+			$('#tabelaVaga').dataTable( {
 				"bJQueryUI": true,
 				"sPaginationType": "full_numbers"
-			});
-			
-			$('#chk-all').click(function()	{
-				if($(this).is(':checked'))	{
-					$('#responsiveTable').find('.chk-row').each(function()	{
-						$(this).prop('checked', true);
-						$(this).parent().parent().parent().addClass('selected');
-					});
-				}
-				else	{
-					$('#responsiveTable').find('.chk-row').each(function()	{
-						$(this).prop('checked' , false);
-						$(this).parent().parent().parent().removeClass('selected');
-					});
-				}
 			});
 		});
 	</script>

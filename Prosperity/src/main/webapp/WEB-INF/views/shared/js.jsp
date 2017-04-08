@@ -3,6 +3,7 @@
 
 <!-- Jquery -->
 <script src="/resources/js/jquery-1.10.2.min.js"></script>
+<script src="/resources/js/jquery.dataTables.min.js"></script>
 
 <!-- Bootstrap -->
 <script src="/resources/bootstrap/js/bootstrap.min.js"></script>
