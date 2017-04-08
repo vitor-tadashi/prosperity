@@ -11,9 +11,12 @@ public class AvaliadorCandidatoConverter implements Converter<AvaliadorCandidato
 
 	@Autowired
 	CandidatoConverter candidatoConverter;
-	
+
 	@Autowired
-	AvaliadorVagaConverter avaliadorVagaConverter;
+	VagaConverter vagaConverter;
+
+	@Autowired
+	UsuarioConverter usuarioConverter;
 
 	@Override
 	public AvaliadorCandidatoEntity convertBeanToEntity(AvaliadorCandidatoBean bean) {
@@ -24,6 +27,8 @@ public class AvaliadorCandidatoConverter implements Converter<AvaliadorCandidato
 
 		entity.setId(bean.getId());
 		entity.setCandidato(candidatoConverter.convertBeanToEntity(bean.getCandidato()));
+		entity.setUsuario(usuarioConverter.convertBeanToEntity(bean.getUsuario()));
+		entity.setVaga(vagaConverter.convertBeanToEntity(bean.getVaga()));
 		entity.setStatus(bean.getStatus());
 
 		return entity;
@@ -38,8 +43,10 @@ public class AvaliadorCandidatoConverter implements Converter<AvaliadorCandidato
 
 		bean.setId(entity.getId());
 		bean.setCandidato(candidatoConverter.convertEntityToBean(entity.getCandidato()));
+		bean.setUsuario(usuarioConverter.convertEntityToBean(entity.getUsuario()));
+		bean.setVaga(vagaConverter.convertEntityToBean(entity.getVaga()));
 		bean.setStatus(entity.getStatus());
-		
+
 		return bean;
 	}
 

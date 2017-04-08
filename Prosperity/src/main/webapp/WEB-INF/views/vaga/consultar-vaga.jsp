@@ -495,8 +495,7 @@
 						<table
 							id="tabelaVaga"
 							class="table table-bordered table-condensed table-hover table-striped"
-							style="font-size: 12px; vertical-align: middle;"
-							id="dataTable">
+							style="font-size: 12px; vertical-align: middle;">
 							<thead>
 								<tr>
 									<th class="text-center">Vaga</th>
@@ -563,8 +562,6 @@
 						
 					</div>
 					<!--</panel default>-->
-					
-					<!--</panel footer>-->
 				</div>
 				<!--</col-sm-12>-->
 			</div>
@@ -606,33 +603,8 @@
 
 	<!-- Perfect -->
 	<script src="js/app/app.js"></script>
-	<script>
-	$(function	()	{
-		$('#dataTable').dataTable( {
-			"bJQueryUI": true,
-			"sPaginationType": "full_numbers"
-		});
-		
-		$('#chk-all').click(function()	{
-			if($(this).is(':checked'))	{
-				$('#responsiveTable').find('.chk-row').each(function()	{
-					$(this).prop('checked', true);
-					$(this).parent().parent().parent().addClass('selected');
-				});
-			}
-			else	{
-				$('#responsiveTable').find('.chk-row').each(function()	{
-					$(this).prop('checked' , false);
-					$(this).parent().parent().parent().removeClass('selected');
-				});
-			}
-		});
-	});
-	</script>
 	
 	<script type="text/javascript">
-	
-	
 	
 	//linhaStatus
 	//span-[status]
@@ -764,26 +736,11 @@
 	
 	
 	</script>
-	<script>
+	<script>/* paginação */
 		$(function	()	{
-			$('#dataTable').dataTable( {
+			$('#tabelaVaga').dataTable( {
 				"bJQueryUI": true,
 				"sPaginationType": "full_numbers"
-			});
-			
-			$('#chk-all').click(function()	{
-				if($(this).is(':checked'))	{
-					$('#responsiveTable').find('.chk-row').each(function()	{
-						$(this).prop('checked', true);
-						$(this).parent().parent().parent().addClass('selected');
-					});
-				}
-				else	{
-					$('#responsiveTable').find('.chk-row').each(function()	{
-						$(this).prop('checked' , false);
-						$(this).parent().parent().parent().removeClass('selected');
-					});
-				}
 			});
 		});
 	</script>

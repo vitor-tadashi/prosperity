@@ -22,7 +22,7 @@ import br.com.prosperity.util.FormatUtil;
 
 @Component
 @XmlRootElement(name = "CandidatoBean")
-public class CandidatoBean  extends FormatUtil {
+public class CandidatoBean<AvaliadorBean>  extends FormatUtil {
 
 	private Integer id;
 
@@ -40,6 +40,7 @@ public class CandidatoBean  extends FormatUtil {
 	private Double valorPretensao;
 	private Date dataAbertura;
 	private Date dataFechamento;
+	@NotEmpty(message = "O campo email deve ser prenchido")
 	private String email;
 	private Date dataAlteracao;
 	private String curriculo;
@@ -50,8 +51,8 @@ public class CandidatoBean  extends FormatUtil {
 	private FormacaoBean formacao;
 	private UsuarioBean usuario;
 	private List<StatusCandidatoBean> status = new ArrayList<>();
-	@Valid
 	private Set<VagaCandidatoBean> vagas = new HashSet<>();
+	
 	private List<CandidatoCompetenciaBean> competencias = new ArrayList<>();
 	private Map<String, List<StatusCandidatoBean>> statusPorMesAno;
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
@@ -62,18 +63,20 @@ public class CandidatoBean  extends FormatUtil {
 	private Double valorMin;
 	private Double valorMax;
 	private StatusCandidatoBean ultimoStatus;
-	@Valid
 	private VagaBean ultimaVaga;
 	@Valid
 	private VagaCandidatoBean vagaCandidato;
 	private Double pretensaoDe;
 	private Double pretensaoPara;
+	private int paginationContext;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataAberturaDe;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date dataAberturaPara;
-	
+
+	private List<AvaliadorBean> avaliadores;
+
 	public VagaCandidatoBean getVagaCandidato() {
 		if (vagaCandidato == null) {
 			getUltimaVaga();
@@ -86,13 +89,8 @@ public class CandidatoBean  extends FormatUtil {
 		this.vagaCandidato = vagaCandidato;
 	}
 
-	public void setPretensaoDe(Double pretensaoDe) {
-		this.pretensaoDe = pretensaoDe;
-	}
-
-	public void setPretensaoPara(Double pretensaoPara) {
-		this.pretensaoPara = pretensaoPara;
-	}
+	
+	
 
 	public Date getDataAberturaDe() {
 		return dataAberturaDe;
@@ -110,19 +108,19 @@ public class CandidatoBean  extends FormatUtil {
 		this.dataAberturaPara = dataAberturaPara;
 	}
 	@XmlTransient
-	public double getPretensaoDe() {
+	public Double getPretensaoDe() {
 		return pretensaoDe;
 	}
 
-	public void setPretensaoDe(double pretensaoDe) {
+	public void setPretensaoDe(Double pretensaoDe) {
 		this.pretensaoDe = pretensaoDe;
 	}
 	@XmlTransient
-	public double getPretensaoPara() {
+	public Double getPretensaoPara() {
 		return pretensaoPara;
 	}
 
-	public void setPretensaoPara(double pretensaoPara) {
+	public void setPretensaoPara(Double pretensaoPara) {
 		this.pretensaoPara = pretensaoPara;
 	}
 
@@ -341,4 +339,13 @@ public class CandidatoBean  extends FormatUtil {
 	public void setValorMax(Double valorMax) {
 		this.valorMax = valorMax;
 	}
+
+	public List<AvaliadorBean> getAvaliadores() {
+		return avaliadores;
+	}
+
+	public void setAvaliadores(List<AvaliadorBean> avaliadores) {
+		this.avaliadores = avaliadores;
+	}
+
 }
