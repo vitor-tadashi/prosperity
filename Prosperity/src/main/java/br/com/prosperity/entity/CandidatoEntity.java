@@ -35,7 +35,7 @@ import javax.persistence.TemporalType;
 		@NamedQuery(name = "aprovacao", query = "SELECT c FROM CandidatoEntity c, AvaliadorCandidatoEntity ac INNER JOIN c.statusCandidatos sc "
 				+ "WHERE ac.candidato.id = c.id AND sc.idStatusCandidato = (SELECT max(sc.idStatusCandidato)"
 				+ "FROM CandidatoEntity c JOIN c.statusCandidatos sc WHERE sc.candidato.id = c.id AND sc.status.id IN (?1)) AND ac.status is NULL"
-				+ " AND ac.avaliadorVaga.usuario.id = ?2") })
+				+ " AND ac.usuario.id = ?2") })
 
 public class CandidatoEntity {
 
