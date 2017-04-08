@@ -37,3 +37,6 @@
         
         <!-- Custom -->
         <link href="/resources/css/custom.css" rel="stylesheet" />
+        
+        <!--jquery table  -->
+       <link href="/resources/css/jquery.dataTables_themeroller.css"/>

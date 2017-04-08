@@ -7,7 +7,8 @@ public class AvaliadorCandidatoBean {
 
 	private Integer id;
 	private CandidatoBean candidato;
-	private AvaliadorVagaBean avaliadorVaga;
+	private UsuarioBean usuario;
+	private VagaBean vaga;
 	private Integer status;
 
 	public Integer getId() {
@@ -26,20 +27,28 @@ public class AvaliadorCandidatoBean {
 		this.candidato = candidato;
 	}
 
-	public AvaliadorVagaBean getAvaliadorVaga() {
-		return avaliadorVaga;
-	}
-
-	public void setAvaliadorVaga(AvaliadorVagaBean avaliadorVaga) {
-		this.avaliadorVaga = avaliadorVaga;
-	}
-
 	public Integer getStatus() {
 		return status;
 	}
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public UsuarioBean getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(UsuarioBean usuario) {
+		this.usuario = usuario;
+	}
+
+	public VagaBean getVaga() {
+		return vaga;
+	}
+
+	public void setVaga(VagaBean vaga) {
+		this.vaga = vaga;
 	}
 
 }

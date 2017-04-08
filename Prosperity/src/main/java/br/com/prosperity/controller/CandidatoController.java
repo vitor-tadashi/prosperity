@@ -1,12 +1,13 @@
 package br.com.prosperity.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
 
-import org.hibernate.annotations.Sort;
-import org.hibernate.property.DirectPropertyAccessor.DirectGetter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -17,8 +18,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.com.prosperity.bean.CanalInformacaoBean;
 import br.com.prosperity.bean.CandidatoBean;
@@ -27,7 +30,6 @@ import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
-import br.com.prosperity.bean.StatusBean;
 import br.com.prosperity.bean.TipoCursoBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.CanalInformacaoBusiness;
@@ -73,8 +75,13 @@ public class CandidatoController<PaginarCandidato> {
 	 * @param model
 	 * @return
 	 */
-	
-	
+	@RequestMapping(value = "cadastrar", method = RequestMethod.GET)
+	public String cadastrarCandidato(Model model) {
+
+		obterDominiosCandidato(model);
+
+		return "candidato/cadastrar-candidato";
+	}
 
 	private void obterDominiosCandidato(Model model) {
 		List<TipoCursoBean> tiposCurso = tipoCursoBusiness.obterTodos();
@@ -83,28 +90,17 @@ public class CandidatoController<PaginarCandidato> {
 		List<SituacaoAtualBean> listaSituacaoAtual = situacaoAtualBusiness.obterTodos();
 		model.addAttribute("listaSituacaoAtual", listaSituacaoAtual);
 
-		List<VagaBean> listaVaga = vagaBusiness.listar();
+		List<VagaBean> listaVaga = vagaBusiness.listarVagasAtivas();
 		model.addAttribute("listaVaga", listaVaga);
 
 		List<CanalInformacaoBean> listaCanal = canalInformacaoBusiness.obterTodos();
 		model.addAttribute("listaCanal", listaCanal);
 		
 	}
-
-		
-	
-
-	@RequestMapping(value = "cadastrar", method = RequestMethod.GET)
-	public String cadastrarCandidato(Model model) {
-		obterDominiosCandidato(model);
-
-		return "candidato/cadastrar-candidato";
-	}
 	
 	@RequestMapping(value = "salvar", method = RequestMethod.POST)
-	public String salvarCandidato(@ModelAttribute("candidatoBean") @Valid CandidatoBean candidatoBean,
-			BindingResult result, Model model) throws BusinessException {
-
+	public String salvarCandidato(@Valid @ModelAttribute("candidatoBean") CandidatoBean candidatoBean,
+			BindingResult result, @RequestParam("file") MultipartFile file, Model model) throws BusinessException {
 		if (result.hasErrors()) {
 			model.addAttribute("erro", result.getErrorCount());
 			model.addAttribute("listaErros", buildErrorMessage(result.getFieldErrors()));
@@ -118,16 +114,14 @@ public class CandidatoController<PaginarCandidato> {
 			candidatoBusiness.inserir(candidatoBean);
 		}
 
-		/*
-		 * candidatoBean =
-		 * candidatoBusiness.obterPorCPF(candidatoBean.getCpf());
-		 * 
-		 * situacaoCandidatoBean.setIdCandidato(candidatoBean.getId());
-		 * situacaoCandidatoBean.setStatus(StatusCandidatoEnum.CANDIDATURA);
-		 * 
-		 * candidatoBusiness.alterarStatus(situacaoCandidatoBean);
-		 */
+	/*	candidatoBean = candidatoBusiness.obterPorCPF(candidatoBean.getCpf());
 
+		SituacaoCandidatoBean situacaoCandidatoBean = null;
+		situacaoCandidatoBean.setIdCandidato(candidatoBean.getId());
+		situacaoCandidatoBean.setStatus(StatusCandidatoEnum.CANDIDATURA);
+
+		candidatoBusiness.alterarStatus(situacaoCandidatoBean);
+*/
 		return "candidato/cadastrar-candidato";
 	}
 
@@ -151,12 +145,46 @@ public class CandidatoController<PaginarCandidato> {
 
 			obterDominiosCandidato(model);
 
+			/*
+			 * ** COLOCAR AQUI *** 1 - Criar um jeito de pegar o value no seu
+			 * jsp 2 - Verificar se a variavel do caminho do documento esta
+			 * preenchida 3 - Se a varivel estiver preenchida entao chamar a
+			 * rotina de copiar arquivos 4 - Criar o metodo de copiar arquivos
+			 * na sua bussiness
+			 */
+
 			return "candidato/cadastrar-candidato";
 		}
 			candidatoBusiness.inserir(candidatoBean);
 		
 
 		return "candidato/cadastrar-candidato";
+	}
+
+	private String uploadCurriculo(MultipartFile file, String cpf) {
+		if (!file.isEmpty()) {
+			try {
+				byte[] bytes = file.getBytes();
+
+				// Creating the directory to store file
+				File dir = new File("curriculo" + File.separator + cpf);
+				if (!dir.exists())
+					dir.mkdirs();
+
+				// Create the file on server
+				File serverFile = new File(
+						dir.getAbsolutePath() + File.separator + "Curriculo_" + cpf + file.getOriginalFilename());
+				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+				stream.write(bytes);
+				stream.close();
+
+				return serverFile.getAbsolutePath();
+			} catch (Exception e) {
+				return "";
+			}
+		} else {
+			return "";
+		}
 	}
 
 	@RequestMapping(value = "/historico/{id}", method = RequestMethod.GET)
