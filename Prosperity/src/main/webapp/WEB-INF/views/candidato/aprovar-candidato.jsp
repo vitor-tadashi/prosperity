@@ -46,6 +46,7 @@
 					<div class="panel-body">
 
 						<div class="form-group col-md-12">
+
 							<div class="form-group">
 								<label class="control-label">Parecer :</label>
 								<div class="form-group">
@@ -59,17 +60,15 @@
 							<!--                                           /form-group -->
 						</div>
 
-						<div class="form-group col-md-12"
-							style="background-color: #ecf0f1" id="piroquinha">
+						<div class="form-group col-md-12" id="piroquinha">
 							<div class="form-group">
 								<label class="control-label">Proposta:</label>
 								<div class="adjoined-bottom">
 									<!-- <input type="hidden" id="hdn-id-editor" /> <input
                                                            type="hidden" id="hdn-editor" /> -->
-									<div class="grid-container" style="background-color: #ecf0f1">
-										<div class="grid-width-100" style="background-color: #ecf0f1">
-											<textarea id="editor" name="editor"
-												style="background-color: #ecf0f1">
+									<div class="grid-container">
+										<div class="grid-width-100">
+											<textarea id="editor" name="editor">
                                                                        Insira o seu texto aqui...
                                                                  </textarea>
 										</div>
@@ -89,7 +88,7 @@
 										competências</label>
 								</div>
 
-								<table class="table" style="font-size: 10px">
+								<table id="tabelaCompetencias" class="table" style="font-size: 10px">
 									<thead class="text-center">
 										<tr class="text-center">
 											<th class="text-center">Competências</th>
@@ -99,175 +98,23 @@
 											<th>Supera as Expectativas</th>
 										</tr>
 									</thead>
-									
-									<c:forEach var="competencia" items="${competencias}">
 									<tbody class="text-center">
-										<tr>
-										
-											<td>${competencia.nome}</td>
+										<c:forEach var="competencia" items="${competencias}">
 											
-												<td><label class="label-radio inline"> <input
-														id="interno" type="radio" name="inline-radio1"> <span
-														class="custom-radio"></span>
-												</label></td>
-												<td><label class="label-radio inline"> <input
-														id="interno" type="radio" name="inline-radio1"> <span
-														class="custom-radio"></span>
-												</label></td>
-												<td><label class="label-radio inline"> <input
-														id="interno" type="radio" name="inline-radio1"> <span
-														class="custom-radio"></span>
-												</label></td>
-												<td><label class="label-radio inline"> <input
-														id="interno" type="radio" name="inline-radio1"> <span
-														class="custom-radio"></span>
-												</label></td>
-											
-										</tr>
-										</tbody>
+												<tr>
+	
+													<td>${competencia.nome}</td>
+													<c:forEach var="avaliacao" items="${avaliacoes}">
+													
+														<td><label class="label-radio inline"> <input
+																class="avaliacaoCompetencia" type="radio" alt="${avaliacao.id}" name="avaliacao${competencia.nome}" value="2">
+																<span class="custom-radio"></span>
+														</label></td>
+														
+													</c:forEach>												
+	
+												</tr>
 										</c:forEach>
-<!-- 										<tr> -->
-<!-- 											<td>Profundidade</td> -->
-<!-- 											<td><label class="label-radio inline"> <input -->
-<!-- 													id="interno" type="radio" name="inline-radio2"> <span -->
-<!-- 													class="custom-radio"></span> -->
-<!-- 											</label></td> -->
-<!-- 											<td><label class="label-radio inline"> <input -->
-<!-- 													id="interno" type="radio" name="inline-radio2"> <span -->
-<!-- 													class="custom-radio"></span> -->
-<!-- 											</label></td> -->
-<!-- 											<td><label class="label-radio inline"> <input -->
-<!-- 													id="interno" type="radio" name="inline-radio2"> <span -->
-<!-- 													class="custom-radio"></span> -->
-<!-- 											</label></td> -->
-<!-- 											<td><label class="label-radio inline"> <input -->
-<!-- 													id="interno" type="radio" name="inline-radio2"> <span -->
-<!-- 													class="custom-radio"></span> -->
-<!-- 											</label></td> -->
-<!-- 										</tr> -->
-
-<!-- 										<tr> -->
-<!-- 											<td>Planejamento</td> -->
-<!-- 											<td><label class="label-radio inline"> <input -->
-<!-- 													id="interno" type="radio" name="inline-radio3"> <span -->
-<!-- 													class="custom-radio"></span> -->
-<!-- 											</label></td> -->
-<!-- 											<td><label class="label-radio inline"> <input -->
-<!-- 													id="interno" type="radio" name="inline-radio3"> <span -->
-<!-- 													class="custom-radio"></span> -->
-<!-- 											</label></td> -->
-<!-- 											<td><label class="label-radio inline"> <input -->
-<!-- 													id="interno" type="radio" name="inline-radio3"> <span -->
-<!-- 													class="custom-radio"></span> -->
-<!-- 											</label></td> -->
-<!-- 											<td><label class="label-radio inline"> <input -->
-<!-- 													id="interno" type="radio" name="inline-radio3"> <span -->
-<!-- 													class="custom-radio"></span> -->
-<!-- 											</label></td> -->
-<!-- 										</tr> -->
-
-
-<!-- 										<tr> -->
-<!-- 											<td>Execução e Entrega</td> -->
-<!-- 											<td><label class="label-radio inline"> <input -->
-<!-- 													id="interno" type="radio" name="inline-radio5"> <span -->
-<!-- 													class="custom-radio"></span> -->
-<!-- 											</label></td> -->
-<!-- 											<td><label class="label-radio inline"> <input -->
-<!-- 													id="interno" type="radio" name="inline-radio5"> <span -->
-<!-- 													class="custom-radio"></span> -->
-<!-- 											</label></td> -->
-<!-- 											<td><label class="label-radio inline"> <input -->
-<!-- 													id="interno" type="radio" name="inline-radio5"> <span -->
-<!-- 													class="custom-radio"></span> -->
-<!-- 											</label></td> -->
-<!-- 											<td><label class="label-radio inline"> <input -->
-<!-- 													id="interno" type="radio" name="inline-radio5"> <span -->
-<!-- 													class="custom-radio"></span> -->
-<!-- 											</label></td> -->
-<!-- 										</tr> -->
-
-<!-- 										<tr> -->
-<!-- 											<td>Relacionamento</td> -->
-<!-- 											<td><label class="label-radio inline"> <input -->
-<!-- 													id="interno" type="radio" name="inline-radio4"> <span -->
-<!-- 													class="custom-radio"></span> -->
-<!-- 											</label></td> -->
-<!-- 											<td><label class="label-radio inline"> <input -->
-<!-- 													id="interno" type="radio" name="inline-radio4"> <span -->
-<!-- 													class="custom-radio"></span> -->
-<!-- 											</label></td> -->
-<!-- 											<td><label class="label-radio inline"> <input -->
-<!-- 													id="interno" type="radio" name="inline-radio4"> <span -->
-<!-- 													class="custom-radio"></span> -->
-<!-- 											</label></td> -->
-<!-- 											<td><label class="label-radio inline"> <input -->
-<!-- 													id="interno" type="radio" name="inline-radio"> <span -->
-<!-- 													class="custom-radio"></span> -->
-<!-- 											</label></td> -->
-<!-- 										</tr> -->
-
-<!-- 										<tr> -->
-<!-- 											<td>Pessoas</td> -->
-<!-- 											<td><label class="label-radio inline"> <input -->
-<!-- 													id="interno" type="radio" name="inline-radio6"> <span -->
-<!-- 													class="custom-radio"></span> -->
-<!-- 											</label></td> -->
-<!-- 											<td><label class="label-radio inline"> <input -->
-<!-- 													id="interno" type="radio" name="inline-radio6"> <span -->
-<!-- 													class="custom-radio"></span> -->
-<!-- 											</label></td> -->
-<!-- 											<td><label class="label-radio inline"> <input -->
-<!-- 													id="interno" type="radio" name="inline-radio6"> <span -->
-<!-- 													class="custom-radio"></span> -->
-<!-- 											</label></td> -->
-<!-- 											<td><label class="label-radio inline"> <input -->
-<!-- 													id="interno" type="radio" name="inline-radio6"> <span -->
-<!-- 													class="custom-radio"></span> -->
-<!-- 											</label></td> -->
-<!-- 										</tr> -->
-
-<!-- 										<tr> -->
-<!-- 											<td>Comercial</td> -->
-<!-- 											<td><label class="label-radio inline"> <input -->
-<!-- 													id="interno" type="radio" name="inline-radio7"> <span -->
-<!-- 													class="custom-radio"></span> -->
-<!-- 											</label></td> -->
-<!-- 											<td><label class="label-radio inline"> <input -->
-<!-- 													id="interno" type="radio" name="inline-radio7"> <span -->
-<!-- 													class="custom-radio"></span> -->
-<!-- 											</label></td> -->
-<!-- 											<td><label class="label-radio inline"> <input -->
-<!-- 													id="interno" type="radio" name="inline-radio7"> <span -->
-<!-- 													class="custom-radio"></span> -->
-<!-- 											</label></td> -->
-<!-- 											<td><label class="label-radio inline"> <input -->
-<!-- 													id="interno" type="radio" name="inline-radio7"> <span -->
-<!-- 													class="custom-radio"></span> -->
-<!-- 											</label></td> -->
-<!-- 										</tr> -->
-
-<!-- 										<tr> -->
-<!-- 											<td>Financeiro</td> -->
-<!-- 											<td><label class="label-radio inline"> <input -->
-<!-- 													id="interno" type="radio" name="inline-radio8"> <span -->
-<!-- 													class="custom-radio"></span> -->
-<!-- 											</label></td> -->
-<!-- 											<td><label class="label-radio inline"> <input -->
-<!-- 													id="interno" type="radio" name="inline-radio8"> <span -->
-<!-- 													class="custom-radio"></span> -->
-<!-- 											</label></td> -->
-<!-- 											<td><label class="label-radio inline"> <input -->
-<!-- 													id="interno" type="radio" name="inline-radio8"> <span -->
-<!-- 													class="custom-radio"></span> -->
-<!-- 											</label></td> -->
-<!-- 											<td><label class="label-radio inline"> <input -->
-<!-- 													id="interno" type="radio" name="inline-radio8"> <span -->
-<!-- 													class="custom-radio"></span> -->
-<!-- 											</label></td> -->
-<!-- 										</tr> -->
-
-
 									</tbody>
 								</table>
 							</section>
@@ -503,9 +350,29 @@
             CKEDITOR.replace('editor');
                   $('#alterarStatus').click(function() {
                         
-                        var data = CKEDITOR.instances.editor.getData();
-                    console.log(data);
+                        var data = CKEDITOR.instances.editor.getData();                    
                         
+	                   	 var avaliacoes = [];
+	                   	 
+	                   	 var avaliacaoCompetencia = {
+	                   		"idAvaliacao" : "",
+	                   		"idCompetencia" : ""
+	                   	 };
+	                   	 
+	                 	 $(".avaliacaoCompetencia").each(function(){
+	                      	if($(this).prop("checked")){
+	                      		var idAvaliacao = $(this).attr("alt");
+	                      		var idCompetencia = $(this).val();
+	                      		
+	                      		avaliacaoCompetencia.idAvaliacao = idAvaliacao;
+	                      		avaliacaoCompetencia.idCompetencia = idCompetencia;
+	                      		
+	                      		avaliacoes.push(avaliacaoCompetencia);
+	                      	}
+	                      }) 
+	                       
+	                    debugger;
+	            		
                         $.ajax({
                               url : "alterar-status-candidato",
                               type : "POST",
@@ -526,7 +393,6 @@
                         });
                         
                   });
-
 
             function alterarStatus(idCandidato, idStatus, proposta) {
                   $('#hdn-id-candidato').val(idCandidato);
