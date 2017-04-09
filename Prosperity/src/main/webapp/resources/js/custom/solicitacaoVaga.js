@@ -18,6 +18,33 @@ $(function() {
     			}
     		}
     	});
+    	
+    	$("#cmbProjetoInterno").change(function(){
+    		var cliente = $("#cmbProjetoInterno").val();
+    	});
+    	
+    	/*$("#cmbProjetoInterno").change(function(){
+        	check();
+        	var id = $("#selected-perfil option:selected").val();
+        	$.ajax({
+        		url: "http://localhost:8080/usuario/obter-cliente",
+        		type: "GET",
+        		dataType: "JSON",
+        		data: {id : id},
+        		success: function(lista){
+        			if(lista != null){
+        				$(".listFun").each(function(index){
+    	    				$.each(lista,function(i,item){
+    	    					if(item.id == $("#"+index).val()){
+    	    						$("#"+index).prop("checked",true)
+    	    					}
+    	    				});
+        				});	
+        			}
+        		}
+        	});
+        });*/
+    	
 	
 	//Script para preencher automático o Radio de TipoVaga
 	
@@ -75,26 +102,28 @@ $(function() {
 	});
 
 	$("#btnSalvar").click(function() {
+		
 		var info = enviarAvaliadores();
+		var result = JSON.stringify(info);
     	$.ajax({
     		url: "http://localhost:8080/vaga/avaliadores",
     		type: "POST",
-    		dataType: "JSON",
-    		data: {id : info},
-    		success: function(dado){
+    		data: {avaliadores : result},
+    		success: function(data){
+    			console.log(data);
+   			
     			
     		}
     	});
-		
-		$("#formCadastro2").submit();
-		
+    	$("#formCadastro2").submit();
 	});
 	
 	function enviarAvaliadores(){
 		var avaliadores = $('#selectedBox2')[0].length;
 		var dados = [];
 		for(var i=0; i<avaliadores; i++){
-			dados.push($('#selectedBox2')[0][i].value);		
+			dados.push($('#selectedBox2')[0][i].value);	
+			
 		}
 			return dados;
 	}

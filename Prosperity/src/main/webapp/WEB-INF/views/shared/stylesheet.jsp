@@ -2,7 +2,8 @@
         <link rel="shortcut icon" type="image/ico" href="/resources/img/prosperity.ico"/>
         
         <!-- Bootstrap core CSS -->
-        <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/resources/bootstrap/css/bootstrap-3.3.7.min.css" rel="stylesheet">
+        <link href="/resources/css/bootstrap.dataTables.min.css" rel="stylesheet">
         
         <!-- Font Awesome -->
         <link href="/resources/css/font-awesome.min.css" rel="stylesheet">
@@ -37,6 +38,3 @@
         
         <!-- Custom -->
         <link href="/resources/css/custom.css" rel="stylesheet" />
-        
-        <!--jquery table  -->
-       <link href="/resources/css/jquery.dataTables_themeroller.css"/>

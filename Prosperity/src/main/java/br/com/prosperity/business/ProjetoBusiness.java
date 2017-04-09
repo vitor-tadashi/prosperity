@@ -26,5 +26,12 @@ public class ProjetoBusiness {
 		List<ProjetoBean> projetoBean = projetoConverter.convertEntityToBean(projetoEntity);
 		return projetoBean;
 	}
+	
+	@Transactional
+	public List<ProjetoBean> buscarProjetoAtivo(){
+		List<ProjetoEntity> projetoEntity = projetoDAO.findByNamedQuery("obterProjetosAtivos");
+		List<ProjetoBean> projetoBean = projetoConverter.convertEntityToBean(projetoEntity);
+		return projetoBean;
+	}
 
 }
