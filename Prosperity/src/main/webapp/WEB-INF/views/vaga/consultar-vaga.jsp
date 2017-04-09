@@ -752,8 +752,8 @@
 					"sSortDescending": ": Ordenar colunas de forma descendente"
 				}
 			}
-		//$(function	()	{
-			/*$('#tabelaVaga').dataTable( {
+		/* $(function	()	{
+			$('#tabelaVaga').dataTable( {
 				"bJQueryUI": true,
 				"sPaginationType": "full_numbers"
 			});
@@ -772,8 +772,8 @@
 			$("#tabelaVaga_last").attr("href", "#");
 			$("#tabelaVaga_previous").attr("href", "#");
 			$("#tabelaVaga_first").attr("href", "#");
-			$(".fg-button").attr("href", "#");
- */			
+			$(".fg-button").attr("href", "#"); */
+ 		
 		});
 	});
 	</script>
