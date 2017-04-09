@@ -28,10 +28,7 @@
 <body>
     
     <div class="panel panel-default table-responsive">
-					<div class="panel-heading">
-						Data Table
-						<span class="label label-info pull-right">790 Items</span>
-					</div>
+					
 					<div class="padding-md clearfix">
 						<table class="table table-striped" id="dataTable">
 							<thead>
@@ -118,47 +115,11 @@
 									<td>Sep 27,2013</td>
 									<td><span class="label label-success">In Stock</span></td>
 								</tr>
-								<tr>
-									<td>#1009</td>
-									<td>Casual stripe</td>
-									<td>$50</td>
-									<td>30</td>
-									<td>25</td>
-									<td>Sep 27,2013</td>
-									<td><span class="label label-success">Sold out</span></td>
-								</tr>
-								<tr>
-									<td>#1010</td>
-									<td>Italian shirt</td>
-									<td>$70</td>
-									<td>40</td>
-									<td>4</td>
-									<td>Sep 27,2013</td>
-									<td><span class="label label-info">Promotion</span></td>
-								</tr>
-								<tr>
-									<td>#1011</td>
-									<td>Iphone 5</td>
-									<td>$400</td>
-									<td>300</td>
-									<td>152</td>
-									<td>Sep 27,2013</td>
-									<td><span class="label label-danger">In stock</span></td>
-								</tr>
-								<tr>
-									<td>#1012</td>
-									<td>Ipad</td>
-									<td>$350</td>
-									<td>46</td>
-									<td>103</td>
-									<td>Sep 25,2013</td>
-									<td><span class="label label-success">In Stock</span></td>
-								</tr>
 							</tbody>
 						</table>
 					</div><!-- /.padding-md -->
 				</div><!-- /panel -->
-</body>
+
  
  
  
@@ -193,29 +154,7 @@
 	<!-- Perfect -->
 	<script src="js/app/app.js"></script>
 	
-	<script>
-		$(function	()	{
-			$('#dataTable').dataTable( {
-				"bJQueryUI": true,
-				"sPaginationType": "full_numbers"
-			});
-			
-			$('#chk-all').click(function()	{
-				if($(this).is(':checked'))	{
-					$('#responsiveTable').find('.chk-row').each(function()	{
-						$(this).prop('checked', true);
-						$(this).parent().parent().parent().addClass('selected');
-					});
-				}
-				else	{
-					$('#responsiveTable').find('.chk-row').each(function()	{
-						$(this).prop('checked' , false);
-						$(this).parent().parent().parent().removeClass('selected');
-					});
-				}
-			});
-		});
-	</script>
+	
 	
   </body>
 </html>
