@@ -14,10 +14,8 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
-
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,11 +25,8 @@ import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CompetenciaBean;
 import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
-import br.com.prosperity.bean.SituacaoVagaBean;
 import br.com.prosperity.bean.StatusCandidatoBean;
 import br.com.prosperity.bean.UsuarioBean;
-import br.com.prosperity.bean.VagaBean;
-import br.com.prosperity.bean.VagaCandidatoBean;
 import br.com.prosperity.converter.AvaliacaoConverter;
 import br.com.prosperity.converter.CandidatoConverter;
 import br.com.prosperity.converter.CompetenciaConverter;
@@ -55,7 +50,6 @@ import br.com.prosperity.entity.CandidatoEntity;
 import br.com.prosperity.entity.CompetenciaEntity;
 import br.com.prosperity.entity.StatusCandidatoEntity;
 import br.com.prosperity.entity.StatusFuturoEntity;
-import br.com.prosperity.entity.StatusVagaEntity;
 import br.com.prosperity.entity.VagaCandidatoEntity;
 import br.com.prosperity.entity.VagaEntity;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
@@ -235,6 +229,8 @@ public class CandidatoBusiness {
 		if (candidatoBean.getId() == null) {
 			if (verificarCandidatura(candidatoBean) == true) {
 				CandidatoEntity candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoBean);
+				SituacaoCandidatoBean situacaoCandidato = new SituacaoCandidatoBean();
+				
 				candidatoEntity.getFormacao().setTipoCurso(tipoCursoDAO.findById(candidatoBean.getFormacao().getTipoCurso().getId()));
 				candidatoEntity.getFormacao().setSituacaoAtual(situacaoAtualDAO.findById(candidatoBean.getFormacao().getSituacaoAtual().getId()));
 				
@@ -246,6 +242,11 @@ public class CandidatoBusiness {
 				candidatoEntity.setVagas(vagas);
 				
 				candidatoDAO.insert(candidatoEntity);
+				
+				situacaoCandidato.setIdCandidato(candidatoEntity.getId());
+				situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
+				
+				alterarStatus(situacaoCandidato);
 				
 			} else {
 				// retornar mensagem de candidato em processo seletivo para vaga

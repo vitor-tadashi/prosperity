@@ -116,14 +116,6 @@ public class CandidatoController<PaginarCandidato> {
 			candidatoBusiness.inserir(candidatoBean);
 		}
 
-/*candidatoBean = candidatoBusiness.obterPorCPF(candidatoBean.getCpf());
-
-		SituacaoCandidatoBean situacaoCandidatoBean = null;
-		situacaoCandidatoBean.setIdCandidato(candidatoBean.getId());
-		situacaoCandidatoBean.setStatus(StatusCandidatoEnum.CANDIDATURA);
-
-		candidatoBusiness.alterarStatus(situacaoCandidatoBean);*/
-
 		return "candidato/cadastrar-candidato";
 	}
 
