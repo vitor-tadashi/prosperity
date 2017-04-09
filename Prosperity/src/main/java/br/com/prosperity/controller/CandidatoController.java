@@ -116,14 +116,6 @@ public class CandidatoController<PaginarCandidato> {
 			candidatoBusiness.inserir(candidatoBean);
 		}
 
-/*candidatoBean = candidatoBusiness.obterPorCPF(candidatoBean.getCpf());
-
-		SituacaoCandidatoBean situacaoCandidatoBean = null;
-		situacaoCandidatoBean.setIdCandidato(candidatoBean.getId());
-		situacaoCandidatoBean.setStatus(StatusCandidatoEnum.CANDIDATURA);
-
-		candidatoBusiness.alterarStatus(situacaoCandidatoBean);*/
-
 		return "candidato/cadastrar-candidato";
 	}
 
@@ -240,11 +232,11 @@ public class CandidatoController<PaginarCandidato> {
 
 		List<CandidatoBean> candidatos = candidatoBusiness.listarAprovacao();
 		List<CompetenciaBean> competencias = candidatoBusiness.listarCompetencia();
-		List<AvaliacaoBean> avaliacao = candidatoBusiness.listarAvaliacao();
+		List<AvaliacaoBean> avaliacoes = candidatoBusiness.listarAvaliacao();
 
 		model.addAttribute("candidatos", candidatos);
 		model.addAttribute("competencias",competencias);
-		model.addAttribute("avaliacao",avaliacao);
+		model.addAttribute("avaliacoes",avaliacoes);
 
 		return "candidato/aprovar-candidato";
 	}
