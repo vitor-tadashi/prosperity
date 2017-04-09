@@ -226,6 +226,7 @@ public class VagaBusiness {
 		return dataAntiga;
 	}
 
+	@Transactional
 	private void inserirAvaliadores(VagaEntity vaga, List<UsuarioBean> usuarios) {
 		for (UsuarioBean usuario : usuarios) {
             AvaliadorVagaEntity avaliadorVagaEntity = new AvaliadorVagaEntity();
