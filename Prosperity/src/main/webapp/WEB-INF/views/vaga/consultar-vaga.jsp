@@ -534,23 +534,7 @@
 											<ul class="dropdown-menu dropdown-menu-right slidedown">
 											<li><a href="#visualizar-modal" 
 													onclick="info(${vaga.id})"><i
-														class="fa fa-eye">&nbsp</i>Visualizar</a></li>
-														
-												<li id="${vaga.ultimoStatus.status.nome}" class="divider"></li>
-												
-												<li id="${vaga.ultimoStatus.status.nome}"><a href="#fecha-modal" 
-												onclick="alterarStatus(${vaga.id}, 'RECUSADO')"
-												data-toggle="modal"><i
-														class="fa fa-lock">&nbsp</i>Fechar</a></li>
-												<li id="${vaga.ultimoStatus.status.nome}" class="divider "></li>
-												
-							
-												<li id="${vaga.ultimoStatus.status.nome}"><a href="#delete-modal" 
-												onclick="alterarStatus(${vaga.id}, 'CANCELADO')"
-												data-toggle="modal"><i
-														class="fa fa-times">&nbsp</i>Cancelar</a></li>
-												
-													
+														class="fa fa-eye">&nbsp</i>Visualizar</a></li>		
 											</ul>
 										</div> <!-- /btn-group -->
 									</td>
@@ -768,6 +752,28 @@
 					"sSortDescending": ": Ordenar colunas de forma descendente"
 				}
 			}
+		//$(function	()	{
+			/*$('#tabelaVaga').dataTable( {
+				"bJQueryUI": true,
+				"sPaginationType": "full_numbers"
+			});
+			$('#tabelaVaga_length').hide();
+			$('#tabelaVaga_filter').hide();
+			$('#tabelaVaga_info').hide();
+			$('#tabelaVaga_last').css('margin-left:2000px');
+			$('#tabelaVaga_next').css('margin-left:200px');
+			$('#tabelaVaga_paginate').css('margin-left: 500px');
+			$("#tabelaVaga_next").text("Próximo");
+			$("#tabelaVaga_last").text("Último");
+			$("#tabelaVaga_previous").text("Anterior");
+			$("#tabelaVaga_first").text("Primeiro");
+			
+			$("#tabelaVaga_next").attr("href", "#");
+			$("#tabelaVaga_last").attr("href", "#");
+			$("#tabelaVaga_previous").attr("href", "#");
+			$("#tabelaVaga_first").attr("href", "#");
+			$(".fg-button").attr("href", "#");
+ */			
 		});
 	});
 	</script>
