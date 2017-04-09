@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
 @NamedQueries({
 
 		@NamedQuery(name = "obterTodos", query = "SELECT u FROM VagaEntity u WHERE u.nomeVaga = ?1"),
-		@NamedQuery(name = "listarVagaAprovar", query = "SELECT u FROM VagaEntity u LEFT OUTER JOIN u.statusVagaEntity p LEFT OUTER JOIN p.status s WHERE s.id = ?1 AND p.situacao = ?2"),
+		@NamedQuery(name = "listarVagaAprovar", query = "SELECT u FROM VagaEntity u LEFT OUTER JOIN u.statusVagaEntity p LEFT OUTER JOIN p.status s WHERE (s.id = ?1 OR s.id=?2) AND p.situacao = ?3"),
 
 		@NamedQuery(name = "obterPorId", query = "SELECT u FROM VagaEntity u WHERE u.id = ?1"),
 

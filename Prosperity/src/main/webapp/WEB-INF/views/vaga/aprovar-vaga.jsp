@@ -310,7 +310,7 @@ footer {
 			</div>
 		</div>
 	</div>
-	<!-- /.modal fechar-->
+	<!-- /.modal aprovar-->
 
 	<!-- Modal reprovar -->
 	<div class="modal fade" id="reprova-modal" data-target="#fecha-modal"
@@ -337,7 +337,7 @@ footer {
 			</div>
 		</div>
 	</div>
-	<!-- /.modal fechar-->
+	<!-- /.modal aprovar-->
 	
 	<!-- modal cancelar -->
 	<div class="modal fade" id="cancela-modal" data-target="#cancela-modal"
@@ -364,6 +364,34 @@ footer {
 			</div>
 		</div>
 	</div>
+	<!-- /.modal cancelar -->
+	
+	<!-- modal fechar -->
+	<div class="modal fade" id="fechar-modal" data-target="#fechar-modal"
+		tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Fechar">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="modalLabel">Fechar vaga</h4>
+				</div>
+				<div class="modal-body">Deseja realmente fechar está vaga?</div>
+				<input class="cancela-id" type="hidden"> <input
+					class="cancela-status" type="hidden">
+				<div class="modal-footer">
+					<a href="#">
+						<button id="excluiVaga" onclick="status()" type="button" class="btn btn-primary"
+							data-dismiss="modal">Sim</button>
+					</a>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /.modal fechar -->
 	
 	<!-- CORPO DA PÁGINA -->
 	<div id="main-container">
@@ -375,8 +403,8 @@ footer {
 			</ul>
 		</div>
 		<!--breadcrumb-->
-
-		<div class="padding-md">
+	
+		<div class="padding-md" id="fourth">
 			<div class="panel panel-default">
 				<div class="panel-heading">Aprovação de vaga</div>
 				<div class="panel-body">
@@ -393,9 +421,10 @@ footer {
 								<th class="text-center">Senioridade</th>
 								<th class="text-center">Solicitante</th>
 								<th class="text-center">Projeto</th>
-								<th class="text-center">Cliente</th>
-								<th class="text-center">Local de trabalho</th>
-								<th class="text-center">Data abertura</th>
+								<!-- <th class="text-center">Cliente</th>
+								<th class="text-center">Local de trabalho</th> -->
+								<th class="text-center">Data abertura</th> 
+								<th class="text-center">Status</th>
 								<th class="text-center">Ações</th>
 							</tr>
 						</thead>
@@ -406,15 +435,16 @@ footer {
 									<td>${vaga.nomeVaga}</td>
 									<td>${vaga.cargoBean.nome}</td>
 									<td>${vaga.senioridadeBean.nome}</td>
-									<td>${vaga.nomeSolicitante}</td>
-									<td>${vaga.projeto.nome}</td>
-									<td>${vaga.projeto.cliente.nome}</td>
+									<td style="width: 112px;">${vaga.nomeSolicitante}</td>
+									<td style="width: 302px;">${vaga.projeto.nome}</td>
+									<%-- <td>${vaga.projeto.cliente.nome}</td>
 									<td><c:if test="${vaga.localTrabalho == 73}">
 										     Interno
 										</c:if> <c:if test="${vaga.localTrabalho == 67}">
 										     Cliente
-										</c:if></td>
+										</c:if></td> --%>
 									<td><fmt:formatDate value="${vaga.dataAbertura }" pattern="dd/MM/yyyy" /></td>
+									<td id="linhaStatus"><span class="label status span-${vaga.ultimoStatus.status.nome}">${vaga.ultimoStatus.status.nome}</span></td>
 									<td>
 										<div class="btn-group">
 											<!-- <-- ! Começo Botão -->
@@ -431,26 +461,41 @@ footer {
 												<li role="separator" class="divider"></li>
 												<li><c:url value="editar/${vaga.id}" var="myURL">
 													</c:url> <a href="${myURL}"><i class="fa fa-pencil"></i> Editar</a></li>
-												<li role="separator" class="divider"></li>
-												<li><a href="#aprova-modal"
-													onclick="alterarStatus(${vaga.id}, 'ACEITO')"
-													data-toggle="modal"><i class="fa fa-check"></i> Aprovar</a></li>
-												<li role="separator" class="divider"></li>
-												<li><a href="#reprova-modal"
-													onclick="alterarStatus(${vaga.id}, 'RECUSADO')"
-													data-toggle="modal"><i class="fa fa-times"></i>
-														Reprovar</a></li>
-														<li role="separator" class="divider"></li>
-														<li><a href="#cancela-modal"
-													onclick="alterarStatus(${vaga.id}, 'CANCELADO')"
-													data-toggle="modal"><i class="fa fa-ban"></i> Cancelar</a></li>
+												
+												<c:if test="${vaga.ultimoStatus.status.nome == 'Pendente'}">
+												    <li id="${vaga.ultimoStatus.status.nome}"role="separator" class="Aprovar divider"></li>
+													<li id="${vaga.ultimoStatus.status.nome}" class="Aprovar">
+													<a href="#aprova-modal"	onclick="alterarStatus(${vaga.id}, 'ACEITO')"
+														data-toggle="modal" ><i class="Aprovar fa fa-thumbs-up"></i> Aprovar</a></li>
+												</c:if>
+												
+												<c:if test="${vaga.ultimoStatus.status.nome == 'Pendente'}">	
+													<li id="${vaga.ultimoStatus.status.nome}"role="separator" class="Reprovar divider"></li>
+													<li id="${vaga.ultimoStatus.status.nome}" class="Reprovar"><a href="#reprova-modal"
+														onclick="alterarStatus(${vaga.id}, 'CANCELADO')"
+														data-toggle="modal" ><i class="Reprovar fa fa-thumbs-down"></i> Reprovar</a></li>
+												</c:if>
+										
+											<c:if test="${vaga.ultimoStatus.status.nome == 'Ativo'}" >
+													<li id="${vaga.ultimoStatus.status.nome}" role="separator" class="cancelarDivider divider"></li>
+													<li id="${vaga.ultimoStatus.status.nome}" >
+													<a href="#cancela-modal" onclick="alterarStatus(${vaga.id}, 'CANCELADO')"
+														data-toggle="modal" class="cancelarAtivos" ><i class="Cancelar fa fa-ban"></i> Cancelar</a></li>
+												</c:if>	
+													
+												<c:if test="${vaga.ultimoStatus.status.nome == 'Ativo'}">
+													<li id="${vaga.ultimoStatus.status.nome}" role="separator" class="fecharDivider divider"></li>
+													<li id="${vaga.ultimoStatus.status.nome}">
+													<a href="#fechar-modal" onclick="alterarStatus(${vaga.id}, 'FECHADO')"
+														data-toggle="modal" class="fecharAtivo" ><i class="Fechar fa fa-times"></i> Fechar</a></li>
+												</c:if>
+												
 											</ul>
 										</div> <!-- Fim Botão -->
-									</td>
-								</tr>
+								 	</td>
+								</tr> 
 
 							</c:forEach>
-
 						</tbody>
 					</table>
 					<!-- Fim Tabela -->
@@ -468,6 +513,36 @@ footer {
 	<!-- JavaScript -->
 
 	<script type="text/javascript">
+	
+	$(".span-Fechado").addClass("label-warning");
+	$(".span-Ativo").addClass("label-success");
+	$(".span-Cancelado").addClass("label-danger");
+	$(".span-Pendente").addClass("label-info");
+	
+// 	if($(".span-Fechado") || $(".span-Cancelado") || $(".span-Pendente")) {
+// 		$('li#Fechado').hide();
+// 		$('li#Cancelado').hide();
+// //  		$('li#Pendente').hide();
+// 	} 
+	
+// 	if($(".span-Ativo")) {
+// 		$('li#Aprovar').hide();
+// 		$('li#Reprovar').hide();
+// 	}
+	
+// 	if($("li#Ativo") ) {
+// 		$(".Cancelar").hide();
+// 	if($("li#Pendente") ) {
+// 		$(".Cancelar").hide();
+// 		$(".Fechar").hide();
+// 	}
+		
+// 	}
+	
+// 	 if($("li#Ativo") ) {
+// 			$(".Aprovar").removeClass("hide");
+// 			$(".Reprovar").removeClass("hide");
+// 	}
 	
 	function info(listaId){
     	//
@@ -575,7 +650,43 @@ footer {
 	    var ano = data.getFullYear();  
 	    return dia+"/"+mes+"/"+ano;
 	}
-
+	
+$(function() {
+		
+    	var id = $("#idPerfil").val();
+    	$.ajax({
+    		url: "http://localhost:8080/usuario/obter-perfil-funcionalidade",
+    		type: "GET",
+    		dataType: "JSON",
+    		data: {id : id},
+    		success: function(lista){
+    			if(lista != null){
+    				var cancelar = 0;
+    				var fechar = 0;
+    				
+	    				$.each(lista,function(i,item){
+    						if(item.id == 29){
+    							cancelar++;
+	    					}
+    						if(item.id == 30){
+    							fechar++;
+	    					}
+	    				});
+	    				
+    				if (cancelar == 0){
+    					$('.cancelarAtivos').hide();
+   						$('.cancelarDivider').hide();
+    				}
+    				if (fechar == 0){
+    					$('.fecharAtivo').hide();
+   						$('.fecharDivider').hide();
+    				}
+    			}
+    		}
+    	});
+	})
+	
+    	
 </script>
 </body>
 </html>

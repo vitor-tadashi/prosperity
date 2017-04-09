@@ -3,7 +3,7 @@
         
         <!-- Bootstrap core CSS -->
         <link href="/resources/bootstrap/css/bootstrap-3.3.7.min.css" rel="stylesheet">
-        <link href="/resources/bootstrap/css/bootstrap.dataTables.min.css" rel="stylesheet">
+        <link href="/resources/css/bootstrap.dataTables.min.css" rel="stylesheet">
         
         <!-- Font Awesome -->
         <link href="/resources/css/font-awesome.min.css" rel="stylesheet">
