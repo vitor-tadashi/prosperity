@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public enum StatusVagaEnum {
 	ACEITO(1),
-	RECUSADO(2),
+	FECHADO(2),
 	CANCELADO(3),
 	PENDENTE(4);
 	
