@@ -23,9 +23,10 @@ public class VagaBean {
 	private String nomeSolicitante;
 	private Double valorPretensao;
 	
-	@NotNull(message = "O campo data de Inicio deve ser preenchido")
+	//@NotNull(message = "O campo data de Inicio deve ser preenchido")
 	@DateTimeFormat(pattern = "dd/MM/YYYY")
 	private Date dataInicio;
+	
 	private Character localTrabalho;
 	private Character idTipoVaga;
 	private String horarioEntrada;

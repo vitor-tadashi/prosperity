@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
-
 import br.com.prosperity.bean.AvaliacaoBean;
 import br.com.prosperity.bean.CanalInformacaoBean;
 import br.com.prosperity.bean.CandidatoBean;
@@ -42,6 +41,7 @@ import br.com.prosperity.business.SenioridadeBusiness;
 import br.com.prosperity.business.SituacaoAtualBusiness;
 import br.com.prosperity.business.TipoCursoBusiness;
 import br.com.prosperity.business.VagaBusiness;
+import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.exception.BusinessException;
 
 @Controller
@@ -116,14 +116,14 @@ public class CandidatoController<PaginarCandidato> {
 			candidatoBusiness.inserir(candidatoBean);
 		}
 
-	/*	candidatoBean = candidatoBusiness.obterPorCPF(candidatoBean.getCpf());
+/*candidatoBean = candidatoBusiness.obterPorCPF(candidatoBean.getCpf());
 
 		SituacaoCandidatoBean situacaoCandidatoBean = null;
 		situacaoCandidatoBean.setIdCandidato(candidatoBean.getId());
 		situacaoCandidatoBean.setStatus(StatusCandidatoEnum.CANDIDATURA);
 
-		candidatoBusiness.alterarStatus(situacaoCandidatoBean);
-*/
+		candidatoBusiness.alterarStatus(situacaoCandidatoBean);*/
+
 		return "candidato/cadastrar-candidato";
 	}
 
@@ -146,15 +146,6 @@ public class CandidatoController<PaginarCandidato> {
 			model.addAttribute("candidato", candidatoBean);
 
 			obterDominiosCandidato(model);
-
-			/*
-			 * ** COLOCAR AQUI *** 1 - Criar um jeito de pegar o value no seu
-			 * jsp 2 - Verificar se a variavel do caminho do documento esta
-			 * preenchida 3 - Se a varivel estiver preenchida entao chamar a
-			 * rotina de copiar arquivos 4 - Criar o metodo de copiar arquivos
-			 * na sua bussiness
-			 */
-
 			return "candidato/cadastrar-candidato";
 		}
 			candidatoBusiness.inserir(candidatoBean);
