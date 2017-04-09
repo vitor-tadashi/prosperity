@@ -23,9 +23,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 
+import br.com.prosperity.bean.AvaliacaoBean;
 import br.com.prosperity.bean.CanalInformacaoBean;
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CargoBean;
+import br.com.prosperity.bean.CompetenciaBean;
 import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
@@ -245,9 +247,13 @@ public class CandidatoController<PaginarCandidato> {
 	@RequestMapping(value = "aprovar", method = RequestMethod.GET)
 	public String aprovarCandidato(Model model) {
 
-		List<CandidatoBean> candidatos = candidatoBusiness.listar();
+		List<CandidatoBean> candidatos = candidatoBusiness.listarAprovacao();
+		List<CompetenciaBean> competencias = candidatoBusiness.listarCompetencia();
+		List<AvaliacaoBean> avaliacao = candidatoBusiness.listarAvaliacao();
 
 		model.addAttribute("candidatos", candidatos);
+		model.addAttribute("competencias",competencias);
+		model.addAttribute("avaliacao",avaliacao);
 
 		return "candidato/aprovar-candidato";
 	}
@@ -272,9 +278,9 @@ public class CandidatoController<PaginarCandidato> {
 
 	@RequestMapping(value = { "alterar-status-candidato" }, method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
-	public @ResponseBody SituacaoCandidatoBean alterarStatusCandidato(Model model,
+	public @ResponseBody String alterarStatusCandidato(Model model,
 			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato) {
 		candidatoBusiness.alterarStatus(situacaoCandidato);
-		return situacaoCandidato;
+		return "candidato/aprovar";
 	}
 }
