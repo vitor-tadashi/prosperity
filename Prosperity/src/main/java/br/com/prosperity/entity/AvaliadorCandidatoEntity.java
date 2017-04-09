@@ -2,6 +2,7 @@ package br.com.prosperity.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,15 +26,15 @@ public class AvaliadorCandidatoEntity {
 	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
 
-	@OneToOne
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idCandidato")
 	private CandidatoEntity candidato;
 
-	@OneToOne
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idVaga")
 	private VagaEntity vaga;
 
-	@OneToOne
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
 

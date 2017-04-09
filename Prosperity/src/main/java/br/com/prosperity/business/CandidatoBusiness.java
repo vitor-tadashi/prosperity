@@ -398,8 +398,7 @@ public class CandidatoBusiness {
 	@Transactional
 	public List<CandidatoBean> listarAprovacao() {
 		List<Integer> listaStatus = obterStatusDisponivelAprovacao();
-//		List<AvaliadorCandidatoEntity> listaAvaliadorCandidato = avaliadorCandidatoDAO.findByNamedQuery("obterProposta", );
-		List<CandidatoEntity> entities = candidatoDAO.findByNamedQuery("aprovacao", listaStatus,usuarioBean.getId());
+		List<CandidatoEntity> entities = candidatoDAO.findByNamedQuery("listarAprovacoes", listaStatus, StatusCandidatoEnum.CANDIDATOEMANALISE.getValue(), usuarioBean.getId());
 		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(entities);
 
 		return beans;
@@ -412,7 +411,6 @@ public class CandidatoBusiness {
 	private List<Integer> obterStatusDisponivelAprovacao() {
 		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
 		List<Integer> listaStatus = new ArrayList<Integer>();
-		listaStatus.add(StatusCandidatoEnum.CANDIDATOEMANALISE.getValue());
 
 		for (FuncionalidadeBean funcionalidadeBean : usuarioBean.getPerfil().getListaFuncionalidades()) {
 			if (funcionalidadeBean.getId() == 27) 
