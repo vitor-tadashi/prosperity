@@ -15,9 +15,10 @@ import javax.persistence.Table;
 @Table(name = "tbAvaliadorVaga")
 @NamedQueries({ 
 @NamedQuery(name = "obterAvaliadores", query = "SELECT u FROM AvaliadorVagaEntity u "),
-@NamedQuery(name = "obterAvaliadoresDaVaga", query = "SELECT u FROM AvaliadorVagaEntity u WHERE u.vaga = ?1")
+@NamedQuery(name = "obterAvaliadoresDaVaga", query = "SELECT u FROM AvaliadorVagaEntity u WHERE u.vaga.id = ?1")
 })
 public class AvaliadorVagaEntity {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idAvaliadorVaga", unique = true, nullable = false)

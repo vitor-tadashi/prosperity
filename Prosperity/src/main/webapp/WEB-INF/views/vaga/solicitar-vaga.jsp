@@ -28,15 +28,22 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">Informações da vaga</div>
 					<div class="panel-body">
+								
 						<form class="form-border" id="formCadastro2" action="/vaga/salvar"
 							method="POST" >
 							<input id="vagaIdVar" name="id" type="hidden" value="${vaga.id}">
 							<div id="textDiv">
+								
 							<input class ="hidden" value="${erro}" id="contErro">
 								<c:forEach var="erro" items="${listaErros}">
 									<p>${erro}</p>
 								</c:forEach>
+								
 							</div>
+							
+							<div id="textDiv1"></div>
+								<div id="textDiv2"></div>
+								<div id="textDiv3"></div>
 
 							<div class="panel-tab clearfix">
 								<ul class="tab-bar wizard-demo" id="wizardDemo">
@@ -72,10 +79,11 @@
 												<label class="control-label" for="dataInicio">Data
 													para início</label>
 												<div class="input-group">
+												<fmt:formatDate value="${vaga.dataInicio}"
+													pattern="dd/MM/yyyy" var="dataInicio"/>
 													<input id="dataInicio" name="dataInicio" type="text"
-														class="datepicker form-control" data-required="true"
-														value="${vaga.dataInicio}" style="height:30px"> <span
-														class="input-group-addon"><i class="fa fa-calendar"></i></span>
+														class="form-control date parsley-validated" data-required="true"
+														value="${vaga.dataInicio}" style="height:30px" onblur="validarData(this.value)"> 
 												</div>
 											</div>
 											<!-- /form-group -->
@@ -110,7 +118,7 @@
 										<div class="row">
 											<div class="form-group col-md-6" style="padding-top:0px">
 												<label for="cmbCargo">Cargo</label> <select
-													class="form-control chzn-select" id="cmbCargo"
+													class="form-control" id="cmbCargo"
 													name="cargoBean.id" value="${cargoBean.id}">
 
 													<option value="0">Selecione o cargo</option>
@@ -149,7 +157,7 @@
 											<div class="form-group col-md-6" style="padding-top:0px">
 												<label for="cmbSenioridade">Senioridade da vaga</label> <select
 													id="cmbSenioridade" name="senioridadeBean.id"
-													class="form-control chzn-select">
+													class="form-control">
 
 													<option value="0">Selecione a senioridade</option>
 
@@ -228,7 +236,7 @@
 											<div class="form-group col-md-12">
 												<label for="exampleInputEmail1">Nome do projeto</label> <select
 													id="cmbProjetoInterno" name="projeto.id"
-													class="form-control chzn-select">
+													class="form-control">
 
 													<option value="0">Selecione o projeto</option>
 
@@ -244,12 +252,12 @@
 											<div class="form-group col-md-6" style="padding-top:0px">
 												<label for="exampleInputEmail1">Cliente</label> 
 												<input type="text" class="form-control input-sm" id="textCliente"
-													placeholder="Cliente" data-required="false" disabled="disabled" onblur="cliente">
+													placeholder="Cliente" name="Cliente" id="Cliente" data-required="false" disabled="disabled" onblur="cliente">
 											</div>
 											<!-- /form-group -->
 											<div class="form-group col-md-6" style="padding-top:0px">
 												<label for="exampleInputEmail1">Gestor imediato</label> 
-												<select id="cmbGestorInterno" name="usuarioBean.id" class="form-control chzn-select">
+												<select id="cmbGestorInterno" name="usuarioBean.id" class="form-control">
 												
 													<option value="0">Selecione o gestor</option>
 
@@ -356,6 +364,11 @@
 					
 											<select multiple="multiple" name="avaliadores" id="selectedBox2" class="select-box pull-right form-control">
 												
+												 <c:forEach var="avaliador" items="${avaliadorVagaBean}" varStatus="i">
+													<option value="${avaliador.usuario.id}"
+													<%-- ${vaga.id == avaliadorVagaBean.vaga.id && usuario.id == avaliadorVagaBean.usuario.id ? 'selected="selected"' : ''} --%> >${avaliador.usuario.nome}</option>
+												</c:forEach> 
+												
 											</select>		
 										</div>
 									</div>
@@ -390,6 +403,89 @@
 				$('#textDiv').addClass("alert alert-danger text-center");
 			}
 		})
+		
+		$(document).ready(function() {
+			$('.cpf').mask('999.999.999-99', {
+				reverse : true
+			});
+			$('.telefone').mask('(99) 99999-9999');
+			$('#rg').mask('99.999.999-9');
+			$("#cep").mask("99999-999");
+			$('.date').mask('99/99/9999');
+
+		})
+	</script>
+	
+	<script type="text/javascript">
+		function validarData(id) {
+			
+			var campo = $('#dataInicio').val();			
+			
+			 if (campo!="")
+			{
+			        erro=0;
+			        hoje = new Date();
+			        anoAtual = hoje.getFullYear();
+			        barras = campo.split("/");
+			        if (barras.length == 3)
+			        {
+			                dia = barras[0];
+			                mes = barras[1];
+			                ano = barras[2];
+			                resultado = (!isNaN(dia) && (dia > 0) && (dia < 32)) && (!isNaN(mes) && (mes > 0) && (mes < 13)) && (!isNaN(ano) && (ano.length == 4) && (ano >= anoAtual && ano >= 1900));
+			                if (!resultado)
+			                {
+			                	var div = document.getElementById("textDiv2").className = "alert alert-danger";
+
+			    				textDiv2.textContent = "Data Inicio inválida";
+
+			    				var text = "[" + div.textContent + "]";
+			                        campo.focus();
+			                        return false;
+			                }
+			         }
+			         else
+			         {
+			        		var div = document.getElementById("textDiv").className = "";
+
+			    			textDiv2.textContent = "Data Inicio inválida";
+
+			    			var text = "[" + div.textContent + "]";
+			                
+			                return false;
+			         }
+			        var div = document.getElementById("textDiv2").className = "";
+
+	    			textDiv2.textContent = "";
+
+	    			var text = "[" + div.textContent + "]";
+	                
+			return true;
+			
+			}
+		}
+			
+
+	</script>
+
+	<script>
+		var elements1 = $("#selectedBox1 option").each(function()
+				{
+				    $(this).val();
+				});
+		var elements2 = $("#selectedBox2 option").each(function()
+				{
+				    $(this).val();
+				});
+		for(var i = 0 ; i<elements1.length;i++){
+			for (var j=0;j<elements2.length;j++) {
+				if (elements1[i].value == elements2[j].value){
+					elements1[i].remove();
+				}
+			}
+		}
+		
+		//usuario.id != avaliadorVagaBean.usuario.id
 	</script>
 
 </body>
