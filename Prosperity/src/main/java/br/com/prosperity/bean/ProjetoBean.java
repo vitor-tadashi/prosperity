@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProjetoBean {
 
-	@Min(value = 1, message = "Projeto Inválido")
+	@Min(value = 1, message = "O campo Nome do projeto deve ser preenchido")
 	private Integer id;
 
 	private String nome;

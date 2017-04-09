@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -70,9 +68,9 @@ public class CandidatoBean<AvaliadorBean>  extends FormatUtil {
 	private Double pretensaoPara;
 	private int paginationContext;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataAberturaDe;
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date dataAberturaPara;
 
 	private List<AvaliadorBean> avaliadores;
