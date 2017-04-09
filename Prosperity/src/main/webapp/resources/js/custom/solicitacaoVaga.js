@@ -111,10 +111,11 @@ $(function() {
     		data: {avaliadores : result},
     		success: function(data){
     			console.log(data);
-    			$("#formCadastro2").submit();
+   			
     			
     		}
     	});
+    	$("#formCadastro2").submit();
 	});
 	
 	function enviarAvaliadores(){

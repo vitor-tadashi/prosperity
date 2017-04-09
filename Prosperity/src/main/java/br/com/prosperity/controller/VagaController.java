@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
+import br.com.prosperity.bean.AvaliadorVagaBean;
 import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.ProjetoBean;
 import br.com.prosperity.bean.SenioridadeBean;
@@ -69,6 +70,9 @@ public class VagaController {
 
 	@Autowired
 	private List<UsuarioBean> usuarios;
+	
+	@Autowired
+	private List<UsuarioBean> avaliadoresB;
 
 	@Autowired
 	private CargoBusiness cargoBusiness;
@@ -200,8 +204,12 @@ public class VagaController {
 		VagaBean vaga = null;
 		vaga = vagaBusiness.obterVagaPorId(id);
 
+		List<AvaliadorVagaBean> avaliadorVagaBean = null;
+		avaliadorVagaBean = vagaBusiness.obterAvaliadores(id);
+		
 		obterDominiosVaga(model);
 		model.addAttribute("vaga", vaga);
+		model.addAttribute("avaliadorVagaBean", avaliadorVagaBean);
 
 		return "vaga/solicitar-vaga";
 	}
@@ -222,7 +230,7 @@ public class VagaController {
 			return "vaga/solicitar-vaga";
 		}
 		
-		vagaBusiness.inserir(vagaBean,usuarios);
+		vagaBusiness.inserir(vagaBean,avaliadoresB);
 		System.out.println("\n\n\nCadastrado\n\n\n");
 		return "redirect:solicitar";
 
@@ -232,11 +240,13 @@ public class VagaController {
 	public @ResponseBody String recebeAvaliadores(@ModelAttribute("avaliadores") String avaliadores){
 		
 		List<String> resultado = new Gson().fromJson(avaliadores, List.class);
-		
+			
 		for(String dados : resultado){
-			usuarios.get(0).setId(Integer.parseInt(dados));
+			UsuarioBean avaliador = new UsuarioBean();
+			avaliador.setId(Integer.parseInt(dados));
+			avaliadoresB.add(avaliador);
 		}
-	    
+		avaliadoresB.remove(0);
 		return "ok";
 		
 	}

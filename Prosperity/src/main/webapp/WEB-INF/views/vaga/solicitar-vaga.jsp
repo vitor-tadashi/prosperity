@@ -364,10 +364,10 @@
 					
 											<select multiple="multiple" name="avaliadores" id="selectedBox2" class="select-box pull-right form-control">
 												
-												<%-- <c:forEach var="usuario" items="${usuarios}" varStatus="i">
+												 <c:forEach var="usuario" items="${usuarios}" varStatus="i">
 													<option value="${usuario.id}"
-													${usuario.id == vaga.usuarioBean.id ? 'selected="selected"' : ''}>${usuario.nome}</option>
-												</c:forEach> --%>
+													${(vaga.id == avaliadorVagaBean.vaga.id && usuario.id == avaliadorVagaBean.usuario.id) ? 'selected="selected"' : ''}>${usuario.nome}</option>
+												</c:forEach>
 												
 											</select>		
 										</div>
@@ -432,7 +432,7 @@
 			                dia = barras[0];
 			                mes = barras[1];
 			                ano = barras[2];
-			                resultado = (!isNaN(dia) && (dia > 0) && (dia < 32)) && (!isNaN(mes) && (mes > 0) && (mes < 13)) && (!isNaN(ano) && (ano.length == 4) && (ano <= anoAtual && ano >= 1900));
+			                resultado = (!isNaN(dia) && (dia > 0) && (dia < 32)) && (!isNaN(mes) && (mes > 0) && (mes < 13)) && (!isNaN(ano) && (ano.length == 4) && (ano >= anoAtual && ano >= 1900));
 			                if (!resultado)
 			                {
 			                	var div = document.getElementById("textDiv2").className = "alert alert-danger";

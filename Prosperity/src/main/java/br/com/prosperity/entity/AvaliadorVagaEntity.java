@@ -18,6 +18,7 @@ import javax.persistence.Table;
 @NamedQuery(name = "obterAvaliadoresDaVaga", query = "SELECT u FROM AvaliadorVagaEntity u WHERE u.vaga = ?1")
 })
 public class AvaliadorVagaEntity {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idAvaliadorVaga", unique = true, nullable = false)
