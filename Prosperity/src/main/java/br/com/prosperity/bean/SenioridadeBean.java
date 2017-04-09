@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SenioridadeBean {
 
-	@Min(value = 1, message = "Senioridade Inválido")
+	@Min(value = 1, message = "O campo Senioridade da vaga deve ser preenchido")
 	private Integer id;
 
 	private String nome;

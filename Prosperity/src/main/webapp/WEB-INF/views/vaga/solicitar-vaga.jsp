@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -19,7 +19,8 @@
 			<ul class="breadcrumb">
 				<li><i class="fa fa-home"></i><a href="dashboard.html">
 						Início</a></li>
-				<li class="active">Solicitação de vaga</li>
+				<li class="active">Vaga</li>
+				<li class="active">Solicitar</li>
 			</ul>
 		</div>
 		<!--breadcrumb-->
@@ -78,12 +79,12 @@
 											<div class="form-group col-md-6" style="padding-top:0px">
 												<label class="control-label" for="dataInicio">Data
 													para início</label>
-												<div class="input-group">
-												<fmt:formatDate value="${vaga.dataInicio}"
+												<div class="input-sm-group">
+												 <fmt:formatDate value="${vaga.dataInicio}"
 													pattern="dd/MM/yyyy" var="dataInicio"/>
 													<input id="dataInicio" name="dataInicio" type="text"
 														class="form-control date parsley-validated" data-required="true"
-														value="${vaga.dataInicio}" style="height:30px" onblur="validarData(this.value)"> 
+														value="${dataInicio}" style="height:30px" onblur="validarData(this.value)"> 
 												</div>
 											</div>
 											<!-- /form-group -->
@@ -199,7 +200,7 @@
 										<div class="row">
 											<div class="form-group col-md-6" style="padding-top:0px">
 												<label for="txtPropostaSalarial">Proposta salarial</label> <input
-													id="txtPropostaSalarial" name="valorPretensao" type="text"
+													id="txtPropostaSalarial" name="valorPretensao" type="number"
 													class="form-control input-sm" placeholder="R$"
 													value="${vaga.valorPretensao}" style="height:30px">
 											</div>
@@ -252,7 +253,7 @@
 											<div class="form-group col-md-6" style="padding-top:0px">
 												<label for="exampleInputEmail1">Cliente</label> 
 												<input type="text" class="form-control input-sm" id="textCliente"
-													placeholder="Cliente" name="Cliente" id="Cliente" data-required="false" disabled="disabled" onblur="cliente">
+													placeholder="Cliente" name="Cliente" value="${vaga.projeto.cliente.nome}" id="Cliente" data-required="false" disabled="disabled" onblur="cliente">
 											</div>
 											<!-- /form-group -->
 											<div class="form-group col-md-6" style="padding-top:0px">
@@ -301,7 +302,7 @@
 									
 									<div class="tab-pane fade" id="third">
 										<section class="panel panel-default">
-											<div class="panel-heading">Formação acadêmica</div>
+											<div class="panel-heading"><label>Formação acadêmica</label></div>
 											<div class="panel-body relative">
 												<textarea class="form-control"
 													name="descricaoFormacaoAcademica" rows="5"
@@ -310,7 +311,7 @@
 										</section>
 										<!-- /panel -->
 										<section class="panel panel-default">
-											<div class="panel-heading">Perfil comportamental</div>
+											<div class="panel-heading"><label>Perfil comportamental</label></div>
 											<div class="panel-body relative">
 												<textarea class="form-control"
 													name="descricaoPerfilComportamental" rows="5"
@@ -319,7 +320,7 @@
 										</section>
 										<!-- /panel -->
 										<section class="panel panel-default">
-											<div class="panel-heading">Perfil técnico</div>
+											<div class="panel-heading"><label>Perfil técnico</label></div>
 											<div class="panel-body relative">
 												<textarea class="form-control" name="descricaoPerfilTecnico"
 													value="${vaga.descricaoPerfilTecnico}" rows="5">${vaga.descricaoPerfilTecnico}</textarea>
@@ -333,7 +334,7 @@
 									<div class="panel panel-default">
 									
 										<div class="panel-heading">
-											Avaliadores
+											<label>Avaliadores</label>
 										</div>
 										
 										<div class="panel-body relative">
@@ -400,7 +401,7 @@
 	<script>
 		$(document).ready(function() {
 			if ($("input#contErro").val() > 0) {
-				$('#textDiv').addClass("alert alert-danger text-center");
+				$('#textDiv').addClass("alert alert-danger");
 			}
 		})
 		
@@ -412,7 +413,6 @@
 			$('#rg').mask('99.999.999-9');
 			$("#cep").mask("99999-999");
 			$('.date').mask('99/99/9999');
-
 		})
 	</script>
 	
@@ -428,6 +428,7 @@
 			        anoAtual = hoje.getFullYear();
 			        barras = campo.split("/");
 			        if (barras.length == 3)
+			        	
 			        {
 			                dia = barras[0];
 			                mes = barras[1];
@@ -437,7 +438,7 @@
 			                {
 			                	var div = document.getElementById("textDiv2").className = "alert alert-danger";
 
-			    				textDiv2.textContent = "Data Inicio inválida";
+			    				textDiv2.textContent = "Campo Data para inicio tem que estar no futuro";
 
 			    				var text = "[" + div.textContent + "]";
 			                        campo.focus();
@@ -448,7 +449,7 @@
 			         {
 			        		var div = document.getElementById("textDiv").className = "";
 
-			    			textDiv2.textContent = "Data Inicio inválida";
+			    			textDiv2.textContent = "Campo Data para inicio inválido";
 
 			    			var text = "[" + div.textContent + "]";
 			                
