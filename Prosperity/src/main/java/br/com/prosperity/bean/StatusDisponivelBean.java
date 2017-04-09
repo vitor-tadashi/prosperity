@@ -7,6 +7,15 @@ public class StatusDisponivelBean {
 
 	private Integer id;
 	private String nome;
+	private String classe;
+
+	public String getClasse() {
+		return classe;
+	}
+
+	public void setClasse(String classe) {
+		this.classe = classe;
+	}
 
 	public Integer getId() {
 		return id;

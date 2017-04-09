@@ -8,13 +8,24 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tbStatusDisponivel")
 public class StatusDisponivelEntity {
-	
+
 	@Id
-	@Column(name="idStatusDisponivel")
+	@Column(name = "idStatusDisponivel")
 	private Integer id;
-	
+
 	@Column(name = "nmOpcao")
 	private String nome;
+
+	public String getClasse() {
+		return classe;
+	}
+
+	public void setClasse(String classe) {
+		this.classe = classe;
+	}
+
+	@Column(name = "nmClasse")
+	private String classe;
 
 	public Integer getId() {
 		return id;
