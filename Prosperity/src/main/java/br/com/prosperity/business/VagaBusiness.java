@@ -244,7 +244,7 @@ public class VagaBusiness {
 	
 	@Transactional(readOnly=true)
 	public List<AvaliadorVagaBean> obterAvaliadores (Integer id){
-		List<AvaliadorVagaEntity> avaliadorVagaEntity = avaliadorVagaDao.findByNamedQuery("obterAvaliadores");
+		List<AvaliadorVagaEntity> avaliadorVagaEntity = avaliadorVagaDao.findByNamedQuery("obterAvaliadoresDaVaga",id);
 		avaliadorVagaBean = avaliadorVagaConverter.convertEntityToBean(avaliadorVagaEntity);
 		return avaliadorVagaBean;
 	}

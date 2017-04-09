@@ -118,7 +118,7 @@
 										<div class="row">
 											<div class="form-group col-md-6" style="padding-top:0px">
 												<label for="cmbCargo">Cargo</label> <select
-													class="form-control chzn-select" id="cmbCargo"
+													class="form-control" id="cmbCargo"
 													name="cargoBean.id" value="${cargoBean.id}">
 
 													<option value="0">Selecione o cargo</option>
@@ -157,7 +157,7 @@
 											<div class="form-group col-md-6" style="padding-top:0px">
 												<label for="cmbSenioridade">Senioridade da vaga</label> <select
 													id="cmbSenioridade" name="senioridadeBean.id"
-													class="form-control chzn-select">
+													class="form-control">
 
 													<option value="0">Selecione a senioridade</option>
 
@@ -236,7 +236,7 @@
 											<div class="form-group col-md-12">
 												<label for="exampleInputEmail1">Nome do projeto</label> <select
 													id="cmbProjetoInterno" name="projeto.id"
-													class="form-control chzn-select">
+													class="form-control">
 
 													<option value="0">Selecione o projeto</option>
 
@@ -257,7 +257,7 @@
 											<!-- /form-group -->
 											<div class="form-group col-md-6" style="padding-top:0px">
 												<label for="exampleInputEmail1">Gestor imediato</label> 
-												<select id="cmbGestorInterno" name="usuarioBean.id" class="form-control chzn-select">
+												<select id="cmbGestorInterno" name="usuarioBean.id" class="form-control">
 												
 													<option value="0">Selecione o gestor</option>
 
@@ -364,10 +364,10 @@
 					
 											<select multiple="multiple" name="avaliadores" id="selectedBox2" class="select-box pull-right form-control">
 												
-												 <c:forEach var="usuario" items="${usuarios}" varStatus="i">
-													<option value="${usuario.id}"
-													${(vaga.id == avaliadorVagaBean.vaga.id && usuario.id == avaliadorVagaBean.usuario.id) ? 'selected="selected"' : ''}>${usuario.nome}</option>
-												</c:forEach>
+												 <c:forEach var="avaliador" items="${avaliadorVagaBean}" varStatus="i">
+													<option value="${avaliador.usuario.id}"
+													<%-- ${vaga.id == avaliadorVagaBean.vaga.id && usuario.id == avaliadorVagaBean.usuario.id ? 'selected="selected"' : ''} --%> >${avaliador.usuario.nome}</option>
+												</c:forEach> 
 												
 											</select>		
 										</div>
@@ -466,6 +466,26 @@
 		}
 			
 
+	</script>
+
+	<script>
+		var elements1 = $("#selectedBox1 option").each(function()
+				{
+				    $(this).val();
+				});
+		var elements2 = $("#selectedBox2 option").each(function()
+				{
+				    $(this).val();
+				});
+		for(var i = 0 ; i<elements1.length;i++){
+			for (var j=0;j<elements2.length;j++) {
+				if (elements1[i].value == elements2[j].value){
+					elements1[i].remove();
+				}
+			}
+		}
+		
+		//usuario.id != avaliadorVagaBean.usuario.id
 	</script>
 
 </body>
