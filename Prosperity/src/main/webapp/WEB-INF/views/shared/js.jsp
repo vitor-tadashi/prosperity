@@ -7,6 +7,7 @@
 
 <!-- Bootstrap -->
 <script src="/resources/bootstrap/js/bootstrap.min.js"></script>
+<script src="/resources/bootstrap/js/dataTables.bootstrap.min.js"></script>
 
 <!-- Chosen -->
 <script src='/resources/js/chosen.jquery.min.js'></script>
