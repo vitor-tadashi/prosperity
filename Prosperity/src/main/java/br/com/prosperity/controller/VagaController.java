@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,11 +14,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+
+import br.com.prosperity.bean.AvaliadorVagaBean;
 import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.ProjetoBean;
 import br.com.prosperity.bean.SenioridadeBean;
@@ -66,6 +70,9 @@ public class VagaController {
 
 	@Autowired
 	private List<UsuarioBean> usuarios;
+	
+	@Autowired
+	private List<UsuarioBean> avaliadoresB;
 
 	@Autowired
 	private CargoBusiness cargoBusiness;
@@ -182,8 +189,8 @@ public class VagaController {
 	private void obterDominiosVaga(Model model) {
 		senioridades = preencherSenioridade.obterTodos();
 		cargos = preencherCargo.obterTodos();
-		projetos = preencherProjeto.obterTodos();
-		usuarios = preencherUsuario.findAll();
+		projetos = preencherProjeto.buscarProjetoAtivo();
+		usuarios = preencherUsuario.buscarUsuarioAtivo();
 
 		model.addAttribute("senioridades", senioridades);
 		model.addAttribute("cargos", cargos);
@@ -197,8 +204,12 @@ public class VagaController {
 		VagaBean vaga = null;
 		vaga = vagaBusiness.obterVagaPorId(id);
 
+		List<AvaliadorVagaBean> avaliadorVagaBean = null;
+		avaliadorVagaBean = vagaBusiness.obterAvaliadores(id);
+		
 		obterDominiosVaga(model);
 		model.addAttribute("vaga", vaga);
+		model.addAttribute("avaliadorVagaBean", avaliadorVagaBean);
 
 		return "vaga/solicitar-vaga";
 	}
@@ -210,7 +221,7 @@ public class VagaController {
 
 	@RequestMapping(value = "/salvar", method = RequestMethod.POST)
 	public String inserirVaga(@ModelAttribute("vagaBean") @Valid VagaBean vagaBean, BindingResult result, Model model) {
-
+		
 		if (result.hasErrors()) {
 			model.addAttribute("erro", result.getErrorCount());
 			model.addAttribute("listaErros", buildErrorMessage(result.getFieldErrors()));
@@ -219,20 +230,23 @@ public class VagaController {
 			return "vaga/solicitar-vaga";
 		}
 		
-		vagaBusiness.inserir(vagaBean,usuarios);
+		vagaBusiness.inserir(vagaBean,avaliadoresB);
 		System.out.println("\n\n\nCadastrado\n\n\n");
 		return "redirect:solicitar";
 
 	}
 	
 	@RequestMapping(value = "/avaliadores", method = RequestMethod.POST)
-	@ResponseBody
-	public String recebeAvaliadores(List<Integer> avaliadores){
+	public @ResponseBody String recebeAvaliadores(@ModelAttribute("avaliadores") String avaliadores){
 		
-		for(Integer dados:avaliadores){
-			usuarios.get(0).setId(dados);
+		List<String> resultado = new Gson().fromJson(avaliadores, List.class);
+			
+		for(String dados : resultado){
+			UsuarioBean avaliador = new UsuarioBean();
+			avaliador.setId(Integer.parseInt(dados));
+			avaliadoresB.add(avaliador);
 		}
-	    
+		avaliadoresB.remove(0);
 		return "ok";
 		
 	}

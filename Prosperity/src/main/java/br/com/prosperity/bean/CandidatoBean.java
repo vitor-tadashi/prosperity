@@ -68,9 +68,9 @@ public class CandidatoBean<AvaliadorBean>  extends FormatUtil {
 	private Double pretensaoPara;
 	private int paginationContext;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataAberturaDe;
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date dataAberturaPara;
 
 	private List<AvaliadorBean> avaliadores;

@@ -14,9 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.prosperity.bean.AvaliadorVagaBean;
 import br.com.prosperity.bean.SituacaoVagaBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
+import br.com.prosperity.converter.AvaliadorVagaConverter;
 import br.com.prosperity.converter.UsuarioConverter;
 import br.com.prosperity.converter.VagaConverter;
 import br.com.prosperity.dao.AvaliadorVagaDAO;
@@ -71,6 +73,15 @@ public class VagaBusiness {
 	
 	@Autowired
 	private List<VagaBean> vagaBean;
+	
+	@Autowired
+	private List<AvaliadorVagaBean> avaliadorVagaBean;
+	
+	@Autowired
+	private AvaliadorVagaDAO avaliadorVagaDao;
+	
+	@Autowired
+	private AvaliadorVagaConverter avaliadorVagaConverter;
 
 	@Transactional(readOnly = true)
 	public List<VagaBean> listar() {
@@ -90,7 +101,7 @@ public class VagaBusiness {
 	@Transactional
 	public List<VagaBean> listarVagaAprovar() {
 
-		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagaAprovar", 4, true); // PENSAR
+		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagaAprovar", 4,1, true); // PENSAR
 		int aux = 0;
 		for(VagaEntity vaga: vagaEntity)
 		{
@@ -143,14 +154,13 @@ public class VagaBusiness {
 	}
 
 	@Transactional
-	public void inserir(VagaBean vagaBean, List<UsuarioBean> usuarioBean /*, HttpSession session */) {
+	public void inserir(VagaBean vagaBean, List<UsuarioBean> usuarioBean) {
 
 		VagaEntity vagaEntity = vagaConverter.convertBeanToEntity(vagaBean);
 
 		if (vagaEntity.getId() == null) {
 			Date dateNow = new Date();
 			vagaEntity.setDataAbertura(dateNow);
-			// vagaBean.setUsuarioBean(usuario);
 			vagaDAO.insert(vagaEntity);
 			situacaoVaga.setIdVaga(vagaEntity.getId());
 			situacaoVaga.setStatus(StatusVagaEnum.PENDENTE);
@@ -216,6 +226,7 @@ public class VagaBusiness {
 		return dataAntiga;
 	}
 
+	@Transactional
 	private void inserirAvaliadores(VagaEntity vaga, List<UsuarioBean> usuarios) {
 		for (UsuarioBean usuario : usuarios) {
             AvaliadorVagaEntity avaliadorVagaEntity = new AvaliadorVagaEntity();
@@ -230,5 +241,12 @@ public class VagaBusiness {
 		List<VagaEntity> vagaEntity = vagaDAO.findAll();
 		vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 		return vagaBean;
+	}
+	
+	@Transactional(readOnly=true)
+	public List<AvaliadorVagaBean> obterAvaliadores (Integer id){
+		List<AvaliadorVagaEntity> avaliadorVagaEntity = avaliadorVagaDao.findByNamedQuery("obterAvaliadoresDaVaga",id);
+		avaliadorVagaBean = avaliadorVagaConverter.convertEntityToBean(avaliadorVagaEntity);
+		return avaliadorVagaBean;
 	}
 }

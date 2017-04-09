@@ -13,6 +13,7 @@ public class ProjetoBean {
 	private String nome;
 	private FuncionarioBean funcionario;
 	private ClienteBean cliente;
+	private Boolean ativo;
 
 	public Integer getId() {
 		return id;
@@ -44,6 +45,14 @@ public class ProjetoBean {
 
 	public void setCliente(ClienteBean cliente) {
 		this.cliente = cliente;
+	}
+	
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 }
