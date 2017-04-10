@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import br.com.prosperity.bean.AvaliacaoBean;
 import br.com.prosperity.bean.CanalInformacaoBean;
 import br.com.prosperity.bean.CandidatoBean;
+import br.com.prosperity.bean.CandidatoCompetenciaBean;
 import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.CompetenciaBean;
 import br.com.prosperity.bean.FuncionarioBean;
