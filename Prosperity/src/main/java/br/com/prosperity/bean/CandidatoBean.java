@@ -50,7 +50,6 @@ public class CandidatoBean<AvaliadorBean>  extends FormatUtil {
 	private UsuarioBean usuario;
 	private List<StatusCandidatoBean> status = new ArrayList<>();
 	private Set<VagaCandidatoBean> vagas = new HashSet<>();
-	
 	private List<CandidatoCompetenciaBean> competencias = new ArrayList<>();
 	private Map<String, List<StatusCandidatoBean>> statusPorMesAno;
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
@@ -74,12 +73,12 @@ public class CandidatoBean<AvaliadorBean>  extends FormatUtil {
 	private Date dataAberturaPara;
 
 	private List<AvaliadorBean> avaliadores;
+	private VagaBean vagaBean;
 
 	public VagaCandidatoBean getVagaCandidato() {
 		if (vagaCandidato == null) {
 			getUltimaVaga();
 		}
-		
 		return vagaCandidato;
 	}
 
@@ -345,7 +344,13 @@ public class CandidatoBean<AvaliadorBean>  extends FormatUtil {
 	public void setAvaliadores(List<AvaliadorBean> avaliadores) {
 		this.avaliadores = avaliadores;
 	}
+	public VagaBean getVagaBean() {
+		return vagaBean;
+	}
 
+	public void setVagaBean(VagaBean vagaBean) {
+		this.vagaBean = vagaBean;
+	}
 	public String getCurriculoTexto() {
 		return curriculoTexto;
 	}

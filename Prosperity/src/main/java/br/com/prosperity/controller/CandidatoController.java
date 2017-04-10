@@ -207,9 +207,12 @@ public class CandidatoController<PaginarCandidato> {
 		return "candidato/consultar-candidato";
 	}
 
+	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "filtrar", method = RequestMethod.GET)
 	public String filtrarCandidatoRH(Model model, CandidatoBean candidato) {
-		
+		if(candidato.getVagaBean().getId() == 0){
+			candidato.setVagaBean(null);
+		}
 
 		List<CandidatoBean> candidatos = candidatoBusiness.filtroCandidato(candidato);
 		model.addAttribute("candidatos", candidatos);
@@ -225,6 +228,9 @@ public class CandidatoController<PaginarCandidato> {
 
 		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.findAll();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
+		
+		List<VagaBean> listaVagaDrop = vagaBusiness.obterTodos();
+		model.addAttribute("listaVagaDrop", listaVagaDrop);
 
 		// avaliadorBusiness.listar();
 

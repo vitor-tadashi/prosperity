@@ -192,15 +192,24 @@ public class CandidatoBusiness {
 		 * Integer.parseInt(vaga.getStatus().get(0).getStatus().getNome()); }
 		 */
 		///////////////////////////////
-
-		Integer idVaga = 0;
-		if (!candidato.getUltimaVaga().getNomeVaga().equals("")) {
-			idVaga = Integer.parseInt(candidato.getUltimaVaga().getNomeVaga());
+		Integer idVaga = 0;/*
+		if(candidato.getVagaCandidato().getVaga().getId() != null) {
+			idVaga = candidato.getVagaCandidato().getVaga().getId();
+		}*/
+		
+//		List<CandidatoEntity> candidatos = candidatoDAO.findByNamedQuery("filtrarVaga", idVaga);
+		
+		
+		
+		List<Criterion>criterions = new ArrayList<>();
+		
+		//VagaBean vaga = (VagaBean) candidato.getVagas().iterator().next();
+		
+		if(candidato.getVagaBean() != null){
+			criterions.add(Restrictions.eq("vaga.vaga.id", candidato.getVagaBean().getId()));
 		}
-
-		List<Criterion> criterions = new ArrayList<>();
-
-		if (!candidato.getNome().isEmpty() || candidato.getNome() != null) {
+		
+		if(!candidato.getNome().isEmpty() || candidato.getNome() != null){
 			criterions.add(Restrictions.like("nome", "%" + candidato.getNome() + "%"));
 		}
 
@@ -217,8 +226,9 @@ public class CandidatoBusiness {
 		if (idVaga != 0) {
 			criterions.add(Restrictions.like("ultimaVaga.nomeVaga", "%" + idVaga + "%"));
 		}
+
 		List<CandidatoEntity> candidatos = candidatoDAO.findByCriteria(criterions);
-		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(candidatos);
+ 		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(candidatos);
 		return beans;
 
 	}
