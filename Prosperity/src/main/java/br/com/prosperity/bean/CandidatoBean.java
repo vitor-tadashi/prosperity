@@ -66,7 +66,7 @@ public class CandidatoBean<AvaliadorBean>  extends FormatUtil {
 	private Double pretensaoDe;
 	private Double pretensaoPara;
 	private int paginationContext;
-	
+	private String curriculoTexto;
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataAberturaDe;
 	@DateTimeFormat(pattern="dd/MM/yyyy")
@@ -344,13 +344,19 @@ public class CandidatoBean<AvaliadorBean>  extends FormatUtil {
 	public void setAvaliadores(List<AvaliadorBean> avaliadores) {
 		this.avaliadores = avaliadores;
 	}
-
 	public VagaBean getVagaBean() {
 		return vagaBean;
 	}
 
 	public void setVagaBean(VagaBean vagaBean) {
 		this.vagaBean = vagaBean;
+	}
+	public String getCurriculoTexto() {
+		return curriculoTexto;
+	}
+
+	public void setCurriculoTexto(String curriculoTexto) {
+		this.curriculoTexto = curriculoTexto;
 	}
 
 }
