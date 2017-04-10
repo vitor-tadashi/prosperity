@@ -107,7 +107,7 @@
 													<c:forEach var="avaliacao" items="${avaliacoes}">
 													
 														<td><label class="label-radio inline"> <input
-																class="avaliacaoCompetencia" type="radio" alt="${avaliacao.id}" name="avaliacao${competencia.nome}" value="2">
+																class="avaliacaoCompetencia" type="radio" alt="${avaliacao.id}" name="avaliacao${competencia.nome}" value="${competencia.id}">
 																<span class="custom-radio"></span>
 														</label></td>
 														
@@ -354,13 +354,14 @@
                         
 	                   	 var avaliacoes = [];
 	                   	 
-	                   	 var avaliacaoCompetencia = {
-	                   		"idAvaliacao" : "",
-	                   		"idCompetencia" : ""
-	                   	 };
-	                   	 
 	                 	 $(".avaliacaoCompetencia").each(function(){
 	                      	if($(this).prop("checked")){
+	                      		
+	   	                   	 var avaliacaoCompetencia = {
+	   		                   		"idAvaliacao" : "",
+	   		                   		"idCompetencia" : ""
+	   		                   	 };
+	   	                   	 
 	                      		var idAvaliacao = $(this).attr("alt");
 	                      		var idCompetencia = $(this).val();
 	                      		
@@ -369,9 +370,7 @@
 	                      		
 	                      		avaliacoes.push(avaliacaoCompetencia);
 	                      	}
-	                      }) 
-	                       
-	                    debugger;
+	                      });
 	            		
                         $.ajax({
                               url : "alterar-status-candidato",
@@ -381,8 +380,8 @@
                                    'idCandidato' : $('#hdn-id-candidato').val(),
                                    'parecer' : $('#parecer').val(),
                                    'proposta' : CKEDITOR.instances.editor.getData(),
-                                   'idStatus' : $('#hdn-status').val()
-                                   
+                                   'idStatus' : $('#hdn-status').val(),
+                                   'avaliacoesCompetencias' : avaliacoes     
                               },
                               success : function(data) {
                                    location.reload();
