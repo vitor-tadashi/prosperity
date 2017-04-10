@@ -20,7 +20,7 @@ import br.com.prosperity.util.FormatUtil;
 
 @Component
 @XmlRootElement(name = "CandidatoBean")
-public class CandidatoBean<AvaliadorBean>  extends FormatUtil {
+public class CandidatoBean extends FormatUtil {
 
 	private Integer id;
 
@@ -71,8 +71,6 @@ public class CandidatoBean<AvaliadorBean>  extends FormatUtil {
 	private Date dataAberturaDe;
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date dataAberturaPara;
-
-	private List<AvaliadorBean> avaliadores;
 	private VagaBean vagaBean;
 
 	public VagaCandidatoBean getVagaCandidato() {
@@ -85,10 +83,6 @@ public class CandidatoBean<AvaliadorBean>  extends FormatUtil {
 	public void setVagaCandidato(VagaCandidatoBean vagaCandidato) {
 		this.vagaCandidato = vagaCandidato;
 	}
-
-	
-	
-
 	public Date getDataAberturaDe() {
 		return dataAberturaDe;
 	}
@@ -337,13 +331,6 @@ public class CandidatoBean<AvaliadorBean>  extends FormatUtil {
 		this.valorMax = valorMax;
 	}
 
-	public List<AvaliadorBean> getAvaliadores() {
-		return avaliadores;
-	}
-
-	public void setAvaliadores(List<AvaliadorBean> avaliadores) {
-		this.avaliadores = avaliadores;
-	}
 	public VagaBean getVagaBean() {
 		return vagaBean;
 	}

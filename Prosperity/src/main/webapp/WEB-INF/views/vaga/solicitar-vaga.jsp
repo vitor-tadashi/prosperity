@@ -33,6 +33,7 @@
 						<form class="form-border" id="formCadastro2" action="/vaga/salvar"
 							method="POST" >
 							<input id="vagaIdVar" name="id" type="hidden" value="${vaga.id}">
+							<input id="vagaStatusVar" name="status" type="hidden" value="${vaga.status}">
 							<div id="textDiv">
 								
 							<input class ="hidden" value="${erro}" id="contErro">
@@ -76,7 +77,7 @@
 													placeholder="Nome da Vaga" data-required="true">
 											</div>
 											<!-- /form-group -->
-											<div class="form-group col-md-6" style="padding-top:0px">
+											<div class="form-group col-md-2" style="padding-top:0px">
 												<label class="control-label" for="dataInicio">Data
 													para início</label>
 												<div class="input-sm-group">
