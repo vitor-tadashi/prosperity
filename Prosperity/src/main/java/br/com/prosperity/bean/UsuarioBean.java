@@ -10,7 +10,7 @@ public class UsuarioBean {
 
 	private final String SENHA_PADRAO = "verity@123";
 	
-	@Min(value = 1, message = "Usuario Inválido")
+	@Min(value = 1, message = "O campo Gestor imediato deve ser preenchido")
 	private Integer id;
 	
 	private PerfilBean perfil;

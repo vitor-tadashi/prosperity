@@ -27,21 +27,39 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "tbCandidato")
 @NamedQueries({
-			
-		//@NamedQuery(name = "status", query = "SELECT u FROM CandidatoEntity u LEFT OUTER JOIN u.statusCandidatoEntity p left join p.status s WHERE u.nomecandidato like ?1 and s.id = ?2 and u.dataAbertura between ?3 and ?4"),
+
+		// @NamedQuery(name = "status", query = "SELECT u FROM CandidatoEntity u
+		// LEFT OUTER JOIN u.statusCandidatoEntity p left join p.status s WHERE
+		// u.nomecandidato like ?1 and s.id = ?2 and u.dataAbertura between ?3
+		// and ?4"),
 		@NamedQuery(name = "pesquisarNome", query = "SELECT u FROM CandidatoEntity u WHERE u.nome like ?1 AND u.valorPretensaoSalarial BETWEEN ?2 AND ?3 AND u.dataAbertura BETWEEN ?4 AND ?5"),
 		@NamedQuery(name = "obterPorCPF", query = "SELECT u FROM CandidatoEntity u WHERE u.cpf = ?1"),
 		@NamedQuery(name = "verificarCanidatura", query = "SELECT c FROM CandidatoEntity c JOIN c.statusCandidatos sc WHERE sc.status in(6,7,14)"
 				+ "AND sc.idStatusCandidato = (SELECT MAX(sc.idStatusCandidato) FROM CandidatoEntity c JOIN c.statusCandidatos sc)"),
 		@NamedQuery(name = "obterParaCombo", query = "SELECT v.id, v.nomeVaga FROM VagaEntity v"),
-		@NamedQuery(name = "aprovacao", query = "SELECT c FROM CandidatoEntity c, AvaliadorCandidatoEntity ac INNER JOIN c.statusCandidatos sc "
-				+ "WHERE ac.candidato.id = c.id AND sc.idStatusCandidato = (SELECT max(sc.idStatusCandidato)"
-				+ "FROM CandidatoEntity c JOIN c.statusCandidatos sc WHERE sc.candidato.id = c.id AND sc.status.id IN (?1)) AND ac.status is NULL OR ac.status IN(9,10,11,12,13)"
-				+ "AND ac.usuario.id = ?2"),
+
+		/*
+		 * SELECT * FROM tbCandidato c, tbAvaliadorCandidato ac INNER JOIN
+		 * tbStatusCandidato sc ON sc.idCandidato = ac.idCandidato WHERE
+		 * ac.idCandidato = c.idCandidato AND sc.idStatusCandidato = (SELECT
+		 * max(sc.idStatusCandidato) FROM tbCandidato c JOIN tbStatusCandidato
+		 * sc ON sc.idCandidato = c.idCandidato WHERE sc.idCandidato =
+		 * c.idCandidato AND sc.idStatus IN (6, 10, 9, 5, 11, 13)) AND
+		 * ac.idStatus is NULL OR ac.idStatus IN(9,10,11,12,13) AND ac.idUsuario
+		 * = 14
+		 */
+
+		@NamedQuery(name = "listarAprovacoes", query = "SELECT DISTINCT c FROM CandidatoEntity c "
+				+ "INNER JOIN c.statusCandidatos sc "
+				+ "INNER JOIN c.avaliadores ac "
+				+ "WHERE (sc.idStatusCandidato = (SELECT max(scc.idStatusCandidato) FROM StatusCandidatoEntity scc WHERE scc.candidato.id = c.id)) "
+				+ "AND ((sc.status.id IN (?1) AND ac.status IS NOT NULL) "
+				+ "OR (sc.status.id = ?2 AND ac.status IS NULL and ac.usuario.id = ?3))"),
+		
 		@NamedQuery(name = "proposta", query = "SELECT c FROM CandidatoEntity c, AvaliadorCandidatoEntity ac INNER JOIN c.statusCandidatos sc "
 				+ "WHERE ac.candidato.id = c.id AND sc.idStatusCandidato = (SELECT max(sc.idStatusCandidato)"
 				+ "FROM CandidatoEntity c JOIN c.statusCandidatos sc WHERE sc.candidato.id = c.id AND sc.status.id IN (?1))"
-				+ "AND ac.usuario.id = ?2")})
+				+ "AND ac.usuario.id = ?2") })
 
 public class CandidatoEntity {
 
@@ -123,19 +141,30 @@ public class CandidatoEntity {
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
 
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idCandidato")
 	private List<StatusCandidatoEntity> statusCandidatos;
-	
-	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
 	@JoinColumn(name = "idCandidato")
 	private List<CandidatoCompetenciaEntity> competencias;
 
-	@OneToMany(cascade ={CascadeType.ALL}, fetch = FetchType.EAGER)
-	@JoinColumn(name="idCandidato")
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
+	@JoinColumn(name = "idCandidato")
 	private Set<VagaCandidatoEntity> vagas;
-	
-	
+
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
+	@JoinColumn(name = "idCandidato")
+	private List<AvaliadorCandidatoEntity> avaliadores;
+
+	public List<AvaliadorCandidatoEntity> getAvaliadores() {
+		return avaliadores;
+	}
+
+	public void setAvaliadores(List<AvaliadorCandidatoEntity> avaliadores) {
+		this.avaliadores = avaliadores;
+	}
+
 	public List<StatusCandidatoEntity> getStatusCandidatos() {
 		return statusCandidatos;
 	}
@@ -151,7 +180,6 @@ public class CandidatoEntity {
 	public void setCompetencias(List<CandidatoCompetenciaEntity> competencias) {
 		this.competencias = competencias;
 	}
-
 
 	public Set<VagaCandidatoEntity> getVagas() {
 		return vagas;

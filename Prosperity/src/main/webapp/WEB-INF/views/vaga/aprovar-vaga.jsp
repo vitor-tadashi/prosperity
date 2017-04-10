@@ -179,10 +179,13 @@ footer {
 												<div class="form-group col-md-6 col-xs-6"
 													style="margin-bottom: 0px">
 													<div class="form-group">
+													
 														<label class="control-label"> Data para inicio</label>
 														<div class="form-group">
 															<div class="input-group">
-															<input type="text" value="${vaga.dataInicio}"
+															<fmt:formatDate value="${vaga.dataInicio}"
+																pattern="dd/MM/yyyy" var="dataInicio"/>
+															<input type="date" value="${vaga.dataInicio}" name="dataInicio"
 																	class="datepicker form-control" id="dataInicio"
 																	disabled> <span class="input-group-addon"><i
 																	class="fa fa-calendar"></i></span>
@@ -411,7 +414,7 @@ footer {
 
 					<table
 						class="table table-bordered table-condensed table-hover table-striped"
-						id=""
+						id="tabelaVaga"
 						style="font-size: 12px !important; vertical-align: middle !important;">
 						<!-- Começo Tabela -->
 						<thead>
@@ -458,24 +461,28 @@ footer {
 												<li><a href="#visualizar-modal"
 												onclick="info(${vaga.id})"> <i class="fa fa-eye fa-lg">&nbsp</i>Visualizar
 												</a></li>
-												<li role="separator" class="divider"></li>
+												
+												<c:if test="${vaga.ultimoStatus.status.nome == 'Pendente'}">
+												<li role="separator" class="editarDivider divider"></li>
 												<li><c:url value="editar/${vaga.id}" var="myURL">
-													</c:url> <a href="${myURL}"><i class="fa fa-pencil"></i> Editar</a></li>
+													</c:url> <a href="${myURL}" class="editarPendente"><i class="fa fa-pencil"></i> Editar</a></li>
+												</c:if>
 												
 												<c:if test="${vaga.ultimoStatus.status.nome == 'Pendente'}">
 												    <li id="${vaga.ultimoStatus.status.nome}"role="separator" class="Aprovar divider"></li>
 													<li id="${vaga.ultimoStatus.status.nome}" class="Aprovar">
 													<a href="#aprova-modal"	onclick="alterarStatus(${vaga.id}, 'ACEITO')"
-														data-toggle="modal" ><i class="Aprovar fa fa-thumbs-up"></i> Aprovar</a></li>
+														data-toggle="modal" ><i class="Aprovar fa fa-check"></i> Aprovar</a></li>
 												</c:if>
 												
 												<c:if test="${vaga.ultimoStatus.status.nome == 'Pendente'}">	
 													<li id="${vaga.ultimoStatus.status.nome}"role="separator" class="Reprovar divider"></li>
 													<li id="${vaga.ultimoStatus.status.nome}" class="Reprovar"><a href="#reprova-modal"
 														onclick="alterarStatus(${vaga.id}, 'CANCELADO')"
-														data-toggle="modal" ><i class="Reprovar fa fa-thumbs-down"></i> Reprovar</a></li>
+														data-toggle="modal" ><i class="Reprovar fa  fa-times"></i> Reprovar</a></li>
 												</c:if>
-										
+												
+
 											<c:if test="${vaga.ultimoStatus.status.nome == 'Ativo'}" >
 													<li id="${vaga.ultimoStatus.status.nome}" role="separator" class="cancelarDivider divider"></li>
 													<li id="${vaga.ultimoStatus.status.nome}" >
@@ -487,7 +494,7 @@ footer {
 													<li id="${vaga.ultimoStatus.status.nome}" role="separator" class="fecharDivider divider"></li>
 													<li id="${vaga.ultimoStatus.status.nome}">
 													<a href="#fechar-modal" onclick="alterarStatus(${vaga.id}, 'FECHADO')"
-														data-toggle="modal" class="fecharAtivo" ><i class="Fechar fa fa-times"></i> Fechar</a></li>
+														data-toggle="modal" class="fecharAtivo" ><i class="Fechar fa fa-trash-o"></i> Fechar</a></li>
 												</c:if>
 												
 											</ul>
@@ -514,36 +521,13 @@ footer {
 
 	<script type="text/javascript">
 	
+	// script para cores dos status
 	$(".span-Fechado").addClass("label-warning");
 	$(".span-Ativo").addClass("label-success");
 	$(".span-Cancelado").addClass("label-danger");
 	$(".span-Pendente").addClass("label-info");
 	
-// 	if($(".span-Fechado") || $(".span-Cancelado") || $(".span-Pendente")) {
-// 		$('li#Fechado').hide();
-// 		$('li#Cancelado').hide();
-// //  		$('li#Pendente').hide();
-// 	} 
-	
-// 	if($(".span-Ativo")) {
-// 		$('li#Aprovar').hide();
-// 		$('li#Reprovar').hide();
-// 	}
-	
-// 	if($("li#Ativo") ) {
-// 		$(".Cancelar").hide();
-// 	if($("li#Pendente") ) {
-// 		$(".Cancelar").hide();
-// 		$(".Fechar").hide();
-// 	}
-		
-// 	}
-	
-// 	 if($("li#Ativo") ) {
-// 			$(".Aprovar").removeClass("hide");
-// 			$(".Reprovar").removeClass("hide");
-// 	}
-	
+	// função para mostrar no modal (visualizar) os campos preenchidos
 	function info(listaId){
     	//
     	$.ajax({
@@ -586,7 +570,7 @@ footer {
     			$('input#solicitante').val(lista.nomeSolicitante);
     			$('input#vagaQuadro').val(lista.aumentaQuadro);
     			$('label#vagaSubstituto').text(lista.nomeSubstituido);
-    			$('#dataInicio').val(dataAtualFormatada);
+    			$('input#dataInicio').val(lista.dataInicio);
     			$('input#vagaCiente').val(lista.projeto.cliente.nome);
     			$('input#vagaProjeto').val(lista.projeto.nome);
     			$('#vagaPerfil').val(lista.descricaoPerfilComportamental);
@@ -596,7 +580,8 @@ footer {
     		}
     	})
     } 
-	
+
+	// metodo para a função imprimir
 	document.getElementById("Print").onclick = function () {
 	    printElement(document.getElementById("printThis"));
 	};
@@ -617,6 +602,7 @@ footer {
 	    window.print();
 	}
 	
+	// função para a alteração de status no botão ações
 	function status(){
     	$.ajax({
     		url: "status",
@@ -639,6 +625,7 @@ footer {
 		$('input.cancelar-status').val(status);
 		
 	}
+	// função para formatar a dataInicio dd/MM/yyyy no modal (visualizar)
 	function dataAtualFormatada(){
 	    var data = new Date();
 	    var dia = data.getDate();
@@ -651,6 +638,7 @@ footer {
 	    return dia+"/"+mes+"/"+ano;
 	}
 	
+	// função para o metodo status ativo
 $(function() {
 		
     	var id = $("#idPerfil").val();
@@ -680,6 +668,8 @@ $(function() {
     				if (fechar == 0){
     					$('.fecharAtivo').hide();
    						$('.fecharDivider').hide();
+   						
+   						
     				}
     			}
     		}
@@ -688,5 +678,62 @@ $(function() {
 	
     	
 </script>
+<script>/* paginação */
+	$(function	()	{
+		$('#tabelaVaga').dataTable( {
+			"bJQueryUI": true,
+			"sPaginationType": "simple_numbers",
+			"bFilter": false,
+			"bInfo": false,
+			"bLengthChange": false,
+
+			"oLanguage": {
+				"sEmptyTable": "Nenhum registro encontrado",
+				"sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+				"sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+				"sInfoFiltered": "(Filtrados de _MAX_ registros)",
+				"sInfoPostFix": "",
+				"sInfoThousands": ".",
+				"sLengthMenu": "_MENU_ resultados por página",
+				"sLoadingRecords": "Carregando...",
+				"sProcessing": "Processando...",
+				"sZeroRecords": "Nenhum registro encontrado",
+				"sSearch": "Pesquisar",
+				"oPaginate": {
+					"sNext": "Próximo",
+					"sPrevious": "Anterior",
+					"sFirst": "Primeiro",
+					"sLast": "Último"
+				},
+				"oAria": {
+					"sSortAscending": ": Ordenar colunas de forma ascendente",
+					"sSortDescending": ": Ordenar colunas de forma descendente"
+				}
+			}
+		/* $(function	()	{
+			$('#tabelaVaga').dataTable( {
+				"bJQueryUI": true,
+				"sPaginationType": "full_numbers"
+			});
+			$('#tabelaVaga_length').hide();
+			$('#tabelaVaga_filter').hide();
+			$('#tabelaVaga_info').hide();
+			$('#tabelaVaga_last').css('margin-left:2000px');
+			$('#tabelaVaga_next').css('margin-left:200px');
+			$('#tabelaVaga_paginate').css('margin-left: 500px');
+			$("#tabelaVaga_next").text("Próximo");
+			$("#tabelaVaga_last").text("Último");
+			$("#tabelaVaga_previous").text("Anterior");
+			$("#tabelaVaga_first").text("Primeiro");
+			
+			$("#tabelaVaga_next").attr("href", "#");
+			$("#tabelaVaga_last").attr("href", "#");
+			$("#tabelaVaga_previous").attr("href", "#");
+			$("#tabelaVaga_first").attr("href", "#");
+			$(".fg-button").attr("href", "#"); */
+ 		
+		});
+	});
+	</script>
 </body>
 </html>

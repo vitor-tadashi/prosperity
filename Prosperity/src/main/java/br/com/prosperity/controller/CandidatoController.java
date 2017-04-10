@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import br.com.prosperity.bean.AvaliacaoBean;
 import br.com.prosperity.bean.CanalInformacaoBean;
 import br.com.prosperity.bean.CandidatoBean;
+import br.com.prosperity.bean.CandidatoCompetenciaBean;
 import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.CompetenciaBean;
 import br.com.prosperity.bean.FuncionarioBean;
@@ -232,11 +233,11 @@ public class CandidatoController<PaginarCandidato> {
 
 		List<CandidatoBean> candidatos = candidatoBusiness.listarAprovacao();
 		List<CompetenciaBean> competencias = candidatoBusiness.listarCompetencia();
-		List<AvaliacaoBean> avaliacao = candidatoBusiness.listarAvaliacao();
+		List<AvaliacaoBean> avaliacoes = candidatoBusiness.listarAvaliacao();
 
 		model.addAttribute("candidatos", candidatos);
 		model.addAttribute("competencias",competencias);
-		model.addAttribute("avaliacao",avaliacao);
+		model.addAttribute("avaliacoes",avaliacoes);
 
 		return "candidato/aprovar-candidato";
 	}
