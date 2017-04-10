@@ -85,10 +85,6 @@ public class CandidatoBean<AvaliadorBean>  extends FormatUtil {
 	public void setVagaCandidato(VagaCandidatoBean vagaCandidato) {
 		this.vagaCandidato = vagaCandidato;
 	}
-
-	
-	
-
 	public Date getDataAberturaDe() {
 		return dataAberturaDe;
 	}

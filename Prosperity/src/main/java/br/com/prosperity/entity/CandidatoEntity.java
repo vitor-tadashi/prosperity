@@ -118,6 +118,7 @@ public class CandidatoEntity {
 
 	@Column(name = "vlPretencaoMax")
 	private Double valorMax;
+
 	@Column(name ="curriculoTexto")
 	private String curriculoTexto;
 
