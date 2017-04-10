@@ -339,11 +339,6 @@ public class CandidatoBusiness {
 
 		candidatosEntity = candidatoDAO.findByNamedQuery("obterPorCPF", cpf);
 
-		// Integer idDoCara = candidatosEntity.get(0).getId();
-		// for (int i = 0; i < candidatosEntity.size(); i++) {
-		//
-		// }
-
 		for (CandidatoEntity candidatoEntity : candidatosEntity) {
 
 			candidatoBean = candidatoConverter.convertEntityToBean(candidatoEntity);
