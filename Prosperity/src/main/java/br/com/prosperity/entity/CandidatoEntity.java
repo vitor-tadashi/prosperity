@@ -118,7 +118,7 @@ public class CandidatoEntity {
 
 	@Column(name = "vlPretencaoMax")
 	private Double valorMax;
-	
+
 	@Column(name ="curriculoTexto")
 	private String curriculoTexto;
 
@@ -371,7 +371,6 @@ public class CandidatoEntity {
 	public void setValorMax(Double valorMax) {
 		this.valorMax = valorMax;
 	}
-
 	public String getCurriculoTexto() {
 		return curriculoTexto;
 	}
@@ -379,6 +378,4 @@ public class CandidatoEntity {
 	public void setCurriculoTexto(String curriculoTexto) {
 		this.curriculoTexto = curriculoTexto;
 	}
-	
-
 }
