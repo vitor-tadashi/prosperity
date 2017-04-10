@@ -232,7 +232,7 @@
 										</div>
 										<div class="form-group col-md-3">
 											<label for="vaga">Vaga a ser aplicado</label> <select
-												class="form-control" id="vaga" name="vagaCandidato.vaga.id">
+												class="form-control" id="vaga" name="vagaCandidato.vaga.id" >
 												<option value="0">Selecione</option>
 												<c:forEach var="vaga" items="${listaVaga}">
 													<option value="${vaga.id}"
@@ -498,11 +498,7 @@
 
 	</script>
 	<script type="text/javascript">
-/* 	function nmCurriculo() {
-		 document.getElementById("upload-curriculo").value =(candidato.curriculo);
-		
-	} */
-	
+
 	</script>
 </body>
 </html>
