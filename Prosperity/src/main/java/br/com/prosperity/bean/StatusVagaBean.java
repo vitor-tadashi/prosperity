@@ -22,7 +22,7 @@ public class StatusVagaBean {
 	private Integer id;
 	private StatusBean status;
 	private Date dataAlteracao;
-	private Integer vagaBean;
+	private VagaBean vagaBean;
 	private UsuarioBean usuarioBean;
 	private boolean situacao;
 
@@ -50,11 +50,11 @@ public class StatusVagaBean {
 		this.status = statusBean;
 	}
 
-	public Integer getVagaBean() {
+	public VagaBean getVagaBean() {
 		return vagaBean;
 	}
 
-	public void setVagaBean(Integer vagaBean) {
+	public void setVagaBean(VagaBean vagaBean) {
 		this.vagaBean = vagaBean;
 	}
 

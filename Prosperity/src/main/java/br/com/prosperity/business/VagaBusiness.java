@@ -157,7 +157,9 @@ public class VagaBusiness {
 	public void inserir(VagaBean vagaBean, List<UsuarioBean> usuarioBean) {
 
 		VagaEntity vagaEntity = vagaConverter.convertBeanToEntity(vagaBean);
-
+		
+		vagaEntity.setStatusVagaEntity(statusVagaDAO.findByNamedQuery("statusVaga", vagaEntity.getId()));
+		
 		if (vagaEntity.getId() == null) {
 			Date dateNow = new Date();
 			vagaEntity.setDataAbertura(dateNow);
@@ -193,7 +195,7 @@ public class VagaBusiness {
 
 		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
 		statusVagaEntity.setStatus(statusDAO.findById(situacaoVaga.getStatus().getValue()));
-		statusVagaEntity.setVaga(situacaoVaga.getIdVaga());
+		statusVagaEntity.getVaga().setId(situacaoVaga.getIdVaga());
 		statusVagaEntity.setDataAlteracao(new Date());
 		statusVagaEntity.setUsuario(usuarioDAO.findById(usuarioBean.getId()));
 		statusVagaEntity.setSituacao(true);
