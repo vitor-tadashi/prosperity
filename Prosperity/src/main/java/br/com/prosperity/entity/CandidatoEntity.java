@@ -34,6 +34,7 @@ import javax.persistence.TemporalType;
 		@NamedQuery(name = "verificarCanidatura", query = "SELECT c FROM CandidatoEntity c JOIN c.statusCandidatos sc WHERE sc.status in(6,7,14)"
 				+ "AND sc.idStatusCandidato = (SELECT MAX(sc.idStatusCandidato) FROM CandidatoEntity c JOIN c.statusCandidatos sc)"),
 		@NamedQuery(name = "obterParaCombo", query = "SELECT v.id, v.nomeVaga FROM VagaEntity v"),
+		@NamedQuery(name = "filtrarVaga", query = "SELECT DISTINCT v FROM CandidatoEntity v INNER JOIN v.vagaCandidato vc WHERE vc.vaga.id = ?1"),
 		@NamedQuery(name = "aprovacao", query = "SELECT c FROM CandidatoEntity c, AvaliadorCandidatoEntity ac INNER JOIN c.statusCandidatos sc "
 				+ "WHERE ac.candidato.id = c.id AND sc.idStatusCandidato = (SELECT max(sc.idStatusCandidato)"
 				+ "FROM CandidatoEntity c JOIN c.statusCandidatos sc WHERE sc.candidato.id = c.id AND sc.status.id IN (?1)) AND ac.status is NULL"
@@ -121,14 +122,17 @@ public class CandidatoEntity {
 	@JoinColumn(name = "idCandidato")
 	private List<StatusCandidatoEntity> statusCandidatos;
 	
-	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+	@OneToMany(cascade = { CascadeType.ALL }/*, fetch = FetchType.EAGER*/)
 	@JoinColumn(name = "idCandidato")
 	private List<CandidatoCompetenciaEntity> competencias;
 
-	@OneToMany(cascade ={CascadeType.ALL}, fetch = FetchType.EAGER)
+	@OneToMany(cascade ={CascadeType.ALL}/*, fetch = FetchType.EAGER*/)
 	@JoinColumn(name="idCandidato")
 	private Set<VagaCandidatoEntity> vagas;
 	
+	@OneToMany
+	@JoinColumn(name="idCandidato")
+	private List<VagaCandidatoEntity> vagaCandidato;
 	
 	public List<StatusCandidatoEntity> getStatusCandidatos() {
 		return statusCandidatos;
@@ -335,6 +339,14 @@ public class CandidatoEntity {
 
 	public void setValorMax(Double valorMax) {
 		this.valorMax = valorMax;
+	}
+
+	public List<VagaCandidatoEntity> getVagaCandidato() {
+		return vagaCandidato;
+	}
+
+	public void setVagaCandidato(List<VagaCandidatoEntity> vagaCandidato) {
+		this.vagaCandidato = vagaCandidato;
 	}
 
 }
