@@ -16,17 +16,9 @@ public class StatusCandidatoBean {
 	private String descricaoParecer;
 	private String proposta;
 	private Boolean situacao;
-
-	public String getProposta() {
-		return proposta;
-	}
-
-	public void setProposta(String proposta) {
-		this.proposta = proposta;
-	}
-
 	private UsuarioBean usuario;
 	private StatusBean status;
+	private String mensagem;
 
 	public StatusCandidatoBean() {
 
@@ -49,8 +41,6 @@ public class StatusCandidatoBean {
 	public void setSituacao(Boolean situacao) {
 		this.situacao = situacao;
 	}
-
-	private String mensagem;
 
 	public String getMensagem() {
 		return mensagem;
@@ -98,6 +88,14 @@ public class StatusCandidatoBean {
 
 	public void setStatus(StatusBean status) {
 		this.status = status;
+	}
+
+	public String getProposta() {
+		return proposta;
+	}
+
+	public void setProposta(String proposta) {
+		this.proposta = proposta;
 	}
 
 }
