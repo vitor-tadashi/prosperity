@@ -456,7 +456,7 @@
 						<!--<form class="form-inline">-->
 						<div class="panel-body">
 
-							<form action="filtro" method="GET" class="row">
+							<form action="filtro" method="GET" class="row" style="margin-bottom: 0px;">
 								<div class="col-md-4">
 									<div class="form-group">
 										<label>Vaga</label> <input class="form-control" id="filtro1" name="nomeVaga" placeholder="Digite o nome de uma vaga">
@@ -495,7 +495,7 @@
 						<table
 							id="tabelaVaga"
 							class="table table-bordered table-condensed table-hover table-striped"
-							style="font-size: 12px; vertical-align: middle;">
+							style="font-size: 12px; vertical-align: middle; margin-top: -10px;">
 							<thead>
 								<tr>
 									<th class="text-center">Vaga</th>
