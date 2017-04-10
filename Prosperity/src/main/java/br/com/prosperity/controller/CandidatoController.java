@@ -22,6 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.google.gson.Gson;
+
 import br.com.prosperity.bean.AvaliacaoBean;
 import br.com.prosperity.bean.CanalInformacaoBean;
 import br.com.prosperity.bean.CandidatoBean;
@@ -204,9 +207,12 @@ public class CandidatoController<PaginarCandidato> {
 		return "candidato/consultar-candidato";
 	}
 
+	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "filtrar", method = RequestMethod.GET)
 	public String filtrarCandidatoRH(Model model, CandidatoBean candidato) {
-		
+		if(candidato.getVagaBean().getId() == 0){
+			candidato.setVagaBean(null);
+		}
 
 		List<CandidatoBean> candidatos = candidatoBusiness.filtroCandidato(candidato);
 		model.addAttribute("candidatos", candidatos);
@@ -222,6 +228,9 @@ public class CandidatoController<PaginarCandidato> {
 
 		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.findAll();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
+		
+		List<VagaBean> listaVagaDrop = vagaBusiness.obterTodos();
+		model.addAttribute("listaVagaDrop", listaVagaDrop);
 
 		// avaliadorBusiness.listar();
 
@@ -263,7 +272,8 @@ public class CandidatoController<PaginarCandidato> {
 	@RequestMapping(value = { "alterar-status-candidato" }, method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
 	public @ResponseBody String alterarStatusCandidato(Model model,
-			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato) {
+			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato, @ModelAttribute("avaliacoesCompetencias") ArrayList<CandidatoCompetenciaBean> avaliacoesCompetencias) {
+		
 		candidatoBusiness.alterarStatus(situacaoCandidato);
 		return "candidato/aprovar";
 	}

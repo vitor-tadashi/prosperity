@@ -193,6 +193,8 @@ public class VagaBusiness {
 	public void alterarStatus(SituacaoVagaBean situacaoVaga) {
 		StatusVagaEntity statusVagaEntity = new StatusVagaEntity();
 
+		desativarStatus(situacaoVaga);
+		
 		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
 		statusVagaEntity.setStatus(statusDAO.findById(situacaoVaga.getStatus().getValue()));
 		statusVagaEntity.getVaga().setId(situacaoVaga.getIdVaga());
@@ -200,14 +202,12 @@ public class VagaBusiness {
 		statusVagaEntity.setUsuario(usuarioDAO.findById(usuarioBean.getId()));
 		statusVagaEntity.setSituacao(true);
 
-		desativarStatus(statusVagaEntity);
-
 		statusVagaDAO.insert(statusVagaEntity);
 	}
 
 	@Transactional
-	private void desativarStatus(StatusVagaEntity statusVaga) {
-		List<StatusVagaEntity> statusVagas = statusVagaDAO.findByNamedQuery("obterStatusVaga", statusVaga.getVaga());
+	private void desativarStatus(SituacaoVagaBean situacaoVaga) {
+		List<StatusVagaEntity> statusVagas = statusVagaDAO.findByNamedQuery("obterStatusVaga", situacaoVaga.getIdVaga());
 		for (StatusVagaEntity status : statusVagas) {
 			status.setSituacao(false);
 			statusVagaDAO.update(status);
