@@ -105,6 +105,13 @@ public class UsuarioBusiness {
 		List<UsuarioBean> usuariosBean = usuarioConverter.convertEntityToBean(usuariosEntity);
 		return usuariosBean;
 	}
+	
+	@Transactional
+	public List<UsuarioBean> buscarUsuarioAtivo(){
+		List<UsuarioEntity> usuariosEntity = usuarioDAO.findByNamedQuery("obterUsuariosAtivos");
+		List<UsuarioBean> usuariosBean = usuarioConverter.convertEntityToBean(usuariosEntity);
+		return usuariosBean;
+	}
 
 	@Transactional(readOnly=true)
 	public UsuarioBean obterPorId(Integer id) {

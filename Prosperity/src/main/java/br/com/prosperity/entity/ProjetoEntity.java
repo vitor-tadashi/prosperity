@@ -4,6 +4,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="tbProjeto")
+@NamedQueries({
+	@NamedQuery(name = "obterProjetosAtivos", query = "SELECT u FROM ProjetoEntity u WHERE u.ativo = true")
+})
 public class ProjetoEntity {
 	
 	@Id
@@ -21,7 +24,11 @@ public class ProjetoEntity {
 	@ManyToOne
 	@JoinColumn(name="idCliente")
 	private ClienteEntity cliente;
+	
+	@Column(name = "ativo")
+	private Boolean ativo;
 		
+	
 	public Integer getIdProjeto() {
 		return id;
 	}
@@ -45,6 +52,13 @@ public class ProjetoEntity {
 	}
 	public void setFuncionario(FuncionarioEntity funcionario) {
 		this.funcionario = funcionario;
+	}
+	
+	public Boolean getAtivo() {
+		return ativo;
+	}
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 }

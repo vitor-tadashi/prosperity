@@ -495,8 +495,7 @@
 						<table
 							id="tabelaVaga"
 							class="table table-bordered table-condensed table-hover table-striped"
-							style="font-size: 12px; vertical-align: middle;"
-							id="dataTable">
+							style="font-size: 12px; vertical-align: middle;">
 							<thead>
 								<tr>
 									<th class="text-center">Vaga</th>
@@ -535,23 +534,7 @@
 											<ul class="dropdown-menu dropdown-menu-right slidedown">
 											<li><a href="#visualizar-modal" 
 													onclick="info(${vaga.id})"><i
-														class="fa fa-eye">&nbsp</i>Visualizar</a></li>
-														
-												<li id="${vaga.ultimoStatus.status.nome}" class="divider"></li>
-												
-												<li id="${vaga.ultimoStatus.status.nome}"><a href="#fecha-modal" 
-												onclick="alterarStatus(${vaga.id}, 'RECUSADO')"
-												data-toggle="modal"><i
-														class="fa fa-lock">&nbsp</i>Fechar</a></li>
-												<li id="${vaga.ultimoStatus.status.nome}" class="divider "></li>
-												
-							
-												<li id="${vaga.ultimoStatus.status.nome}"><a href="#delete-modal" 
-												onclick="alterarStatus(${vaga.id}, 'CANCELADO')"
-												data-toggle="modal"><i
-														class="fa fa-times">&nbsp</i>Cancelar</a></li>
-												
-													
+														class="fa fa-eye">&nbsp</i>Visualizar</a></li>		
 											</ul>
 										</div> <!-- /btn-group -->
 									</td>
@@ -563,24 +546,6 @@
 						
 					</div>
 					<!--</panel default>-->
-<<<<<<< HEAD
-					<div class="panel-footer clearfix">
-						<div class="row">
-						$ (ElementID) .paginate ()
-							<ul class="pagination pagination-xs m-top-none pull-right">
-								<li class="disabled"><a href="#">Anterior</a></li>
-								<li class="active"><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">Próximo</a></li>
-							</ul>
-						</div>
-						<!--</div row>-->
-					</div>
-=======
-					
->>>>>>> 59b16c9bbbd105e49d7ad29f9d5a96a7bbb6c142
-					<!--</panel footer>-->
 				</div>
 				<!--</col-sm-12>-->
 			</div>
@@ -622,33 +587,8 @@
 
 	<!-- Perfect -->
 	<script src="js/app/app.js"></script>
-	<script>
-	$(function	()	{
-		$('#dataTable').dataTable( {
-			"bJQueryUI": true,
-			"sPaginationType": "full_numbers"
-		});
-		
-		$('#chk-all').click(function()	{
-			if($(this).is(':checked'))	{
-				$('#responsiveTable').find('.chk-row').each(function()	{
-					$(this).prop('checked', true);
-					$(this).parent().parent().parent().addClass('selected');
-				});
-			}
-			else	{
-				$('#responsiveTable').find('.chk-row').each(function()	{
-					$(this).prop('checked' , false);
-					$(this).parent().parent().parent().removeClass('selected');
-				});
-			}
-		});
-	});
-	</script>
 	
 	<script type="text/javascript">
-	
-	
 	
 	//linhaStatus
 	//span-[status]
@@ -780,28 +720,62 @@
 	
 	
 	</script>
-	<script>
-		$(function	()	{
-			$('#dataTable').dataTable( {
+	<script>/* paginação */
+	$(function	()	{
+		$('#tabelaVaga').dataTable( {
+			"bJQueryUI": true,
+			"sPaginationType": "simple_numbers",
+			"bFilter": false,
+			"bInfo": false,
+			"bLengthChange": false,
+
+			"oLanguage": {
+				"sEmptyTable": "Nenhum registro encontrado",
+				"sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+				"sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+				"sInfoFiltered": "(Filtrados de _MAX_ registros)",
+				"sInfoPostFix": "",
+				"sInfoThousands": ".",
+				"sLengthMenu": "_MENU_ resultados por página",
+				"sLoadingRecords": "Carregando...",
+				"sProcessing": "Processando...",
+				"sZeroRecords": "Nenhum registro encontrado",
+				"sSearch": "Pesquisar",
+				"oPaginate": {
+					"sNext": "Próximo",
+					"sPrevious": "Anterior",
+					"sFirst": "Primeiro",
+					"sLast": "Último"
+				},
+				"oAria": {
+					"sSortAscending": ": Ordenar colunas de forma ascendente",
+					"sSortDescending": ": Ordenar colunas de forma descendente"
+				}
+			}
+		/* $(function	()	{
+			$('#tabelaVaga').dataTable( {
 				"bJQueryUI": true,
 				"sPaginationType": "full_numbers"
 			});
+			$('#tabelaVaga_length').hide();
+			$('#tabelaVaga_filter').hide();
+			$('#tabelaVaga_info').hide();
+			$('#tabelaVaga_last').css('margin-left:2000px');
+			$('#tabelaVaga_next').css('margin-left:200px');
+			$('#tabelaVaga_paginate').css('margin-left: 500px');
+			$("#tabelaVaga_next").text("Próximo");
+			$("#tabelaVaga_last").text("Último");
+			$("#tabelaVaga_previous").text("Anterior");
+			$("#tabelaVaga_first").text("Primeiro");
 			
-			$('#chk-all').click(function()	{
-				if($(this).is(':checked'))	{
-					$('#responsiveTable').find('.chk-row').each(function()	{
-						$(this).prop('checked', true);
-						$(this).parent().parent().parent().addClass('selected');
-					});
-				}
-				else	{
-					$('#responsiveTable').find('.chk-row').each(function()	{
-						$(this).prop('checked' , false);
-						$(this).parent().parent().parent().removeClass('selected');
-					});
-				}
-			});
+			$("#tabelaVaga_next").attr("href", "#");
+			$("#tabelaVaga_last").attr("href", "#");
+			$("#tabelaVaga_previous").attr("href", "#");
+			$("#tabelaVaga_first").attr("href", "#");
+			$(".fg-button").attr("href", "#"); */
+ 		
 		});
+	});
 	</script>
 	
 	</body>

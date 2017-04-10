@@ -7,12 +7,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProjetoBean {
 
-	@Min(value = 1, message = "Projeto Inválido")
+	@Min(value = 1, message = "O campo Nome do projeto deve ser preenchido")
 	private Integer id;
 
 	private String nome;
 	private FuncionarioBean funcionario;
 	private ClienteBean cliente;
+	private Boolean ativo;
 
 	public Integer getId() {
 		return id;
@@ -44,6 +45,14 @@ public class ProjetoBean {
 
 	public void setCliente(ClienteBean cliente) {
 		this.cliente = cliente;
+	}
+	
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 }

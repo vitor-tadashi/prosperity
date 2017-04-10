@@ -22,10 +22,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
-
+import br.com.prosperity.bean.AvaliacaoBean;
 import br.com.prosperity.bean.CanalInformacaoBean;
 import br.com.prosperity.bean.CandidatoBean;
+import br.com.prosperity.bean.CandidatoCompetenciaBean;
 import br.com.prosperity.bean.CargoBean;
+import br.com.prosperity.bean.CompetenciaBean;
 import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
@@ -40,6 +42,7 @@ import br.com.prosperity.business.SenioridadeBusiness;
 import br.com.prosperity.business.SituacaoAtualBusiness;
 import br.com.prosperity.business.TipoCursoBusiness;
 import br.com.prosperity.business.VagaBusiness;
+import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.exception.BusinessException;
 
 @Controller
@@ -114,14 +117,6 @@ public class CandidatoController<PaginarCandidato> {
 			candidatoBusiness.inserir(candidatoBean);
 		}
 
-	/*	candidatoBean = candidatoBusiness.obterPorCPF(candidatoBean.getCpf());
-
-		SituacaoCandidatoBean situacaoCandidatoBean = null;
-		situacaoCandidatoBean.setIdCandidato(candidatoBean.getId());
-		situacaoCandidatoBean.setStatus(StatusCandidatoEnum.CANDIDATURA);
-
-		candidatoBusiness.alterarStatus(situacaoCandidatoBean);
-*/
 		return "candidato/cadastrar-candidato";
 	}
 
@@ -144,15 +139,6 @@ public class CandidatoController<PaginarCandidato> {
 			model.addAttribute("candidato", candidatoBean);
 
 			obterDominiosCandidato(model);
-
-			/*
-			 * ** COLOCAR AQUI *** 1 - Criar um jeito de pegar o value no seu
-			 * jsp 2 - Verificar se a variavel do caminho do documento esta
-			 * preenchida 3 - Se a varivel estiver preenchida entao chamar a
-			 * rotina de copiar arquivos 4 - Criar o metodo de copiar arquivos
-			 * na sua bussiness
-			 */
-
 			return "candidato/cadastrar-candidato";
 		}
 			candidatoBusiness.inserir(candidatoBean);
@@ -251,9 +237,13 @@ public class CandidatoController<PaginarCandidato> {
 	@RequestMapping(value = "aprovar", method = RequestMethod.GET)
 	public String aprovarCandidato(Model model) {
 
-		List<CandidatoBean> candidatos = candidatoBusiness.listar();
+		List<CandidatoBean> candidatos = candidatoBusiness.listarAprovacao();
+		List<CompetenciaBean> competencias = candidatoBusiness.listarCompetencia();
+		List<AvaliacaoBean> avaliacoes = candidatoBusiness.listarAvaliacao();
 
 		model.addAttribute("candidatos", candidatos);
+		model.addAttribute("competencias",competencias);
+		model.addAttribute("avaliacoes",avaliacoes);
 
 		return "candidato/aprovar-candidato";
 	}
@@ -278,9 +268,9 @@ public class CandidatoController<PaginarCandidato> {
 
 	@RequestMapping(value = { "alterar-status-candidato" }, method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
-	public @ResponseBody SituacaoCandidatoBean alterarStatusCandidato(Model model,
+	public @ResponseBody String alterarStatusCandidato(Model model,
 			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato) {
 		candidatoBusiness.alterarStatus(situacaoCandidato);
-		return situacaoCandidato;
+		return "candidato/aprovar";
 	}
 }

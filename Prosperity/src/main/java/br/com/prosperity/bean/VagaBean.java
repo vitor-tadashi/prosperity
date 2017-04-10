@@ -4,7 +4,9 @@ import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -20,7 +22,8 @@ public class VagaBean {
 	private String nomeVaga;
 	private String nomeSolicitante;
 	private Double valorPretensao;
-	// @Future(message = "Data para inicio inválido")
+	//@NotNull(message = "O campo data de Inicio deve ser preenchido")
+	@DateTimeFormat(pattern = "dd/MM/YYYY")
 	private Date dataInicio;
 	private Character localTrabalho;
 	private Character idTipoVaga;
@@ -48,6 +51,7 @@ public class VagaBean {
 	private String nmAreaResponsavel;
 	private String emailResponsavel;
 	private String telResponsavel;
+	private List<UsuarioBean> avaliadores;
 	private StatusVagaBean ultimoStatus;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataAberturaDe;
@@ -317,6 +321,11 @@ public class VagaBean {
 
 	public void setTelResponsavel(String telResponsavel) {
 		this.telResponsavel = telResponsavel;
+	}
+
+	public List<UsuarioBean> getAvaliadores() {
+		
+		return avaliadores;
 	}
 
 }

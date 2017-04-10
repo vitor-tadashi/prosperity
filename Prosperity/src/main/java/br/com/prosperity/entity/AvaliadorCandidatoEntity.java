@@ -2,6 +2,7 @@ package br.com.prosperity.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,7 +15,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tbAvaliadorCandidato")
 @NamedQueries({
-		@NamedQuery(name = "obterAvaliadoresCandidato", query = "SELECT u FROM AvaliadorCandidatoEntity u WHERE u.status = null")})
+		@NamedQuery(name = "atualizarAvaliador", query = "SELECT u FROM AvaliadorCandidatoEntity u WHERE u.status = null AND u.usuario.id = ?1"),
+		@NamedQuery(name = "obterAvaliadoresCandidato", query = "SELECT u FROM AvaliadorCandidatoEntity u WHERE u.status = null"),
+		@NamedQuery(name = "obterProposta", query = "SELECT u FROM AvaliadorCandidatoEntity u WHERE u.candidato.id = ?1 AND u.status IS NOT NULL")})
 
 public class AvaliadorCandidatoEntity {
 
@@ -23,13 +26,17 @@ public class AvaliadorCandidatoEntity {
 	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
 
-	@OneToOne
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idCandidato")
 	private CandidatoEntity candidato;
 
-	@OneToOne
-	@JoinColumn(name = "idAvaliadorVaga")
-	private AvaliadorVagaEntity avaliadorVaga;
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name = "idVaga")
+	private VagaEntity vaga;
+
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name = "idUsuario")
+	private UsuarioEntity usuario;
 
 	@Column(name = "idStatus")
 	private Integer status = null;
@@ -50,14 +57,6 @@ public class AvaliadorCandidatoEntity {
 		this.candidato = candidato;
 	}
 
-	public AvaliadorVagaEntity getAvaliadorVaga() {
-		return avaliadorVaga;
-	}
-
-	public void setAvaliadorVaga(AvaliadorVagaEntity avaliadorVaga) {
-		this.avaliadorVaga = avaliadorVaga;
-	}
-
 	public Integer getStatus() {
 		return status;
 	}
@@ -65,4 +64,21 @@ public class AvaliadorCandidatoEntity {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
+
+	public VagaEntity getVaga() {
+		return vaga;
+	}
+
+	public void setVaga(VagaEntity vaga) {
+		this.vaga = vaga;
+	}
+
+	public UsuarioEntity getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(UsuarioEntity usuario) {
+		this.usuario = usuario;
+	}
+
 }

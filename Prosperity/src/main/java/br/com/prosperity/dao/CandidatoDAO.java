@@ -46,7 +46,7 @@ public class CandidatoDAO extends GenericDAOImpl<CandidatoEntity, Integer> {
 		try {
 			Session session = (Session) entityManager.getDelegate();
 			Criteria crit = session.createCriteria(CandidatoEntity.class, "candidato");
-			crit.createAlias("candidato.vagaCandidato", "vaga");
+			crit.createAlias("candidato.vagas", "vaga");
 			for (final Criterion c : criterion) {
 				crit.add(c);
 		}
