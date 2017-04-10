@@ -462,10 +462,10 @@
 									</div>
 									<div class="col-md-2">
 										<label for="exampleInputEmail1">Vaga</label> <select
-											class="form-control inline" id="vaga" name="vaga">
-											<option>Selecione</option>
+											class="form-control inline" id="vagaFiltro" name="vagaBean.id">
+											<option value="0">Selecione</option>
 											<c:forEach var="vaga" items="${listaVagaDrop}">
-												<option id="${vaga.id}" value="${vaga.id}">${vaga.nomeVaga}</option>
+												<option value="${vaga.id}">${vaga.nomeVaga}</option>
 											</c:forEach>
 										</select>
 									</div>
@@ -515,7 +515,7 @@
 										<tr>
 											<td>${candidato.nome}</td>
 
-											<td>${candidato.vagaCandidato.vaga.nomeVaga}</td> 	<!--OU vagas-->
+											<td>${candidato.vagaCandidato.vaga.nomeVaga}</td> 	
 											<td>${candidato.valorPretensao}</td>
 											<td><fmt:formatDate value="${candidato.dataAbertura}" pattern="dd/MM/yyyy" /></td>
 											<td><span class="label status span-${candidato.ultimoStatus.status.nome}">${candidato.ultimoStatus.status.nome}</span></td>

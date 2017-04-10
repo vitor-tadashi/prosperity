@@ -119,6 +119,9 @@ public class CandidatoEntity {
 	@Column(name = "vlPretencaoMax")
 	private Double valorMax;
 
+	@Column(name ="curriculoTexto")
+	private String curriculoTexto;
+
 	/* Mapeamento de Relacionamentos */
 
 	// @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -368,5 +371,11 @@ public class CandidatoEntity {
 	public void setValorMax(Double valorMax) {
 		this.valorMax = valorMax;
 	}
+	public String getCurriculoTexto() {
+		return curriculoTexto;
+	}
 
+	public void setCurriculoTexto(String curriculoTexto) {
+		this.curriculoTexto = curriculoTexto;
+	}
 }

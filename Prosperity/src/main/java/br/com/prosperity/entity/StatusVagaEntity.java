@@ -15,10 +15,15 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 @Entity
 @Table(name = "tbStatusVaga")
-@NamedQuery(name = "obterStatusVaga", query = "SELECT v FROM StatusVagaEntity v WHERE v.vaga = ?1")
+@NamedQueries({
+	@NamedQuery(name = "obterStatusVaga", query = "SELECT v FROM StatusVagaEntity v WHERE v.vaga = ?1"),
+	@NamedQuery(name = "statusVaga", query = "SELECT v FROM StatusVagaEntity v WHERE v.vaga.id = ?1") })
+
 public class StatusVagaEntity {
 	/* Mapeamento dos Atributos */
 
@@ -41,9 +46,10 @@ public class StatusVagaEntity {
 	@Column(name = "dtAlteracao")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataAlteracao;
-
-	@Column(name = "idVaga")
-	private Integer vaga;
+	
+	@ManyToOne
+	@JoinColumn(name = "idVaga")
+	private VagaEntity vaga;
 	
 	@Column(name="flSituacao")
 	private boolean situacao;
@@ -74,11 +80,11 @@ public class StatusVagaEntity {
 		this.status = status;
 	}
 
-	public Integer getVaga() {
+	public VagaEntity getVaga() {
 		return vaga;
 	}
 
-	public void setVaga(Integer vaga) {
+	public void setVaga(VagaEntity vaga) {
 		this.vaga = vaga;
 	}
 
