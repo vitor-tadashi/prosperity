@@ -20,7 +20,7 @@ import br.com.prosperity.util.FormatUtil;
 
 @Component
 @XmlRootElement(name = "CandidatoBean")
-public class CandidatoBean<AvaliadorBean>  extends FormatUtil {
+public class CandidatoBean extends FormatUtil {
 
 	private Integer id;
 
@@ -50,7 +50,6 @@ public class CandidatoBean<AvaliadorBean>  extends FormatUtil {
 	private UsuarioBean usuario;
 	private List<StatusCandidatoBean> status = new ArrayList<>();
 	private Set<VagaCandidatoBean> vagas = new HashSet<>();
-	
 	private List<CandidatoCompetenciaBean> competencias = new ArrayList<>();
 	private Map<String, List<StatusCandidatoBean>> statusPorMesAno;
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
@@ -72,24 +71,18 @@ public class CandidatoBean<AvaliadorBean>  extends FormatUtil {
 	private Date dataAberturaDe;
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date dataAberturaPara;
-
-	private List<AvaliadorBean> avaliadores;
+	private VagaBean vagaBean;
 
 	public VagaCandidatoBean getVagaCandidato() {
 		if (vagaCandidato == null) {
 			getUltimaVaga();
 		}
-		
 		return vagaCandidato;
 	}
 
 	public void setVagaCandidato(VagaCandidatoBean vagaCandidato) {
 		this.vagaCandidato = vagaCandidato;
 	}
-
-	
-	
-
 	public Date getDataAberturaDe() {
 		return dataAberturaDe;
 	}
@@ -338,14 +331,13 @@ public class CandidatoBean<AvaliadorBean>  extends FormatUtil {
 		this.valorMax = valorMax;
 	}
 
-	public List<AvaliadorBean> getAvaliadores() {
-		return avaliadores;
+	public VagaBean getVagaBean() {
+		return vagaBean;
 	}
 
-	public void setAvaliadores(List<AvaliadorBean> avaliadores) {
-		this.avaliadores = avaliadores;
+	public void setVagaBean(VagaBean vagaBean) {
+		this.vagaBean = vagaBean;
 	}
-
 	public String getCurriculoTexto() {
 		return curriculoTexto;
 	}
