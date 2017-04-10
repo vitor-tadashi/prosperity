@@ -22,9 +22,89 @@
 <link rel="stylesheet"
 	href="/resources/css/ckeditor_/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
 
-
-
-<!-- fim dessa merda -->
+<script>
+	//Total máximo de campos que você permitirá criar em seu site:
+	var totalCampos = 4;
+	
+	//Não altere os valores abaixo, pois são variáveis controle;
+	var iLoop = 1;
+	var iCount = 0;
+	var linhaAtual;
+	
+	
+	function AddCampos() {
+	var hidden1 = document.getElementById("hidden1");
+	var hidden2 = document.getElementById("hidden2");
+	
+	//Executar apenas se houver possibilidade de inserção de novos campos:
+	if (iCount < totalCampos) {
+	
+	//Limpar hidden1, para atualizar a lista dos campos que ainda estão vazios:
+	hidden2.value = "";
+	
+	//Atualizando a lista dos campos que estão ocultos.
+	//Essa lista ficará armazenada temporiariamente em hidden2;
+	for (iLoop = 1; iLoop <= totalCampos; iLoop++) {
+	        if (document.getElementById("linha"+iLoop).style.display == "none") {
+	                if (hidden2.value == "") {
+	                        hidden2.value = "linha"+iLoop;
+	                }else{
+	                        hidden2.value += ",linha"+iLoop;
+	                }
+	        }
+	}
+	//Quebrando a lista que foi armazenada em hidden2 em array:
+	
+	linhasOcultas = hidden2.value.split(",");
+	
+	
+	        if (linhasOcultas.length > 0) {
+	                //Tornar visível o primeiro elemento de linhasOcultas:
+	                document.getElementById(linhasOcultas[0]).style.display = "block"; iCount++;
+	                
+	                //Acrescentando o índice zero a hidden1:
+	                if (hidden1.value == "") {
+	                        hidden1.value = linhasOcultas[0];
+	                }else{
+	                        hidden1.value += ","+linhasOcultas[0];
+	                }
+	                
+	                /*Retirar a opção acima da lista de itens ocultos: <-------- OPCIONAL!!!
+	                if (hidden2.value.indexOf(","+linhasOcultas[0]) != -1) {
+	                        hidden2.value = hidden2.value.replace(linhasOcultas[0]+",","");
+	                }else if (hidden2.indexOf(linhasOcultas[0]+",") == 0) {
+	                        hidden2.value = hidden2.value.replace(linhasOcultas[0]+",","");
+	                }else{
+	                        hidden2.value = "";
+	                }
+	                */
+	        }
+	}
+	}
+	
+	function RemoverCampos(id) {
+	//Criando ponteiro para hidden1:        
+	var hidden1 = document.getElementById("hidden1");
+	
+	//Pegar o valor do campo que será excluído:
+	var campoValor = document.getElementById("arq"+id).value;
+	        //Se o campo não tiver nenhum valor, atribuir a string: vazio:
+	        if (campoValor == "") {
+	                campoValor = "vazio";
+	        }
+	
+               document.getElementById("linha"+id).style.display = "none"; iCount--;
+               
+               //Removendo o valor de hidden1:
+               if (hidden1.value.indexOf(",linha"+id) != -1) {
+                       hidden1.value = hidden1.value.replace(",linha"+id,"");
+               }else if (hidden1.value.indexOf("linha"+id+",") == 0) {
+                       hidden1.value = hidden1.value.replace("linha"+id+",","");
+               }else{
+                       hidden1.value = "";
+               }
+	}
+</script>
 
 </head>
 <body id="main">
@@ -43,92 +123,131 @@
 					<h4 style="text-align: center;">Gestão de candidato</h4>
 				</div>
 				<div class="modal-body">
-					<div class="panel-body">
-
-						<div class="form-group col-md-12">
-
-							<div class="form-group">
-								<label class="control-label">Parecer :</label>
-								<div class="form-group">
-									<input type="hidden" id="hdn-id-candidato" /> <input
-										type="hidden" id="hdn-status" />
-									<textarea class="form-control" id="parecer"
-										style="margin-left: 0px; width: 770px" name="parecer"></textarea>
-								</div>
-								<!--                                                 /.col -->
-							</div>
-							<!--                                           /form-group -->
-						</div>
-
-						<div class="form-group col-md-12" id="piroquinha">
-							<div class="form-group">
-								<label class="control-label">Proposta:</label>
-								<div class="adjoined-bottom">
-									<!-- <input type="hidden" id="hdn-id-editor" /> <input
-                                                           type="hidden" id="hdn-editor" /> -->
-									<div class="grid-container">
-										<div class="grid-width-100">
-											<textarea id="editor" name="editor">
-                                                                       Insira o seu texto aqui...
-                                                                 </textarea>
+				
+					<div class="panel panel-default">
+					    <div class="panel-tab clearfix">
+					        <ul class="tab-bar">
+					            <li class="active"><a href="#infoEntrevista" data-toggle="tab"><i class="fa fa-user"></i> Informações de entrevista</a></li>
+					            <li><a href="#processoSelecao" data-toggle="tab"><i class="fa fa-pencil"></i> Processo de seleção</a></li>
+					            <li><a href="#avaliacaoComp" data-toggle="tab"><i class="fa fa-briefcase"></i> Avaliação de competências</a></li>
+					            <li><a href="#proposta" data-toggle="tab"><i class="fa fa-money"></i> Proposta</a></li>
+					        </ul>
+					    </div>
+					    
+					    <div class="panel-body">
+					        <div class="tab-content">
+					        
+					            <div class="tab-pane fade in active" id="infoEntrevista">
+									<div class="form-group">
+										<label class="control-label">Parecer :</label>
+										<div class="form-group">
+											<input type="hidden" id="hdn-id-candidato" />
+											<input type="hidden" id="hdn-status" />
+											<textarea class="form-control" id="parecer" style="margin-left: 0px; width: 770px" name="parecer">
+											</textarea>
 										</div>
 									</div>
-								</div>
-								<!-- /.col -->
-							</div>
-							<!-- /form-group -->
-						</div>
-						<!-- /form-group -->
-
-
-						<div class="form-group col-md-12">
-							<section class="panel panel-default">
-								<div class="panel-heading text-center">
-									<label for="exampleInputEmail1">Avaliação de
-										competências</label>
-								</div>
-
-								<table id="tabelaCompetencias" class="table" style="font-size: 10px">
-									<thead class="text-center">
-										<tr class="text-center">
-											<th class="text-center">Competências</th>
-											<th>Insatisfatório</th>
-											<th>Em Desenvolvimento</th>
-											<th>Atende as Expectativas</th>
-											<th>Supera as Expectativas</th>
-										</tr>
-									</thead>
-									<tbody class="text-center">
-										<c:forEach var="competencia" items="${competencias}">
-											
-												<tr>
-	
-													<td>${competencia.nome}</td>
-													<c:forEach var="avaliacao" items="${avaliacoes}">
-													
-														<td><label class="label-radio inline"> <input
-																class="avaliacaoCompetencia" type="radio" alt="${avaliacao.id}" name="avaliacao${competencia.nome}" value="${competencia.id}">
-																<span class="custom-radio"></span>
-														</label></td>
-														
-													</c:forEach>												
-	
+					            </div>
+					            
+					            <div class="tab-pane fade" id="processoSelecao">
+					                <div class="form-group">
+					                	<div class="panel panel-default">
+						                	<div class="panel-body">
+	    
+											    <label>Etapas dos processos de seleção: </label>
+											    
+											    <form name="form1" action="paginaPHPouASP" method="post">
+											        
+											        <input class="btn btn-xs btn-success" type="button" value="Adicionar etapa" onclick="AddCampos()">
+											        <br>
+											        <br>
+											        <script type="text/javascript">
+											            //Escrevendo o código-fonte HTML e ocultando os campos criados:
+											            for (iLoop = 1; iLoop <= totalCampos; iLoop++) {
+											                document.write("<span id='linha"+iLoop+"' style='display:none'> <select class='btn btn-default btn-xs dropdown-toggle' style='width: 160px;'><option value='0'>Selecione etapa</option><option value='1'>Prova Prática</option><option value='2'>Prova teórica</option><option value='3'>Dinâmica de Grupo</option></select> <input type='text' id='arq"+iLoop+"' name='arq"+iLoop+"'> <input class='btn btn-xs btn-danger' type='button' value='Remover' onclick='RemoverCampos(\""+iLoop+"\")'></span>");
+											            }
+											        </script>
+											        <input type="hidden" name="hidden2" id="hidden2">
+											    </form>
+											    
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<input type="hidden" id="hdn-id-candidato" />
+										<input type="hidden" id="hdn-status" />
+										<label class="control-label">Parecer técnico:</label>
+										<textarea class="form-control" id="parecerTecnico" style="margin-left: 0px; width: 770px" name="parecerTecnico">
+										</textarea>
+									</div>
+					            </div>
+					            
+					            <div class="tab-pane fade" id="avaliacaoComp">
+					                <section class="panel panel-default">
+										<div class="panel-heading text-center">
+											<label for="exampleInputEmail1">Avaliação de
+												competências</label>
+										</div>
+		
+										<table id="tabelaCompetencias" class="table" style="font-size: 10px">
+											<thead class="text-center">
+												<tr class="text-center">
+													<th class="text-center">Competências</th>
+													<th>Insatisfatório</th>
+													<th>Em Desenvolvimento</th>
+													<th>Atende as Expectativas</th>
+													<th>Supera as Expectativas</th>
 												</tr>
-										</c:forEach>
-									</tbody>
-								</table>
-							</section>
+											</thead>
+											<tbody class="text-center">
+												<c:forEach var="competencia" items="${competencias}">
+													
+														<tr>
+			
+															<td>${competencia.nome}</td>
+															<c:forEach var="avaliacao" items="${avaliacoes}">
+															
+																<td><label class="label-radio inline"> <input
+																		class="avaliacaoCompetencia" type="radio" alt="${avaliacao.id}" name="avaliacao${competencia.nome}" value="${competencia.id}">
+																		<span class="custom-radio"></span>
+																</label></td>
+																
+															</c:forEach>												
+			
+														</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+									</section>
+					            </div>
+					            
+					            <div class="tab-pane fade" id="proposta">
+					                <div class="form-group col-md-12" id="divCkEditor">
+										<div class="form-group">
+											<label class="control-label">Proposta:</label>
+											<div class="adjoined-bottom">
+												<div class="grid-container">
+													<div class="grid-width-100">
+														<textarea id="editor" name="editor">
+															Insira o seu texto aqui...
+														</textarea>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+					            </div>
+					            
+					        </div>
+					    </div>
+					    <div class="panel-footer ">
+							<button type="button" class="btn btn-sm btn-primary"
+								href="#confirm-modal" data-toggle="modal">
+								<i class="fa fa-check fa-lg"></i>&nbsp;Enviar
+							</button>
 						</div>
-
 					</div>
 
-					<div class="panel-footer ">
-
-						<button type="button" class="btn btn-sm btn-primary"
-							href="#confirm-modal" data-toggle="modal">
-							<i class="fa fa-check fa-lg"></i>&nbsp;Enviar
-						</button>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -292,41 +411,6 @@
 	<!-- /.container -->
 	<a href="" id="scroll-to-top" class="hidden-print"><i
 		class="fa fa-chevron-up"></i></a>
-	<!-- /Modal -->
-	<div class="modal fade" id="formModal">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4>Modal with form</h4>
-				</div>
-				<div class="modal-body">
-					<form>
-						<div class="form-group">
-							<label>Username</label> <input type="text"
-								class="form-control input-sm" placeholder="Email Address">
-						</div>
-						<div class="form-group">
-							<label>Password</label> <input type="password"
-								class="form-control input-sm" placeholder="Password">
-						</div>
-						<div class="form-group">
-							<label class="label-checkbox"> <input type="checkbox"
-								class="regular-checkbox" /> <span class="custom-checkbox"></span>
-								Remember me
-							</label>
-						</div>
-						<div class="form-group text-right">
-							<a href="#" class="btn btn-success">Sign in</a> <a href="#"
-								class="btn btn-success">Sign up</a>
-						</div>
-					</form>
-				</div>
-			</div>
-			<!-- /wrapper -->
-		</div>
-	</div>
 	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
 	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
 
@@ -340,10 +424,10 @@
                   if(status == 9 || status == 10 ){
                         if(perfil.nome.equals("RH") || perfil.nome.equals("Administrador") ||
                               perfil.nome.equals("CEO") || perfil.nome.equals("Diretor de Operação"))
-                              $('#piroquinha').addClass("show");
+                              $('#divCkEditor').removeAttribute("disabled");
                   }
                   else
-                        $('#piroquinha').addClass("hide");
+                        $('#divCkEditor').attr("disabled");
             })
       </script>
 	<script>
@@ -358,15 +442,19 @@
 	                      	if($(this).prop("checked")){
 	                      		
 	   	                   	 var avaliacaoCompetencia = {
-	   		                   		"idAvaliacao" : "",
-	   		                   		"idCompetencia" : ""
+	   		                   		"competencia" : {
+	   		                   			"id" : ""
+	   		                   		},
+	   		                   		"avaliacao" : {
+	   		                   			"id" : ""
+	   		                   		}
 	   		                   	 };
 	   	                   	 
 	                      		var idAvaliacao = $(this).attr("alt");
 	                      		var idCompetencia = $(this).val();
 	                      		
-	                      		avaliacaoCompetencia.idAvaliacao = idAvaliacao;
-	                      		avaliacaoCompetencia.idCompetencia = idCompetencia;
+	                      		avaliacaoCompetencia.avaliacao.id = idAvaliacao;
+	                      		avaliacaoCompetencia.competencia.id = idCompetencia;
 	                      		
 	                      		avaliacoes.push(avaliacaoCompetencia);
 	                      	}
