@@ -447,7 +447,7 @@ footer {
 										     Cliente
 										</c:if></td> --%>
 									<td><fmt:formatDate value="${vaga.dataAbertura }" pattern="dd/MM/yyyy" /></td>
-									<td id="linhaStatus"><span class="label status span-${vaga.ultimoStatus.status.nome}">${vaga.ultimoStatus.status.nome}</span></td>
+									<td id="linhaStatus"><span class="label" style="color: #fff; background-color:${vaga.ultimoStatus.status.css}">${vaga.ultimoStatus.status.nome}</span></td>
 									<td>
 										<div class="btn-group">
 											<!-- <-- ! Começo Botão -->
@@ -478,7 +478,7 @@ footer {
 												<c:if test="${vaga.ultimoStatus.status.nome == 'Pendente'}">	
 													<li id="${vaga.ultimoStatus.status.nome}"role="separator" class="Reprovar divider"></li>
 													<li id="${vaga.ultimoStatus.status.nome}" class="Reprovar"><a href="#reprova-modal"
-														onclick="alterarStatus(${vaga.id}, 'CANCELADO')"
+														onclick="alterarStatus(${vaga.id}, 'RECUSADO')"
 														data-toggle="modal" ><i class="Reprovar fa  fa-times"></i> Reprovar</a></li>
 												</c:if>
 												
