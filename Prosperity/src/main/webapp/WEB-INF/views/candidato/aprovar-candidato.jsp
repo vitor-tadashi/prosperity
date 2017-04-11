@@ -392,7 +392,6 @@
 						dataType:"json",
 						method:"GET",
 						success:function(data){	
-							debugger;
 							if(data.ultimoStatus.status.id == "9" || data.ultimoStatus.status.id == "10"){
 								 var perfil = $('#user').val();
 				                 if(perfil == "RH" || perfil == "Administrador" || perfil == "CEO" || perfil == "Diretor de Operação"){
