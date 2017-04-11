@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tbAvaliadorCandidato")
 @NamedQueries({
-		@NamedQuery(name = "atualizarAvaliador", query = "SELECT u FROM AvaliadorCandidatoEntity u WHERE u.status = null AND u.usuario.id = ?1"),
+		@NamedQuery(name = "atualizarAvaliador", query = "SELECT u FROM AvaliadorCandidatoEntity u WHERE u.status = null AND u.usuario.id = ?1 AND u.candidato = ?2"),
 		@NamedQuery(name = "obterAvaliadoresCandidato", query = "SELECT u FROM AvaliadorCandidatoEntity u WHERE u.status = null"),
 		@NamedQuery(name = "obterProposta", query = "SELECT u FROM AvaliadorCandidatoEntity u WHERE u.candidato.id = ?1 AND u.status IS NOT NULL")})
 

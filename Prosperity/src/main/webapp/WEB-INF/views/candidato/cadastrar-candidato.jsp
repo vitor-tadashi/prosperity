@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -28,7 +28,7 @@
 				<li><i class="fa fa-home"></i><a href=""> Início</a></li>
 				<li><a href=""> Candidato</a></li>
 				<li class="active">Cadastrar</li>
-				
+
 			</ul>
 		</div>
 		<!--breadcrumb-->
@@ -40,19 +40,20 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">Informações do candidato</div>
 					<div class="panel-body">
-					<div class="alert.alert-success"></div>
+						<div class="alert.alert-success"></div>
 						<div id="textDiv">
 							<c:forEach var="erro" items="${listaErros}">
 								<p>${erro}</p>
 
 							</c:forEach>
 						</div>
-							<div id="textDiv1"></div>
-								<div id="textDiv2"></div>
-								<div id="textDiv3"></div>
-								
-						<form class="form-border" action="salvar" method="post" enctype="multipart/form-data"
-							id=formCadastro onsubmit="return Validar()">
+						<div id="textDiv1"></div>
+						<div id="textDiv2"></div>
+						<div id="textDiv3"></div>
+
+						<form class="form-border" action="salvar" method="post"
+							enctype="multipart/form-data" id=formCadastro
+							onsubmit="return Validar()">
 							<div class="panel-tab clearfix">
 								<ul class="tab-bar wizard-demo" id="wizardDemo">
 									<li class="active tab-verity"><a href="#first"
@@ -71,7 +72,8 @@
 										<div class="row">
 											<div class="form-group col-md-4">
 												<label class="control-label" for="nome">Nome</label> <input
-													value="${candidato.nome}" type="text" placeholder="Informe seu nome"
+													value="${candidato.nome}" type="text"
+													placeholder="Informe seu nome"
 													class="form-control parsley-validated" data-minlength="8"
 													id="nome" name="nome">
 											</div>
@@ -91,14 +93,15 @@
 											<div class="form-group col-md-2">
 												<label for="rg" class="control-label">RG</label> <input
 													type="text" class="form-control rg parsley-validated"
-													id="rg" name="rg" data-required="true" data-required="true" placeholder="Informe seu RG"
-													value="${candidato.rg}">
+													id="rg" name="rg" data-required="true" data-required="true"
+													placeholder="Informe seu RG" value="${candidato.rg}">
 											</div>
 											<div class="form-group col-md-2 col-sm-4">
 												<label for="dataNascimento" class="control-label">Data
-													nascimento</label> <fmt:formatDate value="${candidato.dataNascimento}"
-													pattern="dd/MM/yyyy" var="dataNascimento"/>
-													<input type="text"
+													nascimento</label>
+												<fmt:formatDate value="${candidato.dataNascimento}"
+													pattern="dd/MM/yyyy" var="dataNascimento" />
+												<input type="text"
 													class="form-control date parsley-validated"
 													data-required="true" name="dataNascimento"
 													id="dataNascimento" value="${dataNascimento}"
@@ -107,8 +110,9 @@
 											<div class="form-group col-md-2">
 												<label for="contato" class="control-label">Telefone</label>
 												<input type="text"
-													class="form-control telefone parsley-validated" placeholder="Informe seu telefone"
-													data-required="true" id="contato" name="contato.telefone"
+													class="form-control telefone parsley-validated"
+													placeholder="Informe seu telefone" data-required="true"
+													id="contato" name="contato.telefone"
 													value="${candidato.contato.telefone}">
 											</div>
 											<div class="form-group col-md-2">
@@ -119,15 +123,15 @@
 													onblur="pesquisacep(this.value);" />
 											</div>
 											<div class="form-group col-md-6">
-												<label for="rua" class="control-label">Endereço</label>
-												<input type="text" class="form-control parsley-validated"
-													id="rua" data-required="true" name="endereco.logradouro"
+												<label for="rua" class="control-label">Endereço</label> <input
+													type="text" class="form-control parsley-validated" id="rua"
+													data-required="true" name="endereco.logradouro"
 													value="${candidato.endereco.logradouro}" />
 											</div>
 											<div class="form-group col-md-2">
 												<label for="numero" class="control-label">Número</label> <input
 													type="number" class="form-control parsley-validated"
-													id="numero" data-required="true" name="endereco.numero" 
+													id="numero" data-required="true" name="endereco.numero"
 													value="${candidato.endereco.numero}">
 											</div>
 											<div class="form-group col-md-3">
@@ -150,28 +154,29 @@
 													value="${candidato.endereco.cidade}" />
 											</div>
 											<div class="form-group col-xs-12">
-												<label  class="control-label">Currículo</label>
+												<label class="control-label">Currículo</label>
 												<div class="upload-file" style="width: 356px;">
 													<input type="file" id="upload-curriculo" name="file"
 														class="upload-demo"> <label data-title="Selecione"
 														for="upload-curriculo"> <span
-														data-title="Nenhum arquivo selecionado..." ></span>
+														data-title="Nenhum arquivo selecionado..."></span>
 													</label>
 												</div>
-											</div> 
+											</div>
 										</div>
 									</div>
 									<div class="tab-pane fade" id="second">
 										<div class="form-group col-md-4">
 											<label for="curso">Curso</label> <input type="text"
-												class="form-control" id="curso" name="formacao.curso"
+												class="form-control" id="curso" name="formacao.nomeCurso"
 												placeholder="Informe seu curso"
 												value="${candidato.formacao.nomeCurso}">
 										</div>
 										<div class="form-group col-md-5">
 											<label for="instituicao">Instituição</label> <input
 												type="text" class="form-control" id="instituicao"
-												name="formacao.nomeInstituicao" placeholder=" Informe a instituição"
+												name="formacao.nomeInstituicao"
+												placeholder=" Informe a instituição"
 												value="${candidato.formacao.nomeInstituicao}">
 										</div>
 										<div class="form-group col-md-3">
@@ -198,14 +203,13 @@
 											</select>
 										</div>
 										<div class="form-group col-md-2">
-											<label for="mesAnoConclusao">Data de conclusão</label> 
+											<label for="mesAnoConclusao">Data de conclusão</label>
 											<fmt:formatDate value="${candidato.formacao.dataConclusao}"
-													pattern="dd/MM/yyyy" var="dataConclusao"/>
-											<input
-												type="text" class="form-control date" id="mesAnoConclusao"
-												data-required="false" name="formacao.dataConclusao" 
-												onblur="validarData(this.value)"
-												value="${dataConclusao}">
+												pattern="dd/MM/yyyy" var="dataConclusao" />
+											<input type="text" class="form-control date"
+												id="mesAnoConclusao" data-required="false"
+												name="formacao.dataConclusao"
+												onblur="validarData(this.value)" value="${dataConclusao}">
 										</div>
 									</div>
 									<div class="tab-pane fade" id="third">
@@ -232,7 +236,7 @@
 										</div>
 										<div class="form-group col-md-3">
 											<label for="vaga">Vaga a ser aplicado</label> <select
-												class="form-control" id="vaga" name="vagaCandidato.vaga.id" >
+												class="form-control" id="vaga" name="vagaCandidato.vaga.id">
 												<option value="0">Selecione</option>
 												<c:forEach var="vaga" items="${listaVaga}">
 													<option value="${vaga.id}"
@@ -241,35 +245,35 @@
 											</select>
 										</div>
 										<div class="form-group col-md-3">
-											<label for="canalInformacao">Como ficou sabendo
-												desta vaga?</label> <select class="form-control"
+											<label for="canalInformacao">Como ficou sabendo desta
+												vaga?</label> <select class="form-control"
 												name="vagaCandidato.CanalInformacao.id" id="canalInformacao">
 												<option value="0">Selecione</option>
 												<c:forEach var="canalInformacao" items="${listaCanal}">
 													<option value="${canalInformacao.id}"
-													${canalInformacao.id == candidato.vagaCandidato.canalInformacao.id ? 'selected="selected"' : ''}>${canalInformacao.nome}</option>
+														${canalInformacao.id == candidato.vagaCandidato.canalInformacao.id ? 'selected="selected"' : ''}>${canalInformacao.nome}</option>
 												</c:forEach>
 											</select>
 										</div>
 										<div>
 											<div class="form-group col-md-2 col-sm-2">
 												<label for="dataUltimoContato" class="control-label">Data
-													de ultimo contato</label> <fmt:formatDate value="${candidato.dataUltimoContato}"
-													pattern="dd/MM/yyyy" var="dataUltimoContato"/>
-													<input type="text"
-													class="form-control date" name="dataConclusao"
-													onblur="validarData(this.value)" data-required="false"
-													id="dataUltimoContato"
+													de ultimo contato</label>
+												<fmt:formatDate value="${candidato.dataUltimoContato}"
+													pattern="dd/MM/yyyy" var="dataUltimoContato" />
+												<input type="text" class="form-control date"
+													name="dataConclusao" onblur="validarData(this.value)"
+													data-required="false" id="dataUltimoContato"
 													value="${dataUltimoContato}">
 											</div>
 											<div class="form-group col-md-2 col-sm-4">
 												<label for="entrevista" class="control-label">Data
-													de Entrevista</label> <fmt:formatDate value="${candidato.entrevista}"
-													pattern="dd/MM/yyyy" var="entrevista"/>
-													<input type="text" class="form-control date"
+													de Entrevista</label>
+												<fmt:formatDate value="${candidato.entrevista}"
+													pattern="dd/MM/yyyy" var="entrevista" />
+												<input type="text" class="form-control date"
 													data-required="false" name="entrevista" id="entrevista"
-													onblur="validarData(this.value)"
-													value="${entrevista}">
+													onblur="validarData(this.value)" value="${entrevista}">
 											</div>
 										</div>
 
@@ -280,7 +284,7 @@
 
 							</div>
 							<div>
-							<input type="hidden" value="${candidato.id}" name="id">
+								<input type="hidden" value="${candidato.id}" name="id">
 								<button class="btn btn-success btnAjuste">Salvar</button>
 							</div>
 						</form>
