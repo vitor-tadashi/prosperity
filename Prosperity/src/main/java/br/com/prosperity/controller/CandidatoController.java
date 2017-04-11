@@ -272,7 +272,12 @@ public class CandidatoController<PaginarCandidato> {
 	@RequestMapping(value = { "alterar-status-candidato" }, method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
 	public @ResponseBody String alterarStatusCandidato(Model model,
-			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato, @ModelAttribute("avaliacoesCompetencias") ArrayList<CandidatoCompetenciaBean> avaliacoesCompetencias) {
+			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato,
+			@ModelAttribute("avaliacoesCompetencias") String avaliacoesCompetencias) {
+		
+		List<String> resultado = new Gson().fromJson(avaliacoesCompetencias, List.class);
+		
+		resultado.clear();
 		
 		candidatoBusiness.alterarStatus(situacaoCandidato);
 		return "candidato/aprovar";

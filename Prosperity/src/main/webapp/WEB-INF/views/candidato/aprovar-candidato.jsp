@@ -123,106 +123,111 @@
 					<h4 style="text-align: center;">Gestão de candidato</h4>
 				</div>
 				<div class="modal-body">
-				
+
 					<div class="panel panel-default">
-					    <div class="panel-tab clearfix">
-					        <ul class="tab-bar">
-					            <li class="active"><a href="#infoEntrevista" data-toggle="tab"><i class="fa fa-user"></i> Informações de entrevista</a></li>
-					            <li><a href="#processoSelecao" data-toggle="tab"><i class="fa fa-pencil"></i> Processo de seleção</a></li>
-					            <li><a href="#avaliacaoComp" data-toggle="tab"><i class="fa fa-briefcase"></i> Avaliação de competências</a></li>
-					            <li><a href="#proposta" data-toggle="tab"><i class="fa fa-money"></i> Proposta</a></li>
-					        </ul>
-					    </div>
-					    
-					    <div class="panel-body">
-					        <div class="tab-content">
-					        
-					            <div class="tab-pane fade in active" id="infoEntrevista">
+						<div class="panel-tab clearfix">
+							<ul class="tab-bar">
+								<li class="active"><a href="#infoEntrevista"
+									data-toggle="tab"><i class="fa fa-user"></i> Informações de
+										entrevista</a></li>
+								<li><a href="#processoSelecao" data-toggle="tab"><i
+										class="fa fa-pencil"></i> Processo de seleção</a></li>
+								<li><a href="#avaliacaoComp" data-toggle="tab"><i
+										class="fa fa-briefcase"></i> Avaliação de competências</a></li>
+								<li><a href="#proposta" data-toggle="tab"><i
+										class="fa fa-money"></i> Proposta</a></li>
+							</ul>
+						</div>
+
+						<div class="panel-body">
+							<div class="tab-content">
+
+								<div class="tab-pane fade in active" id="infoEntrevista">
 									<div class="form-group">
 										<label class="control-label">Parecer :</label>
 										<div class="form-group">
-											<input type="hidden" id="hdn-id-candidato" />
-											<input type="hidden" id="hdn-status" />
-											<textarea class="form-control" id="parecer" style="margin-left: 0px; width: 770px" name="parecer">
+											<input type="hidden" id="hdn-id-candidato" /> <input
+												type="hidden" id="hdn-status" />
+											<textarea class="form-control" id="parecer"
+												style="margin-left: 0px; width: 770px" name="parecer">
 											</textarea>
 										</div>
 									</div>
-					            </div>
-					            
-					            <div class="tab-pane fade" id="processoSelecao">
-					                <div class="form-group">
-					                	<div class="panel panel-default">
-						                	<div class="panel-body">
-	    
-											    <label>Etapas dos processos de seleção: </label>
-											    
-											    <form name="form1" action="paginaPHPouASP" method="post">
-											        
-											        <input class="btn btn-xs btn-success" type="button" value="Adicionar etapa" onclick="AddCampos()">
-											        <br>
-											        <br>
-											        <script type="text/javascript">
+								</div>
+
+								<div class="tab-pane fade" id="processoSelecao">
+									<div class="form-group">
+										<div class="panel panel-default">
+											<div class="panel-body">
+
+												<label>Etapas dos processos de seleção: </label>
+
+												<form name="form1" action="paginaPHPouASP" method="post">
+
+													<input class="btn btn-xs btn-success" type="button"
+														value="Adicionar etapa" onclick="AddCampos()"> <br>
+													<br>
+													<script type="text/javascript">
 											            //Escrevendo o código-fonte HTML e ocultando os campos criados:
 											            for (iLoop = 1; iLoop <= totalCampos; iLoop++) {
 											                document.write("<span id='linha"+iLoop+"' style='display:none'> <select class='btn btn-default btn-xs dropdown-toggle' style='width: 160px;'><option value='0'>Selecione etapa</option><option value='1'>Prova Prática</option><option value='2'>Prova teórica</option><option value='3'>Dinâmica de Grupo</option></select> <input type='text' id='arq"+iLoop+"' name='arq"+iLoop+"'> <input class='btn btn-xs btn-danger' type='button' value='Remover' onclick='RemoverCampos(\""+iLoop+"\")'></span>");
 											            }
 											        </script>
-											        <input type="hidden" name="hidden2" id="hidden2">
-											    </form>
-											    
+													<input type="hidden" name="hidden2" id="hidden2">
+												</form>
+
 											</div>
 										</div>
 									</div>
 									<div class="form-group">
-										<input type="hidden" id="hdn-id-candidato" />
-										<input type="hidden" id="hdn-status" />
-										<label class="control-label">Parecer técnico:</label>
-										<textarea class="form-control" id="parecerTecnico" style="margin-left: 0px; width: 770px" name="parecerTecnico">
+										<input type="hidden" id="hdn-id-candidato" /> <input
+											type="hidden" id="hdn-status" /> <label
+											class="control-label">Parecer técnico:</label>
+										<textarea class="form-control" id="parecerTecnico"
+											style="margin-left: 0px; width: 770px" name="parecerTecnico">
 										</textarea>
 									</div>
-					            </div>
-					            
-					            <div class="tab-pane fade" id="avaliacaoComp">
-					                <section class="panel panel-default">
+								</div>
+
+								<div class="tab-pane fade" id="avaliacaoComp">
+									<section class="panel panel-default">
 										<div class="panel-heading text-center">
 											<label for="exampleInputEmail1">Avaliação de
 												competências</label>
 										</div>
-		
-										<table id="tabelaCompetencias" class="table" style="font-size: 10px">
+
+										<table id="tabelaCompetencias" class="table"
+											style="font-size: 10px">
 											<thead class="text-center">
 												<tr class="text-center">
 													<th class="text-center">Competências</th>
-													<th>Insatisfatório</th>
-													<th>Em Desenvolvimento</th>
-													<th>Atende as Expectativas</th>
-													<th>Supera as Expectativas</th>
+													<c:forEach var="avaliacao" items="${avaliacoes}">
+														<th>${avaliacao.nome}</th>
+													</c:forEach>
 												</tr>
 											</thead>
 											<tbody class="text-center">
 												<c:forEach var="competencia" items="${competencias}">
-													
-														<tr>
-			
-															<td>${competencia.nome}</td>
-															<c:forEach var="avaliacao" items="${avaliacoes}">
-															
-																<td><label class="label-radio inline"> <input
-																		class="avaliacaoCompetencia" type="radio" alt="${avaliacao.id}" name="avaliacao${competencia.nome}" value="${competencia.id}">
-																		<span class="custom-radio"></span>
-																</label></td>
-																
-															</c:forEach>												
-			
-														</tr>
+													<tr class="linhaAvaliacao">
+														<td>${competencia.nome}</td>
+														<c:forEach var="avaliacao" items="${avaliacoes}">
+															<td><label class="label-radio inline"> <input
+																	class="avaliacaoCompetencia" type="radio"
+																	alt="${avaliacao.id}"
+																	name="avaliacao${competencia.nome}"
+																	value="${competencia.id}"> <span
+																	class="custom-radio"></span>
+															</label></td>
+														</c:forEach>
+													</tr>
 												</c:forEach>
 											</tbody>
 										</table>
 									</section>
-					            </div>
-					            
-					            <div class="tab-pane fade" id="proposta">
-					                <div class="form-group col-md-12" id="divCkEditor">
+								</div>
+
+								<div class="tab-pane fade" id="proposta">
+									<div class="form-group col-md-12" id="divCkEditor">
 										<div class="form-group">
 											<label class="control-label">Proposta:</label>
 											<div class="adjoined-bottom">
@@ -236,11 +241,11 @@
 											</div>
 										</div>
 									</div>
-					            </div>
-					            
-					        </div>
-					    </div>
-					    <div class="panel-footer ">
+								</div>
+
+							</div>
+						</div>
+						<div class="panel-footer ">
 							<button type="button" class="btn btn-sm btn-primary"
 								href="#confirm-modal" data-toggle="modal">
 								<i class="fa fa-check fa-lg"></i>&nbsp;Enviar
@@ -348,7 +353,9 @@
 														style="color: #fff; background-color: ${candidato.ultimoStatus.status.css}">${candidato.ultimoStatus.status.nome}</span></td>
 
 													<td><input type="hidden" name="idStatus" id="idStatus"
-														value="${candidato.ultimoStatus.status.id}" />
+														value="${candidato.ultimoStatus.status.id}" /> <input
+														type="hidden" name="propostas" id="propostas"
+														value="${candidato.ultimoStatus.proposta}" />
 														<div class="btn-group">
 															<button class="btn btn-sm btn-info dropdown-toggle"
 																data-toggle="dropdown" aria-haspopup="true"
@@ -422,12 +429,19 @@
                   perfil = $('#user').val();
                   status = $('#idStatus').val();
                   if(status == 9 || status == 10 ){
-                        if(perfil.nome.equals("RH") || perfil.nome.equals("Administrador") ||
-                              perfil.nome.equals("CEO") || perfil.nome.equals("Diretor de Operação"))
-                              $('#divCkEditor').removeAttribute("disabled");
+                        if(perfil.nome == "RH" || perfil.nome == "Administrador" ||
+                              perfil.nome == "CEO" || perfil.nome == "Diretor de Operação")
+                        	  var div = document.getElementById("divCkEditor").className = "show";
                   }
                   else
-                        $('#divCkEditor').attr("disabled");
+                	  var div = document.getElementById("divCkEditor").className = "hidden";
+            })
+      </script>
+	<script>
+            $(document).ready(function() {
+            	
+            	proposta = $('#propostas').val();
+            	CKEDITOR.instances.editor.setData(proposta);
             })
       </script>
 	<script>
@@ -438,27 +452,28 @@
                         
 	                   	 var avaliacoes = [];
 	                   	 
-	                 	 $(".avaliacaoCompetencia").each(function(){
-	                      	if($(this).prop("checked")){
-	                      		
-	   	                   	 var avaliacaoCompetencia = {
-	   		                   		"competencia" : {
-	   		                   			"id" : ""
-	   		                   		},
-	   		                   		"avaliacao" : {
-	   		                   			"id" : ""
-	   		                   		}
-	   		                   	 };
-	   	                   	 
-	                      		var idAvaliacao = $(this).attr("alt");
-	                      		var idCompetencia = $(this).val();
-	                      		
-	                      		avaliacaoCompetencia.avaliacao.id = idAvaliacao;
-	                      		avaliacaoCompetencia.competencia.id = idCompetencia;
-	                      		
-	                      		avaliacoes.push(avaliacaoCompetencia);
-	                      	}
-	                      });
+	                   	$(".avaliacaoCompetencia").each(function(){
+                            if($(this).prop("checked")){
+                                
+                                 var avaliacaoCompetencia = {
+                                        competencia : {
+                                            id : ""
+                                        },
+                                        avaliacao : {
+                                            id : ""
+                                        }
+                                     };
+                                 
+                                var idAvaliacao = $(this).attr("alt");
+                                var idCompetencia = $(this).val();
+                                
+                                avaliacaoCompetencia.avaliacao.id = idAvaliacao;
+                                avaliacaoCompetencia.competencia.id = idCompetencia;
+                                
+                                console.log(avaliacaoCompetencia);
+                                avaliacoes.push(avaliacaoCompetencia);
+                            }
+                        });
 	            		
                         $.ajax({
                               url : "alterar-status-candidato",
@@ -469,7 +484,7 @@
                                    'parecer' : $('#parecer').val(),
                                    'proposta' : CKEDITOR.instances.editor.getData(),
                                    'idStatus' : $('#hdn-status').val(),
-                                   'avaliacoesCompetencias' : avaliacoes     
+                                   'avaliacoesCompetencias' : JSON.stringify(avaliacoes)
                               },
                               success : function(data) {
                                    location.reload();
