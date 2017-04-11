@@ -272,7 +272,7 @@ public class CandidatoBusiness {
 					vagao.add(vaguinhas);
 				}
 
-				inserirAvaliadores(candidatoEntity, 140);
+				inserirAvaliadores(candidatoEntity, vagao.get(0).getVaga().getId());
 
 				situacaoCandidato.setIdCandidato(candidatoEntity.getId());
 			situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);

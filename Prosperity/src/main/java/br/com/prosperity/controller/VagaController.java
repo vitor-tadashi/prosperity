@@ -203,13 +203,14 @@ public class VagaController {
 
 		VagaBean vaga = null;
 		vaga = vagaBusiness.obterVagaPorId(id);
-
+		StatusVagaBean ultimoStatus = vaga.getUltimoStatus();
 		List<AvaliadorVagaBean> avaliadorVagaBean = null;
 		avaliadorVagaBean = vagaBusiness.obterAvaliadores(id);
 		
 		obterDominiosVaga(model);
 		model.addAttribute("vaga", vaga);
 		model.addAttribute("avaliadorVagaBean", avaliadorVagaBean);
+		model.addAttribute("ultimoStatus", ultimoStatus);
 
 		return "vaga/solicitar-vaga";
 	}

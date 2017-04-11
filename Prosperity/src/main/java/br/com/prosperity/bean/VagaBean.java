@@ -40,6 +40,7 @@ public class VagaBean {
 	private String descricaoFormacaoAcademica; //
 	private String descricaoPerfilComportamental; //
 	private String descricaoPerfilTecnico; //
+	@DateTimeFormat(pattern = "yyyy-mm-dd")
 	private Date dataAbertura; //
 	private Date dataAprovacao; //
 	private Date dataFechamento; //
@@ -53,9 +54,9 @@ public class VagaBean {
 	private String telResponsavel;
 	private List<UsuarioBean> avaliadores;
 	private StatusVagaBean ultimoStatus;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date dataAberturaDe;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date dataAberturaPara;
 
 	public StatusVagaBean getUltimoStatus() {

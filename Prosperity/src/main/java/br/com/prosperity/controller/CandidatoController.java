@@ -49,6 +49,7 @@ import br.com.prosperity.business.SenioridadeBusiness;
 import br.com.prosperity.business.SituacaoAtualBusiness;
 import br.com.prosperity.business.TipoCursoBusiness;
 import br.com.prosperity.business.VagaBusiness;
+import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.exception.BusinessException;
 
 @Controller
@@ -130,6 +131,16 @@ public class CandidatoController<PaginarCandidato> {
 		}
 
 		return "candidato/cadastrar-candidato";
+	}
+	
+	@RequestMapping(value = "/cancelar-candidato/{id}")
+	public String cancelaCandidato(@PathVariable Integer id) {
+		SituacaoCandidatoBean bean = new SituacaoCandidatoBean();
+		bean.setIdCandidato(id);
+		bean.setStatus(StatusCandidatoEnum.CANCELADO);
+		candidatoBusiness.alterarStatus(bean);
+		
+		return "redirect:/candidato/aprovar";
 	}
 
 	@RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)

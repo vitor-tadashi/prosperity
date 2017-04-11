@@ -232,31 +232,31 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<!-- /.modal delete-->
-	<!-- Modal delete -->
-	<div class="modal fade" id="delete-modal" data-target="#delete-modal"
-		tabindex="-1" role="dialog" aria-labelledby="modalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Fechar">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="modalLabel">Cancelar vaga</h4>
-				</div>
-				<div class="modal-body">Deseja realmente fechar esta vaga?</div>
-				<div class="modal-footer">
-					<a id="excluir" href="#">
-						<button type="button" class="btn btn-danger">Sim</button>
-					</a>
-					<button type="button" class="btn btn-success" data-dismiss="modal">Não</button>
+		</div>
+		<!-- Modal delete -->
+		<div class="modal fade" id="delete-modal" data-target="#delete-modal"
+			tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Fechar">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="modalLabel">Cancelar candidato</h4>
+					</div>
+					<div class="modal-body">Deseja realmente cancelar este candidato?</div>
+					<div class="modal-footer">
+						<a id="excluir" href="${urlCancelar}">
+							<button type="button" class="btn btn-danger">Sim</button>
+						</a>
+						<button type="button" class="btn btn-success" data-dismiss="modal">Não</button>
+					</div>
 				</div>
 			</div>
 		</div>
 
-	</div>
+	
 	<!-- /.modal delete-->
 	<div id="main-container">
 		<div id="breadcrumb">
@@ -314,6 +314,7 @@
 														<div class="btn-group">
 
 															<div class="btn-group">
+
 																<button class="btn btn-sm btn-info dropdown-toggle"
 																	data-toggle="dropdown" aria-haspopup="true"
 																	aria-expanded="false">
@@ -337,9 +338,11 @@
 
 																	<li class="divider"></li>
 
-																	<li><a href="#delete-modal" data-toggle="modal"><i
-																			class="fa fa-trash-o fa-lg">&nbsp;</i>Cancelar</a></li>
-																	<!-- /fim botao -->
+																	<li><c:url scope="session" value="cancelar-candidato/${candidato.id}"
+																				var="urlCancelar">
+																			</c:url><a href="#delete-modal" data-toggle="modal"><i
+																				class="fa fa-trash-o fa-lg">&nbsp;</i>Cancelar</a></li>
+																		<!-- /fim botao -->
 
 																</ul>
 															</div>
@@ -350,6 +353,7 @@
 										</form>
 									</tbody>
 								</table>
+
 
 							</div>
 							<!-- /.row -->
@@ -475,6 +479,18 @@
                   $('#hdn-status').val(idStatus);
             
             }
+            
+            function cancelarCandidato(id) {
+            	$.ajax({
+        			url : "cancelar-candidato/"+id,
+        			type : "POST"
+        		}).done(function() {
+        			alert('done');
+        		}).fail(function(jqXHR, textStatus) {
+        			alert('fail');
+        		});
+            }
+            
             </script>
 	<script>/* paginação */
 	$(function	()	{
