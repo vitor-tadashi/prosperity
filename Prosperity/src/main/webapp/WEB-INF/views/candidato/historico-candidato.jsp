@@ -143,10 +143,10 @@
 								<div class="col-xs-4"
 									style="margin-left: 39px; padding-right: 30px">
 									<table class="table table-condensed table-bordered">
-										<c:forEach var="competencia" items="${candidato.competencias}">
+										<c:forEach var="competencias" items="${candidato.competencias}">
 											<tr>
-												<td>${competencia.competencia.nome}</td>
-												<td><span class="badge badge-info">${competencia.avaliacao.nome}</span></td>
+												<td>${competencias.competencia.nome}</td>
+												<td><span class="badge badge-info">${competencias.avaliacao.nome}</span></td>
 											</tr>
 										</c:forEach>
 									</table>

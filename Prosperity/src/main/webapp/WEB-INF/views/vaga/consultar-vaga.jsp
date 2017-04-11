@@ -536,7 +536,18 @@
 											<ul class="dropdown-menu dropdown-menu-right slidedown">
 											<li><a href="#visualizar-modal" 
 													onclick="info(${vaga.id})"><i
-														class="fa fa-eye">&nbsp</i>Visualizar</a></li>		
+														class="fa fa-eye">&nbsp</i>Visualizar</a></li>
+											<c:if test="${vaga.ultimoStatus.status.nome == 'Pendente'}">
+												<li role="separator" class="editarDivider divider"></li>
+												<li><c:url value="editar/${vaga.id}" var="myURL">
+													</c:url> <a href="${myURL}" class="editarPendente"><i class="fa fa-pencil"></i> Editar</a></li>
+												</c:if>
+												
+												<c:if test="${vaga.ultimoStatus.status.nome == 'Ativo'}">
+												<li role="separator" class="editarDivider divider"></li>
+												<li><c:url value="editar/${vaga.id}" var="myURL">
+													</c:url> <a href="${myURL}" class="editarPendente"><i class="fa fa-pencil"></i> Editar avaliadores</a></li>
+												</c:if>					
 											</ul>
 										</div> <!-- /btn-group -->
 									</td>
