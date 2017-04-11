@@ -329,11 +329,11 @@
 							aria-label="Fechar">
 							<span aria-hidden="true">&times;</span>
 						</button>
-						<h4 class="modal-title" id="modalLabel">Cancelar vaga</h4>
+						<h4 class="modal-title" id="modalLabel">Cancelar candidato</h4>
 					</div>
-					<div class="modal-body">Deseja realmente fechar esta vaga?</div>
+					<div class="modal-body">Deseja realmente cancelar este candidato?</div>
 					<div class="modal-footer">
-						<a id="excluir" href="#">
+						<a id="excluir" href="${urlCancelar}">
 							<button type="button" class="btn btn-danger">Sim</button>
 						</a>
 						<button type="button" class="btn btn-success" data-dismiss="modal">Não</button>
@@ -392,11 +392,7 @@
 
 														<td><input type="hidden" name="idStatus"
 															id="idStatus" value="${candidato.ultimoStatus.status.id}" />
-															<input type="hidden" name="propostas" id="propostas"
-															value="${candidato.ultimoStatus.proposta}" />
 															<div class="btn-group">
-																<input type="hidden" name="propostas" id="propostas"
-																	value="${candidato.ultimoStatus.proposta}" />
 																<div class="btn-group">
 																	<button class="btn btn-sm btn-info dropdown-toggle"
 																		data-toggle="dropdown" aria-haspopup="true"
@@ -421,7 +417,9 @@
 
 																		<li class="divider"></li>
 
-																		<li><a href="#delete-modal" data-toggle="modal"><i
+																		<li><c:url scope="session" value="cancelar-candidato/${candidato.id}"
+																				var="urlCancelar">
+																			</c:url><a href="#delete-modal" data-toggle="modal"><i
 																				class="fa fa-trash-o fa-lg">&nbsp;</i>Cancelar</a></li>
 																		<!-- /fim botao -->
 
@@ -543,6 +541,18 @@
                   $('#hdn-status').val(idStatus);
             
             }
+            
+            function cancelarCandidato(id) {
+            	$.ajax({
+        			url : "cancelar-candidato/"+id,
+        			type : "POST"
+        		}).done(function() {
+        			alert('done');
+        		}).fail(function(jqXHR, textStatus) {
+        			alert('fail');
+        		});
+            }
+            
             </script>
 		<script>/* paginação */
 	$(function	()	{
