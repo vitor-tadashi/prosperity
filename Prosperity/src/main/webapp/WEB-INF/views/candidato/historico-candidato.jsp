@@ -145,7 +145,7 @@
 									<table class="table table-condensed table-bordered">
 										<c:forEach var="competencia" items="${candidato.competencias}">
 											<tr>
-												<td>${competencia.nome}</td>
+												<td>${competencia.competencia.nome}</td>
 												<td><span class="badge badge-info">${competencia.avaliacao.nome}</span></td>
 											</tr>
 										</c:forEach>
@@ -153,20 +153,7 @@
 								</div>
 							</div>
 							
-							<div class="form-group col-xs-12">
-								<label class="col-xs-2 control-label">Avaliadores</label>
-								<div class="col-xs-4"
-									style="margin-left: 39px; padding-right: 30px">
-									<table class="table table-condensed table-bordered">
-										<c:forEach var="avaliador" items="${candidato.avaliadores}">
-											<tr>
-												<td>${avaliador.nome}</td>
-												<td><span class="badge badge-info">${avaliador.nome}</span></td>
-											</tr>
-										</c:forEach>
-									</table>
-								</div>
-							</div>
+							
 						</div>
 
 

@@ -187,7 +187,7 @@ public class CandidatoController<PaginarCandidato> {
 		CandidatoBean candidato = candidatoBusiness.obter(id);
 		obterDominiosCandidato(model);
 		model.addAttribute("candidato", candidato);
-
+		
 		return "candidato/historico-candidato";
 	}
 
