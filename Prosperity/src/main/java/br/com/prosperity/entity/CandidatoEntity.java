@@ -34,7 +34,7 @@ import javax.persistence.TemporalType;
 		// and ?4"),
 		@NamedQuery(name = "pesquisarNome", query = "SELECT u FROM CandidatoEntity u WHERE u.nome like ?1 AND u.valorPretensaoSalarial BETWEEN ?2 AND ?3 AND u.dataAbertura BETWEEN ?4 AND ?5"),
 		@NamedQuery(name = "obterPorCPF", query = "SELECT u FROM CandidatoEntity u WHERE u.cpf = ?1"),
-		@NamedQuery(name = "verificarCanidatura", query = "SELECT c FROM CandidatoEntity c JOIN c.statusCandidatos sc WHERE sc.status in(6,7,14)"
+		@NamedQuery(name = "verificarCandidatura", query = "SELECT c FROM CandidatoEntity c JOIN c.statusCandidatos sc WHERE sc.status in(6,7,14)"
 				+ "AND sc.idStatusCandidato = (SELECT MAX(sc.idStatusCandidato) FROM CandidatoEntity c JOIN c.statusCandidatos sc)"),
 		@NamedQuery(name = "obterParaCombo", query = "SELECT v.id, v.nomeVaga FROM VagaEntity v"),
 
@@ -54,7 +54,7 @@ import javax.persistence.TemporalType;
 				+ "INNER JOIN c.avaliadores ac "
 				+ "WHERE (sc.idStatusCandidato = (SELECT max(scc.idStatusCandidato) FROM StatusCandidatoEntity scc WHERE scc.candidato.id = c.id)) "
 				+ "AND ((sc.status.id IN (?1) AND ac.status IS NOT NULL) "
-				+ "OR (sc.status.id = ?2 AND ac.status IS NULL and ac.usuario.id = ?3))"),
+				+ "OR (sc.status.id IN (?2) AND ac.status IS NULL AND ac.usuario.id = ?3))"),
 		
 		@NamedQuery(name = "proposta", query = "SELECT c FROM CandidatoEntity c, AvaliadorCandidatoEntity ac INNER JOIN c.statusCandidatos sc "
 				+ "WHERE ac.candidato.id = c.id AND sc.idStatusCandidato = (SELECT max(sc.idStatusCandidato)"
