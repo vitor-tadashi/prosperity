@@ -23,8 +23,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.google.gson.Gson;
-
 import br.com.prosperity.bean.AvaliacaoBean;
 import br.com.prosperity.bean.CanalInformacaoBean;
 import br.com.prosperity.bean.CandidatoBean;
@@ -32,6 +30,8 @@ import br.com.prosperity.bean.CandidatoCompetenciaBean;
 import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.CompetenciaBean;
 import br.com.prosperity.bean.FuncionarioBean;
+import br.com.prosperity.bean.ProvaBean;
+import br.com.prosperity.bean.ProvaCandidatoBean;
 import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
@@ -41,11 +41,12 @@ import br.com.prosperity.business.CanalInformacaoBusiness;
 import br.com.prosperity.business.CandidatoBusiness;
 import br.com.prosperity.business.CargoBusiness;
 import br.com.prosperity.business.FuncionarioBusiness;
+import br.com.prosperity.business.ProvaBusiness;
+import br.com.prosperity.business.ProvaCandidatoBusiness;
 import br.com.prosperity.business.SenioridadeBusiness;
 import br.com.prosperity.business.SituacaoAtualBusiness;
 import br.com.prosperity.business.TipoCursoBusiness;
 import br.com.prosperity.business.VagaBusiness;
-import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.exception.BusinessException;
 
 @Controller
@@ -76,8 +77,14 @@ public class CandidatoController<PaginarCandidato> {
 	@Autowired
 	private CanalInformacaoBusiness canalInformacaoBusiness;
 
+	@Autowired
+	private ProvaBusiness provaBusiness;
+	
+	@Autowired
+	private ProvaCandidatoBusiness provaCandidatoBusiness;
+
 	/**
-	 * @author thamires.miranda
+	 * @author andre.posman
 	 * @param model
 	 * @return
 	 */
@@ -101,9 +108,9 @@ public class CandidatoController<PaginarCandidato> {
 
 		List<CanalInformacaoBean> listaCanal = canalInformacaoBusiness.obterTodos();
 		model.addAttribute("listaCanal", listaCanal);
-		
+
 	}
-	
+
 	@RequestMapping(value = "salvar", method = RequestMethod.POST)
 	public String salvarCandidato(@Valid @ModelAttribute("candidatoBean") CandidatoBean candidatoBean,
 			BindingResult result, @RequestParam("file") MultipartFile file, Model model) throws BusinessException {
@@ -144,8 +151,7 @@ public class CandidatoController<PaginarCandidato> {
 			obterDominiosCandidato(model);
 			return "candidato/cadastrar-candidato";
 		}
-			candidatoBusiness.inserir(candidatoBean);
-		
+		candidatoBusiness.inserir(candidatoBean);
 
 		return "candidato/cadastrar-candidato";
 	}
@@ -198,7 +204,7 @@ public class CandidatoController<PaginarCandidato> {
 
 		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.findAll();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
-		
+
 		List<VagaBean> listaVagaDrop = vagaBusiness.obterTodos();
 		model.addAttribute("listaVagaDrop", listaVagaDrop);
 
@@ -210,13 +216,13 @@ public class CandidatoController<PaginarCandidato> {
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "filtrar", method = RequestMethod.GET)
 	public String filtrarCandidatoRH(Model model, CandidatoBean candidato) {
-		if(candidato.getVagaBean().getId() == 0){
+		if (candidato.getVagaBean().getId() == 0) {
 			candidato.setVagaBean(null);
 		}
 
 		List<CandidatoBean> candidatos = candidatoBusiness.filtroCandidato(candidato);
 		model.addAttribute("candidatos", candidatos);
-		
+
 		List<VagaBean> listaVaga = vagaBusiness.listar();
 		model.addAttribute("listaVaga", listaVaga);
 
@@ -228,7 +234,7 @@ public class CandidatoController<PaginarCandidato> {
 
 		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.findAll();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
-		
+
 		List<VagaBean> listaVagaDrop = vagaBusiness.obterTodos();
 		model.addAttribute("listaVagaDrop", listaVagaDrop);
 
@@ -237,16 +243,19 @@ public class CandidatoController<PaginarCandidato> {
 		return "candidato/consultar-candidato";
 	}
 
+	// andre
 	@RequestMapping(value = "aprovar", method = RequestMethod.GET)
 	public String aprovarCandidato(Model model) {
 
 		List<CandidatoBean> candidatos = candidatoBusiness.listarAprovacao();
 		List<CompetenciaBean> competencias = candidatoBusiness.listarCompetencia();
 		List<AvaliacaoBean> avaliacoes = candidatoBusiness.listarAvaliacao();
+		List<ProvaBean> provas = provaBusiness.listarProva();
 
 		model.addAttribute("candidatos", candidatos);
-		model.addAttribute("competencias",competencias);
-		model.addAttribute("avaliacoes",avaliacoes);
+		model.addAttribute("competencias", competencias);
+		model.addAttribute("avaliacoes", avaliacoes);
+		model.addAttribute("provas", provas);
 
 		return "candidato/aprovar-candidato";
 	}
@@ -262,7 +271,7 @@ public class CandidatoController<PaginarCandidato> {
 		List<String> novosErros = new ArrayList<>();
 
 		for (FieldError erros : error) {
-				novosErros.add(erros.getDefaultMessage());
+			novosErros.add(erros.getDefaultMessage());
 
 		}
 
@@ -272,7 +281,30 @@ public class CandidatoController<PaginarCandidato> {
 	@RequestMapping(value = { "alterar-status-candidato" }, method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
 	public @ResponseBody String alterarStatusCandidato(Model model,
-			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato, @ModelAttribute("avaliacoesCompetencias") ArrayList<CandidatoCompetenciaBean> avaliacoesCompetencias) {
+			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato,
+			@ModelAttribute("avaliacoesCompetencias") ArrayList<CandidatoCompetenciaBean> avaliacoesCompetencias, 
+			@ModelAttribute("processoSeletivo") ProvaCandidatoBean processoSeletivo,
+			@ModelAttribute("nome1") String nome1,
+			@ModelAttribute("nome2") String nome2,
+			@ModelAttribute("nome3") String nome3,
+			@ModelAttribute("descricao1") String descricao1,
+			@ModelAttribute("descricao2") String descricao2,
+			@ModelAttribute("descricao3") String descricao3,
+			@ModelAttribute("parecerTecnico") String parecerTecnico)
+	{
+		ProvaCandidatoBean provaCandidato = new ProvaCandidatoBean();
+		CandidatoBean bean = new CandidatoBean();
+		bean.setId(situacaoCandidato.getIdCandidato());
+		provaCandidato.setCandidato(bean);
+		provaCandidato.setNome1(nome1);
+		provaCandidato.setNome2(nome2);
+		provaCandidato.setNome3(nome3);
+		provaCandidato.setDescricao1(descricao1);
+		provaCandidato.setDescricao2(descricao2);
+		provaCandidato.setDescricao3(descricao3);
+		provaCandidato.setParecerTecnico(parecerTecnico);
+		
+		provaCandidatoBusiness.inserir(provaCandidato);
 		
 		candidatoBusiness.alterarStatus(situacaoCandidato);
 		return "candidato/aprovar";
