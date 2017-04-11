@@ -1,10 +1,14 @@
 package br.com.prosperity.converter;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.entity.CandidatoEntity;
+import br.com.prosperity.entity.VagaCandidatoEntity;
 
 @Component
 public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoBean> {
@@ -105,9 +109,9 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		entity.setDataUltimoContato(bean.getDataUltimoContato());
 		entity.setProposta(bean.getProposta());
 		entity.setCurriculoTexto(bean.getCurriculoTexto());
-		if (entity.getVagas() == null || (entity.getVagas() != null && entity.getVagas().size() == 0))
+		if (entity.getVagas() == null || (entity.getVagas() != null && entity.getVagas().size() == 0)) {
 			entity.setVagas(vagaCandidatoConverter.convertBeanToEntity(bean.getVagas()));
-		
+		}
 		entity.setValorMax(bean.getValorMax());
 		entity.setValorMin(bean.getValorMin());
 		
