@@ -462,12 +462,12 @@ footer {
 												onclick="info(${vaga.id})"> <i class="fa fa-eye fa-lg">&nbsp</i>Visualizar
 												</a></li>
 												
-												
+												<c:if test="${vaga.ultimoStatus.status.nome == 'Pendente'}">
 												<li role="separator" class="editarDivider divider"></li>
 												<li><c:url value="editar/${vaga.id}" var="myURL">
 													</c:url> <a href="${myURL}" class="editarPendente"><i class="fa fa-pencil"></i> Editar</a></li>
-												
-												
+												</c:if>
+																								
 												<c:if test="${vaga.ultimoStatus.status.nome == 'Pendente'}">
 												    <li id="${vaga.ultimoStatus.status.nome}"role="separator" class="Aprovar divider"></li>
 													<li id="${vaga.ultimoStatus.status.nome}" class="Aprovar">
@@ -614,6 +614,7 @@ footer {
     			}
     	});
     	}
+	// funcao para alterar status
 	function alterarStatus(id,status){
 		$('input.aprovar-id').val(id);
 		$('input.aprovar-status').val(status);
@@ -710,29 +711,7 @@ $(function() {
 					"sSortDescending": ": Ordenar colunas de forma descendente"
 				}
 			}
-		/* $(function	()	{
-			$('#tabelaVaga').dataTable( {
-				"bJQueryUI": true,
-				"sPaginationType": "full_numbers"
 			});
-			$('#tabelaVaga_length').hide();
-			$('#tabelaVaga_filter').hide();
-			$('#tabelaVaga_info').hide();
-			$('#tabelaVaga_last').css('margin-left:2000px');
-			$('#tabelaVaga_next').css('margin-left:200px');
-			$('#tabelaVaga_paginate').css('margin-left: 500px');
-			$("#tabelaVaga_next").text("Próximo");
-			$("#tabelaVaga_last").text("Último");
-			$("#tabelaVaga_previous").text("Anterior");
-			$("#tabelaVaga_first").text("Primeiro");
-			
-			$("#tabelaVaga_next").attr("href", "#");
-			$("#tabelaVaga_last").attr("href", "#");
-			$("#tabelaVaga_previous").attr("href", "#");
-			$("#tabelaVaga_first").attr("href", "#");
-			$(".fg-button").attr("href", "#"); */
- 		
-		});
 	});
 	</script>
 </body>

@@ -116,7 +116,7 @@ public class VagaEntity {
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuarioEntity;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name = "idVaga")
 	private List<StatusVagaEntity> statusVagaEntity;
 
