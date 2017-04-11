@@ -1,17 +1,20 @@
 package br.com.prosperity.entity;
 
-import javax.persistence.CascadeType;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbCandidatoCompetencia")
+@NamedQuery(name="obterCompetencias", query="SELECT cc FROM CandidatoCompetenciaEntity cc")
 public class CandidatoCompetenciaEntity {
 
 	@Id
@@ -19,13 +22,13 @@ public class CandidatoCompetenciaEntity {
 	@Column(name = "idCandidatoCompetencia", unique = true, nullable = false)
 	private Integer idCandidatoCompetencia;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany
 	@JoinColumn(name = "idAvaliacao")
-	private AvaliacaoEntity avaliacao;
+	private List<AvaliacaoEntity> avaliacao;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany
 	@JoinColumn(name = "idCompetencia")
-	private CompetenciaEntity competencia;
+	private List<CompetenciaEntity> competencia;
 
 	public Integer getIdCandidatoCompetencia() {
 		return idCandidatoCompetencia;
@@ -35,19 +38,19 @@ public class CandidatoCompetenciaEntity {
 		this.idCandidatoCompetencia = idCandidatoCompetencia;
 	}
 
-	public AvaliacaoEntity getAvaliacao() {
+	public List<AvaliacaoEntity> getAvaliacao() {
 		return avaliacao;
 	}
 
-	public void setAvaliacao(AvaliacaoEntity avaliacao) {
+	public void setAvaliacao(List<AvaliacaoEntity> avaliacao) {
 		this.avaliacao = avaliacao;
 	}
 
-	public CompetenciaEntity getCompetencia() {
+	public List<CompetenciaEntity> getCompetencia() {
 		return competencia;
 	}
 
-	public void setCompetencia(CompetenciaEntity competencia) {
+	public void setCompetencia(List<CompetenciaEntity> competencia) {
 		this.competencia = competencia;
 	}
 

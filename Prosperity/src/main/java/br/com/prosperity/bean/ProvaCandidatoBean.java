@@ -1,50 +1,19 @@
-package br.com.prosperity.entity;
+package br.com.prosperity.bean;
 
+import org.springframework.stereotype.Component;
 
+@Component
+public class ProvaCandidatoBean {
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "tbProvaCandidato")
-public class ProvaCandidatoEntity {
-
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idProvaCandidato", unique = true, nullable = false)
 	private Integer id;
-	
-	@Column(name = "nmEtapa1")
 	private String nome1;
-	
-	@Column(name = "dsEtapa1")
 	private String descricao1;
-	
-	@Column(name = "nmEtapa2")
 	private String nome2;
-	
-	@Column(name = "dsEtapa2")
 	private String descricao2;
-	
-	@Column(name = "nmEtapa3")
 	private String nome3;
-	
-	@Column(name = "dsEtapa3")
 	private String descricao3;
-	
-	@Column(name = "dsParecer")
-	private String parecer;
-	
-	@OneToOne
-	@JoinColumn(name = "idCandidato")
-	private CandidatoEntity candidato;
+	private String parecerTecnico;
+	private CandidatoBean candidato;
 
 	public Integer getId() {
 		return id;
@@ -102,21 +71,20 @@ public class ProvaCandidatoEntity {
 		this.descricao3 = descricao3;
 	}
 
-	public String getParecer() {
-		return parecer;
+	public String getParecerTecnico() {
+		return parecerTecnico;
 	}
 
-	public void setParecer(String parecer) {
-		this.parecer = parecer;
+	public void setParecerTecnico(String parecerTecnico) {
+		this.parecerTecnico = parecerTecnico;
 	}
 
-	public CandidatoEntity getCandidato() {
+	public CandidatoBean getCandidato() {
 		return candidato;
 	}
 
-	public void setCandidato(CandidatoEntity candidato) {
+	public void setCandidato(CandidatoBean candidato) {
 		this.candidato = candidato;
 	}
-
 
 }

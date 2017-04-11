@@ -1,5 +1,7 @@
 package br.com.prosperity.bean;
 
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.springframework.stereotype.Component;
@@ -9,8 +11,8 @@ import org.springframework.stereotype.Component;
 public class CandidatoCompetenciaBean {
 
 	private Integer id;
-	private CompetenciaBean competencia;
-	private AvaliacaoBean avaliacao;
+	private List<CompetenciaBean> competencia;
+	private List<AvaliacaoBean> avaliacao;
 
 	public Integer getId() {
 		return id;
@@ -20,19 +22,19 @@ public class CandidatoCompetenciaBean {
 		this.id = id;
 	}
 
-	public CompetenciaBean getCompetencia() {
+	public List<CompetenciaBean> getCompetencia() {
 		return competencia;
 	}
 
-	public void setCompetencia(CompetenciaBean competencia) {
+	public void setCompetencia(List<CompetenciaBean> competencia) {
 		this.competencia = competencia;
 	}
 
-	public AvaliacaoBean getAvaliacao() {
+	public List<AvaliacaoBean> getAvaliacao() {
 		return avaliacao;
 	}
 
-	public void setAvaliacao(AvaliacaoBean avaliacao) {
+	public void setAvaliacao(List<AvaliacaoBean> avaliacao) {
 		this.avaliacao = avaliacao;
 	}
 
