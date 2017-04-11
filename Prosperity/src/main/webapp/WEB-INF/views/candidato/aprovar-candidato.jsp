@@ -293,6 +293,7 @@
 				</div>
 			</div>
 		</div>
+		</div>
 
 		<!-- Modal confirmacao-->
 		<div class="modal fade" id="confirm-modal"
@@ -425,6 +426,7 @@
 																		<!-- /fim botao -->
 
 																	</ul>
+																</div>
 																</div>
 																<!-- /btn-group --></td>
 													</tr>
