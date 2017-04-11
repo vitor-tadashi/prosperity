@@ -1,5 +1,7 @@
 $(function() {
 	
+		//Ajax para verificar o perfil e ver se ele pode editar avaliadores
+	
     	var id = $("#idPerfil").val();
     	$.ajax({
     		url: "http://localhost:8080/usuario/obter-perfil-funcionalidade",
@@ -11,7 +13,7 @@ $(function() {
 	    				$.each(lista,function(i,item){
 	    					if(item.id == 24){
 	    						$("#fourth").removeClass('hide')
-	    						$("#abaAvaliadores").removeClass('hide')
+	    						$("#tabAvaliadores").removeClass('hide')
 	    					}
 	    				});
     				
@@ -22,6 +24,19 @@ $(function() {
     	$("#cmbProjetoInterno").change(function(){
     		var cliente = $("#cmbProjetoInterno").val();
     	});
+    	
+    	
+    	// Verifica o status da vaga e esconde caso seja somente para editar avaliadores
+    	
+    	if ($("#status").val() == 19){
+    		$("#tabInformacoes").hide();
+    		$("#tabDados").hide();
+    		$("#tabPerfil").hide();
+    		$("#tabInformacoes2").removeClass("active");
+    		$("#tabAvaliadores2").addClass("active");
+    		$("#first").removeClass("active in");
+    		$("#fourth").addClass("active in");
+    	}
     	
     	/*$("#cmbProjetoInterno").change(function(){
         	check();
