@@ -1,5 +1,8 @@
 package br.com.prosperity.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -38,6 +42,10 @@ public class UsuarioEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idFuncionario")
 	private FuncionarioEntity funcionarioEntity;
+	
+	@OneToMany (cascade = CascadeType.ALL )
+	@JoinColumn(name="idUsuario")
+	private List<AvaliadorCandidatoEntity> avaliador;
 
 	@NotNull
 	@Size(min=5, message="O usuário não pode ter menos que 5 caracteres!")

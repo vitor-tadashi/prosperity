@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
+
 import br.com.prosperity.bean.AvaliacaoBean;
 import br.com.prosperity.bean.CanalInformacaoBean;
 import br.com.prosperity.bean.CandidatoBean;
@@ -79,7 +81,7 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private ProvaBusiness provaBusiness;
-	
+
 	@Autowired
 	private ProvaCandidatoBusiness provaCandidatoBusiness;
 
@@ -187,7 +189,7 @@ public class CandidatoController<PaginarCandidato> {
 		CandidatoBean candidato = candidatoBusiness.obter(id);
 		obterDominiosCandidato(model);
 		model.addAttribute("candidato", candidato);
-		
+
 		return "candidato/historico-candidato";
 	}
 
@@ -282,16 +284,17 @@ public class CandidatoController<PaginarCandidato> {
 	@ResponseStatus(value = HttpStatus.OK)
 	public @ResponseBody String alterarStatusCandidato(Model model,
 			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato,
-			@ModelAttribute("avaliacoesCompetencias") ArrayList<CandidatoCompetenciaBean> avaliacoesCompetencias, 
+			@ModelAttribute("avaliacoesCompetencias") String avaliacoesCompetencias,
 			@ModelAttribute("processoSeletivo") ProvaCandidatoBean processoSeletivo,
-			@ModelAttribute("nome1") String nome1,
-			@ModelAttribute("nome2") String nome2,
-			@ModelAttribute("nome3") String nome3,
-			@ModelAttribute("descricao1") String descricao1,
-			@ModelAttribute("descricao2") String descricao2,
-			@ModelAttribute("descricao3") String descricao3,
-			@ModelAttribute("parecerTecnico") String parecerTecnico)
-	{
+			@ModelAttribute("nome1") String nome1, @ModelAttribute("nome2") String nome2,
+			@ModelAttribute("nome3") String nome3, @ModelAttribute("descricao1") String descricao1,
+			@ModelAttribute("descricao2") String descricao2, @ModelAttribute("descricao3") String descricao3,
+			@ModelAttribute("parecerTecnico") String parecerTecnico) {
+
+		List<String> resultado = new Gson().fromJson(avaliacoesCompetencias, List.class);
+
+		resultado.clear();
+
 		ProvaCandidatoBean provaCandidato = new ProvaCandidatoBean();
 		CandidatoBean bean = new CandidatoBean();
 		bean.setId(situacaoCandidato.getIdCandidato());
@@ -303,9 +306,9 @@ public class CandidatoController<PaginarCandidato> {
 		provaCandidato.setDescricao2(descricao2);
 		provaCandidato.setDescricao3(descricao3);
 		provaCandidato.setParecerTecnico(parecerTecnico);
-		
+
 		provaCandidatoBusiness.inserir(provaCandidato);
-		
+
 		candidatoBusiness.alterarStatus(situacaoCandidato);
 		return "candidato/aprovar";
 	}
