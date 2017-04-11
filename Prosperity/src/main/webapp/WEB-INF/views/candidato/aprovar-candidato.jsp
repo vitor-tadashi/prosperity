@@ -210,7 +210,7 @@
 														name="descricao3" data-required="true" placeholder="">
 												</div>
 
-												>>>>>>> 1f724fa81f7100d11acd9e004359f77220090cca
+												
 											</div>
 										</div>
 										<div class="form-group">

@@ -275,7 +275,7 @@ public class CandidatoBusiness {
 				inserirAvaliadores(candidatoEntity, 140);
 
 				situacaoCandidato.setIdCandidato(candidatoEntity.getId());
-				situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
+			situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
 
 				alterarStatus(situacaoCandidato);
 
