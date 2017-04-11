@@ -12,7 +12,9 @@ public class VagaCandidatoConverter implements Converter<VagaCandidatoEntity, Va
 	private VagaConverter vagaConverter;
 	@Autowired
 	private CanalInformacaoConverter canalInformacaoConverter;
-
+	@Autowired
+	private CandidatoConverter candidatoConverter;
+	
 	@Override
 	public VagaCandidatoEntity convertBeanToEntity(VagaCandidatoBean bean) {
 		if (bean == null) {
