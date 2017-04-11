@@ -146,7 +146,7 @@
 											</div>
 											<!-- /form-group -->
 										</div>
-										<div class="col-md-4">
+										<!-- <div class="col-md-4">
 											<div class="form-group">
 												<label class="control-label">Data de aprovação</label>
 												<div class="form-group">
@@ -157,9 +157,9 @@
 															class="fa fa-calendar"></i></span>
 													</div>
 												</div>
-												<!-- /.col -->
+												/.col
 											</div>
-											<!-- /form-group -->
+											/form-group
 										</div>
 										<div class="col-md-4">
 											<div class="form-group">
@@ -172,9 +172,9 @@
 															class="fa fa-calendar"></i></span>
 													</div>
 												</div>
-												<!-- /.col -->
+												/.col
 											</div>
-											<!-- /form-group -->
+											/form-group
 										</div>
 									</div>
 									<div class="row">
@@ -182,7 +182,7 @@
 											<label for="">Candidatos</label> <input type="number"
 												class="form-control input-sm" id="candidatos" min="0" value="123"
 												name="numeroCandidatos" disabled>
-										</div>
+										</div> -->
 										<!-- /form-group -->
 									</div>
 								</section>
