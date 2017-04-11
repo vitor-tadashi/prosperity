@@ -170,6 +170,7 @@ public class VagaBusiness {
 			// vagaEntity.setDataAbertura(vagaBean.getDataAbertura()); //
 			// VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
 			// vagaBean.setUsuarioBean(usuario);
+			inserirAvaliadores(vagaEntity, usuarioBean);
 			vagaDAO.update(vagaEntity);
 		}
 	}
@@ -210,7 +211,8 @@ public class VagaBusiness {
 	private void desativarStatus(SituacaoVagaBean situacaoVaga) {
 		List<StatusVagaEntity> statusVagas = statusVagaDAO.findByNamedQuery("obterStatusVaga",
 				situacaoVaga.getIdVaga());
-		if (statusVagas != null || statusVagas.size() > 0) {
+		if (statusVagas == null || statusVagas.size() > 0) {
+		}else{
 			for (StatusVagaEntity status : statusVagas) {
 				status.setSituacao(false);
 				statusVagaDAO.update(status);
