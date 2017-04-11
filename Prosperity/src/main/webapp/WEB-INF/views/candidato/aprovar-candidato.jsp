@@ -392,11 +392,7 @@
 
 														<td><input type="hidden" name="idStatus"
 															id="idStatus" value="${candidato.ultimoStatus.status.id}" />
-															<input type="hidden" name="propostas" id="propostas"
-															value="${candidato.ultimoStatus.proposta}" />
 															<div class="btn-group">
-																<input type="hidden" name="propostas" id="propostas"
-																	value="${candidato.ultimoStatus.proposta}" />
 																<div class="btn-group">
 																	<button class="btn btn-sm btn-info dropdown-toggle"
 																		data-toggle="dropdown" aria-haspopup="true"
