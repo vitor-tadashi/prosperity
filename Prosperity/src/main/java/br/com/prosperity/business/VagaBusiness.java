@@ -31,7 +31,6 @@ import br.com.prosperity.entity.StatusVagaEntity;
 import br.com.prosperity.entity.VagaEntity;
 import br.com.prosperity.enumarator.StatusVagaEnum;
 
-
 @Component
 public class VagaBusiness {
 
@@ -67,19 +66,19 @@ public class VagaBusiness {
 
 	@Autowired
 	private HttpSession session;
-	
+
 	@Autowired
 	private SituacaoVagaBean situacaoVaga;
-	
+
 	@Autowired
 	private List<VagaBean> vagaBean;
-	
+
 	@Autowired
 	private List<AvaliadorVagaBean> avaliadorVagaBean;
-	
+
 	@Autowired
 	private AvaliadorVagaDAO avaliadorVagaDao;
-	
+
 	@Autowired
 	private AvaliadorVagaConverter avaliadorVagaConverter;
 
@@ -101,17 +100,16 @@ public class VagaBusiness {
 	@Transactional
 	public List<VagaBean> listarVagaAprovar() {
 
-		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagaAprovar", 4,1, true); // PENSAR
+		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagaAprovar", 4, 1, true); // PENSAR
 		int aux = 0;
-		for(VagaEntity vaga: vagaEntity)
-		{
+		for (VagaEntity vaga : vagaEntity) {
 			vaga.setDataInicio(parseData(vaga.getDataInicio()));
 			System.out.println(vaga.getDataInicio());
 			vagaEntity.get(aux).setDataInicio(vaga.getDataInicio());
 			aux++;
 		}
-		//for each para percorrer lista de vagas formantando ela.
-		//vagaEntity.get(0).setDataInicio(parseData(vagaEntity.get(0).getDataInicio()));
+		// for each para percorrer lista de vagas formantando ela.
+		// vagaEntity.get(0).setDataInicio(parseData(vagaEntity.get(0).getDataInicio()));
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 		return vagaBean;
 	}
@@ -123,24 +121,24 @@ public class VagaBusiness {
 		if (!vaga.getStatus().get(0).getStatus().getNome().equals("")) {
 			idStatus = Integer.parseInt(vaga.getStatus().get(0).getStatus().getNome());
 		}
-		
-		List<Criterion>criterions = new ArrayList<>();
-		if(!vaga.getNomeVaga().isEmpty() || vaga.getNomeVaga() != null){
+
+		List<Criterion> criterions = new ArrayList<>();
+		if (!vaga.getNomeVaga().isEmpty() || vaga.getNomeVaga() != null) {
 			criterions.add(Restrictions.like("nomeVaga", "%" + vaga.getNomeVaga() + "%"));
 		}
-		if(vaga.getDataAberturaDe() != null && vaga.getDataAberturaPara() != null){
-			criterions.add(Restrictions.between("dataAbertura", parseData(vaga.getDataAberturaDe()),  parseData(vaga.getDataAberturaPara())));
+		if (vaga.getDataAberturaDe() != null && vaga.getDataAberturaPara() != null) {
+			criterions.add(Restrictions.between("dataAbertura", parseData(vaga.getDataAberturaDe()),
+					parseData(vaga.getDataAberturaPara())));
 		}
-		
-		if(idStatus != 0) {
+
+		if (idStatus != 0) {
 			criterions.add(Restrictions.eq("status.id", idStatus));
 		}
-		List<VagaEntity>vagas = vagaDAO.findByCriteria(criterions);
-		
+		List<VagaEntity> vagas = vagaDAO.findByCriteria(criterions);
+
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagas);
 		return vagaBean;
 	}
-	
 
 	@Transactional(readOnly = true)
 
@@ -157,9 +155,9 @@ public class VagaBusiness {
 	public void inserir(VagaBean vagaBean, List<UsuarioBean> usuarioBean) {
 
 		VagaEntity vagaEntity = vagaConverter.convertBeanToEntity(vagaBean);
-		
+
 		vagaEntity.setStatusVagaEntity(statusVagaDAO.findByNamedQuery("statusVaga", vagaEntity.getId()));
-		
+
 		if (vagaEntity.getId() == null) {
 			Date dateNow = new Date();
 			vagaEntity.setDataAbertura(dateNow);
@@ -193,11 +191,14 @@ public class VagaBusiness {
 	public void alterarStatus(SituacaoVagaBean situacaoVaga) {
 		StatusVagaEntity statusVagaEntity = new StatusVagaEntity();
 
-		desativarStatus(situacaoVaga);
-		
+		if (situacaoVaga.getStatus().getValue() != 4) {
+			desativarStatus(situacaoVaga);
+		}
 		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
 		statusVagaEntity.setStatus(statusDAO.findById(situacaoVaga.getStatus().getValue()));
-		statusVagaEntity.getVaga().setId(situacaoVaga.getIdVaga());
+		VagaEntity vagaEntity = new VagaEntity();
+		vagaEntity.setId(situacaoVaga.getIdVaga());
+		statusVagaEntity.setVaga(vagaEntity);
 		statusVagaEntity.setDataAlteracao(new Date());
 		statusVagaEntity.setUsuario(usuarioDAO.findById(usuarioBean.getId()));
 		statusVagaEntity.setSituacao(true);
@@ -207,10 +208,13 @@ public class VagaBusiness {
 
 	@Transactional
 	private void desativarStatus(SituacaoVagaBean situacaoVaga) {
-		List<StatusVagaEntity> statusVagas = statusVagaDAO.findByNamedQuery("obterStatusVaga", situacaoVaga.getIdVaga());
-		for (StatusVagaEntity status : statusVagas) {
-			status.setSituacao(false);
-			statusVagaDAO.update(status);
+		List<StatusVagaEntity> statusVagas = statusVagaDAO.findByNamedQuery("obterStatusVaga",
+				situacaoVaga.getIdVaga());
+		if (statusVagas != null || statusVagas.size() > 0) {
+			for (StatusVagaEntity status : statusVagas) {
+				status.setSituacao(false);
+				statusVagaDAO.update(status);
+			}
 		}
 
 	}
@@ -231,23 +235,23 @@ public class VagaBusiness {
 	@Transactional
 	private void inserirAvaliadores(VagaEntity vaga, List<UsuarioBean> usuarios) {
 		for (UsuarioBean usuario : usuarios) {
-            AvaliadorVagaEntity avaliadorVagaEntity = new AvaliadorVagaEntity();
-            avaliadorVagaEntity.setUsuario(usuarioConverter.convertBeanToEntity(usuario));
-            avaliadorVagaEntity.setVaga(vaga);
-            avaliadorVagaDAO.insert(avaliadorVagaEntity);
+			AvaliadorVagaEntity avaliadorVagaEntity = new AvaliadorVagaEntity();
+			avaliadorVagaEntity.setUsuario(usuarioConverter.convertBeanToEntity(usuario));
+			avaliadorVagaEntity.setVaga(vaga);
+			avaliadorVagaDAO.insert(avaliadorVagaEntity);
 		}
 	}
-	
-	@Transactional(readOnly=true)
+
+	@Transactional(readOnly = true)
 	public List<VagaBean> obterTodos() {
 		List<VagaEntity> vagaEntity = vagaDAO.findAll();
 		vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 		return vagaBean;
 	}
-	
-	@Transactional(readOnly=true)
-	public List<AvaliadorVagaBean> obterAvaliadores (Integer id){
-		List<AvaliadorVagaEntity> avaliadorVagaEntity = avaliadorVagaDao.findByNamedQuery("obterAvaliadoresDaVaga",id);
+
+	@Transactional(readOnly = true)
+	public List<AvaliadorVagaBean> obterAvaliadores(Integer id) {
+		List<AvaliadorVagaEntity> avaliadorVagaEntity = avaliadorVagaDao.findByNamedQuery("obterAvaliadoresDaVaga", id);
 		avaliadorVagaBean = avaliadorVagaConverter.convertEntityToBean(avaliadorVagaEntity);
 		return avaliadorVagaBean;
 	}
