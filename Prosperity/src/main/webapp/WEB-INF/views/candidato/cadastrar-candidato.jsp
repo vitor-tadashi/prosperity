@@ -88,7 +88,7 @@
 													type="text" class="form-control cpf parsley-validated"
 													id="cpf" name="cpf" data-required="true"
 													placeholder="Informe seu CPF" value="${candidato.cpf}"
-													onblur="verificarCPF(this.value)">
+													onblur="verificarCPF()">
 											</div>
 											<div class="form-group col-md-2">
 												<label for="rg" class="control-label">RG</label> <input
@@ -105,7 +105,7 @@
 													class="form-control date parsley-validated"
 													data-required="true" name="dataNascimento"
 													id="dataNascimento" value="${dataNascimento}"
-													onblur="validarData(this.value)">
+													onblur="validarData()">
 											</div>
 											<div class="form-group col-md-2">
 												<label for="contato" class="control-label">Telefone</label>
@@ -120,7 +120,7 @@
 													type="text" class="form-control cep parsley-validated"
 													id="cep" name="endereco.cep" placeholder="Informe seu CEP"
 													value="${candidato.endereco.cep}" data-required="true"
-													onblur="pesquisacep(this.value);" />
+													onblur="pesquisacep(this.value)" />
 											</div>
 											<div class="form-group col-md-6">
 												<label for="rua" class="control-label">Endereço</label> <input
@@ -209,7 +209,7 @@
 											<input type="text" class="form-control date"
 												id="mesAnoConclusao" data-required="false"
 												name="formacao.dataConclusao"
-												onblur="validarData(this.value)" value="${dataConclusao}">
+												onblur="validarData()" value="${dataConclusao}">
 										</div>
 									</div>
 									<div class="tab-pane fade" id="third">
@@ -273,7 +273,7 @@
 													pattern="dd/MM/yyyy" var="entrevista" />
 												<input type="text" class="form-control date"
 													data-required="false" name="entrevista" id="entrevista"
-													onblur="validarData(this.value)" value="${entrevista}">
+													onblur="validarData()" value="${entrevista}">
 											</div>
 										</div>
 
@@ -452,7 +452,7 @@
 		}
 	</script>
 	<script type="text/javascript">
-		function validarData(id) {
+		function validarData() {
 			
 			var campo = $('#dataNascimento').val();
 			   if (campo!="")
@@ -474,7 +474,7 @@
 			    				textDiv2.textContent = "Data inválida";
 
 			    				var text = "[" + div.textContent + "]";
-			                        campo.focus();
+			                        
 			                        return false;
 			                }
 			         }
@@ -485,7 +485,7 @@
 			    			textDiv2.textContent = "Data inválida";
 
 			    			var text = "[" + div.textContent + "]";
-			                campo.focus();
+			               
 			                return false;
 			         }
 			        var div = document.getElementById("textDiv2").className = "";
@@ -493,7 +493,7 @@
 	    			textDiv2.textContent = "";
 
 	    			var text = "[" + div.textContent + "]";
-	                campo.focus();
+	                
 			return true;
 			
 			}
