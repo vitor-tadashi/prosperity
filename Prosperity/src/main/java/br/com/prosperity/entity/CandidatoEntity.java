@@ -146,7 +146,7 @@ public class CandidatoEntity {
 	@JoinColumn(name = "idCandidato")
 	private List<StatusCandidatoEntity> statusCandidatos;
 
-	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
 	@JoinColumn(name = "idCandidato")
 	private List<CandidatoCompetenciaEntity> competencias;
 
