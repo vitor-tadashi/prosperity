@@ -22,89 +22,6 @@
 <link rel="stylesheet"
 	href="/resources/css/ckeditor_/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
 
-<!-- <script> -->
-<!-- 	//Total máximo de campos que você permitirá criar em seu site: -->
-<!-- 	var totalCampos = 3; -->
-
-<!-- // 	Não altere os valores abaixo, pois são variáveis controle -->
-<!-- 	var iLoop = 1; -->
-<!-- 	var iCount = 0; -->
-<!-- 	var linhaAtual; -->
-
-
-<!-- 	function AddCampos() { -->
-<!-- 	var hidden1 = document.getElementById("hidden1"); -->
-<!-- 	var hidden2 = document.getElementById("hidden2"); -->
-
-<!-- 	//Executar apenas se houver possibilidade de inserção de novos campos: -->
-<!-- 	if (iCount < totalCampos) { -->
-
-<!-- 	//Limpar hidden1, para atualizar a lista dos campos que ainda estão vazios: -->
-<!-- 	hidden2.value = ""; -->
-
-<!-- 	//Atualizando a lista dos campos que estão ocultos. -->
-<!-- 	//Essa lista ficará armazenada temporiariamente em hidden2; -->
-<!-- 	for (iLoop = 1; iLoop <= totalCampos; iLoop++) { -->
-<!-- 	        if (document.getElementById("linha"+iLoop).style.display == "none") { -->
-<!-- 	                if (hidden2.value == "") { -->
-<!-- 	                        hidden2.value = "linha"+iLoop; -->
-<!-- 	                }else{ -->
-<!-- 	                        hidden2.value += ",linha"+iLoop; -->
-<!-- 	                } -->
-<!-- 	        } -->
-<!-- 	} -->
-<!-- 	//Quebrando a lista que foi armazenada em hidden2 em array: -->
-
-<!-- 	linhasOcultas = hidden2.value.split(","); -->
-
-
-<!-- 	        if (linhasOcultas.length > 0) { -->
-<!-- 	                //Tornar visível o primeiro elemento de linhasOcultas: -->
-<!-- 	                document.getElementById(linhasOcultas[0]).style.display = "block"; iCount++; -->
-
-<!-- 	                //Acrescentando o índice zero a hidden1: -->
-<!-- 	                if (hidden1.value == "") { -->
-<!-- 	                        hidden1.value = linhasOcultas[0]; -->
-<!-- 	                }else{ -->
-<!-- 	                        hidden1.value += ","+linhasOcultas[0]; -->
-<!-- 	                } -->
-
-<!-- 	                /*Retirar a opção acima da lista de itens ocultos: <-------- OPCIONAL!!! -->
-<!-- 	                if (hidden2.value.indexOf(","+linhasOcultas[0]) != -1) { -->
-<!-- 	                        hidden2.value = hidden2.value.replace(linhasOcultas[0]+",",""); -->
-<!-- 	                }else if (hidden2.indexOf(linhasOcultas[0]+",") == 0) { -->
-<!-- 	                        hidden2.value = hidden2.value.replace(linhasOcultas[0]+",",""); -->
-<!-- 	                }else{ -->
-<!-- 	                        hidden2.value = ""; -->
-<!-- 	                } -->
-<!-- 	                */ -->
-<!-- 	        } -->
-<!-- 	} -->
-<!-- 	} -->
-
-<!-- 	function RemoverCampos(id) { -->
-<!-- 	//Criando ponteiro para hidden1:         -->
-<!-- 	var hidden1 = document.getElementById("hidden1"); -->
-
-<!-- 	//Pegar o valor do campo que será excluído: -->
-<!-- 	var campoValor = document.getElementById("arq"+id).value; -->
-<!-- 	        //Se o campo não tiver nenhum valor, atribuir a string: vazio: -->
-<!-- 	        if (campoValor == "") { -->
-<!-- 	                campoValor = "vazio"; -->
-<!-- 	        } -->
-
-<!--                document.getElementById("linha"+id).style.display = "none"; iCount--; -->
-
-<!--                //Removendo o valor de hidden1: -->
-<!--                if (hidden1.value.indexOf(",linha"+id) != -1) { -->
-<!--                        hidden1.value = hidden1.value.replace(",linha"+id,""); -->
-<!--                }else if (hidden1.value.indexOf("linha"+id+",") == 0) { -->
-<!--                        hidden1.value = hidden1.value.replace("linha"+id+",",""); -->
-<!--                }else{ -->
-<!--                        hidden1.value = ""; -->
-<!--                } -->
-<!-- 	} -->
-<!--  </script> -->
 
 </head>
 <body id="main">
@@ -270,9 +187,7 @@
 												<div class="grid-container">
 													<div class="grid-width-100">
 														<textarea id="editor" name="editor">
-															<c:forEach items="${candidatos}" var="candidato" varStatus="contador">
-																${ candidato.ultimoStatus.proposta}
-															</c:forEach>
+															
 														</textarea>
 													</div>
 												</div>
@@ -340,6 +255,7 @@
 				</div>
 			</div>
 		</div>
+
 	</div>
 	<!-- /.modal delete-->
 	<div id="main-container">
@@ -378,12 +294,11 @@
 									</thead>
 									<tbody class="text-center">
 										<form id="form">
-											<c:forEach var="candidato" items="${candidatos}" varStatus="contador">
-											<c:set var="teste[contador.index]" >
-											</c:set>
+											<c:forEach var="candidato" items="${candidatos}">
 
 
 												<tr>
+													<input type="hidden" id="${candidato.id }" />
 													<td>${candidato.nome}</td>
 													<td>${candidato.ultimaVaga.nomeVaga }</td>
 													<td>${candidato.valorPretensao}</td>
@@ -461,26 +376,41 @@
 
 	<script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 	<script>
-            $(document).ready(function() {
-                  perfil = $('#user').val();
-                  status = $('#idStatus').val();
-                  if(status == 9 || status == 10 ){
-                        if(perfil.nome == "RH" || perfil.nome == "Administrador" ||
-                              perfil.nome == "CEO" || perfil.nome == "Diretor de Operação")
-						var div = document.getElementById("divCkEditor").className = "show";
-                  }
-                  else
-                	  var div = document.getElementById("divCkEditor").className = "hidden";
-            })
       </script>
 	<script>
-            $(document).ready(function() {        	
-            	proposta = $('div#propostas').html();
-            	
-            	CKEDITOR.instances.editor.setData(proposta);
-            })
       </script>
 	<script>
+		$("body").on("click", "#aprovar-candidato", function(){
+			var inputs  = $(this).closest("tr").find("input[type=hidden]");
+			CKEDITOR.instances.editor.setData("");
+			CKEDITOR.instances.editor.insertHtml("");
+			inputs.each(function(index, value){
+				if(!isNaN($(value).attr("id"))){
+					var id = $(value).attr("id");
+					$.ajax({
+						url:"buscar/"+id,
+						dataType:"json",
+						method:"GET",
+						success:function(data){	
+							debugger;
+							if(data.ultimoStatus.status.id == "9" || data.ultimoStatus.status.id == "10"){
+								 var perfil = $('#user').val();
+				                 if(perfil == "RH" || perfil == "Administrador" || perfil == "CEO" || perfil == "Diretor de Operação"){
+									CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
+				                	$("#proposta").show();
+				                 }
+				                  
+							}else{
+			                	$("#proposta").hide();
+							}
+							
+						}
+					})
+					
+				}
+				});
+		})
+	
             CKEDITOR.replace('editor');
                   $('#alterarStatus').click(function() {
                         
@@ -489,6 +419,7 @@
 	                   	 var avaliacoes = [];
 	                   	 
 	                   	$(".avaliacaoCompetencia").each(function(){
+	                   		debugger;
                             if($(this).prop("checked")){
                                 
                                  var avaliacaoCompetencia = {

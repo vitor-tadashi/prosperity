@@ -94,7 +94,7 @@ public class VagaBusiness {
 	public List<VagaBean> listarVagasAtivas() {
 		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagasAtivas", 1);
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
-		return vagaBean;
+		return vagaBean;	
 	}
 
 	@Transactional
@@ -170,6 +170,7 @@ public class VagaBusiness {
 			// vagaEntity.setDataAbertura(vagaBean.getDataAbertura()); //
 			// VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
 			// vagaBean.setUsuarioBean(usuario);
+			inserirAvaliadores(vagaEntity, usuarioBean);
 			vagaDAO.update(vagaEntity);
 		}
 	}
@@ -190,14 +191,14 @@ public class VagaBusiness {
 	@Transactional
 	public void alterarStatus(SituacaoVagaBean situacaoVaga) {
 		StatusVagaEntity statusVagaEntity = new StatusVagaEntity();
+		VagaEntity vagaEntity = new VagaEntity();
+		vagaEntity.setId(situacaoVaga.getIdVaga());
 
 		if (situacaoVaga.getStatus().getValue() != 4) {
-			desativarStatus(situacaoVaga);
+			desativarStatus(vagaEntity);
 		}
 		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
 		statusVagaEntity.setStatus(statusDAO.findById(situacaoVaga.getStatus().getValue()));
-		VagaEntity vagaEntity = new VagaEntity();
-		vagaEntity.setId(situacaoVaga.getIdVaga());
 		statusVagaEntity.setVaga(vagaEntity);
 		statusVagaEntity.setDataAlteracao(new Date());
 		statusVagaEntity.setUsuario(usuarioDAO.findById(usuarioBean.getId()));
@@ -207,16 +208,16 @@ public class VagaBusiness {
 	}
 
 	@Transactional
-	private void desativarStatus(SituacaoVagaBean situacaoVaga) {
+	private void desativarStatus(VagaEntity vagaEntity) {
 		List<StatusVagaEntity> statusVagas = statusVagaDAO.findByNamedQuery("obterStatusVaga",
-				situacaoVaga.getIdVaga());
-		if (statusVagas != null || statusVagas.size() > 0) {
+				vagaEntity);
+		if (statusVagas == null || statusVagas.size() < 1) {
+		}else{
 			for (StatusVagaEntity status : statusVagas) {
 				status.setSituacao(false);
 				statusVagaDAO.update(status);
 			}
 		}
-
 	}
 
 	private Date parseData(Date dataAntiga) {

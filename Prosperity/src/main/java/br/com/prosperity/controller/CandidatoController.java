@@ -312,4 +312,10 @@ public class CandidatoController<PaginarCandidato> {
 		candidatoBusiness.alterarStatus(situacaoCandidato);
 		return "candidato/aprovar";
 	}
+	
+	@RequestMapping(value = {"buscar/{id}"}, method = RequestMethod.GET)
+	public @ResponseBody CandidatoBean buscarPorId(@PathVariable int id){
+		CandidatoBean candidato = candidatoBusiness.obter(id);
+		return candidato;
+	}
 }

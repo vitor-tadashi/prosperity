@@ -448,15 +448,16 @@
 			</ul>
 		</div>
 		<!--breadcrumb-->
-		<div class="padding-md">
+		<div class="container">
+		<div class="padding-md clearfix">
 			<div class="row">
 				<div class="col-sm-12">
-					<div class="panel panel-default table-responsive">
+					<div class="panel panel-default">
 						<div class="panel-heading">Consulta de vagas</div>
 						<!--<form class="form-inline">-->
 						<div class="panel-body">
 
-							<form action="filtro" method="GET" class="row" style="margin-bottom: 0px;">
+							<form action="filtro" method="GET" class="row">
 								<div class="col-md-4">
 									<div class="form-group">
 										<label>Vaga</label> <input class="form-control" id="filtro1" name="nomeVaga" placeholder="Digite o nome de uma vaga">
@@ -491,7 +492,7 @@
 							</form>
 						</div>
 						<!--</panel body>-->
-						<div class="padding-md clearfix">
+						
 						<table
 							id="tabelaVaga"
 							class="table table-bordered table-condensed table-hover table-striped"
@@ -543,7 +544,7 @@
 								</c:forEach>
 							</tbody>
 						</table>
-						</div>
+						
 						
 					</div>
 					<!--</panel default>-->
@@ -553,6 +554,7 @@
 			<!--</row>-->
 		</div>
 		<!--</padding>-->
+	</div>
 	</div>
 	
 

@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -24,11 +25,11 @@ public class AvaliadorVagaEntity {
 	@Column(name = "idAvaliadorVaga", unique = true, nullable = false)
 	private Integer id;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "idVaga")
 	private VagaEntity vaga;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
 
