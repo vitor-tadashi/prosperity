@@ -497,6 +497,7 @@
 							<!-- /.panel-body - ATE AQUI O FILTRAR-->
 							
 							<table
+							id="tabelaVaga"
 								class="table table-bordered table-condensed table-hover table-striped"
 								style="font-size: 12px; vertical-align: middle">
 								<thead>
@@ -518,11 +519,10 @@
 											<td>${candidato.vagaCandidato.vaga.nomeVaga}</td> 	
 											<td>${candidato.valorPretensao}</td>
 											<td><fmt:formatDate value="${candidato.dataAbertura}" pattern="dd/MM/yyyy" /></td>
-											<td><span class="label status span-${candidato.ultimoStatus.status.nome}">${candidato.ultimoStatus.status.nome}</span></td>
-									
-									
-									<td>
-												<div class="btn-group">
+											<td id="linhaStatus"><span class="label" style="color: #fff; background-color: ${candidato.ultimoStatus.status.css}">${candidato.ultimoStatus.status.nome}</span></td>
+								
+								<td>
+										<div class="btn-group">
 
 													<button class="btn btn-sm btn-info dropdown-toggle"
 														data-toggle="dropdown" aria-haspopup="true"
@@ -535,8 +535,7 @@
 														<li><c:url value="historico/${candidato.id}"
 																var="myURL">
 															</c:url> <a href="${myURL}"><i class="fa fa-pencil fa-lg">&nbsp;</i>Histórico
-																do Candidato</a></li>
-														<li class="divider"></li>
+																do Candidato</a></li> <li class="divider"></li>
 
 														<li><c:url value="editar/${candidato.id}" var="myURL">
 															</c:url> <a href="${myURL}"><i class="fa fa-pencil"></i>
@@ -554,17 +553,6 @@
 							
 						</div>
 						<!-- fim da div panel -->
-						<div class="panel-footer clearfix">
-							<ul class="pagination pagination-xs m-top-none pull-right">
-								<li class="disabled"><a href="#">Anterior</a></li>
-								<li class="active"><a onclick="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#">Próxima</a></li>
-							</ul>
-						</div>
 					</div>
 				
 					<!-- /col-md-12 -->
@@ -784,6 +772,42 @@
 							+ iLoop + "\")'></span><br>");
 
 		}
+	</script>
+	
+	<script>/* paginação */
+	$(function	()	{
+		$('#tabelaVaga').dataTable( {
+			"bJQueryUI": true,
+			"sPaginationType": "simple_numbers",
+			"bFilter": false,
+			"bInfo": false,
+			"bLengthChange": false,
+
+			"oLanguage": {
+				"sEmptyTable": "Nenhum registro encontrado",
+				"sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+				"sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+				"sInfoFiltered": "(Filtrados de _MAX_ registros)",
+				"sInfoPostFix": "",
+				"sInfoThousands": ".",
+				"sLengthMenu": "_MENU_ resultados por página",
+				"sLoadingRecords": "Carregando...",
+				"sProcessing": "Processando...",
+				"sZeroRecords": "Nenhum registro encontrado",
+				"sSearch": "Pesquisar",
+				"oPaginate": {
+					"sNext": "Próximo",
+					"sPrevious": "Anterior",
+					"sFirst": "Primeiro",
+					"sLast": "Último"
+				},
+				"oAria": {
+					"sSortAscending": ": Ordenar colunas de forma ascendente",
+					"sSortDescending": ": Ordenar colunas de forma descendente"
+				}
+			}
+		});
+	});
 	</script>
 </body>
 </html>

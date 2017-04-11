@@ -393,8 +393,11 @@ public class CandidatoBusiness {
 	@Transactional
 	public List<CandidatoBean> listarAprovacao() {
 		List<Integer> listaStatus = obterStatusDisponivelAprovacao();
+		List<Integer> listaStatus2 = new ArrayList<Integer>();
+		listaStatus2.add(StatusCandidatoEnum.CANDIDATOEMANALISE.getValue());
+		listaStatus2.add(StatusCandidatoEnum.CANDIDATURA.getValue());
 		List<CandidatoEntity> entities = candidatoDAO.findByNamedQuery("listarAprovacoes", listaStatus,
-				StatusCandidatoEnum.CANDIDATOEMANALISE.getValue(), usuarioBean.getId());
+				listaStatus2, usuarioBean.getId());
 		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(entities);
 
 		return beans;
