@@ -294,31 +294,11 @@ public class CandidatoController<PaginarCandidato> {
 	@RequestMapping(value = { "alterar-status-candidato" }, method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
 	public @ResponseBody String alterarStatusCandidato(Model model,
-			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato,
-			@ModelAttribute("avaliacoesCompetencias") String avaliacoesCompetencias,
-			@ModelAttribute("processoSeletivo") ProvaCandidatoBean processoSeletivo,
-			@ModelAttribute("nome1") String nome1, @ModelAttribute("nome2") String nome2,
-			@ModelAttribute("nome3") String nome3, @ModelAttribute("descricao1") String descricao1,
-			@ModelAttribute("descricao2") String descricao2, @ModelAttribute("descricao3") String descricao3,
-			@ModelAttribute("parecerTecnico") String parecerTecnico) {
-
-		List<String> resultado = new Gson().fromJson(avaliacoesCompetencias, List.class);
-
-		resultado.clear();
-
-		ProvaCandidatoBean provaCandidato = new ProvaCandidatoBean();
+			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato) {
 		CandidatoBean bean = new CandidatoBean();
 		bean.setId(situacaoCandidato.getIdCandidato());
-		provaCandidato.setCandidato(bean);
-		provaCandidato.setNome1(nome1);
-		provaCandidato.setNome2(nome2);
-		provaCandidato.setNome3(nome3);
-		provaCandidato.setDescricao1(descricao1);
-		provaCandidato.setDescricao2(descricao2);
-		provaCandidato.setDescricao3(descricao3);
-		provaCandidato.setParecerTecnico(parecerTecnico);
-
-		provaCandidatoBusiness.inserir(provaCandidato);
+		
+		provaCandidatoBusiness.inserir(situacaoCandidato.getProcessoSeletivo());
 
 		candidatoBusiness.alterarStatus(situacaoCandidato);
 		return "candidato/aprovar";

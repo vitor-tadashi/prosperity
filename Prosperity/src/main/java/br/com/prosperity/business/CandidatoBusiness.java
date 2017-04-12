@@ -275,7 +275,7 @@ public class CandidatoBusiness {
 				inserirAvaliadores(candidatoEntity, vagao.get(0).getVaga().getId());
 
 				situacaoCandidato.setIdCandidato(candidatoEntity.getId());
-			situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
+				situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
 
 				alterarStatus(situacaoCandidato);
 
@@ -411,11 +411,19 @@ public class CandidatoBusiness {
 	@Transactional
 	public List<CandidatoBean> listarAprovacao() {
 		List<Integer> listaStatus = obterStatusDisponivelAprovacao();
-		List<Integer> listaStatus2 = new ArrayList<Integer>();
-		listaStatus2.add(StatusCandidatoEnum.CANDIDATOEMANALISE.getValue());
-		listaStatus2.add(StatusCandidatoEnum.CANDIDATURA.getValue());
-		List<CandidatoEntity> entities = candidatoDAO.findByNamedQuery("listarAprovacoes", listaStatus, listaStatus2,
-				usuarioBean.getId());
+		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
+		Integer idStatusCandidatura = 0;
+
+		for (FuncionalidadeBean funcionalidadeBean : usuarioBean.getPerfil().getListaFuncionalidades()) {
+			if (funcionalidadeBean.getId() == 27) {
+				idStatusCandidatura = StatusCandidatoEnum.CANDIDATURA.getValue();
+			}
+			break;
+		}
+
+		List<CandidatoEntity> entities = candidatoDAO.findByNamedQuery("listarAprovacoes", listaStatus,
+				StatusCandidatoEnum.CANDIDATOEMANALISE.getValue(), usuarioBean.getId(),
+				idStatusCandidatura);
 		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(entities);
 
 		return beans;
