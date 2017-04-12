@@ -210,7 +210,7 @@
 														name="descricao3" data-required="true" placeholder="">
 												</div>
 
-												
+
 											</div>
 										</div>
 										<div class="form-group">
@@ -293,169 +293,167 @@
 				</div>
 			</div>
 		</div>
-		</div>
+	</div>
 
-		<!-- Modal confirmacao-->
-		<div class="modal fade" id="confirm-modal"
-			data-target="#confirm-modal" tabindex="-1" role="dialog"
-			aria-labelledby="modalLabel">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Fechar">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<h4 class="modal-title" id="modalLabel">Confirmação</h4>
-					</div>
-					<div class="modal-body">Deseja realmente fazer isso?</div>
-					<div class="modal-footer">
-						<a id="excluir" href="#">
-							<button type="button" class="btn btn-success" id="alterarStatus">Sim</button>
-						</a>
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
-					</div>
+	<!-- Modal confirmacao-->
+	<div class="modal fade" id="confirm-modal" data-target="#confirm-modal"
+		tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Fechar">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="modalLabel">Confirmação</h4>
+				</div>
+				<div class="modal-body">Deseja realmente fazer isso?</div>
+				<div class="modal-footer">
+					<a id="excluir" href="#">
+						<button type="button" class="btn btn-success" id="alterarStatus">Sim</button>
+					</a>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
 				</div>
 			</div>
 		</div>
-		<!-- /.modal delete-->
-		<!-- Modal delete -->
-		<div class="modal fade" id="delete-modal" data-target="#delete-modal"
-			tabindex="-1" role="dialog" aria-labelledby="modalLabel">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Fechar">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<h4 class="modal-title" id="modalLabel">Cancelar vaga</h4>
-					</div>
-					<div class="modal-body">Deseja realmente fechar esta vaga?</div>
-					<div class="modal-footer">
-						<a id="excluir" href="#">
-							<button type="button" class="btn btn-danger">Sim</button>
-						</a>
-						<button type="button" class="btn btn-success" data-dismiss="modal">Não</button>
-					</div>
+	</div>
+	<!-- /.modal delete-->
+	<!-- Modal delete -->
+	<div class="modal fade" id="delete-modal" data-target="#delete-modal"
+		tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Fechar">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="modalLabel">Cancelar vaga</h4>
+				</div>
+				<div class="modal-body">Deseja realmente fechar esta vaga?</div>
+				<div class="modal-footer">
+					<a id="excluir" href="#">
+						<button type="button" class="btn btn-danger">Sim</button>
+					</a>
+					<button type="button" class="btn btn-success" data-dismiss="modal">Não</button>
 				</div>
 			</div>
 		</div>
-		<!-- /.modal delete-->
-		<div id="main-container">
-			<div id="breadcrumb">
-				<ul class="breadcrumb">
-					<li><i class="fa fa-home"></i><a href="index.html"> Home</a></li>
-					<li>Consultar</li>
-					<li class="active">Aprovação de candidatos</li>
-				</ul>
-			</div>
-			<!--breadcrumb-->
-			<div class="container">
-				<div class="padding-md">
-					<div class="row">
-						<div>
-							<div class="panel panel-default">
-								<div class="panel-heading">Aprovação de candidatos</div>
-								<div class="panel-body">
-									<input type="hidden" name="user" id="user"
-										value="${autenticado.perfil.nome}" />
+	</div>
+	<!-- /.modal delete-->
+	<div id="main-container">
+		<div id="breadcrumb">
+			<ul class="breadcrumb">
+				<li><i class="fa fa-home"></i><a href="index.html"> Home</a></li>
+				<li>Consultar</li>
+				<li class="active">Aprovação de candidatos</li>
+			</ul>
+		</div>
+		<!--breadcrumb-->
+		<div class="container">
+			<div class="padding-md">
+				<div class="row">
+					<div>
+						<div class="panel panel-default">
+							<div class="panel-heading">Aprovação de candidatos</div>
+							<div class="panel-body">
+								<input type="hidden" name="user" id="user"
+									value="${autenticado.perfil.nome}" />
 
-									<table
-										class="table table-bordered table-condensed table-hover table-striped"
-										id="tabelaCandidato"
-										style="font-size: 12px !important; vertical-align: middle !important;">
-										<thead>
-											<tr>
-												<th class="text-center">Nome do candidato</th>
-												<th class="text-center">Vaga</th>
-												<th class="text-center">Pretensão</th>
-												<th class="text-center">Data de abertura</th>
-												<th class="text-center">Data de aprovação</th>
-												<th class="text-center">Status</th>
-												<th class="text-center">Ações</th>
-											</tr>
-										</thead>
-										<tbody class="text-center">
-											<form id="form">
-												<c:forEach var="candidato" items="${candidatos}">
-													<tr>
-														<td>${candidato.nome}</td>
-														<td>${candidato.ultimaVaga.nomeVaga }</td>
-														<td>${candidato.valorPretensao}</td>
-														<td><fmt:formatDate value="${candidato.dataAbertura}"
-																pattern="dd/MM/yyyy" /></td>
-														<td><fmt:formatDate
-																value="${candidato.dataFechamento}" pattern="dd/MM/yyyy" /></td>
-														<td><span class="label"
-															style="color: #fff; background-color: ${candidato.ultimoStatus.status.css}">${candidato.ultimoStatus.status.nome}</span></td>
+								<table
+									class="table table-bordered table-condensed table-hover table-striped"
+									id="tabelaCandidato"
+									style="font-size: 12px !important; vertical-align: middle !important;">
+									<thead>
+										<tr>
+											<th class="text-center">Nome do candidato</th>
+											<th class="text-center">Vaga</th>
+											<th class="text-center">Pretensão</th>
+											<th class="text-center">Data de abertura</th>
+											<th class="text-center">Data de aprovação</th>
+											<th class="text-center">Status</th>
+											<th class="text-center">Ações</th>
+										</tr>
+									</thead>
+									<tbody class="text-center">
+										<form id="form">
+											<c:forEach var="candidato" items="${candidatos}">
+												<tr>
+													<td>${candidato.nome}</td>
+													<td>${candidato.ultimaVaga.nomeVaga }</td>
+													<td>${candidato.valorPretensao}</td>
+													<td><fmt:formatDate value="${candidato.dataAbertura}"
+															pattern="dd/MM/yyyy" /></td>
+													<td><fmt:formatDate
+															value="${candidato.dataFechamento}" pattern="dd/MM/yyyy" /></td>
+													<td><span class="label"
+														style="color: #fff; background-color: ${candidato.ultimoStatus.status.css}">${candidato.ultimoStatus.status.nome}</span></td>
 
-														<td><input type="hidden" name="idStatus"
-															id="idStatus" value="${candidato.ultimoStatus.status.id}" />
+													<td><input type="hidden" name="idStatus" id="idStatus"
+														value="${candidato.ultimoStatus.status.id}" />
+														<div class="btn-group">
 															<div class="btn-group">
-																<div class="btn-group">
-																	<button class="btn btn-sm btn-info dropdown-toggle"
-																		data-toggle="dropdown" aria-haspopup="true"
-																		aria-expanded="false">
-																		<i class="fa fa-cogs fa-lg">&nbsp;</i> <span
-																			class="caret"></span>
-																	</button>
-																	<ul class="dropdown-menu dropdown-menu-right slidedown">
-																		<c:forEach var="statusDisponivel"
-																			items="${candidato.ultimoStatus.status.statusDisponiveis}">
-																			<li><a data-toggle="modal"
-																				data-target=".bs-example-modal-lg"
-																				id="aprovar-candidato"
-																				onclick="alterarStatus(${candidato.id}, ${statusDisponivel.id})"><i
-																					${statusDisponivel.classe}>&nbsp;</i>${statusDisponivel.nome}
-																			</a></li>
-																			<li class="divider "></li>
-																		</c:forEach>
-																		<li><c:url value="editar/${candidato.id}"
-																				var="myURL">
-																			</c:url> <a href="${myURL}"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
+																<button class="btn btn-sm btn-info dropdown-toggle"
+																	data-toggle="dropdown" aria-haspopup="true"
+																	aria-expanded="false">
+																	<i class="fa fa-cogs fa-lg">&nbsp;</i> <span
+																		class="caret"></span>
+																</button>
+																<ul class="dropdown-menu dropdown-menu-right slidedown">
+																	<c:forEach var="statusDisponivel"
+																		items="${candidato.ultimoStatus.status.statusDisponiveis}">
+																		<li><a data-toggle="modal"
+																			data-target=".bs-example-modal-lg"
+																			id="aprovar-candidato"
+																			onclick="alterarStatus(${candidato.id}, ${statusDisponivel.id})"><i
+																				${statusDisponivel.classe}>&nbsp;</i>${statusDisponivel.nome}
+																		</a></li>
+																		<li class="divider "></li>
+																	</c:forEach>
+																	<li><c:url value="editar/${candidato.id}"
+																			var="myURL">
+																		</c:url> <a href="${myURL}"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
 
-																		<li class="divider"></li>
+																	<li class="divider"></li>
 
-																		<li><a href="#delete-modal" data-toggle="modal"><i
-																				class="fa fa-trash-o fa-lg">&nbsp;</i>Cancelar</a></li>
-																		<!-- /fim botao -->
+																	<li><a href="#delete-modal" data-toggle="modal"><i
+																			class="fa fa-trash-o fa-lg">&nbsp;</i>Cancelar</a></li>
+																	<!-- /fim botao -->
 
-																	</ul>
-																</div>
-																</div>
-																<!-- /btn-group --></td>
-													</tr>
-												</c:forEach>
-											</form>
-										</tbody>
-									</table>
+																</ul>
+															</div>
+														</div> <!-- /btn-group --></td>
+												</tr>
+											</c:forEach>
+										</form>
+									</tbody>
+								</table>
 
-								</div>
-								<!-- /.row -->
 							</div>
-							<!-- /.panel-body -->
-
+							<!-- /.row -->
 						</div>
-						<!-- fim da div panel -->
+						<!-- /.panel-body -->
 
 					</div>
-					<!-- /col-md-12 -->
+					<!-- fim da div panel -->
+
 				</div>
-				<!-- /.row -->
+				<!-- /col-md-12 -->
 			</div>
-			<!-- /.paddin.md -->
+			<!-- /.row -->
 		</div>
-		<!-- /.container -->
-		<a href="" id="scroll-to-top" class="hidden-print"><i
-			class="fa fa-chevron-up"></i></a>
-		<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
-		<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
+		<!-- /.paddin.md -->
+	</div>
+	<!-- /.container -->
+	<a href="" id="scroll-to-top" class="hidden-print"><i
+		class="fa fa-chevron-up"></i></a>
+	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
+	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
 
-		<!-- import da merda da proposta -->
+	<!-- import da merda da proposta -->
 
-		<script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
-		<script>
+	<script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+	<script>
             $(document).ready(function() {
                   perfil = $('#user').val();
                   status = $('#idStatus').val();
@@ -468,13 +466,13 @@
                 	  var div = document.getElementById("divCkEditor").className = "hidden";
             })
       </script>
-		<script>
+	<script>
             $(document).ready(function() {        	
             	proposta = $('#propostas').val();
             	CKEDITOR.instances.editor.setData(proposta);
             })
       </script>
-		<script>
+	<script>
             CKEDITOR.replace('editor');
                   $('#alterarStatus').click(function() {
                         
@@ -504,7 +502,6 @@
                                 avaliacoes.push(avaliacaoCompetencia);
                             }
                         });
-	            		
                         $.ajax({
                               url : "alterar-status-candidato",
                               type : "POST",
@@ -514,14 +511,15 @@
                                    'parecer' : $('#parecer').val(),
                                    'proposta' : CKEDITOR.instances.editor.getData(),
                                    'idStatus' : $('#hdn-status').val(),
-                                   'avaliacoesCompetencias' : JSON.stringify(avaliacoes),
-                                   'nome1' : $("#nome1").val(),
-                                   'nome2' : $("#nome2").val(),
-                                   'nome3' : $("#nome3").val(),
-                                   'descricao1' : $("#descricao1").val(),
-                                   'descricao2' : $("#descricao2").val(),
-                                   'descricao3' : $("#descricao3").val(),
-                                   'parecerTecnico' : $("#parecerTecnico").val()
+                                   'processoSeletivo': {
+	                                   'nome1' : $("#nome1").val(),
+	                                   'nome2' : $("#nome2").val(),
+	                                   'nome3' : $("#nome3").val(),
+	                                   'descricao1' : $("#descricao1").val(),
+	                                   'descricao2' : $("#descricao2").val(),
+	                                   'descricao3' : $("#descricao3").val(),
+	                                   'parecerTecnico' : $("#parecerTecnico").val()
+                                   }                                  
                               },
                               success : function(data) {
                                    location.reload();
@@ -540,7 +538,7 @@
             
             }
             </script>
-		<script>/* paginação */
+	<script>/* paginação */
 	$(function	()	{
 		$('#tabelaCandidato').dataTable( {
 			"bJQueryUI": true,
