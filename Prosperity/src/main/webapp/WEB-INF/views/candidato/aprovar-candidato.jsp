@@ -22,89 +22,6 @@
 <link rel="stylesheet"
 	href="/resources/css/ckeditor_/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
 
-<!-- <script> -->
-<!-- 	//Total máximo de campos que você permitirá criar em seu site: -->
-<!-- 	var totalCampos = 3; -->
-
-<!-- // 	Não altere os valores abaixo, pois são variáveis controle -->
-<!-- 	var iLoop = 1; -->
-<!-- 	var iCount = 0; -->
-<!-- 	var linhaAtual; -->
-
-
-<!-- 	function AddCampos() { -->
-<!-- 	var hidden1 = document.getElementById("hidden1"); -->
-<!-- 	var hidden2 = document.getElementById("hidden2"); -->
-
-<!-- 	//Executar apenas se houver possibilidade de inserção de novos campos: -->
-<!-- 	if (iCount < totalCampos) { -->
-
-<!-- 	//Limpar hidden1, para atualizar a lista dos campos que ainda estão vazios: -->
-<!-- 	hidden2.value = ""; -->
-
-<!-- 	//Atualizando a lista dos campos que estão ocultos. -->
-<!-- 	//Essa lista ficará armazenada temporiariamente em hidden2; -->
-<!-- 	for (iLoop = 1; iLoop <= totalCampos; iLoop++) { -->
-<!-- 	        if (document.getElementById("linha"+iLoop).style.display == "none") { -->
-<!-- 	                if (hidden2.value == "") { -->
-<!-- 	                        hidden2.value = "linha"+iLoop; -->
-<!-- 	                }else{ -->
-<!-- 	                        hidden2.value += ",linha"+iLoop; -->
-<!-- 	                } -->
-<!-- 	        } -->
-<!-- 	} -->
-<!-- 	//Quebrando a lista que foi armazenada em hidden2 em array: -->
-
-<!-- 	linhasOcultas = hidden2.value.split(","); -->
-
-
-<!-- 	        if (linhasOcultas.length > 0) { -->
-<!-- 	                //Tornar visível o primeiro elemento de linhasOcultas: -->
-<!-- 	                document.getElementById(linhasOcultas[0]).style.display = "block"; iCount++; -->
-
-<!-- 	                //Acrescentando o índice zero a hidden1: -->
-<!-- 	                if (hidden1.value == "") { -->
-<!-- 	                        hidden1.value = linhasOcultas[0]; -->
-<!-- 	                }else{ -->
-<!-- 	                        hidden1.value += ","+linhasOcultas[0]; -->
-<!-- 	                } -->
-
-<!-- 	                /*Retirar a opção acima da lista de itens ocultos: <-------- OPCIONAL!!! -->
-<!-- 	                if (hidden2.value.indexOf(","+linhasOcultas[0]) != -1) { -->
-<!-- 	                        hidden2.value = hidden2.value.replace(linhasOcultas[0]+",",""); -->
-<!-- 	                }else if (hidden2.indexOf(linhasOcultas[0]+",") == 0) { -->
-<!-- 	                        hidden2.value = hidden2.value.replace(linhasOcultas[0]+",",""); -->
-<!-- 	                }else{ -->
-<!-- 	                        hidden2.value = ""; -->
-<!-- 	                } -->
-<!-- 	                */ -->
-<!-- 	        } -->
-<!-- 	} -->
-<!-- 	} -->
-
-<!-- 	function RemoverCampos(id) { -->
-<!-- 	//Criando ponteiro para hidden1:         -->
-<!-- 	var hidden1 = document.getElementById("hidden1"); -->
-
-<!-- 	//Pegar o valor do campo que será excluído: -->
-<!-- 	var campoValor = document.getElementById("arq"+id).value; -->
-<!-- 	        //Se o campo não tiver nenhum valor, atribuir a string: vazio: -->
-<!-- 	        if (campoValor == "") { -->
-<!-- 	                campoValor = "vazio"; -->
-<!-- 	        } -->
-
-<!--                document.getElementById("linha"+id).style.display = "none"; iCount--; -->
-
-<!--                //Removendo o valor de hidden1: -->
-<!--                if (hidden1.value.indexOf(",linha"+id) != -1) { -->
-<!--                        hidden1.value = hidden1.value.replace(",linha"+id,""); -->
-<!--                }else if (hidden1.value.indexOf("linha"+id+",") == 0) { -->
-<!--                        hidden1.value = hidden1.value.replace("linha"+id+",",""); -->
-<!--                }else{ -->
-<!--                        hidden1.value = ""; -->
-<!--                } -->
-<!-- 	} -->
-<!--  </script> -->
 
 </head>
 <body id="main">
@@ -113,8 +30,8 @@
 
 	<!--    Modais   -->
 	<!-- Modal Avaliação de Competencias -->
-	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
-		aria-labelledby="myLargeModalLabel">
+	<div id="modalProposta" class="modal fade bs-example-modal-lg"
+		tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -209,8 +126,6 @@
 													<input type="text" class="form-control" id="descricao3"
 														name="descricao3" data-required="true" placeholder="">
 												</div>
-
-
 											</div>
 										</div>
 										<div class="form-group">
@@ -317,7 +232,6 @@
 			</div>
 		</div>
 	</div>
-	<!-- /.modal delete-->
 	<!-- Modal delete -->
 	<div class="modal fade" id="delete-modal" data-target="#delete-modal"
 		tabindex="-1" role="dialog" aria-labelledby="modalLabel">
@@ -328,11 +242,12 @@
 						aria-label="Fechar">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="modalLabel">Cancelar vaga</h4>
+					<h4 class="modal-title" id="modalLabel">Cancelar candidato</h4>
 				</div>
-				<div class="modal-body">Deseja realmente fechar esta vaga?</div>
+				<div class="modal-body">Deseja realmente cancelar este
+					candidato?</div>
 				<div class="modal-footer">
-					<a id="excluir" href="#">
+					<a id="excluir" href="${urlCancelar}">
 						<button type="button" class="btn btn-danger">Sim</button>
 					</a>
 					<button type="button" class="btn btn-success" data-dismiss="modal">Não</button>
@@ -379,6 +294,7 @@
 										<form id="form">
 											<c:forEach var="candidato" items="${candidatos}">
 												<tr>
+													<input type="hidden" id="${candidato.id }" />
 													<td>${candidato.nome}</td>
 													<td>${candidato.ultimaVaga.nomeVaga }</td>
 													<td>${candidato.valorPretensao}</td>
@@ -392,51 +308,49 @@
 													<td><input type="hidden" name="idStatus" id="idStatus"
 														value="${candidato.ultimoStatus.status.id}" />
 														<div class="btn-group">
-															<div class="btn-group">
-																<button class="btn btn-sm btn-info dropdown-toggle"
-																	data-toggle="dropdown" aria-haspopup="true"
-																	aria-expanded="false">
-																	<i class="fa fa-cogs fa-lg">&nbsp;</i> <span
-																		class="caret"></span>
-																</button>
-																<ul class="dropdown-menu dropdown-menu-right slidedown">
-																	<c:forEach var="statusDisponivel"
-																		items="${candidato.ultimoStatus.status.statusDisponiveis}">
-																		<li><a data-toggle="modal"
-																			data-target=".bs-example-modal-lg"
-																			id="aprovar-candidato"
-																			onclick="alterarStatus(${candidato.id}, ${statusDisponivel.id})"><i
-																				${statusDisponivel.classe}>&nbsp;</i>${statusDisponivel.nome}
-																		</a></li>
-																		<li class="divider "></li>
-																	</c:forEach>
-																	<li><c:url value="editar/${candidato.id}"
-																			var="myURL">
-																		</c:url> <a href="${myURL}"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
+															<button class="btn btn-sm btn-info dropdown-toggle"
+																data-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false">
+																<i class="fa fa-cogs fa-lg">&nbsp;</i> <span
+																	class="caret"></span>
+															</button>
+															<ul class="dropdown-menu dropdown-menu-right slidedown">
+																<c:forEach var="statusDisponivel"
+																	items="${candidato.ultimoStatus.status.statusDisponiveis}">
+																	<li><a data-toggle="modal"
+																		data-target=".bs-example-modal-lg"
+																		id="aprovar-candidato"
+																		onclick="alterarStatus(${candidato.id}, ${statusDisponivel.id})"><i
+																			${statusDisponivel.classe}>&nbsp;</i>${statusDisponivel.nome}
+																	</a></li>
+																	<li class="divider "></li>
+																</c:forEach>
+																<li><c:url value="editar/${candidato.id}"
+																		var="myURL">
+																	</c:url> <a href="${myURL}"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
 
-																	<li class="divider"></li>
+																<li class="divider"></li>
 
-																	<li><a href="#delete-modal" data-toggle="modal"><i
-																			class="fa fa-trash-o fa-lg">&nbsp;</i>Cancelar</a></li>
-																	<!-- /fim botao -->
-
-																</ul>
-															</div>
-														</div> <!-- /btn-group --></td>
+																<li><c:url scope="session"
+																		value="cancelar-candidato/${candidato.id}"
+																		var="urlCancelar">
+																	</c:url><a href="#delete-modal" data-toggle="modal"><i
+																		class="fa fa-trash-o fa-lg">&nbsp;</i>Cancelar</a></li>
+																<!-- /fim botao -->
+															</ul>
+														</div> <!-- /btn-group -->
+													</td>
 												</tr>
 											</c:forEach>
 										</form>
 									</tbody>
 								</table>
-
 							</div>
 							<!-- /.row -->
 						</div>
 						<!-- /.panel-body -->
-
 					</div>
 					<!-- fim da div panel -->
-
 				</div>
 				<!-- /col-md-12 -->
 			</div>
@@ -454,25 +368,35 @@
 
 	<script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 	<script>
-            $(document).ready(function() {
-                  perfil = $('#user').val();
-                  status = $('#idStatus').val();
-                  if(status == 9 || status == 10 ){
-                        if(perfil.nome == "RH" || perfil.nome == "Administrador" ||
-                              perfil.nome == "CEO" || perfil.nome == "Diretor de Operação")
-						var div = document.getElementById("divCkEditor").className = "show";
-                  }
-                  else
-                	  var div = document.getElementById("divCkEditor").className = "hidden";
-            })
-      </script>
-	<script>
-            $(document).ready(function() {        	
-            	proposta = $('#propostas').val();
-            	CKEDITOR.instances.editor.setData(proposta);
-            })
-      </script>
-	<script>
+		$("body").on("click", "#aprovar-candidato", function(){
+			var inputs  = $(this).closest("tr").find("input[type=hidden]");
+			CKEDITOR.instances.editor.setData("");
+			CKEDITOR.instances.editor.insertHtml("");
+			inputs.each(function(index, value){
+				if(!isNaN($(value).attr("id"))){
+					var id = $(value).attr("id");
+					$.ajax({
+						url:"buscar/"+id,
+						dataType:"json",
+						method:"GET",
+						success:function(data){	
+							if(data.ultimoStatus.status.id == "9" || data.ultimoStatus.status.id == "10"){
+								 var perfil = $('#user').val();
+				                 if(perfil == "RH" || perfil == "Administrador" || perfil == "CEO" || perfil == "Diretor de Operação"){
+									CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
+				                	$("#proposta").show();
+				                 }
+				                  
+							}else{
+			                	$("#proposta").hide();
+							}
+							
+						}
+					})
+					
+				}
+				});
+		})
             CKEDITOR.replace('editor');
                   $('#alterarStatus').click(function() {
                         
@@ -481,6 +405,7 @@
 	                   	 var avaliacoes = [];
 	                   	 
 	                   	$(".avaliacaoCompetencia").each(function(){
+	                   		debugger;
                             if($(this).prop("checked")){
                                 
                                  var avaliacaoCompetencia = {
@@ -537,6 +462,18 @@
                   $('#hdn-status').val(idStatus);
             
             }
+            
+            function cancelarCandidato(id) {
+            	$.ajax({
+        			url : "cancelar-candidato/"+id,
+        			type : "POST"
+        		}).done(function() {
+        			alert('done');
+        		}).fail(function(jqXHR, textStatus) {
+        			alert('fail');
+        		});
+            }
+            
             </script>
 	<script>/* paginação */
 	$(function	()	{

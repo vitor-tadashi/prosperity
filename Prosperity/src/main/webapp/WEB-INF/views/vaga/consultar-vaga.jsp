@@ -536,7 +536,18 @@
 											<ul class="dropdown-menu dropdown-menu-right slidedown">
 											<li><a href="#visualizar-modal" 
 													onclick="info(${vaga.id})"><i
-														class="fa fa-eye">&nbsp</i>Visualizar</a></li>		
+														class="fa fa-eye">&nbsp</i>Visualizar</a></li>
+											<c:if test="${vaga.ultimoStatus.status.nome == 'Pendente'}">
+												<li role="separator" class="editarDivider divider"></li>
+												<li><c:url value="editar/${vaga.id}" var="myURL">
+													</c:url> <a href="${myURL}" class="editarPendente"><i class="fa fa-pencil"></i> Editar</a></li>
+												</c:if>
+												
+												<c:if test="${vaga.ultimoStatus.status.nome == 'Ativo'}">
+												<li role="separator" class="editarDivider divider btnEdita hide"></li>
+												<li><c:url value="editar/${vaga.id}" var="myURL">
+													</c:url> <a href="${myURL}" class="editarPendente btnEdita hide"><i class="fa fa-pencil"></i> Editar avaliadores</a></li>
+												</c:if>					
 											</ul>
 										</div> <!-- /btn-group -->
 									</td>
@@ -592,6 +603,27 @@
 	<script src="js/app/app.js"></script>
 	
 	<script type="text/javascript">
+	
+	var id = $("#idPerfil").val();
+	$.ajax({
+		url: "http://localhost:8080/usuario/obter-perfil-funcionalidade",
+		type: "GET",
+		dataType: "JSON",
+		data: {id : id},
+		success: function(lista){
+			if(lista != null){
+    				$.each(lista,function(i,item){
+    					if(item.id == 24){
+    						
+    						$(".btnEdita").removeClass('hide')
+    					}
+    					
+    				});
+				
+			}
+		}
+	});
+	
 	
 	//linhaStatus
 	//span-[status]

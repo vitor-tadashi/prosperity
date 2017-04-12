@@ -33,7 +33,8 @@
 						<form class="form-border" id="formCadastro2" action="/vaga/salvar"
 							method="POST" >
 							<input id="vagaIdVar" name="id" type="hidden" value="${vaga.id}">
-							<input id="vagaStatusVar" name="status" type="hidden" value="${vaga.status}">
+							<input id="dataAbertura" name="dataAbertura" type="hidden" value="${vaga.dataAbertura}">
+							<input id="status" name="status" type="hidden" value="${ultimoStatus.status.id}">
 							<div id="textDiv">
 								
 							<input class ="hidden" value="${erro}" id="contErro">
@@ -49,16 +50,16 @@
 
 							<div class="panel-tab clearfix">
 								<ul class="tab-bar wizard-demo" id="wizardDemo">
-									<li class="active tab-verity"><a href="#first"
+									<li id="tabInformacoes2" class="active tab-verity"><a id="tabInformacoes" href="#first"
 										data-toggle="tab"><i class="fa fa-user"></i> Informações
 											básicas</a></li>
-									<li class="tab-verity"><a href="#second" data-toggle="tab"
+									<li class="tab-verity"><a id="tabDados" href="#second" data-toggle="tab"
 										class="text-success"><i class="fa fa-pencil"></i> Dados do
 											projeto</a></li>
-									<li class="tab-verity"><a href="#third" data-toggle="tab"
+									<li class="tab-verity"><a id="tabPerfil" href="#third" data-toggle="tab"
 										class="text-success"><i class="fa fa-briefcase"></i>
 											Perfil</a></li>
-									<li class="tab-verity"><a id="abaAvaliadores" href="#fourth" data-toggle="tab"
+									<li id="tabAvaliadores2" class="tab-verity"><a id="tabAvaliadores" href="#fourth" data-toggle="tab"
 										class="text-success hide"><i class="fa fa-group"></i>
 											Avaliadores</a></li>
 								</ul>
@@ -415,6 +416,8 @@
 			$("#cep").mask("99999-999");
 			$('.date').mask('99/99/9999');
 		})
+		
+		var dataAberturaVar = ${vaga.dataAbertura};
 	</script>
 	
 	<script type="text/javascript">

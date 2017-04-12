@@ -467,13 +467,7 @@ footer {
 												<li><c:url value="editar/${vaga.id}" var="myURL">
 													</c:url> <a href="${myURL}" class="editarPendente"><i class="fa fa-pencil"></i> Editar</a></li>
 												</c:if>
-												
-												<c:if test="${vaga.ultimoStatus.status.nome == 'Ativo'}">
-												<li role="separator" class="editarDivider divider"></li>
-												<li><c:url value="editar/${vaga.id}" var="myURL">
-													</c:url> <a href="${myURL}" class="editarPendente"><i class="fa fa-pencil"></i> Editar avaliadores</a></li>
-												</c:if>
-												
+																								
 												<c:if test="${vaga.ultimoStatus.status.nome == 'Pendente'}">
 												    <li id="${vaga.ultimoStatus.status.nome}"role="separator" class="Aprovar divider"></li>
 													<li id="${vaga.ultimoStatus.status.nome}" class="Aprovar">

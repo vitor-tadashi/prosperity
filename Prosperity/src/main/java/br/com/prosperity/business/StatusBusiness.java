@@ -40,10 +40,4 @@ public class StatusBusiness {
 		return listaStatus;
 	}
 	
-
-	
-
-	
-	
-	
 }
