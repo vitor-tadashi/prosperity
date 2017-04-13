@@ -166,9 +166,9 @@ $(function() {
 	//Script para alteração da Aba Dados do Projeto e do Radio Button Local de Trabalho
 	
 	if (($("#localTrabalhoVar").val() == "C")) {
-		$("div#dadosAlocacao").removeClass("hide");
+		$("div#dadosAlocacao").hide();
 	}else if(($("#localTrabalhoVar").val() == "I")){
-		$("div#dadosAlocacao").addClass("hide");
+		$("div#dadosAlocacao").show();
 	};
 
 	$("#cliente").click(function() {

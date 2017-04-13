@@ -165,11 +165,9 @@ public class VagaBusiness {
 			situacaoVaga.setIdVaga(vagaEntity.getId());
 			situacaoVaga.setStatus(StatusVagaEnum.PENDENTE);
 			alterarStatus(situacaoVaga);
-			inserirAvaliadores(vagaEntity, usuarioBean);
+			//inserirAvaliadores(vagaEntity, usuarioBean);
 		} else {
-			// vagaEntity.setDataAbertura(vagaBean.getDataAbertura()); //
 			// VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
-			// vagaBean.setUsuarioBean(usuario);
 			inserirAvaliadores(vagaEntity, usuarioBean);
 			vagaDAO.update(vagaEntity);
 		}
