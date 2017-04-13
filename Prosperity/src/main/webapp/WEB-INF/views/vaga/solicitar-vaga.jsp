@@ -395,6 +395,26 @@
 	<script src="/resources/js/custom/custom.js"></script>
 	
 	<script>
+		$(document).ready(function() {
+			if ($("input#contErro").val() > 0) {
+				$('#textDiv').addClass("alert alert-danger");
+			}
+		})
+		
+		$(document).ready(function() {
+			$('.cpf').mask('999.999.999-99', {
+				reverse : true
+			});
+			$('.telefone').mask('(99) 99999-9999');
+			$('#rg').mask('99.999.999-9');
+			$("#cep").mask("99999-999");
+			$('.date').mask('99/99/9999');
+		})
+		
+		var a = ${vaga.dataAbertura} + 1
+		if (a == 1){
+			$("#dataAbertura").val("2017-01-01")
+		}
 	
 //Script para preencher automático o Radio de TipoVaga
 	
