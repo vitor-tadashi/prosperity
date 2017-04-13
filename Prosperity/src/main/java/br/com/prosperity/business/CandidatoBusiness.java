@@ -399,13 +399,14 @@ public class CandidatoBusiness {
 		VagaEntity vaga = vagaDAO.findById(idVaga);
 		List<AvaliadorVagaEntity> avaliadoresEntity = avaliadorVagaDAO.findByNamedQuery("obterAvaliadoresDaVaga",
 				vaga.getId());
-		for (AvaliadorVagaEntity avaliadorVagaEntity : avaliadoresEntity) {
-			AvaliadorCandidatoEntity avaliadorCandidatoEnitty = new AvaliadorCandidatoEntity();
-			avaliadorCandidatoEnitty.setVaga(avaliadorVagaEntity.getVaga());
-			avaliadorCandidatoEnitty.setUsuario(avaliadorVagaEntity.getUsuario());
-			avaliadorCandidatoEnitty.setCandidato(candidato);
-			avaliadorCandidatoDAO.insert(avaliadorCandidatoEnitty);
-		}
+		if (avaliadoresEntity != null)
+			for (AvaliadorVagaEntity avaliadorVagaEntity : avaliadoresEntity) {
+				AvaliadorCandidatoEntity avaliadorCandidatoEnitty = new AvaliadorCandidatoEntity();
+				avaliadorCandidatoEnitty.setVaga(avaliadorVagaEntity.getVaga());
+				avaliadorCandidatoEnitty.setUsuario(avaliadorVagaEntity.getUsuario());
+				avaliadorCandidatoEnitty.setCandidato(candidato);
+				avaliadorCandidatoDAO.insert(avaliadorCandidatoEnitty);
+			}
 	}
 
 	@Transactional
@@ -422,8 +423,7 @@ public class CandidatoBusiness {
 		}
 
 		List<CandidatoEntity> entities = candidatoDAO.findByNamedQuery("listarAprovacoes", listaStatus,
-				StatusCandidatoEnum.CANDIDATOEMANALISE.getValue(), usuarioBean.getId(),
-				idStatusCandidatura);
+				StatusCandidatoEnum.CANDIDATOEMANALISE.getValue(), usuarioBean.getId(), idStatusCandidatura);
 		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(entities);
 
 		return beans;
