@@ -1,43 +1,23 @@
 package br.com.prosperity.entity;
 
-import java.util.List;
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbTipoCurso")
 public class TipoCursoEntity {
-	/* Mapeamento dos Atributos */
+
 	@Id
-	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idTipoCurso", unique = true, nullable = false)
 	private Integer id;
 
 	@Column(name = "nmTipoCurso")
 	private String descricao;
-
-	@OneToMany
-	@JoinColumn(name = "idTipoCurso")
-	private List<FormacaoEntity> formacao;
-	
-	/* fim */
-
-	public List<FormacaoEntity> getFormacao() {
-		return formacao;
-	}
-
-	public void setFormacao(List<FormacaoEntity> formacao) {
-		this.formacao = formacao;
-	}
-
-	public TipoCursoEntity(Integer id, String descricao) {
-		this.id = id;
-		this.descricao = descricao;
-	}
-
-	public TipoCursoEntity() {
-
-	}
 
 	public Integer getId() {
 		return id;
