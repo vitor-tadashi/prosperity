@@ -70,6 +70,13 @@
 								<div class="tab-content">
 									<div class="tab-pane fade in active" id="first">
 										<div class="row">
+											<div class="form-group col-md-3">
+												<label for="cpf" class="control-label">CPF</label> <input
+													type="text" class="form-control cpf parsley-validated"
+													id="cpf" name="cpf" data-required="true"
+													placeholder="Informe seu CPF" value="${candidato.cpf}"
+													onblur="verificarCPF()">
+											</div>
 											<div class="form-group col-md-4">
 												<label class="control-label" for="nome">Nome</label> <input
 													value="${candidato.nome}" type="text"
@@ -83,13 +90,7 @@
 													id="email" name="email" data-required="true"
 													placeholder="Informe seu email" value="${candidato.email}">
 											</div>
-											<div class="form-group col-md-3">
-												<label for="cpf" class="control-label">CPF</label> <input
-													type="text" class="form-control cpf parsley-validated"
-													id="cpf" name="cpf" data-required="true"
-													placeholder="Informe seu CPF" value="${candidato.cpf}"
-													onblur="verificarCPF()">
-											</div>
+										
 											<div class="form-group col-md-2">
 												<label for="rg" class="control-label">RG</label> <input
 													type="text" class="form-control rg parsley-validated"
@@ -221,18 +222,10 @@
 												</div>
 												<div class="col-md-2">
 													<input type="number" class="form-control dinheiro"
-														id="pretensaoSalarial" placeholder="R$" name="valorMin"
-														value="${candidato.valorMin}" />
+														id="pretensaoSalarial" placeholder="R$" name="pretensaoSalarial"
+														value="${candidato.pretensaoSalarial}" />
 												</div>
-												<div class="col-sm-1">
-													<p class="text-center">até</p>
-												</div>
-												<div class="col-md-2">
-													<input type="number" class="form-control dinheiro"
-														placeholder="R$" name="valorMax"
-														value="${candidato.valorMax}" />
-												</div>
-											</div>
+											
 										</div>
 										<div class="form-group col-md-3">
 											<label for="vaga">Vaga a ser aplicado</label> <select

@@ -57,8 +57,7 @@ public class CandidatoBean extends FormatUtil {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date entrevista;
 	private String proposta;
-	private Double valorMin;
-	private Double valorMax;
+	private Double pretensaoSalarial;
 	private StatusCandidatoBean ultimoStatus;
 	private VagaBean ultimaVaga;
 	@Valid
@@ -315,21 +314,7 @@ public class CandidatoBean extends FormatUtil {
 		this.proposta = proposta;
 	}
 
-	public Double getValorMin() {
-		return valorMin;
-	}
 
-	public void setValorMin(Double valorMin) {
-		this.valorMin = valorMin;
-	}
-
-	public Double getValorMax() {
-		return valorMax;
-	}
-
-	public void setValorMax(Double valorMax) {
-		this.valorMax = valorMax;
-	}
 
 	public VagaBean getVagaBean() {
 		return vagaBean;
@@ -344,6 +329,14 @@ public class CandidatoBean extends FormatUtil {
 
 	public void setCurriculoTexto(String curriculoTexto) {
 		this.curriculoTexto = curriculoTexto;
+	}
+
+	public Double getPretensaoSalarial() {
+		return pretensaoSalarial;
+	}
+
+	public void setPretensaoSalarial(Double pretensaoSalarial) {
+		this.pretensaoSalarial = pretensaoSalarial;
 	}
 
 }
