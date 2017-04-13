@@ -84,7 +84,14 @@ public class VagaBusiness {
 
 	@Autowired
 	private AvaliadorVagaConverter avaliadorVagaConverter;
-
+	
+	@Transactional(readOnly = true)
+	public List<VagaBean>listarDecrescente() {
+		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("findAllDesc");
+		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
+		return vagaBean;
+	}
+	
 	@Transactional(readOnly = true)
 	public List<VagaBean> listar() {
 
@@ -169,11 +176,9 @@ public class VagaBusiness {
 			situacaoVaga.setIdVaga(vagaEntity.getId());
 			situacaoVaga.setStatus(StatusVagaEnum.PENDENTE);
 			alterarStatus(situacaoVaga);
-			inserirAvaliadores(vagaEntity, usuarioBean);
+			//inserirAvaliadores(vagaEntity, usuarioBean);
 		} else {
-			// vagaEntity.setDataAbertura(vagaBean.getDataAbertura()); //
 			// VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
-			// vagaBean.setUsuarioBean(usuario);
 			inserirAvaliadores(vagaEntity, usuarioBean);
 			vagaDAO.update(vagaEntity);
 		}
