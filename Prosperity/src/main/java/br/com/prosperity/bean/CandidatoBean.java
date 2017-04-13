@@ -69,7 +69,7 @@ public class CandidatoBean extends FormatUtil {
 	private String curriculoTexto;
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataAberturaDe;
-	@DateTimeFormat(pattern="dd/MM/yyyy")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataAberturaPara;
 	private VagaBean vagaBean;
 
@@ -83,6 +83,7 @@ public class CandidatoBean extends FormatUtil {
 	public void setVagaCandidato(VagaCandidatoBean vagaCandidato) {
 		this.vagaCandidato = vagaCandidato;
 	}
+
 	public Date getDataAberturaDe() {
 		return dataAberturaDe;
 	}
@@ -98,6 +99,7 @@ public class CandidatoBean extends FormatUtil {
 	public void setDataAberturaPara(Date dataAberturaPara) {
 		this.dataAberturaPara = dataAberturaPara;
 	}
+
 	@XmlTransient
 	public Double getPretensaoDe() {
 		return pretensaoDe;
@@ -106,6 +108,7 @@ public class CandidatoBean extends FormatUtil {
 	public void setPretensaoDe(Double pretensaoDe) {
 		this.pretensaoDe = pretensaoDe;
 	}
+
 	@XmlTransient
 	public Double getPretensaoPara() {
 		return pretensaoPara;
@@ -118,14 +121,14 @@ public class CandidatoBean extends FormatUtil {
 	public StatusCandidatoBean getUltimoStatus() {
 		if (status != null && status.size() > 0) {
 			Integer idUltimoStatus = status.stream().map(StatusCandidatoBean::getId).max(Integer::compareTo).get();
-			ultimoStatus = status.stream().filter(st -> st.getId().equals(idUltimoStatus)).findFirst().get();	
+			ultimoStatus = status.stream().filter(st -> st.getId().equals(idUltimoStatus)).findFirst().get();
 		} else {
 			ultimoStatus = new StatusCandidatoBean("Não possui status");
 		}
 
 		return ultimoStatus;
 	}
-	
+
 	public VagaBean getUltimaVaga() {
 		if (vagas != null && vagas.size() > 0) {
 			Integer idUltimaVaga = vagas.stream().map(VagaCandidatoBean::getId).max(Integer::compareTo).get();
@@ -338,6 +341,7 @@ public class CandidatoBean extends FormatUtil {
 	public void setVagaBean(VagaBean vagaBean) {
 		this.vagaBean = vagaBean;
 	}
+
 	public String getCurriculoTexto() {
 		return curriculoTexto;
 	}

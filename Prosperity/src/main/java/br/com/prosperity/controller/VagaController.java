@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 
 import br.com.prosperity.bean.AvaliadorVagaBean;
+import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CargoBean;
+import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.ProjetoBean;
 import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoVagaBean;
@@ -30,7 +32,9 @@ import br.com.prosperity.bean.StatusBean;
 import br.com.prosperity.bean.StatusVagaBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
+import br.com.prosperity.business.CandidatoBusiness;
 import br.com.prosperity.business.CargoBusiness;
+import br.com.prosperity.business.FuncionarioBusiness;
 import br.com.prosperity.business.ProjetoBusiness;
 import br.com.prosperity.business.SenioridadeBusiness;
 import br.com.prosperity.business.StatusBusiness;
@@ -85,12 +89,16 @@ public class VagaController {
 
 	@Autowired
 	private StatusVagaBusiness statusVagaBusiness;
+	
+
 
 	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
 	public String cliente(Model model, VagaBean vaga) {
 
 		// FAZ APARECER A TABELA
-		model.addAttribute("vagas", vagaBusiness.listar());
+		model.addAttribute("vagas", vagaBusiness.listarDecrescente());
+		
+		/*model.addAttribute("vagas", vagaBusiness.listar());*/
 
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
 		model.addAttribute("listaCargo", listaCargo);
@@ -153,6 +161,7 @@ public class VagaController {
 
 		return "vaga/consultar-vaga";
 	}
+	
 
 	@RequestMapping(value = { "abrir" }, method = RequestMethod.GET)
 	public @ResponseBody VagaBean abrirVagaAjax(Model model, @ModelAttribute("id") Integer id) {

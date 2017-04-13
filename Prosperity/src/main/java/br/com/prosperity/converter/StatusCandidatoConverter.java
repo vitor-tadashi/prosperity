@@ -9,10 +9,10 @@ import br.com.prosperity.entity.StatusCandidatoEntity;
 public class StatusCandidatoConverter implements Converter<StatusCandidatoEntity, StatusCandidatoBean> {
 
 	@Autowired
-	StatusConverter statusConverter;
+	private StatusConverter statusConverter;
 
 	@Autowired
-	UsuarioConverter usuarioConverter;
+	private UsuarioConverter usuarioConverter;
 
 	@Override
 	public StatusCandidatoEntity convertBeanToEntity(StatusCandidatoBean bean) {
