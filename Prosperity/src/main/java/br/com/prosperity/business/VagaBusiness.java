@@ -4,7 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.prosperity.bean.AvaliadorVagaBean;
+import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.SituacaoVagaBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
@@ -106,8 +109,9 @@ public class VagaBusiness {
 
 	@Transactional
 	public List<VagaBean> listarVagaAprovar() {
+		List<Integer> listaStatus = obterStatusDisponivelAprovacao();
 
-		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagaAprovar", 4, 1, true); // PENSAR
+		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagaAprovar", listaStatus); // PENSAR
 		int aux = 0;
 		for (VagaEntity vaga : vagaEntity) {
 			vaga.setDataInicio(parseData(vaga.getDataInicio()));
@@ -208,10 +212,10 @@ public class VagaBusiness {
 			}
 		}
 
-		if (situacaoVaga.getStatus().getValue() != 4) {
+		if (situacaoVaga.getStatus().getValue() != StatusVagaEnum.PENDENTE.getValue()) {
 			desativarStatus(vagaEntity);
 		}
-		
+
 		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
 		statusVagaEntity.setStatus(statusDAO.findById(situacaoVaga.getStatus().getValue()));
 		statusVagaEntity.setVaga(vagaEntity);
@@ -269,5 +273,29 @@ public class VagaBusiness {
 		List<AvaliadorVagaEntity> avaliadorVagaEntity = avaliadorVagaDao.findByNamedQuery("obterAvaliadoresDaVaga", id);
 		avaliadorVagaBean = avaliadorVagaConverter.convertEntityToBean(avaliadorVagaEntity);
 		return avaliadorVagaBean;
+	}
+
+	private List<Integer> obterStatusDisponivelAprovacao() {
+		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
+		Set<Integer> lista = new HashSet<>();
+		List<Integer> listaStatus = new ArrayList<Integer>();
+		
+		for (FuncionalidadeBean funcionalidadeBean : usuarioBean.getPerfil().getListaFuncionalidades()) {
+			if (funcionalidadeBean.getId() == 1)
+				lista.add(StatusVagaEnum.PENDENTE.getValue());
+
+			if (funcionalidadeBean.getId() == 30)
+				lista.add(StatusVagaEnum.ACEITO.getValue());
+
+			if (funcionalidadeBean.getId() == 29) {
+				lista.add(StatusVagaEnum.AGUARDANDOAVALIADORES.getValue());
+				lista.add(StatusVagaEnum.PENDENTE.getValue());
+				lista.add(StatusVagaEnum.ACEITO.getValue());
+			}
+		}
+		for(Integer listas : lista){
+			listaStatus.add(listas);
+		}
+		return listaStatus;
 	}
 }
