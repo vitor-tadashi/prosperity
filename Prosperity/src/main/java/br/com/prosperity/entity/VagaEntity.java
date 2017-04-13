@@ -100,19 +100,19 @@ public class VagaEntity {
 	@Temporal(value = TemporalType.DATE)
 	private Date dataFechamento; //
 
-	@ManyToOne//(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idProjeto")
 	private ProjetoEntity projetoEntity;
 
-	@ManyToOne//(cascade = CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idCargo")
 	private CargoEntity cargoEntity;
 
-	@ManyToOne//(cascade = CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idSenioridade")
 	private SenioridadeEntity senioridadeEntity;
 
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuarioEntity;
 
