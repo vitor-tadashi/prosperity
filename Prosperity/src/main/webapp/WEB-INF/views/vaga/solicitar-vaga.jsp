@@ -417,7 +417,11 @@
 			$('.date').mask('99/99/9999');
 		})
 		
-		var dataAberturaVar = ${vaga.dataAbertura};
+		var a = ${vaga.dataAbertura} + 1
+		if (a == 1){
+			$("#dataAbertura").val("2017-01-01")
+		}
+		
 	</script>
 	
 	<script type="text/javascript">
