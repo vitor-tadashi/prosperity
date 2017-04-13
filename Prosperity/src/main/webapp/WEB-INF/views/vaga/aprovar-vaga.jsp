@@ -462,24 +462,19 @@ footer {
 												onclick="info(${vaga.id})"> <i class="fa fa-eye fa-lg">&nbsp</i>Visualizar
 												</a></li>
 												
-												<c:if test="${vaga.ultimoStatus.status.nome == 'Pendente'}">
-												<li role="separator" class="editarDivider divider"></li>
-												<li><c:url value="editar/${vaga.id}" var="myURL">
-													</c:url> <a href="${myURL}" class="editarPendente"><i class="fa fa-pencil"></i> Editar</a></li>
-												</c:if>
-																								
+																																			
 												<c:if test="${vaga.ultimoStatus.status.nome == 'Pendente'}">
 												    <li id="${vaga.ultimoStatus.status.nome}"role="separator" class="Aprovar divider"></li>
 													<li id="${vaga.ultimoStatus.status.nome}" class="Aprovar">
 													<a href="#aprova-modal"	onclick="alterarStatus(${vaga.id}, 'ACEITO')"
-														data-toggle="modal" ><i class="Aprovar fa fa-check"></i> Aprovar</a></li>
+														data-toggle="modal" ><i class="Aprovar fa fa-check fa-lg"></i> Aprovar</a></li>
 												</c:if>
 												
 												<c:if test="${vaga.ultimoStatus.status.nome == 'Pendente'}">	
 													<li id="${vaga.ultimoStatus.status.nome}"role="separator" class="Reprovar divider"></li>
 													<li id="${vaga.ultimoStatus.status.nome}" class="Reprovar"><a href="#reprova-modal"
 														onclick="alterarStatus(${vaga.id}, 'RECUSADO')"
-														data-toggle="modal" ><i class="Reprovar fa  fa-times"></i> Reprovar</a></li>
+														data-toggle="modal" ><i class="Reprovar fa  fa-times fa-lg"></i> Reprovar</a></li>
 												</c:if>
 												
 
@@ -487,14 +482,14 @@ footer {
 													<li id="${vaga.ultimoStatus.status.nome}" role="separator" class="cancelarDivider divider"></li>
 													<li id="${vaga.ultimoStatus.status.nome}" >
 													<a href="#cancela-modal" onclick="alterarStatus(${vaga.id}, 'CANCELADO')"
-														data-toggle="modal" class="cancelarAtivos" ><i class="Cancelar fa fa-ban"></i> Cancelar</a></li>
+														data-toggle="modal" class="cancelarAtivos" ><i class="Cancelar fa fa-ban fa-lg"></i> Cancelar</a></li>
 												</c:if>	
 													
 												<c:if test="${vaga.ultimoStatus.status.nome == 'Ativo'}">
 													<li id="${vaga.ultimoStatus.status.nome}" role="separator" class="fecharDivider divider"></li>
 													<li id="${vaga.ultimoStatus.status.nome}">
 													<a href="#fechar-modal" onclick="alterarStatus(${vaga.id}, 'FECHADO')"
-														data-toggle="modal" class="fecharAtivo" ><i class="Fechar fa fa-trash-o"></i> Fechar</a></li>
+														data-toggle="modal" class="fecharAtivo" ><i class="Fechar fa fa-trash-o fa-lg"></i> Fechar</a></li>
 												</c:if>
 												
 											</ul>
