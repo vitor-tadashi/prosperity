@@ -504,6 +504,7 @@
 									<th class="text-center">Cliente</th>
 									<th class="text-center">Local de trabalho</th>
 									<th class="text-center">Data de abertura</th>
+									<th class="text-center">Data de Início</th>
 									<th class="text-center">Status</th>
 									<th class="text-center">Ações</th>
 								</tr>
@@ -511,7 +512,7 @@
 							<tbody class="text-center">
 								<c:forEach var="vaga" items="${vagas}">
 									<tr position="infoVaga">
-									<td id="linhaNome">${vaga.nomeVaga}</td>
+									<td id="linhaNome" name="nomeVaga">${vaga.nomeVaga}</td>
 									<td>${vaga.nomeSolicitante}</td>
 									<td>${vaga.projeto.cliente.nome}</td>
 									<td>
@@ -524,6 +525,7 @@
 
 									</td>
 									<td><fmt:formatDate value="${vaga.dataAbertura}" pattern="dd/MM/yyyy"/></td>
+									<td><fmt:formatDate value="${vaga.dataInicio}" pattern="dd/MM/yyyy"/></td>
 									<td id="linhaStatus"><span class="label"
 														style="color: #fff; background-color: ${vaga.ultimoStatus.status.css}">${vaga.ultimoStatus.status.nome}</span></td>
 									<td>
@@ -534,19 +536,27 @@
 												<i class="fa fa-cogs fa-lg">&nbsp;</i> <span class="caret"></span>
 											</button>
 											<ul class="dropdown-menu dropdown-menu-right slidedown">
+											
 											<li><a href="#visualizar-modal" 
 													onclick="info(${vaga.id})"><i
 														class="fa fa-eye">&nbsp</i>Visualizar</a></li>
+											<li role="separator" class="editarDivider divider btnEdita hide"></li>
+														
+														<li><a href="#" onclick="filtro" 
+													><i
+														class="fa fa-group">&nbsp</i>Visualizar candidatos</a></li>
+														
+														
 											<c:if test="${vaga.ultimoStatus.status.nome == 'Pendente'}">
-												<li role="separator" class="editarDivider divider"></li>
+												<li role="separator" class="editarDivider pro divider"></li>
 												<li><c:url value="editar/${vaga.id}" var="myURL">
-													</c:url> <a href="${myURL}" class="editarPendente"><i class="fa fa-pencil"></i> Editar</a></li>
+													</c:url> <a href="${myURL}" class="editarPendente pro"><i class="fa fa-pencil"></i> Editar</a></li>
 												</c:if>
 												
-												<c:if test="${vaga.ultimoStatus.status.nome == 'Ativo'}">
-												<li role="separator" class="editarDivider divider btnEdita hide"></li>
+												<c:if test="${vaga.ultimoStatus.status.nome == 'Aguardando avaliadores'}">
+												<li role="separator" class="editarDivider divider btnEdita pre hide"></li>
 												<li><c:url value="editar/${vaga.id}" var="myURL">
-													</c:url> <a href="${myURL}" class="editarPendente btnEdita hide"><i class="fa fa-pencil"></i> Editar avaliadores</a></li>
+													</c:url> <a href="${myURL}" class="editarPendente btnEdita pre hide"><i class="fa fa-pencil"></i> Editar avaliadores</a></li>
 												</c:if>					
 											</ul>
 										</div> <!-- /btn-group -->
@@ -763,6 +773,7 @@
 			"bFilter": false,
 			"bInfo": false,
 			"bLengthChange": false,
+			"bSort": false,
 
 			"oLanguage": {
 				"sEmptyTable": "Nenhum registro encontrado",
@@ -811,6 +822,46 @@
  		
 		});
 	});
+		
+$(function() {
+		
+    	var id = $("#idPerfil").val();
+    	$.ajax({
+    		url: "http://localhost:8080/usuario/obter-perfil-funcionalidade",
+    		type: "GET",
+    		dataType: "JSON",
+    		data: {id : id},
+    		success: function(lista){
+    			if(lista != null){
+    				var editar = 0;
+    				
+	    				$.each(lista,function(i,item){
+    						if(item.id == 31){
+    							editar++;
+	    					}
+	    				});
+	    				
+    				if (editar == 0){
+    					$('.pro').hide();
+    					$('.pre').hide();
+    				}
+    				
+    			}
+    		}
+    	});
+	})
+	
+	function filtrarCandidato(){
+	$.ajax({
+		url: "filtro",
+		type: "GET",
+		dataType: "JSON",
+		data: { 'CandidatoBean' : $('nomeVaga').val()},
+		success: function(){
+				location.reload();	
+			}
+	});
+	}
 	</script>
 	
 	</body>

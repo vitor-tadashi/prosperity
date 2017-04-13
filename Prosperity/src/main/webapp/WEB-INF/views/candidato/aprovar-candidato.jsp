@@ -30,8 +30,8 @@
 
 	<!--    Modais   -->
 	<!-- Modal Avaliação de Competencias -->
-	<div id ="modalProposta" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
-		aria-labelledby="myLargeModalLabel">
+	<div id="modalProposta" class="modal fade bs-example-modal-lg"
+		tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -126,7 +126,6 @@
 													<input type="text" class="form-control" id="descricao3"
 														name="descricao3" data-required="true" placeholder="">
 												</div>
-
 											</div>
 										</div>
 										<div class="form-group">
@@ -232,31 +231,30 @@
 				</div>
 			</div>
 		</div>
-		</div>
-		<!-- Modal delete -->
-		<div class="modal fade" id="delete-modal" data-target="#delete-modal"
-			tabindex="-1" role="dialog" aria-labelledby="modalLabel">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Fechar">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<h4 class="modal-title" id="modalLabel">Cancelar candidato</h4>
-					</div>
-					<div class="modal-body">Deseja realmente cancelar este candidato?</div>
-					<div class="modal-footer">
-						<a id="excluir" href="${urlCancelar}">
-							<button type="button" class="btn btn-danger">Sim</button>
-						</a>
-						<button type="button" class="btn btn-success" data-dismiss="modal">Não</button>
-					</div>
+	</div>
+	<!-- Modal delete -->
+	<div class="modal fade" id="delete-modal" data-target="#delete-modal"
+		tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Fechar">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="modalLabel">Cancelar candidato</h4>
+				</div>
+				<div class="modal-body">Deseja realmente cancelar este
+					candidato?</div>
+				<div class="modal-footer">
+					<a id="excluir" href="${urlCancelar}">
+						<button type="button" class="btn btn-danger">Sim</button>
+					</a>
+					<button type="button" class="btn btn-success" data-dismiss="modal">Não</button>
 				</div>
 			</div>
 		</div>
-
-	
+	</div>
 	<!-- /.modal delete-->
 	<div id="main-container">
 		<div id="breadcrumb">
@@ -295,8 +293,6 @@
 									<tbody class="text-center">
 										<form id="form">
 											<c:forEach var="candidato" items="${candidatos}">
-
-
 												<tr>
 													<input type="hidden" id="${candidato.id }" />
 													<td>${candidato.nome}</td>
@@ -312,57 +308,49 @@
 													<td><input type="hidden" name="idStatus" id="idStatus"
 														value="${candidato.ultimoStatus.status.id}" />
 														<div class="btn-group">
+															<button class="btn btn-sm btn-info dropdown-toggle"
+																data-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false">
+																<i class="fa fa-cogs fa-lg">&nbsp;</i> <span
+																	class="caret"></span>
+															</button>
+															<ul class="dropdown-menu dropdown-menu-right slidedown">
+																<c:forEach var="statusDisponivel"
+																	items="${candidato.ultimoStatus.status.statusDisponiveis}">
+																	<li><a data-toggle="modal"
+																		data-target=".bs-example-modal-lg"
+																		id="aprovar-candidato"
+																		onclick="alterarStatus(${candidato.id}, ${statusDisponivel.id})"><i
+																			${statusDisponivel.classe}>&nbsp;</i>${statusDisponivel.nome}
+																	</a></li>
+																	<li class="divider "></li>
+																</c:forEach>
+																<li><c:url value="editar/${candidato.id}"
+																		var="myURL">
+																	</c:url> <a href="${myURL}"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
 
-															<div class="btn-group">
+																<li class="divider"></li>
 
-																<button class="btn btn-sm btn-info dropdown-toggle"
-																	data-toggle="dropdown" aria-haspopup="true"
-																	aria-expanded="false">
-																	<i class="fa fa-cogs fa-lg">&nbsp;</i> <span
-																		class="caret"></span>
-																</button>
-																<ul class="dropdown-menu dropdown-menu-right slidedown">
-																	<c:forEach var="statusDisponivel"
-																		items="${candidato.ultimoStatus.status.statusDisponiveis}">
-																		<li><a data-toggle="modal"
-																			data-target=".bs-example-modal-lg"
-																			id="aprovar-candidato"
-																			onclick="alterarStatus(${candidato.id}, ${statusDisponivel.id})"><i
-																				${statusDisponivel.classe}>&nbsp;</i>${statusDisponivel.nome}
-																		</a></li>
-																		<li class="divider "></li>
-																	</c:forEach>
-																	<li><c:url value="editar/${candidato.id}"
-																			var="myURL">
-																		</c:url> <a href="${myURL}"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
-
-																	<li class="divider"></li>
-
-																	<li><c:url scope="session" value="cancelar-candidato/${candidato.id}"
-																				var="urlCancelar">
-																			</c:url><a href="#delete-modal" data-toggle="modal"><i
-																				class="fa fa-trash-o fa-lg">&nbsp;</i>Cancelar</a></li>
-																		<!-- /fim botao -->
-
-																</ul>
-															</div>
-														</div> <!-- /btn-group --></td>
+																<li><c:url scope="session"
+																		value="cancelar-candidato/${candidato.id}"
+																		var="urlCancelar">
+																	</c:url><a href="#delete-modal" data-toggle="modal"><i
+																		class="fa fa-trash-o fa-lg">&nbsp;</i>Cancelar</a></li>
+																<!-- /fim botao -->
+															</ul>
+														</div> <!-- /btn-group -->
+													</td>
 												</tr>
-												
 											</c:forEach>
 										</form>
 									</tbody>
 								</table>
-
-
 							</div>
 							<!-- /.row -->
 						</div>
 						<!-- /.panel-body -->
-
 					</div>
 					<!-- fim da div panel -->
-
 				</div>
 				<!-- /col-md-12 -->
 			</div>
@@ -379,10 +367,6 @@
 	<!-- import da merda da proposta -->
 
 	<script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
-	<script>
-      </script>
-	<script>
-      </script>
 	<script>
 		$("body").on("click", "#aprovar-candidato", function(){
 			var inputs  = $(this).closest("tr").find("input[type=hidden]");
@@ -413,7 +397,6 @@
 				}
 				});
 		})
-	
             CKEDITOR.replace('editor');
                   $('#alterarStatus').click(function() {
                         
@@ -444,7 +427,6 @@
                                 avaliacoes.push(avaliacaoCompetencia);
                             }
                         });
-	            		
                         $.ajax({
                               url : "alterar-status-candidato",
                               type : "POST",
@@ -454,14 +436,15 @@
                                    'parecer' : $('#parecer').val(),
                                    'proposta' : CKEDITOR.instances.editor.getData(),
                                    'idStatus' : $('#hdn-status').val(),
-                                   'avaliacoesCompetencias' : JSON.stringify(avaliacoes),
-                                   'nome1' : $("#nome1").val(),
-                                   'nome2' : $("#nome2").val(),
-                                   'nome3' : $("#nome3").val(),
-                                   'descricao1' : $("#descricao1").val(),
-                                   'descricao2' : $("#descricao2").val(),
-                                   'descricao3' : $("#descricao3").val(),
-                                   'parecerTecnico' : $("#parecerTecnico").val()
+                                   'processoSeletivo': {
+	                                   'nome1' : $("#nome1").val(),
+	                                   'nome2' : $("#nome2").val(),
+	                                   'nome3' : $("#nome3").val(),
+	                                   'descricao1' : $("#descricao1").val(),
+	                                   'descricao2' : $("#descricao2").val(),
+	                                   'descricao3' : $("#descricao3").val(),
+	                                   'parecerTecnico' : $("#parecerTecnico").val()
+                                   }                                  
                               },
                               success : function(data) {
                                    location.reload();
