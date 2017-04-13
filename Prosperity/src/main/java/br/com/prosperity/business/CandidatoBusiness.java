@@ -302,11 +302,12 @@ public class CandidatoBusiness {
 	private void desativarStatus(CandidatoEntity candidatoEntity) {
 		List<StatusCandidatoEntity> status = statusCandidatoDAO.findByNamedQuery("obterStatusCandidato",
 				candidatoEntity);
-		for (StatusCandidatoEntity statusCand : status) {
-			statusCand.setFlSituacao(false);
-			statusCandidatoDAO.update(statusCand);
+		if (status != null) {
+			for (StatusCandidatoEntity statusCand : status) {
+				statusCand.setFlSituacao(false);
+				statusCandidatoDAO.update(statusCand);
+			}
 		}
-
 	}
 
 	@Transactional
@@ -399,7 +400,7 @@ public class CandidatoBusiness {
 		VagaEntity vaga = vagaDAO.findById(idVaga);
 		List<AvaliadorVagaEntity> avaliadoresEntity = avaliadorVagaDAO.findByNamedQuery("obterAvaliadoresDaVaga",
 				vaga.getId());
-		if (avaliadoresEntity != null)
+		if (avaliadoresEntity != null && avaliadoresEntity.size() > 0)
 			for (AvaliadorVagaEntity avaliadorVagaEntity : avaliadoresEntity) {
 				AvaliadorCandidatoEntity avaliadorCandidatoEnitty = new AvaliadorCandidatoEntity();
 				avaliadorCandidatoEnitty.setVaga(avaliadorVagaEntity.getVaga());
