@@ -94,7 +94,7 @@ public class VagaBusiness {
 	public List<VagaBean> listarVagasAtivas() {
 		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagasAtivas", 1);
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
-		return vagaBean;	
+		return vagaBean;
 	}
 
 	@Transactional
@@ -194,9 +194,17 @@ public class VagaBusiness {
 		VagaEntity vagaEntity = new VagaEntity();
 		vagaEntity.setId(situacaoVaga.getIdVaga());
 
-		if (situacaoVaga.getStatus().getValue() != 4) {
+		if (situacaoVaga.getStatus() == StatusVagaEnum.ACEITO) {
+			avaliadorVagaBean = obterAvaliadores(vagaEntity.getId());
+			if (avaliadorVagaBean == null || avaliadorVagaBean.size() == 0) {
+				situacaoVaga.setStatus(StatusVagaEnum.AGUARDANDOAVALIADORES);
+			}
+		}
+
+		if (situacaoVaga.getStatus().getValue() != StatusVagaEnum.PENDENTE.getValue()) {
 			desativarStatus(vagaEntity);
 		}
+		
 		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
 		statusVagaEntity.setStatus(statusDAO.findById(situacaoVaga.getStatus().getValue()));
 		statusVagaEntity.setVaga(vagaEntity);
@@ -209,10 +217,9 @@ public class VagaBusiness {
 
 	@Transactional
 	private void desativarStatus(VagaEntity vagaEntity) {
-		List<StatusVagaEntity> statusVagas = statusVagaDAO.findByNamedQuery("obterStatusVaga",
-				vagaEntity);
+		List<StatusVagaEntity> statusVagas = statusVagaDAO.findByNamedQuery("obterStatusVaga", vagaEntity);
 		if (statusVagas == null || statusVagas.size() < 1) {
-		}else{
+		} else {
 			for (StatusVagaEntity status : statusVagas) {
 				status.setSituacao(false);
 				statusVagaDAO.update(status);
