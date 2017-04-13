@@ -25,6 +25,7 @@ import javax.persistence.TemporalType;
 		@NamedQuery(name = "listarVagaAprovar", query = "SELECT u FROM VagaEntity u LEFT OUTER JOIN u.statusVagaEntity p LEFT OUTER JOIN p.status s WHERE (s.id = ?1 OR s.id=?2) AND p.situacao = ?3"),
 
 		@NamedQuery(name = "obterPorId", query = "SELECT u FROM VagaEntity u WHERE u.id = ?1"),
+		@NamedQuery(name = "findAllDesc", query = "SELECT u FROM VagaEntity u ORDER BY u.id DESC"),
 
 		// @NamedQuery(name="listarVagaFiltrado", query="SELECT u FROM
 		// VagaEntity u LEFT JOIN u.statusVagaEntity p LEFT JOIN p.status e
