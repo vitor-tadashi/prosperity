@@ -197,7 +197,7 @@ public class VagaBusiness {
 		if (situacaoVaga.getStatus() == StatusVagaEnum.ACEITO) {
 			avaliadorVagaBean = obterAvaliadores(vagaEntity.getId());
 			if (avaliadorVagaBean == null || avaliadorVagaBean.size() == 0) {
-				situacaoVaga.setStatus(StatusVagaEnum.INSERIRAVALIADORES);
+				situacaoVaga.setStatus(StatusVagaEnum.AGUARDANDOAVALIADORES);
 			}
 		}
 

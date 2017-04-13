@@ -1,5 +1,90 @@
 $(function() {
 	
+	var elements1 = $("#selectedBox1 option").each(function()
+			{
+			    $(this).val();
+			});
+	var elements2 = $("#selectedBox2 option").each(function()
+			{
+			    $(this).val();
+			});
+	for(var i = 0 ; i<elements1.length;i++){
+		for (var j=0;j<elements2.length;j++) {
+			if (elements1[i].value == elements2[j].value){
+				elements1[i].remove();
+			}
+		}
+	}
+	
+	//usuario.id != avaliadorVagaBean.usuario.id
+	
+	function validarData(id) {
+		
+		var campo = $('#dataInicio').val();			
+		
+		 if (campo!="")
+		{
+		        erro=0;
+		        hoje = new Date();
+		        anoAtual = hoje.getFullYear();
+		        barras = campo.split("/");
+		        if (barras.length == 3)
+		        	
+		        {
+		                dia = barras[0];
+		                mes = barras[1];
+		                ano = barras[2];
+		                resultado = (!isNaN(dia) && (dia > 0) && (dia < 32)) && (!isNaN(mes) && (mes > 0) && (mes < 13)) && (!isNaN(ano) && (ano.length == 4) && (ano >= anoAtual && ano >= 1900));
+		                if (!resultado)
+		                {
+		                	var div = document.getElementById("textDiv2").className = "alert alert-danger";
+
+		    				textDiv2.textContent = "Campo Data para inicio tem que estar no futuro";
+
+		    				var text = "[" + div.textContent + "]";
+		                        campo.focus();
+		                        return false;
+		                }
+		         }
+		         else
+		         {
+		        		var div = document.getElementById("textDiv").className = "";
+
+		    			textDiv2.textContent = "Campo Data para inicio inválido";
+
+		    			var text = "[" + div.textContent + "]";
+		                
+		                return false;
+		         }
+		        var div = document.getElementById("textDiv2").className = "";
+
+    			textDiv2.textContent = "";
+
+    			var text = "[" + div.textContent + "]";
+                
+		return true;
+		
+		}
+	}
+	
+	$(document).ready(function() {
+		if ($("input#contErro").val() > 0) {
+			$('#textDiv').addClass("alert alert-danger");
+		}
+	})
+	
+	$(document).ready(function() {
+		$('.cpf').mask('999.999.999-99', {
+			reverse : true
+		});
+		$('.telefone').mask('(99) 99999-9999');
+		$('#rg').mask('99.999.999-9');
+		$("#cep").mask("99999-999");
+		$('.date').mask('99/99/9999');
+	})
+	
+	var dataAberturaVar = ${vaga.dataAbertura};
+	
 		//Ajax para verificar o perfil e ver se ele pode editar avaliadores
 	
     	var id = $("#idPerfil").val();
@@ -12,7 +97,7 @@ $(function() {
     			if(lista != null){
 	    				$.each(lista,function(i,item){
 	    					if(item.id == 24){
-	    						$("#fourth").removeClass('hide')
+	    						$("#fourth").removeClass('hide');
 	    						$("#tabAvaliadores").removeClass('hide')
 	    					}
 	    				});
@@ -28,7 +113,7 @@ $(function() {
     	
     	// Verifica o status da vaga e esconde caso seja somente para editar avaliadores
     	
-    	if ($("#status").val() == 19){
+    	if ($("#status").val() == 27){
     		$("#tabInformacoes").hide();
     		$("#tabDados").hide();
     		$("#tabPerfil").hide();
@@ -38,29 +123,6 @@ $(function() {
     		$("#fourth").addClass("active in");
     	}
     	
-    	/*$("#cmbProjetoInterno").change(function(){
-        	check();
-        	var id = $("#selected-perfil option:selected").val();
-        	$.ajax({
-        		url: "http://localhost:8080/usuario/obter-cliente",
-        		type: "GET",
-        		dataType: "JSON",
-        		data: {id : id},
-        		success: function(lista){
-        			if(lista != null){
-        				$(".listFun").each(function(index){
-    	    				$.each(lista,function(i,item){
-    	    					if(item.id == $("#"+index).val()){
-    	    						$("#"+index).prop("checked",true)
-    	    					}
-    	    				});
-        				});	
-        			}
-        		}
-        	});
-        });*/
-    	
-	
 	//Script para preencher automático o Radio de TipoVaga
 	
 	if(($("#tipoVagaVar").val() == "R")){
@@ -143,7 +205,4 @@ $(function() {
 			return dados;
 	}
 	
-	
-	
-
 });
