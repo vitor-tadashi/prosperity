@@ -1,14 +1,10 @@
 package br.com.prosperity.converter;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.entity.CandidatoEntity;
-import br.com.prosperity.entity.VagaCandidatoEntity;
 
 @Component
 public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoBean> {
