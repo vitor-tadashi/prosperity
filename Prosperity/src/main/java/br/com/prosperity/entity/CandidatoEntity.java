@@ -114,37 +114,30 @@ public class CandidatoEntity {
 	@Column(name = "dsProposta")
 	private String proposta;
 
-	@Column(name = "vlPretencaoMin")
-	private Double valorMin;
-
-	@Column(name = "vlPretencaoMax")
-	private Double valorMax;
-
 	@Column(name ="curriculoTexto")
 	private String curriculoTexto;
 
 	/* Mapeamento de Relacionamentos */
 
-	// @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-
-	@OneToOne(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER, orphanRemoval = true)
+	@OneToOne(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, orphanRemoval = true)
 	@JoinColumn(name = "idContato")
 	private ContatoEntity contato;
 
-	@OneToOne(cascade = { CascadeType.ALL }, orphanRemoval = true)
+	@OneToOne(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, orphanRemoval = true)
 	@JoinColumn(name = "idEndereco")
 	private EnderecoEntity endereco;
 
-	@OneToOne(cascade = { CascadeType.ALL }, orphanRemoval = true)
+	@OneToOne(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, orphanRemoval = true)
 	@JoinColumn(name = "idFormacao")
 	private FormacaoEntity formacao;
-
+	
+	//TODO verificar relacionamento
 	@ManyToOne(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
 
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idCandidato")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "candidato")
+	//@JoinColumn(name = "idCandidato")
 	private List<StatusCandidatoEntity> statusCandidatos;
 
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
@@ -355,23 +348,6 @@ public class CandidatoEntity {
 	 * 
 	 * public Double getValorMin() { =======
 	 */
-	public Double getValorMin() {
-
-		return valorMin;
-	}
-
-	public void setValorMin(Double valorMin) {
-		this.valorMin = valorMin;
-	}
-
-	public Double getValorMax() {
-
-		return valorMax;
-	}
-
-	public void setValorMax(Double valorMax) {
-		this.valorMax = valorMax;
-	}
 	public String getCurriculoTexto() {
 		return curriculoTexto;
 	}
