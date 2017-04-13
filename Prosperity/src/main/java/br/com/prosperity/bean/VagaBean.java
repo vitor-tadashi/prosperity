@@ -4,12 +4,10 @@ import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
@@ -136,6 +134,7 @@ public class VagaBean {
 		this.dataInicio = dataInicio;
 	}
 
+	@XmlTransient
 	public char getLocalTrabalho() {
 		return localTrabalho;
 	}
@@ -144,6 +143,7 @@ public class VagaBean {
 		this.localTrabalho = localTrabalho;
 	}
 
+	@XmlTransient
 	public char getIdTipoVaga() {
 		return idTipoVaga;
 	}
@@ -167,7 +167,8 @@ public class VagaBean {
 	public void setHorarioSaida(String horarioSaida) {
 		this.horarioSaida = horarioSaida;
 	}
-
+	
+	@XmlTransient
 	public char getAumentaQuadro() {
 		return aumentaQuadro;
 	}

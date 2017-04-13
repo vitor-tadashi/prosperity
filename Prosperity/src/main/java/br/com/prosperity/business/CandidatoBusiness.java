@@ -302,11 +302,12 @@ public class CandidatoBusiness {
 	private void desativarStatus(CandidatoEntity candidatoEntity) {
 		List<StatusCandidatoEntity> status = statusCandidatoDAO.findByNamedQuery("obterStatusCandidato",
 				candidatoEntity);
-		for (StatusCandidatoEntity statusCand : status) {
-			statusCand.setFlSituacao(false);
-			statusCandidatoDAO.update(statusCand);
+		if (status != null) {
+			for (StatusCandidatoEntity statusCand : status) {
+				statusCand.setFlSituacao(false);
+				statusCandidatoDAO.update(statusCand);
+			}
 		}
-
 	}
 
 	@Transactional
@@ -399,13 +400,14 @@ public class CandidatoBusiness {
 		VagaEntity vaga = vagaDAO.findById(idVaga);
 		List<AvaliadorVagaEntity> avaliadoresEntity = avaliadorVagaDAO.findByNamedQuery("obterAvaliadoresDaVaga",
 				vaga.getId());
-		for (AvaliadorVagaEntity avaliadorVagaEntity : avaliadoresEntity) {
-			AvaliadorCandidatoEntity avaliadorCandidatoEnitty = new AvaliadorCandidatoEntity();
-			avaliadorCandidatoEnitty.setVaga(avaliadorVagaEntity.getVaga());
-			avaliadorCandidatoEnitty.setUsuario(avaliadorVagaEntity.getUsuario());
-			avaliadorCandidatoEnitty.setCandidato(candidato);
-			avaliadorCandidatoDAO.insert(avaliadorCandidatoEnitty);
-		}
+		if (avaliadoresEntity != null && avaliadoresEntity.size() > 0)
+			for (AvaliadorVagaEntity avaliadorVagaEntity : avaliadoresEntity) {
+				AvaliadorCandidatoEntity avaliadorCandidatoEnitty = new AvaliadorCandidatoEntity();
+				avaliadorCandidatoEnitty.setVaga(avaliadorVagaEntity.getVaga());
+				avaliadorCandidatoEnitty.setUsuario(avaliadorVagaEntity.getUsuario());
+				avaliadorCandidatoEnitty.setCandidato(candidato);
+				avaliadorCandidatoDAO.insert(avaliadorCandidatoEnitty);
+			}
 	}
 
 	@Transactional
@@ -422,8 +424,7 @@ public class CandidatoBusiness {
 		}
 
 		List<CandidatoEntity> entities = candidatoDAO.findByNamedQuery("listarAprovacoes", listaStatus,
-				StatusCandidatoEnum.CANDIDATOEMANALISE.getValue(), usuarioBean.getId(),
-				idStatusCandidatura);
+				StatusCandidatoEnum.CANDIDATOEMANALISE.getValue(), usuarioBean.getId(), idStatusCandidatura);
 		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(entities);
 
 		return beans;
