@@ -163,24 +163,32 @@ public class VagaBusiness {
 	}
 
 	@Transactional
-	public void inserir(VagaBean vagaBean, List<UsuarioBean> usuarioBean) {
+	public String inserir(VagaBean vagaBean, List<UsuarioBean> usuarioBean) {
 
 		VagaEntity vagaEntity = vagaConverter.convertBeanToEntity(vagaBean);
 
 		vagaEntity.setStatusVagaEntity(statusVagaDAO.findByNamedQuery("statusVaga", vagaEntity.getId()));
-
-		if (vagaEntity.getId() == null) {
-			Date dateNow = new Date();
-			vagaEntity.setDataAbertura(dateNow);
-			vagaDAO.insert(vagaEntity);
-			situacaoVaga.setIdVaga(vagaEntity.getId());
-			situacaoVaga.setStatus(StatusVagaEnum.PENDENTE);
-			alterarStatus(situacaoVaga);
-			//inserirAvaliadores(vagaEntity, usuarioBean);
-		} else {
-			// VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
-			inserirAvaliadores(vagaEntity, usuarioBean);
-			vagaDAO.update(vagaEntity);
+		
+		try {
+			if (vagaEntity.getId() == null) {
+				Date dateNow = new Date();
+				vagaEntity.setDataAbertura(dateNow);
+				vagaDAO.insert(vagaEntity);
+				situacaoVaga.setIdVaga(vagaEntity.getId());
+				situacaoVaga.setStatus(StatusVagaEnum.PENDENTE);
+				alterarStatus(situacaoVaga);
+				inserirAvaliadores(vagaEntity, usuarioBean);
+			} else {
+				// VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
+				inserirAvaliadores(vagaEntity, usuarioBean);
+				vagaDAO.update(vagaEntity);
+			}
+		return "Ok";
+		}
+		catch(Exception e){
+			String erro = new String();
+			erro = e.toString();
+			return erro;
 		}
 	}
 

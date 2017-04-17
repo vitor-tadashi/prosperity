@@ -24,6 +24,7 @@ import com.google.gson.Gson;
 import br.com.prosperity.bean.AvaliadorVagaBean;
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CargoBean;
+import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.ProjetoBean;
 import br.com.prosperity.bean.SenioridadeBean;
@@ -50,6 +51,9 @@ public class VagaController {
 
 	@Autowired
 	private VagaBusiness vagaBusiness;
+	
+	@Autowired
+	private ProjetoBusiness projetoBusiness;
 
 	@Autowired
 	private SenioridadeBusiness preencherSenioridade;
@@ -220,6 +224,7 @@ public class VagaController {
 		model.addAttribute("vaga", vaga);
 		model.addAttribute("avaliadorVagaBean", avaliadorVagaBean);
 		model.addAttribute("ultimoStatus", ultimoStatus);
+		
 
 		return "vaga/solicitar-vaga";
 	}
@@ -239,9 +244,9 @@ public class VagaController {
 			obterDominiosVaga(model);
 			return "vaga/solicitar-vaga";
 		}
-		
-		vagaBusiness.inserir(vagaBean,avaliadoresB);
-		System.out.println("\n\n\nCadastrado\n\n\n");
+
+		String resposta = vagaBusiness.inserir(vagaBean,avaliadoresB);
+		model.addAttribute("resposta",resposta);
 		return "redirect:solicitar";
 
 	}
@@ -270,6 +275,12 @@ public class VagaController {
 
 		}
 		return novosErros;
+	}
+	
+	@RequestMapping(value = "obter-cliente", method=RequestMethod.GET)
+	public @ResponseBody List<ProjetoBean> obterPerfilFuncionalidade(Model model,@ModelAttribute("id") Integer id){
+		List<ProjetoBean> cliente = projetoBusiness.obterCliente(id);
+		return cliente;
 	}
 	/*
 	 * @RequestMapping(value = "obter-vaga", method=RequestMethod.GET)

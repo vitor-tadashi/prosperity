@@ -1,5 +1,4 @@
-$(function() {
-	
+
 	var elements1 = $("#selectedBox1 option").each(function()
 			{
 			    $(this).val();
@@ -68,12 +67,11 @@ $(function() {
 	}
 	
 	$(document).ready(function() {
+
 		if ($("input#contErro").val() > 0) {
 			$('#textDiv').addClass("alert alert-danger");
 		}
-	})
-	
-	$(document).ready(function() {
+		
 		$('.cpf').mask('999.999.999-99', {
 			reverse : true
 		});
@@ -82,8 +80,6 @@ $(function() {
 		$("#cep").mask("99999-999");
 		$('.date').mask('99/99/9999');
 	})
-	
-	var dataAberturaVar = ${vaga.dataAbertura};
 	
 		//Ajax para verificar o perfil e ver se ele pode editar avaliadores
 	
@@ -99,9 +95,8 @@ $(function() {
 	    					if(item.id == 24){
 	    						$("#fourth").removeClass('hide');
 	    						$("#tabAvaliadores").removeClass('hide')
-	    					}
-	    				});
-    				
+	    				}
+	    			});
     			}
     		}
     	});
@@ -188,11 +183,13 @@ $(function() {
     		data: {avaliadores : result},
     		success: function(data){
     			console.log(data);
-   			
-    			
     		}
     	});
     	$("#formCadastro2").submit();
+    	var resp = ${resposta};
+    	if (resp == "Okey"){
+    		alert("Cadastrado com Sucesso");
+    	};
 	});
 	
 	function enviarAvaliadores(){
@@ -205,4 +202,3 @@ $(function() {
 			return dados;
 	}
 	
-});

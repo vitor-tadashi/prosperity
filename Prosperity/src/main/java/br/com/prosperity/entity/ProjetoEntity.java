@@ -5,7 +5,8 @@ import javax.persistence.*;
 @Entity
 @Table(name="tbProjeto")
 @NamedQueries({
-	@NamedQuery(name = "obterProjetosAtivos", query = "SELECT u FROM ProjetoEntity u WHERE u.ativo = true")
+	@NamedQuery(name = "obterProjetosAtivos", query = "SELECT u FROM ProjetoEntity u WHERE u.ativo = true"),
+	@NamedQuery(name = "obterCliente", query = "SELECT u FROM ProjetoEntity u WHERE u.ativo = true AND u.id=?1")
 })
 public class ProjetoEntity {
 	
