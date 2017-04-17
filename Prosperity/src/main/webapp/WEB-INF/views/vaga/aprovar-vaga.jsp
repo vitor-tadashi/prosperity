@@ -465,8 +465,8 @@ footer {
 																																			
 												<c:if test="${vaga.ultimoStatus.status.nome == 'Pendente'}">
 												    <li id="${vaga.ultimoStatus.status.nome}"role="separator" class="Aprovar divider"></li>
-													<li id="${vaga.ultimoStatus.status.nome}" class="Aprovar">
-													<a href="#aprova-modal"	onclick="alterarStatus(${vaga.id}, 'ACEITO')"
+													<li id="${vaga.ultimoStatus.status.nome}" class="Aprovar"><a href="#aprova-modal"	
+														onclick="alterarStatus(${vaga.id}, 'ATIVO')"
 														data-toggle="modal" ><i class="Aprovar fa fa-check fa-lg"></i> Aprovar</a></li>
 												</c:if>
 												
@@ -682,6 +682,7 @@ $(function() {
 			"bFilter": false,
 			"bInfo": false,
 			"bLengthChange": false,
+			"bSort": false,
 
 			"oLanguage": {
 				"sEmptyTable": "Nenhum registro encontrado",
