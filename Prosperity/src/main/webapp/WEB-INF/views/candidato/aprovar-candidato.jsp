@@ -76,67 +76,23 @@
 									<div class="form-group">
 										<div class="panel panel-default">
 											<div class="panel-body">
-
-												<label>Etapas dos processos de seleção: </label>
-												<!-- campo chumbado -->
-												<div class="form-group col-md-6">
-													<label for="nmEtapa">Tipo da prova</label> <select
-														class="form-control" id="nome1" name="nome1">
-														<option value="0">Selecione:</option>
-														<option value="1">Prova teórica</option>
-														<option value="2">Prova prática</option>
-														<option value="3">Dinâmica de grupo</option>
-													</select>
+												<div class="form-group col-md-12" id="processoSeletivo">
+													<label>Etapas dos processos de seleção: </label> <input
+														type="button" id="gerarCampo" value="Gerar etapa do processo seletivo"> <br>
 												</div>
 
-												<div class="form-group col-md-6">
-													<label for="instituicao">Descrição</label> <input
-														type="text" class="form-control" id="descricao1"
-														name="descricao1" data-required="true" placeholder="">
-												</div>
 
-												<div class="form-group col-md-6">
-
-													<select class="form-control" id="nome2" name="nome2">
-														<option value="0">Selecione:</option>
-														<option value="1">Prova teórica</option>
-														<option value="2">Prova prática</option>
-														<option value="3">Dinâmica de grupo</option>
-													</select>
-												</div>
-
-												<div class="form-group col-md-6">
-
-													<input type="text" class="form-control" id="descricao2"
-														name="descricao2" data-required="true" placeholder="">
-												</div>
-
-												<div class="form-group col-md-6">
-
-													<select class="form-control" id="nome3" name="nome3">
-														<option value="0">Selecione:</option>
-														<option value="1">Prova teórica</option>
-														<option value="2">Prova prática</option>
-														<option value="3">Dinâmica de grupo</option>
-													</select>
-												</div>
-
-												<div class="form-group col-md-6">
-
-													<input type="text" class="form-control" id="descricao3"
-														name="descricao3" data-required="true" placeholder="">
+												<div class="form-group">
+													<input type="hidden" id="hdn-id-candidato" /> <input
+														type="hidden" id="hdn-status" /> <label
+														class="control-label">Parecer técnico:</label>
+													<textarea class="form-control" id="parecerTecnico"
+														style="margin-left: 0px; width: 800px"
+														name="parecerTecnico">
+											</textarea>
 												</div>
 											</div>
 										</div>
-										<div class="form-group">
-											<input type="hidden" id="hdn-id-candidato" /> <input
-												type="hidden" id="hdn-status" /> <label
-												class="control-label">Parecer técnico:</label>
-											<textarea class="form-control" id="parecerTecnico"
-												style="margin-left: 0px; width: 800px" name="parecerTecnico">
-										</textarea>
-										</div>
-
 									</div>
 
 								</div>
@@ -255,6 +211,8 @@
 			</div>
 		</div>
 	</div>
+
+
 	<!-- /.modal delete-->
 	<div id="main-container">
 		<div id="breadcrumb">
@@ -293,6 +251,8 @@
 									<tbody class="text-center">
 										<form id="form">
 											<c:forEach var="candidato" items="${candidatos}">
+
+
 												<tr>
 													<input type="hidden" id="${candidato.id }" />
 													<td>${candidato.nome}</td>
@@ -308,49 +268,58 @@
 													<td><input type="hidden" name="idStatus" id="idStatus"
 														value="${candidato.ultimoStatus.status.id}" />
 														<div class="btn-group">
-															<button class="btn btn-sm btn-info dropdown-toggle"
-																data-toggle="dropdown" aria-haspopup="true"
-																aria-expanded="false">
-																<i class="fa fa-cogs fa-lg">&nbsp;</i> <span
-																	class="caret"></span>
-															</button>
-															<ul class="dropdown-menu dropdown-menu-right slidedown">
-																<c:forEach var="statusDisponivel"
-																	items="${candidato.ultimoStatus.status.statusDisponiveis}">
-																	<li><a data-toggle="modal"
-																		data-target=".bs-example-modal-lg"
-																		id="aprovar-candidato"
-																		onclick="alterarStatus(${candidato.id}, ${statusDisponivel.id})"><i
-																			${statusDisponivel.classe}>&nbsp;</i>${statusDisponivel.nome}
-																	</a></li>
-																	<li class="divider "></li>
-																</c:forEach>
-																<li><c:url value="editar/${candidato.id}"
-																		var="myURL">
-																	</c:url> <a href="${myURL}"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
 
-																<li class="divider"></li>
+															<div class="btn-group">
 
-																<li><c:url scope="session"
-																		value="cancelar-candidato/${candidato.id}"
-																		var="urlCancelar">
-																	</c:url><a href="#delete-modal" data-toggle="modal"><i
-																		class="fa fa-trash-o fa-lg">&nbsp;</i>Cancelar</a></li>
-																<!-- /fim botao -->
-															</ul>
-														</div> <!-- /btn-group -->
-													</td>
+																<button class="btn btn-sm btn-info dropdown-toggle"
+																	data-toggle="dropdown" aria-haspopup="true"
+																	aria-expanded="false">
+																	<i class="fa fa-cogs fa-lg">&nbsp;</i> <span
+																		class="caret"></span>
+																</button>
+																<ul class="dropdown-menu dropdown-menu-right slidedown">
+																	<c:forEach var="statusDisponivel"
+																		items="${candidato.ultimoStatus.status.statusDisponiveis}">
+																		<li><a data-toggle="modal"
+																			data-target=".bs-example-modal-lg"
+																			id="aprovar-candidato"
+																			onclick="alterarStatus(${candidato.id}, ${statusDisponivel.id})"><i
+																				${statusDisponivel.classe}>&nbsp;</i>${statusDisponivel.nome}
+																		</a></li>
+																		<li class="divider "></li>
+																	</c:forEach>
+																	<li><c:url value="editar/${candidato.id}"
+																			var="myURL">
+																		</c:url> <a href="${myURL}"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
+
+																	<li class="divider"></li>
+
+																	<li><c:url scope="session"
+																			value="cancelar-candidato/${candidato.id}"
+																			var="urlCancelar">
+																		</c:url><a href="#delete-modal" data-toggle="modal"><i
+																			class="fa fa-trash-o fa-lg">&nbsp;</i>Cancelar</a></li>
+																	<!-- /fim botao -->
+
+																</ul>
+															</div>
+														</div> <!-- /btn-group --></td>
 												</tr>
+
 											</c:forEach>
 										</form>
 									</tbody>
 								</table>
+
+
 							</div>
 							<!-- /.row -->
 						</div>
 						<!-- /.panel-body -->
+
 					</div>
 					<!-- fim da div panel -->
+
 				</div>
 				<!-- /col-md-12 -->
 			</div>
@@ -397,6 +366,7 @@
 				}
 				});
 		})
+	
             CKEDITOR.replace('editor');
                   $('#alterarStatus').click(function() {
                         
@@ -408,25 +378,28 @@
 	                   		debugger;
                             if($(this).prop("checked")){
                                 
-                                 var avaliacaoCompetencia = {
-                                        competencia : {
-                                            id : ""
-                                        },
-                                        avaliacao : {
-                                            id : ""
-                                        }
-                                     };
+//                                  var avaliacaoCompetencia = {
+//                                         competencia : {
+//                                             id : ""
+//                                         },
+//                                         avaliacao : {
+//                                             id : ""
+//                                         }
+//                                      };
                                  
                                 var idAvaliacao = $(this).attr("alt");
                                 var idCompetencia = $(this).val();
                                 
-                                avaliacaoCompetencia.avaliacao.id = idAvaliacao;
-                                avaliacaoCompetencia.competencia.id = idCompetencia;
+//                                 avaliacaoCompetencia.avaliacao.id = idAvaliacao;
+//                                 avaliacaoCompetencia.competencia.id = idCompetencia;
                                 
-                                console.log(avaliacaoCompetencia);
-                                avaliacoes.push(avaliacaoCompetencia);
+//                                 console.log(avaliacaoCompetencia);
+//                                 avaliacoes.push(avaliacaoCompetencia);
+								   avaliacoes.push(idAvaliacao);
+								   avaliacoes.push(idCompetencia);
                             }
                         });
+	            		
                         $.ajax({
                               url : "alterar-status-candidato",
                               type : "POST",
@@ -435,16 +408,8 @@
                                    'idCandidato' : $('#hdn-id-candidato').val(),
                                    'parecer' : $('#parecer').val(),
                                    'proposta' : CKEDITOR.instances.editor.getData(),
-                                   'idStatus' : $('#hdn-status').val(),
-                                   'processoSeletivo': {
-	                                   'nome1' : $("#nome1").val(),
-	                                   'nome2' : $("#nome2").val(),
-	                                   'nome3' : $("#nome3").val(),
-	                                   'descricao1' : $("#descricao1").val(),
-	                                   'descricao2' : $("#descricao2").val(),
-	                                   'descricao3' : $("#descricao3").val(),
-	                                   'parecerTecnico' : $("#parecerTecnico").val()
-                                   }                                  
+                                   'idStatus' : $('#hdn-status').val()
+
                               },
                               success : function(data) {
                                    location.reload();
@@ -474,8 +439,34 @@
         		});
             }
             
-            </script>
-	<script>/* paginação */
+        /*gerador de campo*/    
+            var cont = 0;
+            $("#gerarCampo").click(function(){
+            	var campos = 
+            	" <div class='div"+cont+"'>" +
+            	"<select class='classe'>" +
+            	"<c:forEach var='selecao' items='${}'>" +
+            	"<option value='volvo'>Volvo</option>"+
+            	"</c:forEach>" +
+            	"<option value='saab'>Saab</option>"+
+            	"<option value='mercedes'>Mercedes</option>"+
+            	"<option value='audi'>Audi</option>"+
+            	"</select>"+
+            	"<input class='classe' type='text' />"+
+            	"<input type='button' id='btnRemover' onclick='remover("+ cont +")'value='remover'>"+
+            	"</div>" ;
+            	
+            	cont++;
+        /*adiciona na div*/
+            	$("#processoSeletivo").append(campos);
+
+
+            });
+       /*remove os campos*/
+            function remover(id){
+            	$(".div"+id).remove();
+            }
+/* paginação */
 	$(function	()	{
 		$('#tabelaCandidato').dataTable( {
 			"bJQueryUI": true,
@@ -507,28 +498,7 @@
 					"sSortDescending": ": Ordenar colunas de forma descendente"
 				}
 			}
-		/* $(function	()	{
-			$('#tabelaVaga').dataTable( {
-				"bJQueryUI": true,
-				"sPaginationType": "full_numbers"
-			});
-			$('#tabelaVaga_length').hide();
-			$('#tabelaVaga_filter').hide();
-			$('#tabelaVaga_info').hide();
-			$('#tabelaVaga_last').css('margin-left:2000px');
-			$('#tabelaVaga_next').css('margin-left:200px');
-			$('#tabelaVaga_paginate').css('margin-left: 500px');
-			$("#tabelaVaga_next").text("Próximo");
-			$("#tabelaVaga_last").text("Último");
-			$("#tabelaVaga_previous").text("Anterior");
-			$("#tabelaVaga_first").text("Primeiro");
-			
-			$("#tabelaVaga_next").attr("href", "#");
-			$("#tabelaVaga_last").attr("href", "#");
-			$("#tabelaVaga_previous").attr("href", "#");
-			$("#tabelaVaga_first").attr("href", "#");
-			$(".fg-button").attr("href", "#"); */
- 		
+		
 		});
 	});
 	</script>

@@ -56,8 +56,8 @@ import javax.persistence.TemporalType;
 				+ "WHERE (sc.idStatusCandidato = (SELECT max(scc.idStatusCandidato) FROM StatusCandidatoEntity scc WHERE scc.candidato.id = c.id)) "
 				+ "AND ((sc.status.id IN (?1) AND ac.status IS NOT NULL) "
 				+ "OR (sc.status.id IN (?2) AND ac.status IS NULL AND ac.usuario.id = ?3)"
-				+ "OR (sc.status.id = ?4 AND ac.status IS NULL)) ORDER BY c.id DESC"
-				),
+				+ "OR (sc.status.id = ?4 AND ac.status IS NULL)) "
+				), 
 
 		@NamedQuery(name = "proposta", query = "SELECT c FROM CandidatoEntity c, AvaliadorCandidatoEntity ac INNER JOIN c.statusCandidatos sc "
 				+ "WHERE ac.candidato.id = c.id AND sc.idStatusCandidato = (SELECT max(sc.idStatusCandidato)"

@@ -294,11 +294,6 @@ public class CandidatoController<PaginarCandidato> {
 	@ResponseStatus(value = HttpStatus.OK)
 	public @ResponseBody String alterarStatusCandidato(Model model,
 			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato) {
-		CandidatoBean bean = new CandidatoBean();
-		bean.setId(situacaoCandidato.getIdCandidato());
-		
-		provaCandidatoBusiness.inserir(situacaoCandidato.getProcessoSeletivo());
-
 		candidatoBusiness.alterarStatus(situacaoCandidato);
 		return "candidato/aprovar";
 	}
