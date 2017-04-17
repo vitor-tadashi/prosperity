@@ -17,11 +17,11 @@ public class ProjetoEntity {
 	@Column(name="nmProjeto")
 	private String nome;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="idFuncionario")
 	private FuncionarioEntity funcionario;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="idCliente")
 	private ClienteEntity cliente;
 	

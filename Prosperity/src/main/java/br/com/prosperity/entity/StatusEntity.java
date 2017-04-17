@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,15 +36,15 @@ public class StatusEntity {
 	@Column(name = "tpCss")
 	private String tipoCss;
 
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idTpStatus")
 	private TipoStatusEntity tipoStatus;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name = "idStatus")
 	private List<StatusCandidatoEntity> statusCandidatos;
 
-	@OneToMany
+	@OneToMany(fetch=FetchType.LAZY)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinColumn(name = "idStatus")
 	private Set<StatusDisponivelEntity> statusDisponiveis;
