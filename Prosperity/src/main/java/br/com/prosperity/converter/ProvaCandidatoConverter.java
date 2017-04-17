@@ -12,22 +12,24 @@ public class ProvaCandidatoConverter implements Converter<ProvaCandidatoEntity, 
 	@Autowired
 	private CandidatoConverter candidatoConverter;
 
+	@Autowired
+	private DescricaoProvaConverter descricaoProvasConverter;
+	
+	@Autowired
+	private ProvaConverter provasConverter;
+
 	@Override
 	public ProvaCandidatoEntity convertBeanToEntity(ProvaCandidatoBean bean) {
 		if (bean == null) {
 			return null;
 		}
-		
-		ProvaCandidatoEntity entity = new 	ProvaCandidatoEntity();
-		
+
+		ProvaCandidatoEntity entity = new ProvaCandidatoEntity();
+
 		entity.setId(bean.getId());
-		entity.setNome1(bean.getNome1());
-		entity.setDescricao1(bean.getDescricao1());
-		entity.setNome2(bean.getNome2());
-		entity.setDescricao2(bean.getDescricao2());
-		entity.setNome3(bean.getNome3());
-		entity.setDescricao3(bean.getDescricao3());
 		entity.setParecer(bean.getParecerTecnico());
+		entity.setDescricaoProvas(descricaoProvasConverter.convertBeanToEntity(bean.getDescricao()));
+		entity.setProvas(provasConverter.convertBeanToEntity(bean.getProvas()));
 		entity.setCandidato(candidatoConverter.convertBeanToEntity(bean.getCandidato()));
 
 		return entity;
@@ -38,17 +40,13 @@ public class ProvaCandidatoConverter implements Converter<ProvaCandidatoEntity, 
 		if (entity == null) {
 			return null;
 		}
-		
+
 		ProvaCandidatoBean bean = new ProvaCandidatoBean();
-		
+
 		bean.setId(entity.getId());
-		bean.setNome1(entity.getNome1());
-		bean.setDescricao1(entity.getDescricao1());
-		bean.setNome2(entity.getNome2());
-		bean.setDescricao2(entity.getDescricao2());
-		bean.setNome3(entity.getNome3());
-		bean.setDescricao3(entity.getDescricao3());
 		bean.setParecerTecnico(entity.getParecer());
+		bean.setDescricao(descricaoProvasConverter.convertEntityToBean(entity.getDescricaoProvas()));
+		bean.setProvas(provasConverter.convertEntityToBean(entity.getProvas()));
 		bean.setCandidato(candidatoConverter.convertEntityToBean(entity.getCandidato()));
 
 		return bean;

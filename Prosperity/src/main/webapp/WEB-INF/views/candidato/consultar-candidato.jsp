@@ -551,6 +551,13 @@
 								</tbody>
 							</table>
 							
+							
+											<a href="/vaga/consultar"><i
+												class="fa fa-reply"
+													style="margin-left: 10px; margin-bottom: 10px;margin-top: -100px ">&nbsp</i><b> Retornar</b></a>
+								
+							</div>
+							
 						</div>
 						<!-- fim da div panel -->
 					</div>
@@ -589,6 +596,7 @@
 									Remember me
 								</label>
 							</div>
+							
 							<div class="form-group text-right">
 								<a href="#" class="btn btn-success">Sign in</a> <a href="#"
 									class="btn btn-success">Sign up</a>
@@ -782,6 +790,7 @@
 			"bFilter": false,
 			"bInfo": false,
 			"bLengthChange": false,
+			"bSort": false,
 
 			"oLanguage": {
 				"sEmptyTable": "Nenhum registro encontrado",

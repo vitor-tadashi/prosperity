@@ -27,6 +27,7 @@ import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.StatusCandidatoBean;
 import br.com.prosperity.bean.UsuarioBean;
+import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.converter.AvaliacaoConverter;
 import br.com.prosperity.converter.CandidatoConverter;
 import br.com.prosperity.converter.CompetenciaConverter;
@@ -115,6 +116,13 @@ public class CandidatoBusiness {
 
 	@Autowired
 	private HttpSession session;
+
+	@Transactional(readOnly = true)
+	public List<CandidatoBean> listarDecrescente() {
+		List<CandidatoEntity> CandidatoEntity = candidatoDAO.findByNamedQuery("obterPorDesc");
+		List<CandidatoBean> CandidatoBean = candidatoConverter.convertEntityToBean(CandidatoEntity);
+		return CandidatoBean;
+	}
 
 	@Transactional
 	public CandidatoBean obter(Integer id) {
@@ -276,6 +284,9 @@ public class CandidatoBusiness {
 
 				situacaoCandidato.setIdCandidato(candidatoEntity.getId());
 				situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
+
+				if (vagao.get(0).getVaga().getId() == 1202)
+					situacaoCandidato.setStatus(StatusCandidatoEnum.CANCELADO);
 
 				alterarStatus(situacaoCandidato);
 

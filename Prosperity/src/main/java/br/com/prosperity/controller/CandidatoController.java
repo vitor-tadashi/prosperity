@@ -237,6 +237,9 @@ public class CandidatoController<PaginarCandidato> {
 
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
 		model.addAttribute("listaCargo", listaCargo);
+		
+		// TABELA VAGA DECRESCENTE 
+		model.addAttribute("candidato", candidatoBusiness.listarDecrescente());
 
 		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.obterTodos();
 		model.addAttribute("listaSenioridade", listaSenioridade);
@@ -291,11 +294,6 @@ public class CandidatoController<PaginarCandidato> {
 	@ResponseStatus(value = HttpStatus.OK)
 	public @ResponseBody String alterarStatusCandidato(Model model,
 			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato) {
-		CandidatoBean bean = new CandidatoBean();
-		bean.setId(situacaoCandidato.getIdCandidato());
-		
-		provaCandidatoBusiness.inserir(situacaoCandidato.getProcessoSeletivo());
-
 		candidatoBusiness.alterarStatus(situacaoCandidato);
 		return "candidato/aprovar";
 	}
