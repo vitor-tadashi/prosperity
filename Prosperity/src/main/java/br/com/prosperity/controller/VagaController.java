@@ -188,6 +188,7 @@ public class VagaController {
 	@RequestMapping(value = "status", method = RequestMethod.POST)
 	public @ResponseBody HttpStatus alterarStatusVaga(Model model, SituacaoVagaBean status) {
 		vagaBusiness.alterarStatus(status);
+		vagaBusiness.alterarDataAprovacao(status);
 		return HttpStatus.OK;
 	}
 
