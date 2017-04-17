@@ -24,7 +24,7 @@ import javax.persistence.TemporalType;
 		@NamedQuery(name = "obterTodos", query = "SELECT u FROM VagaEntity u WHERE u.nomeVaga = ?1"),
 		@NamedQuery(name = "listarVagaAprovar", query = "SELECT v FROM VagaEntity v LEFT OUTER JOIN v.statusVagaEntity sv "
 				+ "LEFT JOIN sv.status s WHERE sv.id = (SELECT MAX(sv.id) FROM v.statusVagaEntity sv WHERE sv.vaga.id = v.id) "
-				+ "AND sv.status.id IN(?1)"),
+				+ "AND sv.status.id IN(?1) ORDER BY v.id DESC"),
 		@NamedQuery(name = "obterPorId", query = "SELECT u FROM VagaEntity u WHERE u.id = ?1"),
 		@NamedQuery(name = "findAllDesc", query = "SELECT u FROM VagaEntity u ORDER BY u.id DESC"),
 
@@ -102,19 +102,19 @@ public class VagaEntity {
 	@Temporal(value = TemporalType.DATE)
 	private Date dataFechamento; //
 
-	@ManyToOne//(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idProjeto")
 	private ProjetoEntity projetoEntity;
 
-	@ManyToOne//(cascade = CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idCargo")
 	private CargoEntity cargoEntity;
 
-	@ManyToOne//(cascade = CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idSenioridade")
 	private SenioridadeEntity senioridadeEntity;
 
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuarioEntity;
 

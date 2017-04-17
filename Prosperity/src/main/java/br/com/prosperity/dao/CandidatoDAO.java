@@ -4,16 +4,10 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import br.com.prosperity.bean.CandidatoBean;
-import br.com.prosperity.entity.StatusCandidatoEntity;
-import br.com.prosperity.entity.VagaEntity;
 import br.com.prosperity.entity.CandidatoEntity;
 
 @Repository
