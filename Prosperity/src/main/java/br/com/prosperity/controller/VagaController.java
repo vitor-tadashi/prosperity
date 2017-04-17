@@ -90,7 +90,11 @@ public class VagaController {
 	@Autowired
 	private StatusVagaBusiness statusVagaBusiness;
 	
-
+	@RequestMapping(value="/visualizarCandidato/{id}", method = RequestMethod.GET)
+	public String visualizarCandidato(@PathVariable Integer id) {
+		
+		return "redirect:/candidato/filtrar";
+	}
 
 	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
 	public String cliente(Model model, VagaBean vaga) {
