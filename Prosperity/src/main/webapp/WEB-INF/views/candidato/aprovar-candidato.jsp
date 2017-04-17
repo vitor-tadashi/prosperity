@@ -30,8 +30,8 @@
 
 	<!--    Modais   -->
 	<!-- Modal Avaliação de Competencias -->
-	<div id ="modalProposta" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
-		aria-labelledby="myLargeModalLabel">
+	<div id="modalProposta" class="modal fade bs-example-modal-lg"
+		tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -76,68 +76,23 @@
 									<div class="form-group">
 										<div class="panel panel-default">
 											<div class="panel-body">
-
-												<label>Etapas dos processos de seleção: </label>
-												<!-- campo chumbado -->
-												<div class="form-group col-md-6">
-													<label for="nmEtapa">Tipo da prova</label> <select
-														class="form-control" id="nome1" name="nome1">
-														<option value="0">Selecione:</option>
-														<option value="1">Prova teórica</option>
-														<option value="2">Prova prática</option>
-														<option value="3">Dinâmica de grupo</option>
-													</select>
+												<div class="form-group col-md-12" id="processoSeletivo">
+													<label>Etapas dos processos de seleção: </label> <input
+														type="button" id="gerarCampo" value="Gerar etapa do processo seletivo"> <br>
 												</div>
 
-												<div class="form-group col-md-6">
-													<label for="instituicao">Descrição</label> <input
-														type="text" class="form-control" id="descricao1"
-														name="descricao1" data-required="true" placeholder="">
+
+												<div class="form-group">
+													<input type="hidden" id="hdn-id-candidato" /> <input
+														type="hidden" id="hdn-status" /> <label
+														class="control-label">Parecer técnico:</label>
+													<textarea class="form-control" id="parecerTecnico"
+														style="margin-left: 0px; width: 800px"
+														name="parecerTecnico">
+											</textarea>
 												</div>
-
-												<div class="form-group col-md-6">
-
-													<select class="form-control" id="nome2" name="nome2">
-														<option value="0">Selecione:</option>
-														<option value="1">Prova teórica</option>
-														<option value="2">Prova prática</option>
-														<option value="3">Dinâmica de grupo</option>
-													</select>
-												</div>
-
-												<div class="form-group col-md-6">
-
-													<input type="text" class="form-control" id="descricao2"
-														name="descricao2" data-required="true" placeholder="">
-												</div>
-
-												<div class="form-group col-md-6">
-
-													<select class="form-control" id="nome3" name="nome3">
-														<option value="0">Selecione:</option>
-														<option value="1">Prova teórica</option>
-														<option value="2">Prova prática</option>
-														<option value="3">Dinâmica de grupo</option>
-													</select>
-												</div>
-
-												<div class="form-group col-md-6">
-
-													<input type="text" class="form-control" id="descricao3"
-														name="descricao3" data-required="true" placeholder="">
-												</div>
-
 											</div>
 										</div>
-										<div class="form-group">
-											<input type="hidden" id="hdn-id-candidato" /> <input
-												type="hidden" id="hdn-status" /> <label
-												class="control-label">Parecer técnico:</label>
-											<textarea class="form-control" id="parecerTecnico"
-												style="margin-left: 0px; width: 800px" name="parecerTecnico">
-										</textarea>
-										</div>
-
 									</div>
 
 								</div>
@@ -232,31 +187,32 @@
 				</div>
 			</div>
 		</div>
-		</div>
-		<!-- Modal delete -->
-		<div class="modal fade" id="delete-modal" data-target="#delete-modal"
-			tabindex="-1" role="dialog" aria-labelledby="modalLabel">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Fechar">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<h4 class="modal-title" id="modalLabel">Cancelar candidato</h4>
-					</div>
-					<div class="modal-body">Deseja realmente cancelar este candidato?</div>
-					<div class="modal-footer">
-						<a id="excluir" href="${urlCancelar}">
-							<button type="button" class="btn btn-danger">Sim</button>
-						</a>
-						<button type="button" class="btn btn-success" data-dismiss="modal">Não</button>
-					</div>
+	</div>
+	<!-- Modal delete -->
+	<div class="modal fade" id="delete-modal" data-target="#delete-modal"
+		tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Fechar">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="modalLabel">Cancelar candidato</h4>
+				</div>
+				<div class="modal-body">Deseja realmente cancelar este
+					candidato?</div>
+				<div class="modal-footer">
+					<a id="excluir" href="${urlCancelar}">
+						<button type="button" class="btn btn-danger">Sim</button>
+					</a>
+					<button type="button" class="btn btn-success" data-dismiss="modal">Não</button>
 				</div>
 			</div>
 		</div>
+	</div>
 
-	
+
 	<!-- /.modal delete-->
 	<div id="main-container">
 		<div id="breadcrumb">
@@ -338,17 +294,18 @@
 
 																	<li class="divider"></li>
 
-																	<li><c:url scope="session" value="cancelar-candidato/${candidato.id}"
-																				var="urlCancelar">
-																			</c:url><a href="#delete-modal" data-toggle="modal"><i
-																				class="fa fa-trash-o fa-lg">&nbsp;</i>Cancelar</a></li>
-																		<!-- /fim botao -->
+																	<li><c:url scope="session"
+																			value="cancelar-candidato/${candidato.id}"
+																			var="urlCancelar">
+																		</c:url><a href="#delete-modal" data-toggle="modal"><i
+																			class="fa fa-trash-o fa-lg">&nbsp;</i>Cancelar</a></li>
+																	<!-- /fim botao -->
 
 																</ul>
 															</div>
 														</div> <!-- /btn-group --></td>
 												</tr>
-												
+
 											</c:forEach>
 										</form>
 									</tbody>
@@ -379,10 +336,6 @@
 	<!-- import da merda da proposta -->
 
 	<script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
-	<script>
-      </script>
-	<script>
-      </script>
 	<script>
 		$("body").on("click", "#aprovar-candidato", function(){
 			var inputs  = $(this).closest("tr").find("input[type=hidden]");
@@ -455,15 +408,8 @@
                                    'idCandidato' : $('#hdn-id-candidato').val(),
                                    'parecer' : $('#parecer').val(),
                                    'proposta' : CKEDITOR.instances.editor.getData(),
-                                   'idStatus' : $('#hdn-status').val(),
-                                   'avaliacoesCompetencias' : JSON.stringify(avaliacoes),
-                                   'nome1' : $("#nome1").val(),
-                                   'nome2' : $("#nome2").val(),
-                                   'nome3' : $("#nome3").val(),
-                                   'descricao1' : $("#descricao1").val(),
-                                   'descricao2' : $("#descricao2").val(),
-                                   'descricao3' : $("#descricao3").val(),
-                                   'parecerTecnico' : $("#parecerTecnico").val()
+                                   'idStatus' : $('#hdn-status').val()
+
                               },
                               success : function(data) {
                                    location.reload();
@@ -493,8 +439,34 @@
         		});
             }
             
-            </script>
-	<script>/* paginação */
+        /*gerador de campo*/    
+            var cont = 0;
+            $("#gerarCampo").click(function(){
+            	var campos = 
+            	" <div class='div"+cont+"'>" +
+            	"<select class='classe'>" +
+            	"<c:forEach var='selecao' items='${}'>" +
+            	"<option value='volvo'>Volvo</option>"+
+            	"</c:forEach>" +
+            	"<option value='saab'>Saab</option>"+
+            	"<option value='mercedes'>Mercedes</option>"+
+            	"<option value='audi'>Audi</option>"+
+            	"</select>"+
+            	"<input class='classe' type='text' />"+
+            	"<input type='button' id='btnRemover' onclick='remover("+ cont +")'value='remover'>"+
+            	"</div>" ;
+            	
+            	cont++;
+        /*adiciona na div*/
+            	$("#processoSeletivo").append(campos);
+
+
+            });
+       /*remove os campos*/
+            function remover(id){
+            	$(".div"+id).remove();
+            }
+/* paginação */
 	$(function	()	{
 		$('#tabelaCandidato').dataTable( {
 			"bJQueryUI": true,
@@ -526,28 +498,7 @@
 					"sSortDescending": ": Ordenar colunas de forma descendente"
 				}
 			}
-		/* $(function	()	{
-			$('#tabelaVaga').dataTable( {
-				"bJQueryUI": true,
-				"sPaginationType": "full_numbers"
-			});
-			$('#tabelaVaga_length').hide();
-			$('#tabelaVaga_filter').hide();
-			$('#tabelaVaga_info').hide();
-			$('#tabelaVaga_last').css('margin-left:2000px');
-			$('#tabelaVaga_next').css('margin-left:200px');
-			$('#tabelaVaga_paginate').css('margin-left: 500px');
-			$("#tabelaVaga_next").text("Próximo");
-			$("#tabelaVaga_last").text("Último");
-			$("#tabelaVaga_previous").text("Anterior");
-			$("#tabelaVaga_first").text("Primeiro");
-			
-			$("#tabelaVaga_next").attr("href", "#");
-			$("#tabelaVaga_last").attr("href", "#");
-			$("#tabelaVaga_previous").attr("href", "#");
-			$("#tabelaVaga_first").attr("href", "#");
-			$(".fg-button").attr("href", "#"); */
- 		
+		
 		});
 	});
 	</script>
