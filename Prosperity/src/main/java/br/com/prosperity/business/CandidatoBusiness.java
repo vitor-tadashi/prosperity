@@ -420,7 +420,6 @@ public class CandidatoBusiness {
 			if (funcionalidadeBean.getId() == 27) {
 				idStatusCandidatura = StatusCandidatoEnum.CANDIDATURA.getValue();
 			}
-			break;
 		}
 
 		List<CandidatoEntity> entities = candidatoDAO.findByNamedQuery("listarAprovacoes", listaStatus,
@@ -440,9 +439,6 @@ public class CandidatoBusiness {
 		List<Integer> listaStatus = new ArrayList<Integer>();
 
 		for (FuncionalidadeBean funcionalidadeBean : usuarioBean.getPerfil().getListaFuncionalidades()) {
-			if (funcionalidadeBean.getId() == 27)
-				listaStatus.add(StatusCandidatoEnum.CANDIDATURA.getValue());
-
 			if (funcionalidadeBean.getId() == 26)
 				listaStatus.add(StatusCandidatoEnum.GERARPROPOSTA.getValue());
 

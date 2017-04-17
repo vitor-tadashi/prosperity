@@ -176,11 +176,9 @@ public class VagaBusiness {
 			situacaoVaga.setIdVaga(vagaEntity.getId());
 			situacaoVaga.setStatus(StatusVagaEnum.PENDENTE);
 			alterarStatus(situacaoVaga);
-			inserirAvaliadores(vagaEntity, usuarioBean);
+			//inserirAvaliadores(vagaEntity, usuarioBean);
 		} else {
-			// vagaEntity.setDataAbertura(vagaBean.getDataAbertura()); //
 			// VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
-			// vagaBean.setUsuarioBean(usuario);
 			inserirAvaliadores(vagaEntity, usuarioBean);
 			vagaDAO.update(vagaEntity);
 		}
@@ -205,7 +203,7 @@ public class VagaBusiness {
 		VagaEntity vagaEntity = new VagaEntity();
 		vagaEntity.setId(situacaoVaga.getIdVaga());
 
-		if (situacaoVaga.getStatus() == StatusVagaEnum.ACEITO) {
+		if (situacaoVaga.getStatus() == StatusVagaEnum.ATIVO) {
 			avaliadorVagaBean = obterAvaliadores(vagaEntity.getId());
 			if (avaliadorVagaBean == null || avaliadorVagaBean.size() == 0) {
 				situacaoVaga.setStatus(StatusVagaEnum.AGUARDANDOAVALIADORES);
@@ -285,12 +283,12 @@ public class VagaBusiness {
 				lista.add(StatusVagaEnum.PENDENTE.getValue());
 
 			if (funcionalidadeBean.getId() == 30)
-				lista.add(StatusVagaEnum.ACEITO.getValue());
+				lista.add(StatusVagaEnum.ATIVO.getValue());
 
 			if (funcionalidadeBean.getId() == 29) {
 				lista.add(StatusVagaEnum.AGUARDANDOAVALIADORES.getValue());
 				lista.add(StatusVagaEnum.PENDENTE.getValue());
-				lista.add(StatusVagaEnum.ACEITO.getValue());
+				lista.add(StatusVagaEnum.ATIVO.getValue());
 			}
 		}
 		for(Integer listas : lista){
