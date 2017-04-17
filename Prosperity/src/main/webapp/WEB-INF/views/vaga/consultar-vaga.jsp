@@ -509,14 +509,10 @@
 									<th class="text-center">Ações</th>
 								</tr>
 							</thead>
-							
 							<tbody class="text-center">
-								
 								<c:forEach var="vaga" items="${vagas}">
-									
 									<tr position="infoVaga">
-									
-									<td id="linhaNome" name="nomeVaga"><input name="${vaga.nomeVaga}" class="hide">${vaga.nomeVaga}</td>
+									<td id="linhaNome" name="nomeVaga">${vaga.nomeVaga}</td>
 									<td>${vaga.nomeSolicitante}</td>
 									<td>${vaga.projeto.cliente.nome}</td>
 									<td>
@@ -541,12 +537,12 @@
 											</button>
 											<ul class="dropdown-menu dropdown-menu-right slidedown">
 											
-											<li><a href="/visualizarCandidato/{id}"><i
+											<li><a href="#visualizar-modal" 
+													onclick="info(${vaga.id})"><i
 														class="fa fa-eye">&nbsp</i>Visualizar</a></li>
-													
 											<li role="separator" class="editarDivider divider btnEdita hide"></li>
 														
-														<li><a href="#" onclick="filtro" 
+														<li><a href="/candidato/filtrar?nome=&vagaBean.id=${vaga.id}"  
 													><i
 														class="fa fa-group">&nbsp</i>Visualizar candidatos</a></li>
 														
@@ -565,9 +561,7 @@
 											</ul>
 										</div> <!-- /btn-group -->
 									</td>
-								
 								</tr>
-								
 								</c:forEach>
 							</tbody>
 						</table>
