@@ -128,14 +128,14 @@ public class CandidatoController<PaginarCandidato> {
 
 		return "candidato/cadastrar-candidato";
 	}
-	
+
 	@RequestMapping(value = "/cancelar-candidato/{id}")
 	public String cancelaCandidato(@PathVariable Integer id) {
 		SituacaoCandidatoBean bean = new SituacaoCandidatoBean();
 		bean.setIdCandidato(id);
 		bean.setStatus(StatusCandidatoEnum.CANCELADO);
 		candidatoBusiness.alterarStatus(bean);
-		
+
 		return "redirect:/candidato/aprovar";
 	}
 
@@ -146,6 +146,18 @@ public class CandidatoController<PaginarCandidato> {
 		model.addAttribute("candidato", candidato);
 
 		return "candidato/cadastrar-candidato";
+	}
+
+	@RequestMapping(value = "obter", method = RequestMethod.GET)
+	@ResponseStatus(value = HttpStatus.OK)
+	public String obterCPF(Model model, @RequestParam String cpf) {
+		CandidatoBean candidato = candidatoBusiness.obterPorCPF(cpf);
+		if (candidato!= null) {
+		model.addAttribute("candidato", candidato);
+		return "candidato/cadastrar-candidato";
+
+		}
+		return "ok";
 	}
 
 	@RequestMapping(value = "editar/salvar", method = RequestMethod.POST)
@@ -293,15 +305,15 @@ public class CandidatoController<PaginarCandidato> {
 			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato) {
 		CandidatoBean bean = new CandidatoBean();
 		bean.setId(situacaoCandidato.getIdCandidato());
-		
+
 		provaCandidatoBusiness.inserir(situacaoCandidato.getProcessoSeletivo());
 
 		candidatoBusiness.alterarStatus(situacaoCandidato);
 		return "candidato/aprovar";
 	}
-	
-	@RequestMapping(value = {"buscar/{id}"}, method = RequestMethod.GET)
-	public @ResponseBody CandidatoBean buscarPorId(@PathVariable int id){
+
+	@RequestMapping(value = { "buscar/{id}" }, method = RequestMethod.GET)
+	public @ResponseBody CandidatoBean buscarPorId(@PathVariable int id) {
 		CandidatoBean candidato = candidatoBusiness.obter(id);
 		return candidato;
 	}

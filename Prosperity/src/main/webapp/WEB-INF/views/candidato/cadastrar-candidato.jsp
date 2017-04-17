@@ -40,7 +40,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">Informações do candidato</div>
 					<div class="panel-body">
-						<div class="alert.alert-success"></div>
+						<div class="x"></div>
 						<div id="textDiv">
 							<c:forEach var="erro" items="${listaErros}">
 								<p>${erro}</p>
@@ -75,7 +75,7 @@
 													type="text" class="form-control cpf parsley-validated"
 													id="cpf" name="cpf" data-required="true"
 													placeholder="Informe seu CPF" value="${candidato.cpf}"
-													onblur="verificarCPF()">
+													onblur="pesquisacpf()">
 											</div>
 											<div class="form-group col-md-4">
 												<label class="control-label" for="nome">Nome</label> <input
@@ -106,7 +106,7 @@
 													class="form-control date parsley-validated"
 													data-required="true" name="dataNascimento"
 													id="dataNascimento" value="${dataNascimento}"
-													onblur="validarData()">
+													onblur="validarData(this.value)">
 											</div>
 											<div class="form-group col-md-2">
 												<label for="contato" class="control-label">Telefone</label>
@@ -222,8 +222,8 @@
 												</div>
 												<div class="col-md-2">
 													<input type="number" class="form-control dinheiro"
-														id="pretensaoSalarial" placeholder="R$" name="pretensaoSalarial"
-														value="${candidato.pretensaoSalarial}" />
+														id="valorPretensao" placeholder="R$" name="valorPretensao"
+														value="${candidato.valorPretensao}" />
 												</div>
 											
 										</div>
@@ -255,7 +255,7 @@
 												<fmt:formatDate value="${candidato.dataUltimoContato}"
 													pattern="dd/MM/yyyy" var="dataUltimoContato" />
 												<input type="text" class="form-control date"
-													name="dataConclusao" onblur="validarData(this.value)"
+													name="dataUltimoContato" onblur="validarData(this.value)"
 													data-required="false" id="dataUltimoContato"
 													value="${dataUltimoContato}">
 											</div>
@@ -269,25 +269,23 @@
 													onblur="validarData()" value="${entrevista}">
 											</div>
 										</div>
-
+</div>
 
 									</div>
 								</div>
-								<div></div>
-
 							</div>
-							<div>
+							<div class="form-group col-sm-4">
 								<input type="hidden" value="${candidato.id}" name="id">
-								<button class="btn btn-success btnAjuste">Salvar</button>
-							</div>
+									<button class="btn btn-success btnAjuste">Salvar</button>
+								</div>
 						</form>
+					
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- SOMENTE ALTERAR DAQUI PARA CIMA -->
-	<input value="${erro}" id="contErro">
 	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
 	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
 	<script src='/resources/js/parsley.min.js'></script>
@@ -321,7 +319,7 @@
 			else {
 				//CEP não Encontrado.
 				limpa_formulário_cep();
-				var div = document.getElementById("textDiv").className = "alert alert-danger";
+				var div = document.getElementById("textDiv").className = "alert alert-danger x";
 
 				textDiv.textContent = "CEP inválido";
 
@@ -355,7 +353,7 @@
 				else {
 					//cep é inválido.
 					limpa_formulário_cep();
-					var div = document.getElementById("textDiv").className = "alert alert-danger";
+					var div = document.getElementById("textDiv").className = "alert alert-danger x";
 
     				textDiv.textContent = "CEP inválido";
 
@@ -390,7 +388,7 @@
 					+ strCPF.substring(8, 11) + strCPF.substring(12, 14);
 			Soma = 0;
 			if (strCPF == "00000000000") {
-				var div = document.getElementById("textDiv1").className = "alert alert-danger";
+				var div = document.getElementById("textDiv1").className = "alert alert-danger x";
 
 				textDiv1.textContent = "CPF inválido.";
 
@@ -409,7 +407,7 @@
 			}
 
 			if (Resto != parseInt(strCPF.substring(9, 10))) {
-				var div = document.getElementById("textDiv1").className = "alert alert-danger";
+				var div = document.getElementById("textDiv1").className = "alert alert-danger x";
 
 				textDiv1.textContent = "CPF inválido.";
 
@@ -429,7 +427,7 @@
 			}
 
 			if (Resto != parseInt(strCPF.substring(10, 11))) {
-				var div = document.getElementById("textDiv1").className = "alert alert-danger ";
+				var div = document.getElementById("textDiv1").className = "alert alert-danger x";
 
 				textDiv1.textContent = "CPF inválido.";
 
@@ -462,7 +460,7 @@
 			                resultado = (!isNaN(dia) && (dia > 0) && (dia < 32)) && (!isNaN(mes) && (mes > 0) && (mes < 13)) && (!isNaN(ano) && (ano.length == 4) && (ano <= anoAtual && ano >= 1900));
 			                if (!resultado)
 			                {
-			                	var div = document.getElementById("textDiv2").className = "alert alert-danger";
+			                	var div = document.getElementById("textDiv2").className = "alert alert-danger x";
 
 			    				textDiv2.textContent = "Data inválida";
 
@@ -495,7 +493,23 @@
 
 	</script>
 	<script type="text/javascript">
-
+	function pesquisacpf(){
+		var asd = $('#cpf').val();
+		$(function () {
+			$.ajax({
+				url : "http://localhost:8080/candidato/obter",
+				dataType : "JSON",
+				data : {
+					"cpf" : asd
+				},
+				type : "GET",
+				success: function (data){		
+				}
+			});
+		});
+	}
+	
+	
 	</script>
 </body>
 </html>

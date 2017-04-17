@@ -450,6 +450,6 @@ public class CandidatoBusiness {
 				listaStatus.add(StatusCandidatoEnum.PROPOSTARECUSADA.getValue());
 			}
 		}
-		return listaStatus;
+		return listaStatus;	
 	}
 }
