@@ -542,7 +542,7 @@
 														class="fa fa-eye">&nbsp</i>Visualizar</a></li>
 											<li role="separator" class="editarDivider divider btnEdita hide"></li>
 														
-														<li><a href="#" onclick="filtro" 
+														<li><a href="/candidato/filtrar?nome=&vagaBean.id=${vaga.id}"  
 													><i
 														class="fa fa-group">&nbsp</i>Visualizar candidatos</a></li>
 														
