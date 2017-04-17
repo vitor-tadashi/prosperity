@@ -42,10 +42,11 @@ public class StatusCandidatoEntity {
 	@Column(name = "flSituacao")
 	private Boolean flSituacao;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idStatus")
 	private StatusEntity status;
-
+	
+	//TODO vereficar relacionamento IGOR
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;

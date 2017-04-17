@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.prosperity.bean.AvaliadorVagaBean;
 import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.SituacaoVagaBean;
+import br.com.prosperity.bean.StatusVagaBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.converter.AvaliadorVagaConverter;
@@ -211,7 +212,7 @@ public class VagaBusiness {
 		VagaEntity vagaEntity = new VagaEntity();
 		vagaEntity.setId(situacaoVaga.getIdVaga());
 
-		if (situacaoVaga.getStatus() == StatusVagaEnum.ACEITO) {
+		if (situacaoVaga.getStatus() == StatusVagaEnum.ATIVO) {
 			avaliadorVagaBean = obterAvaliadores(vagaEntity.getId());
 			if (avaliadorVagaBean == null || avaliadorVagaBean.size() == 0) {
 				situacaoVaga.setStatus(StatusVagaEnum.AGUARDANDOAVALIADORES);
@@ -230,6 +231,15 @@ public class VagaBusiness {
 		statusVagaEntity.setSituacao(true);
 
 		statusVagaDAO.insert(statusVagaEntity);
+	}
+	
+	@Transactional
+	public void alterarDataAprovacao(SituacaoVagaBean status) {
+		VagaEntity vagaEntity = vagaDAO.findById(status.getIdVaga());
+		vagaEntity.setDataAprovacao(new Date());
+		vagaDAO.update(vagaEntity);
+		vagaEntity.setDataFechamento(new Date());
+		vagaDAO.update(vagaEntity);
 	}
 
 	@Transactional
@@ -291,12 +301,12 @@ public class VagaBusiness {
 				lista.add(StatusVagaEnum.PENDENTE.getValue());
 
 			if (funcionalidadeBean.getId() == 30)
-				lista.add(StatusVagaEnum.ACEITO.getValue());
+				lista.add(StatusVagaEnum.ATIVO.getValue());
 
 			if (funcionalidadeBean.getId() == 29) {
 				lista.add(StatusVagaEnum.AGUARDANDOAVALIADORES.getValue());
 				lista.add(StatusVagaEnum.PENDENTE.getValue());
-				lista.add(StatusVagaEnum.ACEITO.getValue());
+				lista.add(StatusVagaEnum.ATIVO.getValue());
 			}
 		}
 		for(Integer listas : lista){
