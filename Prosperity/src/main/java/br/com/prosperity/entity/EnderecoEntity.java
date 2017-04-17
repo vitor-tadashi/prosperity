@@ -1,6 +1,5 @@
 package br.com.prosperity.entity;
 
-import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,18 +7,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- * Entity implementation class for Entity: PerfilFuncionalidadeEntity
- *
- */
 @Entity
 @Table(name = "tbEndereco")
-@Cacheable
 public class EnderecoEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idEndereco", unique = true)
+	@Column(name = "idEndereco", unique = true, nullable = false)
 	private Integer id;
 
 	@Column(name = "cep")

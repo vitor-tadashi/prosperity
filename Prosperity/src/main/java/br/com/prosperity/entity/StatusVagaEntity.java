@@ -10,19 +10,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 
 @Entity
 @Table(name = "tbStatusVaga")
 @NamedQueries({
 	@NamedQuery(name = "obterStatusVaga", query = "SELECT v FROM StatusVagaEntity v WHERE v.vaga = ?1"),
-	@NamedQuery(name = "statusVaga", query = "SELECT v FROM StatusVagaEntity v WHERE v.vaga = ?1") })
+	@NamedQuery(name = "statusVaga", query = "SELECT v FROM StatusVagaEntity v WHERE v.vaga = ?1") 
+})
 
 public class StatusVagaEntity {
 	/* Mapeamento dos Atributos */
@@ -35,11 +35,11 @@ public class StatusVagaEntity {
 	private Integer id;
 	/* fim */
 
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idStatus")
 	private StatusEntity status;
 
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
 
@@ -47,12 +47,12 @@ public class StatusVagaEntity {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataAlteracao;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idVaga")
 	private VagaEntity vaga;
 	
 	@Column(name="flSituacao")
-	private boolean situacao;
+	private Boolean situacao;
 
 	/* fim dos mapeamentos */
 
@@ -96,11 +96,11 @@ public class StatusVagaEntity {
 		this.usuario = usuario;
 	}
 
-	public boolean getSituacao() {
+	public Boolean getSituacao() {
 		return situacao;
 	}
 
-	public void setSituacao(boolean situacao) {
+	public void setSituacao(Boolean situacao) {
 		this.situacao = situacao;
 	}
 	

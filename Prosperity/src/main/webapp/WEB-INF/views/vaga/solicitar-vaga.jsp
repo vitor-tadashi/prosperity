@@ -34,14 +34,14 @@
 							method="POST" >
 							<input id="vagaIdVar" name="id" type="hidden" value="${vaga.id}">
 							<input id="dataAbertura" name="dataAbertura" type="hidden" value="${vaga.dataAbertura}">
-							<input id="status" name="status" type="hidden" value="${ultimoStatus.status.id}">
-							<div id="textDiv">
-								
+							<input id="status" name="ultimoStatus" type="hidden" value="${ultimoStatus.status.id}">
 							<input class ="hidden" value="${erro}" id="contErro">
+							<input id="txtSolicitante" type="hidden" name="nomeSolicitante" value="${autenticado.funcionario.nome}">
+							
+							<div id="textDiv">
 								<c:forEach var="erro" items="${listaErros}">
 									<p>${erro}</p>
 								</c:forEach>
-								
 							</div>
 							
 							<div id="textDiv1"></div>
@@ -70,7 +70,7 @@
 									<div class="tab-pane fade in active" id="first">
 										
 										<div class="row">
-											<div class="form-group col-md-6" style="padding-top:0px">
+											<div class="form-group col-md-12" style="padding-top:0px">
 												<label for="txtNomeVaga">Nome da vaga</label> <input
 													type="text" name="nomeVaga"
 													value="${vaga.nomeVaga}"
@@ -78,30 +78,28 @@
 													placeholder="Nome da Vaga" data-required="true">
 											</div>
 											<!-- /form-group -->
-											<div class="form-group col-md-2" style="padding-top:0px">
-												<label class="control-label" for="dataInicio">Data
-													para início</label>
-												<div class="input-sm-group">
-												 <fmt:formatDate value="${vaga.dataInicio}"
-													pattern="dd/MM/yyyy" var="dataInicio"/>
-													<input id="dataInicio" name="dataInicio" type="text"
-														class="form-control date parsley-validated" data-required="true"
-														value="${dataInicio}" style="height:30px" onblur="validarData(this.value)"> 
-												</div>
-											</div>
+											
 											<!-- /form-group -->
 										</div>
 										
 										<div class="row">
-											<div class="form-group col-md-6" style="padding-top:0px">
-												<label for="txtSolicitante">Solicitante</label> <input
-													type="text" name="nomeSolicitante"
-													value="${vaga.nomeSolicitante}"
-													class="form-control input-sm" id="txtSolicitante"
-													placeholder="Solicitante" data-required="true">
+											<div class="form-group col-md-6" style="">
+												<label for="cmbCargo">Cargo</label> <select
+													class="form-control" id="cmbCargo"
+													name="cargoBean.id" value="${cargoBean.id}">
+
+													<option value="0">Selecione o cargo</option>
+
+													<c:forEach var="cargo" items="${cargos}" varStatus="i">
+														<option value="${cargo.id}"
+															${cargo.id ==
+															vaga.cargoBean.id ? 'selected="selected"' : ''}>${cargo.nome}</option>
+													</c:forEach>
+
+												</select>
 											</div>
 											<!-- /form-group -->
-											<div class="form-group col-md-6" style="padding-top:0px">
+											<div class="form-group col-md-6" style="">
 												<label>Local de trabalho</label>
 												<div>
 													<input id="localTrabalhoVar" type="hidden"
@@ -120,16 +118,17 @@
 										<!-- /form-group -->
 										<div class="row">
 											<div class="form-group col-md-6" style="padding-top:0px">
-												<label for="cmbCargo">Cargo</label> <select
-													class="form-control" id="cmbCargo"
-													name="cargoBean.id" value="${cargoBean.id}">
+												<label for="cmbSenioridade">Senioridade da vaga</label> <select
+													id="cmbSenioridade" name="senioridadeBean.id"
+													class="form-control">
 
-													<option value="0">Selecione o cargo</option>
+													<option value="0">Selecione a senioridade</option>
 
-													<c:forEach var="cargo" items="${cargos}" varStatus="i">
-														<option value="${cargo.id}"
-															${cargo.id ==
-															vaga.cargoBean.id ? 'selected="selected"' : ''}>${cargo.nome}</option>
+													<c:forEach var="senioridade" items="${senioridades}"
+														varStatus="i">
+														<option value="${senioridade.id}"
+															${senioridade.id ==
+															vaga.senioridadeBean.id ? 'selected="selected"' : ''}>${senioridade.nome}</option>
 													</c:forEach>
 
 												</select>
@@ -158,20 +157,10 @@
 										<!-- /form-group -->
 										<div class="row">
 											<div class="form-group col-md-6" style="padding-top:0px">
-												<label for="cmbSenioridade">Senioridade da vaga</label> <select
-													id="cmbSenioridade" name="senioridadeBean.id"
-													class="form-control">
-
-													<option value="0">Selecione a senioridade</option>
-
-													<c:forEach var="senioridade" items="${senioridades}"
-														varStatus="i">
-														<option value="${senioridade.id}"
-															${senioridade.id ==
-															vaga.senioridadeBean.id ? 'selected="selected"' : ''}>${senioridade.nome}</option>
-													</c:forEach>
-
-												</select>
+												<label for="txtPropostaSalarial">Proposta salarial</label> <input
+													id="txtPropostaSalarial" name="valorPretensao" type="number"
+													class="form-control input-sm" placeholder="R$"
+													value="${vaga.valorPretensao}" style="height:30px">
 											</div>
 											<!-- /form-group -->
 											<div class="form-group col-md-6" style="padding-top:0px">
@@ -201,10 +190,15 @@
 										</div>
 										<div class="row">
 											<div class="form-group col-md-6" style="padding-top:0px">
-												<label for="txtPropostaSalarial">Proposta salarial</label> <input
-													id="txtPropostaSalarial" name="valorPretensao" type="number"
-													class="form-control input-sm" placeholder="R$"
-													value="${vaga.valorPretensao}" style="height:30px">
+												<label class="control-label" for="dataInicio">Data
+													para início</label>
+												<div class="input-sm-group">
+												 <fmt:formatDate value="${vaga.dataInicio}"
+													pattern="dd/MM/yyyy" var="dataInicio"/>
+													<input id="dataInicio" name="dataInicio" type="text"
+														class="form-control date parsley-validated" data-required="true"
+														value="${dataInicio}" style="height:30px" onblur="validarData(this.value)"> 
+												</div>
 											</div>
 											<!-- /form-group -->
 											<div class="form-group col-md-6" style="padding-top:0px">
@@ -254,8 +248,8 @@
 											<!-- /form-group -->
 											<div class="form-group col-md-6" style="padding-top:0px">
 												<label for="exampleInputEmail1">Cliente</label> 
-												<input type="text" class="form-control input-sm" id="textCliente"
-													placeholder="Cliente" name="Cliente" value="${vaga.projeto.cliente.nome}" id="Cliente" data-required="false" disabled="disabled" onblur="cliente">
+												<input type="text" class="form-control input-sm" placeholder="Cliente" id="Cliente" name="Cliente" 
+												value="${vaga.projeto.cliente.nome}" disabled="disabled" onblur="cliente">
 											</div>
 											<!-- /form-group -->
 											<div class="form-group col-md-6" style="padding-top:0px">
@@ -399,7 +393,7 @@
 	<script src="/resources/js/custom/solicitacaoVaga.js"></script>
 	<script src="/resources/js/parsley.min.js"></script>
 	<script src="/resources/js/custom/custom.js"></script>
-
+	
 	<script>
 		$(document).ready(function() {
 			if ($("input#contErro").val() > 0) {
@@ -417,80 +411,67 @@
 			$('.date').mask('99/99/9999');
 		})
 		
-		var dataAberturaVar = ${vaga.dataAbertura};
-	</script>
+		var a = ${vaga.dataAbertura} + 1
+		if (a == 1){
+			$("#dataAbertura").val("2017-01-01")
+		}
 	
-	<script type="text/javascript">
-		function validarData(id) {
-			
-			var campo = $('#dataInicio').val();			
-			
-			 if (campo!="")
-			{
-			        erro=0;
-			        hoje = new Date();
-			        anoAtual = hoje.getFullYear();
-			        barras = campo.split("/");
-			        if (barras.length == 3)
-			        	
-			        {
-			                dia = barras[0];
-			                mes = barras[1];
-			                ano = barras[2];
-			                resultado = (!isNaN(dia) && (dia > 0) && (dia < 32)) && (!isNaN(mes) && (mes > 0) && (mes < 13)) && (!isNaN(ano) && (ano.length == 4) && (ano >= anoAtual && ano >= 1900));
-			                if (!resultado)
-			                {
-			                	var div = document.getElementById("textDiv2").className = "alert alert-danger";
+//Script para preencher automático o Radio de TipoVaga
+	
+	if(($("#tipoVagaVar").val() == "R")){
+		$("#idTipoVagaR").prop("checked",true)
+	} else if(($("#tipoVagaVar").val() == "P")){
+		$("#idTipoVagaP").prop("checked",true)
+	} else if (($("#tipoVagaVar").val() == "H")){
+		$("#idTipoVagaH").prop("checked",true)
+	};
+	
+	//Script para preencher automático o Radio de Aumento de Quadro
+	
+	if(($("#aumentoQuadroVar").val() == "N")){
+		$("#novo").prop("checked",true)
+	} else if(($("#aumentoQuadroVar").val() == "S")){
+		$("#substituicao").prop("checked",true)
+	};
+	
+	if(($("#aumentoQuadroVar").val() == "N")) {
+		$("div#nome").addClass("hide");
+	}else if (($("#aumentoQuadroVar").val() == "S")){
+		$("div#nome").removeClass("hide");
+	};
+	
+	$("#novo").click(function() {
+		$("div#nome").addClass("hide");
+	});
+	
+	$("#substituicao").click(function() {
+		$("div#nome").removeClass("hide");
+	});
+	
+	//Script para preencher automático o Radio de Local de Trabalho
+	
+	if(($("#localTrabalhoVar").val() == "C")){
+		$("#cliente").prop("checked",true)
+	} else if(($("#localTrabalhoVar").val() == "I")){
+		$("#interno").prop("checked",true)
+	}
+	
+	//Script para alteração da Aba Dados do Projeto e do Radio Button Local de Trabalho
+	
+	if (($("#localTrabalhoVar").val() == "C")) {
+		$("div#dadosAlocacao").hide();
+	}else if(($("#localTrabalhoVar").val() == "I")){
+		$("div#dadosAlocacao").show();
+	};
 
-			    				textDiv2.textContent = "Campo Data para inicio tem que estar no futuro";
-
-			    				var text = "[" + div.textContent + "]";
-			                        campo.focus();
-			                        return false;
-			                }
-			         }
-			         else
-			         {
-			        		var div = document.getElementById("textDiv").className = "";
-
-			    			textDiv2.textContent = "Campo Data para inicio inválido";
-
-			    			var text = "[" + div.textContent + "]";
-			                
-			                return false;
-			         }
-			        var div = document.getElementById("textDiv2").className = "";
-
-	    			textDiv2.textContent = "";
-
-	    			var text = "[" + div.textContent + "]";
-	                
-			return true;
-			
-			}
-		}
-			
-
-	</script>
-
-	<script>
-		var elements1 = $("#selectedBox1 option").each(function()
-				{
-				    $(this).val();
-				});
-		var elements2 = $("#selectedBox2 option").each(function()
-				{
-				    $(this).val();
-				});
-		for(var i = 0 ; i<elements1.length;i++){
-			for (var j=0;j<elements2.length;j++) {
-				if (elements1[i].value == elements2[j].value){
-					elements1[i].remove();
-				}
-			}
-		}
-		
-		//usuario.id != avaliadorVagaBean.usuario.id
+	$("#cliente").click(function() {
+		$("div#dadosAlocacao").removeClass("hide");
+	});
+	$("#interno").click(function() {
+		$("div#dadosAlocacao").addClass("hide");
+	});
+	
+	
 	</script>
 
 </body>
