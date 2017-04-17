@@ -132,7 +132,7 @@ public class CandidatoEntity {
 	@JoinColumn(name = "idFormacao")
 	private FormacaoEntity formacao;
 	
-	//TODO verificar relacionamento
+	//TODO verificar relacionamento IGOR
 	@ManyToOne(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;

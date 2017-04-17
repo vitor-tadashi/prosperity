@@ -1,5 +1,6 @@
 package br.com.prosperity.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,11 +18,11 @@ public class VagaCandidatoEntity {
 	@Column(name = "idVagaCandidato", unique = true, nullable = false)
 	private Integer idVagaCandidato;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "idVaga")
 	private VagaEntity vaga;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "idCanalInformacao")
 	private CanalInformacaoEntity canalInformacao;
 
