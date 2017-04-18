@@ -375,7 +375,6 @@
 	                   	 var avaliacoes = [];
 	                   	 
 	                   	$(".avaliacaoCompetencia").each(function(){
-	                   		debugger;
                             if($(this).prop("checked")){
                                 
 //                                  var avaliacaoCompetencia = {
@@ -399,7 +398,6 @@
 								   avaliacoes.push(idCompetencia);
                             }
                         });
-	            		
                         $.ajax({
                               url : "alterar-status-candidato",
                               type : "POST",
@@ -408,8 +406,9 @@
                                    'idCandidato' : $('#hdn-id-candidato').val(),
                                    'parecer' : $('#parecer').val(),
                                    'proposta' : CKEDITOR.instances.editor.getData(),
-                                   'idStatus' : $('#hdn-status').val()
-
+                                   'idStatus' : $('#hdn-status').val(),
+                                   'ac' : JSON.stringify(avaliacoes)
+									
                               },
                               success : function(data) {
                                    location.reload();

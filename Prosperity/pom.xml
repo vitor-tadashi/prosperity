@@ -173,7 +173,7 @@
 		</dependency>
 		<!-- DEPENDÊNCIAS DO JERSEY -->
 
-		<!-- Marshal an unmarshal -->
+		<!-- Marshal and unmarshal -->
 		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
