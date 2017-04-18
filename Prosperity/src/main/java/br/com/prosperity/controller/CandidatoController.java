@@ -153,7 +153,6 @@ public class CandidatoController<PaginarCandidato> {
 	@ResponseStatus(value = HttpStatus.OK)
 	public @ResponseBody CandidatoBean obterCPF(Model model, @RequestParam String cpf) {
 		CandidatoBean candidato = candidatoBusiness.obterPorCPF(cpf);
-
 		return candidato;
 	}
 
