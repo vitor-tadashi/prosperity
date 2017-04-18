@@ -332,4 +332,8 @@ public class CandidatoBean extends FormatUtil {
 		this.curriculoTexto = curriculoTexto;
 	}
 
+	public static boolean getCadastrarCandidato() {
+		return false;
+	}
+
 }
