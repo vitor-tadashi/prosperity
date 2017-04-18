@@ -9,7 +9,6 @@ public class ProjetoBean {
 
 	@Min(value = 1, message = "O campo Nome do projeto deve ser preenchido")
 	private Integer id;
-
 	private String nome;
 	private FuncionarioBean funcionario;
 	private ClienteBean cliente;

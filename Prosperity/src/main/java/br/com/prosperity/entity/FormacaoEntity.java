@@ -2,6 +2,7 @@ package br.com.prosperity.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.engine.internal.Cascade;
 
 @Entity
 @Table(name = "tbFormacao")
@@ -30,11 +33,11 @@ public class FormacaoEntity {
 	@Column(name = "dtConclusao")
 	private Date dataConclusao;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@JoinColumn(name = "idTipoCurso")
 	private TipoCursoEntity tipoCurso;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.REFRESH , fetch = FetchType.LAZY)
 	@JoinColumn(name = "idSituacaoAtual")
 	private SituacaoAtualEntity situacaoAtual;
 

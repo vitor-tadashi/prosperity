@@ -43,7 +43,7 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		entity.setEmail(bean.getEmail());
 		entity.setNome(bean.getNome());
 		entity.setRg(bean.getRg());
-		entity.setValorPretensaoSalarial(bean.getValorPretensao());
+		entity.setValorPretensao(bean.getValorPretensao());
 		entity.setDataAbertura(bean.getDataAbertura());
 		entity.setDataAlteracao(bean.getDataAlteracao());
 		entity.setDataFechamento(bean.getDataFechamento());
@@ -59,6 +59,7 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		entity.setProposta(bean.getProposta());
 		entity.setVagas(vagaCandidatoConverter.convertBeanToEntity(bean.getVagas()));
 		entity.setCurriculoTexto(bean.getCurriculoTexto());
+		
 		return entity;
 	}
 
@@ -88,7 +89,7 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		entity.setEmail(bean.getEmail());
 		entity.setNome(bean.getNome());
 		entity.setRg(bean.getRg());
-		entity.setValorPretensaoSalarial(bean.getValorPretensao());
+		entity.setValorPretensao(bean.getValorPretensao());
 		entity.setDataAbertura(bean.getDataAbertura());
 		entity.setDataAlteracao(bean.getDataAlteracao());
 		entity.setDataFechamento(bean.getDataFechamento());
@@ -124,7 +125,7 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		bean.setEmail(entity.getEmail());
 		bean.setNome(entity.getNome());
 		bean.setRg(entity.getRg());
-		bean.setValorPretensao(entity.getValorPretensaoSalarial());
+		bean.setValorPretensao(entity.getValorPretensao());
 		bean.setDataAbertura(entity.getDataAbertura());
 		bean.setDataAlteracao(entity.getDataAlteracao());
 		bean.setDataFechamento(entity.getDataFechamento());

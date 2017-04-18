@@ -5,7 +5,8 @@ import javax.persistence.*;
 @Entity
 @Table(name="tbProjeto")
 @NamedQueries({
-	@NamedQuery(name = "obterProjetosAtivos", query = "SELECT u FROM ProjetoEntity u WHERE u.ativo = true")
+	@NamedQuery(name = "obterProjetosAtivos", query = "SELECT u FROM ProjetoEntity u WHERE u.ativo = true"),
+	@NamedQuery(name = "obterCliente", query = "SELECT u FROM ProjetoEntity u WHERE u.ativo = true AND u.id=?1")
 })
 public class ProjetoEntity {
 	
@@ -17,11 +18,11 @@ public class ProjetoEntity {
 	@Column(name="nmProjeto")
 	private String nome;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="idFuncionario")
 	private FuncionarioEntity funcionario;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="idCliente")
 	private ClienteEntity cliente;
 	

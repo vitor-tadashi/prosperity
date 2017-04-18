@@ -116,9 +116,9 @@ public class CandidatoBusiness {
 
 	@Autowired
 	private HttpSession session;
-	
+
 	@Transactional(readOnly = true)
-	public List<CandidatoBean>listarDecrescente() {
+	public List<CandidatoBean> listarDecrescente() {
 		List<CandidatoEntity> CandidatoEntity = candidatoDAO.findByNamedQuery("obterPorDesc");
 		List<CandidatoBean> CandidatoBean = candidatoConverter.convertEntityToBean(CandidatoEntity);
 		return CandidatoBean;
@@ -285,6 +285,9 @@ public class CandidatoBusiness {
 				situacaoCandidato.setIdCandidato(candidatoEntity.getId());
 				situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
 
+				if (vagao.get(0).getVaga().getId() == 1202)
+					situacaoCandidato.setStatus(StatusCandidatoEnum.CANCELADO);
+
 				alterarStatus(situacaoCandidato);
 
 			} else {
@@ -370,7 +373,7 @@ public class CandidatoBusiness {
 
 		return statusCandidatoEntity;
 	}
-
+@Transactional
 	public CandidatoBean obterPorCPF(String cpf) {
 		List<CandidatoEntity> candidatosEntity = null;
 
@@ -459,6 +462,6 @@ public class CandidatoBusiness {
 				listaStatus.add(StatusCandidatoEnum.PROPOSTARECUSADA.getValue());
 			}
 		}
-		return listaStatus;
+		return listaStatus;	
 	}
 }
