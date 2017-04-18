@@ -10,7 +10,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.google.gson.Gson;
 
 import br.com.prosperity.bean.AvaliacaoBean;
 import br.com.prosperity.bean.CanalInformacaoBean;
@@ -246,8 +247,8 @@ public class CandidatoController<PaginarCandidato> {
 
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
 		model.addAttribute("listaCargo", listaCargo);
-		
-		// TABELA VAGA DECRESCENTE 
+
+		// TABELA VAGA DECRESCENTE
 		model.addAttribute("candidato", candidatoBusiness.listarDecrescente());
 
 		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.obterTodos();
@@ -302,10 +303,14 @@ public class CandidatoController<PaginarCandidato> {
 	@RequestMapping(value = { "alterar-status-candidato" }, method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
 	public @ResponseBody String alterarStatusCandidato(Model model,
-			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato) {
+			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato,
+			@ModelAttribute("ac")String ac) {
 
 		CandidatoBean bean = new CandidatoBean();
 		bean.setId(situacaoCandidato.getIdCandidato());
+		
+		Gson gson = new Gson();
+		List<Integer> l = gson.fromJson(ac, List.class);
 
 		provaCandidatoBusiness.inserir(situacaoCandidato.getProcessoSeletivo());
 
