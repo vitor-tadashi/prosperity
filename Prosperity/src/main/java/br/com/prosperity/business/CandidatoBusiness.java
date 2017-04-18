@@ -27,7 +27,6 @@ import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.StatusCandidatoBean;
 import br.com.prosperity.bean.UsuarioBean;
-import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.converter.AvaliacaoConverter;
 import br.com.prosperity.converter.CandidatoConverter;
 import br.com.prosperity.converter.CompetenciaConverter;
@@ -463,5 +462,9 @@ public class CandidatoBusiness {
 			}
 		}
 		return listaStatus;	
+	}
+	@Transactional
+	public void atualizarCandidato(CandidatoBean bean) {
+		candidatoDAO.update(candidatoConverter.convertBeanToEntity(bean));
 	}
 }

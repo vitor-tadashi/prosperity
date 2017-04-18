@@ -56,6 +56,9 @@ import br.com.prosperity.exception.BusinessException;
 public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
+	private CandidatoBean bean;
+
+	@Autowired
 	private CandidatoBusiness candidatoBusiness;
 
 	@Autowired
@@ -87,10 +90,10 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private List<CandidatoCompetenciaBean> candidatoCompetenciasBean;
-	
+
 	@Autowired
 	private CompetenciaBean competenciaBean;
-	
+
 	@Autowired
 	private AvaliacaoBean avaliacaoBean;
 
@@ -315,34 +318,9 @@ public class CandidatoController<PaginarCandidato> {
 	public @ResponseBody String alterarStatusCandidato(Model model,
 			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato,
 			@ModelAttribute("ac") String ac) {
-
-		CandidatoBean bean = new CandidatoBean();
-		bean.setId(situacaoCandidato.getIdCandidato());
-
-		Gson gson = new Gson();
-		List<String> l = gson.fromJson(ac, List.class);
-		int aux = 0;
-		for (String lista : l) {
-			Integer aux2 = Integer.parseInt(lista);
-			CandidatoCompetenciaBean candidatoCompetenciaBean = new CandidatoCompetenciaBean();
-			try{
-			if (aux2 != null) {
-				if (aux % 2 == 0) {
-					avaliacaoBean = new AvaliacaoBean();
-					avaliacaoBean.setId(aux2);
-				} else {
-					competenciaBean = new CompetenciaBean();
-					competenciaBean.setId(aux2);
-					candidatoCompetenciaBean.setAvaliacao(avaliacaoBean);
-					candidatoCompetenciaBean.setCompetencia(competenciaBean);
-					candidatoCompetenciasBean.add(candidatoCompetenciaBean);
-				}
-			}
-			}catch (Exception e){
-				System.out.println(e);
-			}
-			aux++;
-		}
+		bean = candidatoBusiness.obter(situacaoCandidato.getIdCandidato());
+		bean.setCompetencias(convertGson(ac));
+		candidatoBusiness.atualizarCandidato(bean);
 
 		provaCandidatoBusiness.inserir(situacaoCandidato.getProcessoSeletivo());
 
@@ -354,5 +332,34 @@ public class CandidatoController<PaginarCandidato> {
 	public @ResponseBody CandidatoBean buscarPorId(@PathVariable int id) {
 		CandidatoBean candidato = candidatoBusiness.obter(id);
 		return candidato;
+	}
+
+	public List<CandidatoCompetenciaBean> convertGson(String ac) {
+		Gson gson = new Gson();
+		List<String> l = gson.fromJson(ac, List.class);
+		candidatoCompetenciasBean.remove(0);
+		int aux = 0;
+		for (String lista : l) {
+			Integer aux2 = Integer.parseInt(lista);
+			CandidatoCompetenciaBean candidatoCompetenciaBean = new CandidatoCompetenciaBean();
+			try {
+				if (aux2 != null) {
+					if (aux % 2 == 0) {
+						avaliacaoBean = new AvaliacaoBean();
+						avaliacaoBean.setId(aux2);
+					} else {
+						competenciaBean = new CompetenciaBean();
+						competenciaBean.setId(aux2);
+						candidatoCompetenciaBean.setAvaliacao(avaliacaoBean);
+						candidatoCompetenciaBean.setCompetencia(competenciaBean);
+						candidatoCompetenciasBean.add(candidatoCompetenciaBean);
+					}
+				}
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			aux++;
+		}
+		return candidatoCompetenciasBean;
 	}
 }
