@@ -10,6 +10,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -150,14 +151,10 @@ public class CandidatoController<PaginarCandidato> {
 
 	@RequestMapping(value = "obter", method = RequestMethod.GET)
 	@ResponseStatus(value = HttpStatus.OK)
-	public String obterCPF(Model model, @RequestParam String cpf) {
+	public @ResponseBody CandidatoBean obterCPF(Model model, @RequestParam String cpf) {
 		CandidatoBean candidato = candidatoBusiness.obterPorCPF(cpf);
-		if (candidato!= null) {
-		model.addAttribute("candidato", candidato);
-		return "candidato/cadastrar-candidato";
 
-		}
-		return "ok";
+		return candidato;
 	}
 
 	@RequestMapping(value = "editar/salvar", method = RequestMethod.POST)

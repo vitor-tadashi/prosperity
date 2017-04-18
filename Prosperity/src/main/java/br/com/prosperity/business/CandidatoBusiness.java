@@ -361,7 +361,7 @@ public class CandidatoBusiness {
 
 		return statusCandidatoEntity;
 	}
-
+@Transactional
 	public CandidatoBean obterPorCPF(String cpf) {
 		List<CandidatoEntity> candidatosEntity = null;
 

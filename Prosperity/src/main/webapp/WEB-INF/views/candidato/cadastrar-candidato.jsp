@@ -493,17 +493,24 @@
 
 	</script>
 	<script type="text/javascript">
+	var vaisefoder = null;
+	
 	function pesquisacpf(){
-		var asd = $('#cpf').val();
+		var cpf = $('#cpf').val();
 		$(function () {
+			alert('vtnc');
 			$.ajax({
 				url : "http://localhost:8080/candidato/obter",
 				dataType : "JSON",
 				data : {
-					"cpf" : asd
+					"cpf" : cpf
 				},
 				type : "GET",
-				success: function (data){		
+				success: function (data){
+					$("#nome").val(data.nome);
+				},
+				error: function (data) {
+					alert('ok');
 				}
 			});
 		});
