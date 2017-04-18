@@ -37,7 +37,7 @@
 							<input id="status" name="ultimoStatus" type="hidden" value="${ultimoStatus.status.id}">
 							<input class ="hidden" value="${erro}" id="contErro">
 							<input id="txtSolicitante" type="hidden" name="nomeSolicitante" value="${autenticado.funcionario.nome}">
-							<input id="cliente" type="hidden" name="nomeSolicitante" value="${projetos}">
+							<input id="cliente" type="hidden" name="cliente" value="${projetos}">
 							
 							<div id="textDiv">
 								<c:forEach var="erro" items="${listaErros}">
