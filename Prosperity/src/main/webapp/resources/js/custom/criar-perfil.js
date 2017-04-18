@@ -34,7 +34,7 @@
     	check();
     	var id = $("#selected-perfil option:selected").val();
     	$.ajax({
-    		url: "http://localhost:8080/usuario/obter-perfil-funcionalidade",
+    		url: "http://localhost:8080/usuario/carrega-funcionalidade-ajax",
     		type: "GET",
     		dataType: "JSON",
     		data: {id : id},
