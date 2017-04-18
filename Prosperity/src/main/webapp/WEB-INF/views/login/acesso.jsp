@@ -17,7 +17,6 @@
 </head>
 <body>
 
-
 	<div class="login-wrapper">
 		<div class="text-center">
 			<img src="/resources/img/logo-prosperity.png" alt="Second slide"
