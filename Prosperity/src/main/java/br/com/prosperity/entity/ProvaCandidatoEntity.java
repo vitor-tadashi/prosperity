@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,11 +23,11 @@ public class ProvaCandidatoEntity {
 	private Integer id;
 
 	@Column(name = "idDescricaoProva")
-	@OneToMany
+	@OneToMany(fetch=FetchType.LAZY)
 	private List<DescricaoProvaEntity> descricaoProvas;
 
 	@Column(name = "idProva")
-	@OneToMany
+	@OneToMany(fetch=FetchType.LAZY)
 	private List<ProvaEntity> provas;
 
 	@Column(name = "dsParecerTecnico")

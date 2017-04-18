@@ -130,6 +130,7 @@ public class UsuarioController {
 			lista = perfilBusiness.obterPerfilFuncionalidades(id);
 			session.setAttribute("listaFunc", lista);
 		}
+		@SuppressWarnings("unchecked")
 		List<FuncionalidadeBean> listaFunc = (List<FuncionalidadeBean>) session.getAttribute("listaFunc");
 		
 		return listaFunc;
