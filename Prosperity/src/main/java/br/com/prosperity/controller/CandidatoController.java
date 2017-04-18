@@ -28,6 +28,7 @@ import com.google.gson.Gson;
 import br.com.prosperity.bean.AvaliacaoBean;
 import br.com.prosperity.bean.CanalInformacaoBean;
 import br.com.prosperity.bean.CandidatoBean;
+import br.com.prosperity.bean.CandidatoCompetenciaBean;
 import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.CompetenciaBean;
 import br.com.prosperity.bean.FuncionarioBean;
@@ -83,6 +84,15 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private ProvaCandidatoBusiness provaCandidatoBusiness;
+
+	@Autowired
+	private List<CandidatoCompetenciaBean> candidatoCompetenciasBean;
+	
+	@Autowired
+	private CompetenciaBean competenciaBean;
+	
+	@Autowired
+	private AvaliacaoBean avaliacaoBean;
 
 	/**
 	 * @author andre.posman
@@ -304,13 +314,35 @@ public class CandidatoController<PaginarCandidato> {
 	@ResponseStatus(value = HttpStatus.OK)
 	public @ResponseBody String alterarStatusCandidato(Model model,
 			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato,
-			@ModelAttribute("ac")String ac) {
+			@ModelAttribute("ac") String ac) {
 
 		CandidatoBean bean = new CandidatoBean();
 		bean.setId(situacaoCandidato.getIdCandidato());
-		
+
 		Gson gson = new Gson();
-		List<Integer> l = gson.fromJson(ac, List.class);
+		List<String> l = gson.fromJson(ac, List.class);
+		int aux = 0;
+		for (String lista : l) {
+			Integer aux2 = Integer.parseInt(lista);
+			CandidatoCompetenciaBean candidatoCompetenciaBean = new CandidatoCompetenciaBean();
+			try{
+			if (aux2 != null) {
+				if (aux % 2 == 0) {
+					avaliacaoBean = new AvaliacaoBean();
+					avaliacaoBean.setId(aux2);
+				} else {
+					competenciaBean = new CompetenciaBean();
+					competenciaBean.setId(aux2);
+					candidatoCompetenciaBean.setAvaliacao(avaliacaoBean);
+					candidatoCompetenciaBean.setCompetencia(competenciaBean);
+					candidatoCompetenciasBean.add(candidatoCompetenciaBean);
+				}
+			}
+			}catch (Exception e){
+				System.out.println(e);
+			}
+			aux++;
+		}
 
 		provaCandidatoBusiness.inserir(situacaoCandidato.getProcessoSeletivo());
 
