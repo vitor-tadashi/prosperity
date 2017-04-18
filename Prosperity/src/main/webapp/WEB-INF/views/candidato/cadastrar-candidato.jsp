@@ -513,10 +513,8 @@
 	</script>
 	<script type="text/javascript">
 	var vaisefoder = null;
-	
 	function pesquisacpf(){
 		var cpf = $('#cpf').val();
-		$(function () {
 			$.ajax({
 				url : "http://localhost:8080/candidato/obter",
 				dataType : "JSON",
@@ -545,19 +543,16 @@
 						$("#valorPretensao").val(data.valorPretensao);
 						$("#valorPretensao").val(data.valorPretensao);
 						$("#vaga").val(data.vagaCandidato.vaga.id);
-						$("#canalInformacao").val(data.vagaCandidato.CanalInformacao.id);
+						$("#canalInformacao").val(data.vagaCandidato.canalInformacao.id);
 						$("#dataUltimoContato").val(data.dataUltimoContato);
 						$("#entrevista").val(data.entrevista);
 						
-						
 					}
-					
 				},
 				error: function (data) {
-					alert('ok');
+					console.log("Cpf não encontrado")
 				}
 			});
-		});
 	}
 	
 	

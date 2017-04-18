@@ -377,7 +377,7 @@ public class CandidatoBusiness {
 		List<CandidatoEntity> candidatosEntity = null;
 
 		candidatosEntity = candidatoDAO.findByNamedQuery("obterPorCPF", cpf);
-		if (candidatosEntity == null) {
+		if (candidatosEntity.isEmpty()) {
 			return null;
 		}
 		for (CandidatoEntity candidatoEntity : candidatosEntity) {
