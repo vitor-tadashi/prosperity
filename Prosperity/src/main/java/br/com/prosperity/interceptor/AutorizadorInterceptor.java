@@ -1,5 +1,8 @@
 package br.com.prosperity.interceptor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,16 +13,21 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.business.FuncionalidadeBusiness;
+import br.com.prosperity.business.PerfilBusiness;
 
 @Component
 public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 
 	@Autowired
 	private FuncionalidadeBusiness funcionalidadeBusiness;
+
+	@Autowired
+	private PerfilBusiness perfilBusiness;
 	
 	@Autowired
 	public UsuarioBean user;
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object controller)
 			throws Exception {
@@ -27,7 +35,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 		
 	      if(uri.endsWith("login/") || 
 	          uri.endsWith("/autenticar") || 
-	              uri.contains("resources/") || uri.endsWith("/servico") || uri.endsWith("/vagas-api")){
+	              uri.contains("resources/") || uri.endsWith("/servico")){
 	        return true;
 	      }
 	      
@@ -35,10 +43,17 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 			request.setAttribute("autenticado", request.getSession().getAttribute("autenticado"));
 			user = (UsuarioBean) request.getSession().getAttribute("autenticado");
 			
-			if(uri.endsWith("obter-perfil-funcionalidade"))
-				return true;
-	
-			for(FuncionalidadeBean fun : funcionalidadeBusiness.listar()){
+			List<FuncionalidadeBean> funcionalidades = new ArrayList<>();
+			
+			if(request.getSession().getAttribute("funcionalidades") == null) {
+				funcionalidades = funcionalidadeBusiness.listar();
+				perfilBusiness.obterPerfilFuncionalidades(user.getPerfil().getId());
+				request.getSession().setAttribute("funcionalidades", funcionalidades);
+			}
+			
+			funcionalidades = (List<FuncionalidadeBean>) request.getSession().getAttribute("funcionalidades");
+			
+			for(FuncionalidadeBean fun : funcionalidades){
 				if(uri.endsWith(fun.getUrl())){
 					for(FuncionalidadeBean f : user.getPerfil().getListaFuncionalidades()){
 						if(f.getId() == fun.getId()){
@@ -74,7 +89,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 						return true;
 					}
 				}
-				response.sendRedirect(request.getContextPath() + "/pagina-inicial/");
+			response.sendRedirect(request.getContextPath() + "/pagina-inicial/");
 				return false;
 			}
 			if(uri.endsWith("vaga/consultar")){

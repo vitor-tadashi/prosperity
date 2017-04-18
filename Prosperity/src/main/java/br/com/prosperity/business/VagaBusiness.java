@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.prosperity.bean.AvaliadorVagaBean;
 import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.SituacaoVagaBean;
+import br.com.prosperity.bean.StatusVagaBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.converter.AvaliadorVagaConverter;
@@ -163,24 +164,32 @@ public class VagaBusiness {
 	}
 
 	@Transactional
-	public void inserir(VagaBean vagaBean, List<UsuarioBean> usuarioBean) {
+	public String inserir(VagaBean vagaBean, List<UsuarioBean> usuarioBean) {
 
 		VagaEntity vagaEntity = vagaConverter.convertBeanToEntity(vagaBean);
 
 		vagaEntity.setStatusVagaEntity(statusVagaDAO.findByNamedQuery("statusVaga", vagaEntity.getId()));
-
-		if (vagaEntity.getId() == null) {
-			Date dateNow = new Date();
-			vagaEntity.setDataAbertura(dateNow);
-			vagaDAO.insert(vagaEntity);
-			situacaoVaga.setIdVaga(vagaEntity.getId());
-			situacaoVaga.setStatus(StatusVagaEnum.PENDENTE);
-			alterarStatus(situacaoVaga);
-			//inserirAvaliadores(vagaEntity, usuarioBean);
-		} else {
-			// VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
-			inserirAvaliadores(vagaEntity, usuarioBean);
-			vagaDAO.update(vagaEntity);
+		
+		try {
+			if (vagaEntity.getId() == null) {
+				Date dateNow = new Date();
+				vagaEntity.setDataAbertura(dateNow);
+				vagaDAO.insert(vagaEntity);
+				situacaoVaga.setIdVaga(vagaEntity.getId());
+				situacaoVaga.setStatus(StatusVagaEnum.PENDENTE);
+				alterarStatus(situacaoVaga);
+				inserirAvaliadores(vagaEntity, usuarioBean);
+			} else {
+				// VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
+				inserirAvaliadores(vagaEntity, usuarioBean);
+				vagaDAO.update(vagaEntity);
+			}
+		return "Ok";
+		}
+		catch(Exception e){
+			String erro = new String();
+			erro = e.toString();
+			return erro;
 		}
 	}
 
@@ -222,6 +231,15 @@ public class VagaBusiness {
 		statusVagaEntity.setSituacao(true);
 
 		statusVagaDAO.insert(statusVagaEntity);
+	}
+	
+	@Transactional
+	public void alterarDataAprovacao(SituacaoVagaBean status) {
+		VagaEntity vagaEntity = vagaDAO.findById(status.getIdVaga());
+		vagaEntity.setDataAprovacao(new Date());
+		vagaDAO.update(vagaEntity);
+		vagaEntity.setDataFechamento(new Date());
+		vagaDAO.update(vagaEntity);
 	}
 
 	@Transactional

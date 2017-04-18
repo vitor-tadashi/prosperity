@@ -37,6 +37,7 @@
 							<input id="status" name="ultimoStatus" type="hidden" value="${ultimoStatus.status.id}">
 							<input class ="hidden" value="${erro}" id="contErro">
 							<input id="txtSolicitante" type="hidden" name="nomeSolicitante" value="${autenticado.funcionario.nome}">
+							<input id="cliente" type="hidden" name="nomeSolicitante" value="${projetos}">
 							
 							<div id="textDiv">
 								<c:forEach var="erro" items="${listaErros}">
@@ -242,13 +243,13 @@
 															${projeto.id ==
 														vaga.projeto.id ? 'selected="selected"' : ''}>${projeto.nome}</option>
 													</c:forEach>
-
+													
 												</select>
 											</div>
 											<!-- /form-group -->
 											<div class="form-group col-md-6" style="padding-top:0px">
 												<label for="exampleInputEmail1">Cliente</label> 
-												<input type="text" class="form-control input-sm" placeholder="Cliente" id="Cliente" name="Cliente" 
+												<input type="text" class="form-control input-sm" placeholder="Selecione o projeto" id="Cliente" name="Cliente" 
 												value="${vaga.projeto.cliente.nome}" disabled="disabled" onblur="cliente">
 											</div>
 											<!-- /form-group -->
@@ -395,6 +396,26 @@
 	<script src="/resources/js/custom/custom.js"></script>
 	
 	<script>
+	
+	var dropdownProjeto = document.querySelector("#cmbProjetoInterno");
+	dropdownProjeto.addEventListener("change",function(){
+
+		var id = $("#cmbProjetoInterno").val();
+		$.ajax({
+			url: "http://localhost:8080/vaga/obter-cliente",
+			type: "GET",
+			dataType: "JSON",
+			data: {id : id},
+			success: function(lista){
+				if(id == 0){
+					$("#Cliente").val("Selecione o projeto");
+				}
+				$("#Cliente").val(lista[0].cliente.nome);
+			}
+		});
+		
+	});
+	
 		$(document).ready(function() {
 			if ($("input#contErro").val() > 0) {
 				$('#textDiv').addClass("alert alert-danger");
