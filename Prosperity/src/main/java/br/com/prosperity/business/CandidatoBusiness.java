@@ -53,6 +53,7 @@ import br.com.prosperity.entity.StatusFuturoEntity;
 import br.com.prosperity.entity.VagaCandidatoEntity;
 import br.com.prosperity.entity.VagaEntity;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
+import br.com.prosperity.exception.BusinessException;
 import br.com.prosperity.util.FormatUtil;
 
 @SuppressWarnings("unused")
@@ -241,7 +242,7 @@ public class CandidatoBusiness {
 	}
 
 	@Transactional
-	public void inserir(CandidatoBean candidatoBean) {
+	public void inserir(CandidatoBean candidatoBean) throws BusinessException {
 		if (candidatoBean.getId() == null) {
 			if (verificarCandidatura(candidatoBean) == true) {
 				CandidatoEntity candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoBean);

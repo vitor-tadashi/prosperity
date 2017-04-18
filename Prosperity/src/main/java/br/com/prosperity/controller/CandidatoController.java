@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 
@@ -51,6 +52,7 @@ import br.com.prosperity.business.VagaBusiness;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.exception.BusinessException;
 
+@SuppressWarnings("unused")
 @Controller
 @RequestMapping(value = "candidato")
 public class CandidatoController<PaginarCandidato> {
@@ -136,11 +138,16 @@ public class CandidatoController<PaginarCandidato> {
 			obterDominiosCandidato(model);
 
 			return "candidato/cadastrar-candidato";
-
 		} else {
-			candidatoBusiness.inserir(candidatoBean);
-		}
+			try{
+				candidatoBusiness.inserir(candidatoBean);
+				model.addAttribute("sucesso", "Candidato salvo com sucesso.");
+				
+			}catch(BusinessException e){
 
+			}
+		}
+		
 		return "candidato/cadastrar-candidato";
 	}
 
