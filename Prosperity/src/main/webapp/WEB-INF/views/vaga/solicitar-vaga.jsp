@@ -35,9 +35,8 @@
 							<input id="vagaIdVar" name="id" type="hidden" value="${vaga.id}">
 							<input id="dataAbertura" name="dataAbertura" type="hidden" value="${vaga.dataAbertura}">
 							<input id="status" name="ultimoStatus" type="hidden" value="${ultimoStatus.status.id}">
-							<input class ="hidden" value="${erro}" id="contErro">
+							<input id="contErro" class ="hidden" value="${erro}">
 							<input id="txtSolicitante" type="hidden" name="nomeSolicitante" value="${autenticado.funcionario.nome}">
-							<input id="cliente" type="hidden" name="nomeSolicitante" value="${projetos}">
 							
 							<div id="textDiv">
 								<c:forEach var="erro" items="${listaErros}">
@@ -394,106 +393,6 @@
 	<script src="/resources/js/custom/solicitacaoVaga.js"></script>
 	<script src="/resources/js/parsley.min.js"></script>
 	<script src="/resources/js/custom/custom.js"></script>
-	
-	<script>
-	
-	var dropdownProjeto = document.querySelector("#cmbProjetoInterno");
-	dropdownProjeto.addEventListener("change",function(){
-
-		var id = $("#cmbProjetoInterno").val();
-		$.ajax({
-			url: "http://localhost:8080/vaga/obter-cliente",
-			type: "GET",
-			dataType: "JSON",
-			data: {id : id},
-			success: function(lista){
-				if(id == 0){
-					$("#Cliente").val("Selecione o projeto");
-				}
-				$("#Cliente").val(lista[0].cliente.nome);
-			}
-		});
-		
-	});
-	
-		$(document).ready(function() {
-			if ($("input#contErro").val() > 0) {
-				$('#textDiv').addClass("alert alert-danger");
-			}
-		})
-		
-		$(document).ready(function() {
-			$('.cpf').mask('999.999.999-99', {
-				reverse : true
-			});
-			$('.telefone').mask('(99) 99999-9999');
-			$('#rg').mask('99.999.999-9');
-			$("#cep").mask("99999-999");
-			$('.date').mask('99/99/9999');
-		})
-		
-		var a = ${vaga.dataAbertura} + 1
-		if (a == 1){
-			$("#dataAbertura").val("2017-01-01")
-		}
-	
-//Script para preencher automático o Radio de TipoVaga
-	
-	if(($("#tipoVagaVar").val() == "R")){
-		$("#idTipoVagaR").prop("checked",true)
-	} else if(($("#tipoVagaVar").val() == "P")){
-		$("#idTipoVagaP").prop("checked",true)
-	} else if (($("#tipoVagaVar").val() == "H")){
-		$("#idTipoVagaH").prop("checked",true)
-	};
-	
-	//Script para preencher automático o Radio de Aumento de Quadro
-	
-	if(($("#aumentoQuadroVar").val() == "N")){
-		$("#novo").prop("checked",true)
-	} else if(($("#aumentoQuadroVar").val() == "S")){
-		$("#substituicao").prop("checked",true)
-	};
-	
-	if(($("#aumentoQuadroVar").val() == "N")) {
-		$("div#nome").addClass("hide");
-	}else if (($("#aumentoQuadroVar").val() == "S")){
-		$("div#nome").removeClass("hide");
-	};
-	
-	$("#novo").click(function() {
-		$("div#nome").addClass("hide");
-	});
-	
-	$("#substituicao").click(function() {
-		$("div#nome").removeClass("hide");
-	});
-	
-	//Script para preencher automático o Radio de Local de Trabalho
-	
-	if(($("#localTrabalhoVar").val() == "C")){
-		$("#cliente").prop("checked",true)
-	} else if(($("#localTrabalhoVar").val() == "I")){
-		$("#interno").prop("checked",true)
-	}
-	
-	//Script para alteração da Aba Dados do Projeto e do Radio Button Local de Trabalho
-	
-	if (($("#localTrabalhoVar").val() == "C")) {
-		$("div#dadosAlocacao").hide();
-	}else if(($("#localTrabalhoVar").val() == "I")){
-		$("div#dadosAlocacao").show();
-	};
-
-	$("#cliente").click(function() {
-		$("div#dadosAlocacao").removeClass("hide");
-	});
-	$("#interno").click(function() {
-		$("div#dadosAlocacao").addClass("hide");
-	});
-	
-	
-	</script>
 
 </body>
 
