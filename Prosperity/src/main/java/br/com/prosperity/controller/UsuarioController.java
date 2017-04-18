@@ -135,5 +135,11 @@ public class UsuarioController {
 		
 		return listaFunc;
 	}
+	@RequestMapping(value = "carrega-funcionalidade-ajax", method=RequestMethod.GET)
+	public @ResponseBody List<FuncionalidadeBean> carregaPerfilFuncionalidadeAjax(Model model,@ModelAttribute("id")Integer id){
+		List<FuncionalidadeBean> lista = perfilBusiness.obterPerfilFuncionalidades(id);
+		
+		return lista;
+	}
 
 }
