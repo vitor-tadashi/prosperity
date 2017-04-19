@@ -27,6 +27,7 @@ import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.ProjetoBean;
 import br.com.prosperity.bean.SenioridadeBean;
+import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.SituacaoVagaBean;
 import br.com.prosperity.bean.StatusBean;
 import br.com.prosperity.bean.StatusVagaBean;
@@ -41,6 +42,8 @@ import br.com.prosperity.business.StatusBusiness;
 import br.com.prosperity.business.StatusVagaBusiness;
 import br.com.prosperity.business.UsuarioBusiness;
 import br.com.prosperity.business.VagaBusiness;
+import br.com.prosperity.enumarator.StatusCandidatoEnum;
+import br.com.prosperity.enumarator.StatusVagaEnum;
 
 @Controller
 @RequestMapping("vaga")
@@ -261,6 +264,16 @@ public class VagaController {
 	@RequestMapping(value = "idAvaliador", method = RequestMethod.GET)
 	public String idAvaliador() {
 		return "idAvaliador";
+	}
+	
+	@RequestMapping(value = "/cancelar-candidato/{id}")
+	public String cancelaCandidato(@PathVariable Integer id) {
+		SituacaoVagaBean bean = new SituacaoVagaBean();
+		bean.setIdVaga(id);
+		bean.setStatus(StatusVagaEnum.CANCELADO);
+		vagaBusiness.alterarStatus(bean);
+
+		return "redirect:/candidato/aprovar";
 	}
 
 	@RequestMapping(value = "/salvar", method = RequestMethod.POST)

@@ -385,7 +385,7 @@ footer {
 				<input class="avaliador-id" type="hidden"> <input
 					class="avaliador-status" type="hidden">
 				<div class="modal-footer">
-					<a href="#">
+					<a id="excluir" href="${urlCancelar}">
 						<button id="excluiVaga" onclick="status()" type="button" class="btn btn-primary"
 							data-dismiss="modal">Sim</button>
 					</a>

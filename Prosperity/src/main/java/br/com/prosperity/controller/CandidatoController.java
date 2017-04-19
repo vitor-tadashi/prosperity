@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 
@@ -32,6 +31,7 @@ import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CandidatoCompetenciaBean;
 import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.CompetenciaBean;
+import br.com.prosperity.bean.DescricaoProvaBean;
 import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.ProvaBean;
 import br.com.prosperity.bean.ProvaCandidatoBean;
@@ -101,6 +101,21 @@ public class CandidatoController<PaginarCandidato> {
 	@Autowired
 	private AvaliacaoBean avaliacaoBean;
 
+	@Autowired
+	private ProvaCandidatoBean provaCandidatoBean;
+
+	@Autowired
+	private ProvaBean provaBean;
+
+	@Autowired
+	private DescricaoProvaBean descricaoProvaBean;
+
+	@Autowired
+	private List<ProvaBean> provasBean;
+
+	@Autowired
+	private List<DescricaoProvaBean> descricaoProvasBean;
+
 	/**
 	 * @author andre.posman
 	 * @param model
@@ -141,15 +156,15 @@ public class CandidatoController<PaginarCandidato> {
 			return "candidato/cadastrar-candidato";
 			
 		} else {
-			try{
+			try {
 				candidatoBusiness.inserir(candidatoBean);
 				model.addAttribute("sucesso", "Candidato salvo com sucesso.");
-				
-			}catch(BusinessException e){
+
+			} catch (BusinessException e) {
 
 			}
 		}
-		
+
 		return "candidato/cadastrar-candidato";
 	}
 
@@ -244,8 +259,9 @@ public class CandidatoController<PaginarCandidato> {
 
 		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.findAll();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
-
-		List<VagaBean> listaVagaDrop = vagaBusiness.obterTodos();
+		
+		//LISTAR VAGA ATIVA
+		List<VagaBean> listaVagaDrop = vagaBusiness.listarVagasAtivas();
 		model.addAttribute("listaVagaDrop", listaVagaDrop);
 
 		// avaliadorBusiness.listar();
@@ -325,8 +341,9 @@ public class CandidatoController<PaginarCandidato> {
 	@ResponseStatus(value = HttpStatus.OK)
 	public @ResponseBody String alterarStatusCandidato(Model model,
 			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato,
-			@ModelAttribute("ac") String ac) {
+			@ModelAttribute("ac") String ac, @ModelAttribute("processoSelectivo") String processoSeletivo) {
 		bean = candidatoBusiness.obter(situacaoCandidato.getIdCandidato());
+		situacaoCandidato.setProcessoSeletivo(convertGsonProva(processoSeletivo));
 		bean.setCompetencias(convertGson(ac));
 		candidatoBusiness.atualizarCandidato(bean);
 
@@ -345,7 +362,7 @@ public class CandidatoController<PaginarCandidato> {
 	public List<CandidatoCompetenciaBean> convertGson(String ac) {
 		Gson gson = new Gson();
 		List<String> l = gson.fromJson(ac, List.class);
-		candidatoCompetenciasBean = null;
+		candidatoCompetenciasBean = new ArrayList<CandidatoCompetenciaBean>();
 		int aux = 0;
 		for (String lista : l) {
 			Integer aux2 = Integer.parseInt(lista);
@@ -369,5 +386,36 @@ public class CandidatoController<PaginarCandidato> {
 			aux++;
 		}
 		return candidatoCompetenciasBean;
+	}
+
+	public ProvaCandidatoBean convertGsonProva(String processoSeletivo) {
+		Gson gson = new Gson();
+		List<String> l = gson.fromJson(processoSeletivo, List.class);
+		provaCandidatoBean = new ProvaCandidatoBean();
+		descricaoProvasBean = new ArrayList<DescricaoProvaBean>();
+		provasBean = new ArrayList<ProvaBean>();
+		int aux = 0;
+		for (String lista : l) {
+			String aux2 = lista;
+			try {
+				if (aux2 != null) {
+					if (aux % 2 == 0) {
+						provaBean = new ProvaBean();
+						provaBean.setId(Integer.parseInt(aux2));
+						provasBean.add(provaBean);
+					} else {
+						descricaoProvaBean = new DescricaoProvaBean();
+						descricaoProvaBean.setNome(aux2);
+						descricaoProvasBean.add(descricaoProvaBean);
+					}
+				}
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			aux++;
+		}
+		provaCandidatoBean.setProvas(provasBean);
+		provaCandidatoBean.setDescricao(descricaoProvasBean);
+		return provaCandidatoBean;
 	}
 }
