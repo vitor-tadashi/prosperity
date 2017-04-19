@@ -55,6 +55,7 @@ import br.com.prosperity.entity.VagaEntity;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.exception.BusinessException;
 import br.com.prosperity.util.FormatUtil;
+import br.com.prosperity.util.GeradorEmail;
 
 @SuppressWarnings("unused")
 @Component
@@ -243,7 +244,9 @@ public class CandidatoBusiness {
 
 	@Transactional
 	public void inserir(CandidatoBean candidatoBean) throws BusinessException {
+
 		if (candidatoBean.getId() == null) {
+
 			if (verificarCandidatura(candidatoBean) == true) {
 				CandidatoEntity candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoBean);
 				SituacaoCandidatoBean situacaoCandidato = new SituacaoCandidatoBean();
@@ -271,6 +274,15 @@ public class CandidatoBusiness {
 					vagas.add(novoVagaCandidato);
 				}
 				candidatoEntity.setVagas(vagas);
+
+				String replace = candidatoEntity.getCpf().replace(".", "").replace("-", "");
+				String replaceRG = candidatoEntity.getRg().replace(".", "").replace("-", "");
+				String replaceTelefone = candidatoEntity.getContato().getTelefone().replace("(", "").replace(")", "")
+						.replace("-", "");
+
+				candidatoEntity.getContato().setTelefone(replaceTelefone);
+				candidatoEntity.setCpf(replace);
+				candidatoEntity.setRg(replaceRG);
 
 				candidatoDAO.insert(candidatoEntity);
 
@@ -372,6 +384,7 @@ public class CandidatoBusiness {
 
 		return statusCandidatoEntity;
 	}
+
 	@Transactional
 	public CandidatoBean obterPorCPF(String cpf) {
 		List<CandidatoEntity> candidatosEntity = null;
@@ -463,10 +476,11 @@ public class CandidatoBusiness {
 				listaStatus.add(StatusCandidatoEnum.PROPOSTARECUSADA.getValue());
 			}
 		}
-		return listaStatus;	
+		return listaStatus;
 	}
+
 	@Transactional
 	public void atualizarCandidato(CandidatoBean bean) {
-		candidatoDAO.update(candidatoConverter.convertBeanToEntity(bean));
+		candidatoDAO.insert(candidatoConverter.convertBeanToEntity(bean));
 	}
 }

@@ -56,7 +56,12 @@ public class VagaBean {
 	private Date dataAberturaDe;
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date dataAberturaPara;
-
+	private List<VagaCandidatoBean> vagaCandidatoBean;
+	
+	public int getCountCandidatos() {
+		return vagaCandidatoBean.size();
+	}
+	
 	public StatusVagaBean getUltimoStatus() {
 		if (status != null && status.size() > 0) {
 			Date dataUltimoStatus = status.stream().map(StatusVagaBean::getDataAlteracao).max(Date::compareTo).get();
@@ -328,6 +333,14 @@ public class VagaBean {
 	public List<UsuarioBean> getAvaliadores() {
 		
 		return avaliadores;
+	}
+
+	public List<VagaCandidatoBean> getVagaCandidatoBean() {
+		return vagaCandidatoBean;
+	}
+
+	public void setVagaCandidatoBean(List<VagaCandidatoBean> vagaCandidatoBean) {
+		this.vagaCandidatoBean = vagaCandidatoBean;
 	}
 
 }

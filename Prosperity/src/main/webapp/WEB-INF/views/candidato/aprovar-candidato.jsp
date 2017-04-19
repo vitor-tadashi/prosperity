@@ -284,7 +284,7 @@
 																		items="${candidato.ultimoStatus.status.statusDisponiveis}">
 																		<li><a data-toggle="modal"
 																			data-target=".bs-example-modal-lg"
-																			id="aprovar-candidato"
+																			id="aprovar-candidato" href="aprovar-modal"
 																			onclick="alterarStatus(${candidato.id}, ${statusDisponivel.id})"><i
 																				${statusDisponivel.classe}>&nbsp;</i>${statusDisponivel.nome}
 																		</a></li>

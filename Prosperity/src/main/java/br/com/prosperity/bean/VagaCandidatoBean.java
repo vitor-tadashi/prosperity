@@ -17,13 +17,11 @@ public class VagaCandidatoBean {
 	
 	@Valid
 	private VagaBean vaga;
-	
-	private List<VagaBean> vagaLista;
-	
+		
 	private CanalInformacaoBean canalInformacao;
 	
-	private List<CandidatoBean> candidatoBean;
-
+	private CandidatoBean candidatoBean;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -39,16 +37,6 @@ public class VagaCandidatoBean {
 	public void setVaga(VagaBean vaga) {
 		this.vaga = vaga;
 	}
-	
-	
-	
-	public List<VagaBean> getVagaLista() {
-		return vagaLista;
-	}
-
-	public void setVagaLista(List<VagaBean> vagaLista) {
-		this.vagaLista = vagaLista;
-	}
 
 	public CanalInformacaoBean getCanalInformacao() {
 		return canalInformacao;
@@ -58,11 +46,11 @@ public class VagaCandidatoBean {
 		this.canalInformacao = canalInformacao;
 	}
 
-	public List<CandidatoBean> getCandidatoBean() {
+	public CandidatoBean getCandidatoBean() {
 		return candidatoBean;
 	}
 
-	public void setCandidatoBean(List<CandidatoBean> candidatoBean) {
+	public void setCandidatoBean(CandidatoBean candidatoBean) {
 		this.candidatoBean = candidatoBean;
 	}
 
