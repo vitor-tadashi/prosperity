@@ -44,9 +44,8 @@
 						<div id="textDiv">
 							<c:forEach var="erro" items="${listaErros}">
 								<p>${erro}</p>
-									</c:forEach>
-							
-							<!-- MENSAGEM DE SUCESSO -->
+
+							</c:forEach>
 							<c:if test="${not empty sucesso}">
 									<div id="msg-sucesso" class="alert alert-success msg-margin">
 										<ul>
@@ -55,7 +54,6 @@
 									</div>
 								</c:if>
 						</div>
-						
 						<div id="textDiv1"></div>
 						<div id="textDiv2"></div>
 						<div id="textDiv3"></div>
@@ -231,7 +229,7 @@
 														salarial</label>
 												</div>
 												<div class="col-md-2">
-													<input type="text" class="form-control pretensao"
+													<input type="number" class="form-control pretensao"
 														id="valorPretensao" placeholder="R$" name="valorPretensao"
 														value="${candidato.valorPretensao}" />
 												</div>
@@ -291,9 +289,9 @@
 								</div>
 
 						</form>
-</div>
-</div>
-</div>
+						</div>
+						</div>
+						</div>
 
 					</div>
 				</div>
@@ -305,7 +303,6 @@
 
 	<script type="text/javascript">
 	
-	<!-- MENSAGEM DE SUCESSO-->
 	  $(document).ready(function () {
 	        setTimeout(function () {
 	            $('#msg-sucesso').fadeOut(1500);
@@ -320,7 +317,6 @@
 			$('#rg').mask('99.999.999-9');
 			$("#cep").mask("99999-999");
 			$('.date').mask('99/99/9999');
-			$('.pretensao').mask('000.000.000.000.000,00', {reverse: true});
 
 		})
 
