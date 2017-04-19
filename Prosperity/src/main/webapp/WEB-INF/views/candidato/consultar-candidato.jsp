@@ -551,13 +551,11 @@
 								</tbody>
 							</table>
 							
-							
-											<a href="/vaga/consultar"><i
-												class="fa fa-reply"
-													style="margin-left: 10px; margin-bottom: 10px;margin-top: -100px ">&nbsp</i><b> Retornar</b></a>
-								
-							</div>
-							
+							<div style="margin-left: 10px; margin-bottom: 30px;margin-top: -30px; position: absolute "> 
+							    	<a href="/vaga/consultar" class="btn btn-xs btn-default"><i class="fa fa-reply"></i> Retornar</a>				
+								<i >&nbsp</i> 								
+						 </div>
+			
 						</div>
 						<!-- fim da div panel -->
 					</div>

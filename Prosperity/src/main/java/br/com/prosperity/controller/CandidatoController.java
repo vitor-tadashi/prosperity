@@ -10,7 +10,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,10 +22,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.google.gson.Gson;
 
 import br.com.prosperity.bean.AvaliacaoBean;
 import br.com.prosperity.bean.CanalInformacaoBean;
 import br.com.prosperity.bean.CandidatoBean;
+import br.com.prosperity.bean.CandidatoCompetenciaBean;
 import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.CompetenciaBean;
 import br.com.prosperity.bean.FuncionarioBean;
@@ -49,9 +52,13 @@ import br.com.prosperity.business.VagaBusiness;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.exception.BusinessException;
 
+@SuppressWarnings("unused")
 @Controller
 @RequestMapping(value = "candidato")
 public class CandidatoController<PaginarCandidato> {
+
+	@Autowired
+	private CandidatoBean bean;
 
 	@Autowired
 	private CandidatoBusiness candidatoBusiness;
@@ -82,6 +89,15 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private ProvaCandidatoBusiness provaCandidatoBusiness;
+
+	@Autowired
+	private List<CandidatoCompetenciaBean> candidatoCompetenciasBean;
+
+	@Autowired
+	private CompetenciaBean competenciaBean;
+
+	@Autowired
+	private AvaliacaoBean avaliacaoBean;
 
 	/**
 	 * @author andre.posman
@@ -122,11 +138,16 @@ public class CandidatoController<PaginarCandidato> {
 			obterDominiosCandidato(model);
 
 			return "candidato/cadastrar-candidato";
-
 		} else {
-			candidatoBusiness.inserir(candidatoBean);
-		}
+			try{
+				candidatoBusiness.inserir(candidatoBean);
+				model.addAttribute("sucesso", "Candidato salvo com sucesso.");
+				
+			}catch(BusinessException e){
 
+			}
+		}
+		
 		return "candidato/cadastrar-candidato";
 	}
 
@@ -153,7 +174,6 @@ public class CandidatoController<PaginarCandidato> {
 	@ResponseStatus(value = HttpStatus.OK)
 	public @ResponseBody CandidatoBean obterCPF(Model model, @RequestParam String cpf) {
 		CandidatoBean candidato = candidatoBusiness.obterPorCPF(cpf);
-
 		return candidato;
 	}
 
@@ -246,8 +266,8 @@ public class CandidatoController<PaginarCandidato> {
 
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
 		model.addAttribute("listaCargo", listaCargo);
-		
-		// TABELA VAGA DECRESCENTE 
+
+		// TABELA VAGA DECRESCENTE
 		model.addAttribute("candidato", candidatoBusiness.listarDecrescente());
 
 		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.obterTodos();
@@ -302,10 +322,11 @@ public class CandidatoController<PaginarCandidato> {
 	@RequestMapping(value = { "alterar-status-candidato" }, method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
 	public @ResponseBody String alterarStatusCandidato(Model model,
-			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato) {
-
-		CandidatoBean bean = new CandidatoBean();
-		bean.setId(situacaoCandidato.getIdCandidato());
+			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato,
+			@ModelAttribute("ac") String ac) {
+		bean = candidatoBusiness.obter(situacaoCandidato.getIdCandidato());
+		bean.setCompetencias(convertGson(ac));
+		candidatoBusiness.atualizarCandidato(bean);
 
 		provaCandidatoBusiness.inserir(situacaoCandidato.getProcessoSeletivo());
 
@@ -317,5 +338,34 @@ public class CandidatoController<PaginarCandidato> {
 	public @ResponseBody CandidatoBean buscarPorId(@PathVariable int id) {
 		CandidatoBean candidato = candidatoBusiness.obter(id);
 		return candidato;
+	}
+
+	public List<CandidatoCompetenciaBean> convertGson(String ac) {
+		Gson gson = new Gson();
+		List<String> l = gson.fromJson(ac, List.class);
+		candidatoCompetenciasBean.remove(0);
+		int aux = 0;
+		for (String lista : l) {
+			Integer aux2 = Integer.parseInt(lista);
+			CandidatoCompetenciaBean candidatoCompetenciaBean = new CandidatoCompetenciaBean();
+			try {
+				if (aux2 != null) {
+					if (aux % 2 == 0) {
+						avaliacaoBean = new AvaliacaoBean();
+						avaliacaoBean.setId(aux2);
+					} else {
+						competenciaBean = new CompetenciaBean();
+						competenciaBean.setId(aux2);
+						candidatoCompetenciaBean.setAvaliacao(avaliacaoBean);
+						candidatoCompetenciaBean.setCompetencia(competenciaBean);
+						candidatoCompetenciasBean.add(candidatoCompetenciaBean);
+					}
+				}
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			aux++;
+		}
+		return candidatoCompetenciasBean;
 	}
 }
