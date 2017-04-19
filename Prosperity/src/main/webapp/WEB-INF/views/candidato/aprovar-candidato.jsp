@@ -412,7 +412,6 @@
                      			   }
                      	   provas.push(prova);
                      	   
-                     	  alert('rola3');
                      	   });
 	                   	x =  JSON.stringify(provasDescricoes);
                         $.ajax({

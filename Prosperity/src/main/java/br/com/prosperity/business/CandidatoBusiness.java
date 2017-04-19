@@ -467,6 +467,6 @@ public class CandidatoBusiness {
 	}
 	@Transactional
 	public void atualizarCandidato(CandidatoBean bean) {
-		candidatoDAO.update(candidatoConverter.convertBeanToEntity(bean));
+		candidatoDAO.insert(candidatoConverter.convertBeanToEntity(bean));
 	}
 }
