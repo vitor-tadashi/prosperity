@@ -101,6 +101,7 @@ public class VagaBusiness {
 		return vagaBean;
 	}
 
+	//TODAS AS VAGAS ATIVAS
 	@Transactional(readOnly = true)
 	public List<VagaBean> listarVagasAtivas() {
 		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagasAtivas", 1);
