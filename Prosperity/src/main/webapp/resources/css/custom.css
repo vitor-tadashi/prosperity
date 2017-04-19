@@ -56,6 +56,10 @@ footer {
 	margin-left: -1.5px;
 }
 
+textarea {
+    resize: none;
+}
+
 .tldate {
 	display: block;
 	width: 200px;
