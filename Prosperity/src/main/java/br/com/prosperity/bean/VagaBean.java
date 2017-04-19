@@ -46,6 +46,7 @@ public class VagaBean {
 	@Valid
 	private UsuarioBean usuarioBean;
 	private List<StatusVagaBean> status;
+	private String statusAtual;
 	private String nmResponsavel;
 	private String nmAreaResponsavel;
 	private String emailResponsavel;
@@ -329,5 +330,13 @@ public class VagaBean {
 		
 		return avaliadores;
 	}
+	public String getStatusAtual() {
+		return statusAtual;
+	}
+
+	public void setStatusAtual(String statusAtual) {
+		this.statusAtual = statusAtual;
+	}
+
 
 }

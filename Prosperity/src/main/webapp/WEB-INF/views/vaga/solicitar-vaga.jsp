@@ -35,8 +35,11 @@
 							<input id="vagaIdVar" name="id" type="hidden" value="${vaga.id}">
 							<input id="dataAbertura" name="dataAbertura" type="hidden" value="${vaga.dataAbertura}">
 							<input id="status" name="ultimoStatus" type="hidden" value="${ultimoStatus.status.id}">
+							<input id="statusAtual" name="statusAtual" type="hidden" value="${ultimoStatus.status.nome}">
 							<input id="contErro" class ="hidden" value="${erro}">
 							<input id="txtSolicitante" type="hidden" name="nomeSolicitante" value="${autenticado.funcionario.nome}">
+							<input id="tipoVagaVar" type="hidden" value="${vaga.idTipoVaga}">
+							<input id="aumentoQuadroVar" type="hidden" value="${vaga.aumentaQuadro}">
 							
 							<div id="textDiv">
 								<c:forEach var="erro" items="${listaErros}">
@@ -70,7 +73,7 @@
 									<div class="tab-pane fade in active" id="first">
 										
 										<div class="row">
-											<div class="form-group col-md-12" style="padding-top:0px">
+											<div class="form-group col-md-6" style="padding-top:0px">
 												<label for="txtNomeVaga">Nome da vaga</label> <input
 													type="text" name="nomeVaga"
 													value="${vaga.nomeVaga}"
@@ -78,12 +81,44 @@
 													placeholder="Nome da Vaga" data-required="true">
 											</div>
 											<!-- /form-group -->
-											
-											<!-- /form-group -->
+											<div class="form-group col-md-2" style="padding-top:0px">
+												<label class="control-label" for="dataInicio">Data
+													para início</label>
+												<div class="input-sm-group">
+												 <fmt:formatDate value="${vaga.dataInicio}"
+													pattern="dd/MM/yyyy" var="dataInicio"/>
+													<input id="dataInicio" name="dataInicio" type="text"
+														class="form-control date parsley-validated" data-required="true"
+														value="${dataInicio}" style="height:30px" onblur="validarData(this.value)"> 
+												</div>
+											</div>
+											<div class="form-group col-md-4" style="padding-top:0px">
+												<label class="control-label" style="margin-left:15px" for="txtHorarioInicial">Horário</label>
+												<div>
+													<div class="form-group col-md-2" style="padding-top:0px">
+														<div class="input-group bootstrap-timepicker">
+															<input id="txtHorarioInicial" name="horarioEntrada"
+																type="time" value="${vaga.horarioEntrada}" style="width:70px;height:30px;padding-top:0px">
+														</div>
+													</div>
+													<!-- /form-group -->
+													<div class="form-group col-md-1" style="padding-top:0px">
+														<label style="margin-top: 5px; margin-left: 25px" >às</label>
+													</div>
+													<!-- /form-group -->
+													<div class="form-group col-md-2" style="padding-top:0px; margin-left: 20px">
+														<div class="input-group bootstrap-timepicker">
+															<input id="txtHorarioFinal" name="horarioSaida"
+																type="time" value="${vaga.horarioSaida}" style="width:70px;height:30px;padding-top:0px">
+														</div>
+													</div>
+													<!-- /form-group -->
+												</div>
+											</div>
 										</div>
 										
 										<div class="row">
-											<div class="form-group col-md-6" style="">
+											<div class="form-group col-md-6" style="padding-top:0px">
 												<label for="cmbCargo">Cargo</label> <select
 													class="form-control" id="cmbCargo"
 													name="cargoBean.id" value="${cargoBean.id}">
@@ -99,7 +134,7 @@
 												</select>
 											</div>
 											<!-- /form-group -->
-											<div class="form-group col-md-6" style="">
+											<div class="form-group col-md-6" style="padding-top:0px">
 												<label>Local de trabalho</label>
 												<div>
 													<input id="localTrabalhoVar" type="hidden"
@@ -137,9 +172,7 @@
 											<div class="form-group col-md-6" style="padding-top:0px">
 												<label>Tipo de vaga</label>
 												<div>
-													<input id="tipoVagaVar" type="hidden"
-														value="${vaga.idTipoVaga}"> <label
-														class="label-radio inline"> <input
+													 <label	class="label-radio inline"> <input
 														id="idTipoVagaR" name="idTipoVaga" value="R" type="radio"
 														checked> <span class="custom-radio"></span> Real
 													</label> <label class="label-radio inline"> <input
@@ -156,74 +189,34 @@
 										</div>
 										<!-- /form-group -->
 										<div class="row">
-											<div class="form-group col-md-6" style="padding-top:0px">
-												<label for="txtPropostaSalarial">Proposta salarial</label> <input
-													id="txtPropostaSalarial" name="valorPretensao" type="number"
-													class="form-control input-sm" placeholder="R$"
-													value="${vaga.valorPretensao}" style="height:30px">
-											</div>
-											<!-- /form-group -->
-											<div class="form-group col-md-6" style="padding-top:0px">
-												<label class="control-label" for="txtHorarioInicial">Horário</label>
-												<div>
-													<div class="form-group col-md-2" style="padding-top:0px">
-														<div class="input-group bootstrap-timepicker">
-															<input id="txtHorarioInicial" name="horarioEntrada"
-																type="time" value="${vaga.horarioEntrada}" style="width:70px;height:30px;padding-top:0px">
-														</div>
-													</div>
-													<!-- /form-group -->
-													<div class="form-group col-md-1" style="padding-top:0px">
-														<label style="margin-top: 0px" >às</label>
-													</div>
-													<!-- /form-group -->
-													<div class="form-group col-md-2" style="padding-top:0px">
-														<div class="input-group bootstrap-timepicker">
-															<input id="txtHorarioFinal" name="horarioSaida"
-																type="time" value="${vaga.horarioSaida}" style="width:70px;height:30px;padding-top:0px">
-														</div>
-													</div>
-													<!-- /form-group -->
+											<div class="form-group col-md-6">
+												<label class="col-lg-4 control-label">Proposta salarial</label>
+												<div class="col-lg-4">
+													<input type="text" class="form-control" value=""
+													data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[150,650]" id="sl2" >
 												</div>
-											</div>
-											<!-- /form-group -->
-										</div>
-										<div class="row">
-											<div class="form-group col-md-6" style="padding-top:0px">
-												<label class="control-label" for="dataInicio">Data
-													para início</label>
-												<div class="input-sm-group">
-												 <fmt:formatDate value="${vaga.dataInicio}"
-													pattern="dd/MM/yyyy" var="dataInicio"/>
-													<input id="dataInicio" name="dataInicio" type="text"
-														class="form-control date parsley-validated" data-required="true"
-														value="${dataInicio}" style="height:30px" onblur="validarData(this.value)"> 
-												</div>
-											</div>
-											<!-- /form-group -->
+											</div><!-- /form-group -->
 											<div class="form-group col-md-6" style="padding-top:0px">
 												<label class="control-label">Aumento de quadro</label>
 												<div>
-													 <div class="form-group col-md-5" style="padding-top:0px"> 
-														<input id="aumentoQuadroVar" type="hidden" value="${vaga.aumentaQuadro}">
-														
-														<label class="label-radio inline">Novo</label>
+													 <div class="form-group col-md-4" style="padding-top:0px;padding-left:0px"> 
 														<input id="novo" name="aumentaQuadro" value="N" type="radio" checked>
 														<span class="custom-radio"> </span> 
-														 <label class="label-radio inline">Substituição</label>
-															 <input id="substituicao" name="aumentaQuadro" value="S" type="radio"> 
-															 <span class="custom-radio"> </span>
+														<label class="label-radio inline">Novo</label>
+														<input id="substituicao" name="aumentaQuadro" value="S" type="radio"> 
+														<span class="custom-radio"> </span>
+														<label class="label-radio inline">Substituição</label>
 													</div>
-													<div id="nome" class="col-md-6 hide" style="padding-top:0px">
+													<div id="nome" class="col-md-6 hide" style="padding-top:0px;padding-left:0px">
 														<input id="nomeSubstituido" name="nomeSubstituido" type="text"
 														class="form-control input-sm"
 														placeholder="Nome do Substituido" data-required="true"
 														value="${vaga.nomeSubstituido}">
 													</div>
 												</div>
-											</div>
-											<!-- /form-group -->
+											</div><!-- /form-group -->
 										</div>
+										
 										<!-- /form-group -->
 									</div>
 									

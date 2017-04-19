@@ -167,7 +167,6 @@ public class VagaBusiness {
 	public String inserir(VagaBean vagaBean, List<UsuarioBean> usuarioBean) {
 
 		VagaEntity vagaEntity = vagaConverter.convertBeanToEntity(vagaBean);
-
 		vagaEntity.setStatusVagaEntity(statusVagaDAO.findByNamedQuery("statusVaga", vagaEntity.getId()));
 
 		try {
@@ -181,6 +180,16 @@ public class VagaBusiness {
 				inserirAvaliadores(vagaEntity, usuarioBean);
 			} else {
 				// VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
+				String status = vagaBean.getStatusAtual();
+				if (status.equals("Pendente")){
+					situacaoVaga.setIdVaga(vagaEntity.getId());
+					situacaoVaga.setStatus(StatusVagaEnum.PENDENTE);
+					alterarStatus(situacaoVaga);
+				} else if(status.equals("Aguardando avaliadores")){
+					situacaoVaga.setIdVaga(vagaEntity.getId());
+					situacaoVaga.setStatus(StatusVagaEnum.AGUARDANDOAVALIADORES);
+					alterarStatus(situacaoVaga);
+				}			
 				inserirAvaliadores(vagaEntity, usuarioBean);
 				vagaDAO.update(vagaEntity);
 			}
