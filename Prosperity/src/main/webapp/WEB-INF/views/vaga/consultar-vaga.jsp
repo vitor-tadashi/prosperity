@@ -99,6 +99,10 @@
 	margin-left: 20px;
 }
 
+li a.active {
+	background: #f2f2f2;
+} 
+
 </style>
 
 </head>
@@ -537,7 +541,7 @@
 											</button>
 											<ul class="dropdown-menu dropdown-menu-right slidedown">
 											
-											<li><a href="#visualizar-modal" 
+											<li><a href="#visualizar-modal"
 													onclick="info(${vaga.id})"><i
 														class="fa fa-eye">&nbsp</i>Visualizar</a></li>
 											<li role="separator" class="editarDivider divider btnEdita hide"></li>
@@ -566,9 +570,28 @@
 							</tbody>
 						</table>
 						
-						
 					</div>
 					<!--</panel default>-->
+					<div class="panel-footer clearfix">
+						<div class="row">
+							<input type="hidden" id="pageActive" value="${page }">
+							<ul class="pagination pagination-xs m-top-none pull-right">
+								<li>
+									<c:if test="${page > 1}">
+										<a href="<c:url value="/vaga/consultar" ><c:param name="page" value="${page - 1}"/></c:url>">Anterior</a>
+									</c:if>
+									<c:forEach begin="${startpage}" end="${endpage}" var="p">
+										<a id="page${p}" href="<c:url value="/vaga/consultar" ><c:param name="page" value="${p}"/>${p}</c:url>">${p}</a>
+									</c:forEach>
+									<c:if test="${page < endpage}">
+										<a href="<c:url value="/vaga/consultar" ><c:param name="page" value="${page + 1}"/></c:url>">Próximo</a>
+									</c:if>
+								</li>
+							</ul>
+						</div>
+						<!--</div row>-->
+					</div>
+					<!--</panel footer>-->
 				</div>
 				<!--</col-sm-12>-->
 			</div>
@@ -766,8 +789,11 @@
 	
 	</script>
 	<script>/* paginação */
+	var pagina = $('#pageActive').val();
+	$('#page'+pagina).addClass('active');
+	
 	$(function	()	{
-		$('#tabelaVaga').dataTable( {
+		$('#alterei').dataTable( {
 			"bJQueryUI": true,
 			"sPaginationType": "simple_numbers",
 			"bFilter": false,
