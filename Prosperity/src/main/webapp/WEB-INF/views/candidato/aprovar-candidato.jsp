@@ -445,7 +445,6 @@
                   $('#hdn-id-candidato').val(idCandidato);
                   $('#hdn-proposta').val(proposta);
                   $('#hdn-status').val(idStatus);
-                  alert('rola7');
             
             }
             
@@ -458,7 +457,6 @@
         		}).fail(function(jqXHR, textStatus) {
         			alert('fail');
         		});
-            	alert('rola8');
             }
             
         /*gerador de campo*/    
