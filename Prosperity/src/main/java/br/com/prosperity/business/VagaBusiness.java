@@ -194,6 +194,7 @@ public class VagaBusiness {
 				vagaDAO.update(vagaEntity);
 			}
 			return "Ok";
+
 		} catch (Exception e) {
 			String erro = new String();
 			erro = e.toString();
@@ -277,11 +278,13 @@ public class VagaBusiness {
 
 	@Transactional
 	private void inserirAvaliadores(VagaEntity vaga, List<UsuarioBean> usuarios) {
-		for (UsuarioBean usuario : usuarios) {
-			AvaliadorVagaEntity avaliadorVagaEntity = new AvaliadorVagaEntity();
-			avaliadorVagaEntity.setUsuario(usuarioConverter.convertBeanToEntity(usuario));
-			avaliadorVagaEntity.setVaga(vaga);
-			avaliadorVagaDAO.insert(avaliadorVagaEntity);
+		if (usuarios != null || usuarios.size() < 1) {
+			for (UsuarioBean usuario : usuarios) {
+				AvaliadorVagaEntity avaliadorVagaEntity = new AvaliadorVagaEntity();
+				avaliadorVagaEntity.setUsuario(usuarioConverter.convertBeanToEntity(usuario));
+				avaliadorVagaEntity.setVaga(vaga);
+				avaliadorVagaDAO.insert(avaliadorVagaEntity);
+			}
 		}
 	}
 

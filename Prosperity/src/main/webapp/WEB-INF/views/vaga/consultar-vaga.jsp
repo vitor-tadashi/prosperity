@@ -32,6 +32,11 @@
  footer {
 	page-break-before: always;
 	}
+	
+	.hiddenRow {
+    padding: 0 !important;
+}
+	
 @media screen {
     #printSection {
         display: none;
@@ -101,6 +106,7 @@
 
 li a.active {
 	background: #f2f2f2;
+	
 } 
 
 </style>
@@ -150,7 +156,7 @@ li a.active {
 											</div>
 											<!-- /form-group -->
 										</div>
-										<!-- <div class="col-md-4">
+										<div class="col-md-4">
 											<div class="form-group">
 												<label class="control-label">Data de aprovação</label>
 												<div class="form-group">
@@ -161,9 +167,9 @@ li a.active {
 															class="fa fa-calendar"></i></span>
 													</div>
 												</div>
-												/.col
+												
 											</div>
-											/form-group
+											
 										</div>
 										<div class="col-md-4">
 											<div class="form-group">
@@ -176,9 +182,9 @@ li a.active {
 															class="fa fa-calendar"></i></span>
 													</div>
 												</div>
-												/.col
+												
 											</div>
-											/form-group
+											
 										</div>
 									</div>
 									<div class="row">
@@ -186,7 +192,7 @@ li a.active {
 											<label for="">Candidatos</label> <input type="number"
 												class="form-control input-sm" id="candidatos" min="0" value="123"
 												name="numeroCandidatos" disabled>
-										</div> -->
+										</div>
 										<!-- /form-group -->
 									</div>
 								</section>
@@ -194,7 +200,7 @@ li a.active {
 						</div>
 						<div id="menu1" class="tab-pane fade">
 							<section class="panel panel-default">
-								<div class="panel-heading">Informações básicas</div>
+								<div class="panel-heading">Especificações</div>
 								<div class="panel-body">
 									<form>
 										<div class="form-group row">
@@ -514,84 +520,135 @@ li a.active {
 								</tr>
 							</thead>
 							<tbody class="text-center">
-								<c:forEach var="vaga" items="${vagas}">
-									<tr position="infoVaga">
-									<td id="linhaNome" name="nomeVaga">${vaga.nomeVaga}</td>
-									<td>${vaga.nomeSolicitante}</td>
-									<td>${vaga.projeto.cliente.nome}</td>
-									<td>
-										<c:if test="${vaga.localTrabalho == 73}" >
-										     Interno
-										</c:if>
-										<c:if test="${vaga.localTrabalho == 67}" >
-										     Cliente
-										</c:if>
-
-									</td>
-									<td><fmt:formatDate value="${vaga.dataAbertura}" pattern="dd/MM/yyyy"/></td>
-									<td><fmt:formatDate value="${vaga.dataInicio}" pattern="dd/MM/yyyy"/></td>
-									<td id="linhaStatus"><span class="label"
-														style="color: #fff; background-color: ${vaga.ultimoStatus.status.css}">${vaga.ultimoStatus.status.nome}</span></td>
-									<td>
-										<div class="btn-group">
-											<button class="btn btn-sm btn-info dropdown-toggle"
-												data-toggle="dropdown" aria-haspopup="true"
-												aria-expanded="false">
-												<i class="fa fa-cogs fa-lg">&nbsp;</i> <span class="caret"></span>
-											</button>
-											<ul class="dropdown-menu dropdown-menu-right slidedown">
-											
-											<li><a href="#visualizar-modal"
-													onclick="info(${vaga.id})"><i
-														class="fa fa-eye">&nbsp</i>Visualizar</a></li>
-											<li role="separator" class="editarDivider divider btnEdita hide"></li>
-														
-														<li><a href="/candidato/filtrar?nome=&vagaBean.id=${vaga.id}"  
-													><i
-														class="fa fa-group">&nbsp</i>Visualizar candidatos</a></li>
-														
-														
-											<c:if test="${vaga.ultimoStatus.status.nome == 'Pendente'}">
-												<li role="separator" class="editarDivider pro divider"></li>
-												<li><c:url value="editar/${vaga.id}" var="myURL">
-													</c:url> <a href="${myURL}" class="editarPendente pro"><i class="fa fa-pencil"></i> Editar</a></li>
-												</c:if>
+								<c:forEach var="vaga" items="${vagas}" varStatus="count">
+									<tr position="infoVaga"  data-toggle="collapse" data-target="#demo${count.index}" class="accordion-toggle" style="cursor: pointer;">
+										<td id="linhaNome" name="nomeVaga">
+										${vaga.nomeVaga}
+										</td>
+										<td>${vaga.nomeSolicitante}</td>
+										<td>${vaga.projeto.cliente.nome}</td>
+										<td>
+											<c:if test="${vaga.localTrabalho == 73}" >
+											     Interno
+											</c:if>
+											<c:if test="${vaga.localTrabalho == 67}" >
+											     Cliente
+											</c:if>
+	
+										</td>
+										<td><fmt:formatDate value="${vaga.dataAbertura}" pattern="dd/MM/yyyy"/></td>
+										<td><fmt:formatDate value="${vaga.dataInicio}" pattern="dd/MM/yyyy"/></td>
+										<td id="linhaStatus"><span class="label"
+															style="color: #fff; background-color: ${vaga.ultimoStatus.status.css}">${vaga.ultimoStatus.status.nome}</span></td>
+										<td>
+											<div class="btn-group">
+												<button class="btn btn-sm btn-info dropdown-toggle"
+													data-toggle="dropdown" aria-haspopup="true"
+													aria-expanded="false">
+													<i class="fa fa-cogs fa-lg">&nbsp;</i> <span class="caret"></span>
+												</button>
+												<ul class="dropdown-menu dropdown-menu-right slidedown">
 												
-												<c:if test="${vaga.ultimoStatus.status.nome == 'Aguardando avaliadores'}">
-												<li role="separator" class="editarDivider divider btnEdita pre hide"></li>
-												<li><c:url value="editar/${vaga.id}" var="myURL">
-													</c:url> <a href="${myURL}" class="editarPendente btnEdita pre hide"><i class="fa fa-pencil"></i> Editar avaliadores</a></li>
-												</c:if>					
-											</ul>
-										</div> <!-- /btn-group -->
-									</td>
-								</tr>
+												<li><a href="#visualizar-modal" 
+														onclick="info(${vaga.id})"><i
+															class="fa fa-eye">&nbsp</i>Visualizar</a></li>
+												<li role="separator" class="editarDivider divider btnEdita hide"></li>
+															
+															<li><a href="/candidato/filtrar?nome=&vagaBean.id=${vaga.id}"  
+														><i
+															class="fa fa-group">&nbsp</i>Visualizar candidatos</a></li>
+															
+															
+												<c:if test="${vaga.ultimoStatus.status.nome == 'Pendente'}">
+													<li role="separator" class="editarDivider pro divider"></li>
+													<li><c:url value="editar/${vaga.id}" var="myURL">
+														</c:url> <a href="${myURL}" class="editarPendente pro"><i class="fa fa-pencil"></i> Editar</a></li>
+													</c:if>
+													
+													<c:if test="${vaga.ultimoStatus.status.nome == 'Aguardando avaliadores'}">
+													<li role="separator" class="editarDivider divider btnEdita pre hide"></li>
+													<li><c:url value="editar/${vaga.id}" var="myURL">
+														</c:url> <a href="${myURL}" class="editarPendente btnEdita pre hide"><i class="fa fa-pencil"></i> Editar avaliadores</a></li>
+													</c:if>					
+												</ul>
+											</div> <!-- /btn-group -->
+										</td>
+									</tr>
+									 <tr >
+            <td colspan="8" class="hiddenRow"><div class="accordian-body collapse" id="demo${count.index}">
+            
+            	<br/>
+            		<div class="col-sm-12" style="margin-left: 5px">
+            			<div class="col-md-3 well well-sm btn btn-success" style="height: 56px;
+															    margin-right: 5px;
+															    width: 200px;
+															    margin-left: 5px;">
+            				<label>Data de Abertura</label>
+            					<p>${vaga.dataAbertura}</p>
+            			</div>
+            			<div class="col-md-3 well well-sm btn btn-info" style="    height: 56px;
+    margin-right: 5px;
+    width: 200px;
+    margin-left: 5px;">
+            				<label>Data de Aprovação</label>
+            					<p>12/12/2019</p>
+            			</div>
+            			<div class="col-md-3 well well-sm btn btn-danger" style="    height: 56px;
+    margin-right: 5px;
+    width: 200px;
+    margin-left: 5px;">
+            				<label>Data de Fechamento</label>
+            					<p>12/12/2019</p>
+            			</div>
+            			<div class="col-md-3 well well-sm btn btn-success" style="    height: 56px;
+    margin-right: 5px;
+    width: 200px;
+    margin-left: 5px;">
+            				<label>Proposta</label>
+            					<p>R$ ${vaga.valorPretensao}</p>
+            			</div>
+            			<div class="col-md-3 well well-sm btn btn-warning" style="    height: 56px;
+    margin-right: 5px;
+    width: 200px;
+    margin-left: 5px;">
+            				<label>Numero de Candidatos</label>
+            					<p>19</p>
+            			</div>
+            		</div>
+            	
+            	<br/>
+            
+            
+             </div> </td>
+        </tr>
+								
 								</c:forEach>
 							</tbody>
 						</table>
 						
+						
 					</div>
 					<!--</panel default>-->
-					<div class="panel-footer clearfix">
-						<div class="row">
-							<input type="hidden" id="pageActive" value="${page }">
-							<ul class="pagination pagination-xs m-top-none pull-right">
-								<li>
-									<c:if test="${page > 1}">
-										<a href="<c:url value="/vaga/consultar" ><c:param name="page" value="${page - 1}"/></c:url>">Anterior</a>
-									</c:if>
-									<c:forEach begin="${startpage}" end="${endpage}" var="p">
-										<a id="page${p}" href="<c:url value="/vaga/consultar" ><c:param name="page" value="${p}"/>${p}</c:url>">${p}</a>
-									</c:forEach>
-									<c:if test="${page < endpage}">
-										<a href="<c:url value="/vaga/consultar" ><c:param name="page" value="${page + 1}"/></c:url>">Próximo</a>
-									</c:if>
-								</li>
-							</ul>
-						</div>
-						<!--</div row>-->
-					</div>
-					<!--</panel footer>-->
+					   <div class="panel-footer clearfix">
+                          <div class="row">
+                              <input type="hidden" id="pageActive" value="${page }">
+                              <ul class="pagination pagination-xs m-top-none pull-right">
+                                  <li>
+                                      <c:if test="${page > 1}">
+                                          <a href="<c:url value="/vaga/consultar" ><c:param name="page" value="${page - 1}"/></c:url>">Anterior</a>
+                                      </c:if>
+                                      <c:forEach begin="${startpage}" end="${endpage}" var="p">
+                                          <a id="page${p}" href="<c:url value="/vaga/consultar" ><c:param name="page" value="${p}"/>${p}</c:url>">${p}</a>
+                                      </c:forEach>
+                                      <c:if test="${page < endpage}">
+                                          <a href="<c:url value="/vaga/consultar" ><c:param name="page" value="${page + 1}"/></c:url>">Próximo</a>
+                                      </c:if>
+                                  </li>
+                              </ul>
+                          </div>
+                          <!--</div row>-->
+                      </div>
+                      <!--</panel footer>-->
 				</div>
 				<!--</col-sm-12>-->
 			</div>
@@ -636,6 +693,13 @@ li a.active {
 	<script src="js/app/app.js"></script>
 	
 	<script type="text/javascript">
+	
+	$('.accordian-body').on('show.bs.collapse', function () {
+	    $(this).closest("table")
+	        .find(".collapse.in")
+	        .not(this)
+	        .collapse('toggle')
+	})
 	
 	var id = $("#idPerfil").val();
 	$.ajax({
