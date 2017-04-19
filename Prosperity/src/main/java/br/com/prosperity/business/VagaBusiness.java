@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.prosperity.bean.AvaliadorVagaBean;
 import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.SituacaoVagaBean;
+import br.com.prosperity.bean.StatusVagaBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.converter.AvaliadorVagaConverter;
@@ -84,14 +85,14 @@ public class VagaBusiness {
 
 	@Autowired
 	private AvaliadorVagaConverter avaliadorVagaConverter;
-	
+
 	@Transactional(readOnly = true)
-	public List<VagaBean>listarDecrescente() {
+	public List<VagaBean> listarDecrescente() {
 		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("findAllDesc");
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 		return vagaBean;
 	}
-	
+
 	@Transactional(readOnly = true)
 	public List<VagaBean> listar() {
 
@@ -163,24 +164,32 @@ public class VagaBusiness {
 	}
 
 	@Transactional
-	public void inserir(VagaBean vagaBean, List<UsuarioBean> usuarioBean) {
+	public String inserir(VagaBean vagaBean, List<UsuarioBean> usuarioBean) {
 
 		VagaEntity vagaEntity = vagaConverter.convertBeanToEntity(vagaBean);
 
 		vagaEntity.setStatusVagaEntity(statusVagaDAO.findByNamedQuery("statusVaga", vagaEntity.getId()));
 
-		if (vagaEntity.getId() == null) {
-			Date dateNow = new Date();
-			vagaEntity.setDataAbertura(dateNow);
-			vagaDAO.insert(vagaEntity);
-			situacaoVaga.setIdVaga(vagaEntity.getId());
-			situacaoVaga.setStatus(StatusVagaEnum.PENDENTE);
-			alterarStatus(situacaoVaga);
-			//inserirAvaliadores(vagaEntity, usuarioBean);
-		} else {
-			// VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
-			inserirAvaliadores(vagaEntity, usuarioBean);
-			vagaDAO.update(vagaEntity);
+		try {
+			if (vagaEntity.getId() == null) {
+				Date dateNow = new Date();
+				vagaEntity.setDataAbertura(dateNow);
+				vagaDAO.insert(vagaEntity);
+				situacaoVaga.setIdVaga(vagaEntity.getId());
+				situacaoVaga.setStatus(StatusVagaEnum.PENDENTE);
+				alterarStatus(situacaoVaga);
+				inserirAvaliadores(vagaEntity, usuarioBean);
+			} else {
+				// VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
+				inserirAvaliadores(vagaEntity, usuarioBean);
+				vagaDAO.update(vagaEntity);
+			}
+			return "Ok";
+
+		} catch (Exception e) {
+			String erro = new String();
+			erro = e.toString();
+			return erro;
 		}
 	}
 
@@ -225,6 +234,15 @@ public class VagaBusiness {
 	}
 
 	@Transactional
+	public void alterarDataAprovacao(SituacaoVagaBean status) {
+		VagaEntity vagaEntity = vagaDAO.findById(status.getIdVaga());
+		vagaEntity.setDataAprovacao(new Date());
+		vagaDAO.update(vagaEntity);
+		vagaEntity.setDataFechamento(new Date());
+		vagaDAO.update(vagaEntity);
+	}
+
+	@Transactional
 	private void desativarStatus(VagaEntity vagaEntity) {
 		List<StatusVagaEntity> statusVagas = statusVagaDAO.findByNamedQuery("obterStatusVaga", vagaEntity);
 		if (statusVagas == null || statusVagas.size() < 1) {
@@ -251,11 +269,13 @@ public class VagaBusiness {
 
 	@Transactional
 	private void inserirAvaliadores(VagaEntity vaga, List<UsuarioBean> usuarios) {
-		for (UsuarioBean usuario : usuarios) {
-			AvaliadorVagaEntity avaliadorVagaEntity = new AvaliadorVagaEntity();
-			avaliadorVagaEntity.setUsuario(usuarioConverter.convertBeanToEntity(usuario));
-			avaliadorVagaEntity.setVaga(vaga);
-			avaliadorVagaDAO.insert(avaliadorVagaEntity);
+		if (usuarios != null || usuarios.size() < 1) {
+			for (UsuarioBean usuario : usuarios) {
+				AvaliadorVagaEntity avaliadorVagaEntity = new AvaliadorVagaEntity();
+				avaliadorVagaEntity.setUsuario(usuarioConverter.convertBeanToEntity(usuario));
+				avaliadorVagaEntity.setVaga(vaga);
+				avaliadorVagaDAO.insert(avaliadorVagaEntity);
+			}
 		}
 	}
 
@@ -277,7 +297,7 @@ public class VagaBusiness {
 		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
 		Set<Integer> lista = new HashSet<>();
 		List<Integer> listaStatus = new ArrayList<Integer>();
-		
+
 		for (FuncionalidadeBean funcionalidadeBean : usuarioBean.getPerfil().getListaFuncionalidades()) {
 			if (funcionalidadeBean.getId() == 1)
 				lista.add(StatusVagaEnum.PENDENTE.getValue());
@@ -291,7 +311,7 @@ public class VagaBusiness {
 				lista.add(StatusVagaEnum.ATIVO.getValue());
 			}
 		}
-		for(Integer listas : lista){
+		for (Integer listas : lista) {
 			listaStatus.add(listas);
 		}
 		return listaStatus;

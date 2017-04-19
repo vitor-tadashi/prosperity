@@ -369,6 +369,33 @@ footer {
 	</div>
 	<!-- /.modal cancelar -->
 	
+	<!-- modal cancelar avaliador -->
+	<div class="modal fade" id="avaliador-modal" data-target="#avaliador-modal"
+		tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Fechar">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="modalLabel">Cancelar avaliadores</h4>
+				</div>
+				<div class="modal-body">Deseja realmente cancelar avaliador?</div>
+				<input class="avaliador-id" type="hidden"> <input
+					class="avaliador-status" type="hidden">
+				<div class="modal-footer">
+					<a href="#">
+						<button id="excluiVaga" onclick="status()" type="button" class="btn btn-primary"
+							data-dismiss="modal">Sim</button>
+					</a>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /.modal cancelar avaliador -->
+	
 	<!-- modal fechar -->
 	<div class="modal fade" id="fechar-modal" data-target="#fechar-modal"
 		tabindex="-1" role="dialog" aria-labelledby="modalLabel">
@@ -492,6 +519,12 @@ footer {
 														data-toggle="modal" class="fecharAtivo" ><i class="Fechar fa fa-trash-o fa-lg"></i> Fechar</a></li>
 												</c:if>
 												
+												<c:if test="${vaga.ultimoStatus.status.nome == 'Aguardando avaliadores'}" >
+													<li id="${vaga.ultimoStatus.status.nome}" role="separator" class="avaliadorDivider divider"></li>
+													<li id="${vaga.ultimoStatus.status.nome}" >
+													<a href="#avaliador-modal" onclick="alterarStatus(${vaga.id}, 'CANCELADO')"
+														data-toggle="modal" class="avaliador" ><i class="Cancelar fa fa-ban fa-lg"></i> Cancelar</a></li>
+												</c:if>	
 											</ul>
 										</div> <!-- Fim Botão -->
 								 	</td>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.WordpressBean;
 import br.com.prosperity.business.CandidatoBusiness;
+import br.com.prosperity.exception.BusinessException;
 
 @RestController
 public class CandidatoService {
@@ -33,7 +34,12 @@ public class CandidatoService {
 
 		if (!candidatos.isEmpty())
 			for (CandidatoBean c : candidatos) {
-				b.inserir(c);
+				try {
+					b.inserir(c);
+				} catch (BusinessException e) {
+				
+					e.printStackTrace();
+				}
 			}
 	}
 }

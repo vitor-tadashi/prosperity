@@ -32,11 +32,12 @@ import javax.persistence.TemporalType;
 		// LEFT OUTER JOIN u.statusCandidatoEntity p left join p.status s WHERE
 		// u.nomecandidato like ?1 and s.id = ?2 and u.dataAbertura between ?3
 		// and ?4"),
-		@NamedQuery(name = "pesquisarNome", query = "SELECT u FROM CandidatoEntity u WHERE u.nome like ?1 AND u.valorPretensaoSalarial BETWEEN ?2 AND ?3 AND u.dataAbertura BETWEEN ?4 AND ?5"),
-		@NamedQuery(name = "obterPorCPF", query = "SELECT u FROM CandidatoEntity u WHERE u.cpf = ?1"),
+		@NamedQuery(name = "pesquisarNome", query = "SELECT u FROM CandidatoEntity u WHERE u.nome like ?1 AND u.valorPretensao BETWEEN ?2 AND ?3 AND u.dataAbertura BETWEEN ?4 AND ?5"),
+		@NamedQuery(name = "obterPorCPF", query = "SELECT u FROM CandidatoEntity u WHERE u.cpf LIKE ?1"),
 		@NamedQuery(name = "verificarCandidatura", query = "SELECT c FROM CandidatoEntity c JOIN c.statusCandidatos sc WHERE sc.status in(6,7,14)"
 				+ "AND sc.idStatusCandidato = (SELECT MAX(sc.idStatusCandidato) FROM CandidatoEntity c JOIN c.statusCandidatos sc)"),
 		@NamedQuery(name = "obterParaCombo", query = "SELECT v.id, v.nomeVaga FROM VagaEntity v"),
+
 		@NamedQuery(name = "obterPorDesc", query = "SELECT u FROM CandidatoEntity u ORDER BY u.id DESC"),
 
 		/*
@@ -54,9 +55,9 @@ import javax.persistence.TemporalType;
 				+ "INNER JOIN c.statusCandidatos sc "
 				+ "INNER JOIN c.avaliadores ac "
 				+ "WHERE (sc.idStatusCandidato = (SELECT max(scc.idStatusCandidato) FROM StatusCandidatoEntity scc WHERE scc.candidato.id = c.id)) "
-				+ "AND ((sc.status.id IN (?1) AND ac.status IS NOT NULL) "
+				+ "AND (sc.status.id IN (?1) AND ac.status IS NOT NULL) "
 				+ "OR (sc.status.id IN (?2) AND ac.status IS NULL AND ac.usuario.id = ?3)"
-				+ "OR (sc.status.id = ?4 AND ac.status IS NULL)) "
+				+ "OR (sc.status.id = ?4 AND ac.status IS NULL) ORDER BY c.id DESC"
 				), 
 
 		@NamedQuery(name = "proposta", query = "SELECT c FROM CandidatoEntity c, AvaliadorCandidatoEntity ac INNER JOIN c.statusCandidatos sc "
@@ -85,7 +86,7 @@ public class CandidatoEntity {
 	private Date dataNascimento;
 
 	@Column(name = "vlPretensao")
-	private Double valorPretensaoSalarial;
+	private Double valorPretensao;
 
 	@Column(name = "dtAbertura")
 	@Temporal(TemporalType.DATE)
@@ -107,7 +108,7 @@ public class CandidatoEntity {
 
 	@Column(name = "dtUltimoContato")
 	@Temporal(TemporalType.DATE)
-	private Date dataultimoContato;
+	private Date dataUltimoContato;
 
 	@Column(name = "dtEntrevista")
 	@Temporal(TemporalType.DATE)
@@ -226,13 +227,6 @@ public class CandidatoEntity {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public Double getValorPretensaoSalarial() {
-		return valorPretensaoSalarial;
-	}
-
-	public void setValorPretensaoSalarial(Double valorPretensaoSalarial) {
-		this.valorPretensaoSalarial = valorPretensaoSalarial;
-	}
 
 	public Date getDataAbertura() {
 		return dataAbertura;
@@ -275,11 +269,11 @@ public class CandidatoEntity {
 	}
 
 	public Date getDataUltimoContato() {
-		return dataultimoContato;
+		return dataUltimoContato;
 	}
 
 	public void setDataUltimoContato(Date contatoBean) {
-		this.dataultimoContato = contatoBean;
+		this.dataUltimoContato = contatoBean;
 	}
 
 	public Date getDataEntrevista() {
@@ -348,7 +342,7 @@ public class CandidatoEntity {
 	 * public void setDataultimoContato(Date dataultimoContato) {
 	 * this.dataultimoContato = dataultimoContato; }
 	 * 
-	 * public Double getValorMin() { =======
+	 * public Double getMin() { =======
 	 */
 	public String getCurriculoTexto() {
 		return curriculoTexto;
@@ -357,4 +351,14 @@ public class CandidatoEntity {
 	public void setCurriculoTexto(String curriculoTexto) {
 		this.curriculoTexto = curriculoTexto;
 	}
+
+	public Double getValorPretensao() {
+		return valorPretensao;
+	}
+
+	public void setValorPretensao(Double valorPretensao) {
+		this.valorPretensao = valorPretensao;
+	}
 }
+
+

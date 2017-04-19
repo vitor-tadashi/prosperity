@@ -57,7 +57,6 @@ public class CandidatoBean extends FormatUtil {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date entrevista;
 	private String proposta;
-	private Double pretensaoSalarial;
 	private StatusCandidatoBean ultimoStatus;
 	private VagaBean ultimaVaga;
 	@Valid
@@ -317,8 +316,6 @@ public class CandidatoBean extends FormatUtil {
 		this.proposta = proposta;
 	}
 
-
-
 	public VagaBean getVagaBean() {
 		return vagaBean;
 	}
@@ -335,12 +332,8 @@ public class CandidatoBean extends FormatUtil {
 		this.curriculoTexto = curriculoTexto;
 	}
 
-	public Double getPretensaoSalarial() {
-		return pretensaoSalarial;
-	}
-
-	public void setPretensaoSalarial(Double pretensaoSalarial) {
-		this.pretensaoSalarial = pretensaoSalarial;
+	public static boolean getCadastrarCandidato() {
+		return false;
 	}
 
 }

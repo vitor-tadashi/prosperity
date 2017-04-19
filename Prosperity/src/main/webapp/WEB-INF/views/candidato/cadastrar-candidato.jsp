@@ -40,17 +40,24 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">Informações do candidato</div>
 					<div class="panel-body">
-						<div class="alert.alert-success"></div>
+						<div class="x"></div>
 						<div id="textDiv">
 							<c:forEach var="erro" items="${listaErros}">
 								<p>${erro}</p>
 
 							</c:forEach>
+							<c:if test="${not empty sucesso}">
+									<div id="msg-sucesso" class="alert alert-success msg-margin">
+										<ul>
+											<li class="li-msg">${sucesso }</li>
+										</ul>
+									</div>
+								</c:if>
 						</div>
 						<div id="textDiv1"></div>
 						<div id="textDiv2"></div>
 						<div id="textDiv3"></div>
-
+						
 						<form class="form-border" action="salvar" method="post"
 							enctype="multipart/form-data" id=formCadastro
 							onsubmit="return Validar()">
@@ -75,7 +82,8 @@
 													type="text" class="form-control cpf parsley-validated"
 													id="cpf" name="cpf" data-required="true"
 													placeholder="Informe seu CPF" value="${candidato.cpf}"
-													onblur="verificarCPF()">
+													onblur="pesquisacpf()">
+													<input type="hidden" value="${candidato.id}"  id="id" name="id">
 											</div>
 											<div class="form-group col-md-4">
 												<label class="control-label" for="nome">Nome</label> <input
@@ -90,7 +98,7 @@
 													id="email" name="email" data-required="true"
 													placeholder="Informe seu email" value="${candidato.email}">
 											</div>
-										
+
 											<div class="form-group col-md-2">
 												<label for="rg" class="control-label">RG</label> <input
 													type="text" class="form-control rg parsley-validated"
@@ -106,7 +114,7 @@
 													class="form-control date parsley-validated"
 													data-required="true" name="dataNascimento"
 													id="dataNascimento" value="${dataNascimento}"
-													onblur="validarData()">
+													onblur="validarData(this.value)">
 											</div>
 											<div class="form-group col-md-2">
 												<label for="contato" class="control-label">Telefone</label>
@@ -209,8 +217,8 @@
 												pattern="dd/MM/yyyy" var="dataConclusao" />
 											<input type="text" class="form-control date"
 												id="mesAnoConclusao" data-required="false"
-												name="formacao.dataConclusao"
-												onblur="validarData()" value="${dataConclusao}">
+												name="formacao.dataConclusao" onblur="validarData()"
+												value="${dataConclusao}">
 										</div>
 									</div>
 									<div class="tab-pane fade" id="third">
@@ -222,77 +230,85 @@
 												</div>
 												<div class="col-md-2">
 													<input type="number" class="form-control dinheiro"
-														id="pretensaoSalarial" placeholder="R$" name="pretensaoSalarial"
-														value="${candidato.pretensaoSalarial}" />
+														id="valorPretensao" placeholder="R$" name="valorPretensao"
+														value="${candidato.valorPretensao}" />
 												</div>
-											
-										</div>
-										<div class="form-group col-md-3">
-											<label for="vaga">Vaga a ser aplicado</label> <select
-												class="form-control" id="vaga" name="vagaCandidato.vaga.id">
-												<option value="0">Selecione</option>
-												<c:forEach var="vaga" items="${listaVaga}">
-													<option value="${vaga.id}"
-														${vaga.id == candidato.vagaCandidato.vaga.id ? 'selected="selected"' : ''}>${vaga.nomeVaga}</option>
-												</c:forEach>
-											</select>
-										</div>
-										<div class="form-group col-md-3">
-											<label for="canalInformacao">Como ficou sabendo desta
-												vaga?</label> <select class="form-control"
-												name="vagaCandidato.CanalInformacao.id" id="canalInformacao">
-												<option value="0">Selecione</option>
-												<c:forEach var="canalInformacao" items="${listaCanal}">
-													<option value="${canalInformacao.id}"
-														${canalInformacao.id == candidato.vagaCandidato.canalInformacao.id ? 'selected="selected"' : ''}>${canalInformacao.nome}</option>
-												</c:forEach>
-											</select>
-										</div>
-										<div>
-											<div class="form-group col-md-2 col-sm-2">
-												<label for="dataUltimoContato" class="control-label">Data
-													de ultimo contato</label>
-												<fmt:formatDate value="${candidato.dataUltimoContato}"
-													pattern="dd/MM/yyyy" var="dataUltimoContato" />
-												<input type="text" class="form-control date"
-													name="dataConclusao" onblur="validarData(this.value)"
-													data-required="false" id="dataUltimoContato"
-													value="${dataUltimoContato}">
-											</div>
-											<div class="form-group col-md-2 col-sm-4">
-												<label for="entrevista" class="control-label">Data
-													de Entrevista</label>
-												<fmt:formatDate value="${candidato.entrevista}"
-													pattern="dd/MM/yyyy" var="entrevista" />
-												<input type="text" class="form-control date"
-													data-required="false" name="entrevista" id="entrevista"
-													onblur="validarData()" value="${entrevista}">
-											</div>
-										</div>
 
+											</div>
+											<div class="form-group col-md-3">
+												<label for="vaga">Vaga a ser aplicado</label> <select
+													class="form-control" id="vaga" name="vagaCandidato.vaga.id">
+													<option value="0">Selecione</option>
+													<c:forEach var="vaga" items="${listaVaga}">
+														<option value="${vaga.id}"
+															${vaga.id == candidato.vagaCandidato.vaga.id ? 'selected="selected"' : ''}>${vaga.nomeVaga}</option>
+													</c:forEach>
+												</select>
+											</div>
+											<div class="form-group col-md-3">
+												<label for="canalInformacao">Como ficou sabendo
+													desta vaga?</label> <select class="form-control"
+													name="vagaCandidato.CanalInformacao.id"
+													id="canalInformacao">
+													<option value="0">Selecione</option>
+													<c:forEach var="canalInformacao" items="${listaCanal}">
+														<option value="${canalInformacao.id}"
+															${canalInformacao.id == candidato.vagaCandidato.canalInformacao.id ? 'selected="selected"' : ''}>${canalInformacao.nome}</option>
+													</c:forEach>
+												</select>
+											</div>
+											<div>
+												<div class="form-group col-md-2 col-sm-2">
+													<label for="dataUltimoContato" class="control-label">Data
+														de ultimo contato</label>
+													<fmt:formatDate value="${candidato.dataUltimoContato}"
+														pattern="dd/MM/yyyy" var="dataUltimoContato" />
+													<input type="text" class="form-control date"
+														name="dataUltimoContato" onblur="validarData(this.value)"
+														data-required="false" id="dataUltimoContato"
+														value="${dataUltimoContato}">
+												</div>
+												<div class="form-group col-md-2 col-sm-4">
+													<label for="entrevista" class="control-label">Data
+														de Entrevista</label>
+													<fmt:formatDate value="${candidato.entrevista}"
+														pattern="dd/MM/yyyy" var="entrevista" />
+													<input type="text" class="form-control date"
+														data-required="false" name="entrevista" id="entrevista"
+														onblur="validarData()" value="${entrevista}">
+												</div>
+											</div>
+										</div>
 
 									</div>
 								</div>
-								<div></div>
+							</div>
+							<div class="form-group col-sm-4">
+							<input type="hidden" value="${candidato.id}" name="id">
+									<button class="btn btn-success btnAjuste">Salvar</button>
+								</div>
 
-							</div>
-							<div>
-								<input type="hidden" value="${candidato.id}" name="id">
-								<button class="btn btn-success btnAjuste">Salvar</button>
-							</div>
 						</form>
+</div>
+</div>
+</div>
+
 					</div>
 				</div>
-			</div>
-		</div>
-	</div>
+		
 	<!-- SOMENTE ALTERAR DAQUI PARA CIMA -->
-	<input value="${erro}" id="contErro">
 	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
 	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
 	<script src='/resources/js/parsley.min.js'></script>
 
 	<script type="text/javascript">
+	
+	  $(document).ready(function () {
+	        setTimeout(function () {
+	            $('#msg-sucesso').fadeOut(1500);
+	        }, 5000);
+	    });
+	  
 		$(document).ready(function() {
 			$('.cpf').mask('999.999.999-99', {
 				reverse : true
@@ -321,7 +337,7 @@
 			else {
 				//CEP não Encontrado.
 				limpa_formulário_cep();
-				var div = document.getElementById("textDiv").className = "alert alert-danger";
+				var div = document.getElementById("textDiv").className = "alert alert-danger x";
 
 				textDiv.textContent = "CEP inválido";
 
@@ -355,7 +371,7 @@
 				else {
 					//cep é inválido.
 					limpa_formulário_cep();
-					var div = document.getElementById("textDiv").className = "alert alert-danger";
+					var div = document.getElementById("textDiv").className = "alert alert-danger x";
 
     				textDiv.textContent = "CEP inválido";
 
@@ -376,6 +392,7 @@
 	</script>
 
 	<script>
+	
 		$(document).ready(function() {
 			if ($("input#contErro").val() > 0) {
 				$('#textDiv').addClass("alert alert-danger");
@@ -390,7 +407,7 @@
 					+ strCPF.substring(8, 11) + strCPF.substring(12, 14);
 			Soma = 0;
 			if (strCPF == "00000000000") {
-				var div = document.getElementById("textDiv1").className = "alert alert-danger";
+				var div = document.getElementById("textDiv1").className = "alert alert-danger x";
 
 				textDiv1.textContent = "CPF inválido.";
 
@@ -409,7 +426,7 @@
 			}
 
 			if (Resto != parseInt(strCPF.substring(9, 10))) {
-				var div = document.getElementById("textDiv1").className = "alert alert-danger";
+				var div = document.getElementById("textDiv1").className = "alert alert-danger x";
 
 				textDiv1.textContent = "CPF inválido.";
 
@@ -429,7 +446,7 @@
 			}
 
 			if (Resto != parseInt(strCPF.substring(10, 11))) {
-				var div = document.getElementById("textDiv1").className = "alert alert-danger ";
+				var div = document.getElementById("textDiv1").className = "alert alert-danger x";
 
 				textDiv1.textContent = "CPF inválido.";
 
@@ -462,7 +479,7 @@
 			                resultado = (!isNaN(dia) && (dia > 0) && (dia < 32)) && (!isNaN(mes) && (mes > 0) && (mes < 13)) && (!isNaN(ano) && (ano.length == 4) && (ano <= anoAtual && ano >= 1900));
 			                if (!resultado)
 			                {
-			                	var div = document.getElementById("textDiv2").className = "alert alert-danger";
+			                	var div = document.getElementById("textDiv2").className = "alert alert-danger x";
 
 			    				textDiv2.textContent = "Data inválida";
 
@@ -478,7 +495,7 @@
 			    			textDiv2.textContent = "Data inválida";
 
 			    			var text = "[" + div.textContent + "]";
-			               
+			              
 			                return false;
 			         }
 			        var div = document.getElementById("textDiv2").className = "";
@@ -495,7 +512,50 @@
 
 	</script>
 	<script type="text/javascript">
-
+	var vaisefoder = null;
+	function pesquisacpf(){
+		var cpf = $('#cpf').val();
+			$.ajax({
+				url : "http://localhost:8080/candidato/obter",
+				dataType : "JSON",
+				data : {
+					"cpf" : cpf
+				},
+				type : "GET",
+				success: function (data){
+					if(data != null){
+						$("#id").val(data.id);
+						$("#nome").val(data.nome);
+						$("#rg").val(data.rg);
+						$("#email").val(data.email);
+						$("#dataNascimento").val(data.dataNascimento);
+						$("#contato").val(data.contato.telefone);
+						$("#cep").val(data.endereco.cep);
+						$("#rua").val(data.endereco.logradouro);
+						$("#numero").val(data.endereco.numero);
+						$("#complemento").val(data.endereco.complemento);
+						$("#uf").val(data.endereco.estado);
+						$("#cidade").val(data.endereco.cidade);
+						$("#curso").val(data.formacao.nomeCurso);
+						$("#instituicao").val(data.formacao.nomeInstituicao);
+						$("#tipoDeCurso").val(data.formacao.tipoCurso.id);
+						$("#mesAnoConclusao").val(data.formacao.dataConclusao);
+						$("#valorPretensao").val(data.valorPretensao);
+						$("#valorPretensao").val(data.valorPretensao);
+						$("#vaga").val(data.vagaCandidato.vaga.id);
+						$("#canalInformacao").val(data.vagaCandidato.canalInformacao.id);
+						$("#dataUltimoContato").val(data.dataUltimoContato);
+						$("#entrevista").val(data.entrevista);
+						
+					}
+				},
+				error: function (data) {
+					console.log("Cpf não encontrado")
+				}
+			});
+	}
+	
+	
 	</script>
 </body>
 </html>

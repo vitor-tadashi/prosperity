@@ -363,10 +363,8 @@
 							}else{
 			                	$("#proposta").hide();
 							}
-							
 						}
 					})
-					
 				}
 				});
 		})
@@ -374,37 +372,18 @@
             CKEDITOR.replace('editor');
                   $('#alterarStatus').click(function() {
                         
-//                         var data = CKEDITOR.instances.editor.getData();                    
+                        var data = CKEDITOR.instances.editor.getData();                    
                         
-// 	                   	 var avaliacoes = [];
-// 	                   	alert('rola1');
-	                   	 
-// 	                   	$(".avaliacaoCompetencia").each(function(){
-// 	                   		debugger;
-//                             if($(this).prop("checked")){
-                                
-// //                                  var avaliacaoCompetencia = {
-// //                                         competencia : {
-// //                                             id : ""
-// //                                         },
-// //                                         avaliacao : {
-// //                                             id : ""
-// //                                         }
-// //                                      };
-                                 
-//                                 var idAvaliacao = $(this).attr("alt");
-//                                 var idCompetencia = $(this).val();
-                                
-// //                                 avaliacaoCompetencia.avaliacao.id = idAvaliacao;
-// //                                 avaliacaoCompetencia.competencia.id = idCompetencia;
-                                
-// //                                 console.log(avaliacaoCompetencia);
-// //                                 avaliacoes.push(avaliacaoCompetencia);
-// 								   avaliacoes.push(idAvaliacao);
-// 								   avaliacoes.push(idCompetencia);
-// 								   alert('rola2');
-//                             }
-//                         });
+	                   	var avaliacoes = [];
+
+	                   	$(".avaliacaoCompetencia").each(function(){
+                            if($(this).prop("checked")){
+                                var idAvaliacao = $(this).attr("alt");
+                                var idCompetencia = $(this).val();
+								avaliacoes.push(idAvaliacao);
+								avaliacoes.push(idCompetencia);
+                            }
+                        });
 
 	                   	var provasDescricoes  = [];
 	                
@@ -421,20 +400,20 @@
 	                   	 	provaDescricao.prova = select;
 	                   		provaDescricao.descricao = input;
 	                		
-//	                   		if(provaDescricao.prova != "" && provaDescricao.descricao != ""){
+	                   		if(provaDescricao.prova != "" && provaDescricao.descricao != ""){
 	                   			provasDescricoes[i].push(provaDescricao.value);
-//	                   		}
+	                   		}
 	                   			i++;
 	                   	});                  	
 	                   	
-//                         $.each(cont, function() {
-//                      	   var prova = {
-//                      			   nome: $('#descricao'+cont).val()
-//                      			   }
-//                      	   provas.push(prova);
+                        $.each(cont, function() {
+                     	   var prova = {
+                     			   nome: $('#descricao'+cont).val()
+                     			   }
+                     	   provas.push(prova);
                      	   
-//                      	  alert('rola3');
-//                      	   });
+                     	  alert('rola3');
+                     	   });
 	                   	x =  JSON.stringify(provasDescricoes);
                         $.ajax({
                               url : "alterar-status-candidato",
@@ -446,8 +425,8 @@
                                    'proposta' : CKEDITOR.instances.editor.getData(),
                                    'idStatus' : $('#hdn-status').val(),
                                    'parecerTecnico' : $('#parecerTecnico').val(),
-                                   
                                    'processoSeletivo' : JSON.stringify(provasDescricoes),
+                                   'ac' : JSON.stringify(avaliacoes)
                               },
                               contentType: "text",
                               success : function(data) {
