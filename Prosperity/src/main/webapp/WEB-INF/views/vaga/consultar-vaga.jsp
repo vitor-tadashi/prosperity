@@ -584,28 +584,28 @@ li a.active {
 															    width: 200px;
 															    margin-left: 5px;">
             				<label>Data de Abertura</label>
-            					<p style="margin-top: -5px;">${vaga.dataAbertura}</p>
+            					<p style="margin-top: -5px;"><fmt:formatDate value="${vaga.dataAbertura}" pattern="dd/MM/yyyy" /></p>
             			</div>
             			<div class="col-md-3 well well-sm btn btn-info" style="    height: 56px;
     margin-right: 5px;
     width: 200px;
     margin-left: 5px;">
             				<label>Data de Aprovação</label>
-            					<p style="margin-top: -5px;">${vaga.dataAprovacao}</p>
+            					<p style="margin-top: -5px;"><fmt:formatDate value="${vaga.dataAprovacao}" pattern="dd/MM/yyyy" /></p>
             			</div>
             			<div class="col-md-3 well well-sm btn btn-danger" style="    height: 56px;
     margin-right: 5px;
     width: 200px;
     margin-left: 5px;">
             				<label>Data de Fechamento</label>
-            					<p style="margin-top: -5px;">${vaga.dataFechamento}</p>
+            					<p style="margin-top: -5px;"><fmt:formatDate value="${vaga.dataFechamento}" pattern="dd/MM/yyyy" /></p>
             			</div>
             			<div class="col-md-3 well well-sm btn btn-success" style="    height: 56px;
     margin-right: 5px;
     width: 200px;
     margin-left: 5px;">
             				<label>Proposta</label>
-            					<p style="margin-top: -5px;">R$ ${vaga.valorPretensao}</p>
+            					<p style="margin-top: -5px;">R$ <fmt:formatNumber pattern="#,##0.00" value="${vaga.valorPretensao}" /></p>
             			</div>
             			<div class="col-md-3 well well-sm btn btn-warning" style="    height: 56px;
     margin-right: 5px;

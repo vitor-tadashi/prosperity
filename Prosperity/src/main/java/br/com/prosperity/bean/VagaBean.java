@@ -38,7 +38,7 @@ public class VagaBean {
 	private String descricaoFormacaoAcademica; //
 	private String descricaoPerfilComportamental; //
 	private String descricaoPerfilTecnico; //
-	@DateTimeFormat(pattern = "yyyy-mm-dd")
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date dataAbertura; //
 	private Date dataAprovacao; //
 	private Date dataFechamento; //
