@@ -65,6 +65,9 @@
 									<li id="tabAvaliadores2" class="tab-verity"><a id="tabAvaliadores" href="#fourth" data-toggle="tab"
 										class="text-success hide"><i class="fa fa-group"></i>
 											Avaliadores</a></li>
+									<li id="tabMarketing" class="tab-verity"><a id="tabMarketing" href="#fifth" data-toggle="tab"
+										class="text-success"><i class="fa fa-group"></i>
+											Marketing</a></li>
 								</ul>
 							</div>
 
@@ -364,7 +367,21 @@
 									</div>
 														
 									</div>
-									
+									<div class="tab-pane fade" id="fifth">
+										<div class="panel panel-default">
+											<div class="panel-heading">
+												<label>Marketing social</label>
+											</div>
+											<section class="panel panel-default">
+											<div class="panel-heading"><label>Marketing social</label></div>
+											<div class="panel-body relative">
+												<textarea class="form-control"
+													name="marketingSocial" rows="10"
+													value=""></textarea>
+											</div>
+											</section>
+										</div>
+									</div>
 								</div>
 							</div>
 							<div class="text-right pull-right">
