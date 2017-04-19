@@ -85,6 +85,7 @@
 													id="cpf" name="cpf" data-required="true"
 													placeholder="Informe seu CPF" value="${candidato.cpf}"
 													onblur="pesquisacpf()">
+													<input type="hidden" value="${candidato.id}"  id="id" name="id">
 											</div>
 											<div class="form-group col-md-4">
 												<label class="control-label" for="nome">Nome</label> <input
@@ -285,16 +286,18 @@
 								</div>
 							</div>
 							<div class="form-group col-sm-4">
-								<input type="hidden" value="${candidato.id}" name="id">
-								<button class="btn btn-success btnAjuste">Salvar</button>
-							</div>
+							<input type="hidden" value="${candidato.id}" name="id">
+									<button class="btn btn-success btnAjuste">Salvar</button>
+								</div>
+
 						</form>
+</div>
+</div>
+</div>
 
 					</div>
 				</div>
-			</div>
-		</div>
-	</div>
+		
 	<!-- SOMENTE ALTERAR DAQUI PARA CIMA -->
 	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
 	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
@@ -495,7 +498,7 @@
 			    			textDiv2.textContent = "Data inválida";
 
 			    			var text = "[" + div.textContent + "]";
-			               
+			              
 			                return false;
 			         }
 			        var div = document.getElementById("textDiv2").className = "";
@@ -512,12 +515,21 @@
 
 	</script>
 	<script type="text/javascript">
-	var vaisefoder = null;
+	function dataFormatada(dt){
+		var data = new Date(dt);
+	    var dia = data.getDate();
+	    if (dia.toString().length == 1)
+	      dia = "0"+dia;
+	    var mes = data.getMonth()+1;
+	    if (mes.toString().length == 1)
+	      mes = "0"+mes;
+	    var ano = data.getFullYear();  
+	    return dia+"/"+mes+"/"+ano;
+	}
 	
+	var vaisefoder = null;
 	function pesquisacpf(){
 		var cpf = $('#cpf').val();
-		$(function () {
-			alert('vtnc');
 			$.ajax({
 				url : "http://localhost:8080/candidato/obter",
 				dataType : "JSON",
@@ -526,13 +538,36 @@
 				},
 				type : "GET",
 				success: function (data){
-					$("#nome").val(data.nome);
+					if(data != null){
+						$("#id").val(data.id);
+						$("#nome").val(data.nome);
+						$("#rg").val(data.rg);
+						$("#email").val(data.email);
+						$("#dataNascimento").val(dataFormatada(data.dataNascimento));
+						$("#contato").val(data.contato.telefone);
+						$("#cep").val(data.endereco.cep);
+						$("#rua").val(data.endereco.logradouro);
+						$("#numero").val(data.endereco.numero);
+						$("#complemento").val(data.endereco.complemento);
+						$("#uf").val(data.endereco.estado);
+						$("#cidade").val(data.endereco.cidade);
+						$("#curso").val(data.formacao.nomeCurso);
+						$("#instituicao").val(data.formacao.nomeInstituicao);
+						$("#tipoDeCurso").val(data.formacao.tipoCurso.id);
+						$("#mesAnoConclusao").val(dataFormatada(data.formacao.dataConclusao));
+						$("#valorPretensao").val(data.valorPretensao);
+						$("#valorPretensao").val(data.valorPretensao);
+						$("#vaga").val(data.vagaCandidato.vaga.id);
+						$("#canalInformacao").val(data.vagaCandidato.canalInformacao.id);
+						$("#dataUltimoContato").val(dataFormatada(data.dataUltimoContato));
+						$("#entrevista").val(dataFormatada(data.entrevista));
+						
+					}
 				},
 				error: function (data) {
-					alert('ok');
+					console.log("Cpf não encontrado")
 				}
 			});
-		});
 	}
 	
 	
