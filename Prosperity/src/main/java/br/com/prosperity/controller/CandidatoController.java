@@ -111,16 +111,6 @@ public class CandidatoController<PaginarCandidato> {
 
 		obterDominiosCandidato(model);
 
-		try {
-			GeradorEmail enviarEmail = new GeradorEmail("smtp.office365.com", "587");
-			enviarEmail.sendMail("leonardo.ramos@verity.com.br", "guilherme.oliveira@verity.com.br", "Gerador Email",
-					"Um email para vc");
-
-		} catch (Exception e) {
-			System.out.println("Erro\n");
-			e.printStackTrace();
-		}
-
 		return "candidato/cadastrar-candidato";
 	}
 
