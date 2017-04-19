@@ -19,7 +19,6 @@
 
 </head>
 <body>
-
 	<c:import url="/WEB-INF/views/shared/dashboard.jsp"></c:import>
 
 	<!--    Modais   -->
@@ -470,8 +469,9 @@
 										</select>
 									</div>
 									<div class="col-md-1">
-										<label for="exampleInputEmail1">Salário</label> <input
-											type="text" name="PretensaoDe" class="form-control"
+										<label for="salário">Salário</label> <input
+											type="text" class="form-control valorPretensao parsley-validated"
+													id="valorPretensao" name="PretensaoDe" class="form-control"
 											placeholder="De" style="width: 80px">
 									</div>
 									<div class="col-md-1">
@@ -612,6 +612,11 @@
 	<!-- JavaScript -->
 
 	<script type="text/javascript">
+	
+	$(document).ready(function(){
+		 $('.money2').mask("#.##0,00", {reverse: true});
+	 });
+		
 		function info(listaId) {
 			//
 			$.ajax({

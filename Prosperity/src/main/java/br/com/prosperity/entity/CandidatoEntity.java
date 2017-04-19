@@ -50,7 +50,8 @@ import javax.persistence.TemporalType;
 		 * ac.idStatus is NULL OR ac.idStatus IN(9,10,11,12,13) AND ac.idUsuario
 		 * = 14
 		 */
-
+		
+		
 		@NamedQuery(name = "listarAprovacoes", query = "SELECT DISTINCT c FROM CandidatoEntity c "
 				+ "INNER JOIN c.statusCandidatos sc "
 				+ "INNER JOIN c.avaliadores ac "
@@ -147,8 +148,7 @@ public class CandidatoEntity {
 	@JoinColumn(name = "idCandidato")
 	private List<CandidatoCompetenciaEntity> competencias;
 
-	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
-	@JoinColumn(name = "idCandidato")
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "candidato" )
 	private Set<VagaCandidatoEntity> vagas;
 
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)

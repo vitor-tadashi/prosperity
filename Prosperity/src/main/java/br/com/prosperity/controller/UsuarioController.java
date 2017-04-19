@@ -125,12 +125,7 @@ public class UsuarioController {
 	
 	@RequestMapping(value = "obter-perfil-funcionalidade", method=RequestMethod.GET)
 	public @ResponseBody List<FuncionalidadeBean> obterPerfilFuncionalidade(Model model,@ModelAttribute("id")Integer id){
-		List<FuncionalidadeBean> lista = new ArrayList<>();
-		if(session.getAttribute("listaFunc") == null) {
-			lista = perfilBusiness.obterPerfilFuncionalidades(id);
-			session.setAttribute("listaFunc", lista);
-		}
-		List<FuncionalidadeBean> listaFunc = (List<FuncionalidadeBean>) session.getAttribute("listaFunc");
+		List<FuncionalidadeBean> listaFunc = perfilBusiness.obterPerfilFuncionalidades(id);
 		
 		return listaFunc;
 	}
