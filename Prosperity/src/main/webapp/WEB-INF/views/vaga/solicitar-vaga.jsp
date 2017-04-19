@@ -45,6 +45,15 @@
 								<c:forEach var="erro" items="${listaErros}">
 									<p>${erro}</p>
 								</c:forEach>
+								
+								<!-- MENSAGEM DE SUCESSO -->
+							<c:if test="${not empty sucesso}">
+									<div id="msg-sucesso" class="alert alert-success msg-margin">
+										<ul>
+											<li class="li-msg">${sucesso }</li>
+										</ul>
+									</div>
+								</c:if>
 							</div>
 							
 							<div id="textDiv1"></div>
@@ -403,7 +412,16 @@
 	<script src="/resources/js/custom/solicitacaoVaga.js"></script>
 	<script src="/resources/js/parsley.min.js"></script>
 	<script src="/resources/js/custom/custom.js"></script>
+	
+	<script type="text/javascript">
+	
+	<!-- MENSAGEM DE SUCESSO-->
+	  $(document).ready(function () {
+	        setTimeout(function () {
+	            $('#msg-sucesso').fadeOut(1500);
+	        }, 5000);
+	    });
 
+</script>	  
 </body>
-
 </html>

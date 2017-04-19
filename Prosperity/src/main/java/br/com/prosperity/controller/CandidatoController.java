@@ -34,6 +34,7 @@ import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.CompetenciaBean;
 import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.ProvaBean;
+import br.com.prosperity.bean.ProvaCandidatoBean;
 import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
@@ -130,14 +131,14 @@ public class CandidatoController<PaginarCandidato> {
 	@RequestMapping(value = "salvar", method = RequestMethod.POST)
 	public String salvarCandidato(@Valid @ModelAttribute("candidatoBean") CandidatoBean candidatoBean,
 			BindingResult result, @RequestParam("file") MultipartFile file, Model model) throws BusinessException {
+		
 		if (result.hasErrors()) {
 			model.addAttribute("erro", result.getErrorCount());
 			model.addAttribute("listaErros", buildErrorMessage(result.getFieldErrors()));
 			model.addAttribute("candidato", candidatoBean);
-
 			obterDominiosCandidato(model);
-
 			return "candidato/cadastrar-candidato";
+			
 		} else {
 			try{
 				candidatoBusiness.inserir(candidatoBean);
@@ -343,7 +344,7 @@ public class CandidatoController<PaginarCandidato> {
 	public List<CandidatoCompetenciaBean> convertGson(String ac) {
 		Gson gson = new Gson();
 		List<String> l = gson.fromJson(ac, List.class);
-		candidatoCompetenciasBean.remove(0);
+		candidatoCompetenciasBean = null;
 		int aux = 0;
 		for (String lista : l) {
 			Integer aux2 = Integer.parseInt(lista);
