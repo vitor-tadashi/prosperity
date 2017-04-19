@@ -102,6 +102,7 @@ public class VagaBusiness {
 		return vagaBean;
 	}
 
+	//TODAS AS VAGAS ATIVAS
 	@Transactional(readOnly = true)
 	public Integer totalPagina() {
 		Integer paginas = (int)Math.round((double) (vagaDAO.count("paginacao") / VagaDAO.limitResultsPerPage)+0.5);
