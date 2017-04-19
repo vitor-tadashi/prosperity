@@ -20,6 +20,8 @@ public class VagaDAO extends GenericDAOImpl<VagaEntity, Integer> {
 
 	Session session;
 
+	public static final int limitResultsPerPage =5;
+
 	public List<StatusVagaEntity> pegarOsStatus() {
 
 		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
@@ -32,7 +34,7 @@ public class VagaDAO extends GenericDAOImpl<VagaEntity, Integer> {
 
 		return criteria.list();
 	}
-	
+
 	public List<VagaEntity> findByCriteria(final List<Criterion> criterion) {
 		List<VagaEntity> ret = null;
 		try {
@@ -42,10 +44,20 @@ public class VagaDAO extends GenericDAOImpl<VagaEntity, Integer> {
 		}
 		return ret;
 	}
-	
+
+	public List<VagaEntity> paginar(Integer page, final List<Criterion> criterion) {
+		List<VagaEntity> ret = null;
+		try {
+			ret = findByCriteria("id", true, (page * limitResultsPerPage) - (limitResultsPerPage), limitResultsPerPage, criterion);
+		} catch (Exception e) {
+
+		}
+		return ret;
+	}
+
 	@SuppressWarnings("unchecked")
-	protected List<VagaEntity> findByCriteria(String propertyOrder, Boolean isDesc, final int firstResult, final int maxResults,
-			final List<Criterion> criterion) {
+	protected List<VagaEntity> findByCriteria(String propertyOrder, Boolean isDesc, final int firstResult,
+			final int maxResults, final List<Criterion> criterion) {
 		List<VagaEntity> result = null;
 
 		try {
@@ -54,9 +66,9 @@ public class VagaDAO extends GenericDAOImpl<VagaEntity, Integer> {
 			crit.createAlias("vaga.statusVagaEntity", "statusVaga");
 			crit.createAlias("statusVaga.status", "status");
 			crit.add(Restrictions.eq("statusVaga.situacao", true));
-			
+
 			for (final Criterion c : criterion) {
-					crit.add(c);
+				crit.add(c);
 			}
 
 			if (firstResult > 0) {
@@ -82,7 +94,20 @@ public class VagaDAO extends GenericDAOImpl<VagaEntity, Integer> {
 
 		return result;
 	}
-	
-	
+
+	public Long count(final String name) {
+		Long result = null;
+
+		try {
+			javax.persistence.Query query = entityManager.createNamedQuery(name);
+
+			result = (Long)query.getSingleResult();
+
+		} catch (Exception e) {
+
+		}
+
+		return result;
+	}
 
 }

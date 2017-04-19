@@ -103,6 +103,13 @@ public class VagaBusiness {
 	}
 
 	@Transactional(readOnly = true)
+	public Integer totalPagina() {
+		Integer paginas = (int)Math.round((double) (vagaDAO.count("paginacao") / VagaDAO.limitResultsPerPage)+0.5);
+		paginas = paginas < 1 ? 1 : paginas;
+		return paginas;
+	}
+
+	@Transactional(readOnly = true)
 	public List<VagaBean> listarVagasAtivas() {
 		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagasAtivas", 1);
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
@@ -128,26 +135,28 @@ public class VagaBusiness {
 	}
 
 	@Transactional(readOnly = true)
-	public List<VagaBean> filtroVaga(VagaBean vaga) {
-
-		Integer idStatus = 0;
-		if (!vaga.getStatus().get(0).getStatus().getNome().equals("")) {
-			idStatus = Integer.parseInt(vaga.getStatus().get(0).getStatus().getNome());
-		}
-
+	public List<VagaBean> filtroVaga(VagaBean vaga,Integer page) {
 		List<Criterion> criterions = new ArrayList<>();
-		if (!vaga.getNomeVaga().isEmpty() || vaga.getNomeVaga() != null) {
-			criterions.add(Restrictions.like("nomeVaga", "%" + vaga.getNomeVaga() + "%"));
-		}
-		if (vaga.getDataAberturaDe() != null && vaga.getDataAberturaPara() != null) {
-			criterions.add(Restrictions.between("dataAbertura", parseData(vaga.getDataAberturaDe()),
-					parseData(vaga.getDataAberturaPara())));
-		}
+		Integer idStatus = 0;
+		try {
+			if (!vaga.getStatus().get(0).getStatus().getNome().equals("")) {
+				idStatus = Integer.parseInt(vaga.getStatus().get(0).getStatus().getNome());
+			}
+			if (!vaga.getNomeVaga().isEmpty() || vaga.getNomeVaga() != null) {
+				criterions.add(Restrictions.like("nomeVaga", "%" + vaga.getNomeVaga() + "%"));
+			}
+			if (vaga.getDataAberturaDe() != null && vaga.getDataAberturaPara() != null) {
+				criterions.add(Restrictions.between("dataAbertura", parseData(vaga.getDataAberturaDe()),
+						parseData(vaga.getDataAberturaPara())));
+			}
 
-		if (idStatus != 0) {
-			criterions.add(Restrictions.eq("status.id", idStatus));
+			if (idStatus != 0) {
+				criterions.add(Restrictions.eq("status.id", idStatus));
+			}
+		} catch (Exception e) {
+
 		}
-		List<VagaEntity> vagas = vagaDAO.findByCriteria(criterions);
+		List<VagaEntity> vagas = vagaDAO.paginar(page, criterions);
 
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagas);
 		return vagaBean;

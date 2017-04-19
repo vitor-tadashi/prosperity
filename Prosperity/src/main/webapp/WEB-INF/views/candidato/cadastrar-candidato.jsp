@@ -44,8 +44,9 @@
 						<div id="textDiv">
 							<c:forEach var="erro" items="${listaErros}">
 								<p>${erro}</p>
-
-							</c:forEach>
+									</c:forEach>
+							
+							<!-- MENSAGEM DE SUCESSO -->
 							<c:if test="${not empty sucesso}">
 									<div id="msg-sucesso" class="alert alert-success msg-margin">
 										<ul>
@@ -54,6 +55,7 @@
 									</div>
 								</c:if>
 						</div>
+						
 						<div id="textDiv1"></div>
 						<div id="textDiv2"></div>
 						<div id="textDiv3"></div>
@@ -303,6 +305,7 @@
 
 	<script type="text/javascript">
 	
+	<!-- MENSAGEM DE SUCESSO-->
 	  $(document).ready(function () {
 	        setTimeout(function () {
 	            $('#msg-sucesso').fadeOut(1500);
@@ -512,11 +515,21 @@
 
 	</script>
 	<script type="text/javascript">
-	var vaisefoder = null;
+	function dataFormatada(dt){
+		var data = new Date(dt);
+	    var dia = data.getDate();
+	    if (dia.toString().length == 1)
+	      dia = "0"+dia;
+	    var mes = data.getMonth()+1;
+	    if (mes.toString().length == 1)
+	      mes = "0"+mes;
+	    var ano = data.getFullYear();  
+	    return dia+"/"+mes+"/"+ano;
+	}
 	
+	var vaisefoder = null;
 	function pesquisacpf(){
 		var cpf = $('#cpf').val();
-		$(function () {
 			$.ajax({
 				url : "http://localhost:8080/candidato/obter",
 				dataType : "JSON",
@@ -530,7 +543,7 @@
 						$("#nome").val(data.nome);
 						$("#rg").val(data.rg);
 						$("#email").val(data.email);
-						$("#dataNascimento").val(data.dataNascimento);
+						$("#dataNascimento").val(dataFormatada(data.dataNascimento));
 						$("#contato").val(data.contato.telefone);
 						$("#cep").val(data.endereco.cep);
 						$("#rua").val(data.endereco.logradouro);
@@ -541,23 +554,20 @@
 						$("#curso").val(data.formacao.nomeCurso);
 						$("#instituicao").val(data.formacao.nomeInstituicao);
 						$("#tipoDeCurso").val(data.formacao.tipoCurso.id);
-						$("#mesAnoConclusao").val(data.formacao.dataConclusao);
+						$("#mesAnoConclusao").val(dataFormatada(data.formacao.dataConclusao));
 						$("#valorPretensao").val(data.valorPretensao);
 						$("#valorPretensao").val(data.valorPretensao);
 						$("#vaga").val(data.vagaCandidato.vaga.id);
-						$("#canalInformacao").val(data.vagaCandidato.CanalInformacao.id);
-						$("#dataUltimoContato").val(data.dataUltimoContato);
-						$("#entrevista").val(data.entrevista);
-						
+						$("#canalInformacao").val(data.vagaCandidato.canalInformacao.id);
+						$("#dataUltimoContato").val(dataFormatada(data.dataUltimoContato));
+						$("#entrevista").val(dataFormatada(data.entrevista));
 						
 					}
-					
 				},
 				error: function (data) {
-					alert('ok');
+					console.log("Cpf não encontrado")
 				}
 			});
-		});
 	}
 	
 	

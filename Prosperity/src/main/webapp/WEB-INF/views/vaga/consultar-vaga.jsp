@@ -104,6 +104,11 @@
 	margin-left: 20px;
 }
 
+li a.active {
+	background: #f2f2f2;
+	
+} 
+
 </style>
 
 </head>
@@ -624,6 +629,26 @@
 						
 					</div>
 					<!--</panel default>-->
+					   <div class="panel-footer clearfix">
+                          <div class="row">
+                              <input type="hidden" id="pageActive" value="${page }">
+                              <ul class="pagination pagination-xs m-top-none pull-right">
+                                  <li>
+                                      <c:if test="${page > 1}">
+                                          <a href="<c:url value="/vaga/consultar" ><c:param name="page" value="${page - 1}"/></c:url>">Anterior</a>
+                                      </c:if>
+                                      <c:forEach begin="${startpage}" end="${endpage}" var="p">
+                                          <a id="page${p}" href="<c:url value="/vaga/consultar" ><c:param name="page" value="${p}"/>${p}</c:url>">${p}</a>
+                                      </c:forEach>
+                                      <c:if test="${page < endpage}">
+                                          <a href="<c:url value="/vaga/consultar" ><c:param name="page" value="${page + 1}"/></c:url>">Próximo</a>
+                                      </c:if>
+                                  </li>
+                              </ul>
+                          </div>
+                          <!--</div row>-->
+                      </div>
+                      <!--</panel footer>-->
 				</div>
 				<!--</col-sm-12>-->
 			</div>
@@ -828,8 +853,11 @@
 	
 	</script>
 	<script>/* paginação */
+	var pagina = $('#pageActive').val();
+	$('#page'+pagina).addClass('active');
+	
 	$(function	()	{
-		$('#tabelaVaga').dataTable( {
+		$('#alterei').dataTable( {
 			"bJQueryUI": true,
 			"sPaginationType": "simple_numbers",
 			"bFilter": false,

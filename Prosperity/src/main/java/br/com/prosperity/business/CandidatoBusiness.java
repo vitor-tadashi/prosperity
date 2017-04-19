@@ -55,6 +55,7 @@ import br.com.prosperity.entity.VagaEntity;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.exception.BusinessException;
 import br.com.prosperity.util.FormatUtil;
+import br.com.prosperity.util.GeradorEmail;
 
 @SuppressWarnings("unused")
 @Component
@@ -377,7 +378,7 @@ public class CandidatoBusiness {
 		List<CandidatoEntity> candidatosEntity = null;
 
 		candidatosEntity = candidatoDAO.findByNamedQuery("obterPorCPF", cpf);
-		if (candidatosEntity == null) {
+		if (candidatosEntity.isEmpty()) {
 			return null;
 		}
 		for (CandidatoEntity candidatoEntity : candidatosEntity) {
@@ -467,6 +468,6 @@ public class CandidatoBusiness {
 	}
 	@Transactional
 	public void atualizarCandidato(CandidatoBean bean) {
-		candidatoDAO.update(candidatoConverter.convertBeanToEntity(bean));
+		candidatoDAO.insert(candidatoConverter.convertBeanToEntity(bean));
 	}
 }
