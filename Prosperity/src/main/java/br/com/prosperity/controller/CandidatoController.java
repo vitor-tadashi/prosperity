@@ -48,6 +48,7 @@ import br.com.prosperity.business.TipoCursoBusiness;
 import br.com.prosperity.business.VagaBusiness;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.exception.BusinessException;
+import br.com.prosperity.util.GeradorEmail;
 
 @Controller
 @RequestMapping(value = "candidato")
@@ -92,6 +93,16 @@ public class CandidatoController<PaginarCandidato> {
 	public String cadastrarCandidato(Model model) {
 
 		obterDominiosCandidato(model);
+
+		try {
+			GeradorEmail enviarEmail = new GeradorEmail("smtp.office365.com", "587");
+			enviarEmail.sendMail("leonardo.ramos@verity.com.br", "guilherme.oliveira@verity.com.br", "Gerador Email",
+					"Um email para vc");
+
+		} catch (Exception e) {
+			System.out.println("Erro\n");
+			e.printStackTrace();
+		}
 
 		return "candidato/cadastrar-candidato";
 	}
@@ -246,8 +257,8 @@ public class CandidatoController<PaginarCandidato> {
 
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
 		model.addAttribute("listaCargo", listaCargo);
-		
-		// TABELA VAGA DECRESCENTE 
+
+		// TABELA VAGA DECRESCENTE
 		model.addAttribute("candidato", candidatoBusiness.listarDecrescente());
 
 		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.obterTodos();
