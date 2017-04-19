@@ -30,6 +30,7 @@ import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.CompetenciaBean;
 import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.ProvaBean;
+import br.com.prosperity.bean.ProvaCandidatoBean;
 import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
@@ -128,14 +129,14 @@ public class CandidatoController<PaginarCandidato> {
 
 		return "candidato/cadastrar-candidato";
 	}
-	
+
 	@RequestMapping(value = "/cancelar-candidato/{id}")
 	public String cancelaCandidato(@PathVariable Integer id) {
 		SituacaoCandidatoBean bean = new SituacaoCandidatoBean();
 		bean.setIdCandidato(id);
 		bean.setStatus(StatusCandidatoEnum.CANCELADO);
 		candidatoBusiness.alterarStatus(bean);
-		
+
 		return "redirect:/candidato/aprovar";
 	}
 
@@ -237,8 +238,8 @@ public class CandidatoController<PaginarCandidato> {
 
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
 		model.addAttribute("listaCargo", listaCargo);
-		
-		// TABELA VAGA DECRESCENTE 
+
+		// TABELA VAGA DECRESCENTE
 		model.addAttribute("candidato", candidatoBusiness.listarDecrescente());
 
 		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.obterTodos();
@@ -291,9 +292,7 @@ public class CandidatoController<PaginarCandidato> {
 	}
 
 	@RequestMapping(value = { "alterar-status-candidato" }, method = RequestMethod.POST)
-	@ResponseStatus(value = HttpStatus.OK)
-	public @ResponseBody String alterarStatusCandidato(Model model,
-			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato) {
+	public String alterarStatusCandidato(Model model, @ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato, @ModelAttribute("processoSeletivo") String processo){
 		candidatoBusiness.alterarStatus(situacaoCandidato);
 		return "candidato/aprovar";
 	}

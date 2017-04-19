@@ -78,7 +78,9 @@
 											<div class="panel-body">
 												<div class="form-group col-md-12" id="processoSeletivo">
 													<label>Etapas dos processos de seleção: </label> <input
-														type="button" id="gerarCampo" value="Gerar etapa do processo seletivo"> <br>
+														type="button" id="gerarCampo"
+														value="Gerar etapa do processo seletivo"
+														class="btn btn-sm btn-primary"> <br> <br>
 												</div>
 
 
@@ -337,6 +339,8 @@
 
 	<script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 	<script>
+	var cont;
+	
 		$("body").on("click", "#aprovar-candidato", function(){
 			var inputs  = $(this).closest("tr").find("input[type=hidden]");
 			CKEDITOR.instances.editor.setData("");
@@ -366,56 +370,93 @@
 				}
 				});
 		})
-	
+	var x = "";
             CKEDITOR.replace('editor');
                   $('#alterarStatus').click(function() {
                         
-                        var data = CKEDITOR.instances.editor.getData();                    
+//                         var data = CKEDITOR.instances.editor.getData();                    
                         
-	                   	 var avaliacoes = [];
+// 	                   	 var avaliacoes = [];
+// 	                   	alert('rola1');
 	                   	 
-	                   	$(".avaliacaoCompetencia").each(function(){
-	                   		debugger;
-                            if($(this).prop("checked")){
+// 	                   	$(".avaliacaoCompetencia").each(function(){
+// 	                   		debugger;
+//                             if($(this).prop("checked")){
                                 
-//                                  var avaliacaoCompetencia = {
-//                                         competencia : {
-//                                             id : ""
-//                                         },
-//                                         avaliacao : {
-//                                             id : ""
-//                                         }
-//                                      };
+// //                                  var avaliacaoCompetencia = {
+// //                                         competencia : {
+// //                                             id : ""
+// //                                         },
+// //                                         avaliacao : {
+// //                                             id : ""
+// //                                         }
+// //                                      };
                                  
-                                var idAvaliacao = $(this).attr("alt");
-                                var idCompetencia = $(this).val();
+//                                 var idAvaliacao = $(this).attr("alt");
+//                                 var idCompetencia = $(this).val();
                                 
-//                                 avaliacaoCompetencia.avaliacao.id = idAvaliacao;
-//                                 avaliacaoCompetencia.competencia.id = idCompetencia;
+// //                                 avaliacaoCompetencia.avaliacao.id = idAvaliacao;
+// //                                 avaliacaoCompetencia.competencia.id = idCompetencia;
                                 
-//                                 console.log(avaliacaoCompetencia);
-//                                 avaliacoes.push(avaliacaoCompetencia);
-								   avaliacoes.push(idAvaliacao);
-								   avaliacoes.push(idCompetencia);
-                            }
-                        });
-	            		
+// //                                 console.log(avaliacaoCompetencia);
+// //                                 avaliacoes.push(avaliacaoCompetencia);
+// 								   avaliacoes.push(idAvaliacao);
+// 								   avaliacoes.push(idCompetencia);
+// 								   alert('rola2');
+//                             }
+//                         });
+
+	                   	var provasDescricoes  = [];
+	                
+	                   	var i = 0;
+	                   	$(".processoSeletivo").each(function(){
+		                   	var provaDescricao = {
+		                   			"prova" : "",
+		                   			"descricao" : ""
+		                   	};
+		                   	
+	                   	    var select = $(this).find("select").val();
+	                   	    var input = $(this).find("input").val();
+	                   	    
+	                   	 	provaDescricao.prova = select;
+	                   		provaDescricao.descricao = input;
+	                		
+//	                   		if(provaDescricao.prova != "" && provaDescricao.descricao != ""){
+	                   			provasDescricoes[i].push(provaDescricao.value);
+//	                   		}
+	                   			i++;
+	                   	});                  	
+	                   	
+//                         $.each(cont, function() {
+//                      	   var prova = {
+//                      			   nome: $('#descricao'+cont).val()
+//                      			   }
+//                      	   provas.push(prova);
+                     	   
+//                      	  alert('rola3');
+//                      	   });
+	                   	x =  JSON.stringify(provasDescricoes);
                         $.ajax({
                               url : "alterar-status-candidato",
-                              type : "POST",
+                              method : "POST",
                               dataType : "JSON",
                               data : {
                                    'idCandidato' : $('#hdn-id-candidato').val(),
                                    'parecer' : $('#parecer').val(),
                                    'proposta' : CKEDITOR.instances.editor.getData(),
-                                   'idStatus' : $('#hdn-status').val()
-
+                                   'idStatus' : $('#hdn-status').val(),
+                                   'parecerTecnico' : $('#parecerTecnico').val(),
+                                   
+                                   'processoSeletivo' : JSON.stringify(provasDescricoes),
                               },
+                              contentType: "text",
                               success : function(data) {
                                    location.reload();
+                                   
+                                   alert('deu bom ?');
                               },
                               error : function(e) {
-                                   location.reload();
+                                   alert('deu ruim');
                               }
                         });
                         
@@ -425,6 +466,7 @@
                   $('#hdn-id-candidato').val(idCandidato);
                   $('#hdn-proposta').val(proposta);
                   $('#hdn-status').val(idStatus);
+                  alert('rola7');
             
             }
             
@@ -437,23 +479,23 @@
         		}).fail(function(jqXHR, textStatus) {
         			alert('fail');
         		});
+            	alert('rola8');
             }
             
         /*gerador de campo*/    
             var cont = 0;
             $("#gerarCampo").click(function(){
             	var campos = 
-            	" <div class='div"+cont+"'>" +
-            	"<select class='classe'>" +
-            	"<c:forEach var='selecao' items='${}'>" +
-            	"<option value='volvo'>Volvo</option>"+
+            	" <div class='div"+cont+" processoSeletivo'>" +
+            	"<select>" +
+            	"<br>" +
+            	"<option value='0'>Selecione:</option>"+
+            	"<c:forEach var='selecao' items='${provas}'>" +
+            	"<option value='${selecao.id}'>${selecao.nome}</option>"+
             	"</c:forEach>" +
-            	"<option value='saab'>Saab</option>"+
-            	"<option value='mercedes'>Mercedes</option>"+
-            	"<option value='audi'>Audi</option>"+
             	"</select>"+
-            	"<input class='classe' type='text' />"+
-            	"<input type='button' id='btnRemover' onclick='remover("+ cont +")'value='remover'>"+
+            	"<input type='text' id='descricao"+ cont +"'/>"+
+            	"<input type='button' id='btnRemover' onclick='remover("+ cont +")'value='Remover campo'  class='btn btn-sm btn-danger'>"+
             	"</div>" ;
             	
             	cont++;
@@ -465,6 +507,7 @@
        /*remove os campos*/
             function remover(id){
             	$(".div"+id).remove();
+            	cont--;
             }
 /* paginação */
 	$(function	()	{
