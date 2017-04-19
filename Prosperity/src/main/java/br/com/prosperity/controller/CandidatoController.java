@@ -52,6 +52,7 @@ import br.com.prosperity.business.TipoCursoBusiness;
 import br.com.prosperity.business.VagaBusiness;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.exception.BusinessException;
+import br.com.prosperity.util.GeradorEmail;
 
 @SuppressWarnings("unused")
 @Controller

@@ -3,21 +3,25 @@ package br.com.prosperity.entity;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbVagaCandidato")
+@NamedQuery(name = "countCandidatosVaga", query = "SELECT count(vc) FROM VagaCandidatoEntity vc WHERE vc.vaga.id = 1200")
 public class VagaCandidatoEntity {
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
 	@Column(name = "idVagaCandidato", unique = true, nullable = false)
 	private Integer idVagaCandidato;
 
-	@OneToOne(cascade = CascadeType.REFRESH)
+	@ManyToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "idVaga")
 	private VagaEntity vaga;
 
@@ -25,6 +29,10 @@ public class VagaCandidatoEntity {
 	@JoinColumn(name = "idCanalInformacao")
 	private CanalInformacaoEntity canalInformacao;
 
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name = "idCandidato")
+	private CandidatoEntity candidato;
+	
 	public Integer getIdVagaCandidato() {
 		return idVagaCandidato;
 	}
@@ -47,6 +55,14 @@ public class VagaCandidatoEntity {
 
 	public void setCanalInformacao(CanalInformacaoEntity canalInformacao) {
 		this.canalInformacao = canalInformacao;
+	}
+
+	public CandidatoEntity getCandidato() {
+		return candidato;
+	}
+
+	public void setCandidato(CandidatoEntity candidato) {
+		this.candidato = candidato;
 	}
 
 }

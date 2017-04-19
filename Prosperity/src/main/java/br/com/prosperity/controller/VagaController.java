@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
@@ -44,8 +45,6 @@ import br.com.prosperity.business.VagaBusiness;
 @Controller
 @RequestMapping("vaga")
 public class VagaController {
-	
-
 
 	@Autowired
 	private VagaBusiness vagaBusiness;
@@ -92,6 +91,16 @@ public class VagaController {
 	@Autowired
 	private StatusVagaBusiness statusVagaBusiness;
 	
+	private void paginacao(Integer page, Model model){
+
+		Integer startpage = 1;
+		Integer endpage = vagaBusiness.totalPagina();
+	    
+		model.addAttribute("startpage", startpage);
+		model.addAttribute("endpage", endpage);
+		model.addAttribute("page",page);
+	}
+	
 	@RequestMapping(value="/visualizarCandidato/{id}", method = RequestMethod.GET)
 	public String visualizarCandidato(@PathVariable Integer id) {
 		
@@ -99,10 +108,20 @@ public class VagaController {
 	}
 
 	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
-	public String cliente(Model model, VagaBean vaga) {
+	public String cliente(@RequestParam(value = "page", required = false) Integer page,Model model, VagaBean vaga) {
+		if (page == null) {
+			page = 1;
+		}
+		List<VagaBean> vagas = vagaBusiness.filtroVaga(vaga, page);
+		//Paginando
+		paginacao(page,model);
+		
+		model.addAttribute("vagas", vagas);
 
+		//List<VagaBean> listarDecrescente = vagaBusiness.listarDecrescente();
+		
 		// FAZ APARECER A TABELA
-		model.addAttribute("vagas", vagaBusiness.listarDecrescente());
+		//model.addAttribute("vagas", vagaBusiness.listarDecrescente());
 		
 		/*model.addAttribute("vagas", vagaBusiness.listar());*/
 
@@ -123,6 +142,8 @@ public class VagaController {
 		List<StatusBean> listaStatusDrop = statusBusiness.obterStatusVaga();
 		model.addAttribute("listaStatusDrop", listaStatusDrop);
 
+		vagaBusiness.obterQtdCandidatos(1200);
+		
 		/*
 		 * List<StatusVagaBean> listaStatusVaga =
 		 * statusVagaBusiness.obterTodos(); StatusVagaBean vagaStatus = new
@@ -135,15 +156,20 @@ public class VagaController {
 	}
 
 	@RequestMapping(value = { "filtro" }, method = RequestMethod.GET)
-	public String filtrar(Model model, VagaBean vaga) {
-		if (vaga.getNomeVaga().isEmpty() && vaga.getDataAberturaDe() == null && vaga.getDataAberturaPara() == null
+	public String filtrar(@RequestParam(value = "page", required = false) Integer page, Model model, VagaBean vaga) {
+		/*if (vaga.getNomeVaga().isEmpty() && vaga.getDataAberturaDe() == null && vaga.getDataAberturaPara() == null
 				&& vaga.getStatus().get(0).getStatus().getNome().equals("Selecione")) {
 			return "redirect:consultar";
 
+		}*/
+		if (page == null) {
+			page = 1;
 		}
+		List<VagaBean> vagas = vagaBusiness.filtroVaga(vaga, page);
+		//Paginando
+		paginacao(page,model);
 		
-		List<VagaBean> listaVagaFiltro = vagaBusiness.filtroVaga(vaga);
-		model.addAttribute("vagas", listaVagaFiltro);
+		model.addAttribute("vagas", vagas);
 
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
 		model.addAttribute("listaCargo", listaCargo);
