@@ -52,6 +52,7 @@ import br.com.prosperity.business.TipoCursoBusiness;
 import br.com.prosperity.business.VagaBusiness;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.exception.BusinessException;
+import br.com.prosperity.util.GeradorEmail;
 
 @SuppressWarnings("unused")
 @Controller
@@ -131,14 +132,14 @@ public class CandidatoController<PaginarCandidato> {
 	@RequestMapping(value = "salvar", method = RequestMethod.POST)
 	public String salvarCandidato(@Valid @ModelAttribute("candidatoBean") CandidatoBean candidatoBean,
 			BindingResult result, @RequestParam("file") MultipartFile file, Model model) throws BusinessException {
+		
 		if (result.hasErrors()) {
 			model.addAttribute("erro", result.getErrorCount());
 			model.addAttribute("listaErros", buildErrorMessage(result.getFieldErrors()));
 			model.addAttribute("candidato", candidatoBean);
-
 			obterDominiosCandidato(model);
-
 			return "candidato/cadastrar-candidato";
+			
 		} else {
 			try{
 				candidatoBusiness.inserir(candidatoBean);

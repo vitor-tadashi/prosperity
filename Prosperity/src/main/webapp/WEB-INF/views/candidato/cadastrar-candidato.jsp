@@ -44,8 +44,9 @@
 						<div id="textDiv">
 							<c:forEach var="erro" items="${listaErros}">
 								<p>${erro}</p>
-
-							</c:forEach>
+									</c:forEach>
+							
+							<!-- MENSAGEM DE SUCESSO -->
 							<c:if test="${not empty sucesso}">
 									<div id="msg-sucesso" class="alert alert-success msg-margin">
 										<ul>
@@ -54,6 +55,7 @@
 									</div>
 								</c:if>
 						</div>
+						
 						<div id="textDiv1"></div>
 						<div id="textDiv2"></div>
 						<div id="textDiv3"></div>
@@ -303,6 +305,7 @@
 
 	<script type="text/javascript">
 	
+	<!-- MENSAGEM DE SUCESSO-->
 	  $(document).ready(function () {
 	        setTimeout(function () {
 	            $('#msg-sucesso').fadeOut(1500);
