@@ -569,8 +569,8 @@
 											</div> <!-- /btn-group -->
 										</td>
 									</tr>
-									 <tr >
-            <td colspan="8" class="hiddenRow"><div class="accordian-body collapse" id="demo${count.index}">
+									 <tr>
+            <td colspan="8" class="hiddenRow" style="background-color: #c7dbe5"><div class="accordian-body collapse" id="demo${count.index}">
             
             	<br/>
             		<div class="col-sm-12" style="margin-left: 5px">
@@ -579,35 +579,35 @@
 															    width: 200px;
 															    margin-left: 5px;">
             				<label>Data de Abertura</label>
-            					<p>${vaga.dataAbertura}</p>
+            					<p style="margin-top: -5px;">${vaga.dataAbertura}</p>
             			</div>
             			<div class="col-md-3 well well-sm btn btn-info" style="    height: 56px;
     margin-right: 5px;
     width: 200px;
     margin-left: 5px;">
             				<label>Data de Aprovação</label>
-            					<p>12/12/2019</p>
+            					<p style="margin-top: -5px;">${vaga.dataAprovacao}</p>
             			</div>
             			<div class="col-md-3 well well-sm btn btn-danger" style="    height: 56px;
     margin-right: 5px;
     width: 200px;
     margin-left: 5px;">
             				<label>Data de Fechamento</label>
-            					<p>12/12/2019</p>
+            					<p style="margin-top: -5px;">${vaga.dataFechamento}</p>
             			</div>
             			<div class="col-md-3 well well-sm btn btn-success" style="    height: 56px;
     margin-right: 5px;
     width: 200px;
     margin-left: 5px;">
             				<label>Proposta</label>
-            					<p>R$ ${vaga.valorPretensao}</p>
+            					<p style="margin-top: -5px;">R$ ${vaga.valorPretensao}</p>
             			</div>
             			<div class="col-md-3 well well-sm btn btn-warning" style="    height: 56px;
     margin-right: 5px;
     width: 200px;
     margin-left: 5px;">
             				<label>Numero de Candidatos</label>
-            					<p>19</p>
+            					<p style="margin-top: -5px;">${vaga.countCandidatos}</p>
             			</div>
             		</div>
             	

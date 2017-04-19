@@ -101,8 +101,10 @@ public class VagaController {
 	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
 	public String cliente(Model model, VagaBean vaga) {
 
+		List<VagaBean> listarDecrescente = vagaBusiness.listarDecrescente();
+		
 		// FAZ APARECER A TABELA
-		model.addAttribute("vagas", vagaBusiness.listarDecrescente());
+		model.addAttribute("vagas", listarDecrescente);
 		
 		/*model.addAttribute("vagas", vagaBusiness.listar());*/
 
@@ -123,6 +125,8 @@ public class VagaController {
 		List<StatusBean> listaStatusDrop = statusBusiness.obterStatusVaga();
 		model.addAttribute("listaStatusDrop", listaStatusDrop);
 
+		vagaBusiness.obterQtdCandidatos(1200);
+		
 		/*
 		 * List<StatusVagaBean> listaStatusVaga =
 		 * statusVagaBusiness.obterTodos(); StatusVagaBean vagaStatus = new

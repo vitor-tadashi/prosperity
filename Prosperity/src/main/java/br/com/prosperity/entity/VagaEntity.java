@@ -26,7 +26,7 @@ import javax.persistence.TemporalType;
 				+ "LEFT JOIN sv.status s WHERE sv.id = (SELECT MAX(sv.id) FROM v.statusVagaEntity sv WHERE sv.vaga.id = v.id) "
 				+ "AND sv.status.id IN(?1) ORDER BY v.id DESC"),
 		@NamedQuery(name = "obterPorId", query = "SELECT u FROM VagaEntity u WHERE u.id = ?1"),
-		@NamedQuery(name = "findAllDesc", query = "SELECT u FROM VagaEntity u ORDER BY u.id DESC"),
+		@NamedQuery(name = "findAllDesc", query = "SELECT u FROM VagaEntity u LEFT OUTER JOIN u.statusVagaEntity v WHERE v.situacao = TRUE ORDER BY u.id DESC"),
 
 		// @NamedQuery(name="listarVagaFiltrado", query="SELECT u FROM
 		// VagaEntity u LEFT JOIN u.statusVagaEntity p LEFT JOIN p.status e
@@ -36,7 +36,8 @@ import javax.persistence.TemporalType;
 		@NamedQuery(name = "listarVagasAtivas", query = "SELECT v FROM VagaEntity v LEFT JOIN v.statusVagaEntity sv where sv.status.id = ?1"),
 		@NamedQuery(name = "listarVagaFiltrado", query = "SELECT u FROM VagaEntity u LEFT OUTER JOIN u.statusVagaEntity p left join p.status s "
 				+ "WHERE u.nomeVaga like ?1 and s.id = ?2 and u.dataAbertura between ?3 and ?4"),
-		@NamedQuery(name = "ultimoCadastro", query = "SELECT MAX(u.id) FROM VagaEntity u") })
+		@NamedQuery(name = "ultimoCadastro", query = "SELECT MAX(u.id) FROM VagaEntity u")
+})
 
 @Entity
 @Table(name = "tbVaga")
@@ -137,6 +138,10 @@ public class VagaEntity {
 	@Column(name = "telResponsavel")
 	private String telResponsavel;
 
+	@OneToMany(fetch=FetchType.LAZY)
+	@JoinColumn(name = "idVaga")
+	private List<VagaCandidatoEntity> vagaCandidatoEntity;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -366,6 +371,14 @@ public class VagaEntity {
 
 	public void setTelResponsavel(String telResponsavel) {
 		this.telResponsavel = telResponsavel;
+	}
+
+	public List<VagaCandidatoEntity> getVagaCandidatoEntity() {
+		return vagaCandidatoEntity;
+	}
+
+	public void setVagaCandidatoEntity(List<VagaCandidatoEntity> vagaCandidatoEntity) {
+		this.vagaCandidatoEntity = vagaCandidatoEntity;
 	}
 
 	// public AvaliadorEntity getAvaliadorEntity() {

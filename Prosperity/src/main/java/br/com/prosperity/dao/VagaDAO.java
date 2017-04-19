@@ -36,7 +36,7 @@ public class VagaDAO extends GenericDAOImpl<VagaEntity, Integer> {
 	public List<VagaEntity> findByCriteria(final List<Criterion> criterion) {
 		List<VagaEntity> ret = null;
 		try {
-			ret = findByCriteria(null, null, -1, -1, criterion);
+			ret = findByCriteria("id", true, -1, -1, criterion);
 		} catch (Exception e) {
 
 		}

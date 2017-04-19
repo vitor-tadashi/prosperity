@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.prosperity.bean.AvaliadorVagaBean;
 import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.SituacaoVagaBean;
-import br.com.prosperity.bean.StatusVagaBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.converter.AvaliadorVagaConverter;
@@ -29,9 +28,11 @@ import br.com.prosperity.dao.AvaliadorVagaDAO;
 import br.com.prosperity.dao.StatusDAO;
 import br.com.prosperity.dao.StatusVagaDAO;
 import br.com.prosperity.dao.UsuarioDAO;
+import br.com.prosperity.dao.VagaCandidatoDAO;
 import br.com.prosperity.dao.VagaDAO;
 import br.com.prosperity.entity.AvaliadorVagaEntity;
 import br.com.prosperity.entity.StatusVagaEntity;
+import br.com.prosperity.entity.VagaCandidatoEntity;
 import br.com.prosperity.entity.VagaEntity;
 import br.com.prosperity.enumarator.StatusVagaEnum;
 
@@ -51,7 +52,7 @@ public class VagaBusiness {
 	private SenioridadeBusiness senioridadeBusinness;
 
 	@Autowired
-	private CargoBusiness cargoBusinness;
+	private VagaCandidatoDAO vagaCandidatoDAO;
 
 	@Autowired
 	private StatusDAO statusDAO;
@@ -315,5 +316,10 @@ public class VagaBusiness {
 			listaStatus.add(listas);
 		}
 		return listaStatus;
+	}
+
+	public Long obterQtdCandidatos(Integer idVaga) {
+		Long count = vagaCandidatoDAO.count("countCandidatosVaga");
+		return count;
 	}
 }
