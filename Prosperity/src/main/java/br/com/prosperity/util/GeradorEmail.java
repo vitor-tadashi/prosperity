@@ -53,8 +53,7 @@ public class GeradorEmail {
 		props.put("mail.smtp.host", mailSMTPServer); // server SMTP do email
 		props.put("mail.smtp.auth", "true"); // ativa autenticacao
 		props.put("mail.smtp.user", from); // usuario ou seja, a conta que esta
-											// enviando o email (tem que ser do
-											// GMAIL)
+											// enviando o email
 		props.put("mail.debug", "true");
 		props.put("mail.smtp.port", mailSMTPServerPort); // porta
 		props.put("mail.smtp.socketFactory.port", mailSMTPServerPort); // mesma
