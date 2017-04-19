@@ -53,6 +53,7 @@ import br.com.prosperity.entity.StatusFuturoEntity;
 import br.com.prosperity.entity.VagaCandidatoEntity;
 import br.com.prosperity.entity.VagaEntity;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
+import br.com.prosperity.exception.BusinessException;
 import br.com.prosperity.util.FormatUtil;
 import br.com.prosperity.util.GeradorEmail;
 
@@ -242,11 +243,10 @@ public class CandidatoBusiness {
 	}
 
 	@Transactional
-	public void inserir(CandidatoBean candidatoBean) {
+	public void inserir(CandidatoBean candidatoBean) throws BusinessException {
 		if (candidatoBean.getId() == null) {
 			if (verificarCandidatura(candidatoBean) == true) {
 				CandidatoEntity candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoBean);
-
 				SituacaoCandidatoBean situacaoCandidato = new SituacaoCandidatoBean();
 
 				candidatoEntity.getFormacao()
@@ -373,12 +373,14 @@ public class CandidatoBusiness {
 
 		return statusCandidatoEntity;
 	}
-@Transactional
+	@Transactional
 	public CandidatoBean obterPorCPF(String cpf) {
 		List<CandidatoEntity> candidatosEntity = null;
 
 		candidatosEntity = candidatoDAO.findByNamedQuery("obterPorCPF", cpf);
-
+		if (candidatosEntity.isEmpty()) {
+			return null;
+		}
 		for (CandidatoEntity candidatoEntity : candidatosEntity) {
 
 			candidatoBean = candidatoConverter.convertEntityToBean(candidatoEntity);
@@ -463,5 +465,9 @@ public class CandidatoBusiness {
 			}
 		}
 		return listaStatus;	
+	}
+	@Transactional
+	public void atualizarCandidato(CandidatoBean bean) {
+		candidatoDAO.insert(candidatoConverter.convertBeanToEntity(bean));
 	}
 }
