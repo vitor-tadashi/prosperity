@@ -3,8 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -43,32 +41,31 @@
 							<div class="form-group col-md-6">
 								<label class="col-xs-5 control-label">Nome do candidato:</label>
 								<div class="col-xs-7">
-									<p class="form-control-static" id="nome" name="nome">${candidato.nome}</p>
+									<p class="form-control-static" id="nome">${candidato.nome}</p>
 								</div>
 							</div>
 							<div class="form-group col-md-6">
 								<label class="col-xs-5 control-label">Email:</label>
 								<div class="col-xs-7">
-									<p class="form-control-static" id="email" name="email">${candidato.email}</p>
+									<p class="form-control-static" id="email">${candidato.email}</p>
 								</div>
 							</div>
 							<div class="form-group col-md-6">
 								<label class="col-xs-5 control-label">CPF:</label>
 								<div class="col-xs-7">
-									<p class="form-control-static" id="cpf" name="cpf">${candidato.cpf}</p>
+									<p class="form-control-static" id="cpf">${candidato.cpf}</p>
 								</div>
 							</div>
 							<div class="form-group col-md-6">
 								<label class="col-xs-5 control-label">RG:</label>
 								<div class="col-xs-7">
-									<p class="form-control-static" id="rg" name="rg">${candidato.rg}</p>
+									<p class="form-control-static" id="rg">${candidato.rg}</p>
 								</div>
 							</div>
 							<div class="form-group col-md-6">
 								<label class="col-xs-5 control-label">Data nascimento:</label>
 								<div class="col-xs-7">
-									<p class="form-control-static" id="dtNascimento"
-										name="dtNascimento">
+									<p class="form-control-static" id="dtNascimento">
 										<fmt:formatDate value="${candidato.dataNascimento}"
 											pattern="dd/MM/yyyy" />
 									</p>
@@ -77,51 +74,52 @@
 							<div class="form-group col-md-6">
 								<label class="col-xs-5 control-label">Telefone:</label>
 								<div class="col-xs-7">
-									<p class="form-control-static" id="telefone" name="telefone">${candidato.contato.telefone}</p>
+									<p class="form-control-static" id="telefone">${candidato.contato.telefone}</p>
 								</div>
 							</div>
 							<div class="form-group col-md-6">
 								<label class="col-xs-5 control-label">Cidade:</label>
 								<div class="col-xs-7">
-									<p class="form-control-static" id="cidade" name="cidade">${candidato.endereco.cidade}</p>
+									<p class="form-control-static" id="cidade">${candidato.endereco.cidade}</p>
 								</div>
 							</div>
 							<div class="form-group col-md-6">
 								<label class="col-xs-5 control-label">Estado:</label>
 								<div class="col-xs-7">
-									<p class="form-control-static" id="estado" name="estado">${candidato.endereco.estado}</p>
+									<p class="form-control-static" id="estado">${candidato.endereco.estado}</p>
 								</div>
 							</div>
 							<div class="form-group col-md-6">
 								<label class="col-xs-5 control-label">Curso:</label>
 								<div class="col-xs-7">
-									<p class="form-control-static" id="nomeCurso" name="nomeCurso">${candidato.formacao.nomeCurso}</p>
+									<p class="form-control-static" id="nomeCurso">${candidato.formacao.nomeCurso}</p>
 								</div>
 							</div>
 							<div class="form-group col-md-6">
 								<label class="col-xs-5 control-label">Instituição:</label>
 								<div class="col-xs-7">
 									<p class="form-control-static" id="instituicao"
-										name="instituicao">${candidato.formacao.nomeInstituicao}</p>
+										>${candidato.formacao.nomeInstituicao}</p>
 								</div>
 							</div>
 							<div class="form-group col-md-6">
 								<label class="col-xs-5 control-label">Tipo de curso:</label>
 								<div class="col-xs-7">
-									<p class="form-control-static" id="tipoCurso" name="tipoCurso">${candidato.formacao.tipoCurso.nome}</p>
+									<p class="form-control-static" id="tipoCurso">${candidato.formacao.tipoCurso.nome}</p>
 								</div>
 							</div>
 							<div class="form-group col-md-6">
 								<label class="col-xs-5 control-label">Situação atual:</label>
 								<div class="col-xs-7">
-									<p class="form-control-static" id="situacaoAtual"
-										name="situacaoAtual">${candidato.formacao.situacaoAtual.descricao}</p>
+									<p class="form-control-static" id="situacaoAtual">
+										${candidato.formacao.situacaoAtual.descricao}
+									</p>
 								</div>
 							</div>
 							<div class="form-group col-md-6">
 								<label class="col-xs-5 control-label">Mês/Ano conclusão:</label>
 								<div class="col-xs-7">
-									<p class="form-control-static" id="conclusao" name="conclusao">
+									<p class="form-control-static" id="conclusao">
 										<fmt:formatDate value="${candidato.formacao.dataConclusao}"
 											pattern="dd/MM/yyyy" />
 									</p>
@@ -131,9 +129,9 @@
 								<label class="col-xs-5 control-label">Pretensão
 									salarial:</label>
 								<div class="col-xs-7">
-									<p class="form-control-static" id="pretensao" name="pretensao">
+									<p class="form-control-static" id="pretensao">
 										<fmt:formatNumber value="${candidato.valorPretensao}"
-											minFractionDigits="2" type="currency" />
+											minFractionDigits="2" type="currency" pattern="" />
 									</p>
 								</div>
 							</div>
