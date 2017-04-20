@@ -1,5 +1,7 @@
 package br.com.prosperity.business;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Component;
 import br.com.prosperity.bean.ProvaCandidatoBean;
 import br.com.prosperity.converter.ProvaCandidatoConverter;
 import br.com.prosperity.dao.ProvaCandidatoDAO;
+import br.com.prosperity.entity.ProvaCandidatoEntity;
 
 @Component
 public class ProvaCandidatoBusiness {
@@ -18,7 +21,10 @@ public class ProvaCandidatoBusiness {
 	private ProvaCandidatoConverter provaCandidatoConverter;
 
 	@Transactional
-	public void inserir(ProvaCandidatoBean provaCandidato) {
-		provaCandidatoDAO.insert(provaCandidatoConverter.convertBeanToEntity(provaCandidato));
+	public void inserir(List<ProvaCandidatoBean> provas) {
+		List<ProvaCandidatoEntity> provasCandidatoEntity = provaCandidatoConverter.convertBeanToEntity(provas);
+		for(ProvaCandidatoEntity provaCandidato: provasCandidatoEntity){
+			provaCandidatoDAO.insert(provaCandidato);
+		}
 	}
 }
