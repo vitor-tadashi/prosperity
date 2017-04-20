@@ -66,7 +66,7 @@
 											<input type="hidden" id="hdn-id-candidato" /> <input
 												type="hidden" id="hdn-status" />
 											<textarea class="form-control" id="parecer"
-												style="margin-left: 0px; width: 770px" name="parecer">
+												style="margin-left: 0px; width: 800px" name="parecer">
 											</textarea>
 										</div>
 									</div>
