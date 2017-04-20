@@ -125,7 +125,7 @@ public class CandidatoController<PaginarCandidato> {
 	public String cadastrarCandidato(Model model) {
 
 		obterDominiosCandidato(model);
-
+		
 		return "candidato/cadastrar-candidato";
 	}
 
