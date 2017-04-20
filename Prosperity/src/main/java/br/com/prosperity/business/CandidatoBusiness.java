@@ -242,6 +242,16 @@ public class CandidatoBusiness {
 		return beans;
 
 	}
+	
+//	@Transactional
+//	public void inserir(CandidatoBean candidatoBean) throws BusinessException {
+//		CandidatoEntity candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoBean);
+//		candidatoDAO.insert(candidatoEntity);
+//		//inserirAvaliadores(candidatoEntity, candidatoBean.getVagaBean().getVagaCandidatoBean().get(0).getId());
+//		SituacaoCandidatoBean situacaoCandidato = new SituacaoCandidatoBean();
+//		situacaoCandidato.setIdCandidato(candidatoEntity.getId());
+//		situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
+//	}
 
 	@Transactional
 	public void inserir(CandidatoBean candidatoBean) throws BusinessException {
@@ -276,13 +286,13 @@ public class CandidatoBusiness {
 				}
 				candidatoEntity.setVagas(vagas);
 
-				String replace = candidatoEntity.getCpf().replace(".", "").replace("-", "");
+				String replaceCPF = candidatoEntity.getCpf().replace(".", "").replace("-", "");
 				String replaceRG = candidatoEntity.getRg().replace(".", "").replace("-", "");
 				String replaceTelefone = candidatoEntity.getContato().getTelefone().replace("(", "").replace(")", "")
 						.replace("-", "");
 
 				candidatoEntity.getContato().setTelefone(replaceTelefone);
-				candidatoEntity.setCpf(replace);
+				candidatoEntity.setCpf(replaceCPF);
 				candidatoEntity.setRg(replaceRG);
 
 				candidatoDAO.insert(candidatoEntity);
@@ -310,6 +320,15 @@ public class CandidatoBusiness {
 			CandidatoEntity candidatoEntity = candidatoDAO.findById(candidatoBean.getId());
 
 			candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoEntity, candidatoBean);
+
+			String replaceCPF = candidatoEntity.getCpf().replace(".", "").replace("-", "");
+			String replaceRG = candidatoEntity.getRg().replace(".", "").replace("-", "");
+			String replaceTelefone = candidatoEntity.getContato().getTelefone().replace("(", "").replace(")", "")
+					.replace("-", "");
+
+			candidatoEntity.getContato().setTelefone(replaceTelefone);
+			candidatoEntity.setCpf(replaceCPF);
+			candidatoEntity.setRg(replaceRG);
 
 			candidatoDAO.update(candidatoEntity);
 		}
@@ -390,7 +409,7 @@ public class CandidatoBusiness {
 	public CandidatoBean obterPorCPF(String cpf) {
 		List<CandidatoEntity> candidatosEntity = null;
 
-		candidatosEntity = candidatoDAO.findByNamedQuery("obterPorCPF", cpf);
+		candidatosEntity = candidatoDAO.findByNamedQuery("obterPorCPF", cpf.replace(".", "").replace("-", ""));
 		if (candidatosEntity.isEmpty()) {
 			return null;
 		}
@@ -478,10 +497,5 @@ public class CandidatoBusiness {
 			}
 		}
 		return listaStatus;
-	}
-
-	@Transactional
-	public void atualizarCandidato(CandidatoBean bean) {
-		candidatoDAO.insert(candidatoConverter.convertBeanToEntity(bean));
 	}
 }

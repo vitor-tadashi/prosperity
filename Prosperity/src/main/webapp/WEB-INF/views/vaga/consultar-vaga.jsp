@@ -470,16 +470,19 @@ li a.active {
 							<form action="filtro" method="GET" class="row">
 								<div class="col-md-4">
 									<div class="form-group">
-										<label>Vaga</label> <input class="form-control" id="filtro1" name="nomeVaga" placeholder="Digite o nome de uma vaga">
+										<label>Vaga</label> <input class="form-control" id="filtro1" name="nomeVaga" placeholder="Digite o nome de uma vaga" value="${filtroVaga.nomeVaga }">
 									</div>
 								</div>
 
 								<div class="col-md-5">
 									<label for="">Data</label>
 									<div class="input-group">
-										<input type="date" name="dataAberturaDe" id="data1" class="form-control"> <span
-											class="input-group-addon">até</span> <input type="date"
-											class="form-control" name="dataAberturaPara" id="data2">
+									<fmt:formatDate value="${filtroVaga.dataAberturaDe}"
+														pattern="dd/MM/yyyy" var="d1" />
+									<fmt:formatDate value="${filtroVaga.dataAberturaPara}"
+														pattern="dd/MM/yyyy" var="d2" />
+										<input type="date" name="dataAberturaDe" id="data1" class="form-control" value="${d1 }"> <span
+											class="input-group-addon">até</span> <input type="date" class="form-control" name="dataAberturaPara" id="data2" value="${d2 }">
 									</div>
 								</div>
 
@@ -488,7 +491,7 @@ li a.active {
 									<select class="form-control" style="width: 130px;" id="status" name="status">
 											<option value="0">Selecione</option>
 										<c:forEach var="status" items="${listaStatusDrop}">
-												<option id="${status.id}"value="${status.id}">${status.nome}</option>
+												<option id="${status.id}"value="${status.id}" ${status.id == filtroVaga.status[0].status.nome? 'selected="selected"' : ''} >${status.nome}</option>
 										</c:forEach>
 									</select>
 								</div>
@@ -584,28 +587,28 @@ li a.active {
 															    width: 200px;
 															    margin-left: 5px;">
             				<label>Data de Abertura</label>
-            					<p style="margin-top: -5px;">${vaga.dataAbertura}</p>
+            					<p style="margin-top: -5px;"><fmt:formatDate value="${vaga.dataAbertura}" pattern="dd/MM/yyyy" /></p>
             			</div>
             			<div class="col-md-3 well well-sm btn btn-info" style="    height: 56px;
     margin-right: 5px;
     width: 200px;
     margin-left: 5px;">
             				<label>Data de Aprovação</label>
-            					<p style="margin-top: -5px;">${vaga.dataAprovacao}</p>
+            					<p style="margin-top: -5px;"><fmt:formatDate value="${vaga.dataAprovacao}" pattern="dd/MM/yyyy" /></p>
             			</div>
             			<div class="col-md-3 well well-sm btn btn-danger" style="    height: 56px;
     margin-right: 5px;
     width: 200px;
     margin-left: 5px;">
             				<label>Data de Fechamento</label>
-            					<p style="margin-top: -5px;">${vaga.dataFechamento}</p>
+            					<p style="margin-top: -5px;"><fmt:formatDate value="${vaga.dataFechamento}" pattern="dd/MM/yyyy" /></p>
             			</div>
             			<div class="col-md-3 well well-sm btn btn-success" style="    height: 56px;
     margin-right: 5px;
     width: 200px;
     margin-left: 5px;">
             				<label>Proposta</label>
-            					<p style="margin-top: -5px;">R$ ${vaga.valorPretensao}</p>
+            					<p style="margin-top: -5px;">R$ <fmt:formatNumber pattern="#,##0.00" value="${vaga.valorPretensao}" /></p>
             			</div>
             			<div class="col-md-3 well well-sm btn btn-warning" style="    height: 56px;
     margin-right: 5px;

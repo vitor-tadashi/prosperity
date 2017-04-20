@@ -58,6 +58,7 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		entity.setDataUltimoContato(bean.getDataUltimoContato());
 		entity.setProposta(bean.getProposta());
 		entity.setCurriculoTexto(bean.getCurriculoTexto());
+		entity.setVagas(vagaCandidatoConverter.convertBeanToEntity(bean.getVagas()));
 		
 		return entity;
 	}
@@ -103,6 +104,9 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		entity.setDataUltimoContato(bean.getDataUltimoContato());
 		entity.setProposta(bean.getProposta());
 		entity.setCurriculoTexto(bean.getCurriculoTexto());
+		if (entity.getVagas() == null || (entity.getVagas() != null && entity.getVagas().size() == 0)) {
+			entity.setVagas(vagaCandidatoConverter.convertBeanToEntity(bean.getVagas()));
+		}
 		
 		return entity;
 	}
@@ -136,6 +140,7 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		bean.setDataUltimoContato(entity.getDataUltimoContato());
 		bean.setProposta(entity.getProposta());
 		bean.setCurriculoTexto(entity.getCurriculoTexto());
+		bean.setVagas(vagaCandidatoConverter.convertEntityToBean(entity.getVagas()));
 		return bean;
 	}
 }

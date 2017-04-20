@@ -38,7 +38,7 @@ public class VagaBean {
 	private String descricaoFormacaoAcademica; //
 	private String descricaoPerfilComportamental; //
 	private String descricaoPerfilTecnico; //
-	@DateTimeFormat(pattern = "yyyy-mm-dd")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataAbertura; //
 	private Date dataAprovacao; //
 	private Date dataFechamento; //
@@ -46,15 +46,16 @@ public class VagaBean {
 	@Valid
 	private UsuarioBean usuarioBean;
 	private List<StatusVagaBean> status;
+	private String statusAtual;
 	private String nmResponsavel;
 	private String nmAreaResponsavel;
 	private String emailResponsavel;
 	private String telResponsavel;
 	private List<UsuarioBean> avaliadores;
 	private StatusVagaBean ultimoStatus;
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataAberturaDe;
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataAberturaPara;
 	private List<VagaCandidatoBean> vagaCandidatoBean;
 	
@@ -334,6 +335,14 @@ public class VagaBean {
 		
 		return avaliadores;
 	}
+	public String getStatusAtual() {
+		return statusAtual;
+	}
+
+	public void setStatusAtual(String statusAtual) {
+		this.statusAtual = statusAtual;
+	}
+
 
 	public List<VagaCandidatoBean> getVagaCandidatoBean() {
 		return vagaCandidatoBean;
