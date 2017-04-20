@@ -242,6 +242,16 @@ public class CandidatoBusiness {
 		return beans;
 
 	}
+	
+//	@Transactional
+//	public void inserir(CandidatoBean candidatoBean) throws BusinessException {
+//		CandidatoEntity candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoBean);
+//		candidatoDAO.insert(candidatoEntity);
+//		//inserirAvaliadores(candidatoEntity, candidatoBean.getVagaBean().getVagaCandidatoBean().get(0).getId());
+//		SituacaoCandidatoBean situacaoCandidato = new SituacaoCandidatoBean();
+//		situacaoCandidato.setIdCandidato(candidatoEntity.getId());
+//		situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
+//	}
 
 	@Transactional
 	public void inserir(CandidatoBean candidatoBean) throws BusinessException {
@@ -310,8 +320,7 @@ public class CandidatoBusiness {
 			CandidatoEntity candidatoEntity = candidatoDAO.findById(candidatoBean.getId());
 
 			candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoEntity, candidatoBean);
-			
-			
+
 			String replaceCPF = candidatoEntity.getCpf().replace(".", "").replace("-", "");
 			String replaceRG = candidatoEntity.getRg().replace(".", "").replace("-", "");
 			String replaceTelefone = candidatoEntity.getContato().getTelefone().replace("(", "").replace(")", "")
@@ -319,8 +328,8 @@ public class CandidatoBusiness {
 
 			candidatoEntity.getContato().setTelefone(replaceTelefone);
 			candidatoEntity.setCpf(replaceCPF);
-			candidatoEntity.setRg(replaceRG); 
-				
+			candidatoEntity.setRg(replaceRG);
+
 			candidatoDAO.update(candidatoEntity);
 		}
 	}
@@ -399,7 +408,7 @@ public class CandidatoBusiness {
 	@Transactional
 	public CandidatoBean obterPorCPF(String cpf) {
 		List<CandidatoEntity> candidatosEntity = null;
-		
+
 		candidatosEntity = candidatoDAO.findByNamedQuery("obterPorCPF", cpf.replace(".", "").replace("-", ""));
 		if (candidatosEntity.isEmpty()) {
 			return null;

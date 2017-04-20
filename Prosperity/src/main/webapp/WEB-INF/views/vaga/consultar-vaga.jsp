@@ -477,8 +477,12 @@ li a.active {
 								<div class="col-md-5">
 									<label for="">Data</label>
 									<div class="input-group">
-										<input type="date" name="dataAberturaDe" id="data1" class="form-control" value="${filtroVaga.dataAberturaDe }"> <span
-											class="input-group-addon">até</span> <input type="date" class="form-control" name="dataAberturaPara" id="data2" value="${filtroVaga.dataAberturaPara }">
+									<fmt:formatDate value="${filtroVaga.dataAberturaDe}"
+														pattern="dd/MM/yyyy" var="d1" />
+									<fmt:formatDate value="${filtroVaga.dataAberturaPara}"
+														pattern="dd/MM/yyyy" var="d2" />
+										<input type="date" name="dataAberturaDe" id="data1" class="form-control" value="${d1 }"> <span
+											class="input-group-addon">até</span> <input type="date" class="form-control" name="dataAberturaPara" id="data2" value="${d2 }">
 									</div>
 								</div>
 
@@ -487,7 +491,7 @@ li a.active {
 									<select class="form-control" style="width: 130px;" id="status" name="status">
 											<option value="0">Selecione</option>
 										<c:forEach var="status" items="${listaStatusDrop}">
-												<option id="${status.id}"value="${status.id}" ${status.id == filtroVaga.status[0].id? 'selected="selected"' : ''} >${status.nome}</option>
+												<option id="${status.id}"value="${status.id}" ${status.id == filtroVaga.status[0].status.nome? 'selected="selected"' : ''} >${status.nome}</option>
 										</c:forEach>
 									</select>
 								</div>
