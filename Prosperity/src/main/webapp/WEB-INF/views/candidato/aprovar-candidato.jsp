@@ -65,13 +65,11 @@
 										<div class="form-group">
 											<input type="hidden" id="hdn-id-candidato" /> <input
 												type="hidden" id="hdn-status" />
-											<textarea class="form-control" id="parecer"
-												style="margin-left: 0px; width: 770px" name="parecer">
-											</textarea>
+											<textarea class="form-control" id="parecer" 
+											style="margin-left: 0px; width: 770px" name="parecer"></textarea>
 										</div>
 									</div>
 								</div>
-
 								<div class="tab-pane fade" id="processoSelecao">
 									<div class="form-group">
 										<div class="panel panel-default">
@@ -82,30 +80,23 @@
 														value="Gerar etapa do processo seletivo"
 														class="btn btn-sm btn-primary"> <br> <br>
 												</div>
-
-
 												<div class="form-group">
 													<input type="hidden" id="hdn-id-candidato" /> <input
 														type="hidden" id="hdn-status" /> <label
-														class="control-label">Parecer técnico:</label>
-													<textarea class="form-control" id="parecerTecnico"
+														class="control-label">Parecer técnico:</label><textarea class="form-control" id="parecerTecnico"
 														style="margin-left: 0px; width: 800px"
-														name="parecerTecnico">
-											</textarea>
+														name="parecerTecnico"></textarea>
 												</div>
 											</div>
 										</div>
 									</div>
-
 								</div>
-
 								<div class="tab-pane fade" id="avaliacaoComp">
 									<section class="panel panel-default">
 										<div class="panel-heading text-center">
 											<label for="exampleInputEmail1">Avaliação de
 												competências</label>
 										</div>
-
 										<table id="tabelaCompetencias" class="table"
 											style="font-size: 10px">
 											<thead class="text-center">
@@ -453,7 +444,7 @@
             	"</c:forEach>" +
             	"</select>"+
             	"<input type='text' id='descricao"+ cont +"'/>"+
-            	//"<input type='button' id='btnRemover' onclick='remover("+ cont +")'value='Remover campo'  class='btn btn-sm btn-danger'>"+
+            	"<input type='button' id='btnRemover' onclick='remover("+ cont +")'value='Remover campo'  class='btn btn-sm btn-danger'>"+
             	"</div>" ;
             	
             	cont++;

@@ -94,10 +94,10 @@ public class VagaController {
 	@Autowired
 	private StatusVagaBusiness statusVagaBusiness;
 	
-	private void paginacao(Integer page, Model model){
+	private void paginacao(Integer page, Model model, VagaBean vaga){
 
 		Integer startpage = 1;
-		Integer endpage = vagaBusiness.totalPagina();
+		Integer endpage = vagaBusiness.totalPagina(vaga);
 	    
 		model.addAttribute("startpage", startpage);
 		model.addAttribute("endpage", endpage);
@@ -117,7 +117,7 @@ public class VagaController {
 		}
 		List<VagaBean> vagas = vagaBusiness.filtroVaga(vaga, page);
 		//Paginando
-		paginacao(page,model);
+		paginacao(page,model,vaga);
 		
 		model.addAttribute("vagas", vagas);
 
@@ -170,8 +170,8 @@ public class VagaController {
 		}
 		List<VagaBean> vagas = vagaBusiness.filtroVaga(vaga, page);
 		//Paginando
-		paginacao(page,model);
-		
+		paginacao(page,model,vaga);
+		model.addAttribute("filtroVaga",vaga);
 		model.addAttribute("vagas", vagas);
 
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();

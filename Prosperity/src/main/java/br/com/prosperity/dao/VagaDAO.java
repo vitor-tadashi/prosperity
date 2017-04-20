@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -20,7 +21,7 @@ public class VagaDAO extends GenericDAOImpl<VagaEntity, Integer> {
 
 	Session session;
 
-	public static final int limitResultsPerPage =5;
+	public static final int limitResultsPerPage = 10;
 
 	public List<StatusVagaEntity> pegarOsStatus() {
 
@@ -66,7 +67,7 @@ public class VagaDAO extends GenericDAOImpl<VagaEntity, Integer> {
 			crit.createAlias("vaga.statusVagaEntity", "statusVaga");
 			crit.createAlias("statusVaga.status", "status");
 			crit.add(Restrictions.eq("statusVaga.situacao", true));
-
+			
 			for (final Criterion c : criterion) {
 				crit.add(c);
 			}
@@ -94,19 +95,22 @@ public class VagaDAO extends GenericDAOImpl<VagaEntity, Integer> {
 
 		return result;
 	}
-
-	public Long count(final String name) {
-		Long result = null;
-
+	public Integer rowCount(final List<Criterion> criterion){
+		Integer result = null;
 		try {
-			javax.persistence.Query query = entityManager.createNamedQuery(name);
-
-			result = (Long)query.getSingleResult();
-
+			Session session = (Session) entityManager.getDelegate();
+			Criteria crit = session.createCriteria(VagaEntity.class, "vaga");
+			crit.createAlias("vaga.statusVagaEntity", "statusVaga");
+			crit.createAlias("statusVaga.status", "status");
+			crit.add(Restrictions.eq("statusVaga.situacao", true));
+			
+			for (final Criterion c : criterion) {
+				crit.add(c);
+			}
+			result = ((Number)crit.setProjection(Projections.rowCount()).uniqueResult()).intValue();
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
-
 		return result;
 	}
 
