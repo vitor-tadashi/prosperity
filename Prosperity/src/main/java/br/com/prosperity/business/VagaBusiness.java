@@ -286,10 +286,6 @@ public class VagaBusiness {
 				avaliadorVagaEntity.setVaga(vaga);
 				avaliadorVagaDAO.insert(avaliadorVagaEntity);
 			}
-			situacaoVaga.setIdVaga(vaga.getId());
-			situacaoVaga.setStatus(StatusVagaEnum.ATIVO);
-
-			alterarStatus(situacaoVaga);
 		}
 	}
 
