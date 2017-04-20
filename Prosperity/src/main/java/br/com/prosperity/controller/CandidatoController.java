@@ -343,7 +343,8 @@ public class CandidatoController<PaginarCandidato> {
 			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato,
 			@ModelAttribute("ac") String ac, @ModelAttribute("processoSelectivo") String processoSeletivo) {
 		bean = candidatoBusiness.obter(situacaoCandidato.getIdCandidato());
-		if (ac != null) {
+		System.out.println("podia beijado");
+		if (!ac.equals("[]")) {
 			bean.setCompetencias(convertGson(ac));
 			try{
 			candidatoBusiness.inserir(bean);
@@ -351,7 +352,7 @@ public class CandidatoController<PaginarCandidato> {
 				System.out.println(e);
 			}
 		}
-		if (processoSeletivo != null) {
+		if (processoSeletivo.equals("[]")) {
 			situacaoCandidato.setProcessoSeletivo(convertGsonProva(processoSeletivo));
 			provaCandidatoBusiness.inserir(situacaoCandidato.getProcessoSeletivo());
 		}
