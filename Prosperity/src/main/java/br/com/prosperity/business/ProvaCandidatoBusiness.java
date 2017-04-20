@@ -13,13 +13,12 @@ import br.com.prosperity.dao.ProvaCandidatoDAO;
 public class ProvaCandidatoBusiness {
 	@Autowired
 	private ProvaCandidatoDAO provaCandidatoDAO;
-	
+
 	@Autowired
 	private ProvaCandidatoConverter provaCandidatoConverter;
-	
+
 	@Transactional
 	public void inserir(ProvaCandidatoBean provaCandidato) {
 		provaCandidatoDAO.insert(provaCandidatoConverter.convertBeanToEntity(provaCandidato));
-		
 	}
 }
