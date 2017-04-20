@@ -32,7 +32,6 @@ import br.com.prosperity.dao.VagaCandidatoDAO;
 import br.com.prosperity.dao.VagaDAO;
 import br.com.prosperity.entity.AvaliadorVagaEntity;
 import br.com.prosperity.entity.StatusVagaEntity;
-import br.com.prosperity.entity.VagaCandidatoEntity;
 import br.com.prosperity.entity.VagaEntity;
 import br.com.prosperity.enumarator.StatusVagaEnum;
 
@@ -102,10 +101,10 @@ public class VagaBusiness {
 		return vagaBean;
 	}
 
-	//TODAS AS VAGAS ATIVAS
+	// TODAS AS VAGAS ATIVAS
 	@Transactional(readOnly = true)
 	public Integer totalPagina() {
-		Integer paginas = (int)Math.round((double) (vagaDAO.count("paginacao") / VagaDAO.limitResultsPerPage)+0.5);
+		Integer paginas = (int) Math.round((double) (vagaDAO.count("paginacao") / VagaDAO.limitResultsPerPage) + 0.5);
 		paginas = paginas < 1 ? 1 : paginas;
 		return paginas;
 	}
@@ -136,7 +135,7 @@ public class VagaBusiness {
 	}
 
 	@Transactional(readOnly = true)
-	public List<VagaBean> filtroVaga(VagaBean vaga,Integer page) {
+	public List<VagaBean> filtroVaga(VagaBean vaga, Integer page) {
 		List<Criterion> criterions = new ArrayList<>();
 		Integer idStatus = 0;
 		try {
