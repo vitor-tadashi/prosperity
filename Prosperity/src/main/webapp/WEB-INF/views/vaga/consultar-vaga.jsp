@@ -104,6 +104,11 @@
 	margin-left: 20px;
 }
 
+li a.active {
+	background: #f2f2f2;
+	
+} 
+
 </style>
 
 </head>
@@ -569,8 +574,8 @@
 											</div> <!-- /btn-group -->
 										</td>
 									</tr>
-									 <tr >
-            <td colspan="8" class="hiddenRow"><div class="accordian-body collapse" id="demo${count.index}">
+									 <tr>
+            <td colspan="8" class="hiddenRow" style="background-color: #c7dbe5"><div class="accordian-body collapse" id="demo${count.index}">
             
             	<br/>
             		<div class="col-sm-12" style="margin-left: 5px">
@@ -579,35 +584,35 @@
 															    width: 200px;
 															    margin-left: 5px;">
             				<label>Data de Abertura</label>
-            					<p>${vaga.dataAbertura}</p>
+            					<p style="margin-top: -5px;"><fmt:formatDate value="${vaga.dataAbertura}" pattern="dd/MM/yyyy" /></p>
             			</div>
             			<div class="col-md-3 well well-sm btn btn-info" style="    height: 56px;
     margin-right: 5px;
     width: 200px;
     margin-left: 5px;">
             				<label>Data de Aprovação</label>
-            					<p>12/12/2019</p>
+            					<p style="margin-top: -5px;"><fmt:formatDate value="${vaga.dataAprovacao}" pattern="dd/MM/yyyy" /></p>
             			</div>
             			<div class="col-md-3 well well-sm btn btn-danger" style="    height: 56px;
     margin-right: 5px;
     width: 200px;
     margin-left: 5px;">
             				<label>Data de Fechamento</label>
-            					<p>12/12/2019</p>
+            					<p style="margin-top: -5px;"><fmt:formatDate value="${vaga.dataFechamento}" pattern="dd/MM/yyyy" /></p>
             			</div>
             			<div class="col-md-3 well well-sm btn btn-success" style="    height: 56px;
     margin-right: 5px;
     width: 200px;
     margin-left: 5px;">
             				<label>Proposta</label>
-            					<p>R$ ${vaga.valorPretensao}</p>
+            					<p style="margin-top: -5px;">R$ <fmt:formatNumber pattern="#,##0.00" value="${vaga.valorPretensao}" /></p>
             			</div>
             			<div class="col-md-3 well well-sm btn btn-warning" style="    height: 56px;
     margin-right: 5px;
     width: 200px;
     margin-left: 5px;">
             				<label>Numero de Candidatos</label>
-            					<p>19</p>
+            					<p style="margin-top: -5px;">${vaga.countCandidatos}</p>
             			</div>
             		</div>
             	
@@ -624,6 +629,26 @@
 						
 					</div>
 					<!--</panel default>-->
+					   <div class="panel-footer clearfix">
+                          <div class="row">
+                              <input type="hidden" id="pageActive" value="${page }">
+                              <ul class="pagination pagination-xs m-top-none pull-right">
+                                  <li>
+                                      <c:if test="${page > 1}">
+                                          <a href="<c:url value="/vaga/consultar" ><c:param name="page" value="${page - 1}"/></c:url>">Anterior</a>
+                                      </c:if>
+                                      <c:forEach begin="${startpage}" end="${endpage}" var="p">
+                                          <a id="page${p}" href="<c:url value="/vaga/consultar" ><c:param name="page" value="${p}"/>${p}</c:url>">${p}</a>
+                                      </c:forEach>
+                                      <c:if test="${page < endpage}">
+                                          <a href="<c:url value="/vaga/consultar" ><c:param name="page" value="${page + 1}"/></c:url>">Próximo</a>
+                                      </c:if>
+                                  </li>
+                              </ul>
+                          </div>
+                          <!--</div row>-->
+                      </div>
+                      <!--</panel footer>-->
 				</div>
 				<!--</col-sm-12>-->
 			</div>
@@ -828,8 +853,11 @@
 	
 	</script>
 	<script>/* paginação */
+	var pagina = $('#pageActive').val();
+	$('#page'+pagina).addClass('active');
+	
 	$(function	()	{
-		$('#tabelaVaga').dataTable( {
+		$('#alterei').dataTable( {
 			"bJQueryUI": true,
 			"sPaginationType": "simple_numbers",
 			"bFilter": false,
