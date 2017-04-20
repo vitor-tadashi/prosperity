@@ -158,10 +158,10 @@
     		}
     	});
     	$("#formCadastro2").submit();
-    	//var resp = ${resposta};
-    	if (resp == "Ok"){
-    		alert("Cadastrado com Sucesso");
-    	};
+//    	var resp = ${resposta};
+//    	if (resp == "Ok"){
+//    		alert("Cadastrado com Sucesso");
+//    	};
 	});
 	
 	function enviarAvaliadores(){
@@ -198,7 +198,6 @@
 		    				textDiv2.textContent = "Campo Data para inicio tem que estar no futuro";
 
 		    				var text = "[" + div.textContent + "]";
-		                        campo.focus();
 		                        return false;
 		                }
 		         }

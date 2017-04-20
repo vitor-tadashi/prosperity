@@ -470,16 +470,15 @@ li a.active {
 							<form action="filtro" method="GET" class="row">
 								<div class="col-md-4">
 									<div class="form-group">
-										<label>Vaga</label> <input class="form-control" id="filtro1" name="nomeVaga" placeholder="Digite o nome de uma vaga">
+										<label>Vaga</label> <input class="form-control" id="filtro1" name="nomeVaga" placeholder="Digite o nome de uma vaga" value="${filtroVaga.nomeVaga }">
 									</div>
 								</div>
 
 								<div class="col-md-5">
 									<label for="">Data</label>
 									<div class="input-group">
-										<input type="date" name="dataAberturaDe" id="data1" class="form-control"> <span
-											class="input-group-addon">até</span> <input type="date"
-											class="form-control" name="dataAberturaPara" id="data2">
+										<input type="date" name="dataAberturaDe" id="data1" class="form-control" value="${filtroVaga.dataAberturaDe }"> <span
+											class="input-group-addon">até</span> <input type="date" class="form-control" name="dataAberturaPara" id="data2" value="${filtroVaga.dataAberturaPara }">
 									</div>
 								</div>
 
@@ -488,7 +487,7 @@ li a.active {
 									<select class="form-control" style="width: 130px;" id="status" name="status">
 											<option value="0">Selecione</option>
 										<c:forEach var="status" items="${listaStatusDrop}">
-												<option id="${status.id}"value="${status.id}">${status.nome}</option>
+												<option id="${status.id}"value="${status.id}" ${status.id == filtroVaga.status[0].id? 'selected="selected"' : ''} >${status.nome}</option>
 										</c:forEach>
 									</select>
 								</div>
