@@ -345,7 +345,11 @@ public class CandidatoController<PaginarCandidato> {
 		bean = candidatoBusiness.obter(situacaoCandidato.getIdCandidato());
 		if (ac != null) {
 			bean.setCompetencias(convertGson(ac));
-			candidatoBusiness.atualizarCandidato(bean);
+			try{
+			candidatoBusiness.inserir(bean);
+			}catch(Exception e){
+				System.out.println(e);
+			}
 		}
 		if (processoSeletivo != null) {
 			situacaoCandidato.setProcessoSeletivo(convertGsonProva(processoSeletivo));

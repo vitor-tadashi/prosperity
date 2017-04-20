@@ -489,9 +489,4 @@ public class CandidatoBusiness {
 		}
 		return listaStatus;
 	}
-
-	@Transactional
-	public void atualizarCandidato(CandidatoBean bean) {
-		candidatoDAO.update(candidatoConverter.convertBeanToEntity(bean));
-	}
 }
