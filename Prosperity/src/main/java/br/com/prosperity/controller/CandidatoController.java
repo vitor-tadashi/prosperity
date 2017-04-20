@@ -110,7 +110,7 @@ public class CandidatoController<PaginarCandidato> {
 	public String cadastrarCandidato(Model model) {
 
 		obterDominiosCandidato(model);
-
+		
 		return "candidato/cadastrar-candidato";
 	}
 
@@ -132,24 +132,24 @@ public class CandidatoController<PaginarCandidato> {
 	@RequestMapping(value = "salvar", method = RequestMethod.POST)
 	public String salvarCandidato(@Valid @ModelAttribute("candidatoBean") CandidatoBean candidatoBean,
 			BindingResult result, @RequestParam("file") MultipartFile file, Model model) throws BusinessException {
-		
+
 		if (result.hasErrors()) {
 			model.addAttribute("erro", result.getErrorCount());
 			model.addAttribute("listaErros", buildErrorMessage(result.getFieldErrors()));
 			model.addAttribute("candidato", candidatoBean);
 			obterDominiosCandidato(model);
 			return "candidato/cadastrar-candidato";
-			
+
 		} else {
-			try{
+			try {
 				candidatoBusiness.inserir(candidatoBean);
 				model.addAttribute("sucesso", "Candidato salvo com sucesso.");
-				
-			}catch(BusinessException e){
+
+			} catch (BusinessException e) {
 
 			}
 		}
-		
+
 		return "candidato/cadastrar-candidato";
 	}
 
