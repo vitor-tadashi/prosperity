@@ -276,13 +276,13 @@ public class CandidatoBusiness {
 				}
 				candidatoEntity.setVagas(vagas);
 
-				String replace = candidatoEntity.getCpf().replace(".", "").replace("-", "");
+				String replaceCPF = candidatoEntity.getCpf().replace(".", "").replace("-", "");
 				String replaceRG = candidatoEntity.getRg().replace(".", "").replace("-", "");
 				String replaceTelefone = candidatoEntity.getContato().getTelefone().replace("(", "").replace(")", "")
 						.replace("-", "");
 
 				candidatoEntity.getContato().setTelefone(replaceTelefone);
-				candidatoEntity.setCpf(replace);
+				candidatoEntity.setCpf(replaceCPF);
 				candidatoEntity.setRg(replaceRG);
 
 				candidatoDAO.insert(candidatoEntity);
@@ -310,7 +310,17 @@ public class CandidatoBusiness {
 			CandidatoEntity candidatoEntity = candidatoDAO.findById(candidatoBean.getId());
 
 			candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoEntity, candidatoBean);
+			
+			
+			String replaceCPF = candidatoEntity.getCpf().replace(".", "").replace("-", "");
+			String replaceRG = candidatoEntity.getRg().replace(".", "").replace("-", "");
+			String replaceTelefone = candidatoEntity.getContato().getTelefone().replace("(", "").replace(")", "")
+					.replace("-", "");
 
+			candidatoEntity.getContato().setTelefone(replaceTelefone);
+			candidatoEntity.setCpf(replaceCPF);
+			candidatoEntity.setRg(replaceRG); 
+				
 			candidatoDAO.update(candidatoEntity);
 		}
 	}
@@ -389,8 +399,8 @@ public class CandidatoBusiness {
 	@Transactional
 	public CandidatoBean obterPorCPF(String cpf) {
 		List<CandidatoEntity> candidatosEntity = null;
-
-		candidatosEntity = candidatoDAO.findByNamedQuery("obterPorCPF", cpf);
+		
+		candidatosEntity = candidatoDAO.findByNamedQuery("obterPorCPF", cpf.replace(".", "").replace("-", ""));
 		if (candidatosEntity.isEmpty()) {
 			return null;
 		}
@@ -478,10 +488,5 @@ public class CandidatoBusiness {
 			}
 		}
 		return listaStatus;
-	}
-
-	@Transactional
-	public void atualizarCandidato(CandidatoBean bean) {
-		candidatoDAO.update(candidatoConverter.convertBeanToEntity(bean));
 	}
 }
