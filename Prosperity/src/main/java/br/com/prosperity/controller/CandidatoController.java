@@ -125,7 +125,7 @@ public class CandidatoController<PaginarCandidato> {
 	public String cadastrarCandidato(Model model) {
 
 		obterDominiosCandidato(model);
-
+		
 		return "candidato/cadastrar-candidato";
 	}
 
@@ -147,14 +147,14 @@ public class CandidatoController<PaginarCandidato> {
 	@RequestMapping(value = "salvar", method = RequestMethod.POST)
 	public String salvarCandidato(@Valid @ModelAttribute("candidatoBean") CandidatoBean candidatoBean,
 			BindingResult result, @RequestParam("file") MultipartFile file, Model model) throws BusinessException {
-		
+
 		if (result.hasErrors()) {
 			model.addAttribute("erro", result.getErrorCount());
 			model.addAttribute("listaErros", buildErrorMessage(result.getFieldErrors()));
 			model.addAttribute("candidato", candidatoBean);
 			obterDominiosCandidato(model);
 			return "candidato/cadastrar-candidato";
-			
+
 		} else {
 			try {
 				candidatoBusiness.inserir(candidatoBean);
@@ -259,8 +259,8 @@ public class CandidatoController<PaginarCandidato> {
 
 		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.findAll();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
-		
-		//LISTAR VAGA ATIVA
+
+		// LISTAR VAGA ATIVA
 		List<VagaBean> listaVagaDrop = vagaBusiness.listarVagasAtivas();
 		model.addAttribute("listaVagaDrop", listaVagaDrop);
 
@@ -343,12 +343,14 @@ public class CandidatoController<PaginarCandidato> {
 			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato,
 			@ModelAttribute("ac") String ac, @ModelAttribute("processoSelectivo") String processoSeletivo) {
 		bean = candidatoBusiness.obter(situacaoCandidato.getIdCandidato());
-		situacaoCandidato.setProcessoSeletivo(convertGsonProva(processoSeletivo));
-		bean.setCompetencias(convertGson(ac));
-		candidatoBusiness.atualizarCandidato(bean);
-
-		provaCandidatoBusiness.inserir(situacaoCandidato.getProcessoSeletivo());
-
+		if (ac != null) {
+			bean.setCompetencias(convertGson(ac));
+			candidatoBusiness.atualizarCandidato(bean);
+		}
+		if (processoSeletivo != null) {
+			situacaoCandidato.setProcessoSeletivo(convertGsonProva(processoSeletivo));
+			provaCandidatoBusiness.inserir(situacaoCandidato.getProcessoSeletivo());
+		}
 		candidatoBusiness.alterarStatus(situacaoCandidato);
 		return "candidato/aprovar";
 	}
