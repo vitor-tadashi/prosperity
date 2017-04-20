@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.prosperity.bean.AvaliadorVagaBean;
 import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.SituacaoVagaBean;
+import br.com.prosperity.bean.StatusVagaBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.converter.AvaliadorVagaConverter;
@@ -177,7 +178,7 @@ public class VagaBusiness {
 	public String inserir(VagaBean vagaBean, List<UsuarioBean> usuarioBean) {
 
 		VagaEntity vagaEntity = vagaConverter.convertBeanToEntity(vagaBean);
-		vagaEntity.setStatusVagaEntity(statusVagaDAO.findByNamedQuery("statusVaga", vagaEntity.getId()));
+		//vagaEntity.setStatusVagaEntity(statusVagaDAO.findByNamedQuery("statusVaga", vagaEntity.getId()));
 
 		try {
 			if (vagaEntity.getId() == null) {
@@ -190,12 +191,12 @@ public class VagaBusiness {
 				inserirAvaliadores(vagaEntity, usuarioBean);
 			} else {
 				// VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
-				String status = vagaBean.getStatusAtual();
-				if (status.equals("Pendente")){
+				StatusVagaBean status = vagaBean.getUltimoStatus();
+				if (status.getStatus().getNome().equals("Pendente")){
 					situacaoVaga.setIdVaga(vagaEntity.getId());
 					situacaoVaga.setStatus(StatusVagaEnum.PENDENTE);
 					alterarStatus(situacaoVaga);
-				} else if(status.equals("Aguardando avaliadores")){
+				} else if(status.getStatus().getNome().equals("Aguardando avaliadores")){
 					situacaoVaga.setIdVaga(vagaEntity.getId());
 					situacaoVaga.setStatus(StatusVagaEnum.AGUARDANDOAVALIADORES);
 					alterarStatus(situacaoVaga);
