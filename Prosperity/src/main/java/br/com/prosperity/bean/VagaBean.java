@@ -52,9 +52,9 @@ public class VagaBean {
 	private String telResponsavel;
 	private List<UsuarioBean> avaliadores;
 	private StatusVagaBean ultimoStatus;
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataAberturaDe;
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataAberturaPara;
 	private List<VagaCandidatoBean> vagaCandidatoBean;
 	
