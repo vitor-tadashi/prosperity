@@ -284,7 +284,7 @@
 																		items="${candidato.ultimoStatus.status.statusDisponiveis}">
 																		<li><a data-toggle="modal"
 																			data-target=".bs-example-modal-lg"
-																			id="aprovar-candidato"
+																			id="aprovar-candidato" href="aprovar-modal"
 																			onclick="alterarStatus(${candidato.id}, ${statusDisponivel.id})"><i
 																				${statusDisponivel.classe}>&nbsp;</i>${statusDisponivel.nome}
 																		</a></li>
@@ -367,8 +367,7 @@
 					})
 				}
 				});
-		})
-	var x = "";
+			})
             CKEDITOR.replace('editor');
                   $('#alterarStatus').click(function() {
                         
@@ -386,34 +385,20 @@
                         });
 
 	                   	var provasDescricoes  = [];
-	                
-	                   	var i = 0;
+	                	var x = 0;
 	                   	$(".processoSeletivo").each(function(){
 		                   	var provaDescricao = {
 		                   			"prova" : "",
 		                   			"descricao" : ""
 		                   	};
 		                   	
-	                   	    var select = $(this).find("select").val();
-	                   	    var input = $(this).find("input").val();
-	                   	    
-	                   	 	provaDescricao.prova = select;
-	                   		provaDescricao.descricao = input;
-	                		
-	                   		if(provaDescricao.prova != "" && provaDescricao.descricao != ""){
-	                   			provasDescricoes[i].push(provaDescricao.value);
-	                   		}
-	                   			i++;
+	                   	    var select = $(this).find("#prova"+x).val();
+	                   	    var input = $(this).find("#descricao"+x).val();
+
+	                   		provasDescricoes.push(select);
+	                   		provasDescricoes.push(input);
+	                   		x++;
 	                   	});                  	
-	                   	
-                        $.each(cont, function() {
-                     	   var prova = {
-                     			   nome: $('#descricao'+cont).val()
-                     			   }
-                     	   provas.push(prova);
-                     	   
-                     	   });
-	                   	x =  JSON.stringify(provasDescricoes);
                         $.ajax({
                               url : "alterar-status-candidato",
                               method : "POST",
@@ -424,27 +409,24 @@
                                    'proposta' : CKEDITOR.instances.editor.getData(),
                                    'idStatus' : $('#hdn-status').val(),
                                    'parecerTecnico' : $('#parecerTecnico').val(),
-                                   'processoSeletivo' : JSON.stringify(provasDescricoes),
+                                   'processoSelectivo' : JSON.stringify(provasDescricoes),
                                    'ac' : JSON.stringify(avaliacoes)
                               },
-                              contentType: "text",
                               success : function(data) {
-                                   location.reload();
-                                   
-                                   alert('deu bom ?');
+                            	  alert('deu bom ?'); 
+                            	  location.reload();
                               },
                               error : function(e) {
                                    alert('deu ruim');
+                                   location.reload();
                               }
                         });
-                        
                   });
 
-            function alterarStatus(idCandidato, idStatus, proposta, processoSelecao) {
+            function alterarStatus(idCandidato, idStatus, proposta) {
                   $('#hdn-id-candidato').val(idCandidato);
                   $('#hdn-proposta').val(proposta);
                   $('#hdn-status').val(idStatus);
-            
             }
             
             function cancelarCandidato(id) {
@@ -462,8 +444,8 @@
             var cont = 0;
             $("#gerarCampo").click(function(){
             	var campos = 
-            	" <div class='div"+cont+" processoSeletivo'>" +
-            	"<select>" +
+            	"<div class='processoSeletivo'>" +
+            	"<select id='prova"+ cont +"'>" +
             	"<br>" +
             	"<option value='0'>Selecione:</option>"+
             	"<c:forEach var='selecao' items='${provas}'>" +
@@ -471,7 +453,7 @@
             	"</c:forEach>" +
             	"</select>"+
             	"<input type='text' id='descricao"+ cont +"'/>"+
-            	"<input type='button' id='btnRemover' onclick='remover("+ cont +")'value='Remover campo'  class='btn btn-sm btn-danger'>"+
+            	//"<input type='button' id='btnRemover' onclick='remover("+ cont +")'value='Remover campo'  class='btn btn-sm btn-danger'>"+
             	"</div>" ;
             	
             	cont++;

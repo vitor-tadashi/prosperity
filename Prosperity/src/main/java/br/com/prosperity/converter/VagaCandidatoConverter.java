@@ -9,8 +9,6 @@ import br.com.prosperity.entity.VagaCandidatoEntity;
 @Component
 public class VagaCandidatoConverter implements Converter<VagaCandidatoEntity, VagaCandidatoBean> {	
 	@Autowired
-	private VagaConverter vagaConverter;
-	@Autowired
 	private CanalInformacaoConverter canalInformacaoConverter;
 	@Autowired
 	private CandidatoConverter candidatoConverter;
@@ -23,7 +21,7 @@ public class VagaCandidatoConverter implements Converter<VagaCandidatoEntity, Va
 		VagaCandidatoEntity entity = new VagaCandidatoEntity();
 		entity.setIdVagaCandidato(bean.getId());
 		entity.setCanalInformacao(canalInformacaoConverter.convertBeanToEntity(bean.getCanalInformacao()));
-		entity.setVaga(vagaConverter.convertBeanToEntity(bean.getVaga()));
+		//entity.setCandidato(candidatoConverter.convertBeanToEntity(bean.getCandidatoBean()));
 		
 		return entity;
 	}
@@ -36,8 +34,8 @@ public class VagaCandidatoConverter implements Converter<VagaCandidatoEntity, Va
 		VagaCandidatoBean bean = new VagaCandidatoBean();
 		bean.setId(entity.getIdVagaCandidato());
 		bean.setCanalInformacao(canalInformacaoConverter.convertEntityToBean(entity.getCanalInformacao()));
-		bean.setVaga(vagaConverter.convertEntityToBean(entity.getVaga()));
-
+		//bean.setCandidatoBean(candidatoConverter.convertEntityToBean(entity.getCandidato()));
+		
 		return bean;
 	}
 

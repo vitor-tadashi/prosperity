@@ -43,17 +43,17 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 			request.setAttribute("autenticado", request.getSession().getAttribute("autenticado"));
 			user = (UsuarioBean) request.getSession().getAttribute("autenticado");
 			
-			List<FuncionalidadeBean> funcionalidades = new ArrayList<>();
+/*			List<FuncionalidadeBean> funcionalidades = new ArrayList<>();
 			
 			if(request.getSession().getAttribute("funcionalidades") == null) {
 				funcionalidades = funcionalidadeBusiness.listar();
 				perfilBusiness.obterPerfilFuncionalidades(user.getPerfil().getId());
 				request.getSession().setAttribute("funcionalidades", funcionalidades);
-			}
+			}*/
 			
-			funcionalidades = (List<FuncionalidadeBean>) request.getSession().getAttribute("funcionalidades");
+			//funcionalidades = (List<FuncionalidadeBean>) request.getSession().getAttribute("funcionalidades");
 			
-			for(FuncionalidadeBean fun : funcionalidades){
+			for(FuncionalidadeBean fun : funcionalidadeBusiness.listar()){
 				if(uri.endsWith(fun.getUrl())){
 					for(FuncionalidadeBean f : user.getPerfil().getListaFuncionalidades()){
 						if(f.getId() == fun.getId()){

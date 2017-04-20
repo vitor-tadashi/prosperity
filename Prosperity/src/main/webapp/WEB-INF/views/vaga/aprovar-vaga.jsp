@@ -385,7 +385,7 @@ footer {
 				<input class="avaliador-id" type="hidden"> <input
 					class="avaliador-status" type="hidden">
 				<div class="modal-footer">
-					<a href="#">
+					<a id="excluir" href="${urlCancelar}">
 						<button id="excluiVaga" onclick="status()" type="button" class="btn btn-primary"
 							data-dismiss="modal">Sim</button>
 					</a>
@@ -520,9 +520,10 @@ footer {
 												</c:if>
 												
 												<c:if test="${vaga.ultimoStatus.status.nome == 'Aguardando avaliadores'}" >
+													<li id="${candidado.ultimoStatus.status.css}">
 													<li id="${vaga.ultimoStatus.status.nome}" role="separator" class="avaliadorDivider divider"></li>
 													<li id="${vaga.ultimoStatus.status.nome}" >
-													<a href="#avaliador-modal" onclick="alterarStatus(${vaga.id}, 'CANCELADO')"
+													<a href="#avaliador-modal" onclick="alterarStatus(${vaga.id}, ${candidato.id} 'CANCELADO')"
 														data-toggle="modal" class="avaliador" ><i class="Cancelar fa fa-ban fa-lg"></i> Cancelar</a></li>
 												</c:if>	
 											</ul>

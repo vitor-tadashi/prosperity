@@ -7,6 +7,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -18,7 +19,7 @@ public class VagaCandidatoEntity {
 	@Column(name = "idVagaCandidato", unique = true, nullable = false)
 	private Integer idVagaCandidato;
 
-	@OneToOne(cascade = CascadeType.REFRESH, fetch=FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch=FetchType.LAZY)
 	@JoinColumn(name = "idVaga")
 	private VagaEntity vaga;
 
@@ -26,6 +27,10 @@ public class VagaCandidatoEntity {
 	@JoinColumn(name = "idCanalInformacao")
 	private CanalInformacaoEntity canalInformacao;
 
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name = "idCandidato")
+	private CandidatoEntity candidato;
+	
 	public Integer getIdVagaCandidato() {
 		return idVagaCandidato;
 	}
@@ -48,6 +53,14 @@ public class VagaCandidatoEntity {
 
 	public void setCanalInformacao(CanalInformacaoEntity canalInformacao) {
 		this.canalInformacao = canalInformacao;
+	}
+
+	public CandidatoEntity getCandidato() {
+		return candidato;
+	}
+
+	public void setCandidato(CandidatoEntity candidato) {
+		this.candidato = candidato;
 	}
 
 }

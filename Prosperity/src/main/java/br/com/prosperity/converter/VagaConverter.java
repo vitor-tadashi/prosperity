@@ -23,6 +23,9 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 
 	@Autowired
 	private UsuarioConverter usuarioConverter;
+	
+	@Autowired
+	private VagaCandidatoConverter vagaCandidatoConverter;
 
 	@Override
 	public VagaEntity convertBeanToEntity(VagaBean bean) {
@@ -101,7 +104,7 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 		bean.setNmAreaResponsavel(entity.getNmAreaResponsavel());
 		bean.setEmailResponsavel(entity.getEmailResponsavel());
 		bean.setTelResponsavel(entity.getTelResponsavel());
-		
+		bean.setVagaCandidatoBean(vagaCandidatoConverter.convertEntityToBean(entity.getVagaCandidatoEntity()));
 		return bean;
 	}
 
