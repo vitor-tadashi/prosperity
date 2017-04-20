@@ -272,7 +272,7 @@ public class VagaBusiness {
 		try {
 			data = novaData.format(dataAntiga);
 			return novaData.parse(data);
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			e.printStackTrace(); // imprimi a stack trace
 		}
 		return dataAntiga;
@@ -333,3 +333,4 @@ public class VagaBusiness {
 		return count;
 	}
 }
+	

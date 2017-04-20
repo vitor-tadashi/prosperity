@@ -266,14 +266,15 @@ public class VagaController {
 		return "idAvaliador";
 	}
 	
-	@RequestMapping(value = "/cancelar-candidato/{id}")
-	public String cancelaCandidato(@PathVariable Integer id) {
+	@RequestMapping(value = "/cancelar-vaga/{id}")
+	public String cancelaVaga(@PathVariable Integer id) {
 		SituacaoVagaBean bean = new SituacaoVagaBean();
+		vagaBusiness.cancelarVagaCandidato(id);
 		bean.setIdVaga(id);
 		bean.setStatus(StatusVagaEnum.CANCELADO);
 		vagaBusiness.alterarStatus(bean);
 
-		return "redirect:/candidato/aprovar";
+		return "redirect:/aprovar";
 	}
 
 	@RequestMapping(value = "/salvar", method = RequestMethod.POST)

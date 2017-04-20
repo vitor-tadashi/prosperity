@@ -202,11 +202,11 @@
 												<label class="control-label" for="dataInicio">Data
 													para início</label>
 												<div class="input-sm-group">
-												 <fmt:formatDate value="${vaga.dataInicio}"
+												<fmt:formatDate value="${vaga.dataInicio}"
 													pattern="dd/MM/yyyy" var="dataInicio"/>
 													<input id="dataInicio" name="dataInicio" type="text"
 														class="form-control date parsley-validated" data-required="true"
-														value="${dataInicio}" style="height:30px" onblur="validarData(this.value)"> 
+														value="${dataInicio}" style="height:30px" onblur="validarData(this.value)">  
 												</div>
 											</div>
 											<!-- /form-group -->
