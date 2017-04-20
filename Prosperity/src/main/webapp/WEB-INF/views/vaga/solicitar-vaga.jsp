@@ -33,7 +33,9 @@
 						<form class="form-border" id="formCadastro2" action="/vaga/salvar"
 							method="POST" >
 							<input id="vagaIdVar" name="id" type="hidden" value="${vaga.id}">
-							<input id="dataAbertura" name="dataAbertura" type="hidden" value="${vaga.dataAbertura}">
+							<fmt:formatDate value="${vaga.dataAbertura}"
+													pattern="dd/MM/yyyy" var="dataAbertura"/> 
+							<input id="dataAbertura" name="dataAbertura" type="hidden" value="${dataAbertura}">
 							<input id="status" name="ultimoStatus" type="hidden" value="${ultimoStatus.status.id}">
 							<input id="statusAtual" name="statusAtual" type="hidden" value="${ultimoStatus.status.nome}">
 							<input id="contErro" class ="hidden" value="${erro}">
@@ -97,17 +99,17 @@
 												<label class="control-label" for="dataInicio">Data
 													para início</label>
 												<div class="input-sm-group">
-												 <%-- <fmt:formatDate value="${vaga.dataInicio}"
-													pattern="dd/MM/yyyy" var="dataInicio"/> --%>
+												 <fmt:formatDate value="${vaga.dataInicio}"
+													pattern="dd/MM/yyyy" var="dataInicio"/>
 													<input id="dataInicio" name="dataInicio" type="text"
 														class="form-control date parsley-validated" data-required="true"
-														value="${vaga.dataInicio}" style="height:30px" onblur="validarData(this.value)"> 
+														value="${dataInicio}" style="height:30px" onblur="validarData(this.value)"> 
 												</div>
 											</div>
 											<div class="form-group col-md-4" style="padding-top:0px">
 												<label class="control-label" style="margin-left:15px" for="txtHorarioInicial">Horário</label>
 												<div>
-													<div class="form-group col-md-2" style="padding-top:0px">
+													<div class="form-group col-md-2" style="padding-top:0px;">
 														<div class="input-group bootstrap-timepicker">
 															<input id="txtHorarioInicial" name="horarioEntrada"
 																type="time" value="${vaga.horarioEntrada}" style="width:70px;height:30px;padding-top:0px">
