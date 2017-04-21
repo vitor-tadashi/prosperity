@@ -13,9 +13,6 @@ public class ProvaCandidatoConverter implements Converter<ProvaCandidatoEntity, 
 	private CandidatoConverter candidatoConverter;
 
 	@Autowired
-	private DescricaoProvaConverter descricaoProvasConverter;
-	
-	@Autowired
 	private ProvaConverter provasConverter;
 
 	@Override
@@ -27,8 +24,7 @@ public class ProvaCandidatoConverter implements Converter<ProvaCandidatoEntity, 
 		ProvaCandidatoEntity entity = new ProvaCandidatoEntity();
 
 		entity.setId(bean.getId());
-		entity.setParecer(bean.getParecerTecnico());
-		entity.setDescricaoProvas(descricaoProvasConverter.convertBeanToEntity(bean.getDescricao()));
+		entity.setDescricaoProva(bean.getDescricao());
 		entity.setProvas(provasConverter.convertBeanToEntity(bean.getProvas()));
 		entity.setCandidato(candidatoConverter.convertBeanToEntity(bean.getCandidato()));
 
@@ -44,8 +40,7 @@ public class ProvaCandidatoConverter implements Converter<ProvaCandidatoEntity, 
 		ProvaCandidatoBean bean = new ProvaCandidatoBean();
 
 		bean.setId(entity.getId());
-		bean.setParecerTecnico(entity.getParecer());
-		bean.setDescricao(descricaoProvasConverter.convertEntityToBean(entity.getDescricaoProvas()));
+		bean.setDescricao(entity.getDescricaoProva());
 		bean.setProvas(provasConverter.convertEntityToBean(entity.getProvas()));
 		bean.setCandidato(candidatoConverter.convertEntityToBean(entity.getCandidato()));
 

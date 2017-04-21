@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.prosperity.bean.AvaliadorVagaBean;
 import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.SituacaoVagaBean;
+import br.com.prosperity.bean.StatusVagaBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.converter.AvaliadorVagaConverter;
@@ -103,8 +104,15 @@ public class VagaBusiness {
 
 	// TODAS AS VAGAS ATIVAS
 	@Transactional(readOnly = true)
-	public Integer totalPagina() {
-		Integer paginas = (int) Math.round((double) (vagaDAO.count("paginacao") / VagaDAO.limitResultsPerPage) + 0.5);
+	public Integer totalPagina(VagaBean vaga) {
+		List<Criterion> criterions = confFiltro(vaga);
+		float pag = (float)vagaDAO.rowCount(criterions) / (float)VagaDAO.limitResultsPerPage;
+		Integer paginas = null;
+		if (pag % 1 == 0) {
+			paginas = (int) pag;
+		} else {
+			paginas = (int) Math.ceil((double) pag);
+		}
 		paginas = paginas < 1 ? 1 : paginas;
 		return paginas;
 	}
@@ -136,6 +144,15 @@ public class VagaBusiness {
 
 	@Transactional(readOnly = true)
 	public List<VagaBean> filtroVaga(VagaBean vaga, Integer page) {
+		List<Criterion> criterions = confFiltro(vaga);
+
+		List<VagaEntity> vagas = vagaDAO.paginar(page, criterions);
+
+		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagas);
+		return vagaBean;
+	}
+
+	private List<Criterion> confFiltro(VagaBean vaga) {
 		List<Criterion> criterions = new ArrayList<>();
 		Integer idStatus = 0;
 		try {
@@ -156,14 +173,10 @@ public class VagaBusiness {
 		} catch (Exception e) {
 
 		}
-		List<VagaEntity> vagas = vagaDAO.paginar(page, criterions);
-
-		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagas);
-		return vagaBean;
+		return criterions;
 	}
 
 	@Transactional(readOnly = true)
-
 	public VagaBean obter(int idVaga) {
 
 		VagaEntity vagaEntity = vagaDAO.findById(idVaga);
@@ -177,8 +190,7 @@ public class VagaBusiness {
 	public String inserir(VagaBean vagaBean, List<UsuarioBean> usuarioBean) {
 
 		VagaEntity vagaEntity = vagaConverter.convertBeanToEntity(vagaBean);
-
-		vagaEntity.setStatusVagaEntity(statusVagaDAO.findByNamedQuery("statusVaga", vagaEntity.getId()));
+		//vagaEntity.setStatusVagaEntity(statusVagaDAO.findByNamedQuery("statusVaga", vagaEntity.getId()));
 
 		try {
 			if (vagaEntity.getId() == null) {
@@ -191,6 +203,16 @@ public class VagaBusiness {
 				inserirAvaliadores(vagaEntity, usuarioBean);
 			} else {
 				// VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
+				StatusVagaBean status = vagaBean.getUltimoStatus();
+				if (status.getStatus().getNome().equals("Pendente")){
+					situacaoVaga.setIdVaga(vagaEntity.getId());
+					situacaoVaga.setStatus(StatusVagaEnum.PENDENTE);
+					alterarStatus(situacaoVaga);
+				} else if(status.getStatus().getNome().equals("Aguardando avaliadores")){
+					situacaoVaga.setIdVaga(vagaEntity.getId());
+					situacaoVaga.setStatus(StatusVagaEnum.AGUARDANDOAVALIADORES);
+					alterarStatus(situacaoVaga);
+				}			
 				inserirAvaliadores(vagaEntity, usuarioBean);
 				vagaDAO.update(vagaEntity);
 			}
@@ -271,7 +293,7 @@ public class VagaBusiness {
 		try {
 			data = novaData.format(dataAntiga);
 			return novaData.parse(data);
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			e.printStackTrace(); // imprimi a stack trace
 		}
 		return dataAntiga;
@@ -332,3 +354,4 @@ public class VagaBusiness {
 		return count;
 	}
 }
+	

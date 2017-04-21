@@ -47,17 +47,17 @@
 
 							</c:forEach>
 							<c:if test="${not empty sucesso}">
-									<div id="msg-sucesso" class="alert alert-success msg-margin">
-										<ul>
-											<li class="li-msg">${sucesso}</li>
-										</ul>
-									</div>
-								</c:if>
+								<div id="msg-sucesso" class="alert alert-success msg-margin">
+									<ul>
+										<li class="li-msg">${sucesso}</li>
+									</ul>
+								</div>
+							</c:if>
 						</div>
 						<div id="textDiv1"></div>
 						<div id="textDiv2"></div>
 						<div id="textDiv3"></div>
-						
+
 						<form class="form-border" action="salvar" method="post"
 							enctype="multipart/form-data" id=formCadastro
 							onsubmit="return Validar()">
@@ -82,8 +82,8 @@
 													type="text" class="form-control cpf parsley-validated"
 													id="cpf" name="cpf" data-required="true"
 													placeholder="Informe seu CPF" value="${candidato.cpf}"
-													onblur="pesquisacpf()">
-													<input type="hidden" value="${candidato.id}"  id="id" name="id">
+													onblur="pesquisacpf()"> <input type="hidden"
+													value="${candidato.id}" id="id" name="id">
 											</div>
 											<div class="form-group col-md-4">
 												<label class="control-label" for="nome">Nome</label> <input
@@ -284,18 +284,18 @@
 								</div>
 							</div>
 							<div class="form-group col-sm-4">
-							<input type="hidden" value="${candidato.id}" name="id">
-									<button class="btn btn-success btnAjuste">Salvar</button>
-								</div>
+								<input type="hidden" value="${candidato.id}" name="id">
+								<button class="btn btn-success btnAjuste">Salvar</button>
+							</div>
 
 						</form>
-						</div>
-						</div>
-						</div>
-
 					</div>
 				</div>
-		
+			</div>
+
+		</div>
+	</div>
+
 	<!-- SOMENTE ALTERAR DAQUI PARA CIMA -->
 	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
 	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
@@ -310,9 +310,9 @@
 	    });
 	  
 		$(document).ready(function() {
-			$('.cpf').mask('999.999.999-99', {
-				reverse : true
-			});
+		 	 $('.cpf').mask('999.999.999-99', {
+				reverse : true 
+			}) ; 
 			$('.telefone').mask('(99) 99999-9999');
 			$('#rg').mask('99.999.999-9');
 			$("#cep").mask("99999-999");
@@ -569,7 +569,8 @@
 				}
 			},
 			error: function (data) {
-				console.log("Cpf não encontrado")
+				console.log("Cpf não encontrado");
+				
 			}
 		});
 	}

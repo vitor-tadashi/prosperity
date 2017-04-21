@@ -198,7 +198,6 @@
 		    				textDiv2.textContent = "Campo Data para inicio tem que estar no futuro";
 
 		    				var text = "[" + div.textContent + "]";
-		                        campo.focus();
 		                        return false;
 		                }
 		         }

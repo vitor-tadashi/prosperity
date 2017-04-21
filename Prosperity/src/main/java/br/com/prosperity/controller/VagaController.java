@@ -51,7 +51,7 @@ public class VagaController {
 
 	@Autowired
 	private VagaBusiness vagaBusiness;
-	
+
 	@Autowired
 	private ProjetoBusiness projetoBusiness;
 
@@ -78,7 +78,7 @@ public class VagaController {
 
 	@Autowired
 	private List<UsuarioBean> usuarios;
-	
+
 	@Autowired
 	private List<UsuarioBean> avaliadoresB;
 
@@ -93,40 +93,40 @@ public class VagaController {
 
 	@Autowired
 	private StatusVagaBusiness statusVagaBusiness;
-	
-	private void paginacao(Integer page, Model model){
+
+	private void paginacao(Integer page, Model model, VagaBean vaga) {
 
 		Integer startpage = 1;
-		Integer endpage = vagaBusiness.totalPagina();
-	    
+		Integer endpage = vagaBusiness.totalPagina(vaga);
+
 		model.addAttribute("startpage", startpage);
 		model.addAttribute("endpage", endpage);
-		model.addAttribute("page",page);
+		model.addAttribute("page", page);
 	}
-	
-	@RequestMapping(value="/visualizarCandidato/{id}", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/visualizarCandidato/{id}", method = RequestMethod.GET)
 	public String visualizarCandidato(@PathVariable Integer id) {
-		
+
 		return "redirect:/candidato/filtrar";
 	}
 
 	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
-	public String cliente(@RequestParam(value = "page", required = false) Integer page,Model model, VagaBean vaga) {
+	public String cliente(@RequestParam(value = "page", required = false) Integer page, Model model, VagaBean vaga) {
 		if (page == null) {
 			page = 1;
 		}
 		List<VagaBean> vagas = vagaBusiness.filtroVaga(vaga, page);
-		//Paginando
-		paginacao(page,model);
-		
+		// Paginando
+		paginacao(page, model, vaga);
+
 		model.addAttribute("vagas", vagas);
 
-		//List<VagaBean> listarDecrescente = vagaBusiness.listarDecrescente();
-		
+		// List<VagaBean> listarDecrescente = vagaBusiness.listarDecrescente();
+
 		// FAZ APARECER A TABELA
-		//model.addAttribute("vagas", vagaBusiness.listarDecrescente());
-		
-		/*model.addAttribute("vagas", vagaBusiness.listar());*/
+		// model.addAttribute("vagas", vagaBusiness.listarDecrescente());
+
+		/* model.addAttribute("vagas", vagaBusiness.listar()); */
 
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
 		model.addAttribute("listaCargo", listaCargo);
@@ -146,7 +146,7 @@ public class VagaController {
 		model.addAttribute("listaStatusDrop", listaStatusDrop);
 
 		vagaBusiness.obterQtdCandidatos(1200);
-		
+
 		/*
 		 * List<StatusVagaBean> listaStatusVaga =
 		 * statusVagaBusiness.obterTodos(); StatusVagaBean vagaStatus = new
@@ -160,18 +160,21 @@ public class VagaController {
 
 	@RequestMapping(value = { "filtro" }, method = RequestMethod.GET)
 	public String filtrar(@RequestParam(value = "page", required = false) Integer page, Model model, VagaBean vaga) {
-		/*if (vaga.getNomeVaga().isEmpty() && vaga.getDataAberturaDe() == null && vaga.getDataAberturaPara() == null
-				&& vaga.getStatus().get(0).getStatus().getNome().equals("Selecione")) {
-			return "redirect:consultar";
-
-		}*/
+		/*
+		 * if (vaga.getNomeVaga().isEmpty() && vaga.getDataAberturaDe() == null
+		 * && vaga.getDataAberturaPara() == null &&
+		 * vaga.getStatus().get(0).getStatus().getNome().equals("Selecione")) {
+		 * return "redirect:consultar";
+		 * 
+		 * }
+		 */
 		if (page == null) {
 			page = 1;
 		}
 		List<VagaBean> vagas = vagaBusiness.filtroVaga(vaga, page);
-		//Paginando
-		paginacao(page,model);
-		
+		// Paginando
+		paginacao(page, model, vaga);
+		model.addAttribute("filtroVaga", vaga);
 		model.addAttribute("vagas", vagas);
 
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
@@ -196,7 +199,6 @@ public class VagaController {
 
 		return "vaga/consultar-vaga";
 	}
-	
 
 	@RequestMapping(value = { "abrir" }, method = RequestMethod.GET)
 	public @ResponseBody VagaBean abrirVagaAjax(Model model, @ModelAttribute("id") Integer id) {
@@ -251,12 +253,11 @@ public class VagaController {
 		StatusVagaBean ultimoStatus = vaga.getUltimoStatus();
 		List<AvaliadorVagaBean> avaliadorVagaBean = null;
 		avaliadorVagaBean = vagaBusiness.obterAvaliadores(id);
-		
+
 		obterDominiosVaga(model);
 		model.addAttribute("vaga", vaga);
 		model.addAttribute("avaliadorVagaBean", avaliadorVagaBean);
 		model.addAttribute("ultimoStatus", ultimoStatus);
-		
 
 		return "vaga/solicitar-vaga";
 	}
@@ -265,20 +266,23 @@ public class VagaController {
 	public String idAvaliador() {
 		return "idAvaliador";
 	}
-	
+
+
+
 	@RequestMapping(value = "/cancelar-candidato/{id}")
 	public String cancelaCandidato(@PathVariable Integer id) {
 		SituacaoVagaBean bean = new SituacaoVagaBean();
+		//vagaBusiness.cancelarVagaCandidato(id);
 		bean.setIdVaga(id);
 		bean.setStatus(StatusVagaEnum.CANCELADO);
 		vagaBusiness.alterarStatus(bean);
 
-		return "redirect:/candidato/aprovar";
+		return "redirect:/aprovar";
 	}
 
 	@RequestMapping(value = "/salvar", method = RequestMethod.POST)
 	public String inserirVaga(@ModelAttribute("vagaBean") @Valid VagaBean vagaBean, BindingResult result, Model model) {
-		
+
 		if (result.hasErrors()) {
 			model.addAttribute("erro", result.getErrorCount());
 			model.addAttribute("listaErros", buildErrorMessage(result.getFieldErrors()));
@@ -287,25 +291,25 @@ public class VagaController {
 			return "vaga/solicitar-vaga";
 		}
 
-		String resposta = vagaBusiness.inserir(vagaBean,avaliadoresB);
-		model.addAttribute("resposta",resposta);
+		String resposta = vagaBusiness.inserir(vagaBean, avaliadoresB);
+		model.addAttribute("resposta", resposta);
 		return "redirect:solicitar";
 
 	}
-	
+
 	@RequestMapping(value = "/avaliadores", method = RequestMethod.POST)
-	public @ResponseBody String recebeAvaliadores(@ModelAttribute("avaliadores") String avaliadores){
-		
+	public @ResponseBody String recebeAvaliadores(@ModelAttribute("avaliadores") String avaliadores) {
+
 		List<String> resultado = new Gson().fromJson(avaliadores, List.class);
-			
-		for(String dados : resultado){
+
+		for (String dados : resultado) {
 			UsuarioBean avaliador = new UsuarioBean();
 			avaliador.setId(Integer.parseInt(dados));
 			avaliadoresB.add(avaliador);
 		}
 		avaliadoresB.remove(0);
 		return "ok";
-		
+
 	}
 
 	private List<String> buildErrorMessage(List<FieldError> error) {
@@ -318,9 +322,9 @@ public class VagaController {
 		}
 		return novosErros;
 	}
-	
-	@RequestMapping(value = "obter-cliente", method=RequestMethod.GET)
-	public @ResponseBody List<ProjetoBean> obterPerfilFuncionalidade(Model model,@ModelAttribute("id") Integer id){
+
+	@RequestMapping(value = "obter-cliente", method = RequestMethod.GET)
+	public @ResponseBody List<ProjetoBean> obterPerfilFuncionalidade(Model model, @ModelAttribute("id") Integer id) {
 		List<ProjetoBean> cliente = projetoBusiness.obterCliente(id);
 		return cliente;
 	}
