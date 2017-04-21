@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -19,7 +21,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="tbCargoSenioridade")
-
+@NamedQueries({ 
+	@NamedQuery(name = "rangeSalarial", query = "SELECT u FROM CargoSenioridadeEntity u WHERE u.idCargo = ?1 AND u.idSenioridade = ?2")
+})
 public class CargoSenioridadeEntity{
 	
 	@Id
