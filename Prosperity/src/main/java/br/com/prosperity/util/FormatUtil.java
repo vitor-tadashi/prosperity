@@ -36,7 +36,6 @@ public class FormatUtil {
 			String bloco1;
 			String bloco2;
 			String bloco3;
-			contatoBean.getTelefone().
 			
 			if(contatoBean.getTelefone().length() == 11) {
 				bloco1 = contatoBean.getTelefone().substring(0, 2);
