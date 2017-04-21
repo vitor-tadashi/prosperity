@@ -158,10 +158,10 @@
     		}
     	});
     	$("#formCadastro2").submit();
-    	//var resp = ${resposta};
-    	if (resp == "Ok"){
-    		alert("Cadastrado com Sucesso");
-    	};
+//    	var resp = ${resposta};
+//    	if (resp == "Ok"){
+//    		alert("Cadastrado com Sucesso");
+//    	};
 	});
 	
 	function enviarAvaliadores(){

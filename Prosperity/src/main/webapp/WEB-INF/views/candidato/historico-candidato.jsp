@@ -131,7 +131,7 @@
 								<div class="col-xs-7">
 									<p class="form-control-static" id="pretensao">
 										<fmt:formatNumber value="${candidato.valorPretensao}"
-											minFractionDigits="2" type="currency" pattern="" />
+											minFractionDigits="2" type="currency" pattern="#,##0.00" />
 									</p>
 								</div>
 							</div>
