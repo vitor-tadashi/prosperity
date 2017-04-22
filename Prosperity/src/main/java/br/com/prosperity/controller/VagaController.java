@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import br.com.prosperity.bean.AvaliadorVagaBean;
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CargoBean;
+import br.com.prosperity.bean.CargoSenioridadeBean;
 import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.ProjetoBean;
@@ -35,6 +36,7 @@ import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.CandidatoBusiness;
 import br.com.prosperity.business.CargoBusiness;
+import br.com.prosperity.business.CargoSenioridadeBusiness;
 import br.com.prosperity.business.FuncionarioBusiness;
 import br.com.prosperity.business.ProjetoBusiness;
 import br.com.prosperity.business.SenioridadeBusiness;
@@ -81,7 +83,10 @@ public class VagaController {
 
 	@Autowired
 	private List<UsuarioBean> avaliadoresB;
-
+	
+	@Autowired
+	private CargoSenioridadeBusiness cargoSenioridadeBusiness;
+	
 	@Autowired
 	private CargoBusiness cargoBusiness;
 
@@ -267,8 +272,6 @@ public class VagaController {
 		return "idAvaliador";
 	}
 
-
-
 	@RequestMapping(value = "/cancelar-candidato/{id}")
 	public String cancelaCandidato(@PathVariable Integer id) {
 		SituacaoVagaBean bean = new SituacaoVagaBean();
@@ -327,6 +330,12 @@ public class VagaController {
 	public @ResponseBody List<ProjetoBean> obterPerfilFuncionalidade(Model model, @ModelAttribute("id") Integer id) {
 		List<ProjetoBean> cliente = projetoBusiness.obterCliente(id);
 		return cliente;
+	}
+	
+	@RequestMapping(value = "obter-range-salarial", method = RequestMethod.GET)
+	public @ResponseBody List<CargoSenioridadeBean> obterCargoSenioridade(Model model, @ModelAttribute("idCargo") Integer idCargo,@ModelAttribute("idSenioridade") Integer idSenioridade) {
+		List<CargoSenioridadeBean> rangeSalarial = cargoSenioridadeBusiness.obterRangeSalarial(idCargo,idSenioridade);
+		return rangeSalarial;
 	}
 	/*
 	 * @RequestMapping(value = "obter-vaga", method=RequestMethod.GET)
