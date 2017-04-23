@@ -1,25 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<title>Histórico de candidato</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
-<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<%@ taglib uri="http://kwonnam.pe.kr/jsp/template-inheritance" prefix="layout"%>
 
-<c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
-
-
-</head>
-
-<body>
-	<c:import url="/WEB-INF/views/shared/dashboard.jsp"></c:import>
+<layout:extends name="base">
+	<layout:put block="title" type="REPLACE">
+		<title>Histórico de candidato</title>
+	</layout:put>
+	
+	<layout:put block="contents">
 	<div id="main-container">
 		<div id="breadcrumb">
 			<ul class="breadcrumb">
@@ -227,10 +217,5 @@
 			<!-- /.padding-md -->
 		</div>
 	</div>
-
-	<!-- SOMENTE ALTERAR DAQUI PARA CIMA -->
-
-	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
-	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
-</body>
-</html>
+	</layout:put>
+</layout:extends>

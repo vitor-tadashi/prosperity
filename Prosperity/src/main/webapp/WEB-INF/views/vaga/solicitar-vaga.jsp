@@ -2,23 +2,19 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<title>Solicitar Vaga</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
+<%@ taglib uri="http://kwonnam.pe.kr/jsp/template-inheritance" prefix="layout"%>
 
-<c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
-<body>
-	<c:import url="/WEB-INF/views/shared/dashboard.jsp"></c:import>
+<layout:extends name="base">
+	<layout:put block="title" type="REPLACE">
+		<title>Solicitar Vaga</title>
+	</layout:put>
+
+	<layout:put block="contents">
 	<div id="main-container">
 		<div id="breadcrumb">
 			<ul class="breadcrumb">
-				<li><i class="fa fa-home"></i><a href="dashboard.html">
-						Início</a></li>
+				<li><i class="fa fa-home"></i><a href="/pagina-inicial">
+						Página inicial</a></li>
 				<li class="active">Vaga</li>
 				<li class="active">Solicitar</li>
 			</ul>
@@ -398,7 +394,7 @@
 								</div>
 							</div>
 							<div class="text-right pull-right">
-								<button type="submit" class="btn btn-sm btn-success" id="btnSalvar">Salvar</button>
+								<button type="submit" class="btn btn-sm btn-success" id="btnSalvar"><i class="fa fa-check"></i> Salvar</button>
 							</div>
 						</form>
 
@@ -409,13 +405,13 @@
 		</div>
 		<!-- /wrapper -->
 	</div>
-	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
-	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
+	</layout:put>
 
+	<layout:put block="scripts" type="REPLACE">
 	<!-- Custom -->
 	<script src="/resources/js/custom/solicitacaoVaga.js"></script>
 	<script src="/resources/js/parsley.min.js"></script>
-	<script src="/resources/js/custom/custom.js"></script>
+	
 	<script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 	
 	<script type="text/javascript">
@@ -427,6 +423,5 @@
 	        }, 5000);
 	    });
 	</script>	  
-	
-</body>
-</html>
+	</layout:put>
+</layout:extends>

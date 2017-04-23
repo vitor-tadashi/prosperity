@@ -10,14 +10,12 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
 
 <!-- Link e style aqui -->
 </head>
 
 <body>
 
-	<c:import url="/WEB-INF/views/shared/dashboard.jsp"></c:import>
 
 	<!-- Corpo da pagina aqui -->
 	<div id="main-container">
@@ -44,8 +42,7 @@
 		</div>
 	</div>
 
-	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
-	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
+
 	
 </body>
 </html>

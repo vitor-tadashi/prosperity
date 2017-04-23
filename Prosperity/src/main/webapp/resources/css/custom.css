@@ -1,20 +1,35 @@
 #menu-toggle{
 	visibility: hidden;
 }
+
 .logo {
 	width: 100px;
+	margin-top: -6px;
 }
 
 #main-container {
-	min-height: 690px;
+	min-height: 100%;
 }
 
-#wrapper {
-	min-height: 0;
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  min-height: 100%;
 }
 
 footer {
-	/*position: absolute;*/
+	position: absolute;
 	right: 0;
 	bottom: 0;
 	left: 0;

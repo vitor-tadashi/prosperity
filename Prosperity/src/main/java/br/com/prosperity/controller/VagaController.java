@@ -21,30 +21,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 
 import br.com.prosperity.bean.AvaliadorVagaBean;
-import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.CargoSenioridadeBean;
-import br.com.prosperity.bean.FuncionalidadeBean;
-import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.ProjetoBean;
 import br.com.prosperity.bean.SenioridadeBean;
-import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.SituacaoVagaBean;
 import br.com.prosperity.bean.StatusBean;
 import br.com.prosperity.bean.StatusVagaBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
-import br.com.prosperity.business.CandidatoBusiness;
 import br.com.prosperity.business.CargoBusiness;
 import br.com.prosperity.business.CargoSenioridadeBusiness;
-import br.com.prosperity.business.FuncionarioBusiness;
 import br.com.prosperity.business.ProjetoBusiness;
 import br.com.prosperity.business.SenioridadeBusiness;
 import br.com.prosperity.business.StatusBusiness;
 import br.com.prosperity.business.StatusVagaBusiness;
 import br.com.prosperity.business.UsuarioBusiness;
 import br.com.prosperity.business.VagaBusiness;
-import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.enumarator.StatusVagaEnum;
 
 @Controller
@@ -303,6 +296,7 @@ public class VagaController {
 	@RequestMapping(value = "/avaliadores", method = RequestMethod.POST)
 	public @ResponseBody String recebeAvaliadores(@ModelAttribute("avaliadores") String avaliadores) {
 
+		@SuppressWarnings("unchecked")
 		List<String> resultado = new Gson().fromJson(avaliadores, List.class);
 
 		for (String dados : resultado) {

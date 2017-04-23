@@ -720,7 +720,7 @@ aside .main-menu .alert {
 #wrapper {
   position: relative;
   overflow: hidden;
-  min-height: 800px;
+  min-height: 670px;
   background-color: #f9f9f9;
 }
 @media (min-width: 768px) {

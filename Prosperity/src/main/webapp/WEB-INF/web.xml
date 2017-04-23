@@ -57,5 +57,15 @@
 		<error-code>404</error-code>
 		<location>/WEB-INF/views/shared/erro404.jsp</location>
 	</error-page>
+	
+	<context-param>
+	    <param-name>jsp-inheritance-prefix</param-name>
+	    <param-value>/WEB-INF/views/layouts/</param-value>
+	</context-param>
+	
+	<context-param>
+	    <param-name>jsp-inheritance-suffix</param-name>
+	    <param-value>.jsp</param-value>
+	</context-param>
 
 </web-app>

@@ -2,25 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<title>Consulta de candidatos</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
+<%@ taglib uri="http://kwonnam.pe.kr/jsp/template-inheritance" prefix="layout"%>
 
-<c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
+<layout:extends name="base">
+	<layout:put block="title" type="REPLACE">
+		<title>Consulta de candidatos</title>
+	</layout:put>
 
-<!-- Link e style aqui -->
-
-
-
-</head>
-<body>
-	<c:import url="/WEB-INF/views/shared/dashboard.jsp"></c:import>
-
+	<layout:put block="contents">
 	<!--    Modais   -->
 	<!-- Modal Avaliação de Competencias -->
 	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
@@ -431,9 +420,9 @@
 	<div id="main-container">
 		<div id="breadcrumb">
 			<ul class="breadcrumb">
-				<li><i class="fa fa-home"></i><a href="/pagina-inicial"> Home</a></li>
+				<li><i class="fa fa-home"></i><a href="/pagina-inicial"> Página inicial</a></li>
 				<li>Candidato</li>
-				<li><a href="consultar">Consultar</a></li>
+				<li class="active">Consultar</li>
 			</ul>
 		</div>
 		<!--breadcrumb-->
@@ -492,9 +481,8 @@
 								</div>
 							</form>
 							<!-- /.row -->
-						</div>
-						<!-- /.panel-body - ATE AQUI O FILTRAR-->
 						
+						<br />
 						<table
 						id="tabelaVaga"
 							class="table table-bordered table-condensed table-hover table-striped"
@@ -523,7 +511,7 @@
 							<td>
 									<div class="btn-group">
 
-												<button class="btn btn-sm btn-info dropdown-toggle"
+												<button class="btn btn-xs btn-info dropdown-toggle"
 													data-toggle="dropdown" aria-haspopup="true"
 													aria-expanded="false">
 													<i class="fa fa-cogs fa-lg">&nbsp;</i> <span class="caret"></span>
@@ -549,11 +537,11 @@
 
 							</tbody>
 						</table>
-						
-						<div style="margin-left: 10px; margin-bottom: 30px;margin-top: -30px; position: absolute "> 
-						    	<a href="/vaga/consultar" class="btn btn-xs btn-default"><i class="fa fa-reply"></i> Retornar</a>				
-							<i >&nbsp</i> 								
-					 </div>
+						</div>
+						<!-- /.panel-body - ATE AQUI O FILTRAR-->
+						<div class="panel-footer">
+							<a href="/vaga/consultar" class="btn btn-xs btn-default"><i class="fa fa-reply"></i> Retornar</a>				
+					 	</div>
 		
 					</div>
 					<!-- fim da div panel -->
@@ -604,9 +592,9 @@
 			</div>
 		</div>
 	</div>
-	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
-	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
+	</layout:put>
 
+	<layout:put block="scripts" type="REPLACE">
 	<!-- JavaScript -->
 
 	<script type="text/javascript">
@@ -782,42 +770,5 @@
 
 		}
 	</script>
-	
-	<script>/* paginação */
-	$(function	()	{
-		$('#tabelaVaga').dataTable( {
-			"bJQueryUI": true,
-			"sPaginationType": "simple_numbers",
-			"bFilter": false,
-			"bInfo": false,
-			"bLengthChange": false,
-			"bSort": false,
-
-			"oLanguage": {
-				"sEmptyTable": "Nenhum registro encontrado",
-				"sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-				"sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
-				"sInfoFiltered": "(Filtrados de _MAX_ registros)",
-				"sInfoPostFix": "",
-				"sInfoThousands": ".",
-				"sLengthMenu": "_MENU_ resultados por página",
-				"sLoadingRecords": "Carregando...",
-				"sProcessing": "Processando...",
-				"sZeroRecords": "Nenhum registro encontrado",
-				"sSearch": "Pesquisar",
-				"oPaginate": {
-					"sNext": "Próximo",
-					"sPrevious": "Anterior",
-					"sFirst": "Primeiro",
-					"sLast": "Último"
-				},
-				"oAria": {
-					"sSortAscending": ": Ordenar colunas de forma ascendente",
-					"sSortDescending": ": Ordenar colunas de forma descendente"
-				}
-			}
-		});
-	});
-	</script>
-</body>
-</html>
+	</layout:put>
+</layout:extends>
