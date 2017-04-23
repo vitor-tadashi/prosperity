@@ -216,7 +216,6 @@
 			</ul>
 		</div>
 		<!--breadcrumb-->
-		<div class="container">
 			<div class="padding-md">
 				<div class="row">
 					<div>
@@ -317,7 +316,6 @@
 				<!-- /col-md-12 -->
 			</div>
 			<!-- /.row -->
-		</div>
 		<!-- /.paddin.md -->
 	</div>
 	<!-- /.container -->

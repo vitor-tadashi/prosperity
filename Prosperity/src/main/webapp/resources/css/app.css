@@ -463,9 +463,6 @@ aside .sidebar-inner .search-block .btn {
   background: #272938;
   border: 1px solid #272938;
 }
-aside .main-menu {
-  height: 100%;
-}
 aside .main-menu > ul {
   margin: 0;
   list-style: none;

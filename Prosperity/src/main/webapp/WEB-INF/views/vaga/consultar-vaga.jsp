@@ -458,7 +458,6 @@ li a.active {
 			</ul>
 		</div>
 		<!--breadcrumb-->
-		<div class="container">
 		<div class="padding-md clearfix">
 			<div class="row">
 				<div class="col-sm-12">
@@ -503,8 +502,6 @@ li a.active {
 									</a>
 								</div>
 							</form>
-						</div>
-						<!--</panel body>-->
 						
 						<table
 							id="tabelaVaga"
@@ -629,7 +626,8 @@ li a.active {
 							</tbody>
 						</table>
 						
-						
+						</div>
+						<!--</panel body>-->
 					</div>
 					<!--</panel default>-->
 					   <div class="panel-footer clearfix">
@@ -658,7 +656,6 @@ li a.active {
 			<!--</row>-->
 		</div>
 		<!--</padding>-->
-	</div>
 	</div>
 	
 

@@ -97,60 +97,58 @@
 			</ul>
 		</div>
 		<!--breadcrumb-->
-		<div class="container">
-			<div class="padding-md">
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="panel panel-default">
-							<div class="panel-heading"><strong>Usuários:</strong></div>
-							<div class="panel-body">
-								<div id="divAlert"></div>
-								<c:if test="${not empty mensagem}">
-									<div class="alert alert-info mensagem">
-										${mensagem}
-									</div>
-								</c:if>
-								<table class="table table-bordered table-condensed table-hover table-striped" id="tbUsuario">
-									<thead>
-										<tr>
-											<th class="text-center">Nome</th>
-											<th class="text-center">Usuário</th>
-											<th class="text-center">E-mail</th>
-											<th class="text-center">Perfil</th>
-											<th class="text-center">Situação</th>
-											<th class="text-center">Editar</th>
+		<div class="padding-md">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="panel panel-default">
+						<div class="panel-heading"><strong>Usuários:</strong></div>
+						<div class="panel-body">
+							<div id="divAlert"></div>
+							<c:if test="${not empty mensagem}">
+								<div class="alert alert-info mensagem">
+									${mensagem}
+								</div>
+							</c:if>
+							<table class="table table-bordered table-condensed table-hover table-striped" id="tbUsuario">
+								<thead>
+									<tr>
+										<th class="text-center">Nome</th>
+										<th class="text-center">Usuário</th>
+										<th class="text-center">E-mail</th>
+										<th class="text-center">Perfil</th>
+										<th class="text-center">Situação</th>
+										<th class="text-center">Editar</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="usuario" items="${usuarios}">
+										<tr class="text-center">
+											<td>${usuario.funcionario.nome}</td>
+											<td>${usuario.nome}</td>
+											<td>${usuario.email}</td>
+											<td>${usuario.perfil.nome}</td>
+											<td id="status_${usuario.id}">
+												<c:if test="${usuario.ativo}">
+													<span class="label label-success status">Ativo</span>
+												</c:if>
+												<c:if test="${!usuario.ativo}">
+													<span class="label label-danger status">Inativo</span>
+												</c:if>
+											</td>
+											<td>
+												<div class="btn-group">
+													<a class="btn btn-info btn-xs" onclick="abrirModal('editar', ${usuario.id})"><i class="fa fa-edit"></i></a>
+												</div>
+											</td>
 										</tr>
-									</thead>
-									<tbody>
-										<c:forEach var="usuario" items="${usuarios}">
-											<tr class="text-center">
-												<td>${usuario.funcionario.nome}</td>
-												<td>${usuario.nome}</td>
-												<td>${usuario.email}</td>
-												<td>${usuario.perfil.nome}</td>
-												<td id="status_${usuario.id}">
-													<c:if test="${usuario.ativo}">
-														<span class="label label-success status">Ativo</span>
-													</c:if>
-													<c:if test="${!usuario.ativo}">
-														<span class="label label-danger status">Inativo</span>
-													</c:if>
-												</td>
-												<td>
-													<div class="btn-group">
-														<a class="btn btn-info btn-xs" onclick="abrirModal('editar', ${usuario.id})"><i class="fa fa-edit"></i></a>
-													</div>
-												</td>
-											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
-							</div>
+									</c:forEach>
+								</tbody>
+							</table>
 						</div>
-						<!-- /.col -->
-						<div class="pull-right">
-							<a class="btn btn-primary" onclick="abrirModal('incluir')"><span class="fa fa-plus"></span> Novo usuário</a>
-						</div>
+					</div>
+					<!-- /.col -->
+					<div class="pull-right">
+						<a class="btn btn-primary" onclick="abrirModal('incluir')"><span class="fa fa-plus"></span> Novo usuário</a>
 					</div>
 				</div>
 			</div>
