@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.prosperity.bean.AvaliadorVagaBean;
 import br.com.prosperity.bean.FuncionalidadeBean;
+import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.SituacaoVagaBean;
 import br.com.prosperity.bean.StatusVagaBean;
 import br.com.prosperity.bean.UsuarioBean;
@@ -33,7 +34,9 @@ import br.com.prosperity.dao.VagaCandidatoDAO;
 import br.com.prosperity.dao.VagaDAO;
 import br.com.prosperity.entity.AvaliadorVagaEntity;
 import br.com.prosperity.entity.StatusVagaEntity;
+import br.com.prosperity.entity.VagaCandidatoEntity;
 import br.com.prosperity.entity.VagaEntity;
+import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.enumarator.StatusVagaEnum;
 
 @Component
@@ -47,9 +50,6 @@ public class VagaBusiness {
 
 	@Autowired
 	private UsuarioConverter usuarioConverter;
-
-	@Autowired
-	private SenioridadeBusiness senioridadeBusinness;
 
 	@Autowired
 	private VagaCandidatoDAO vagaCandidatoDAO;
@@ -86,6 +86,12 @@ public class VagaBusiness {
 
 	@Autowired
 	private AvaliadorVagaConverter avaliadorVagaConverter;
+
+	@Autowired
+	private CandidatoBusiness candidatoBusiness;
+
+	@Autowired
+	private SituacaoCandidatoBean situacaoCandidato;
 
 	@Transactional(readOnly = true)
 	public List<VagaBean> listarDecrescente() {
@@ -255,6 +261,17 @@ public class VagaBusiness {
 			desativarStatus(vagaEntity);
 		}
 
+		if (situacaoVaga.getStatus().getValue() != StatusVagaEnum.CANCELADO.getValue()
+				|| situacaoVaga.getStatus().getValue() != StatusVagaEnum.RECUSADO.getValue()) {
+			List<VagaCandidatoEntity> vagaCandidatos = new ArrayList<VagaCandidatoEntity>();
+			for (VagaCandidatoEntity vcandidato : vagaCandidatos) {
+				situacaoCandidato.setIdCandidato(vcandidato.getCandidato().getId());
+				situacaoCandidato.setStatus(StatusCandidatoEnum.CANCELADO);
+				candidatoBusiness.alterarStatus(situacaoCandidato);
+			}
+
+		}
+
 		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
 		statusVagaEntity.setStatus(statusDAO.findById(situacaoVaga.getStatus().getValue()));
 		statusVagaEntity.setVaga(vagaEntity);
@@ -354,4 +371,3 @@ public class VagaBusiness {
 		return count;
 	}
 }
-	

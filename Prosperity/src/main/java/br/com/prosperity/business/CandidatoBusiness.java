@@ -90,7 +90,7 @@ public class CandidatoBusiness {
 	private UsuarioBean usuarioBean;
 
 	@Autowired
-	CanalInformacaoDAO canalInformacaoDAO;
+	private CanalInformacaoDAO canalInformacaoDAO;
 
 	@Autowired
 	private UsuarioDAO usuarioDAO;
@@ -392,6 +392,12 @@ public class CandidatoBusiness {
 
 		desativarStatus(candidatoEntity);
 
+		if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANCELADO.getValue()
+			|| situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOREPROVADO.getValue()) {
+			desativarAvaliadores(situacaoCandidato.getIdCandidato());
+
+		}
+
 		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
 		statusCandidatoEntity.setStatus(statusDAO.findById(situacaoCandidato.getStatus().getValue()));
 		statusCandidatoEntity.setCandidato(candidatoEntity);
@@ -403,6 +409,17 @@ public class CandidatoBusiness {
 		statusCandidatoEntity.setFlSituacao(true);
 
 		return statusCandidatoEntity;
+	}
+
+	private void desativarAvaliadores(Integer idCandidato) {
+		List<AvaliadorCandidatoEntity> avaliadoresCandidato = avaliadorCandidatoDAO
+				.findByNamedQuery("desativarAvaliadores", idCandidato);
+		if (avaliadoresCandidato != null) {
+			for (AvaliadorCandidatoEntity avaliador : avaliadoresCandidato) {
+				avaliador.setStatus(StatusCandidatoEnum.CANCELADO.getValue());
+				avaliadorCandidatoDAO.update(avaliador);
+			}
+		}
 	}
 
 	@Transactional
