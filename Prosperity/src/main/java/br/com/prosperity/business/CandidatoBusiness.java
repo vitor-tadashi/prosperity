@@ -505,7 +505,7 @@ public class CandidatoBusiness {
 			if (funcionalidadeBean.getId() == 26)
 				listaStatus.add(StatusCandidatoEnum.GERARPROPOSTA.getValue());
 
-			if (funcionalidadeBean.getId() == 25)
+			if (funcionalidadeBean.getId() == 23)
 				listaStatus.add(StatusCandidatoEnum.PROPOSTACANDIDATO.getValue());
 
 			if (funcionalidadeBean.getId() == 28) {
