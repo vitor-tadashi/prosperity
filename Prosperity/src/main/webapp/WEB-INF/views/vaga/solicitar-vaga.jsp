@@ -120,7 +120,7 @@
 											<div class="form-group col-md-6">
 												<label for="cmbCargo">Cargo</label> <select
 													class="form-control" id="cmbCargo"
-													name="cmbCargo">
+													name="cargoBean.id" value="${cargoBean.id}">
 
 													<option value="0">Selecione o cargo</option>
 
