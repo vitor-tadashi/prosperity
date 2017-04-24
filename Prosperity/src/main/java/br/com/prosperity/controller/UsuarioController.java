@@ -1,9 +1,6 @@
 package br.com.prosperity.controller;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,9 +38,6 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioBusiness usuarioBusiness;
-	
-	@Autowired
-	private HttpSession session;
 
 	@RequestMapping(value = "/gerenciar", method = RequestMethod.GET)
 	public String carregaUsuarios(Model model) {
@@ -124,7 +118,7 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping(value = "obter-perfil-funcionalidade", method=RequestMethod.GET)
-	public @ResponseBody List<FuncionalidadeBean> obterPerfilFuncionalidade(Model model,@ModelAttribute("id")Integer id){
+	public @ResponseBody List<FuncionalidadeBean> obterPerfilFuncionalidade(@ModelAttribute("id") Integer id){
 		List<FuncionalidadeBean> listaFunc = perfilBusiness.obterPerfilFuncionalidades(id);
 		
 		return listaFunc;

@@ -10,8 +10,6 @@ import br.com.prosperity.entity.VagaCandidatoEntity;
 public class VagaCandidatoConverter implements Converter<VagaCandidatoEntity, VagaCandidatoBean> {	
 	@Autowired
 	private CanalInformacaoConverter canalInformacaoConverter;
-	@Autowired
-	private CandidatoConverter candidatoConverter;
 	
 	@Override
 	public VagaCandidatoEntity convertBeanToEntity(VagaCandidatoBean bean) {

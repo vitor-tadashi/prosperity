@@ -1,0 +1,11 @@
+.verity-time-input {
+	max-width: 80px;
+}
+
+form.form-border .form-group:last-child {
+	padding-bottom: 15px;
+}
+
+.label-time-input {
+	padding-left:0;
+}
