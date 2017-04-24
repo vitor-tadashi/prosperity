@@ -11,6 +11,9 @@ public class VagaCandidatoConverter implements Converter<VagaCandidatoEntity, Va
 	@Autowired
 	private CanalInformacaoConverter canalInformacaoConverter;
 	
+	@Autowired
+	private VagaConverter vagaConverter;
+	
 	@Override
 	public VagaCandidatoEntity convertBeanToEntity(VagaCandidatoBean bean) {
 		if (bean == null) {
@@ -32,6 +35,7 @@ public class VagaCandidatoConverter implements Converter<VagaCandidatoEntity, Va
 		VagaCandidatoBean bean = new VagaCandidatoBean();
 		bean.setId(entity.getIdVagaCandidato());
 		bean.setCanalInformacao(canalInformacaoConverter.convertEntityToBean(entity.getCanalInformacao()));
+		/*bean.setVaga(vagaConverter.convertEntityToBean(entity.getVaga()));*/
 		//bean.setCandidatoBean(candidatoConverter.convertEntityToBean(entity.getCandidato()));
 		
 		return bean;

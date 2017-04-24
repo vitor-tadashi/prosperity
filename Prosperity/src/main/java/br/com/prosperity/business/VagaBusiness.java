@@ -26,15 +26,16 @@ import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.converter.AvaliadorVagaConverter;
 import br.com.prosperity.converter.UsuarioConverter;
 import br.com.prosperity.converter.VagaConverter;
+import br.com.prosperity.dao.AvaliadorCandidatoDAO;
 import br.com.prosperity.dao.AvaliadorVagaDAO;
 import br.com.prosperity.dao.StatusDAO;
 import br.com.prosperity.dao.StatusVagaDAO;
 import br.com.prosperity.dao.UsuarioDAO;
 import br.com.prosperity.dao.VagaCandidatoDAO;
 import br.com.prosperity.dao.VagaDAO;
+import br.com.prosperity.entity.AvaliadorCandidatoEntity;
 import br.com.prosperity.entity.AvaliadorVagaEntity;
 import br.com.prosperity.entity.StatusVagaEntity;
-import br.com.prosperity.entity.VagaCandidatoEntity;
 import br.com.prosperity.entity.VagaEntity;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.enumarator.StatusVagaEnum;
@@ -83,6 +84,9 @@ public class VagaBusiness {
 
 	@Autowired
 	private AvaliadorVagaDAO avaliadorVagaDao;
+	
+	@Autowired
+	private AvaliadorCandidatoDAO avaliadorCandidatoDAO;
 
 	@Autowired
 	private AvaliadorVagaConverter avaliadorVagaConverter;
@@ -254,7 +258,7 @@ public class VagaBusiness {
 	public void alterarStatus(SituacaoVagaBean situacaoVaga) {
 		StatusVagaEntity statusVagaEntity = new StatusVagaEntity();
 		VagaEntity vagaEntity = vagaDAO.findById(situacaoVaga.getIdVaga());
-		//vagaEntity.setId(situacaoVaga.getIdVaga());
+		vagaEntity.setId(situacaoVaga.getIdVaga());
 		//obter avaliadores esta dando nullPointer
 		if (situacaoVaga.getStatus() == StatusVagaEnum.ATIVO) {
 			List<AvaliadorVagaEntity>avaliadorVagaEntity = avaliadorVagaDao.findByNamedQuery("obterAvaliadoresDaVaga", vagaEntity.getId());
@@ -267,11 +271,11 @@ public class VagaBusiness {
 			desativarStatus(vagaEntity);
 		}
 
-		if (situacaoVaga.getStatus().getValue() != StatusVagaEnum.CANCELADO.getValue()
-				|| situacaoVaga.getStatus().getValue() != StatusVagaEnum.RECUSADO.getValue()) {
-			List<VagaCandidatoEntity> vagaCandidatos = new ArrayList<VagaCandidatoEntity>();
-			for (VagaCandidatoEntity vcandidato : vagaCandidatos) {
-				situacaoCandidato.setIdCandidato(vcandidato.getCandidato().getId());
+		if (situacaoVaga.getStatus().getValue() == StatusVagaEnum.CANCELADO.getValue()
+				|| situacaoVaga.getStatus().getValue() == StatusVagaEnum.RECUSADO.getValue()) {
+			List<AvaliadorCandidatoEntity> avaliadorCandidatos = avaliadorCandidatoDAO.findByNamedQuery("desativarAvaliadoresPorVaga", vagaEntity.getId());
+			for (AvaliadorCandidatoEntity acandidato : avaliadorCandidatos) {
+				situacaoCandidato.setIdCandidato(acandidato.getCandidato().getId());
 				situacaoCandidato.setStatus(StatusCandidatoEnum.CANCELADO);
 				candidatoBusiness.alterarStatus(situacaoCandidato);
 			}

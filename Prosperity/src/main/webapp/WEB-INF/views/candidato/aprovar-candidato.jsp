@@ -2,18 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://kwonnam.pe.kr/jsp/template-inheritance"
-	prefix="layout"%>
+<%@ taglib uri="http://kwonnam.pe.kr/jsp/template-inheritance" prefix="layout"%>
 
 <layout:extends name="base">
 	<layout:put block="contents">
-
-		<!--
-<link rel="stylesheet" href="/resources/css/ckeditor_/ckeditor/samples/css/samples.css">
--->
 		<link rel="stylesheet"
 			href="/resources/css/ckeditor_/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
-
 		<!--    Modais   -->
 		<!-- Modal Avaliação de Competencias -->
 		<div id="modalProposta" class="modal fade bs-example-modal-lg"
@@ -26,25 +20,22 @@
 						<h4 style="text-align: center;">Gestão de candidato</h4>
 					</div>
 					<div class="modal-body">
-
 						<div class="panel panel-default">
 							<div class="panel-tab clearfix">
 								<ul class="tab-bar">
-									<li class="active"><a href="#infoEntrevista"
+									<li id="entrevista-tab"><a href="#infoEntrevista"
 										data-toggle="tab"><i class="fa fa-user"></i> Informações
 											de entrevista</a></li>
-									<li><a href="#processoSelecao" data-toggle="tab"><i
+									<li id="processo-tab"><a href="#processoSelecao" data-toggle="tab"><i
 											class="fa fa-pencil"></i> Processo de seleção</a></li>
-									<li><a href="#avaliacaoComp" data-toggle="tab"><i
+									<li id="avaliacao-tab"><a href="#avaliacaoComp" data-toggle="tab"><i
 											class="fa fa-briefcase"></i> Avaliação de competências</a></li>
-									<li><a href="#proposta" data-toggle="tab"><i
+									<li id="proposta-tab"><a href="#proposta" data-toggle="tab"><i
 											class="fa fa-money"></i> Proposta</a></li>
 								</ul>
 							</div>
-
 							<div class="panel-body">
 								<div class="tab-content">
-
 									<div class="tab-pane fade in active" id="infoEntrevista">
 										<div class="form-group">
 											<label class="control-label">Parecer :</label>
@@ -52,7 +43,7 @@
 												<input type="hidden" id="hdn-id-candidato" /> <input
 													type="hidden" id="hdn-status" />
 												<textarea class="form-control" id="parecer"
-													style="margin-left: 0px; width: 770px" name="parecer"></textarea>
+													style="margin-left: 0px; width: 800px" name="parecer"></textarea>
 											</div>
 										</div>
 									</div>
@@ -113,7 +104,6 @@
 											</table>
 										</section>
 									</div>
-
 									<div class="tab-pane fade" id="proposta">
 										<div class="form-group col-md-12" id="divCkEditor">
 											<div class="form-group">
@@ -121,32 +111,27 @@
 												<div class="adjoined-bottom">
 													<div class="grid-container">
 														<div class="grid-width-100">
-															<textarea id="editor" name="editor">
-															
-														</textarea>
+															<textarea id="editor" name="editor"></textarea>
 														</div>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
-
 								</div>
 							</div>
 							<div class="panel-footer ">
 								<button type="button" class="btn btn-sm btn-primary"
-									data-target="#confirm-modal" data-toggle="modal">
+									href="#confirm-modal" data-toggle="modal">
 									<i class="fa fa-check fa-lg"></i>&nbsp;Enviar
 								</button>
 							</div>
 						</div>
-
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<!-- Modal confirmacao-->
 		<div class="modal fade" id="confirm-modal"
 			data-target="#confirm-modal" tabindex="-1" role="dialog"
 			aria-labelledby="modalLabel">
@@ -169,31 +154,30 @@
 				</div>
 			</div>
 		</div>
-		<!-- Modal delete -->
-		<div class="modal fade" id="delete-modal" data-target="#delete-modal"
-			tabindex="-1" role="dialog" aria-labelledby="modalLabel">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Fechar">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<h4 class="modal-title" id="modalLabel">Cancelar candidato</h4>
-					</div>
-					<div class="modal-body">Deseja realmente cancelar este
-						candidato?</div>
-					<div class="modal-footer">
-						<a id="excluir" href="${urlCancelar}">
-							<button type="button" class="btn btn-danger">Sim</button>
-						</a>
-						<button type="button" class="btn btn-success" data-dismiss="modal">Não</button>
+	<!-- Modal delete -->
+	<div class="modal fade" id="delete-modal" data-target="#delete-modal"
+		tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Fechar">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="modalLabel">Cancelar candidato</h4>
+				</div>
+				<div class="modal-body">Deseja realmente cancelar este
+					candidato?</div>
+				<div class="modal-footer">
+				<input type="hidden" id="#idCancelamento" />
+					<a id="excluir" href="/cancelar-candidato/">
+						<button type="button" class="btn btn-danger">Sim</button>
+					</a>
+					<button type="button" class="btn btn-success" data-dismiss="modal">Não</button>
 					</div>
 				</div>
 			</div>
 		</div>
-
-
 		<!-- /.modal delete-->
 		<div id="main-container">
 			<div id="breadcrumb">
@@ -206,83 +190,75 @@
 			<!--breadcrumb-->
 			<div class="padding-md">
 				<div class="row">
-					<div class="panel panel-default">
-						<div class="panel-heading">Aprovação de candidatos</div>
-						<div class="panel-body">
-							<input type="hidden" name="user" id="user"
-								value="${autenticado.perfil.nome}" />
+						<div class="panel panel-default">
+							<div class="panel-heading">Aprovação de candidatos</div>
+							<div class="panel-body">
+								<input type="hidden" name="user" id="user"
+									value="${autenticado.perfil.nome}" />
 
-							<table
-								class="table table-bordered table-condensed table-hover table-striped"
-								id="tabelaCandidato"
-								style="font-size: 12px !important; vertical-align: middle !important;">
-								<thead>
-									<tr>
-										<th class="text-center">Nome do candidato</th>
-										<th class="text-center">Vaga</th>
-										<th class="text-center">Pretensão</th>
-										<th class="text-center">Data de abertura</th>
-										<th class="text-center">Data de aprovação</th>
-										<th class="text-center">Status</th>
-										<th class="text-center">Ações</th>
-									</tr>
-								</thead>
-								<tbody class="text-center">
-									<form id="form">
-										<c:forEach var="candidato" items="${candidatos}">
-											<tr>
-												<input type="hidden" id="${candidato.id }" />
-												<td>${candidato.nome}</td>
-												<td>${candidato.ultimaVaga.nomeVaga }</td>
-												<td>${candidato.valorPretensao}</td>
-												<td><fmt:formatDate value="${candidato.dataAbertura}"
-														pattern="dd/MM/yyyy" /></td>
-												<td><fmt:formatDate value="${candidato.dataFechamento}"
-														pattern="dd/MM/yyyy" /></td>
-												<td><span class="label"
-													style="color: #fff; background-color: ${candidato.ultimoStatus.status.css}">${candidato.ultimoStatus.status.nome}</span></td>
-
-												<td><input type="hidden" name="idStatus" id="idStatus"
-													value="${candidato.ultimoStatus.status.id}" />
-													<div class="btn-group">
-
-															<button class="btn btn-xs btn-info dropdown-toggle"
-																data-toggle="dropdown" aria-haspopup="true"
-																aria-expanded="false">
-																<i class="fa fa-cogs fa-lg">&nbsp;</i> <span
-																	class="caret"></span>
-															</button>
-															<ul class="dropdown-menu dropdown-menu-right slidedown">
-																<c:forEach var="statusDisponivel"
-																	items="${candidato.ultimoStatus.status.statusDisponiveis}">
-																	<li><a data-toggle="modal"
-																		data-target=".bs-example-modal-lg"
-																		id="aprovar-candidato" href="aprovar-modal"
-																		onclick="alterarStatus(${candidato.id}, ${statusDisponivel.id})"><i
-																			${statusDisponivel.classe}>&nbsp;</i>${statusDisponivel.nome}
-																	</a></li>
-																	<li class="divider "></li>
-																</c:forEach>
-																<li><c:url value="editar/${candidato.id}"
-																		var="myURL">
-																	</c:url> <a href="${myURL}"><i class="fa fa-pencil fa-lg">&nbsp;</i>Editar</a></li>
-
-																<li class="divider"></li>
-
-																<li><c:url scope="session"
-																		value="cancelar-candidato/${candidato.id}"
-																		var="urlCancelar">
-																	</c:url><a href="#delete-modal" data-toggle="modal"><i
-																		class="fa fa-trash-o fa-lg">&nbsp;</i>Cancelar</a></li>
-																<!-- /fim botao -->
-															</ul>
-													</div> <!-- /btn-group -->
-												</td>
-											</tr>
-										</c:forEach>
-									</form>
-								</tbody>
-							</table>
+								<table
+									class="table table-bordered table-condensed table-hover table-striped"
+									id="tabelaCandidato"
+									style="font-size: 12px !important; vertical-align: middle !important;">
+									<thead>
+										<tr>
+											<th class="text-center">Nome do candidato</th>
+											<th class="text-center">Vaga</th>
+											<th class="text-center">Pretensão</th>
+											<th class="text-center">Data de abertura</th>
+											<th class="text-center">Status</th>
+											<th class="text-center">Ações</th>
+										</tr>
+									</thead>
+									<tbody class="text-center">
+										<form id="form">
+											<c:forEach var="candidato" items="${candidatos}">
+												<tr>
+													<input type="hidden" id="${candidato.id}"/>
+													<td>${candidato.nome}</td>
+													<td>${candidato.vagaCandidato.vaga.nomeVaga}</td>
+													<td><fmt:formatNumber value="${candidato.valorPretensao}"
+											minFractionDigits="2" type="currency" /></td>
+													<td><fmt:formatDate value="${candidato.dataAbertura}"
+															pattern="dd/MM/yyyy" /></td>
+													<td><span class="label"
+														style="color: #fff; background-color: ${candidato.ultimoStatus.status.css}">${candidato.ultimoStatus.status.nome}</span></td>
+													<td><input type="hidden" name="idStatus" id="idStatus"
+														value="${candidato.ultimoStatus.status.id}" />
+														<div class="btn-group">
+															<div class="btn-group">
+																<button class="btn btn-sm btn-info dropdown-toggle"
+																	data-toggle="dropdown" aria-haspopup="true"
+																	aria-expanded="false">
+																	<i class="fa fa-cogs fa-lg">&nbsp;</i> <span
+																		class="caret"></span>
+																</button>
+																<ul class="dropdown-menu dropdown-menu-right slidedown">
+																	<c:forEach var="statusDisponivel"
+																		items="${candidato.ultimoStatus.status.statusDisponiveis}">
+																		<li><a data-toggle="modal"
+																			data-target=".bs-example-modal-lg"
+																			id="aprovar-candidato" href="aprovar-modal"
+																			onclick="alterarStatus(${candidato.id}, ${statusDisponivel.id})">
+																			<i${statusDisponivel.classe}>&nbsp;</i>${statusDisponivel.nome}</a></li>
+																		<li class="divider "></li>
+																	</c:forEach>
+																	<li class="divider"></li>
+																	<li><c:url 
+																			value="cancelar-candidato/${candidato.id}"
+																			var="urlCancelar">
+																		</c:url><a href="#delete-modal" onclick="cancelarClick" data-toggle="modal"><i
+																			class="fa fa-trash-o fa-lg">&nbsp;</i>Cancelar</a></li>
+																	<!-- /fim botao -->
+																</ul>
+															</div>
+														</div> <!-- /btn-group -->
+													</td>
+												</tr>
+											</c:forEach>
+										</form>
+									</tbody>
+								</table>
 						</div>
 						<!-- /.row -->
 					</div>
@@ -294,7 +270,6 @@
 			<!-- /.paddin.md -->
 		</div>
 	</layout:put>
-
 	<layout:put block="scripts" type="REPLACE">
 
 		<script src="/resources/js/parsley.min.js"></script>
@@ -306,9 +281,14 @@
 			var inputs  = $(this).closest("tr").find("input[type=hidden]");
 			CKEDITOR.instances.editor.setData("");
 			CKEDITOR.instances.editor.insertHtml("");
+			
+			
 			inputs.each(function(index, value){
 				if(!isNaN($(value).attr("id"))){
 					var id = $(value).attr("id");
+					
+					
+					
 					$.ajax({
 						url:"buscar/"+id,
 						dataType:"json",
@@ -318,22 +298,49 @@
 								 var perfil = $('#user').val();
 				                 if(perfil == "RH" || perfil == "Administrador" || perfil == "CEO" || perfil == "Diretor de Operação"){
 									CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
+				                	$("#proposta-tab").show();
 				                	$("#proposta").show();
 				                 }
 				                  
 							}else{
+			                	$("#proposta-tab").hide();
 			                	$("#proposta").hide();
+							}
+							if(data.ultimoStatus.status.id == "6"){
+								$("#avaliacao-tab").show();
+								$("#avaliacaoComp").show();
+								$("#processo-tab").show();
+								$("#processoSeletivo").show();
+							}else{
+								$("#avaliacao-tab").hide();
+								$("#avaliacaoComp").hide();
+								$("#processo-tab").hide();
+								$("#processoSeletivo").hide();
+							}
+							if(data.ultimoStatus.status.id == "5"){
+								$("#entrevista-tab").show();
+								$("#infoEntrevista").show();
+							}else{
+								$("#entrevista-tab").hide();
+								$("#infoEntrevista").hide();
 							}
 						}
 					})
 				}
 				});
+			
+
+			function alterarStatus(id,status){
+				$('input.cancelar-id').val(id);
+				$('input.cancelar-status').val(status);
+				
+			}
+				
+				
 			})
             CKEDITOR.replace('editor');
                   $('#alterarStatus').click(function() {
-                        
                         var data = CKEDITOR.instances.editor.getData();                    
-                        
 	                   	var avaliacoes = [];
 
 	                   	$(".avaliacaoCompetencia").each(function(){
@@ -374,11 +381,9 @@
                                    'ac' : JSON.stringify(avaliacoes)
                               },
                               success : function(data) {
-                            	  alert('deu bom ?'); 
                             	  location.reload();
                               },
                               error : function(e) {
-                                   alert('deu ruim');
                                    location.reload();
                               }
                         });
@@ -400,7 +405,11 @@
         			alert('fail');
         		});
             }
-            
+
+           function cancelarClick (id){
+        	   $("#idCancelamento").val(id)
+           } 
+
         /*gerador de campo*/    
             var cont = 0;
             $("#gerarCampo").click(function(){
@@ -416,18 +425,51 @@
             	"<input type='text' id='descricao"+ cont +"'/>"+
             	"<input type='button' id='btnRemover' onclick='remover("+ cont +")'value='Remover campo' class='btn btn-sm btn-danger'>"+
             	"</div>" ;
-            	
             	cont++;
         /*adiciona na div*/
             	$("#processoSeletivo").append(campos);
-
-
             });
        /*remove os campos*/
             function remover(id){
             	$(".div"+id).remove();
             	cont--;
             }
+/* paginação */
+	$(function	()	{
+		$('#tabelaCandidato').dataTable( {
+			"bJQueryUI": true,
+			"sPaginationType": "simple_numbers",
+			"bFilter": false,
+			"bInfo": false,
+			"bLengthChange": false,
+			"bSort": false,
+
+			"oLanguage": {
+				"sEmptyTable": "Nenhum registro encontrado",
+				"sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+				"sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+				"sInfoFiltered": "(Filtrados de _MAX_ registros)",
+				"sInfoPostFix": "",
+				"sInfoThousands": ".",
+				"sLengthMenu": "_MENU_ resultados por página",
+				"sLoadingRecords": "Carregando...",
+				"sProcessing": "Processando...",
+				"sZeroRecords": "Nenhum registro encontrado",
+				"sSearch": "Pesquisar",
+				"oPaginate": {
+					"sNext": "Próximo",
+					"sPrevious": "Anterior",
+					"sFirst": "Primeiro",
+					"sLast": "Último"
+				},
+				"oAria": {
+					"sSortAscending": ": Ordenar colunas de forma ascendente",
+					"sSortDescending": ": Ordenar colunas de forma descendente"
+				}
+			}
+		});
+	});
+
 	</script>
 	</layout:put>
 </layout:extends>
