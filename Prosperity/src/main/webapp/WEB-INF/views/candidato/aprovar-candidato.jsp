@@ -197,7 +197,8 @@
 				<div class="modal-body">Deseja realmente cancelar este
 					candidato?</div>
 				<div class="modal-footer">
-					<a id="excluir" href="${urlCancelar}">
+				<input type="hidden" id="#idCancelamento" />
+					<a id="excluir" href="/cancelar-candidato/">
 						<button type="button" class="btn btn-danger">Sim</button>
 					</a>
 					<button type="button" class="btn btn-success" data-dismiss="modal">Não</button>
@@ -237,7 +238,6 @@
 											<th class="text-center">Vaga</th>
 											<th class="text-center">Pretensão</th>
 											<th class="text-center">Data de abertura</th>
-											<th class="text-center">Data de aprovação</th>
 											<th class="text-center">Status</th>
 											<th class="text-center">Ações</th>
 										</tr>
@@ -248,14 +248,13 @@
 
 
 												<tr>
-													<input type="hidden" id="${candidato.id }" />
+													<input type="hidden" id="${candidato.id}"/>
 													<td>${candidato.nome}</td>
-													<td>${candidato.ultimaVaga.nomeVaga }</td>
-													<td>${candidato.valorPretensao}</td>
+													<td>${candidato.vagaCandidato.vaga.nomeVaga}</td>
+													<td><fmt:formatNumber value="${candidato.valorPretensao}"
+											minFractionDigits="2" type="currency" /></td>
 													<td><fmt:formatDate value="${candidato.dataAbertura}"
 															pattern="dd/MM/yyyy" /></td>
-													<td><fmt:formatDate
-															value="${candidato.dataFechamento}" pattern="dd/MM/yyyy" /></td>
 													<td><span class="label"
 														style="color: #fff; background-color: ${candidato.ultimoStatus.status.css}">${candidato.ultimoStatus.status.nome}</span></td>
 
@@ -287,10 +286,10 @@
 
 																	<li class="divider"></li>
 
-																	<li><c:url scope="session"
+																	<li><c:url 
 																			value="cancelar-candidato/${candidato.id}"
 																			var="urlCancelar">
-																		</c:url><a href="#delete-modal" data-toggle="modal"><i
+																		</c:url><a href="#delete-modal" onclick="cancelarClick" data-toggle="modal"><i
 																			class="fa fa-trash-o fa-lg">&nbsp;</i>Cancelar</a></li>
 																	<!-- /fim botao -->
 
@@ -336,9 +335,14 @@
 			var inputs  = $(this).closest("tr").find("input[type=hidden]");
 			CKEDITOR.instances.editor.setData("");
 			CKEDITOR.instances.editor.insertHtml("");
+			
+			
 			inputs.each(function(index, value){
 				if(!isNaN($(value).attr("id"))){
 					var id = $(value).attr("id");
+					
+					
+					
 					$.ajax({
 						url:"buscar/"+id,
 						dataType:"json",
@@ -358,6 +362,15 @@
 					})
 				}
 				});
+			
+
+			function alterarStatus(id,status){
+				$('input.cancelar-id').val(id);
+				$('input.cancelar-status').val(status);
+				
+			}
+				
+				
 			})
             CKEDITOR.replace('editor');
                   $('#alterarStatus').click(function() {
@@ -404,11 +417,9 @@
                                    'ac' : JSON.stringify(avaliacoes)
                               },
                               success : function(data) {
-                            	  alert('deu bom ?'); 
                             	  location.reload();
                               },
                               error : function(e) {
-                                   alert('deu ruim');
                                    location.reload();
                               }
                         });
@@ -431,6 +442,12 @@
         		});
             }
             
+           function cancelarClick (id){
+        	   $("#idCancelamento").val(id)
+           } 
+            
+            
+           
         /*gerador de campo*/    
             var cont = 0;
             $("#gerarCampo").click(function(){
