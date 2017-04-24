@@ -27,26 +27,24 @@
 									<li id="entrevista-tab"><a href="#infoEntrevista"
 										data-toggle="tab"><i class="fa fa-user"></i> Informações
 											de entrevista</a></li>
-									<li id="processo-tab"><a href="#processoSelecao"
-										data-toggle="tab"><i class="fa fa-pencil"></i> Processo de
-											seleção</a></li>
-									<li id="avaliacao-tab"><a href="#avaliacaoComp"
-										data-toggle="tab"><i class="fa fa-briefcase"></i>
-											Avaliação de competências</a></li>
-									<li id="proposta-tab"><a href="#proposta"
-										data-toggle="tab"><i class="fa fa-money"></i> Proposta</a></li>
+									<li id="processo-tab"><a href="#processoSelecao" data-toggle="tab"><i
+											class="fa fa-pencil"></i> Processo de seleção</a></li>
+									<li id="avaliacao-tab"><a href="#avaliacaoComp" data-toggle="tab"><i
+											class="fa fa-briefcase"></i> Avaliação de competências</a></li>
+									<li id="proposta-tab"><a href="#proposta" data-toggle="tab"><i
+											class="fa fa-money"></i> Proposta</a></li>
 								</ul>
 							</div>
 							<div class="panel-body">
 								<div class="tab-content">
-									<div class="tab-pane fade in" id="infoEntrevista">
+									<div class="tab-pane fade in active" id="infoEntrevista">
 										<div class="form-group">
 											<label class="control-label">Parecer :</label>
 											<div class="form-group">
 												<input type="hidden" id="hdn-id-candidato" /> <input
 													type="hidden" id="hdn-status" />
 												<textarea class="form-control" id="parecer"
-													style="margin-left: 0px; width: 770px" name="parecer"></textarea>
+													style="margin-left: 0px; width: 800px" name="parecer"></textarea>
 											</div>
 										</div>
 									</div>
@@ -73,41 +71,39 @@
 										</div>
 									</div>
 									<div class="tab-pane fade" id="avaliacaoComp">
-										<div class="form-group">
-											<section class="panel panel-default">
-												<div class="panel-heading text-center">
-													<label for="exampleInputEmail1">Avaliação de
-														competências</label>
-												</div>
-												<table id="tabelaCompetencias" class="table"
-													style="font-size: 10px">
-													<thead class="text-center">
-														<tr class="text-center">
-															<th class="text-center">Competências</th>
+										<section class="panel panel-default">
+											<div class="panel-heading text-center">
+												<label for="exampleInputEmail1">Avaliação de
+													competências</label>
+											</div>
+											<table id="tabelaCompetencias" class="table"
+												style="font-size: 10px">
+												<thead class="text-center">
+													<tr class="text-center">
+														<th class="text-center">Competências</th>
+														<c:forEach var="avaliacao" items="${avaliacoes}">
+															<th>${avaliacao.nome}</th>
+														</c:forEach>
+													</tr>
+												</thead>
+												<tbody class="text-center">
+													<c:forEach var="competencia" items="${competencias}">
+														<tr class="linhaAvaliacao">
+															<td>${competencia.nome}</td>
 															<c:forEach var="avaliacao" items="${avaliacoes}">
-																<th>${avaliacao.nome}</th>
+																<td><label class="label-radio inline"> <input
+																		class="avaliacaoCompetencia" type="radio"
+																		alt="${avaliacao.id}"
+																		name="avaliacao${competencia.nome}"
+																		value="${competencia.id}"> <span
+																		class="custom-radio"></span>
+																</label></td>
 															</c:forEach>
 														</tr>
-													</thead>
-													<tbody class="text-center">
-														<c:forEach var="competencia" items="${competencias}">
-															<tr class="linhaAvaliacao">
-																<td>${competencia.nome}</td>
-																<c:forEach var="avaliacao" items="${avaliacoes}">
-																	<td><label class="label-radio inline"> <input
-																			class="avaliacaoCompetencia" type="radio"
-																			alt="${avaliacao.id}"
-																			name="avaliacao${competencia.nome}"
-																			value="${competencia.id}"> <span
-																			class="custom-radio"></span>
-																	</label></td>
-																</c:forEach>
-															</tr>
-														</c:forEach>
-													</tbody>
-												</table>
-											</section>
-										</div>
+													</c:forEach>
+												</tbody>
+											</table>
+										</section>
 									</div>
 									<div class="tab-pane fade" id="proposta">
 										<div class="form-group col-md-12" id="divCkEditor">
@@ -125,18 +121,18 @@
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="panel-footer ">
-							<button type="button" class="btn btn-sm btn-primary"
-								href="#confirm-modal" data-toggle="modal">
-								<i class="fa fa-check fa-lg"></i>&nbsp;Enviar
-							</button>
+							<div class="panel-footer ">
+								<button type="button" class="btn btn-sm btn-primary"
+									href="#confirm-modal" data-toggle="modal">
+									<i class="fa fa-check fa-lg"></i>&nbsp;Enviar
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- Modal confirmacao-->
+
 		<div class="modal fade" id="confirm-modal"
 			data-target="#confirm-modal" tabindex="-1" role="dialog"
 			aria-labelledby="modalLabel">
