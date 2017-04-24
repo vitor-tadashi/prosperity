@@ -327,7 +327,11 @@ public class VagaController {
 	
 	@RequestMapping(value = "obter-range-salarial", method = RequestMethod.GET)
 	public @ResponseBody List<CargoSenioridadeBean> obterCargoSenioridade(Model model, @ModelAttribute("idCargo") Integer idCargo,@ModelAttribute("idSenioridade") Integer idSenioridade) {
-		List<CargoSenioridadeBean> rangeSalarial = cargoSenioridadeBusiness.obterRangeSalarial(idCargo,idSenioridade);
+		CargoBean cargo = new CargoBean();
+		SenioridadeBean senioridade = new SenioridadeBean();
+		cargo.setId(idCargo);
+		senioridade.setId(idSenioridade);
+		List<CargoSenioridadeBean> rangeSalarial = cargoSenioridadeBusiness.obterRangeSalarial(cargo,senioridade);
 		return rangeSalarial;
 	}
 	/*

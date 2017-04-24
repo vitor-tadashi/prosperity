@@ -92,7 +92,7 @@
 													type="text" name="nomeVaga"
 													value="${vaga.nomeVaga}"
 													class="form-control input-sm" id="txtNomeVaga"
-													placeholder="Nome da Vaga" data-required="true">
+													placeholder="Nome da Vaga" data-required="true" maxlength="50">
 											</div>
 											<!-- /form-group -->
 											<div class="form-group col-md-2" style="padding-top:0px">
@@ -103,7 +103,7 @@
 													pattern="dd/MM/yyyy" var="dataInicio"/>
 													<input id="dataInicio" name="dataInicio" type="text"
 														class="form-control date parsley-validated" data-required="true"
-														value="${dataInicio}" style="height:30px" onblur="validarData(this.value)">  
+														value="${dataInicio}" style="height:30px" >  
 												</div>
 											</div>
 											<!-- /form-group -->
@@ -235,7 +235,7 @@
 														<input id="nomeSubstituido" name="nomeSubstituido" type="text"
 														class="form-control input-sm"
 														placeholder="Nome do Substituido" data-required="true"
-														value="${vaga.nomeSubstituido}">
+														value="${vaga.nomeSubstituido}" maxlength="50">
 													</div>
 												</div>
 											</div>
@@ -277,7 +277,7 @@
 
 													<c:forEach var="usuario" items="${usuarios}" varStatus="i">
 														<option value="${usuario.id}"
-														${usuario.id == vaga.usuarioBean.id ? 'selected="selected"' : ''}>${usuario.nome}</option>
+														${usuario.id == vaga.usuarioBean.id ? 'selected="selected"' : ''}>${usuario.funcionario.nome}</option>
 													</c:forEach>
 													
 												</select>
@@ -290,17 +290,17 @@
 												<div class="col-md-6" style="padding-left:0px">
 											    <label for="nmResponsavel">Nome do responsável</label> 
 											    <input type="name" class="form-control input-sm" id="nmResponsavel"
-												placeholder="Nome do Cliente Responsável" data-required="true" name="nmResponsavel" value="${vaga.nmResponsavel}"> 
+												placeholder="Nome do Cliente Responsável" data-required="true" name="nmResponsavel" value="${vaga.nmResponsavel}" maxlength="30"> 
 												</div>
 												<div class="col-md-6">
 												<label for="nmAreaResponsavel">Área do responsável</label> 
 												<input type="text" class="form-control input-sm" id="nmAreaResponsavel" name="nmAreaResponsavel" value="${vaga.nmAreaResponsavel}"
-												placeholder="Área do Cliente Responsável" data-required="true"> 
+												placeholder="Área do Cliente Responsável" data-required="true" maxlength="30"> 
 												</div>
 												<div class="col-md-6" style="padding-left:0px;padding-top:15px">
 												<label for="emailResponsavel">E-mail do responsável</label> 
 												<input type="email" class="form-control input-sm" id="emailResponsavel" name="emailResponsavel" value="${vaga.emailResponsavel}"
-												placeholder="E-mail do Cliente Responsável" data-required="true">
+												placeholder="E-mail do Cliente Responsável" data-required="true" maxlength="50">
 												</div>
 												<div class="col-md-6" style="padding-top:15px">
 												<label for="telResponsavel">Telefone</label> 
@@ -318,26 +318,29 @@
 										<section class="panel panel-default">
 											<div class="panel-heading"><label>Formação acadêmica</label></div>
 											<div class="panel-body relative">
-												<textarea class="form-control"
+												<textarea id="descricaoFormacaoAcademica" class="form-control"
 													name="descricaoFormacaoAcademica" rows="5"
-													value="${vaga.descricaoFormacaoAcademica}">${vaga.descricaoFormacaoAcademica}</textarea>
+													value="${vaga.descricaoFormacaoAcademica}" maxlength="500" onkeyup="maxCaracterFormacaoAcademica()">${vaga.descricaoFormacaoAcademica}</textarea>
+												<label id="maxFormacaoAcademica">Caracteres restantes : 500</label>
 											</div>
 										</section>
 										<!-- /panel -->
 										<section class="panel panel-default">
 											<div class="panel-heading"><label>Perfil comportamental</label></div>
 											<div class="panel-body relative">
-												<textarea class="form-control"
+												<textarea id="descricaoPerfilComportamental" class="form-control"
 													name="descricaoPerfilComportamental" rows="5"
-													value="${vaga.descricaoPerfilComportamental}">${vaga.descricaoPerfilComportamental}</textarea>
+													value="${vaga.descricaoPerfilComportamental}" maxlength="500" onkeyup="maxCaracterPefilComportamental()">${vaga.descricaoPerfilComportamental}</textarea>
+													<label id="maxPerfilComportamental">Caracteres restantes : 500</label>
 											</div>
 										</section>
 										<!-- /panel -->
 										<section class="panel panel-default">
 											<div class="panel-heading"><label>Perfil técnico</label></div>
 											<div class="panel-body relative">
-												<textarea class="form-control" name="descricaoPerfilTecnico"
-													value="${vaga.descricaoPerfilTecnico}" rows="5">${vaga.descricaoPerfilTecnico}</textarea>
+												<textarea id="descricaoPerfilTecnico" class="form-control" name="descricaoPerfilTecnico"
+													value="${vaga.descricaoPerfilTecnico}" rows="5" maxlength="500" onkeyup="maxCaracterPefilTecnico()">${vaga.descricaoPerfilTecnico}</textarea>
+													<label id="maxPerfilTecnico">Caracteres restantes : 500</label>
 											</div>
 										</section>
 										<!-- /panel -->
@@ -356,7 +359,7 @@
 											
 												<c:forEach var="usuario" items="${usuarios}" varStatus="i">
 													<option value="${usuario.id}"
-													${usuario.id == vaga.usuarioBean.id ? 'selected="selected"' : ''}>${usuario.nome}</option>
+													${usuario.id == vaga.usuarioBean.id ? 'selected="selected"' : ''}>${usuario.funcionario.nome}</option>
 												</c:forEach>
 										
 											</select>		
