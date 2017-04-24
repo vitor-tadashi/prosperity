@@ -231,7 +231,7 @@ public class CandidatoBusiness {
 		}
 
 		if (candidato.getPretensaoDe() != null && candidato.getPretensaoPara() != null) {
-			criterions.add(Restrictions.between("valorPretensaoSalarial", candidato.getPretensaoDe(),
+			criterions.add(Restrictions.between("valorPretensao", candidato.getPretensaoDe(),
 					candidato.getPretensaoPara()));
 		}
 
