@@ -42,6 +42,7 @@ import br.com.prosperity.dao.StatusDAO;
 import br.com.prosperity.dao.StatusFuturoDAO;
 import br.com.prosperity.dao.TipoCursoDAO;
 import br.com.prosperity.dao.UsuarioDAO;
+import br.com.prosperity.dao.VagaCandidatoDAO;
 import br.com.prosperity.dao.VagaDAO;
 import br.com.prosperity.entity.AvaliacaoEntity;
 import br.com.prosperity.entity.AvaliadorCandidatoEntity;
@@ -113,6 +114,9 @@ public class CandidatoBusiness {
 
 	@Autowired
 	private VagaDAO vagaDAO;
+	
+	@Autowired
+	private VagaCandidatoDAO vagaCandidatoDAO;
 
 	@Autowired
 	private HttpSession session;
@@ -270,7 +274,7 @@ public class CandidatoBusiness {
 					v.setVaga(vagaDAO.findById(candidatoBean.getVagaCandidato().getVaga().getId()));
 					v.setCanalInformacao(
 							canalInformacaoDAO.findById(candidatoBean.getVagaCandidato().getCanalInformacao().getId()));
-
+					vagas.add(v);
 				}
 				if (vagas.isEmpty() || vagas.size() == 0 || vagas == null) {
 					VagaCandidatoEntity novoVagaCandidato = new VagaCandidatoEntity();
@@ -279,7 +283,7 @@ public class CandidatoBusiness {
 					if (candidatoBean.getVagaCandidato().getCanalInformacao().getId() != null)
 						novoVagaCandidato.setCanalInformacao(canalInformacaoDAO
 								.findById(candidatoBean.getVagaCandidato().getCanalInformacao().getId()));
-
+						novoVagaCandidato.setCandidato(candidatoEntity);
 					vagas.add(novoVagaCandidato);
 				}
 				candidatoEntity.setVagas(vagas);
@@ -294,6 +298,10 @@ public class CandidatoBusiness {
 				candidatoEntity.setRg(replaceRG);
 
 				candidatoDAO.insert(candidatoEntity);
+				/*for(VagaCandidatoEntity vc: candidatoEntity.getVagas()){
+					vagaCandidatoDAO.insert(vc);	
+				}*/
+
 
 				List<VagaCandidatoEntity> vagao = new ArrayList<VagaCandidatoEntity>();
 				for (VagaCandidatoEntity vaguinhas : vagas) {
