@@ -1,49 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<title>Gerar relatório</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
+<%@ taglib uri="http://kwonnam.pe.kr/jsp/template-inheritance"
+	prefix="layout"%>
 
-<c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
+<layout:extends name="base">
+	<layout:put block="title" type="REPLACE">
+		<title>Gerar relatório</title>
+	</layout:put>
 
-</head>
-<body>
-	<!-- Modal salvo com sucesso -->
-	<div class="modal fade" id="salvo" data-target="#salvo" tabindex="-1"
-		role="dialog" aria-labelledby="myModalLabel">
-		<div class="alert alert-success text-center">
-			<strong>Salvo com sucesso!</strong>
-		</div>
-	</div>
-	<!-- Modal -->
+	<layout:put block="contents">
+		<div id="main-container">
+			<div id="breadcrumb">
+				<ul class="breadcrumb">
+					<li><i class="fa fa-home"></i><a href="dashboard.html">
+							Início</a></li>
+					<li class="active">Gerar relatório</li>
+				</ul>
+			</div>
+			<!--breadcrumb-->
 
-	<c:import url="/WEB-INF/views/shared/dashboard.jsp"></c:import>
-
-	<div id="main-container">
-		<div id="breadcrumb">
-			<ul class="breadcrumb">
-				<li><i class="fa fa-home"></i><a href="dashboard.html">
-						Início</a></li>
-				<li class="active">Gerar relatório</li>
-			</ul>
-		</div>
-		<!--breadcrumb-->
-
-		<!--corpo -->
-		<br />
-		<div class="container">
+			<!--corpo -->
 			<div class="padding-md">
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="panel panel-default">
-							<div class="panel-heading">Relatório</div>
+							<div class="panel-heading">
+								<strong>Relatório</strong>
+							</div>
 							<!--<form class="form-inline">-->
 							<div class="panel-body">
 								<form>
@@ -109,28 +93,27 @@
 			</div>
 			<!--</container>-->
 		</div>
-	</div>
-	<!--</main container>-->
-	<!--corpo -->
-	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
-	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
-	<script>
-		$("#divVagas").css('display', 'none');
-		$("#divSituacao").css('display', 'none');
+	</layout:put>
 
-		$("#cmbTipoRelatorio").on('change', function() {
-			var element = $("#cmbTipoRelatorio");
-			if (element.val() == "1") {
-				$("#divVagas").css('display', 'none');
-				$("#divSituacao").css('display', 'none');
-			} else if (element.val() == "2") {
-				$("#divVagas").css('display', 'block');
-				$("#divSituacao").css('display', 'block');
-			} else {
-				$("#divVagas").css('display', 'none');
-				$("#divSituacao").css('display', 'none');
-			}
-		});
-	</script>
-</body>
-</html>
+	<layout:put block="scripts" type="REPLACE">
+		<script>
+			$("#divVagas").css('display', 'none');
+			$("#divSituacao").css('display', 'none');
+
+			$("#cmbTipoRelatorio").on('change', function() {
+				var element = $("#cmbTipoRelatorio");
+				if (element.val() == "1") {
+					$("#divVagas").css('display', 'none');
+					$("#divSituacao").css('display', 'none');
+				} else if (element.val() == "2") {
+					$("#divVagas").css('display', 'block');
+					$("#divSituacao").css('display', 'block');
+				} else {
+					$("#divVagas").css('display', 'none');
+					$("#divSituacao").css('display', 'none');
+				}
+			});
+		</script>
+	</layout:put>
+
+</layout:extends>

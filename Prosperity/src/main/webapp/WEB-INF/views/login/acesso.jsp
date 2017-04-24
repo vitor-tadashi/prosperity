@@ -11,7 +11,21 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
+<!-- Bootstrap core CSS -->
+<link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link href="/resources/css/font-awesome.min.css" rel="stylesheet">
+
+<!-- Pace -->
+<link href="/resources/css/pace.css" rel="stylesheet">
+
+<!-- Perfect -->
+<link href="/resources/css/app.css" rel="stylesheet">
+<link href="/resources/css/app-skin.css" rel="stylesheet">
+
+<link href="/resources/css/custom.css" rel="stylesheet">
+
 <link href="/resources/css/custom/acesso.css" rel="stylesheet"/>
 
 </head>
@@ -63,7 +77,40 @@
 	</div>
 	<!-- /login-wrapper -->
 
-	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
+	<!-- Jquery -->
+	<script src="/resources/js/jquery-1.10.2.min.js"></script>
+	<script src="/resources/js/jquery.dataTables.min.js"></script>
+	
+	<!-- Bootstrap -->
+	<script src="/resources/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/resources/js/dataTables.bootstrap.min.js"></script>
+	
+	<!-- Mask-input -->
+	<script src='/resources/js/jquery.maskedinput.min.js'></script>
+	
+	<!-- Modernizr -->
+	<script src='/resources/js/modernizr.min.js'></script>
+	
+	<!-- Pace -->
+	<script src='/resources/js/pace.min.js'></script>
+	
+	<!-- Popup Overlay -->
+	<script src='/resources/js/jquery.popupoverlay.min.js'></script>
+	
+	<!-- Slimscroll -->
+	<script src='/resources/js/jquery.slimscroll.min.js'></script>
+	
+	<!-- Cookie -->
+	<script src='/resources/js/jquery.cookie.min.js'></script>
+	
+	<!-- Perfect -->
+	<script src="/resources/js/app/app.js"></script>
+	
+	<!-- menu lateral -->
+	<script src="/resources/js/custom/menu.js"></script>
+	
+	<script src="/resources/js/custom/custom.js"></script>
+	<script src="/resources/js/parsley.min.js"></script>
 
 </body>
 </html>
