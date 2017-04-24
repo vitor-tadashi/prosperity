@@ -159,20 +159,20 @@
 		tabindex="-1" role="dialog" aria-labelledby="modalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Fechar">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="modalLabel">Cancelar candidato</h4>
-				</div>
-				<div class="modal-body">Deseja realmente cancelar este
-					candidato?</div>
-				<div class="modal-footer">
-				<input type="hidden" id="#idCancelamento" />
-					<a id="excluir" href="/cancelar-candidato/">
-						<button type="button" class="btn btn-danger">Sim</button>
-					</a>
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Fechar">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="modalLabel">Cancelar candidato</h4>
+					</div>
+					<div class="modal-body">Deseja realmente cancelar este
+						candidato?</div>
+					<div class="modal-footer">
+					<input type="hidden" id="idCancelamento" value="" />
+					
+					<button type="button" class="btn btn-danger" onclick="cancelarCandidato()">Sim</button>
+	
 					<button type="button" class="btn btn-success" data-dismiss="modal">Não</button>
 					</div>
 				</div>
@@ -216,7 +216,7 @@
 												<tr>
 													<input type="hidden" id="${candidato.id}"/>
 													<td>${candidato.nome}</td>
-													<td>${candidato.vagaCandidato.vaga.nomeVaga}</td>
+													<td>${candidato.ultimaVaga.nomeVaga}</td>
 													<td><fmt:formatNumber value="${candidato.valorPretensao}"
 											minFractionDigits="2" type="currency" /></td>
 													<td><fmt:formatDate value="${candidato.dataAbertura}"
@@ -247,7 +247,7 @@
 																	<li><c:url 
 																			value="cancelar-candidato/${candidato.id}"
 																			var="urlCancelar">
-																		</c:url><a href="#delete-modal" onclick="cancelarClick" data-toggle="modal"><i
+																		</c:url><a href="#delete-modal" onclick="cancelarClick(${candidato.id})" data-toggle="modal"><i
 																			class="fa fa-trash-o fa-lg">&nbsp;</i>Cancelar</a></li>
 																	<!-- /fim botao -->
 																</ul>
@@ -395,19 +395,22 @@
                   $('#hdn-status').val(idStatus);
             }
             
-            function cancelarCandidato(id) {
+            function cancelarCandidato() {
+            	var id = $("#idCancelamento").val();
+            	
             	$.ajax({
         			url : "cancelar-candidato/"+id,
         			type : "POST"
         		}).done(function() {
-        			alert('done');
+        			 location.reload();
         		}).fail(function(jqXHR, textStatus) {
         			alert('fail');
+        			 location.reload();s
         		});
             }
 
            function cancelarClick (id){
-        	   $("#idCancelamento").val(id)
+        	   $("#idCancelamento").val(id);
            } 
 
         /*gerador de campo*/    
