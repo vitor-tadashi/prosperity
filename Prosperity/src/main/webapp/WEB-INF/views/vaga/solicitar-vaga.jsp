@@ -33,8 +33,13 @@
 						<form class="form-border" id="formCadastro2" action="/vaga/salvar"
 							method="POST" >
 							<input id="vagaIdVar" name="id" type="hidden" value="${vaga.id}">
-							<input id="dataAbertura" name="dataAbertura" type="hidden" value="${vaga.dataAbertura}">
-							<input id="status" name="ultimoStatus" type="hidden" value="${ultimoStatus.status.id}">
+							<fmt:formatDate value="${vaga.dataAbertura}"
+														pattern="dd/MM/yyyy" var="dataAbertura" />
+							<input id="dataAbertura" name="dataAbertura" type="hidden" value="${dataAbertura}">
+							<c:if test="${ultimoStatus.status.id == 27 }">
+								<input id="status" name="status[0].status.id" type="hidden" value="1">
+								<input name="status[0].status.nome" type="hidden" value="Ativo">	
+							</c:if>
 							<input id="contErro" class ="hidden" value="${erro}">
 							<input id="txtSolicitante" type="hidden" name="nomeSolicitante" value="${autenticado.funcionario.nome}">
 							

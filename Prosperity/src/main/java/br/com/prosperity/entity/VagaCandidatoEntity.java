@@ -29,7 +29,7 @@ public class VagaCandidatoEntity {
 	@JoinColumn(name = "idCanalInformacao")
 	private CanalInformacaoEntity canalInformacao;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.LAZY,cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "idCandidato")
 	private CandidatoEntity candidato;
 	
