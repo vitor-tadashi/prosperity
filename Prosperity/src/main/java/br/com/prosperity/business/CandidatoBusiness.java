@@ -221,7 +221,7 @@ public class CandidatoBusiness {
 			criterions.add(Restrictions.eq("vaga.vaga.id", candidato.getVagaBean().getId()));
 		}
 
-		if (!candidato.getNome().isEmpty() || candidato.getNome() != null) {
+		if (candidato.getNome() != null) {
 			criterions.add(Restrictions.like("nome", "%" + candidato.getNome() + "%"));
 		}
 
@@ -231,7 +231,7 @@ public class CandidatoBusiness {
 		}
 
 		if (candidato.getPretensaoDe() != null && candidato.getPretensaoPara() != null) {
-			criterions.add(Restrictions.between("valorPretensaoSalarial", candidato.getPretensaoDe(),
+			criterions.add(Restrictions.between("valorPretensao", candidato.getPretensaoDe(),
 					candidato.getPretensaoPara()));
 		}
 

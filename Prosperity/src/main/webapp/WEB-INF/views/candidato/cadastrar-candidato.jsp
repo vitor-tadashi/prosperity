@@ -7,6 +7,7 @@
 <layout:extends name="base">
 	<layout:put block="title" type="REPLACE">
 		<title>Cadastro de Candidato</title>
+		<link href="/resources/css/custom/criar-perfil.css" rel="stylesheet" />
 	</layout:put>
 	
 	<layout:put block="contents">
@@ -34,10 +35,11 @@
 								<p>${erro}</p>
 
 							</c:forEach>
+						
 							<c:if test="${not empty sucesso}">
 								<div id="msg-sucesso" class="alert alert-success msg-margin">
 									<ul>
-										<li class="li-msg">${sucesso}</li>
+										<li class="li-msg"><strong> ${sucesso }</strong></li>
 									</ul>
 								</div>
 							</c:if>

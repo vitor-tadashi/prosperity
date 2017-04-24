@@ -508,6 +508,10 @@
 										<td><fmt:formatDate value="${candidato.dataAbertura}" pattern="dd/MM/yyyy" /></td>
 										<td id="linhaStatus"><span class="label" style="color: #fff; background-color: ${candidato.ultimoStatus.status.css}">${candidato.ultimoStatus.status.nome}</span></td>
 							
+
+							
+			
+
 							<td>
 									<div class="btn-group">
 
@@ -537,6 +541,7 @@
 
 							</tbody>
 						</table>
+
 						</div>
 						<!-- /.panel-body - ATE AQUI O FILTRAR-->
 						<div class="panel-footer">
@@ -621,6 +626,9 @@
 				}
 			})
 		}
+		$('#btn-retornar').click(function() {
+			window.history.back();
+		});
 	</script>
 
 

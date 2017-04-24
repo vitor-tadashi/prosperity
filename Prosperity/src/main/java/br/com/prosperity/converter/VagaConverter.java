@@ -26,6 +26,8 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 	
 	@Autowired
 	private VagaCandidatoConverter vagaCandidatoConverter;
+	
+	
 
 	@Override
 	public VagaEntity convertBeanToEntity(VagaBean bean) {

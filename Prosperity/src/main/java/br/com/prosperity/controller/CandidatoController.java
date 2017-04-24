@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 
@@ -261,11 +262,12 @@ public class CandidatoController<PaginarCandidato> {
 	}
 
 	@RequestMapping(value = "filtrar", method = RequestMethod.GET)
-	public String filtrarCandidatoRH(Model model, CandidatoBean candidato) {
+	public String filtrarCandidatoRH(Model model, CandidatoBean candidato, RedirectAttributes redirectAttributes) {
 		if (candidato.getVagaBean().getId() == 0) {
 			candidato.setVagaBean(null);
 		}
-
+		
+		
 		List<CandidatoBean> candidatos = candidatoBusiness.filtroCandidato(candidato);
 		model.addAttribute("candidatos", candidatos);
 
