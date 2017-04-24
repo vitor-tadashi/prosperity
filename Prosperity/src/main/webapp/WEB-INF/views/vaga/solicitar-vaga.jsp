@@ -120,7 +120,7 @@
 											<div class="form-group col-md-6">
 												<label for="cmbCargo">Cargo</label> <select
 													class="form-control" id="cmbCargo"
-													name="cmbCargo">
+													name="cargoBean.id" value="${cargoBean.id}">
 
 													<option value="0">Selecione o cargo</option>
 
@@ -407,6 +407,7 @@
 	<!-- Custom -->
 	<script src="/resources/js/custom/solicitacaoVaga.js"></script>
 	<script src="/resources/js/parsley.min.js"></script>
+	<script src="/resources/js/app/app.js"></script>
 	
 	<script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 	
