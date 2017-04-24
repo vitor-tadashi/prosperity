@@ -7,6 +7,7 @@
 <layout:extends name="base">
 	<layout:put block="title" type="REPLACE">
 		<title>Histórico de candidato</title>
+		<link rel="stylesheet" href="/resources/css/custom/timeline.css" />
 	</layout:put>
 	
 	<layout:put block="contents">

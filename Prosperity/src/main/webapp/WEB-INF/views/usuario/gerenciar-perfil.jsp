@@ -1,15 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://kwonnam.pe.kr/jsp/template-inheritance" prefix="layout"%>
+<%@ taglib uri="http://kwonnam.pe.kr/jsp/template-inheritance"
+	prefix="layout"%>
 
 <layout:extends name="base">
 	<layout:put block="title" type="REPLACE">
-      
-      <title>Cria perfil</title>
-
-      <!-- Link e style aqui -->
-      <link href="/resources/css/custom/criar-perfil.css" rel="stylesheet"/>
-      </layout:put>
+		<title>Cria perfil</title>
+		<link href="/resources/css/custom/criar-perfil.css" rel="stylesheet" />
+	</layout:put>
 
 	<layout:put block="contents">
 		<!-- Corpo da pagina aqui -->
@@ -56,14 +55,12 @@
 													<span class="custom-radio"> </span> Novo perfil
 												</label> <label class="label-radio inline"> <input
 													id="edita-perfil" type="radio" name="inline-radio">
-													<span class="custom-radio"> </span> Editar perfil
-													existente
+													<span class="custom-radio"> </span> Editar perfil existente
 												</label>
 											</div>
 											<!-- /.col -->
 										</div>
-										<br>
-										<br>
+										<br> <br>
 										<c:if test="${not empty erros}">
 											<div class="alert alert-danger msg-margin">
 												<ul>
@@ -125,8 +122,8 @@
 			</form>
 		</div>
 	</layout:put>
-      <layout:put block="scripts" type="REPLACE">
-	      <!-- javaScript aqui -->
-	      <script src="/resources/js/custom/criar-perfil.js"></script>
-      </layout:put>
+	<layout:put block="scripts" type="REPLACE">
+		<!-- javaScript aqui -->
+		<script src="/resources/js/custom/criar-perfil.js"></script>
+	</layout:put>
 </layout:extends>

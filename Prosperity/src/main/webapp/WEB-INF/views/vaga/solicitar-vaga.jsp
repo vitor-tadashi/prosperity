@@ -7,6 +7,7 @@
 <layout:extends name="base">
 	<layout:put block="title" type="REPLACE">
 		<title>Solicitar Vaga</title>
+		<link rel="stylesheet" href="/resources/css/custom/solicitar-vaga.css" />
 	</layout:put>
 
 	<layout:put block="contents">
@@ -86,7 +87,7 @@
 													placeholder="Nome da Vaga" data-required="true">
 											</div>
 											<!-- /form-group -->
-											<div class="form-group col-md-2" style="padding-top:0px">
+											<div class="form-group col-md-2">
 												<label class="control-label" for="dataInicio">Data
 													para início</label>
 												<div class="input-sm-group">
@@ -98,33 +99,23 @@
 												</div>
 											</div>
 											<!-- /form-group -->
-											<div class="form-group col-md-3" style="padding-top:0px">
-												<label class="control-label" style="padding-left:15px" for="txtHorarioInicial">Horário</label>
-												<div>
-													<div class="form-group col-md-2" style="padding-top:0px">
-														<div class="input-group bootstrap-timepicker">
-															<input id="txtHorarioInicial" name="horarioEntrada"
-																type="time" value="${vaga.horarioEntrada}" style="width:70px;height:30px;padding-top:0px">
-														</div>
-													</div>
-													<div class="form-group col-md-1" style="padding-top:5px;margin-left:40px">
-														<label style="margin-top: 0px" >às</label>
-													</div>
-													<div class="form-group col-md-2" style="padding-top:0px">
-														<div class="input-group bootstrap-timepicker">
-															<input id="txtHorarioFinal" name="horarioSaida"
-																type="time" value="${vaga.horarioSaida}" style="width:70px;height:30px;padding-top:0px">
-														</div>
-													</div>
+											<div class="form-group col-md-4">
+												<div class="row">
+													<label class="control-label label-time-input col-xs-12" for="txtHorarioInicial">Horário</label>
+													<input id="txtHorarioInicial" name="horarioEntrada" 
+														type="time" class="form-control verity-time-input input-sm col-xs-5" value="${vaga.horarioEntrada}">
+													<span class="col-xs-1">às</span>
+													<input id="txtHorarioFinal" name="horarioSaida"
+														type="time" class="form-control verity-time-input input-sm col-xs-5" value="${vaga.horarioSaida}">
 												</div>
 											</div>
 										</div>
 										
 										<div class="row">
-											<div class="form-group col-md-6" style="padding-top:0px">
+											<div class="form-group col-md-6">
 												<label for="cmbCargo">Cargo</label> <select
 													class="form-control" id="cmbCargo"
-													name="cargoBean.id" value="${cargoBean.id}">
+													name="cmbCargo">
 
 													<option value="0">Selecione o cargo</option>
 
@@ -137,7 +128,7 @@
 												</select>
 											</div>
 											<!-- /form-group -->
-											<div class="form-group col-md-6" style="padding-top:0px">
+											<div class="form-group col-md-6">
 												<label>Local de trabalho</label>
 												<div>
 													<input id="localTrabalhoVar" type="hidden"

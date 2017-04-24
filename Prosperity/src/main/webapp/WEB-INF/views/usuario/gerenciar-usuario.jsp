@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://kwonnam.pe.kr/jsp/template-inheritance" prefix="layout"%>
+<%@ taglib uri="http://kwonnam.pe.kr/jsp/template-inheritance"
+	prefix="layout"%>
 
 <layout:extends name="base">
 	<layout:put block="title" type="REPLACE">
-	<title>Controle de usuários</title>
+		<title>Controle de usuários</title>
 	</layout:put>
 
 	<layout:put block="contents">
@@ -151,10 +152,10 @@
 			</div>
 		</div>
 	</layout:put>
-	<layout:put block="scripts" type="REPLACE">	
-	<!-- javaScript aqui -->
-	<script src="/resources/js/api/usuario-api.js"></script>
-	<script src='/resources/js/parsley.min.js'></script>
+	<layout:put block="scripts" type="REPLACE">
+		<!-- javaScript aqui -->
+		<script src="/resources/js/api/usuario-api.js"></script>
+		<script src='/resources/js/parsley.min.js'></script>
 
 	</layout:put>
 </layout:extends>

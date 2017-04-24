@@ -60,7 +60,7 @@
 	
 	<context-param>
 	    <param-name>jsp-inheritance-prefix</param-name>
-	    <param-value>/WEB-INF/views/layouts/</param-value>
+	    <param-value>/WEB-INF/views/shared/</param-value>
 	</context-param>
 	
 	<context-param>

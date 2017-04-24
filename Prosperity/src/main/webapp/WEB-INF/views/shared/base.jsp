@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://kwonnam.pe.kr/jsp/template-inheritance" prefix="layout"%>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -31,7 +32,6 @@
 
 	<!-- Overlay Div -->
 	<div id="overlay" class="transparent"></div>
-
 	
 	<div id="wrapper" class="preload">
 	    <div id="top-nav" class="skin-6 fixed">
@@ -118,7 +118,7 @@
 							</ul></li>
 							<li class="openable menu25 menu1 hide"><a href="#"> <span class="menu-icon">
 									<i class="fa fa-check fa-lg"></i>
-							</span> <span class="text"> Aprovar / Reprovar </span> <span class="menu-hover"></span>
+							</span> <span class="text"> Aprovar / Reprovar</span> <span class="menu-hover"></span>
 						</a>
 							<ul class="submenu">
 								<li class="menu-opcao hasMenu hide" value="25"><a
@@ -131,18 +131,18 @@
 							</ul></li>
 						<li class="menu-opcao hide" value="21"><a href="/relatorio">
 								<span class="menu-icon"> <i class="fa fa-print fa-lg"></i>
-							</span> <span class="text"> Relatório </span> <span class="menu-hover"></span>
+							</span> <span class="text"> Relatório</span> <span class="menu-hover"></span>
 						</a></li>
 						<li class="openable menu22 menu16 hide" value=""><a href="#"> <span class="menu-icon">
 									<i class="fa fa-cogs fa-lg"></i>
-							</span> <span class="text"> Gerenciar </span> <span class="menu-hover"></span>
+							</span> <span class="text"> Gerenciar</span> <span class="menu-hover"></span>
 						</a>
 							<ul class="submenu">
 								<li class="menu-opcao hasMenu hide" value="22"><a
 									href="/usuario/gerenciar"> <span class="submenu-label">Usuário</span>
 								</a></li>
 								<li class="menu-opcao hasMenu hide" value="16"><a
-									href="/usuario/perfil/gerenciar"> <span
+									href='<c:url value="/usuario/perfil/gerenciar" />'> <span
 										class="submenu-label">Perfil</span>
 								</a></li>
 							</ul></li>

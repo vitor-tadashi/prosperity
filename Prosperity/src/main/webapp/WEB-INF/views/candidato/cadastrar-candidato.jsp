@@ -65,13 +65,13 @@
 								<div class="tab-content">
 									<div class="tab-pane fade in active" id="first">
 										<div class="row">
+											<input type="hidden" value="${candidato.id}" id="id" name="id">
 											<div class="form-group col-md-3">
 												<label for="cpf" class="control-label">CPF</label> <input
 													type="text" class="form-control cpf parsley-validated"
 													id="cpf" name="cpf" data-required="true"
 													placeholder="Informe seu CPF" value="${candidato.cpf}"
-													onblur="pesquisacpf()"> <input type="hidden"
-													value="${candidato.id}" id="id" name="id">
+													onblur="pesquisacpf()">
 											</div>
 											<div class="form-group col-md-4">
 												<label class="control-label" for="nome">Nome</label> <input
@@ -223,51 +223,50 @@
 												</div>
 
 											</div>
-											<div class="form-group col-md-3">
-												<label for="vaga">Vaga a ser aplicado</label> <select
-													class="form-control" id="vaga" name="vagaCandidato.vaga.id">
-													<option value="0">Selecione</option>
-													<c:forEach var="vaga" items="${listaVaga}">
-														<option value="${vaga.id}"
-															${vaga.id == candidato.vagaCandidato.vaga.id ? 'selected="selected"' : ''}>${vaga.nomeVaga}</option>
-													</c:forEach>
-												</select>
+										</div>
+										<div class="form-group col-md-3">
+											<label for="vaga">Vaga a ser aplicado</label> <select
+												class="form-control" id="vaga" name="vagaCandidato.vaga.id">
+												<option value="0">Selecione</option>
+												<c:forEach var="vaga" items="${listaVaga}">
+													<option value="${vaga.id}"
+														${vaga.id == candidato.vagaCandidato.vaga.id ? 'selected="selected"' : ''}>${vaga.nomeVaga}</option>
+												</c:forEach>
+											</select>
+										</div>
+										<div class="form-group col-md-3">
+											<label for="canalInformacao">Como ficou sabendo
+												desta vaga?</label> <select class="form-control"
+												name="vagaCandidato.CanalInformacao.id"
+												id="canalInformacao">
+												<option value="0">Selecione</option>
+												<c:forEach var="canalInformacao" items="${listaCanal}">
+													<option value="${canalInformacao.id}"
+														${canalInformacao.id == candidato.vagaCandidato.canalInformacao.id ? 'selected="selected"' : ''}>${canalInformacao.nome}</option>
+												</c:forEach>
+											</select>
+										</div>
+										<div>
+											<div class="form-group col-md-2 col-sm-2">
+												<label for="dataUltimoContato" class="control-label">Data
+													de ultimo contato</label>
+												<fmt:formatDate value="${candidato.dataUltimoContato}"
+													pattern="dd/MM/yyyy" var="dataUltimoContato" />
+												<input type="text" class="form-control date"
+													name="dataUltimoContato" onblur="validarData(this.value)"
+													data-required="false" id="dataUltimoContato"
+													value="${dataUltimoContato}">
 											</div>
-											<div class="form-group col-md-3">
-												<label for="canalInformacao">Como ficou sabendo
-													desta vaga?</label> <select class="form-control"
-													name="vagaCandidato.CanalInformacao.id"
-													id="canalInformacao">
-													<option value="0">Selecione</option>
-													<c:forEach var="canalInformacao" items="${listaCanal}">
-														<option value="${canalInformacao.id}"
-															${canalInformacao.id == candidato.vagaCandidato.canalInformacao.id ? 'selected="selected"' : ''}>${canalInformacao.nome}</option>
-													</c:forEach>
-												</select>
-											</div>
-											<div>
-												<div class="form-group col-md-2 col-sm-2">
-													<label for="dataUltimoContato" class="control-label">Data
-														de ultimo contato</label>
-													<fmt:formatDate value="${candidato.dataUltimoContato}"
-														pattern="dd/MM/yyyy" var="dataUltimoContato" />
-													<input type="text" class="form-control date"
-														name="dataUltimoContato" onblur="validarData(this.value)"
-														data-required="false" id="dataUltimoContato"
-														value="${dataUltimoContato}">
-												</div>
-												<div class="form-group col-md-2 col-sm-4">
-													<label for="entrevista" class="control-label">Data
-														de Entrevista</label>
-													<fmt:formatDate value="${candidato.entrevista}"
-														pattern="dd/MM/yyyy" var="entrevista" />
-													<input type="text" class="form-control date"
-														data-required="false" name="entrevista" id="entrevista"
-														onblur="validarData()" value="${entrevista}">
-												</div>
+											<div class="form-group col-md-2 col-sm-4">
+												<label for="entrevista" class="control-label">Data
+													de Entrevista</label>
+												<fmt:formatDate value="${candidato.entrevista}"
+													pattern="dd/MM/yyyy" var="entrevista" />
+												<input type="text" class="form-control date"
+													data-required="false" name="entrevista" id="entrevista"
+													onblur="validarData()" value="${entrevista}">
 											</div>
 										</div>
-
 									</div>
 								</div>
 							</div>
