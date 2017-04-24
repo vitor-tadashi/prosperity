@@ -1,0 +1,76 @@
+footer {
+	page-break-before: always;
+}
+
+.hiddenRow {
+	padding: 0 !important;
+}
+
+@media screen {
+	#printSection {
+		display: none;
+	}
+}
+
+@media print {
+	body * {
+		visibility: hidden;
+	}
+	#printSection * {
+		visibility: visible;
+	}
+	#printSection {
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
+	label {
+		font-weight: normal;
+	}
+	#quebra {
+		page-break-inside: avoid;
+	}
+}
+
+.label-stand, .badge-stand {
+	background-color: #9b59b6;
+	color: #fff;
+}
+
+.label-aprovadoPendente, .badge-stand {
+	background-color: #2980b9;
+	color: #fff;
+}
+
+.label-analiseRH, .badge-stand {
+	background-color: #e67e22;
+	color: #fff;
+}
+
+.label-analiseTecnica, .badge-stand {
+	background-color: #f1c40f;
+	color: #fff;
+}
+
+.label-reprovado, .badge-stand {
+	background-color: #e74c3c;
+	color: #fff;
+}
+
+.label-contratado, .badge-stand {
+	background-color: #2ecc71;
+	color: #fff;
+}
+
+.dropdown-menu {
+	left: -115px !important;
+}
+
+.col-md-9 .label-radio {
+	margin-right: 58px;
+	margin-left: 20px;
+}
+
+li a.active {
+	background: #f2f2f2;
+}
