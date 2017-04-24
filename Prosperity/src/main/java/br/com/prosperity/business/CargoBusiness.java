@@ -10,6 +10,7 @@ import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.converter.CargoConverter;
 import br.com.prosperity.dao.CargoDAO;
 import br.com.prosperity.entity.CargoEntity;
+import br.com.prosperity.entity.CargoSenioridadeEntity;
 
 @Component
 public class CargoBusiness {
@@ -32,5 +33,5 @@ public class CargoBusiness {
 		CargoEntity entity = cargoDAO.findById(id);
 		return entity;
 	}
-
+	
 }

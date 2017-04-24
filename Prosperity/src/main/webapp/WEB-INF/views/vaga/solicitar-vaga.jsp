@@ -71,11 +71,14 @@
 										class="text-success"><i class="fa fa-pencil"></i> Dados do
 											projeto</a></li>
 									<li class="tab-verity"><a id="tabPerfil" href="#third" data-toggle="tab"
-										class="text-success"><i class="fa fa-briefcase"></i>
+										class="text-success"><i class="glyphicon glyphicon-education"></i>
 											Perfil</a></li>
 									<li id="tabAvaliadores2" class="tab-verity"><a id="tabAvaliadores" href="#fourth" data-toggle="tab"
 										class="text-success hide"><i class="fa fa-group"></i>
 											Avaliadores</a></li>
+									<li id="tabMarketing" class="tab-verity"><a id="tabMarketing" href="#fifth" data-toggle="tab"
+										class="text-success"><i class="fa fa-briefcase"></i>
+											Marketing</a></li>
 								</ul>
 							</div>
 
@@ -84,7 +87,7 @@
 									<div class="tab-pane fade in active" id="first">
 										
 										<div class="row">
-											<div class="form-group col-md-12" style="padding-top:0px">
+											<div class="form-group col-md-6" style="padding-top:0px">
 												<label for="txtNomeVaga">Nome da vaga</label> <input
 													type="text" name="nomeVaga"
 													value="${vaga.nomeVaga}"
@@ -92,12 +95,42 @@
 													placeholder="Nome da Vaga" data-required="true">
 											</div>
 											<!-- /form-group -->
-											
+											<div class="form-group col-md-2" style="padding-top:0px">
+												<label class="control-label" for="dataInicio">Data
+													para início</label>
+												<div class="input-sm-group">
+												<fmt:formatDate value="${vaga.dataInicio}"
+													pattern="dd/MM/yyyy" var="dataInicio"/>
+													<input id="dataInicio" name="dataInicio" type="text"
+														class="form-control date parsley-validated" data-required="true"
+														value="${dataInicio}" style="height:30px" onblur="validarData(this.value)">  
+												</div>
+											</div>
 											<!-- /form-group -->
+											<div class="form-group col-md-3" style="padding-top:0px">
+												<label class="control-label" style="padding-left:15px" for="txtHorarioInicial">Horário</label>
+												<div>
+													<div class="form-group col-md-2" style="padding-top:0px">
+														<div class="input-group bootstrap-timepicker">
+															<input id="txtHorarioInicial" name="horarioEntrada"
+																type="time" value="${vaga.horarioEntrada}" style="width:70px;height:30px;padding-top:0px">
+														</div>
+													</div>
+													<div class="form-group col-md-1" style="padding-top:5px;margin-left:40px">
+														<label style="margin-top: 0px" >às</label>
+													</div>
+													<div class="form-group col-md-2" style="padding-top:0px">
+														<div class="input-group bootstrap-timepicker">
+															<input id="txtHorarioFinal" name="horarioSaida"
+																type="time" value="${vaga.horarioSaida}" style="width:70px;height:30px;padding-top:0px">
+														</div>
+													</div>
+												</div>
+											</div>
 										</div>
 										
 										<div class="row">
-											<div class="form-group col-md-6" style="">
+											<div class="form-group col-md-6" style="padding-top:0px">
 												<label for="cmbCargo">Cargo</label> <select
 													class="form-control" id="cmbCargo"
 													name="cargoBean.id" value="${cargoBean.id}">
@@ -113,7 +146,7 @@
 												</select>
 											</div>
 											<!-- /form-group -->
-											<div class="form-group col-md-6" style="">
+											<div class="form-group col-md-6" style="padding-top:0px">
 												<label>Local de trabalho</label>
 												<div>
 													<input id="localTrabalhoVar" type="hidden"
@@ -171,62 +204,32 @@
 										<!-- /form-group -->
 										<div class="row">
 											<div class="form-group col-md-6" style="padding-top:0px">
-												<label for="txtPropostaSalarial">Proposta salarial</label> <input
-													id="txtPropostaSalarial" name="valorPretensao" type="number"
-													class="form-control input-sm" placeholder="R$"
+											<div>
+												<label class="control-label" for="txtPropostaSalarial">Range salarial</label>
+											</div>
+												<label class="control-label col-md-2" for="txtPropostaSalarial" style="padding-top:5px">Mínimo</label>
+											 	<input
+													id="valorMinimo" name="valorMinimo" type="number"
+													class="input-sm col-md-4" disabled placeholder="R$"
 													value="${vaga.valorPretensao}" style="height:30px">
-											</div>
-											<!-- /form-group -->
-											<div class="form-group col-md-6" style="padding-top:0px">
-												<label class="control-label" for="txtHorarioInicial">Horário</label>
-												<div>
-													<div class="form-group col-md-2" style="padding-top:0px">
-														<div class="input-group bootstrap-timepicker">
-															<input id="txtHorarioInicial" name="horarioEntrada"
-																type="time" value="${vaga.horarioEntrada}" style="width:70px;height:30px;padding-top:0px">
-														</div>
-													</div>
-													<!-- /form-group -->
-													<div class="form-group col-md-1" style="padding-top:0px">
-														<label style="margin-top: 0px" >às</label>
-													</div>
-													<!-- /form-group -->
-													<div class="form-group col-md-2" style="padding-top:0px">
-														<div class="input-group bootstrap-timepicker">
-															<input id="txtHorarioFinal" name="horarioSaida"
-																type="time" value="${vaga.horarioSaida}" style="width:70px;height:30px;padding-top:0px">
-														</div>
-													</div>
-													<!-- /form-group -->
-												</div>
-											</div>
-											<!-- /form-group -->
-										</div>
-										<div class="row">
-											<div class="form-group col-md-6" style="padding-top:0px">
-												<label class="control-label" for="dataInicio">Data
-													para início</label>
-												<div class="input-sm-group">
-												<fmt:formatDate value="${vaga.dataInicio}"
-													pattern="dd/MM/yyyy" var="dataInicio"/>
-													<input id="dataInicio" name="dataInicio" type="text"
-														class="form-control date parsley-validated" data-required="true"
-														value="${dataInicio}" style="height:30px" onblur="validarData(this.value)">  
-												</div>
+												<label class="control-label col-md-2" style="padding-left:10px;padding-top:5px" for="txtPropostaSalarial">Máximo</label>
+													<input
+													id="valorMaximo" name="valorMaximo" type="number"
+													class="input-sm col-md-4" disabled placeholder="R$" 
+													value="${vaga.valorPretensao}" style="height:30px">
 											</div>
 											<!-- /form-group -->
 											<div class="form-group col-md-6" style="padding-top:0px">
 												<label class="control-label">Aumento de quadro</label>
 												<div>
-													 <div class="form-group col-md-5" style="padding-top:0px"> 
-														<input id="aumentoQuadroVar" type="hidden" value="${vaga.aumentaQuadro}">
-														
-														<label class="label-radio inline">Novo</label>
+													 <div class="form-group col-md-5" style="padding-top:0px;padding-left:0px"> 
 														<input id="novo" name="aumentaQuadro" value="N" type="radio" checked>
-														<span class="custom-radio"> </span> 
+													 	<span class="custom-radio"> </span>
+														<label class="label-radio inline">Novo</label>
+														<input id="substituicao" name="aumentaQuadro" value="S" type="radio"> 
+														 <span class="custom-radio"> </span>
 														 <label class="label-radio inline">Substituição</label>
-															 <input id="substituicao" name="aumentaQuadro" value="S" type="radio"> 
-															 <span class="custom-radio"> </span>
+													 	<input id="aumentoQuadroVar" type="hidden" value="${vaga.aumentaQuadro}">
 													</div>
 													<div id="nome" class="col-md-6 hide" style="padding-top:0px">
 														<input id="nomeSubstituido" name="nomeSubstituido" type="text"
@@ -238,7 +241,7 @@
 											</div>
 											<!-- /form-group -->
 										</div>
-										<!-- /form-group -->
+										
 									</div>
 									
 									<div class= "row tab-pane fade" id="second">
@@ -285,23 +288,24 @@
 											
 											<div id="dadosAlocacao" class="col-md-12 hide" style="padding-top:0px">
 												<div class="col-md-6" style="padding-left:0px">
-											    <label for="exampleInputEmail1">Nome do responsável</label> 
-											    <input type="name" class="form-control input-sm" id="exampleInputEmail1"
+											    <label for="nmResponsavel">Nome do responsável</label> 
+											    <input type="name" class="form-control input-sm" id="nmResponsavel"
 												placeholder="Nome do Cliente Responsável" data-required="true" name="nmResponsavel" value="${vaga.nmResponsavel}"> 
 												</div>
 												<div class="col-md-6">
-												<label for="exampleInputEmail1">Área do responsável</label> 
-												<input type="text" class="form-control input-sm" id="exampleInputEmail1" name="nmAreaResponsavel" value="${vaga.nmAreaResponsavel}"
+												<label for="nmAreaResponsavel">Área do responsável</label> 
+												<input type="text" class="form-control input-sm" id="nmAreaResponsavel" name="nmAreaResponsavel" value="${vaga.nmAreaResponsavel}"
 												placeholder="Área do Cliente Responsável" data-required="true"> 
 												</div>
-												<div class="col-md-6" style="padding-left:0px;padding-top:10px">
-												<label for="exampleInputEmail1">E-mail do responsável</label> 
-												<input type="email" class="form-control input-sm" id="exampleInputEmail1" name="emailResponsavel" value="${vaga.emailResponsavel}"
+												<div class="col-md-6" style="padding-left:0px;padding-top:15px">
+												<label for="emailResponsavel">E-mail do responsável</label> 
+												<input type="email" class="form-control input-sm" id="emailResponsavel" name="emailResponsavel" value="${vaga.emailResponsavel}"
 												placeholder="E-mail do Cliente Responsável" data-required="true">
 												</div>
-												<div class="col-md-6" style="padding-top:10px">
-												<label for="exampleInputEmail1">Telefone 1</label> 
-												<input id="phone-mask" type="text" class=" form-control input-sm phone" name="telResponsavel" value="${vaga.telResponsavel}"> 
+												<div class="col-md-6" style="padding-top:15px">
+												<label for="telResponsavel">Telefone</label> 
+												<input id="telResponsavel" type="tel" class="form-control input-sm telefone" name="telResponsavel" 
+												value="${vaga.telResponsavel}" onblur="validarTel(this.value)"> 
 												</div>
 											</div>
 											<!-- /Section -->
@@ -385,7 +389,17 @@
 									</div>
 														
 									</div>
-									
+									<div class="tab-pane fade" id="fifth">
+										<div class="panel panel-default">
+											<div class="adjoined-bottom">
+												<div class="grid-container">
+													<textarea id="editor" name="editor">
+														
+													</textarea>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 							<div class="text-right pull-right">
@@ -407,6 +421,7 @@
 	<script src="/resources/js/custom/solicitacaoVaga.js"></script>
 	<script src="/resources/js/parsley.min.js"></script>
 	<script src="/resources/js/custom/custom.js"></script>
+	<script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 	
 	<script type="text/javascript">
 	
@@ -416,7 +431,7 @@
 	            $('#msg-sucesso').fadeOut(1500);
 	        }, 5000);
 	    });
-
-</script>	  
+	</script>	  
+	
 </body>
 </html>
