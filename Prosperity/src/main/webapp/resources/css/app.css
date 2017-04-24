@@ -463,9 +463,6 @@ aside .sidebar-inner .search-block .btn {
   background: #272938;
   border: 1px solid #272938;
 }
-aside .main-menu {
-  height: 100%;
-}
 aside .main-menu > ul {
   margin: 0;
   list-style: none;
@@ -723,7 +720,7 @@ aside .main-menu .alert {
 #wrapper {
   position: relative;
   overflow: hidden;
-  min-height: 800px;
+  min-height: 672px;
   background-color: #f9f9f9;
 }
 @media (min-width: 768px) {
@@ -3202,12 +3199,8 @@ table.dataTable thead th .DataTables_sort_wrapper span.ui-icon-triangle-1-s:befo
 }
 form.form-border .form-group {
   margin-bottom: 0;
-  padding-top: 15px;
   padding-bottom: 15px;
   border-bottom: 1px solid #f1f5fc;
-}
-form.form-border .form-group:first-child {
-  padding-top: 0;
 }
 form.form-border .form-group:last-child {
   padding-bottom: 0;

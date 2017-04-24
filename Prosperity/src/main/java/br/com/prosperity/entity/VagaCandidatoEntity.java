@@ -16,19 +16,20 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tbVagaCandidato")
 @NamedQueries({
-@NamedQuery(name = "countCandidatosVaga", query = "SELECT count(vc) FROM VagaCandidatoEntity vc WHERE vc.vaga.id = 1200"),
-@NamedQuery(name = "candidatosVaga", query = "SELECT vc FROM VagaCandidatoEntity vc WHERE vc.vaga.id = ?1")})
+	@NamedQuery(name = "countCandidatosVaga", query = "SELECT count(vc) FROM VagaCandidatoEntity vc WHERE vc.vaga.id = 1200"),
+	@NamedQuery(name = "candidatosVaga", query = "SELECT vc FROM VagaCandidatoEntity vc WHERE vc.vaga.id = ?1")
+})
 public class VagaCandidatoEntity {
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
 	@Column(name = "idVagaCandidato", unique = true, nullable = false)
 	private Integer idVagaCandidato;
 
-	@ManyToOne(cascade = CascadeType.REFRESH)
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch=FetchType.LAZY)
 	@JoinColumn(name = "idVaga")
 	private VagaEntity vaga;
 
-	@OneToOne(cascade = CascadeType.REFRESH)
+	@OneToOne(cascade = CascadeType.REFRESH, fetch=FetchType.LAZY)
 	@JoinColumn(name = "idCanalInformacao")
 	private CanalInformacaoEntity canalInformacao;
 

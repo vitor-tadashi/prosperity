@@ -22,8 +22,9 @@ public class CandidatoDAO extends GenericDAOImpl<CandidatoEntity, Integer> {
 	public List<CandidatoEntity> findByCriteria(final List<Criterion> criterion) {
 		List<CandidatoEntity> ret = null;
 		try {
-			ret = findByCriteria(null, null, -1, -1, criterion);
+			ret = findByCriteria("id", true, -1, -1, criterion);
 		} catch (Exception e) {
+			
 
 		}
 		return ret;
@@ -41,6 +42,7 @@ public class CandidatoDAO extends GenericDAOImpl<CandidatoEntity, Integer> {
 			Session session = (Session) entityManager.getDelegate();
 			Criteria crit = session.createCriteria(CandidatoEntity.class, "candidato");
 			crit.createAlias("candidato.vagas", "vaga");
+			//crit.createAlias("vagas.vaga", "vaga");
 			for (final Criterion c : criterion) {
 				crit.add(c);
 		}

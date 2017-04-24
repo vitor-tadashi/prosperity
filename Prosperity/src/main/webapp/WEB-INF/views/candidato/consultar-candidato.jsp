@@ -2,25 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<title>Consulta de candidatos</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
+<%@ taglib uri="http://kwonnam.pe.kr/jsp/template-inheritance" prefix="layout"%>
 
-<c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
+<layout:extends name="base">
+	<layout:put block="title" type="REPLACE">
+		<title>Consulta de candidatos</title>
+	</layout:put>
 
-<!-- Link e style aqui -->
-
-
-
-</head>
-<body>
-	<c:import url="/WEB-INF/views/shared/dashboard.jsp"></c:import>
-
+	<layout:put block="contents">
 	<!--    Modais   -->
 	<!-- Modal Avaliação de Competencias -->
 	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
@@ -431,141 +420,143 @@
 	<div id="main-container">
 		<div id="breadcrumb">
 			<ul class="breadcrumb">
-				<li><i class="fa fa-home"></i><a href="/pagina-inicial"> Home</a></li>
+				<li><i class="fa fa-home"></i><a href="/pagina-inicial"> Página inicial</a></li>
 				<li>Candidato</li>
-				<li><a href="consultar">Consultar</a></li>
+				<li class="active">Consultar</li>
 			</ul>
 		</div>
 		<!--breadcrumb-->
 		
-		<div class="container">
-			<div class="padding-md clearfix">
-			
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="panel panel-default">
-			
-							<div class="panel-heading">Consultar candidatos</div>
-							<div class="panel-body">
-								<form action="filtrar" method="GET" class="row">
-									<div class="col-md-2">
-										<label for="exampleInputEmail1">Nome: </label>
-										<div class="search-block">
-											<div class="input-group">
-												<input type="text" class="form-control input-sm"
-													placeholder="Nome" name="nome">
-											</div>
-											<!-- /input-group -->
-										</div>
-										<!-- /search-block -->
-									</div>
-									<div class="col-md-2">
-										<label for="exampleInputEmail1">Vaga</label> <select
-											class="form-control inline" id="vagaFiltro" name="vagaBean.id">
-											<option value="0">Selecione</option>
-											<c:forEach var="vaga" items="${listaVagaDrop}">
-												<option value="${vaga.id}">${vaga.nomeVaga}</option>
-											</c:forEach>
-										</select>
-									</div>
-									<div class="col-md-1">
-										<label for="salário">Salário</label> <input
-											type="text" class="form-control valorPretensao parsley-validated"
-													id="valorPretensao" name="PretensaoDe" class="form-control"
-											placeholder="De" style="width: 80px">
-									</div>
-									<div class="col-md-1">
-										<label for="exampleInputEmail1">&nbsp;</label> <input
-											type="text" name="PretensaoPara" class="form-control"
-											placeholder="Até" style="width: 80px">
-									</div>
-									<div class="col-md-3">
-										<label for="exampleInputEmail1">Data:</label>
+		<div class="padding-md">
+		
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="panel panel-default">
+		
+						<div class="panel-heading">Consultar candidatos</div>
+						<div class="panel-body">
+							<form action="filtrar" method="GET" class="row">
+								<div class="col-md-2">
+									<label for="exampleInputEmail1">Nome: </label>
+									<div class="search-block">
 										<div class="input-group">
-											<input type="date" name="dataAberturaDe" class="form-control">
-											<span class="input-group-addon">até</span> <input type="date"
-												name="dataAberturaPara" class="form-control">
+											<input type="text" class="form-control input-sm"
+												placeholder="Nome" name="nome">
 										</div>
+										<!-- /input-group -->
 									</div>
-									<div class="col-md-2 col-md-offset-1">
-										<button class="btn btn-primary pull-right "
-											style="margin-top: 22px">Pesquisar</button>
+									<!-- /search-block -->
+								</div>
+								<div class="col-md-2">
+									<label for="exampleInputEmail1">Vaga</label> <select
+										class="form-control inline" id="vagaFiltro" name="vagaBean.id">
+										<option value="0">Selecione</option>
+										<c:forEach var="vaga" items="${listaVagaDrop}">
+											<option value="${vaga.id}">${vaga.nomeVaga}</option>
+										</c:forEach>
+									</select>
+								</div>
+								<div class="col-md-1">
+									<label for="salário">Salário</label> <input
+										type="text" class="form-control valorPretensao parsley-validated"
+												id="valorPretensao" name="PretensaoDe" class="form-control"
+										placeholder="De" style="width: 80px">
+								</div>
+								<div class="col-md-1">
+									<label for="exampleInputEmail1">&nbsp;</label> <input
+										type="text" name="PretensaoPara" class="form-control"
+										placeholder="Até" style="width: 80px">
+								</div>
+								<div class="col-md-3">
+									<label for="exampleInputEmail1">Data:</label>
+									<div class="input-group">
+										<input type="date" name="dataAberturaDe" class="form-control">
+										<span class="input-group-addon">até</span> <input type="date"
+											name="dataAberturaPara" class="form-control">
 									</div>
-								</form>
-								<!-- /.row -->
-							</div>
-							<!-- /.panel-body - ATE AQUI O FILTRAR-->
-							
-							<table
-							id="tabelaVaga"
-								class="table table-bordered table-condensed table-hover table-striped"
-								style="font-size: 12px; vertical-align: middle">
-								<thead>
+								</div>
+								<div class="col-md-2 col-md-offset-1">
+									<button class="btn btn-primary pull-right "
+										style="margin-top: 22px">Pesquisar</button>
+								</div>
+							</form>
+							<!-- /.row -->
+						
+						<br />
+						<table
+						id="tabelaVaga"
+							class="table table-bordered table-condensed table-hover table-striped"
+							style="font-size: 12px; vertical-align: middle">
+							<thead>
+								<tr>
+									<th class="text-center">Nome do candidato</th>
+									<th class="text-center">Vaga</th>
+									<th class="text-center">Pretensão</th>
+									<th class="text-center">Data de abertura</th>
+									<!-- <th class="text-center">Data de aprovação</th> -->
+									<th class="text-center">Status</th>
+									<th class="text-center">Ações</th>
+								</tr>
+							</thead>
+							<tbody class="text-center">
+								<c:forEach var="candidato" items="${candidatos}">
 									<tr>
-										<th class="text-center">Nome do candidato</th>
-										<th class="text-center">Vaga</th>
-										<th class="text-center">Pretensão</th>
-										<th class="text-center">Data de abertura</th>
-										<!-- <th class="text-center">Data de aprovação</th> -->
-										<th class="text-center">Status</th>
-										<th class="text-center">Ações</th>
-									</tr>
-								</thead>
-								<tbody class="text-center">
-									<c:forEach var="candidato" items="${candidatos}">
-										<tr>
-											<td>${candidato.nome}</td>
+										<td>${candidato.nome}</td>
 
-											<td>${candidato.vagaCandidato.vaga.nomeVaga}</td> 	
-											<td>${candidato.valorPretensao}</td>
-											<td><fmt:formatDate value="${candidato.dataAbertura}" pattern="dd/MM/yyyy" /></td>
-											<td id="linhaStatus"><span class="label" style="color: #fff; background-color: ${candidato.ultimoStatus.status.css}">${candidato.ultimoStatus.status.nome}</span></td>
-								
-								<td>
-										<div class="btn-group">
-
-													<button class="btn btn-sm btn-info dropdown-toggle"
-														data-toggle="dropdown" aria-haspopup="true"
-														aria-expanded="false">
-														<i class="fa fa-cogs fa-lg">&nbsp;</i> <span class="caret"></span>
-													</button>
-													<ul class="dropdown-menu slidedown btnAlinhado">
-
-
-														<li><c:url value="historico/${candidato.id}"
-																var="myURL">
-															</c:url> <a href="${myURL}"><i class="fa fa-pencil fa-lg">&nbsp;</i>Histórico
-																do Candidato</a></li> <li class="divider"></li>
-
-														<li><c:url value="editar/${candidato.id}" var="myURL">
-															</c:url> <a href="${myURL}"><i class="fa fa-pencil"></i>
-																Editar</a></li>
-													
-
-
-													</ul>
-												</div></td>
-										</tr>
-									</c:forEach>
-
-								</tbody>
-							</table>
+										<td>${candidato.vagaCandidato.vaga.nomeVaga}</td> 	
+										<td>${candidato.valorPretensao}</td>
+										<td><fmt:formatDate value="${candidato.dataAbertura}" pattern="dd/MM/yyyy" /></td>
+										<td id="linhaStatus"><span class="label" style="color: #fff; background-color: ${candidato.ultimoStatus.status.css}">${candidato.ultimoStatus.status.nome}</span></td>
 							
-							<div style="margin-left: 10px; margin-bottom: 30px;margin-top: -30px; position: absolute "> 
-							    	<a href="/vaga/consultar" class="btn btn-xs btn-default"><i class="fa fa-reply"></i> Retornar</a>				
-								<i >&nbsp</i> 								
-						 </div>
+
+							
 			
+
+							<td>
+									<div class="btn-group">
+
+												<button class="btn btn-xs btn-info dropdown-toggle"
+													data-toggle="dropdown" aria-haspopup="true"
+													aria-expanded="false">
+													<i class="fa fa-cogs fa-lg">&nbsp;</i> <span class="caret"></span>
+												</button>
+												<ul class="dropdown-menu slidedown btnAlinhado">
+
+
+													<li><c:url value="historico/${candidato.id}"
+															var="myURL">
+														</c:url> <a href="${myURL}"><i class="fa fa-pencil fa-lg">&nbsp;</i>Histórico
+															do Candidato</a></li> <li class="divider"></li>
+
+													<li><c:url value="editar/${candidato.id}" var="myURL">
+														</c:url> <a href="${myURL}"><i class="fa fa-pencil"></i>
+															Editar</a></li>
+												
+
+
+												</ul>
+											</div></td>
+									</tr>
+								</c:forEach>
+
+							</tbody>
+						</table>
+
 						</div>
-						<!-- fim da div panel -->
+						<!-- /.panel-body - ATE AQUI O FILTRAR-->
+						<div class="panel-footer">
+							<a href="/vaga/consultar" class="btn btn-xs btn-default"><i class="fa fa-reply"></i> Retornar</a>				
+					 	</div>
+		
 					</div>
-				
-					<!-- /col-md-12 -->
+					<!-- fim da div panel -->
 				</div>
-				<!-- /.row -->
+			
+				<!-- /col-md-12 -->
 			</div>
-			<!-- /.paddin.md -->
+			<!-- /.row -->
 		</div>
+			<!-- /.paddin.md -->
 		<!-- /.container -->
 		<a href="" id="scroll-to-top" class="hidden-print"><i
 			class="fa fa-chevron-up"></i></a>
@@ -606,9 +597,9 @@
 			</div>
 		</div>
 	</div>
-	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
-	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
+	</layout:put>
 
+	<layout:put block="scripts" type="REPLACE">
 	<!-- JavaScript -->
 
 	<script type="text/javascript">
@@ -635,6 +626,9 @@
 				}
 			})
 		}
+		$('#btn-retornar').click(function() {
+			window.history.back();
+		});
 	</script>
 
 
@@ -784,42 +778,5 @@
 
 		}
 	</script>
-	
-	<script>/* paginação */
-	$(function	()	{
-		$('#tabelaVaga').dataTable( {
-			"bJQueryUI": true,
-			"sPaginationType": "simple_numbers",
-			"bFilter": false,
-			"bInfo": false,
-			"bLengthChange": false,
-			"bSort": false,
-
-			"oLanguage": {
-				"sEmptyTable": "Nenhum registro encontrado",
-				"sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-				"sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
-				"sInfoFiltered": "(Filtrados de _MAX_ registros)",
-				"sInfoPostFix": "",
-				"sInfoThousands": ".",
-				"sLengthMenu": "_MENU_ resultados por página",
-				"sLoadingRecords": "Carregando...",
-				"sProcessing": "Processando...",
-				"sZeroRecords": "Nenhum registro encontrado",
-				"sSearch": "Pesquisar",
-				"oPaginate": {
-					"sNext": "Próximo",
-					"sPrevious": "Anterior",
-					"sFirst": "Primeiro",
-					"sLast": "Último"
-				},
-				"oAria": {
-					"sSortAscending": ": Ordenar colunas de forma ascendente",
-					"sSortDescending": ": Ordenar colunas de forma descendente"
-				}
-			}
-		});
-	});
-	</script>
-</body>
-</html>
+	</layout:put>
+</layout:extends>
