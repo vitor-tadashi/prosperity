@@ -443,7 +443,7 @@
 												</button>
 												<ul class="dropdown-menu dropdown-menu-right slidedown">
 												
-												<li><a data-target="#visualizar-modal" 
+												<li><a data-toggle="modal" data-target="#visualizar-modal" 
 														onclick="info(${vaga.id})"><i
 															class="fa fa-eye">&nbsp;</i>Visualizar</a></li>
 												<li role="separator" class="editarDivider divider btnEdita hide"></li>
