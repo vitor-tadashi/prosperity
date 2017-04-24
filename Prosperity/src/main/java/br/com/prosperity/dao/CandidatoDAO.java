@@ -24,6 +24,7 @@ public class CandidatoDAO extends GenericDAOImpl<CandidatoEntity, Integer> {
 		try {
 			ret = findByCriteria("id", true, -1, -1, criterion);
 		} catch (Exception e) {
+			
 
 		}
 		return ret;
