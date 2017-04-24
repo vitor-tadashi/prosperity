@@ -64,11 +64,7 @@ footer {
 					</div>
 					<div class="modal-body">
 						<div class="panel-tab clearfix">
-							<ul class="tab-bar">
-								<li class="active"><a data-toggle="tab" href="#home"><i
-										class="fa fa-tags">&nbsp</i>Especificações</a></li>
-							</ul>
-						</div>
+					</div>
 						<div class="tab-content">
 							<div id="home" class="tab-pane fade in active">
 								<section class="panel panel-default" style="margin-bottom: 0px">
