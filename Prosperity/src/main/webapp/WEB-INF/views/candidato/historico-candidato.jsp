@@ -202,7 +202,7 @@
 													<label>Parecer:</label> ${status.descricaoParecer}
 												</p>
 												<p>
-													<label>Usuário:</label> ${candidato.usuario.nome}
+													<label>Usuário:</label> ${status.usuario.nome}
 												</p>
 											</div>
 										</div>

@@ -244,7 +244,6 @@
 	
 	<!-- menu lateral -->
 	<script src="/resources/js/custom/menu.js"></script>
-	
 
 	
 	<!-- scripts serão carregados aqui -->	
