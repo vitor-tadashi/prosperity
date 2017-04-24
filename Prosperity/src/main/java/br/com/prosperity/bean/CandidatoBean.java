@@ -36,6 +36,7 @@ public class CandidatoBean extends FormatUtil {
 	@DateTimeFormat(pattern = "dd/MM/YYYY")
 	private Date dataNascimento;
 	private Double valorPretensao;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataAbertura;
 	private Date dataFechamento;
 	@NotEmpty(message = "O campo email deve ser prenchido")
@@ -64,9 +65,9 @@ public class CandidatoBean extends FormatUtil {
 	private Double pretensaoDe;
 	private Double pretensaoPara;
 	private String curriculoTexto;
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataAberturaDe;
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataAberturaPara;
 	private VagaBean vagaBean;
 
