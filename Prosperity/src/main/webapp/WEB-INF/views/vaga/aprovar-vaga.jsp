@@ -2,86 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<title>Aprovação de vagas</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
-
-<c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
-
-<style type="text/css">
-footer {
-	page-break-before: always;
-	}
-
-@media screen {
-	#printSection {
-		display: none;
-	}
-}
-
-@media print {
-	body * {
-		visibility: hidden;
-	}
-	#printSection * {
-		visibility: visible;
-	}
-	#printSection {
-		position: absolute;
-		left: 0;
-		top: 0;
-	}
-	label {
-		font-weight: normal;
-	}
-	#quebra { page-break-inside: avoid; }
-}
-</style>
-
-</head>
-<body>
-
-	<c:import url="/WEB-INF/views/shared/dashboard.jsp"></c:import>
-
-
-	<!-- Modal visualizar-->
-	<div class="modal fade" id="vaga-modal" data-target="#vaga-modal"
-		tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div id="printThis">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<h4 class="modal-title" id="titulo">Vaga</h4>
-					</div>
-					<div class="modal-body">
-						<div class="panel-tab clearfix">
-					</div>
-						<div class="tab-content">
-							<div id="home" class="tab-pane fade in active">
-								<section class="panel panel-default" style="margin-bottom: 0px">
-									<div class="panel-heading">Informações básicas</div>
-									<div class="panel-body">
-										<form>
-											<div class="form-group row">
-												<div>
-													<div class="form-group col-md-6 col-xs-6"
-														style="margin-bottom: 0px">
-														<label for="solicitante">Solicitante</label> <input
-															class="form-control input-sm" disabled
-															name="solicitante.id" id="solicitante"
-															data-required="true" name="solicitante">
 <%@ taglib uri="http://kwonnam.pe.kr/jsp/template-inheritance"
 	prefix="layout"%>
-
 <layout:extends name="base">
 	<layout:put block="title" type="REPLACE">
 		<title>Aprovação de vagas</title>
@@ -104,10 +26,7 @@ footer {
 						</div>
 						<div class="modal-body">
 							<div class="panel-tab clearfix">
-								<ul class="tab-bar">
-									<li class="active"><a data-toggle="tab" href="#home"><i
-											class="fa fa-tags">&nbsp</i>Especificações</a></li>
-								</ul>
+								
 							</div>
 							<div class="tab-content">
 								<div id="home" class="tab-pane fade in active">
@@ -532,8 +451,8 @@ footer {
 													<i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
 												</button>
 												<ul class="dropdown-menu slidedown btnAlinhado">
-													<li><a href="#visualizar-modal"
-														onclick="info(${vaga.id})"> <i class="fa fa-eye fa-lg">&nbsp</i>Visualizar
+													<li><a href="#visualizar-modal" data-toggle="modal"
+														onclick="info(${vaga.id})"> <i class="fa fa-eye fa-lg">&nbsp;</i>Visualizar
 													</a></li>
 
 
