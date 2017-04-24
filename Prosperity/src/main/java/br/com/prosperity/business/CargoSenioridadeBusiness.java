@@ -20,7 +20,7 @@ import br.com.prosperity.entity.SenioridadeEntity;
 
 @Component
 public class CargoSenioridadeBusiness {
-	
+
 	@Autowired
 	private CargoSenioridadeDAO cargoSenioridadeDAO;
 	@Autowired
