@@ -3,7 +3,7 @@
 		if ($("input#contErro").val() > 0) {
 			$('#textDiv').addClass("alert alert-danger");
 		}
-		$('.telefone').mask('(999)99999-9999');
+		$('.telefone').mask('(99)99999-9999');
 		$('.date').mask('99/99/9999');
 		
 		 CKEDITOR.replace('editor');
@@ -11,21 +11,21 @@
 	
 	function validarTel(){
 		var tel = $("#telResponsavel").val().replace(/[^\d]+/g,'');
-		if (tel.length == 11){
-			$("#telResponsavel").val(tel).mask('(999)9999-9999');
+		if (tel.length == 10){
+			$("#telResponsavel").val(tel).mask('(99)9999-9999');
 		}else{
-			$("#telResponsavel").val(tel).mask('(999)99999-9999');
+			$("#telResponsavel").val(tel).mask('(99)99999-9999');
 		}
 	}
 	
-	var elements1 = $("#selectedBox1 option").each(function()
-			{
+	var elements1 = $("#selectedBox1 option").each(function(){
 			    $(this).val();
 			});
-	var elements2 = $("#selectedBox2 option").each(function()
-			{
+	
+	var elements2 = $("#selectedBox2 option").each(function(){
 			    $(this).val();
 			});
+	
 	for(var i = 0 ; i<elements1.length;i++){
 		for (var j=0;j<elements2.length;j++) {
 			if (elements1[i].value == elements2[j].value){
@@ -37,6 +37,27 @@
 	var a = $("#dataAbertura").value + 1;
 	if (a == 1){
 		$("#dataAbertura").val("2017-01-01")
+	}
+	
+	function maxCaracterFormacaoAcademica(){
+		var maxFormacaoAcademica = $("#descricaoFormacaoAcademica").val();
+		var restante = 500 - maxFormacaoAcademica.length;
+		var maxCaracteres = document.querySelector("#maxFormacaoAcademica");
+		maxCaracteres.innerHTML = "Caracteres restantes : " + restante;
+	}
+	
+	function maxCaracterPefilComportamental(){
+		var maxPerfilComportamental = $("#descricaoPerfilComportamental").val();
+		var restante = 500 - maxPerfilComportamental.length;
+		var maxCaracteres = document.querySelector("#maxPerfilComportamental");
+		maxCaracteres.innerHTML = "Caracteres restantes : " + restante;
+	}
+	
+	function maxCaracterPefilTecnico(){
+		var maxPerfilTecnico = $("#descricaoPerfilTecnico").val();
+		var restante = 500 - maxPerfilTecnico.length;
+		var maxCaracteres = document.querySelector("#maxPerfilTecnico");
+		maxCaracteres.innerHTML = "Caracteres restantes : " + restante;
 	}
 	
 	//Ajax para verificar o projeto e preencher o campo cliente de acordo com o projeto
@@ -190,6 +211,9 @@
     	});
     	var tel = $("#telResponsavel").val().replace(/[^\d]+/g,'');
     	$("#telResponsavel").val(tel);
+    	var data = $("#dataInicio").val();
+    	$("#dataInicio").val(data);
+    	console.log(dataInicio.value);
     	$("#formCadastro2").submit();
 //    	var resp = ${resposta};
 //    	if (resp == "Ok"){
@@ -207,9 +231,9 @@
 			return dados;
 	}
 	
-	function validarData(id) {
+	function validarData() {
 		
-		var campo = $('#dataInicio').val();			
+		var campo = $(this).val();			
 		
 		 if (campo!="")
 		{

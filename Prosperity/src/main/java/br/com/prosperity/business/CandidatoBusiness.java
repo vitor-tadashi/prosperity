@@ -245,15 +245,6 @@ public class CandidatoBusiness {
 
 	}
 	
-//	@Transactional
-//	public void inserir(CandidatoBean candidatoBean) throws BusinessException {
-//		CandidatoEntity candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoBean);
-//		candidatoDAO.insert(candidatoEntity);
-//		//inserirAvaliadores(candidatoEntity, candidatoBean.getVagaBean().getVagaCandidatoBean().get(0).getId());
-//		SituacaoCandidatoBean situacaoCandidato = new SituacaoCandidatoBean();
-//		situacaoCandidato.setIdCandidato(candidatoEntity.getId());
-//		situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
-//	}
 
 	@Transactional
 	public void inserir(CandidatoBean candidatoBean) throws BusinessException {
@@ -263,6 +254,8 @@ public class CandidatoBusiness {
 			if (verificarCandidatura(candidatoBean) == true) {
 				CandidatoEntity candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoBean);
 				SituacaoCandidatoBean situacaoCandidato = new SituacaoCandidatoBean();
+				Date dateNow = new Date();
+				candidatoEntity.setDataAbertura(dateNow);
 
 				candidatoEntity.getFormacao()
 						.setTipoCurso(tipoCursoDAO.findById(candidatoBean.getFormacao().getTipoCurso().getId()));
@@ -512,7 +505,7 @@ public class CandidatoBusiness {
 			if (funcionalidadeBean.getId() == 26)
 				listaStatus.add(StatusCandidatoEnum.GERARPROPOSTA.getValue());
 
-			if (funcionalidadeBean.getId() == 25)
+			if (funcionalidadeBean.getId() == 23)
 				listaStatus.add(StatusCandidatoEnum.PROPOSTACANDIDATO.getValue());
 
 			if (funcionalidadeBean.getId() == 28) {

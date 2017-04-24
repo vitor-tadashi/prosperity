@@ -4,7 +4,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://kwonnam.pe.kr/jsp/template-inheritance"
 	prefix="layout"%>
-
 <layout:extends name="base">
 	<layout:put block="title" type="REPLACE">
 		<title>Aprovação de vagas</title>
@@ -27,10 +26,7 @@
 						</div>
 						<div class="modal-body">
 							<div class="panel-tab clearfix">
-								<ul class="tab-bar">
-									<li class="active"><a data-toggle="tab" href="#home"><i
-											class="fa fa-tags">&nbsp</i>Especificações</a></li>
-								</ul>
+								
 							</div>
 							<div class="tab-content">
 								<div id="home" class="tab-pane fade in active">
@@ -455,8 +451,8 @@
 													<i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
 												</button>
 												<ul class="dropdown-menu slidedown btnAlinhado">
-													<li><a href="#visualizar-modal"
-														onclick="info(${vaga.id})"> <i class="fa fa-eye fa-lg">&nbsp</i>Visualizar
+													<li><a href="#visualizar-modal" data-toggle="modal"
+														onclick="info(${vaga.id})"> <i class="fa fa-eye fa-lg">&nbsp;</i>Visualizar
 													</a></li>
 
 
