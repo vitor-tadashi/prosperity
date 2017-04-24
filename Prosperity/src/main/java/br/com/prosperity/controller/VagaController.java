@@ -296,6 +296,7 @@ public class VagaController {
 	@RequestMapping(value = "/avaliadores", method = RequestMethod.POST)
 	public @ResponseBody String recebeAvaliadores(@ModelAttribute("avaliadores") String avaliadores) {
 
+		@SuppressWarnings("unchecked")
 		List<String> resultado = new Gson().fromJson(avaliadores, List.class);
 
 		for (String dados : resultado) {

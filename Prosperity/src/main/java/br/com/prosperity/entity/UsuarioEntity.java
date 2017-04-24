@@ -43,7 +43,7 @@ public class UsuarioEntity {
 	@JoinColumn(name = "idFuncionario")
 	private FuncionarioEntity funcionarioEntity;
 	
-	@OneToMany (cascade = CascadeType.ALL )
+	@OneToMany (cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="idUsuario")
 	private List<AvaliadorCandidatoEntity> avaliador;
 

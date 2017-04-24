@@ -2,118 +2,15 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<title>Consultar vaga</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
-<!-- Bootstrap core CSS -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	
-	<!-- Font Awesome-->
-	<link href="css/font-awesome.min.css" rel="stylesheet">
+<%@ taglib uri="http://kwonnam.pe.kr/jsp/template-inheritance" prefix="layout"%>
 
-	<!-- Pace -->
-	<link href="css/pace.css" rel="stylesheet">
-	
-	<!-- Datatable -->
-	<link href="css/jquery.dataTables_themeroller.css" rel="stylesheet">
-	
-	<!-- Perfect -->
-	<link href="css/app.min.css" rel="stylesheet">
-	<link href="css/app-skin.css" rel="stylesheet">
+<layout:extends name="base">
+	<layout:put block="title" type="REPLACE">
+		<title>Consultar vaga</title>
+		<link rel="stylesheet" href="/resources/css/custom/consultar-vaga.css">
+	</layout:put>
 
-<c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
-
-<style type="text/css">
- footer {
-	page-break-before: always;
-	}
-	
-	.hiddenRow {
-    padding: 0 !important;
-}
-	
-@media screen {
-    #printSection {
-        display: none;
-    }
-}
-@media print {
-
-    body * {
-        visibility:hidden;
-    }
-    #printSection * {
-        visibility:visible;
-    }
-    #printSection {
-        position: absolute;
-        left: 0;
-        top: 0;
-        
-    }
-    label {
-		font-weight: normal;
-	}
-	#quebra { page-break-inside:avoid; }
-}
-</style>
-
-<style>
-
-.label-stand, .badge-stand {
-	background-color: #9b59b6;
-	color: #fff;
-}
-
-.label-aprovadoPendente, .badge-stand {
-	background-color: #2980b9;
-	color: #fff;
-}
-
-.label-analiseRH, .badge-stand {
-	background-color: #e67e22;
-	color: #fff;
-}
-
-.label-analiseTecnica, .badge-stand {
-	background-color: #f1c40f;
-	color: #fff;
-}
-
-.label-reprovado, .badge-stand {
-	background-color: #e74c3c;
-	color: #fff;
-}
-
-.label-contratado, .badge-stand {
-	background-color: #2ecc71;
-	color: #fff;
-}
-
-.dropdown-menu {
-	left: -115px !important;
-}
-
-.col-md-9 .label-radio {
-	margin-right: 58px;
-	margin-left: 20px;
-}
-
-li a.active {
-	background: #f2f2f2;
-	
-} 
-
-</style>
-
-</head>
-<body>
-	<!-- Modal visualizar-->
+	<layout:put block="contents">
 	<div class="modal fade" id="vaga-modal" data-target="#vaga-modal"
 		tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
@@ -129,78 +26,12 @@ li a.active {
 				</div>
 				<div class="modal-body">
 					<div class="panel-tab clearfix">
-						<ul class="tab-bar">
-							<li class="active"><a data-toggle="tab" href="#home"><i
-									class="fa fa-info-circle">&nbsp</i>Informações</a></li>
-							<li><a data-toggle="tab" href="#menu1"><i
-									class="fa fa-tags">&nbsp</i>Especificações</a></li>
-						</ul>
+
 					</div>
 					<div class="tab-content">
-						<div id="home" class="tab-pane fade in active">
-							<form>
-								<section class="panel panel-default panel-body">
-									<div class="row">
-										<div class="col-md-4">
-											<div class="form-group">
-												<label class="control-label">Data de abertura</label>
-												<div class="form-group">
-													<div class="input-group">
-														<input type="text" value="01/01/2017"
-															class="datepicker form-control" id="dataAbertura" name="dataAbertura"
-															readonly> <span class="input-group-addon"><i
-															class="fa fa-calendar"></i></span>
-													</div>
-												</div>
-												<!-- /.col -->
-											</div>
-											<!-- /form-group -->
-										</div>
-										<div class="col-md-4">
-											<div class="form-group">
-												<label class="control-label">Data de aprovação</label>
-												<div class="form-group">
-													<div class="input-group">
-														<input type="text" value="01/01/2017"
-															class="datepicker form-control" id="dataAprovacao" name="dataAprovacao"
-															readonly> <span class="input-group-addon"><i
-															class="fa fa-calendar"></i></span>
-													</div>
-												</div>
-												
-											</div>
-											
-										</div>
-										<div class="col-md-4">
-											<div class="form-group">
-												<label class="control-label">Data de fechamento</label>
-												<div class="form-group">
-													<div class="input-group">
-														<input type="text" value="01/01/2017"
-															class="datepicker form-control" id="dataFechamento" name="dataFechamento"
-															readonly> <span class="input-group-addon"><i
-															class="fa fa-calendar"></i></span>
-													</div>
-												</div>
-												
-											</div>
-											
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group col-md-3">
-											<label for="">Candidatos</label> <input type="number"
-												class="form-control input-sm" id="candidatos" min="0" value="123"
-												name="numeroCandidatos" disabled>
-										</div>
-										<!-- /form-group -->
-									</div>
-								</section>
-							</form>
-						</div>
-						<div id="menu1" class="tab-pane fade">
+						<div id="menu1" class="tab-pane fade in active">
 							<section class="panel panel-default">
-								<div class="panel-heading">Especificações</div>
+								<div class="panel-heading"><i class="fa fa-tags"></i> Especificações</div>
 								<div class="panel-body">
 									<form>
 										<div class="form-group row">
@@ -215,8 +46,8 @@ li a.active {
 '
 												<div class="form-group col-md-6 col-xs-6" style="margin-bottom: 0px">
 													<label for="exampleInputEmail1">Local de trabalho:</label>
-													<div class="radiogroup" name="localTrabalho" id="local">
-														<label id="lblLocal" class="label-radio inline" value="">
+													<div class="radiogroup" id="local">
+														<label id="lblLocal" class="label-radio inline">
 														</label>
 													</div>
 													<!-- /.col -->
@@ -238,8 +69,8 @@ li a.active {
 
 												<div class="form-group col-md-6 col-xs-6" style="margin-bottom: 0px">
 													<label for="exampleInputEmail1">Tipo de vaga:</label>
-													<div class="radiogroup" name="idTipoVaga" id="tipo">
-														<label id="tpVaga" class="label-radio inline" value = "">
+													<div class="radiogroup" id="tipo">
+														<label id="tpVaga" class="label-radio inline">
 														</label>
 													</div>
 													<!-- /.col -->
@@ -262,8 +93,7 @@ li a.active {
 												<div>
 													<div class="form-group col-md-2 col-xs-2">
 														<div class="input-group bootstrap-timepicker">
-															<label id="horaEntrada" name="horarioEntrada"
-																	type="time" style="margin-top: 7px" value=""></label>
+															<label id="horaEntrada" style="margin-top: 7px"></label>
 														</div>
 													</div>
 
@@ -273,8 +103,7 @@ li a.active {
 
 													<div class="form-group col-md-2 col-xs-1">
 														<div class="input-group bootstrap-timepicker">
-															<label id="horaSaida" name="horaSaida" type="time"
-																	style="margin-top: 7px" value=""></label>
+															<label id="horaSaida" style="margin-top: 7px"></label>
 														</div>
 													</div>
 												</div>
@@ -295,8 +124,8 @@ li a.active {
 
 												<div class="form-group col-md-6 col-xs-6" style="margin-bottom: 0px">
 													<label for="exampleInputEmail1">Aumento de quadro:</label>
-													<div class="radiogroup" name="aumentoQuadro" id="aumento">
-														<label id="lblQuadro" class="label-radio inline" value = "">
+													<div class="radiogroup" id="aumento">
+														<label id="lblQuadro" class="label-radio inline">
 														</label>
 
 													</div>
@@ -328,8 +157,7 @@ li a.active {
 												<div id="" class="">
 													<label id="substituidoId">Nome do substituido:</label> 
 												</div>
-												<label id="substituido" name="nomeSubstituido"
-														style="margin-top: 7px" value=""></label>
+												<label id="substituido" style="margin-top: 7px"></label>
 											</div>
 
 										</div>
@@ -446,19 +274,16 @@ li a.active {
 	</div>
 	<!-- /.modal delete-->
 
-	<c:import url="/WEB-INF/views/shared/dashboard.jsp"></c:import>
-
 	<!--corpo -->
 	<div id="main-container">
 		<div id="breadcrumb">
 			<ul class="breadcrumb">
-				<li><i class="fa fa-home"></i><a href="dashboard.html"> Início</a></li>
-				<li class="active">Vaga</li>
-				<li><a href="consultar">Consultar</a></li>
+				<li><i class="fa fa-home"></i><a href="/pagina-inicial"> Página inicial</a></li>
+				<li>Vaga</li>
+				<li class="active">Consultar</li>
 			</ul>
 		</div>
 		<!--breadcrumb-->
-		<div class="container">
 		<div class="padding-md clearfix">
 			<div class="row">
 				<div class="col-sm-12">
@@ -503,8 +328,8 @@ li a.active {
 									</a>
 								</div>
 							</form>
-						</div>
-						<!--</panel body>-->
+						
+						<br />
 						
 						<table
 							id="tabelaVaga"
@@ -525,7 +350,7 @@ li a.active {
 							<tbody class="text-center">
 								<c:forEach var="vaga" items="${vagas}" varStatus="count">
 									<tr position="infoVaga"  data-toggle="collapse" data-target="#demo${count.index}" class="accordion-toggle" style="cursor: pointer;">
-										<td id="linhaNome" name="nomeVaga">
+										<td id="linhaNome">
 										${vaga.nomeVaga}
 										</td>
 										<td>${vaga.nomeSolicitante}</td>
@@ -545,21 +370,20 @@ li a.active {
 															style="color: #fff; background-color: ${vaga.ultimoStatus.status.css}">${vaga.ultimoStatus.status.nome}</span></td>
 										<td>
 											<div class="btn-group">
-												<button class="btn btn-sm btn-info dropdown-toggle"
+												<button class="btn btn-xs btn-info dropdown-toggle"
 													data-toggle="dropdown" aria-haspopup="true"
 													aria-expanded="false">
 													<i class="fa fa-cogs fa-lg">&nbsp;</i> <span class="caret"></span>
 												</button>
 												<ul class="dropdown-menu dropdown-menu-right slidedown">
 												
-												<li><a href="#visualizar-modal" 
+												<li><a data-toggle="modal" data-target="#visualizar-modal" 
 														onclick="info(${vaga.id})"><i
+
 															class="fa fa-eye">&nbsp</i>Visualizar</a></li>
-												<li role="separator" class="editarDivider divider btnEdita hide"></li>
+												
 															
-															<li><a href="/candidato/filtrar?nome=&vagaBean.id=${vaga.id}"  
-														><i
-															class="fa fa-group">&nbsp</i>Visualizar candidatos</a></li>
+
 															
 															
 												<c:if test="${vaga.ultimoStatus.status.nome == 'Pendente'}">
@@ -610,13 +434,22 @@ li a.active {
             				<label>Proposta</label>
             					<p style="margin-top: -5px;">R$ <fmt:formatNumber pattern="#,##0.00" value="${vaga.valorPretensao}" /></p>
             			</div>
-            			<div class="col-md-3 well well-sm btn btn-warning" style="    height: 56px;
-    margin-right: 5px;
-    width: 200px;
-    margin-left: 5px;">
+            			<a href="/candidato/filtrar?nome=&vagaBean.id=${vaga.id}">
+            			<div class="col-md-3 well well-sm btn btn-warning" 
+            			style="    
+
+            				height: 56px;
+   							margin-right: 5px;
+							width: 200px;
+							margin-left: 5px;"
+						data-toggle="tooltip" data-placement="bottom" title="Clique para visualizar os candidatos"
+						>
+            				
             				<label>Numero de Candidatos</label>
             					<p style="margin-top: -5px;">${vaga.countCandidatos}</p>
+            					
             			</div>
+            			</a>
             		</div>
             	
             	<br/>
@@ -629,9 +462,8 @@ li a.active {
 							</tbody>
 						</table>
 						
-						
-					</div>
-					<!--</panel default>-->
+						</div>
+						<!--</panel body>-->
 					   <div class="panel-footer clearfix">
                           <div class="row">
                               <input type="hidden" id="pageActive" value="${page }">
@@ -652,6 +484,8 @@ li a.active {
                           <!--</div row>-->
                       </div>
                       <!--</panel footer>-->
+					</div>
+					<!--</panel default>-->
 				</div>
 				<!--</col-sm-12>-->
 			</div>
@@ -659,41 +493,9 @@ li a.active {
 		</div>
 		<!--</padding>-->
 	</div>
-	</div>
+	</layout:put>
 	
-
-	<!--</container>-->
-	<!--</main container>-->
-	<!--corpo -->
-
-	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
-	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
-	<!-- Jquery -->
-	<script src="js/jquery-1.10.2.min.js"></script>
-	
-	<!-- Bootstrap -->
-    <script src="bootstrap/js/bootstrap.min.js"></script>
- 
-	<!-- Datatable -->
-	<script src='js/jquery.dataTables.min.js'></script>	
-	
-	<!-- Modernizr -->
-	<script src='js/modernizr.min.js'></script>
-	
-	<!-- Pace -->
-	<script src='js/pace.min.js'></script>
-	
-	<!-- Popup Overlay -->
-	<script src='js/jquery.popupoverlay.min.js'></script>
-	
-	<!-- Slimscroll -->
-	<script src='js/jquery.slimscroll.min.js'></script>
-	
-	<!-- Cookie -->
-	<script src='js/jquery.cookie.min.js'></script>
-
-	<!-- Perfect -->
-	<script src="js/app/app.js"></script>
+	<layout:put block="scripts" type="REPLACE">
 	
 	<script type="text/javascript">
 	
@@ -855,68 +657,9 @@ li a.active {
 	
 	
 	</script>
-	<script>/* paginação */
-	var pagina = $('#pageActive').val();
-	$('#page'+pagina).addClass('active');
+	<script>
 	
-	$(function	()	{
-		$('#alterei').dataTable( {
-			"bJQueryUI": true,
-			"sPaginationType": "simple_numbers",
-			"bFilter": false,
-			"bInfo": false,
-			"bLengthChange": false,
-			"bSort": false,
-
-			"oLanguage": {
-				"sEmptyTable": "Nenhum registro encontrado",
-				"sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-				"sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
-				"sInfoFiltered": "(Filtrados de _MAX_ registros)",
-				"sInfoPostFix": "",
-				"sInfoThousands": ".",
-				"sLengthMenu": "_MENU_ resultados por página",
-				"sLoadingRecords": "Carregando...",
-				"sProcessing": "Processando...",
-				"sZeroRecords": "Nenhum registro encontrado",
-				"sSearch": "Pesquisar",
-				"oPaginate": {
-					"sNext": "Próximo",
-					"sPrevious": "Anterior",
-					"sFirst": "Primeiro",
-					"sLast": "Último"
-				},
-				"oAria": {
-					"sSortAscending": ": Ordenar colunas de forma ascendente",
-					"sSortDescending": ": Ordenar colunas de forma descendente"
-				}
-			}
-		/* $(function	()	{
-			$('#tabelaVaga').dataTable( {
-				"bJQueryUI": true,
-				"sPaginationType": "full_numbers"
-			});
-			$('#tabelaVaga_length').hide();
-			$('#tabelaVaga_filter').hide();
-			$('#tabelaVaga_info').hide();
-			$('#tabelaVaga_last').css('margin-left:2000px');
-			$('#tabelaVaga_next').css('margin-left:200px');
-			$('#tabelaVaga_paginate').css('margin-left: 500px');
-			$("#tabelaVaga_next").text("Próximo");
-			$("#tabelaVaga_last").text("Último");
-			$("#tabelaVaga_previous").text("Anterior");
-			$("#tabelaVaga_first").text("Primeiro");
-			
-			$("#tabelaVaga_next").attr("href", "#");
-			$("#tabelaVaga_last").attr("href", "#");
-			$("#tabelaVaga_previous").attr("href", "#");
-			$("#tabelaVaga_first").attr("href", "#");
-			$(".fg-button").attr("href", "#"); */
- 		
-		});
-	});
-		
-$(function() {
+	$(function() {
 		
     	var id = $("#idPerfil").val();
     	$.ajax({
@@ -956,6 +699,5 @@ $(function() {
 	});
 	}
 	</script>
-	
-	</body>
-	</html>
+	</layout:put>
+</layout:extends>

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 
@@ -107,10 +108,6 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private ProvaBean provaBean;
-
-	@Autowired
-	private List<ProvaBean> provasBean;
-
 	/**
 	 * @author andre.posman
 	 * @param model
@@ -265,11 +262,12 @@ public class CandidatoController<PaginarCandidato> {
 	}
 
 	@RequestMapping(value = "filtrar", method = RequestMethod.GET)
-	public String filtrarCandidatoRH(Model model, CandidatoBean candidato) {
+	public String filtrarCandidatoRH(Model model, CandidatoBean candidato, RedirectAttributes redirectAttributes) {
 		if (candidato.getVagaBean().getId() == 0) {
 			candidato.setVagaBean(null);
 		}
-
+		
+		
 		List<CandidatoBean> candidatos = candidatoBusiness.filtroCandidato(candidato);
 		model.addAttribute("candidatos", candidatos);
 
@@ -337,7 +335,6 @@ public class CandidatoController<PaginarCandidato> {
 			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato,
 			@ModelAttribute("ac") String ac, @ModelAttribute("processoSelectivo") String processoSeletivo) {
 		bean = candidatoBusiness.obter(situacaoCandidato.getIdCandidato());
-		System.out.println("podia beijado");
 		if (!ac.equals("[]")) {
 			bean.setCompetencias(convertGson(ac));
 			try{
@@ -395,7 +392,6 @@ public class CandidatoController<PaginarCandidato> {
 		List<String> l = gson.fromJson(processoSeletivo, List.class);
 		provasCandidatoBean = new ArrayList<ProvaCandidatoBean>();
 		List<String> descricao = new ArrayList<String>();
-		provasBean = new ArrayList<ProvaBean>();
 		int aux = 0;
 		for (String lista : l) {
 			String aux2 = lista;
@@ -404,17 +400,18 @@ public class CandidatoController<PaginarCandidato> {
 					if (aux % 2 == 0) {
 						provaBean = new ProvaBean();
 						provaBean.setId(Integer.parseInt(aux2));
-						provaCandidatoBean.setProvas(provaBean);
 					} else {
 						String dsProva = aux2;
+						provaCandidatoBean = new ProvaCandidatoBean();
+						provaCandidatoBean.setProvas(provaBean);
 						provaCandidatoBean.setDescricao(dsProva);
+						provaCandidatoBean.setCandidato(bean);
+						provasCandidatoBean.add(provaCandidatoBean);
 					}
 				}
 			} catch (Exception e) {
 				System.out.println(e);
 			}
-			provaCandidatoBean.setCandidato(bean);
-			provasCandidatoBean.add(provaCandidatoBean);
 			aux++;
 		}
 		return provasCandidatoBean;

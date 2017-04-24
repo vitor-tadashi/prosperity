@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.prosperity.bean.CandidatoBean;
+import br.com.prosperity.bean.VagaCandidatoBean;
 import br.com.prosperity.entity.CandidatoEntity;
 
 @Component
@@ -29,6 +30,9 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 
 	@Autowired
 	private StatusCandidatoConverter statusCandidatoConverter;
+	
+	@Autowired
+	public CandidatoVagaConverter candidatoVagaConverter;
 
 	public CandidatoEntity convertBeanToEntityService(CandidatoBean bean) {
 		if (bean == null) {
@@ -140,7 +144,11 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		bean.setDataUltimoContato(entity.getDataUltimoContato());
 		bean.setProposta(entity.getProposta());
 		bean.setCurriculoTexto(entity.getCurriculoTexto());
-		bean.setVagas(vagaCandidatoConverter.convertEntityToBean(entity.getVagas()));
+		//bean.setVagaCandidato(vagaCandidato);
+		bean.setVagas(candidatoVagaConverter.convertEntityToBean(entity.getVagas()));
+		for(VagaCandidatoBean vc : bean.getVagas()){
+			bean.setVagaCandidato(vc);
+		}
 		return bean;
 	}
 }

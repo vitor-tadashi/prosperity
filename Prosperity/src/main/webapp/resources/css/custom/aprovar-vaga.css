@@ -1,0 +1,29 @@
+footer {
+	page-break-before: always;
+}
+
+@media screen {
+	#printSection {
+		display: none;
+	}
+}
+
+@media print {
+	body * {
+		visibility: hidden;
+	}
+	#printSection * {
+		visibility: visible;
+	}
+	#printSection {
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
+	label {
+		font-weight: normal;
+	}
+	#quebra {
+		page-break-inside: avoid;
+	}
+}
