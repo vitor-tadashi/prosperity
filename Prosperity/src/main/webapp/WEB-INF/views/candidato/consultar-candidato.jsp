@@ -551,17 +551,14 @@
 								</tbody>
 							</table>
 							
-						 <c:if test="${not empty redirect}">
 							<div style="margin-left: 10px; margin-bottom: 30px;margin-top: -30px; position: absolute "> 
 							    	<a class="btn btn-xs btn-default" id="btn-retornar"><i class="fa fa-reply"></i> Retornar</a>				
-								<i >&nbsp</i>
-						 	</div>
-						 </c:if>
+								<i >&nbsp</i> 								
+						 </div>
 			
 						</div>
 						<!-- fim da div panel -->
 					</div>
-					<p>${redirect}</p>
 				
 					<!-- /col-md-12 -->
 				</div>

@@ -129,78 +129,11 @@ li a.active {
 				</div>
 				<div class="modal-body">
 					<div class="panel-tab clearfix">
-						<ul class="tab-bar">
-							<li class="active"><a data-toggle="tab" href="#home"><i
-									class="fa fa-info-circle">&nbsp</i>Informações</a></li>
-							<li><a data-toggle="tab" href="#menu1"><i
-									class="fa fa-tags">&nbsp</i>Especificações</a></li>
-						</ul>
 					</div>
 					<div class="tab-content">
-						<div id="home" class="tab-pane fade in active">
-							<form>
-								<section class="panel panel-default panel-body">
-									<div class="row">
-										<div class="col-md-4">
-											<div class="form-group">
-												<label class="control-label">Data de abertura</label>
-												<div class="form-group">
-													<div class="input-group">
-														<input type="text" value="01/01/2017"
-															class="datepicker form-control" id="dataAbertura" name="dataAbertura"
-															readonly> <span class="input-group-addon"><i
-															class="fa fa-calendar"></i></span>
-													</div>
-												</div>
-												<!-- /.col -->
-											</div>
-											<!-- /form-group -->
-										</div>
-										<div class="col-md-4">
-											<div class="form-group">
-												<label class="control-label">Data de aprovação</label>
-												<div class="form-group">
-													<div class="input-group">
-														<input type="text" value="01/01/2017"
-															class="datepicker form-control" id="dataAprovacao" name="dataAprovacao"
-															readonly> <span class="input-group-addon"><i
-															class="fa fa-calendar"></i></span>
-													</div>
-												</div>
-												
-											</div>
-											
-										</div>
-										<div class="col-md-4">
-											<div class="form-group">
-												<label class="control-label">Data de fechamento</label>
-												<div class="form-group">
-													<div class="input-group">
-														<input type="text" value="01/01/2017"
-															class="datepicker form-control" id="dataFechamento" name="dataFechamento"
-															readonly> <span class="input-group-addon"><i
-															class="fa fa-calendar"></i></span>
-													</div>
-												</div>
-												
-											</div>
-											
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group col-md-3">
-											<label for="">Candidatos</label> <input type="number"
-												class="form-control input-sm" id="candidatos" min="0" value="123"
-												name="numeroCandidatos" disabled>
-										</div>
-										<!-- /form-group -->
-									</div>
-								</section>
-							</form>
-						</div>
-						<div id="menu1" class="tab-pane fade">
+						<div id="menu1" class="tab-pane fade in active">
 							<section class="panel panel-default">
-								<div class="panel-heading">Especificações</div>
+								<div class="panel-heading"><i class="fa fa-tags"></i> Especificações</div>
 								<div class="panel-body">
 									<form>
 										<div class="form-group row">
@@ -551,11 +484,8 @@ li a.active {
 												<li><a href="#visualizar-modal" 
 														onclick="info(${vaga.id})"><i
 															class="fa fa-eye">&nbsp</i>Visualizar</a></li>
-												<li role="separator" class="editarDivider divider btnEdita hide"></li>
+												
 															
-															<li><a href="visualizarCandidato/${vaga.id}"  
-														><i
-															class="fa fa-group">&nbsp</i>Visualizar candidatos</a></li>
 															
 															
 												<c:if test="${vaga.ultimoStatus.status.nome == 'Pendente'}">
@@ -606,13 +536,22 @@ li a.active {
             				<label>Proposta</label>
             					<p style="margin-top: -5px;">R$ <fmt:formatNumber pattern="#,##0.00" value="${vaga.valorPretensao}" /></p>
             			</div>
-            			<div class="col-md-3 well well-sm btn btn-warning" style="    height: 56px;
-    margin-right: 5px;
-    width: 200px;
-    margin-left: 5px;">
+            			<a href="/candidato/filtrar?nome=&vagaBean.id=${vaga.id}">
+            			<div class="col-md-3 well well-sm btn btn-warning" 
+            			style="    
+
+            				height: 56px;
+   							margin-right: 5px;
+							width: 200px;
+							margin-left: 5px;"
+						data-toggle="tooltip" data-placement="bottom" title="Clique para visualizar os candidatos"
+						>
+            				
             				<label>Numero de Candidatos</label>
             					<p style="margin-top: -5px;">${vaga.countCandidatos}</p>
+            					
             			</div>
+            			</a>
             		</div>
             	
             	<br/>

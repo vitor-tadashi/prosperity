@@ -271,7 +271,7 @@ public class CandidatoController<PaginarCandidato> {
 	}
 
 	@RequestMapping(value = "filtrar", method = RequestMethod.GET)
-	public String filtrarCandidatoRH(Model model, CandidatoBean candidato) {
+	public String filtrarCandidatoRH(Model model, CandidatoBean candidato, RedirectAttributes redirectAttributes) {
 		if (candidato.getVagaBean().getId() == 0) {
 			candidato.setVagaBean(null);
 		}
