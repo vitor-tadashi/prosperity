@@ -283,14 +283,24 @@
 						dataType:"json",
 						method:"GET",
 						success:function(data){	
-							if(data.ultimoStatus.status.id == "9" || data.ultimoStatus.status.id == "10"){
+							if(data.ultimoStatus.status.id == "9"){
 								 var perfil = $('#user').val();
-				                 if(perfil == "RH" || perfil == "Administrador" || perfil == "CEO" || perfil == "Diretor de Operação"){
+				                 if(perfil == "RH"){
 									CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
 				                	$("#proposta-tab").show();
 				                	$("#proposta").show();
 				                 }
-				                  
+							}else{
+			                	$("#proposta-tab").hide();
+			                	$("#proposta").hide();
+							}
+							if(data.ultimoStatus.status.id == "10"){
+								 var perfil = $('#user').val();
+				                 if(perfil == "Administrador" || perfil == "CEO" || perfil == "Diretor de operação"){
+									CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
+				                	$("#proposta-tab").show();
+				                	$("#proposta").show();
+				                 }
 							}else{
 			                	$("#proposta-tab").hide();
 			                	$("#proposta").hide();
@@ -321,7 +331,6 @@
 			function alterarStatus(id,status){
 				$('input.cancelar-id').val(id);
 				$('input.cancelar-status').val(status);
-				
 			}
 				
 			})
