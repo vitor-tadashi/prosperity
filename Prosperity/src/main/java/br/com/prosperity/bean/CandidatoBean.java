@@ -33,7 +33,7 @@ public class CandidatoBean extends FormatUtil {
 	private String rg;
 
 	@NotNull(message = "O campo data de nascimento deve ser preenchido")
-	@DateTimeFormat(pattern = "dd/MM/YYYY")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataNascimento;
 	private Double valorPretensao;
 	private Date dataAbertura;

@@ -13,16 +13,18 @@ import br.com.prosperity.entity.CargoSenioridadeEntity;
 
 @Component
 public class CargoSenioridadeBusiness {
-	
+
 	@Autowired
 	private CargoSenioridadeDAO cargoSenioridadeDAO;
 	@Autowired
 	private CargoSenioridadeConverter cargoSenioridadeConverter;
-	
-	@Transactional(readOnly=true)
-	public List<CargoSenioridadeBean> obterRangeSalarial(Integer idCargo,Integer idSenioridade) {
-		List<CargoSenioridadeEntity> rangeSalarialEntity = cargoSenioridadeDAO.findByNamedQuery("rangeSalarial", idCargo,idSenioridade);
-		List<CargoSenioridadeBean> rangeSalarialBean = cargoSenioridadeConverter.convertEntityToBean(rangeSalarialEntity);
+
+	@Transactional(readOnly = true)
+	public List<CargoSenioridadeBean> obterRangeSalarial(Integer idCargo, Integer idSenioridade) {
+		List<CargoSenioridadeEntity> rangeSalarialEntity = cargoSenioridadeDAO.findByNamedQuery("rangeSalarial",
+				idCargo, idSenioridade);
+		List<CargoSenioridadeBean> rangeSalarialBean = cargoSenioridadeConverter
+				.convertEntityToBean(rangeSalarialEntity);
 		return rangeSalarialBean;
 	}
 

@@ -59,8 +59,7 @@
 						<div id="textDiv3"></div>
 
 						<form class="form-border" action="salvar" method="post"
-							enctype="multipart/form-data" id=formCadastro
-							onsubmit="return Validar()">
+							enctype="multipart/form-data" id=formCadastro>
 							<div class="panel-tab clearfix">
 								<ul class="tab-bar wizard-demo" id="wizardDemo">
 									<li class="active tab-verity"><a href="#first"
@@ -88,20 +87,20 @@
 											<div class="form-group col-md-4">
 												<label class="control-label" for="nome">Nome</label> <input
 													value="${candidato.nome}" type="text"
-													placeholder="Informe seu nome"
+													placeholder="Informe seu nome" maxlength="100"
 													class="form-control parsley-validated" data-minlength="8"
 													id="nome" name="nome">
 											</div>
 											<div class="form-group col-md-3">
 												<label for="email" class="control-label">E-mail</label> <input
 													type="email" class="form-control parsley-validated"
-													id="email" name="email" data-required="true"
+													id="email" name="email" data-required="true" maxlength="100"
 													placeholder="Informe seu email" value="${candidato.email}">
 											</div>
 
 											<div class="form-group col-md-2">
 												<label for="rg" class="control-label">RG</label> <input
-													type="text" class="form-control rg parsley-validated"
+													type="text" class="form-control rg parsley-validated" maxlength="50"
 													id="rg" name="rg" data-required="true" data-required="true"
 													placeholder="Informe seu RG" value="${candidato.rg}">
 											</div>
@@ -110,16 +109,16 @@
 													nascimento</label>
 												<fmt:formatDate value="${candidato.dataNascimento}"
 													pattern="dd/MM/yyyy" var="dataNascimento" />
-												<input type="text"
-													class="form-control date parsley-validated"
-													data-required="true" name="dataNascimento"
-													id="dataNascimento" value="${dataNascimento}"
-													onblur="validarData(this.value)">
+												<input type="text" class="form-control date"
+													name="dataNascimento" data-required="false" id="dataNascimento"
+													onblur="validarData('dataNascimento')"
+													value="${dataNascimento}">
+
 											</div>
 											<div class="form-group col-md-2">
 												<label for="contato" class="control-label">Telefone</label>
 												<input type="text"
-													class="form-control telefone parsley-validated"
+													class="form-control telefone parsley-validated" maxlength="30"
 													placeholder="Informe seu telefone" data-required="true"
 													id="contato" name="contato.telefone"
 													value="${candidato.contato.telefone}">
@@ -178,13 +177,13 @@
 										<div class="form-group col-md-4">
 											<label for="curso">Curso</label> <input type="text"
 												class="form-control" id="curso" name="formacao.nomeCurso"
-												placeholder="Informe seu curso"
+												placeholder="Informe seu curso" maxlength="50"
 												value="${candidato.formacao.nomeCurso}">
 										</div>
 										<div class="form-group col-md-5">
 											<label for="instituicao">Instituição</label> <input
 												type="text" class="form-control" id="instituicao"
-												name="formacao.nomeInstituicao"
+												name="formacao.nomeInstituicao" maxlength="50"
 												placeholder=" Informe a instituição"
 												value="${candidato.formacao.nomeInstituicao}">
 										</div>
@@ -217,7 +216,7 @@
 												pattern="dd/MM/yyyy" var="dataConclusao" />
 											<input type="text" class="form-control date"
 												id="mesAnoConclusao" data-required="false"
-												name="formacao.dataConclusao" onblur="validarData()"
+												name="formacao.dataConclusao" onblur="validarData('mesAnoConclusao')"
 												value="${dataConclusao}">
 										</div>
 									</div>
@@ -264,7 +263,7 @@
 													<fmt:formatDate value="${candidato.dataUltimoContato}"
 														pattern="dd/MM/yyyy" var="dataUltimoContato" />
 													<input type="text" class="form-control date"
-														name="dataUltimoContato" onblur="validarData(this.value)"
+														name="dataUltimoContato" onblur="validarData('dataUltimoContato')"
 														data-required="false" id="dataUltimoContato"
 														value="${dataUltimoContato}">
 												</div>
@@ -275,7 +274,7 @@
 														pattern="dd/MM/yyyy" var="entrevista" />
 													<input type="text" class="form-control date"
 														data-required="false" name="entrevista" id="entrevista"
-														onblur="validarData()" value="${entrevista}">
+														onblur="validarData('entrevista')" value="${entrevista}">
 												</div>
 											</div>
 										</div>
@@ -462,10 +461,10 @@
 		}
 	</script>
 	<script type="text/javascript">
-		function validarData() {
-			
-			var campo = $('#dataNascimento').val();
-			   if (campo!="")
+		function validarData(idCampo) {
+
+			var campo = $("#"+idCampo).val();
+			if (campo!="")
 			{
 			        erro=0;
 			        hoje = new Date();
