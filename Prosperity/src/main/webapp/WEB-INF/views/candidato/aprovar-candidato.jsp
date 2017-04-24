@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -14,20 +13,14 @@
 
 <c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
 
-
-
 <!--
 <link rel="stylesheet" href="/resources/css/ckeditor_/ckeditor/samples/css/samples.css">
 -->
 <link rel="stylesheet"
 	href="/resources/css/ckeditor_/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
-
-
 </head>
 <body id="main">
-
 	<c:import url="/WEB-INF/views/shared/dashboard.jsp"></c:import>
-
 	<!--    Modais   -->
 	<!-- Modal Avaliação de Competencias -->
 	<div id="modalProposta" class="modal fade bs-example-modal-lg"
@@ -40,26 +33,23 @@
 					<h4 style="text-align: center;">Gestão de candidato</h4>
 				</div>
 				<div class="modal-body">
-
 					<div class="panel panel-default">
 						<div class="panel-tab clearfix">
 							<ul class="tab-bar">
-								<li class="active"><a href="#infoEntrevista"
+								<li id="entrevista-tab"><a href="#infoEntrevista"
 									data-toggle="tab"><i class="fa fa-user"></i> Informações de
 										entrevista</a></li>
-								<li><a href="#processoSelecao" data-toggle="tab"><i
+								<li id="processo-tab"><a href="#processoSelecao" data-toggle="tab"><i
 										class="fa fa-pencil"></i> Processo de seleção</a></li>
-								<li><a href="#avaliacaoComp" data-toggle="tab"><i
+								<li id="avaliacao-tab"><a href="#avaliacaoComp" data-toggle="tab"><i
 										class="fa fa-briefcase"></i> Avaliação de competências</a></li>
-								<li><a href="#proposta" data-toggle="tab"><i
+								<li id="proposta-tab"><a href="#proposta" data-toggle="tab"><i
 										class="fa fa-money"></i> Proposta</a></li>
 							</ul>
 						</div>
-
 						<div class="panel-body">
 							<div class="tab-content">
-
-								<div class="tab-pane fade in active" id="infoEntrevista">
+								<div class="tab-pane fade in" id="infoEntrevista">
 									<div class="form-group">
 										<label class="control-label">Parecer :</label>
 										<div class="form-group">
@@ -126,7 +116,6 @@
 										</table>
 									</section>
 								</div>
-
 								<div class="tab-pane fade" id="proposta">
 									<div class="form-group col-md-12" id="divCkEditor">
 										<div class="form-group">
@@ -134,16 +123,13 @@
 											<div class="adjoined-bottom">
 												<div class="grid-container">
 													<div class="grid-width-100">
-														<textarea id="editor" name="editor">
-															
-														</textarea>
+														<textarea id="editor" name="editor"></textarea>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-
 							</div>
 						</div>
 						<div class="panel-footer ">
@@ -153,12 +139,10 @@
 							</button>
 						</div>
 					</div>
-
 				</div>
 			</div>
 		</div>
 	</div>
-
 	<!-- Modal confirmacao-->
 	<div class="modal fade" id="confirm-modal" data-target="#confirm-modal"
 		tabindex="-1" role="dialog" aria-labelledby="modalLabel">
@@ -205,7 +189,6 @@
 		</div>
 	</div>
 
-
 	<!-- /.modal delete-->
 	<div id="main-container">
 		<div id="breadcrumb">
@@ -225,7 +208,6 @@
 							<div class="panel-body">
 								<input type="hidden" name="user" id="user"
 									value="${autenticado.perfil.nome}" />
-
 								<table
 									class="table table-bordered table-condensed table-hover table-striped"
 									id="tabelaCandidato"
@@ -244,10 +226,7 @@
 									<tbody class="text-center">
 										<form id="form">
 											<c:forEach var="candidato" items="${candidatos}">
-
-
 												<tr>
-													<input type="hidden" id="${candidato.id }" />
 													<td>${candidato.nome}</td>
 													<td>${candidato.ultimaVaga.nomeVaga }</td>
 													<td>${candidato.valorPretensao}</td>
@@ -257,13 +236,11 @@
 															value="${candidato.dataFechamento}" pattern="dd/MM/yyyy" /></td>
 													<td><span class="label"
 														style="color: #fff; background-color: ${candidato.ultimoStatus.status.css}">${candidato.ultimoStatus.status.nome}</span></td>
-
 													<td><input type="hidden" name="idStatus" id="idStatus"
 														value="${candidato.ultimoStatus.status.id}" />
+														<input type="hidden" id="${candidato.id }" />
 														<div class="btn-group">
-
 															<div class="btn-group">
-
 																<button class="btn btn-sm btn-info dropdown-toggle"
 																	data-toggle="dropdown" aria-haspopup="true"
 																	aria-expanded="false">
@@ -293,26 +270,21 @@
 																		</c:url><a href="#delete-modal" data-toggle="modal"><i
 																			class="fa fa-trash-o fa-lg">&nbsp;</i>Cancelar</a></li>
 																	<!-- /fim botao -->
-
 																</ul>
 															</div>
-														</div> <!-- /btn-group --></td>
+														</div> <!-- /btn-group -->
+													</td>
 												</tr>
-
 											</c:forEach>
 										</form>
 									</tbody>
 								</table>
-
-
 							</div>
 							<!-- /.row -->
 						</div>
 						<!-- /.panel-body -->
-
 					</div>
 					<!-- fim da div panel -->
-
 				</div>
 				<!-- /col-md-12 -->
 			</div>
@@ -348,11 +320,31 @@
 								 var perfil = $('#user').val();
 				                 if(perfil == "RH" || perfil == "Administrador" || perfil == "CEO" || perfil == "Diretor de Operação"){
 									CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
+				                	$("#proposta-tab").show();
 				                	$("#proposta").show();
 				                 }
 				                  
 							}else{
+			                	$("#proposta-tab").hide();
 			                	$("#proposta").hide();
+							}
+							if(data.ultimoStatus.status.id == "6"){
+								$("#avaliacao-tab").show();
+								$("#avaliacaoComp").show();
+								$("#processo-tab").show();
+								$("#processoSeletivo").show();
+							}else{
+								$("#avaliacao-tab").hide();
+								$("#avaliacaoComp").hide();
+								$("#processo-tab").hide();
+								$("#processoSeletivo").hide();
+							}
+							if(data.ultimoStatus.status.id == "5"){
+								$("#entrevista-tab").show();
+								$("#infoEntrevista").show();
+							}else{
+								$("#entrevista-tab").hide();
+								$("#infoEntrevista").hide();
 							}
 						}
 					})
@@ -361,9 +353,7 @@
 			})
             CKEDITOR.replace('editor');
                   $('#alterarStatus').click(function() {
-                        
                         var data = CKEDITOR.instances.editor.getData();                    
-                        
 	                   	var avaliacoes = [];
 
 	                   	$(".avaliacaoCompetencia").each(function(){
@@ -404,11 +394,9 @@
                                    'ac' : JSON.stringify(avaliacoes)
                               },
                               success : function(data) {
-                            	  alert('deu bom ?'); 
                             	  location.reload();
                               },
                               error : function(e) {
-                                   alert('deu ruim');
                                    location.reload();
                               }
                         });
@@ -430,7 +418,6 @@
         			alert('fail');
         		});
             }
-            
         /*gerador de campo*/    
             var cont = 0;
             $("#gerarCampo").click(function(){
@@ -446,12 +433,9 @@
             	"<input type='text' id='descricao"+ cont +"'/>"+
             	"<input type='button' id='btnRemover' onclick='remover("+ cont +")'value='Remover campo' class='btn btn-sm btn-danger'>"+
             	"</div>" ;
-            	
             	cont++;
         /*adiciona na div*/
             	$("#processoSeletivo").append(campos);
-
-
             });
        /*remove os campos*/
             function remover(id){
@@ -466,6 +450,7 @@
 			"bFilter": false,
 			"bInfo": false,
 			"bLengthChange": false,
+			"bSort": false,
 
 			"oLanguage": {
 				"sEmptyTable": "Nenhum registro encontrado",
@@ -490,7 +475,6 @@
 					"sSortDescending": ": Ordenar colunas de forma descendente"
 				}
 			}
-		
 		});
 	});
 	</script>
