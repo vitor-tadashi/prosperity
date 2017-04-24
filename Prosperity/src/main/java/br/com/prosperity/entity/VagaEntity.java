@@ -119,8 +119,8 @@ public class VagaEntity {
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuarioEntity;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name = "idVaga")
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="vaga")
+	//@JoinColumn(name = "idVaga")
 	private List<StatusVagaEntity> statusVagaEntity;
 
 	// @ManyToOne(cascade = CascadeType.ALL)
@@ -138,8 +138,8 @@ public class VagaEntity {
 	@Column(name = "telResponsavel")
 	private String telResponsavel;
 
-	@OneToMany(fetch=FetchType.LAZY)
-	@JoinColumn(name = "idVaga")
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="vaga")
+	//@JoinColumn(name = "idVaga")
 	private List<VagaCandidatoEntity> vagaCandidatoEntity;
 	
 	public Integer getId() {

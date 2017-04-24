@@ -43,6 +43,7 @@ import br.com.prosperity.dao.StatusDAO;
 import br.com.prosperity.dao.StatusFuturoDAO;
 import br.com.prosperity.dao.TipoCursoDAO;
 import br.com.prosperity.dao.UsuarioDAO;
+import br.com.prosperity.dao.VagaCandidatoDAO;
 import br.com.prosperity.dao.VagaDAO;
 import br.com.prosperity.entity.AvaliacaoEntity;
 import br.com.prosperity.entity.AvaliadorCandidatoEntity;
@@ -90,7 +91,7 @@ public class CandidatoBusiness {
 	private UsuarioBean usuarioBean;
 
 	@Autowired
-	CanalInformacaoDAO canalInformacaoDAO;
+	private CanalInformacaoDAO canalInformacaoDAO;
 
 	@Autowired
 	private UsuarioDAO usuarioDAO;
@@ -115,6 +116,9 @@ public class CandidatoBusiness {
 
 	@Autowired
 	private VagaDAO vagaDAO;
+	
+	@Autowired
+	private VagaCandidatoDAO vagaCandidatoDAO;
 
 	@Autowired
 	private HttpSession session;
@@ -272,7 +276,7 @@ public class CandidatoBusiness {
 					v.setVaga(vagaDAO.findById(candidatoBean.getVagaCandidato().getVaga().getId()));
 					v.setCanalInformacao(
 							canalInformacaoDAO.findById(candidatoBean.getVagaCandidato().getCanalInformacao().getId()));
-
+					vagas.add(v);
 				}
 				if (vagas.isEmpty() || vagas.size() == 0 || vagas == null) {
 					VagaCandidatoEntity novoVagaCandidato = new VagaCandidatoEntity();
@@ -281,7 +285,7 @@ public class CandidatoBusiness {
 					if (candidatoBean.getVagaCandidato().getCanalInformacao().getId() != null)
 						novoVagaCandidato.setCanalInformacao(canalInformacaoDAO
 								.findById(candidatoBean.getVagaCandidato().getCanalInformacao().getId()));
-
+						novoVagaCandidato.setCandidato(candidatoEntity);
 					vagas.add(novoVagaCandidato);
 				}
 				candidatoEntity.setVagas(vagas);
@@ -296,6 +300,10 @@ public class CandidatoBusiness {
 				candidatoEntity.setRg(replaceRG);
 
 				candidatoDAO.insert(candidatoEntity);
+				/*for(VagaCandidatoEntity vc: candidatoEntity.getVagas()){
+					vagaCandidatoDAO.insert(vc);	
+				}*/
+
 
 				List<VagaCandidatoEntity> vagao = new ArrayList<VagaCandidatoEntity>();
 				for (VagaCandidatoEntity vaguinhas : vagas) {
@@ -392,6 +400,12 @@ public class CandidatoBusiness {
 
 		desativarStatus(candidatoEntity);
 
+		if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANCELADO.getValue()
+			|| situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOREPROVADO.getValue()) {
+			desativarAvaliadores(situacaoCandidato.getIdCandidato());
+
+		}
+
 		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
 		statusCandidatoEntity.setStatus(statusDAO.findById(situacaoCandidato.getStatus().getValue()));
 		statusCandidatoEntity.setCandidato(candidatoEntity);
@@ -403,6 +417,17 @@ public class CandidatoBusiness {
 		statusCandidatoEntity.setFlSituacao(true);
 
 		return statusCandidatoEntity;
+	}
+
+	private void desativarAvaliadores(Integer idCandidato) {
+		List<AvaliadorCandidatoEntity> avaliadoresCandidato = avaliadorCandidatoDAO
+				.findByNamedQuery("desativarAvaliadores", idCandidato);
+		if (avaliadoresCandidato != null) {
+			for (AvaliadorCandidatoEntity avaliador : avaliadoresCandidato) {
+				avaliador.setStatus(StatusCandidatoEnum.CANCELADO.getValue());
+				avaliadorCandidatoDAO.update(avaliador);
+			}
+		}
 	}
 
 	@Transactional
