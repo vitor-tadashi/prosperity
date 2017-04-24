@@ -2,23 +2,20 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<title>Solicitar Vaga</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
+<%@ taglib uri="http://kwonnam.pe.kr/jsp/template-inheritance" prefix="layout"%>
 
-<c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
-<body>
-	<c:import url="/WEB-INF/views/shared/dashboard.jsp"></c:import>
+<layout:extends name="base">
+	<layout:put block="title" type="REPLACE">
+		<title>Solicitar Vaga</title>
+		<link rel="stylesheet" href="/resources/css/custom/solicitar-vaga.css" />
+	</layout:put>
+
+	<layout:put block="contents">
 	<div id="main-container">
 		<div id="breadcrumb">
 			<ul class="breadcrumb">
-				<li><i class="fa fa-home"></i><a href="dashboard.html">
-						Início</a></li>
+				<li><i class="fa fa-home"></i><a href="/pagina-inicial">
+						Página inicial</a></li>
 				<li class="active">Vaga</li>
 				<li class="active">Solicitar</li>
 			</ul>
@@ -33,13 +30,15 @@
 						<form class="form-border" id="formCadastro2" action="/vaga/salvar"
 							method="POST" >
 							<input id="vagaIdVar" name="id" type="hidden" value="${vaga.id}">
-							<input id="dataAbertura" name="dataAbertura" type="hidden" value="${vaga.dataAbertura}">
-							<input id="status" name="ultimoStatus" type="hidden" value="${ultimoStatus.status.id}">
-							<input id="statusAtual" name="statusAtual" type="hidden" value="${ultimoStatus.status.nome}">
+							<fmt:formatDate value="${vaga.dataAbertura}"
+														pattern="dd/MM/yyyy" var="dataAbertura" />
+							<input id="dataAbertura" name="dataAbertura" type="hidden" value="${dataAbertura}">
+							<c:if test="${ultimoStatus.status.id == 27 }">
+								<input id="status" name="status[0].status.id" type="hidden" value="1">
+								<input name="status[0].status.nome" type="hidden" value="Ativo">	
+							</c:if>
 							<input id="contErro" class ="hidden" value="${erro}">
 							<input id="txtSolicitante" type="hidden" name="nomeSolicitante" value="${autenticado.funcionario.nome}">
-							<input id="tipoVagaVar" type="hidden" value="${vaga.idTipoVaga}">
-							<input id="aumentoQuadroVar" type="hidden" value="${vaga.aumentaQuadro}">
 							
 							<div id="textDiv">
 								<c:forEach var="erro" items="${listaErros}">
@@ -69,13 +68,13 @@
 										class="text-success"><i class="fa fa-pencil"></i> Dados do
 											projeto</a></li>
 									<li class="tab-verity"><a id="tabPerfil" href="#third" data-toggle="tab"
-										class="text-success"><i class="fa fa-briefcase"></i>
+										class="text-success"><i class="glyphicon glyphicon-education"></i>
 											Perfil</a></li>
 									<li id="tabAvaliadores2" class="tab-verity"><a id="tabAvaliadores" href="#fourth" data-toggle="tab"
 										class="text-success hide"><i class="fa fa-group"></i>
 											Avaliadores</a></li>
 									<li id="tabMarketing" class="tab-verity"><a id="tabMarketing" href="#fifth" data-toggle="tab"
-										class="text-success"><i class="fa fa-group"></i>
+										class="text-success"><i class="fa fa-briefcase"></i>
 											Marketing</a></li>
 								</ul>
 							</div>
@@ -93,47 +92,35 @@
 													placeholder="Nome da Vaga" data-required="true">
 											</div>
 											<!-- /form-group -->
-											<div class="form-group col-md-2" style="padding-top:0px">
+											<div class="form-group col-md-2">
 												<label class="control-label" for="dataInicio">Data
 													para início</label>
 												<div class="input-sm-group">
-												 <%-- <fmt:formatDate value="${vaga.dataInicio}"
-													pattern="dd/MM/yyyy" var="dataInicio"/> --%>
+												<fmt:formatDate value="${vaga.dataInicio}"
+													pattern="dd/MM/yyyy" var="dataInicio"/>
 													<input id="dataInicio" name="dataInicio" type="text"
 														class="form-control date parsley-validated" data-required="true"
-														value="${vaga.dataInicio}" style="height:30px" onblur="validarData(this.value)"> 
+														value="${dataInicio}" style="height:30px" onblur="validarData(this.value)">  
 												</div>
 											</div>
-											<div class="form-group col-md-4" style="padding-top:0px">
-												<label class="control-label" style="margin-left:15px" for="txtHorarioInicial">Horário</label>
-												<div>
-													<div class="form-group col-md-2" style="padding-top:0px">
-														<div class="input-group bootstrap-timepicker">
-															<input id="txtHorarioInicial" name="horarioEntrada"
-																type="time" value="${vaga.horarioEntrada}" style="width:70px;height:30px;padding-top:0px">
-														</div>
-													</div>
-													<!-- /form-group -->
-													<div class="form-group col-md-1" style="padding-top:0px">
-														<label style="margin-top: 5px; margin-left: 25px" >às</label>
-													</div>
-													<!-- /form-group -->
-													<div class="form-group col-md-2" style="padding-top:0px; margin-left: 20px">
-														<div class="input-group bootstrap-timepicker">
-															<input id="txtHorarioFinal" name="horarioSaida"
-																type="time" value="${vaga.horarioSaida}" style="width:70px;height:30px;padding-top:0px">
-														</div>
-													</div>
-													<!-- /form-group -->
+											<!-- /form-group -->
+											<div class="form-group col-md-4">
+												<div class="row">
+													<label class="control-label label-time-input col-xs-12" for="txtHorarioInicial">Horário</label>
+													<input id="txtHorarioInicial" name="horarioEntrada" 
+														type="time" class="form-control verity-time-input input-sm col-xs-5" value="${vaga.horarioEntrada}">
+													<span class="col-xs-1">às</span>
+													<input id="txtHorarioFinal" name="horarioSaida"
+														type="time" class="form-control verity-time-input input-sm col-xs-5" value="${vaga.horarioSaida}">
 												</div>
 											</div>
 										</div>
 										
 										<div class="row">
-											<div class="form-group col-md-6" style="padding-top:0px">
+											<div class="form-group col-md-6">
 												<label for="cmbCargo">Cargo</label> <select
 													class="form-control" id="cmbCargo"
-													name="cargoBean.id" value="${cargoBean.id}">
+													name="cmbCargo">
 
 													<option value="0">Selecione o cargo</option>
 
@@ -146,7 +133,7 @@
 												</select>
 											</div>
 											<!-- /form-group -->
-											<div class="form-group col-md-6" style="padding-top:0px">
+											<div class="form-group col-md-6">
 												<label>Local de trabalho</label>
 												<div>
 													<input id="localTrabalhoVar" type="hidden"
@@ -184,7 +171,9 @@
 											<div class="form-group col-md-6" style="padding-top:0px">
 												<label>Tipo de vaga</label>
 												<div>
-													 <label	class="label-radio inline"> <input
+													<input id="tipoVagaVar" type="hidden"
+														value="${vaga.idTipoVaga}"> <label
+														class="label-radio inline"> <input
 														id="idTipoVagaR" name="idTipoVaga" value="R" type="radio"
 														checked> <span class="custom-radio"></span> Real
 													</label> <label class="label-radio inline"> <input
@@ -201,35 +190,45 @@
 										</div>
 										<!-- /form-group -->
 										<div class="row">
-											<div class="form-group col-md-6">
-												<label class="col-lg-4 control-label">Proposta salarial</label>
-												<div class="col-lg-4">
-													<input type="text" class="form-control" value=""
-													data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[150,650]" id="sl2" >
-												</div>
-											</div><!-- /form-group -->
+											<div class="form-group col-md-6" style="padding-top:0px">
+											<div>
+												<label class="control-label" for="txtPropostaSalarial">Range salarial</label>
+											</div>
+												<label class="control-label col-md-2" for="txtPropostaSalarial" style="padding-top:5px">Mínimo</label>
+											 	<input
+													id="valorMinimo" name="valorMinimo" type="number"
+													class="input-sm col-md-4" disabled placeholder="R$"
+													value="${vaga.valorPretensao}" style="height:30px">
+												<label class="control-label col-md-2" style="padding-left:10px;padding-top:5px" for="txtPropostaSalarial">Máximo</label>
+													<input
+													id="valorMaximo" name="valorMaximo" type="number"
+													class="input-sm col-md-4" disabled placeholder="R$" 
+													value="${vaga.valorPretensao}" style="height:30px">
+											</div>
+											<!-- /form-group -->
 											<div class="form-group col-md-6" style="padding-top:0px">
 												<label class="control-label">Aumento de quadro</label>
 												<div>
-													 <div class="form-group col-md-4" style="padding-top:0px;padding-left:0px"> 
+													 <div class="form-group col-md-5" style="padding-top:0px;padding-left:0px"> 
 														<input id="novo" name="aumentaQuadro" value="N" type="radio" checked>
-														<span class="custom-radio"> </span> 
+													 	<span class="custom-radio"> </span>
 														<label class="label-radio inline">Novo</label>
 														<input id="substituicao" name="aumentaQuadro" value="S" type="radio"> 
-														<span class="custom-radio"> </span>
-														<label class="label-radio inline">Substituição</label>
+														 <span class="custom-radio"> </span>
+														 <label class="label-radio inline">Substituição</label>
+													 	<input id="aumentoQuadroVar" type="hidden" value="${vaga.aumentaQuadro}">
 													</div>
-													<div id="nome" class="col-md-6 hide" style="padding-top:0px;padding-left:0px">
+													<div id="nome" class="col-md-6 hide" style="padding-top:0px">
 														<input id="nomeSubstituido" name="nomeSubstituido" type="text"
 														class="form-control input-sm"
 														placeholder="Nome do Substituido" data-required="true"
 														value="${vaga.nomeSubstituido}">
 													</div>
 												</div>
-											</div><!-- /form-group -->
+											</div>
+											<!-- /form-group -->
 										</div>
 										
-										<!-- /form-group -->
 									</div>
 									
 									<div class= "row tab-pane fade" id="second">
@@ -276,23 +275,24 @@
 											
 											<div id="dadosAlocacao" class="col-md-12 hide" style="padding-top:0px">
 												<div class="col-md-6" style="padding-left:0px">
-											    <label for="exampleInputEmail1">Nome do responsável</label> 
-											    <input type="name" class="form-control input-sm" id="exampleInputEmail1"
+											    <label for="nmResponsavel">Nome do responsável</label> 
+											    <input type="name" class="form-control input-sm" id="nmResponsavel"
 												placeholder="Nome do Cliente Responsável" data-required="true" name="nmResponsavel" value="${vaga.nmResponsavel}"> 
 												</div>
 												<div class="col-md-6">
-												<label for="exampleInputEmail1">Área do responsável</label> 
-												<input type="text" class="form-control input-sm" id="exampleInputEmail1" name="nmAreaResponsavel" value="${vaga.nmAreaResponsavel}"
+												<label for="nmAreaResponsavel">Área do responsável</label> 
+												<input type="text" class="form-control input-sm" id="nmAreaResponsavel" name="nmAreaResponsavel" value="${vaga.nmAreaResponsavel}"
 												placeholder="Área do Cliente Responsável" data-required="true"> 
 												</div>
-												<div class="col-md-6" style="padding-left:0px;padding-top:10px">
-												<label for="exampleInputEmail1">E-mail do responsável</label> 
-												<input type="email" class="form-control input-sm" id="exampleInputEmail1" name="emailResponsavel" value="${vaga.emailResponsavel}"
+												<div class="col-md-6" style="padding-left:0px;padding-top:15px">
+												<label for="emailResponsavel">E-mail do responsável</label> 
+												<input type="email" class="form-control input-sm" id="emailResponsavel" name="emailResponsavel" value="${vaga.emailResponsavel}"
 												placeholder="E-mail do Cliente Responsável" data-required="true">
 												</div>
-												<div class="col-md-6" style="padding-top:10px">
-												<label for="exampleInputEmail1">Telefone 1</label> 
-												<input id="phone-mask" type="text" class=" form-control input-sm phone" name="telResponsavel" value="${vaga.telResponsavel}"> 
+												<div class="col-md-6" style="padding-top:15px">
+												<label for="telResponsavel">Telefone</label> 
+												<input id="telResponsavel" type="tel" class="form-control input-sm telefone" name="telResponsavel" 
+												value="${vaga.telResponsavel}" onblur="validarTel(this.value)"> 
 												</div>
 											</div>
 											<!-- /Section -->
@@ -378,23 +378,19 @@
 									</div>
 									<div class="tab-pane fade" id="fifth">
 										<div class="panel panel-default">
-											<div class="panel-heading">
-												<label>Marketing social</label>
+											<div class="adjoined-bottom">
+												<div class="grid-container">
+													<textarea id="editor" name="editor">
+														
+													</textarea>
+												</div>
 											</div>
-											<section class="panel panel-default">
-											<div class="panel-heading"><label>Marketing social</label></div>
-											<div class="panel-body relative">
-												<textarea class="form-control"
-													name="marketingSocial" rows="10"
-													value=""></textarea>
-											</div>
-											</section>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="text-right pull-right">
-								<button type="submit" class="btn btn-sm btn-success" id="btnSalvar">Salvar</button>
+								<button type="submit" class="btn btn-sm btn-success" id="btnSalvar"><i class="fa fa-check"></i> Salvar</button>
 							</div>
 						</form>
 
@@ -405,13 +401,14 @@
 		</div>
 		<!-- /wrapper -->
 	</div>
-	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
-	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
+	</layout:put>
 
+	<layout:put block="scripts" type="REPLACE">
 	<!-- Custom -->
 	<script src="/resources/js/custom/solicitacaoVaga.js"></script>
 	<script src="/resources/js/parsley.min.js"></script>
-	<script src="/resources/js/custom/custom.js"></script>
+	
+	<script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 	
 	<script type="text/javascript">
 	
@@ -421,7 +418,6 @@
 	            $('#msg-sucesso').fadeOut(1500);
 	        }, 5000);
 	    });
-
-</script>	  
-</body>
-</html>
+	</script>	  
+	</layout:put>
+</layout:extends>

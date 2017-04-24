@@ -1,17 +1,14 @@
 package br.com.prosperity.bean;
 
-import java.util.List;
-
 import org.springframework.stereotype.Component;
 
 @Component
 public class ProvaCandidatoBean {
 
 	private Integer id;
-	private String parecerTecnico;
 	private CandidatoBean candidato;
-	private List<ProvaBean> provas;
-	private List<DescricaoProvaBean> descricao;
+	private ProvaBean provas;
+	private String descricao;
 
 	public Integer getId() {
 		return id;
@@ -19,14 +16,6 @@ public class ProvaCandidatoBean {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getParecerTecnico() {
-		return parecerTecnico;
-	}
-
-	public void setParecerTecnico(String parecerTecnico) {
-		this.parecerTecnico = parecerTecnico;
 	}
 
 	public CandidatoBean getCandidato() {
@@ -37,19 +26,19 @@ public class ProvaCandidatoBean {
 		this.candidato = candidato;
 	}
 
-	public List<ProvaBean> getProvas() {
+	public ProvaBean getProvas() {
 		return provas;
 	}
 
-	public void setProvas(List<ProvaBean> provas) {
+	public void setProvas(ProvaBean provas) {
 		this.provas = provas;
 	}
 
-	public List<DescricaoProvaBean> getDescricao() {
+	public String getDescricao() {
 		return descricao;
 	}
 
-	public void setDescricao(List<DescricaoProvaBean> descricao) {
+	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
 

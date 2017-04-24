@@ -27,7 +27,6 @@ import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.StatusCandidatoBean;
 import br.com.prosperity.bean.UsuarioBean;
-import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.converter.AvaliacaoConverter;
 import br.com.prosperity.converter.CandidatoConverter;
 import br.com.prosperity.converter.CompetenciaConverter;
@@ -43,6 +42,7 @@ import br.com.prosperity.dao.StatusDAO;
 import br.com.prosperity.dao.StatusFuturoDAO;
 import br.com.prosperity.dao.TipoCursoDAO;
 import br.com.prosperity.dao.UsuarioDAO;
+import br.com.prosperity.dao.VagaCandidatoDAO;
 import br.com.prosperity.dao.VagaDAO;
 import br.com.prosperity.entity.AvaliacaoEntity;
 import br.com.prosperity.entity.AvaliadorCandidatoEntity;
@@ -56,7 +56,6 @@ import br.com.prosperity.entity.VagaEntity;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.exception.BusinessException;
 import br.com.prosperity.util.FormatUtil;
-import br.com.prosperity.util.GeradorEmail;
 
 @SuppressWarnings("unused")
 @Component
@@ -90,7 +89,7 @@ public class CandidatoBusiness {
 	private UsuarioBean usuarioBean;
 
 	@Autowired
-	CanalInformacaoDAO canalInformacaoDAO;
+	private CanalInformacaoDAO canalInformacaoDAO;
 
 	@Autowired
 	private UsuarioDAO usuarioDAO;
@@ -115,6 +114,9 @@ public class CandidatoBusiness {
 
 	@Autowired
 	private VagaDAO vagaDAO;
+	
+	@Autowired
+	private VagaCandidatoDAO vagaCandidatoDAO;
 
 	@Autowired
 	private HttpSession session;
@@ -242,6 +244,16 @@ public class CandidatoBusiness {
 		return beans;
 
 	}
+	
+//	@Transactional
+//	public void inserir(CandidatoBean candidatoBean) throws BusinessException {
+//		CandidatoEntity candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoBean);
+//		candidatoDAO.insert(candidatoEntity);
+//		//inserirAvaliadores(candidatoEntity, candidatoBean.getVagaBean().getVagaCandidatoBean().get(0).getId());
+//		SituacaoCandidatoBean situacaoCandidato = new SituacaoCandidatoBean();
+//		situacaoCandidato.setIdCandidato(candidatoEntity.getId());
+//		situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
+//	}
 
 	@Transactional
 	public void inserir(CandidatoBean candidatoBean) throws BusinessException {
@@ -262,7 +274,7 @@ public class CandidatoBusiness {
 					v.setVaga(vagaDAO.findById(candidatoBean.getVagaCandidato().getVaga().getId()));
 					v.setCanalInformacao(
 							canalInformacaoDAO.findById(candidatoBean.getVagaCandidato().getCanalInformacao().getId()));
-
+					vagas.add(v);
 				}
 				if (vagas.isEmpty() || vagas.size() == 0 || vagas == null) {
 					VagaCandidatoEntity novoVagaCandidato = new VagaCandidatoEntity();
@@ -271,21 +283,25 @@ public class CandidatoBusiness {
 					if (candidatoBean.getVagaCandidato().getCanalInformacao().getId() != null)
 						novoVagaCandidato.setCanalInformacao(canalInformacaoDAO
 								.findById(candidatoBean.getVagaCandidato().getCanalInformacao().getId()));
-
+						novoVagaCandidato.setCandidato(candidatoEntity);
 					vagas.add(novoVagaCandidato);
 				}
 				candidatoEntity.setVagas(vagas);
 
-				String replace = candidatoEntity.getCpf().replace(".", "").replace("-", "");
+				String replaceCPF = candidatoEntity.getCpf().replace(".", "").replace("-", "");
 				String replaceRG = candidatoEntity.getRg().replace(".", "").replace("-", "");
 				String replaceTelefone = candidatoEntity.getContato().getTelefone().replace("(", "").replace(")", "")
 						.replace("-", "");
 
 				candidatoEntity.getContato().setTelefone(replaceTelefone);
-				candidatoEntity.setCpf(replace);
+				candidatoEntity.setCpf(replaceCPF);
 				candidatoEntity.setRg(replaceRG);
 
 				candidatoDAO.insert(candidatoEntity);
+				/*for(VagaCandidatoEntity vc: candidatoEntity.getVagas()){
+					vagaCandidatoDAO.insert(vc);	
+				}*/
+
 
 				List<VagaCandidatoEntity> vagao = new ArrayList<VagaCandidatoEntity>();
 				for (VagaCandidatoEntity vaguinhas : vagas) {
@@ -310,6 +326,15 @@ public class CandidatoBusiness {
 			CandidatoEntity candidatoEntity = candidatoDAO.findById(candidatoBean.getId());
 
 			candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoEntity, candidatoBean);
+
+			String replaceCPF = candidatoEntity.getCpf().replace(".", "").replace("-", "");
+			String replaceRG = candidatoEntity.getRg().replace(".", "").replace("-", "");
+			String replaceTelefone = candidatoEntity.getContato().getTelefone().replace("(", "").replace(")", "")
+					.replace("-", "");
+
+			candidatoEntity.getContato().setTelefone(replaceTelefone);
+			candidatoEntity.setCpf(replaceCPF);
+			candidatoEntity.setRg(replaceRG);
 
 			candidatoDAO.update(candidatoEntity);
 		}
@@ -373,6 +398,12 @@ public class CandidatoBusiness {
 
 		desativarStatus(candidatoEntity);
 
+		if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANCELADO.getValue()
+			|| situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOREPROVADO.getValue()) {
+			desativarAvaliadores(situacaoCandidato.getIdCandidato());
+
+		}
+
 		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
 		statusCandidatoEntity.setStatus(statusDAO.findById(situacaoCandidato.getStatus().getValue()));
 		statusCandidatoEntity.setCandidato(candidatoEntity);
@@ -387,10 +418,22 @@ public class CandidatoBusiness {
 	}
 
 	@Transactional
+	private void desativarAvaliadores(Integer idCandidato) {
+		List<AvaliadorCandidatoEntity> avaliadoresCandidato = avaliadorCandidatoDAO
+				.findByNamedQuery("desativarAvaliadores", idCandidato);
+		if (avaliadoresCandidato != null) {
+			for (AvaliadorCandidatoEntity avaliador : avaliadoresCandidato) {
+				avaliador.setStatus(StatusCandidatoEnum.CANCELADO.getValue());
+				avaliadorCandidatoDAO.update(avaliador);
+			}
+		}
+	}
+
+	@Transactional
 	public CandidatoBean obterPorCPF(String cpf) {
 		List<CandidatoEntity> candidatosEntity = null;
 
-		candidatosEntity = candidatoDAO.findByNamedQuery("obterPorCPF", cpf);
+		candidatosEntity = candidatoDAO.findByNamedQuery("obterPorCPF", cpf.replace(".", "").replace("-", ""));
 		if (candidatosEntity.isEmpty()) {
 			return null;
 		}
@@ -478,10 +521,5 @@ public class CandidatoBusiness {
 			}
 		}
 		return listaStatus;
-	}
-
-	@Transactional
-	public void atualizarCandidato(CandidatoBean bean) {
-		candidatoDAO.update(candidatoConverter.convertBeanToEntity(bean));
 	}
 }

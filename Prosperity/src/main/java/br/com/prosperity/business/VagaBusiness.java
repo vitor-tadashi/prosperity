@@ -18,7 +18,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.prosperity.bean.AvaliadorVagaBean;
 import br.com.prosperity.bean.FuncionalidadeBean;
+import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.SituacaoVagaBean;
+import br.com.prosperity.bean.StatusVagaBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.converter.AvaliadorVagaConverter;
@@ -32,7 +34,9 @@ import br.com.prosperity.dao.VagaCandidatoDAO;
 import br.com.prosperity.dao.VagaDAO;
 import br.com.prosperity.entity.AvaliadorVagaEntity;
 import br.com.prosperity.entity.StatusVagaEntity;
+import br.com.prosperity.entity.VagaCandidatoEntity;
 import br.com.prosperity.entity.VagaEntity;
+import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.enumarator.StatusVagaEnum;
 
 @Component
@@ -46,9 +50,6 @@ public class VagaBusiness {
 
 	@Autowired
 	private UsuarioConverter usuarioConverter;
-
-	@Autowired
-	private SenioridadeBusiness senioridadeBusinness;
 
 	@Autowired
 	private VagaCandidatoDAO vagaCandidatoDAO;
@@ -85,6 +86,12 @@ public class VagaBusiness {
 
 	@Autowired
 	private AvaliadorVagaConverter avaliadorVagaConverter;
+
+	@Autowired
+	private CandidatoBusiness candidatoBusiness;
+
+	@Autowired
+	private SituacaoCandidatoBean situacaoCandidato;
 
 	@Transactional(readOnly = true)
 	public List<VagaBean> listarDecrescente() {
@@ -189,7 +196,7 @@ public class VagaBusiness {
 	public String inserir(VagaBean vagaBean, List<UsuarioBean> usuarioBean) {
 
 		VagaEntity vagaEntity = vagaConverter.convertBeanToEntity(vagaBean);
-		vagaEntity.setStatusVagaEntity(statusVagaDAO.findByNamedQuery("statusVaga", vagaEntity.getId()));
+		//vagaEntity.setStatusVagaEntity(statusVagaDAO.findByNamedQuery("statusVaga", vagaEntity.getId()));
 
 		try {
 			if (vagaEntity.getId() == null) {
@@ -201,18 +208,24 @@ public class VagaBusiness {
 				alterarStatus(situacaoVaga);
 				inserirAvaliadores(vagaEntity, usuarioBean);
 			} else {
+				inserirAvaliadores(vagaEntity, usuarioBean);
 				// VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
-				String status = vagaBean.getStatusAtual();
-				if (status.equals("Pendente")){
+				//TODO jsp verifico se status é 27 se sim manda o status 1
+				//TODO aqui cria um else if se for status 1 faz o set como os outros mas com ativo
+				StatusVagaBean status = vagaBean.getStatus().get(0);
+				if (status.getStatus().getNome().equals("Pendente")){
 					situacaoVaga.setIdVaga(vagaEntity.getId());
 					situacaoVaga.setStatus(StatusVagaEnum.PENDENTE);
 					alterarStatus(situacaoVaga);
-				} else if(status.equals("Aguardando avaliadores")){
+				} else if(status.getStatus().getNome().equals("Aguardando avaliadores")){
 					situacaoVaga.setIdVaga(vagaEntity.getId());
 					situacaoVaga.setStatus(StatusVagaEnum.AGUARDANDOAVALIADORES);
 					alterarStatus(situacaoVaga);
-				}			
-				inserirAvaliadores(vagaEntity, usuarioBean);
+				}else if(status.getStatus().getNome().equals("Ativo")){
+					situacaoVaga.setIdVaga(vagaEntity.getId());
+					situacaoVaga.setStatus(StatusVagaEnum.ATIVO);
+					alterarStatus(situacaoVaga);
+				}
 				vagaDAO.update(vagaEntity);
 			}
 			return "Ok";
@@ -240,18 +253,29 @@ public class VagaBusiness {
 	@Transactional
 	public void alterarStatus(SituacaoVagaBean situacaoVaga) {
 		StatusVagaEntity statusVagaEntity = new StatusVagaEntity();
-		VagaEntity vagaEntity = new VagaEntity();
-		vagaEntity.setId(situacaoVaga.getIdVaga());
-
+		VagaEntity vagaEntity = vagaDAO.findById(situacaoVaga.getIdVaga());
+		//vagaEntity.setId(situacaoVaga.getIdVaga());
+		//obter avaliadores esta dando nullPointer
 		if (situacaoVaga.getStatus() == StatusVagaEnum.ATIVO) {
-			avaliadorVagaBean = obterAvaliadores(vagaEntity.getId());
-			if (avaliadorVagaBean == null || avaliadorVagaBean.size() == 0) {
+			List<AvaliadorVagaEntity>avaliadorVagaEntity = avaliadorVagaDao.findByNamedQuery("obterAvaliadoresDaVaga", vagaEntity.getId());
+			if (avaliadorVagaEntity == null || avaliadorVagaEntity.size() == 0) {
 				situacaoVaga.setStatus(StatusVagaEnum.AGUARDANDOAVALIADORES);
 			}
 		}
 
 		if (situacaoVaga.getStatus().getValue() != StatusVagaEnum.PENDENTE.getValue()) {
 			desativarStatus(vagaEntity);
+		}
+
+		if (situacaoVaga.getStatus().getValue() != StatusVagaEnum.CANCELADO.getValue()
+				|| situacaoVaga.getStatus().getValue() != StatusVagaEnum.RECUSADO.getValue()) {
+			List<VagaCandidatoEntity> vagaCandidatos = new ArrayList<VagaCandidatoEntity>();
+			for (VagaCandidatoEntity vcandidato : vagaCandidatos) {
+				situacaoCandidato.setIdCandidato(vcandidato.getCandidato().getId());
+				situacaoCandidato.setStatus(StatusCandidatoEnum.CANCELADO);
+				candidatoBusiness.alterarStatus(situacaoCandidato);
+			}
+
 		}
 
 		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
@@ -275,6 +299,7 @@ public class VagaBusiness {
 
 	@Transactional
 	private void desativarStatus(VagaEntity vagaEntity) {
+		//TODO obter status apenas ativos
 		List<StatusVagaEntity> statusVagas = statusVagaDAO.findByNamedQuery("obterStatusVaga", vagaEntity);
 		if (statusVagas == null || statusVagas.size() < 1) {
 		} else {
@@ -292,7 +317,7 @@ public class VagaBusiness {
 		try {
 			data = novaData.format(dataAntiga);
 			return novaData.parse(data);
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			e.printStackTrace(); // imprimi a stack trace
 		}
 		return dataAntiga;
@@ -317,7 +342,7 @@ public class VagaBusiness {
 		return vagaBean;
 	}
 
-	@Transactional(readOnly = true)
+	@Transactional(readOnly = true)//esta dando nullPointer
 	public List<AvaliadorVagaBean> obterAvaliadores(Integer id) {
 		List<AvaliadorVagaEntity> avaliadorVagaEntity = avaliadorVagaDao.findByNamedQuery("obterAvaliadoresDaVaga", id);
 		avaliadorVagaBean = avaliadorVagaConverter.convertEntityToBean(avaliadorVagaEntity);

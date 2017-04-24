@@ -43,6 +43,7 @@
 			$('#usuarioLabel').text('Incluir usuário');
 			$('button#btnRedefinirSenha').hide();
 			$('button#btnMudarStatus').hide();
+			$('input#id').val('');
 			$('#usuario-modal').modal('show');
 		}
 	}

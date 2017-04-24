@@ -32,7 +32,6 @@ import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CandidatoCompetenciaBean;
 import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.CompetenciaBean;
-import br.com.prosperity.bean.DescricaoProvaBean;
 import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.ProvaBean;
 import br.com.prosperity.bean.ProvaCandidatoBean;
@@ -53,7 +52,6 @@ import br.com.prosperity.business.TipoCursoBusiness;
 import br.com.prosperity.business.VagaBusiness;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.exception.BusinessException;
-import br.com.prosperity.util.GeradorEmail;
 
 @SuppressWarnings("unused")
 @Controller
@@ -101,21 +99,18 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private AvaliacaoBean avaliacaoBean;
-
+	
 	@Autowired
 	private ProvaCandidatoBean provaCandidatoBean;
+
+	@Autowired
+	private List<ProvaCandidatoBean> provasCandidatoBean;
 
 	@Autowired
 	private ProvaBean provaBean;
 
 	@Autowired
-	private DescricaoProvaBean descricaoProvaBean;
-
-	@Autowired
 	private List<ProvaBean> provasBean;
-
-	@Autowired
-	private List<DescricaoProvaBean> descricaoProvasBean;
 
 	/**
 	 * @author andre.posman
@@ -344,13 +339,17 @@ public class CandidatoController<PaginarCandidato> {
 			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato,
 			@ModelAttribute("ac") String ac, @ModelAttribute("processoSelectivo") String processoSeletivo) {
 		bean = candidatoBusiness.obter(situacaoCandidato.getIdCandidato());
-		if (ac != null) {
+		System.out.println("podia beijado");
+		if (!ac.equals("[]")) {
 			bean.setCompetencias(convertGson(ac));
-			candidatoBusiness.atualizarCandidato(bean);
+			try{
+			candidatoBusiness.inserir(bean);
+			}catch(Exception e){
+				System.out.println(e);
+			}
 		}
-		if (processoSeletivo != null) {
-			situacaoCandidato.setProcessoSeletivo(convertGsonProva(processoSeletivo));
-			provaCandidatoBusiness.inserir(situacaoCandidato.getProcessoSeletivo());
+		if (!processoSeletivo.equals("[]")) {
+			provaCandidatoBusiness.inserir(convertGsonProva(processoSeletivo, bean));
 		}
 		candidatoBusiness.alterarStatus(situacaoCandidato);
 		return "candidato/aprovar";
@@ -364,6 +363,7 @@ public class CandidatoController<PaginarCandidato> {
 
 	public List<CandidatoCompetenciaBean> convertGson(String ac) {
 		Gson gson = new Gson();
+		@SuppressWarnings("unchecked")
 		List<String> l = gson.fromJson(ac, List.class);
 		candidatoCompetenciasBean = new ArrayList<CandidatoCompetenciaBean>();
 		int aux = 0;
@@ -391,11 +391,12 @@ public class CandidatoController<PaginarCandidato> {
 		return candidatoCompetenciasBean;
 	}
 
-	public ProvaCandidatoBean convertGsonProva(String processoSeletivo) {
+	public List<ProvaCandidatoBean> convertGsonProva(String processoSeletivo, CandidatoBean bean) {
 		Gson gson = new Gson();
+		@SuppressWarnings("unchecked")
 		List<String> l = gson.fromJson(processoSeletivo, List.class);
-		provaCandidatoBean = new ProvaCandidatoBean();
-		descricaoProvasBean = new ArrayList<DescricaoProvaBean>();
+		provasCandidatoBean = new ArrayList<ProvaCandidatoBean>();
+		List<String> descricao = new ArrayList<String>();
 		provasBean = new ArrayList<ProvaBean>();
 		int aux = 0;
 		for (String lista : l) {
@@ -405,20 +406,19 @@ public class CandidatoController<PaginarCandidato> {
 					if (aux % 2 == 0) {
 						provaBean = new ProvaBean();
 						provaBean.setId(Integer.parseInt(aux2));
-						provasBean.add(provaBean);
+						provaCandidatoBean.setProvas(provaBean);
 					} else {
-						descricaoProvaBean = new DescricaoProvaBean();
-						descricaoProvaBean.setNome(aux2);
-						descricaoProvasBean.add(descricaoProvaBean);
+						String dsProva = aux2;
+						provaCandidatoBean.setDescricao(dsProva);
 					}
 				}
 			} catch (Exception e) {
 				System.out.println(e);
 			}
+			provaCandidatoBean.setCandidato(bean);
+			provasCandidatoBean.add(provaCandidatoBean);
 			aux++;
 		}
-		provaCandidatoBean.setProvas(provasBean);
-		provaCandidatoBean.setDescricao(descricaoProvasBean);
-		return provaCandidatoBean;
+		return provasCandidatoBean;
 	}
 }

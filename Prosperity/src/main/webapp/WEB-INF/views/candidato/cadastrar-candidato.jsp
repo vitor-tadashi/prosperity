@@ -1,32 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
-<html lang="pt-br">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://kwonnam.pe.kr/jsp/template-inheritance" prefix="layout"%>
 
-<head>
-
-<meta charset="UTF-8">
-<title>Cadastro de Candidato</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
-
-<c:import url="/WEB-INF/views/shared/stylesheet.jsp"></c:import>
-
-
-</head>
-<body>
-	<c:import url="/WEB-INF/views/shared/dashboard.jsp"></c:import>
-
+<layout:extends name="base">
+	<layout:put block="title" type="REPLACE">
+		<title>Cadastro de Candidato</title>
+	</layout:put>
+	
+	<layout:put block="contents">
 	<div id="main-container">
 		<div id="breadcrumb">
 			<ul class="breadcrumb">
-				<li><i class="fa fa-home"></i><a href=""> Início</a></li>
-				<li><a href=""> Candidato</a></li>
+				<li><i class="fa fa-home"></i><a href="/pagina-inicial"> Página inicial</a></li>
+				<li>Candidato</li>
 				<li class="active">Cadastrar</li>
 
 			</ul>
@@ -47,17 +35,17 @@
 
 							</c:forEach>
 							<c:if test="${not empty sucesso}">
-									<div id="msg-sucesso" class="alert alert-success msg-margin">
-										<ul>
-											<li class="li-msg">${sucesso}</li>
-										</ul>
-									</div>
-								</c:if>
+								<div id="msg-sucesso" class="alert alert-success msg-margin">
+									<ul>
+										<li class="li-msg">${sucesso}</li>
+									</ul>
+								</div>
+							</c:if>
 						</div>
 						<div id="textDiv1"></div>
 						<div id="textDiv2"></div>
 						<div id="textDiv3"></div>
-						
+
 						<form class="form-border" action="salvar" method="post"
 							enctype="multipart/form-data" id=formCadastro
 							onsubmit="return Validar()">
@@ -77,13 +65,13 @@
 								<div class="tab-content">
 									<div class="tab-pane fade in active" id="first">
 										<div class="row">
+											<input type="hidden" value="${candidato.id}" id="id" name="id">
 											<div class="form-group col-md-3">
 												<label for="cpf" class="control-label">CPF</label> <input
 													type="text" class="form-control cpf parsley-validated"
 													id="cpf" name="cpf" data-required="true"
 													placeholder="Informe seu CPF" value="${candidato.cpf}"
 													onblur="pesquisacpf()">
-													<input type="hidden" value="${candidato.id}"  id="id" name="id">
 											</div>
 											<div class="form-group col-md-4">
 												<label class="control-label" for="nome">Nome</label> <input
@@ -235,70 +223,69 @@
 												</div>
 
 											</div>
-											<div class="form-group col-md-3">
-												<label for="vaga">Vaga a ser aplicado</label> <select
-													class="form-control" id="vaga" name="vagaCandidato.vaga.id">
-													<option value="0">Selecione</option>
-													<c:forEach var="vaga" items="${listaVaga}">
-														<option value="${vaga.id}"
-															${vaga.id == candidato.vagaCandidato.vaga.id ? 'selected="selected"' : ''}>${vaga.nomeVaga}</option>
-													</c:forEach>
-												</select>
+										</div>
+										<div class="form-group col-md-3">
+											<label for="vaga">Vaga a ser aplicado</label> <select
+												class="form-control" id="vaga" name="vagaCandidato.vaga.id">
+												<option value="0">Selecione</option>
+												<c:forEach var="vaga" items="${listaVaga}">
+													<option value="${vaga.id}"
+														${vaga.id == candidato.vagaCandidato.vaga.id ? 'selected="selected"' : ''}>${vaga.nomeVaga}</option>
+												</c:forEach>
+											</select>
+										</div>
+										<div class="form-group col-md-3">
+											<label for="canalInformacao">Como ficou sabendo
+												desta vaga?</label> <select class="form-control"
+												name="vagaCandidato.CanalInformacao.id"
+												id="canalInformacao">
+												<option value="0">Selecione</option>
+												<c:forEach var="canalInformacao" items="${listaCanal}">
+													<option value="${canalInformacao.id}"
+														${canalInformacao.id == candidato.vagaCandidato.canalInformacao.id ? 'selected="selected"' : ''}>${canalInformacao.nome}</option>
+												</c:forEach>
+											</select>
+										</div>
+										<div>
+											<div class="form-group col-md-2 col-sm-2">
+												<label for="dataUltimoContato" class="control-label">Data
+													de ultimo contato</label>
+												<fmt:formatDate value="${candidato.dataUltimoContato}"
+													pattern="dd/MM/yyyy" var="dataUltimoContato" />
+												<input type="text" class="form-control date"
+													name="dataUltimoContato" onblur="validarData(this.value)"
+													data-required="false" id="dataUltimoContato"
+													value="${dataUltimoContato}">
 											</div>
-											<div class="form-group col-md-3">
-												<label for="canalInformacao">Como ficou sabendo
-													desta vaga?</label> <select class="form-control"
-													name="vagaCandidato.CanalInformacao.id"
-													id="canalInformacao">
-													<option value="0">Selecione</option>
-													<c:forEach var="canalInformacao" items="${listaCanal}">
-														<option value="${canalInformacao.id}"
-															${canalInformacao.id == candidato.vagaCandidato.canalInformacao.id ? 'selected="selected"' : ''}>${canalInformacao.nome}</option>
-													</c:forEach>
-												</select>
-											</div>
-											<div>
-												<div class="form-group col-md-2 col-sm-2">
-													<label for="dataUltimoContato" class="control-label">Data
-														de ultimo contato</label>
-													<fmt:formatDate value="${candidato.dataUltimoContato}"
-														pattern="dd/MM/yyyy" var="dataUltimoContato" />
-													<input type="text" class="form-control date"
-														name="dataUltimoContato" onblur="validarData(this.value)"
-														data-required="false" id="dataUltimoContato"
-														value="${dataUltimoContato}">
-												</div>
-												<div class="form-group col-md-2 col-sm-4">
-													<label for="entrevista" class="control-label">Data
-														de Entrevista</label>
-													<fmt:formatDate value="${candidato.entrevista}"
-														pattern="dd/MM/yyyy" var="entrevista" />
-													<input type="text" class="form-control date"
-														data-required="false" name="entrevista" id="entrevista"
-														onblur="validarData()" value="${entrevista}">
-												</div>
+											<div class="form-group col-md-2 col-sm-4">
+												<label for="entrevista" class="control-label">Data
+													de Entrevista</label>
+												<fmt:formatDate value="${candidato.entrevista}"
+													pattern="dd/MM/yyyy" var="entrevista" />
+												<input type="text" class="form-control date"
+													data-required="false" name="entrevista" id="entrevista"
+													onblur="validarData()" value="${entrevista}">
 											</div>
 										</div>
-
 									</div>
 								</div>
 							</div>
 							<div class="form-group col-sm-4">
-							<input type="hidden" value="${candidato.id}" name="id">
-									<button class="btn btn-success btnAjuste">Salvar</button>
-								</div>
+								<input type="hidden" value="${candidato.id}" name="id">
+								<button class="btn btn-success btnAjuste"><i class="fa fa-check"></i> Salvar</button>
+							</div>
 
 						</form>
-						</div>
-						</div>
-						</div>
-
 					</div>
 				</div>
-		
-	<!-- SOMENTE ALTERAR DAQUI PARA CIMA -->
-	<c:import url="/WEB-INF/views/shared/footer.jsp"></c:import>
-	<c:import url="/WEB-INF/views/shared/js.jsp"></c:import>
+			</div>
+
+		</div>
+	</div>
+	</layout:put>
+	
+	<layout:put block="scripts" type="REPLACE">
+	
 	<script src='/resources/js/parsley.min.js'></script>
 
 	<script type="text/javascript">
@@ -310,9 +297,9 @@
 	    });
 	  
 		$(document).ready(function() {
-			$('.cpf').mask('999.999.999-99', {
-				reverse : true
-			});
+		 	 $('.cpf').mask('999.999.999-99', {
+				reverse : true 
+			}) ; 
 			$('.telefone').mask('(99) 99999-9999');
 			$('#rg').mask('99.999.999-9');
 			$("#cep").mask("99999-999");
@@ -569,12 +556,13 @@
 				}
 			},
 			error: function (data) {
-				console.log("Cpf não encontrado")
+				console.log("Cpf não encontrado");
+				
 			}
 		});
 	}
 	
 	
 	</script>
-</body>
-</html>
+	</layout:put>
+</layout:extends>

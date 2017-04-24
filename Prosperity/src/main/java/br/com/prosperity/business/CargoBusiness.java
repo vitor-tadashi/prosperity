@@ -32,5 +32,5 @@ public class CargoBusiness {
 		CargoEntity entity = cargoDAO.findById(id);
 		return entity;
 	}
-
+	
 }

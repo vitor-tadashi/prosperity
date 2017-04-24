@@ -1,7 +1,5 @@
 package br.com.prosperity.bean;
 
-import java.util.List;
-
 import org.springframework.stereotype.Component;
 
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
@@ -13,9 +11,7 @@ public class SituacaoCandidatoBean {
 	private StatusCandidatoEnum status;
 	private String parecer;
 	private String proposta;
-	private ProvaCandidatoBean processoSeletivo;
 	private String parecerTecnico;
-	private List<CandidatoCompetenciaBean> avaliacoesCompetencias;
 
 	public Integer getIdCandidato() {
 		return idCandidato;
@@ -53,14 +49,6 @@ public class SituacaoCandidatoBean {
 		this.proposta = proposta;
 	}
 
-	public ProvaCandidatoBean getProcessoSeletivo() {
-		return processoSeletivo;
-	}
-
-	public void setProcessoSeletivo(ProvaCandidatoBean processoSeletivo) {
-		this.processoSeletivo = processoSeletivo;
-	}
-
 	public String getParecerTecnico() {
 		return parecerTecnico;
 	}
@@ -68,15 +56,5 @@ public class SituacaoCandidatoBean {
 	public void setParecerTecnico(String parecerTecnico) {
 		this.parecerTecnico = parecerTecnico;
 	}
-
-	public List<CandidatoCompetenciaBean> getAvaliacoesCompetencias() {
-		return avaliacoesCompetencias;
-	}
-
-	public void setAvaliacoesCompetencias(List<CandidatoCompetenciaBean> avaliacoesCompetencias) {
-		this.avaliacoesCompetencias = avaliacoesCompetencias;
-	}
-	
-	
 
 }

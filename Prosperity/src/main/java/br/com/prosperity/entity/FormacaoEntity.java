@@ -13,8 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.engine.internal.Cascade;
-
 @Entity
 @Table(name = "tbFormacao")
 public class FormacaoEntity {
