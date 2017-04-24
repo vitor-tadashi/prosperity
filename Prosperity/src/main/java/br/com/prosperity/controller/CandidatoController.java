@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.annotation.MultipartConfig;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -200,9 +201,9 @@ public class CandidatoController<PaginarCandidato> {
 		}
 		candidatoBusiness.inserir(candidatoBean);
 
-		return "candidato/cadastrar-candidato";
+		return "redirect:candidato/cadastrar-candidato";
 	}
-
+	
 	private String uploadCurriculo(MultipartFile file, String cpf) {
 		if (!file.isEmpty()) {
 			try {
