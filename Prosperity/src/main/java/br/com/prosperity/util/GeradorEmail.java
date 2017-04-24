@@ -61,10 +61,10 @@ public class GeradorEmail {
 			
 			List<String> listaEmails = Arrays.asList(to.split("\\s*,\\s*"));
 			
+			// Setando os destinatários:
 			for (String email : listaEmails) {
 				msg.addRecipient(Message.RecipientType.CC, new InternetAddress(email));
 			}
-			
 			
 			// Setando a origem do email
 			msg.setFrom(new InternetAddress(from));

@@ -3,15 +3,20 @@
 		if ($("input#contErro").val() > 0) {
 			$('#textDiv').addClass("alert alert-danger");
 		}
-		
-		$('.cpf').mask('999.999.999-99', {
-			reverse : true
-		});
-		$('.telefone').mask('(99) 99999-9999');
-		$('#rg').mask('99.999.999-9');
-		$("#cep").mask("99999-999");
+		$('.telefone').mask('(999)99999-9999');
 		$('.date').mask('99/99/9999');
+		
+		 CKEDITOR.replace('editor');
 	})
+	
+	function validarTel(){
+		var tel = $("#telResponsavel").val().replace(/[^\d]+/g,'');
+		if (tel.length == 11){
+			$("#telResponsavel").val(tel).mask('(999)9999-9999');
+		}else{
+			$("#telResponsavel").val(tel).mask('(999)99999-9999');
+		}
+	}
 	
 	var elements1 = $("#selectedBox1 option").each(function()
 			{
@@ -34,23 +39,49 @@
 		$("#dataAbertura").val("2017-01-01")
 	}
 	
+	//Ajax para verificar o projeto e preencher o campo cliente de acordo com o projeto
+	
 	var dropdownProjeto = document.querySelector("#cmbProjetoInterno");
 	dropdownProjeto.addEventListener("change",function(){
-
-		var id = $("#cmbProjetoInterno").val();
-		$.ajax({
-			url: "http://localhost:8080/vaga/obter-cliente",
-			type: "GET",
-			dataType: "JSON",
-			data: {id : id},
-			success: function(lista){
-				if(id == 0){
-					$("#Cliente").val("Selecione o projeto");
+		var id = dropdownProjeto.value;
+		if (id>0){
+			$.ajax({
+				url: "http://localhost:8080/vaga/obter-cliente",
+				type: "GET",
+				dataType: "JSON",
+				data: {id : id},
+				success: function(lista){
+					$("#Cliente").val(lista[0].cliente.nome);
 				}
-				$("#Cliente").val(lista[0].cliente.nome);
-			}
-		});
-		
+			});
+		} else {
+			$("#Cliente").val("Selecione o projeto");
+		}
+	});
+	
+	//Ajax para verificar o cargo e a senioridade e preencher o campo de valor minimo e valor máximo
+	
+	var dropdownSenioridade = document.querySelector("#cmbSenioridade");
+	var dropdownCargo = document.querySelector("#cmbCargo");
+	dropdownSenioridade.addEventListener("change",function(){
+		var idSenioridade = dropdownSenioridade.value;
+		var idCargo = dropdownCargo.value;
+		if (idSenioridade>0 && idCargo>0){
+			$.ajax({
+				url: "http://localhost:8080/vaga/obter-range-salarial",
+				type: "GET",
+				dataType: "JSON",
+				data: {idCargo : idCargo,
+					idSenioridade : idSenioridade},
+				success: function(lista){
+					$("#valorMinimo").val(lista[0].valorMinSalario);
+					$("#valorMaximo").val(lista[0].valorMaxSalario);
+				}
+			});
+		} else{
+			$("#valorMinimo").val("R$");
+			$("#valorMaximo").val("R$");
+		}
 	});
 	
 		//Ajax para verificar o perfil e ver se ele pode editar avaliadores
@@ -157,11 +188,13 @@
     			console.log(data);
     		}
     	});
+    	var tel = $("#telResponsavel").val().replace(/[^\d]+/g,'');
+    	$("#telResponsavel").val(tel);
     	$("#formCadastro2").submit();
-    	//var resp = ${resposta};
-    	if (resp == "Ok"){
-    		alert("Cadastrado com Sucesso");
-    	};
+//    	var resp = ${resposta};
+//    	if (resp == "Ok"){
+//    		alert("Cadastrado com Sucesso");
+//    	};
 	});
 	
 	function enviarAvaliadores(){
@@ -198,7 +231,6 @@
 		    				textDiv2.textContent = "Campo Data para inicio tem que estar no futuro";
 
 		    				var text = "[" + div.textContent + "]";
-		                        campo.focus();
 		                        return false;
 		                }
 		         }

@@ -358,7 +358,7 @@ footer {
 				<input class="cancela-id" type="hidden"> <input
 					class="cancela-status" type="hidden">
 				<div class="modal-footer">
-					<a href="#">
+					<a id="excluir" href="${urlCancelar}">
 						<button id="excluiVaga" onclick="status()" type="button" class="btn btn-primary"
 							data-dismiss="modal">Sim</button>
 					</a>
@@ -386,7 +386,7 @@ footer {
 					class="avaliador-status" type="hidden">
 				<div class="modal-footer">
 					<a id="excluir" href="${urlCancelar}">
-						<button id="excluiVaga" onclick="status()" type="button" class="btn btn-primary"
+						<button type="button" class="btn btn-primary"
 							data-dismiss="modal">Sim</button>
 					</a>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
@@ -506,6 +506,10 @@ footer {
 												
 
 											<c:if test="${vaga.ultimoStatus.status.nome == 'Ativo'}" >
+											<c:url scope="session"
+															value="cancelar-vaga/${vaga.id}"
+															var="urlCancelar">
+													</c:url>
 													<li id="${vaga.ultimoStatus.status.nome}" role="separator" class="cancelarDivider divider"></li>
 													<li id="${vaga.ultimoStatus.status.nome}" >
 													<a href="#cancela-modal" onclick="alterarStatus(${vaga.id}, 'CANCELADO')"
@@ -520,7 +524,10 @@ footer {
 												</c:if>
 												
 												<c:if test="${vaga.ultimoStatus.status.nome == 'Aguardando avaliadores'}" >
-													<li id="${candidado.ultimoStatus.status.css}">
+													<c:url scope="session"
+															value="cancelar-vaga/${vaga.id}"
+															var="urlCancelar">
+													</c:url>
 													<li id="${vaga.ultimoStatus.status.nome}" role="separator" class="avaliadorDivider divider"></li>
 													<li id="${vaga.ultimoStatus.status.nome}" >
 													<a href="#avaliador-modal" onclick="alterarStatus(${vaga.id}, ${candidato.id} 'CANCELADO')"

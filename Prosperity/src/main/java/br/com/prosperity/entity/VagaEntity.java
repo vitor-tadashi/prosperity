@@ -37,8 +37,7 @@ import javax.persistence.TemporalType;
 		@NamedQuery(name = "listarVagasAtivas", query = "SELECT v FROM VagaEntity v LEFT JOIN v.statusVagaEntity sv where sv.status.id = ?1"),
 		@NamedQuery(name = "listarVagaFiltrado", query = "SELECT u FROM VagaEntity u LEFT OUTER JOIN u.statusVagaEntity p left join p.status s "
 				+ "WHERE u.nomeVaga like ?1 and s.id = ?2 and u.dataAbertura between ?3 and ?4"),
-		@NamedQuery(name = "ultimoCadastro", query = "SELECT MAX(u.id) FROM VagaEntity u"),
-		@NamedQuery(name= "paginacao", query = "SELECT COUNT(v) FROM VagaEntity v LEFT OUTER JOIN v.statusVagaEntity sv WHERE sv.situacao = TRUE")})
+		@NamedQuery(name = "ultimoCadastro", query = "SELECT MAX(u.id) FROM VagaEntity u")})
 
 @Entity
 @Table(name = "tbVaga")
@@ -120,8 +119,8 @@ public class VagaEntity {
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuarioEntity;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name = "idVaga")
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="vaga")
+	//@JoinColumn(name = "idVaga")
 	private List<StatusVagaEntity> statusVagaEntity;
 
 	// @ManyToOne(cascade = CascadeType.ALL)
@@ -139,8 +138,8 @@ public class VagaEntity {
 	@Column(name = "telResponsavel")
 	private String telResponsavel;
 
-	@OneToMany(fetch=FetchType.LAZY)
-	@JoinColumn(name = "idVaga")
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="vaga")
+	//@JoinColumn(name = "idVaga")
 	private List<VagaCandidatoEntity> vagaCandidatoEntity;
 	
 	public Integer getId() {

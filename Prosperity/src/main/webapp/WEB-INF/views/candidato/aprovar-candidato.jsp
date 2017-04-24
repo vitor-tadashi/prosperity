@@ -435,7 +435,7 @@
             var cont = 0;
             $("#gerarCampo").click(function(){
             	var campos = 
-            	"<div class='processoSeletivo'>" +
+            	"<div class='div"+cont+" processoSeletivo'>" +
             	"<select id='prova"+ cont +"'>" +
             	"<br>" +
             	"<option value='0'>Selecione:</option>"+
@@ -444,7 +444,7 @@
             	"</c:forEach>" +
             	"</select>"+
             	"<input type='text' id='descricao"+ cont +"'/>"+
-            	"<input type='button' id='btnRemover' onclick='remover("+ cont +")'value='Remover campo'  class='btn btn-sm btn-danger'>"+
+            	"<input type='button' id='btnRemover' onclick='remover("+ cont +")'value='Remover campo' class='btn btn-sm btn-danger'>"+
             	"</div>" ;
             	
             	cont++;
