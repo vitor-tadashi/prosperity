@@ -162,10 +162,9 @@
 					<div class="modal-body">Deseja realmente cancelar este
 						candidato?</div>
 					<div class="modal-footer">
-						<input type="hidden" id="#idCancelamento" /> <a id="excluir"
-							href="/cancelar-candidato/">
-							<button type="button" class="btn btn-danger">Sim</button>
-						</a>
+						<input type="hidden" id="idCancelamento" value="" />
+						<button type="button" class="btn btn-danger"
+							onclick="cancelarCandidato()">Sim</button>
 						<button type="button" class="btn btn-success" data-dismiss="modal">Não</button>
 					</div>
 				</div>
@@ -188,6 +187,7 @@
 						<div class="panel-body">
 							<input type="hidden" name="user" id="user"
 								value="${autenticado.perfil.nome}" />
+
 							<table
 								class="table table-bordered table-condensed table-hover table-striped"
 								id="tabelaCandidato"
@@ -206,9 +206,9 @@
 									<form id="form">
 										<c:forEach var="candidato" items="${candidatos}">
 											<tr>
-												<input type="hidden" id="${candidato.id}" />
+												<input type="hidden" id="${candidato.id}"/>
 												<td>${candidato.nome}</td>
-												<td>${candidato.vagaCandidato.vaga.nomeVaga}</td>
+												<td>${candidato.ultimaVaga.nomeVaga}</td>
 												<td><fmt:formatNumber
 														value="${candidato.valorPretensao}" minFractionDigits="2"
 														type="currency" /></td>
@@ -236,16 +236,17 @@
 																			<i ${statusDisponivel.classe}>&nbsp;</i>${statusDisponivel.nome}</a></li>
 																	<li class="divider "></li>
 																</c:forEach>
+																<li class="divider"></li>
 																<li><c:url
 																		value="cancelar-candidato/${candidato.id}"
 																		var="urlCancelar">
-																	</c:url><a href="#delete-modal" onclick="cancelarClick"
+																	</c:url><a href="#delete-modal"
+																	onclick="cancelarClick(${candidato.id})"
 																	data-toggle="modal"><i class="fa fa-trash-o fa-lg">&nbsp;</i>Cancelar</a></li>
 																<!-- /fim botao -->
 															</ul>
 														</div>
-													</div> <!-- /btn-group -->
-												</td>
+													</div> <!-- /btn-group --></td>
 											</tr>
 										</c:forEach>
 									</form>
@@ -379,19 +380,22 @@
                   $('#hdn-status').val(idStatus);
             }
             
-            function cancelarCandidato(id) {
+            function cancelarCandidato() {
+            	var id = $("#idCancelamento").val();
+            	
             	$.ajax({
         			url : "cancelar-candidato/"+id,
         			type : "POST"
         		}).done(function() {
-        			alert('done');
+        			 location.reload();
         		}).fail(function(jqXHR, textStatus) {
         			alert('fail');
+        			 location.reload();s
         		});
             }
 
            function cancelarClick (id){
-        	   $("#idCancelamento").val(id)
+        	   $("#idCancelamento").val(id);
            } 
 
         /*gerador de campo*/    

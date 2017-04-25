@@ -7,10 +7,9 @@
 <layout:extends name="base">
 	<layout:put block="title" type="REPLACE">
 		<title>Cadastro de Candidato</title>
-		<link href="/resources/css/custom/criar-perfil.css" rel="stylesheet" />
 	</layout:put>
 	
-	<layout:put block="contents">
+	<layout:put block="contents">O
 	<div id="main-container">
 		<div id="breadcrumb">
 			<ul class="breadcrumb">
@@ -28,28 +27,28 @@
 			<div class="row">
 				<div class="panel panel-default">
 					<div class="panel-heading">Informações do candidato</div>
+					
 					<div class="panel-body">
-						<div class="x"></div>
 						<div id="textDiv">
-							<c:forEach var="erro" items="${listaErros}">
-								<p>${erro}</p>
-
-							</c:forEach>
-						
+								<c:forEach var="erro" items="${listaErros}">
+									<p>${erro}</p>
+								</c:forEach>
+								</div>
 							<c:if test="${not empty sucesso}">
 								<div id="msg-sucesso" class="alert alert-success msg-margin">
 									<ul>
-										<li class="li-msg"><strong> ${sucesso }</strong></li>
+										<li class="li-msg"><strong> ${sucesso}</strong></li>
 									</ul>
 								</div>
 							</c:if>
-						</div>
+						
 						<div id="textDiv1"></div>
 						<div id="textDiv2"></div>
 						<div id="textDiv3"></div>
 
 						<form class="form-border" action="salvar" method="post"
-							enctype="multipart/form-data" id=formCadastro>
+							enctype="multipart/form-data" id=formCadastro onblur="validar()">
+						
 							<div class="panel-tab clearfix">
 								<ul class="tab-bar wizard-demo" id="wizardDemo">
 									<li class="active tab-verity"><a href="#first"
@@ -110,7 +109,7 @@
 												<input type="text"
 													class="form-control telefone parsley-validated" maxlength="30"
 													placeholder="Informe seu telefone" data-required="true"
-													id="contato" name="contato.telefone"
+													id="contato" name="contato.telefone" onblur="validarTel()"
 													value="${candidato.contato.telefone}">
 											</div>
 											<div class="form-group col-md-2">
@@ -247,51 +246,45 @@
 												</c:forEach>
 											</select>
 										</div>
-										<div>
-											<div class="form-group col-md-2 col-sm-2">
-												<label for="dataUltimoContato" class="control-label">Data
-													de ultimo contato</label>
-												<fmt:formatDate value="${candidato.dataUltimoContato}"
-													pattern="dd/MM/yyyy" var="dataUltimoContato" />
-												<input type="text" class="form-control date"
-													name="dataUltimoContato" onblur="validarData(this.value)"
-													data-required="false" id="dataUltimoContato"
-													value="${dataUltimoContato}">
-											</div>
-
-											<div class="form-group col-md-2 col-sm-4">
-												<label for="entrevista" class="control-label">Data
-													de Entrevista</label>
-												<fmt:formatDate value="${candidato.entrevista}"
-													pattern="dd/MM/yyyy" var="entrevista" />
-												<input type="text" class="form-control date"
-													data-required="false" name="entrevista" id="entrevista"
-													onblur="validarData('entrevista')" value="${entrevista}">
-											</div>
+										<div class="form-group col-md-2 col-sm-2">
+											<label for="dataUltimoContato" class="control-label">Data
+												de ultimo contato</label>
+											<fmt:formatDate value="${candidato.dataUltimoContato}"
+												pattern="dd/MM/yyyy" var="dataUltimoContato" />
+											<input type="text" class="form-control date"
+												name="dataUltimoContato" onblur="validarData(this.value)"
+												data-required="false" id="dataUltimoContato"
+												value="${dataUltimoContato}">
+										</div>
+										<div class="form-group col-md-2 col-sm-4">
+											<label for="entrevista" class="control-label">Data
+												de Entrevista</label>
+											<fmt:formatDate value="${candidato.entrevista}"
+												pattern="dd/MM/yyyy" var="entrevista" />
+											<input type="text" class="form-control date"
+												data-required="false" name="entrevista" id="entrevista"
+												onblur="validarData('entrevista')" value="${entrevista}">
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="form-group col-sm-4">
 								<input type="hidden" value="${candidato.id}" name="id">
+								<input type="hidden" value="${erro}" id="contErro">
 								<button class="btn btn-success btnAjuste"><i class="fa fa-check"></i> Salvar</button>
 							</div>
-
 						</form>
 					</div>
 				</div>
 			</div>
-
 		</div>
-	</div>
 	</layout:put>
 	
 	<layout:put block="scripts" type="REPLACE">
 	
-	<script src='/resources/js/parsley.min.js'></script>
-
-	<script type="text/javascript">
-	
+	<script src="/resources/js/parsley.min.js"></script>
+	<script src="/resources/js/app/app.js"></script>
+	<script>
 	  $(document).ready(function () {
 	        setTimeout(function () {
 	            $('#msg-sucesso').fadeOut(1500);
@@ -302,12 +295,21 @@
 		 	 $('.cpf').mask('999.999.999-99', {
 				reverse : true 
 			}) ; 
-			$('.telefone').mask('(99) 99999-9999');
+			$('.telefone').mask('(99)99999-9999');
 			$('#rg').mask('99.999.999-9');
 			$("#cep").mask("99999-999");
 			$('.date').mask('99/99/9999');
 
-		})
+		}) 
+		
+		function validarTel(){
+		var tel = $("#contato").val().replace(/[^\d]+/g,'');
+		if (tel.length == 10){
+			$("#contato").val(tel).mask('(99)9999-9999');
+		}else{
+			$("#contato").val(tel).mask('(99)99999-9999');
+		}
+	}
 
 		function limpa_formulário_cep() {
 			//Limpa valores do formulário de cep.
@@ -326,9 +328,9 @@
 			else {
 				//CEP não Encontrado.
 				limpa_formulário_cep();
-				var div = document.getElementById("textDiv").className = "alert alert-danger x";
+				var div = document.getElementById("textDiv").className = "alert alert-danger";
 
-				textDiv.textContent = "CEP inválido";
+				textDiv.textContent = "";
 
 				var text = "[" + div.textContent + "]";
 			}
@@ -360,7 +362,7 @@
 				else {
 					//cep é inválido.
 					limpa_formulário_cep();
-					var div = document.getElementById("textDiv").className = "alert alert-danger x";
+					var div = document.getElementById("textDiv").className = "alert alert-danger";
 
     				textDiv.textContent = "CEP inválido";
 
@@ -381,7 +383,7 @@
 	</script>
 
 	<script>
-	
+
 		$(document).ready(function() {
 			if ($("input#contErro").val() > 0) {
 				$('#textDiv').addClass("alert alert-danger");
@@ -415,7 +417,7 @@
 			}
 
 			if (Resto != parseInt(strCPF.substring(9, 10))) {
-				var div = document.getElementById("textDiv1").className = "alert alert-danger x";
+				var div = document.getElementById("textDiv1").className = "alert alert-danger";
 
 				textDiv1.textContent = "CPF inválido.";
 
@@ -435,7 +437,7 @@
 			}
 
 			if (Resto != parseInt(strCPF.substring(10, 11))) {
-				var div = document.getElementById("textDiv1").className = "alert alert-danger x";
+				var div = document.getElementById("textDiv1").className = "alert alert-danger";
 
 				textDiv1.textContent = "CPF inválido.";
 
@@ -468,7 +470,7 @@
 			                resultado = (!isNaN(dia) && (dia > 0) && (dia < 32)) && (!isNaN(mes) && (mes > 0) && (mes < 13)) && (!isNaN(ano) && (ano.length == 4) && (ano <= anoAtual && ano >= 1900));
 			                if (!resultado)
 			                {
-			                	var div = document.getElementById("textDiv2").className = "alert alert-danger x";
+			                	var div = document.getElementById("textDiv2").className = "alert alert-danger";
 
 			    				textDiv2.textContent = "Data inválida";
 
@@ -479,7 +481,7 @@
 			         }
 			         else
 			         {
-			        		var div = document.getElementById("textDiv").className = "";
+			        		var div = document.getElementById("textDiv2").className = "";
 
 			    			textDiv2.textContent = "Data inválida";
 
@@ -512,8 +514,6 @@
 	    var ano = data.getFullYear();  
 	    return dia+"/"+mes+"/"+ano;
 	}
-	
-	var vaisefoder = null;
 	function pesquisacpf(){
 		var cpf = $('#cpf').val();
 		
