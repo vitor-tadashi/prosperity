@@ -129,7 +129,7 @@ public class VagaBusiness {
 
 	@Transactional(readOnly = true)
 	public List<VagaBean> listarVagasAtivas() {
-		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagasAtivas", 1);
+		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagasAtivas");
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 		return vagaBean;
 	}
@@ -197,12 +197,12 @@ public class VagaBusiness {
 	}
 
 	@Transactional
-	public String inserir(VagaBean vagaBean, List<UsuarioBean> usuarioBean) {
+	public void inserir(VagaBean vagaBean, List<UsuarioBean> usuarioBean) {
 
 		VagaEntity vagaEntity = vagaConverter.convertBeanToEntity(vagaBean);
 		//vagaEntity.setStatusVagaEntity(statusVagaDAO.findByNamedQuery("statusVaga", vagaEntity.getId()));
 
-		try {
+		
 			if (vagaEntity.getId() == null) {
 				Date dateNow = new Date();
 				vagaEntity.setDataAbertura(dateNow);
@@ -232,13 +232,7 @@ public class VagaBusiness {
 				}
 				vagaDAO.update(vagaEntity);
 			}
-			return "Ok";
 
-		} catch (Exception e) {
-			String erro = new String();
-			erro = e.toString();
-			return erro;
-		}
 	}
 
 	@Transactional

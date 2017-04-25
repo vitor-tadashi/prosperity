@@ -4,17 +4,23 @@
 			$('#textDiv').addClass("alert alert-danger");
 		}
 		$('.telefone').mask('(99)99999-9999');
-		$('.date').mask('99/99/9999');
+		$('.data').mask('99/99/9999');
 		
 		 CKEDITOR.replace('editor');
+		 
+		 setTimeout(function () {
+	            $('#msg-sucesso').fadeOut(1500);
+	        }, 5000);
 	})
 	
 	function validarTel(){
 		var tel = $("#telResponsavel").val().replace(/[^\d]+/g,'');
 		if (tel.length == 10){
 			$("#telResponsavel").val(tel).mask('(99)9999-9999');
-		}else{
+		}else if(tel.length == 11){
 			$("#telResponsavel").val(tel).mask('(99)99999-9999');
+		}else{
+			$("#telResponsavel").val(tel);
 		}
 	}
 	
@@ -85,6 +91,27 @@
 	var dropdownSenioridade = document.querySelector("#cmbSenioridade");
 	var dropdownCargo = document.querySelector("#cmbCargo");
 	dropdownSenioridade.addEventListener("change",function(){
+		var idSenioridade = dropdownSenioridade.value;
+		var idCargo = dropdownCargo.value;
+		if (idSenioridade>0 && idCargo>0){
+			$.ajax({
+				url: "http://localhost:8080/vaga/obter-range-salarial",
+				type: "GET",
+				dataType: "JSON",
+				data: {idCargo : idCargo,
+					idSenioridade : idSenioridade},
+				success: function(lista){
+					$("#valorMinimo").val(lista[0].valorMinSalario);
+					$("#valorMaximo").val(lista[0].valorMaxSalario);
+				}
+			});
+		} else{
+			$("#valorMinimo").val("R$");
+			$("#valorMaximo").val("R$");
+		}
+	});
+	
+	dropdownCargo.addEventListener("change",function(){
 		var idSenioridade = dropdownSenioridade.value;
 		var idCargo = dropdownCargo.value;
 		if (idSenioridade>0 && idCargo>0){

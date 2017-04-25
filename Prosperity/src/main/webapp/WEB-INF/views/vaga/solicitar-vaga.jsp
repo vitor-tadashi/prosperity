@@ -99,7 +99,7 @@
 												<fmt:formatDate value="${vaga.dataInicio}"
 													pattern="dd/MM/yyyy" var="dataInicio"/>
 													<input id="dataInicio" name="dataInicio" type="text"
-														class="form-control date parsley-validated" data-required="true"
+														class="form-control data parsley-validated" data-required="true"
 														value="${dataInicio}" style="height:30px" >  
 												</div>
 											</div>
@@ -198,12 +198,12 @@
 											 	<input
 													id="valorMinimo" name="valorMinimo" type="number"
 													class="input-sm col-md-4" disabled placeholder="R$"
-													value="${vaga.valorPretensao}" style="height:30px">
+													value="" style="height:30px">
 												<label class="control-label col-md-2" style="padding-left:10px;padding-top:5px" for="txtPropostaSalarial">Máximo</label>
 													<input
 													id="valorMaximo" name="valorMaximo" type="number"
 													class="input-sm col-md-4" disabled placeholder="R$" 
-													value="${vaga.valorPretensao}" style="height:30px">
+													value="" style="height:30px">
 											</div>
 											<!-- /form-group -->
 											<div class="form-group col-md-6" style="padding-top:0px">
@@ -286,7 +286,7 @@
 												</div>
 												<div class="col-md-6" style="padding-left:0px;padding-top:15px">
 												<label for="emailResponsavel">E-mail do responsável</label> 
-												<input type="email" class="form-control input-sm" id="emailResponsavel" name="emailResponsavel" value="${vaga.emailResponsavel}"
+												<input type="text" class="form-control input-sm" id="emailResponsavel" name="emailResponsavel" value="${vaga.emailResponsavel}"
 												placeholder="E-mail do Cliente Responsável" data-required="true" maxlength="50">
 												</div>
 												<div class="col-md-6" style="padding-top:15px">
@@ -412,15 +412,6 @@
 	<script src="/resources/js/parsley.min.js"></script>
 	
 	<script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
-	
-	<script type="text/javascript">
-	
-	<!-- MENSAGEM DE SUCESSO-->
-	  $(document).ready(function () {
-	        setTimeout(function () {
-	            $('#msg-sucesso').fadeOut(1500);
-	        }, 5000);
-	    });
-	</script>	  
+		  
 	</layout:put>
 </layout:extends>
