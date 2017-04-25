@@ -150,6 +150,8 @@ public class CandidatoController<PaginarCandidato> {
 
 		} else {
 			try {
+				String caminho = uploadCurriculo(file, candidatoBean.getCpf());
+				candidatoBean.setCurriculo(caminho);
 				candidatoBusiness.inserir(candidatoBean);
 				model.addAttribute("sucesso", "Candidato salvo com sucesso.");
 
