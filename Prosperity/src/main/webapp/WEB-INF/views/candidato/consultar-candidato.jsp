@@ -458,13 +458,13 @@
 								</div>
 								<div class="col-md-1">
 									<label for="salário">Salário</label> <input
-										type="text" class="form-control valorPretensao parsley-validated"
-												id="valorPretensao" name="PretensaoDe" class="form-control"
+										type="text" class="form-control money2 parsley-validated"
+												id="valorPretensao" name="PretensaoDe" class="form-control money2"
 										placeholder="De" style="width: 80px">
 								</div>
 								<div class="col-md-1">
 									<label for="exampleInputEmail1">&nbsp;</label> <input
-										type="text" name="PretensaoPara" class="form-control"
+										type="text" name="PretensaoPara" class="form-control money2"
 										placeholder="Até" style="width: 80px">
 								</div>
 								<div class="col-md-3">
