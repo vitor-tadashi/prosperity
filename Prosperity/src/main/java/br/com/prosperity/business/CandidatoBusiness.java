@@ -367,8 +367,8 @@ public class CandidatoBusiness {
 			if (statusFuturoEntity.size() == 1) {
 				situacaoCandidato.setStatus(StatusCandidatoEnum.valueOf(statusFuturoEntity.get(0).getIdStatusFuturo()));
 			} else {
-				avaliadorCandidatoEntity = avaliadorCandidatoDAO.findByNamedQuery("atualizarAvaliador",
-						usuarioBean.getId(), statusCandidatoEntity.getCandidato());
+				avaliadorCandidatoEntity = avaliadorCandidatoDAO.findByNamedQuery("obterAvaliadoresCandidato",
+						statusCandidatoEntity.getCandidato());
 				if (avaliadorCandidatoEntity != null && avaliadorCandidatoEntity.size() > 0) {
 					StatusCandidatoEnum status = avaliadorCandidatoEntity.size() == 1
 							? StatusCandidatoEnum.GERARPROPOSTA : StatusCandidatoEnum.CANDIDATOEMANALISE;
@@ -376,6 +376,8 @@ public class CandidatoBusiness {
 					situacaoCandidato.setStatus(status);
 				}
 			}
+			avaliadorCandidatoEntity = avaliadorCandidatoDAO.findByNamedQuery("atualizarAvaliador",
+					usuarioBean.getId(), statusCandidatoEntity.getCandidato());
 			avaliadorCandidatoEntity.get(0).setStatus(situacaoCandidato.getStatus().getValue());
 			avaliadorCandidatoDAO.update(avaliadorCandidatoEntity.get(0));
 			statusCandidatoDAO.insert(statusAlteracao(situacaoCandidato));
