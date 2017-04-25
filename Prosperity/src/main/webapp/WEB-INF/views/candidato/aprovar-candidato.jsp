@@ -37,15 +37,17 @@
 								</ul>
 							</div>
 							<div class="panel-body">
+							<form id="formValidar" data-validate="parsley" novalidate>
 								<div class="tab-content">
 									<div class="tab-pane fade in active" id="infoEntrevista">
 										<div class="form-group">
+										
 											<label class="control-label">Parecer :</label>
 											<div class="form-group">
 												<input type="hidden" id="hdn-id-candidato" /> <input
 													type="hidden" id="hdn-status" />
-												<textarea class="form-control" id="parecer"
-													style="margin-left: 0px; width: 800px" name="parecer"></textarea>
+												<textarea class="form-control parsley-validated" id="parecer"
+													style="margin-left: 0px; width: 800px" name="parecer"  data-required="true"></textarea>
 											</div>
 										</div>
 									</div>
@@ -113,10 +115,11 @@
 										</div>
 									</div>
 								</div>
+								</form>
 							</div>
 							<div class="panel-footer ">
 								<button type="button" class="btn btn-sm btn-primary"
-									href="#confirm-modal" data-toggle="modal">
+									 id="btnEnviar">
 									<i class="fa fa-check fa-lg"></i>&nbsp;Enviar
 								</button>
 							</div>
@@ -137,7 +140,7 @@
 						</button>
 						<h4 class="modal-title" id="modalLabel">Confirmação</h4>
 					</div>
-					<div class="modal-body">Deseja realmente fazer isso?</div>
+					<div class="modal-body">Confirmar?</div>
 					<div class="modal-footer">
 						<a id="excluir" href="#">
 							<button type="button" class="btn btn-success" id="alterarStatus">Sim</button>
@@ -289,16 +292,17 @@
 									CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
 				                	$("#proposta-tab").show();
 				                	$("#proposta").show();
+				                	
 				                 }
 							}else if(data.ultimoStatus.status.id == "10"){
 				                 if(perfil == "Administrador" || perfil == "CEO" || perfil == "Diretor de operação"){
 										CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
 					                	$("#proposta-tab").show();
-					                	$("#proposta").show();
+					                	CKEDITOR.instances['editor'].setReadOnly(true);
 					                 }
 							}else{
 			                	$("#proposta-tab").hide();
-			                	$("#proposta").hide();
+			                	$("#proposta").setReadOnly(true);
 							}
 							if(data.ultimoStatus.status.id == "6"){
 								$("#avaliacao-tab").show();
@@ -421,6 +425,15 @@
             	$(".div"+id).remove();
             	cont--;
             }
+       
+         // Submit do formulário
+        	$("button#btnEnviar").click(function() {
+        		$("form#formValidar").submit();
+        		if($('form#formValidar').parsley('isValid')){
+					$('#confirm-modal').modal('show');
+			   }
+        	});
+         
 /* paginação */
 	$(function	()	{
 		$('#tabelaCandidato').dataTable( {

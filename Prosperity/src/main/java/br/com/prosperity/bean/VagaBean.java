@@ -5,9 +5,11 @@ import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
@@ -17,10 +19,11 @@ public class VagaBean {
 
 	@Min(value = 1, message = "O campo de vaga a ser aplicado deve ser preenchido")
 	private Integer id;
+	@NotEmpty(message = "O campo Nome da vaga deve ser preenchido")
 	private String nomeVaga;
 	private String nomeSolicitante;
 	private Double valorPretensao;
-	//@NotNull(message = "O campo data de Inicio deve ser preenchido")
+	@NotNull(message = "O campo Data para inicio deve ser preenchido")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataInicio;
 	private Character localTrabalho;
