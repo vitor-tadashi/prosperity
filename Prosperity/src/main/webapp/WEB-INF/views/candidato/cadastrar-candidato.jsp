@@ -246,26 +246,24 @@
 												</c:forEach>
 											</select>
 										</div>
-										<div>
-											<div class="form-group col-md-2 col-sm-2">
-												<label for="dataUltimoContato" class="control-label">Data
-													de ultimo contato</label>
-												<fmt:formatDate value="${candidato.dataUltimoContato}"
-													pattern="dd/MM/yyyy" var="dataUltimoContato" />
-												<input type="text" class="form-control date"
-													name="dataUltimoContato" onblur="validarData(this.value)"
-													data-required="false" id="dataUltimoContato"
-													value="${dataUltimoContato}">
-											</div>
-												<div class="form-group col-md-2 col-sm-4">
-													<label for="entrevista" class="control-label">Data
-														de Entrevista</label>
-													<fmt:formatDate value="${candidato.entrevista}"
-														pattern="dd/MM/yyyy" var="entrevista" />
-													<input type="text" class="form-control date"
-														data-required="false" name="entrevista" id="entrevista"
-														onblur="validarData('entrevista')" value="${entrevista}">
-												</div>
+										<div class="form-group col-md-2 col-sm-2">
+											<label for="dataUltimoContato" class="control-label">Data
+												de ultimo contato</label>
+											<fmt:formatDate value="${candidato.dataUltimoContato}"
+												pattern="dd/MM/yyyy" var="dataUltimoContato" />
+											<input type="text" class="form-control date"
+												name="dataUltimoContato" onblur="validarData(this.value)"
+												data-required="false" id="dataUltimoContato"
+												value="${dataUltimoContato}">
+										</div>
+										<div class="form-group col-md-2 col-sm-4">
+											<label for="entrevista" class="control-label">Data
+												de Entrevista</label>
+											<fmt:formatDate value="${candidato.entrevista}"
+												pattern="dd/MM/yyyy" var="entrevista" />
+											<input type="text" class="form-control date"
+												data-required="false" name="entrevista" id="entrevista"
+												onblur="validarData('entrevista')" value="${entrevista}">
 										</div>
 									</div>
 								</div>
