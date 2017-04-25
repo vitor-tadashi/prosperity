@@ -36,8 +36,8 @@
 								</div>
 							<c:if test="${not empty sucesso}">
 								<div id="msg-sucesso" class="alert alert-success msg-margin">
-									<ul>
-										<li class="li-msg"><strong> ${sucesso}</strong></li>
+									<ul style="list-style: none;">
+										<li class="li-msg"> ${sucesso}</li>
 									</ul>
 								</div>
 							</c:if>
@@ -154,7 +154,7 @@
 												<label class="control-label">Currículo</label>
 												<div class="upload-file" style="width: 356px;">
 													<input type="file" id="upload-curriculo" name="file"
-														class="upload-demo"> <label data-title="Selecione"
+														class="upload-demo" value="${candidato.curriculo}"> <label data-title="Selecione"
 														for="upload-curriculo"> <span
 														data-title="Nenhum arquivo selecionado..."></span>
 													</label>
@@ -280,6 +280,8 @@
 				</div>
 			</div>
 		</div>
+</div>
+		
 	</layout:put>
 	
 	<layout:put block="scripts" type="REPLACE">
