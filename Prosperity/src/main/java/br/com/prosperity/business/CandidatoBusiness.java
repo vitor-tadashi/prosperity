@@ -514,9 +514,9 @@ public class CandidatoBusiness {
 				listaStatus.add(StatusCandidatoEnum.PROPOSTARECUSADA.getValue());
 			}
 		}
-		if(listaStatus.isEmpty()){
-			listaStatus.add(0);
-		}
+//		if(listaStatus.isEmpty()){
+//			listaStatus.add(0);
+//		}
 		return listaStatus;
 	}
 }
