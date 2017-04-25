@@ -115,7 +115,7 @@
 								</div>
 							</div>
 							<div class="panel-footer ">
-								<button type="button" class="btn btn-sm btn-primary"
+								<button type="button" class="btn btn-sm btn-primary pull-right"
 									href="#confirm-modal" data-toggle="modal">
 									<i class="fa fa-check fa-lg"></i>&nbsp;Enviar
 								</button>
