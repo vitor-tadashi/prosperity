@@ -500,17 +500,15 @@
 							</thead>
 							<tbody class="text-center">
 								<c:forEach var="candidato" items="${candidatos}">
+												
 									<tr>
 										<td>${candidato.nome}</td>
-
-										<td>${candidato.vagaCandidato.vaga.nomeVaga}</td> 	
-										<td>${candidato.valorPretensao}</td>
+										<td>${candidato.vagaCandidato.vaga.nomeVaga}</td>
+										 	
+										<td><fmt:formatNumber value="${candidato.valorPretensao}" type="currency"></fmt:formatNumber></td>
 										<td><fmt:formatDate value="${candidato.dataAbertura}" pattern="dd/MM/yyyy" /></td>
 										<td id="linhaStatus"><span class="label" style="color: #fff; background-color: ${candidato.ultimoStatus.status.css}">${candidato.ultimoStatus.status.nome}</span></td>
 							
-
-							
-			
 
 							<td>
 									<div class="btn-group">

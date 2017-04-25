@@ -37,15 +37,17 @@
 								</ul>
 							</div>
 							<div class="panel-body">
+							<form id="formValidar" data-validate="parsley" novalidate>
 								<div class="tab-content">
 									<div class="tab-pane fade in active" id="infoEntrevista">
 										<div class="form-group">
+										
 											<label class="control-label">Parecer :</label>
 											<div class="form-group">
 												<input type="hidden" id="hdn-id-candidato" /> <input
 													type="hidden" id="hdn-status" />
-												<textarea class="form-control" id="parecer"
-													style="margin-left: 0px; width: 800px" name="parecer"></textarea>
+												<textarea class="form-control parsley-validated" id="parecer"
+													style="margin-left: 0px; width: 800px" name="parecer"  data-required="true"></textarea>
 											</div>
 										</div>
 									</div>
@@ -113,10 +115,11 @@
 										</div>
 									</div>
 								</div>
+								</form>
 							</div>
 							<div class="panel-footer ">
 								<button type="button" class="btn btn-sm btn-primary"
-									href="#confirm-modal" data-toggle="modal">
+									 id="btnEnviar">
 									<i class="fa fa-check fa-lg"></i>&nbsp;Enviar
 								</button>
 							</div>
@@ -137,7 +140,7 @@
 						</button>
 						<h4 class="modal-title" id="modalLabel">Confirmação</h4>
 					</div>
-					<div class="modal-body">Deseja realmente fazer isso?</div>
+					<div class="modal-body">Confirmar?</div>
 					<div class="modal-footer">
 						<a id="excluir" href="#">
 							<button type="button" class="btn btn-success" id="alterarStatus">Sim</button>
@@ -162,10 +165,9 @@
 					<div class="modal-body">Deseja realmente cancelar este
 						candidato?</div>
 					<div class="modal-footer">
-						<input type="hidden" id="#idCancelamento" /> <a id="excluir"
-							href="/cancelar-candidato/">
-							<button type="button" class="btn btn-danger">Sim</button>
-						</a>
+						<input type="hidden" id="idCancelamento" value="" />
+						<button type="button" class="btn btn-danger"
+							onclick="cancelarCandidato()">Sim</button>
 						<button type="button" class="btn btn-success" data-dismiss="modal">Não</button>
 					</div>
 				</div>
@@ -188,6 +190,7 @@
 						<div class="panel-body">
 							<input type="hidden" name="user" id="user"
 								value="${autenticado.perfil.nome}" />
+
 							<table
 								class="table table-bordered table-condensed table-hover table-striped"
 								id="tabelaCandidato"
@@ -206,9 +209,9 @@
 									<form id="form">
 										<c:forEach var="candidato" items="${candidatos}">
 											<tr>
-												<input type="hidden" id="${candidato.id}" />
+												<input type="hidden" id="${candidato.id}"/>
 												<td>${candidato.nome}</td>
-												<td>${candidato.vagaCandidato.vaga.nomeVaga}</td>
+												<td>${candidato.ultimaVaga.nomeVaga}</td>
 												<td><fmt:formatNumber
 														value="${candidato.valorPretensao}" minFractionDigits="2"
 														type="currency" /></td>
@@ -239,13 +242,13 @@
 																<li><c:url
 																		value="cancelar-candidato/${candidato.id}"
 																		var="urlCancelar">
-																	</c:url><a href="#delete-modal" onclick="cancelarClick"
+																	</c:url><a href="#delete-modal"
+																	onclick="cancelarClick(${candidato.id})"
 																	data-toggle="modal"><i class="fa fa-trash-o fa-lg">&nbsp;</i>Cancelar</a></li>
 																<!-- /fim botao -->
 															</ul>
 														</div>
-													</div> <!-- /btn-group -->
-												</td>
+													</div> <!-- /btn-group --></td>
 											</tr>
 										</c:forEach>
 									</form>
@@ -289,16 +292,17 @@
 									CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
 				                	$("#proposta-tab").show();
 				                	$("#proposta").show();
+				                	
 				                 }
 							}else if(data.ultimoStatus.status.id == "10"){
 				                 if(perfil == "Administrador" || perfil == "CEO" || perfil == "Diretor de operação"){
 										CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
 					                	$("#proposta-tab").show();
-					                	$("#proposta").show();
+					                	CKEDITOR.instances['editor'].setReadOnly(true);
 					                 }
 							}else{
 			                	$("#proposta-tab").hide();
-			                	$("#proposta").hide();
+			                	$("#proposta").setReadOnly(true);
 							}
 							if(data.ultimoStatus.status.id == "6"){
 								$("#avaliacao-tab").show();
@@ -379,19 +383,22 @@
                   $('#hdn-status').val(idStatus);
             }
             
-            function cancelarCandidato(id) {
+            function cancelarCandidato() {
+            	var id = $("#idCancelamento").val();
+            	
             	$.ajax({
         			url : "cancelar-candidato/"+id,
         			type : "POST"
         		}).done(function() {
-        			alert('done');
+        			 location.reload();
         		}).fail(function(jqXHR, textStatus) {
         			alert('fail');
+        			 location.reload();s
         		});
             }
 
            function cancelarClick (id){
-        	   $("#idCancelamento").val(id)
+        	   $("#idCancelamento").val(id);
            } 
 
         /*gerador de campo*/    
@@ -418,6 +425,15 @@
             	$(".div"+id).remove();
             	cont--;
             }
+       
+         // Submit do formulário
+        	$("button#btnEnviar").click(function() {
+        		$("form#formValidar").submit();
+        		if($('form#formValidar').parsley('isValid')){
+					$('#confirm-modal').modal('show');
+			   }
+        	});
+         
 /* paginação */
 	$(function	()	{
 		$('#tabelaCandidato').dataTable( {

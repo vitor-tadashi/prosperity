@@ -150,6 +150,8 @@ public class CandidatoController<PaginarCandidato> {
 
 		} else {
 			try {
+				String caminho = uploadCurriculo(file, candidatoBean.getCpf());
+				candidatoBean.setCurriculo(caminho);
 				candidatoBusiness.inserir(candidatoBean);
 				model.addAttribute("sucesso", "Candidato salvo com sucesso.");
 
@@ -201,7 +203,7 @@ public class CandidatoController<PaginarCandidato> {
 		}
 		candidatoBusiness.inserir(candidatoBean);
 
-		return "redirect:candidato/cadastrar-candidato";
+		return "candidato/cadastrar-candidato";
 	}
 	
 	private String uploadCurriculo(MultipartFile file, String cpf) {
@@ -233,8 +235,14 @@ public class CandidatoController<PaginarCandidato> {
 	@RequestMapping(value = "/historico/{id}", method = RequestMethod.GET)
 	public String historicoCandidato(Model model, @PathVariable Integer id) {
 		CandidatoBean candidato = candidatoBusiness.obter(id);
-		obterDominiosCandidato(model);
+		List<ProvaCandidatoBean> provasCandidatoBean = provaCandidatoBusiness.obterProva(id);
+		/*List<ProvaCandidatoBean> provasCandidatoBean = new ArrayList<ProvaCandidatoBean>();
+		provasCandidatoBean.get(0).setId(id);
+		List<ProvaCandidatoBean> provaCandidato = provaCandidatoBusiness.obterProva(provasCandidatoBean);
+		obterDominiosCandidato(model);*/
+		model.addAttribute("provas",provasCandidatoBean);
 		model.addAttribute("candidato", candidato);
+		//model.addAttribute("provasCandidato",provasCandidatoBean);
 
 		return "candidato/historico-candidato";
 	}

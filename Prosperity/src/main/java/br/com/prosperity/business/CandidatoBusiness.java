@@ -251,64 +251,29 @@ public class CandidatoBusiness {
 
 		if (candidatoBean.getId() == null) {
 
-			if (verificarCandidatura(candidatoBean) == true) {
+			if (verificarCandidatura(candidatoBean)) {
 				CandidatoEntity candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoBean);
 				SituacaoCandidatoBean situacaoCandidato = new SituacaoCandidatoBean();
 				Date dateNow = new Date();
 				candidatoEntity.setDataAbertura(dateNow);
 
-				candidatoEntity.getFormacao()
-						.setTipoCurso(tipoCursoDAO.findById(candidatoBean.getFormacao().getTipoCurso().getId()));
-				candidatoEntity.getFormacao().setSituacaoAtual(
-						situacaoAtualDAO.findById(candidatoBean.getFormacao().getSituacaoAtual().getId()));
+				definirFormacao(candidatoBean, candidatoEntity);
 
-				Set<VagaCandidatoEntity> vagas = new HashSet<>();
-				for (VagaCandidatoEntity v : candidatoEntity.getVagas()) {
-					v.setVaga(vagaDAO.findById(candidatoBean.getVagaCandidato().getVaga().getId()));
-					v.setCanalInformacao(
-							canalInformacaoDAO.findById(candidatoBean.getVagaCandidato().getCanalInformacao().getId()));
-					vagas.add(v);
-				}
-				if (vagas.isEmpty() || vagas.size() == 0 || vagas == null) {
-					VagaCandidatoEntity novoVagaCandidato = new VagaCandidatoEntity();
+				VagaEntity vagaAtual = definirVagas(candidatoBean, candidatoEntity);
 
-					novoVagaCandidato.setVaga(vagaDAO.findById(candidatoBean.getVagaCandidato().getVaga().getId()));
-					if (candidatoBean.getVagaCandidato().getCanalInformacao().getId() != null)
-						novoVagaCandidato.setCanalInformacao(canalInformacaoDAO
-								.findById(candidatoBean.getVagaCandidato().getCanalInformacao().getId()));
-						novoVagaCandidato.setCandidato(candidatoEntity);
-					vagas.add(novoVagaCandidato);
-				}
-				candidatoEntity.setVagas(vagas);
-
-				String replaceCPF = candidatoEntity.getCpf().replace(".", "").replace("-", "");
-				String replaceRG = candidatoEntity.getRg().replace(".", "").replace("-", "");
-				String replaceTelefone = candidatoEntity.getContato().getTelefone().replace("(", "").replace(")", "")
-						.replace("-", "");
-
-				candidatoEntity.getContato().setTelefone(replaceTelefone);
-				candidatoEntity.setCpf(replaceCPF);
-				candidatoEntity.setRg(replaceRG);
+				tratarInformacoes(candidatoEntity);
 
 				candidatoDAO.insert(candidatoEntity);
-				/*for(VagaCandidatoEntity vc: candidatoEntity.getVagas()){
-					vagaCandidatoDAO.insert(vc);	
-				}*/
-
-
-				List<VagaCandidatoEntity> vagao = new ArrayList<VagaCandidatoEntity>();
-				for (VagaCandidatoEntity vaguinhas : vagas) {
-					vagao.add(vaguinhas);
-				}
-
-				inserirAvaliadores(candidatoEntity, vagao.get(0).getVaga().getId());
+				
+				inserirAvaliadores(candidatoEntity, vagaAtual.getId());
+				
+				if (vagaAtual.getId() == 1202)
+					situacaoCandidato.setStatus(StatusCandidatoEnum.CANCELADO);
 
 				situacaoCandidato.setIdCandidato(candidatoEntity.getId());
 				situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
 
-				if (vagao.get(0).getVaga().getId() == 1202)
-					situacaoCandidato.setStatus(StatusCandidatoEnum.CANCELADO);
-
+				
 				alterarStatus(situacaoCandidato);
 
 			} else {
@@ -320,17 +285,51 @@ public class CandidatoBusiness {
 
 			candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoEntity, candidatoBean);
 
-			String replaceCPF = candidatoEntity.getCpf().replace(".", "").replace("-", "");
-			String replaceRG = candidatoEntity.getRg().replace(".", "").replace("-", "");
-			String replaceTelefone = candidatoEntity.getContato().getTelefone().replace("(", "").replace(")", "")
-					.replace("-", "");
-
-			candidatoEntity.getContato().setTelefone(replaceTelefone);
-			candidatoEntity.setCpf(replaceCPF);
-			candidatoEntity.setRg(replaceRG);
+			tratarInformacoes(candidatoEntity);
 
 			candidatoDAO.update(candidatoEntity);
 		}
+	}
+
+	private void tratarInformacoes(CandidatoEntity candidatoEntity) {
+		String replaceCPF = candidatoEntity.getCpf().replace(".", "").replace("-", "");
+		String replaceRG = candidatoEntity.getRg().replace(".", "").replace("-", "");
+		String replaceTelefone = candidatoEntity.getContato().getTelefone().replace("(", "").replace(")", "")
+				.replace("-", "");
+
+		candidatoEntity.getContato().setTelefone(replaceTelefone);
+		candidatoEntity.setCpf(replaceCPF);
+		candidatoEntity.setRg(replaceRG);
+	}
+
+	private VagaEntity definirVagas(CandidatoBean candidatoBean, CandidatoEntity candidatoEntity) {
+		Set<VagaCandidatoEntity> vagas = new HashSet<>();
+		for (VagaCandidatoEntity v : candidatoEntity.getVagas()) {
+			v.setVaga(vagaDAO.findById(candidatoBean.getVagaCandidato().getVaga().getId()));
+			v.setCanalInformacao(
+					canalInformacaoDAO.findById(candidatoBean.getVagaCandidato().getCanalInformacao().getId()));
+			vagas.add(v);
+		}
+		if (vagas.isEmpty() || vagas.size() == 0 || vagas == null) {
+			VagaCandidatoEntity novoVagaCandidato = new VagaCandidatoEntity();
+
+			novoVagaCandidato.setVaga(vagaDAO.findById(candidatoBean.getVagaCandidato().getVaga().getId()));
+			if (candidatoBean.getVagaCandidato().getCanalInformacao().getId() != null)
+				novoVagaCandidato.setCanalInformacao(canalInformacaoDAO
+						.findById(candidatoBean.getVagaCandidato().getCanalInformacao().getId()));
+				novoVagaCandidato.setCandidato(candidatoEntity);
+			vagas.add(novoVagaCandidato);
+		}
+		candidatoEntity.setVagas(vagas);
+		VagaEntity vagaAtual = new ArrayList<VagaCandidatoEntity>(vagas).get(0).getVaga();
+		return vagaAtual;
+	}
+
+	private void definirFormacao(CandidatoBean candidatoBean, CandidatoEntity candidatoEntity) {
+		candidatoEntity.getFormacao()
+				.setTipoCurso(tipoCursoDAO.findById(candidatoBean.getFormacao().getTipoCurso().getId()));
+		candidatoEntity.getFormacao().setSituacaoAtual(
+				situacaoAtualDAO.findById(candidatoBean.getFormacao().getSituacaoAtual().getId()));
 	}
 
 	@Transactional
@@ -368,8 +367,8 @@ public class CandidatoBusiness {
 			if (statusFuturoEntity.size() == 1) {
 				situacaoCandidato.setStatus(StatusCandidatoEnum.valueOf(statusFuturoEntity.get(0).getIdStatusFuturo()));
 			} else {
-				avaliadorCandidatoEntity = avaliadorCandidatoDAO.findByNamedQuery("atualizarAvaliador",
-						usuarioBean.getId(), statusCandidatoEntity.getCandidato());
+				avaliadorCandidatoEntity = avaliadorCandidatoDAO.findByNamedQuery("obterAvaliadoresCandidato",
+						statusCandidatoEntity.getCandidato());
 				if (avaliadorCandidatoEntity != null && avaliadorCandidatoEntity.size() > 0) {
 					StatusCandidatoEnum status = avaliadorCandidatoEntity.size() == 1
 							? StatusCandidatoEnum.GERARPROPOSTA : StatusCandidatoEnum.CANDIDATOEMANALISE;
@@ -377,6 +376,8 @@ public class CandidatoBusiness {
 					situacaoCandidato.setStatus(status);
 				}
 			}
+			avaliadorCandidatoEntity = avaliadorCandidatoDAO.findByNamedQuery("atualizarAvaliador",
+					usuarioBean.getId(), statusCandidatoEntity.getCandidato());
 			avaliadorCandidatoEntity.get(0).setStatus(situacaoCandidato.getStatus().getValue());
 			avaliadorCandidatoDAO.update(avaliadorCandidatoEntity.get(0));
 			statusCandidatoDAO.insert(statusAlteracao(situacaoCandidato));
@@ -512,6 +513,9 @@ public class CandidatoBusiness {
 				listaStatus.add(StatusCandidatoEnum.PROPOSTAACEITA.getValue());
 				listaStatus.add(StatusCandidatoEnum.PROPOSTARECUSADA.getValue());
 			}
+		}
+		if(listaStatus.isEmpty()){
+			listaStatus.add(0);
 		}
 		return listaStatus;
 	}
