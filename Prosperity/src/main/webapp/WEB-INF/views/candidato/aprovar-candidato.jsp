@@ -23,7 +23,7 @@
 						<div class="panel panel-default">
 							<div class="panel-tab clearfix">
 								<ul class="tab-bar">
-									<li id="entrevista-tab"><a href="#infoEntrevista"
+									<li id="entrevista-tab" class="active"><a href="#infoEntrevista"
 										data-toggle="tab"><i class="fa fa-user"></i> Informações
 											de entrevista</a></li>
 									<li id="processo-tab"><a href="#processoSelecao"
@@ -284,14 +284,19 @@
 						dataType:"json",
 						method:"GET",
 						success:function(data){	
-							if(data.ultimoStatus.status.id == "9" || data.ultimoStatus.status.id == "10"){
-								 var perfil = $('#user').val();
-				                 if(perfil == "RH" || perfil == "Administrador" || perfil == "CEO" || perfil == "Diretor de Operação"){
+							var perfil = $('#user').val();
+							if(data.ultimoStatus.status.id == "9"){
+				                 if(perfil == "Analista de RH" || perfil == "Gestor RH"){
 									CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
 				                	$("#proposta-tab").show();
 				                	$("#proposta").show();
 				                 }
-				                  
+							}else if(data.ultimoStatus.status.id == "10"){
+				                 if(perfil == "Administrador" || perfil == "CEO" || perfil == "Diretor de operação"){
+										CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
+					                	$("#proposta-tab").show();
+					                	$("#proposta").show();
+					                 }
 							}else{
 			                	$("#proposta-tab").hide();
 			                	$("#proposta").hide();
@@ -307,13 +312,6 @@
 								$("#processo-tab").hide();
 								$("#processoSeletivo").hide();
 							}
-							if(data.ultimoStatus.status.id == "5"){
-								$("#entrevista-tab").show();
-								$("#infoEntrevista").show();
-							}else{
-								$("#entrevista-tab").hide();
-								$("#infoEntrevista").hide();
-							}
 						}
 					})
 				}
@@ -322,7 +320,6 @@
 			function alterarStatus(id,status){
 				$('input.cancelar-id').val(id);
 				$('input.cancelar-status').val(status);
-				
 			}
 				
 			})
