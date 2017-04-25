@@ -1,5 +1,6 @@
 package br.com.prosperity.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -86,7 +87,7 @@ public class CandidatoEntity {
 	private Date dataNascimento;
 
 	@Column(name = "vlPretensao")
-	private Double valorPretensao;
+	private BigDecimal valorPretensao;
 
 	@Column(name = "dtAbertura")
 	@Temporal(TemporalType.DATE)
@@ -351,11 +352,11 @@ public class CandidatoEntity {
 		this.curriculoTexto = curriculoTexto;
 	}
 
-	public Double getValorPretensao() {
+	public BigDecimal getValorPretensao() {
 		return valorPretensao;
 	}
 
-	public void setValorPretensao(Double valorPretensao) {
+	public void setValorPretensao(BigDecimal valorPretensao) {
 		this.valorPretensao = valorPretensao;
 	}
 }

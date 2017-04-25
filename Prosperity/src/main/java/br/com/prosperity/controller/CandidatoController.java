@@ -203,7 +203,7 @@ public class CandidatoController<PaginarCandidato> {
 		}
 		candidatoBusiness.inserir(candidatoBean);
 
-		return "redirect:candidato/cadastrar-candidato";
+		return "candidato/cadastrar-candidato";
 	}
 	
 	private String uploadCurriculo(MultipartFile file, String cpf) {
