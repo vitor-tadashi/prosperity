@@ -108,10 +108,6 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private ProvaBean provaBean;
-
-	@Autowired
-	private List<ProvaBean> provasBean;
-
 	/**
 	 * @author andre.posman
 	 * @param model
@@ -396,7 +392,6 @@ public class CandidatoController<PaginarCandidato> {
 		List<String> l = gson.fromJson(processoSeletivo, List.class);
 		provasCandidatoBean = new ArrayList<ProvaCandidatoBean>();
 		List<String> descricao = new ArrayList<String>();
-		provasBean = new ArrayList<ProvaBean>();
 		int aux = 0;
 		for (String lista : l) {
 			String aux2 = lista;
@@ -405,17 +400,18 @@ public class CandidatoController<PaginarCandidato> {
 					if (aux % 2 == 0) {
 						provaBean = new ProvaBean();
 						provaBean.setId(Integer.parseInt(aux2));
-						provaCandidatoBean.setProvas(provaBean);
 					} else {
 						String dsProva = aux2;
+						provaCandidatoBean = new ProvaCandidatoBean();
+						provaCandidatoBean.setProvas(provaBean);
 						provaCandidatoBean.setDescricao(dsProva);
+						provaCandidatoBean.setCandidato(bean);
+						provasCandidatoBean.add(provaCandidatoBean);
 					}
 				}
 			} catch (Exception e) {
 				System.out.println(e);
 			}
-			provaCandidatoBean.setCandidato(bean);
-			provasCandidatoBean.add(provaCandidatoBean);
 			aux++;
 		}
 		return provasCandidatoBean;
