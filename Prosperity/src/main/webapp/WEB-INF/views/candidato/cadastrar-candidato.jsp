@@ -109,7 +109,7 @@
 												<input type="text"
 													class="form-control telefone parsley-validated" maxlength="30"
 													placeholder="Informe seu telefone" data-required="true"
-													id="contato" name="contato.telefone" onblur="validarTel(this.value)"
+													id="contato" name="contato.telefone" onblur="validarTel()"
 													value="${candidato.contato.telefone}">
 											</div>
 											<div class="form-group col-md-2">
@@ -303,12 +303,13 @@
 			$('.date').mask('99/99/9999');
 
 		}) 
-			function validarTel(){
-		var tel = $("#telefone").val().replace(/[^\d]+/g,'');
-		if (tel.length == 11){
-			$("#telefone").val(tel).mask('(999)9999-9999');
+		
+		function validarTel(){
+		var tel = $("#contato").val().replace(/[^\d]+/g,'');
+		if (tel.length == 10){
+			$("#contato").val(tel).mask('(99)9999-9999');
 		}else{
-			$("#telefone").val(tel).mask('(999)99999-9999');
+			$("#contato").val(tel).mask('(99)99999-9999');
 		}
 	}
 
@@ -331,7 +332,7 @@
 				limpa_formulário_cep();
 				var div = document.getElementById("textDiv").className = "alert alert-danger";
 
-				textDiv.textContent = "CEP inválido";
+				textDiv.textContent = "";
 
 				var text = "[" + div.textContent + "]";
 			}
