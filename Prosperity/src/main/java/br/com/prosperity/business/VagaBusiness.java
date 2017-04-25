@@ -129,7 +129,7 @@ public class VagaBusiness {
 
 	@Transactional(readOnly = true)
 	public List<VagaBean> listarVagasAtivas() {
-		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagasAtivas", 1);
+		List<VagaEntity> vagaEntity = vagaDAO.findByNamedQuery("listarVagasAtivas");
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 		return vagaBean;
 	}
