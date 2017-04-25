@@ -144,7 +144,6 @@ textarea {
 	border-top-left-radius: 50%;
 	border-bottom-right-radius: 50%;
 	border-bottom-left-radius: 50%;
-	z-index: 99999;
 }
 
 /** timeline content **/

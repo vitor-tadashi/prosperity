@@ -198,11 +198,11 @@
 												</p>
 											</div>
 											<div class="tl-body">
-												<p>
-													<label>Parecer:</label> ${status.descricaoParecer}
+												<p class="desParecer">
+													<label>Parecer:</label> <span>${status.descricaoParecer}</span>
 												</p>
 												<p>
-													<label>Usuário:</label> ${status.usuario.nome}
+													<label>Usuário:</label> <span>${status.usuario.nome}</span>
 												</p>
 											</div>
 										</div>
@@ -218,5 +218,16 @@
 			<!-- /.padding-md -->
 		</div>
 	</div>
+	</layout:put>
+	<layout:put block="scripts" type="REPLACE">
+	<script>	
+		$(function() {
+			$('p.desParecer').each(function() {
+				if($(this).find('span').text() == '') {
+					$(this).remove();
+				}
+			});
+		});
+	</script>
 	</layout:put>
 </layout:extends>
