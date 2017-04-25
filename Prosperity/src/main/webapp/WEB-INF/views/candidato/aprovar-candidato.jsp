@@ -236,7 +236,6 @@
 																			<i ${statusDisponivel.classe}>&nbsp;</i>${statusDisponivel.nome}</a></li>
 																	<li class="divider "></li>
 																</c:forEach>
-																<li class="divider"></li>
 																<li><c:url
 																		value="cancelar-candidato/${candidato.id}"
 																		var="urlCancelar">
