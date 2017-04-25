@@ -148,10 +148,23 @@ public class CandidatoEntity {
 
 	@OneToMany(cascade = {CascadeType.ALL } ,fetch = FetchType.LAZY, mappedBy = "candidato" )
 	private Set<VagaCandidatoEntity> vagas;
-
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "provas")
+	private List<ProvaCandidatoEntity> provaCandidato;
+	
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
 	@JoinColumn(name = "idCandidato")
 	private List<AvaliadorCandidatoEntity> avaliadores;
+	
+	
+	
+	public List<ProvaCandidatoEntity> getProvaCandidato() {
+		return provaCandidato;
+	}
+
+	public void setProvaCandidato(List<ProvaCandidatoEntity> provaCandidato) {
+		this.provaCandidato = provaCandidato;
+	}
 
 	public List<AvaliadorCandidatoEntity> getAvaliadores() {
 		return avaliadores;
