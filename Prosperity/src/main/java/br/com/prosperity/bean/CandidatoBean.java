@@ -39,6 +39,7 @@ public class CandidatoBean extends FormatUtil {
 	private Date dataNascimento; 
 	@NumberFormat(pattern = "#,##0.00") 
 	private BigDecimal valorPretensao;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataAbertura;
 	private Date dataFechamento;
 	@NotEmpty(message = "O campo email deve ser prenchido")
@@ -67,11 +68,12 @@ public class CandidatoBean extends FormatUtil {
 	private Double pretensaoDe;
 	private Double pretensaoPara;
 	private String curriculoTexto;
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataAberturaDe;
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataAberturaPara;
 	private VagaBean vagaBean;
+	private List<ProvaCandidatoBean> provaCandidato = new ArrayList<>();
 
 	public VagaCandidatoBean getVagaCandidato() {
 		if (vagaCandidato == null) {
@@ -79,6 +81,20 @@ public class CandidatoBean extends FormatUtil {
 		}
 		return vagaCandidato;
 	}
+	
+	
+	
+	public List<ProvaCandidatoBean> getProvaCandidato() {
+		return provaCandidato;
+	}
+
+
+
+	public void setProvaCandidato(List<ProvaCandidatoBean> provaCandidato) {
+		this.provaCandidato = provaCandidato;
+	}
+
+
 
 	public void setVagaCandidato(VagaCandidatoBean vagaCandidato) {
 		this.vagaCandidato = vagaCandidato;

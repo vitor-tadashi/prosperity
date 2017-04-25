@@ -147,15 +147,20 @@
 							<div class="form-group col-md-6">
 								<label class="col-xs-5 control-label">Tipo de prova:</label>
 								<div class="col-xs-7">
-									<p class="form-control-static" id="situacaoAtual"
-										name="situacaoAtual">Prova teórica</p>
+									<p class="form-control-static" id="situacaoAtual" name="#">
+										<c:forEach items="${provas }" var="prova">
+											${prova.provas.nome }<br/>
+										</c:forEach>
+										</p>
 								</div>
 							</div>
 							<div class="form-group col-md-6">
 								<label class="col-xs-5 control-label">Descrição:</label>
 								<div class="col-xs-7">
 									<p class="form-control-static" id="conclusao" name="conclusao">
-										Prova de .NET e Java
+										<c:forEach items="${provas }" var="prova">
+											${prova.descricao}<br/>
+										</c:forEach>
 									</p>
 								</div>
 							</div>
