@@ -10,14 +10,14 @@
 			href="/resources/css/ckeditor_/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
 		<!--    Modais   -->
 		<!-- Modal Avaliação de Competencias -->
-		<div id="modalProposta" class="modal fade bs-example-modal-lg"
-			tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+		<div id="modalProposta" class="modal fade"
+			tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-						<h4 style="text-align: center;">Gestão de candidato</h4>
+						<h4 style="text-align: center;" class="modal-title" id="myModalLabel">Gestão de candidato</h4>
 					</div>
 					<div class="modal-body">
 						<div class="panel panel-default">
@@ -174,7 +174,7 @@
 		<div id="main-container">
 			<div id="breadcrumb">
 				<ul class="breadcrumb">
-					<li><i class="fa fa-home"></i><a href="index.html"> Home</a></li>
+					<li><i class="fa fa-home"></i><a href="/pagina-inicial"> Página inicial</a></li>
 					<li>Consultar</li>
 					<li class="active">Aprovação de candidatos</li>
 				</ul>
@@ -219,34 +219,30 @@
 												<td><input type="hidden" name="idStatus" id="idStatus"
 													value="${candidato.ultimoStatus.status.id}" />
 													<div class="btn-group">
-														<div class="btn-group">
-															<button class="btn btn-sm btn-info dropdown-toggle"
-																data-toggle="dropdown" aria-haspopup="true"
-																aria-expanded="false">
-																<i class="fa fa-cogs fa-lg">&nbsp;</i> <span
-																	class="caret"></span>
-															</button>
-															<ul class="dropdown-menu dropdown-menu-right slidedown">
-																<c:forEach var="statusDisponivel"
-																	items="${candidato.ultimoStatus.status.statusDisponiveis}">
-																	<li><a data-toggle="modal"
-																		data-target=".bs-example-modal-lg"
-																		id="aprovar-candidato" href="aprovar-modal"
-																		onclick="alterarStatus(${candidato.id}, ${statusDisponivel.id})">
-																			<i ${statusDisponivel.classe}>&nbsp;</i>${statusDisponivel.nome}</a></li>
-																	<li class="divider "></li>
-																</c:forEach>
+														<button class="btn btn-sm btn-info dropdown-toggle"
+															data-toggle="dropdown" aria-haspopup="true"
+															aria-expanded="false">
+															<i class="fa fa-cogs fa-lg">&nbsp;</i> <span
+																class="caret"></span>
+														</button>
+														<ul class="dropdown-menu dropdown-menu-right slidedown">
+															<c:forEach var="statusDisponivel"
+																items="${candidato.ultimoStatus.status.statusDisponiveis}">
+																<li><a class="clickable"
+																	id="aprovar-candidato" 
+																	onclick="alterarStatus(${candidato.id}, ${statusDisponivel.id})">
+																		<i ${statusDisponivel.classe}>&nbsp;</i>${statusDisponivel.nome}</a></li>
 																<li class="divider"></li>
-																<li><c:url
-																		value="cancelar-candidato/${candidato.id}"
-																		var="urlCancelar">
-																	</c:url><a href="#delete-modal"
-																	onclick="cancelarClick(${candidato.id})"
-																	data-toggle="modal"><i class="fa fa-trash-o fa-lg">&nbsp;</i>Cancelar</a></li>
-																<!-- /fim botao -->
-															</ul>
-														</div>
-													</div> <!-- /btn-group --></td>
+															</c:forEach>
+															<li><c:url
+																	value="cancelar-candidato/${candidato.id}"
+																	var="urlCancelar">
+																</c:url><a href="#delete-modal"
+																onclick="cancelarClick(${candidato.id})"
+																data-toggle="modal"><i class="fa fa-trash-o fa-lg">&nbsp;</i>Cancelar</a></li>
+															<!-- /fim botao -->
+														</ul>
+												</div> <!-- /btn-group --></td>
 											</tr>
 										</c:forEach>
 									</form>
@@ -312,6 +308,7 @@
 								$("#processo-tab").hide();
 								$("#processoSeletivo").hide();
 							}
+							$('#modalProposta').modal('show');
 						}
 					})
 				}
@@ -390,7 +387,7 @@
         			 location.reload();
         		}).fail(function(jqXHR, textStatus) {
         			alert('fail');
-        			 location.reload();s
+        			 location.reload();
         		});
             }
 

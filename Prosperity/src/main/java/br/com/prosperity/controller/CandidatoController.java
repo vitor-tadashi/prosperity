@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.annotation.MultipartConfig;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +53,6 @@ import br.com.prosperity.business.VagaBusiness;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.exception.BusinessException;
 
-@SuppressWarnings("unused")
 @Controller
 @RequestMapping(value = "candidato")
 public class CandidatoController<PaginarCandidato> {

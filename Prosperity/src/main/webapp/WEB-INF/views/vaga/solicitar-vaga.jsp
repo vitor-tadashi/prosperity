@@ -410,7 +410,6 @@
 	<!-- Custom -->
 	<script src="/resources/js/custom/solicitacaoVaga.js"></script>
 	<script src="/resources/js/parsley.min.js"></script>
-	<script src="/resources/js/app/app.js"></script>
 	
 	<script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 	
