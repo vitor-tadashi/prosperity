@@ -70,6 +70,7 @@ public class CandidatoBean extends FormatUtil {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataAberturaPara;
 	private VagaBean vagaBean;
+	private List<ProvaCandidatoBean> provaCandidato = new ArrayList<>();
 
 	public VagaCandidatoBean getVagaCandidato() {
 		if (vagaCandidato == null) {
@@ -77,6 +78,20 @@ public class CandidatoBean extends FormatUtil {
 		}
 		return vagaCandidato;
 	}
+	
+	
+	
+	public List<ProvaCandidatoBean> getProvaCandidato() {
+		return provaCandidato;
+	}
+
+
+
+	public void setProvaCandidato(List<ProvaCandidatoBean> provaCandidato) {
+		this.provaCandidato = provaCandidato;
+	}
+
+
 
 	public void setVagaCandidato(VagaCandidatoBean vagaCandidato) {
 		this.vagaCandidato = vagaCandidato;

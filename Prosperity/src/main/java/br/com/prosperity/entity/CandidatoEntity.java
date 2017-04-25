@@ -59,6 +59,8 @@ import javax.persistence.TemporalType;
 				+ "OR (sc.status.id IN (?2) AND ac.status IS NULL AND ac.usuario.id = ?3)"
 				+ "OR (sc.status.id = ?4 AND ac.status IS NULL) ORDER BY c.id DESC"
 				), 
+		
+		
 
 		@NamedQuery(name = "proposta", query = "SELECT c FROM CandidatoEntity c, AvaliadorCandidatoEntity ac INNER JOIN c.statusCandidatos sc "
 				+ "WHERE ac.candidato.id = c.id AND sc.idStatusCandidato = (SELECT max(sc.idStatusCandidato)"
@@ -149,10 +151,23 @@ public class CandidatoEntity {
 
 	@OneToMany(cascade = {CascadeType.ALL } ,fetch = FetchType.LAZY, mappedBy = "candidato" )
 	private Set<VagaCandidatoEntity> vagas;
-
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "provas")
+	private List<ProvaCandidatoEntity> provaCandidato;
+	
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
 	@JoinColumn(name = "idCandidato")
 	private List<AvaliadorCandidatoEntity> avaliadores;
+	
+	
+	
+	public List<ProvaCandidatoEntity> getProvaCandidato() {
+		return provaCandidato;
+	}
+
+	public void setProvaCandidato(List<ProvaCandidatoEntity> provaCandidato) {
+		this.provaCandidato = provaCandidato;
+	}
 
 	public List<AvaliadorCandidatoEntity> getAvaliadores() {
 		return avaliadores;

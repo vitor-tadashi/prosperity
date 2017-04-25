@@ -33,6 +33,9 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 	
 	@Autowired
 	public CandidatoVagaConverter candidatoVagaConverter;
+	
+	@Autowired
+	public ProvaCandidatoConverter provaCandidatoConverter;
 
 	public CandidatoEntity convertBeanToEntityService(CandidatoBean bean) {
 		if (bean == null) {
@@ -63,6 +66,7 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		entity.setProposta(bean.getProposta());
 		entity.setCurriculoTexto(bean.getCurriculoTexto());
 		entity.setVagas(vagaCandidatoConverter.convertBeanToEntity(bean.getVagas()));
+		//entity.setProvaCandidato(provaCandidatoConverter.convertBeanToEntity(bean.getProvaCandidato()));
 		
 		return entity;
 	}
@@ -144,6 +148,7 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		bean.setDataUltimoContato(entity.getDataUltimoContato());
 		bean.setProposta(entity.getProposta());
 		bean.setCurriculoTexto(entity.getCurriculoTexto());
+		//bean.setProvaCandidato(provaCandidatoConverter.convertEntityToBean(entity.getProvaCandidato()));
 		//bean.setVagaCandidato(vagaCandidato);
 		bean.setVagas(candidatoVagaConverter.convertEntityToBean(entity.getVagas()));
 		for(VagaCandidatoBean vc : bean.getVagas()){
