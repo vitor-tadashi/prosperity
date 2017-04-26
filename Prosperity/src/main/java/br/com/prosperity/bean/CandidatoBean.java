@@ -73,6 +73,7 @@ public class CandidatoBean extends FormatUtil {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataAberturaPara;
 	private VagaBean vagaBean;
+	
 	private List<ProvaCandidatoBean> provaCandidato = new ArrayList<>();
 
 	public VagaCandidatoBean getVagaCandidato() {
