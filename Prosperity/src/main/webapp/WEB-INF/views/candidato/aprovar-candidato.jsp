@@ -300,6 +300,12 @@
 					                	$("#proposta-tab").show();
 					                	$("#proposta").show();
 					                 }
+							}else if(data.ultimoStatus.status.id == "14"){
+				                 if(perfil == "Analista de RH" || perfil == "Gestor RH"){
+										CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
+					                	$("#proposta-tab").show();
+					                	$("#proposta").show();
+					                 }
 							}else{
 			                	$("#proposta-tab").hide();
 			                	$("#proposta").hide();
