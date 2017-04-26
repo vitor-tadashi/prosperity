@@ -98,7 +98,7 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private AvaliacaoBean avaliacaoBean;
-	
+
 	@Autowired
 	private ProvaCandidatoBean provaCandidatoBean;
 
@@ -107,6 +107,7 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private ProvaBean provaBean;
+
 	/**
 	 * @author andre.posman
 	 * @param model
@@ -116,7 +117,7 @@ public class CandidatoController<PaginarCandidato> {
 	public String cadastrarCandidato(Model model) {
 
 		obterDominiosCandidato(model);
-		
+
 		return "candidato/cadastrar-candidato";
 	}
 
@@ -201,10 +202,11 @@ public class CandidatoController<PaginarCandidato> {
 			return "candidato/cadastrar-candidato";
 		}
 		candidatoBusiness.inserir(candidatoBean);
+		model.addAttribute("sucesso", "Candidato salvo com sucesso.");
 
 		return "candidato/cadastrar-candidato";
 	}
-	
+
 	private String uploadCurriculo(MultipartFile file, String cpf) {
 		if (!file.isEmpty()) {
 			try {
@@ -235,13 +237,17 @@ public class CandidatoController<PaginarCandidato> {
 	public String historicoCandidato(Model model, @PathVariable Integer id) {
 		CandidatoBean candidato = candidatoBusiness.obter(id);
 		List<ProvaCandidatoBean> provasCandidatoBean = provaCandidatoBusiness.obterProva(id);
-		/*List<ProvaCandidatoBean> provasCandidatoBean = new ArrayList<ProvaCandidatoBean>();
-		provasCandidatoBean.get(0).setId(id);
-		List<ProvaCandidatoBean> provaCandidato = provaCandidatoBusiness.obterProva(provasCandidatoBean);
-		obterDominiosCandidato(model);*/
-		model.addAttribute("provas",provasCandidatoBean);
+		/*
+		 * List<ProvaCandidatoBean> provasCandidatoBean = new
+		 * ArrayList<ProvaCandidatoBean>();
+		 * provasCandidatoBean.get(0).setId(id); List<ProvaCandidatoBean>
+		 * provaCandidato =
+		 * provaCandidatoBusiness.obterProva(provasCandidatoBean);
+		 * obterDominiosCandidato(model);
+		 */
+		model.addAttribute("provas", provasCandidatoBean);
 		model.addAttribute("candidato", candidato);
-		//model.addAttribute("provasCandidato",provasCandidatoBean);
+		// model.addAttribute("provasCandidato",provasCandidatoBean);
 
 		return "candidato/historico-candidato";
 	}
@@ -274,8 +280,7 @@ public class CandidatoController<PaginarCandidato> {
 		if (candidato.getVagaBean().getId() == 0) {
 			candidato.setVagaBean(null);
 		}
-		
-		
+
 		List<CandidatoBean> candidatos = candidatoBusiness.filtroCandidato(candidato);
 		model.addAttribute("candidatos", candidatos);
 
@@ -345,9 +350,9 @@ public class CandidatoController<PaginarCandidato> {
 		bean = candidatoBusiness.obter(situacaoCandidato.getIdCandidato());
 		if (!ac.equals("[]")) {
 			bean.setCompetencias(convertGson(ac));
-			try{
-			candidatoBusiness.inserir(bean);
-			}catch(Exception e){
+			try {
+				candidatoBusiness.inserir(bean);
+			} catch (Exception e) {
 				System.out.println(e);
 			}
 		}
