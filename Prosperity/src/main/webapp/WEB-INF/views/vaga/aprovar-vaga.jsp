@@ -402,13 +402,10 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">Aprovação de vaga</div>
 					<div class="panel-body">
-										<c:if test="${not empty sucesso}">
-											<div id="msg-sucesso" class="alert alert-success msg-margin">
-												<ul>
-													<li class="li-msg">${sucesso }</li>
-												</ul>
-											</div>
-										</c:if>
+							<div id="divAlert"></div>
+								<c:if test="${not empty mensagem}">
+									<div class="alert alert-info mensagem">${mensagem}</div>
+								</c:if>
 						<table
 							class="table table-bordered table-condensed table-hover table-striped"
 							id="tabelaVaga"
@@ -538,11 +535,11 @@
 
 	<layout:put block="scripts" type="REPLACE">
 	<script type="text/javascript">
-	$(document).ready(function () {
+	/* $(document).ready(function () {
         setTimeout(function () {
             $('#msg-sucesso').fadeOut(1500);
         }, 5000);
-    });
+    }); */
 	// script para cores dos status
 	$(".span-Fechado").addClass("label-warning");
 	$(".span-Ativo").addClass("label-success");
@@ -625,17 +622,39 @@
 	}
 	
 	// função para a alteração de status no botão ações
+	
 	function status(){
     	$.ajax({
     		url: "status",
     		type: "POST",
     		dataType: "JSON",
-    		data: { 'idVaga' : $('.aprovar-id').val(), 'status' : $('.aprovar-status').val()},
+    		data: { 'idVaga' : $('.aprovar-id').val(), 'status' : $('.aprovar-status').val()}
+    		}).done(function() {
+    			$('#vaga-modal').modal('hide');
+    			msg = 'Vaga alterada com sucesso!';
+    			$('#divAlert').html(msg).addClass('alert alert-success').show();
+    			escondeMensagem();
+    			location.reload();
+        	}).fail(function(jqXHR, textStatus) {
+    			console.log();
+    			console.log(jqXHR);
+    			console.log(textStatus);
+    			
+    		});
+    }
+	
+	function escondeMensagem() {
+		window.setTimeout(function () {
+			$("#divAlert").hide();
+			$(".mensagem").hide();
+		}, 20000);
+	}
+    	/* 	data: { 'idVaga' : $('.aprovar-id').val(), 'status' : $('.aprovar-status').val()},
     		success: function(){
     				location.reload();	
     			}
-    	});
-    	}
+    	}); */
+    	
 	// funcao para alterar status
 	function alterarStatus(id,status){
 		$('input.aprovar-id').val(id);
@@ -697,7 +716,7 @@
     			}
     		}
     	});
-	})
+	});
 	</script>
 	</layout:put>
 </layout:extends>

@@ -274,4 +274,16 @@
 		});
 	}
 	
+	$(document).ready(function() {
+		var url = window.location.href;
+		if(url.match(/editar/)) {
+			$(".download-download").show();
+		} else {
+			$(".download-download").hide();
+		}
+	});
+	
+	function download (url) {
+		window.location.href = url;
+	}
 	

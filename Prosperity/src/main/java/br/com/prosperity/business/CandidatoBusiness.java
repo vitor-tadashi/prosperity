@@ -510,6 +510,7 @@ public class CandidatoBusiness {
 				listaStatus.add(StatusCandidatoEnum.PROPOSTACANDIDATO.getValue());
 
 			if (funcionalidadeBean.getId() == 28) {
+				listaStatus.add(StatusCandidatoEnum.REFAZERPROPOSTA.getValue());
 				listaStatus.add(StatusCandidatoEnum.PROPOSTAACEITA.getValue());
 				listaStatus.add(StatusCandidatoEnum.PROPOSTARECUSADA.getValue());
 			}
