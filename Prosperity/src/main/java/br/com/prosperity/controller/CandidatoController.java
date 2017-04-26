@@ -177,6 +177,7 @@ public class CandidatoController<PaginarCandidato> {
 	public String solicitarCandidato(Model model, @PathVariable Integer id) {
 		CandidatoBean candidato = candidatoBusiness.obterCandidatoPorId(id);
 		obterDominiosCandidato(model);
+		candidato.setCurriculo("file:///C:/Users/leonardo.ramos/Downloads/PontosProsperity.docx");
 		model.addAttribute("candidato", candidato);
 
 		return "candidato/cadastrar-candidato";
@@ -203,7 +204,7 @@ public class CandidatoController<PaginarCandidato> {
 		}
 		candidatoBusiness.inserir(candidatoBean);
 
-		return "redirect:candidato/cadastrar-candidato";
+		return "candidato/cadastrar-candidato";
 	}
 	
 	private String uploadCurriculo(MultipartFile file, String cpf) {

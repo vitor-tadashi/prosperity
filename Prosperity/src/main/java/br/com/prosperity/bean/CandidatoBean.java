@@ -1,5 +1,6 @@
 package br.com.prosperity.bean;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -69,6 +70,15 @@ public class CandidatoBean extends FormatUtil {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataAberturaPara;
 	private VagaBean vagaBean;
+	private File curriculoFile;
+
+	public File getCurriculoFile() {
+		return curriculoFile;
+	}
+
+	public void setCurriculoFile(File curriculoFile) {
+		this.curriculoFile = curriculoFile;
+	}
 
 	public VagaCandidatoBean getVagaCandidato() {
 		if (vagaCandidato == null) {
