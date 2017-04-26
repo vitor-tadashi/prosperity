@@ -44,6 +44,7 @@ public class CandidatoBean extends FormatUtil {
 	private Date dataFechamento;
 	@NotEmpty(message = "O campo email deve ser prenchido")
 	private String email;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataAlteracao;
 	private String curriculo;
 	@Valid
@@ -73,6 +74,7 @@ public class CandidatoBean extends FormatUtil {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataAberturaPara;
 	private VagaBean vagaBean;
+	
 	private List<ProvaCandidatoBean> provaCandidato = new ArrayList<>();
 
 	public VagaCandidatoBean getVagaCandidato() {

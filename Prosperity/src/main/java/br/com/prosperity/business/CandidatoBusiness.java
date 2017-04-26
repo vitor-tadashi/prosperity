@@ -114,7 +114,7 @@ public class CandidatoBusiness {
 
 	@Autowired
 	private VagaDAO vagaDAO;
-	
+
 	@Autowired
 	private VagaCandidatoDAO vagaCandidatoDAO;
 
@@ -231,8 +231,8 @@ public class CandidatoBusiness {
 		}
 
 		if (candidato.getPretensaoDe() != null && candidato.getPretensaoPara() != null) {
-			criterions.add(Restrictions.between("valorPretensao", candidato.getPretensaoDe(),
-					candidato.getPretensaoPara()));
+			criterions.add(
+					Restrictions.between("valorPretensao", candidato.getPretensaoDe(), candidato.getPretensaoPara()));
 		}
 
 		if (idVaga != 0) {
@@ -244,7 +244,6 @@ public class CandidatoBusiness {
 		return beans;
 
 	}
-	
 
 	@Transactional
 	public void inserir(CandidatoBean candidatoBean) throws BusinessException {
@@ -264,16 +263,15 @@ public class CandidatoBusiness {
 				tratarInformacoes(candidatoEntity);
 
 				candidatoDAO.insert(candidatoEntity);
-				
+
 				inserirAvaliadores(candidatoEntity, vagaAtual.getId());
-				
+
 				if (vagaAtual.getId() == 1202)
 					situacaoCandidato.setStatus(StatusCandidatoEnum.CANCELADO);
 
 				situacaoCandidato.setIdCandidato(candidatoEntity.getId());
 				situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
 
-				
 				alterarStatus(situacaoCandidato);
 
 			} else {
@@ -315,9 +313,9 @@ public class CandidatoBusiness {
 
 			novoVagaCandidato.setVaga(vagaDAO.findById(candidatoBean.getVagaCandidato().getVaga().getId()));
 			if (candidatoBean.getVagaCandidato().getCanalInformacao().getId() != null)
-				novoVagaCandidato.setCanalInformacao(canalInformacaoDAO
-						.findById(candidatoBean.getVagaCandidato().getCanalInformacao().getId()));
-				novoVagaCandidato.setCandidato(candidatoEntity);
+				novoVagaCandidato.setCanalInformacao(
+						canalInformacaoDAO.findById(candidatoBean.getVagaCandidato().getCanalInformacao().getId()));
+			novoVagaCandidato.setCandidato(candidatoEntity);
 			vagas.add(novoVagaCandidato);
 		}
 		candidatoEntity.setVagas(vagas);
@@ -328,8 +326,8 @@ public class CandidatoBusiness {
 	private void definirFormacao(CandidatoBean candidatoBean, CandidatoEntity candidatoEntity) {
 		candidatoEntity.getFormacao()
 				.setTipoCurso(tipoCursoDAO.findById(candidatoBean.getFormacao().getTipoCurso().getId()));
-		candidatoEntity.getFormacao().setSituacaoAtual(
-				situacaoAtualDAO.findById(candidatoBean.getFormacao().getSituacaoAtual().getId()));
+		candidatoEntity.getFormacao()
+				.setSituacaoAtual(situacaoAtualDAO.findById(candidatoBean.getFormacao().getSituacaoAtual().getId()));
 	}
 
 	@Transactional
@@ -376,10 +374,12 @@ public class CandidatoBusiness {
 					situacaoCandidato.setStatus(status);
 				}
 			}
-			avaliadorCandidatoEntity = avaliadorCandidatoDAO.findByNamedQuery("atualizarAvaliador",
-					usuarioBean.getId(), statusCandidatoEntity.getCandidato());
-			avaliadorCandidatoEntity.get(0).setStatus(situacaoCandidato.getStatus().getValue());
-			avaliadorCandidatoDAO.update(avaliadorCandidatoEntity.get(0));
+			avaliadorCandidatoEntity = avaliadorCandidatoDAO.findByNamedQuery("atualizarAvaliador", usuarioBean.getId(),
+					statusCandidatoEntity.getCandidato());
+			if (avaliadorCandidatoEntity != null && avaliadorCandidatoEntity.size() > 0) {
+				avaliadorCandidatoEntity.get(0).setStatus(situacaoCandidato.getStatus().getValue());
+				avaliadorCandidatoDAO.update(avaliadorCandidatoEntity.get(0));
+			}
 			statusCandidatoDAO.insert(statusAlteracao(situacaoCandidato));
 		}
 	}
@@ -393,7 +393,7 @@ public class CandidatoBusiness {
 		desativarStatus(candidatoEntity);
 
 		if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANCELADO.getValue()
-			|| situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOREPROVADO.getValue()) {
+				|| situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOREPROVADO.getValue()) {
 			desativarAvaliadores(situacaoCandidato.getIdCandidato());
 
 		}
@@ -510,11 +510,12 @@ public class CandidatoBusiness {
 				listaStatus.add(StatusCandidatoEnum.PROPOSTACANDIDATO.getValue());
 
 			if (funcionalidadeBean.getId() == 28) {
+				listaStatus.add(StatusCandidatoEnum.REFAZERPROPOSTA.getValue());
 				listaStatus.add(StatusCandidatoEnum.PROPOSTAACEITA.getValue());
 				listaStatus.add(StatusCandidatoEnum.PROPOSTARECUSADA.getValue());
 			}
 		}
-		if(listaStatus.isEmpty()){
+		if (listaStatus.isEmpty()) {
 			listaStatus.add(0);
 		}
 		return listaStatus;

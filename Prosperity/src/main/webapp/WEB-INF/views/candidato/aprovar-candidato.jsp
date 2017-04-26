@@ -117,9 +117,8 @@
 								</div>
 								</form>
 							</div>
-							<div class="panel-footer">
-								<button type="button" class="btn btn-sm btn-primary"
-									 id="btnEnviar">
+							<div class="panel-footer ">
+								<button type="button" class="btn btn-sm btn-primary pull-right" id="btnEnviar">
 									<i class="fa fa-check fa-lg"></i>&nbsp;Enviar
 								</button>
 							</div>
@@ -274,6 +273,7 @@
 			inputs.each(function(index, value){
 				if(!isNaN($(value).attr("id"))){
 					var id = $(value).attr("id");
+					CKEDITOR.instances['editor'].setReadOnly(false);
 					
 					$.ajax({
 						url:"buscar/"+id,
@@ -290,11 +290,25 @@
 							}else if(data.ultimoStatus.status.id == "10"){
 				                 if(perfil == "Administrador" || perfil == "CEO" || perfil == "Diretor de operação"){
 										CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
-										$("#proposta-tab").show();
+					                	$("#proposta-tab").show();
+					                	$("#proposta").show();
 					                	CKEDITOR.instances['editor'].setReadOnly(true);
 					                 }
+							}else if(data.ultimoStatus.status.id == "11"){
+				                 if(perfil == "Analista de RH" || perfil == "Gestor RH"){
+										CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
+					                	$("#proposta-tab").show();
+					                	$("#proposta").show();
+					                 }
+							}else if(data.ultimoStatus.status.id == "14"){
+				                 if(perfil == "Analista de RH" || perfil == "Gestor RH"){
+										CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
+					                	$("#proposta-tab").show();
+					                	$("#proposta").show();
+					                 }
 							}else{
-								$("#proposta-tab").hide();
+			                	$("#proposta-tab").hide();
+			                	$("#proposta").hide();
 							}
 							if(data.ultimoStatus.status.id == "6"){
 								$("#avaliacao-tab").show();
