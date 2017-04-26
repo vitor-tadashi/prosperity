@@ -402,7 +402,13 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">Aprovação de vaga</div>
 					<div class="panel-body">
-
+										<c:if test="${not empty sucesso}">
+											<div id="msg-sucesso" class="alert alert-success msg-margin">
+												<ul>
+													<li class="li-msg">${sucesso }</li>
+												</ul>
+											</div>
+										</c:if>
 						<table
 							class="table table-bordered table-condensed table-hover table-striped"
 							id="tabelaVaga"
@@ -532,7 +538,11 @@
 
 	<layout:put block="scripts" type="REPLACE">
 	<script type="text/javascript">
-	
+	$(document).ready(function () {
+        setTimeout(function () {
+            $('#msg-sucesso').fadeOut(1500);
+        }, 5000);
+    });
 	// script para cores dos status
 	$(".span-Fechado").addClass("label-warning");
 	$(".span-Ativo").addClass("label-success");

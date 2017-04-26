@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 
@@ -39,6 +40,7 @@ import br.com.prosperity.business.StatusVagaBusiness;
 import br.com.prosperity.business.UsuarioBusiness;
 import br.com.prosperity.business.VagaBusiness;
 import br.com.prosperity.enumarator.StatusVagaEnum;
+import br.com.prosperity.exception.BusinessException;
 
 @Controller
 @RequestMapping("vaga")
@@ -219,9 +221,9 @@ public class VagaController {
 	}
 
 	@RequestMapping(value = "status", method = RequestMethod.POST)
-	public @ResponseBody HttpStatus alterarStatusVaga(Model model, SituacaoVagaBean status) {
+	public @ResponseBody HttpStatus alterarStatusVaga(Model model, SituacaoVagaBean status, RedirectAttributes redirectAttributes)throws BusinessException{
 		vagaBusiness.alterarStatus(status);
-		vagaBusiness.alterarDataAprovacao(status);
+		vagaBusiness.alterarDataAprovacao(status);		
 		return HttpStatus.OK;
 	}
 
@@ -266,13 +268,15 @@ public class VagaController {
 	}
 
 	@RequestMapping(value = "/cancelar-candidato/{id}")
-	public String cancelaCandidato(@PathVariable Integer id) {
+	public String cancelaCandidato(@PathVariable Integer id, RedirectAttributes redirectAttributes)throws BusinessException  {
 		SituacaoVagaBean bean = new SituacaoVagaBean();
 		//vagaBusiness.cancelarVagaCandidato(id);
 		bean.setIdVaga(id);
 		bean.setStatus(StatusVagaEnum.CANCELADO);
 		vagaBusiness.alterarStatus(bean);
-
+		
+		redirectAttributes.addFlashAttribute("sucesso", "Vaga cancelada com sucesso.");
+		
 		return "redirect:/aprovar";
 	}
 
