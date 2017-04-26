@@ -22,7 +22,7 @@
 					<div class="modal-body">
 						<div class="panel panel-default">
 							<div class="panel-tab clearfix">
-								<ul class="tab-bar">
+								<ul class="tab-bar" id="tabs">
 									<li id="entrevista-tab" class="active"><a href="#infoEntrevista"
 										data-toggle="tab"><i class="fa fa-user"></i> Informações
 											de entrevista</a></li>
@@ -139,7 +139,7 @@
 						</button>
 						<h4 class="modal-title" id="modalLabel">Confirmação</h4>
 					</div>
-					<div class="modal-body">Confirmar?</div>
+					<div class="modal-body"><p>Deseja confirmar a operação?</p></div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-success" id="alterarStatus">Sim</button>
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
@@ -284,31 +284,30 @@
 							if(data.ultimoStatus.status.id == "9"){
 				                 if(perfil == "Analista de RH" || perfil == "Gestor RH"){
 									CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
-				                	$("#proposta-tab").show();
-				                	$("#proposta").show();
-				                	
+									document.getElementById("proposta-tab").style.visibility = "visible";
+									document.getElementById("proposta").style.visibility = "visible";
 				                 }
 							}else if(data.ultimoStatus.status.id == "10"){
 				                 if(perfil == "Administrador" || perfil == "CEO" || perfil == "Diretor de operação"){
 										CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
-					                	$("#proposta-tab").show();
+										$("#proposta-tab").show();
 					                	CKEDITOR.instances['editor'].setReadOnly(true);
 					                 }
 							}else{
-			                	$("#proposta-tab").hide();
-			                	//$("#proposta").setReadOnly(true);
+								$("#proposta-tab").hide();
 							}
 							if(data.ultimoStatus.status.id == "6"){
 								$("#avaliacao-tab").show();
-								$("#avaliacaoComp").show();
+								document.getElementById("avaliacaoComp").style.visibility = "visible";
 								$("#processo-tab").show();
-								$("#processoSeletivo").show();
+								$("#processoSelecao").show();
 							}else{
 								$("#avaliacao-tab").hide();
-								$("#avaliacaoComp").hide();
+								document.getElementById("avaliacaoComp").style.visibility = "hidden";
 								$("#processo-tab").hide();
-								$("#processoSeletivo").hide();
+								$("#processoSelecao").hide();
 							}
+							$('.tab-bar a[href="#infoEntrevista"]').tab('show')
 							$('#modalProposta').modal('show');
 						}
 					})
