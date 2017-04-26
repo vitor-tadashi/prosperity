@@ -44,6 +44,7 @@ public class CandidatoBean extends FormatUtil {
 	private Date dataFechamento;
 	@NotEmpty(message = "O campo email deve ser prenchido")
 	private String email;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataAlteracao;
 	private String curriculo;
 	@Valid

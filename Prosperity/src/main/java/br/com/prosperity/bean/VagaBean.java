@@ -19,11 +19,11 @@ public class VagaBean {
 
 	@Min(value = 1, message = "O campo de vaga a ser aplicado deve ser preenchido")
 	private Integer id;
-	@NotEmpty(message = "O campo Nome da vaga deve ser preenchido")
+	//@NotEmpty(message = "O campo Nome da vaga deve ser preenchido")
 	private String nomeVaga;
 	private String nomeSolicitante;
 	private Double valorPretensao;
-	@NotNull(message = "O campo Data para inicio deve ser preenchido")
+	//@NotNull(message = "O campo Data para inicio deve ser preenchido")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataInicio;
 	private Character localTrabalho;
