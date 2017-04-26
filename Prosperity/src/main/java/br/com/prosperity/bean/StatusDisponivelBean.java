@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 public class StatusDisponivelBean {
 
 	private Integer id;
+	private Integer idStatusDisponivel;
 	private String nome;
 	private String classe;
 
@@ -25,6 +26,14 @@ public class StatusDisponivelBean {
 		this.id = id;
 	}
 
+	public Integer getIdStatusDisponivel() {
+		return idStatusDisponivel;
+	}
+
+	public void setIdStatusDisponivel(Integer idStatusDisponivel) {
+		this.idStatusDisponivel = idStatusDisponivel;
+	}
+
 	public String getNome() {
 		return nome;
 	}
@@ -32,5 +41,4 @@ public class StatusDisponivelBean {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 }
