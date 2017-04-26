@@ -273,6 +273,7 @@
 			inputs.each(function(index, value){
 				if(!isNaN($(value).attr("id"))){
 					var id = $(value).attr("id");
+					CKEDITOR.instances['editor'].setReadOnly(false);
 					
 					$.ajax({
 						url:"buscar/"+id,
