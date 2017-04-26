@@ -25,7 +25,7 @@ public class CargoSenioridadeConverter implements Converter<CargoSenioridadeEnti
 		entity.setCargo(cargoConverter.convertBeanToEntity(bean.getCargos()));
 		entity.setIdSenioridade(senioridadeConverter.convertBeanToEntity(bean.getSenioridades()));
 		entity.setVlMaxSalario(bean.getValorMaxSalario());
-		entity.setVlMaxSalario(bean.getValorMinSalario());
+		entity.setVlMinSalario(bean.getValorMinSalario());
 		return entity;
 	}
 
@@ -39,7 +39,7 @@ public class CargoSenioridadeConverter implements Converter<CargoSenioridadeEnti
 		bean.setCargos(cargoConverter.convertEntityToBean(entity.getCargo()));
 		bean.setSenioridades(senioridadeConverter.convertEntityToBean(entity.getIdSenioridade()));
 		bean.setValorMaxSalario(entity.getVlMaxSalario());
-		bean.setValorMaxSalario(entity.getVlMinSalario());
+		bean.setValorMinSalario(entity.getVlMinSalario());
 		return bean;
 	}
 }

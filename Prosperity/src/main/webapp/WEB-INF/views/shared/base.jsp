@@ -202,7 +202,9 @@
 	<script src='/resources/js/chosen.jquery.min.js'></script>
 	
 	<!-- Mask-input -->
-	<script src='/resources/js/jquery.maskedinput.min.js'></script>
+	<!-- <script src='/resources/js/jquery.maskedinput.min.js'></script> -->
+	
+	<script src='/resources/js/jquery.mask.min.js'></script>
 	
 	<!-- Datepicker -->
 	<script src='/resources/js/bootstrap-datepicker.min.js'></script>
