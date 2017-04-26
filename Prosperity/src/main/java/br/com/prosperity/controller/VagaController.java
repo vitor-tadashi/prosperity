@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.google.gson.Gson;
 
@@ -207,8 +208,9 @@ public class VagaController {
 		return vaga;
 	}
 
-	@RequestMapping(value = "aprovar", method = RequestMethod.GET)
-	public String aprovacaoVaga(Model model) {
+	@RequestMapping(value = "/aprovar", method = RequestMethod.GET)
+	public String aprovacaoVaga(@ModelAttribute("sucesso") String sucesso, Model model) {
+		System.out.println(sucesso);
 		model.addAttribute("vagas", vagaBusiness.listarVagaAprovar());
 		return "vaga/aprovar-vaga";
 	}
@@ -221,7 +223,7 @@ public class VagaController {
 	}
 
 	@RequestMapping(value = "status", method = RequestMethod.POST)
-	public @ResponseBody HttpStatus alterarStatusVaga(Model model, SituacaoVagaBean status, RedirectAttributes redirectAttributes)throws BusinessException{
+	public @ResponseBody HttpStatus alterarStatusVaga(Model model, SituacaoVagaBean status){
 		vagaBusiness.alterarStatus(status);
 		vagaBusiness.alterarDataAprovacao(status);		
 		return HttpStatus.OK;
@@ -268,7 +270,7 @@ public class VagaController {
 	}
 
 	@RequestMapping(value = "/cancelar-candidato/{id}")
-	public String cancelaCandidato(@PathVariable Integer id, RedirectAttributes redirectAttributes)throws BusinessException  {
+	public RedirectView cancelaCandidato(Model model, @PathVariable Integer id, RedirectAttributes redirectAttributes)throws BusinessException  {
 		SituacaoVagaBean bean = new SituacaoVagaBean();
 		//vagaBusiness.cancelarVagaCandidato(id);
 		bean.setIdVaga(id);
@@ -277,7 +279,7 @@ public class VagaController {
 		
 		redirectAttributes.addFlashAttribute("sucesso", "Vaga cancelada com sucesso.");
 		
-		return "redirect:/aprovar";
+		return new RedirectView("/aprovar", true);
 	}
 
 	@RequestMapping(value = "/salvar", method = RequestMethod.POST)
