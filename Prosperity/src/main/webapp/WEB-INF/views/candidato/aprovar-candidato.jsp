@@ -298,11 +298,13 @@
 							}
 							if(data.ultimoStatus.status.id == "6"){
 								$("#avaliacao-tab").show();
+								$("#avaliacaoComp").show();
 								document.getElementById("avaliacaoComp").style.visibility = "visible";
 								$("#processo-tab").show();
 								$("#processoSelecao").show();
 							}else{
 								$("#avaliacao-tab").hide();
+								$("#avaliacaoComp").hide();
 								document.getElementById("avaliacaoComp").style.visibility = "hidden";
 								$("#processo-tab").hide();
 								$("#processoSelecao").hide();
