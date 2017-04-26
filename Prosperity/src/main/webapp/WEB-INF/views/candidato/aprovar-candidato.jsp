@@ -117,7 +117,7 @@
 								</div>
 								</form>
 							</div>
-							<div class="panel-footer ">
+							<div class="panel-footer">
 								<button type="button" class="btn btn-sm btn-primary"
 									 id="btnEnviar">
 									<i class="fa fa-check fa-lg"></i>&nbsp;Enviar
@@ -128,8 +128,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="modal fade" id="confirm-modal"
-			data-target="#confirm-modal" tabindex="-1" role="dialog"
+		<div class="modal fade" id="confirm-modal" tabindex="-1" role="dialog"
 			aria-labelledby="modalLabel">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -142,9 +141,7 @@
 					</div>
 					<div class="modal-body">Confirmar?</div>
 					<div class="modal-footer">
-						<a id="excluir" href="#">
-							<button type="button" class="btn btn-success" id="alterarStatus">Sim</button>
-						</a>
+						<button type="button" class="btn btn-success" id="alterarStatus">Sim</button>
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
 					</div>
 				</div>
@@ -299,7 +296,7 @@
 					                 }
 							}else{
 			                	$("#proposta-tab").hide();
-			                	$("#proposta").setReadOnly(true);
+			                	//$("#proposta").setReadOnly(true);
 							}
 							if(data.ultimoStatus.status.id == "6"){
 								$("#avaliacao-tab").show();
@@ -431,6 +428,15 @@
 					$('#confirm-modal').modal('show');
 			   }
         	});
+         
+        	$(document).ready(function () {
+                $('form#formValidar').parsley();
+
+                $('form#formValidar').on('submit', function (e) {
+                    e.preventDefault();
+                    $(this).parsley().validate();
+                });
+            });
          
 /* paginação */
 	$(function	()	{
