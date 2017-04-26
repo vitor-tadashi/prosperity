@@ -278,14 +278,13 @@
 				</div>
 			</div>
 		</div>
-</div>
-		
+	</div>
+
 	</layout:put>
 	
 	<layout:put block="scripts" type="REPLACE">
 	
 	<script src="/resources/js/parsley.min.js"></script>
-	<script src="/resources/js/app/app.js"></script>
 	<script>
 	  $(document).ready(function () {
 	        setTimeout(function () {

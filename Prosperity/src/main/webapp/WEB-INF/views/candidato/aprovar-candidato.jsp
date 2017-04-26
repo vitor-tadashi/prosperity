@@ -10,19 +10,19 @@
 			href="/resources/css/ckeditor_/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
 		<!--    Modais   -->
 		<!-- Modal Avaliação de Competencias -->
-		<div id="modalProposta" class="modal fade bs-example-modal-lg"
-			tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+		<div id="modalProposta" class="modal fade"
+			tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-						<h4 style="text-align: center;">Gestão de candidato</h4>
+						<h4 style="text-align: center;" class="modal-title" id="myModalLabel">Gestão de candidato</h4>
 					</div>
 					<div class="modal-body">
 						<div class="panel panel-default">
 							<div class="panel-tab clearfix">
-								<ul class="tab-bar">
+								<ul class="tab-bar" id="tabs">
 									<li id="entrevista-tab" class="active"><a href="#infoEntrevista"
 										data-toggle="tab"><i class="fa fa-user"></i> Informações
 											de entrevista</a></li>
@@ -117,7 +117,7 @@
 								</div>
 								</form>
 							</div>
-							<div class="panel-footer ">
+							<div class="panel-footer">
 								<button type="button" class="btn btn-sm btn-primary"
 									 id="btnEnviar">
 									<i class="fa fa-check fa-lg"></i>&nbsp;Enviar
@@ -128,8 +128,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="modal fade" id="confirm-modal"
-			data-target="#confirm-modal" tabindex="-1" role="dialog"
+		<div class="modal fade" id="confirm-modal" tabindex="-1" role="dialog"
 			aria-labelledby="modalLabel">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -140,11 +139,9 @@
 						</button>
 						<h4 class="modal-title" id="modalLabel">Confirmação</h4>
 					</div>
-					<div class="modal-body">Confirmar?</div>
+					<div class="modal-body"><p>Deseja confirmar a operação?</p></div>
 					<div class="modal-footer">
-						<a id="excluir" href="#">
-							<button type="button" class="btn btn-success" id="alterarStatus">Sim</button>
-						</a>
+						<button type="button" class="btn btn-success" id="alterarStatus">Sim</button>
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
 					</div>
 				</div>
@@ -177,7 +174,7 @@
 		<div id="main-container">
 			<div id="breadcrumb">
 				<ul class="breadcrumb">
-					<li><i class="fa fa-home"></i><a href="index.html"> Home</a></li>
+					<li><i class="fa fa-home"></i><a href="/pagina-inicial"> Página inicial</a></li>
 					<li>Consultar</li>
 					<li class="active">Aprovação de candidatos</li>
 				</ul>
@@ -222,33 +219,30 @@
 												<td><input type="hidden" name="idStatus" id="idStatus"
 													value="${candidato.ultimoStatus.status.id}" />
 													<div class="btn-group">
-														<div class="btn-group">
-															<button class="btn btn-sm btn-info dropdown-toggle"
-																data-toggle="dropdown" aria-haspopup="true"
-																aria-expanded="false">
-																<i class="fa fa-cogs fa-lg">&nbsp;</i> <span
-																	class="caret"></span>
-															</button>
-															<ul class="dropdown-menu dropdown-menu-right slidedown">
-																<c:forEach var="statusDisponivel"
-																	items="${candidato.ultimoStatus.status.statusDisponiveis}">
-																	<li><a data-toggle="modal"
-																		data-target=".bs-example-modal-lg"
-																		id="aprovar-candidato" href="aprovar-modal"
-																		onclick="alterarStatus(${candidato.id}, ${statusDisponivel.id})">
-																			<i ${statusDisponivel.classe}>&nbsp;</i>${statusDisponivel.nome}</a></li>
-																	<li class="divider "></li>
-																</c:forEach>
-																<li><c:url
-																		value="cancelar-candidato/${candidato.id}"
-																		var="urlCancelar">
-																	</c:url><a href="#delete-modal"
-																	onclick="cancelarClick(${candidato.id})"
-																	data-toggle="modal"><i class="fa fa-trash-o fa-lg">&nbsp;</i>Cancelar</a></li>
-																<!-- /fim botao -->
-															</ul>
-														</div>
-													</div> <!-- /btn-group --></td>
+														<button class="btn btn-sm btn-info dropdown-toggle"
+															data-toggle="dropdown" aria-haspopup="true"
+															aria-expanded="false">
+															<i class="fa fa-cogs fa-lg">&nbsp;</i> <span
+																class="caret"></span>
+														</button>
+														<ul class="dropdown-menu dropdown-menu-right slidedown">
+															<c:forEach var="statusDisponivel"
+																items="${candidato.ultimoStatus.status.statusDisponiveis}">
+																<li><a class="clickable"
+																	id="aprovar-candidato" 
+																	onclick="alterarStatus(${candidato.id}, ${statusDisponivel.id})">
+																		<i ${statusDisponivel.classe}>&nbsp;</i>${statusDisponivel.nome}</a></li>
+																<li class="divider"></li>
+															</c:forEach>
+															<li><c:url
+																	value="cancelar-candidato/${candidato.id}"
+																	var="urlCancelar">
+																</c:url><a href="#delete-modal"
+																onclick="cancelarClick(${candidato.id})"
+																data-toggle="modal"><i class="fa fa-trash-o fa-lg">&nbsp;</i>Cancelar</a></li>
+															<!-- /fim botao -->
+														</ul>
+												</div> <!-- /btn-group --></td>
 											</tr>
 										</c:forEach>
 									</form>
@@ -290,31 +284,31 @@
 							if(data.ultimoStatus.status.id == "9"){
 				                 if(perfil == "Analista de RH" || perfil == "Gestor RH"){
 									CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
-				                	$("#proposta-tab").show();
-				                	$("#proposta").show();
-				                	
+									document.getElementById("proposta-tab").style.visibility = "visible";
+									document.getElementById("proposta").style.visibility = "visible";
 				                 }
 							}else if(data.ultimoStatus.status.id == "10"){
 				                 if(perfil == "Administrador" || perfil == "CEO" || perfil == "Diretor de operação"){
 										CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
-					                	$("#proposta-tab").show();
+										$("#proposta-tab").show();
 					                	CKEDITOR.instances['editor'].setReadOnly(true);
 					                 }
 							}else{
-			                	$("#proposta-tab").hide();
-			                	$("#proposta").setReadOnly(true);
+								$("#proposta-tab").hide();
 							}
 							if(data.ultimoStatus.status.id == "6"){
 								$("#avaliacao-tab").show();
-								$("#avaliacaoComp").show();
+								document.getElementById("avaliacaoComp").style.visibility = "visible";
 								$("#processo-tab").show();
-								$("#processoSeletivo").show();
+								$("#processoSelecao").show();
 							}else{
 								$("#avaliacao-tab").hide();
-								$("#avaliacaoComp").hide();
+								document.getElementById("avaliacaoComp").style.visibility = "hidden";
 								$("#processo-tab").hide();
-								$("#processoSeletivo").hide();
+								$("#processoSelecao").hide();
 							}
+							$('.tab-bar a[href="#infoEntrevista"]').tab('show')
+							$('#modalProposta').modal('show');
 						}
 					})
 				}
@@ -393,7 +387,7 @@
         			 location.reload();
         		}).fail(function(jqXHR, textStatus) {
         			alert('fail');
-        			 location.reload();s
+        			 location.reload();
         		});
             }
 
@@ -433,6 +427,15 @@
 					$('#confirm-modal').modal('show');
 			   }
         	});
+         
+        	$(document).ready(function () {
+                $('form#formValidar').parsley();
+
+                $('form#formValidar').on('submit', function (e) {
+                    e.preventDefault();
+                    $(this).parsley().validate();
+                });
+            });
          
 /* paginação */
 	$(function	()	{
