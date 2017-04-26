@@ -176,6 +176,7 @@ public class CandidatoController<PaginarCandidato> {
 	public String solicitarCandidato(Model model, @PathVariable Integer id) {
 		CandidatoBean candidato = candidatoBusiness.obterCandidatoPorId(id);
 		obterDominiosCandidato(model);
+		candidato.setCurriculo("file:///C:/Users/leonardo.ramos/Downloads/PontosProsperity.docx");
 		model.addAttribute("candidato", candidato);
 
 		return "candidato/cadastrar-candidato";
