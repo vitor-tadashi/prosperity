@@ -10,8 +10,8 @@ public class CargoSenioridadeBean {
 	private Integer id;
 	private Double valorMinSalario;
 	private Double valorMaxSalario;
-	private List<CargoBean> cargos;
-	private List<SenioridadeBean> senioridades;
+	private CargoBean cargos;
+	private SenioridadeBean senioridades;
 
 	public CargoSenioridadeBean() {
 
@@ -41,19 +41,19 @@ public class CargoSenioridadeBean {
 		this.valorMaxSalario = valorMaxSalario;
 	}
 
-	public List<CargoBean> getCargos() {
+	public CargoBean getCargos() {
 		return cargos;
 	}
 
-	public void setCargos(List<CargoBean> cargos) {
+	public void setCargos(CargoBean cargos) {
 		this.cargos = cargos;
 	}
 
-	public List<SenioridadeBean> getSenioridades() {
+	public SenioridadeBean getSenioridades() {
 		return senioridades;
 	}
 
-	public void setSenioridades(List<SenioridadeBean> senioridades) {
+	public void setSenioridades(SenioridadeBean senioridades) {
 		this.senioridades = senioridades;
 	}
 

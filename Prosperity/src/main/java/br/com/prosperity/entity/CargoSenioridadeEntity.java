@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -31,13 +32,13 @@ public class CargoSenioridadeEntity{
 	@Column(name="idCargoSenioridade", unique = true)
 	private Integer id;
 	
-	@OneToMany(fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idCargo")
-	private List<CargoEntity> idCargo;
+	private CargoEntity idCargo;
 	
-	@OneToMany(fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idSenioridade")
-	private List<SenioridadeEntity> idSenioridade;
+	private SenioridadeEntity idSenioridade;
 	
 	@Column(name="vlMinSalario")
 	private Double vlMinSalario;
@@ -52,16 +53,16 @@ public class CargoSenioridadeEntity{
 		this.id = id;
 	}
 
-	public List<CargoEntity> getCargo() {
+	public CargoEntity getCargo() {
 		return idCargo;
 	}
-	public void setCargo(List<CargoEntity> idCargo) {
+	public void setCargo(CargoEntity idCargo) {
 		this.idCargo = idCargo;
 	}
-	public List<SenioridadeEntity> getIdSenioridade() {
+	public SenioridadeEntity getIdSenioridade() {
 		return idSenioridade;
 	}
-	public void setIdSenioridade(List<SenioridadeEntity> idSenioridade) {
+	public void setIdSenioridade(SenioridadeEntity idSenioridade) {
 		this.idSenioridade = idSenioridade;
 	}
 	public Double getVlMinSalario() {

@@ -1,6 +1,6 @@
 package br.com.prosperity.bean;
 
-import java.io.File;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
 import org.springframework.stereotype.Component;
 
 import br.com.prosperity.util.FormatUtil;
@@ -35,8 +36,10 @@ public class CandidatoBean extends FormatUtil {
 
 	@NotNull(message = "O campo data de nascimento deve ser preenchido")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date dataNascimento;
-	private Double valorPretensao;
+	private Date dataNascimento; 
+	@NumberFormat(pattern = "#,##0.00") 
+	private BigDecimal valorPretensao;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataAbertura;
 	private Date dataFechamento;
 	@NotEmpty(message = "O campo email deve ser prenchido")
@@ -65,20 +68,13 @@ public class CandidatoBean extends FormatUtil {
 	private Double pretensaoDe;
 	private Double pretensaoPara;
 	private String curriculoTexto;
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataAberturaDe;
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataAberturaPara;
 	private VagaBean vagaBean;
-	private File curriculoFile;
-
-	public File getCurriculoFile() {
-		return curriculoFile;
-	}
-
-	public void setCurriculoFile(File curriculoFile) {
-		this.curriculoFile = curriculoFile;
-	}
+	
+	private List<ProvaCandidatoBean> provaCandidato = new ArrayList<>();
 
 	public VagaCandidatoBean getVagaCandidato() {
 		if (vagaCandidato == null) {
@@ -86,6 +82,20 @@ public class CandidatoBean extends FormatUtil {
 		}
 		return vagaCandidato;
 	}
+	
+	
+	
+	public List<ProvaCandidatoBean> getProvaCandidato() {
+		return provaCandidato;
+	}
+
+
+
+	public void setProvaCandidato(List<ProvaCandidatoBean> provaCandidato) {
+		this.provaCandidato = provaCandidato;
+	}
+
+
 
 	public void setVagaCandidato(VagaCandidatoBean vagaCandidato) {
 		this.vagaCandidato = vagaCandidato;
@@ -188,11 +198,11 @@ public class CandidatoBean extends FormatUtil {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public Double getValorPretensao() {
+	public BigDecimal getValorPretensao() {
 		return valorPretensao;
 	}
 
-	public void setValorPretensao(Double valorPretensao) {
+	public void setValorPretensao(BigDecimal valorPretensao) {
 		this.valorPretensao = valorPretensao;
 	}
 

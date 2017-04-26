@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.annotation.MultipartConfig;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +53,6 @@ import br.com.prosperity.business.VagaBusiness;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.exception.BusinessException;
 
-@SuppressWarnings("unused")
 @Controller
 @RequestMapping(value = "candidato")
 public class CandidatoController<PaginarCandidato> {
@@ -236,8 +234,14 @@ public class CandidatoController<PaginarCandidato> {
 	@RequestMapping(value = "/historico/{id}", method = RequestMethod.GET)
 	public String historicoCandidato(Model model, @PathVariable Integer id) {
 		CandidatoBean candidato = candidatoBusiness.obter(id);
-		obterDominiosCandidato(model);
+		List<ProvaCandidatoBean> provasCandidatoBean = provaCandidatoBusiness.obterProva(id);
+		/*List<ProvaCandidatoBean> provasCandidatoBean = new ArrayList<ProvaCandidatoBean>();
+		provasCandidatoBean.get(0).setId(id);
+		List<ProvaCandidatoBean> provaCandidato = provaCandidatoBusiness.obterProva(provasCandidatoBean);
+		obterDominiosCandidato(model);*/
+		model.addAttribute("provas",provasCandidatoBean);
 		model.addAttribute("candidato", candidato);
+		//model.addAttribute("provasCandidato",provasCandidatoBean);
 
 		return "candidato/historico-candidato";
 	}

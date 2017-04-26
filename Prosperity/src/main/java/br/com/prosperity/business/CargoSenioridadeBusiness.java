@@ -31,14 +31,12 @@ public class CargoSenioridadeBusiness {
 	private CargoConverter cargoConverter;
 	
 	@Transactional(readOnly=true)
-	public List<CargoSenioridadeBean> obterRangeSalarial(CargoBean cargo,SenioridadeBean senioridade) {
-		CargoEntity cargo1 = cargoConverter.convertBeanToEntity(cargo);
-		List<CargoEntity> cargoEntity = new ArrayList<>();
-		cargoEntity.add(cargo1);
-		SenioridadeEntity senioridade1 = senioridadeConverter.convertBeanToEntity(senioridade);
-		List<SenioridadeEntity> senioridadeEntity = new ArrayList<>();
-		senioridadeEntity.add(senioridade1);
-		List<CargoSenioridadeEntity> rangeSalarialEntity = cargoSenioridadeDAO.findByNamedQuery("rangeSalarial", cargoEntity,senioridadeEntity);
+	public List<CargoSenioridadeBean> obterRangeSalarial(Integer cargo,Integer senioridade) {
+		CargoEntity cargo1 = new CargoEntity();
+		cargo1.setId(cargo);
+		SenioridadeEntity senioridade1 = new SenioridadeEntity();
+		senioridade1.setId(senioridade);
+		List<CargoSenioridadeEntity> rangeSalarialEntity = cargoSenioridadeDAO.findByNamedQuery("rangeSalarial", cargo1,senioridade1);
 		List<CargoSenioridadeBean> rangeSalarialBean = cargoSenioridadeConverter.convertEntityToBean(rangeSalarialEntity);
 		return rangeSalarialBean;
 	}
