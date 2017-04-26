@@ -1,5 +1,6 @@
 package br.com.prosperity.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -54,11 +55,10 @@ import javax.persistence.TemporalType;
 		@NamedQuery(name = "listarAprovacoes", query = "SELECT DISTINCT c FROM CandidatoEntity c "
 				+ "INNER JOIN c.statusCandidatos sc "
 				+ "INNER JOIN c.avaliadores ac "
-				+ "WHERE (sc.idStatusCandidato = (SELECT max(scc.idStatusCandidato) FROM StatusCandidatoEntity scc WHERE scc.candidato.id = c.id)) "
-				+ "AND (sc.status.id IN (?1) AND ac.status IS NOT NULL) "
-				+ "OR (sc.status.id IN (?2) AND ac.status IS NULL AND ac.usuario.id = ?3)"
-				+ "OR (sc.status.id = ?4 AND ac.status IS NULL) ORDER BY c.id DESC"
-				), 
+				+ "WHERE (sc.idStatusCandidato = (SELECT max(scc.idStatusCandidato) FROM StatusCandidatoEntity scc WHERE scc.candidato.id = c.id) "
+				+ "AND (sc.status.id IN (?1) AND ac.status IS NOT NULL AND sc.flSituacao = true) "
+				+ "OR (sc.status.id = ?2 AND ac.status IS NULL AND ac.usuario.id = ?3 AND sc.flSituacao = true)"
+				+ "OR (sc.status.id = ?4 AND ac.status IS NULL AND sc.flSituacao = true)) ORDER BY c.id DESC"), 
 
 		@NamedQuery(name = "proposta", query = "SELECT c FROM CandidatoEntity c, AvaliadorCandidatoEntity ac INNER JOIN c.statusCandidatos sc "
 				+ "WHERE ac.candidato.id = c.id AND sc.idStatusCandidato = (SELECT max(sc.idStatusCandidato)"
@@ -86,7 +86,7 @@ public class CandidatoEntity {
 	private Date dataNascimento;
 
 	@Column(name = "vlPretensao")
-	private Double valorPretensao;
+	private BigDecimal valorPretensao;
 
 	@Column(name = "dtAbertura")
 	@Temporal(TemporalType.DATE)
@@ -149,10 +149,23 @@ public class CandidatoEntity {
 
 	@OneToMany(cascade = {CascadeType.ALL } ,fetch = FetchType.LAZY, mappedBy = "candidato" )
 	private Set<VagaCandidatoEntity> vagas;
-
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "provas")
+	private List<ProvaCandidatoEntity> provaCandidato;
+	
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
 	@JoinColumn(name = "idCandidato")
 	private List<AvaliadorCandidatoEntity> avaliadores;
+	
+	
+	
+	public List<ProvaCandidatoEntity> getProvaCandidato() {
+		return provaCandidato;
+	}
+
+	public void setProvaCandidato(List<ProvaCandidatoEntity> provaCandidato) {
+		this.provaCandidato = provaCandidato;
+	}
 
 	public List<AvaliadorCandidatoEntity> getAvaliadores() {
 		return avaliadores;
@@ -351,11 +364,11 @@ public class CandidatoEntity {
 		this.curriculoTexto = curriculoTexto;
 	}
 
-	public Double getValorPretensao() {
+	public BigDecimal getValorPretensao() {
 		return valorPretensao;
 	}
 
-	public void setValorPretensao(Double valorPretensao) {
+	public void setValorPretensao(BigDecimal valorPretensao) {
 		this.valorPretensao = valorPretensao;
 	}
 }

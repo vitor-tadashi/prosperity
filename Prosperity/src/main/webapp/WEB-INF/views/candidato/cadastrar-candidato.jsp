@@ -217,7 +217,7 @@
 														salarial</label>
 												</div>
 												<div class="col-md-2">
-													<input type="number" class="form-control pretensao"
+													<input type="text" class="form-control dinheiro pretensao"
 														id="valorPretensao" placeholder="R$" name="valorPretensao"
 														value="${candidato.valorPretensao}" />
 												</div>
@@ -294,15 +294,17 @@
 	    });
 	  
 		$(document).ready(function() {
-		 	 $('.cpf').mask('999.999.999-99', {
+		 	 $('.cpf').mask('000.000.000-00', {
 				reverse : true 
 			}) ; 
-			$('.telefone').mask('(99)99999-9999');
-			$('#rg').mask('99.999.999-9');
+			$('.telefone').mask('(00)00000-0000');
+			$('#rg').mask('00.000.000-0');
 			$("#cep").mask("99999-999");
-			$('.date').mask('99/99/9999');
+			$('.date').mask('00/00/0000');
+			$('.dinheiro').mask('000.000.000.000.000,00', {reverse: true});
 
 		}) 
+		
 		
 		function validarTel(){
 		var tel = $("#contato").val().replace(/[^\d]+/g,'');
@@ -334,7 +336,7 @@
 
 				textDiv.textContent = "";
 
-				var text = "[" + div.textContent + "]";
+				var textDiv = "[" + div.textContent + "]";
 			}
 		}
 
@@ -469,7 +471,7 @@
 			                dia = barras[0];
 			                mes = barras[1];
 			                ano = barras[2];
-			                resultado = (!isNaN(dia) && (dia > 0) && (dia < 32)) && (!isNaN(mes) && (mes > 0) && (mes < 13)) && (!isNaN(ano) && (ano.length == 4) && (ano <= anoAtual && ano >= 1900));
+			                resultado = (!isNaN(dia) && (dia > 0) && (dia < 32)) && (!isNaN(mes) && (mes > 0) && (mes < 13)) && (!isNaN(ano) && (ano.length == 4) && (ano >= 1900));
 			                if (!resultado)
 			                {
 			                	var div = document.getElementById("textDiv2").className = "alert alert-danger";
@@ -556,6 +558,7 @@
 					$("#canalInformacao").val(data.vagaCandidato.canalInformacao.id);
 					$("#dataUltimoContato").val(dataFormatada(data.dataUltimoContato));
 					$("#entrevista").val(dataFormatada(data.entrevista));
+					$("#situacaoAtual").val(data.formacao.situacaoAtual.id);
 					
 				}
 			},

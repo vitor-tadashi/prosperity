@@ -281,7 +281,7 @@ public class VagaController {
 	}
 
 	@RequestMapping(value = "/salvar", method = RequestMethod.POST)
-	public String inserirVaga(@ModelAttribute("vagaBean") @Valid VagaBean vagaBean, BindingResult result, Model model) {
+	public String inserirVaga(@ModelAttribute("vagaBean") @Valid VagaBean vagaBean, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
 
 		if (result.hasErrors()) {
 			model.addAttribute("erro", result.getErrorCount());
@@ -291,14 +291,14 @@ public class VagaController {
 			return "vaga/solicitar-vaga";
 		}
 
-		String resposta = vagaBusiness.inserir(vagaBean, avaliadoresB);
-		model.addAttribute("resposta", resposta);
+		vagaBusiness.inserir(vagaBean, avaliadoresB);
+		redirectAttributes.addFlashAttribute("sucesso", "Vaga salva com sucesso.");
 		return "redirect:solicitar";
 
 	}
 
 	@RequestMapping(value = "/avaliadores", method = RequestMethod.POST)
-	public @ResponseBody String recebeAvaliadores(@ModelAttribute("avaliadores") String avaliadores) {
+	public @ResponseBody void recebeAvaliadores(@ModelAttribute("avaliadores") String avaliadores) {
 
 		@SuppressWarnings("unchecked")
 		List<String> resultado = new Gson().fromJson(avaliadores, List.class);
@@ -309,7 +309,6 @@ public class VagaController {
 			avaliadoresB.add(avaliador);
 		}
 		avaliadoresB.remove(0);
-		return "ok";
 
 	}
 
@@ -336,7 +335,7 @@ public class VagaController {
 		SenioridadeBean senioridade = new SenioridadeBean();
 		cargo.setId(idCargo);
 		senioridade.setId(idSenioridade);
-		List<CargoSenioridadeBean> rangeSalarial = cargoSenioridadeBusiness.obterRangeSalarial(cargo,senioridade);
+		List<CargoSenioridadeBean> rangeSalarial = cargoSenioridadeBusiness.obterRangeSalarial(cargo.getId(),senioridade.getId());
 		return rangeSalarial;
 	}
 	/*
