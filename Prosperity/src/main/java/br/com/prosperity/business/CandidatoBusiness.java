@@ -164,6 +164,11 @@ public class CandidatoBusiness {
 	@Transactional
 	public List<CandidatoBean> listarTop10() {
 		List<Criterion> criterions = new ArrayList<>();
+		Integer idVaga = 0;
+		if (idVaga != 0) {
+			criterions.add(Restrictions.like("ultimaVaga.nomeVaga", "%" + idVaga + "%"));
+		}
+		
 		List<CandidatoEntity> candidato = candidatoDAO.findByCriteria(criterions);
 		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(candidato);
 		return beans;
