@@ -270,6 +270,9 @@
 									</div>
 								</div>
 							</div>
+							<div class="form-group col-sm-1 download-download">
+								<button type="button" class="btn btn-primary" onclick="download('${candidato.curriculo}')"><i class="fa fa-download"></i> Download</button>
+							</div>
 							<div class="form-group col-sm-4">
 								<input type="hidden" value="${candidato.id}" name="id">
 								<input type="hidden" value="${erro}" id="contErro">
