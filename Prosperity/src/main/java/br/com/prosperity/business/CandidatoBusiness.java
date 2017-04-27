@@ -122,8 +122,8 @@ public class CandidatoBusiness {
 	@Autowired
 	private HttpSession session;
 	
-	@Autowired
-	private GeradorEmail geradorEmail;
+/*	@Autowired
+	private GeradorEmail geradorEmail;*/
 
 	@Transactional(readOnly = true)
 	public List<CandidatoBean> listarDecrescente() {
