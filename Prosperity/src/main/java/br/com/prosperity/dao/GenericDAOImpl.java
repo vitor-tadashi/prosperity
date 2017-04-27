@@ -201,7 +201,11 @@ public class GenericDAOImpl<T, ID extends Serializable> implements GenericDAO<T,
 	@Override
 	public T update(T entity) {
 		try {
-			entityManager.merge(entity);
+//			entityManager.merge(entity);
+
+			entity = entityManager.merge( entity );
+			entityManager.flush();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 
