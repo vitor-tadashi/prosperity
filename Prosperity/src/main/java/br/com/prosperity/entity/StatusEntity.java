@@ -1,7 +1,6 @@
 package br.com.prosperity.entity;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -36,18 +35,18 @@ public class StatusEntity {
 	@Column(name = "tpCss")
 	private String tipoCss;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idTpStatus")
 	private TipoStatusEntity tipoStatus;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "idStatus")
 	private List<StatusCandidatoEntity> statusCandidatos;
 
-	@OneToMany(fetch=FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinColumn(name = "idStatus")
-	private Set<StatusDisponivelEntity> statusDisponiveis;
+	private List<StatusDisponivelEntity> statusDisponiveis;
 
 	public Integer getId() {
 		return id;
@@ -81,12 +80,19 @@ public class StatusEntity {
 		this.tipoStatus = tipoStatus;
 	}
 
-	public Set<StatusDisponivelEntity> getStatusDisponiveis() {
+	public List<StatusCandidatoEntity> getStatusCandidatos() {
+		return statusCandidatos;
+	}
+
+	public void setStatusCandidatos(List<StatusCandidatoEntity> statusCandidatos) {
+		this.statusCandidatos = statusCandidatos;
+	}
+
+	public List<StatusDisponivelEntity> getStatusDisponiveis() {
 		return statusDisponiveis;
 	}
 
-	public void setStatusDisponiveis(Set<StatusDisponivelEntity> statusDisponiveis) {
+	public void setStatusDisponiveis(List<StatusDisponivelEntity> statusDisponiveis) {
 		this.statusDisponiveis = statusDisponiveis;
 	}
-
 }

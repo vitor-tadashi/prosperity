@@ -306,7 +306,6 @@
 										CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
 					                	$("#proposta-tab").show();
 					                	$("#proposta").show();
-					                	CKEDITOR.instances['editor'].setReadOnly(true);
 					                 }
 							}else if(data.ultimoStatus.status.id == "14"){
 				                 if(perfil == "Analista de RH" || perfil == "Gestor RH"){

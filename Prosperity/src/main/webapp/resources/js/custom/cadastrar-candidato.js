@@ -155,7 +155,6 @@
 				var text = "[" + div.textContent + "]";
 				return false;
 			}
-			var div = document.getElementById("textDiv1").className = "";
 
 			textDiv1.textContent = "";
 
