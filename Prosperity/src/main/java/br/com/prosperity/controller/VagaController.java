@@ -169,14 +169,6 @@ public class VagaController {
 
 	@RequestMapping(value = { "filtro" }, method = RequestMethod.GET)
 	public String filtrar(@RequestParam(value = "page", required = false) Integer page, Model model, VagaBean vaga) {
-		/*
-		 * if (vaga.getNomeVaga().isEmpty() && vaga.getDataAberturaDe() == null
-		 * && vaga.getDataAberturaPara() == null &&
-		 * vaga.getStatus().get(0).getStatus().getNome().equals("Selecione")) {
-		 * return "redirect:consultar";
-		 * 
-		 * }
-		 */
 		if (page == null) {
 			page = 1;
 		}

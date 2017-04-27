@@ -8,7 +8,7 @@ public enum StatusVagaEnum {
 	CANCELADO(3),
 	PENDENTE(4),
 	RECUSADO(18),
-	AGUARDANDOAVALIADORES(27);
+	PENDENTEDEINFORMACOES(27);
 	
 	private Integer value;
 	private static HashMap<Integer, StatusVagaEnum> map = new HashMap<Integer, StatusVagaEnum>();

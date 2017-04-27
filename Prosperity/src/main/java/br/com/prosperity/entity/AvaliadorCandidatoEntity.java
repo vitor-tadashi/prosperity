@@ -19,7 +19,7 @@ import javax.persistence.Table;
 		@NamedQuery(name = "obterAvaliadoresCandidato", query = "SELECT u FROM AvaliadorCandidatoEntity u WHERE u.status is null AND u.candidato = ?1"),
 		@NamedQuery(name = "obterProposta", query = "SELECT u FROM AvaliadorCandidatoEntity u WHERE u.candidato.id = ?1 AND u.status IS NOT NULL"),
 		@NamedQuery(name = "desativarAvaliadores", query = "SELECT u FROM AvaliadorCandidatoEntity u WHERE u.candidato.id = ?1 AND u.status IS NULL"),
-		@NamedQuery(name = "desativarAvaliadoresPorVaga", query = "SELECT u FROM AvaliadorCandidatoEntity u WHERE u.vaga.id = ?1 AND u.status IS NULL")})
+		@NamedQuery(name = "desativarAvaliadoresPorVaga", query = "SELECT u FROM AvaliadorCandidatoEntity u WHERE u.vaga.id = ?1")})
 
 public class AvaliadorCandidatoEntity {
 

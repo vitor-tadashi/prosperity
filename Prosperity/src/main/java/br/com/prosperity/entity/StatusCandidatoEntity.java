@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -20,7 +21,11 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "tbStatusCandidato")
-@NamedQuery(name="obterStatusCandidato",query="SELECT sc FROM StatusCandidatoEntity sc WHERE sc.candidato = ?1")
+@NamedQueries({
+@NamedQuery(name="obterStatusCandidato",query="SELECT sc FROM StatusCandidatoEntity sc WHERE sc.candidato.id = ?1 AND sc.flSituacao = true"),
+@NamedQuery(name="desativarStatus",query="SELECT sc FROM StatusCandidatoEntity sc WHERE sc.candidato.id = ?1")
+
+})
 public class StatusCandidatoEntity {
 	
 	@Id
