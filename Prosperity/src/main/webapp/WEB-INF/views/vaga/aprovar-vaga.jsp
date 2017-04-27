@@ -187,7 +187,7 @@
 												<div class="form-group col-md-6 col-xs-6"
 													style="margin-bottom: 5px;">
 													<label class="control-label">Cliente</label> <input
-														readonly class="form-control" id="vagaCiente"
+														readonly class="form-control" id="vagaCliente"
 														value="Carrefour">
 												</div>
 												<div class="form-group col-md-6 col-xs-6"
@@ -196,7 +196,7 @@
 														readonly class="form-control" id="vagaGestor"
 														value="Vitor Tadashi">
 												</div>
-												
+												<div id="interno">
 												<div class="form-group col-md-6 col-xs-6"
 												style="margin-bottom: 5px;">
 											    <label class="control-label">Nome do responsável</label> 
@@ -212,16 +212,16 @@
 												
 												<div class="form-group col-md-6 col-xs-6" style="margin-bottom: 5px;">
 												<label class="control-label">E-mail do responsável</label> 
-												<input readonly class="form-control" id="nmAreaResponsavel" 
+												<input readonly class="form-control" id="emailResponsavel" 
 												value=""> 
 												</div>
 												
 												<div class="form-group col-md-6 col-xs-6" style="margin-bottom: 5px;">
 												<label class="control-label">Telefone</label> 
-												<input readonly class="form-control" id="nmAreaResponsavel" 
+												<input readonly class="form-control" id="telResponsavel" 
 												value=""> 
 												</div>
-												
+											</div>
 												
 											</div>
 										</section>
@@ -637,13 +637,20 @@
     		success: function(lista){
     			console.log(lista);
     			$('#titulo').html(lista.nomeVaga);
-    			$('input#vagaGestor').val(lista.nome);
+    			
     			if(lista.localTrabalho == 'C') {
     				//$("#cliente").attr('checked', 'checked');
     				$("#lblLocal").text('Cliente')
+    				$('div#divLocalTrabalho').show();
+    				$('#nmResponsavel').val(lista.nmResponsavel);
+    				$('#nmAreaResponsavel').val(lista.nmAreaResponsavel);
+    				$('#emailResponsavel').val(lista.emailResponsavel);
+    				$('#telResponsavel').val(lista.telResponsavel);
+    				$("#interno").show();
     			} else {
     				//$("#interno").attr('checked', 'checked');
     				$("#lblLocal").text('Interno')
+    				$("#interno").hide();
     			}
     			if(lista.idTipoVaga == 'H') { 
     				$("#tpVaga").text('Hunting')
@@ -670,11 +677,12 @@
     			$('input#vagaQuadro').val(lista.aumentaQuadro);
     			$('label#vagaSubstituto').text(lista.nomeSubstituido);
     			$('input#dataInicio').val(lista.dataInicio);
-    			$('input#vagaCiente').val(lista.projeto.cliente.nome);
+    			$('input#vagaCliente').val(lista.projeto.cliente.nome);
     			$('input#vagaProjeto').val(lista.projeto.nome);
     			$('#vagaPerfil').val(lista.descricaoPerfilComportamental);
     			$('#vagaFormacao').val(lista.descricaoFormacaoAcademica);
     			$('#vagaPerfilTecnico').val(lista.descricaoPerfilTecnico);
+    			$('#vagaGestor').val(lista.usuarioBean.funcionario.nome);
     			$('#vaga-modal').modal('show');
     		}
     	})
