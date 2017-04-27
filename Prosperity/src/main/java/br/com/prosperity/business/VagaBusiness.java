@@ -254,7 +254,7 @@ public class VagaBusiness {
 		return date;
 	}
 
-	@Transactional
+	@Transactional(readOnly = true)
 	public void alterarStatus(SituacaoVagaBean situacaoVaga) {
 		StatusVagaEntity statusVagaEntity = new StatusVagaEntity();
 		VagaEntity vagaEntity = vagaDAO.findById(situacaoVaga.getIdVaga());
