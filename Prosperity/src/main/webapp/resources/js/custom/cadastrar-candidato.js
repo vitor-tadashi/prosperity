@@ -155,7 +155,6 @@
 				var text = "[" + div.textContent + "]";
 				return false;
 			}
-			var div = document.getElementById("textDiv1").className = "";
 
 			textDiv1.textContent = "";
 
@@ -275,4 +274,16 @@
 		});
 	}
 	
+	$(document).ready(function() {
+		var url = window.location.href;
+		if(url.match(/editar/)) {
+			$(".download-download").show();
+		} else {
+			$(".download-download").hide();
+		}
+	});
+	
+	function download (url) {
+		window.location.href = url;
+	}
 	

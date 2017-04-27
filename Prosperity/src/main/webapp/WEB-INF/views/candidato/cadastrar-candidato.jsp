@@ -262,13 +262,15 @@
 											<input type="text" class="form-control date"
 												data-required="false" name="entrevista" id="entrevista"
 												onblur="validarData('entrevista')" value="${entrevista}">
-												
 								<fmt:formatDate value="${candidato.dataAbertura}"
 														pattern="dd/MM/yyyy" var="dataAbertura" />
 														<input type="hidden" value="${candidato.dataAbertura}" name="dataAbertura">
 										</div>
 									</div>
 								</div>
+							</div>
+							<div class="form-group col-sm-1 download-download">
+								<button type="button" class="btn btn-primary" onclick="download('${candidato.curriculo}')"><i class="fa fa-download"></i> Download</button>
 							</div>
 							<div class="form-group col-sm-4">
 								<input type="hidden" value="${candidato.id}" name="id">
