@@ -162,14 +162,6 @@ public class CandidatoBusiness {
 	}
 
 	@Transactional
-	public List<CandidatoBean> listarTop10() {
-		List<Criterion> criterions = new ArrayList<>();
-		List<CandidatoEntity> candidato = candidatoDAO.findByCriteria(criterions);
-		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(candidato);
-		return beans;
-	}
-
-	@Transactional
 	public List<CandidatoBean> listar() {
 		List<CandidatoEntity> candidato = candidatoDAO.findByNamedQuery("verificarCandidatura");
 		List<CandidatoEntity> entities = candidatoDAO.findAll();
@@ -195,51 +187,10 @@ public class CandidatoBusiness {
 	}
 
 	@Transactional
-	public List<CandidatoBean> filtroCandidato(CandidatoBean candidato) {
-
-		// Integer idStatus = 0;
-		/*
-		 * if (!vaga.getStatus().get(0).getStatus().getNome().equals("")) {
-		 * idStatus =
-		 * Integer.parseInt(vaga.getStatus().get(0).getStatus().getNome()); }
-		 */
-		///////////////////////////////
-		Integer idVaga = 0;/*
-							 * if(candidato.getVagaCandidato().getVaga().getId()
-							 * != null) { idVaga =
-							 * candidato.getVagaCandidato().getVaga().getId(); }
-							 */
-
-		// List<CandidatoEntity> candidatos =
-		// candidatoDAO.findByNamedQuery("filtrarVaga", idVaga);
-
-		List<Criterion> criterions = new ArrayList<>();
-
-		// VagaBean vaga = (VagaBean) candidato.getVagas().iterator().next();
-
-		if (candidato.getVagaBean() != null) {
-			criterions.add(Restrictions.eq("vaga.vaga.id", candidato.getVagaBean().getId()));
-		}
-
-		if (candidato.getNome() != null) {
-			criterions.add(Restrictions.like("nome", "%" + candidato.getNome() + "%"));
-		}
-
-		if (candidato.getDataAberturaDe() != null && candidato.getDataAberturaPara() != null) {
-			criterions.add(Restrictions.between("dataAbertura", parseData(candidato.getDataAberturaDe()),
-					parseData(candidato.getDataAberturaPara())));
-		}
-
-		if (candidato.getPretensaoDe() != null && candidato.getPretensaoPara() != null) {
-			criterions.add(
-					Restrictions.between("valorPretensao", candidato.getPretensaoDe(), candidato.getPretensaoPara()));
-		}
-
-		if (idVaga != 0) {
-			criterions.add(Restrictions.like("ultimaVaga.nomeVaga", "%" + idVaga + "%"));
-		}
-
-		List<CandidatoEntity> candidatos = candidatoDAO.findByCriteria(criterions);
+	public List<CandidatoBean> filtroCandidato(CandidatoBean candidato, Integer page) {
+		List<Criterion> criterions = confFiltro(candidato);
+		
+		List<CandidatoEntity> candidatos = candidatoDAO.findByCriteria(page,criterions);
 		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(candidatos);
 		return beans;
 
@@ -519,5 +470,47 @@ public class CandidatoBusiness {
 			listaStatus.add(0);
 		}
 		return listaStatus;
+	}
+	@Transactional
+	public Integer totalPagina(CandidatoBean candidato) {
+		List<Criterion> criterions = confFiltro(candidato);
+		float pag = (float)candidatoDAO.rowCount(criterions) / (float)CandidatoDAO.limitResultsPerPage;
+		Integer paginas = null;
+		if (pag % 1 == 0) {
+			paginas = (int) pag;
+		} else {
+			paginas = (int) Math.ceil((double) pag);
+		}
+		paginas = paginas < 1 ? 1 : paginas;
+		return paginas;
+	}
+
+	private List<Criterion> confFiltro(CandidatoBean candidato) {
+		Integer idVaga = 0;
+
+		List<Criterion> criterions = new ArrayList<>();
+
+		if (candidato.getVagaBean() != null) {
+			criterions.add(Restrictions.eq("vaga.vaga.id", candidato.getVagaBean().getId()));
+		}
+
+		if (candidato.getNome() != null) {
+			criterions.add(Restrictions.like("nome", "%" + candidato.getNome() + "%"));
+		}
+
+		if (candidato.getDataAberturaDe() != null && candidato.getDataAberturaPara() != null) {
+			criterions.add(Restrictions.between("dataAbertura", parseData(candidato.getDataAberturaDe()),
+					parseData(candidato.getDataAberturaPara())));
+		}
+
+		if (candidato.getPretensaoDe() != null && candidato.getPretensaoPara() != null) {
+			criterions.add(
+					Restrictions.between("valorPretensao", candidato.getPretensaoDe(), candidato.getPretensaoPara()));
+		}
+
+		if (idVaga != 0) {
+			criterions.add(Restrictions.like("ultimaVaga.nomeVaga", "%" + idVaga + "%"));
+		}
+		return criterions;
 	}
 }
