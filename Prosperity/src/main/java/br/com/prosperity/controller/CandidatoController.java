@@ -116,12 +116,15 @@ public class CandidatoController<PaginarCandidato> {
 	
 	@Autowired
 	private GeradorEmail geradorEmail;
+	private void paginacao(Integer page, Model model, CandidatoBean candidato) {
 
-	/**
-	 * @author andre.posman
-	 * @param model
-	 * @return
-	 */
+		Integer startpage = 1;
+		Integer endpage = candidatoBusiness.totalPagina(candidato);
+
+		model.addAttribute("startpage", startpage);
+		model.addAttribute("endpage", endpage);
+		model.addAttribute("page", page);
+	}
 	@RequestMapping(value = "cadastrar", method = RequestMethod.GET)
 	public String cadastrarCandidato(Model model) {
 
@@ -262,9 +265,18 @@ public class CandidatoController<PaginarCandidato> {
 	}
 
 	@RequestMapping(value = "consultar", method = RequestMethod.GET)
-	public String consultarCandidatoRH(Model model) {
-		List<CandidatoBean> candidatos = candidatoBusiness.listarTop10();
+	public String consultarCandidatoRH(@RequestParam(value = "page", required = false) Integer page, Model model, CandidatoBean candidato) {
+		if (page == null) {
+			page = 1;
+		}
+		List<CandidatoBean> candidatos = candidatoBusiness.filtroCandidato(candidato, page);
+		// Paginando
+		paginacao(page, model, candidato);
+
 		model.addAttribute("candidatos", candidatos);
+		
+		//List<CandidatoBean> candidatos = candidatoBusiness.listarTop10();
+		//model.addAttribute("candidatos", candidatos);
 
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
 		model.addAttribute("listaCargo", listaCargo);
@@ -285,12 +297,16 @@ public class CandidatoController<PaginarCandidato> {
 	}
 
 	@RequestMapping(value = "filtrar", method = RequestMethod.GET)
-	public String filtrarCandidatoRH(Model model, CandidatoBean candidato, RedirectAttributes redirectAttributes) {
+	public String filtrarCandidatoRH(@RequestParam(value = "page", required = false) Integer page,Model model, CandidatoBean candidato, RedirectAttributes redirectAttributes) {
+		if (page == null) {
+			page = 1;
+		}
+		
 		if (candidato.getVagaBean().getId() == 0) {
 			candidato.setVagaBean(null);
 		}
-
-		List<CandidatoBean> candidatos = candidatoBusiness.filtroCandidato(candidato);
+		paginacao(page, model, candidato);
+		List<CandidatoBean> candidatos = candidatoBusiness.filtroCandidato(candidato,page);
 		model.addAttribute("candidatos", candidatos);
 
 		List<VagaBean> listaVaga = vagaBusiness.listar();

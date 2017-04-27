@@ -1,7 +1,6 @@
 package br.com.prosperity.bean;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 
@@ -12,11 +11,7 @@ public class StatusBean {
 	private String nome;
 	private String css;
 	private TipoStatusBean tipo;
-	private Set<StatusDisponivelBean> statusDisponiveis;
-	
-	public StatusBean() {
-		statusDisponiveis = new HashSet<StatusDisponivelBean>();
-	}
+	private List<StatusDisponivelBean> statusDisponiveis;
 
 	public Integer getId() {
 		return id;
@@ -50,12 +45,12 @@ public class StatusBean {
 		this.css = css;
 	}
 
-	public Set<StatusDisponivelBean> getStatusDisponiveis() {
+	public List<StatusDisponivelBean> getStatusDisponiveis() {
 		return statusDisponiveis;
 	}
 
-	public void setStatusDisponiveis(Set<StatusDisponivelBean> statusDisponiveis) {
+	public void setStatusDisponiveis(List<StatusDisponivelBean> statusDisponiveis) {
 		this.statusDisponiveis = statusDisponiveis;
 	}
-	
+
 }

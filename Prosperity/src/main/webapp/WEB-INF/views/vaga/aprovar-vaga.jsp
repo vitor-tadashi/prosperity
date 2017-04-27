@@ -262,7 +262,7 @@
 						</button>
 						<h4 class="modal-title" id="modalLabel">Aprovar vaga</h4>
 					</div>
-					<div class="modal-body">Deseja realmente aprovar está vaga?</div>
+					<div class="modal-body">Deseja realmente aprovar esta vaga?</div>
 					<input class="aprovar-id" type="hidden"> <input
 						class="aprovar-status" type="hidden">
 					<div class="modal-footer">
@@ -289,7 +289,7 @@
 						</button>
 						<h4 class="modal-title" id="modalLabel">Reprovar vaga</h4>
 					</div>
-					<div class="modal-body">Deseja realmente reprovar está vaga?</div>
+					<div class="modal-body">Deseja realmente reprovar esta vaga?</div>
 					<input class="reprovar-id" type="hidden"> <input
 						class="reprovar-status" type="hidden">
 					<div class="modal-footer">
@@ -317,7 +317,7 @@
 						</button>
 						<h4 class="modal-title" id="modalLabel">Cancelar vaga</h4>
 					</div>
-					<div class="modal-body">Deseja realmente cancelar está vaga?</div>
+					<div class="modal-body">Deseja realmente cancelar esta vaga?</div>
 					<input class="cancela-id" type="hidden"> <input
 						class="cancela-status" type="hidden">
 					<div class="modal-footer">
@@ -372,7 +372,7 @@
 						</button>
 						<h4 class="modal-title" id="modalLabel">Fechar vaga</h4>
 					</div>
-					<div class="modal-body">Deseja realmente fechar está vaga?</div>
+					<div class="modal-body">Deseja realmente fechar esta vaga?</div>
 					<input class="cancela-id" type="hidden"> <input
 						class="cancela-status" type="hidden">
 					<div class="modal-footer">
