@@ -16,6 +16,9 @@
 			tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
+				
+					<div id="print_helper"></div>
+				<div id="print_helper"></div>
 					<div id="printThis">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal"
@@ -193,6 +196,33 @@
 														readonly class="form-control" id="vagaGestor"
 														value="Vitor Tadashi">
 												</div>
+												
+												<div class="form-group col-md-6 col-xs-6"
+												style="margin-bottom: 5px;">
+											    <label class="control-label">Nome do responsável</label> 
+											    <input readonly class="form-control" class="form-control input-sm" id="nmResponsavel"
+												value=""> 
+												</div>
+												
+												<div class="form-group col-md-6 col-xs-6" style="margin-bottom: 5px;">
+												<label class="control-label">Área do responsável</label> 
+												<input readonly class="form-control" id="nmAreaResponsavel" 
+												value=""> 
+												</div>
+												
+												<div class="form-group col-md-6 col-xs-6" style="margin-bottom: 5px;">
+												<label class="control-label">E-mail do responsável</label> 
+												<input readonly class="form-control" id="nmAreaResponsavel" 
+												value=""> 
+												</div>
+												
+												<div class="form-group col-md-6 col-xs-6" style="margin-bottom: 5px;">
+												<label class="control-label">Telefone</label> 
+												<input readonly class="form-control" id="nmAreaResponsavel" 
+												value=""> 
+												</div>
+												
+												
 											</div>
 										</section>
 										<!-- /panel -->
@@ -203,7 +233,7 @@
 											<div class="panel-body relative"
 												style="padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
 												<div class="form-group">
-													<textarea class="form-control" rows="3" name="vagaFormacao"
+													<textarea class="form-control" rows="5"  name="vagaFormacao"
 														id=vagaFormacao disabled>
 										</textarea>
 												</div>
@@ -217,7 +247,7 @@
 											<div class="panel-body relative"
 												style="padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
 												<div class="form-group">
-													<textarea class="form-control" rows="3" name="vagaPerfil"
+													<textarea class="form-control" rows="5"  name="vagaPerfil"
 														id=vagaPerfil disabled></textarea>
 												</div>
 												<!-- /form-group -->
@@ -231,7 +261,7 @@
 											<div class="panel-body relative"
 												style="padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
 												<div class="form-group">
-													<textarea class="form-control" rows="3"
+													<textarea class="form-control" rows="5" 
 														name="vagaPerfilTecnico" id=vagaPerfilTecnico disabled></textarea>
 												</div>
 												<!-- /form-group -->
@@ -268,9 +298,9 @@
 					<div class="modal-footer">
 						<a href="#">
 							<button id="aprovaVaga" onclick="status()" type="button"
-								class="btn btn-primary" data-dismiss="modal">Sim</button>
+								class="btn btn-success" data-dismiss="modal">Sim</button>
 						</a>
-						<button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
 					</div>
 				</div>
 			</div>
@@ -295,9 +325,9 @@
 					<div class="modal-footer">
 						<a href="#">
 							<button id="reprovaVaga" type="button" onclick="status()"
-								class="btn btn-primary" data-dismiss="modal">Sim</button>
+								class="btn btn-success" data-dismiss="modal">Sim</button>
 						</a>
-						<button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
 					</div>
 				</div>
 			</div>
@@ -317,22 +347,80 @@
 						</button>
 						<h4 class="modal-title" id="modalLabel">Cancelar vaga</h4>
 					</div>
-					<div class="modal-body">Deseja realmente cancelar esta vaga?</div>
+					<div class="modal-body">Deseja realmente cancelar esta vaga? 
+					Voce irá cancelar os candidatos.</div>
 					<input class="cancela-id" type="hidden"> <input
 						class="cancela-status" type="hidden">
 					<div class="modal-footer">
 						<a id="excluir" href="${urlCancelar}">
 							<button id="excluiVaga" onclick="status()" type="button"
-								class="btn btn-primary" data-dismiss="modal">Sim</button>
+								class="btn btn-success" data-dismiss="modal">Sim</button>
 						</a>
-						<button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- /.modal cancelar -->
+		
+		<!-- modal cancelar pendente -->
+		<div class="modal fade" id="pendente-modal"
+			data-target="#pendente-modal" tabindex="-1" role="dialog"
+			aria-labelledby="modalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Fechar">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="modalLabel">Cancelar vaga</h4>
+					</div>
+					<div class="modal-body">Deseja realmente cancelar esta vaga? 
+					Voce irá cancelar os candidatos.</div>
+					<input class="cancela-id" type="hidden"> <input
+						class="cancela-status" type="hidden">
+					<div class="modal-footer">
+						<a id="excluir" href="${urlCancelar}">
+							<button id="excluiVaga" onclick="status()" type="button"
+								class="btn btn-success" data-dismiss="modal">Sim</button>
+						</a>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /.modal cancelar pendente -->
 
-		<!-- modal cancelar avaliador -->
+		<!-- modal fechar -->
+		<div class="modal fade" id="fechar-modal" data-target="#fechar-modal"
+			tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Fechar">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="modalLabel">Fechar vaga</h4>
+					</div>
+					<div class="modal-body">Deseja realmente fechar esta vaga? 
+					Voce irá cancelar os candidatos.</div>
+					<input class="cancela-id" type="hidden"> <input
+						class="cancela-status" type="hidden">
+					<div class="modal-footer">
+						<a href="#">
+							<button id="excluiVaga" onclick="status()" type="button"
+								class="btn btn-success" data-dismiss="modal">Sim</button>
+						</a>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /.modal fechar -->
+		
+		<%-- <!-- modal cancelar avaliador -->
 		<div class="modal fade" id="avaliador-modal"
 			data-target="#avaliador-modal" tabindex="-1" role="dialog"
 			aria-labelledby="modalLabel">
@@ -350,42 +438,15 @@
 						class="avaliador-status" type="hidden">
 					<div class="modal-footer">
 						<a id="excluir" href="${urlCancelar}">
-							<button type="button" class="btn btn-primary"
+							<button type="button" class="btn btn-success"
 								data-dismiss="modal">Sim</button>
 						</a>
-						<button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> --%>
 		<!-- /.modal cancelar avaliador -->
-
-		<!-- modal fechar -->
-		<div class="modal fade" id="fechar-modal" data-target="#fechar-modal"
-			tabindex="-1" role="dialog" aria-labelledby="modalLabel">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Fechar">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<h4 class="modal-title" id="modalLabel">Fechar vaga</h4>
-					</div>
-					<div class="modal-body">Deseja realmente fechar esta vaga?</div>
-					<input class="cancela-id" type="hidden"> <input
-						class="cancela-status" type="hidden">
-					<div class="modal-footer">
-						<a href="#">
-							<button id="excluiVaga" onclick="status()" type="button"
-								class="btn btn-primary" data-dismiss="modal">Sim</button>
-						</a>
-						<button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- /.modal fechar -->
 
 		<!-- CORPO DA PÁGINA -->
 		<div id="main-container">
@@ -457,8 +518,10 @@
 													<li><a href="#visualizar-modal" data-toggle="modal"
 														onclick="info(${vaga.id})"> <i class="fa fa-eye fa-lg">&nbsp;</i>Visualizar
 													</a></li>
-
-
+													
+													<c:if test="${autenticado.perfil.id == 1 || autenticado.perfil.id == 3 || autenticado.perfil.id == 4 || autenticado.perfil.id == 5 || autenticado.perfil.id == 6 || 
+													autenticado.perfil.id == 7 || autenticado.perfil.id == 9 || autenticado.perfil.id == 63 || autenticado.perfil.id == 64 }">
+													
 													<c:if test="${vaga.ultimoStatus.status.nome == 'Pendente'}">
 														<li id="${vaga.ultimoStatus.status.nome}" role="separator"
 															class="Aprovar divider"></li>
@@ -468,7 +531,10 @@
 															data-toggle="modal"><i
 																class="Aprovar fa fa-check fa-lg"></i> Aprovar</a></li>
 													</c:if>
+													</c:if>
 
+													<c:if test="${autenticado.perfil.id == 1 || autenticado.perfil.id == 3 || autenticado.perfil.id == 4 || autenticado.perfil.id == 5 || autenticado.perfil.id == 6 || 
+													autenticado.perfil.id == 7 || autenticado.perfil.id == 9 || autenticado.perfil.id == 63 || autenticado.perfil.id == 64 }">
 													<c:if test="${vaga.ultimoStatus.status.nome == 'Pendente'}">
 														<li id="${vaga.ultimoStatus.status.nome}" role="separator"
 															class="Reprovar divider"></li>
@@ -477,6 +543,19 @@
 															onclick="alterarStatus(${vaga.id}, 'RECUSADO')"
 															data-toggle="modal"><i
 																class="Reprovar fa  fa-times fa-lg"></i> Reprovar</a></li>
+													</c:if>
+													</c:if>
+													
+													<c:if test="${autenticado.perfil.id == 2}"> 
+													<c:if test="${vaga.ultimoStatus.status.nome == 'Pendente'}">
+														<li id="${vaga.ultimoStatus.status.nome}" role="separator"
+															class="cancelarDivider divider"></li>
+														<li id="${vaga.ultimoStatus.status.nome}" class="Reprovar"><a
+															href="#pendente-modal"
+															onclick="alterarStatus(${vaga.id}, 'RECUSADO')"
+															data-toggle="modal"><i
+																class="Cancelar fa fa-ban fa-lg"></i> Cancelar</a></li>
+													</c:if>
 													</c:if>
 
 
@@ -503,8 +582,8 @@
 																class="Fechar fa fa-trash-o fa-lg"></i> Fechar</a></li>
 													</c:if>
 
-													<c:if
-														test="${vaga.ultimoStatus.status.nome == 'Aguardando avaliadores'}">
+													<%-- <c:if
+														test="${vaga.ultimoStatus.status.nome == 'Pendente de informações'}">
 														<c:url scope="session" value="cancelar-vaga/${vaga.id}"
 															var="urlCancelar">
 														</c:url>
@@ -515,7 +594,7 @@
 															onclick="alterarStatus(${vaga.id}, ${candidato.id} 'CANCELADO')"
 															data-toggle="modal" class="avaliador"><i
 																class="Cancelar fa fa-ban fa-lg"></i> Cancelar</a></li>
-													</c:if>
+													</c:if> --%>
 												</ul>
 											</div> <!-- Fim Botão -->
 										</td>
@@ -557,7 +636,7 @@
     		success: function(lista){
     			console.log(lista);
     			$('#titulo').html(lista.nomeVaga);
-    			$('input#vagaGestor').val(lista.nomeSolicitante);
+    			$('input#vagaGestor').val(lista.nome);
     			if(lista.localTrabalho == 'C') {
     				//$("#cliente").attr('checked', 'checked');
     				$("#lblLocal").text('Cliente')
@@ -606,6 +685,7 @@
 	};
 
 	function printElement(elem) {
+	
 	    var domClone = elem.cloneNode(true);
 
 	    var $printSection = document.getElementById("printSection");
@@ -620,7 +700,7 @@
 	    $printSection.appendChild(domClone);
 	    window.print();
 	}
-	
+		
 	// função para a alteração de status no botão ações
 	
 	function status(){
@@ -634,7 +714,7 @@
     			msg = 'Vaga alterada com sucesso!';
     			$('#divAlert').html(msg).addClass('alert alert-success').show();
     			escondeMensagem();
-    			location.reload();
+    			//location.reload();
         	}).fail(function(jqXHR, textStatus) {
     			console.log();
     			console.log(jqXHR);
@@ -647,7 +727,7 @@
 		window.setTimeout(function () {
 			$("#divAlert").hide();
 			$(".mensagem").hide();
-		}, 20000);
+		}, 5000);
 	}
     	/* 	data: { 'idVaga' : $('.aprovar-id').val(), 'status' : $('.aprovar-status').val()},
     		success: function(){
@@ -717,6 +797,7 @@
     		}
     	});
 	});
+	$('#vagaPerfilTecnico').autoResize(); 
 	</script>
 	</layout:put>
 </layout:extends>
