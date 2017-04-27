@@ -30,6 +30,7 @@ import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.converter.AvaliacaoConverter;
 import br.com.prosperity.converter.CandidatoConverter;
 import br.com.prosperity.converter.CompetenciaConverter;
+import br.com.prosperity.converter.UsuarioConverter;
 import br.com.prosperity.dao.AvaliacaoDAO;
 import br.com.prosperity.dao.AvaliadorCandidatoDAO;
 import br.com.prosperity.dao.AvaliadorVagaDAO;
@@ -129,6 +130,9 @@ public class CandidatoBusiness {
 
 	@Autowired
 	private UsuarioBusiness usuarioBusiness;
+	
+	@Autowired
+	private UsuarioConverter usuarioConverter;
 
 
 	@Transactional(readOnly = true)
@@ -538,10 +542,19 @@ public class CandidatoBusiness {
 	}
 
 	public void buscarUsuariosParaEmail(CandidatoBean candidato) {
+		
+		candidato = candidatoConverter.convertEntityToBean(candidatoDAO.findById(candidato.getId()));
+		VagaEntity vaga = vagaDAO.findById(candidato.getVagaCandidato().getVaga().getId());
+		
 		List<UsuarioBean> usuarios = usuarioBusiness.findAll();
 		ArrayList<String> recipients = new ArrayList<>();
 		ArrayList<String> nomes = new ArrayList<>();
-		List<UsuarioBean> avaliadores = candidato.getVagaBean().getAvaliadores();
+		List<AvaliadorVagaEntity> avaliadores = avaliadorVagaDAO.findByNamedQuery("obterAvaliadoresDaVaga", vaga.getId());
+		List<UsuarioBean> usuariosAvaliadores = new ArrayList<>();
+		
+		for (AvaliadorVagaEntity a : avaliadores) {
+			usuariosAvaliadores.add(usuarioConverter.convertEntityToBean(a.getUsuario()));
+		}
 
 		if (candidato.getUltimoStatus().equals("GERARPROPOSTA")) {
 			for (UsuarioBean u : usuarios) {
@@ -560,7 +573,7 @@ public class CandidatoBusiness {
 			}
 		} else if (candidato.getUltimoStatus().equals("CANDIDATOEMANALISE")) {
 
-			for (UsuarioBean a : avaliadores) {
+			for (UsuarioBean a : usuariosAvaliadores) {
 				recipients.add(a.getEmail());
 				nomes.add(a.getNome());
 			}
