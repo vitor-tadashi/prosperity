@@ -21,7 +21,7 @@ import javax.persistence.TemporalType;
 @Table(name = "tbStatusVaga")
 @NamedQueries({
 	@NamedQuery(name = "obterStatusVaga", query = "SELECT v FROM StatusVagaEntity v WHERE v.vaga = ?1 AND v.situacao = TRUE"),
-	@NamedQuery(name = "statusVaga", query = "SELECT u FROM StatusVagaEntity u WHERE u.vaga = ?1") 
+	@NamedQuery(name="desativarStatusVaga",query="SELECT sv FROM StatusVagaEntity sv WHERE sv.vaga = ?1")
 })
 
 public class StatusVagaEntity {

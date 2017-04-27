@@ -447,7 +447,7 @@
 									<div class="search-block">
 										<div class="input-group">
 											<input type="text" class="form-control input-sm"
-												placeholder="Nome" name="nome">
+												placeholder="Nome" name="nome" value="${filtroC.nome }">
 										</div>
 										<!-- /input-group -->
 									</div>
@@ -458,27 +458,33 @@
 										class="form-control inline" id="vagaFiltro" name="vagaBean.id">
 										<option value="0">Selecione</option>
 										<c:forEach var="vaga" items="${listaVagaDrop}">
-											<option value="${vaga.id}">${vaga.nomeVaga}</option>
+											<option value="${vaga.id}"
+											${vaga.id == filtroC.vagaBean.id? 'selected="selected"' : ''}>${vaga.nomeVaga}</option>
+											
 										</c:forEach>
 									</select>
 								</div>
 								<div class="col-md-1">
 									<label for="salário">Salário</label> <input
 										type="text" class="form-control money2 parsley-validated"
-												id="valorPretensao" name="PretensaoDe" class="form-control money2"
-										placeholder="De" style="width: 80px">
+												id="valorPretensao" name="pretensaoDe" class="form-control money2"
+										placeholder="De" style="width: 80px" value="${filtroC.pretensaoDe }">
 								</div>
 								<div class="col-md-1">
 									<label for="exampleInputEmail1">&nbsp;</label> <input
-										type="text" name="PretensaoPara" class="form-control money2"
-										placeholder="Até" style="width: 80px">
+										type="text" name="pretensaoPara" class="form-control money2"
+										placeholder="Até" style="width: 80px" value="${filtroC.pretensaoPara }">
 								</div>
 								<div class="col-md-3">
 									<label for="exampleInputEmail1">Data:</label>
 									<div class="input-group">
-										<input type="date" name="dataAberturaDe" class="form-control">
+									<fmt:formatDate value="${filtroC.dataAberturaDe}"
+												pattern="yyyy-MM-dd" var="d1" />
+											<fmt:formatDate value="${filtroC.dataAberturaPara}"
+												pattern="yyyy-MM-dd" var="d2" />
+										<input type="date" name="dataAberturaDe" class="form-control" value="${d1 }">
 										<span class="input-group-addon">até</span> <input type="date"
-											name="dataAberturaPara" class="form-control">
+											name="dataAberturaPara" class="form-control" value="${d2 }">
 									</div>
 								</div>
 								<div class="col-md-2 col-md-offset-1">
@@ -628,7 +634,7 @@
 	$('#page'+$('#pageActive').val()).addClass('active');
 	
 	$(document).ready(function(){
-		 $('.money2').mask("#.##0,00", {reverse: true});
+		 //$('.money2').mask("#.##0,00", {reverse: true});
 	 });
 		
 		function info(listaId) {
