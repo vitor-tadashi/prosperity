@@ -458,7 +458,7 @@
 																		pattern="dd/MM/yyyy" />
 																</p>
 															</div>
-															<div class="col-md-3 well well-sm btn btn-info"
+<%-- 															<div class="col-md-3 well well-sm btn btn-info"
 																style="height: 56px; margin-right: 5px; width: 200px; margin-left: 5px;">
 																<label>Data de Aprovação</label>
 																<p style="margin-top: -5px;">
@@ -482,7 +482,7 @@
 																	<fmt:formatNumber pattern="#,##0.00"
 																		value="${vaga.valorPretensao}" />
 																</p>
-															</div>
+															</div> --%>
 															<a href="/candidato/filtrar?nome=&vagaBean.id=${vaga.id}">
 																<div class="col-md-3 well well-sm btn btn-warning"
 																	style="height: 56px; margin-right: 5px; width: 200px; margin-left: 5px;"
