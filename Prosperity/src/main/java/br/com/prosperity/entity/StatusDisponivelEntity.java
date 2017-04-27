@@ -1,10 +1,15 @@
 package br.com.prosperity.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,6 +29,10 @@ public class StatusDisponivelEntity {
 
 	@Column(name = "nmClasse")
 	private String classe;
+
+	@ManyToOne
+	@JoinColumn(name = "idStatus")
+	private StatusEntity status;
 
 	public String getClasse() {
 		return classe;
@@ -55,6 +64,14 @@ public class StatusDisponivelEntity {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public StatusEntity getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusEntity status) {
+		this.status = status;
 	}
 
 }

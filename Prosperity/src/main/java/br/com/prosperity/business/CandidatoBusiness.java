@@ -39,6 +39,7 @@ import br.com.prosperity.dao.CompetenciaDAO;
 import br.com.prosperity.dao.SituacaoAtualDAO;
 import br.com.prosperity.dao.StatusCandidatoDAO;
 import br.com.prosperity.dao.StatusDAO;
+import br.com.prosperity.dao.StatusDisponivelDAO;
 import br.com.prosperity.dao.StatusFuturoDAO;
 import br.com.prosperity.dao.TipoCursoDAO;
 import br.com.prosperity.dao.UsuarioDAO;
@@ -50,12 +51,14 @@ import br.com.prosperity.entity.AvaliadorVagaEntity;
 import br.com.prosperity.entity.CandidatoEntity;
 import br.com.prosperity.entity.CompetenciaEntity;
 import br.com.prosperity.entity.StatusCandidatoEntity;
+import br.com.prosperity.entity.StatusDisponivelEntity;
 import br.com.prosperity.entity.StatusFuturoEntity;
 import br.com.prosperity.entity.VagaCandidatoEntity;
 import br.com.prosperity.entity.VagaEntity;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.exception.BusinessException;
 import br.com.prosperity.util.FormatUtil;
+import br.com.prosperity.util.GeradorEmail;
 
 @SuppressWarnings("unused")
 @Component
@@ -119,7 +122,13 @@ public class CandidatoBusiness {
 	private VagaCandidatoDAO vagaCandidatoDAO;
 
 	@Autowired
+	private StatusDisponivelDAO statusDisponivelDAO;
+
+	@Autowired
 	private HttpSession session;
+	
+/*	@Autowired
+	private GeradorEmail geradorEmail;*/
 
 	@Transactional(readOnly = true)
 	public List<CandidatoBean> listarDecrescente() {
@@ -189,8 +198,8 @@ public class CandidatoBusiness {
 	@Transactional
 	public List<CandidatoBean> filtroCandidato(CandidatoBean candidato, Integer page) {
 		List<Criterion> criterions = confFiltro(candidato);
-		
-		List<CandidatoEntity> candidatos = candidatoDAO.findByCriteria(page,criterions);
+
+		List<CandidatoEntity> candidatos = candidatoDAO.findByCriteria(page, criterions);
 		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(candidatos);
 		return beans;
 
@@ -222,7 +231,7 @@ public class CandidatoBusiness {
 
 				situacaoCandidato.setIdCandidato(candidatoEntity.getId());
 				situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
-
+				
 				alterarStatus(situacaoCandidato);
 
 			} else {
@@ -289,8 +298,8 @@ public class CandidatoBusiness {
 
 	@Transactional
 	private void desativarStatus(CandidatoEntity candidatoEntity) {
-		List<StatusCandidatoEntity> status = statusCandidatoDAO.findByNamedQuery("obterStatusCandidato",
-				candidatoEntity);
+		List<StatusCandidatoEntity> status = statusCandidatoDAO.findByNamedQuery("desativarStatus",
+				candidatoEntity.getId());
 		if (status != null) {
 			for (StatusCandidatoEntity statusCand : status) {
 				statusCand.setFlSituacao(false);
@@ -299,13 +308,25 @@ public class CandidatoBusiness {
 		}
 	}
 
-	@Transactional
+	@Transactional(readOnly = true)
 	public void alterarStatus(SituacaoCandidatoBean situacaoCandidato) {
-		StatusCandidatoEntity statusCandidatoEntity = statusAlteracao(situacaoCandidato);
+		StatusCandidatoEntity statusCandidatoEntity = null;
 		List<StatusFuturoEntity> statusFuturoEntity = null;
 		List<AvaliadorCandidatoEntity> avaliadorCandidatoEntity = null;
+		List<StatusDisponivelEntity> statusDisponivelEntity = statusDisponivelDAO.findAll();
 
-		statusCandidatoDAO.insert(statusCandidatoEntity);
+		if (statusDisponivelEntity != null || statusDisponivelEntity.size() > 0) {
+			List<StatusCandidatoEntity> statusCandidato = statusCandidatoDAO
+					.findByNamedQuery("obterStatusCandidato", situacaoCandidato.getIdCandidato());
+			for (StatusDisponivelEntity sde : statusDisponivelEntity) {
+				if (sde.getStatus().getId() == statusCandidato.get(0).getStatus().getId()) {
+					if (situacaoCandidato.getStatus().getValue() == sde.getIdStatusDisponivel()) {
+						statusCandidatoEntity = statusAlteracao(situacaoCandidato);
+						statusCandidatoDAO.insert(statusCandidatoEntity);
+					}
+				}
+			}
+		}
 
 		statusFuturoEntity = statusFuturoDAO.findByNamedQuery("obterStatusFuturos",
 				situacaoCandidato.getStatus().getValue());
@@ -471,10 +492,11 @@ public class CandidatoBusiness {
 		}
 		return listaStatus;
 	}
+
 	@Transactional
 	public Integer totalPagina(CandidatoBean candidato) {
 		List<Criterion> criterions = confFiltro(candidato);
-		float pag = (float)candidatoDAO.rowCount(criterions) / (float)CandidatoDAO.limitResultsPerPage;
+		float pag = (float) candidatoDAO.rowCount(criterions) / (float) CandidatoDAO.limitResultsPerPage;
 		Integer paginas = null;
 		if (pag % 1 == 0) {
 			paginas = (int) pag;

@@ -232,7 +232,7 @@
 																items="${candidato.ultimoStatus.status.statusDisponiveis}">
 																<li><a class="clickable"
 																	id="aprovar-candidato" 
-																	onclick="alterarStatus(${candidato.id}, ${statusDisponivel.id})">
+																	onclick="alterarStatus(${candidato.id}, ${statusDisponivel.idStatusDisponivel})">
 																		<i ${statusDisponivel.classe}>&nbsp;</i>${statusDisponivel.nome}</a></li>
 																<li class="divider"></li>
 															</c:forEach>
