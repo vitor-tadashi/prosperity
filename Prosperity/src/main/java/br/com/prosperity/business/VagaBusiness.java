@@ -184,11 +184,11 @@ public class VagaBusiness {
 			
 			if (vaga.getDataAberturaDe() != null && vaga.getDataAberturaPara() != null) {
 				if(vaga.getDataAberturaDe() == null) {
-					criterions.add(Restrictions.between("dataAbertura", "''", parseData(vaga.getDataAberturaPara())));
+					criterions.add(Restrictions.between("dataAbertura", "", parseData(vaga.getDataAberturaPara())));
 				}
 				else if(vaga.getDataAberturaPara() == null) {
 					criterions.add(Restrictions.between("dataAbertura", parseData(vaga.getDataAberturaDe()),
-							"''"));
+							""));
 				}
 				else {
 					criterions.add(Restrictions.between("dataAbertura", parseData(vaga.getDataAberturaDe()),
