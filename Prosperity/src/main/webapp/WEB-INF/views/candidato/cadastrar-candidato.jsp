@@ -47,7 +47,7 @@
 						<div id="textDiv3"></div>
 
 						<form class="form-border" action="salvar" method="post"
-							enctype="multipart/form-data" id=formCadastro onblur="validar()">
+							enctype="multipart/form-data" id=formCadastro onsubmit="validarVaga()">
 							<div class="panel-tab clearfix">
 								<ul class="tab-bar wizard-demo" id="wizardDemo">
 									<li class="active tab-verity"><a href="#first"
@@ -224,7 +224,7 @@
 										</div>
 										<div class="form-group col-md-3">
 											<label for="vaga">Vaga a ser aplicado</label> <select
-												class="form-control" id="vaga" name="vagaCandidato.vaga.id">
+												class="form-control" id="vaga" name="vagaCandidato.vaga.id" required>
 												<option value="0">Selecione</option>
 												<c:forEach var="vaga" items="${listaVaga}">
 													<option value="${vaga.id}"

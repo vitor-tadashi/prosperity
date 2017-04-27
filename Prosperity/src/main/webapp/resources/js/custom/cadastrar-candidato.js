@@ -288,4 +288,18 @@ $(document).ready(function () {
 	function download (url) {
 		window.location.href = url;
 	}
+	function validarVaga(){
+		  var vaga= document.getElementById("vaga").value;
+		    $vaga = vaga;
+		    if (vaga == "0") {
+		    	var div = document.getElementById("textDiv	2").className = "alert alert-danger";
+
+    			textDiv2.textContent = "O campo vaga a ser aplicado deve ser preenchido";
+
+    			var text = "[" + div.textContent + "]";
+                
+		      return false;
+		      }
+		    return true;
+	}
 	
