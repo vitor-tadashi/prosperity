@@ -10,9 +10,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import br.com.prosperity.bean.SituacaoCandidatoBean;
-import br.com.prosperity.bean.SituacaoVagaBean;
-import br.com.prosperity.bean.UsuarioBean;
+import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.VagaBean;
 
 //clase que retorna uma autenticacao para ser enviada e verificada pelo servidor smtp
@@ -139,18 +137,17 @@ public class GeradorEmail {
 	private String para;
 
 	// Para alterações em status de candidatos:
-	public void enviarEmail(VagaBean vaga, SituacaoCandidatoBean situacaoCandidato, List<UsuarioBean> usuarios) {
+	public void enviarEmail(CandidatoBean candidato, String para, String nome) {
 
-		para = "";
-
-		for (UsuarioBean u : usuarios) {
-			para += u.getEmail() + ",";
-		}
-
+		Mensagem mensagem = new Mensagem();
+		
+		String mensagemtexto = mensagem.gerador("o candidato ", candidato.getNome(), candidato.getUltimoStatus().toString(), nome);
+		
+		
 		new Thread() {
 			public void run() {
 				try {
-					sendMail(de, para, "Gerador Email", "Um email para vc");
+					sendMail(de, para, "Prosperity (Não responda)", mensagemtexto);
 
 				} catch (Exception e) {
 					System.out.println("Erro\n");
@@ -161,18 +158,16 @@ public class GeradorEmail {
 	}
 
 	// Para alterações em status de vagas:
-	public void enviarEmail(VagaBean vaga, SituacaoVagaBean situacaoVaga, List<UsuarioBean> usuarios) {
+	public void enviarEmail(VagaBean vaga, String para, String nome) {
 
-		para = "";
-
-		for (UsuarioBean u : usuarios) {
-			para += u.getEmail() + ",";
-		}
-
+		Mensagem mensagem = new Mensagem();
+		
+		String mensagemtexto = mensagem.gerador("a vaga ", vaga.getNomeVaga(), vaga.getUltimoStatus().toString(), nome);
+		
 		new Thread() {
 			public void run() {
 				try {
-					sendMail(de, para, "Gerador Email", "Um email para você");
+					sendMail(de, para, "Prosperity (Não responda)", mensagemtexto);
 
 				} catch (Exception e) {
 					System.out.println("Erro\n");

@@ -121,9 +121,9 @@ public class CandidatoBusiness {
 
 	@Autowired
 	private HttpSession session;
-	
+
 	@Autowired
-	private GeradorEmail geradorEmail;
+	private UsuarioBusiness usuarioBusiness;
 
 	@Transactional(readOnly = true)
 	public List<CandidatoBean> listarDecrescente() {
@@ -193,8 +193,8 @@ public class CandidatoBusiness {
 	@Transactional
 	public List<CandidatoBean> filtroCandidato(CandidatoBean candidato, Integer page) {
 		List<Criterion> criterions = confFiltro(candidato);
-		
-		List<CandidatoEntity> candidatos = candidatoDAO.findByCriteria(page,criterions);
+
+		List<CandidatoEntity> candidatos = candidatoDAO.findByCriteria(page, criterions);
 		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(candidatos);
 		return beans;
 
@@ -226,7 +226,7 @@ public class CandidatoBusiness {
 
 				situacaoCandidato.setIdCandidato(candidatoEntity.getId());
 				situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
-				
+
 				alterarStatus(situacaoCandidato);
 
 			} else {
@@ -475,10 +475,11 @@ public class CandidatoBusiness {
 		}
 		return listaStatus;
 	}
+
 	@Transactional
 	public Integer totalPagina(CandidatoBean candidato) {
 		List<Criterion> criterions = confFiltro(candidato);
-		float pag = (float)candidatoDAO.rowCount(criterions) / (float)CandidatoDAO.limitResultsPerPage;
+		float pag = (float) candidatoDAO.rowCount(criterions) / (float) CandidatoDAO.limitResultsPerPage;
 		Integer paginas = null;
 		if (pag % 1 == 0) {
 			paginas = (int) pag;
@@ -516,5 +517,108 @@ public class CandidatoBusiness {
 			criterions.add(Restrictions.like("ultimaVaga.nomeVaga", "%" + idVaga + "%"));
 		}
 		return criterions;
+	}
+
+	public void buscarUsuariosParaEmail(CandidatoBean candidato) {
+		List<UsuarioBean> usuarios = usuarioBusiness.findAll();
+		ArrayList<String> recipients = new ArrayList<>();
+		ArrayList<String> nomes = new ArrayList<>();
+		List<UsuarioBean> avaliadores = candidato.getVagaBean().getAvaliadores();
+
+		if (candidato.getUltimoStatus().equals("GERARPROPOSTA")) {
+			for (UsuarioBean u : usuarios) {
+				switch (u.getPerfil().getNome()) {
+				case "Analista de RH":
+					recipients.add(u.getEmail());
+					nomes.add(u.getNome());
+					break;
+				case "Gestor de RH":
+					recipients.add(u.getEmail());
+					nomes.add(u.getNome());
+					break;
+				default:
+					break;
+				}
+			}
+		} else if (candidato.getUltimoStatus().equals("CANDIDATOEMANALISE")) {
+
+			for (UsuarioBean a : avaliadores) {
+				recipients.add(a.getEmail());
+				nomes.add(a.getNome());
+			}
+		} else if (candidato.getUltimoStatus().equals("CANDIDATOAPROVADO")
+				|| candidato.getUltimoStatus().equals("CANDIDATOCONTRATADO")) {
+
+			recipients.add(candidato.getVagaBean().getUsuarioBean().getEmail());
+
+			for (UsuarioBean u : usuarios) {
+				switch (u.getPerfil().getNome()) {
+				case "Analista de RH":
+					recipients.add(u.getEmail());
+					nomes.add(u.getNome());
+					break;
+				case "Gestor de RH":
+					recipients.add(u.getEmail());
+					nomes.add(u.getNome());
+					break;
+				default:
+					break;
+				}
+			}
+		} else if (candidato.getUltimoStatus().equals("PROPOSTACANDIDATO")) {
+			for (UsuarioBean u : usuarios) {
+				switch (u.getPerfil().getNome()) {
+				case "CEO":
+					recipients.add(u.getEmail());
+					nomes.add(u.getNome());
+					break;
+				case "Diretor de operação":
+					recipients.add(u.getEmail());
+					nomes.add(u.getNome());
+					break;
+				default:
+					break;
+				}
+			}
+		} else if (candidato.getUltimoStatus().equals("PROPOSTAACEITA")) {
+			for (UsuarioBean u : usuarios) {
+				switch (u.getPerfil().getNome()) {
+				case "Analista de RH":
+					recipients.add(u.getEmail());
+					nomes.add(u.getNome());
+					break;
+				case "Gestor de RH":
+					recipients.add(u.getEmail());
+					nomes.add(u.getNome());
+					break;
+				default:
+					break;
+				}
+			}
+		} else if (candidato.getUltimoStatus().equals("PROPOSTARECUSADA")) {
+			for (UsuarioBean u : usuarios) {
+				switch (u.getPerfil().getNome()) {
+				case "Analista de RH":
+					recipients.add(u.getEmail());
+					nomes.add(u.getNome());
+					break;
+				case "Gestor de RH":
+					recipients.add(u.getEmail());
+					nomes.add(u.getNome());
+					break;
+				default:
+					break;
+				}
+			}
+		}
+
+		GeradorEmail email = new GeradorEmail();
+
+		int i = 0;
+
+		for (String usuario : recipients) {
+			email.enviarEmail(candidato, usuario, nomes.get(i));
+			i++;
+		}
 	}
 }
