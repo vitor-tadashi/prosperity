@@ -9,7 +9,7 @@ public class Mensagem {
 	
 	public String gerador(String tipo, String nome, String status, String usuario) {
 		
-		String mensagem = "Olá " + usuario + " ,\nvocê está sendo notificado(a) que o(a)" + tipo 
+		String mensagem = "Olá " + usuario + " ,\nvocê está sendo notificado(a) que " + tipo 
 				+ " " + nome + " recebeu o status de "
 				+ status + "\n\natenciosamente, equipe Prosperity.";
 		

@@ -6,6 +6,11 @@
 
 <layout:extends name="base">
 	<layout:put block="contents">
+	<style>
+		li a.active {
+		background: #f2f2f2;
+		}
+	</style>
 		<link rel="stylesheet"
 			href="/resources/css/ckeditor_/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
 		<!--    Modais   -->
@@ -120,7 +125,7 @@
 								</div>
 								</form>
 							</div>
-							<div class="panel-footer ">
+							<div class="panel-footer clearfix">
 								<button type="button" class="btn btn-sm btn-primary pull-right" id="btnEnviar">
 									<i class="fa fa-check fa-lg"></i>&nbsp;Enviar
 								</button>
@@ -232,7 +237,7 @@
 																items="${candidato.ultimoStatus.status.statusDisponiveis}">
 																<li><a class="clickable"
 																	id="aprovar-candidato" 
-																	onclick="alterarStatus(${candidato.id}, ${statusDisponivel.id})">
+																	onclick="alterarStatus(${candidato.id}, ${statusDisponivel.idStatusDisponivel})">
 																		<i ${statusDisponivel.classe}>&nbsp;</i>${statusDisponivel.nome}</a></li>
 																<li class="divider"></li>
 															</c:forEach>
@@ -252,8 +257,27 @@
 							</table>
 						</div>
 						<!-- /.row -->
+						<div class="panel-footer clearfix">
+						
+                              <input type="hidden" id="pageActive" value="${page }">
+                              <ul class="pagination pagination-xs m-top-none pull-right">
+                                  <li>
+                                      <c:if test="${page > 1}">
+                                          <a href="<c:url value="/candidato/aprovar" ><c:param name="page" value="${page - 1}"/></c:url>">Anterior</a>
+                                      </c:if>
+                                      <c:forEach begin="${startpage}" end="${endpage}" var="p">
+                                          <a id="page${p}" href="<c:url value="/candidato/aprovar" ><c:param name="page" value="${p}"/>${p}</c:url>">${p}</a>
+                                      </c:forEach>
+                                      <c:if test="${page < endpage}">
+                                          <a href="<c:url value="/candidato/aprovar" ><c:param name="page" value="${page + 1}"/></c:url>">Próximo</a>
+                                      </c:if>
+                                  </li>
+                              </ul>
+							 			
+					 	</div>
 					</div>
 					<!-- /.panel-body -->
+					
 				</div>
 				<!-- /col-md-12 -->
 			</div>
@@ -266,6 +290,7 @@
 		<script src="/resources/js/parsley.min.js"></script>
 		<script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 		<script>
+		$('#page'+$('#pageActive').val()).addClass('active');
 	var cont;
 	function maxCaracterParecer(){
 		var maxParecer = $("#parecer").val();
@@ -294,51 +319,39 @@
 							if(data.ultimoStatus.status.id == "9"){
 				                 if(perfil == "Analista de RH" || perfil == "Gestor RH"){
 									CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
-									document.getElementById("proposta-tab").style.visibility = "visible";
-									document.getElementById("proposta").style.visibility = "visible";
+									$("#proposta-tab").show();
 				                 }
 							}else if(data.ultimoStatus.status.id == "10"){
 				                 if(perfil == "Administrador" || perfil == "CEO" || perfil == "Diretor de operação"){
 										CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
 					                	$("#proposta-tab").show();
-					                	$("#proposta").show();
 					                	CKEDITOR.instances['editor'].setReadOnly(true);
 					                 }
 							}else if(data.ultimoStatus.status.id == "11"){
 				                 if(perfil == "Analista de RH" || perfil == "Gestor RH"){
 										CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
 					                	$("#proposta-tab").show();
-					                	$("#proposta").show();
 					                	CKEDITOR.instances['editor'].setReadOnly(true);
 					                 }
 							}else if(data.ultimoStatus.status.id == "13"){
 				                 if(perfil == "Analista de RH" || perfil == "Gestor RH"){
 										CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
 					                	$("#proposta-tab").show();
-					                	$("#proposta").show();
 					                 }
 							}else if(data.ultimoStatus.status.id == "14"){
 				                 if(perfil == "Analista de RH" || perfil == "Gestor RH"){
 										CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
 					                	$("#proposta-tab").show();
-					                	$("#proposta").show();
 					                 }
 							}else{
 			                	$("#proposta-tab").hide();
-			                	$("#proposta").hide();
 							}
 							if(data.ultimoStatus.status.id == "6"){
 								$("#avaliacao-tab").show();
-								$("#avaliacaoComp").show();
-								document.getElementById("avaliacaoComp").style.visibility = "visible";
 								$("#processo-tab").show();
-								$("#processoSelecao").show();
 							}else{
 								$("#avaliacao-tab").hide();
-								$("#avaliacaoComp").hide();
-								document.getElementById("avaliacaoComp").style.visibility = "hidden";
 								$("#processo-tab").hide();
-								$("#processoSelecao").hide();
 							}
 							$('.tab-bar a[href="#infoEntrevista"]').tab('show')
 							$('#modalProposta').modal('show');
@@ -472,40 +485,6 @@
             });
          
 /* paginação */
-	$(function	()	{
-		$('#tabelaCandidato').dataTable( {
-			"bJQueryUI": true,
-			"sPaginationType": "simple_numbers",
-			"bFilter": false,
-			"bInfo": false,
-			"bLengthChange": false,
-			"bSort": false,
-
-			"oLanguage": {
-				"sEmptyTable": "Nenhum registro encontrado",
-				"sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-				"sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
-				"sInfoFiltered": "(Filtrados de _MAX_ registros)",
-				"sInfoPostFix": "",
-				"sInfoThousands": ".",
-				"sLengthMenu": "_MENU_ resultados por página",
-				"sLoadingRecords": "Carregando...",
-				"sProcessing": "Processando...",
-				"sZeroRecords": "Nenhum registro encontrado",
-				"sSearch": "Pesquisar",
-				"oPaginate": {
-					"sNext": "Próximo",
-					"sPrevious": "Anterior",
-					"sFirst": "Primeiro",
-					"sLast": "Último"
-				},
-				"oAria": {
-					"sSortAscending": ": Ordenar colunas de forma ascendente",
-					"sSortDescending": ": Ordenar colunas de forma descendente"
-				}
-			}
-		});
-	});
 	</script>
 	</layout:put>
 </layout:extends>
