@@ -248,11 +248,12 @@ public class CandidatoBusiness {
 	@Transactional
 	public void inserir(CandidatoBean candidatoBean) throws BusinessException {
 
+		SituacaoCandidatoBean situacaoCandidato;
+
 		if (candidatoBean.getId() == null) {
 
 			if (verificarCandidatura(candidatoBean)) {
 				CandidatoEntity candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoBean);
-				SituacaoCandidatoBean situacaoCandidato = new SituacaoCandidatoBean();
 				Date dateNow = new Date();
 				candidatoEntity.setDataAbertura(dateNow);
 
@@ -265,7 +266,9 @@ public class CandidatoBusiness {
 				candidatoDAO.insert(candidatoEntity);
 
 				inserirAvaliadores(candidatoEntity, vagaAtual.getId());
-
+				
+				situacaoCandidato = new SituacaoCandidatoBean();
+				
 				if (vagaAtual.getId() == 1202)
 					situacaoCandidato.setStatus(StatusCandidatoEnum.CANCELADO);
 
@@ -284,7 +287,15 @@ public class CandidatoBusiness {
 			candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoEntity, candidatoBean);
 
 			tratarInformacoes(candidatoEntity);
-
+		
+			List<StatusCandidatoEntity> statusCandidato = statusCandidatoDAO.findByNamedQuery("obterStatusCandidato", candidatoEntity.getId());
+			
+			if(candidatoBean.getUltimoStatus().getStatus().getId() == StatusCandidatoEnum.CANCELADO.getValue()) {
+				situacaoCandidato = new SituacaoCandidatoBean();
+				situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
+				alterarStatus(situacaoCandidato);
+			}
+			
 			candidatoDAO.update(candidatoEntity);
 		}
 	}
@@ -333,6 +344,9 @@ public class CandidatoBusiness {
 	@Transactional
 	public CandidatoBean obterCandidatoPorId(Integer id) {
 		CandidatoBean bean = candidatoConverter.convertEntityToBean(candidatoDAO.findById(id));
+		String vp = bean.getValorPretensao().toString();
+		Double vpd = Double.valueOf(vp.replace(".000", ""));
+		bean.setValorPretensao(bean.getValorPretensao().valueOf(vpd)); 
 		return bean;
 	}
 
