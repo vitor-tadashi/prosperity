@@ -426,7 +426,7 @@ public class CandidatoBusiness {
 	}
 
 	@Transactional
-	public List<CandidatoBean> listarAprovacao() {
+	public List<CandidatoBean> listarAprovacao(Integer page) {
 		List<Integer> listaStatus = obterStatusDisponivelAprovacao();
 		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
 		Integer idStatusCandidatura = 0;
@@ -437,8 +437,8 @@ public class CandidatoBusiness {
 			}
 		}
 
-		List<CandidatoEntity> entities = candidatoDAO.findByNamedQuery("listarAprovacoes", listaStatus,
-				StatusCandidatoEnum.CANDIDATOEMANALISE.getValue(), usuarioBean.getId(), idStatusCandidatura);
+		List<CandidatoEntity> entities = candidatoDAO.listarAprovacao( listaStatus,
+				StatusCandidatoEnum.CANDIDATOEMANALISE.getValue(), usuarioBean.getId(), idStatusCandidatura, page);
 		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(entities);
 
 		return beans;
@@ -473,8 +473,23 @@ public class CandidatoBusiness {
 	}
 	@Transactional
 	public Integer totalPagina(CandidatoBean candidato) {
-		List<Criterion> criterions = confFiltro(candidato);
-		float pag = (float)candidatoDAO.rowCount(criterions) / (float)CandidatoDAO.limitResultsPerPage;
+		float pag = 0;
+		if(candidato.getId() == null){
+			List<Criterion> criterions = confFiltro(candidato);
+			pag = (float)candidatoDAO.rowCount(criterions) / (float)CandidatoDAO.limitResultsPerPage;
+		}else{
+			List<Integer> listaStatus = obterStatusDisponivelAprovacao();
+			usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
+			Integer idStatusCandidatura = 0;
+
+			for (FuncionalidadeBean funcionalidadeBean : usuarioBean.getPerfil().getListaFuncionalidades()) {
+				if (funcionalidadeBean.getId() == 27) {
+					idStatusCandidatura = StatusCandidatoEnum.CANDIDATURA.getValue();
+				}
+			}
+			pag = (float)candidatoDAO.countAprovacao(listaStatus,
+					StatusCandidatoEnum.CANDIDATOEMANALISE.getValue(), usuarioBean.getId(), idStatusCandidatura) / (float)CandidatoDAO.limitResultsPerPage;
+		}
 		Integer paginas = null;
 		if (pag % 1 == 0) {
 			paginas = (int) pag;
