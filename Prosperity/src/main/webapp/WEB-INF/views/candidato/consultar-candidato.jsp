@@ -549,7 +549,7 @@
 						</div>
 						<!-- /.panel-body - ATE AQUI O FILTRAR-->
 						<div class="panel-footer clearfix">
-						<div class="row">
+						
                               <input type="hidden" id="pageActive" value="${page }">
                               <ul class="pagination pagination-xs m-top-none pull-right">
                                   <li>
@@ -564,11 +564,9 @@
                                       </c:if>
                                   </li>
                               </ul>
-                         
-                          <!--</div row>-->	
 						
 							<a href="/vaga/consultar" class="btn btn-xs btn-default"><i class="fa fa-reply"></i> Retornar</a>
-							 </div> 			
+							 			
 					 	</div>
 		
 					</div>
