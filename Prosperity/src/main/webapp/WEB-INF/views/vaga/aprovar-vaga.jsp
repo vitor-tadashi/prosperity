@@ -178,7 +178,7 @@
 											<div class="panel-heading">Informações de projeto</div>
 											<div class="panel-body">
 												<!-- /form-group -->
-												<div class="form-group col-md-13 "
+												<div class="form-group col-md-12"
 													style="margin-bottom: 5px;">
 													<label class="control-label">Projeto</label> <input
 														readonly class="form-control default-cursor"
@@ -668,7 +668,8 @@
        				$("#substituidoId").show();
     				$("#vagaSubstituto").show();
     			}
-    			$('input#vagaSalario').val(lista.valorPretensao);
+    			//var rangeSalarial = ${rangeSalarial.valorMaxSalario};
+    			//$('input#vagaSalario').val(rangeSalarial);
     			$('input#cargo').val(lista.cargoBean.nome);
     			$('input#vagaSenioridade').val(lista.senioridadeBean.nome);
     			$('label#horaEntrada').text(lista.horarioEntrada);
@@ -806,7 +807,7 @@
     		}
     	});
 	});
-	$('#vagaPerfilTecnico').autoResize(); 
+	
 	</script>
 	</layout:put>
 </layout:extends>
