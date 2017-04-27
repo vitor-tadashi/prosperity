@@ -130,7 +130,6 @@ public class CandidatoBusiness {
 	@Autowired
 	private UsuarioBusiness usuarioBusiness;
 
-
 	@Transactional(readOnly = true)
 	public List<CandidatoBean> listarDecrescente() {
 		List<CandidatoEntity> CandidatoEntity = candidatoDAO.findByNamedQuery("obterPorDesc");
@@ -316,18 +315,8 @@ public class CandidatoBusiness {
 		List<AvaliadorCandidatoEntity> avaliadorCandidatoEntity = null;
 		List<StatusDisponivelEntity> statusDisponivelEntity = statusDisponivelDAO.findAll();
 
-		if (statusDisponivelEntity != null || statusDisponivelEntity.size() > 0) {
-			List<StatusCandidatoEntity> statusCandidato = statusCandidatoDAO
-					.findByNamedQuery("obterStatusCandidato", situacaoCandidato.getIdCandidato());
-			for (StatusDisponivelEntity sde : statusDisponivelEntity) {
-				if (sde.getStatus().getId() == statusCandidato.get(0).getStatus().getId()) {
-					if (situacaoCandidato.getStatus().getValue() == sde.getIdStatusDisponivel()) {
-						statusCandidatoEntity = statusAlteracao(situacaoCandidato);
-						statusCandidatoDAO.insert(statusCandidatoEntity);
-					}
-				}
-			}
-		}
+		statusCandidatoEntity = statusAlteracao(situacaoCandidato);
+		statusCandidatoDAO.insert(statusCandidatoEntity);
 
 		statusFuturoEntity = statusFuturoDAO.findByNamedQuery("obterStatusFuturos",
 				situacaoCandidato.getStatus().getValue());
@@ -354,6 +343,8 @@ public class CandidatoBusiness {
 				avaliadorCandidatoDAO.update(avaliadorCandidatoEntity.get(0));
 			}
 			statusCandidatoDAO.insert(statusAlteracao(situacaoCandidato));
+			// candidatoBean.setId(situacaoCandidato.getIdCandidato());
+			// buscarUsuariosParaEmail(candidatoBean);
 		}
 	}
 
@@ -537,7 +528,9 @@ public class CandidatoBusiness {
 		return criterions;
 	}
 
+	@Transactional
 	public void buscarUsuariosParaEmail(CandidatoBean candidato) {
+		candidato = candidatoConverter.convertEntityToBean(candidatoDAO.findById(candidato.getId()));
 		List<UsuarioBean> usuarios = usuarioBusiness.findAll();
 		ArrayList<String> recipients = new ArrayList<>();
 		ArrayList<String> nomes = new ArrayList<>();
