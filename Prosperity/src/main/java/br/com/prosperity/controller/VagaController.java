@@ -177,7 +177,7 @@ public class VagaController {
 		paginacao(page, model, vaga);
 		model.addAttribute("filtroVaga", vaga);
 		model.addAttribute("vagas", vagas);
-
+		
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
 		model.addAttribute("listaCargo", listaCargo);
 

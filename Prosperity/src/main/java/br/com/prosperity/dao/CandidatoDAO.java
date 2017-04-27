@@ -94,6 +94,8 @@ public class CandidatoDAO extends GenericDAOImpl<CandidatoEntity, Integer> {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		if(result == null)
+			result = 0;
 		return result;
 	}
 	public List<CandidatoEntity> listarAprovacao(List<Integer> listaStatus,Integer statu,Integer idUsuario,Integer idStatusCandidatura,Integer page){

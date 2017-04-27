@@ -368,9 +368,9 @@
 										<label for="">Data</label>
 										<div class="input-group">
 											<fmt:formatDate value="${filtroVaga.dataAberturaDe}"
-												pattern="dd/MM/yyyy" var="d1" />
+												pattern="yyyy-MM-dd" var="d1" />
 											<fmt:formatDate value="${filtroVaga.dataAberturaPara}"
-												pattern="dd/MM/yyyy" var="d2" />
+												pattern="yyyy-MM-dd" var="d2" />
 											<input type="date" name="dataAberturaDe" id="data1"
 												class="form-control" value="${d1 }"> <span
 												class="input-group-addon">até</span> <input type="date"
