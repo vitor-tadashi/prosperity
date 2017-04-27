@@ -17,6 +17,7 @@ public class StatusDisponivelConverter implements Converter<StatusDisponivelEnti
 		StatusDisponivelEntity entity = new StatusDisponivelEntity();
 
 		entity.setId(bean.getId());
+		entity.setIdStatusDisponivel(bean.getIdStatusDisponivel());
 		entity.setNome(bean.getNome());
 		entity.setClasse(bean.getClasse());
 
@@ -32,6 +33,7 @@ public class StatusDisponivelConverter implements Converter<StatusDisponivelEnti
 		StatusDisponivelBean bean = new StatusDisponivelBean();
 
 		bean.setId(entity.getId());
+		bean.setIdStatusDisponivel(entity.getIdStatusDisponivel());
 		bean.setNome(entity.getNome());
 		bean.setClasse(entity.getClasse());
 		

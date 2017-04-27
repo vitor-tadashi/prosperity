@@ -104,3 +104,11 @@ function info(listaId){
 	    var ano = data.getFullYear();  
 	    return dia+"/"+mes+"/"+ano;
 	}
+	$(document).ready(function() {
+		var url = window.location.href;
+		if(url.match(/editar/)){
+			$(".download-download").show();
+		} else {
+			$(".download-download").hide();
+		}
+	});	

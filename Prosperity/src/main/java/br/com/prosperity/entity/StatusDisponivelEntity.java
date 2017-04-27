@@ -2,6 +2,8 @@ package br.com.prosperity.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -10,11 +12,18 @@ import javax.persistence.Table;
 public class StatusDisponivelEntity {
 
 	@Id
-	@Column(name = "idStatusDisponivel")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idStatusHabilitado", unique = true, nullable = false)
 	private Integer id;
+
+	@Column(name = "idStatusDisponivel")
+	private Integer idStatusDisponivel;
 
 	@Column(name = "nmOpcao")
 	private String nome;
+
+	@Column(name = "nmClasse")
+	private String classe;
 
 	public String getClasse() {
 		return classe;
@@ -24,15 +33,20 @@ public class StatusDisponivelEntity {
 		this.classe = classe;
 	}
 
-	@Column(name = "nmClasse")
-	private String classe;
-
 	public Integer getId() {
 		return id;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Integer getIdStatusDisponivel() {
+		return idStatusDisponivel;
+	}
+
+	public void setIdStatusDisponivel(Integer idStatusDisponivel) {
+		this.idStatusDisponivel = idStatusDisponivel;
 	}
 
 	public String getNome() {
