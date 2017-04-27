@@ -254,6 +254,13 @@
 										</c:forEach>
 									</form>
 								</tbody>
+								<c:if test="${empty candidatos}">
+								<tfoot>
+									<tr>
+										<td colspan="6">Nenhum registro</td>
+									</tr>
+								</tfoot>
+								</c:if>
 							</table>
 						</div>
 						<!-- /.row -->
