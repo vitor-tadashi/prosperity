@@ -1,16 +1,23 @@
 package br.com.prosperity.bean;
 
-import java.util.List;
+import java.math.BigDecimal;
 
+import org.springframework.format.annotation.NumberFormat;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CargoSenioridadeBean {
 
 	private Integer id;
-	private Double valorMinSalario;
-	private Double valorMaxSalario;
+	
+	@NumberFormat(pattern = "#,##0.00")
+	private BigDecimal valorMinSalario;
+	
+	@NumberFormat(pattern = "#,##0.00")
+	private BigDecimal valorMaxSalario;
+	
 	private CargoBean cargos;
+	
 	private SenioridadeBean senioridades;
 
 	public CargoSenioridadeBean() {
@@ -25,19 +32,19 @@ public class CargoSenioridadeBean {
 		this.id = id;
 	}
 
-	public Double getValorMinSalario() {
+	public BigDecimal getValorMinSalario() {
 		return valorMinSalario;
 	}
 
-	public void setValorMinSalario(Double valorMinSalario) {
+	public void setValorMinSalario(BigDecimal valorMinSalario) {
 		this.valorMinSalario = valorMinSalario;
 	}
 
-	public Double getValorMaxSalario() {
+	public BigDecimal getValorMaxSalario() {
 		return valorMaxSalario;
 	}
 
-	public void setValorMaxSalario(Double valorMaxSalario) {
+	public void setValorMaxSalario(BigDecimal valorMaxSalario) {
 		this.valorMaxSalario = valorMaxSalario;
 	}
 

@@ -63,16 +63,16 @@
 										<br> <br>
 										<c:if test="${not empty erros}">
 											<div class="alert alert-danger msg-margin">
-												<ul>
+												<ul style="list-style: none;">
 													<c:forEach items="${erros }" var="erro">
-														<li class="li-msg"><strong> ${erro }</strong></li>
+														<li class="li-msg">${erro }</li>
 													</c:forEach>
 												</ul>
 											</div>
 										</c:if>
 										<c:if test="${not empty sucesso}">
 											<div id="msg-sucesso" class="alert alert-success msg-margin">
-												<ul>
+												<ul  style="list-style: none;">
 													<li class="li-msg">${sucesso }</li>
 												</ul>
 											</div>

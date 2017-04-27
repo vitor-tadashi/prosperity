@@ -115,7 +115,10 @@ public class UsuarioBusiness {
 
 	@Transactional(readOnly=true)
 	public UsuarioBean obterPorId(Integer id) {
-		UsuarioBean bean = usuarioConverter.convertEntityToBean(usuarioDAO.findById(id));
+		
+		UsuarioEntity usuarioEntity = usuarioDAO.findById(id);
+		
+		UsuarioBean bean = usuarioConverter.convertEntityToBean(usuarioEntity);
 		return bean;
 	}
 

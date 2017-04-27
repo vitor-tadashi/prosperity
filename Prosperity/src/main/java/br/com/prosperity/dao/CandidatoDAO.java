@@ -2,29 +2,36 @@ package br.com.prosperity.dao;
 
 import java.util.List;
 
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import br.com.prosperity.entity.CandidatoEntity;
+import br.com.prosperity.entity.FormacaoEntity;
+import br.com.prosperity.entity.VagaEntity;
 
 @Repository
 public class CandidatoDAO extends GenericDAOImpl<CandidatoEntity, Integer> {
 	
 	Session session;
 	
+	public static final int limitResultsPerPage = 10;
 	
 	/**
 	 * Use this inside subclasses as a convenience method.
 	 */
-	public List<CandidatoEntity> findByCriteria(final List<Criterion> criterion) {
+	public List<CandidatoEntity> findByCriteria(Integer page, final List<Criterion> criterion) {
 		List<CandidatoEntity> ret = null;
 		try {
-			ret = findByCriteria("id", true, -1, -1, criterion);
+			ret = findByCriteria("dataAbertura", true, (page * limitResultsPerPage) - (limitResultsPerPage), limitResultsPerPage, criterion);
 		} catch (Exception e) {
-			
 
 		}
 		return ret;
@@ -70,6 +77,63 @@ public class CandidatoDAO extends GenericDAOImpl<CandidatoEntity, Integer> {
 			e.printStackTrace();
 		}
 
+		return result;
+	}
+
+	public float rowCount(List<Criterion> criterions) {
+		Integer result = null;
+		try {
+			Session session = (Session) entityManager.getDelegate();
+			Criteria crit = session.createCriteria(CandidatoEntity.class, "candidato");
+			crit.createAlias("candidato.vagas", "vaga");
+			
+			for (final Criterion c : criterions) {
+				crit.add(c);
+			}
+			result = ((Number)crit.setProjection(Projections.rowCount()).uniqueResult()).intValue();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	public List<CandidatoEntity> listarAprovacao(List<Integer> listaStatus,Integer statu,Integer idUsuario,Integer idStatusCandidatura,Integer page){
+		Query query = entityManager.createQuery("SELECT DISTINCT c FROM CandidatoEntity c "
+				+ "INNER JOIN c.statusCandidatos sc "
+				+ "INNER JOIN c.avaliadores ac "
+				+ "WHERE (sc.idStatusCandidato = (SELECT max(scc.idStatusCandidato) FROM StatusCandidatoEntity scc WHERE scc.candidato.id = c.id) "
+				+ "AND (sc.status.id IN (?1) AND ac.status IS NOT NULL AND sc.flSituacao = true) "
+				+ "OR (sc.status.id = ?2 AND ac.status IS NULL AND ac.usuario.id = ?3 AND sc.flSituacao = true)"
+				+ "OR (sc.status.id = ?4 AND ac.status IS NULL AND sc.flSituacao = true)) ORDER BY c.id DESC");
+		
+		query.setParameter(1, listaStatus);
+		query.setParameter(2, statu);
+		query.setParameter(3, idUsuario);
+		query.setParameter(4, idStatusCandidatura);
+		
+		query.setFirstResult((page * limitResultsPerPage) - (limitResultsPerPage));
+		query.setMaxResults(limitResultsPerPage);
+		
+		List<CandidatoEntity> candidatos = query.getResultList();
+		
+		return candidatos;
+	}
+	public float countAprovacao(List<Integer> listaStatus,Integer statu,Integer idUsuario,Integer idStatusCandidatura){
+		Long result = null;
+		
+		Query query = entityManager.createQuery("SELECT COUNT(DISTINCT sc.candidato.id) FROM CandidatoEntity c "
+				+ "INNER JOIN c.statusCandidatos sc "
+				+ "INNER JOIN c.avaliadores ac "
+				+ "WHERE (sc.idStatusCandidato = (SELECT max(scc.idStatusCandidato) FROM StatusCandidatoEntity scc WHERE scc.candidato.id = c.id) "
+				+ "AND (sc.status.id IN (?1) AND ac.status IS NOT NULL AND sc.flSituacao = true) "
+				+ "OR (sc.status.id = ?2 AND ac.status IS NULL AND ac.usuario.id = ?3 AND sc.flSituacao = true)"
+				+ "OR (sc.status.id = ?4 AND ac.status IS NULL AND sc.flSituacao = true)) ");
+		
+		query.setParameter(1, listaStatus);
+		query.setParameter(2, statu);
+		query.setParameter(3, idUsuario);
+		query.setParameter(4, idStatusCandidatura);
+		
+		result = (long) query.getSingleResult();
 		return result;
 	}
 }

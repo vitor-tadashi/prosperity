@@ -1,6 +1,6 @@
 package br.com.prosperity.entity;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -41,10 +40,10 @@ public class CargoSenioridadeEntity{
 	private SenioridadeEntity idSenioridade;
 	
 	@Column(name="vlMinSalario")
-	private Double vlMinSalario;
+	private BigDecimal vlMinSalario;
 	
 	@Column(name="vlMaxSalario")
-	private Double vlMaxSalario;
+	private BigDecimal vlMaxSalario;
 	
 	public Integer getId() {
 		return id;
@@ -65,16 +64,16 @@ public class CargoSenioridadeEntity{
 	public void setIdSenioridade(SenioridadeEntity idSenioridade) {
 		this.idSenioridade = idSenioridade;
 	}
-	public Double getVlMinSalario() {
+	public BigDecimal getVlMinSalario() {
 		return vlMinSalario;
 	}
-	public void setVlMinSalario(Double vlMinSalario) {
+	public void setVlMinSalario(BigDecimal vlMinSalario) {
 		this.vlMinSalario = vlMinSalario;
 	}
-	public Double getVlMaxSalario() {
+	public BigDecimal getVlMaxSalario() {
 		return vlMaxSalario;
 	}
-	public void setVlMaxSalario(Double vlMaxSalario) {
+	public void setVlMaxSalario(BigDecimal vlMaxSalario) {
 		this.vlMaxSalario = vlMaxSalario;
 	}
 	

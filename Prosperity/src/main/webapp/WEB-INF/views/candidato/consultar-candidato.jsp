@@ -10,6 +10,12 @@
 	</layout:put>
 
 	<layout:put block="contents">
+	<style>
+		li a.active {
+		background: #f2f2f2;
+		}
+	</style>
+	
 	<!--    Modais   -->
 	<!-- Modal Avaliação de Competencias -->
 	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
@@ -492,7 +498,7 @@
 									<th class="text-center">Nome do candidato</th>
 									<th class="text-center">Vaga</th>
 									<th class="text-center">Pretensão</th>
-									<th class="text-center">Data de abertura</th>
+									<th class="text-center">Data de candidatura</th>
 									<!-- <th class="text-center">Data de aprovação</th> -->
 									<th class="text-center">Status</th>
 									<th class="text-center">Ações</th>
@@ -542,8 +548,25 @@
 
 						</div>
 						<!-- /.panel-body - ATE AQUI O FILTRAR-->
-						<div class="panel-footer">
-							<a href="/vaga/consultar" class="btn btn-xs btn-default"><i class="fa fa-reply"></i> Retornar</a>				
+						<div class="panel-footer clearfix">
+						
+                              <input type="hidden" id="pageActive" value="${page }">
+                              <ul class="pagination pagination-xs m-top-none pull-right">
+                                  <li>
+                                      <c:if test="${page > 1}">
+                                          <a href="<c:url value="/candidato/consultar" ><c:param name="page" value="${page - 1}"/></c:url>">Anterior</a>
+                                      </c:if>
+                                      <c:forEach begin="${startpage}" end="${endpage}" var="p">
+                                          <a id="page${p}" href="<c:url value="/candidato/consultar" ><c:param name="page" value="${p}"/>${p}</c:url>">${p}</a>
+                                      </c:forEach>
+                                      <c:if test="${page < endpage}">
+                                          <a href="<c:url value="/candidato/consultar" ><c:param name="page" value="${page + 1}"/></c:url>">Próximo</a>
+                                      </c:if>
+                                  </li>
+                              </ul>
+						
+							<a href="/vaga/consultar" class="btn btn-xs btn-default"><i class="fa fa-reply"></i> Retornar</a>
+							 			
 					 	</div>
 		
 					</div>
@@ -601,6 +624,8 @@
 	<!-- JavaScript -->
 
 	<script type="text/javascript">
+	
+	$('#page'+$('#pageActive').val()).addClass('active');
 	
 	$(document).ready(function(){
 		 $('.money2').mask("#.##0,00", {reverse: true});
@@ -746,10 +771,6 @@
 		}
 		
 		$(function	()	{
-			$('#dataTable').dataTable( {
-				"bJQueryUI": true,
-				"sPaginationType": "full_numbers"
-			});
 			
 			$('#chk-all').click(function()	{
 				if($(this).is(':checked'))	{
@@ -777,40 +798,7 @@
 		}
 	</script>
 		<script>/* paginação */
-	$(function	()	{
-		$('#tabelaVaga').dataTable( {
-			"bJQueryUI": true,
-			"sPaginationType": "simple_numbers",
-			"bFilter": false,
-			"bInfo": false,
-			"bLengthChange": false,
-			"bSort": false,
 
-			"oLanguage": {
-				"sEmptyTable": "Nenhum registro encontrado",
-				"sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-				"sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
-				"sInfoFiltered": "(Filtrados de _MAX_ registros)",
-				"sInfoPostFix": "",
-				"sInfoThousands": ".",
-				"sLengthMenu": "_MENU_ resultados por página",
-				"sLoadingRecords": "Carregando...",
-				"sProcessing": "Processando...",
-				"sZeroRecords": "Nenhum registro encontrado",
-				"sSearch": "Pesquisar",
-				"oPaginate": {
-					"sNext": "Próximo",
-					"sPrevious": "Anterior",
-					"sFirst": "Primeiro",
-					"sLast": "Último"
-				},
-				"oAria": {
-					"sSortAscending": ": Ordenar colunas de forma ascendente",
-					"sSortDescending": ": Ordenar colunas de forma descendente"
-				}
-			}
-		});
-	});
 	</script>
 	</layout:put>
 </layout:extends>
