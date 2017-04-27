@@ -114,9 +114,6 @@ public class CandidatoController<PaginarCandidato> {
 	@Autowired
 	private ProvaBean provaBean;
 	
-/*	@Autowired
-	private GeradorEmail geradorEmail;*/
-	
 	private void paginacao(Integer page, Model model, CandidatoBean candidato) {
 
 		Integer startpage = 1;

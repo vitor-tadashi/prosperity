@@ -39,6 +39,7 @@ import br.com.prosperity.dao.CompetenciaDAO;
 import br.com.prosperity.dao.SituacaoAtualDAO;
 import br.com.prosperity.dao.StatusCandidatoDAO;
 import br.com.prosperity.dao.StatusDAO;
+import br.com.prosperity.dao.StatusDisponivelDAO;
 import br.com.prosperity.dao.StatusFuturoDAO;
 import br.com.prosperity.dao.TipoCursoDAO;
 import br.com.prosperity.dao.UsuarioDAO;
@@ -50,6 +51,7 @@ import br.com.prosperity.entity.AvaliadorVagaEntity;
 import br.com.prosperity.entity.CandidatoEntity;
 import br.com.prosperity.entity.CompetenciaEntity;
 import br.com.prosperity.entity.StatusCandidatoEntity;
+import br.com.prosperity.entity.StatusDisponivelEntity;
 import br.com.prosperity.entity.StatusFuturoEntity;
 import br.com.prosperity.entity.VagaCandidatoEntity;
 import br.com.prosperity.entity.VagaEntity;
@@ -120,10 +122,14 @@ public class CandidatoBusiness {
 	private VagaCandidatoDAO vagaCandidatoDAO;
 
 	@Autowired
+	private StatusDisponivelDAO statusDisponivelDAO;
+
+	@Autowired
 	private HttpSession session;
-	
-/*	@Autowired
-	private GeradorEmail geradorEmail;*/
+
+	@Autowired
+	private UsuarioBusiness usuarioBusiness;
+
 
 	@Transactional(readOnly = true)
 	public List<CandidatoBean> listarDecrescente() {
@@ -229,7 +235,7 @@ public class CandidatoBusiness {
 
 				situacaoCandidato.setIdCandidato(candidatoEntity.getId());
 				situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
-				
+
 				alterarStatus(situacaoCandidato);
 
 			} else {
@@ -313,8 +319,8 @@ public class CandidatoBusiness {
 
 	@Transactional
 	private void desativarStatus(CandidatoEntity candidatoEntity) {
-		List<StatusCandidatoEntity> status = statusCandidatoDAO.findByNamedQuery("obterStatusCandidato",
-				candidatoEntity);
+		List<StatusCandidatoEntity> status = statusCandidatoDAO.findByNamedQuery("desativarStatus",
+				candidatoEntity.getId());
 		if (status != null) {
 			for (StatusCandidatoEntity statusCand : status) {
 				statusCand.setFlSituacao(false);
@@ -323,13 +329,25 @@ public class CandidatoBusiness {
 		}
 	}
 
-	@Transactional
+	@Transactional(readOnly = true)
 	public void alterarStatus(SituacaoCandidatoBean situacaoCandidato) {
-		StatusCandidatoEntity statusCandidatoEntity = statusAlteracao(situacaoCandidato);
+		StatusCandidatoEntity statusCandidatoEntity = null;
 		List<StatusFuturoEntity> statusFuturoEntity = null;
 		List<AvaliadorCandidatoEntity> avaliadorCandidatoEntity = null;
+		List<StatusDisponivelEntity> statusDisponivelEntity = statusDisponivelDAO.findAll();
 
-		statusCandidatoDAO.insert(statusCandidatoEntity);
+		if (statusDisponivelEntity != null || statusDisponivelEntity.size() > 0) {
+			List<StatusCandidatoEntity> statusCandidato = statusCandidatoDAO
+					.findByNamedQuery("obterStatusCandidato", situacaoCandidato.getIdCandidato());
+			for (StatusDisponivelEntity sde : statusDisponivelEntity) {
+				if (sde.getStatus().getId() == statusCandidato.get(0).getStatus().getId()) {
+					if (situacaoCandidato.getStatus().getValue() == sde.getIdStatusDisponivel()) {
+						statusCandidatoEntity = statusAlteracao(situacaoCandidato);
+						statusCandidatoDAO.insert(statusCandidatoEntity);
+					}
+				}
+			}
+		}
 
 		statusFuturoEntity = statusFuturoDAO.findByNamedQuery("obterStatusFuturos",
 				situacaoCandidato.getStatus().getValue());
@@ -537,5 +555,108 @@ public class CandidatoBusiness {
 			criterions.add(Restrictions.like("ultimaVaga.nomeVaga", "%" + idVaga + "%"));
 		}
 		return criterions;
+	}
+
+	public void buscarUsuariosParaEmail(CandidatoBean candidato) {
+		List<UsuarioBean> usuarios = usuarioBusiness.findAll();
+		ArrayList<String> recipients = new ArrayList<>();
+		ArrayList<String> nomes = new ArrayList<>();
+		List<UsuarioBean> avaliadores = candidato.getVagaBean().getAvaliadores();
+
+		if (candidato.getUltimoStatus().equals("GERARPROPOSTA")) {
+			for (UsuarioBean u : usuarios) {
+				switch (u.getPerfil().getNome()) {
+				case "Analista de RH":
+					recipients.add(u.getEmail());
+					nomes.add(u.getNome());
+					break;
+				case "Gestor de RH":
+					recipients.add(u.getEmail());
+					nomes.add(u.getNome());
+					break;
+				default:
+					break;
+				}
+			}
+		} else if (candidato.getUltimoStatus().equals("CANDIDATOEMANALISE")) {
+
+			for (UsuarioBean a : avaliadores) {
+				recipients.add(a.getEmail());
+				nomes.add(a.getNome());
+			}
+		} else if (candidato.getUltimoStatus().equals("CANDIDATOAPROVADO")
+				|| candidato.getUltimoStatus().equals("CANDIDATOCONTRATADO")) {
+
+			recipients.add(candidato.getVagaBean().getUsuarioBean().getEmail());
+
+			for (UsuarioBean u : usuarios) {
+				switch (u.getPerfil().getNome()) {
+				case "Analista de RH":
+					recipients.add(u.getEmail());
+					nomes.add(u.getNome());
+					break;
+				case "Gestor de RH":
+					recipients.add(u.getEmail());
+					nomes.add(u.getNome());
+					break;
+				default:
+					break;
+				}
+			}
+		} else if (candidato.getUltimoStatus().equals("PROPOSTACANDIDATO")) {
+			for (UsuarioBean u : usuarios) {
+				switch (u.getPerfil().getNome()) {
+				case "CEO":
+					recipients.add(u.getEmail());
+					nomes.add(u.getNome());
+					break;
+				case "Diretor de operação":
+					recipients.add(u.getEmail());
+					nomes.add(u.getNome());
+					break;
+				default:
+					break;
+				}
+			}
+		} else if (candidato.getUltimoStatus().equals("PROPOSTAACEITA")) {
+			for (UsuarioBean u : usuarios) {
+				switch (u.getPerfil().getNome()) {
+				case "Analista de RH":
+					recipients.add(u.getEmail());
+					nomes.add(u.getNome());
+					break;
+				case "Gestor de RH":
+					recipients.add(u.getEmail());
+					nomes.add(u.getNome());
+					break;
+				default:
+					break;
+				}
+			}
+		} else if (candidato.getUltimoStatus().equals("PROPOSTARECUSADA")) {
+			for (UsuarioBean u : usuarios) {
+				switch (u.getPerfil().getNome()) {
+				case "Analista de RH":
+					recipients.add(u.getEmail());
+					nomes.add(u.getNome());
+					break;
+				case "Gestor de RH":
+					recipients.add(u.getEmail());
+					nomes.add(u.getNome());
+					break;
+				default:
+					break;
+				}
+			}
+		}
+
+		GeradorEmail email = new GeradorEmail();
+
+		int i = 0;
+
+		for (String usuario : recipients) {
+			email.enviarEmail(candidato, usuario, nomes.get(i));
+			i++;
+		}
 	}
 }
