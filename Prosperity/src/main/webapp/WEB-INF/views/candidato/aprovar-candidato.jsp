@@ -22,7 +22,9 @@
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-						<h4 style="text-align: center;" class="modal-title" id="myModalLabel">Gestão de candidato</h4>
+							
+						<h4 style="text-align: center;" class="modal-title" id="modalTitulo">placeholder</h4>
+
 					</div>
 					<div class="modal-body">
 						<div class="panel panel-default">
@@ -52,7 +54,8 @@
 												<input type="hidden" id="hdn-id-candidato" /> <input
 													type="hidden" id="hdn-status" />
 												<textarea class="form-control parsley-validated" id="parecer"
-													style="margin-left: 0px; width: 800px" name="parecer"  data-required="true"></textarea>
+													style="margin-left: 0px; width: 800px" name="parecer"  data-required="true" maxlength="500" rows="5" onkeyup="maxCaracterParecer()"></textarea>
+											<label id="maxParecer">Caracteres restantes : 500</label>
 											</div>
 										</div>
 									</div>
@@ -122,7 +125,7 @@
 								</div>
 								</form>
 							</div>
-							<div class="panel-footer ">
+							<div class="panel-footer clearfix">
 								<button type="button" class="btn btn-sm btn-primary pull-right" id="btnEnviar">
 									<i class="fa fa-check fa-lg"></i>&nbsp;Enviar
 								</button>
@@ -167,9 +170,9 @@
 						candidato?</div>
 					<div class="modal-footer">
 						<input type="hidden" id="idCancelamento" value="" />
-						<button type="button" class="btn btn-danger"
+						<button type="button" class="btn btn-success"
 							onclick="cancelarCandidato()">Sim</button>
-						<button type="button" class="btn btn-success" data-dismiss="modal">Não</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
 					</div>
 				</div>
 			</div>
@@ -234,7 +237,7 @@
 																items="${candidato.ultimoStatus.status.statusDisponiveis}">
 																<li><a class="clickable"
 																	id="aprovar-candidato" 
-																	onclick="alterarStatus(${candidato.id}, ${statusDisponivel.id})">
+																	onclick="alterarStatus(${candidato.id}, ${statusDisponivel.idStatusDisponivel})">
 																		<i ${statusDisponivel.classe}>&nbsp;</i>${statusDisponivel.nome}</a></li>
 																<li class="divider"></li>
 															</c:forEach>
@@ -289,11 +292,17 @@
 		<script>
 		$('#page'+$('#pageActive').val()).addClass('active');
 	var cont;
-	
+	function maxCaracterParecer(){
+		var maxParecer = $("#parecer").val();
+		var restante = 500 - maxParecer.length;
+		var maxCaracteres = document.querySelector("#maxParecer");
+		maxCaracteres.innerHTML = "Caracteres restantes : " + restante;
+	}
 		$("body").on("click", "#aprovar-candidato", function(){
 			var inputs  = $(this).closest("tr").find("input[type=hidden]");
 			CKEDITOR.instances.editor.setData("");
 			CKEDITOR.instances.editor.insertHtml("");
+			var tituloModal = $(this).text();
 			
 			inputs.each(function(index, value){
 				if(!isNaN($(value).attr("id"))){
@@ -306,54 +315,43 @@
 						method:"GET",
 						success:function(data){	
 							var perfil = $('#user').val();
+							$("#modalTitulo").text(tituloModal);
 							if(data.ultimoStatus.status.id == "9"){
 				                 if(perfil == "Analista de RH" || perfil == "Gestor RH"){
 									CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
-									document.getElementById("proposta-tab").style.visibility = "visible";
-									document.getElementById("proposta").style.visibility = "visible";
+									$("#proposta-tab").show();
 				                 }
 							}else if(data.ultimoStatus.status.id == "10"){
 				                 if(perfil == "Administrador" || perfil == "CEO" || perfil == "Diretor de operação"){
 										CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
 					                	$("#proposta-tab").show();
-					                	$("#proposta").show();
 					                	CKEDITOR.instances['editor'].setReadOnly(true);
 					                 }
 							}else if(data.ultimoStatus.status.id == "11"){
 				                 if(perfil == "Analista de RH" || perfil == "Gestor RH"){
 										CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
 					                	$("#proposta-tab").show();
-					                	$("#proposta").show();
 					                	CKEDITOR.instances['editor'].setReadOnly(true);
 					                 }
 							}else if(data.ultimoStatus.status.id == "13"){
 				                 if(perfil == "Analista de RH" || perfil == "Gestor RH"){
 										CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
 					                	$("#proposta-tab").show();
-					                	$("#proposta").show();
 					                 }
 							}else if(data.ultimoStatus.status.id == "14"){
 				                 if(perfil == "Analista de RH" || perfil == "Gestor RH"){
 										CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
 					                	$("#proposta-tab").show();
-					                	$("#proposta").show();
 					                 }
 							}else{
 			                	$("#proposta-tab").hide();
-			                	$("#proposta").hide();
 							}
 							if(data.ultimoStatus.status.id == "6"){
 								$("#avaliacao-tab").show();
-								$("#avaliacaoComp").show();
-								document.getElementById("avaliacaoComp").style.visibility = "visible";
 								$("#processo-tab").show();
-								$("#processoSelecao").show();
 							}else{
 								$("#avaliacao-tab").hide();
-								$("#avaliacaoComp").hide();
-								document.getElementById("avaliacaoComp").style.visibility = "hidden";
 								$("#processo-tab").hide();
-								$("#processoSelecao").hide();
 							}
 							$('.tab-bar a[href="#infoEntrevista"]').tab('show')
 							$('#modalProposta').modal('show');
@@ -366,7 +364,8 @@
 				$('input.cancelar-id').val(id);
 				$('input.cancelar-status').val(status);
 			}
-				
+			
+		
 			})
             CKEDITOR.replace('editor');
                   $('#alterarStatus').click(function() {

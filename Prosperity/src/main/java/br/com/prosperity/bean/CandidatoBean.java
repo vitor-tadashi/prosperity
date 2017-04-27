@@ -69,9 +69,9 @@ public class CandidatoBean extends FormatUtil {
 	private Double pretensaoDe;
 	private Double pretensaoPara;
 	private String curriculoTexto;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataAberturaDe;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataAberturaPara;
 	private VagaBean vagaBean;
 	
