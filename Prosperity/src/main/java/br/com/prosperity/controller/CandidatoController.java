@@ -305,6 +305,8 @@ public class CandidatoController<PaginarCandidato> {
 		paginacao(page, model, candidato);
 		List<CandidatoBean> candidatos = candidatoBusiness.filtroCandidato(candidato,page);
 		model.addAttribute("candidatos", candidatos);
+		
+		model.addAttribute("filtroC",candidato);
 
 		List<VagaBean> listaVaga = vagaBusiness.listar();
 		model.addAttribute("listaVaga", listaVaga);
