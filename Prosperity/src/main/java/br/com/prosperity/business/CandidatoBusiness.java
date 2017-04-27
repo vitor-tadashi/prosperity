@@ -316,22 +316,26 @@ public class CandidatoBusiness {
 		List<AvaliadorCandidatoEntity> avaliadorCandidatoEntity = null;
 		List<StatusDisponivelEntity> statusDisponivelEntity = statusDisponivelDAO.findAll();
 
-		if (statusDisponivelEntity != null || statusDisponivelEntity.size() > 0) {
-			List<StatusCandidatoEntity> statusCandidato = null;
-			statusCandidato = statusCandidatoDAO.findByNamedQuery("obterStatusCandidato",
-					situacaoCandidato.getIdCandidato());
-			for (StatusDisponivelEntity sde : statusDisponivelEntity) {
-				if (sde.getStatus().getId() == statusCandidato.get(0).getStatus().getId()) {
-					if (situacaoCandidato.getStatus().getValue() == sde.getIdStatusDisponivel()) {
-						statusCandidatoEntity = statusAlteracao(situacaoCandidato);
-						statusCandidatoDAO.insert(statusCandidatoEntity);
-						// candidatoBean.setId(situacaoCandidato.getIdCandidato());
-						// buscarUsuariosParaEmail(candidatoBean);
+		if (situacaoCandidato.getStatus().getValue() != StatusCandidatoEnum.CANDIDATURA.getValue()) {
+			if (statusDisponivelEntity != null || statusDisponivelEntity.size() > 0) {
+				List<StatusCandidatoEntity> statusCandidato = null;
+				statusCandidato = statusCandidatoDAO.findByNamedQuery("obterStatusCandidato",
+						situacaoCandidato.getIdCandidato());
+				for (StatusDisponivelEntity sde : statusDisponivelEntity) {
+					if (sde.getStatus().getId() == statusCandidato.get(0).getStatus().getId()) {
+						if (situacaoCandidato.getStatus().getValue() == sde.getIdStatusDisponivel()) {
+							statusCandidatoEntity = statusAlteracao(situacaoCandidato);
+							statusCandidatoDAO.insert(statusCandidatoEntity);
+							// candidatoBean.setId(situacaoCandidato.getIdCandidato());
+							// buscarUsuariosParaEmail(candidatoBean);
+						}
 					}
 				}
 			}
+		}else{
+			statusCandidatoEntity = statusAlteracao(situacaoCandidato);
+			statusCandidatoDAO.insert(statusCandidatoEntity);
 		}
-
 		statusFuturoEntity = statusFuturoDAO.findByNamedQuery("obterStatusFuturos",
 				situacaoCandidato.getStatus().getValue());
 
@@ -464,7 +468,7 @@ public class CandidatoBusiness {
 			}
 		}
 
-		List<CandidatoEntity> entities = candidatoDAO.listarAprovacao( listaStatus,
+		List<CandidatoEntity> entities = candidatoDAO.listarAprovacao(listaStatus,
 				StatusCandidatoEnum.CANDIDATOEMANALISE.getValue(), usuarioBean.getId(), idStatusCandidatura, page);
 		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(entities);
 
@@ -503,10 +507,10 @@ public class CandidatoBusiness {
 	public Integer totalPagina(CandidatoBean candidato) {
 
 		float pag = 0;
-		if(candidato.getId() == null){
+		if (candidato.getId() == null) {
 			List<Criterion> criterions = confFiltro(candidato);
-			pag = (float)candidatoDAO.rowCount(criterions) / (float)CandidatoDAO.limitResultsPerPage;
-		}else{
+			pag = (float) candidatoDAO.rowCount(criterions) / (float) CandidatoDAO.limitResultsPerPage;
+		} else {
 			List<Integer> listaStatus = obterStatusDisponivelAprovacao();
 			usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
 			Integer idStatusCandidatura = 0;
@@ -516,8 +520,8 @@ public class CandidatoBusiness {
 					idStatusCandidatura = StatusCandidatoEnum.CANDIDATURA.getValue();
 				}
 			}
-			pag = (float)candidatoDAO.countAprovacao(listaStatus,
-					StatusCandidatoEnum.CANDIDATOEMANALISE.getValue(), usuarioBean.getId(), idStatusCandidatura) / (float)CandidatoDAO.limitResultsPerPage;
+			pag = (float) candidatoDAO.countAprovacao(listaStatus, StatusCandidatoEnum.CANDIDATOEMANALISE.getValue(),
+					usuarioBean.getId(), idStatusCandidatura) / (float) CandidatoDAO.limitResultsPerPage;
 		}
 		Integer paginas = null;
 		if (pag % 1 == 0) {

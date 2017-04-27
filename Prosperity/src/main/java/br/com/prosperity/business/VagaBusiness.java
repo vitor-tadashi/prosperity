@@ -319,10 +319,8 @@ public class VagaBusiness {
 
 	@Transactional
 	private void desativarStatus(VagaEntity vagaEntity) {
-		// TODO obter status apenas ativos
-		List<StatusVagaEntity> statusVagas = statusVagaDAO.findByNamedQuery("obterStatusVaga", vagaEntity);
-		if (statusVagas == null || statusVagas.size() < 1) {
-		} else {
+		List<StatusVagaEntity> statusVagas = statusVagaDAO.findByNamedQuery("desativarStatusVaga", vagaEntity);
+		if (statusVagas != null) {
 			for (StatusVagaEntity status : statusVagas) {
 				status.setSituacao(false);
 				statusVagaDAO.update(status);
