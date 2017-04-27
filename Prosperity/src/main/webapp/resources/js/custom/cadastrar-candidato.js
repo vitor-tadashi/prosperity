@@ -1,4 +1,5 @@
-  $(document).ready(function () {
+//MASK DOS CAMPOS DE CADASTRAR CANDIDATO  
+$(document).ready(function () {
 	        setTimeout(function () {
 	            $('#msg-sucesso').fadeOut(1500);
 	        }, 5000);
@@ -13,6 +14,7 @@
 			$('.dinheiro').mask('000.000,00', {reverse: true});
 
 		});
+		//FUNCTION CEP 
 
 		function limpa_formulário_cep() {
 			//Limpa valores do formulário de cep.
@@ -102,7 +104,7 @@
 			if(strCPF == ''){
 				var div = document.getElementById("textDiv1").className = "alert alert-danger";
 
-				textDiv1.textContent = "O CPF deve ser preenchido.";
+				textDiv1.textContent = "O campo CPF deve ser preenchido.";
 				var text = "[" + div.textContent + "]";
 				
 				return false;

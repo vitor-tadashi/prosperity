@@ -142,7 +142,7 @@ public class CandidatoController<PaginarCandidato> {
 
 	@RequestMapping(value = "salvar", method = RequestMethod.POST)
 	public String salvarCandidato(@Valid @ModelAttribute("candidatoBean") CandidatoBean candidatoBean,
-			BindingResult result, @RequestParam("file") MultipartFile file, Model model) throws BusinessException {
+			BindingResult result, @RequestParam("file") MultipartFile file, Model model, RedirectAttributes redirectAttrs) throws BusinessException {
 
 		if (result.hasErrors()) {
 			model.addAttribute("erro", result.getErrorCount());
@@ -156,14 +156,13 @@ public class CandidatoController<PaginarCandidato> {
 				String caminho = uploadCurriculo(file, candidatoBean.getCpf());
 				candidatoBean.setCurriculo(caminho);
 				candidatoBusiness.inserir(candidatoBean);
-				model.addAttribute("sucesso", "Candidato salvo com sucesso.");
-
+				redirectAttrs.addFlashAttribute("sucesso", "Candidato salvo com sucesso.");
 			} catch (BusinessException e) {
 
 			}
 		}
 
-		return "candidato/cadastrar-candidato";
+		return "redirect:cadastrar";
 	}
 
 	@RequestMapping(value = "/cancelar-candidato/{id}")
@@ -203,12 +202,12 @@ public class CandidatoController<PaginarCandidato> {
 			model.addAttribute("candidato", candidatoBean);
 
 			obterDominiosCandidato(model);
-			return "candidato/cadastrar-candidato";
+			return "redirect:/candidato/cadastrar-candidato";
 		}
 		candidatoBusiness.inserir(candidatoBean);
 		model.addAttribute("sucesso", "Candidato salvo com sucesso.");
 
-		return "candidato/cadastrar-candidato";
+		return "redirect:/cadastrar-candidato";
 	}
 
 	private String uploadCurriculo(MultipartFile file, String cpf) {

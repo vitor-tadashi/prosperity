@@ -189,8 +189,8 @@ public class CandidatoBusiness {
 	@Transactional
 	public List<CandidatoBean> filtroCandidato(CandidatoBean candidato, Integer page) {
 		List<Criterion> criterions = confFiltro(candidato);
-		
-		List<CandidatoEntity> candidatos = candidatoDAO.findByCriteria(page,criterions);
+
+		List<CandidatoEntity> candidatos = candidatoDAO.findByCriteria(page, criterions);
 		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(candidatos);
 		return beans;
 
@@ -217,9 +217,9 @@ public class CandidatoBusiness {
 				candidatoDAO.insert(candidatoEntity);
 
 				inserirAvaliadores(candidatoEntity, vagaAtual.getId());
-				
+
 				situacaoCandidato = new SituacaoCandidatoBean();
-				
+
 				if (vagaAtual.getId() == 1202)
 					situacaoCandidato.setStatus(StatusCandidatoEnum.CANCELADO);
 
@@ -237,16 +237,22 @@ public class CandidatoBusiness {
 
 			candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoEntity, candidatoBean);
 
+			candidatoEntity.setDataAbertura(new Date());
 			tratarInformacoes(candidatoEntity);
-		
-			List<StatusCandidatoEntity> statusCandidato = statusCandidatoDAO.findByNamedQuery("obterStatusCandidato", candidatoEntity.getId());
-			
-			if(candidatoBean.getUltimoStatus().getStatus().getId() == StatusCandidatoEnum.CANCELADO.getValue()) {
+
+			List<StatusCandidatoEntity> statusCandidato = statusCandidatoDAO.findByNamedQuery("obterStatusCandidato",
+					candidatoEntity.getId());
+
+			if (statusCandidato.get(0).getStatus().getId() == StatusCandidatoEnum.CANCELADO.getValue()
+					|| statusCandidato.get(0).getStatus().getId() == StatusCandidatoEnum.CANDIDATOREPROVADO.getValue()
+					|| statusCandidato.get(0).getStatus().getId() == StatusCandidatoEnum.CONTRATADO.getValue()
+					|| statusCandidato.get(0).getStatus().getId() == StatusCandidatoEnum.CANDIDATURA.getValue()) {
 				situacaoCandidato = new SituacaoCandidatoBean();
+				situacaoCandidato.setIdCandidato(candidatoBean.getId());
 				situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
 				alterarStatus(situacaoCandidato);
 			}
-			
+
 			candidatoDAO.update(candidatoEntity);
 		}
 	}
@@ -297,7 +303,7 @@ public class CandidatoBusiness {
 		CandidatoBean bean = candidatoConverter.convertEntityToBean(candidatoDAO.findById(id));
 		String vp = bean.getValorPretensao().toString();
 		Double vpd = Double.valueOf(vp.replace(".000", ""));
-		bean.setValorPretensao(bean.getValorPretensao().valueOf(vpd)); 
+		bean.setValorPretensao(bean.getValorPretensao().valueOf(vpd));
 		return bean;
 	}
 
@@ -485,10 +491,11 @@ public class CandidatoBusiness {
 		}
 		return listaStatus;
 	}
+
 	@Transactional
 	public Integer totalPagina(CandidatoBean candidato) {
 		List<Criterion> criterions = confFiltro(candidato);
-		float pag = (float)candidatoDAO.rowCount(criterions) / (float)CandidatoDAO.limitResultsPerPage;
+		float pag = (float) candidatoDAO.rowCount(criterions) / (float) CandidatoDAO.limitResultsPerPage;
 		Integer paginas = null;
 		if (pag % 1 == 0) {
 			paginas = (int) pag;
