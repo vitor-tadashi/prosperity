@@ -217,17 +217,13 @@ public class VagaBusiness {
 			alterarStatus(situacaoVaga);
 			inserirAvaliadores(vagaEntity, usuarioBean);
 		} else {
-			inserirAvaliadores(vagaEntity, usuarioBean);
 			// VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
 			// TODO jsp verifico se status é 27 se sim manda o status 1
 			// TODO aqui cria um else if se for status 1 faz o set como os
 			// outros mas com ativo
-			StatusVagaBean status = vagaBean.getStatus().get(0);
-			if (status.getStatus().getNome().equals("Pendente")) {
-				situacaoVaga.setIdVaga(vagaEntity.getId());
-				situacaoVaga.setStatus(StatusVagaEnum.PENDENTE);
-				alterarStatus(situacaoVaga);
-			} else if (status.getStatus().getNome().equals("Aguardando avaliadores")) {
+			StatusVagaBean status = new StatusVagaBean();
+			status = vagaBean.getStatus().get(0);
+			if (status.getStatus().getNome().equals("Aguardando avaliadores")) {
 				situacaoVaga.setIdVaga(vagaEntity.getId());
 				situacaoVaga.setStatus(StatusVagaEnum.PENDENTEDEINFORMACOES);
 				alterarStatus(situacaoVaga);
@@ -236,6 +232,7 @@ public class VagaBusiness {
 				situacaoVaga.setStatus(StatusVagaEnum.ATIVO);
 				alterarStatus(situacaoVaga);
 			}
+			inserirAvaliadores(vagaEntity, usuarioBean);
 			vagaDAO.update(vagaEntity);
 		}
 
