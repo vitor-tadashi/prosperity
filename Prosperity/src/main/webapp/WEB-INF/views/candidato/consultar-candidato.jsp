@@ -498,7 +498,7 @@
 									<th class="text-center">Nome do candidato</th>
 									<th class="text-center">Vaga</th>
 									<th class="text-center">Pretensão</th>
-									<th class="text-center">Data de abertura</th>
+									<th class="text-center">Data de candidatura</th>
 									<!-- <th class="text-center">Data de aprovação</th> -->
 									<th class="text-center">Status</th>
 									<th class="text-center">Ações</th>

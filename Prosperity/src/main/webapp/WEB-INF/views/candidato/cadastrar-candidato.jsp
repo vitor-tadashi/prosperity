@@ -9,7 +9,7 @@
 		<title>Cadastro de Candidato</title>
 	</layout:put>
 	
-	<layout:put block="contents">O
+	<layout:put block="contents">
 	<div id="main-container">
 		<div id="breadcrumb">
 			<ul class="breadcrumb">
@@ -47,7 +47,7 @@
 						<div id="textDiv3"></div>
 
 						<form class="form-border" action="salvar" method="post"
-							enctype="multipart/form-data" id=formCadastro onblur="validar()">
+							enctype="multipart/form-data" id=formCadastro onsubmit="validarVaga()">
 							<div class="panel-tab clearfix">
 								<ul class="tab-bar wizard-demo" id="wizardDemo">
 									<li class="active tab-verity"><a href="#first"
@@ -107,7 +107,7 @@
 												<input type="text"
 													class="form-control telefone parsley-validated" maxlength="30"
 													placeholder="Informe seu telefone" data-required="true"
-													id="contato" name="contato.telefone" onblur="validarTel()"
+													id="contato" name="contato.telefone" onchange="validarTel()"
 													value="${candidato.contato.telefone}">
 											</div>
 											<div class="form-group col-md-2">
@@ -224,7 +224,7 @@
 										</div>
 										<div class="form-group col-md-3">
 											<label for="vaga">Vaga a ser aplicado</label> <select
-												class="form-control" id="vaga" name="vagaCandidato.vaga.id">
+												class="form-control" id="vaga" name="vagaCandidato.vaga.id" required>
 												<option value="0">Selecione</option>
 												<c:forEach var="vaga" items="${listaVaga}">
 													<option value="${vaga.id}"
@@ -262,9 +262,8 @@
 											<input type="text" class="form-control date"
 												data-required="false" name="entrevista" id="entrevista"
 												onblur="validarData('entrevista')" value="${entrevista}">
-								<fmt:formatDate value="${candidato.dataAbertura}"
-														pattern="dd/MM/yyyy" var="dataAbertura" />
-														<input type="hidden" value="${candidato.dataAbertura}" name="dataAbertura">
+								<fmt:formatDate value="${candidato.dataAbertura}" pattern="dd/MM/yyyy" var="dataAbertura" />
+														<input type="hidden" value="${dataAbertura}" name="dataAbertura">
 										</div>
 									</div>
 								</div>

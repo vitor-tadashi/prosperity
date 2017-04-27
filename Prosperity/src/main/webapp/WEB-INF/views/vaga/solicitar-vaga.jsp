@@ -48,7 +48,7 @@
 								<!-- MENSAGEM DE SUCESSO -->
 							<c:if test="${not empty sucesso}">
 									<div id="msg-sucesso" class="alert alert-success msg-margin">
-										<ul>
+										<ul style="list-style: none;">
 											<li class="li-msg">${sucesso }</li>
 										</ul>
 									</div>
