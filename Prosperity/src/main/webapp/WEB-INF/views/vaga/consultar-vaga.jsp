@@ -161,7 +161,7 @@
 														</div>
 														<!-- /form-group -->
 													</div>
-
+													
 													<div class="form-group col-md-6 col-xs-6"
 														style="margin-bottom: 0px">
 														<div id="" class="">
@@ -171,8 +171,35 @@
 													</div>
 
 												</div>
+												</form>
+										</div>
+									</section>
+									
+									<div id="quebra">
+										<section class="panel panel-default"
+											style="margin-bottom: 5px;">
+											<div class="panel-heading">Informações de projeto</div>
+											<div class="panel-body">
+											
 												<div class="form-group row" id="divLocalTrabalho">
-
+													<div class="form-group col-md-12"
+													style="margin-bottom: 5px;">
+													<label class="control-label">Projeto</label> <input
+														readonly class="form-control default-cursor"
+														id="vagaProjeto" value="Mobile">
+												</div>
+												<div class="form-group col-md-6 col-xs-6"
+													style="margin-bottom: 5px;">
+													<label class="control-label">Cliente</label> <input
+														readonly class="form-control" id="vagaCliente"
+														value="Carrefour">
+												</div>
+												<div class="form-group col-md-6 col-xs-6"
+													style="margin-bottom: 5px;">
+													<label class="control-label">Gestor imediato</label> <input
+														readonly class="form-control" id="vagaGestor"
+														value="Vitor Tadashi">
+												</div>
 													<div class="form-group col-md-6 col-xs-6">
 														<label for="nmResponsavel">Nome do responsável</label> <input
 															class="form-control input-sm" disabled
@@ -194,9 +221,9 @@
 															id="telResponsavel" />
 													</div>
 												</div>
-												</form>
-										</div>
-									</section>
+												
+											</div>
+										</section>
 									<!-- /Section -->
 									<section class="panel panel-default">
 										<div class="panel-heading">Formação acadêmica</div>
@@ -237,10 +264,10 @@
 
 										</div>
 									</section>
+									</div>
 								</div>
 							</div>
 						</div>
-
 					</div>
 					<!-- /panel -->
 					<!-- /tab-content -->
