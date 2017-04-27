@@ -181,11 +181,21 @@ public class VagaBusiness {
 			if (!vaga.getNomeVaga().isEmpty() || vaga.getNomeVaga() != null) {
 				criterions.add(Restrictions.like("nomeVaga", "%" + vaga.getNomeVaga() + "%"));
 			}
+			
 			if (vaga.getDataAberturaDe() != null && vaga.getDataAberturaPara() != null) {
-				criterions.add(Restrictions.between("dataAbertura", parseData(vaga.getDataAberturaDe()),
-						parseData(vaga.getDataAberturaPara())));
+				if(vaga.getDataAberturaDe() == null) {
+					criterions.add(Restrictions.between("dataAbertura", "''", parseData(vaga.getDataAberturaPara())));
+				}
+				else if(vaga.getDataAberturaPara() == null) {
+					criterions.add(Restrictions.between("dataAbertura", parseData(vaga.getDataAberturaDe()),
+							"''"));
+				}
+				else {
+					criterions.add(Restrictions.between("dataAbertura", parseData(vaga.getDataAberturaDe()),
+							parseData(vaga.getDataAberturaPara())));
+				}
 			}
-
+		
 			if (idStatus != 0) {
 				criterions.add(Restrictions.eq("status.id", idStatus));
 			}

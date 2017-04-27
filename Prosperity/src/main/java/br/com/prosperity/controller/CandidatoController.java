@@ -185,7 +185,7 @@ public class CandidatoController<PaginarCandidato> {
 	public String solicitarCandidato(Model model, @PathVariable Integer id) {
 		CandidatoBean candidato = candidatoBusiness.obterCandidatoPorId(id);
 		obterDominiosCandidato(model);
-		candidato.setCurriculo("file:///C:/Users/leonardo.ramos/Downloads/PontosProsperity.docx");
+		//candidato.setCurriculo("file:///C:/Users/leonardo.ramos/Downloads/PontosProsperity.docx");
 		model.addAttribute("candidato", candidato);
 
 		return "candidato/cadastrar-candidato";
@@ -321,7 +321,7 @@ public class CandidatoController<PaginarCandidato> {
 		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.findAll();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
 
-		List<VagaBean> listaVagaDrop = vagaBusiness.obterTodos();
+		List<VagaBean> listaVagaDrop = vagaBusiness.listarVagasAtivas();
 		model.addAttribute("listaVagaDrop", listaVagaDrop);
 
 		// avaliadorBusiness.listar();

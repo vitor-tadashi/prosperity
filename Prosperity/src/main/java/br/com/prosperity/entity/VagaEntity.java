@@ -35,7 +35,7 @@ import javax.persistence.TemporalType;
 		
 
 		//VAGAS ATIVAS
-		@NamedQuery(name = "listarVagasAtivas", query = "SELECT v FROM VagaEntity v LEFT JOIN v.statusVagaEntity sv where sv.situacao = TRUE AND sv.status.id = 1 ORDER BY v.nomeVaga ASC"),
+		@NamedQuery(name = "listarVagasAtivas", query = "SELECT v FROM VagaEntity v LEFT JOIN v.statusVagaEntity sv where sv.situacao = TRUE ORDER BY v.nomeVaga ASC"),
 
 		@NamedQuery(name = "listarVagaFiltrado", query = "SELECT u FROM VagaEntity u LEFT OUTER JOIN u.statusVagaEntity p left join p.status s "
 				+ "WHERE u.nomeVaga like ?1 and s.id = ?2 and u.dataAbertura between ?3 and ?4"),

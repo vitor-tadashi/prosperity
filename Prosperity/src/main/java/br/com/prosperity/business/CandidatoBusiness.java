@@ -175,6 +175,7 @@ public class CandidatoBusiness {
 	}
 
 	@Transactional
+
 	public List<CandidatoBean> listar() {
 		List<CandidatoEntity> candidato = candidatoDAO.findByNamedQuery("verificarCandidatura");
 		List<CandidatoEntity> entities = candidatoDAO.findAll();

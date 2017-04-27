@@ -1,0 +1,21 @@
+diff a/Prosperity/src/main/webapp/WEB-INF/views/candidato/consultar-candidato.jsp b/Prosperity/src/main/webapp/WEB-INF/views/candidato/consultar-candidato.jsp	(rejected hunks)
+@@ -551,14 +551,17 @@
+ 								</tbody>
+ 							</table>
+ 							
++						 <c:if test="${not empty redirect}">
+ 							<div style="margin-left: 10px; margin-bottom: 30px;margin-top: -30px; position: absolute "> 
+ 							    	<a class="btn btn-xs btn-default" id="btn-retornar"><i class="fa fa-reply"></i> Retornar</a>				
+-								<i >&nbsp</i> 								
+-						 </div>
++								<i >&nbsp</i>
++						 	</div>
++						 </c:if>
+ 			
+ 						</div>
+ 						<!-- fim da div panel -->
+ 					</div>
++					<p>${redirect}</p>
+ 				
+ 					<!-- /col-md-12 -->
+ 				</div>
