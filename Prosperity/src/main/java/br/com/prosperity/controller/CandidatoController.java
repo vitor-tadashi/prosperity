@@ -185,7 +185,7 @@ public class CandidatoController<PaginarCandidato> {
 	public String solicitarCandidato(Model model, @PathVariable Integer id) {
 		CandidatoBean candidato = candidatoBusiness.obterCandidatoPorId(id);
 		obterDominiosCandidato(model);
-		candidato.setCurriculo("file:///C:/Users/leonardo.ramos/Downloads/PontosProsperity.docx");
+		//candidato.setCurriculo("file:///C:/Users/leonardo.ramos/Downloads/PontosProsperity.docx");
 		model.addAttribute("candidato", candidato);
 
 		return "candidato/cadastrar-candidato";
@@ -321,7 +321,7 @@ public class CandidatoController<PaginarCandidato> {
 		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.findAll();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
 
-		List<VagaBean> listaVagaDrop = vagaBusiness.obterTodos();
+		List<VagaBean> listaVagaDrop = vagaBusiness.listarVagasAtivas();
 		model.addAttribute("listaVagaDrop", listaVagaDrop);
 
 		// avaliadorBusiness.listar();
@@ -331,9 +331,16 @@ public class CandidatoController<PaginarCandidato> {
 
 	// andre
 	@RequestMapping(value = "aprovar", method = RequestMethod.GET)
-	public String aprovarCandidato(Model model) {
-
-		List<CandidatoBean> candidatos = candidatoBusiness.listarAprovacao();
+	public String aprovarCandidato(Model model,Integer page) {
+		if (page == null) {
+			page = 1;
+		}
+		//Paginação
+		CandidatoBean c = new CandidatoBean();
+		c.setId(-1);
+		paginacao(page, model, c);
+		
+		List<CandidatoBean> candidatos = candidatoBusiness.listarAprovacao(page);
 		List<CompetenciaBean> competencias = candidatoBusiness.listarCompetencia();
 		List<AvaliacaoBean> avaliacoes = candidatoBusiness.listarAvaliacao();
 		List<ProvaBean> provas = provaBusiness.listarProva();

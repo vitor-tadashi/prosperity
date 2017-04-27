@@ -268,9 +268,9 @@
 					<div class="modal-footer">
 						<a href="#">
 							<button id="aprovaVaga" onclick="status()" type="button"
-								class="btn btn-primary" data-dismiss="modal">Sim</button>
+								class="btn btn-success" data-dismiss="modal">Sim</button>
 						</a>
-						<button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
 					</div>
 				</div>
 			</div>
@@ -295,9 +295,9 @@
 					<div class="modal-footer">
 						<a href="#">
 							<button id="reprovaVaga" type="button" onclick="status()"
-								class="btn btn-primary" data-dismiss="modal">Sim</button>
+								class="btn btn-success" data-dismiss="modal">Sim</button>
 						</a>
-						<button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
 					</div>
 				</div>
 			</div>
@@ -323,9 +323,9 @@
 					<div class="modal-footer">
 						<a id="excluir" href="${urlCancelar}">
 							<button id="excluiVaga" onclick="status()" type="button"
-								class="btn btn-primary" data-dismiss="modal">Sim</button>
+								class="btn btn-success" data-dismiss="modal">Sim</button>
 						</a>
-						<button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
 					</div>
 				</div>
 			</div>
@@ -350,10 +350,10 @@
 						class="avaliador-status" type="hidden">
 					<div class="modal-footer">
 						<a id="excluir" href="${urlCancelar}">
-							<button type="button" class="btn btn-primary"
+							<button type="button" class="btn btn-success"
 								data-dismiss="modal">Sim</button>
 						</a>
-						<button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
 					</div>
 				</div>
 			</div>
@@ -378,9 +378,9 @@
 					<div class="modal-footer">
 						<a href="#">
 							<button id="excluiVaga" onclick="status()" type="button"
-								class="btn btn-primary" data-dismiss="modal">Sim</button>
+								class="btn btn-success" data-dismiss="modal">Sim</button>
 						</a>
-						<button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
 					</div>
 				</div>
 			</div>
