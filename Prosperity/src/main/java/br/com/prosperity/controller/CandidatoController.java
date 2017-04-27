@@ -39,6 +39,7 @@ import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.TipoCursoBean;
+import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.CanalInformacaoBusiness;
 import br.com.prosperity.business.CandidatoBusiness;
@@ -49,9 +50,11 @@ import br.com.prosperity.business.ProvaCandidatoBusiness;
 import br.com.prosperity.business.SenioridadeBusiness;
 import br.com.prosperity.business.SituacaoAtualBusiness;
 import br.com.prosperity.business.TipoCursoBusiness;
+import br.com.prosperity.business.UsuarioBusiness;
 import br.com.prosperity.business.VagaBusiness;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.exception.BusinessException;
+import br.com.prosperity.util.GeradorEmail;
 
 @Controller
 @RequestMapping(value = "candidato")
@@ -89,6 +92,9 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private ProvaCandidatoBusiness provaCandidatoBusiness;
+	
+	@Autowired
+	private UsuarioBusiness usuarioBusiness;
 
 	@Autowired
 	private List<CandidatoCompetenciaBean> candidatoCompetenciasBean;
@@ -107,6 +113,9 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private ProvaBean provaBean;
+	
+	@Autowired
+	private GeradorEmail geradorEmail;
 
 	/**
 	 * @author andre.posman

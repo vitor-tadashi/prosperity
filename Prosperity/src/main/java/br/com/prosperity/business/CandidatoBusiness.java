@@ -56,6 +56,7 @@ import br.com.prosperity.entity.VagaEntity;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.exception.BusinessException;
 import br.com.prosperity.util.FormatUtil;
+import br.com.prosperity.util.GeradorEmail;
 
 @SuppressWarnings("unused")
 @Component
@@ -120,6 +121,9 @@ public class CandidatoBusiness {
 
 	@Autowired
 	private HttpSession session;
+	
+	@Autowired
+	private GeradorEmail geradorEmail;
 
 	@Transactional(readOnly = true)
 	public List<CandidatoBean> listarDecrescente() {
@@ -271,7 +275,7 @@ public class CandidatoBusiness {
 
 				situacaoCandidato.setIdCandidato(candidatoEntity.getId());
 				situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
-
+				
 				alterarStatus(situacaoCandidato);
 
 			} else {
