@@ -162,9 +162,9 @@
 						candidato?</div>
 					<div class="modal-footer">
 						<input type="hidden" id="idCancelamento" value="" />
-						<button type="button" class="btn btn-danger"
+						<button type="button" class="btn btn-success"
 							onclick="cancelarCandidato()">Sim</button>
-						<button type="button" class="btn btn-success" data-dismiss="modal">Não</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
 					</div>
 				</div>
 			</div>

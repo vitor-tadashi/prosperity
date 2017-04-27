@@ -26,12 +26,14 @@ import br.com.prosperity.bean.AvaliadorVagaBean;
 import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.CargoSenioridadeBean;
 import br.com.prosperity.bean.ProjetoBean;
+import br.com.prosperity.bean.ProvaCandidatoBean;
 import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoVagaBean;
 import br.com.prosperity.bean.StatusBean;
 import br.com.prosperity.bean.StatusVagaBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
+import br.com.prosperity.business.AvaliadorVagaBusiness;
 import br.com.prosperity.business.CargoBusiness;
 import br.com.prosperity.business.CargoSenioridadeBusiness;
 import br.com.prosperity.business.ProjetoBusiness;
@@ -94,6 +96,9 @@ public class VagaController {
 
 	@Autowired
 	private StatusVagaBusiness statusVagaBusiness;
+	
+	@Autowired
+	private AvaliadorVagaBusiness avaliadorVagaBusiness;
 
 	private void paginacao(Integer page, Model model, VagaBean vaga) {
 
@@ -112,7 +117,7 @@ public class VagaController {
 	}
 
 	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
-	public String cliente(@RequestParam(value = "page", required = false) Integer page, Model model, VagaBean vaga) {
+	public String cliente(@RequestParam(value = "page", required = false) Integer page, Model model, VagaBean vaga, Integer id) {
 		if (page == null) {
 			page = 1;
 		}
@@ -128,6 +133,9 @@ public class VagaController {
 		// model.addAttribute("vagas", vagaBusiness.listarDecrescente());
 
 		/* model.addAttribute("vagas", vagaBusiness.listar()); */
+		
+		List<AvaliadorVagaBean> avaliadorVagaBean = avaliadorVagaBusiness.obterAvaliador(id);
+		model.addAttribute("avaliadores", avaliadorVagaBean);
 
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
 		model.addAttribute("listaCargo", listaCargo);

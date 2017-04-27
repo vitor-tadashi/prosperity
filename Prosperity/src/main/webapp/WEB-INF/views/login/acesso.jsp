@@ -65,7 +65,7 @@
 									id="senha" name="senha" data-required="true">
 							</div>
 						</div>
-						<button class="btn btn-success btn-sm">
+						<button class="btn btn-success btn-sm pull-right">
 							<i class="fa fa-sign-in"></i> Entrar
 						</button>
 					</form>

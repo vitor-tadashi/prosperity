@@ -299,7 +299,7 @@ public class CandidatoController<PaginarCandidato> {
 		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.findAll();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
 
-		List<VagaBean> listaVagaDrop = vagaBusiness.obterTodos();
+		List<VagaBean> listaVagaDrop = vagaBusiness.listarVagasAtivas();
 		model.addAttribute("listaVagaDrop", listaVagaDrop);
 
 		// avaliadorBusiness.listar();

@@ -79,13 +79,13 @@
 					limpa_formulário_cep();
 					var div = document.getElementById("textDiv").className = "alert alert-danger";
 
-    				textDiv.textContent = "CEP inválido";
+    				textDiv.textContent = "";
 
     				var text = "[" + div.textContent + "]";
 				}
 
 
-				textDiv.textContent = "";
+				textDiv.textContent = "CEP inválido";
 
 				var text = "[" + div.textContent + "]";
 			} //end if.
