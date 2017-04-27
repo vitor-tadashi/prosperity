@@ -499,6 +499,8 @@
 	
 	<script type="text/javascript">
 	
+	$('#page'+$('#pageActive').val()).addClass('active');
+	
 	$('.accordian-body').on('show.bs.collapse', function () {
 	    $(this).closest("table")
 	        .find(".collapse.in")
