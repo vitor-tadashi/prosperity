@@ -171,34 +171,28 @@
 													</div>
 
 												</div>
-												<div class="form-group row">
+												<div class="form-group row" id="divLocalTrabalho">
 
-													<div class="form-group col-md-6 col-xs-6"
-														style="margin-bottom: -10px">
-
-														<div class="form-group">
-															<label class="control-label">Avaliadores desta vaga</label>
-															<div class="form-group">
-																<div class="input-group">
-																	
-																	<table class="table table-condensed table-bordered">
-										<c:forEach items="${avaliadores  }" var="avaliador">
-											<tr>
-												<td><i class="fa fa-user"></i></td>
-												<td><span>${avaliador.usuario.nome }</span></td>
-											</tr>
-											</c:forEach>
-										
-									</table>
-																	
-																	
-																</div>
-															</div>
-															<!-- /.col -->
-														</div>
-														<!-- /form-group -->
+													<div class="form-group col-md-6 col-xs-6">
+														<label for="nmResponsavel">Nome do responsável</label> <input
+															class="form-control input-sm" disabled
+															id="nmResponsavel" />
 													</div>
-
+													<div class="form-group col-md-6 col-xs-6">
+														<label for="nmResponsavel">Área do responsável</label> <input
+															class="form-control input-sm" disabled
+															id="nmAreaResponsavel" />
+													</div>
+													<div class="form-group col-md-6 col-xs-6">
+														<label for="nmResponsavel">Email do responsável</label> <input
+															class="form-control input-sm" disabled
+															id="emailResponsavel" />
+													</div>
+													<div class="form-group col-md-6 col-xs-6">
+														<label for="nmResponsavel">Telefone do responsável</label> <input
+															class="form-control input-sm" disabled
+															id="telResponsavel" />
+													</div>
 												</div>
 												</form>
 										</div>
@@ -437,7 +431,7 @@
 															</c:if>
 
 															<c:if
-																test="${vaga.ultimoStatus.status.nome == 'Pendente em Informações'}">
+																test="${vaga.ultimoStatus.status.nome == 'Pendente de informações'}">
 																<li role="separator"
 																	class="editarDivider divider btnEdita pre hide"></li>
 																<li><c:url value="editar/${vaga.id}" var="myURL">
@@ -614,10 +608,14 @@
     			$('input#candidatos').val(lista.numeroCandidatos);
     			
     			if(lista.localTrabalho == 'C') {
-    				//$("#cliente").attr('checked', 'checked');
     				$("#lblLocal").text('Cliente')
+    				$('div#divLocalTrabalho').show();
+    				$('#nmResponsavel').val(lista.nmResponsavel);
+    				$('#nmAreaResponsavel').val(lista.nmAreaResponsavel);
+    				$('#emailResponsavel').val(lista.emailResponsavel);
+    				$('#telResponsavel').val(lista.telResponsavel);
     			} else {
-    				//$("#interno").attr('checked', 'checked');
+    				$('div#divLocalTrabalho').hide();
     				$("#lblLocal").text('Interno')
     			}
     			if(lista.idTipoVaga == 'H') { 

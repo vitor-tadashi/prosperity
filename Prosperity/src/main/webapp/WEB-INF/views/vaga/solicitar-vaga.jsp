@@ -375,7 +375,7 @@
 												
 												 <c:forEach var="avaliador" items="${avaliadorVagaBean}" varStatus="i">
 													<option value="${avaliador.usuario.id}"
-													<%-- ${vaga.id == avaliadorVagaBean.vaga.id && usuario.id == avaliadorVagaBean.usuario.id ? 'selected="selected"' : ''} --%> >${avaliador.usuario.nome}</option>
+													<%-- ${vaga.id == avaliadorVagaBean.vaga.id && usuario.id == avaliadorVagaBean.usuario.id ? 'selected="selected"' : ''} --%> >${avaliador.usuario.funcionario.nome}</option>
 												</c:forEach> 
 												
 											</select>		
