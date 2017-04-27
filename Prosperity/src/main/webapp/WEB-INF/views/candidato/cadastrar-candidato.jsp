@@ -203,7 +203,7 @@
 												pattern="dd/MM/yyyy" var="dataConclusao" />
 											<input type="text" class="form-control date"
 												id="mesAnoConclusao" data-required="false"
-												name="formacao.dataConclusao" onblur="validarData('mesAnoConclusao')"
+												name="formacao.dataConclusao" onblur="validarData1('mesAnoConclusao')"
 												value="${dataConclusao}">
 										</div>
 									</div>
@@ -269,14 +269,19 @@
 									</div>
 								</div>
 							</div>
-							<div class="form-group col-sm-1 download-download">
-								<button type="button" class="btn btn-primary" onclick="download('${candidato.curriculo}')"><i class="fa fa-download"></i> Download</button>
-							</div>
-							<div class="form-group col-sm-4">
+							<div class="row pull-right">
+							
+							<div class="download-download col-md-6">
+								<button type="button" class="btn btn-primary pull-right" onclick="download('${candidato.curriculo}')"><i class="fa fa-download"></i> Download</button>
+							</div> 
+							
+							<div class="cold-md-6">
 								<input type="hidden" value="${candidato.id}" name="id">
 								<input type="hidden" value="${erro}" id="contErro">
-								<button class="btn btn-success btnAjuste"> Salvar</button>
+								<button class="btn btn-success"> Salvar</button>
+							</div>	
 							</div>
+							
 						</form>
 					</div>
 				</div>

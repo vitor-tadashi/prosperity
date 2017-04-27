@@ -183,7 +183,7 @@
 			                {
 			                	var div = document.getElementById("textDiv2").className = "alert alert-danger";
 
-			    				textDiv2.textContent = "Data inválida";
+			    				textDiv2.textContent = "Data de nascimento inválida";
 
 			    				var text = "[" + div.textContent + "]";
 			                        
@@ -194,7 +194,7 @@
 			         {
 			        		var div = document.getElementById("textDiv2").className = "";
 
-			    			textDiv2.textContent = "Data inválida";
+			    			textDiv2.textContent = "Data de nascimento inválida";
 
 			    			var text = "[" + div.textContent + "]";
 			              
@@ -211,6 +211,102 @@
 			}
 		}
 			
+		function validarData1(idCampo) {
+
+			var campo = $("#"+idCampo).val();
+			if (campo!="")
+			{
+			        erro=0;
+			        hoje = new Date();
+			        anoAtual = hoje.getFullYear();
+			        barras = campo.split("/");
+			        if (barras.length == 3)
+			        {
+			                dia = barras[0];
+			                mes = barras[1];
+			                ano = barras[2];
+			                resultado = (!isNaN(dia) && (dia > 0) && (dia < 32)) && (!isNaN(mes) && (mes > 0) && (mes < 13)) && (!isNaN(ano) && (ano.length == 4) && (ano >= 1900));
+			                if (!resultado)
+			                {
+			                	var div = document.getElementById("textDiv2").className = "alert alert-danger";
+
+			    				textDiv2.textContent = "Data de conclusão inválida";
+
+			    				var text = "[" + div.textContent + "]";
+			                        
+			                        return false;
+			                }
+			         }
+			         else
+			         {
+			        		var div = document.getElementById("textDiv2").className = "";
+
+			    			textDiv2.textContent = "Data de nascimento inválida";
+
+			    			var text = "[" + div.textContent + "]";
+			              
+			                return false;
+			         }
+			        var div = document.getElementById("textDiv2").className = "";
+
+	    			textDiv2.textContent = "";
+
+	    			var text = "[" + div.textContent + "]";
+	                
+			return true;
+			
+			}
+		}
+		
+
+		function validarData2(idCampo) {
+
+			var campo = $("#"+idCampo).val();
+			if (campo!="")
+			{
+			        erro=0;
+			        hoje = new Date();
+			        anoAtual = hoje.getFullYear();
+			        barras = campo.split("/");
+			        if (barras.length == 3)
+			        {
+			                dia = barras[0];
+			                mes = barras[1];
+			                ano = barras[2];
+			                resultado = (!isNaN(dia) && (dia > 0) && (dia < 32)) && (!isNaN(mes) && (mes > 0) && (mes < 13)) && (!isNaN(ano) && (ano.length == 4) && (ano >= 1900));
+			                if (!resultado)
+			                {
+			                	var div = document.getElementById("textDiv2").className = "alert alert-danger";
+
+			    				textDiv2.textContent = "Data de último contato inválida";
+
+			    				var text = "[" + div.textContent + "]";
+			                        
+			                        return false;
+			                }
+			         }
+			         else
+			         {
+			        		var div = document.getElementById("textDiv2").className = "";
+
+			    			textDiv2.textContent = "Data de último contato inválida";
+
+			    			var text = "[" + div.textContent + "]";
+			              
+			                return false;
+			         }
+			        var div = document.getElementById("textDiv2").className = "";
+
+	    			textDiv2.textContent = "";
+
+	    			var text = "[" + div.textContent + "]";
+	                
+			return true;
+			
+			}
+		}
+		
+		
 
 	function dataFormatada(dt){
 		var data = new Date(dt);
