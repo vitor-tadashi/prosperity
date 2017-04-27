@@ -1,30 +1,20 @@
-  $(document).ready(function () {
+//MASK DOS CAMPOS DE CADASTRAR CANDIDATO  
+$(document).ready(function () {
 	        setTimeout(function () {
 	            $('#msg-sucesso').fadeOut(1500);
 	        }, 5000);
 	    });
 	  
 		$(document).ready(function() {
-		 	 $('.cpf').mask('000.000.000-00', {
-				reverse : true 
-			}) ; 
-			$('.telefone').mask('(00)00000-0000');
+		 	 $('.cpf').mask('000.000.000-00'); 
+			$('.telefone').mask('(00)0000-00009');
 			$('#rg').mask('00.000.000-0');
-			$("#cep").mask("99999-999");
+			$("#cep").mask("00000-000");
 			$('.date').mask('00/00/0000');
-			$('.dinheiro').mask('000.000.000.000.000,00', {reverse: true});
+			$('.dinheiro').mask('000.000,00', {reverse: true});
 
-		}) 
-		
-		
-		function validarTel(){
-		var tel = $("#contato").val().replace(/[^\d]+/g,'');
-		if (tel.length == 10){
-			$("#contato").val(tel).mask('(99)9999-9999');
-		}else{
-			$("#contato").val(tel).mask('(99)99999-9999');
-		}
-	}
+		});
+		//FUNCTION CEP 
 
 		function limpa_formulário_cep() {
 			//Limpa valores do formulário de cep.
@@ -108,8 +98,20 @@
 			strCPF = strCPF.substring(0, 3) + strCPF.substring(4, 7)
 					+ strCPF.substring(8, 11) + strCPF.substring(12, 14);
 			Soma = 0;
+			
+			console.log(strCPF);
+			
+			if(strCPF == ''){
+				var div = document.getElementById("textDiv1").className = "alert alert-danger";
+
+				textDiv1.textContent = "O campo CPF deve ser preenchido.";
+				var text = "[" + div.textContent + "]";
+				
+				return false;
+			}
+			
 			if (strCPF == "00000000000") {
-				var div = document.getElementById("textDiv1").className = "alert alert-danger x";
+				var div = document.getElementById("textDiv1").className = "alert alert-danger";
 
 				textDiv1.textContent = "CPF inválido.";
 
@@ -285,5 +287,19 @@
 	
 	function download (url) {
 		window.location.href = url;
+	}
+	function validarVaga(){
+		  var vaga= document.getElementById("vaga").value;
+		    $vaga = vaga;
+		    if (vaga == "0") {
+		    	var div = document.getElementById("textDiv	2").className = "alert alert-danger";
+
+    			textDiv2.textContent = "O campo vaga a ser aplicado deve ser preenchido";
+
+    			var text = "[" + div.textContent + "]";
+                
+		      return false;
+		      }
+		    return true;
 	}
 	
