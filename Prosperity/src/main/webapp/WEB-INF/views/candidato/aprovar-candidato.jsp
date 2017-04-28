@@ -437,7 +437,7 @@
             	"</c:forEach>" +
             	"</select>"+
             	"<input type='text' id='descricao"+ cont +"'/>"+
-            	"<input type='button' id='btnRemover' onclick='remover("+ cont +")'value='Remover campo' class='btn btn-sm btn-danger'>"+
+            	"<input type='button' id='btnRemover' onclick='remover("+ cont +")'value='-' class='btn btn-sm btn-danger'>"+
             	"</div>" ;
             	cont++;
         /*adiciona na div*/
