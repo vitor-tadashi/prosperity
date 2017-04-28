@@ -684,6 +684,25 @@
     			$('#vagaFormacao').val(lista.descricaoFormacaoAcademica);
     			$('#vagaPerfilTecnico').val(lista.descricaoPerfilTecnico);
     			$('#vagaGestor').val(lista.usuarioBean.funcionario.nome);
+    			
+    				var idSenioridade = lista.senioridadeBean.id;
+    				var idCargo = lista.cargoBean.id;
+    				if (idSenioridade>0 && idCargo>0){
+    					$.ajax({
+    						url: "http://localhost:8080/vaga/obter-range-salarial",
+    						type: "GET",
+    						dataType: "JSON",
+    						data: {idCargo : idCargo,
+    							idSenioridade : idSenioridade},
+    						success: function(lista){
+    							$('input#vagaSalario').val("R$ " + lista[0].valorMinSalario + " até " + "R$ " + lista[0].valorMaxSalario);
+    							//$("#valorMaximo").val(lista[0].valorMaxSalario);
+    						}
+    					});
+    				} else{
+    					$('input#vagaSalario').val("R$ 00,00 - R$ 00,00");
+    				}
+    			
     			$('#vaga-modal').modal('show');
     		}
     	})
