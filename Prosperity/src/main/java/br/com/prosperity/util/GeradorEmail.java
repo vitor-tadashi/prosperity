@@ -136,8 +136,6 @@ public class GeradorEmail {
 		return properties;
 	}
 
-	private String para;
-
 	// Para alterações em status de candidatos:
 	public void enviarEmail(CandidatoBean candidato, String para, String nome) {
 
