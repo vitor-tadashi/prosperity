@@ -513,21 +513,22 @@ public class CandidatoBusiness {
 	public Integer totalPagina(CandidatoBean candidato) {
 
 		float pag = 0;
-			List<Criterion> criterions = confFiltro(candidato);
-			pag = (float) candidatoDAO.rowCount(criterions) / (float) CandidatoDAO.limitResultsPerPage;
-		 /*else {
-			List<Integer> listaStatus = obterStatusDisponivelAprovacao();
-			usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
-			Integer idStatusCandidatura = 0;
-
-			for (FuncionalidadeBean funcionalidadeBean : usuarioBean.getPerfil().getListaFuncionalidades()) {
-				if (funcionalidadeBean.getId() == 27) {
-					idStatusCandidatura = StatusCandidatoEnum.CANDIDATURA.getValue();
-				}
-			}
-			pag = (float) candidatoDAO.countAprovacao(listaStatus, StatusCandidatoEnum.CANDIDATOEMANALISE.getValue(),
-					usuarioBean.getId(), idStatusCandidatura) / (float) CandidatoDAO.limitResultsPerPage;
-		}*/
+		List<Criterion> criterions = confFiltro(candidato);
+		pag = (float) candidatoDAO.rowCount(criterions) / (float) CandidatoDAO.limitResultsPerPage;
+		/*
+		 * else { List<Integer> listaStatus = obterStatusDisponivelAprovacao();
+		 * usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
+		 * Integer idStatusCandidatura = 0;
+		 * 
+		 * for (FuncionalidadeBean funcionalidadeBean :
+		 * usuarioBean.getPerfil().getListaFuncionalidades()) { if
+		 * (funcionalidadeBean.getId() == 27) { idStatusCandidatura =
+		 * StatusCandidatoEnum.CANDIDATURA.getValue(); } } pag = (float)
+		 * candidatoDAO.countAprovacao(listaStatus,
+		 * StatusCandidatoEnum.CANDIDATOEMANALISE.getValue(),
+		 * usuarioBean.getId(), idStatusCandidatura) / (float)
+		 * CandidatoDAO.limitResultsPerPage; }
+		 */
 		Integer paginas = null;
 		if (pag % 1 == 0) {
 			paginas = (int) pag;
@@ -577,40 +578,10 @@ public class CandidatoBusiness {
 		List<AvaliadorCandidatoBean> avaliadores = avaliadorCandidatoConverter
 				.convertEntityToBean(avaliadorCandidatoDAO.findByNamedQuery("obterProposta", candidatoBean.getId()));
 
-		if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.GERARPROPOSTA.getValue()) {
-			for (UsuarioBean u : usuarios) {
-				switch (u.getPerfil().getNome()) {
-				case "Analista de RH":
-					recipients.add(u.getEmail());
-					nomes.add(u.getNome());
-					break;
-				case "Gestor de RH":
-					recipients.add(u.getEmail());
-					nomes.add(u.getNome());
-					break;
-				default:
-					break;
-				}
-			}
-		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOEMANALISE.getValue()) {
+		if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOEMANALISE.getValue()) {
 			for (AvaliadorCandidatoBean a : avaliadores) {
 				recipients.add(a.getUsuario().getEmail());
 				nomes.add(a.getUsuario().getNome());
-			}
-		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CONTRATADO.getValue()) {
-			for (UsuarioBean u : usuarios) {
-				switch (u.getPerfil().getNome()) {
-				case "Analista de RH":
-					recipients.add(u.getEmail());
-					nomes.add(u.getNome());
-					break;
-				case "Gestor de RH":
-					recipients.add(u.getEmail());
-					nomes.add(u.getNome());
-					break;
-				default:
-					break;
-				}
 			}
 		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.PROPOSTACANDIDATO.getValue()) {
 			for (UsuarioBean u : usuarios) {
@@ -627,22 +598,7 @@ public class CandidatoBusiness {
 					break;
 				}
 			}
-		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.PROPOSTAACEITA.getValue()) {
-			for (UsuarioBean u : usuarios) {
-				switch (u.getPerfil().getNome()) {
-				case "Analista de RH":
-					recipients.add(u.getEmail());
-					nomes.add(u.getNome());
-					break;
-				case "Gestor de RH":
-					recipients.add(u.getEmail());
-					nomes.add(u.getNome());
-					break;
-				default:
-					break;
-				}
-			}
-		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.PROPOSTARECUSADA.getValue()) {
+		}else{
 			for (UsuarioBean u : usuarios) {
 				switch (u.getPerfil().getNome()) {
 				case "Analista de RH":

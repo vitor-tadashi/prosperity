@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.prosperity.bean.AvaliadorCandidatoBean;
 import br.com.prosperity.bean.AvaliadorVagaBean;
 import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
@@ -106,9 +105,6 @@ public class VagaBusiness {
 
 	@Autowired
 	private UsuarioBusiness usuarioBusiness;
-	
-	@Autowired
-	private VagaBean vaga;
 
 	@Transactional(readOnly = true)
 	public List<VagaBean> listarDecrescente() {
@@ -306,10 +302,10 @@ public class VagaBusiness {
 		statusVagaEntity.setDataAlteracao(new Date());
 		statusVagaEntity.setUsuario(usuarioDAO.findById(usuarioBean.getId()));
 		statusVagaEntity.setSituacao(true);
-		
-		buscarUsuariosParaEmail(situacaoVaga);
 
 		statusVagaDAO.insert(statusVagaEntity);
+
+		buscarUsuariosParaEmail(situacaoVaga);
 	}
 
 	@Transactional
@@ -409,49 +405,25 @@ public class VagaBusiness {
 		List<AvaliadorVagaBean> avaliadores = avaliadorVagaConverter
 				.convertEntityToBean(avaliadorVagaDAO.findByNamedQuery("obterProposta", vaga.getId()));
 
-		if (situacaoVagaBean.getStatus().getValue() == StatusVagaEnum.ATIVO.getValue()
-				|| situacaoVagaBean.getStatus().getValue() == StatusVagaEnum.PENDENTEDEINFORMACOES.getValue()) {
-			for (UsuarioBean u : usuarios) {
-				switch (u.getPerfil().getNome()) {
-				case "Analista de RH":
-					recipients.add(u.getEmail());
-					nomes.add(u.getNome());
-					break;
-				case "Gestor de RH":
-					recipients.add(u.getEmail());
-					nomes.add(u.getNome());
-					break;
-				default:
-					break;
-				}
-			}
-		} else if (situacaoVagaBean.getStatus().getValue() == StatusVagaEnum.FECHADO.getValue()
-				|| situacaoVagaBean.getStatus().getValue() == StatusVagaEnum.RECUSADO.getValue()
-				|| situacaoVagaBean.getStatus().getValue() == StatusVagaEnum.CANCELADO.getValue()) {
-
-			for (AvaliadorVagaBean a : avaliadores) {
-				recipients.add(a.getUsuario().getEmail());
-				nomes.add(a.getUsuario().getNome());
-			}
-
-			for (UsuarioBean u : usuarios) {
-				switch (u.getPerfil().getNome()) {
-				case "Analista de RH":
-					recipients.add(u.getEmail());
-					nomes.add(u.getNome());
-					break;
-				case "Gestor de RH":
-					recipients.add(u.getEmail());
-					nomes.add(u.getNome());
-					break;
-				default:
-					break;
-				}
-			}
-		} else if (situacaoVagaBean.getStatus().getValue() == StatusVagaEnum.PENDENTE.getValue()) {
+		if (situacaoVagaBean.getStatus().getValue() == StatusVagaEnum.PENDENTE.getValue()) {
 			for (UsuarioBean u : usuarios) {
 				switch (u.getPerfil().getNome()) {
 				case "Diretor de operação":
+					recipients.add(u.getEmail());
+					nomes.add(u.getNome());
+					break;
+				default:
+					break;
+				}
+			}
+		} else {
+			for (UsuarioBean u : usuarios) {
+				switch (u.getPerfil().getNome()) {
+				case "Analista de RH":
+					recipients.add(u.getEmail());
+					nomes.add(u.getNome());
+					break;
+				case "Gestor de RH":
 					recipients.add(u.getEmail());
 					nomes.add(u.getNome());
 					break;
