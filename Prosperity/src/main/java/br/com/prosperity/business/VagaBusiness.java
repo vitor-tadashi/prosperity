@@ -238,15 +238,16 @@ public class VagaBusiness {
 			StatusVagaBean status = new StatusVagaBean();
 			status = vagaBean.getStatus().get(0);
 			if (status.getStatus().getNome().equals("Aguardando avaliadores")) {
+				inserirAvaliadores(vagaEntity, usuarioBean);
 				situacaoVaga.setIdVaga(vagaEntity.getId());
 				situacaoVaga.setStatus(StatusVagaEnum.PENDENTEDEINFORMACOES);
 				alterarStatus(situacaoVaga);
 			} else if (status.getStatus().getNome().equals("Ativo")) {
+				inserirAvaliadores(vagaEntity, usuarioBean);
 				situacaoVaga.setIdVaga(vagaEntity.getId());
 				situacaoVaga.setStatus(StatusVagaEnum.ATIVO);
 				alterarStatus(situacaoVaga);
 			}
-			inserirAvaliadores(vagaEntity, usuarioBean);
 			vagaDAO.update(vagaEntity);
 		}
 
@@ -278,10 +279,6 @@ public class VagaBusiness {
 			}
 		}
 
-		if (situacaoVaga.getStatus().getValue() != StatusVagaEnum.PENDENTE.getValue()) {
-			desativarStatus(vagaEntity);
-		}
-
 		if (situacaoVaga.getStatus().getValue() == StatusVagaEnum.CANCELADO.getValue()
 				|| situacaoVaga.getStatus().getValue() == StatusVagaEnum.RECUSADO.getValue()
 				|| situacaoVaga.getStatus().getValue() == StatusVagaEnum.FECHADO.getValue()) {
@@ -297,7 +294,11 @@ public class VagaBusiness {
 				}
 			}
 		}
-
+		
+		if (situacaoVaga.getStatus().getValue() != StatusVagaEnum.PENDENTE.getValue()) {
+			desativarStatus(vagaEntity);
+		}
+		
 		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
 		statusVagaEntity.setStatus(statusDAO.findById(situacaoVaga.getStatus().getValue()));
 		statusVagaEntity.setVaga(vagaEntity);

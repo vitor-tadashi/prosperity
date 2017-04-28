@@ -316,7 +316,11 @@ public class CandidatoBusiness {
 		List<AvaliadorCandidatoEntity> avaliadorCandidatoEntity = null;
 		List<StatusDisponivelEntity> statusDisponivelEntity = statusDisponivelDAO.findAll();
 
-		if (situacaoCandidato.getStatus().getValue() != StatusCandidatoEnum.CANDIDATURA.getValue()) {
+		if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANDIDATURA.getValue()
+				|| situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANCELADO.getValue()) {
+			statusCandidatoEntity = statusAlteracao(situacaoCandidato);
+			statusCandidatoDAO.insert(statusCandidatoEntity);
+		} else {
 			if (statusDisponivelEntity != null || statusDisponivelEntity.size() > 0) {
 				List<StatusCandidatoEntity> statusCandidato = null;
 				statusCandidato = statusCandidatoDAO.findByNamedQuery("obterStatusCandidato",
@@ -332,9 +336,6 @@ public class CandidatoBusiness {
 					}
 				}
 			}
-		}else{
-			statusCandidatoEntity = statusAlteracao(situacaoCandidato);
-			statusCandidatoDAO.insert(statusCandidatoEntity);
 		}
 		statusFuturoEntity = statusFuturoDAO.findByNamedQuery("obterStatusFuturos",
 				situacaoCandidato.getStatus().getValue());
