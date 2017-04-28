@@ -291,7 +291,7 @@ public class CandidatoController<PaginarCandidato> {
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
 
 		// LISTAR VAGA ATIVA
-		List<VagaBean> listaVagaDrop = vagaBusiness.listarVagasAtivas();
+		List<VagaBean> listaVagaDrop = vagaBusiness.listar();
 		model.addAttribute("listaVagaDrop", listaVagaDrop);
 
 		// avaliadorBusiness.listar();
