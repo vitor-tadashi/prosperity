@@ -416,7 +416,6 @@
         		}).done(function() {
         			 location.reload();
         		}).fail(function(jqXHR, textStatus) {
-        			alert('fail');
         			 location.reload();
         		});
             }
