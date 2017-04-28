@@ -307,7 +307,7 @@ public class VagaBusiness {
 		statusVagaEntity.setUsuario(usuarioDAO.findById(usuarioBean.getId()));
 		statusVagaEntity.setSituacao(true);
 		
-		buscarUsuariosParaEmail(situacaoVaga);
+		//buscarUsuariosParaEmail(situacaoVaga);
 
 		statusVagaDAO.insert(statusVagaEntity);
 	}
