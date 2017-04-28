@@ -333,16 +333,16 @@ public class CandidatoController<PaginarCandidato> {
 
 	// andre
 	@RequestMapping(value = "aprovar", method = RequestMethod.GET)
-	public String aprovarCandidato(Model model,Integer page) {
-		if (page == null) {
+	public String aprovarCandidato(Model model) {
+		/*if (page == null) {
 			page = 1;
 		}
 		//Paginação
 		CandidatoBean c = new CandidatoBean();
 		c.setId(-1);
-		paginacao(page, model, c);
+		paginacao(page, model, c);*/
 		
-		List<CandidatoBean> candidatos = candidatoBusiness.listarAprovacao(page);
+		List<CandidatoBean> candidatos = candidatoBusiness.listarAprovacao();
 		List<CompetenciaBean> competencias = candidatoBusiness.listarCompetencia();
 		List<AvaliacaoBean> avaliacoes = candidatoBusiness.listarAvaliacao();
 		List<ProvaBean> provas = provaBusiness.listarProva();
