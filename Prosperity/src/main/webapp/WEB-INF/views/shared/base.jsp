@@ -9,6 +9,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
+	<link rel="shortcut icon" type="image/ico" href="/resources/img/prosperity.ico"/>
+	
 	<!-- Bootstrap core CSS -->
 	<link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	

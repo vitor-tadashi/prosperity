@@ -29,15 +29,28 @@ $(document).ready(function () {
 				document.getElementById('rua').value = (conteudo.logradouro);
 				document.getElementById('cidade').value = (conteudo.localidade);
 				document.getElementById('uf').value = (conteudo.uf);
+				
+				var div = document.getElementById("textDiv").className =  "hide";
 			} //end if.
 			else {
 				//CEP não Encontrado.
-				limpa_formulário_cep();
+		
+
 				var div = document.getElementById("textDiv").className = "alert alert-danger";
 
-				textDiv.textContent = "";
+				textDiv.textContent = "CEP inválido";
 
-				var textDiv = "[" + div.textContent + "]";
+				var text = "[" + div.textContent + "]";
+				
+				limpa_formulário_cep();
+				var div = document.getElementById("textDiv");
+
+				textDiv.textContent = "CEP inválido";
+
+				var text = "[" + div.textContent + "]";
+				
+				
+
 			}
 		}
 
@@ -62,27 +75,32 @@ $(document).ready(function () {
 
 					//Insere script no documento e carrega o conteúdo.
 					document.body.appendChild(script);
+					
 
 				} //end if.
 				else {
 					//cep é inválido.
-					limpa_formulário_cep();
 					var div = document.getElementById("textDiv").className = "alert alert-danger";
 
-    				textDiv.textContent = "";
+					textDiv.textContent = "CEP inválido";
 
-    				var text = "[" + div.textContent + "]";
+					var text = "[" + div.textContent + "]";
+					limpa_formulário_cep();
+    				
+    				
 				}
 
 
-				textDiv.textContent = "CEP inválido";
-
-				var text = "[" + div.textContent + "]";
+				
 			} //end if.
 			else {
 				//cep sem valor, limpa formulário.
+				var div = document.getElementById("textDiv");
+
+				textDiv.textContent = "";
+
+				var text = "[" + div.textContent + "]";
 				limpa_formulário_cep();
-				
 			}
 		};
 
@@ -105,7 +123,7 @@ $(document).ready(function () {
 			if(strCPF == ''){
 				var div = document.getElementById("textDiv1").className = "alert alert-danger";
 
-				textDiv1.textContent = "O campo CPF deve ser preenchido.";
+				textDiv1.textContent = "O campo CPF deve ser preenchido";
 				var text = "[" + div.textContent + "]";
 				
 				return false;
@@ -114,7 +132,7 @@ $(document).ready(function () {
 			if (strCPF == "00000000000") {
 				var div = document.getElementById("textDiv1").className = "alert alert-danger";
 
-				textDiv1.textContent = "CPF inválido.";
+				textDiv1.textContent = "CPF inválidasso";
 
 				var text = "[" + div.textContent + "]";
 				return false;
@@ -133,7 +151,7 @@ $(document).ready(function () {
 			if (Resto != parseInt(strCPF.substring(9, 10))) {
 				var div = document.getElementById("textDiv1").className = "alert alert-danger";
 
-				textDiv1.textContent = "CPF inválido.";
+				textDiv1.textContent = "CPF inválido";
 
 				var text = "[" + div.textContent + "]";
 				return false
@@ -153,7 +171,7 @@ $(document).ready(function () {
 			if (Resto != parseInt(strCPF.substring(10, 11))) {
 				var div = document.getElementById("textDiv1").className = "alert alert-danger";
 
-				textDiv1.textContent = "CPF inválido.";
+				textDiv1.textContent = "CPF inválido";
 
 				var text = "[" + div.textContent + "]";
 				return false;
@@ -262,7 +280,7 @@ $(document).ready(function () {
 		}
 		
 
-		function validarData2(idCampo) {
+		function validarData3(idCampo) {
 
 			var campo = $("#"+idCampo).val();
 			if (campo!="")
@@ -308,6 +326,55 @@ $(document).ready(function () {
 			
 			}
 		}
+		
+
+		function validarData4(idCampo) {
+
+			var campo = $("#"+idCampo).val();
+			if (campo!="")
+			{
+			        erro=0;
+			        hoje = new Date();
+			        anoAtual = hoje.getFullYear();
+			        barras = campo.split("/");
+			        if (barras.length == 3)
+			        {
+			                dia = barras[0];
+			                mes = barras[1];
+			                ano = barras[2];
+			                resultado = (!isNaN(dia) && (dia > 0) && (dia < 32)) && (!isNaN(mes) && (mes > 0) && (mes < 13)) && (!isNaN(ano) && (ano.length == 4) && (ano >= 1900));
+			                if (!resultado)
+			                {
+			                	var div = document.getElementById("textDiv2").className = "alert alert-danger";
+
+			    				textDiv2.textContent = "Data da última entrevista inválida";
+
+			    				var text = "[" + div.textContent + "]";
+			                        
+			                        return false;
+			                }
+			         }
+			         else
+			         {
+			        		var div = document.getElementById("textDiv2").className = "";
+
+			    			textDiv2.textContent = "Data da última entrevista inválida";
+
+			    			var text = "[" + div.textContent + "]";
+			              
+			                return false;
+			         }
+			        var div = document.getElementById("textDiv2").className = "";
+
+	    			textDiv2.textContent = "";
+
+	    			var text = "[" + div.textContent + "]";
+	                
+			return true;
+			
+			}
+		}
+
 		
 		
 

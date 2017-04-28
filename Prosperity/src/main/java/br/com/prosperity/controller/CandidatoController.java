@@ -2,13 +2,15 @@ package br.com.prosperity.controller;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,7 @@ import br.com.prosperity.bean.ProvaCandidatoBean;
 import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
+import br.com.prosperity.bean.StatusBean;
 import br.com.prosperity.bean.TipoCursoBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.CanalInformacaoBusiness;
@@ -51,6 +54,7 @@ import br.com.prosperity.business.ProvaBusiness;
 import br.com.prosperity.business.ProvaCandidatoBusiness;
 import br.com.prosperity.business.SenioridadeBusiness;
 import br.com.prosperity.business.SituacaoAtualBusiness;
+import br.com.prosperity.business.StatusBusiness;
 import br.com.prosperity.business.TipoCursoBusiness;
 import br.com.prosperity.business.UsuarioBusiness;
 import br.com.prosperity.business.VagaBusiness;
@@ -102,6 +106,9 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private CompetenciaBean competenciaBean;
+	
+	@Autowired
+	private StatusBusiness statusBusiness;
 
 	@Autowired
 	private AvaliacaoBean avaliacaoBean;
@@ -289,9 +296,12 @@ public class CandidatoController<PaginarCandidato> {
 
 		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.findAll();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
-
+		
+		List<StatusBean> listaStatusDrop = statusBusiness.obterStatusVaga();
+		model.addAttribute("listaStatusDrop", listaStatusDrop);
+		
 		// LISTAR VAGA ATIVA
-		List<VagaBean> listaVagaDrop = vagaBusiness.listarVagasAtivas();
+		List<VagaBean> listaVagaDrop = vagaBusiness.listar();
 		model.addAttribute("listaVagaDrop", listaVagaDrop);
 
 		// avaliadorBusiness.listar();
@@ -328,8 +338,9 @@ public class CandidatoController<PaginarCandidato> {
 
 		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.findAll();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
+		
 
-		List<VagaBean> listaVagaDrop = vagaBusiness.listarVagasAtivas();
+		List<VagaBean> listaVagaDrop = vagaBusiness.listar();
 		model.addAttribute("listaVagaDrop", listaVagaDrop);
 
 		// avaliadorBusiness.listar();
@@ -465,5 +476,24 @@ public class CandidatoController<PaginarCandidato> {
 			aux++;
 		}
 		return provasCandidatoBean;
+	}
+	
+	@RequestMapping(value = "/file/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public void getFile(@PathVariable Integer id, HttpServletResponse response) {
+
+		String caminho = candidatoBusiness.obter(id).getCurriculo();
+
+		try {
+			File file = new File(caminho);
+			response.addHeader("Content-Disposition", "attachment; filename="+caminho);
+			InputStream is = new FileInputStream(file);
+			org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
+			response.flushBuffer();
+
+			is.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
