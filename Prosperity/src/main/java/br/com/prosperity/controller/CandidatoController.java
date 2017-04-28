@@ -3,6 +3,9 @@ package br.com.prosperity.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +42,6 @@ import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.TipoCursoBean;
-import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.CanalInformacaoBusiness;
 import br.com.prosperity.business.CandidatoBusiness;
@@ -54,10 +56,9 @@ import br.com.prosperity.business.UsuarioBusiness;
 import br.com.prosperity.business.VagaBusiness;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.exception.BusinessException;
-import br.com.prosperity.util.GeradorEmail;
 
 @Controller
-@RequestMapping(value = "candidato")
+@RequestMapping(value = "/candidato")
 public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
@@ -123,7 +124,7 @@ public class CandidatoController<PaginarCandidato> {
 		model.addAttribute("endpage", endpage);
 		model.addAttribute("page", page);
 	}
-	@RequestMapping(value = "cadastrar", method = RequestMethod.GET)
+	@RequestMapping(value = "/cadastrar", method = RequestMethod.GET)
 	public String cadastrarCandidato(Model model) {
 
 		obterDominiosCandidato(model);
@@ -146,7 +147,7 @@ public class CandidatoController<PaginarCandidato> {
 
 	}
 
-	@RequestMapping(value = "salvar", method = RequestMethod.POST)
+	@RequestMapping(value = "/salvar", method = RequestMethod.POST)
 	public String salvarCandidato(@Valid @ModelAttribute("candidatoBean") CandidatoBean candidatoBean,
 			BindingResult result, @RequestParam("file") MultipartFile file, Model model, RedirectAttributes redirectAttrs) throws BusinessException {
 
@@ -168,7 +169,7 @@ public class CandidatoController<PaginarCandidato> {
 			}
 		}
 
-		return "redirect:cadastrar";
+		return "redirect:/candidato/cadastrar";
 	}
 
 	@RequestMapping(value = "/cancelar-candidato/{id}")
@@ -185,22 +186,27 @@ public class CandidatoController<PaginarCandidato> {
 	public String solicitarCandidato(Model model, @PathVariable Integer id) {
 		CandidatoBean candidato = candidatoBusiness.obterCandidatoPorId(id);
 		obterDominiosCandidato(model);
+		
+		BigDecimal b = new BigDecimal(candidato.getValorPretensao().toString());
+		b = b.setScale(2, BigDecimal.ROUND_DOWN);
+		
+		candidato.setValorPretensao(b);
 		//candidato.setCurriculo("file:///C:/Users/leonardo.ramos/Downloads/PontosProsperity.docx");
 		model.addAttribute("candidato", candidato);
 
 		return "candidato/cadastrar-candidato";
 	}
 
-	@RequestMapping(value = "obter", method = RequestMethod.GET)
+	@RequestMapping(value = "/obter", method = RequestMethod.GET)
 	@ResponseStatus(value = HttpStatus.OK)
 	public @ResponseBody CandidatoBean obterCPF(Model model, @RequestParam String cpf) {
 		CandidatoBean candidato = candidatoBusiness.obterPorCPF(cpf);
 		return candidato;
 	}
 
-	@RequestMapping(value = "editar/salvar", method = RequestMethod.POST)
+	@RequestMapping(value = "/editar/salvar", method = RequestMethod.POST)
 	public String salvarEditar(@ModelAttribute("candidatoBean") @Valid CandidatoBean candidatoBean,
-			BindingResult result, Model model) throws BusinessException {
+			BindingResult result, Model model, RedirectAttributes redirectAttrs) throws BusinessException {
 
 		if (result.hasErrors()) {
 			model.addAttribute("erro", result.getErrorCount());
@@ -208,12 +214,12 @@ public class CandidatoController<PaginarCandidato> {
 			model.addAttribute("candidato", candidatoBean);
 
 			obterDominiosCandidato(model);
-			return "redirect:/candidato/cadastrar-candidato";
+			return "candidato/cadastrar-candidato";
 		}
 		candidatoBusiness.inserir(candidatoBean);
-		model.addAttribute("sucesso", "Candidato salvo com sucesso.");
+		redirectAttrs.addFlashAttribute("sucesso", "Candidato salvo com sucesso.");
 
-		return "redirect:/cadastrar-candidato";
+		return "redirect:/candidato/cadastrar";
 	}
 
 	private String uploadCurriculo(MultipartFile file, String cpf) {
@@ -261,7 +267,7 @@ public class CandidatoController<PaginarCandidato> {
 		return "candidato/historico-candidato";
 	}
 
-	@RequestMapping(value = "consultar", method = RequestMethod.GET)
+	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
 	public String consultarCandidatoRH(@RequestParam(value = "page", required = false) Integer page, Model model, CandidatoBean candidato) {
 		if (page == null) {
 			page = 1;
@@ -293,7 +299,7 @@ public class CandidatoController<PaginarCandidato> {
 		return "candidato/consultar-candidato";
 	}
 
-	@RequestMapping(value = "filtrar", method = RequestMethod.GET)
+	@RequestMapping(value = "/filtrar", method = RequestMethod.GET)
 	public String filtrarCandidatoRH(@RequestParam(value = "page", required = false) Integer page,Model model, CandidatoBean candidato, RedirectAttributes redirectAttributes) {
 		if (page == null) {
 			page = 1;
@@ -332,7 +338,7 @@ public class CandidatoController<PaginarCandidato> {
 	}
 
 	// andre
-	@RequestMapping(value = "aprovar", method = RequestMethod.GET)
+	@RequestMapping(value = "/aprovar", method = RequestMethod.GET)
 	public String aprovarCandidato(Model model) {
 		/*if (page == null) {
 			page = 1;
@@ -355,7 +361,7 @@ public class CandidatoController<PaginarCandidato> {
 		return "candidato/aprovar-candidato";
 	}
 
-	@RequestMapping(value = { "gerenciar" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/gerenciar" }, method = RequestMethod.GET)
 	public @ResponseBody CandidatoBean gerenciarAjax(Model model, @ModelAttribute("id") Integer id) {
 		CandidatoBean candidato = new CandidatoBean();
 		candidato = candidatoBusiness.obterCandidatoPorId(id);
@@ -373,7 +379,7 @@ public class CandidatoController<PaginarCandidato> {
 		return novosErros;
 	}
 
-	@RequestMapping(value = { "alterar-status-candidato" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/alterar-status-candidato" }, method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
 	public @ResponseBody String alterarStatusCandidato(Model model,
 			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato,
@@ -394,7 +400,7 @@ public class CandidatoController<PaginarCandidato> {
 		return "candidato/aprovar";
 	}
 
-	@RequestMapping(value = { "buscar/{id}" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/buscar/{id}" }, method = RequestMethod.GET)
 	public @ResponseBody CandidatoBean buscarPorId(@PathVariable int id) {
 		CandidatoBean candidato = candidatoBusiness.obter(id);
 		return candidato;

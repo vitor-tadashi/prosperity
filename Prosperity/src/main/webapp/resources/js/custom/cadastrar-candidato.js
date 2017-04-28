@@ -100,6 +100,7 @@ $(document).ready(function () {
 			Soma = 0;
 			
 			console.log(strCPF);
+			var div = document.getElementById("textDiv1");
 			
 			if(strCPF == ''){
 				var div = document.getElementById("textDiv1").className = "alert alert-danger";
