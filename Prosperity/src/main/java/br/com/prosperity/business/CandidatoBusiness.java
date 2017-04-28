@@ -598,11 +598,7 @@ public class CandidatoBusiness {
 				recipients.add(a.getUsuario().getEmail());
 				nomes.add(a.getUsuario().getNome());
 			}
-		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOAPROVADO.getValue()
-				|| situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CONTRATADO.getValue()) {
-			
-			recipients.add(candidatoBean.getVagaBean().getUsuarioBean().getEmail());
-
+		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CONTRATADO.getValue()) {
 			for (UsuarioBean u : usuarios) {
 				switch (u.getPerfil().getNome()) {
 				case "Analista de RH":

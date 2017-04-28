@@ -400,8 +400,10 @@ public class VagaBusiness {
 		return count;
 	}
 
+	@Transactional
 	public void buscarUsuariosParaEmail(SituacaoVagaBean situacaoVagaBean) {
-		vaga = vagaConverter.convertEntityToBean(vagaDAO.findById(situacaoVagaBean.getIdVaga()));
+		VagaEntity vagaEntity = vagaDAO.findById(situacaoVagaBean.getIdVaga());
+		vaga = vagaConverter.convertEntityToBean(vagaEntity);
 		List<UsuarioBean> usuarios = usuarioBusiness.findAll();
 		ArrayList<String> recipients = new ArrayList<>();
 		ArrayList<String> nomes = new ArrayList<>();

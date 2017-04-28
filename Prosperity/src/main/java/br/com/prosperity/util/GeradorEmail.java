@@ -141,7 +141,7 @@ public class GeradorEmail {
 
 		Mensagem mensagem = new Mensagem();
 		
-		String mensagemtexto = mensagem.gerador("o candidato ", candidato.getNome(), candidato.getUltimoStatus().toString(), nome);
+		String mensagemtexto = mensagem.gerador("o candidato ", candidato.getNome(), candidato.getUltimoStatus().getStatus().getNome().toString(), nome);
 		
 		
 		new Thread() {
@@ -162,7 +162,7 @@ public class GeradorEmail {
 
 		Mensagem mensagem = new Mensagem();
 		
-		String mensagemtexto = mensagem.gerador("a vaga ", vaga.getNomeVaga(), vaga.getUltimoStatus().toString(), nome);
+		String mensagemtexto = mensagem.gerador("a vaga ", vaga.getNomeVaga(), vaga.getUltimoStatus().getStatus().getNome().toString(), nome);
 		
 		new Thread() {
 			public void run() {
