@@ -262,7 +262,7 @@
 												style="padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
 												<div class="form-group">
 													<textarea class="form-control" rows="5" 
-														name="vagaPerfilTecnico" id=vagaPerfilTecnico disabled></p>
+														name="vagaPerfilTecnico" id=vagaPerfilTecnico disabled></textarea>
 												</div>
 												<!-- /form-group -->
 											</div>
