@@ -16,7 +16,7 @@
 			<ul class="breadcrumb">
 				<li><i class="fa fa-home"></i><a href="/pagina-inicial">
 						Página inicial</a></li>
-				<li class="active">Vaga</li>
+				<li>Vaga</li>
 				<li class="active">Solicitar</li>
 			</ul>
 		</div>
