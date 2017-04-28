@@ -262,7 +262,7 @@ $(document).ready(function () {
 		}
 		
 
-		function validarData2(idCampo) {
+		function validarData3(idCampo) {
 
 			var campo = $("#"+idCampo).val();
 			if (campo!="")
@@ -308,6 +308,55 @@ $(document).ready(function () {
 			
 			}
 		}
+		
+
+		function validarData4(idCampo) {
+
+			var campo = $("#"+idCampo).val();
+			if (campo!="")
+			{
+			        erro=0;
+			        hoje = new Date();
+			        anoAtual = hoje.getFullYear();
+			        barras = campo.split("/");
+			        if (barras.length == 3)
+			        {
+			                dia = barras[0];
+			                mes = barras[1];
+			                ano = barras[2];
+			                resultado = (!isNaN(dia) && (dia > 0) && (dia < 32)) && (!isNaN(mes) && (mes > 0) && (mes < 13)) && (!isNaN(ano) && (ano.length == 4) && (ano >= 1900));
+			                if (!resultado)
+			                {
+			                	var div = document.getElementById("textDiv2").className = "alert alert-danger";
+
+			    				textDiv2.textContent = "Data da última entrevista inválida";
+
+			    				var text = "[" + div.textContent + "]";
+			                        
+			                        return false;
+			                }
+			         }
+			         else
+			         {
+			        		var div = document.getElementById("textDiv2").className = "";
+
+			    			textDiv2.textContent = "Data da última entrevista inválida";
+
+			    			var text = "[" + div.textContent + "]";
+			              
+			                return false;
+			         }
+			        var div = document.getElementById("textDiv2").className = "";
+
+	    			textDiv2.textContent = "";
+
+	    			var text = "[" + div.textContent + "]";
+	                
+			return true;
+			
+			}
+		}
+
 		
 		
 

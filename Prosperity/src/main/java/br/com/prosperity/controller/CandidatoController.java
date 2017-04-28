@@ -2,13 +2,15 @@ package br.com.prosperity.controller;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -465,5 +467,24 @@ public class CandidatoController<PaginarCandidato> {
 			aux++;
 		}
 		return provasCandidatoBean;
+	}
+	
+	@RequestMapping(value = "/file/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public void getFile(@PathVariable Integer id, HttpServletResponse response) {
+
+		String caminho = candidatoBusiness.obter(id).getCurriculo();
+
+		try {
+			File file = new File(caminho);
+			response.addHeader("Content-Disposition", "attachment; filename="+caminho);
+			InputStream is = new FileInputStream(file);
+			org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
+			response.flushBuffer();
+
+			is.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
