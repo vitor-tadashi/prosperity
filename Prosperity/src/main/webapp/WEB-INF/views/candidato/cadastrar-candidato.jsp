@@ -66,11 +66,21 @@
 										<div class="row">
 											<input type="hidden" value="${candidato.id}" id="id" name="id">
 											<div class="form-group col-md-3">
-												<label for="cpf" class="control-label">CPF</label> <input
-													type="text" class="form-control cpf parsley-validated"
-													id="cpf" name="cpf" data-required="true"
-													placeholder="Informe seu CPF" value="${candidato.cpf}"
-													onblur="pesquisacpf()">
+												<label for="cpf" class="control-label">CPF</label>
+												<c:if test="${empty candidato.id}">
+													<input
+														type="text" class="form-control cpf parsley-validated"
+														id="cpf" name="cpf" data-required="true"
+														placeholder="Informe seu CPF" value="${candidato.cpf}"
+														onblur="pesquisacpf()" />
+												</c:if>
+												<c:if test="${not empty candidato.id}">
+													<input
+														type="text" class="form-control cpf"
+														id="cpf" name="cpf"
+														placeholder="Informe seu CPF" value="${candidato.cpf}" disabled="disabled" />
+														<input type="hidden" id="cpf" name="cpf" value="${candidato.cpf}" />
+												</c:if>
 											</div>
 											<div class="form-group col-md-4">
 												<label class="control-label" for="nome">Nome</label> <input
