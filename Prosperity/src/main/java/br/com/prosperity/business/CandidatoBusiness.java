@@ -463,7 +463,7 @@ public class CandidatoBusiness {
 	}
 
 	@Transactional
-	public List<CandidatoBean> listarAprovacao(Integer page) {
+	public List<CandidatoBean> listarAprovacao() {
 		List<Integer> listaStatus = obterStatusDisponivelAprovacao();
 		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
 		Integer idStatusCandidatura = 0;
@@ -474,8 +474,8 @@ public class CandidatoBusiness {
 			}
 		}
 
-		List<CandidatoEntity> entities = candidatoDAO.listarAprovacao(listaStatus,
-				StatusCandidatoEnum.CANDIDATOEMANALISE.getValue(), usuarioBean.getId(), idStatusCandidatura, page);
+		List<CandidatoEntity> entities = candidatoDAO.findByNamedQuery("listarAprovacoes", listaStatus,
+				StatusCandidatoEnum.CANDIDATOEMANALISE.getValue(), usuarioBean.getId(), idStatusCandidatura);
 		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(entities);
 
 		return beans;
@@ -513,10 +513,9 @@ public class CandidatoBusiness {
 	public Integer totalPagina(CandidatoBean candidato) {
 
 		float pag = 0;
-		if (candidato.getId() == null) {
 			List<Criterion> criterions = confFiltro(candidato);
 			pag = (float) candidatoDAO.rowCount(criterions) / (float) CandidatoDAO.limitResultsPerPage;
-		} else {
+		 /*else {
 			List<Integer> listaStatus = obterStatusDisponivelAprovacao();
 			usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
 			Integer idStatusCandidatura = 0;
@@ -528,7 +527,7 @@ public class CandidatoBusiness {
 			}
 			pag = (float) candidatoDAO.countAprovacao(listaStatus, StatusCandidatoEnum.CANDIDATOEMANALISE.getValue(),
 					usuarioBean.getId(), idStatusCandidatura) / (float) CandidatoDAO.limitResultsPerPage;
-		}
+		}*/
 		Integer paginas = null;
 		if (pag % 1 == 0) {
 			paginas = (int) pag;
