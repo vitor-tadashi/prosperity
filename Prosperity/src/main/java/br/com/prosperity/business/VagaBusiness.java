@@ -307,7 +307,7 @@ public class VagaBusiness {
 		statusVagaEntity.setUsuario(usuarioDAO.findById(usuarioBean.getId()));
 		statusVagaEntity.setSituacao(true);
 		
-		//buscarUsuariosParaEmail(situacaoVaga);
+		buscarUsuariosParaEmail(situacaoVaga);
 
 		statusVagaDAO.insert(statusVagaEntity);
 	}
@@ -402,8 +402,7 @@ public class VagaBusiness {
 
 	@Transactional
 	public void buscarUsuariosParaEmail(SituacaoVagaBean situacaoVagaBean) {
-		VagaEntity vagaEntity = vagaDAO.findById(situacaoVagaBean.getIdVaga());
-		vaga = vagaConverter.convertEntityToBean(vagaEntity);
+		VagaEntity vaga = vagaDAO.findById(situacaoVagaBean.getIdVaga());
 		List<UsuarioBean> usuarios = usuarioBusiness.findAll();
 		ArrayList<String> recipients = new ArrayList<>();
 		ArrayList<String> nomes = new ArrayList<>();
@@ -427,7 +426,8 @@ public class VagaBusiness {
 				}
 			}
 		} else if (situacaoVagaBean.getStatus().getValue() == StatusVagaEnum.FECHADO.getValue()
-				|| situacaoVagaBean.getStatus().getValue() == StatusVagaEnum.RECUSADO.getValue()) {
+				|| situacaoVagaBean.getStatus().getValue() == StatusVagaEnum.RECUSADO.getValue()
+				|| situacaoVagaBean.getStatus().getValue() == StatusVagaEnum.CANCELADO.getValue()) {
 
 			for (AvaliadorVagaBean a : avaliadores) {
 				recipients.add(a.getUsuario().getEmail());
