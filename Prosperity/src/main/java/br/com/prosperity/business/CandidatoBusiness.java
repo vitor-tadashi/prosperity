@@ -368,7 +368,7 @@ public class CandidatoBusiness {
 				avaliadorCandidatoDAO.update(avaliadorCandidatoEntity.get(0));
 			}
 			statusCandidatoDAO.insert(statusAlteracao(situacaoCandidato));
-			// buscarUsuariosParaEmail(situacaoCandidato);
+			buscarUsuariosParaEmail(situacaoCandidato);
 		}
 	}
 
