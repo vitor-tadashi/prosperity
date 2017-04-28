@@ -21,6 +21,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.prosperity.bean.AvaliacaoBean;
+import br.com.prosperity.bean.AvaliadorCandidatoBean;
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CompetenciaBean;
 import br.com.prosperity.bean.FuncionalidadeBean;
@@ -28,6 +29,7 @@ import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.StatusCandidatoBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.converter.AvaliacaoConverter;
+import br.com.prosperity.converter.AvaliadorCandidatoConverter;
 import br.com.prosperity.converter.CandidatoConverter;
 import br.com.prosperity.converter.CompetenciaConverter;
 import br.com.prosperity.dao.AvaliacaoDAO;
@@ -111,6 +113,9 @@ public class CandidatoBusiness {
 
 	@Autowired
 	private AvaliadorCandidatoDAO avaliadorCandidatoDAO;
+
+	@Autowired
+	private AvaliadorCandidatoConverter avaliadorCandidatoConverter;
 
 	@Autowired
 	private AvaliadorVagaDAO avaliadorVagaDAO;
@@ -320,6 +325,7 @@ public class CandidatoBusiness {
 				|| situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANCELADO.getValue()) {
 			statusCandidatoEntity = statusAlteracao(situacaoCandidato);
 			statusCandidatoDAO.insert(statusCandidatoEntity);
+			buscarUsuariosParaEmail(situacaoCandidato);
 		} else {
 			if (statusDisponivelEntity != null || statusDisponivelEntity.size() > 0) {
 				List<StatusCandidatoEntity> statusCandidato = null;
@@ -330,8 +336,8 @@ public class CandidatoBusiness {
 						if (situacaoCandidato.getStatus().getValue() == sde.getIdStatusDisponivel()) {
 							statusCandidatoEntity = statusAlteracao(situacaoCandidato);
 							statusCandidatoDAO.insert(statusCandidatoEntity);
-							// candidatoBean.setId(situacaoCandidato.getIdCandidato());
-							// buscarUsuariosParaEmail(candidatoBean);
+							candidatoBean.setId(situacaoCandidato.getIdCandidato());
+							buscarUsuariosParaEmail(situacaoCandidato);
 						}
 					}
 				}
@@ -362,8 +368,7 @@ public class CandidatoBusiness {
 				avaliadorCandidatoDAO.update(avaliadorCandidatoEntity.get(0));
 			}
 			statusCandidatoDAO.insert(statusAlteracao(situacaoCandidato));
-			// candidatoBean.setId(situacaoCandidato.getIdCandidato());
-			// buscarUsuariosParaEmail(candidatoBean);
+			// buscarUsuariosParaEmail(situacaoCandidato);
 		}
 	}
 
@@ -564,15 +569,16 @@ public class CandidatoBusiness {
 	}
 
 	@Transactional
-	public void buscarUsuariosParaEmail(CandidatoBean candidato) {
-		candidato = candidatoConverter.convertEntityToBean(candidatoDAO.findById(candidato.getId()));
-		VagaEntity vaga = vagaDAO.findById(candidato.getVagaCandidato().getVaga().getId());
+	public void buscarUsuariosParaEmail(SituacaoCandidatoBean situacaoCandidatoBean) {
+		candidatoBean = candidatoConverter
+				.convertEntityToBean(candidatoDAO.findById(situacaoCandidatoBean.getIdCandidato()));
 		List<UsuarioBean> usuarios = usuarioBusiness.findAll();
 		ArrayList<String> recipients = new ArrayList<>();
 		ArrayList<String> nomes = new ArrayList<>();
-		List<UsuarioBean> avaliadores = candidato.getVagaBean().getAvaliadores();
+		List<AvaliadorCandidatoBean> avaliadores = avaliadorCandidatoConverter
+				.convertEntityToBean(avaliadorCandidatoDAO.findByNamedQuery("obterProposta", candidatoBean.getId()));
 
-		if (candidato.getUltimoStatus().equals("GERARPROPOSTA")) {
+		if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.GERARPROPOSTA.getValue()) {
 			for (UsuarioBean u : usuarios) {
 				switch (u.getPerfil().getNome()) {
 				case "Analista de RH":
@@ -587,16 +593,15 @@ public class CandidatoBusiness {
 					break;
 				}
 			}
-		} else if (candidato.getUltimoStatus().equals("CANDIDATOEMANALISE")) {
-
-			for (UsuarioBean a : avaliadores) {
-				recipients.add(a.getEmail());
-				nomes.add(a.getNome());
+		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOEMANALISE.getValue()) {
+			for (AvaliadorCandidatoBean a : avaliadores) {
+				recipients.add(a.getUsuario().getEmail());
+				nomes.add(a.getUsuario().getNome());
 			}
-		} else if (candidato.getUltimoStatus().equals("CANDIDATOAPROVADO")
-				|| candidato.getUltimoStatus().equals("CANDIDATOCONTRATADO")) {
-
-			recipients.add(candidato.getVagaBean().getUsuarioBean().getEmail());
+		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOAPROVADO.getValue()
+				|| situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CONTRATADO.getValue()) {
+			
+			recipients.add(candidatoBean.getVagaBean().getUsuarioBean().getEmail());
 
 			for (UsuarioBean u : usuarios) {
 				switch (u.getPerfil().getNome()) {
@@ -612,7 +617,7 @@ public class CandidatoBusiness {
 					break;
 				}
 			}
-		} else if (candidato.getUltimoStatus().equals("PROPOSTACANDIDATO")) {
+		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.PROPOSTACANDIDATO.getValue()) {
 			for (UsuarioBean u : usuarios) {
 				switch (u.getPerfil().getNome()) {
 				case "CEO":
@@ -627,7 +632,7 @@ public class CandidatoBusiness {
 					break;
 				}
 			}
-		} else if (candidato.getUltimoStatus().equals("PROPOSTAACEITA")) {
+		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.PROPOSTAACEITA.getValue()) {
 			for (UsuarioBean u : usuarios) {
 				switch (u.getPerfil().getNome()) {
 				case "Analista de RH":
@@ -642,7 +647,7 @@ public class CandidatoBusiness {
 					break;
 				}
 			}
-		} else if (candidato.getUltimoStatus().equals("PROPOSTARECUSADA")) {
+		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.PROPOSTARECUSADA.getValue()) {
 			for (UsuarioBean u : usuarios) {
 				switch (u.getPerfil().getNome()) {
 				case "Analista de RH":
@@ -658,13 +663,10 @@ public class CandidatoBusiness {
 				}
 			}
 		}
-
 		GeradorEmail email = new GeradorEmail();
-
 		int i = 0;
-
 		for (String usuario : recipients) {
-			email.enviarEmail(candidato, usuario, nomes.get(i));
+			email.enviarEmail(candidatoBean, usuario, nomes.get(i));
 			i++;
 		}
 	}
