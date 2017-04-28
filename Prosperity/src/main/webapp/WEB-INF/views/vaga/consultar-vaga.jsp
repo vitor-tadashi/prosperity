@@ -161,7 +161,7 @@
 														</div>
 														<!-- /form-group -->
 													</div>
-
+													
 													<div class="form-group col-md-6 col-xs-6"
 														style="margin-bottom: 0px">
 														<div id="" class="">
@@ -171,38 +171,59 @@
 													</div>
 
 												</div>
-												<div class="form-group row">
-
-													<div class="form-group col-md-6 col-xs-6"
-														style="margin-bottom: -10px">
-
-														<div class="form-group">
-															<label class="control-label">Avaliadores desta vaga</label>
-															<div class="form-group">
-																<div class="input-group">
-																	
-																	<table class="table table-condensed table-bordered">
-										<c:forEach items="${avaliadores  }" var="avaliador">
-											<tr>
-												<td><i class="fa fa-user"></i></td>
-												<td><span>${avaliador.usuario.nome }</span></td>
-											</tr>
-											</c:forEach>
-										
-									</table>
-																	
-																	
-																</div>
-															</div>
-															<!-- /.col -->
-														</div>
-														<!-- /form-group -->
-													</div>
-
-												</div>
 												</form>
 										</div>
 									</section>
+									
+									<div id="quebra">
+										<section class="panel panel-default"
+											style="margin-bottom: 5px;">
+											<div class="panel-heading">Informações de projeto</div>
+											<div class="panel-body">
+											
+												<div class="form-group row" id="divLocalTrabalho">
+													<div class="form-group col-md-12"
+													style="margin-bottom: 5px;">
+													<label class="control-label">Projeto</label> <input
+														readonly class="form-control default-cursor"
+														id="vagaProjeto" value="Mobile">
+												</div>
+												<div class="form-group col-md-6 col-xs-6"
+													style="margin-bottom: 5px;">
+													<label class="control-label">Cliente</label> <input
+														readonly class="form-control" id="vagaCliente"
+														value="Carrefour">
+												</div>
+												<div class="form-group col-md-6 col-xs-6"
+													style="margin-bottom: 5px;">
+													<label class="control-label">Gestor imediato</label> <input
+														readonly class="form-control" id="vagaGestor"
+														value="Vitor Tadashi">
+												</div>
+													<div class="form-group col-md-6 col-xs-6">
+														<label for="nmResponsavel">Nome do responsável</label> <input
+															class="form-control input-sm" disabled
+															id="nmResponsavel" />
+													</div>
+													<div class="form-group col-md-6 col-xs-6">
+														<label for="nmResponsavel">Área do responsável</label> <input
+															class="form-control input-sm" disabled
+															id="nmAreaResponsavel" />
+													</div>
+													<div class="form-group col-md-6 col-xs-6">
+														<label for="nmResponsavel">Email do responsável</label> <input
+															class="form-control input-sm" disabled
+															id="emailResponsavel" />
+													</div>
+													<div class="form-group col-md-6 col-xs-6">
+														<label for="nmResponsavel">Telefone do responsável</label> <input
+															class="form-control input-sm" disabled
+															id="telResponsavel" />
+													</div>
+												</div>
+												
+											</div>
+										</section>
 									<!-- /Section -->
 									<section class="panel panel-default">
 										<div class="panel-heading">Formação acadêmica</div>
@@ -243,10 +264,10 @@
 
 										</div>
 									</section>
+									</div>
 								</div>
 							</div>
 						</div>
-
 					</div>
 					<!-- /panel -->
 					<!-- /tab-content -->
@@ -347,9 +368,9 @@
 										<label for="">Data</label>
 										<div class="input-group">
 											<fmt:formatDate value="${filtroVaga.dataAberturaDe}"
-												pattern="dd/MM/yyyy" var="d1" />
+												pattern="yyyy-MM-dd" var="d1" />
 											<fmt:formatDate value="${filtroVaga.dataAberturaPara}"
-												pattern="dd/MM/yyyy" var="d2" />
+												pattern="yyyy-MM-dd" var="d2" />
 											<input type="date" name="dataAberturaDe" id="data1"
 												class="form-control" value="${d1 }"> <span
 												class="input-group-addon">até</span> <input type="date"
@@ -437,7 +458,7 @@
 															</c:if>
 
 															<c:if
-																test="${vaga.ultimoStatus.status.nome == 'Pendente em Informações'}">
+																test="${vaga.ultimoStatus.status.nome == 'Pendente de informações'}">
 																<li role="separator"
 																	class="editarDivider divider btnEdita pre hide"></li>
 																<li><c:url value="editar/${vaga.id}" var="myURL">
@@ -464,7 +485,7 @@
 																		pattern="dd/MM/yyyy" />
 																</p>
 															</div>
-															<div class="col-md-3 well well-sm btn btn-info"
+ 															<div class="col-md-3 well well-sm btn btn-info"
 																style="height: 56px; margin-right: 5px; width: 200px; margin-left: 5px;">
 																<label>Data de Aprovação</label>
 																<p style="margin-top: -5px;">
@@ -614,10 +635,14 @@
     			$('input#candidatos').val(lista.numeroCandidatos);
     			
     			if(lista.localTrabalho == 'C') {
-    				//$("#cliente").attr('checked', 'checked');
     				$("#lblLocal").text('Cliente')
+    				$('div#divLocalTrabalho').show();
+    				$('#nmResponsavel').val(lista.nmResponsavel);
+    				$('#nmAreaResponsavel').val(lista.nmAreaResponsavel);
+    				$('#emailResponsavel').val(lista.emailResponsavel);
+    				$('#telResponsavel').val(lista.telResponsavel);
     			} else {
-    				//$("#interno").attr('checked', 'checked');
+    				$('div#divLocalTrabalho').hide();
     				$("#lblLocal").text('Interno')
     			}
     			if(lista.idTipoVaga == 'H') { 

@@ -3,8 +3,8 @@
 		if ($("input#contErro").val() > 0) {
 			$('#textDiv').addClass("alert alert-danger");
 		}
-		$('.telefone').mask('(99)99999-9999');
-		$('.data').mask('99/99/9999');
+		$('.telefone').mask('(00)0000-00009');
+		$('.data').mask('00/00/0000');
 		
 		 CKEDITOR.replace('editor');
 		 
@@ -12,17 +12,6 @@
 	            $('#msg-sucesso').fadeOut(1500);
 	        }, 5000);
 	})
-	
-	function validarTel(){
-		var tel = $("#telResponsavel").val().replace(/[^\d]+/g,'');
-		if (tel.length == 10){
-			$("#telResponsavel").val(tel).mask('(99)9999-9999');
-		}else if(tel.length == 11){
-			$("#telResponsavel").val(tel).mask('(99)99999-9999');
-		}else{
-			$("#telResponsavel").val(tel);
-		}
-	}
 	
 	var elements1 = $("#selectedBox1 option").each(function(){
 			    $(this).val();
@@ -212,9 +201,9 @@
 	//Script para alteração da Aba Dados do Projeto e do Radio Button Local de Trabalho
 	
 	if (($("#localTrabalhoVar").val() == "C")) {
-		$("div#dadosAlocacao").hide();
+		$("div#dadosAlocacao").removeClass("hide");
 	}else if(($("#localTrabalhoVar").val() == "I")){
-		$("div#dadosAlocacao").show();
+		$("div#dadosAlocacao").hide();
 	};
 
 	$("#cliente").click(function() {

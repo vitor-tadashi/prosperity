@@ -26,7 +26,6 @@ import br.com.prosperity.bean.AvaliadorVagaBean;
 import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.CargoSenioridadeBean;
 import br.com.prosperity.bean.ProjetoBean;
-import br.com.prosperity.bean.ProvaCandidatoBean;
 import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoVagaBean;
 import br.com.prosperity.bean.StatusBean;
@@ -46,7 +45,7 @@ import br.com.prosperity.enumarator.StatusVagaEnum;
 import br.com.prosperity.exception.BusinessException;
 
 @Controller
-@RequestMapping("vaga")
+@RequestMapping("/vaga")
 public class VagaController {
 
 	@Autowired
@@ -167,7 +166,7 @@ public class VagaController {
 		return "vaga/consultar-vaga";
 	}
 
-	@RequestMapping(value = { "filtro" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/filtro" }, method = RequestMethod.GET)
 	public String filtrar(@RequestParam(value = "page", required = false) Integer page, Model model, VagaBean vaga) {
 		if (page == null) {
 			page = 1;
@@ -177,7 +176,7 @@ public class VagaController {
 		paginacao(page, model, vaga);
 		model.addAttribute("filtroVaga", vaga);
 		model.addAttribute("vagas", vagas);
-
+		
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
 		model.addAttribute("listaCargo", listaCargo);
 
@@ -201,7 +200,7 @@ public class VagaController {
 		return "vaga/consultar-vaga";
 	}
 
-	@RequestMapping(value = { "abrir" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/abrir" }, method = RequestMethod.GET)
 	public @ResponseBody VagaBean abrirVagaAjax(Model model, @ModelAttribute("id") Integer id) {
 		VagaBean vaga = new VagaBean();
 		vaga = vagaBusiness.obterVagaPorId(id);
@@ -215,14 +214,18 @@ public class VagaController {
 		return "vaga/aprovar-vaga";
 	}
 
-	@RequestMapping(value = { "visualizar" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/visualizar" }, method = RequestMethod.GET)
 	public @ResponseBody VagaBean visualizarVagaAjax(Model model, @ModelAttribute("id") Integer id) {
 		VagaBean vaga = new VagaBean();
 		vaga = vagaBusiness.obterVagaPorId(id);
+		/*Integer idCargo = vaga.getCargoBean().getId();
+		Integer idSenioridade = vaga.getSenioridadeBean().getId();
+		List<CargoSenioridadeBean> rangeSalarial = obterCargoSenioridade(model,idCargo,idSenioridade);
+		model.addAttribute("rangeSalarial",rangeSalarial);*/
 		return vaga;
 	}
 
-	@RequestMapping(value = "status", method = RequestMethod.POST)
+	@RequestMapping(value = "/status", method = RequestMethod.POST)
 	public @ResponseBody HttpStatus alterarStatusVaga(Model model, SituacaoVagaBean status){
 		vagaBusiness.alterarStatus(status);
 		vagaBusiness.alterarDataAprovacao(status);		
@@ -264,7 +267,7 @@ public class VagaController {
 		return "vaga/solicitar-vaga";
 	}
 
-	@RequestMapping(value = "idAvaliador", method = RequestMethod.GET)
+	@RequestMapping(value = "/idAvaliador", method = RequestMethod.GET)
 	public String idAvaliador() {
 		return "idAvaliador";
 	}
@@ -279,7 +282,7 @@ public class VagaController {
 		
 		redirectAttributes.addFlashAttribute("sucesso", "Vaga cancelada com sucesso.");
 		
-		return new RedirectView("/aprovar", true);
+		return new RedirectView("/vaga/aprovar", true);
 	}
 
 	@RequestMapping(value = "/salvar", method = RequestMethod.POST)
@@ -295,7 +298,7 @@ public class VagaController {
 
 		vagaBusiness.inserir(vagaBean, avaliadoresB);
 		redirectAttributes.addFlashAttribute("sucesso", "Vaga salva com sucesso.");
-		return "redirect:solicitar";
+		return "redirect:/vaga/solicitar";
 
 	}
 
@@ -325,13 +328,13 @@ public class VagaController {
 		return novosErros;
 	}
 
-	@RequestMapping(value = "obter-cliente", method = RequestMethod.GET)
+	@RequestMapping(value = "/obter-cliente", method = RequestMethod.GET)
 	public @ResponseBody List<ProjetoBean> obterPerfilFuncionalidade(Model model, @ModelAttribute("id") Integer id) {
 		List<ProjetoBean> cliente = projetoBusiness.obterCliente(id);
 		return cliente;
 	}
 	
-	@RequestMapping(value = "obter-range-salarial", method = RequestMethod.GET)
+	@RequestMapping(value = "/obter-range-salarial", method = RequestMethod.GET)
 	public @ResponseBody List<CargoSenioridadeBean> obterCargoSenioridade(Model model, @ModelAttribute("idCargo") Integer idCargo,@ModelAttribute("idSenioridade") Integer idSenioridade) {
 		CargoBean cargo = new CargoBean();
 		SenioridadeBean senioridade = new SenioridadeBean();

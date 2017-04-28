@@ -21,7 +21,7 @@
 			</div><!-- /page-title -->
 		</div>
 		<div class="padding-md">
-			<div class="row">
+			<!-- <div class="row">
 				<div class="col-sm-6 col-md-3">
 					<div class="panel-stat3 bg-danger">
 						<h2 class="m-top-none" id="userCount">362</h2>
@@ -34,7 +34,7 @@
 							<i class="loading-icon fa fa-refresh fa-spin fa-lg"></i>
 						</div>
 					</div>
-				</div><!-- /.col -->
+				</div>/.col
 				<div class="col-sm-6 col-md-3">
 					<div class="panel-stat3 bg-info">
 						<h2 class="m-top-none"><span id="serverloadCount">15</span>%</h2>
@@ -47,7 +47,7 @@
 							<i class="loading-icon fa fa-refresh fa-spin fa-lg"></i>
 						</div>
 					</div>
-				</div><!-- /.col -->
+				</div>/.col
 				<div class="col-sm-6 col-md-3">
 					<div class="panel-stat3 bg-warning">
 						<h2 class="m-top-none" id="orderCount">593</h2>
@@ -60,7 +60,7 @@
 							<i class="loading-icon fa fa-refresh fa-spin fa-lg"></i>
 						</div>
 					</div>
-				</div><!-- /.col -->
+				</div>/.col
 				<div class="col-sm-6 col-md-3">
 					<div class="panel-stat3 bg-success">
 						<h2 class="m-top-none" id="visitorCount">7214</h2>
@@ -73,8 +73,8 @@
 							<i class="loading-icon fa fa-refresh fa-spin fa-lg"></i>
 						</div>
 					</div>
-				</div><!-- /.col -->
-			</div>
+				</div>/.col
+			</div> -->
 		</div>
 	</div>
 	</layout:put>

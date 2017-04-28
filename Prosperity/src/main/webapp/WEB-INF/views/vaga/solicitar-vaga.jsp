@@ -16,7 +16,7 @@
 			<ul class="breadcrumb">
 				<li><i class="fa fa-home"></i><a href="/pagina-inicial">
 						Página inicial</a></li>
-				<li class="active">Vaga</li>
+				<li>Vaga</li>
 				<li class="active">Solicitar</li>
 			</ul>
 		</div>
@@ -36,6 +36,10 @@
 							<c:if test="${ultimoStatus.status.id == 27 }">
 								<input id="status" name="status[0].status.id" type="hidden" value="1">
 								<input name="status[0].status.nome" type="hidden" value="Ativo">	
+							</c:if>
+							<c:if test="${ultimoStatus.status.id != 27 }">
+								<input id="status" name="status[0].status.id" type="hidden" value="${ultimoStatus.status.id}">
+								<input name="status[0].status.nome" type="hidden" value="${ultimoStatus.status.nome}">	
 							</c:if>
 							<input id="contErro" class ="hidden" value="${erro}">
 							<input id="txtSolicitante" type="hidden" name="nomeSolicitante" value="${autenticado.funcionario.nome}">
@@ -68,7 +72,7 @@
 										class="text-success"><i class="fa fa-pencil"></i> Dados do
 											projeto</a></li>
 									<li class="tab-verity"><a id="tabPerfil" href="#third" data-toggle="tab"
-										class="text-success"><i class="glyphicon glyphicon-education"></i>
+										class="text-success"><i class="fa fa-group"></i>
 											Perfil</a></li>
 									<li id="tabAvaliadores2" class="tab-verity"><a id="tabAvaliadores" href="#fourth" data-toggle="tab"
 										class="text-success hide"><i class="fa fa-group"></i>
@@ -196,14 +200,14 @@
 											</div>
 												<label class="control-label col-md-2" for="txtPropostaSalarial" style="padding-top:5px">Mínimo</label>
 											 	<input
-													id="valorMinimo" name="valorMinimo" type="number"
+													id="valorMinimo" name="valorMinimo" type="text"
 													class="input-sm col-md-4" disabled placeholder="R$"
-													value="" style="height:30px">
+													value="" style="height:30px" data-mask="000.000,00" data-mask-reverse="true">
 												<label class="control-label col-md-2" style="padding-left:10px;padding-top:5px" for="txtPropostaSalarial">Máximo</label>
-													<input
-													id="valorMaximo" name="valorMaximo" type="number"
+													<input 
+													id="valorMaximo" name="valorMaximo" type="text"
 													class="input-sm col-md-4" disabled placeholder="R$" 
-													value="" style="height:30px">
+													value="" style="height:30px" data-mask="000.000,00" data-mask-reverse="true">
 											</div>
 											<!-- /form-group -->
 											<div class="form-group col-md-6" style="padding-top:0px">
@@ -371,7 +375,7 @@
 												
 												 <c:forEach var="avaliador" items="${avaliadorVagaBean}" varStatus="i">
 													<option value="${avaliador.usuario.id}"
-													<%-- ${vaga.id == avaliadorVagaBean.vaga.id && usuario.id == avaliadorVagaBean.usuario.id ? 'selected="selected"' : ''} --%> >${avaliador.usuario.nome}</option>
+													<%-- ${vaga.id == avaliadorVagaBean.vaga.id && usuario.id == avaliadorVagaBean.usuario.id ? 'selected="selected"' : ''} --%> >${avaliador.usuario.funcionario.nome}</option>
 												</c:forEach> 
 												
 											</select>		

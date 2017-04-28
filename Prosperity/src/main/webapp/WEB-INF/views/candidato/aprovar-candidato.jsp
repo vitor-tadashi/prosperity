@@ -249,11 +249,19 @@
 										</c:forEach>
 									</form>
 								</tbody>
+								<c:if test="${empty candidatos}">
+								<tfoot>
+									<tr>
+										<td colspan="6">Nenhum registro</td>
+									</tr>
+								</tfoot>
+								</c:if>
 							</table>
 						</div>
 						<!-- /.row -->
 					</div>
 					<!-- /.panel-body -->
+					
 				</div>
 				<!-- /col-md-12 -->
 			</div>
@@ -408,7 +416,6 @@
         		}).done(function() {
         			 location.reload();
         		}).fail(function(jqXHR, textStatus) {
-        			alert('fail');
         			 location.reload();
         		});
             }
@@ -430,7 +437,7 @@
             	"</c:forEach>" +
             	"</select>"+
             	"<input type='text' id='descricao"+ cont +"'/>"+
-            	"<input type='button' id='btnRemover' onclick='remover("+ cont +")'value='Remover campo' class='btn btn-sm btn-danger'>"+
+            	"<input type='button' id='btnRemover' onclick='remover("+ cont +")'value='-' class='btn btn-sm btn-danger'>"+
             	"</div>" ;
             	cont++;
         /*adiciona na div*/
@@ -460,40 +467,6 @@
             });
          
 /* paginação */
-	$(function	()	{
-		$('#tabelaCandidato').dataTable( {
-			"bJQueryUI": true,
-			"sPaginationType": "simple_numbers",
-			"bFilter": false,
-			"bInfo": false,
-			"bLengthChange": false,
-			"bSort": false,
-
-			"oLanguage": {
-				"sEmptyTable": "Nenhum registro encontrado",
-				"sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-				"sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
-				"sInfoFiltered": "(Filtrados de _MAX_ registros)",
-				"sInfoPostFix": "",
-				"sInfoThousands": ".",
-				"sLengthMenu": "_MENU_ resultados por página",
-				"sLoadingRecords": "Carregando...",
-				"sProcessing": "Processando...",
-				"sZeroRecords": "Nenhum registro encontrado",
-				"sSearch": "Pesquisar",
-				"oPaginate": {
-					"sNext": "Próximo",
-					"sPrevious": "Anterior",
-					"sFirst": "Primeiro",
-					"sLast": "Último"
-				},
-				"oAria": {
-					"sSortAscending": ": Ordenar colunas de forma ascendente",
-					"sSortDescending": ": Ordenar colunas de forma descendente"
-				}
-			}
-		});
-	});
 	</script>
 	</layout:put>
 </layout:extends>

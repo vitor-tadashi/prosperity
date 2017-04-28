@@ -16,6 +16,9 @@
 			tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
+				
+					<div id="print_helper"></div>
+				<div id="print_helper"></div>
 					<div id="printThis">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal"
@@ -31,7 +34,7 @@
 							<div class="tab-content">
 								<div id="home" class="tab-pane fade in active">
 									<section class="panel panel-default" style="margin-bottom: 0px">
-										<div class="panel-heading">Informações básicas</div>
+										<div class="panel-heading"><strong>Informações básicas</strong></div>
 										<div class="panel-body">
 											<form>
 												<div class="form-group row">
@@ -172,54 +175,78 @@
 									<div id="quebra">
 										<section class="panel panel-default"
 											style="margin-bottom: 5px;">
-											<div class="panel-heading">Informações de projeto</div>
+											<div class="panel-heading"><strong>Informações de projeto</strong></div>
 											<div class="panel-body">
-												<!-- /form-group -->
-												<div class="form-group col-md-13 "
+												<div class="row">
+													<!-- /form-group -->
+													<div class="form-group col-md-12"
+														style="margin-bottom: 5px;">
+														<label class="control-label">Projeto</label> <input
+															readonly class="form-control default-cursor"
+															id="vagaProjeto" value="Mobile">
+													</div>
+													<div class="form-group col-md-6 col-xs-6"
+														style="margin-bottom: 5px;">
+														<label class="control-label">Cliente</label> <input
+															readonly class="form-control" id="vagaCliente"
+															value="Carrefour">
+													</div>
+													<div class="form-group col-md-6 col-xs-6"
+														style="margin-bottom: 5px;">
+														<label class="control-label">Gestor imediato</label> <input
+															readonly class="form-control" id="vagaGestor"
+															value="Vitor Tadashi">
+													</div>
+													<div id="interno">
+													<div class="form-group col-md-6 col-xs-6"
 													style="margin-bottom: 5px;">
-													<label class="control-label">Projeto</label> <input
-														readonly class="form-control default-cursor"
-														id="vagaProjeto" value="Mobile">
+												    <label class="control-label">Nome do responsável</label> 
+												    <input readonly class="form-control" class="form-control input-sm" id="nmResponsavel"
+													value=""> 
+													</div>
+													
+													<div class="form-group col-md-6 col-xs-6" style="margin-bottom: 5px;">
+													<label class="control-label">Área do responsável</label> 
+													<input readonly class="form-control" id="nmAreaResponsavel" 
+													value=""> 
+													</div>
+													
+													<div class="form-group col-md-6 col-xs-6" style="margin-bottom: 5px;">
+													<label class="control-label">E-mail do responsável</label> 
+													<input readonly class="form-control" id="emailResponsavel" 
+													value=""> 
+													</div>
+													
+													<div class="form-group col-md-6 col-xs-6" style="margin-bottom: 5px;">
+													<label class="control-label">Telefone</label> 
+													<input readonly class="form-control" id="telResponsavel" 
+													value=""> 
+													</div>
+													</div>
 												</div>
-												<div class="form-group col-md-6 col-xs-6"
-													style="margin-bottom: 5px;">
-													<label class="control-label">Cliente</label> <input
-														readonly class="form-control" id="vagaCiente"
-														value="Carrefour">
-												</div>
-												<div class="form-group col-md-6 col-xs-6"
-													style="margin-bottom: 5px;">
-													<label class="control-label">Gestor imediato</label> <input
-														readonly class="form-control" id="vagaGestor"
-														value="Vitor Tadashi">
-												</div>
+												
 											</div>
 										</section>
 										<!-- /panel -->
 										<section class="panel panel-default"
 											style="margin-bottom: 0px;">
 											<div style="page-break-before: always;"></div>
-											<div class="panel-heading">Formação acadêmica</div>
-											<div class="panel-body relative"
-												style="padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
-												<div class="form-group">
-													<textarea class="form-control" rows="3" name="vagaFormacao"
-														id=vagaFormacao disabled>
-										</textarea>
-												</div>
+											<div class="panel-heading"><strong>Formação acadêmica</strong></div>
+											<div class="panel-body relative">
+													<p>
+														<span id="vagaFormacao"></span>
+													</p>
 												<!-- /form-group -->
 											</div>
 										</section>
 										<!-- /panel -->
 										<section class="panel panel-default"
 											style="margin-bottom: 0px;">
-											<div class="panel-heading">Perfil comportamental</div>
-											<div class="panel-body relative"
-												style="padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
-												<div class="form-group">
-													<textarea class="form-control" rows="3" name="vagaPerfil"
-														id=vagaPerfil disabled></textarea>
-												</div>
+											<div class="panel-heading"><strong>Perfil comportamental</strong></div>
+											<div class="panel-body relative">
+													<p>
+														<span id="vagaPerfil"></span>
+													</p>
 												<!-- /form-group -->
 											</div>
 										</section>
@@ -227,14 +254,11 @@
 
 										<section class="panel panel-default "
 											style="margin-bottom: 0px;">
-											<div class="panel-heading">Perfil técnico</div>
-											<div class="panel-body relative"
-												style="padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
-												<div class="form-group">
-													<textarea class="form-control" rows="3"
-														name="vagaPerfilTecnico" id=vagaPerfilTecnico disabled></textarea>
-												</div>
-												<!-- /form-group -->
+											<div class="panel-heading"><strong>Perfil técnico</strong></div>
+											<div class="panel-body relative">
+												<p>
+													<span id="vagaPerfilTecnico"></span>
+												</p>
 											</div>
 										</section>
 									</div>
@@ -317,7 +341,8 @@
 						</button>
 						<h4 class="modal-title" id="modalLabel">Cancelar vaga</h4>
 					</div>
-					<div class="modal-body">Deseja realmente cancelar esta vaga?</div>
+					<div class="modal-body">Deseja realmente cancelar esta vaga? 
+					Voce irá cancelar os candidatos.</div>
 					<input class="cancela-id" type="hidden"> <input
 						class="cancela-status" type="hidden">
 					<div class="modal-footer">
@@ -331,8 +356,66 @@
 			</div>
 		</div>
 		<!-- /.modal cancelar -->
+		
+		<!-- modal cancelar pendente -->
+		<div class="modal fade" id="pendente-modal"
+			data-target="#pendente-modal" tabindex="-1" role="dialog"
+			aria-labelledby="modalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Fechar">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="modalLabel">Cancelar vaga</h4>
+					</div>
+					<div class="modal-body">Deseja realmente cancelar esta vaga? 
+					Voce irá cancelar os candidatos.</div>
+					<input class="cancela-id" type="hidden"> <input
+						class="cancela-status" type="hidden">
+					<div class="modal-footer">
+						<a id="excluir" href="${urlCancelar}">
+							<button id="excluiVaga" onclick="status()" type="button"
+								class="btn btn-success" data-dismiss="modal">Sim</button>
 
-		<!-- modal cancelar avaliador -->
+						</a>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /.modal cancelar pendente -->
+
+		<!-- modal fechar -->
+		<div class="modal fade" id="fechar-modal" data-target="#fechar-modal"
+			tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Fechar">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="modalLabel">Fechar vaga</h4>
+					</div>
+					<div class="modal-body">Deseja realmente fechar esta vaga? 
+					Voce irá cancelar os candidatos.</div>
+					<input class="cancela-id" type="hidden"> <input
+						class="cancela-status" type="hidden">
+					<div class="modal-footer">
+						<a href="#">
+							<button id="excluiVaga" onclick="status()" type="button"
+								class="btn btn-success" data-dismiss="modal">Sim</button>
+						</a>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /.modal fechar -->
+		
+		<%-- <!-- modal cancelar avaliador -->
 		<div class="modal fade" id="avaliador-modal"
 			data-target="#avaliador-modal" tabindex="-1" role="dialog"
 			aria-labelledby="modalLabel">
@@ -357,42 +440,15 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> --%>
 		<!-- /.modal cancelar avaliador -->
-
-		<!-- modal fechar -->
-		<div class="modal fade" id="fechar-modal" data-target="#fechar-modal"
-			tabindex="-1" role="dialog" aria-labelledby="modalLabel">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Fechar">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<h4 class="modal-title" id="modalLabel">Fechar vaga</h4>
-					</div>
-					<div class="modal-body">Deseja realmente fechar esta vaga?</div>
-					<input class="cancela-id" type="hidden"> <input
-						class="cancela-status" type="hidden">
-					<div class="modal-footer">
-						<a href="#">
-							<button id="excluiVaga" onclick="status()" type="button"
-								class="btn btn-success" data-dismiss="modal">Sim</button>
-						</a>
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- /.modal fechar -->
 
 		<!-- CORPO DA PÁGINA -->
 		<div id="main-container">
 			<div id="breadcrumb">
 				<ul class="breadcrumb">
-					<li><i class="fa fa-home"></i><a href="dashboard.html">
-							Início</a></li>
+					<li><i class="fa fa-home"></i><a href="/pagina-inicial">
+							Página inicial</a></li>
 					<li class="active">Aprovação de vaga</li>
 				</ul>
 			</div>
@@ -457,8 +513,10 @@
 													<li><a href="#visualizar-modal" data-toggle="modal"
 														onclick="info(${vaga.id})"> <i class="fa fa-eye fa-lg">&nbsp;</i>Visualizar
 													</a></li>
-
-
+													
+													<c:if test="${autenticado.perfil.id == 1 || autenticado.perfil.id == 3 || autenticado.perfil.id == 4 || autenticado.perfil.id == 5 || autenticado.perfil.id == 6 || 
+													autenticado.perfil.id == 7 || autenticado.perfil.id == 9 || autenticado.perfil.id == 63 || autenticado.perfil.id == 64 }">
+													
 													<c:if test="${vaga.ultimoStatus.status.nome == 'Pendente'}">
 														<li id="${vaga.ultimoStatus.status.nome}" role="separator"
 															class="Aprovar divider"></li>
@@ -468,7 +526,10 @@
 															data-toggle="modal"><i
 																class="Aprovar fa fa-check fa-lg"></i> Aprovar</a></li>
 													</c:if>
+													</c:if>
 
+													<c:if test="${autenticado.perfil.id == 1 || autenticado.perfil.id == 3 || autenticado.perfil.id == 4 || autenticado.perfil.id == 5 || autenticado.perfil.id == 6 || 
+													autenticado.perfil.id == 7 || autenticado.perfil.id == 9 || autenticado.perfil.id == 63 || autenticado.perfil.id == 64 }">
 													<c:if test="${vaga.ultimoStatus.status.nome == 'Pendente'}">
 														<li id="${vaga.ultimoStatus.status.nome}" role="separator"
 															class="Reprovar divider"></li>
@@ -477,6 +538,19 @@
 															onclick="alterarStatus(${vaga.id}, 'RECUSADO')"
 															data-toggle="modal"><i
 																class="Reprovar fa  fa-times fa-lg"></i> Reprovar</a></li>
+													</c:if>
+													</c:if>
+													
+													<c:if test="${autenticado.perfil.id == 2}"> 
+													<c:if test="${vaga.ultimoStatus.status.nome == 'Pendente'}">
+														<li id="${vaga.ultimoStatus.status.nome}" role="separator"
+															class="cancelarDivider divider"></li>
+														<li id="${vaga.ultimoStatus.status.nome}" class="Reprovar"><a
+															href="#pendente-modal"
+															onclick="alterarStatus(${vaga.id}, 'RECUSADO')"
+															data-toggle="modal"><i
+																class="Cancelar fa fa-ban fa-lg"></i> Cancelar</a></li>
+													</c:if>
 													</c:if>
 
 
@@ -503,8 +577,8 @@
 																class="Fechar fa fa-trash-o fa-lg"></i> Fechar</a></li>
 													</c:if>
 
-													<c:if
-														test="${vaga.ultimoStatus.status.nome == 'Aguardando avaliadores'}">
+													<%-- <c:if
+														test="${vaga.ultimoStatus.status.nome == 'Pendente de informações'}">
 														<c:url scope="session" value="cancelar-vaga/${vaga.id}"
 															var="urlCancelar">
 														</c:url>
@@ -515,7 +589,7 @@
 															onclick="alterarStatus(${vaga.id}, ${candidato.id} 'CANCELADO')"
 															data-toggle="modal" class="avaliador"><i
 																class="Cancelar fa fa-ban fa-lg"></i> Cancelar</a></li>
-													</c:if>
+													</c:if> --%>
 												</ul>
 											</div> <!-- Fim Botão -->
 										</td>
@@ -557,13 +631,20 @@
     		success: function(lista){
     			console.log(lista);
     			$('#titulo').html(lista.nomeVaga);
-    			$('input#vagaGestor').val(lista.nomeSolicitante);
+    			
     			if(lista.localTrabalho == 'C') {
     				//$("#cliente").attr('checked', 'checked');
     				$("#lblLocal").text('Cliente')
+    				$('div#divLocalTrabalho').show();
+    				$('#nmResponsavel').val(lista.nmResponsavel);
+    				$('#nmAreaResponsavel').val(lista.nmAreaResponsavel);
+    				$('#emailResponsavel').val(lista.emailResponsavel);
+    				$('#telResponsavel').val(lista.telResponsavel);
+    				$("#interno").show();
     			} else {
     				//$("#interno").attr('checked', 'checked');
     				$("#lblLocal").text('Interno')
+    				$("#interno").hide();
     			}
     			if(lista.idTipoVaga == 'H') { 
     				$("#tpVaga").text('Hunting')
@@ -581,7 +662,8 @@
        				$("#substituidoId").show();
     				$("#vagaSubstituto").show();
     			}
-    			$('input#vagaSalario').val(lista.valorPretensao);
+    			//var rangeSalarial = ${rangeSalarial.valorMaxSalario};
+    			//$('input#vagaSalario').val(rangeSalarial);
     			$('input#cargo').val(lista.cargoBean.nome);
     			$('input#vagaSenioridade').val(lista.senioridadeBean.nome);
     			$('label#horaEntrada').text(lista.horarioEntrada);
@@ -590,11 +672,31 @@
     			$('input#vagaQuadro').val(lista.aumentaQuadro);
     			$('label#vagaSubstituto').text(lista.nomeSubstituido);
     			$('input#dataInicio').val(lista.dataInicio);
-    			$('input#vagaCiente').val(lista.projeto.cliente.nome);
+    			$('input#vagaCliente').val(lista.projeto.cliente.nome);
     			$('input#vagaProjeto').val(lista.projeto.nome);
-    			$('#vagaPerfil').val(lista.descricaoPerfilComportamental);
-    			$('#vagaFormacao').val(lista.descricaoFormacaoAcademica);
-    			$('#vagaPerfilTecnico').val(lista.descricaoPerfilTecnico);
+    			$('#vagaPerfil').text(lista.descricaoPerfilComportamental);
+    			$('#vagaFormacao').text(lista.descricaoFormacaoAcademica);
+    			$('#vagaPerfilTecnico').text(lista.descricaoPerfilTecnico);
+    			$('#vagaGestor').val(lista.usuarioBean.funcionario.nome);
+    			
+    				var idSenioridade = lista.senioridadeBean.id;
+    				var idCargo = lista.cargoBean.id;
+    				if (idSenioridade>0 && idCargo>0){
+    					$.ajax({
+    						url: "http://localhost:8080/vaga/obter-range-salarial",
+    						type: "GET",
+    						dataType: "JSON",
+    						data: {idCargo : idCargo,
+    							idSenioridade : idSenioridade},
+    						success: function(lista){
+    							$('input#vagaSalario').val("R$ " + lista[0].valorMinSalario + " até " + "R$ " + lista[0].valorMaxSalario);
+    							//$("#valorMaximo").val(lista[0].valorMaxSalario);
+    						}
+    					});
+    				} else{
+    					$('input#vagaSalario').val("R$ 00,00 - R$ 00,00");
+    				}
+    			
     			$('#vaga-modal').modal('show');
     		}
     	})
@@ -606,6 +708,7 @@
 	};
 
 	function printElement(elem) {
+	
 	    var domClone = elem.cloneNode(true);
 
 	    var $printSection = document.getElementById("printSection");
@@ -620,7 +723,7 @@
 	    $printSection.appendChild(domClone);
 	    window.print();
 	}
-	
+		
 	// função para a alteração de status no botão ações
 	
 	function status(){
@@ -634,7 +737,8 @@
     			msg = 'Vaga alterada com sucesso!';
     			$('#divAlert').html(msg).addClass('alert alert-success').show();
     			escondeMensagem();
-    			location.reload();
+    			setTimeout('location.reload();', 5000);
+    			//location.reload();
         	}).fail(function(jqXHR, textStatus) {
     			console.log();
     			console.log(jqXHR);
@@ -647,7 +751,7 @@
 		window.setTimeout(function () {
 			$("#divAlert").hide();
 			$(".mensagem").hide();
-		}, 20000);
+		}, 5000);
 	}
     	/* 	data: { 'idVaga' : $('.aprovar-id').val(), 'status' : $('.aprovar-status').val()},
     		success: function(){
@@ -717,6 +821,7 @@
     		}
     	});
 	});
+	
 	</script>
 	</layout:put>
 </layout:extends>

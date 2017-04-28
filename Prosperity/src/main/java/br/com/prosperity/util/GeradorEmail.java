@@ -12,6 +12,8 @@ import javax.mail.internet.MimeMessage;
 
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.VagaBean;
+import br.com.prosperity.entity.StatusVagaEntity;
+import br.com.prosperity.entity.VagaEntity;
 
 //clase que retorna uma autenticacao para ser enviada e verificada pelo servidor smtp
 public class GeradorEmail {
@@ -141,7 +143,7 @@ public class GeradorEmail {
 
 		Mensagem mensagem = new Mensagem();
 		
-		String mensagemtexto = mensagem.gerador("o candidato ", candidato.getNome(), candidato.getUltimoStatus().toString(), nome);
+		String mensagemtexto = mensagem.gerador("o candidato ", candidato.getNome(), candidato.getUltimoStatus().getStatus().getNome().toString(), nome);
 		
 		
 		new Thread() {
@@ -158,11 +160,17 @@ public class GeradorEmail {
 	}
 
 	// Para alterações em status de vagas:
-	public void enviarEmail(VagaBean vaga, String para, String nome) {
+	public void enviarEmail(VagaEntity vaga, String para, String nome) {
 
 		Mensagem mensagem = new Mensagem();
 		
-		String mensagemtexto = mensagem.gerador("a vaga ", vaga.getNomeVaga(), vaga.getUltimoStatus().toString(), nome);
+		StatusVagaEntity status = new StatusVagaEntity();
+		
+		for(StatusVagaEntity statusVaga: vaga.getStatusVagaEntity()){
+			status = statusVaga;
+		}
+		
+		String mensagemtexto = mensagem.gerador("a vaga ", vaga.getNomeVaga(), status.getStatus().getNome(), nome);
 		
 		new Thread() {
 			public void run() {
