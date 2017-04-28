@@ -245,7 +245,7 @@
 										<div class="form-group col-md-3">
 											<label for="canalInformacao">Como ficou sabendo
 												desta vaga?</label> <select class="form-control"
-												name="vagaCandidato.CanalInformacao.id"
+												name="vagaCandidato.canalInformacao.id"
 												id="canalInformacao">
 												<option value="0">Selecione</option>
 												<c:forEach var="canalInformacao" items="${listaCanal}">
