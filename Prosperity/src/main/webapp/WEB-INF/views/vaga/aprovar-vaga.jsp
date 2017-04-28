@@ -262,7 +262,7 @@
 												style="padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
 												<div class="form-group">
 													<textarea class="form-control" rows="5" 
-														name="vagaPerfilTecnico" id=vagaPerfilTecnico disabled></textarea>
+														name="vagaPerfilTecnico" id=vagaPerfilTecnico disabled></p>
 												</div>
 												<!-- /form-group -->
 											</div>
@@ -743,6 +743,7 @@
     			msg = 'Vaga alterada com sucesso!';
     			$('#divAlert').html(msg).addClass('alert alert-success').show();
     			escondeMensagem();
+    			setTimeout('location.reload();', 5000);
     			//location.reload();
         	}).fail(function(jqXHR, textStatus) {
     			console.log();
