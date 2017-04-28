@@ -475,11 +475,9 @@ public class CandidatoController<PaginarCandidato> {
 
 		String caminho = candidatoBusiness.obter(id).getCurriculo();
 
-		File file = new File(caminho);
-		
-		response.addHeader("Content-Disposition", "attachment; filename="+caminho);
-		
 		try {
+			File file = new File(caminho);
+			response.addHeader("Content-Disposition", "attachment; filename="+caminho);
 			InputStream is = new FileInputStream(file);
 			org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
 			response.flushBuffer();

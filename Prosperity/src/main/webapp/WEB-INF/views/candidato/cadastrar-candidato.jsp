@@ -297,7 +297,7 @@
 										<a href="/candidato/file/${candidato.id}" target="_blank">Download</a>
 									</div>
 
-									<div class="cold-md-6">
+									<div class="col-md-6">
 										<input type="hidden" value="${candidato.id}" name="id">
 										<input type="hidden" value="${erro}" id="contErro">
 										<button class="btn btn-success">Salvar</button>
