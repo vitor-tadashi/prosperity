@@ -417,7 +417,6 @@
         		}).done(function() {
         			 location.reload();
         		}).fail(function(jqXHR, textStatus) {
-        			alert('fail');
         			 location.reload();
         		});
             }
@@ -447,6 +446,7 @@
             	"&nbsp;"+
             	"<input class='form-control col-md-3' style='width: 190px; height: 30px;' type='text' id='descricao"+ cont +"'/>"+
             	"<input type='button' id='btnRemover' onclick='remover("+ cont +")'value='Remover campo' class='btn btn-sm btn-danger'>"+
+
             	"</div>" ;
             	cont++;
         /*adiciona na div*/

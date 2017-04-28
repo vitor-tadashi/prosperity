@@ -467,12 +467,12 @@
 								<div class="col-md-1">
 									<label for="salário">Salário</label> <input
 										type="text" class="form-control money2 parsley-validated"
-												id="valorPretensao" name="pretensaoDe" class="form-control money2"
+												id="pretensaoDe" name="pretensaoDe" 
 										placeholder="De" style="width: 80px" value="${filtroC.pretensaoDe }">
 								</div>
 								<div class="col-md-1">
 									<label for="exampleInputEmail1">&nbsp;</label> <input
-										type="text" name="pretensaoPara" class="form-control money2"
+										type="text" name="pretensaoPara" class="form-control money2" id="pretensaoPara"
 										placeholder="Até" style="width: 80px" value="${filtroC.pretensaoPara }">
 								</div>
 								<div class="col-md-3">
@@ -794,6 +794,7 @@
 				}
 			});
 		});
+		
 	</script>
 	<script type="text/javascript">
 		//Escrevendo o código-fonte HTML e ocultando os campos criados:
@@ -803,9 +804,6 @@
 							+ iLoop + "\")'></span><br>");
 
 		}
-	</script>
-		<script>/* paginação */
-
 	</script>
 	</layout:put>
 </layout:extends>
