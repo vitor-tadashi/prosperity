@@ -296,10 +296,7 @@
 									<div class="download-download col-md-6">
 										<a href="/candidato/file/${candidato.id}" target="_blank">Download</a>
 									</div>
-
-<<<<<<< HEAD
 									<div class="col-md-6">
-=======
 											</div>
 										</div>
 										<div class="form-group col-md-3">

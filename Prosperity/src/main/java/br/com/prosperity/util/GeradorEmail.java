@@ -57,7 +57,7 @@ public class GeradorEmail {
 		// envio do email
 
 		// Objeto que contém a mensagem
-		Message msg = new MimeMessage(session);
+		MimeMessage msg = new MimeMessage(session);
 
 		try {
 
@@ -71,7 +71,7 @@ public class GeradorEmail {
 			// Setando a origem do email
 			msg.setFrom(new InternetAddress(from));
 			// Setando o assuntos
-			msg.setSubject(subject);
+			msg.setSubject(subject, "utf-8");
 			// Setando o conteúdo/corpo do email
 			msg.setContent(message, "text/plain");
 
