@@ -66,8 +66,10 @@ public class CandidatoBean extends FormatUtil {
 	private VagaBean ultimaVaga;
 	@Valid
 	private VagaCandidatoBean vagaCandidato;
-	private Double pretensaoDe;
-	private Double pretensaoPara;
+	@NumberFormat(pattern = "#,##0.00")
+	private BigDecimal pretensaoDe;
+	@NumberFormat(pattern = "#,##0.00")
+	private BigDecimal pretensaoPara;
 	private String curriculoTexto;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataAberturaDe;
@@ -119,20 +121,20 @@ public class CandidatoBean extends FormatUtil {
 	}
 
 	@XmlTransient
-	public Double getPretensaoDe() {
+	public BigDecimal getPretensaoDe() {
 		return pretensaoDe;
 	}
 
-	public void setPretensaoDe(Double pretensaoDe) {
+	public void setPretensaoDe(BigDecimal pretensaoDe) {
 		this.pretensaoDe = pretensaoDe;
 	}
 
 	@XmlTransient
-	public Double getPretensaoPara() {
+	public BigDecimal getPretensaoPara() {
 		return pretensaoPara;
 	}
 
-	public void setPretensaoPara(Double pretensaoPara) {
+	public void setPretensaoPara(BigDecimal pretensaoPara) {
 		this.pretensaoPara = pretensaoPara;
 	}
 

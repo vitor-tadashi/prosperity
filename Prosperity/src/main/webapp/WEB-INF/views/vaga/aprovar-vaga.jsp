@@ -743,6 +743,7 @@
     			msg = 'Vaga alterada com sucesso!';
     			$('#divAlert').html(msg).addClass('alert alert-success').show();
     			escondeMensagem();
+    			setTimeout('location.reload();', 5000);
     			//location.reload();
         	}).fail(function(jqXHR, textStatus) {
     			console.log();
