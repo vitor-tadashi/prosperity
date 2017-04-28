@@ -29,15 +29,28 @@ $(document).ready(function () {
 				document.getElementById('rua').value = (conteudo.logradouro);
 				document.getElementById('cidade').value = (conteudo.localidade);
 				document.getElementById('uf').value = (conteudo.uf);
+				
+				var div = document.getElementById("textDiv").className =  "hide";
 			} //end if.
 			else {
 				//CEP não Encontrado.
-				limpa_formulário_cep();
+		
+
 				var div = document.getElementById("textDiv").className = "alert alert-danger";
 
-				textDiv.textContent = "";
+				textDiv.textContent = "CEP inválido";
 
-				var textDiv = "[" + div.textContent + "]";
+				var text = "[" + div.textContent + "]";
+				
+				limpa_formulário_cep();
+				var div = document.getElementById("textDiv");
+
+				textDiv.textContent = "CEP inválido";
+
+				var text = "[" + div.textContent + "]";
+				
+				
+
 			}
 		}
 
@@ -62,27 +75,32 @@ $(document).ready(function () {
 
 					//Insere script no documento e carrega o conteúdo.
 					document.body.appendChild(script);
+					
 
 				} //end if.
 				else {
 					//cep é inválido.
-					limpa_formulário_cep();
 					var div = document.getElementById("textDiv").className = "alert alert-danger";
 
-    				textDiv.textContent = "";
+					textDiv.textContent = "CEP inválido";
 
-    				var text = "[" + div.textContent + "]";
+					var text = "[" + div.textContent + "]";
+					limpa_formulário_cep();
+    				
+    				
 				}
 
 
-				textDiv.textContent = "CEP inválido";
-
-				var text = "[" + div.textContent + "]";
+				
 			} //end if.
 			else {
 				//cep sem valor, limpa formulário.
+				var div = document.getElementById("textDiv");
+
+				textDiv.textContent = "";
+
+				var text = "[" + div.textContent + "]";
 				limpa_formulário_cep();
-				
 			}
 		};
 
@@ -104,7 +122,7 @@ $(document).ready(function () {
 			if(strCPF == ''){
 				var div = document.getElementById("textDiv1").className = "alert alert-danger";
 
-				textDiv1.textContent = "O campo CPF deve ser preenchido.";
+				textDiv1.textContent = "O campo CPF deve ser preenchido";
 				var text = "[" + div.textContent + "]";
 				
 				return false;
@@ -113,7 +131,7 @@ $(document).ready(function () {
 			if (strCPF == "00000000000") {
 				var div = document.getElementById("textDiv1").className = "alert alert-danger";
 
-				textDiv1.textContent = "CPF inválido.";
+				textDiv1.textContent = "CPF inválidasso";
 
 				var text = "[" + div.textContent + "]";
 				return false;
@@ -132,7 +150,7 @@ $(document).ready(function () {
 			if (Resto != parseInt(strCPF.substring(9, 10))) {
 				var div = document.getElementById("textDiv1").className = "alert alert-danger";
 
-				textDiv1.textContent = "CPF inválido.";
+				textDiv1.textContent = "CPF inválido";
 
 				var text = "[" + div.textContent + "]";
 				return false
@@ -152,7 +170,7 @@ $(document).ready(function () {
 			if (Resto != parseInt(strCPF.substring(10, 11))) {
 				var div = document.getElementById("textDiv1").className = "alert alert-danger";
 
-				textDiv1.textContent = "CPF inválido.";
+				textDiv1.textContent = "CPF inválido";
 
 				var text = "[" + div.textContent + "]";
 				return false;

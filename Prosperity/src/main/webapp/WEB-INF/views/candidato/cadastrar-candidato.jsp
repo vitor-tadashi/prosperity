@@ -246,7 +246,7 @@
 										</div>
 										<div class="form-group col-md-2 col-sm-2">
 											<label for="dataUltimoContato" class="control-label">Data
-												de ultimo contato</label>
+												de último contato</label>
 											<fmt:formatDate value="${candidato.dataUltimoContato}"
 												pattern="dd/MM/yyyy" var="dataUltimoContato" />
 											<input type="text" class="form-control date"
@@ -256,7 +256,7 @@
 										</div>
 										<div class="form-group col-md-2 col-sm-4">
 											<label for="entrevista" class="control-label">Data
-												de Entrevista</label>
+												de entrevista</label>
 											<fmt:formatDate value="${candidato.entrevista}"
 												pattern="dd/MM/yyyy" var="entrevista" />
 											<input type="text" class="form-control date"

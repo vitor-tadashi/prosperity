@@ -38,6 +38,7 @@ import br.com.prosperity.bean.ProvaCandidatoBean;
 import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
+import br.com.prosperity.bean.StatusBean;
 import br.com.prosperity.bean.TipoCursoBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
@@ -49,6 +50,7 @@ import br.com.prosperity.business.ProvaBusiness;
 import br.com.prosperity.business.ProvaCandidatoBusiness;
 import br.com.prosperity.business.SenioridadeBusiness;
 import br.com.prosperity.business.SituacaoAtualBusiness;
+import br.com.prosperity.business.StatusBusiness;
 import br.com.prosperity.business.TipoCursoBusiness;
 import br.com.prosperity.business.UsuarioBusiness;
 import br.com.prosperity.business.VagaBusiness;
@@ -101,6 +103,9 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private CompetenciaBean competenciaBean;
+	
+	@Autowired
+	private StatusBusiness statusBusiness;
 
 	@Autowired
 	private AvaliacaoBean avaliacaoBean;
@@ -283,7 +288,10 @@ public class CandidatoController<PaginarCandidato> {
 
 		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.findAll();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
-
+		
+		List<StatusBean> listaStatusDrop = statusBusiness.obterStatusVaga();
+		model.addAttribute("listaStatusDrop", listaStatusDrop);
+		
 		// LISTAR VAGA ATIVA
 		List<VagaBean> listaVagaDrop = vagaBusiness.listarVagasAtivas();
 		model.addAttribute("listaVagaDrop", listaVagaDrop);
@@ -322,6 +330,7 @@ public class CandidatoController<PaginarCandidato> {
 
 		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.findAll();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
+		
 
 		List<VagaBean> listaVagaDrop = vagaBusiness.listarVagasAtivas();
 		model.addAttribute("listaVagaDrop", listaVagaDrop);
