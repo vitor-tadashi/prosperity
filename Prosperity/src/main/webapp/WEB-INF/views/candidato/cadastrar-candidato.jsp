@@ -244,15 +244,16 @@
 												</c:forEach>
 											</select>
 										</div>
-										<div class="form-group col-md-2 col-sm-2">
-											<label for="dataUltimoContato" class="control-label">Data
-												de ultimo contato</label>
+										<div class="form-group col-md-2 col-sm-4">
+											<label for="entrevista" class="control-label">Data
+												de Último Contato</label>
 											<fmt:formatDate value="${candidato.dataUltimoContato}"
 												pattern="dd/MM/yyyy" var="dataUltimoContato" />
 											<input type="text" class="form-control date"
-												name="dataUltimoContato" onblur="validarData(this.value)"
-												data-required="false" id="dataUltimoContato"
-												value="${dataUltimoContato}">
+												data-required="false" name="dataUltimoContato" id="dataUltimoContato"
+												onblur="validarData3('dataUltimoContato')" value="${dataUltimoContato}">
+								<fmt:formatDate value="${candidato.dataAbertura}" pattern="dd/MM/yyyy" var="dataUltimoContato" />
+														<input type="hidden" value="${dataUltimoContato}" name="dataUltimoContato">
 										</div>
 										<div class="form-group col-md-2 col-sm-4">
 											<label for="entrevista" class="control-label">Data
@@ -261,9 +262,9 @@
 												pattern="dd/MM/yyyy" var="entrevista" />
 											<input type="text" class="form-control date"
 												data-required="false" name="entrevista" id="entrevista"
-												onblur="validarData('entrevista')" value="${entrevista}">
-								<fmt:formatDate value="${candidato.dataAbertura}" pattern="dd/MM/yyyy" var="dataAbertura" />
-														<input type="hidden" value="${dataAbertura}" name="dataAbertura">
+												onblur="validarData4('entrevista')" value="${entrevista}">
+								<fmt:formatDate value="${candidato.entrevista}" pattern="dd/MM/yyyy" var="entrevista" />
+														<input type="hidden" value="${entrevista}" name="entrevista">
 										</div>
 									</div>
 								</div>
