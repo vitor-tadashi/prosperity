@@ -297,10 +297,62 @@
 										<a href="/candidato/file/${candidato.id}" target="_blank">Download</a>
 									</div>
 
+<<<<<<< HEAD
 									<div class="col-md-6">
+=======
+											</div>
+										</div>
+										<div class="form-group col-md-3">
+											<label for="vaga">Vaga a ser aplicado</label> <select
+												class="form-control" id="vaga" name="vagaCandidato.vaga.id" required>
+												<option value="0">Selecione</option>
+												<c:forEach var="vaga" items="${listaVaga}">
+													<option value="${vaga.id}"
+														${vaga.id == candidato.vagaCandidato.vaga.id ? 'selected="selected"' : ''}>${vaga.nomeVaga}</option>
+												</c:forEach>
+											</select>
+										</div>
+										<div class="form-group col-md-3">
+											<label for="canalInformacao">Como ficou sabendo
+												desta vaga?</label> <select class="form-control"
+												name="vagaCandidato.CanalInformacao.id"
+												id="canalInformacao">
+												<option value="0">Selecione</option>
+												<c:forEach var="canalInformacao" items="${listaCanal}">
+													<option value="${canalInformacao.id}"
+														${canalInformacao.id == candidato.vagaCandidato.canalInformacao.id ? 'selected="selected"' : ''}>${canalInformacao.nome}</option>
+												</c:forEach>
+											</select>
+										</div>
+										<div class="form-group col-md-2 col-sm-4">
+											<label for="entrevista" class="control-label">Data
+												de Último Contato</label>
+											<fmt:formatDate value="${candidato.dataUltimoContato}"
+												pattern="dd/MM/yyyy" var="dataUltimoContato" />
+											<input type="text" class="form-control date"
+												data-required="false" name="dataUltimoContato" id="dataUltimoContato"
+												onblur="validarData3('dataUltimoContato')" value="${dataUltimoContato}">
+								<fmt:formatDate value="${candidato.dataAbertura}" pattern="dd/MM/yyyy" var="dataUltimoContato" />
+														<input type="hidden" value="${dataUltimoContato}" name="dataUltimoContato">
+										</div>
+										<div class="form-group col-md-2 col-sm-4">
+											<label for="entrevista" class="control-label">Data
+												de Entrevista</label>
+											<fmt:formatDate value="${candidato.entrevista}"
+												pattern="dd/MM/yyyy" var="entrevista" />
+											<input type="text" class="form-control date"
+												data-required="false" name="entrevista" id="entrevista"
+												onblur="validarData4('entrevista')" value="${entrevista}">
+								<fmt:formatDate value="${candidato.entrevista}" pattern="dd/MM/yyyy" var="entrevista" />
+														<input type="hidden" value="${entrevista}" name="entrevista">
+										</div>
+
+									<div class="cold-md-6">
+>>>>>>> 522f28c32a77ddcf7d6b24d3d28d97fff5b46226
 										<input type="hidden" value="${candidato.id}" name="id">
 										<input type="hidden" value="${erro}" id="contErro">
 										<button class="btn btn-success">Salvar</button>
+
 									</div>
 								</div>
 
