@@ -225,43 +225,39 @@
 											</div>
 										</section>
 									<!-- /Section -->
-									<section class="panel panel-default">
-										<div class="panel-heading">Formação acadêmica</div>
-										<div class="panel-body relative">
-											<div class="form-group">
-												<textarea class="form-control" rows="3"
-													name="formacaoAcademica" id="formacaoAcademica" disabled></textarea>
+									
+									<section class="panel panel-default"
+											style="margin-bottom: 0px;">
+											<div style="page-break-before: always;"></div>
+											<div class="panel-heading"><strong>Formação acadêmica</strong></div>
+											<div class="panel-body relative">
+													<p>
+														<span id="formacaoAcademica"></span>
+													</p>
+												<!-- /form-group -->
 											</div>
-											<!-- /form-group -->
-
-										</div>
-									</section>
+										</section>
+									
+									<!-- /panel -->
+											<section class="panel panel-default"
+											style="margin-bottom: 0px;">
+											<div class="panel-heading"><strong>Perfil comportamental</strong></div>
+											<div class="panel-body relative">
+													<p>
+														<span id="perfilComportamental"></span>
+													</p>
+												<!-- /form-group -->
+											</div>
+										</section>
 									<!-- /panel -->
 
 									<section class="panel panel-default">
-										<div class="panel-heading">Perfil comportamental</div>
-										<div class="panel-body relative">
-											<div class="form-group">
-												<textarea class="form-control" rows="3"
-													name="perfilComportamental" id="perfilComportamental"
-													disabled></textarea>
-											</div>
-											<!-- /form-group -->
-
-										</div>
-									</section>
-									<!-- /panel -->
-
-									<section class="panel panel-default">
-										<div class="panel-heading">Perfil técnico</div>
+										<div class="panel-heading"><strong>Perfil técnico</strong></div>
 										<div class="panel-body relative">
 
-											<div class="form-group">
-												<textarea class="form-control" rows="3" name="perfilTecnico"
-													id="perfilTecnico" disabled></textarea>
-											</div>
-											<!-- /form-group -->
-
+												<p>
+													<span id="perfilTecnico"></span>
+												</p>
 										</div>
 									</section>
 									</div>
@@ -675,9 +671,9 @@
     			
     			$('input#dataInicio').val(lista.dataInicio);
     			$('label#substituido').text(lista.nomeSubstituido);
-    			$('#formacaoAcademica').val(lista.descricaoFormacaoAcademica);
-    			$('#perfilComportamental').val(lista.descricaoPerfilComportamental);
-    			$('#perfilTecnico').val(lista.descricaoPerfilTecnico);
+    			$('#formacaoAcademica').text(lista.descricaoFormacaoAcademica);
+    			$('#perfilComportamental').text(lista.descricaoPerfilComportamental);
+    			$('#perfilTecnico').text(lista.descricaoPerfilTecnico);
     			$('#vaga-modal').modal('show');
     		}
     	})
