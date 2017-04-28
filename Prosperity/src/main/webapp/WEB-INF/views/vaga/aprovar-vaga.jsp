@@ -34,7 +34,7 @@
 							<div class="tab-content">
 								<div id="home" class="tab-pane fade in active">
 									<section class="panel panel-default" style="margin-bottom: 0px">
-										<div class="panel-heading">Informações básicas</div>
+										<div class="panel-heading"><strong>Informações básicas</strong></div>
 										<div class="panel-body">
 											<form>
 												<div class="form-group row">
@@ -175,53 +175,55 @@
 									<div id="quebra">
 										<section class="panel panel-default"
 											style="margin-bottom: 5px;">
-											<div class="panel-heading">Informações de projeto</div>
+											<div class="panel-heading"><strong>Informações de projeto</strong></div>
 											<div class="panel-body">
-												<!-- /form-group -->
-												<div class="form-group col-md-12"
+												<div class="row">
+													<!-- /form-group -->
+													<div class="form-group col-md-12"
+														style="margin-bottom: 5px;">
+														<label class="control-label">Projeto</label> <input
+															readonly class="form-control default-cursor"
+															id="vagaProjeto" value="Mobile">
+													</div>
+													<div class="form-group col-md-6 col-xs-6"
+														style="margin-bottom: 5px;">
+														<label class="control-label">Cliente</label> <input
+															readonly class="form-control" id="vagaCliente"
+															value="Carrefour">
+													</div>
+													<div class="form-group col-md-6 col-xs-6"
+														style="margin-bottom: 5px;">
+														<label class="control-label">Gestor imediato</label> <input
+															readonly class="form-control" id="vagaGestor"
+															value="Vitor Tadashi">
+													</div>
+													<div id="interno">
+													<div class="form-group col-md-6 col-xs-6"
 													style="margin-bottom: 5px;">
-													<label class="control-label">Projeto</label> <input
-														readonly class="form-control default-cursor"
-														id="vagaProjeto" value="Mobile">
+												    <label class="control-label">Nome do responsável</label> 
+												    <input readonly class="form-control" class="form-control input-sm" id="nmResponsavel"
+													value=""> 
+													</div>
+													
+													<div class="form-group col-md-6 col-xs-6" style="margin-bottom: 5px;">
+													<label class="control-label">Área do responsável</label> 
+													<input readonly class="form-control" id="nmAreaResponsavel" 
+													value=""> 
+													</div>
+													
+													<div class="form-group col-md-6 col-xs-6" style="margin-bottom: 5px;">
+													<label class="control-label">E-mail do responsável</label> 
+													<input readonly class="form-control" id="emailResponsavel" 
+													value=""> 
+													</div>
+													
+													<div class="form-group col-md-6 col-xs-6" style="margin-bottom: 5px;">
+													<label class="control-label">Telefone</label> 
+													<input readonly class="form-control" id="telResponsavel" 
+													value=""> 
+													</div>
+													</div>
 												</div>
-												<div class="form-group col-md-6 col-xs-6"
-													style="margin-bottom: 5px;">
-													<label class="control-label">Cliente</label> <input
-														readonly class="form-control" id="vagaCliente"
-														value="Carrefour">
-												</div>
-												<div class="form-group col-md-6 col-xs-6"
-													style="margin-bottom: 5px;">
-													<label class="control-label">Gestor imediato</label> <input
-														readonly class="form-control" id="vagaGestor"
-														value="Vitor Tadashi">
-												</div>
-												<div id="interno">
-												<div class="form-group col-md-6 col-xs-6"
-												style="margin-bottom: 5px;">
-											    <label class="control-label">Nome do responsável</label> 
-											    <input readonly class="form-control" class="form-control input-sm" id="nmResponsavel"
-												value=""> 
-												</div>
-												
-												<div class="form-group col-md-6 col-xs-6" style="margin-bottom: 5px;">
-												<label class="control-label">Área do responsável</label> 
-												<input readonly class="form-control" id="nmAreaResponsavel" 
-												value=""> 
-												</div>
-												
-												<div class="form-group col-md-6 col-xs-6" style="margin-bottom: 5px;">
-												<label class="control-label">E-mail do responsável</label> 
-												<input readonly class="form-control" id="emailResponsavel" 
-												value=""> 
-												</div>
-												
-												<div class="form-group col-md-6 col-xs-6" style="margin-bottom: 5px;">
-												<label class="control-label">Telefone</label> 
-												<input readonly class="form-control" id="telResponsavel" 
-												value=""> 
-												</div>
-											</div>
 												
 											</div>
 										</section>
@@ -229,27 +231,22 @@
 										<section class="panel panel-default"
 											style="margin-bottom: 0px;">
 											<div style="page-break-before: always;"></div>
-											<div class="panel-heading">Formação acadêmica</div>
-											<div class="panel-body relative"
-												style="padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
-												<div class="form-group">
-													<textarea class="form-control" rows="5"  name="vagaFormacao"
-														id=vagaFormacao disabled>
-										</textarea>
-												</div>
+											<div class="panel-heading"><strong>Formação acadêmica</strong></div>
+											<div class="panel-body relative">
+													<p>
+														<span id="vagaFormacao"></span>
+													</p>
 												<!-- /form-group -->
 											</div>
 										</section>
 										<!-- /panel -->
 										<section class="panel panel-default"
 											style="margin-bottom: 0px;">
-											<div class="panel-heading">Perfil comportamental</div>
-											<div class="panel-body relative"
-												style="padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
-												<div class="form-group">
-													<textarea class="form-control" rows="5"  name="vagaPerfil"
-														id=vagaPerfil disabled></textarea>
-												</div>
+											<div class="panel-heading"><strong>Perfil comportamental</strong></div>
+											<div class="panel-body relative">
+													<p>
+														<span id="vagaPerfil"></span>
+													</p>
 												<!-- /form-group -->
 											</div>
 										</section>
@@ -257,14 +254,11 @@
 
 										<section class="panel panel-default "
 											style="margin-bottom: 0px;">
-											<div class="panel-heading">Perfil técnico</div>
-											<div class="panel-body relative"
-												style="padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
-												<div class="form-group">
-													<textarea class="form-control" rows="5" 
-														name="vagaPerfilTecnico" id=vagaPerfilTecnico disabled></textarea>
-												</div>
-												<!-- /form-group -->
+											<div class="panel-heading"><strong>Perfil técnico</strong></div>
+											<div class="panel-body relative">
+												<p>
+													<span id="vagaPerfilTecnico"></span>
+												</p>
 											</div>
 										</section>
 									</div>
@@ -453,8 +447,8 @@
 		<div id="main-container">
 			<div id="breadcrumb">
 				<ul class="breadcrumb">
-					<li><i class="fa fa-home"></i><a href="dashboard.html">
-							Início</a></li>
+					<li><i class="fa fa-home"></i><a href="/pagina-inicial">
+							Página inicial</a></li>
 					<li class="active">Aprovação de vaga</li>
 				</ul>
 			</div>
@@ -680,9 +674,9 @@
     			$('input#dataInicio').val(lista.dataInicio);
     			$('input#vagaCliente').val(lista.projeto.cliente.nome);
     			$('input#vagaProjeto').val(lista.projeto.nome);
-    			$('#vagaPerfil').val(lista.descricaoPerfilComportamental);
-    			$('#vagaFormacao').val(lista.descricaoFormacaoAcademica);
-    			$('#vagaPerfilTecnico').val(lista.descricaoPerfilTecnico);
+    			$('#vagaPerfil').text(lista.descricaoPerfilComportamental);
+    			$('#vagaFormacao').text(lista.descricaoFormacaoAcademica);
+    			$('#vagaPerfilTecnico').text(lista.descricaoPerfilTecnico);
     			$('#vagaGestor').val(lista.usuarioBean.funcionario.nome);
     			
     				var idSenioridade = lista.senioridadeBean.id;
