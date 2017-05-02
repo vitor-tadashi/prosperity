@@ -311,7 +311,7 @@
 											<div class="panel-body relative">
 												<textarea id="descricaoFormacaoAcademica" class="form-control"
 													name="descricaoFormacaoAcademica" rows="5"
-													value="${vaga.descricaoFormacaoAcademica}" maxlength="500" onkeyup="maxCaracterFormacaoAcademica()">${vaga.descricaoFormacaoAcademica}</textarea>
+													value="${vaga.descricaoFormacaoAcademica}" maxlength="500" onkeyup="maxCaracterFormacaoAcademica()" style="resize: none;">${vaga.descricaoFormacaoAcademica}</textarea>
 												<label id="maxFormacaoAcademica">Caracteres restantes : 500</label>
 											</div>
 										</section>
@@ -321,7 +321,7 @@
 											<div class="panel-body relative">
 												<textarea id="descricaoPerfilComportamental" class="form-control"
 													name="descricaoPerfilComportamental" rows="5"
-													value="${vaga.descricaoPerfilComportamental}" maxlength="500" onkeyup="maxCaracterPefilComportamental()">${vaga.descricaoPerfilComportamental}</textarea>
+													value="${vaga.descricaoPerfilComportamental}" maxlength="500" onkeyup="maxCaracterPefilComportamental()" style="resize: none;">${vaga.descricaoPerfilComportamental}</textarea>
 													<label id="maxPerfilComportamental">Caracteres restantes : 500</label>
 											</div>
 										</section>
@@ -330,7 +330,7 @@
 											<div class="panel-heading"><label>Perfil técnico</label></div>
 											<div class="panel-body relative">
 												<textarea id="descricaoPerfilTecnico" class="form-control" name="descricaoPerfilTecnico"
-													value="${vaga.descricaoPerfilTecnico}" rows="5" maxlength="500" onkeyup="maxCaracterPefilTecnico()">${vaga.descricaoPerfilTecnico}</textarea>
+													value="${vaga.descricaoPerfilTecnico}" rows="5" maxlength="500" onkeyup="maxCaracterPefilTecnico()" style="resize: none;">${vaga.descricaoPerfilTecnico}</textarea>
 													<label id="maxPerfilTecnico">Caracteres restantes : 500</label>
 											</div>
 										</section>

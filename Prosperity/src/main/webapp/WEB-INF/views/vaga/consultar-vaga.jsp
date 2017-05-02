@@ -580,7 +580,7 @@
 	
 	var id = $("#idPerfil").val();
 	$.ajax({
-		url: "http://localhost:8080/usuario/obter-perfil-funcionalidade",
+		url: "/usuario/obter-perfil-funcionalidade",
 		type: "GET",
 		dataType: "JSON",
 		data: {id : id},
@@ -739,7 +739,7 @@
 		
     	var id = $("#idPerfil").val();
     	$.ajax({
-    		url: "http://localhost:8080/usuario/obter-perfil-funcionalidade",
+    		url: "/usuario/obter-perfil-funcionalidade",
     		type: "GET",
     		dataType: "JSON",
     		data: {id : id},
