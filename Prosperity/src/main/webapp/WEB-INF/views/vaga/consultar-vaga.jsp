@@ -231,7 +231,7 @@
 											<div style="page-break-before: always;"></div>
 											<div class="panel-heading"><strong>Formação acadêmica</strong></div>
 											<div class="panel-body relative">
-													<p>
+													<p class="text-justify">
 														<span id="formacaoAcademica"></span>
 													</p>
 												<!-- /form-group -->
@@ -243,7 +243,7 @@
 											style="margin-bottom: 0px;">
 											<div class="panel-heading"><strong>Perfil comportamental</strong></div>
 											<div class="panel-body relative">
-													<p>
+													<p class="text-justify">
 														<span id="perfilComportamental"></span>
 													</p>
 												<!-- /form-group -->
@@ -255,7 +255,7 @@
 										<div class="panel-heading"><strong>Perfil técnico</strong></div>
 										<div class="panel-body relative">
 
-												<p>
+												<p class="text-justify">
 													<span id="perfilTecnico"></span>
 												</p>
 										</div>
@@ -460,7 +460,7 @@
 																<li><c:url value="editar/${vaga.id}" var="myURL">
 																	</c:url> <a href="${myURL}"
 																	class="editarPendente btnEdita pre hide"><i
-																		class="fa fa-pencil"></i> Editar avaliadores</a></li>
+																		class="fa fa-pencil"></i> Editar</a></li>
 															</c:if>
 														</ul>
 													</div> <!-- /btn-group -->

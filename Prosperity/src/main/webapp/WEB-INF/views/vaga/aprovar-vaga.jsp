@@ -233,7 +233,7 @@
 											<div style="page-break-before: always;"></div>
 											<div class="panel-heading"><strong>Formação acadêmica</strong></div>
 											<div class="panel-body relative">
-													<p>
+													<p class="text-justify">
 														<span id="vagaFormacao"></span>
 													</p>
 												<!-- /form-group -->
@@ -244,7 +244,7 @@
 											style="margin-bottom: 0px;">
 											<div class="panel-heading"><strong>Perfil comportamental</strong></div>
 											<div class="panel-body relative">
-													<p>
+													<p class="text-justify">
 														<span id="vagaPerfil"></span>
 													</p>
 												<!-- /form-group -->
@@ -256,7 +256,7 @@
 											style="margin-bottom: 0px;">
 											<div class="panel-heading"><strong>Perfil técnico</strong></div>
 											<div class="panel-body relative">
-												<p>
+												<p class="text-justify">
 													<span id="vagaPerfilTecnico"></span>
 												</p>
 											</div>
