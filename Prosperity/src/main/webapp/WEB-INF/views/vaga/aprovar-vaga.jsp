@@ -732,15 +732,25 @@
     		type: "POST",
     		dataType: "JSON",
     		data: { 'idVaga' : $('.aprovar-id').val(), 'status' : $('.aprovar-status').val()}
-    		}).done(function() {
-    			$('#aprova-modal').modal('hide');
-    			msg = 'Vaga aprovada com sucesso!';
+    		}).done(function(dado) {
+    			if(dado == '1' || dado == '27') {
+    				$('#aprova-modal').modal('hide');
+        			msg = 'Vaga aprovada com sucesso!';
+    			}else if(dado == '3'){
+        			$('#cancela-modal').modal('hide');
+        			msg = 'Vaga cancelada com sucesso!';
+    			}
+    			
+    			else if (dado == '18'){
     			$('#reprova-modal').modal('hide');
     			msg = 'Vaga reprovada com sucesso!';
-    			$('#cancela-modal').modal('hide');
-    			msg = 'Vaga cancelada com sucesso!';
-    			$('#fechar-modal').modal('hide');
-    			msg = 'Vaga fechada com sucesso!';
+    			}
+    			
+    			else if (dado == '2'){
+        			$('#fechar-modal').modal('hide');
+        			msg = 'Vaga fechada com sucesso!';
+    			}
+    			
     			$('#divAlert').html(msg).addClass('alert alert-success').show();
     			escondeMensagem();
     			setTimeout('location.reload();', 5000);
