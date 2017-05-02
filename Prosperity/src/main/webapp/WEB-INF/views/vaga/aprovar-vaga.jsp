@@ -275,7 +275,7 @@
 			</div>
 		</div>
 		<!-- Modal aprovar -->
-		<div class="modal fade" id="aprova-modal" data-target="#fecha-modal"
+		<div class="modal fade" id="aprova-modal" data-target="#aprova-modal"
 			tabindex="-1" role="dialog" aria-labelledby="modalLabel">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -302,7 +302,7 @@
 		<!-- /.modal aprovar-->
 
 		<!-- Modal reprovar -->
-		<div class="modal fade" id="reprova-modal" data-target="#fecha-modal"
+		<div class="modal fade" id="reprova-modal" data-target="#reprova-modal"
 			tabindex="-1" role="dialog" aria-labelledby="modalLabel">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -359,7 +359,7 @@
 		
 		<!-- modal cancelar pendente -->
 		<div class="modal fade" id="pendente-modal"
-			data-target="#pendente-modal" tabindex="-1" role="dialog"
+			data-target="#cancela-modal" tabindex="-1" role="dialog"
 			aria-labelledby="modalLabel">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -547,7 +547,7 @@
 															class="cancelarDivider divider"></li>
 														<li id="${vaga.ultimoStatus.status.nome}" class="Reprovar"><a
 															href="#pendente-modal"
-															onclick="alterarStatus(${vaga.id}, 'RECUSADO')"
+															onclick="alterarStatus(${vaga.id}, 'CANCELADO')"
 															data-toggle="modal"><i
 																class="Cancelar fa fa-ban fa-lg"></i> Cancelar</a></li>
 													</c:if>
@@ -733,8 +733,14 @@
     		dataType: "JSON",
     		data: { 'idVaga' : $('.aprovar-id').val(), 'status' : $('.aprovar-status').val()}
     		}).done(function() {
-    			$('#vaga-modal').modal('hide');
-    			msg = 'Vaga alterada com sucesso!';
+    			$('#aprova-modal').modal('hide');
+    			msg = 'Vaga aprovada com sucesso!';
+    			$('#reprova-modal').modal('hide');
+    			msg = 'Vaga reprovada com sucesso!';
+    			$('#cancela-modal').modal('hide');
+    			msg = 'Vaga cancelada com sucesso!';
+    			$('#fechar-modal').modal('hide');
+    			msg = 'Vaga fechada com sucesso!';
     			$('#divAlert').html(msg).addClass('alert alert-success').show();
     			escondeMensagem();
     			setTimeout('location.reload();', 5000);

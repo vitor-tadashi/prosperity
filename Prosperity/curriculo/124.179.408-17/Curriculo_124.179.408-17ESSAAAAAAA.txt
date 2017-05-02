@@ -1,0 +1,27 @@
+http://localhost:8080/candidato/editar/65
+
+localhost:8080/candidato/file/${candidato.curriculo}"
+
+1º Colocar a tabela para fazer o download do arquivo já importado
+2º Colocar um href (link do arquivo)
+3º No href colocar a url para download do arquivo (Ex: file/<ID Candidato>)
+4º No controller implementar o método download e o RequestMapping colocar "file/{idCandidato}"
+5º No controller realizar a busca do arquivo pelo Id do Candidato
+6º Após pegar o caminho do arquivo ir no Google e pesquisar "Spring MVC download File"
+7º Implementar o que achou no google
+8º Testar
+
+@RequestMapping(value = "/file/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public FileSystemResource getFile(@PathVariable Integer id, HttpServletResponse response) {
+		
+		String caminho = candidatoBusiness.obter(id).getCurriculo();
+		
+		File file = new File(caminho);
+		
+	    return new FileSystemResource(file); 
+	}
+
+<button type="button" onclick="download()" class="btn btn-primary"> Salvar</button>
+
+"/candidato/file/${candidato.id}"

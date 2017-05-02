@@ -143,7 +143,7 @@
 					</div>
 					<div class="modal-body"><p>Deseja confirmar a operação?</p></div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-success" id="alterarStatus">Sim</button>
+						<button type="button" class="btn btn-success" onclick="cancelarCandidato()" id="alterarStatus">Sim</button>
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
 					</div>
 				</div>
@@ -189,7 +189,6 @@
 						<div class="panel-body">
 							<input type="hidden" name="user" id="user"
 								value="${autenticado.perfil.nome}" />
-
 							<table
 								class="table table-bordered table-condensed table-hover table-striped"
 								id="tabelaCandidato"
@@ -274,6 +273,8 @@
 		<script src="/resources/js/parsley.min.js"></script>
 		<script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 		<script>
+		
+		
 	var cont;
 	function maxCaracterParecer(){
 		var maxParecer = $("#parecer").val();
@@ -428,16 +429,24 @@
             var cont = 0;
             $("#gerarCampo").click(function(){
             	var campos = 
-            	"<div class='div"+cont+" processoSeletivo'>" +
-            	"<select id='prova"+ cont +"'>" +
+            	"<div class='div"+cont+" col-md-12 processoSeletivo'>" +
+            	"<select class='form-control col-md-3' style='width: 120px; height: 30px;' id='prova"+ cont +"'>" +
             	"<br>" +
+            	"&nbsp;"+
+            	"<br/>" +
             	"<option value='0'>Selecione:</option>"+
+            	"<br/>" +
             	"<c:forEach var='selecao' items='${provas}'>" +
+            	"<br/>" +
             	"<option value='${selecao.id}'>${selecao.nome}</option>"+
+            	"<br/>" +
             	"</c:forEach>" +
+            	"<br/>" +
             	"</select>"+
-            	"<input type='text' id='descricao"+ cont +"'/>"+
+            	"&nbsp;"+
+            	"<input class='form-control col-md-3' style='width: 190px; height: 30px;' type='text' id='descricao"+ cont +"'/>"+
             	"<input type='button' id='btnRemover' onclick='remover("+ cont +")'value='Remover campo' class='btn btn-sm btn-danger'>"+
+
             	"</div>" ;
             	cont++;
         /*adiciona na div*/

@@ -398,45 +398,55 @@ public class VagaBusiness {
 
 	@Transactional
 	public void buscarUsuariosParaEmail(SituacaoVagaBean situacaoVagaBean) {
-		VagaEntity vaga = vagaDAO.findById(situacaoVagaBean.getIdVaga());
-		List<UsuarioBean> usuarios = usuarioBusiness.findAll();
-		ArrayList<String> recipients = new ArrayList<>();
-		ArrayList<String> nomes = new ArrayList<>();
-		List<AvaliadorVagaBean> avaliadores = avaliadorVagaConverter
-				.convertEntityToBean(avaliadorVagaDAO.findByNamedQuery("obterProposta", vaga.getId()));
 
-		if (situacaoVagaBean.getStatus().getValue() == StatusVagaEnum.PENDENTE.getValue()) {
-			for (UsuarioBean u : usuarios) {
-				switch (u.getPerfil().getNome()) {
-				case "Diretor de operação":
-					recipients.add(u.getEmail());
-					nomes.add(u.getNome());
-					break;
-				default:
-					break;
+		new Thread() {
+			public void run() {
+				try {
+					VagaEntity vaga = vagaDAO.findById(situacaoVagaBean.getIdVaga());
+					List<UsuarioBean> usuarios = usuarioBusiness.findAll();
+					ArrayList<String> recipients = new ArrayList<>();
+					ArrayList<String> nomes = new ArrayList<>();
+					List<AvaliadorVagaBean> avaliadores = avaliadorVagaConverter
+							.convertEntityToBean(avaliadorVagaDAO.findByNamedQuery("obterProposta", vaga.getId()));
+
+					if (situacaoVagaBean.getStatus().getValue() == StatusVagaEnum.PENDENTE.getValue()) {
+						for (UsuarioBean u : usuarios) {
+							switch (u.getPerfil().getNome()) {
+							case "Diretor de operação":
+								recipients.add(u.getEmail());
+								nomes.add(u.getNome());
+								break;
+							default:
+								break;
+							}
+						}
+					} else {
+						for (UsuarioBean u : usuarios) {
+							switch (u.getPerfil().getNome()) {
+							case "Analista de RH":
+								recipients.add(u.getEmail());
+								nomes.add(u.getNome());
+								break;
+							case "Gestor de RH":
+								recipients.add(u.getEmail());
+								nomes.add(u.getNome());
+								break;
+							default:
+								break;
+							}
+						}
+					}
+					GeradorEmail email = new GeradorEmail();
+					int i = 0;
+					for (String usuario : recipients) {
+						email.enviarEmail(vaga, usuario, nomes.get(i));
+						i++;
+					}
+				} catch (Exception e) {
+					System.out.println("Erro\n");
+					e.printStackTrace();
 				}
 			}
-		} else {
-			for (UsuarioBean u : usuarios) {
-				switch (u.getPerfil().getNome()) {
-				case "Analista de RH":
-					recipients.add(u.getEmail());
-					nomes.add(u.getNome());
-					break;
-				case "Gestor de RH":
-					recipients.add(u.getEmail());
-					nomes.add(u.getNome());
-					break;
-				default:
-					break;
-				}
-			}
-		}
-		GeradorEmail email = new GeradorEmail();
-		int i = 0;
-		for (String usuario : recipients) {
-			email.enviarEmail(vaga, usuario, nomes.get(i));
-			i++;
-		}
+		}.start();
 	}
 }

@@ -225,43 +225,39 @@
 											</div>
 										</section>
 									<!-- /Section -->
-									<section class="panel panel-default">
-										<div class="panel-heading">Formação acadêmica</div>
-										<div class="panel-body relative">
-											<div class="form-group">
-												<textarea class="form-control" rows="3"
-													name="formacaoAcademica" id="formacaoAcademica" disabled></textarea>
+									
+									<section class="panel panel-default"
+											style="margin-bottom: 0px;">
+											<div style="page-break-before: always;"></div>
+											<div class="panel-heading"><strong>Formação acadêmica</strong></div>
+											<div class="panel-body relative">
+													<p>
+														<span id="formacaoAcademica"></span>
+													</p>
+												<!-- /form-group -->
 											</div>
-											<!-- /form-group -->
-
-										</div>
-									</section>
+										</section>
+									
+									<!-- /panel -->
+											<section class="panel panel-default"
+											style="margin-bottom: 0px;">
+											<div class="panel-heading"><strong>Perfil comportamental</strong></div>
+											<div class="panel-body relative">
+													<p>
+														<span id="perfilComportamental"></span>
+													</p>
+												<!-- /form-group -->
+											</div>
+										</section>
 									<!-- /panel -->
 
 									<section class="panel panel-default">
-										<div class="panel-heading">Perfil comportamental</div>
-										<div class="panel-body relative">
-											<div class="form-group">
-												<textarea class="form-control" rows="3"
-													name="perfilComportamental" id="perfilComportamental"
-													disabled></textarea>
-											</div>
-											<!-- /form-group -->
-
-										</div>
-									</section>
-									<!-- /panel -->
-
-									<section class="panel panel-default">
-										<div class="panel-heading">Perfil técnico</div>
+										<div class="panel-heading"><strong>Perfil técnico</strong></div>
 										<div class="panel-body relative">
 
-											<div class="form-group">
-												<textarea class="form-control" rows="3" name="perfilTecnico"
-													id="perfilTecnico" disabled></textarea>
-											</div>
-											<!-- /form-group -->
-
+												<p>
+													<span id="perfilTecnico"></span>
+												</p>
 										</div>
 									</section>
 									</div>
@@ -392,7 +388,7 @@
 
 									<div class="text-right">
 										<a href="#" style="text-decoration: none; color: #ffffff">
-											<button class="btn btn-primary"
+											<button id="pesquisar" class="btn btn-primary"
 												style="margin-top: 22px; margin-right: 22px;" type="submit">Pesquisar</button>
 										</a>
 									</div>
@@ -539,17 +535,18 @@
 								<div class="row">
 									<input type="hidden" id="pageActive" value="${page }">
 									<ul class="pagination pagination-xs m-top-none pull-right">
-										<li><c:if test="${page > 1}">
-												<a
-													href="<c:url value="/vaga/consultar" ><c:param name="page" value="${page - 1}"/></c:url>">Anterior</a>
-											</c:if> <c:forEach begin="${startpage}" end="${endpage}" var="p">
-												<a id="page${p}"
-													href="<c:url value="/vaga/consultar" ><c:param name="page" value="${p}"/>${p}</c:url>">${p}</a>
-											</c:forEach> <c:if test="${page < endpage}">
-												<a
-													href="<c:url value="/vaga/consultar" ><c:param name="page" value="${page + 1}"/></c:url>">Próximo</a>
-											</c:if></li>
-									</ul>
+	                                  <li>
+	                                      <c:if test="${page > 1}">
+	                                          <button class="btn btn-default btn-sm" onclick="paginar(${page-1})">Anterior</button>
+	                                      </c:if>
+	                                      <c:forEach begin="${startpage}" end="${endpage}" var="p">
+	                                          <button class="btn btn-default btn-sm" onclick="paginar(${p})" id="page${p}">${p}</button>
+	                                      </c:forEach>
+	                                      <c:if test="${page < endpage}">
+	                                          <button class="btn btn-default btn-sm" onclick="paginar(${page+1})">Próximo</button>
+	                                      </c:if>
+	                                  </li>
+                              		</ul>
 								</div>
 								<!--</div row>-->
 							</div>
@@ -568,6 +565,16 @@
 	<layout:put block="scripts" type="REPLACE">
 
 		<script type="text/javascript">
+		
+		function paginar (page){
+			if($('#filtro1').val() || $('#status').val() > 0 || $('#data1').val() || $('#data2').val()){
+				$('form').append('<input type="hidden" name="page" value="' + page +'"/>')
+				$('#pesquisar').click();
+			}
+			else{
+				window.location.href = '/vaga/consultar?page='+page;
+			}
+		};
 	
 	$('#page'+$('#pageActive').val()).addClass('active');
 	
@@ -675,9 +682,9 @@
     			
     			$('input#dataInicio').val(lista.dataInicio);
     			$('label#substituido').text(lista.nomeSubstituido);
-    			$('#formacaoAcademica').val(lista.descricaoFormacaoAcademica);
-    			$('#perfilComportamental').val(lista.descricaoPerfilComportamental);
-    			$('#perfilTecnico').val(lista.descricaoPerfilTecnico);
+    			$('#formacaoAcademica').text(lista.descricaoFormacaoAcademica);
+    			$('#perfilComportamental').text(lista.descricaoPerfilComportamental);
+    			$('#perfilTecnico').text(lista.descricaoPerfilTecnico);
     			$('#vaga-modal').modal('show');
     		}
     	})

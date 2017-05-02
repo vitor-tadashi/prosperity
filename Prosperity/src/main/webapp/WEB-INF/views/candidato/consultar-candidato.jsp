@@ -441,13 +441,13 @@
 		
 						<div class="panel-heading">Consultar candidatos</div>
 						<div class="panel-body">
-							<form action="filtrar" method="GET" class="row">
+							<form action="filtrar" method="GET" class="row" id="filtroForm">
 								<div class="col-md-2">
 									<label for="exampleInputEmail1">Nome: </label>
 									<div class="search-block">
 										<div class="input-group">
 											<input type="text" class="form-control input-sm"
-												placeholder="Nome" name="nome" value="${filtroC.nome }">
+												placeholder="Nome" name="nome" value="${filtroC.nome }" id="nmCandidato">
 										</div>
 										<!-- /input-group -->
 									</div>
@@ -482,15 +482,16 @@
 												pattern="yyyy-MM-dd" var="d1" />
 											<fmt:formatDate value="${filtroC.dataAberturaPara}"
 												pattern="yyyy-MM-dd" var="d2" />
-										<input type="date" name="dataAberturaDe" class="form-control" value="${d1 }">
+										<input type="date" name="dataAberturaDe" class="form-control" value="${d1 }" id="dtDe">
 										<span class="input-group-addon">até</span> <input type="date"
-											name="dataAberturaPara" class="form-control" value="${d2 }">
+											name="dataAberturaPara" class="form-control" value="${d2 }" id="dtPara">
 									</div>
 								</div>
 								<div class="col-md-2 col-md-offset-1">
 									<button class="btn btn-primary pull-right "
-										style="margin-top: 22px">Pesquisar</button>
+										style="margin-top: 22px" id="pesquisar">Pesquisar</button>
 								</div>
+								
 							</form>
 							<!-- /.row -->
 						
@@ -560,13 +561,13 @@
                               <ul class="pagination pagination-xs m-top-none pull-right">
                                   <li>
                                       <c:if test="${page > 1}">
-                                          <a href="<c:url value="/candidato/consultar" ><c:param name="page" value="${page - 1}"/></c:url>">Anterior</a>
+                                          <button class="btn btn-default btn-sm" onclick="paginar(${page-1})">Anterior</button>
                                       </c:if>
                                       <c:forEach begin="${startpage}" end="${endpage}" var="p">
-                                          <a id="page${p}" href="<c:url value="/candidato/consultar" ><c:param name="page" value="${p}"/>${p}</c:url>">${p}</a>
+                                          <button class="btn btn-default btn-sm" onclick="paginar(${p})" id="page${p}">${p}</button>
                                       </c:forEach>
                                       <c:if test="${page < endpage}">
-                                          <a href="<c:url value="/candidato/consultar" ><c:param name="page" value="${page + 1}"/></c:url>">Próximo</a>
+                                          <button class="btn btn-default btn-sm" onclick="paginar(${page+1})">Próximo</button>
                                       </c:if>
                                   </li>
                               </ul>
@@ -618,18 +619,38 @@
 									class="btn btn-success">Sign up</a>
 							</div>
 						</form>
+						
 					</div>
+					
 				</div>
+				
 				<!-- /wrapper -->
 			</div>
+		
+		
 		</div>
+		
 	</div>
+	</div>
+	
 	</layout:put>
 
 	<layout:put block="scripts" type="REPLACE">
 	<!-- JavaScript -->
 
+
 	<script type="text/javascript">
+	
+	function paginar (page){
+		if($('#nmCandidato').val() || $('#vagaFiltro').val() > 0 || $('#pretensaoDe').val() ||
+				$('#pretensaoPara').val() || $('#dtDe').val() || $('#dtPara').val()){
+			$('form').append('<input type="hidden" name="page" value="' + page +'"/>')
+			$('#pesquisar').click();
+		}
+		else{
+			window.location.href = '/candidato/consultar?page='+page;
+		}
+	};
 	
 	$('#page'+$('#pageActive').val()).addClass('active');
 	
