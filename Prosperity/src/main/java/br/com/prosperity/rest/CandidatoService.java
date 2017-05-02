@@ -35,7 +35,7 @@ public class CandidatoService {
 		if (!candidatos.isEmpty())
 			for (CandidatoBean c : candidatos) {
 				try {
-					b.inserir(c);
+					b.inserirWordpress(c);
 				} catch (BusinessException e) {
 				
 					e.printStackTrace();

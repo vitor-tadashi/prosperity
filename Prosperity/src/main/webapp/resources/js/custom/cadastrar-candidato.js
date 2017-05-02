@@ -347,7 +347,7 @@ $(document).ready(function () {
 			                {
 			                	var div = document.getElementById("textDiv2").className = "alert alert-danger";
 
-			    				textDiv2.textContent = "Data da última entrevista inválida";
+			    				textDiv2.textContent = "Data de última entrevista inválida";
 
 			    				var text = "[" + div.textContent + "]";
 			                        
@@ -358,7 +358,7 @@ $(document).ready(function () {
 			         {
 			        		var div = document.getElementById("textDiv2").className = "";
 
-			    			textDiv2.textContent = "Data da última entrevista inválida";
+			    			textDiv2.textContent = "Data de última entrevista inválida";
 
 			    			var text = "[" + div.textContent + "]";
 			              
@@ -399,7 +399,7 @@ $(document).ready(function () {
 	
 	function obterCandidato(cpf) {
 		$.ajax({
-			url : "http://localhost:8080/candidato/obter",
+			url : "/candidato/obter",
 			dataType : "JSON",
 			data : {
 				"cpf" : cpf
