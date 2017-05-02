@@ -388,7 +388,7 @@
 
 									<div class="text-right">
 										<a href="#" style="text-decoration: none; color: #ffffff">
-											<button class="btn btn-primary"
+											<button id="pesquisar" class="btn btn-primary"
 												style="margin-top: 22px; margin-right: 22px;" type="submit">Pesquisar</button>
 										</a>
 									</div>
@@ -535,17 +535,18 @@
 								<div class="row">
 									<input type="hidden" id="pageActive" value="${page }">
 									<ul class="pagination pagination-xs m-top-none pull-right">
-										<li><c:if test="${page > 1}">
-												<a
-													href="<c:url value="/vaga/consultar" ><c:param name="page" value="${page - 1}"/></c:url>">Anterior</a>
-											</c:if> <c:forEach begin="${startpage}" end="${endpage}" var="p">
-												<a id="page${p}"
-													href="<c:url value="/vaga/consultar" ><c:param name="page" value="${p}"/>${p}</c:url>">${p}</a>
-											</c:forEach> <c:if test="${page < endpage}">
-												<a
-													href="<c:url value="/vaga/consultar" ><c:param name="page" value="${page + 1}"/></c:url>">Próximo</a>
-											</c:if></li>
-									</ul>
+	                                  <li>
+	                                      <c:if test="${page > 1}">
+	                                          <button class="btn btn-default btn-sm" onclick="paginar(${page-1})">Anterior</button>
+	                                      </c:if>
+	                                      <c:forEach begin="${startpage}" end="${endpage}" var="p">
+	                                          <button class="btn btn-default btn-sm" onclick="paginar(${p})" id="page${p}">${p}</button>
+	                                      </c:forEach>
+	                                      <c:if test="${page < endpage}">
+	                                          <button class="btn btn-default btn-sm" onclick="paginar(${page+1})">Próximo</button>
+	                                      </c:if>
+	                                  </li>
+                              		</ul>
 								</div>
 								<!--</div row>-->
 							</div>
@@ -564,6 +565,16 @@
 	<layout:put block="scripts" type="REPLACE">
 
 		<script type="text/javascript">
+		
+		function paginar (page){
+			if($('#filtro1').val() || $('#status').val() > 0 || $('#data1').val() || $('#data2').val()){
+				$('form').append('<input type="hidden" name="page" value="' + page +'"/>')
+				$('#pesquisar').click();
+			}
+			else{
+				window.location.href = '/vaga/consultar?page='+page;
+			}
+		};
 	
 	$('#page'+$('#pageActive').val()).addClass('active');
 	
