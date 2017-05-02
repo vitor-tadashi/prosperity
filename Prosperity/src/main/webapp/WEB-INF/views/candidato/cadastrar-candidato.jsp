@@ -242,54 +242,7 @@
 
 												</div>
 											</div>
-											<div class="form-group col-md-3">
-												<label for="vaga">Vaga a ser aplicado</label> <select
-													class="form-control" id="vaga" name="vagaCandidato.vaga.id"
-													required>
-													<option value="0">Selecione</option>
-													<c:forEach var="vaga" items="${listaVaga}">
-														<option value="${vaga.id}"
-															${vaga.id == candidato.vagaCandidato.vaga.id ? 'selected="selected"' : ''}>${vaga.nomeVaga}</option>
-													</c:forEach>
-												</select>
-											</div>
-											<div class="form-group col-md-3">
-												<label for="canalInformacao">Como ficou sabendo
-													desta vaga?</label> <select class="form-control"
-													name="vagaCandidato.CanalInformacao.id"
-													id="canalInformacao">
-													<option value="0">Selecione</option>
-													<c:forEach var="canalInformacao" items="${listaCanal}">
-														<option value="${canalInformacao.id}"
-															${canalInformacao.id == candidato.vagaCandidato.canalInformacao.id ? 'selected="selected"' : ''}>${canalInformacao.nome}</option>
-													</c:forEach>
-												</select>
-											</div>
-											<div class="form-group col-md-2 col-sm-2">
-												<label for="dataUltimoContato" class="control-label">Data
-													de ultimo contato</label>
-												<fmt:formatDate value="${candidato.dataUltimoContato}"
-													pattern="dd/MM/yyyy" var="dataUltimoContato" />
-												<input type="text" class="form-control date"
-													name="dataUltimoContato" onblur="validarData(this.value)"
-													data-required="false" id="dataUltimoContato"
-													value="${dataUltimoContato}">
-											</div>
-											<div class="form-group col-md-2 col-sm-4">
-												<label for="entrevista" class="control-label">Data
-													de Entrevista</label>
-												<fmt:formatDate value="${candidato.entrevista}"
-													pattern="dd/MM/yyyy" var="entrevista" />
-												<input type="text" class="form-control date"
-													data-required="false" name="entrevista" id="entrevista"
-													onblur="validarData('entrevista')" value="${entrevista}">
-												<fmt:formatDate value="${candidato.dataAbertura}"
-													pattern="dd/MM/yyyy" var="dataAbertura" />
-												<input type="hidden" value="${dataAbertura}"
-													name="dataAbertura">
-											</div>
-										</div>
-
+											
 										<div class="form-group col-md-3">
 											<label for="vaga">Vaga a ser aplicado</label> <select
 												class="form-control" id="vaga" name="vagaCandidato.vaga.id" required>
@@ -335,6 +288,7 @@
 										</div>
 
 									</div>
+									</div>
 								</div>
 								<div class="panel-footer">
 									<input type="hidden" value="${candidato.id}" name="id">
@@ -345,6 +299,7 @@
 							</form>
 						</div>
 					</div>
+					
 				</div>
 			</div>
 		</div>
