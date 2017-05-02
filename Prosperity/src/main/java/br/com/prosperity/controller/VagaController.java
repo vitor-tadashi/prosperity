@@ -226,10 +226,11 @@ public class VagaController {
 	}
 
 	@RequestMapping(value = "/status", method = RequestMethod.POST)
-	public @ResponseBody HttpStatus alterarStatusVaga(Model model, SituacaoVagaBean status){
+	public @ResponseBody Integer alterarStatusVaga(Model model, SituacaoVagaBean status){
 		vagaBusiness.alterarStatus(status);
-		vagaBusiness.alterarDataAprovacao(status);		
-		return HttpStatus.OK;
+		vagaBusiness.alterarDataAprovacao(status);	
+		Integer id = status.getStatus().getValue();
+		return id;
 	}
 
 	@RequestMapping(value = "/solicitar", method = RequestMethod.GET)

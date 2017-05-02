@@ -12,7 +12,7 @@
 				<Set name="DatabaseName">prosperity</Set>
 				<Set name="ServerName">192.168.2.20\mssql2012</Set>
 				<Set name="PortNumber">1433</Set>
-			</New>
+			</New> 
 		</Arg>
 	</New>
 </Configure>
