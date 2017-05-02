@@ -683,7 +683,7 @@
     				var idCargo = lista.cargoBean.id;
     				if (idSenioridade>0 && idCargo>0){
     					$.ajax({
-    						url: "http://localhost:8080/vaga/obter-range-salarial",
+    						url: "/vaga/obter-range-salarial",
     						type: "GET",
     						dataType: "JSON",
     						data: {idCargo : idCargo,
@@ -795,7 +795,7 @@
 		
     	var id = $("#idPerfil").val();
     	$.ajax({
-    		url: "http://localhost:8080/usuario/obter-perfil-funcionalidade",
+    		url: "/usuario/obter-perfil-funcionalidade",
     		type: "GET",
     		dataType: "JSON",
     		data: {id : id},

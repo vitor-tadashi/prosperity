@@ -399,7 +399,7 @@ $(document).ready(function () {
 	
 	function obterCandidato(cpf) {
 		$.ajax({
-			url : "http://localhost:8080/candidato/obter",
+			url : "/candidato/obter",
 			dataType : "JSON",
 			data : {
 				"cpf" : cpf
