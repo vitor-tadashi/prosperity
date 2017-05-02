@@ -619,12 +619,20 @@
 									class="btn btn-success">Sign up</a>
 							</div>
 						</form>
+						
 					</div>
+					
 				</div>
+				
 				<!-- /wrapper -->
 			</div>
+		
+		
 		</div>
+		
 	</div>
+	</div>
+	
 	</layout:put>
 
 	<layout:put block="scripts" type="REPLACE">
