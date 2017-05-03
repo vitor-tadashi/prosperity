@@ -237,7 +237,7 @@ public class VagaBusiness {
 			if (status.getStatus().getNome().equals("Aguardando avaliadores")) {
 				inserirAvaliadores(vagaEntity, usuarioBean);
 				situacaoVaga.setIdVaga(vagaEntity.getId());
-				situacaoVaga.setStatus(StatusVagaEnum.PENDENTEDEINFORMACOES);
+				situacaoVaga.setStatus(StatusVagaEnum.VAGANOVA);
 				alterarStatus(situacaoVaga);
 			} else if (status.getStatus().getNome().equals("Ativo")) {
 				inserirAvaliadores(vagaEntity, usuarioBean);
@@ -272,7 +272,7 @@ public class VagaBusiness {
 			List<AvaliadorVagaEntity> avaliadorVagaEntity = avaliadorVagaDao.findByNamedQuery("obterAvaliadoresDaVaga",
 					vagaEntity.getId());
 			if (avaliadorVagaEntity == null || avaliadorVagaEntity.size() == 0) {
-				situacaoVaga.setStatus(StatusVagaEnum.PENDENTEDEINFORMACOES);
+				situacaoVaga.setStatus(StatusVagaEnum.VAGANOVA);
 			}
 		}
 
@@ -387,7 +387,7 @@ public class VagaBusiness {
 				lista.add(StatusVagaEnum.ATIVO.getValue());
 
 			if (funcionalidadeBean.getId() == 29) {
-				lista.add(StatusVagaEnum.PENDENTEDEINFORMACOES.getValue());
+				lista.add(StatusVagaEnum.VAGANOVA.getValue());
 				lista.add(StatusVagaEnum.PENDENTE.getValue());
 				lista.add(StatusVagaEnum.ATIVO.getValue());
 			}
