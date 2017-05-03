@@ -344,7 +344,7 @@ public class CandidatoBusiness {
 			statusCandidatoDAO.insert(statusCandidatoEntity);
 			buscarUsuariosParaEmail(situacaoCandidato);
 		} else {
-			if (statusDisponivelEntity != null || statusDisponivelEntity.size() > 0) {
+			if (statusDisponivelEntity != null) {
 				List<StatusCandidatoEntity> statusCandidato = null;
 				statusCandidato = statusCandidatoDAO.findByNamedQuery("obterStatusCandidato",
 						situacaoCandidato.getIdCandidato());

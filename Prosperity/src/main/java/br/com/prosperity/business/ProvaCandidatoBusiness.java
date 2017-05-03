@@ -1,6 +1,5 @@
 package br.com.prosperity.business;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -24,21 +23,24 @@ public class ProvaCandidatoBusiness {
 	@Transactional
 	public void inserir(List<ProvaCandidatoBean> provas) {
 		List<ProvaCandidatoEntity> provasCandidatoEntity = provaCandidatoConverter.convertBeanToEntity(provas);
-		for(ProvaCandidatoEntity provaCandidato: provasCandidatoEntity){
+		for (ProvaCandidatoEntity provaCandidato : provasCandidatoEntity) {
 			provaCandidatoDAO.insert(provaCandidato);
 		}
 	}
-	
+
 	@Transactional
 	public List<ProvaCandidatoBean> obterProva(Integer id) {
 		List<ProvaCandidatoEntity> provasCandidatoEntity = provaCandidatoDAO.findByNamedQuery("queryProva", id);
-		//ProvaCandidatoEntity provaCandidatoEntity = new ProvaCandidatoEntity();
-		
-		//provaCandidatoEntity.setProvas(provasCandidatoEntity.get(0).getProvas());
-		//provaCandidatoEntity.setDescricaoProva(provasCandidatoEntity.get(0).getDescricaoProva());
-		//ProvaCandidatoBean provaCandidatoBean = provaCandidatoConverter.convertEntityToBean(provaCandidatoEntity);
-		List<ProvaCandidatoBean> provasCandidatoBean = provaCandidatoConverter.convertEntityToBean(provasCandidatoEntity);
-		//provasCandidatoBean.add(provaCandidatoBean);
+		// ProvaCandidatoEntity provaCandidatoEntity = new
+		// ProvaCandidatoEntity();
+
+		// provaCandidatoEntity.setProvas(provasCandidatoEntity.get(0).getProvas());
+		// provaCandidatoEntity.setDescricaoProva(provasCandidatoEntity.get(0).getDescricaoProva());
+		// ProvaCandidatoBean provaCandidatoBean =
+		// provaCandidatoConverter.convertEntityToBean(provaCandidatoEntity);
+		List<ProvaCandidatoBean> provasCandidatoBean = provaCandidatoConverter
+				.convertEntityToBean(provasCandidatoEntity);
+		// provasCandidatoBean.add(provaCandidatoBean);
 		return provasCandidatoBean;
-		}
+	}
 }

@@ -343,7 +343,7 @@ public class VagaBusiness {
 
 	@Transactional
 	private void inserirAvaliadores(VagaEntity vaga, List<UsuarioBean> usuarios) {
-		if (usuarios != null || usuarios.size() < 1) {
+		if (usuarios != null) {
 			for (UsuarioBean usuario : usuarios) {
 				AvaliadorVagaEntity avaliadorVagaEntity = new AvaliadorVagaEntity();
 				avaliadorVagaEntity.setUsuario(usuarioConverter.convertBeanToEntity(usuario));
@@ -406,6 +406,7 @@ public class VagaBusiness {
 					List<UsuarioBean> usuarios = usuarioBusiness.findAll();
 					ArrayList<String> recipients = new ArrayList<>();
 					ArrayList<String> nomes = new ArrayList<>();
+					@SuppressWarnings("unused")
 					List<AvaliadorVagaBean> avaliadores = avaliadorVagaConverter
 							.convertEntityToBean(avaliadorVagaDAO.findByNamedQuery("obterProposta", vaga.getId()));
 
