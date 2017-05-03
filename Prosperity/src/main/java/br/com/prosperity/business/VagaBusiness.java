@@ -310,11 +310,18 @@ public class VagaBusiness {
 
 	@Transactional
 	public void alterarDataAprovacao(SituacaoVagaBean status) {
+		Integer idStatus = status.getStatus().getValue();
 		VagaEntity vagaEntity = vagaDAO.findById(status.getIdVaga());
+		
+		if( idStatus == 1 || idStatus == 27){
 		vagaEntity.setDataAprovacao(new Date());
 		vagaDAO.update(vagaEntity);
+		}
+		else if( idStatus == 2 || idStatus == 3 || idStatus == 18){
 		vagaEntity.setDataFechamento(new Date());
 		vagaDAO.update(vagaEntity);
+		}
+		
 	}
 
 	@Transactional

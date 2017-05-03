@@ -218,10 +218,6 @@ public class VagaController {
 	public @ResponseBody VagaBean visualizarVagaAjax(Model model, @ModelAttribute("id") Integer id) {
 		VagaBean vaga = new VagaBean();
 		vaga = vagaBusiness.obterVagaPorId(id);
-		/*Integer idCargo = vaga.getCargoBean().getId();
-		Integer idSenioridade = vaga.getSenioridadeBean().getId();
-		List<CargoSenioridadeBean> rangeSalarial = obterCargoSenioridade(model,idCargo,idSenioridade);
-		model.addAttribute("rangeSalarial",rangeSalarial);*/
 		return vaga;
 	}
 
