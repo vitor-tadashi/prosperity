@@ -44,7 +44,7 @@
 									<div class="tab-pane fade in active" id="infoEntrevista">
 										<div class="form-group">
 										
-											<label class="control-label">Parecer :</label>
+											<label class="control-label">Observação :</label>
 											<div class="form-group">
 												<input type="hidden" id="hdn-id-candidato" /> <input
 													type="hidden" id="hdn-status" />
