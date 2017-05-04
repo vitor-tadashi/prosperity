@@ -462,7 +462,8 @@
 								<c:if test="${not empty mensagem}">
 									<div class="alert alert-info mensagem">${mensagem}</div>
 								</c:if>
-						<table
+								<div class ="table-responsive">
+						<table 
 							class="table table-bordered table-condensed table-hover table-striped"
 							id="tabelaVaga"
 							style="font-size: 12px !important; vertical-align: middle !important;">
@@ -597,6 +598,7 @@
 								</c:forEach>
 							</tbody>
 						</table>
+						</div>
 						<!-- Fim Tabela -->
 					</div>
 					<!-- /panel -->
@@ -753,7 +755,7 @@
     			
     			$('#divAlert').html(msg).addClass('alert alert-success').show();
     			escondeMensagem();
-    			setTimeout('location.reload();', 5000);
+    			setTimeout('location.reload();', 3000);
     			//location.reload();
         	}).fail(function(jqXHR, textStatus) {
     			console.log();
