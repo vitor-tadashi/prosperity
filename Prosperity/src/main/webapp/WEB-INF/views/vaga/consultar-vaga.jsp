@@ -454,7 +454,7 @@
 															</c:if>
 
 															<c:if
-																test="${vaga.ultimoStatus.status.nome == 'Pendente de informações'}">
+																test="${vaga.ultimoStatus.status.nome == 'Vaga nova'}">
 																<li role="separator"
 																	class="editarDivider divider btnEdita pre hide"></li>
 																<li><c:url value="editar/${vaga.id}" var="myURL">
