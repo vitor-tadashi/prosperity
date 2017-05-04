@@ -11,7 +11,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import br.com.prosperity.bean.CandidatoBean;
-import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.entity.StatusVagaEntity;
 import br.com.prosperity.entity.VagaEntity;
 
@@ -140,10 +139,10 @@ public class GeradorEmail {
 	public void enviarEmail(CandidatoBean candidato, String para, String nome) {
 
 		Mensagem mensagem = new Mensagem();
-		
-		String mensagemtexto = mensagem.gerador("O candidato", candidato.getNome(), candidato.getUltimoStatus().getStatus().getNome().toString(), nome);
-		
-		
+
+		String mensagemtexto = mensagem.gerador("O candidato", candidato.getNome(),
+				candidato.getUltimoStatus().getStatus().getNome().toString(), nome);
+
 		new Thread() {
 			public void run() {
 				try {
@@ -161,15 +160,15 @@ public class GeradorEmail {
 	public void enviarEmail(VagaEntity vaga, String para, String nome) {
 
 		Mensagem mensagem = new Mensagem();
-		
+
 		StatusVagaEntity status = new StatusVagaEntity();
-		
-		for(StatusVagaEntity statusVaga: vaga.getStatusVagaEntity()){
+
+		for (StatusVagaEntity statusVaga : vaga.getStatusVagaEntity()) {
 			status = statusVaga;
 		}
-		
+
 		String mensagemtexto = mensagem.gerador("a vaga", vaga.getNomeVaga(), status.getStatus().getNome(), nome);
-		
+
 		new Thread() {
 			public void run() {
 				try {

@@ -3,19 +3,15 @@ package br.com.prosperity.dao;
 import java.util.List;
 
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import br.com.prosperity.entity.CandidatoEntity;
-import br.com.prosperity.entity.FormacaoEntity;
-import br.com.prosperity.entity.VagaEntity;
 
 @Repository
 public class CandidatoDAO extends GenericDAOImpl<CandidatoEntity, Integer> {
@@ -115,6 +111,7 @@ public class CandidatoDAO extends GenericDAOImpl<CandidatoEntity, Integer> {
 		query.setFirstResult((page * limitResultsPerPage) - (limitResultsPerPage));
 		query.setMaxResults(limitResultsPerPage);
 		
+		@SuppressWarnings("unchecked")
 		List<CandidatoEntity> candidatos = query.getResultList();
 		
 		return candidatos;

@@ -3,7 +3,6 @@ package br.com.prosperity.entity;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -32,14 +31,13 @@ import javax.persistence.TemporalType;
 		// VagaEntity u LEFT JOIN u.statusVagaEntity p LEFT JOIN p.status e
 		// WHERE u.dataAbertura BETWEEN ?1 AND ?2 AND u.nomeVaga like ?3 AND
 		// p.status = ?4" )
-		
 
-		//VAGAS ATIVAS
+		// VAGAS ATIVAS
 		@NamedQuery(name = "listarVagasAtivas", query = "SELECT v FROM VagaEntity v LEFT JOIN v.statusVagaEntity sv where sv.situacao = TRUE AND sv.status.id = 1 ORDER BY v.nomeVaga ASC"),
 
 		@NamedQuery(name = "listarVagaFiltrado", query = "SELECT u FROM VagaEntity u LEFT OUTER JOIN u.statusVagaEntity p left join p.status s "
 				+ "WHERE u.nomeVaga like ?1 and s.id = ?2 and u.dataAbertura between ?3 and ?4"),
-		@NamedQuery(name = "ultimoCadastro", query = "SELECT MAX(u.id) FROM VagaEntity u")})
+		@NamedQuery(name = "ultimoCadastro", query = "SELECT MAX(u.id) FROM VagaEntity u") })
 
 @Entity
 @Table(name = "tbVaga")
@@ -105,24 +103,24 @@ public class VagaEntity {
 	@Temporal(value = TemporalType.DATE)
 	private Date dataFechamento; //
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idProjeto")
 	private ProjetoEntity projetoEntity;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idCargo")
 	private CargoEntity cargoEntity;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idSenioridade")
 	private SenioridadeEntity senioridadeEntity;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuarioEntity;
 
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="vaga")
-	//@JoinColumn(name = "idVaga")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "vaga")
+	// @JoinColumn(name = "idVaga")
 	private List<StatusVagaEntity> statusVagaEntity;
 
 	// @ManyToOne(cascade = CascadeType.ALL)
@@ -140,10 +138,10 @@ public class VagaEntity {
 	@Column(name = "telResponsavel")
 	private String telResponsavel;
 
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="vaga")
-	//@JoinColumn(name = "idVaga")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "vaga")
+	// @JoinColumn(name = "idVaga")
 	private List<VagaCandidatoEntity> vagaCandidatoEntity;
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -328,11 +326,11 @@ public class VagaEntity {
 	}
 
 	public UsuarioEntity getUsuarioEntity() {
-	return usuarioEntity;
+		return usuarioEntity;
 	}
-	
+
 	public void setUsuarioEntity(UsuarioEntity usuarioEntity) {
-	this.usuarioEntity = usuarioEntity;
+		this.usuarioEntity = usuarioEntity;
 	}
 
 	public List<StatusVagaEntity> getStatusVagaEntity() {

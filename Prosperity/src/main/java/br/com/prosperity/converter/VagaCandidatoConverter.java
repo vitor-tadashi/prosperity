@@ -7,13 +7,11 @@ import br.com.prosperity.bean.VagaCandidatoBean;
 import br.com.prosperity.entity.VagaCandidatoEntity;
 
 @Component
-public class VagaCandidatoConverter implements Converter<VagaCandidatoEntity, VagaCandidatoBean> {	
+public class VagaCandidatoConverter implements Converter<VagaCandidatoEntity, VagaCandidatoBean> {
+
 	@Autowired
 	private CanalInformacaoConverter canalInformacaoConverter;
-	
-	@Autowired
-	private VagaConverter vagaConverter;
-	
+
 	@Override
 	public VagaCandidatoEntity convertBeanToEntity(VagaCandidatoBean bean) {
 		if (bean == null) {
@@ -22,8 +20,8 @@ public class VagaCandidatoConverter implements Converter<VagaCandidatoEntity, Va
 		VagaCandidatoEntity entity = new VagaCandidatoEntity();
 		entity.setIdVagaCandidato(bean.getId());
 		entity.setCanalInformacao(canalInformacaoConverter.convertBeanToEntity(bean.getCanalInformacao()));
-		//entity.setCandidato(candidatoConverter.convertBeanToEntity(bean.getCandidatoBean()));
-		
+		// entity.setCandidato(candidatoConverter.convertBeanToEntity(bean.getCandidatoBean()));
+
 		return entity;
 	}
 
@@ -35,9 +33,9 @@ public class VagaCandidatoConverter implements Converter<VagaCandidatoEntity, Va
 		VagaCandidatoBean bean = new VagaCandidatoBean();
 		bean.setId(entity.getIdVagaCandidato());
 		bean.setCanalInformacao(canalInformacaoConverter.convertEntityToBean(entity.getCanalInformacao()));
-		/*bean.setVaga(vagaConverter.convertEntityToBean(entity.getVaga()));*/
-		//bean.setCandidatoBean(candidatoConverter.convertEntityToBean(entity.getCandidato()));
-		
+		/* bean.setVaga(vagaConverter.convertEntityToBean(entity.getVaga())); */
+		// bean.setCandidatoBean(candidatoConverter.convertEntityToBean(entity.getCandidato()));
+
 		return bean;
 	}
 

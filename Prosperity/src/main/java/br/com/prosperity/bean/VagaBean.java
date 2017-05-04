@@ -4,12 +4,9 @@ import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
@@ -18,11 +15,11 @@ import org.springframework.stereotype.Component;
 public class VagaBean {
 
 	private Integer id;
-	//@NotEmpty(message = "O campo Nome da vaga deve ser preenchido")
+	// @NotEmpty(message = "O campo Nome da vaga deve ser preenchido")
 	private String nomeVaga;
 	private String nomeSolicitante;
 	private Double valorPretensao;
-	//@NotNull(message = "O campo Data para inicio deve ser preenchido")
+	// @NotNull(message = "O campo Data para inicio deve ser preenchido")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataInicio;
 	private Character localTrabalho;
@@ -60,11 +57,11 @@ public class VagaBean {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataAberturaPara;
 	private List<VagaCandidatoBean> vagaCandidatoBean;
-	
+
 	public int getCountCandidatos() {
 		return vagaCandidatoBean.size();
 	}
-	
+
 	public StatusVagaBean getUltimoStatus() {
 		if (status != null && status.size() > 0) {
 			Date dataUltimoStatus = status.stream().map(StatusVagaBean::getDataAlteracao).max(Date::compareTo).get();
@@ -78,7 +75,6 @@ public class VagaBean {
 	}
 
 	public VagaBean() {
-
 
 	}
 
@@ -175,7 +171,7 @@ public class VagaBean {
 	public void setHorarioSaida(String horarioSaida) {
 		this.horarioSaida = horarioSaida;
 	}
-	
+
 	@XmlTransient
 	public char getAumentaQuadro() {
 		return aumentaQuadro;
@@ -334,9 +330,10 @@ public class VagaBean {
 	}
 
 	public List<UsuarioBean> getAvaliadores() {
-		
+
 		return avaliadores;
 	}
+
 	public String getStatusAtual() {
 		return statusAtual;
 	}
@@ -344,7 +341,6 @@ public class VagaBean {
 	public void setStatusAtual(String statusAtual) {
 		this.statusAtual = statusAtual;
 	}
-
 
 	public List<VagaCandidatoBean> getVagaCandidatoBean() {
 		return vagaCandidatoBean;

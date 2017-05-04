@@ -23,8 +23,10 @@ public class VagaDAO extends GenericDAOImpl<VagaEntity, Integer> {
 
 	public static final int limitResultsPerPage = 10;
 
+	@SuppressWarnings("unchecked")
 	public List<StatusVagaEntity> pegarOsStatus() {
 
+		@SuppressWarnings("deprecation")
 		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 		session = sessionFactory.openSession();
 
