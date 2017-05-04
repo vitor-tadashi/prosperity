@@ -395,7 +395,7 @@
 								</form>
 
 								<br />
-
+								<div class ="table-responsive">
 								<table id="tabelaVaga"
 									class="table table-bordered table-condensed table-hover"
 									style="font-size: 12px; vertical-align: middle; margin-top: -10px;">
@@ -528,7 +528,7 @@
 										</c:forEach>
 									</tbody>
 								</table>
-
+								</div>
 							</div>
 							<!--</panel body>-->
 							<div class="panel-footer clearfix">
