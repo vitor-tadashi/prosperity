@@ -56,7 +56,6 @@ import br.com.prosperity.business.SenioridadeBusiness;
 import br.com.prosperity.business.SituacaoAtualBusiness;
 import br.com.prosperity.business.StatusBusiness;
 import br.com.prosperity.business.TipoCursoBusiness;
-import br.com.prosperity.business.UsuarioBusiness;
 import br.com.prosperity.business.VagaBusiness;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.exception.BusinessException;
@@ -97,16 +96,13 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private ProvaCandidatoBusiness provaCandidatoBusiness;
-	
-	@Autowired
-	private UsuarioBusiness usuarioBusiness;
 
 	@Autowired
 	private List<CandidatoCompetenciaBean> candidatoCompetenciasBean;
 
 	@Autowired
 	private CompetenciaBean competenciaBean;
-	
+
 	@Autowired
 	private StatusBusiness statusBusiness;
 
@@ -121,7 +117,7 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private ProvaBean provaBean;
-	
+
 	private void paginacao(Integer page, Model model, CandidatoBean candidato) {
 
 		Integer startpage = 1;
@@ -131,6 +127,7 @@ public class CandidatoController<PaginarCandidato> {
 		model.addAttribute("endpage", endpage);
 		model.addAttribute("page", page);
 	}
+
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.GET)
 	public String cadastrarCandidato(Model model) {
 
@@ -156,7 +153,8 @@ public class CandidatoController<PaginarCandidato> {
 
 	@RequestMapping(value = "/salvar", method = RequestMethod.POST)
 	public String salvarCandidato(@Valid @ModelAttribute("candidatoBean") CandidatoBean candidatoBean,
-			BindingResult result, @RequestParam("file") MultipartFile file, Model model, RedirectAttributes redirectAttrs) throws BusinessException {
+			BindingResult result, @RequestParam("file") MultipartFile file, Model model,
+			RedirectAttributes redirectAttrs) throws BusinessException {
 
 		if (result.hasErrors()) {
 			model.addAttribute("erro", result.getErrorCount());
@@ -193,12 +191,12 @@ public class CandidatoController<PaginarCandidato> {
 	public String solicitarCandidato(Model model, @PathVariable Integer id) {
 		CandidatoBean candidato = candidatoBusiness.obterCandidatoPorId(id);
 		obterDominiosCandidato(model);
-		
+
 		BigDecimal b = new BigDecimal(candidato.getValorPretensao().toString());
 		b = b.setScale(2, BigDecimal.ROUND_DOWN);
-		
+
 		candidato.setValorPretensao(b);
-		//candidato.setCurriculo("file:///C:/Users/leonardo.ramos/Downloads/PontosProsperity.docx");
+		// candidato.setCurriculo("file:///C:/Users/leonardo.ramos/Downloads/PontosProsperity.docx");
 		model.addAttribute("candidato", candidato);
 
 		return "candidato/cadastrar-candidato";
@@ -275,7 +273,8 @@ public class CandidatoController<PaginarCandidato> {
 	}
 
 	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
-	public String consultarCandidatoRH(@RequestParam(value = "page", required = false) Integer page, Model model, CandidatoBean candidato) {
+	public String consultarCandidatoRH(@RequestParam(value = "page", required = false) Integer page, Model model,
+			CandidatoBean candidato) {
 		if (page == null) {
 			page = 1;
 		}
@@ -284,9 +283,9 @@ public class CandidatoController<PaginarCandidato> {
 		paginacao(page, model, candidato);
 
 		model.addAttribute("candidatos", candidatos);
-		
-		//List<CandidatoBean> candidatos = candidatoBusiness.listarTop10();
-		//model.addAttribute("candidatos", candidatos);
+
+		// List<CandidatoBean> candidatos = candidatoBusiness.listarTop10();
+		// model.addAttribute("candidatos", candidatos);
 
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
 		model.addAttribute("listaCargo", listaCargo);
@@ -296,10 +295,10 @@ public class CandidatoController<PaginarCandidato> {
 
 		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.findAll();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
-		
+
 		List<StatusBean> listaStatusDrop = statusBusiness.obterStatusVaga();
 		model.addAttribute("listaStatusDrop", listaStatusDrop);
-		
+
 		// LISTAR VAGA ATIVA
 		List<VagaBean> listaVagaDrop = vagaBusiness.listar();
 		model.addAttribute("listaVagaDrop", listaVagaDrop);
@@ -310,19 +309,20 @@ public class CandidatoController<PaginarCandidato> {
 	}
 
 	@RequestMapping(value = "/filtrar", method = RequestMethod.GET)
-	public String filtrarCandidatoRH(@RequestParam(value = "page", required = false) Integer page,Model model, CandidatoBean candidato, RedirectAttributes redirectAttributes) {
+	public String filtrarCandidatoRH(@RequestParam(value = "page", required = false) Integer page, Model model,
+			CandidatoBean candidato, RedirectAttributes redirectAttributes) {
 		if (page == null) {
 			page = 1;
 		}
-		
+
 		if (candidato.getVagaBean().getId() == 0) {
 			candidato.setVagaBean(null);
 		}
 		paginacao(page, model, candidato);
-		List<CandidatoBean> candidatos = candidatoBusiness.filtroCandidato(candidato,page);
+		List<CandidatoBean> candidatos = candidatoBusiness.filtroCandidato(candidato, page);
 		model.addAttribute("candidatos", candidatos);
-		
-		model.addAttribute("filtroC",candidato);
+
+		model.addAttribute("filtroC", candidato);
 
 		List<VagaBean> listaVaga = vagaBusiness.listar();
 		model.addAttribute("listaVaga", listaVaga);
@@ -338,7 +338,6 @@ public class CandidatoController<PaginarCandidato> {
 
 		List<FuncionarioBean> listaFuncionarios = funcionarioBusiness.findAll();
 		model.addAttribute("listaFuncionarios", listaFuncionarios);
-		
 
 		List<VagaBean> listaVagaDrop = vagaBusiness.listar();
 		model.addAttribute("listaVagaDrop", listaVagaDrop);
@@ -351,14 +350,11 @@ public class CandidatoController<PaginarCandidato> {
 	// andre
 	@RequestMapping(value = "/aprovar", method = RequestMethod.GET)
 	public String aprovarCandidato(Model model) {
-		/*if (page == null) {
-			page = 1;
-		}
-		//Paginação
-		CandidatoBean c = new CandidatoBean();
-		c.setId(-1);
-		paginacao(page, model, c);*/
-		
+		/*
+		 * if (page == null) { page = 1; } //Paginação CandidatoBean c = new
+		 * CandidatoBean(); c.setId(-1); paginacao(page, model, c);
+		 */
+
 		List<CandidatoBean> candidatos = candidatoBusiness.listarAprovacao();
 		List<CompetenciaBean> competencias = candidatoBusiness.listarCompetencia();
 		List<AvaliacaoBean> avaliacoes = candidatoBusiness.listarAvaliacao();
@@ -452,6 +448,7 @@ public class CandidatoController<PaginarCandidato> {
 		@SuppressWarnings("unchecked")
 		List<String> l = gson.fromJson(processoSeletivo, List.class);
 		provasCandidatoBean = new ArrayList<ProvaCandidatoBean>();
+		@SuppressWarnings("unused")
 		List<String> descricao = new ArrayList<String>();
 		int aux = 0;
 		for (String lista : l) {
@@ -477,7 +474,7 @@ public class CandidatoController<PaginarCandidato> {
 		}
 		return provasCandidatoBean;
 	}
-	
+
 	@RequestMapping(value = "/file/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	public void getFile(@PathVariable Integer id, HttpServletResponse response) {
@@ -486,7 +483,7 @@ public class CandidatoController<PaginarCandidato> {
 
 		try {
 			File file = new File(caminho);
-			response.addHeader("Content-Disposition", "attachment; filename="+caminho);
+			response.addHeader("Content-Disposition", "attachment; filename=" + caminho);
 			InputStream is = new FileInputStream(file);
 			org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
 			response.flushBuffer();

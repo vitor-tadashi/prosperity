@@ -62,7 +62,7 @@
 		var id = dropdownProjeto.value;
 		if (id>0){
 			$.ajax({
-				url: "http://localhost:8080/vaga/obter-cliente",
+				url: "/vaga/obter-cliente",
 				type: "GET",
 				dataType: "JSON",
 				data: {id : id},
@@ -84,7 +84,7 @@
 		var idCargo = dropdownCargo.value;
 		if (idSenioridade>0 && idCargo>0){
 			$.ajax({
-				url: "http://localhost:8080/vaga/obter-range-salarial",
+				url: "/vaga/obter-range-salarial",
 				type: "GET",
 				dataType: "JSON",
 				data: {idCargo : idCargo,
@@ -105,7 +105,7 @@
 		var idCargo = dropdownCargo.value;
 		if (idSenioridade>0 && idCargo>0){
 			$.ajax({
-				url: "http://localhost:8080/vaga/obter-range-salarial",
+				url: "/vaga/obter-range-salarial",
 				type: "GET",
 				dataType: "JSON",
 				data: {idCargo : idCargo,
@@ -125,7 +125,7 @@
 	
     	var id = $("#idPerfil").val();
     	$.ajax({
-    		url: "http://localhost:8080/usuario/obter-perfil-funcionalidade",
+    		url: "/usuario/obter-perfil-funcionalidade",
     		type: "GET",
     		dataType: "JSON",
     		data: {id : id},
@@ -218,7 +218,7 @@
 		var info = enviarAvaliadores();
 		var result = JSON.stringify(info);
     	$.ajax({
-    		url: "http://localhost:8080/vaga/avaliadores",
+    		url: "/vaga/avaliadores",
     		type: "POST",
     		data: {avaliadores : result},
     		success: function(data){

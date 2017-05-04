@@ -6,7 +6,6 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -80,10 +79,10 @@ public class VagaController {
 
 	@Autowired
 	private List<UsuarioBean> avaliadoresB;
-	
+
 	@Autowired
 	private CargoSenioridadeBusiness cargoSenioridadeBusiness;
-	
+
 	@Autowired
 	private CargoBusiness cargoBusiness;
 
@@ -95,7 +94,7 @@ public class VagaController {
 
 	@Autowired
 	private StatusVagaBusiness statusVagaBusiness;
-	
+
 	@Autowired
 	private AvaliadorVagaBusiness avaliadorVagaBusiness;
 
@@ -116,7 +115,8 @@ public class VagaController {
 	}
 
 	@RequestMapping(value = "/consultar", method = RequestMethod.GET)
-	public String cliente(@RequestParam(value = "page", required = false) Integer page, Model model, VagaBean vaga, Integer id) {
+	public String cliente(@RequestParam(value = "page", required = false) Integer page, Model model, VagaBean vaga,
+			Integer id) {
 		if (page == null) {
 			page = 1;
 		}
@@ -132,7 +132,7 @@ public class VagaController {
 		// model.addAttribute("vagas", vagaBusiness.listarDecrescente());
 
 		/* model.addAttribute("vagas", vagaBusiness.listar()); */
-		
+
 		List<AvaliadorVagaBean> avaliadorVagaBean = avaliadorVagaBusiness.obterAvaliador(id);
 		model.addAttribute("avaliadores", avaliadorVagaBean);
 
@@ -176,7 +176,7 @@ public class VagaController {
 		paginacao(page, model, vaga);
 		model.addAttribute("filtroVaga", vaga);
 		model.addAttribute("vagas", vagas);
-		
+
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
 		model.addAttribute("listaCargo", listaCargo);
 
@@ -217,19 +217,15 @@ public class VagaController {
 	@RequestMapping(value = { "/visualizar" }, method = RequestMethod.GET)
 	public @ResponseBody VagaBean visualizarVagaAjax(Model model, @ModelAttribute("id") Integer id) {
 		VagaBean vaga = new VagaBean();
-		vaga = vagaBusiness.obterVagaPorId(id);
-		/*Integer idCargo = vaga.getCargoBean().getId();
-		Integer idSenioridade = vaga.getSenioridadeBean().getId();
-		List<CargoSenioridadeBean> rangeSalarial = obterCargoSenioridade(model,idCargo,idSenioridade);
-		model.addAttribute("rangeSalarial",rangeSalarial);*/
 		return vaga;
 	}
 
 	@RequestMapping(value = "/status", method = RequestMethod.POST)
-	public @ResponseBody HttpStatus alterarStatusVaga(Model model, SituacaoVagaBean status){
+	public @ResponseBody Integer alterarStatusVaga(Model model, SituacaoVagaBean status) {
 		vagaBusiness.alterarStatus(status);
-		vagaBusiness.alterarDataAprovacao(status);		
-		return HttpStatus.OK;
+		vagaBusiness.alterarDataAprovacao(status);
+		Integer id = status.getStatus().getValue();
+		return id;
 	}
 
 	@RequestMapping(value = "/solicitar", method = RequestMethod.GET)
@@ -273,20 +269,22 @@ public class VagaController {
 	}
 
 	@RequestMapping(value = "/cancelar-candidato/{id}")
-	public RedirectView cancelaCandidato(Model model, @PathVariable Integer id, RedirectAttributes redirectAttributes)throws BusinessException  {
+	public RedirectView cancelaCandidato(Model model, @PathVariable Integer id, RedirectAttributes redirectAttributes)
+			throws BusinessException {
 		SituacaoVagaBean bean = new SituacaoVagaBean();
-		//vagaBusiness.cancelarVagaCandidato(id);
+		// vagaBusiness.cancelarVagaCandidato(id);
 		bean.setIdVaga(id);
 		bean.setStatus(StatusVagaEnum.CANCELADO);
 		vagaBusiness.alterarStatus(bean);
-		
+
 		redirectAttributes.addFlashAttribute("sucesso", "Vaga cancelada com sucesso.");
-		
+
 		return new RedirectView("/vaga/aprovar", true);
 	}
 
 	@RequestMapping(value = "/salvar", method = RequestMethod.POST)
-	public String inserirVaga(@ModelAttribute("vagaBean") @Valid VagaBean vagaBean, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+	public String inserirVaga(@ModelAttribute("vagaBean") @Valid VagaBean vagaBean, BindingResult result, Model model,
+			RedirectAttributes redirectAttributes) {
 
 		if (result.hasErrors()) {
 			model.addAttribute("erro", result.getErrorCount());
@@ -333,14 +331,16 @@ public class VagaController {
 		List<ProjetoBean> cliente = projetoBusiness.obterCliente(id);
 		return cliente;
 	}
-	
+
 	@RequestMapping(value = "/obter-range-salarial", method = RequestMethod.GET)
-	public @ResponseBody List<CargoSenioridadeBean> obterCargoSenioridade(Model model, @ModelAttribute("idCargo") Integer idCargo,@ModelAttribute("idSenioridade") Integer idSenioridade) {
+	public @ResponseBody List<CargoSenioridadeBean> obterCargoSenioridade(Model model,
+			@ModelAttribute("idCargo") Integer idCargo, @ModelAttribute("idSenioridade") Integer idSenioridade) {
 		CargoBean cargo = new CargoBean();
 		SenioridadeBean senioridade = new SenioridadeBean();
 		cargo.setId(idCargo);
 		senioridade.setId(idSenioridade);
-		List<CargoSenioridadeBean> rangeSalarial = cargoSenioridadeBusiness.obterRangeSalarial(cargo.getId(),senioridade.getId());
+		List<CargoSenioridadeBean> rangeSalarial = cargoSenioridadeBusiness.obterRangeSalarial(cargo.getId(),
+				senioridade.getId());
 		return rangeSalarial;
 	}
 	/*

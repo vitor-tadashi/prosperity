@@ -1,7 +1,7 @@
 $(function() {
 	var id = $("input#idPerfil").val();
 	$.ajax({
-		url : "http://localhost:8080/usuario/obter-perfil-funcionalidade",
+		url : "/usuario/obter-perfil-funcionalidade",
 		type : "GET",
 		dataType : "JSON",
 		data : {

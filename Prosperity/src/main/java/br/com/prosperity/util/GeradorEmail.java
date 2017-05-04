@@ -139,25 +139,28 @@ public class GeradorEmail {
 	public void enviarEmail(CandidatoBean candidato, String para, String nome) {
 
 		Mensagem mensagem = new Mensagem();
-		
-		String mensagemtexto = mensagem.gerador("o candidato ", candidato.getNome(), candidato.getUltimoStatus().getStatus().getNome().toString(), nome);
+
+		String mensagemtexto = mensagem.gerador("O candidato", candidato.getNome(),
+				candidato.getUltimoStatus().getStatus().getNome().toString(), nome);
 		
 		sendMail(de, para, "Prosperity (Não responda)", mensagemtexto);
+
 	}
 
 	// Para alterações em status de vagas:
 	public void enviarEmail(VagaEntity vaga, String para, String nome) {
 
 		Mensagem mensagem = new Mensagem();
-		
+
 		StatusVagaEntity status = new StatusVagaEntity();
-		
-		for(StatusVagaEntity statusVaga: vaga.getStatusVagaEntity()){
+
+		for (StatusVagaEntity statusVaga : vaga.getStatusVagaEntity()) {
 			status = statusVaga;
 		}
 		
 		String mensagemtexto = mensagem.gerador("a vaga ", vaga.getNomeVaga(), status.getStatus().getNome(), nome);
 		
 		sendMail(de, para, "Prosperity (Não responda)", mensagemtexto);
+
 	}
 }

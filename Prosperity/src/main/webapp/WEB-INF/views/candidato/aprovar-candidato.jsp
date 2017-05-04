@@ -275,13 +275,16 @@
 		<script>
 		
 		
-	var cont;
+	/*contador de caracter - parecer*/
+	
 	function maxCaracterParecer(){
 		var maxParecer = $("#parecer").val();
 		var restante = 500 - maxParecer.length;
 		var maxCaracteres = document.querySelector("#maxParecer");
 		maxCaracteres.innerHTML = "Caracteres restantes : " + restante;
-	}
+		}
+
+	
 		$("body").on("click", "#aprovar-candidato", function(){
 			var inputs  = $(this).closest("tr").find("input[type=hidden]");
 			CKEDITOR.instances.editor.setData("");
@@ -428,6 +431,7 @@
         /*gerador de campo*/    
             var cont = 0;
             $("#gerarCampo").click(function(){
+            	
             	var campos = 
             	"<div class='div"+cont+" col-md-12 processoSeletivo'>" +
             	"<select class='form-control col-md-3' style='width: 120px; height: 30px;' id='prova"+ cont +"'>" +
@@ -444,15 +448,31 @@
             	"<br/>" +
             	"</select>"+
             	"&nbsp;"+
-            	"<input class='form-control col-md-3' style='width: 190px; height: 30px;' type='text' id='descricao"+ cont +"'/>"+
-            	"<input type='button' id='btnRemover' onclick='remover("+ cont +")'value='Remover campo' class='btn btn-sm btn-danger'>"+
-
+            	"<input class='form-control col-md-3 descricaoProva' style='width: 190px; height: 30px;' type='text' id='descricao"+ cont +"' name='descricao"+ cont +"' maxlength='50'  onkeyup='maxDescricaoProva()' />"+
+            	"&nbsp; <input type='button' id='btnRemover' onclick='remover("+ cont +")'value='Remover campo' class='btn btn-sm btn-danger'>"+
+            	"&nbsp; &nbsp;<label id='maxDescricao'>Caracteres restantes : <span class='numeroCaracteres" + cont +"'>50</span></label>"+
+            	"<br>" + 	
             	"</div>" ;
             	cont++;
         /*adiciona na div*/
             	$("#processoSeletivo").append(campos);
+        
+            	
+            	/*contador de caracter - descrição prova*/	
             });
        /*remove os campos*/
+       
+                function maxDescricaoProva(){
+    	   			var cont = 0;
+    	   			$(".descricaoProva").each(function(){
+    	   				
+                		var descricao = $(this).val().length;
+                		var restante = 50 - descricao;
+                		$(".numeroCaracteres"+cont).text(restante);
+    	   				cont++;
+    	   			})
+
+            	}
             function remover(id){
             	$(".div"+id).remove();
             	cont--;

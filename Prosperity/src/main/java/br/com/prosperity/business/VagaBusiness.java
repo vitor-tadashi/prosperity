@@ -237,7 +237,7 @@ public class VagaBusiness {
 			if (status.getStatus().getNome().equals("Aguardando avaliadores")) {
 				inserirAvaliadores(vagaEntity, usuarioBean);
 				situacaoVaga.setIdVaga(vagaEntity.getId());
-				situacaoVaga.setStatus(StatusVagaEnum.PENDENTEDEINFORMACOES);
+				situacaoVaga.setStatus(StatusVagaEnum.VAGANOVA);
 				alterarStatus(situacaoVaga);
 			} else if (status.getStatus().getNome().equals("Ativo")) {
 				inserirAvaliadores(vagaEntity, usuarioBean);
@@ -272,7 +272,7 @@ public class VagaBusiness {
 			List<AvaliadorVagaEntity> avaliadorVagaEntity = avaliadorVagaDao.findByNamedQuery("obterAvaliadoresDaVaga",
 					vagaEntity.getId());
 			if (avaliadorVagaEntity == null || avaliadorVagaEntity.size() == 0) {
-				situacaoVaga.setStatus(StatusVagaEnum.PENDENTEDEINFORMACOES);
+				situacaoVaga.setStatus(StatusVagaEnum.VAGANOVA);
 			}
 		}
 
@@ -310,11 +310,18 @@ public class VagaBusiness {
 
 	@Transactional
 	public void alterarDataAprovacao(SituacaoVagaBean status) {
+		Integer idStatus = status.getStatus().getValue();
 		VagaEntity vagaEntity = vagaDAO.findById(status.getIdVaga());
+		
+		if( idStatus == 1 || idStatus == 27){
 		vagaEntity.setDataAprovacao(new Date());
 		vagaDAO.update(vagaEntity);
+		}
+		else if( idStatus == 2 || idStatus == 3 || idStatus == 18){
 		vagaEntity.setDataFechamento(new Date());
 		vagaDAO.update(vagaEntity);
+		}
+		
 	}
 
 	@Transactional
@@ -343,7 +350,7 @@ public class VagaBusiness {
 
 	@Transactional
 	private void inserirAvaliadores(VagaEntity vaga, List<UsuarioBean> usuarios) {
-		if (usuarios != null || usuarios.size() < 1) {
+		if (usuarios != null) {
 			for (UsuarioBean usuario : usuarios) {
 				AvaliadorVagaEntity avaliadorVagaEntity = new AvaliadorVagaEntity();
 				avaliadorVagaEntity.setUsuario(usuarioConverter.convertBeanToEntity(usuario));
@@ -380,7 +387,7 @@ public class VagaBusiness {
 				lista.add(StatusVagaEnum.ATIVO.getValue());
 
 			if (funcionalidadeBean.getId() == 29) {
-				lista.add(StatusVagaEnum.PENDENTEDEINFORMACOES.getValue());
+				lista.add(StatusVagaEnum.VAGANOVA.getValue());
 				lista.add(StatusVagaEnum.PENDENTE.getValue());
 				lista.add(StatusVagaEnum.ATIVO.getValue());
 			}
@@ -406,6 +413,7 @@ public class VagaBusiness {
 					List<UsuarioBean> usuarios = usuarioBusiness.findAll();
 					ArrayList<String> recipients = new ArrayList<>();
 					ArrayList<String> nomes = new ArrayList<>();
+					@SuppressWarnings("unused")
 					List<AvaliadorVagaBean> avaliadores = avaliadorVagaConverter
 							.convertEntityToBean(avaliadorVagaDAO.findByNamedQuery("obterProposta", vaga.getId()));
 

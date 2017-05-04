@@ -344,7 +344,7 @@ public class CandidatoBusiness {
 			statusCandidatoDAO.insert(statusCandidatoEntity);
 			buscarUsuariosParaEmail(situacaoCandidato);
 		} else {
-			if (statusDisponivelEntity != null || statusDisponivelEntity.size() > 0) {
+			if (statusDisponivelEntity != null) {
 				List<StatusCandidatoEntity> statusCandidato = null;
 				statusCandidato = statusCandidatoDAO.findByNamedQuery("obterStatusCandidato",
 						situacaoCandidato.getIdCandidato());
@@ -516,7 +516,7 @@ public class CandidatoBusiness {
 
 			if (funcionalidadeBean.getId() == 28) {
 				listaStatus.add(StatusCandidatoEnum.CANDIDATORECUSOUPROPOSTA.getValue());
-				listaStatus.add(StatusCandidatoEnum.PROPOSTAACEITA.getValue());
+				listaStatus.add(StatusCandidatoEnum.PROPOSTAAPROVADA.getValue());
 				listaStatus.add(StatusCandidatoEnum.PROPOSTARECUSADA.getValue());
 			}
 		}
