@@ -510,7 +510,7 @@
 													<i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
 												</button>
 												<ul class="dropdown-menu slidedown btnAlinhado">
-													<li><a href="#visualizar-modal" data-toggle="modal"
+													<li><a href="#" data-toggle="modal"
 														onclick="info(${vaga.id})"> <i class="fa fa-eye fa-lg">&nbsp;</i>Visualizar
 													</a></li>
 													
@@ -624,7 +624,7 @@
 	function info(listaId){
     	//
     	$.ajax({
-    		url: "visualizar",
+    		url: "abrir",
     		type: "GET",
     		dataType: "JSON",
     		data: { 'id' : listaId},
