@@ -51,7 +51,7 @@ public class GeradorEmail {
 		 * autenticação
 		 */
 		Session session = Session.getDefaultInstance(properties, authenticator);
-		// session.setDebug(true); // Habilita o LOG das ações executadas
+		session.setDebug(true);
 		// durante o
 		// envio do email
 
@@ -142,18 +142,9 @@ public class GeradorEmail {
 
 		String mensagemtexto = mensagem.gerador("O candidato", candidato.getNome(),
 				candidato.getUltimoStatus().getStatus().getNome().toString(), nome);
+		
+		sendMail(de, para, "Prosperity (Não responda)", mensagemtexto);
 
-		new Thread() {
-			public void run() {
-				try {
-					sendMail(de, para, "Prosperity (Não responda)", mensagemtexto);
-
-				} catch (Exception e) {
-					System.out.println("Erro\n");
-					e.printStackTrace();
-				}
-			}
-		}.start();
 	}
 
 	// Para alterações em status de vagas:
@@ -166,19 +157,10 @@ public class GeradorEmail {
 		for (StatusVagaEntity statusVaga : vaga.getStatusVagaEntity()) {
 			status = statusVaga;
 		}
+		
+		String mensagemtexto = mensagem.gerador("a vaga ", vaga.getNomeVaga(), status.getStatus().getNome(), nome);
+		
+		sendMail(de, para, "Prosperity (Não responda)", mensagemtexto);
 
-		String mensagemtexto = mensagem.gerador("a vaga", vaga.getNomeVaga(), status.getStatus().getNome(), nome);
-
-		new Thread() {
-			public void run() {
-				try {
-					sendMail(de, para, "Prosperity (Não responda)", mensagemtexto);
-
-				} catch (Exception e) {
-					System.out.println("Erro\n");
-					e.printStackTrace();
-				}
-			}
-		}.start();
 	}
 }
