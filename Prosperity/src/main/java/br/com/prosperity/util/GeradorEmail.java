@@ -11,7 +11,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import br.com.prosperity.bean.CandidatoBean;
-import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.entity.StatusVagaEntity;
 import br.com.prosperity.entity.VagaEntity;
 
@@ -52,7 +51,7 @@ public class GeradorEmail {
 		 * autenticação
 		 */
 		Session session = Session.getDefaultInstance(properties, authenticator);
-		// session.setDebug(true); // Habilita o LOG das ações executadas
+		session.setDebug(true);
 		// durante o
 		// envio do email
 
@@ -143,18 +142,7 @@ public class GeradorEmail {
 		
 		String mensagemtexto = mensagem.gerador("o candidato ", candidato.getNome(), candidato.getUltimoStatus().getStatus().getNome().toString(), nome);
 		
-		
-		new Thread() {
-			public void run() {
-				try {
-					sendMail(de, para, "Prosperity (Não responda)", mensagemtexto);
-
-				} catch (Exception e) {
-					System.out.println("Erro\n");
-					e.printStackTrace();
-				}
-			}
-		}.start();
+		sendMail(de, para, "Prosperity (Não responda)", mensagemtexto);
 	}
 
 	// Para alterações em status de vagas:
@@ -170,16 +158,6 @@ public class GeradorEmail {
 		
 		String mensagemtexto = mensagem.gerador("a vaga ", vaga.getNomeVaga(), status.getStatus().getNome(), nome);
 		
-		new Thread() {
-			public void run() {
-				try {
-					sendMail(de, para, "Prosperity (Não responda)", mensagemtexto);
-
-				} catch (Exception e) {
-					System.out.println("Erro\n");
-					e.printStackTrace();
-				}
-			}
-		}.start();
+		sendMail(de, para, "Prosperity (Não responda)", mensagemtexto);
 	}
 }
