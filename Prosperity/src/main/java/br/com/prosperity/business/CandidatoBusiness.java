@@ -150,7 +150,6 @@ public class CandidatoBusiness {
 		if (candidatoEntity != null) {
 			candidatoBean = candidatoConverter.convertEntityToBean(candidatoEntity);
 			candidatoBean = FormatUtil.formatCPF(candidatoBean);
-			candidatoBean = FormatUtil.formatRG(candidatoBean);
 			candidatoBean.setContato(FormatUtil.formatPhone(candidatoBean.getContato()));
 		}
 
