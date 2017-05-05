@@ -43,6 +43,7 @@
 							</c:if>
 							<input id="contErro" class ="hidden" value="${erro}">
 							<input id="txtSolicitante" type="hidden" name="nomeSolicitante" value="${autenticado.funcionario.nome}">
+							<input id="solicitante" type="hidden" value="${vaga.nomeSolicitante }">
 							
 							<div id="textDiv">
 								<c:forEach var="erro" items="${listaErros}">
