@@ -395,7 +395,7 @@
 								</form>
 
 								<br />
-
+								<div class ="table-responsive">
 								<table id="tabelaVaga"
 									class="table table-bordered table-condensed table-hover"
 									style="font-size: 12px; vertical-align: middle; margin-top: -10px;">
@@ -454,7 +454,7 @@
 															</c:if>
 
 															<c:if
-																test="${vaga.ultimoStatus.status.nome == 'Pendente de informações'}">
+																test="${vaga.ultimoStatus.status.nome == 'Vaga nova'}">
 																<li role="separator"
 																	class="editarDivider divider btnEdita pre hide"></li>
 																<li><c:url value="editar/${vaga.id}" var="myURL">
@@ -528,7 +528,7 @@
 										</c:forEach>
 									</tbody>
 								</table>
-
+								</div>
 							</div>
 							<!--</panel body>-->
 							<div class="panel-footer clearfix">

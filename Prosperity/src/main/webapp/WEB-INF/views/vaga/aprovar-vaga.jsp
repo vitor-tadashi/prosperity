@@ -462,7 +462,8 @@
 								<c:if test="${not empty mensagem}">
 									<div class="alert alert-info mensagem">${mensagem}</div>
 								</c:if>
-						<table
+								<div class ="table-responsive">
+						<table 
 							class="table table-bordered table-condensed table-hover table-striped"
 							id="tabelaVaga"
 							style="font-size: 12px !important; vertical-align: middle !important;">
@@ -510,7 +511,7 @@
 													<i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
 												</button>
 												<ul class="dropdown-menu slidedown btnAlinhado">
-													<li><a href="#visualizar-modal" data-toggle="modal"
+													<li><a href="#" data-toggle="modal"
 														onclick="info(${vaga.id})"> <i class="fa fa-eye fa-lg">&nbsp;</i>Visualizar
 													</a></li>
 													
@@ -597,6 +598,7 @@
 								</c:forEach>
 							</tbody>
 						</table>
+						</div>
 						<!-- Fim Tabela -->
 					</div>
 					<!-- /panel -->
@@ -624,7 +626,7 @@
 	function info(listaId){
     	//
     	$.ajax({
-    		url: "visualizar",
+    		url: "abrir",
     		type: "GET",
     		dataType: "JSON",
     		data: { 'id' : listaId},
@@ -753,7 +755,7 @@
     			
     			$('#divAlert').html(msg).addClass('alert alert-success').show();
     			escondeMensagem();
-    			setTimeout('location.reload();', 5000);
+    			setTimeout('location.reload();', 3000);
     			//location.reload();
         	}).fail(function(jqXHR, textStatus) {
     			console.log();
