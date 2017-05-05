@@ -17,30 +17,6 @@ public class FormatUtil {
 		return candidatoBean;
 	}
 
-	public static CandidatoBean formatRG(CandidatoBean candidatoBean) {
-		if(candidatoBean != null){
-			String bloco1;
-			String bloco2;
-			String bloco3;
-			String bloco4;
-			
-			if(candidatoBean.getRg().length() == 9) {
-				bloco1 = candidatoBean.getRg().substring(0, 2);
-				bloco2 = candidatoBean.getRg().substring(2, 5);
-				bloco3 = candidatoBean.getRg().substring(5, 8);
-				bloco4 = candidatoBean.getRg().substring(8, 9);
-			} else {
-				bloco1 = candidatoBean.getRg().substring(0, 2);
-				bloco2 = candidatoBean.getRg().substring(2, 5);
-				bloco3 = candidatoBean.getRg().substring(5, 8);
-				bloco4 = "0";
-			}
-		
-		candidatoBean.setRg(String.format("%s.%s.%s-%s", bloco1, bloco2, bloco3, bloco4));
-		}
-		return candidatoBean;
-	}
-
 	public static ContatoBean formatPhone(ContatoBean contatoBean) {
 		if (contatoBean != null) {
 			//11971245007
