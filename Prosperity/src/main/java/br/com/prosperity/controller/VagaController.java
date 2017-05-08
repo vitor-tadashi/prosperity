@@ -287,7 +287,7 @@ public class VagaController {
 			obterDominiosVaga(model);
 			return "vaga/solicitar-vaga";
 		}
-
+	
 		vagaBusiness.inserir(vagaBean, avaliadoresB);
 		redirectAttributes.addFlashAttribute("sucesso", "Vaga salva com sucesso.");
 		return "redirect:/vaga/solicitar";

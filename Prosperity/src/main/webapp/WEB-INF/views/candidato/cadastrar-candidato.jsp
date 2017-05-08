@@ -105,7 +105,7 @@
 												<div class="form-group col-md-2">
 													<label for="rg" class="control-label">RG</label> <input
 														type="text" class="form-control rg parsley-validated"
-														maxlength="50" id="rg" name="rg" data-required="true"
+														maxlength="20" id="rg" name="rg" data-required="true"
 														data-required="true" placeholder="Informe seu RG"
 														value="${candidato.rg}">
 												</div>
@@ -311,4 +311,5 @@
 		<script src="/resources/js/parsley.min.js"></script>
 		<script src="/resources/js/custom/cadastrar-candidato.js"></script>
 	</layout:put>
+	
 </layout:extends>
