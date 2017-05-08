@@ -308,10 +308,10 @@
 									
 									<div class="tab-pane fade" id="third">
 										<section class="panel panel-default">
-											<div class="panel-heading"><label>Formação acadêmica</label></div>
+											<div class="panel-heading"><label for="descricaoFormacaoAcademica">Formação acadêmica</label></div>
 											<div class="panel-body relative">
 												<textarea id="descricaoFormacaoAcademica" class="form-control"
-													name="descricaoFormacaoAcademica" rows="5"
+													name="descricaoFormacaoAcademica.id" id="solicitante" rows="5"
 													value="${vaga.descricaoFormacaoAcademica}" maxlength="500" onkeyup="maxCaracterFormacaoAcademica()" style="resize: none;">${vaga.descricaoFormacaoAcademica}</textarea>
 												<label id="maxFormacaoAcademica">Caracteres restantes : 500</label>
 											</div>

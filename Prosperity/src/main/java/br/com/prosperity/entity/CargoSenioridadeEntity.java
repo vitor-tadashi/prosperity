@@ -22,7 +22,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name="tbCargoSenioridade")
 @NamedQueries({ 
-	@NamedQuery(name = "rangeSalarial", query = "SELECT u FROM CargoSenioridadeEntity u WHERE u.idCargo = ?1 AND u.idSenioridade = ?2")
+	@NamedQuery(name = "rangeSalarial", query = "SELECT u FROM CargoSenioridadeEntity u WHERE u.idCargo = ?1 AND u.idSenioridade = ?2"),
+	@NamedQuery(name = "perfilPrePronto", query = "SELECT u FROM CargoSenioridadeEntity u WHERE u.idCargo = ?1 AND u.idSenioridade = ?2")
 })
 public class CargoSenioridadeEntity{
 	

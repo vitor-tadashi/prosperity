@@ -1,11 +1,5 @@
+	$(document).ready(function() {
 
-
-
-$(document).ready(function() {
-	if($("#solicitante").val()) {
-		$("#txtSolicitante").val($("#solicitante").val());
-	}
-	
 		if ($("input#contErro").val() > 0) {
 			$('#textDiv').addClass("alert alert-danger");
 		}
@@ -119,7 +113,6 @@ $(document).ready(function() {
 				success: function(lista){
 					$("#valorMinimo").val(lista[0].valorMinSalario);
 					$("#valorMaximo").val(lista[0].valorMaxSalario);
-					$("#descricaoFormacaoAcademica").text(lista[0].dsPreTexto);
 				}
 			});
 		} else{
@@ -128,6 +121,36 @@ $(document).ready(function() {
 			
 		}
 	});
+	
+	// Ajax para verificar o cargo e a senioridade e preencher os campos de formação
+	// academica
+	// Perfil coomportamental
+	// Perfil técnico
+		
+		var dropdowndescricaoFormacaoAcademica = document.querySelector("#cmbSenioridade");
+		var dropdownCargo = document.querySelector("#cmbCargo");
+		dropdownSenioridade.addEventListener("change",function(){
+			var idSenioridade = dropdownSenioridade.value;
+			var idCargo = dropdownCargo.value;
+			if (idSenioridade>0 && idCargo>0){
+				$.ajax({
+					url: "/vaga/obter-perfil-pre-pronto",
+					type: "GET",
+					dataType: "JSON",
+					data: {idCargo : idCargo,
+						idSenioridade : idSenioridade},
+					success: function(lista){
+						$("#descricaoFormacaoAcademica").val(lista[0].dsPreTexto);
+						$("#descricaoPerfilComportamental").val(lista[0].dsPreTexto);
+						$("#descricaoPerfilTecnico").val(lista[0].dsPreTexto);
+					}
+				});
+			} else{
+				$("#descricaoFormacaoAcademica").val("Nao funcionou");
+				$("#descricaoPerfilComportamental").val("Nao funcionou");
+				$("#descricaoPerfilTecnico").val("Nao funcionou");
+			}
+		});
 	
 		//Ajax para verificar o perfil e ver se ele pode editar avaliadores
 	
