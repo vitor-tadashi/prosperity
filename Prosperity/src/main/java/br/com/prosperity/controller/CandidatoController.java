@@ -13,6 +13,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.apache.commons.fileupload.FileUpload;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -59,6 +61,7 @@ import br.com.prosperity.business.TipoCursoBusiness;
 import br.com.prosperity.business.VagaBusiness;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.exception.BusinessException;
+import br.com.prosperity.util.TesteExcel;
 
 @Controller
 @RequestMapping(value = "/candidato")
@@ -492,5 +495,10 @@ public class CandidatoController<PaginarCandidato> {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@RequestMapping(value = { "/gerar-proposta" },headers = "Content-Type=multipart/form-data", method = RequestMethod.POST)
+	public void gerarProposta(FileUpload uploadForm) {
+		TesteExcel tst = new TesteExcel();
 	}
 }
