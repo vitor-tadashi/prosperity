@@ -39,6 +39,9 @@ public class CargoSenioridadeEntity{
 	@JoinColumn(name = "idSenioridade")
 	private SenioridadeEntity idSenioridade;
 	
+	@Column(name="dsPreTexto")
+	private String dsPretexto;
+	
 	@Column(name="vlMinSalario")
 	private BigDecimal vlMinSalario;
 	
@@ -75,6 +78,18 @@ public class CargoSenioridadeEntity{
 	}
 	public void setVlMaxSalario(BigDecimal vlMaxSalario) {
 		this.vlMaxSalario = vlMaxSalario;
+	}
+	public CargoEntity getIdCargo() {
+		return idCargo;
+	}
+	public void setIdCargo(CargoEntity idCargo) {
+		this.idCargo = idCargo;
+	}
+	public String getDsPretexto() {
+		return dsPretexto;
+	}
+	public void setDsPretexto(String dsPretexto) {
+		this.dsPretexto = dsPretexto;
 	}
 	
 }

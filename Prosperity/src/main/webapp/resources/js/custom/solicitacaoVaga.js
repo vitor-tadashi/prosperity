@@ -113,11 +113,13 @@
 				success: function(lista){
 					$("#valorMinimo").val(lista[0].valorMinSalario);
 					$("#valorMaximo").val(lista[0].valorMaxSalario);
+					$("#descricaoFormacaoAcademica").text(lista[0].dsPreTexto);
 				}
 			});
 		} else{
 			$("#valorMinimo").val("R$");
 			$("#valorMaximo").val("R$");
+			
 		}
 	});
 	
