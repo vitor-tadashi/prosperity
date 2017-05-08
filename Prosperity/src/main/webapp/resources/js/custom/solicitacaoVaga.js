@@ -1,5 +1,11 @@
-	$(document).ready(function() {
 
+
+
+$(document).ready(function() {
+	if($("#solicitante").val()) {
+		$("#txtSolicitante").val($("#solicitante").val());
+	}
+	
 		if ($("input#contErro").val() > 0) {
 			$('#textDiv').addClass("alert alert-danger");
 		}

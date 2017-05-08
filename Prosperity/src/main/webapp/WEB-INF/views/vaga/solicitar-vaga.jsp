@@ -43,6 +43,7 @@
 							</c:if>
 							<input id="contErro" class ="hidden" value="${erro}">
 							<input id="txtSolicitante" type="hidden" name="nomeSolicitante" value="${autenticado.funcionario.nome}">
+							<input id="solicitante" type="hidden" value="${vaga.nomeSolicitante }">
 							
 							<div id="textDiv">
 								<c:forEach var="erro" items="${listaErros}">
@@ -79,7 +80,7 @@
 											Avaliadores</a></li>
 									<li id="tabMarketing" class="tab-verity"><a id="tabMarketing" href="#fifth" data-toggle="tab"
 										class="text-success"><i class="fa fa-briefcase"></i>
-											Marketing</a></li>
+											Divulgação</a></li>
 								</ul>
 							</div>
 
@@ -196,7 +197,7 @@
 										<div class="row">
 											<div class="form-group col-md-6" style="padding-top:0px">
 											<div>
-												<label class="control-label" for="txtPropostaSalarial">Range salarial</label>
+												<label class="control-label" for="txtPropostaSalarial">Faixa salarial</label>
 											</div>
 												<label class="control-label col-md-2" for="txtPropostaSalarial" style="padding-top:5px">Mínimo</label>
 											 	<input

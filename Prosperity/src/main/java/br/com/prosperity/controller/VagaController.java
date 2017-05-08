@@ -214,12 +214,6 @@ public class VagaController {
 		return "vaga/aprovar-vaga";
 	}
 
-	@RequestMapping(value = { "/visualizar" }, method = RequestMethod.GET)
-	public @ResponseBody VagaBean visualizarVagaAjax(Model model, @ModelAttribute("id") Integer id) {
-		VagaBean vaga = new VagaBean();
-		return vaga;
-	}
-
 	@RequestMapping(value = "/status", method = RequestMethod.POST)
 	public @ResponseBody Integer alterarStatusVaga(Model model, SituacaoVagaBean status) {
 		vagaBusiness.alterarStatus(status);
@@ -293,7 +287,7 @@ public class VagaController {
 			obterDominiosVaga(model);
 			return "vaga/solicitar-vaga";
 		}
-
+	
 		vagaBusiness.inserir(vagaBean, avaliadoresB);
 		redirectAttributes.addFlashAttribute("sucesso", "Vaga salva com sucesso.");
 		return "redirect:/vaga/solicitar";

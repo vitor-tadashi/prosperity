@@ -101,7 +101,7 @@
                                                     maxlength="100" placeholder="Informe seu email"
                                                     value="${candidato.email}">
                                             </div>
-
+                                            
                                             <div class="form-group col-md-2">
                                                 <label for="rg" class="control-label">RG</label> <input
                                                     type="text" class="form-control rg parsley-validated"
@@ -241,7 +241,6 @@
                                                         id="valorPretensao" placeholder="R$"
                                                         name="valorPretensao" value="${candidato.valorPretensao}" />
                                                 </div>
-
                                             </div>
                                         </div>
 
