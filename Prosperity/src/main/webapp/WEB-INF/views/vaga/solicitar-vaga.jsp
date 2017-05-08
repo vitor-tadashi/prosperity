@@ -387,7 +387,9 @@
 												</div>
 											</section>
 											<!-- /panel -->
-										</div>
+										<!-- /Section-->
+									</div>
+									
 
 										<div class="tab-pane fade hide" id="fourth">
 

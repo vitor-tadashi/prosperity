@@ -337,6 +337,18 @@ public class VagaController {
 				senioridade.getId());
 		return rangeSalarial;
 	}
+	
+	@RequestMapping(value = "/obter-perfil-pre-pronto", method = RequestMethod.GET)
+	public @ResponseBody List<CargoSenioridadeBean> obterPerfilPrePronto(Model model,
+			@ModelAttribute("idCargo") Integer idCargo, @ModelAttribute("idSenioridade") Integer idSenioridade) {
+		CargoBean cargo = new CargoBean();
+		SenioridadeBean senioridade = new SenioridadeBean();
+		cargo.setId(idCargo);
+		senioridade.setId(idSenioridade);
+		List<CargoSenioridadeBean> perfilPrePronto = cargoSenioridadeBusiness.obterRangeSalarial(cargo.getId(),
+				senioridade.getId());
+		return perfilPrePronto;
+	}
 	/*
 	 * @RequestMapping(value = "obter-vaga", method=RequestMethod.GET)
 	 * public @ResponseBody List<VagaBean> obterVaga(Model
