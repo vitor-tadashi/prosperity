@@ -1,6 +1,3 @@
-
-
-
 $(document).ready(function() {
 	if($("#solicitante").val()) {
 		$("#txtSolicitante").val($("#solicitante").val());

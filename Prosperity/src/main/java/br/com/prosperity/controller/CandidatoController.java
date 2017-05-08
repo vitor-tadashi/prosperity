@@ -222,7 +222,7 @@ public class CandidatoController<PaginarCandidato> {
 			return "candidato/cadastrar-candidato";
 		}
 		candidatoBusiness.inserir(candidatoBean);
-		redirectAttrs.addFlashAttribute("sucesso", "Candidato salvo com sucesso.");
+		redirectAttrs.addFlashAttribute("sucesso", "Candidato salvo com sucesso!");
 
 		return "redirect:/candidato/cadastrar";
 	}
@@ -404,7 +404,7 @@ public class CandidatoController<PaginarCandidato> {
 			provaCandidatoBusiness.inserir(convertGsonProva(processoSeletivo, bean));
 		}
 		candidatoBusiness.alterarStatus(situacaoCandidato);
-		return "candidato/aprovar";
+		return "redirect:candidato/aprovar";
 	}
 
 	@RequestMapping(value = { "/buscar/{id}" }, method = RequestMethod.GET)
