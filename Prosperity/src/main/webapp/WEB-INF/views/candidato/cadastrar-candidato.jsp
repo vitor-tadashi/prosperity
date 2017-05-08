@@ -197,9 +197,9 @@
 													class="form-control" id="tipoDeCurso"
 													name="formacao.tipoCurso.id">
 													<option value="0">Selecione</option>
-													<c:forEach var="tipoCurso" items="${tiposCurso}">
-														<option value="${tipoCurso.id}"
-															${tipoCurso.id == candidato.formacao.tipoCurso.id ? 'selected="selected"' : ''}>${tipoCurso.nome}</option>
+													<c:forEach var="cancelamento" items="${cancelamento}">
+														<option value="${cancelamento.id}"
+															${cancelamento.id == candidato.cancelamento.id ? 'selected="selected"' : ''}>${cancelamento.descricao}</option>
 													</c:forEach>
 
 												</select>

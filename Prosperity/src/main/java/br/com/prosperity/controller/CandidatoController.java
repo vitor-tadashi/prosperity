@@ -33,6 +33,7 @@ import com.google.gson.Gson;
 
 import br.com.prosperity.bean.AvaliacaoBean;
 import br.com.prosperity.bean.CanalInformacaoBean;
+import br.com.prosperity.bean.CancelamentoBean;
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CandidatoCompetenciaBean;
 import br.com.prosperity.bean.CargoBean;
@@ -47,6 +48,7 @@ import br.com.prosperity.bean.StatusBean;
 import br.com.prosperity.bean.TipoCursoBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.CanalInformacaoBusiness;
+import br.com.prosperity.business.CancelamentoBusiness;
 import br.com.prosperity.business.CandidatoBusiness;
 import br.com.prosperity.business.CargoBusiness;
 import br.com.prosperity.business.FuncionarioBusiness;
@@ -66,7 +68,8 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private CandidatoBean bean;
-
+	@Autowired
+	private CancelamentoBusiness cancelamentoBusiness;
 	@Autowired
 	private CandidatoBusiness candidatoBusiness;
 
@@ -359,11 +362,13 @@ public class CandidatoController<PaginarCandidato> {
 		List<CompetenciaBean> competencias = candidatoBusiness.listarCompetencia();
 		List<AvaliacaoBean> avaliacoes = candidatoBusiness.listarAvaliacao();
 		List<ProvaBean> provas = provaBusiness.listarProva();
-
+		List<CancelamentoBean> cancelamento = cancelamentoBusiness.listar();
 		model.addAttribute("candidatos", candidatos);
 		model.addAttribute("competencias", competencias);
 		model.addAttribute("avaliacoes", avaliacoes);
 		model.addAttribute("provas", provas);
+		model.addAttribute("cancelamento", cancelamento);
+		
 
 		return "candidato/aprovar-candidato";
 	}
