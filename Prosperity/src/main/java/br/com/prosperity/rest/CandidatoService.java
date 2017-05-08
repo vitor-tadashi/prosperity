@@ -7,7 +7,6 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +23,7 @@ public class CandidatoService {
 	@POST
 	@RequestMapping("/servico")
 	@Consumes("application/xml")
-	public void salvarBean(@RequestBody WordpressBean w) {
+	public void salvarBean(WordpressBean w) {
 
 		System.out.println("Chegou aqui!");
 

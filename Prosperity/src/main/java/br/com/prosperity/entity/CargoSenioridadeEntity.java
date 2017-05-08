@@ -22,7 +22,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name="tbCargoSenioridade")
 @NamedQueries({ 
-	@NamedQuery(name = "rangeSalarial", query = "SELECT u FROM CargoSenioridadeEntity u WHERE u.idCargo = ?1 AND u.idSenioridade = ?2")
+	@NamedQuery(name = "rangeSalarial", query = "SELECT u FROM CargoSenioridadeEntity u WHERE u.idCargo = ?1 AND u.idSenioridade = ?2"),
+	@NamedQuery(name = "perfilPrePronto", query = "SELECT u FROM CargoSenioridadeEntity u WHERE u.idCargo = ?1 AND u.idSenioridade = ?2")
 })
 public class CargoSenioridadeEntity{
 	
@@ -38,6 +39,9 @@ public class CargoSenioridadeEntity{
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idSenioridade")
 	private SenioridadeEntity idSenioridade;
+	
+	@Column(name="dsPreTexto")
+	private String dsPretexto;
 	
 	@Column(name="vlMinSalario")
 	private BigDecimal vlMinSalario;
@@ -75,6 +79,18 @@ public class CargoSenioridadeEntity{
 	}
 	public void setVlMaxSalario(BigDecimal vlMaxSalario) {
 		this.vlMaxSalario = vlMaxSalario;
+	}
+	public CargoEntity getIdCargo() {
+		return idCargo;
+	}
+	public void setIdCargo(CargoEntity idCargo) {
+		this.idCargo = idCargo;
+	}
+	public String getDsPretexto() {
+		return dsPretexto;
+	}
+	public void setDsPretexto(String dsPretexto) {
+		this.dsPretexto = dsPretexto;
 	}
 	
 }

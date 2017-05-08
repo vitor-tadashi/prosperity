@@ -20,7 +20,6 @@
 							aria-hidden="true">&times;</button>
 						<h4 style="text-align: center;" class="modal-title"
 							id="modalTitulo">placeholder</h4>
-
 					</div>
 					<div class="modal-body">
 						<div class="panel panel-default">
@@ -44,7 +43,6 @@
 									<div class="tab-content">
 										<div class="tab-pane fade in active" id="infoEntrevista">
 											<div class="form-group">
-
 												<label class="control-label">Observação :</label>
 												<div class="form-group">
 													<input type="hidden" id="hdn-id-candidato" /> <input
@@ -331,6 +329,16 @@
 			<div class="padding-md">
 				<div class="row">
 					<div class="panel panel-default">
+
+						<!-- MENSAGEM DE SUCESSO -->
+						<c:if test="${not empty sucesso}">
+							<div id="msg-sucesso" class="alert alert-success msg-margin">
+								<ul style="list-style: none;">
+									<li class="li-msg">${sucesso}</li>
+								</ul>
+							</div>
+						</c:if>
+
 						<div class="panel-heading">Aprovação de candidatos</div>
 						<div class="panel-body">
 							<input type="hidden" name="user" id="user"
@@ -417,8 +425,7 @@
 
 		<script src="/resources/js/parsley.min.js"></script>
 		<script>
-
-
+		
 	/*contador de caracter - parecer*/
 
 	function maxCaracterParecer(){
@@ -427,7 +434,6 @@
 		var maxCaracteres = document.querySelector("#maxParecer");
 		maxCaracteres.innerHTML = "Caracteres restantes : " + restante;
 		}
-
 
 		$("body").on("click", "#aprovar-candidato", function(){
 			var inputs  = $(this).closest("tr").find("input[type=hidden]");
@@ -656,7 +662,7 @@
         			url : "gerar-proposta",
         			type : "POST",
                     data : {
-                             'caminho' : oReq;
+                             'caminho' : oReq
                     },
 
         		}).done(function(data) {
