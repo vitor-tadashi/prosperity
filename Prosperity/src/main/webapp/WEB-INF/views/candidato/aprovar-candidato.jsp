@@ -224,6 +224,16 @@
 			<div class="padding-md">
 				<div class="row">
 					<div class="panel panel-default">
+
+						<!-- MENSAGEM DE SUCESSO -->
+						<c:if test="${not empty sucesso}">
+							<div id="msg-sucesso" class="alert alert-success msg-margin">
+								<ul style="list-style: none;">
+									<li class="li-msg">${sucesso}</li>
+								</ul>
+							</div>
+						</c:if>
+
 						<div class="panel-heading">Aprovação de candidatos</div>
 						<div class="panel-body">
 							<input type="hidden" name="user" id="user"

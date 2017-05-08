@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -60,8 +61,11 @@
 											data-toggle="tab" class="text-success"><i
 												class="fa fa-pencil"></i> Inf. acadêmicas</a></li>
 										<li class="tab-verity"><a href="#third" data-toggle="tab"
-											class="text-success"><i class="fa fa-briefcase"></i>
-												Inf.Vaga</a></li>
+											class="text-success"><i class="fa fa-briefcase"></i> Inf.
+												vaga</a></li>
+										<li class="tab-verity"><a href="#fourth"
+											data-toggle="tab" class="text-success"><i
+												class="fa fa-calendar"></i>&nbsp;Datas de entrevista</a></li>
 									</ul>
 								</div>
 								<div class="panel-body">
@@ -105,7 +109,7 @@
 												<div class="form-group col-md-2">
 													<label for="rg" class="control-label">RG</label> <input
 														type="text" class="form-control rg parsley-validated"
-														maxlength="20" id="rg" name="rg" data-required="true"
+														maxlength="50" id="rg" name="rg" data-required="true"
 														data-required="true" placeholder="Informe seu RG"
 														value="${candidato.rg}">
 												</div>
@@ -193,16 +197,15 @@
 													value="${candidato.formacao.nomeInstituicao}">
 											</div>
 											<div class="form-group col-md-3">
-												<label for="tipoDeCurso">Grau de instrução</label> <select
+												<label for="tipoDeCurso">Grau de instrução</label> 
+												<select
 													class="form-control" id="tipoDeCurso"
-													name="formacao.tipoCurso.id">
+													name="formacao.tipoCurso.id"></select>
 													<option value="0">Selecione</option>
-													<c:forEach var="cancelamento" items="${cancelamento}">
-														<option value="${cancelamento.id}"
-															${cancelamento.id == candidato.cancelamento.id ? 'selected="selected"' : ''}>${cancelamento.descricao}</option>
+													<c:forEach var="tipoCurso" items="${tiposCurso}">
+														<option value="${tipoCurso.id}"
+															${tipoCurso.id == candidato.formacao.tipoCurso.id ? 'selected="selected"' : ''}>${tipoCurso.nome}</option>
 													</c:forEach>
-
-												</select>
 											</div>
 											<div class="form-group col-md-2">
 												<label for="situacaoAtual">Situação atual</label> <select
@@ -239,69 +242,95 @@
 															id="valorPretensao" placeholder="R$"
 															name="valorPretensao" value="${candidato.valorPretensao}" />
 													</div>
-
 												</div>
 											</div>
-											
-										<div class="form-group col-md-3">
-											<label for="vaga">Vaga a ser aplicado</label> <select
-												class="form-control" id="vaga" name="vagaCandidato.vaga.id" required>
-												<option value="0">Selecione</option>
-												<c:forEach var="vaga" items="${listaVaga}">
-													<option value="${vaga.id}"
-														${vaga.id == candidato.vagaCandidato.vaga.id ? 'selected="selected"' : ''}>${vaga.nomeVaga}</option>
-												</c:forEach>
-											</select>
-										</div>
-										<div class="form-group col-md-3">
-											<label for="canalInformacao">Como ficou sabendo
-												desta vaga?</label> <select class="form-control"
-												name="vagaCandidato.CanalInformacao.id"
-												id="canalInformacao">
-												<option value="0">Selecione</option>
-												<c:forEach var="canalInformacao" items="${listaCanal}">
-													<option value="${canalInformacao.id}"
-														${canalInformacao.id == candidato.vagaCandidato.canalInformacao.id ? 'selected="selected"' : ''}>${canalInformacao.nome}</option>
-												</c:forEach>
-											</select>
-										</div>
-												<div class="form-group col-md-2 col-sm-4">
-											<label for="entrevista" class="control-label">Data
-												de último contato</label>
-											<fmt:formatDate value="${candidato.dataUltimoContato}"
-												pattern="dd/MM/yyyy" var="dataUltimoContato" />
-											<input type="text" class="form-control date"
-												data-required="false" name="dataUltimoContato" id="dataUltimoContato"
-												onblur="validarData3('dataUltimoContato')" value="${dataUltimoContato}">
-								<fmt:formatDate value="${candidato.dataAbertura}" pattern="dd/MM/yyyy" var="dataAbertura" />
-														<input type="hidden" value="${dataAbertura}" name="dataAbertura">
-										</div>
-										
-										<div class="form-group col-md-2 col-sm-4">
-											<label for="entrevista" class="control-label">Data
-												de entrevista</label>
-											<fmt:formatDate value="${candidato.entrevista}"
-												pattern="dd/MM/yyyy" var="entrevista" />
-											<input type="text" class="form-control date"
-												data-required="false" name="entrevista" id="entrevista"
-												onblur="validarData4('entrevista')" value="${entrevista}">
-								<fmt:formatDate value="${candidato.dataAbertura}" pattern="dd/MM/yyyy" var="dataAbertura" />
-														<input type="hidden" value="${dataAbertura}" name="dataAbertura">
-										</div>
 
-									</div>
+											<div class="form-group col-md-3">
+												<label for="vaga">Vaga a ser aplicado</label> <select
+													class="form-control" id="vaga" name="vagaCandidato.vaga.id"
+													required>
+													<option value="0">Selecione</option>
+													<c:forEach var="vaga" items="${listaVaga}">
+														<option value="${vaga.id}"
+															${vaga.id == candidato.vagaCandidato.vaga.id ? 'selected="selected"' : ''}>${vaga.nomeVaga}</option>
+													</c:forEach>
+												</select>
+											</div>
+											<div class="form-group col-md-3">
+												<label for="canalInformacao">Como ficou sabendo
+													desta vaga?</label> <select class="form-control"
+													name="vagaCandidato.CanalInformacao.id"
+													id="canalInformacao">
+													<option value="0">Selecione</option>
+													<c:forEach var="canalInformacao" items="${listaCanal}">
+														<option value="${canalInformacao.id}"
+															${canalInformacao.id == candidato.vagaCandidato.canalInformacao.id ? 'selected="selected"' : ''}>${canalInformacao.nome}</option>
+													</c:forEach>
+												</select>
+											</div>
+											<div class="form-group col-md-2 col-sm-4">
+												<label for="entrevista" class="control-label">Data
+													de último contato</label>
+												<fmt:formatDate value="${candidato.dataUltimoContato}"
+													pattern="dd/MM/yyyy" var="dataUltimoContato" />
+												<input type="text" class="form-control date"
+													data-required="false" name="dataUltimoContato"
+													id="dataUltimoContato"
+													onblur="validarData3('dataUltimoContato')"
+													value="${dataUltimoContato}">
+												<fmt:formatDate value="${candidato.dataAbertura}"
+													pattern="dd/MM/yyyy" var="dataAbertura" />
+												<input type="hidden" value="${dataAbertura}"
+													name="dataAbertura">
+											</div>
+
+											<div class="form-group col-md-2 col-sm-4">
+												<label for="entrevista" class="control-label">Data
+													de entrevista</label>
+												<fmt:formatDate value="${candidato.entrevista}"
+													pattern="dd/MM/yyyy" var="entrevista" />
+												<input type="text" class="form-control date"
+													data-required="false" name="entrevista" id="entrevista"
+													onblur="validarData4('entrevista')" value="${entrevista}">
+												<fmt:formatDate value="${candidato.dataAbertura}"
+													pattern="dd/MM/yyyy" var="dataAbertura" />
+												<input type="hidden" value="${dataAbertura}"
+													name="dataAbertura">
+											</div>
+
+
+
+
+										</div>
+										<!--começo - tab 4 -->
+										<div class="tab-pane fade" id="fourth">
+											<div class="row">
+												<div class="col-xs-6">
+													<label>Nome do gestor: &nbsp;</label> <label
+														class="highlight">placeholder</label>
+												</div>
+												<div class="col-md-2">
+													<label>Data de entrevista: &nbsp;</label>
+												</div>
+												<div class="col-sm-2">
+													<input type="text" class="form-control date">
+												</div>
+											</div>
+										</div>
+										<!--fim - tab 4 -->
 									</div>
 								</div>
 								<div class="panel-footer">
 									<input type="hidden" value="${candidato.id}" name="id">
-									<input type="hidden" value="${erro}" id="contErro">
-									<a href="/candidato/file/${candidato.id}" target="_blank" class="btn btn-default pull-left download-download">Download</a>
+									<input type="hidden" value="${erro}" id="contErro"> <a
+										href="/candidato/file/${candidato.id}" target="_blank"
+										class="btn btn-default pull-left download-download">Download</a>
 									<button class="btn btn-success pull-right">Salvar</button>
 								</div>
 							</form>
 						</div>
 					</div>
-					
+
 				</div>
 			</div>
 		</div>
@@ -311,5 +340,4 @@
 		<script src="/resources/js/parsley.min.js"></script>
 		<script src="/resources/js/custom/cadastrar-candidato.js"></script>
 	</layout:put>
-	
 </layout:extends>
