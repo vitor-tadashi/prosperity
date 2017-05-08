@@ -205,7 +205,7 @@
 						<input type="hidden" id="idCancelamento" value="" />
 						<button type="button" class="btn btn-success"
 							onclick="cancelarCandidato()">Confirmar</button>
-							<button button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+						<button button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 					</div>
 				</div>
 			</div>

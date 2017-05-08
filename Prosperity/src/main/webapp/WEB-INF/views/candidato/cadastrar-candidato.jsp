@@ -197,15 +197,16 @@
 													value="${candidato.formacao.nomeInstituicao}">
 											</div>
 											<div class="form-group col-md-3">
-												<label for="tipoDeCurso">Grau de instrução</label> 
-												<select
+												<label for="tipoDeCurso">Grau de instrução</label> <select
 													class="form-control" id="tipoDeCurso"
-													name="formacao.tipoCurso.id"></select>
+													name="formacao.tipoCurso.id">
 													<option value="0">Selecione</option>
 													<c:forEach var="tipoCurso" items="${tiposCurso}">
 														<option value="${tipoCurso.id}"
 															${tipoCurso.id == candidato.formacao.tipoCurso.id ? 'selected="selected"' : ''}>${tipoCurso.nome}</option>
 													</c:forEach>
+
+												</select>
 											</div>
 											<div class="form-group col-md-2">
 												<label for="situacaoAtual">Situação atual</label> <select
