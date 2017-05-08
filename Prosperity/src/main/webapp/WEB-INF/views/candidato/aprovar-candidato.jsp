@@ -18,10 +18,8 @@
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-
 						<h4 style="text-align: center;" class="modal-title"
 							id="modalTitulo">placeholder</h4>
-
 					</div>
 					<div class="modal-body">
 						<div class="panel panel-default">
@@ -45,7 +43,6 @@
 									<div class="tab-content">
 										<div class="tab-pane fade in active" id="infoEntrevista">
 											<div class="form-group">
-
 												<label class="control-label">Observação :</label>
 												<div class="form-group">
 													<input type="hidden" id="hdn-id-candidato" /> <input
@@ -108,17 +105,155 @@
 											</section>
 										</div>
 										<div class="tab-pane fade" id="proposta">
-											<div class="form-group col-md-12" id="divCkEditor">
-												<div class="form-group">
-													<label class="control-label">Proposta:</label>
-													<div class="adjoined-bottom">
-														<div class="grid-container">
-															<div class="grid-width-100">
-																<textarea id="editor" name="editor"></textarea>
-															</div>
+											<div class="panel panel-default">
+												<div class="panel-heading">Proposta</div>
+												<div class="panel-body">
+													<div class="col-md-6 row">
+														<div class="form-group">
+															<label>Empresa anterior:</label> <input type="text" id=""
+																name="" class="form-control input-sm">
+														</div>
+														<!-- /form-group -->
+														<div class="form-group">
+															<label>Cargo:</label> <input type="text" id="" name=""
+																class="form-control input-sm">
+														</div>
+														<!-- /form-group -->
+														<div class="form-group">
+															<label>Salário fixo bruto:</label> <input type="text"
+																id="" name="" class="form-control input-sm">
+														</div>
+														<!-- /form-group -->
+														<div class="form-group">
+															<label>Salário líquido mensal:</label> <input type="text"
+																id="" name="" class="form-control input-sm">
+														</div>
+														<!-- /form-group -->
+														<div class="form-group">
+															<label>VR mensal:</label> <input type="text" id=""
+																name="" class="form-control input-sm">
+														</div>
+														<!-- /form-group -->
+														<div class="form-group">
+															<label>VA mensal:</label> <input type="text" id=""
+																name="" class="form-control input-sm">
+														</div>
+														<!-- /form-group -->
+														<div class="form-group">
+															<label>Seguro de saúde mensal:</label> <input type="text"
+																id="" name="" class="form-control input-sm">
+														</div>
+														<!-- /form-group -->
+														<div class="form-group">
+															<label>Vale auto:</label> <input type="text" id=""
+																name="" class="form-control input-sm">
+														</div>
+														<!-- /form-group -->
+														<div class="form-group">
+															<label>Vale transporte(até 6% desc.):</label> <input
+																type="text" id="" name="" class="form-control input-sm">
+														</div>
+														<!-- /form-group -->
+														<div class="form-group">
+															<label>Líquido m. + ben.:</label> <input type="text"
+																id="" name="" class="form-control input-sm">
+														</div>
+														<!-- /form-group -->
+														<div class="form-group">
+															<label>Anual líquido:</label> <input type="text" id=""
+																name="" class="form-control input-sm">
+														</div>
+														<!-- /form-group -->
+														<div class="form-group">
+															<label>PLR anual líquido/bonús:</label> <input
+																type="text" id="" name="" class="form-control input-sm">
+														</div>
+														<!-- /form-group -->
+														<div class="form-group">
+															<label>Total anual líquido + ben.:</label> <input
+																type="text" id="" name="" class="form-control input-sm">
+														</div>
+														<!-- /form-group -->
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label>Proposta:</label> <input type="text" id="" name=""
+																class="form-control input-sm">
+														</div>
+														<!-- /form-group -->
+														<div class="form-group">
+															<label>Cargo:</label> <input type="text" id="" name=""
+																class="form-control input-sm">
+														</div>
+														<!-- /form-group -->
+														<div class="form-group">
+															<label>Salário fixo bruto:</label> <input type="text"
+																id="" name="" class="form-control input-sm">
+														</div>
+														<!-- /form-group -->
+														<div class="form-group">
+															<label>Salário líquido mensal:</label> <input type="text"
+																id="" name="" class="form-control input-sm">
+														</div>
+														<!-- /form-group -->
+														<div class="form-group">
+															<label>VR mensal:</label> <input type="text" id=""
+																name="" class="form-control input-sm">
+														</div>
+														<!-- /form-group -->
+														<div class="form-group">
+															<label>VA mensal:</label> <input type="text" id=""
+																name="" class="form-control input-sm">
+														</div>
+														<!-- /form-group -->
+														<div class="form-group">
+															<label>Seguro de saúde mensal:</label> <input type="text"
+																id="" name="" class="form-control input-sm">
+														</div>
+														<!-- /form-group -->
+														<div class="form-group">
+															<label>Vale auto:</label> <input type="text" id=""
+																name="" class="form-control input-sm">
+														</div>
+														<!-- /form-group -->
+														<div class="form-group">
+															<label>Vale transporte(até 6% desc.):</label> <input
+																type="text" id="" name="" class="form-control input-sm">
+														</div>
+														<!-- /form-group -->
+														<div class="form-group">
+															<label>Líquido m. + ben.:</label> <input type="text"
+																id="" name="" class="form-control input-sm">
+														</div>
+														<!-- /form-group -->
+														<div class="form-group">
+															<label>Anual líquido:</label> <input type="text" id=""
+																name="" class="form-control input-sm">
+														</div>
+														<!-- /form-group -->
+														<div class="form-group">
+															<label>PLR anual líquido/bonús:</label> <input
+																type="text" id="" name="" class="form-control input-sm">
+														</div>
+														<!-- /form-group -->
+														<div class="form-group">
+															<label>Total anual líquido + ben.:</label> <input
+																type="text" id="" name="" class="form-control input-sm">
+														</div>
+														<!-- /form-group -->
+													</div>
+													<div class="form-group col-md-6 row">
+														<label class="control-label">Proposta</label>
+														<div class="upload-file" onchange="gerarProposta()">
+															<input type="file" name="file" id="upload-proposta"
+																class="upload-demo" required /> <label
+																data-title="Selecione" for="upload-proposta"> <span
+																id="caminho"></span>
+															</label>
 														</div>
 													</div>
 												</div>
+												<!-- /panel -->
 											</div>
 										</div>
 									</div>
@@ -159,7 +294,8 @@
 		</div>
 		<!-- Modal delete -->
 		<div class="modal fade" id="delete-modal" data-target="#delete-modal"
-			tabindex="-1" role="dialog" aria-labelledby="modalLabel" data-backdrop="static" data-keyboard="false">
+			tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+			data-backdrop="static" data-keyboard="false">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -182,20 +318,21 @@
 												<option value="${cancelamento.id}"
 													${cancelamento.id == candidato.cancelamento.id ? 'selected="selected"' : ''}>${cancelamento.descricao}</option>
 											</c:forEach>
-	
+
 										</select>
 									</div>
 								</div>
 								<div class="row">
 									<div class="form-group col-sm-12">
 										<label for="">Observação :</label> <input type="hidden"
-											id="hdn-id-candidato" /> <input type="hidden" id="hdn-status" />
+											id="hdn-id-candidato" /> <input type="hidden"
+											id="hdn-status" />
 										<textarea class="form-control parsley-validated"
 											id="parecerCancelamento" name="parecer" data-required="true"
 											maxlength="300" rows="3"
 											onkeyup="maxCaracterParecerCancelamento()"></textarea>
 										<label id="maxParecerCanc">Caracteres restantes : 300</label>
-	
+
 									</div>
 								</div>
 							</form>
@@ -205,7 +342,8 @@
 						<input type="hidden" id="idCancelamento" value="" />
 						<button type="button" class="btn btn-success"
 							onclick="cancelarCandidato()">Confirmar</button>
-						<button button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+						<button button type="button" class="btn btn-danger"
+							data-dismiss="modal">Cancelar</button>
 					</div>
 				</div>
 			</div>
@@ -321,12 +459,10 @@
 	<layout:put block="scripts" type="REPLACE">
 
 		<script src="/resources/js/parsley.min.js"></script>
-		<script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 		<script>
 		
-		
 	/*contador de caracter - parecer*/
-	
+
 	function maxCaracterParecer(){
 		var maxParecer = $("#parecer").val();
 		var restante = 500 - maxParecer.length;
@@ -342,47 +478,37 @@
 	
 		$("body").on("click", "#aprovar-candidato", function(){
 			var inputs  = $(this).closest("tr").find("input[type=hidden]");
-			CKEDITOR.instances.editor.setData("");
-			CKEDITOR.instances.editor.insertHtml("");
 			var tituloModal = $(this).text();
-			
+
 			inputs.each(function(index, value){
 				if(!isNaN($(value).attr("id"))){
 					var id = $(value).attr("id");
-					CKEDITOR.instances['editor'].setReadOnly(false);
-					
+
 					$.ajax({
 						url:"buscar/"+id,
 						dataType:"json",
 						method:"GET",
-						success:function(data){	
+						success:function(data){
 							var perfil = $('#user').val();
 							$("#modalTitulo").text(tituloModal);
 							if(data.ultimoStatus.status.id == "9"){
 				                 if(perfil == "Analista de RH" || perfil == "Gestor RH"){
-									CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
 									$("#proposta-tab").show();
 				                 }
 							}else if(data.ultimoStatus.status.id == "10"){
 				                 if(perfil == "Administrador" || perfil == "CEO" || perfil == "Diretor de operação"){
-										CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
 					                	$("#proposta-tab").show();
-					                	CKEDITOR.instances['editor'].setReadOnly(true);
 					                 }
 							}else if(data.ultimoStatus.status.id == "11"){
 				                 if(perfil == "Analista de RH" || perfil == "Gestor RH"){
-										CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
 					                	$("#proposta-tab").show();
-					                	CKEDITOR.instances['editor'].setReadOnly(true);
 					                 }
 							}else if(data.ultimoStatus.status.id == "13"){
 				                 if(perfil == "Analista de RH" || perfil == "Gestor RH"){
-										CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
 					                	$("#proposta-tab").show();
 					                 }
 							}else if(data.ultimoStatus.status.id == "14"){
 				                 if(perfil == "Analista de RH" || perfil == "Gestor RH"){
-										CKEDITOR.instances.editor.insertHtml(data.ultimoStatus.proposta);
 					                	$("#proposta-tab").show();
 					                 }
 							}else{
@@ -395,7 +521,7 @@
 								$("#avaliacao-tab").hide();
 								$("#processo-tab").hide();
 							}
-							$('.tab-bar a[href="#infoEntrevista"]').tab('show')
+							$('.tab-bar a[href="#infoEntrevista"]').tab('show');
 							$('#modalProposta').modal('show');
 						}
 					})
@@ -406,12 +532,10 @@
 				$('input.cancelar-id').val(id);
 				$('input.cancelar-status').val(status);
 			}
-			
-		
+
+
 			})
-            CKEDITOR.replace('editor');
                   $('#alterarStatus').click(function() {
-                        var data = CKEDITOR.instances.editor.getData();                    
 	                   	var avaliacoes = [];
 
 	                   	$(".avaliacaoCompetencia").each(function(){
@@ -430,14 +554,14 @@
 		                   			"prova" : "",
 		                   			"descricao" : ""
 		                   	};
-		                   	
+
 	                   	    var select = $(this).find("#prova"+x).val();
 	                   	    var input = $(this).find("#descricao"+x).val();
 
 	                   		provasDescricoes.push(select);
 	                   		provasDescricoes.push(input);
 	                   		x++;
-	                   	});                  	
+	                   	});
                         $.ajax({
                               url : "alterar-status-candidato",
                               method : "POST",
@@ -445,7 +569,6 @@
                               data : {
                                    'idCandidato' : $('#hdn-id-candidato').val(),
                                    'parecer' : $('#parecer').val(),
-                                   'proposta' : CKEDITOR.instances.editor.getData(),
                                    'idStatus' : $('#hdn-status').val(),
                                    'parecerTecnico' : $('#parecerTecnico').val(),
                                    'processoSelectivo' : JSON.stringify(provasDescricoes),
@@ -465,10 +588,10 @@
                   $('#hdn-proposta').val(proposta);
                   $('#hdn-status').val(idStatus);
             }
-            
+
             function cancelarCandidato() {
             	var id = $("#idCancelamento").val();
-            	
+
             	$.ajax({
         			url : "cancelar-candidato/"+id,
         			type : "POST"
@@ -481,15 +604,18 @@
 
            function cancelarClick (id){
         	   $("#idCancelamento").val(id);
+
         	   $('#frmCancelar')[0].reset();
         	   maxCaracterParecerCancelamento();
            } 
 
-        /*gerador de campo*/    
+
+
+        /*gerador de campo*/
             var cont = 0;
             $("#gerarCampo").click(function(){
-            	
-            	var campos = 
+
+            	var campos =
             	"<div class='div"+cont+" col-md-12 processoSeletivo'>" +
             	"<select class='form-control col-md-3' style='width: 120px; height: 30px;' id='prova"+ cont +"'>" +
             	"<br>" +
@@ -508,21 +634,21 @@
             	"<input class='form-control col-md-3 descricaoProva' style='width: 190px; height: 30px;' type='text' id='descricao"+ cont +"' name='descricao"+ cont +"' maxlength='50'  onkeyup='maxDescricaoProva()' />"+
             	"&nbsp; <input type='button' id='btnRemover' onclick='remover("+ cont +")'value='Remover campo' class='btn btn-sm btn-danger'>"+
             	"&nbsp; &nbsp;<label id='maxDescricao'>Caracteres restantes : <span class='numeroCaracteres" + cont +"'>50</span></label>"+
-            	"<br>" + 	
+            	"<br>" +
             	"</div>" ;
             	cont++;
         /*adiciona na div*/
             	$("#processoSeletivo").append(campos);
-        
-            	
-            	/*contador de caracter - descrição prova*/	
+
+
+            	/*contador de caracter - descrição prova*/
             });
        /*remove os campos*/
-       
+
                 function maxDescricaoProva(){
     	   			var cont = 0;
     	   			$(".descricaoProva").each(function(){
-    	   				
+
                 		var descricao = $(this).val().length;
                 		var restante = 50 - descricao;
                 		$(".numeroCaracteres"+cont).text(restante);
@@ -534,7 +660,7 @@
             	$(".div"+id).remove();
             	cont--;
             }
-       
+
          // Submit do formulário
         	$("button#btnEnviar").click(function() {
         		$("form#formValidar").submit();
@@ -542,7 +668,7 @@
 					$('#confirm-modal').modal('show');
 			   }
         	});
-         
+
         	$(document).ready(function () {
                 $('form#formValidar').parsley();
 
@@ -551,7 +677,45 @@
                     $(this).parsley().validate();
                 });
             });
-         
+
+            function gerarProposta() {
+            	
+            	var url = $('input[type="file"]');
+            	var oReq = new XMLHttpRequest();
+            	oReq.open("POST", gerar-proposta, true);
+            	oReq.responseType = "arraybuffer";
+
+            	oReq.onload = function(e) {
+            	  var arraybuffer = oReq.response;
+
+            	  /* convert data to binary string */
+            	  var data = new Uint8Array(arraybuffer);
+            	  var arr = new Array();
+            	  for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+            	  var bstr = arr.join("");
+
+            	  /* Call XLSX */
+            	  var workbook = XLSX.read(bstr, {type:"binary"});
+
+            	  /* DO SOMETHING WITH workbook HERE */
+            	  var first_sheet_name = workbook.SheetNames[0];
+            	  /* Get worksheet */
+            	  var worksheet = workbook.Sheets[first_sheet_name];
+            	  console.log(XLSX.utils.sheet_to_json(worksheet,{raw:true}));
+            	}
+            	
+            	$.ajax({
+        			url : "gerar-proposta",
+        			type : "POST",
+                    data : {
+                             'caminho' : oReq
+                    },
+
+        		}).done(function(data) {
+        		}).fail(function(e) {
+        		});
+            }
+
 /* paginação */
 	</script>
 	</layout:put>
