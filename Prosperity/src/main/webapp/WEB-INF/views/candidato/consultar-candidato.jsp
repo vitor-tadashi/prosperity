@@ -554,9 +554,9 @@ li a.active {
 																	var="myURL">
 																</c:url> <a href="${myURL}"><i class="fa fa-pencil fa-lg">&nbsp;</i>Histórico
 																	do Candidato</a></li>
-															<li class="divider editar-editar"></li>
+															<li class="divider js-editar"></li>
 
-															<li class="editar-editar"><c:url
+															<li class="js-editar"><c:url
 																	value="editar/${candidato.id}" var="myURL">
 																</c:url> <a href="${myURL}"><i class="fa fa-pencil"></i>
 																	Editar</a></li>
@@ -589,8 +589,8 @@ li a.active {
 										</c:if></li>
 								</ul>
 
-								<a href="/vaga/consultar" class="btn btn-xs btn-default"><i
-									class="fa fa-reply"></i> Retornar</a>
+								<button type="button" onclick="voltarConsultaVaga()" class="btn btn-xs btn-default js-retornar"><i
+									class="fa fa-reply"></i> Retornar</button>
 
 							</div>
 
@@ -693,13 +693,18 @@ li a.active {
 				}
 			})
 		}
-		$('#btn-retornar').click(function() {
-			window.history.back();
-		});
+		
 	</script>
 
 
 		<script>
+		
+		function voltarConsultaVaga() {
+			$('.js-retornar').click(function() {
+				window.location.href = document.referrer;
+			});
+		}
+		
 		$(function() {
 			$('#dataTable').dataTable({
 				"bJQueryUI" : true,
@@ -845,10 +850,14 @@ li a.active {
 		//Só RH pode editar:
 		$(document).ready(function() {
 			
-			$('.editar-editar').hide();
+			$('.js-editar').hide();
+			$('.js-retornar').hide();
 			
 			if($('#func32').val()==32) {
-				$('.editar-editar').show();
+				$('.js-editar').show();
+			}
+			if(document.referrer.match('/vaga/')) {
+				$('.js-retornar').show();
 			}
 		});
 		
