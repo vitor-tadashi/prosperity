@@ -50,15 +50,13 @@ import javax.persistence.TemporalType;
 		 * ac.idStatus is NULL OR ac.idStatus IN(9,10,11,12,13) AND ac.idUsuario
 		 * = 14
 		 */
-		
-		
+
 		@NamedQuery(name = "listarAprovacoes", query = "SELECT DISTINCT c FROM CandidatoEntity c "
-				+ "INNER JOIN c.statusCandidatos sc "
-				+ "INNER JOIN c.avaliadores ac "
+				+ "INNER JOIN c.statusCandidatos sc " + "INNER JOIN c.avaliadores ac "
 				+ "WHERE (sc.idStatusCandidato = (SELECT max(scc.idStatusCandidato) FROM StatusCandidatoEntity scc WHERE scc.candidato.id = c.id) "
 				+ "AND (sc.status.id IN (?1) AND ac.status IS NOT NULL AND sc.flSituacao = true) "
 				+ "OR (sc.status.id = ?2 AND ac.status IS NULL AND ac.usuario.id = ?3 AND sc.flSituacao = true)"
-				+ "OR (sc.status.id = ?4 AND ac.status IS NULL AND sc.flSituacao = true)) ORDER BY c.id DESC"), 
+				+ "OR (sc.status.id = ?4 AND ac.status IS NULL AND sc.flSituacao = true)) ORDER BY c.id DESC"),
 
 		@NamedQuery(name = "proposta", query = "SELECT c FROM CandidatoEntity c, AvaliadorCandidatoEntity ac INNER JOIN c.statusCandidatos sc "
 				+ "WHERE ac.candidato.id = c.id AND sc.idStatusCandidato = (SELECT max(sc.idStatusCandidato)"
@@ -110,14 +108,10 @@ public class CandidatoEntity {
 	@Temporal(TemporalType.DATE)
 	private Date dataUltimoContato;
 
-	@Column(name = "dtEntrevista")
-	@Temporal(TemporalType.DATE)
-	private Date dataEntrevista;
-
 	@Column(name = "dsProposta")
 	private String proposta;
 
-	@Column(name ="curriculoTexto")
+	@Column(name = "curriculoTexto")
 	private String curriculoTexto;
 
 	/* Mapeamento de Relacionamentos */
@@ -133,32 +127,34 @@ public class CandidatoEntity {
 	@OneToOne(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, orphanRemoval = true)
 	@JoinColumn(name = "idFormacao")
 	private FormacaoEntity formacao;
-	
-	//TODO verificar relacionamento IGOR
+
+	// TODO verificar relacionamento IGOR
 	@ManyToOne(cascade = { CascadeType.REFRESH }, fetch = FetchType.LAZY)
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "candidato")
-	//@JoinColumn(name = "idCandidato")
+	// @JoinColumn(name = "idCandidato")
 	private List<StatusCandidatoEntity> statusCandidatos;
 
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
 	@JoinColumn(name = "idCandidato")
 	private List<CandidatoCompetenciaEntity> competencias;
 
-	@OneToMany(cascade = {CascadeType.ALL } ,fetch = FetchType.LAZY, mappedBy = "candidato" )
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "candidato")
 	private Set<VagaCandidatoEntity> vagas;
-	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "provas")
 	private List<ProvaCandidatoEntity> provaCandidato;
-	
+
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
 	@JoinColumn(name = "idCandidato")
 	private List<AvaliadorCandidatoEntity> avaliadores;
-	
-	
-	
+
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
+	@JoinColumn(name = "idCandidato")
+	private List<DataEntrevistaEntity> datasEntrevistas;
+
 	public List<ProvaCandidatoEntity> getProvaCandidato() {
 		return provaCandidato;
 	}
@@ -239,7 +235,6 @@ public class CandidatoEntity {
 		this.dataNascimento = dataNascimento;
 	}
 
-
 	public Date getDataAbertura() {
 		return dataAbertura;
 	}
@@ -288,13 +283,6 @@ public class CandidatoEntity {
 		this.dataUltimoContato = contatoBean;
 	}
 
-	public Date getDataEntrevista() {
-		return dataEntrevista;
-	}
-
-	public void setDataEntrevista(Date dataEntrevista) {
-		this.dataEntrevista = dataEntrevista;
-	}
 
 	public String getProposta() {
 		return proposta;
@@ -336,6 +324,14 @@ public class CandidatoEntity {
 		this.usuario = usuario;
 	}
 
+	public List<DataEntrevistaEntity> getDatasEntrevistas() {
+		return datasEntrevistas;
+	}
+
+	public void setDatasEntrevistas(List<DataEntrevistaEntity> datasEntrevistas) {
+		this.datasEntrevistas = datasEntrevistas;
+	}
+
 	/*
 	 * public List<StatusCandidatoEntity> getStatusCandidatos() { return
 	 * statusCandidatos; }
@@ -372,5 +368,3 @@ public class CandidatoEntity {
 		this.valorPretensao = valorPretensao;
 	}
 }
-
-

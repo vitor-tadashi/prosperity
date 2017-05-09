@@ -428,6 +428,9 @@ $(document).ready(function () {
 					$("#dataUltimoContato").val(dataFormatada(data.dataUltimoContato));
 					$("#entrevista").val(dataFormatada(data.entrevista));
 					$("#situacaoAtual").val(data.formacao.situacaoAtual.id);
+					debugger;
+					$("#label1").text(data.dataEntrevista[0].usuario.nome);
+					$("#label2").val(data.dataEntrevista[0].dataEntrevista);
 					
 				}
 			},
