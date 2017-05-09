@@ -611,11 +611,7 @@
 
 	<layout:put block="scripts" type="REPLACE">
 	<script type="text/javascript">
-	/* $(document).ready(function () {
-        setTimeout(function () {
-            $('#msg-sucesso').fadeOut(1500);
-        }, 5000);
-    }); */
+	
 	// script para cores dos status
 	$(".span-Fechado").addClass("label-warning");
 	$(".span-Ativo").addClass("label-success");
