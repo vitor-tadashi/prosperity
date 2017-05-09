@@ -428,9 +428,30 @@ $(document).ready(function () {
 					$("#dataUltimoContato").val(dataFormatada(data.dataUltimoContato));
 					$("#entrevista").val(dataFormatada(data.entrevista));
 					$("#situacaoAtual").val(data.formacao.situacaoAtual.id);
-					debugger;
-					$("#label1").text(data.dataEntrevista[0].usuario.nome);
-					$("#label2").val(data.dataEntrevista[0].dataEntrevista);
+					
+					
+					var dadosEntrevistadores = data.dataEntrevista;
+					
+					$(dadosEntrevistadores).each(function(index, value) {
+						var campos = "<div class='row'>" +
+										"<div class='col-xs-4 form-group'>" +
+											"<label>Nome do entrevistador: &nbsp;</label>" +
+											"<input type='text' id='entrevistador"+ index +"' style='width: 140px' class='form-control' value='"+ value.usuario.funcionario.nome +"'/>" +
+										"</div>" +
+										"<div class='col-md-2 form-group'>" +
+											"<label>Data de entrevista: &nbsp;</label>" +
+                                    	 	"<input type='text' id='data"+ index +"' class='form-control date' value='"+ value.dataEntrevista +"'/>" +
+                                    	 "</div>" +
+                                    "</div>";
+						
+						$("#fourth").append(campos);
+						
+					});
+										
+					$("#entrevistador").text(data.dataEntrevista[0].usuario.nome);
+					$("#data").val(data.dataEntrevista[0].dataEntrevista);
+					
+					
 					
 				}
 			},

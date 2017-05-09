@@ -296,18 +296,19 @@
                                 </div>
                                     <!--começo - tab 4 -->    
                                     <div class="tab-pane fade" id="fourth">
-                                       <div class="row">
-                                           <div class="col-xs-6">
-                                                <label>Nome do gestor: &nbsp;</label>
-                                                <label class="highlight" id="label1"></label>
-                                           </div>
-                                          <div class="col-md-2">
-                                                <label>Data de entrevista: &nbsp;</label>
-                                           </div>
-                                            <div class="col-sm-2">
-                                                <input type="text" id="label2" class="form-control date" value="">
-                                           </div>
-                                        </div>
+                                   
+<!--                                        <div class="row"> -->
+<!--                                            <div class="col-xs-6"> -->
+<!--                                                 <label>Nome do gestor: &nbsp;</label> -->
+<!--                                                 <label class="highlight" id="entrevistador"></label> -->
+<!--                                            </div> -->
+<!--                                           <div class="col-md-2"> -->
+<!--                                                 <label>Data de entrevista: &nbsp;</label> -->
+<!--                                            </div> -->
+<!--                                             <div class="col-sm-2"> -->
+<!--                                                 <input type="text" id="data" class="form-control date" value=""> -->
+<!--                                            </div> -->
+<!--                                         </div> -->
                                     </div>
                                     <!--fim - tab 4 -->        
                                 </div>
