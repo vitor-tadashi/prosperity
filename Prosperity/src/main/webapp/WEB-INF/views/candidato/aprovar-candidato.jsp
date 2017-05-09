@@ -39,7 +39,8 @@
 								</ul>
 							</div>
 							<div class="panel-body">
-							<form id="formValidar" data-validate="parsley" novalidate>
+							<form id="formValidar" data-validate="parsley" novalidate enctype="multipart/form-data">
+							<input type="hidden" name="idCandidato" value="${candidatos[0].id}">
 								<div class="tab-content">
 									<div class="tab-pane fade in active" id="infoEntrevista">
 										<div class="form-group">
@@ -376,13 +377,15 @@
 		                   			"descricao" : ""
 		                   	};
 		                   	
-	                   	    var select = $(this).find("#prova"+x).val();
-	                   	    var input = $(this).find("#descricao"+x).val();
+	                   	    var select = $(this).find("#prova-js").val();
+	                   	    var input = $(this).find("#descricao-js").val();
 
 	                   		provasDescricoes.push(select);
 	                   		provasDescricoes.push(input);
 	                   		x++;
-	                   	});                  	
+	                   	});
+	                   	file();
+	                   	
                         $.ajax({
                               url : "alterar-status-candidato",
                               method : "POST",
@@ -404,7 +407,24 @@
                               }
                         });
                   });
+			
+                  function file(){
+                   	  var paperElement = document.getElementById("modalPapers");
 
+                   	  if ($(paperElement).val()) {
+	                   	  var form = document.getElementById("formValidar");
+	                   	  var formData = new FormData(form);
+	                   	  var xhr = new XMLHttpRequest();
+	                   	  xhr.open('POST', "submitFiles");
+	                   	  xhr.onreadystatechange = function() {
+	                   	    if (xhr.readyState == 4 && xhr.status == 200) {
+	                   	      console.log("Files Uploaded")
+	                   	    }
+	                   	  };
+	                   	  xhr.send(formData);
+	                  }
+					}      
+                  
             function alterarStatus(idCandidato, idStatus, proposta) {
                   $('#hdn-id-candidato').val(idCandidato);
                   $('#hdn-proposta').val(proposta);
@@ -433,26 +453,29 @@
             $("#gerarCampo").click(function(){
             	
             	var campos = 
-            	"<div class='div"+cont+" col-md-12 processoSeletivo'>" +
-            	"<select class='form-control col-md-3' style='width: 120px; height: 30px;' id='prova"+ cont +"'>" +
-            	"<br>" +
-            	"&nbsp;"+
-            	"<br/>" +
-            	"<option value='0'>Selecione:</option>"+
-            	"<br/>" +
+            	
+            	"<div class='div"+cont+" processoSeletivo'>" +
+            	"<div class='row'>"+
+            	"<div class='col-md-6 form-inline'>"+
+            	"<a id='btnRemover' onclick='remover("+ cont +")'class='text-danger fa fa-times fa-lg'></a>"+
+            	"&nbsp;<select class='form-control' id='prova-js'>" +
+            	"<option value='0'>Selecione</option>"+
             	"<c:forEach var='selecao' items='${provas}'>" +
-            	"<br/>" +
             	"<option value='${selecao.id}'>${selecao.nome}</option>"+
-            	"<br/>" +
             	"</c:forEach>" +
-            	"<br/>" +
             	"</select>"+
-            	"&nbsp;"+
-            	"<input class='form-control col-md-3 descricaoProva' style='width: 190px; height: 30px;' type='text' id='descricao"+ cont +"' name='descricao"+ cont +"' maxlength='50'  onkeyup='maxDescricaoProva()' />"+
-            	"&nbsp; <input type='button' id='btnRemover' onclick='remover("+ cont +")'value='Remover campo' class='btn btn-sm btn-danger'>"+
-            	"&nbsp; &nbsp;<label id='maxDescricao'>Caracteres restantes : <span class='numeroCaracteres" + cont +"'>50</span></label>"+
-            	"<br>" + 	
-            	"</div>" ;
+            	"<input class='form-control descricaoProva' type='text' id='descricao-js' name='descricao"+ cont +"' placeholder='Descrição' maxlength='50'  onkeyup='maxDescricaoProva()' />"+
+            	"</div>"+
+            	
+            
+            	
+            	"<div class='col-md-5 form-inline'>"+
+            	"<input name='papers' id='modalPapers' type='file' class='input-sm' multiple data-input='false'>"+
+            	"</div>"+
+            	//"&nbsp; &nbsp;<label id='maxDescricao'>Caracteres restantes : <span class='numeroCaracteres" + cont +"'>50</span></label>"+
+            		
+            	"</div>"+
+            	"</div>";
             	cont++;
         /*adiciona na div*/
             	$("#processoSeletivo").append(campos);

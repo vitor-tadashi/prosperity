@@ -13,6 +13,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
@@ -117,6 +119,8 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private ProvaBean provaBean;
+	
+	private List<String>caminhoProvas;
 
 	private void paginacao(Integer page, Model model, CandidatoBean candidato) {
 
@@ -401,7 +405,13 @@ public class CandidatoController<PaginarCandidato> {
 			}
 		}
 		if (!processoSeletivo.equals("[]")) {
-			provaCandidatoBusiness.inserir(convertGsonProva(processoSeletivo, bean));
+			List<ProvaCandidatoBean> provas = convertGsonProva(processoSeletivo, bean);
+			for(int i = 0; i <= provas.size()-1; i++){
+				provas.get(i).setCaminhoProva(caminhoProvas.get(i));
+			}
+			provaCandidatoBusiness.inserir(provas);
+			//TODO:não da refresh ao salvar status
+			
 		}
 		candidatoBusiness.alterarStatus(situacaoCandidato);
 		return "candidato/aprovar";
@@ -493,4 +503,28 @@ public class CandidatoController<PaginarCandidato> {
 			e.printStackTrace();
 		}
 	}
+	@ResponseBody
+	  @RequestMapping(value = "submitFiles", method = RequestMethod.POST)
+	  public String submitPapers(MultipartHttpServletRequest request,String idCandidato) {
+	    List < MultipartFile > papers = request.getFiles("papers");
+	    try {
+	      saveFilesToServer(papers,idCandidato);
+	    } catch (Exception e) {
+	      return "error";
+	    }
+	    return "success";
+	  }
+	public void saveFilesToServer(List<MultipartFile> multipartFiles, String idCandidato) throws IOException {
+	  	caminhoProvas = new ArrayList<>();
+		
+		String directory = "/home/user/uploadedFilesDir/"+idCandidato+"/";
+		File file = new File(directory);
+		file.mkdirs();
+		for (MultipartFile multipartFile : multipartFiles) {
+			file = new File(directory + multipartFile.getOriginalFilename());
+			IOUtils.copy(multipartFile.getInputStream(), new FileOutputStream(file));
+			
+			caminhoProvas.add(file.getAbsolutePath());
+		}
+	  }
 }
