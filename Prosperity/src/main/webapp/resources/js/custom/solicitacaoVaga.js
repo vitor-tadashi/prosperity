@@ -6,6 +6,8 @@ $(document).ready(function() {
 		$("#txtSolicitante").val($("#solicitante").val());
 	}
 	
+	
+	
 		if ($("input#contErro").val() > 0) {
 			$('#textDiv').addClass("alert alert-danger");
 		}

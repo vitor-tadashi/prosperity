@@ -44,6 +44,8 @@
 							<input id="contErro" class ="hidden" value="${erro}">
 							<input id="txtSolicitante" type="hidden" name="nomeSolicitante" value="${autenticado.funcionario.nome}">
 							<input id="solicitante" type="hidden" value="${vaga.nomeSolicitante }">
+							<fmt:formatDate value="${vaga.dataAprovacao}" pattern="dd/MM/yyyy" var="aprox"/>
+							<input id="aprovay" type="hidden" name="dataAprovacao" value="${aprox}">
 							
 							<div id="textDiv">
 								<c:forEach var="erro" items="${listaErros}">
