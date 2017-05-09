@@ -289,7 +289,7 @@ public class VagaController {
 		}
 	
 		vagaBusiness.inserir(vagaBean, avaliadoresB);
-		redirectAttributes.addFlashAttribute("sucesso", "Vaga salva com sucesso.");
+		redirectAttributes.addFlashAttribute("sucesso", "Vaga salva com sucesso!");
 		return "redirect:/vaga/solicitar";
 
 	}
@@ -336,6 +336,18 @@ public class VagaController {
 		List<CargoSenioridadeBean> rangeSalarial = cargoSenioridadeBusiness.obterRangeSalarial(cargo.getId(),
 				senioridade.getId());
 		return rangeSalarial;
+	}
+	
+	@RequestMapping(value = "/obter-perfil-pre-pronto", method = RequestMethod.GET)
+	public @ResponseBody List<CargoSenioridadeBean> obterPerfilPrePronto(Model model,
+			@ModelAttribute("idCargo") Integer idCargo, @ModelAttribute("idSenioridade") Integer idSenioridade) {
+		CargoBean cargo = new CargoBean();
+		SenioridadeBean senioridade = new SenioridadeBean();
+		cargo.setId(idCargo);
+		senioridade.setId(idSenioridade);
+		List<CargoSenioridadeBean> perfilPrePronto = cargoSenioridadeBusiness.obterRangeSalarial(cargo.getId(),
+				senioridade.getId());
+		return perfilPrePronto;
 	}
 	/*
 	 * @RequestMapping(value = "obter-vaga", method=RequestMethod.GET)

@@ -10,6 +10,8 @@ public class CargoSenioridadeBean {
 
 	private Integer id;
 	
+	private String dsPreTexto;
+	
 	@NumberFormat(pattern = "#,##0.00")
 	private BigDecimal valorMinSalario;
 	
@@ -42,6 +44,14 @@ public class CargoSenioridadeBean {
 
 	public BigDecimal getValorMaxSalario() {
 		return valorMaxSalario;
+	}
+
+	public String getDsPreTexto() {
+		return dsPreTexto;
+	}
+
+	public void setDsPreTexto(String dsPreTexto) {
+		this.dsPreTexto = dsPreTexto;
 	}
 
 	public void setValorMaxSalario(BigDecimal valorMaxSalario) {
