@@ -488,6 +488,7 @@
 																	<fmt:formatDate value="${vaga.dataAprovacao}"
 																		pattern="dd/MM/yyyy" />
 																</p>
+																
 															</div>
 															<div class="col-md-3 well well-sm btn btn-danger"
 																style="height: 56px; margin-right: 5px; width: 200px; margin-left: 5px;">

@@ -76,6 +76,8 @@ public class CandidatoBean extends FormatUtil {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataAberturaPara;
 	private VagaBean vagaBean;
+	private CancelamentoBean cancelamentoBean;
+	
 	
 	private List<ProvaCandidatoBean> provaCandidato = new ArrayList<>();
 
@@ -356,6 +358,18 @@ public class CandidatoBean extends FormatUtil {
 
 	public static boolean getCadastrarCandidato() {
 		return false;
+	}
+
+
+
+	public CancelamentoBean getCancelamentoBean() {
+		return cancelamentoBean;
+	}
+
+
+
+	public void setCancelamentoBean(CancelamentoBean cancelamentoBean) {
+		this.cancelamentoBean = cancelamentoBean;
 	}
 
 }

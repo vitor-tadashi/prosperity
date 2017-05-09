@@ -37,9 +37,10 @@
 								</ul>
 							</div>
 							<div class="panel-body">
-								<form id="formValidar" data-validate="parsley" novalidate>
-									<div class="tab-content">
-										<div class="tab-pane fade in active" id="infoEntrevista">
+							<form id="formValidar" data-validate="parsley" novalidate enctype="multipart/form-data">
+							<input type="hidden" name="idCandidato" id="idCandidatoFile" value="">
+								<div class="tab-content">
+									<div class="tab-pane fade in active" id="infoEntrevista">
 											<div class="form-group">
 												<label class="control-label">Observação :</label>
 												<div class="form-group">
@@ -242,7 +243,7 @@
 													</div>
 													<div class="form-group col-md-6 row">
 														<label class="control-label">Proposta</label>
-														<div class="upload-file" onchange="gerarProposta()">
+														<div class="upload-file" onchange="">
 															<input type="file" name="file" id="upload-proposta"
 																class="upload-demo" required /> <label
 																data-title="Selecione" for="upload-proposta"> <span
@@ -292,7 +293,8 @@
 		</div>
 		<!-- Modal delete -->
 		<div class="modal fade" id="delete-modal" data-target="#delete-modal"
-			tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+			tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+			data-backdrop="static" data-keyboard="false">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -302,13 +304,45 @@
 						</button>
 						<h4 class="modal-title" id="modalLabel">Cancelar candidato</h4>
 					</div>
-					<div class="modal-body">Deseja realmente cancelar este
-						candidato?</div>
+					<div class="modal-body">
+						<div class="container-fluid">
+							<form id="frmCancelar">
+								<div class="row">
+									<div class="form-group col-sm-12">
+										<label for="cancelamento">Motivo do cancelamento:</label> <select
+											class="form-control" id="cancelamento"
+											name="candidato.cancelamento.id">
+											<option value="0">Selecione</option>
+											<c:forEach var="cancelamento" items="${cancelamento}">
+												<option value="${cancelamento.id}"
+													${cancelamento.id == candidato.cancelamento.id ? 'selected="selected"' : ''}>${cancelamento.descricao}</option>
+											</c:forEach>
+
+										</select>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-sm-12">
+										<label for="">Observação :</label> <input type="hidden"
+											id="hdn-id-candidato" /> <input type="hidden"
+											id="hdn-status" />
+										<textarea class="form-control parsley-validated"
+											id="parecerCancelamento" name="parecer" data-required="true"
+											maxlength="300" rows="3"
+											onkeyup="maxCaracterParecerCancelamento()"></textarea>
+										<label id="maxParecerCanc">Caracteres restantes : 300</label>
+
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
 					<div class="modal-footer">
 						<input type="hidden" id="idCancelamento" value="" />
 						<button type="button" class="btn btn-success"
-							onclick="cancelarCandidato()">Sim</button>
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
+							onclick="cancelarCandidato()">Confirmar</button>
+						<button button type="button" class="btn btn-danger"
+							data-dismiss="modal">Cancelar</button>
 					</div>
 				</div>
 			</div>
@@ -408,6 +442,7 @@
 								</c:if>
 							</table>
 						</div>
+
 						<!-- /.row -->
 					</div>
 					<!-- /.panel-body -->
@@ -418,6 +453,7 @@
 			<!-- /.row -->
 			<!-- /.paddin.md -->
 		</div>
+
 	</layout:put>
 	<layout:put block="scripts" type="REPLACE">
 
@@ -433,7 +469,13 @@
 		var maxCaracteres = document.querySelector("#maxParecer");
 		maxCaracteres.innerHTML = "Caracteres restantes : " + restante;
 		}
-
+	function maxCaracterParecerCancelamento(){
+		var maxParecer = $("#parecerCancelamento").val();
+		var restante = 300 - maxParecer.length;
+		var maxCaracteres = document.querySelector("#maxParecerCanc");
+		maxCaracteres.innerHTML = "Caracteres restantes : " + restante;
+	}
+	
 		$("body").on("click", "#aprovar-candidato", function(){
 			var inputs  = $(this).closest("tr").find("input[type=hidden]");
 			var tituloModal = $(this).text();
@@ -512,14 +554,16 @@
 		                   			"prova" : "",
 		                   			"descricao" : ""
 		                   	};
-
-	                   	    var select = $(this).find("#prova"+x).val();
-	                   	    var input = $(this).find("#descricao"+x).val();
+		                   	
+	                   	    var select = $(this).find("#prova-js").val();
+	                   	    var input = $(this).find("#descricao-js").val();
 
 	                   		provasDescricoes.push(select);
 	                   		provasDescricoes.push(input);
 	                   		x++;
 	                   	});
+	                   	file();
+	                   	
                         $.ajax({
                               url : "alterar-status-candidato",
                               method : "POST",
@@ -540,11 +584,30 @@
                               }
                         });
                   });
+			
+                  function file(){
+                   	  var paperElement = document.getElementById("modalPapers");
 
+                   	  if ($(paperElement).val()) {
+	                   	  var form = document.getElementById("formValidar");
+	                   	  var formData = new FormData(form);
+	                   	  var xhr = new XMLHttpRequest();
+	                   	  xhr.open('POST', "submitFiles");
+	                   	  xhr.onreadystatechange = function() {
+	                   	    if (xhr.readyState == 4 && xhr.status == 200) {
+	                   	      console.log("Files Uploaded")
+	                   	    }
+	                   	  };
+	                   	  xhr.send(formData);
+	                  }
+					}      
+                  
             function alterarStatus(idCandidato, idStatus, proposta) {
                   $('#hdn-id-candidato').val(idCandidato);
                   $('#hdn-proposta').val(proposta);
                   $('#hdn-status').val(idStatus);
+                  
+                  $('#idCandidatoFile').val(idCandidato);
             }
 
             function cancelarCandidato() {
@@ -562,33 +625,40 @@
 
            function cancelarClick (id){
         	   $("#idCancelamento").val(id);
-           }
+
+        	   $('#frmCancelar')[0].reset();
+        	   maxCaracterParecerCancelamento();
+           } 
+
+
 
         /*gerador de campo*/
             var cont = 0;
             $("#gerarCampo").click(function(){
-
-            	var campos =
-            	"<div class='div"+cont+" col-md-12 processoSeletivo'>" +
-            	"<select class='form-control col-md-3' style='width: 120px; height: 30px;' id='prova"+ cont +"'>" +
-            	"<br>" +
-            	"&nbsp;"+
-            	"<br/>" +
-            	"<option value='0'>Selecione:</option>"+
-            	"<br/>" +
+            	
+            	var campos = 
+            	
+            	"<div class='div"+cont+" processoSeletivo'>" +
+            	"<div class='row'>"+
+            	
+            	"<div class='col-md-6 form-inline'>"+
+            	"<a id='btnRemover' onclick='remover("+ cont +")'class='text-danger fa fa-times fa-lg'></a>"+
+            	"&nbsp;<select class='form-control' id='prova-js'>" +
+            	"<option value='0'>Selecione</option>"+
             	"<c:forEach var='selecao' items='${provas}'>" +
-            	"<br/>" +
             	"<option value='${selecao.id}'>${selecao.nome}</option>"+
-            	"<br/>" +
             	"</c:forEach>" +
-            	"<br/>" +
             	"</select>"+
-            	"&nbsp;"+
-            	"<input class='form-control col-md-3 descricaoProva' style='width: 190px; height: 30px;' type='text' id='descricao"+ cont +"' name='descricao"+ cont +"' maxlength='50'  onkeyup='maxDescricaoProva()' />"+
-            	"&nbsp; <input type='button' id='btnRemover' onclick='remover("+ cont +")'value='Remover campo' class='btn btn-sm btn-danger'>"+
-            	"&nbsp; &nbsp;<label id='maxDescricao'>Caracteres restantes : <span class='numeroCaracteres" + cont +"'>50</span></label>"+
-            	"<br>" +
-            	"</div>" ;
+            	"<input class='form-control descricaoProva' type='text' id='descricao-js' name='descricao"+ cont +"' placeholder='Descrição' maxlength='50'  onkeyup='maxDescricaoProva()' />"+
+            	"</div>"+
+
+            	"<div class='col-md-5 form-inline'>"+
+            	"<input name='papers' id='modalPapers' type='file' class='input-sm' multiple data-input='false'>"+
+            	"</div>"+
+            	//"&nbsp; &nbsp;<label id='maxDescricao'>Caracteres restantes : <span class='numeroCaracteres" + cont +"'>50</span></label>"+
+            		
+            	"</div>"+
+            	"</div>";
             	cont++;
         /*adiciona na div*/
             	$("#processoSeletivo").append(campos);
@@ -645,7 +715,6 @@
                     },
                 });
             };
-
 /* paginação */
 	</script>
 	</layout:put>

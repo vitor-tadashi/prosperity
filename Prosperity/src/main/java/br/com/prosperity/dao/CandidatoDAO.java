@@ -26,7 +26,7 @@ public class CandidatoDAO extends GenericDAOImpl<CandidatoEntity, Integer> {
 	public List<CandidatoEntity> findByCriteria(Integer page, final List<Criterion> criterion) {
 		List<CandidatoEntity> ret = null;
 		try {
-			ret = findByCriteria("dataAbertura", true, (page * limitResultsPerPage) - (limitResultsPerPage), limitResultsPerPage, criterion);
+			ret = findByCriteria("id", true, (page * limitResultsPerPage) - (limitResultsPerPage), limitResultsPerPage, criterion);
 		} catch (Exception e) {
 
 		}

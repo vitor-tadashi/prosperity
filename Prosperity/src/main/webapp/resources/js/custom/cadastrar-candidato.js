@@ -175,7 +175,7 @@ $(document).ready(function () {
 				return false;
 			}
 
-			textDiv1.textContent = "";
+			textDiv1.textContent = "CPF inválido";
 
 			var text = "[" + div.textContent + "]";
 			return true;

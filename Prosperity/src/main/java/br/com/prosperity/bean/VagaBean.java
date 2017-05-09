@@ -39,6 +39,7 @@ public class VagaBean {
 	private String descricaoPerfilTecnico; //
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataAbertura; //
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataAprovacao; //
 	private Date dataFechamento; //
 	private Integer numeroCandidatos; //

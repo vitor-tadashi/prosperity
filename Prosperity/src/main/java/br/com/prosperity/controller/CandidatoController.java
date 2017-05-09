@@ -13,6 +13,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.fileupload.FileUpload;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +30,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 
 import br.com.prosperity.bean.AvaliacaoBean;
 import br.com.prosperity.bean.CanalInformacaoBean;
+import br.com.prosperity.bean.CancelamentoBean;
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CandidatoCompetenciaBean;
 import br.com.prosperity.bean.CargoBean;
@@ -49,6 +52,7 @@ import br.com.prosperity.bean.StatusBean;
 import br.com.prosperity.bean.TipoCursoBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.CanalInformacaoBusiness;
+import br.com.prosperity.business.CancelamentoBusiness;
 import br.com.prosperity.business.CandidatoBusiness;
 import br.com.prosperity.business.CargoBusiness;
 import br.com.prosperity.business.FuncionarioBusiness;
@@ -69,7 +73,8 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private CandidatoBean bean;
-
+	@Autowired
+	private CancelamentoBusiness cancelamentoBusiness;
 	@Autowired
 	private CandidatoBusiness candidatoBusiness;
 
@@ -120,6 +125,8 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private ProvaBean provaBean;
+	
+	private List<String>caminhoProvas;
 
 	private void paginacao(Integer page, Model model, CandidatoBean candidato) {
 
@@ -362,11 +369,13 @@ public class CandidatoController<PaginarCandidato> {
 		List<CompetenciaBean> competencias = candidatoBusiness.listarCompetencia();
 		List<AvaliacaoBean> avaliacoes = candidatoBusiness.listarAvaliacao();
 		List<ProvaBean> provas = provaBusiness.listarProva();
-
+		List<CancelamentoBean> cancelamento = cancelamentoBusiness.listar();
 		model.addAttribute("candidatos", candidatos);
 		model.addAttribute("competencias", competencias);
 		model.addAttribute("avaliacoes", avaliacoes);
 		model.addAttribute("provas", provas);
+		model.addAttribute("cancelamento", cancelamento);
+		
 
 		return "candidato/aprovar-candidato";
 	}
@@ -404,7 +413,13 @@ public class CandidatoController<PaginarCandidato> {
 			}
 		}
 		if (!processoSeletivo.equals("[]")) {
-			provaCandidatoBusiness.inserir(convertGsonProva(processoSeletivo, bean));
+			List<ProvaCandidatoBean> provas = convertGsonProva(processoSeletivo, bean);
+			for(int i = 0; i <= provas.size()-1; i++){
+				provas.get(i).setCaminhoProva(caminhoProvas.get(i));
+			}
+			provaCandidatoBusiness.inserir(provas);
+			//TODO:não da refresh ao salvar status
+			
 		}
 		candidatoBusiness.alterarStatus(situacaoCandidato);
 		return "redirect:candidato/aprovar";
@@ -496,9 +511,29 @@ public class CandidatoController<PaginarCandidato> {
 			e.printStackTrace();
 		}
 	}
-	
-	@RequestMapping(value = { "/gerar-proposta" },headers = "Content-Type=multipart/form-data", method = RequestMethod.POST)
-	public void gerarProposta(FileUpload uploadForm) {
-		TesteExcel tst = new TesteExcel();
-	}
+
+	@ResponseBody
+	  @RequestMapping(value = "submitFiles", method = RequestMethod.POST)
+	  public String submitPapers(MultipartHttpServletRequest request,String idCandidato) {
+	    List < MultipartFile > papers = request.getFiles("papers");
+	    try {
+	      saveFilesToServer(papers,idCandidato);
+	    } catch (Exception e) {
+	      return "error";
+	    }
+	    return "success";
+	  }
+	public void saveFilesToServer(List<MultipartFile> multipartFiles, String idCandidato) throws IOException {
+	  	caminhoProvas = new ArrayList<>();
+		
+		String directory = "/home/user/uploadedFilesDir/"+idCandidato+"/";
+		File file = new File(directory);
+		file.mkdirs();
+		for (MultipartFile multipartFile : multipartFiles) {
+			file = new File(directory + multipartFile.getOriginalFilename());
+			IOUtils.copy(multipartFile.getInputStream(), new FileOutputStream(file));
+			
+			caminhoProvas.add(file.getAbsolutePath());
+		}
+	  }
 }
