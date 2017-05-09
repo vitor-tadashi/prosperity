@@ -13,6 +13,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.apache.commons.fileupload.FileUpload;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -33,6 +35,7 @@ import com.google.gson.Gson;
 
 import br.com.prosperity.bean.AvaliacaoBean;
 import br.com.prosperity.bean.CanalInformacaoBean;
+import br.com.prosperity.bean.CancelamentoBean;
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CandidatoCompetenciaBean;
 import br.com.prosperity.bean.CargoBean;
@@ -47,6 +50,7 @@ import br.com.prosperity.bean.StatusBean;
 import br.com.prosperity.bean.TipoCursoBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.CanalInformacaoBusiness;
+import br.com.prosperity.business.CancelamentoBusiness;
 import br.com.prosperity.business.CandidatoBusiness;
 import br.com.prosperity.business.CargoBusiness;
 import br.com.prosperity.business.FuncionarioBusiness;
@@ -59,6 +63,7 @@ import br.com.prosperity.business.TipoCursoBusiness;
 import br.com.prosperity.business.VagaBusiness;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.exception.BusinessException;
+import br.com.prosperity.util.TesteExcel;
 
 @Controller
 @RequestMapping(value = "/candidato")
@@ -66,7 +71,8 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private CandidatoBean bean;
-
+	@Autowired
+	private CancelamentoBusiness cancelamentoBusiness;
 	@Autowired
 	private CandidatoBusiness candidatoBusiness;
 
@@ -222,7 +228,7 @@ public class CandidatoController<PaginarCandidato> {
 			return "candidato/cadastrar-candidato";
 		}
 		candidatoBusiness.inserir(candidatoBean);
-		redirectAttrs.addFlashAttribute("sucesso", "Candidato salvo com sucesso.");
+		redirectAttrs.addFlashAttribute("sucesso", "Candidato salvo com sucesso!");
 
 		return "redirect:/candidato/cadastrar";
 	}
@@ -359,11 +365,13 @@ public class CandidatoController<PaginarCandidato> {
 		List<CompetenciaBean> competencias = candidatoBusiness.listarCompetencia();
 		List<AvaliacaoBean> avaliacoes = candidatoBusiness.listarAvaliacao();
 		List<ProvaBean> provas = provaBusiness.listarProva();
-
+		List<CancelamentoBean> cancelamento = cancelamentoBusiness.listar();
 		model.addAttribute("candidatos", candidatos);
 		model.addAttribute("competencias", competencias);
 		model.addAttribute("avaliacoes", avaliacoes);
 		model.addAttribute("provas", provas);
+		model.addAttribute("cancelamento", cancelamento);
+		
 
 		return "candidato/aprovar-candidato";
 	}
@@ -404,7 +412,7 @@ public class CandidatoController<PaginarCandidato> {
 			provaCandidatoBusiness.inserir(convertGsonProva(processoSeletivo, bean));
 		}
 		candidatoBusiness.alterarStatus(situacaoCandidato);
-		return "candidato/aprovar";
+		return "redirect:candidato/aprovar";
 	}
 
 	@RequestMapping(value = { "/buscar/{id}" }, method = RequestMethod.GET)
@@ -492,5 +500,10 @@ public class CandidatoController<PaginarCandidato> {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@RequestMapping(value = { "/gerar-proposta" },headers = "Content-Type=multipart/form-data", method = RequestMethod.POST)
+	public void gerarProposta(FileUpload uploadForm) {
+		TesteExcel tst = new TesteExcel();
 	}
 }
