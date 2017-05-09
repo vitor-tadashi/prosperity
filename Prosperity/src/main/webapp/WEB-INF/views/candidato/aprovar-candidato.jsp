@@ -40,7 +40,7 @@
 							</div>
 							<div class="panel-body">
 							<form id="formValidar" data-validate="parsley" novalidate enctype="multipart/form-data">
-							<input type="hidden" name="idCandidato" value="${candidatos[0].id}">
+							<input type="hidden" name="idCandidato" id="idCandidatoFile" value="">
 								<div class="tab-content">
 									<div class="tab-pane fade in active" id="infoEntrevista">
 											<div class="form-group">
@@ -607,6 +607,8 @@
                   $('#hdn-id-candidato').val(idCandidato);
                   $('#hdn-proposta').val(proposta);
                   $('#hdn-status').val(idStatus);
+                  
+                  $('#idCandidatoFile').val(idCandidato);
             }
 
             function cancelarCandidato() {
