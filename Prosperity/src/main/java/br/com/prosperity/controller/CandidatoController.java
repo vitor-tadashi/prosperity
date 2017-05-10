@@ -188,12 +188,11 @@ public class CandidatoController<PaginarCandidato> {
 	}
 
 	@RequestMapping(value = "/cancelar-candidato/{id}")
-	public String cancelaCandidato(@PathVariable Integer id) {
+	public String cancelaCandidato(@PathVariable Integer id, Model model) {
 		SituacaoCandidatoBean bean = new SituacaoCandidatoBean();
 		bean.setIdCandidato(id);
 		bean.setStatus(StatusCandidatoEnum.CANCELADO);
 		candidatoBusiness.alterarStatus(bean);
-
 		return "redirect:/candidato/aprovar";
 	}
 
