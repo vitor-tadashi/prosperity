@@ -23,7 +23,8 @@ import javax.persistence.TemporalType;
 @Table(name = "tbStatusCandidato")
 @NamedQueries({
 @NamedQuery(name="obterStatusCandidato",query="SELECT sc FROM StatusCandidatoEntity sc WHERE sc.candidato.id = ?1 AND sc.flSituacao = true"),
-@NamedQuery(name="desativarStatus",query="SELECT sc FROM StatusCandidatoEntity sc WHERE sc.candidato.id = ?1")
+@NamedQuery(name="desativarStatus",query="SELECT sc FROM StatusCandidatoEntity sc WHERE sc.candidato.id = ?1"),
+@NamedQuery(name="obterStatusCandidatos",query="SELECT sc FROM StatusCandidatoEntity sc WHERE sc.candidato IN (?1) AND sc.flSituacao = true")
 
 })
 public class StatusCandidatoEntity {

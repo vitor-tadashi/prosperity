@@ -28,6 +28,7 @@ import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.StatusCandidatoBean;
 import br.com.prosperity.bean.UsuarioBean;
+import br.com.prosperity.bean.VagaCandidatoBean;
 import br.com.prosperity.converter.AvaliacaoConverter;
 import br.com.prosperity.converter.AvaliadorCandidatoConverter;
 import br.com.prosperity.converter.CandidatoConverter;
@@ -354,6 +355,16 @@ public class CandidatoBusiness {
 							statusCandidatoDAO.insert(statusCandidatoEntity);
 							candidatoBean.setId(situacaoCandidato.getIdCandidato());
 							buscarUsuariosParaEmail(situacaoCandidato);
+							if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CONTRATADO.getValue()) {
+								List<VagaCandidatoEntity> contratado = vagaCandidatoDAO
+										.findByNamedQuery("candidatoContratado", situacaoCandidato.getIdCandidato());
+								VagaCandidatoEntity contrados = null;
+								for (VagaCandidatoEntity cand : contratado) {
+									cand.setContratado(true);
+									contrados = cand;
+								}
+								vagaCandidatoDAO.update(contrados);
+							}
 						}
 					}
 				}

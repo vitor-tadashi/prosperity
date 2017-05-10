@@ -271,8 +271,6 @@ public class VagaController {
 		bean.setStatus(StatusVagaEnum.CANCELADO);
 		vagaBusiness.alterarStatus(bean);
 
-		redirectAttributes.addFlashAttribute("sucesso", "Vaga cancelada com sucesso.");
-
 		return new RedirectView("/vaga/aprovar", true);
 	}
 
