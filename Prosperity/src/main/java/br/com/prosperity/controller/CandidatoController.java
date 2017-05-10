@@ -277,6 +277,8 @@ public class CandidatoController<PaginarCandidato> {
 		model.addAttribute("provas", provasCandidatoBean);
 		model.addAttribute("candidato", candidato);
 		// model.addAttribute("provasCandidato",provasCandidatoBean);
+		
+		
 
 		return "candidato/historico-candidato";
 	}
