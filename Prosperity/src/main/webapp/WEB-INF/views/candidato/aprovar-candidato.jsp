@@ -288,7 +288,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-success"
-							onclick="cancelarCandidato()" id="alterarStatus">Sim</button>
+							id="alterarStatus">Sim</button>
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
 					</div>
 				</div>
@@ -636,18 +636,16 @@
 														.stringify(avaliacoes)
 											},
 											success : function(data) {
-												$('#delete-modal')
+												$('#confirm-modal')
 														.modal('hide');
 												msg = 'O candidato <strong>'
 														+ nomeCandidato
-														+ '</strong> foi cancelado com sucesso!'
+														+ '</strong> foi alterado com sucesso!'
 												$('#msg-sucesso')
 														.html(msg)
 														.addClass(
 																'alert alert-success')
 														.show();
-												$('#js-trCandidato_' + id)
-														.remove();
 												escondeMensagem();
 											},
 											error : function(e) {
