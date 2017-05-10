@@ -158,7 +158,7 @@ public class CandidatoController<PaginarCandidato> {
 
 		List<CanalInformacaoBean> listaCanal = canalInformacaoBusiness.obterTodos();
 		model.addAttribute("listaCanal", listaCanal);
-
+		
 	}
 
 	@RequestMapping(value = "/salvar", method = RequestMethod.POST)
