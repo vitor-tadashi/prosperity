@@ -299,38 +299,23 @@
 													name="dataAbertura">
 											</div>
 
-
-
-
-										</div>
-										<!--começo - tab 4 -->
-										<div class="tab-pane fade" id="fourth">
-											<div class="row">
-												<div class="col-xs-6">
-													<label>Nome do gestor: &nbsp;</label> <label
-														class="highlight">placeholder</label>
-												</div>
-												<div class="col-md-2">
-													<label>Data de entrevista: &nbsp;</label>
-												</div>
-												<div class="col-sm-2">
-													<input type="text" class="form-control date">
-												</div>
-											</div>
-										</div>
-										<!--fim - tab 4 -->
-									</div>
-								</div>
-								<div class="panel-footer">
-									<input type="hidden" value="${candidato.id}" name="id">
-									<input type="hidden" value="${erro}" id="contErro"> <a
-										href="/candidato/file/${candidato.id}" target="_blank"
-										class="btn btn-default pull-left download-download">Download</a>
-									<button class="btn btn-success pull-right">Salvar</button>
-								</div>
-							</form>
-						</div>
-					</div>
+                                </div>
+                                    <!--começo - tab 4 -->    
+                                    <div class="tab-pane fade" id="fourth">
+<!-- 										conteudo gerado pelo ajax                                    -->
+                                    </div>
+                                    <!--fim - tab 4 -->        
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                                <input type="hidden" value="${candidato.id}" name="id">
+                                <input type="hidden" value="${erro}" id="contErro">
+                                <a href="/candidato/file/${candidato.id}" target="_blank" class="btn btn-default pull-left download-download">Download</a>
+                                <button class="btn btn-success pull-right">Salvar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
 
 				</div>
 			</div>
