@@ -37,10 +37,12 @@
 								</ul>
 							</div>
 							<div class="panel-body">
-							<form id="formValidar" data-validate="parsley" novalidate enctype="multipart/form-data">
-							<input type="hidden" name="idCandidato" id="idCandidatoFile" value="">
-								<div class="tab-content">
-									<div class="tab-pane fade in active" id="infoEntrevista">
+								<form id="formValidar" data-validate="parsley" novalidate
+									enctype="multipart/form-data">
+									<input type="hidden" name="idCandidato" id="idCandidatoFile"
+										value="">
+									<div class="tab-content">
+										<div class="tab-pane fade in active" id="infoEntrevista">
 											<div class="form-group">
 												<label class="control-label">Observação :</label>
 												<div class="form-group">
@@ -110,7 +112,7 @@
 													<div class="col-md-6 row">
 														<div class="form-group">
 															<label>Empresa anterior:</label> <input type="text" id=""
-																name="" class="form-control input-sm">
+																name="" class="form-control input-sm" value="${valorzinho.d}">
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
@@ -243,7 +245,7 @@
 													</div>
 													<div class="form-group col-md-6 row">
 														<label class="control-label">Proposta</label>
-														<div class="upload-file" onchange="">
+														<div class="upload-file" onchange="gerarProposta()">
 															<input type="file" name="file" id="upload-proposta"
 																class="upload-demo" required /> <label
 																data-title="Selecione" for="upload-proposta"> <span
@@ -533,7 +535,6 @@
 				$('input.cancelar-status').val(status);
 			}
 
-
 			})
                   $('#alterarStatus').click(function() {
 	                   	var avaliacoes = [];
@@ -702,18 +703,23 @@
             });
 
             function gerarProposta(){
-                $.ajax({
-                    url: 'gerar-proposta',
-                    enctype: 'multipart/form-data',
-                    type: 'POST',
-                    data: MultipartFile,
-                    processData: false,
-                    contentType: false,
-                    cache: false,
-                    success: function (data) {
-                        alert(data)
-                    },
-                });
+                	var paperElement = document.getElementById("upload-proposta");
+
+             	 	if ($(paperElement).val()) {
+                 	 	var form = document.getElementById("formValidar");
+                 	  	var formData = new FormData(form);
+                        $.ajax({
+                            url: 'gerar-proposta',
+                            enctype: 'multipart/form-data',
+                            type: 'POST',
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            cache: false,
+                            success: function (data) {
+                            },
+                        });
+                 	}
             };
 /* paginação */
 	</script>
