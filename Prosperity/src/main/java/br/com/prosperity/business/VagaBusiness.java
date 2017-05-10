@@ -236,7 +236,6 @@ public class VagaBusiness {
 		if (vagaEntity.getId() == null) {
 			Date dateNow = new Date();
 			vagaEntity.setDataAbertura(dateNow);
-			vagaEntity.setDataAprovacao(dateNow);
 			vagaDAO.insert(vagaEntity);
 			situacaoVaga.setIdVaga(vagaEntity.getId());
 			situacaoVaga.setStatus(StatusVagaEnum.PENDENTE);
@@ -247,8 +246,8 @@ public class VagaBusiness {
 			// TODO jsp verifico se status é 27 se sim manda o status 1
 			// TODO aqui cria um else if se for status 1 faz o set como os
 			// outros mas com ativo
-			Date dateNow = new Date();
-			vagaEntity.setDataAprovacao(dateNow);
+			
+			
 			StatusVagaBean status = new StatusVagaBean();
 			status = vagaBean.getStatus().get(0);
 			if (status.getStatus().getId() == StatusVagaEnum.VAGANOVA.getValue()) {
