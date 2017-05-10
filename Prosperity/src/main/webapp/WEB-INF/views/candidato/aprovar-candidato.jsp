@@ -37,10 +37,12 @@
 								</ul>
 							</div>
 							<div class="panel-body">
-							<form id="formValidar" data-validate="parsley" novalidate enctype="multipart/form-data">
-							<input type="hidden" name="idCandidato" id="idCandidatoFile" value="">
-								<div class="tab-content">
-									<div class="tab-pane fade in active" id="infoEntrevista">
+								<form id="formValidar" data-validate="parsley" novalidate
+									enctype="multipart/form-data">
+									<input type="hidden" name="idCandidato" id="idCandidatoFile"
+										value="">
+									<div class="tab-content">
+										<div class="tab-pane fade in active" id="infoEntrevista">
 											<div class="form-group">
 												<label class="control-label">Observação :</label>
 												<div class="form-group">
@@ -110,7 +112,7 @@
 													<div class="col-md-6 row">
 														<div class="form-group">
 															<label>Empresa anterior:</label> <input type="text" id=""
-																name="" class="form-control input-sm">
+																name="" class="form-control input-sm" value="${valorzinho.d}">
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
@@ -243,7 +245,7 @@
 													</div>
 													<div class="form-group col-md-6 row">
 														<label class="control-label">Proposta</label>
-														<div class="upload-file" onchange="">
+														<div class="upload-file" onchange="gerarProposta()">
 															<input type="file" name="file" id="upload-proposta"
 																class="upload-demo" required /> <label
 																data-title="Selecione" for="upload-proposta"> <span
@@ -363,13 +365,7 @@
 					<div class="panel panel-default">
 
 						<!-- MENSAGEM DE SUCESSO -->
-						<c:if test="${not empty sucesso}">
-							<div id="msg-sucesso" class="alert alert-success msg-margin">
-								<ul style="list-style: none;">
-									<li class="li-msg">${sucesso}</li>
-								</ul>
-							</div>
-						</c:if>
+						<div id="msg-sucesso"></div>
 
 						<div class="panel-heading">Aprovação de candidatos</div>
 						<div class="panel-body">
@@ -392,7 +388,7 @@
 								<tbody class="text-center">
 									<form id="form">
 										<c:forEach var="candidato" items="${candidatos}">
-											<tr>
+											<tr id="js-trCandidato_${candidato.id}">
 												<input type="hidden" id="${candidato.id}" />
 												<td>${candidato.nome}</td>
 												<td>${candidato.ultimaVaga.nomeVaga}</td>
@@ -458,11 +454,13 @@
 	<layout:put block="scripts" type="REPLACE">
 
 		<script src="/resources/js/parsley.min.js"></script>
-
+		<!-- <script src="/resources/js/custom/aprovar-candidato.js"></script> -->
 		<script>
 		
 	/*contador de caracter - parecer*/
 
+	var nomeCandidato;
+	
 	function maxCaracterParecer(){
 		var maxParecer = $("#parecer").val();
 		var restante = 500 - maxParecer.length;
@@ -532,7 +530,6 @@
 				$('input.cancelar-id').val(id);
 				$('input.cancelar-status').val(status);
 			}
-
 
 			})
                   $('#alterarStatus').click(function() {
@@ -610,27 +607,12 @@
                   $('#idCandidatoFile').val(idCandidato);
             }
 
-            function cancelarCandidato() {
-            	var id = $("#idCancelamento").val();
-
-            	$.ajax({
-        			url : "cancelar-candidato/"+id,
-        			type : "POST"
-        		}).done(function() {
-        			 location.reload();
-        		}).fail(function(jqXHR, textStatus) {
-        			 location.reload();
-        		});
-            }
-
            function cancelarClick (id){
         	   $("#idCancelamento").val(id);
 
         	   $('#frmCancelar')[0].reset();
         	   maxCaracterParecerCancelamento();
            } 
-
-
 
         /*gerador de campo*/
             var cont = 0;
@@ -702,19 +684,48 @@
             });
 
             function gerarProposta(){
-                $.ajax({
-                    url: 'gerar-proposta',
-                    enctype: 'multipart/form-data',
-                    type: 'POST',
-                    data: MultipartFile,
-                    processData: false,
-                    contentType: false,
-                    cache: false,
-                    success: function (data) {
-                        alert(data)
-                    },
-                });
+                	var paperElement = document.getElementById("upload-proposta");
+
+             	 	if ($(paperElement).val()) {
+                 	 	var form = document.getElementById("formValidar");
+                 	  	var formData = new FormData(form);
+                        $.ajax({
+                            url: 'gerar-proposta',
+                            enctype: 'multipart/form-data',
+                            type: 'POST',
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            cache: false,
+                            success: function (data) {
+                            },
+                        });
+                 	}
             };
+            
+            function cancelarCandidato() {
+            	var id = $("#idCancelamento").val();
+
+            	$.ajax({
+        			url : "cancelar-candidato/"+id,
+        			type : "POST"
+        		}).done(function() {
+        			$('#delete-modal').modal('hide');
+        			msg = 'O candidato <strong>' + nomeCandidato + '</strong> foi cancelado com sucesso!'
+        			$('#msg-sucesso').html(msg).addClass('alert alert-success').show();
+        			$('#js-trCandidato_' + id).remove();
+        			escondeMensagem();
+        		}).fail(function(jqXHR, textStatus) {
+        			 location.reload();
+        		});
+            }
+
+            function escondeMensagem() {
+        		window.setTimeout(function () {
+        			$("#msg-sucesso").hide();
+        			$(".mensagem").hide();
+        		}, 5000);
+        	}
 /* paginação */
 	</script>
 	</layout:put>

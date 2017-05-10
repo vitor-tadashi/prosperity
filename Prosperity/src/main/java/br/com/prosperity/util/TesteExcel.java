@@ -14,13 +14,13 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class TesteExcel {
 
-	public void testa(Workbook caminho) {
-		Double b;
+	public Double testa(String caminho) {
+		Double b = null;
 		try {
 			FileInputStream file = new FileInputStream(
-					new File("C:\\Users\\guilherme.oliveira\\Documents\\teste.xlsx"));
+					new File(caminho));
 
-			XSSFWorkbook workbook = new XSSFWorkbook((OPCPackage) caminho);
+			XSSFWorkbook workbook = new XSSFWorkbook(file);
 
 			XSSFSheet sheet = workbook.getSheetAt(0);
 			CellReference cellReference = new CellReference("A1");
@@ -58,11 +58,12 @@ public class TesteExcel {
 			 */
 			file.close();
 			FileOutputStream out = new FileOutputStream(
-					new File("C:\\Users\\guilherme.oliveira\\Documents\\teste.xlsx"));
+					new File(caminho));
 			workbook.write(out);
 			out.close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+		return b;
 	}
 }

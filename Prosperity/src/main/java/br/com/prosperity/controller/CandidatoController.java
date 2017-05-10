@@ -125,8 +125,8 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private ProvaBean provaBean;
-	
-	private List<String>caminhoProvas;
+
+	private List<String> caminhoProvas;
 
 	private void paginacao(Integer page, Model model, CandidatoBean candidato) {
 
@@ -188,12 +188,11 @@ public class CandidatoController<PaginarCandidato> {
 	}
 
 	@RequestMapping(value = "/cancelar-candidato/{id}")
-	public String cancelaCandidato(@PathVariable Integer id) {
+	public String cancelaCandidato(@PathVariable Integer id, Model model) {
 		SituacaoCandidatoBean bean = new SituacaoCandidatoBean();
 		bean.setIdCandidato(id);
 		bean.setStatus(StatusCandidatoEnum.CANCELADO);
 		candidatoBusiness.alterarStatus(bean);
-
 		return "redirect:/candidato/aprovar";
 	}
 
@@ -377,7 +376,6 @@ public class CandidatoController<PaginarCandidato> {
 		model.addAttribute("avaliacoes", avaliacoes);
 		model.addAttribute("provas", provas);
 		model.addAttribute("cancelamento", cancelamento);
-		
 
 		return "candidato/aprovar-candidato";
 	}
@@ -416,12 +414,12 @@ public class CandidatoController<PaginarCandidato> {
 		}
 		if (!processoSeletivo.equals("[]")) {
 			List<ProvaCandidatoBean> provas = convertGsonProva(processoSeletivo, bean);
-			for(int i = 0; i <= provas.size()-1; i++){
+			for (int i = 0; i <= provas.size() - 1; i++) {
 				provas.get(i).setCaminhoProva(caminhoProvas.get(i));
 			}
 			provaCandidatoBusiness.inserir(provas);
-			//TODO:não da refresh ao salvar status
-			
+			// TODO:não da refresh ao salvar status
+
 		}
 		candidatoBusiness.alterarStatus(situacaoCandidato);
 		return "redirect:candidato/aprovar";
@@ -515,27 +513,57 @@ public class CandidatoController<PaginarCandidato> {
 	}
 
 	@ResponseBody
-	  @RequestMapping(value = "submitFiles", method = RequestMethod.POST)
-	  public String submitPapers(MultipartHttpServletRequest request,String idCandidato) {
-	    List < MultipartFile > papers = request.getFiles("papers");
-	    try {
-	      saveFilesToServer(papers,idCandidato);
-	    } catch (Exception e) {
-	      return "error";
-	    }
-	    return "success";
-	  }
+	@RequestMapping(value = "submitFiles", method = RequestMethod.POST)
+	public String submitPapers(MultipartHttpServletRequest request, String idCandidato) {
+		List<MultipartFile> papers = request.getFiles("papers");
+		try {
+			saveFilesToServer(papers, idCandidato);
+		} catch (Exception e) {
+			return "error";
+		}
+		return "success";
+	}
+
 	public void saveFilesToServer(List<MultipartFile> multipartFiles, String idCandidato) throws IOException {
-	  	caminhoProvas = new ArrayList<>();
-		
-		String directory = "/home/user/uploadedFilesDir/"+idCandidato+"/";
+		caminhoProvas = new ArrayList<>();
+
+		String directory = "/home/user/uploadedFilesDir/" + idCandidato + "/";
 		File file = new File(directory);
 		file.mkdirs();
 		for (MultipartFile multipartFile : multipartFiles) {
 			file = new File(directory + multipartFile.getOriginalFilename());
 			IOUtils.copy(multipartFile.getInputStream(), new FileOutputStream(file));
-			
+
 			caminhoProvas.add(file.getAbsolutePath());
 		}
-	  }
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "gerar-proposta", method = RequestMethod.POST)
+	public String gerarProposta(MultipartHttpServletRequest request, Model model) {
+		List<MultipartFile> papers = request.getFiles("file");
+		Double d = null;
+		try {
+			String caminho = gerarProposta(papers);
+			TesteExcel teste = new TesteExcel();
+			d = teste.testa(caminho);
+		} catch (Exception e) {
+			return "error";
+		}
+		model.addAttribute("valorzinho", d);
+		return "success";
+	}
+
+	public String gerarProposta(List<MultipartFile> multipartFiles) throws IOException {
+		String arquivo = null;
+		String directory = "C:/Users/guilherme.oliveira/Documents/teste/";
+		File file = new File(directory);
+		file.mkdirs();
+		for (MultipartFile multipartFile : multipartFiles) {
+			file = new File(directory + multipartFile.getOriginalFilename());
+			IOUtils.copy(multipartFile.getInputStream(), new FileOutputStream(file));
+			arquivo = directory + multipartFile.getOriginalFilename();
+		}
+		return arquivo;
+	}
 }

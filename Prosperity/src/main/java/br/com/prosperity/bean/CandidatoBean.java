@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.validation.Valid;
+import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -36,8 +37,11 @@ public class CandidatoBean extends FormatUtil {
 
 	@NotNull(message = "O campo data de nascimento deve ser preenchido")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date dataNascimento;
-	@NumberFormat(pattern = "#,##0.00")
+
+	private Date dataNascimento; 
+	@DecimalMax(value="200000.00", message="Pretensão salarial está com valor inválido")
+	@NumberFormat(pattern = "###,##0.00")
+
 	private BigDecimal valorPretensao;
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataAbertura;
