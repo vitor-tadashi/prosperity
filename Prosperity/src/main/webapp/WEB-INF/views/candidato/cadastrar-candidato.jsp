@@ -238,6 +238,8 @@
 														<label class="control-label" for="pretensaoSalarial">Pretensão
 															salarial</label>
 													</div>
+													
+												
 													<div class="col-md-2">
 														<input type="text" class="form-control dinheiro pretensao"
 															id="valorPretensao" placeholder="R$"
