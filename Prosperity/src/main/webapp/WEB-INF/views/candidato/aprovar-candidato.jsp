@@ -459,6 +459,8 @@
 		
 	/*contador de caracter - parecer*/
 
+	var nomeCandidato;
+	
 	function maxCaracterParecer(){
 		var maxParecer = $("#parecer").val();
 		var restante = 500 - maxParecer.length;
@@ -605,27 +607,12 @@
                   $('#idCandidatoFile').val(idCandidato);
             }
 
-            function cancelarCandidato() {
-            	var id = $("#idCancelamento").val();
-
-            	$.ajax({
-        			url : "cancelar-candidato/"+id,
-        			type : "POST"
-        		}).done(function() {
-        			 location.reload();
-        		}).fail(function(jqXHR, textStatus) {
-        			 location.reload();
-        		});
-            }
-
            function cancelarClick (id){
         	   $("#idCancelamento").val(id);
 
         	   $('#frmCancelar')[0].reset();
         	   maxCaracterParecerCancelamento();
            } 
-
-
 
         /*gerador de campo*/
             var cont = 0;
