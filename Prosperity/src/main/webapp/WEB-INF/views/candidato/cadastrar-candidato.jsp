@@ -238,6 +238,8 @@
 														<label class="control-label" for="pretensaoSalarial">Pretensão
 															salarial</label>
 													</div>
+													
+												
 													<div class="col-md-2">
 														<input type="text" class="form-control dinheiro pretensao"
 															id="valorPretensao" placeholder="R$"
@@ -302,7 +304,7 @@
                                 </div>
                                     <!--começo - tab 4 -->    
                                     <div class="tab-pane fade" id="fourth">
-<!-- 										conteudo gerado pelo ajax                                    -->
+<!-- 										conteudo gerado pelo ajax!!!                                    -->
                                     </div>
                                     <!--fim - tab 4 -->        
                                 </div>

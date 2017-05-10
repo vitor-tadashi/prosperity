@@ -26,6 +26,7 @@ import javax.validation.constraints.Size;
 	@NamedQuery(name = "existeUsuario", query = "SELECT u FROM UsuarioEntity u WHERE u.nome = ?1"),
 	@NamedQuery(name = "obterUsuariosAtivos", query = "SELECT u FROM UsuarioEntity u WHERE u.ativo = true"),
 	@NamedQuery(name = "existeUsuarioAlterar", query = "SELECT u FROM UsuarioEntity u WHERE u.nome = ?2 AND u.id NOT LIKE ?1")
+	
 
 })
 public class UsuarioEntity {
