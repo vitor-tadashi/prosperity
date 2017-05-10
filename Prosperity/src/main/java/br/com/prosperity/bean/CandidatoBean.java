@@ -37,9 +37,11 @@ public class CandidatoBean extends FormatUtil {
 
 	@NotNull(message = "O campo data de nascimento deve ser preenchido")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
+
 	private Date dataNascimento; 
 	@DecimalMax(value="200000.00", message="Pretensão salarial está com valor inválido")
 	@NumberFormat(pattern = "###,##0.00")
+
 	private BigDecimal valorPretensao;
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataAbertura;
@@ -62,7 +64,6 @@ public class CandidatoBean extends FormatUtil {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataUltimoContato;
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date entrevista;
 	private String proposta;
 	private StatusCandidatoBean ultimoStatus;
 	private VagaBean ultimaVaga;
@@ -79,9 +80,24 @@ public class CandidatoBean extends FormatUtil {
 	private Date dataAberturaPara;
 	private VagaBean vagaBean;
 	private CancelamentoBean cancelamentoBean;
-	
-	
 	private List<ProvaCandidatoBean> provaCandidato = new ArrayList<>();
+	private List<DataEntrevistaBean> dataEntrevista;
+
+	public List<DataEntrevistaBean> getDataEntrevista() {
+		return dataEntrevista;
+	}
+
+	public void setDataEntrevista(List<DataEntrevistaBean> dataEntrevista) {
+		this.dataEntrevista = dataEntrevista;
+	}
+
+	public void setUltimoStatus(StatusCandidatoBean ultimoStatus) {
+		this.ultimoStatus = ultimoStatus;
+	}
+
+	public void setUltimaVaga(VagaBean ultimaVaga) {
+		this.ultimaVaga = ultimaVaga;
+	}
 
 	public VagaCandidatoBean getVagaCandidato() {
 		if (vagaCandidato == null) {
@@ -89,20 +105,14 @@ public class CandidatoBean extends FormatUtil {
 		}
 		return vagaCandidato;
 	}
-	
-	
-	
+
 	public List<ProvaCandidatoBean> getProvaCandidato() {
 		return provaCandidato;
 	}
 
-
-
 	public void setProvaCandidato(List<ProvaCandidatoBean> provaCandidato) {
 		this.provaCandidato = provaCandidato;
 	}
-
-
 
 	public void setVagaCandidato(VagaCandidatoBean vagaCandidato) {
 		this.vagaCandidato = vagaCandidato;
@@ -326,14 +336,6 @@ public class CandidatoBean extends FormatUtil {
 		this.dataUltimoContato = dataUltimoContato;
 	}
 
-	public Date getEntrevista() {
-		return entrevista;
-	}
-
-	public void setEntrevista(Date entrevista) {
-		this.entrevista = entrevista;
-	}
-
 	public String getProposta() {
 		return proposta;
 	}
@@ -362,13 +364,9 @@ public class CandidatoBean extends FormatUtil {
 		return false;
 	}
 
-
-
 	public CancelamentoBean getCancelamentoBean() {
 		return cancelamentoBean;
 	}
-
-
 
 	public void setCancelamentoBean(CancelamentoBean cancelamentoBean) {
 		this.cancelamentoBean = cancelamentoBean;
