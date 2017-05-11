@@ -24,6 +24,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -539,7 +540,7 @@ public class CandidatoController<PaginarCandidato> {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "gerar-proposta", method = RequestMethod.POST)
+	@PostMapping(value = "gerar-proposta")
 	public String gerarProposta(MultipartHttpServletRequest request, Model model) {
 		List<MultipartFile> papers = request.getFiles("file");
 		Double d = null;
@@ -565,5 +566,13 @@ public class CandidatoController<PaginarCandidato> {
 			arquivo = directory + multipartFile.getOriginalFilename();
 		}
 		return arquivo;
+	}
+	
+	@RequestMapping(value = "/proposta", method = RequestMethod.GET)
+	@ResponseStatus(value = HttpStatus.OK)
+	public @ResponseBody String returnProposta(Model model) {
+		String a = "legal";
+		model.addAttribute(a);
+		return a;
 	}
 }
