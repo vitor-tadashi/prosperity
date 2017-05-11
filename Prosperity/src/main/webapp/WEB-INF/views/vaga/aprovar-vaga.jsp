@@ -390,13 +390,14 @@
 																	onclick="alterarStatus(${vaga.id}, ${statusDisponivel.idStatusDisponivel})">
 																		<i ${statusDisponivel.classe}>&nbsp;</i>${statusDisponivel.nome}</a></li>
 															</c:forEach>
-															</ul>
+														</ul>
 										</td>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
 						</div>
+					
 						<!-- Fim Tabela -->
 					</div>
 					<!-- /panel -->
@@ -579,19 +580,19 @@
     	$('input.id-status').val(status);
     		
     	if( status == '1'){
-    		titulo = "Aprovar vaga."
+    		titulo = "Aprovar vaga"
     		mensagem = "Deseja realmente aprovar esta vaga?";
     	}else if(status == '18'){
-			titulo = "Reprovar vaga."
+			titulo = "Reprovar vaga"
 			mensagem = "Deseja realmente reprovar esta vaga?";
 		}else if(status == '3'){
-			titulo = "Cancelar vaga."
+			titulo = "Cancelar vaga"
 			mensagem = "Deseja realmente cancelar esta vaga?"
 		}else if(status == '2'){
-			titulo = "Fechar vaga."
+			titulo = "Fechar vaga"
 			mensagem = "Deseja realmente fechar esta vaga?"
 		}else if(dado == '27'){
-			titulo = "Ativar vaga."
+			titulo = "Ativar vaga"
 			msg = 'Deseja realmente ativar esta vaga?';
 		}
     	
