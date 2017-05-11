@@ -24,6 +24,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,6 +50,7 @@ import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.StatusBean;
+import br.com.prosperity.bean.StatusCandidatoBean;
 import br.com.prosperity.bean.TipoCursoBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.CanalInformacaoBusiness;
@@ -158,7 +160,7 @@ public class CandidatoController<PaginarCandidato> {
 
 		List<CanalInformacaoBean> listaCanal = canalInformacaoBusiness.obterTodos();
 		model.addAttribute("listaCanal", listaCanal);
-
+		
 	}
 
 	@RequestMapping(value = "/salvar", method = RequestMethod.POST)
@@ -199,15 +201,16 @@ public class CandidatoController<PaginarCandidato> {
 	@RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
 	public String solicitarCandidato(Model model, @PathVariable Integer id) {
 		CandidatoBean candidato = candidatoBusiness.obterCandidatoPorId(id);
+		StatusCandidatoBean statusCandidato = candidato.getUltimoStatus();
 		obterDominiosCandidato(model);
 
 		BigDecimal b = new BigDecimal(candidato.getValorPretensao().toString());
 		b = b.setScale(2, BigDecimal.ROUND_DOWN);
-
 		candidato.setValorPretensao(b);
-		// candidato.setCurriculo("file:///C:/Users/leonardo.ramos/Downloads/PontosProsperity.docx");
+		
 		model.addAttribute("candidato", candidato);
-
+		model.addAttribute("statusCandidato", statusCandidato);
+		
 		return "candidato/cadastrar-candidato";
 	}
 
@@ -539,7 +542,7 @@ public class CandidatoController<PaginarCandidato> {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "gerar-proposta", method = RequestMethod.POST)
+	@PostMapping(value = "gerar-proposta")
 	public String gerarProposta(MultipartHttpServletRequest request, Model model) {
 		List<MultipartFile> papers = request.getFiles("file");
 		Double d = null;
@@ -565,5 +568,13 @@ public class CandidatoController<PaginarCandidato> {
 			arquivo = directory + multipartFile.getOriginalFilename();
 		}
 		return arquivo;
+	}
+	
+	@RequestMapping(value = "/proposta", method = RequestMethod.GET)
+	@ResponseStatus(value = HttpStatus.OK)
+	public @ResponseBody String returnProposta(Model model) {
+		String a = "legal";
+		model.addAttribute(a);
+		return a;
 	}
 }

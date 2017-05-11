@@ -20,6 +20,16 @@ public class VagaCandidatoBean {
 	
 	private CandidatoBean candidatoBean;
 	
+	private Boolean contratado;
+	
+	public Boolean getContratado() {
+		return contratado;
+	}
+
+	public void setContratado(Boolean contratado) {
+		this.contratado = contratado;
+	}
+
 	public Integer getId() {
 		return id;
 	}

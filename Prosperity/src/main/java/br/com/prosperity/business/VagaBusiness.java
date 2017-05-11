@@ -20,6 +20,7 @@ import br.com.prosperity.bean.AvaliadorVagaBean;
 import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.SituacaoVagaBean;
+import br.com.prosperity.bean.StatusDisponivelBean;
 import br.com.prosperity.bean.StatusVagaBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
@@ -28,6 +29,7 @@ import br.com.prosperity.converter.UsuarioConverter;
 import br.com.prosperity.converter.VagaConverter;
 import br.com.prosperity.dao.AvaliadorCandidatoDAO;
 import br.com.prosperity.dao.AvaliadorVagaDAO;
+import br.com.prosperity.dao.CandidatoDAO;
 import br.com.prosperity.dao.StatusCandidatoDAO;
 import br.com.prosperity.dao.StatusDAO;
 import br.com.prosperity.dao.StatusVagaDAO;
@@ -36,8 +38,10 @@ import br.com.prosperity.dao.VagaCandidatoDAO;
 import br.com.prosperity.dao.VagaDAO;
 import br.com.prosperity.entity.AvaliadorCandidatoEntity;
 import br.com.prosperity.entity.AvaliadorVagaEntity;
+import br.com.prosperity.entity.CandidatoEntity;
 import br.com.prosperity.entity.StatusCandidatoEntity;
 import br.com.prosperity.entity.StatusVagaEntity;
+import br.com.prosperity.entity.VagaCandidatoEntity;
 import br.com.prosperity.entity.VagaEntity;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.enumarator.StatusVagaEnum;
@@ -105,6 +109,9 @@ public class VagaBusiness {
 
 	@Autowired
 	private UsuarioBusiness usuarioBusiness;
+	
+	@Autowired
+	private CandidatoDAO candidatoDAO;
 
 	@Transactional(readOnly = true)
 	public List<VagaBean> listarDecrescente() {
@@ -155,9 +162,16 @@ public class VagaBusiness {
 			vagaEntity.get(aux).setDataInicio(vaga.getDataInicio());
 			aux++;
 		}
-		// for each para percorrer lista de vagas formantando ela.
-		// vagaEntity.get(0).setDataInicio(parseData(vagaEntity.get(0).getDataInicio()));
+		
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
+		for (int i = 0; i< vagaBean.size(); i++) {
+			for(int c = 0; c < vagaBean.get(i).getVagaCandidatoBean().size(); c++){
+				if(vagaBean.get(i).getVagaCandidatoBean().get(c).getContratado()!= null && vagaBean.get(i).getVagaCandidatoBean().get(c).getContratado()){
+					vagaBean.get(i).getUltimoStatus().getStatus().getStatusDisponiveis().remove(0);
+					c = vagaBean.get(i).getVagaCandidatoBean().size();
+				}
+			}
+		}
 		return vagaBean;
 	}
 
@@ -247,7 +261,7 @@ public class VagaBusiness {
 				situacaoVaga.setStatus(StatusVagaEnum.ATIVO);
 				alterarStatus(situacaoVaga);
 			}
-			
+
 			vagaDAO.update(vagaEntity);
 		}
 
@@ -315,16 +329,15 @@ public class VagaBusiness {
 	public void alterarDataAprovacao(SituacaoVagaBean status) {
 		Integer idStatus = status.getStatus().getValue();
 		VagaEntity vagaEntity = vagaDAO.findById(status.getIdVaga());
-		
-		if( idStatus == 1 || idStatus == 27){
-		vagaEntity.setDataAprovacao(new Date());
-		vagaDAO.update(vagaEntity);
+
+		if (idStatus == 1 || idStatus == 27) {
+			vagaEntity.setDataAprovacao(new Date());
+			vagaDAO.update(vagaEntity);
+		} else if (idStatus == 2 || idStatus == 3 || idStatus == 18) {
+			vagaEntity.setDataFechamento(new Date());
+			vagaDAO.update(vagaEntity);
 		}
-		else if( idStatus == 2 || idStatus == 3 || idStatus == 18){
-		vagaEntity.setDataFechamento(new Date());
-		vagaDAO.update(vagaEntity);
-		}
-		
+
 	}
 
 	@Transactional
@@ -393,6 +406,7 @@ public class VagaBusiness {
 				lista.add(StatusVagaEnum.VAGANOVA.getValue());
 				lista.add(StatusVagaEnum.PENDENTE.getValue());
 				lista.add(StatusVagaEnum.ATIVO.getValue());
+
 			}
 		}
 		for (Integer listas : lista) {

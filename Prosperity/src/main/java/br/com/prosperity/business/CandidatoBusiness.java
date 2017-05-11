@@ -373,6 +373,16 @@ public class CandidatoBusiness {
 							statusCandidatoDAO.insert(statusCandidatoEntity);
 							candidatoBean.setId(situacaoCandidato.getIdCandidato());
 							buscarUsuariosParaEmail(situacaoCandidato);
+							if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CONTRATADO.getValue()) {
+								List<VagaCandidatoEntity> contratado = vagaCandidatoDAO
+										.findByNamedQuery("candidatoContratado", situacaoCandidato.getIdCandidato());
+								VagaCandidatoEntity contrados = null;
+								for (VagaCandidatoEntity cand : contratado) {
+									cand.setContratado(true);
+									contrados = cand;
+								}
+								vagaCandidatoDAO.update(contrados);
+							}
 						}
 					}
 				}
