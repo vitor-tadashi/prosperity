@@ -1,3 +1,10 @@
+	function maxCaracterFormacaoAcademica(){
+		var maxCaracterFormacaoAcademica = $("#descricaoFormacaoAcademica").val();
+		var restante = 500 - maxCaracterFormacaoAcademica.length;
+		var maxCaracteres = document.querySelector("#maxCaracterFormacaoAcademica");
+		maxCaracteres.innerHTML = "Caracteres restantes : " + restante;
+		}
+
 $(document).ready(function() {
 	if($("#solicitante").val()) {
 		$("#txtSolicitante").val($("#solicitante").val());
@@ -10,7 +17,7 @@ $(document).ready(function() {
 		}
 		$('.telefone').mask('(00)0000-00009');
 		$('.data').mask('00/00/0000');
-		
+	
 		 CKEDITOR.replace('editor');
 		 
 		 setTimeout(function () {
@@ -145,9 +152,9 @@ $(document).ready(function() {
 					data: {idCargo : idCargo,
 						idSenioridade : idSenioridade},
 					success: function(lista){
-						$("#descricaoFormacaoAcademica").val(lista[0].dsPreTexto);
-						$("#descricaoPerfilComportamental").val(lista[0].dsPreTexto);
-						$("#descricaoPerfilTecnico").val(lista[0].dsPreTexto);
+						$("#descricaoFormacaoAcademica").val(lista[0].dsPreFormacaoAcademica);
+						$("#descricaoPerfilComportamental").val(lista[0].dsPrePerfilComportamental);
+						$("#descricaoPerfilTecnico").val(lista[0].dsPrePerfilTecnico);
 					}
 				});
 			} else{
@@ -329,4 +336,7 @@ $(document).ready(function() {
 		return true;
 		
 		}
+			$(document).ready(function() {
+				$('.dinheiro').mask('000.000,00', {reverse: true});
+			});
 	}})

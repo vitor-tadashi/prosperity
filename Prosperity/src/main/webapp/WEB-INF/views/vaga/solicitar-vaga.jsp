@@ -350,10 +350,10 @@
 													<textarea id="descricaoFormacaoAcademica"
 														class="form-control" name="descricaoFormacaoAcademica"
 														rows="5" value="${vaga.descricaoFormacaoAcademica}"
-														maxlength="500" onkeyup="maxCaracterFormacaoAcademica()"
+														maxlength="2000" onkeyup="maxCaracterFormacaoAcademica()"
 														style="resize: none;">${vaga.descricaoFormacaoAcademica}</textarea>
 													<label id="maxFormacaoAcademica">Caracteres
-														restantes : 500</label>
+														restantes : 2000</label>
 												</div>
 											</section>
 											<!-- /panel -->
@@ -365,10 +365,10 @@
 													<textarea id="descricaoPerfilComportamental"
 														class="form-control" name="descricaoPerfilComportamental"
 														rows="5" value="${vaga.descricaoPerfilComportamental}"
-														maxlength="500" onkeyup="maxCaracterPefilComportamental()"
+														maxlength="2000" onkeyup="maxCaracterPefilComportamental()"
 														style="resize: none;">${vaga.descricaoPerfilComportamental}</textarea>
 													<label id="maxPerfilComportamental">Caracteres
-														restantes : 500</label>
+														restantes : 2000</label>
 												</div>
 											</section>
 											<!-- /panel -->
@@ -380,10 +380,10 @@
 													<textarea id="descricaoPerfilTecnico" class="form-control"
 														name="descricaoPerfilTecnico"
 														value="${vaga.descricaoPerfilTecnico}" rows="5"
-														maxlength="500" onkeyup="maxCaracterPefilTecnico()"
+														maxlength="2000" onkeyup="maxCaracterPefilTecnico()"
 														style="resize: none;">${vaga.descricaoPerfilTecnico}</textarea>
 													<label id="maxPerfilTecnico">Caracteres restantes :
-														500</label>
+														2000</label>
 												</div>
 											</section>
 											<!-- /panel -->

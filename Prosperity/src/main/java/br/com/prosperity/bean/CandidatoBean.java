@@ -36,8 +36,8 @@ public class CandidatoBean extends FormatUtil {
 
 	@NotNull(message = "O campo data de nascimento deve ser preenchido")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date dataNascimento; 
-	@NumberFormat(pattern = "#,##0.00") 
+	private Date dataNascimento;
+	@NumberFormat(pattern = "#,##0.00")
 	private BigDecimal valorPretensao;
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataAbertura;
@@ -77,8 +77,8 @@ public class CandidatoBean extends FormatUtil {
 	private Date dataAberturaPara;
 	private VagaBean vagaBean;
 	private CancelamentoBean cancelamentoBean;
-	
-	
+	private List<PropostaBean> propostaBean;
+
 	private List<ProvaCandidatoBean> provaCandidato = new ArrayList<>();
 
 	public VagaCandidatoBean getVagaCandidato() {
@@ -87,20 +87,14 @@ public class CandidatoBean extends FormatUtil {
 		}
 		return vagaCandidato;
 	}
-	
-	
-	
+
 	public List<ProvaCandidatoBean> getProvaCandidato() {
 		return provaCandidato;
 	}
 
-
-
 	public void setProvaCandidato(List<ProvaCandidatoBean> provaCandidato) {
 		this.provaCandidato = provaCandidato;
 	}
-
-
 
 	public void setVagaCandidato(VagaCandidatoBean vagaCandidato) {
 		this.vagaCandidato = vagaCandidato;
@@ -360,16 +354,20 @@ public class CandidatoBean extends FormatUtil {
 		return false;
 	}
 
-
-
 	public CancelamentoBean getCancelamentoBean() {
 		return cancelamentoBean;
 	}
 
-
-
 	public void setCancelamentoBean(CancelamentoBean cancelamentoBean) {
 		this.cancelamentoBean = cancelamentoBean;
+	}
+
+	public List<PropostaBean> getPropostaBean() {
+		return propostaBean;
+	}
+
+	public void setPropostaBean(List<PropostaBean> propostaBean) {
+		this.propostaBean = propostaBean;
 	}
 
 }
