@@ -436,8 +436,8 @@ $(document).ready(function () {
 						var campos = "<div class='row'>" +
 										"<div class='col-xs-4 form-group'>" +
 											"<label>Nome do entrevistador: &nbsp;</label>" +
-											"<input type='hidden' value='dataEntrevista.usuario' name='dataEntrevista.usuario'>" +
-											"<input type='text' id='entrevistador"+ index +"' name ='dataEntrevista.usuario' style='width: 140px' class='form-control' value='"+ value.usuario.funcionario.nome +"'/>" +
+											"<input type='hidden' value='dataEntrevista.usuario' name='dataEntrevista"+'['+ index + ']'+".usuario.funcionario'>" +
+											"<input type='text' id='entrevistador"+ index +"' name ='dataEntrevista"+'['+ index + ']'+".usuario.funcionario.nome' style='width: 140px' class='form-control' value='"+ value.usuario.funcionario.nome +"'/>" +
 										"</div>" +
 										"<div class='col-md-2 form-group'>" +
 											"<label>Data de entrevista: &nbsp;</label>" +

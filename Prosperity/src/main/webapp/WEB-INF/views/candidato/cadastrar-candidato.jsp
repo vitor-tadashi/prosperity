@@ -271,10 +271,27 @@
 													</c:forEach>
 												</select>
 											</div>
-
+</div>
                                     <!--começo - tab 4 -->    
                                     <div class="tab-pane fade" id="fourth">
 <!-- 										conteudo gerado pelo ajax!!!!!                                    -->
+
+											<c:if test="${not empty candidato.dataEntrevista}">
+												<c:forEach var="data" items="${candidato.dataEntrevista}" varStatus="status">
+													<div class="row">
+														<div class='col-xs-4 form-group'>
+															<label>Nome do entrevistador: &nbsp;</label> 
+															<input type="text" name="" style="width: 140px" class="form-control" value="${data.usuario.funcionario.nome}"/>
+															<%-- <input type="hidden" name="candidatoBean.dataEntrevista[${status.index}].usuario.funcionario.nome" value="${data.usuario.funcionario.nome}" /> --%>
+														</div>
+														<div class='col-md-2 form-group'>
+															<label>Data de entrevista: &nbsp;</label>
+															<fmt:formatDate pattern="dd/MM/yyyy" value="${data.dataEntrevista}" var="dataEntrevista"/>
+															<input type="text" name="dataEntrevista[${status.index}].dataEntrevista" name="dataEntrevista" id="dataEntrevista" class="form-control date" data-required="false"  value="${dataEntrevista}">
+														 </div>
+													</div>
+												</c:forEach>
+											</c:if>
                                     </div>
                                     <!--fim - tab 4 -->        
                                 </div>
