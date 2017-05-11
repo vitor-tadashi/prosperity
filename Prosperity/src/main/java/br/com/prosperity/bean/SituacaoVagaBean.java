@@ -25,5 +25,7 @@ public class SituacaoVagaBean {
 	public void setStatus(StatusVagaEnum status) {
 		this.status = status;
 	}
-
+	public void setIdStatus(Integer idStatus){
+		status = StatusVagaEnum.valueOf(idStatus);
+	}
 }

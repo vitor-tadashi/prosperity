@@ -13,6 +13,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.fileupload.FileUpload;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
@@ -47,6 +50,7 @@ import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.StatusBean;
+import br.com.prosperity.bean.StatusCandidatoBean;
 import br.com.prosperity.bean.TipoCursoBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.CanalInformacaoBusiness;
@@ -124,6 +128,8 @@ public class CandidatoController<PaginarCandidato> {
 	@Autowired
 	private ProvaBean provaBean;
 
+	private List<String> caminhoProvas;
+
 	private void paginacao(Integer page, Model model, CandidatoBean candidato) {
 
 		Integer startpage = 1;
@@ -154,7 +160,7 @@ public class CandidatoController<PaginarCandidato> {
 
 		List<CanalInformacaoBean> listaCanal = canalInformacaoBusiness.obterTodos();
 		model.addAttribute("listaCanal", listaCanal);
-
+		
 	}
 
 	@RequestMapping(value = "/salvar", method = RequestMethod.POST)
@@ -184,27 +190,27 @@ public class CandidatoController<PaginarCandidato> {
 	}
 
 	@RequestMapping(value = "/cancelar-candidato/{id}")
-	public String cancelaCandidato(@PathVariable Integer id) {
+	public String cancelaCandidato(@PathVariable Integer id, Model model) {
 		SituacaoCandidatoBean bean = new SituacaoCandidatoBean();
 		bean.setIdCandidato(id);
 		bean.setStatus(StatusCandidatoEnum.CANCELADO);
 		candidatoBusiness.alterarStatus(bean);
-
 		return "redirect:/candidato/aprovar";
 	}
 
 	@RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
 	public String solicitarCandidato(Model model, @PathVariable Integer id) {
 		CandidatoBean candidato = candidatoBusiness.obterCandidatoPorId(id);
+		StatusCandidatoBean statusCandidato = candidato.getUltimoStatus();
 		obterDominiosCandidato(model);
 
 		BigDecimal b = new BigDecimal(candidato.getValorPretensao().toString());
 		b = b.setScale(2, BigDecimal.ROUND_DOWN);
-
 		candidato.setValorPretensao(b);
-		// candidato.setCurriculo("file:///C:/Users/leonardo.ramos/Downloads/PontosProsperity.docx");
+		
 		model.addAttribute("candidato", candidato);
-
+		model.addAttribute("statusCandidato", statusCandidato);
+		
 		return "candidato/cadastrar-candidato";
 	}
 
@@ -274,6 +280,8 @@ public class CandidatoController<PaginarCandidato> {
 		model.addAttribute("provas", provasCandidatoBean);
 		model.addAttribute("candidato", candidato);
 		// model.addAttribute("provasCandidato",provasCandidatoBean);
+		
+		
 
 		return "candidato/historico-candidato";
 	}
@@ -371,7 +379,6 @@ public class CandidatoController<PaginarCandidato> {
 		model.addAttribute("avaliacoes", avaliacoes);
 		model.addAttribute("provas", provas);
 		model.addAttribute("cancelamento", cancelamento);
-		
 
 		return "candidato/aprovar-candidato";
 	}
@@ -409,7 +416,13 @@ public class CandidatoController<PaginarCandidato> {
 			}
 		}
 		if (!processoSeletivo.equals("[]")) {
-			provaCandidatoBusiness.inserir(convertGsonProva(processoSeletivo, bean));
+			List<ProvaCandidatoBean> provas = convertGsonProva(processoSeletivo, bean);
+			for (int i = 0; i <= provas.size() - 1; i++) {
+				provas.get(i).setCaminhoProva(caminhoProvas.get(i));
+			}
+			provaCandidatoBusiness.inserir(provas);
+			// TODO:não da refresh ao salvar status
+
 		}
 		candidatoBusiness.alterarStatus(situacaoCandidato);
 		return "redirect:candidato/aprovar";
@@ -501,9 +514,67 @@ public class CandidatoController<PaginarCandidato> {
 			e.printStackTrace();
 		}
 	}
+
+	@ResponseBody
+	@RequestMapping(value = "submitFiles", method = RequestMethod.POST)
+	public String submitPapers(MultipartHttpServletRequest request, String idCandidato) {
+		List<MultipartFile> papers = request.getFiles("papers");
+		try {
+			saveFilesToServer(papers, idCandidato);
+		} catch (Exception e) {
+			return "error";
+		}
+		return "success";
+	}
+
+	public void saveFilesToServer(List<MultipartFile> multipartFiles, String idCandidato) throws IOException {
+		caminhoProvas = new ArrayList<>();
+
+		String directory = "/home/user/uploadedFilesDir/" + idCandidato + "/";
+		File file = new File(directory);
+		file.mkdirs();
+		for (MultipartFile multipartFile : multipartFiles) {
+			file = new File(directory + multipartFile.getOriginalFilename());
+			IOUtils.copy(multipartFile.getInputStream(), new FileOutputStream(file));
+
+			caminhoProvas.add(file.getAbsolutePath());
+		}
+	}
 	
-	@RequestMapping(value = { "/gerar-proposta" },headers = "Content-Type=multipart/form-data", method = RequestMethod.POST)
-	public void gerarProposta(FileUpload uploadForm) {
-		TesteExcel tst = new TesteExcel();
+	@ResponseBody
+	@PostMapping(value = "gerar-proposta")
+	public String gerarProposta(MultipartHttpServletRequest request, Model model) {
+		List<MultipartFile> papers = request.getFiles("file");
+		Double d = null;
+		try {
+			String caminho = gerarProposta(papers);
+			TesteExcel teste = new TesteExcel();
+			d = teste.testa(caminho);
+		} catch (Exception e) {
+			return "error";
+		}
+		model.addAttribute("valorzinho", d);
+		return "success";
+	}
+
+	public String gerarProposta(List<MultipartFile> multipartFiles) throws IOException {
+		String arquivo = null;
+		String directory = "C:/Users/guilherme.oliveira/Documents/teste/";
+		File file = new File(directory);
+		file.mkdirs();
+		for (MultipartFile multipartFile : multipartFiles) {
+			file = new File(directory + multipartFile.getOriginalFilename());
+			IOUtils.copy(multipartFile.getInputStream(), new FileOutputStream(file));
+			arquivo = directory + multipartFile.getOriginalFilename();
+		}
+		return arquivo;
+	}
+	
+	@RequestMapping(value = "/proposta", method = RequestMethod.GET)
+	@ResponseStatus(value = HttpStatus.OK)
+	public @ResponseBody String returnProposta(Model model) {
+		String a = "legal";
+		model.addAttribute(a);
+		return a;
 	}
 }

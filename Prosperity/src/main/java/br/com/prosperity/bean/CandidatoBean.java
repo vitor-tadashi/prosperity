@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.validation.Valid;
+import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -36,9 +37,11 @@ public class CandidatoBean extends FormatUtil {
 
 	@NotNull(message = "O campo data de nascimento deve ser preenchido")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date dataNascimento;
-	@NumberFormat(pattern = "#,##0.00")
+	private Date dataNascimento; 
+	@DecimalMax(value="200000.00", message="Pretensão salarial está com valor inválido")
+	@NumberFormat(pattern = "###,##0.00")
 	private BigDecimal valorPretensao;
+	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataAbertura;
 	private Date dataFechamento;
@@ -60,7 +63,6 @@ public class CandidatoBean extends FormatUtil {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataUltimoContato;
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date entrevista;
 	private String proposta;
 	private StatusCandidatoBean ultimoStatus;
 	private VagaBean ultimaVaga;
@@ -78,8 +80,24 @@ public class CandidatoBean extends FormatUtil {
 	private VagaBean vagaBean;
 	private CancelamentoBean cancelamentoBean;
 	private List<PropostaBean> propostaBean;
-
 	private List<ProvaCandidatoBean> provaCandidato = new ArrayList<>();
+	private List<DataEntrevistaBean> dataEntrevista;
+
+	public List<DataEntrevistaBean> getDataEntrevista() {
+		return dataEntrevista;
+	}
+
+	public void setDataEntrevista(List<DataEntrevistaBean> dataEntrevista) {
+		this.dataEntrevista = dataEntrevista;
+	}
+
+	public void setUltimoStatus(StatusCandidatoBean ultimoStatus) {
+		this.ultimoStatus = ultimoStatus;
+	}
+
+	public void setUltimaVaga(VagaBean ultimaVaga) {
+		this.ultimaVaga = ultimaVaga;
+	}
 
 	public VagaCandidatoBean getVagaCandidato() {
 		if (vagaCandidato == null) {
@@ -316,14 +334,6 @@ public class CandidatoBean extends FormatUtil {
 
 	public void setDataUltimoContato(Date dataUltimoContato) {
 		this.dataUltimoContato = dataUltimoContato;
-	}
-
-	public Date getEntrevista() {
-		return entrevista;
-	}
-
-	public void setEntrevista(Date entrevista) {
-		this.entrevista = entrevista;
 	}
 
 	public String getProposta() {

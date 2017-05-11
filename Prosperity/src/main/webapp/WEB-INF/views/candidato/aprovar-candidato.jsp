@@ -7,8 +7,6 @@
 
 <layout:extends name="base">
 	<layout:put block="contents">
-		<link rel="stylesheet"
-			href="/resources/css/ckeditor_/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
 		<!--    Modais   -->
 		<!-- Modal Avaliação de Competencias -->
 		<div id="modalProposta" class="modal fade" tabindex="-1" role="dialog"
@@ -39,7 +37,10 @@
 								</ul>
 							</div>
 							<div class="panel-body">
-								<form id="formValidar" data-validate="parsley" novalidate>
+								<form id="formValidar" data-validate="parsley" novalidate
+									enctype="multipart/form-data">
+									<input type="hidden" name="idCandidato" id="idCandidatoFile"
+										value="">
 									<div class="tab-content">
 										<div class="tab-pane fade in active" id="infoEntrevista">
 											<div class="form-group">
@@ -285,8 +286,7 @@
 						<p>Deseja confirmar a operação?</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-success"
-							onclick="cancelarCandidato()" id="alterarStatus">Sim</button>
+						<button type="button" class="btn btn-success" id="alterarStatus">Sim</button>
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
 					</div>
 				</div>
@@ -318,7 +318,6 @@
 												<option value="${cancelamento.id}"
 													${cancelamento.id == candidato.cancelamento.id ? 'selected="selected"' : ''}>${cancelamento.descricao}</option>
 											</c:forEach>
-
 										</select>
 									</div>
 								</div>
@@ -362,16 +361,8 @@
 			<div class="padding-md">
 				<div class="row">
 					<div class="panel panel-default">
-
 						<!-- MENSAGEM DE SUCESSO -->
-						<c:if test="${not empty sucesso}">
-							<div id="msg-sucesso" class="alert alert-success msg-margin">
-								<ul style="list-style: none;">
-									<li class="li-msg">${sucesso}</li>
-								</ul>
-							</div>
-						</c:if>
-
+						<div id="msg-sucesso"></div>
 						<div class="panel-heading">Aprovação de candidatos</div>
 						<div class="panel-body">
 							<input type="hidden" name="user" id="user"
@@ -393,7 +384,7 @@
 								<tbody class="text-center">
 									<form id="form">
 										<c:forEach var="candidato" items="${candidatos}">
-											<tr>
+											<tr id="js-trCandidato_${candidato.id}">
 												<input type="hidden" id="${candidato.id}" />
 												<td>${candidato.nome}</td>
 												<td>${candidato.ultimaVaga.nomeVaga}</td>
@@ -407,17 +398,17 @@
 												<td><input type="hidden" name="idStatus" id="idStatus"
 													value="${candidato.ultimoStatus.status.id}" />
 													<div class="btn-group">
-														<button class="btn btn-sm btn-info dropdown-toggle"
+														<button class="btn btn-xs btn-info dropdown-toggle"
 															data-toggle="dropdown" aria-haspopup="true"
 															aria-expanded="false">
-															<i class="fa fa-cogs fa-lg">&nbsp;</i> <span
+															<i class="fa fa-cogs fa-sm">&nbsp;</i> <span
 																class="caret"></span>
 														</button>
 														<ul class="dropdown-menu dropdown-menu-right slidedown">
 															<c:forEach var="statusDisponivel"
 																items="${candidato.ultimoStatus.status.statusDisponiveis}">
 																<li><a class="clickable" id="aprovar-candidato"
-																	onclick="alterarStatus(${candidato.id}, ${statusDisponivel.idStatusDisponivel})">
+																	onclick="alterarStatus('${candidato.id}', '${statusDisponivel.idStatusDisponivel}', '${candidato.nome}')">
 																		<i ${statusDisponivel.classe}>&nbsp;</i>${statusDisponivel.nome}</a></li>
 																<li class="divider"></li>
 															</c:forEach>
@@ -425,7 +416,7 @@
 																	value="cancelar-candidato/${candidato.id}"
 																	var="urlCancelar">
 																</c:url><a href="#delete-modal"
-																onclick="cancelarClick(${candidato.id})"
+																onclick="cancelarClick('${candidato.id}', '${candidato.nome}')"
 																data-toggle="modal"><i class="fa fa-trash-o fa-lg">&nbsp;</i>Cancelar</a></li>
 															<!-- /fim botao -->
 														</ul>
@@ -443,11 +434,9 @@
 								</c:if>
 							</table>
 						</div>
-
 						<!-- /.row -->
 					</div>
 					<!-- /.panel-body -->
-
 				</div>
 				<!-- /col-md-12 -->
 			</div>
@@ -459,264 +448,348 @@
 	<layout:put block="scripts" type="REPLACE">
 
 		<script src="/resources/js/parsley.min.js"></script>
+		<!-- <script src="/resources/js/custom/aprovar-candidato.js"></script> -->
 		<script>
-		
-	/*contador de caracter - parecer*/
+			var nomeCandidato;
 
-	function maxCaracterParecer(){
-		var maxParecer = $("#parecer").val();
-		var restante = 500 - maxParecer.length;
-		var maxCaracteres = document.querySelector("#maxParecer");
-		maxCaracteres.innerHTML = "Caracteres restantes : " + restante;
-		}
-	function maxCaracterParecerCancelamento(){
-		var maxParecer = $("#parecerCancelamento").val();
-		var restante = 300 - maxParecer.length;
-		var maxCaracteres = document.querySelector("#maxParecerCanc");
-		maxCaracteres.innerHTML = "Caracteres restantes : " + restante;
-	}
-	
-		$("body").on("click", "#aprovar-candidato", function(){
-			var inputs  = $(this).closest("tr").find("input[type=hidden]");
-			var tituloModal = $(this).text();
-
-			inputs.each(function(index, value){
-				if(!isNaN($(value).attr("id"))){
-					var id = $(value).attr("id");
-
-					$.ajax({
-						url:"buscar/"+id,
-						dataType:"json",
-						method:"GET",
-						success:function(data){
-							var perfil = $('#user').val();
-							$("#modalTitulo").text(tituloModal);
-							if(data.ultimoStatus.status.id == "9"){
-				                 if(perfil == "Analista de RH" || perfil == "Gestor RH"){
-									$("#proposta-tab").show();
-				                 }
-							}else if(data.ultimoStatus.status.id == "10"){
-				                 if(perfil == "Administrador" || perfil == "CEO" || perfil == "Diretor de operação"){
-					                	$("#proposta-tab").show();
-					                 }
-							}else if(data.ultimoStatus.status.id == "11"){
-				                 if(perfil == "Analista de RH" || perfil == "Gestor RH"){
-					                	$("#proposta-tab").show();
-					                 }
-							}else if(data.ultimoStatus.status.id == "13"){
-				                 if(perfil == "Analista de RH" || perfil == "Gestor RH"){
-					                	$("#proposta-tab").show();
-					                 }
-							}else if(data.ultimoStatus.status.id == "14"){
-				                 if(perfil == "Analista de RH" || perfil == "Gestor RH"){
-					                	$("#proposta-tab").show();
-					                 }
-							}else{
-			                	$("#proposta-tab").hide();
-							}
-							if(data.ultimoStatus.status.id == "6"){
-								$("#avaliacao-tab").show();
-								$("#processo-tab").show();
-							}else{
-								$("#avaliacao-tab").hide();
-								$("#processo-tab").hide();
-							}
-							$('.tab-bar a[href="#infoEntrevista"]').tab('show');
-							$('#modalProposta').modal('show');
-						}
-					})
-				}
-				});
-
-			function alterarStatus(id,status){
-				$('input.cancelar-id').val(id);
-				$('input.cancelar-status').val(status);
+			function maxCaracterParecer() {
+				var maxParecer = $("#parecer").val();
+				var restante = 500 - maxParecer.length;
+				var maxCaracteres = document.querySelector("#maxParecer");
+				maxCaracteres.innerHTML = "Caracteres restantes : " + restante;
+			}
+			function maxCaracterParecerCancelamento() {
+				var maxParecer = $("#parecerCancelamento").val();
+				var restante = 300 - maxParecer.length;
+				var maxCaracteres = document.querySelector("#maxParecerCanc");
+				maxCaracteres.innerHTML = "Caracteres restantes : " + restante;
 			}
 
+			$("body")
+					.on(
+							"click",
+							"#aprovar-candidato",
+							function() {
+								var inputs = $(this).closest("tr").find(
+										"input[type=hidden]");
+								var tituloModal = $(this).text();
 
-			})
-                  $('#alterarStatus').click(function() {
-	                   	var avaliacoes = [];
+								inputs
+										.each(function(index, value) {
+											if (!isNaN($(value).attr("id"))) {
+												var id = $(value).attr("id");
 
-	                   	$(".avaliacaoCompetencia").each(function(){
-                            if($(this).prop("checked")){
-                                var idAvaliacao = $(this).attr("alt");
-                                var idCompetencia = $(this).val();
+												$
+														.ajax({
+															url : "buscar/"
+																	+ id,
+															dataType : "json",
+															method : "GET",
+															success : function(
+																	data) {
+																var perfil = $(
+																		'#user')
+																		.val();
+																$(
+																		"#modalTitulo")
+																		.text(
+																				tituloModal);
+																if (data.ultimoStatus.status.id == "9") {
+																	if (perfil == "Analista de RH"
+																			|| perfil == "Gestor RH") {
+																		$(
+																				"#proposta-tab")
+																				.show();
+																	}
+																} else if (data.ultimoStatus.status.id == "10") {
+																	if (perfil == "Administrador"
+																			|| perfil == "CEO"
+																			|| perfil == "Diretor de operação") {
+																		$(
+																				"#proposta-tab")
+																				.show();
+																	}
+																} else if (data.ultimoStatus.status.id == "11") {
+																	if (perfil == "Analista de RH"
+																			|| perfil == "Gestor RH") {
+																		$(
+																				"#proposta-tab")
+																				.show();
+																	}
+																} else if (data.ultimoStatus.status.id == "13") {
+																	if (perfil == "Analista de RH"
+																			|| perfil == "Gestor RH") {
+																		$(
+																				"#proposta-tab")
+																				.show();
+																	}
+																} else if (data.ultimoStatus.status.id == "14") {
+																	if (perfil == "Analista de RH"
+																			|| perfil == "Gestor RH") {
+																		$(
+																				"#proposta-tab")
+																				.show();
+																	}
+																} else {
+																	$(
+																			"#proposta-tab")
+																			.hide();
+																}
+																if (data.ultimoStatus.status.id == "6") {
+																	$(
+																			"#avaliacao-tab")
+																			.show();
+																	$(
+																			"#processo-tab")
+																			.show();
+																} else {
+																	$(
+																			"#avaliacao-tab")
+																			.hide();
+																	$(
+																			"#processo-tab")
+																			.hide();
+																}
+																$(
+																		'.tab-bar a[href="#infoEntrevista"]')
+																		.tab(
+																				'show');
+																$(
+																		'#modalProposta')
+																		.modal(
+																				'show');
+															}
+														})
+											}
+										});
+
+								function alterarStatus(id, status, nome) {
+
+									nomeCandidato = nome;
+
+									$('input.cancelar-id').val(id);
+									$('input.cancelar-status').val(status);
+								}
+
+							})
+			$('#alterarStatus').click(
+					function() {
+						var avaliacoes = [];
+
+						$(".avaliacaoCompetencia").each(function() {
+							if ($(this).prop("checked")) {
+								var idAvaliacao = $(this).attr("alt");
+								var idCompetencia = $(this).val();
 								avaliacoes.push(idAvaliacao);
 								avaliacoes.push(idCompetencia);
-                            }
-                        });
+							}
+						});
 
-	                   	var provasDescricoes  = [];
-	                	var x = 0;
-	                   	$(".processoSeletivo").each(function(){
-		                   	var provaDescricao = {
-		                   			"prova" : "",
-		                   			"descricao" : ""
-		                   	};
+						var provasDescricoes = [];
+						var x = 0;
+						$(".processoSeletivo").each(function() {
+							var provaDescricao = {
+								"prova" : "",
+								"descricao" : ""
+							};
 
-	                   	    var select = $(this).find("#prova"+x).val();
-	                   	    var input = $(this).find("#descricao"+x).val();
+							var select = $(this).find("#prova-js").val();
+							var input = $(this).find("#descricao-js").val();
 
-	                   		provasDescricoes.push(select);
-	                   		provasDescricoes.push(input);
-	                   		x++;
-	                   	});
-                        $.ajax({
-                              url : "alterar-status-candidato",
-                              method : "POST",
-                              dataType : "JSON",
-                              data : {
-                                   'idCandidato' : $('#hdn-id-candidato').val(),
-                                   'parecer' : $('#parecer').val(),
-                                   'idStatus' : $('#hdn-status').val(),
-                                   'parecerTecnico' : $('#parecerTecnico').val(),
-                                   'processoSelectivo' : JSON.stringify(provasDescricoes),
-                                   'ac' : JSON.stringify(avaliacoes)
-                              },
-                              success : function(data) {
-                            	  location.reload();
-                              },
-                              error : function(e) {
-                                   location.reload();
-                              }
-                        });
-                  });
+							provasDescricoes.push(select);
+							provasDescricoes.push(input);
+							x++;
+						});
+						file();
 
-            function alterarStatus(idCandidato, idStatus, proposta) {
-                  $('#hdn-id-candidato').val(idCandidato);
-                  $('#hdn-proposta').val(proposta);
-                  $('#hdn-status').val(idStatus);
-            }
+						$.ajax({
+							url : "alterar-status-candidato",
+							method : "POST",
+							dataType : "JSON",
+							data : {
+								'idCandidato' : $('#hdn-id-candidato').val(),
+								'parecer' : $('#parecer').val(),
+								'idStatus' : $('#hdn-status').val(),
+								'parecerTecnico' : $('#parecerTecnico').val(),
+								'processoSelectivo' : JSON
+										.stringify(provasDescricoes),
+								'ac' : JSON.stringify(avaliacoes)
+							},
+							success : function(data) {
+								$('#confirm-modal').modal('hide');
+								msg = 'O candidato <strong>' + nomeCandidato
+										+ '</strong> foi alterado com sucesso!'
+								$('#msg-sucesso').html(msg).addClass(
+										'alert alert-success').show();
+								escondeMensagem();
+							},
+							error : function(e) {
+								location.reload();
+							}
+						});
+					});
 
-            function cancelarCandidato() {
-            	var id = $("#idCancelamento").val();
+			function file() {
+				var paperElement = document.getElementById("modalPapers");
 
-            	$.ajax({
-        			url : "cancelar-candidato/"+id,
-        			type : "POST"
-        		}).done(function() {
-        			 location.reload();
-        		}).fail(function(jqXHR, textStatus) {
-        			 location.reload();
-        		});
-            }
+				if ($(paperElement).val()) {
+					var form = document.getElementById("formValidar");
+					var formData = new FormData(form);
+					var xhr = new XMLHttpRequest();
+					xhr.open('POST', "submitFiles");
+					xhr.onreadystatechange = function() {
+						if (xhr.readyState == 4 && xhr.status == 200) {
+							console.log("Files Uploaded")
+						}
+					};
+					xhr.send(formData);
+				}
+			}
 
-           function cancelarClick (id){
-        	   $("#idCancelamento").val(id);
+			function alterarStatus(idCandidato, idStatus, proposta) {
+				$('#hdn-id-candidato').val(idCandidato);
+				$('#hdn-proposta').val(proposta);
+				$('#hdn-status').val(idStatus);
+				$('#idCandidatoFile').val(idCandidato);
+			}
 
-        	   $('#frmCancelar')[0].reset();
-        	   maxCaracterParecerCancelamento();
-           } 
+			function cancelarClick(id, nome) {
 
+				nomeCandidato = nome;
 
+				$("#idCancelamento").val(id);
 
-        /*gerador de campo*/
-            var cont = 0;
-            $("#gerarCampo").click(function(){
+				$('#frmCancelar')[0].reset();
+				maxCaracterParecerCancelamento();
+			}
 
-            	var campos =
-            	"<div class='div"+cont+" col-md-12 processoSeletivo'>" +
-            	"<select class='form-control col-md-3' style='width: 120px; height: 30px;' id='prova"+ cont +"'>" +
-            	"<br>" +
-            	"&nbsp;"+
-            	"<br/>" +
-            	"<option value='0'>Selecione:</option>"+
-            	"<br/>" +
-            	"<c:forEach var='selecao' items='${provas}'>" +
-            	"<br/>" +
-            	"<option value='${selecao.id}'>${selecao.nome}</option>"+
-            	"<br/>" +
-            	"</c:forEach>" +
-            	"<br/>" +
-            	"</select>"+
-            	"&nbsp;"+
-            	"<input class='form-control col-md-3 descricaoProva' style='width: 190px; height: 30px;' type='text' id='descricao"+ cont +"' name='descricao"+ cont +"' maxlength='50'  onkeyup='maxDescricaoProva()' />"+
-            	"&nbsp; <input type='button' id='btnRemover' onclick='remover("+ cont +")'value='Remover campo' class='btn btn-sm btn-danger'>"+
-            	"&nbsp; &nbsp;<label id='maxDescricao'>Caracteres restantes : <span class='numeroCaracteres" + cont +"'>50</span></label>"+
-            	"<br>" +
-            	"</div>" ;
-            	cont++;
-        /*adiciona na div*/
-            	$("#processoSeletivo").append(campos);
+			/*gerador de campo*/
+			var cont = 0;
+			$("#gerarCampo")
+					.click(
+							function() {
 
+								var campos =
 
-            	/*contador de caracter - descrição prova*/
-            });
-       /*remove os campos*/
+								"<div class='div"+cont+" processoSeletivo'>"
+										+ "<div class='row'>"
+										+ "<div class='col-md-6 form-inline'>"
+										+ "<a id='btnRemover' onclick='remover("
+										+ cont
+										+ ")'class='text-danger fa fa-times fa-lg'></a>"
+										+ "&nbsp;<select class='form-control' id='prova-js'>"
+										+ "<option value='0'>Selecione</option>"
+										+ "<c:forEach var='selecao' items='${provas}'>"
+										+ "<option value='${selecao.id}'>${selecao.nome}</option>"
+										+ "</c:forEach>"
+										+ "</select>"
+										+ "<input class='form-control descricaoProva' type='text'	id='descricao-js' name='descricao"
+										+ cont
+										+ "' placeholder='Descrição' maxlength='50'	onkeyup='maxDescricaoProva()' />"
+										+ "</div>"
+										+ "<div class='col-md-5 form-inline'>"
+										+ "<input name='papers' id='modalPapers' type='file' class='input-sm' multiple data-input='false'>"
+										+ "</div>"
+										+ "&nbsp; &nbsp;<label id='maxDescricao'>Caracteres restantes : <span class='numeroCaracteres" + cont +"'>50</span></label>"
+										+ "</div>" + "</div>";
+								cont++;
+								/*adiciona na div*/
+								$("#processoSeletivo").append(campos);
 
-                function maxDescricaoProva(){
-    	   			var cont = 0;
-    	   			$(".descricaoProva").each(function(){
+								/*contador de caracter - descrição prova*/
+							});
+			/*remove os campos*/
 
-                		var descricao = $(this).val().length;
-                		var restante = 50 - descricao;
-                		$(".numeroCaracteres"+cont).text(restante);
-    	   				cont++;
-    	   			})
+			function maxDescricaoProva() {
+				var cont = 0;
+				$(".descricaoProva").each(function() {
 
-            	}
-            function remover(id){
-            	$(".div"+id).remove();
-            	cont--;
-            }
+					var descricao = $(this).val().length;
+					var restante = 50 - descricao;
+					$(".numeroCaracteres" + cont).text(restante);
+					cont++;
+				})
 
-         // Submit do formulário
-        	$("button#btnEnviar").click(function() {
-        		$("form#formValidar").submit();
-        		if($('form#formValidar').parsley('isValid')){
+			}
+			function remover(id) {
+				$(".div" + id).remove();
+				cont--;
+			}
+
+			// Submit do formulário
+			$("button#btnEnviar").click(function() {
+				$("form#formValidar").submit();
+				if ($('form#formValidar').parsley('isValid')) {
 					$('#confirm-modal').modal('show');
-			   }
-        	});
+				}
+			});
 
-        	$(document).ready(function () {
-                $('form#formValidar').parsley();
+			$(document).ready(function() {
+				$('form#formValidar').parsley();
 
-                $('form#formValidar').on('submit', function (e) {
-                    e.preventDefault();
-                    $(this).parsley().validate();
-                });
-            });
+				$('form#formValidar').on('submit', function(e) {
+					e.preventDefault();
+					$(this).parsley().validate();
+				});
+			});
 
-            function gerarProposta() {
-            	
-            	var url = $('input[type="file"]');
-            	var oReq = new XMLHttpRequest();
-            	oReq.open("POST", gerar-proposta, true);
-            	oReq.responseType = "arraybuffer";
+			function gerarProposta() {
+				var paperElement = document.getElementById("upload-proposta");
 
-            	oReq.onload = function(e) {
-            	  var arraybuffer = oReq.response;
+				if ($(paperElement).val()) {
+					var form = document.getElementById("formValidar");
+					var formData = new FormData(form);
+					$.ajax({
+						url : 'gerar-proposta',
+						enctype : 'multipart/form-data',
+						type : 'POST',
+						data : formData,
+						processData : false,
+						contentType : false,
+						cache : false,
+						success : function(data) {
+						},
+					});
+				}
+				$.ajax({
+					url : "proposta",
+					type : "GET",
+					success : function(data) {
+						$("#emp").val(data);
+					},
+					error : function(data) {
+						$("#emp").val(data.a);
+					}
+				});
+			};
 
-            	  /* convert data to binary string */
-            	  var data = new Uint8Array(arraybuffer);
-            	  var arr = new Array();
-            	  for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
-            	  var bstr = arr.join("");
+			function cancelarCandidato() {
+				var id = $("#idCancelamento").val();
+				debugger;
+				$.ajax({
+					url : "cancelar-candidato/" + id,
+					type : "POST"
+				}).done(
+						function() {
+							$('#delete-modal').modal('hide');
+							msg = 'O candidato <strong>' + nomeCandidato
+									+ '</strong> foi cancelado com sucesso!'
+							$('#msg-sucesso').html(msg).addClass(
+									'alert alert-success').show();
+							$('#js-trCandidato_' + id).remove();
+							escondeMensagem();
+						}).fail(function(jqXHR, textStatus) {
+					location.reload();
+				});
+			}
 
-            	  /* Call XLSX */
-            	  var workbook = XLSX.read(bstr, {type:"binary"});
-
-            	  /* DO SOMETHING WITH workbook HERE */
-            	  var first_sheet_name = workbook.SheetNames[0];
-            	  /* Get worksheet */
-            	  var worksheet = workbook.Sheets[first_sheet_name];
-            	  console.log(XLSX.utils.sheet_to_json(worksheet,{raw:true}));
-            	}
-            	
-            	$.ajax({
-        			url : "gerar-proposta",
-        			type : "POST",
-                    data : {
-                             'caminho' : oReq
-                    },
-
-        		}).done(function(data) {
-        		}).fail(function(e) {
-        		});
-            }
-
-/* paginação */
-	</script>
+			function escondeMensagem(id) {
+				window.setTimeout(function() {
+					$("#msg-sucesso").hide();
+					$(".mensagem").hide();
+				}, 5000);
+			}
+			/* paginação */
+		</script>
 	</layout:put>
 </layout:extends>

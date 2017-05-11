@@ -39,6 +39,9 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 	
 	@Autowired
 	public PropostaConverter propostaConverter;
+	
+	@Autowired
+	public DataEntrevistaConverter dataEntrevistaConverter;
 
 	public CandidatoEntity convertBeanToEntityService(CandidatoBean bean) {
 		if (bean == null) {
@@ -64,7 +67,6 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		entity.setFormacao(formacaoConverter.convertBeanToEntity(bean.getFormacao()));
 		entity.setUsuario(usuarioConverter.convertBeanToEntity(bean.getUsuario()));
 		entity.setStatusCandidatos(statusCandidatoConverter.convertBeanToEntity(bean.getStatus()));
-		entity.setDataEntrevista(bean.getEntrevista());
 		entity.setDataUltimoContato(bean.getDataUltimoContato());
 		entity.setProposta(bean.getProposta());
 		entity.setCurriculoTexto(bean.getCurriculoTexto());
@@ -111,7 +113,6 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		entity.setFormacao(formacaoConverter.convertBeanToEntity(bean.getFormacao()));
 		entity.setUsuario(usuarioConverter.convertBeanToEntity(bean.getUsuario()));
 		entity.setStatusCandidatos(statusCandidatoConverter.convertBeanToEntity(bean.getStatus()));
-		entity.setDataEntrevista(bean.getEntrevista());
 		entity.setDataUltimoContato(bean.getDataUltimoContato());
 		entity.setProposta(bean.getProposta());
 		entity.setCurriculoTexto(bean.getCurriculoTexto());
@@ -148,7 +149,6 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		bean.setFormacao(formacaoConverter.convertEntityToBean(entity.getFormacao()));
 		bean.setUsuario(usuarioConverter.convertEntityToBean(entity.getUsuario()));
 		bean.setStatus(statusCandidatoConverter.convertEntityToBean(entity.getStatusCandidatos()));
-		bean.setEntrevista(entity.getDataEntrevista());
 		bean.setDataUltimoContato(entity.getDataUltimoContato());
 		bean.setProposta(entity.getProposta());
 		bean.setCurriculoTexto(entity.getCurriculoTexto());
@@ -156,6 +156,7 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		//bean.setVagaCandidato(vagaCandidato);
 		bean.setVagas(candidatoVagaConverter.convertEntityToBean(entity.getVagas()));
 		bean.setPropostaBean(propostaConverter.convertEntityToBean(entity.getPropostaEntity()));
+		bean.setDataEntrevista(dataEntrevistaConverter.convertEntityToBean(entity.getDatasEntrevistas()));
 		for(VagaCandidatoBean vc : bean.getVagas()){
 			bean.setVagaCandidato(vc);
 		}

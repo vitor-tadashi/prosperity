@@ -238,6 +238,8 @@
 														<label class="control-label" for="pretensaoSalarial">Pretensão
 															salarial</label>
 													</div>
+													
+												
 													<div class="col-md-2">
 														<input type="text" class="form-control dinheiro pretensao"
 															id="valorPretensao" placeholder="R$"
@@ -249,7 +251,7 @@
 											<div class="form-group col-md-3">
 												<label for="vaga">Vaga a ser aplicado</label> <select
 													class="form-control" id="vaga" name="vagaCandidato.vaga.id"
-													required>
+													required="required" ${(statusCandidato.status.id != 17) && (statusCandidato.status.id != 5) ? 'disabled="disabled"' : ''}>
 													<option value="0">Selecione</option>
 													<c:forEach var="vaga" items="${listaVaga}">
 														<option value="${vaga.id}"
@@ -269,68 +271,23 @@
 													</c:forEach>
 												</select>
 											</div>
-											<div class="form-group col-md-2 col-sm-4">
-												<label for="entrevista" class="control-label">Data
-													de último contato</label>
-												<fmt:formatDate value="${candidato.dataUltimoContato}"
-													pattern="dd/MM/yyyy" var="dataUltimoContato" />
-												<input type="text" class="form-control date"
-													data-required="false" name="dataUltimoContato"
-													id="dataUltimoContato"
-													onblur="validarData3('dataUltimoContato')"
-													value="${dataUltimoContato}">
-												<fmt:formatDate value="${candidato.dataAbertura}"
-													pattern="dd/MM/yyyy" var="dataAbertura" />
-												<input type="hidden" value="${dataAbertura}"
-													name="dataAbertura">
-											</div>
 
-											<div class="form-group col-md-2 col-sm-4">
-												<label for="entrevista" class="control-label">Data
-													de entrevista</label>
-												<fmt:formatDate value="${candidato.entrevista}"
-													pattern="dd/MM/yyyy" var="entrevista" />
-												<input type="text" class="form-control date"
-													data-required="false" name="entrevista" id="entrevista"
-													onblur="validarData4('entrevista')" value="${entrevista}">
-												<fmt:formatDate value="${candidato.dataAbertura}"
-													pattern="dd/MM/yyyy" var="dataAbertura" />
-												<input type="hidden" value="${dataAbertura}"
-													name="dataAbertura">
-											</div>
-
-
-
-
-										</div>
-										<!--começo - tab 4 -->
-										<div class="tab-pane fade" id="fourth">
-											<div class="row">
-												<div class="col-xs-6">
-													<label>Nome do gestor: &nbsp;</label> <label
-														class="highlight">placeholder</label>
-												</div>
-												<div class="col-md-2">
-													<label>Data de entrevista: &nbsp;</label>
-												</div>
-												<div class="col-sm-2">
-													<input type="text" class="form-control date">
-												</div>
-											</div>
-										</div>
-										<!--fim - tab 4 -->
-									</div>
-								</div>
-								<div class="panel-footer">
-									<input type="hidden" value="${candidato.id}" name="id">
-									<input type="hidden" value="${erro}" id="contErro"> <a
-										href="/candidato/file/${candidato.id}" target="_blank"
-										class="btn btn-default pull-left download-download">Download</a>
-									<button class="btn btn-success pull-right">Salvar</button>
-								</div>
-							</form>
-						</div>
-					</div>
+                                    <!--começo - tab 4 -->    
+                                    <div class="tab-pane fade" id="fourth">
+<!-- 										conteudo gerado pelo ajax!!!!!                                    -->
+                                    </div>
+                                    <!--fim - tab 4 -->        
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                                <input type="hidden" value="${candidato.id}" name="id">
+                                <input type="hidden" value="${erro}" id="contErro">
+                                <a href="/candidato/file/${candidato.id}" target="_blank" class="btn btn-default pull-left download-download">Download</a>
+                                <button class="btn btn-success pull-right">Salvar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
 
 				</div>
 			</div>

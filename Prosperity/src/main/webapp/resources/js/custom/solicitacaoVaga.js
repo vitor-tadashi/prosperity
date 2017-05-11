@@ -1,15 +1,30 @@
-	function maxCaracterFormacaoAcademica(){
-		var maxCaracterFormacaoAcademica = $("#descricaoFormacaoAcademica").val();
-		var restante = 500 - maxCaracterFormacaoAcademica.length;
-		var maxCaracteres = document.querySelector("#maxCaracterFormacaoAcademica");
+function maxCaracterFormacaoAcademica(){
+		var maxFormacaoAcademica = $("#descricaoFormacaoAcademica").val();
+		var restante = 500 - maxFormacaoAcademica.length;
+		var maxCaracteres = document.querySelector("#maxFormacaoAcademica");
 		maxCaracteres.innerHTML = "Caracteres restantes : " + restante;
-		}
+	}
+	
+	function maxCaracterPefilComportamental(){
+		var maxPerfilComportamental = $("#descricaoPerfilComportamental").val();
+		var restante = 500 - maxPerfilComportamental.length;
+		var maxCaracteres = document.querySelector("#maxPerfilComportamental");
+		maxCaracteres.innerHTML = "Caracteres restantes : " + restante;
+	}
+	
+	function maxCaracterPefilTecnico(){
+		var maxPerfilTecnico = $("#descricaoPerfilTecnico").val();
+		var restante = 500 - maxPerfilTecnico.length;
+		var maxCaracteres = document.querySelector("#maxPerfilTecnico");
+		maxCaracteres.innerHTML = "Caracteres restantes : " + restante;
+	}
 
 $(document).ready(function() {
 	if($("#solicitante").val()) {
 		$("#txtSolicitante").val($("#solicitante").val());
 	}
 	
+
 	$(document).ready(function() {
 
 		if ($("input#contErro").val() > 0) {
@@ -46,26 +61,7 @@ $(document).ready(function() {
 		$("#dataAbertura").val("2017-01-01")
 	}
 	
-	function maxCaracterFormacaoAcademica(){
-		var maxFormacaoAcademica = $("#descricaoFormacaoAcademica").val();
-		var restante = 500 - maxFormacaoAcademica.length;
-		var maxCaracteres = document.querySelector("#maxFormacaoAcademica");
-		maxCaracteres.innerHTML = "Caracteres restantes : " + restante;
-	}
 	
-	function maxCaracterPefilComportamental(){
-		var maxPerfilComportamental = $("#descricaoPerfilComportamental").val();
-		var restante = 500 - maxPerfilComportamental.length;
-		var maxCaracteres = document.querySelector("#maxPerfilComportamental");
-		maxCaracteres.innerHTML = "Caracteres restantes : " + restante;
-	}
-	
-	function maxCaracterPefilTecnico(){
-		var maxPerfilTecnico = $("#descricaoPerfilTecnico").val();
-		var restante = 500 - maxPerfilTecnico.length;
-		var maxCaracteres = document.querySelector("#maxPerfilTecnico");
-		maxCaracteres.innerHTML = "Caracteres restantes : " + restante;
-	}
 	
 	//Ajax para verificar o projeto e preencher o campo cliente de acordo com o projeto
 	
