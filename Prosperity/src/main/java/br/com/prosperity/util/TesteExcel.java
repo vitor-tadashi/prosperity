@@ -5,17 +5,17 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
 import org.apache.poi.hssf.util.CellReference;
-import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class TesteExcel {
+import br.com.prosperity.bean.PropostaBean;
 
-	public Double testa(String caminho) {
-		Double b = null;
+public class TesteExcel {
+	
+	public PropostaBean testa(String caminho) {
+		PropostaBean propostaBean = new PropostaBean();
 		try {
 			FileInputStream file = new FileInputStream(
 					new File(caminho));
@@ -26,218 +26,143 @@ public class TesteExcel {
 			CellReference cellReference = new CellReference("B3");
 			Row row = sheet.getRow(cellReference.getRow());
 			Cell cell = row.getCell(cellReference.getCol());
-			b = cell.getNumericCellValue();
+			propostaBean.setAnteriorEmpresa(cell.getStringCellValue());
 
-			System.out.println(b);
-			
 			cellReference = new CellReference("B4");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			b = cell.getNumericCellValue();
+			propostaBean.setAnteriorCargo(cell.getStringCellValue());
 
-			System.out.println(b);
-			
 			cellReference = new CellReference("B5");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			b = cell.getNumericCellValue();
+			propostaBean.setAnteriorSalarioFixoBruto(cell.getNumericCellValue());
 
-			System.out.println(b);
-			
 			cellReference = new CellReference("B6");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			b = cell.getNumericCellValue();
+			propostaBean.setAnteriorSalarioLiquidoMensal(cell.getNumericCellValue());
 
-			System.out.println(b);
-			
 			cellReference = new CellReference("B7");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			b = cell.getNumericCellValue();
-
-			System.out.println(b);
+			propostaBean.setAnteriorVrMensal(cell.getNumericCellValue());
 			
 			cellReference = new CellReference("B8");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			b = cell.getNumericCellValue();
+			propostaBean.setAnteriorVaMensal(cell.getNumericCellValue());
 
-			System.out.println(b);
-			
 			cellReference = new CellReference("B9");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			b = cell.getNumericCellValue();
+			propostaBean.setAnteriorSeguroSaudeMensal(cell.getNumericCellValue());
 
-			System.out.println(b);
-			
 			cellReference = new CellReference("B10");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			b = cell.getNumericCellValue();
+			propostaBean.setAnteriorValeAuto(cell.getNumericCellValue());
 
-			System.out.println(b);
-			
 			cellReference = new CellReference("B11");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			b = cell.getNumericCellValue();
+			propostaBean.setAnteriorEstacionamento(cell.getNumericCellValue());
 
-			System.out.println(b);
-			
 			cellReference = new CellReference("B12");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			b = cell.getNumericCellValue();
-
-			System.out.println(b);
+			propostaBean.setAnteriorValeTransporte(cell.getNumericCellValue());
 			
 			cellReference = new CellReference("B13");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			b = cell.getNumericCellValue();
-
-			System.out.println(b);
-
+			propostaBean.setAnteriorLiquidoComBeneficios(cell.getNumericCellValue());
+			
 			cellReference = new CellReference("B14");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			b = cell.getNumericCellValue();
-
-			System.out.println(b);
+			propostaBean.setAnteriorAnualLiquido(cell.getNumericCellValue());
 			
 			cellReference = new CellReference("B15");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			b = cell.getNumericCellValue();
-
-			System.out.println(b);
+			propostaBean.setAnteriorParticipacaoLucrosOuBonus(cell.getNumericCellValue());
 			
 			cellReference = new CellReference("B16");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			b = cell.getNumericCellValue();
-
-			System.out.println(b);
+			propostaBean.setAnteriorTotalAnualLiquidoComBeneficios(cell.getNumericCellValue());
 			
 			cellReference = new CellReference("E3");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			b = cell.getNumericCellValue();
+			propostaBean.setNovaEmpresa(cell.getStringCellValue());
 
-			System.out.println(b);
-			
 			cellReference = new CellReference("E4");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			b = cell.getNumericCellValue();
+			propostaBean.setNovoCargo(cell.getStringCellValue());
 
-			System.out.println(b);
-			
 			cellReference = new CellReference("E5");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			b = cell.getNumericCellValue();
+			propostaBean.setNovoSalarioFixoBruto(cell.getNumericCellValue());
 
-			System.out.println(b);
-			
 			cellReference = new CellReference("E6");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			b = cell.getNumericCellValue();
+			propostaBean.setNovoSalarioLiquidoMensal(cell.getNumericCellValue());
 
-			System.out.println(b);
-			
 			cellReference = new CellReference("E7");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			b = cell.getNumericCellValue();
-
-			System.out.println(b);
+			propostaBean.setNovoVrMensal(cell.getNumericCellValue());
 			
 			cellReference = new CellReference("E8");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			b = cell.getNumericCellValue();
+			propostaBean.setNovoVaMensal(cell.getNumericCellValue());
 
-			System.out.println(b);
-			
 			cellReference = new CellReference("E9");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			b = cell.getNumericCellValue();
+			propostaBean.setNovoSeguroSaudeMensal(cell.getNumericCellValue());
 
-			System.out.println(b);
-			
 			cellReference = new CellReference("E10");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			b = cell.getNumericCellValue();
+			propostaBean.setNovoValeAuto(cell.getNumericCellValue());
 
-			System.out.println(b);
-			
 			cellReference = new CellReference("E11");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			b = cell.getNumericCellValue();
+			propostaBean.setNovoEstacionamento(cell.getNumericCellValue());
 
-			System.out.println(b);
-			
 			cellReference = new CellReference("E12");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			b = cell.getNumericCellValue();
-
-			System.out.println(b);
+			propostaBean.setNovoValeTransporte(cell.getNumericCellValue());
 			
 			cellReference = new CellReference("E13");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			b = cell.getNumericCellValue();
-
-			System.out.println(b);
-
+			propostaBean.setNovoLiquidoComBeneficios(cell.getNumericCellValue());
+			
 			cellReference = new CellReference("E14");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			b = cell.getNumericCellValue();
-
-			System.out.println(b);
+			propostaBean.setNovoAnualLiquido(cell.getNumericCellValue());
 			
 			cellReference = new CellReference("E15");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			b = cell.getNumericCellValue();
-
-			System.out.println(b);
+			propostaBean.setNovaParticipacaoLucrosOuBonus(cell.getNumericCellValue());
 			
 			cellReference = new CellReference("E16");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			b = cell.getNumericCellValue();
+			propostaBean.setNovoTotalAnualLiquidoComBeneficios(cell.getNumericCellValue());
 
-			System.out.println(b);
-
-			/*
-			 * Iterator<Row> rowIterator = sheet.iterator();
-			 * 
-			 * while (rowIterator.hasNext()) { Row row = rowIterator.next();
-			 * 
-			 * // For each row, iterate through each columns Iterator<Cell>
-			 * cellIterator = row.cellIterator(); while (cellIterator.hasNext())
-			 * {
-			 * 
-			 * Cell cell = cellIterator.next();
-			 * 
-			 * switch (cell.getCellType()) { case Cell.CELL_TYPE_BOOLEAN:
-			 * System.out.print(cell.getBooleanCellValue() + "\t\t"); break;
-			 * case Cell.CELL_TYPE_NUMERIC:
-			 * System.out.print(cell.getNumericCellValue() + "\t\t"); break;
-			 * case Cell.CELL_TYPE_STRING:
-			 * System.out.print(cell.getStringCellValue() + "\t\t"); break; } }
-			 * System.out.println(""); }
-			 */
 			file.close();
 			FileOutputStream out = new FileOutputStream(
 					new File(caminho));
@@ -246,6 +171,6 @@ public class TesteExcel {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		return b;
+		return propostaBean;
 	}
 }

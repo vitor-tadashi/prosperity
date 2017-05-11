@@ -1,7 +1,5 @@
 package br.com.prosperity.bean;
 
-import java.math.BigDecimal;
-
 import org.springframework.stereotype.Component;
 
 @Component
@@ -13,199 +11,278 @@ public class PropostaBean {
 	private String anteriorEmpresa;
 	private String novoCargo;
 	private String anteriorCargo;
-	private BigDecimal anteriorSalarioFixoBruto;
-	private BigDecimal novoSalarioFixoBruto;
-	private BigDecimal anteriorSalarioLiquidoMensal;
-	private BigDecimal novoSalarioLiquidoMensal;
-	private BigDecimal anteriorVrMensal;
-	private BigDecimal novoVrMensal;
-	private BigDecimal anteriorSeguroSaudeMensal;
-	private BigDecimal novoSeguroSaudeMensal;
-	private BigDecimal anteriorValeAuto;
-	private BigDecimal novoValeAuto;
-	private BigDecimal anteriorEstacionamento;
-	private BigDecimal novoEstacionamento;
-	private BigDecimal anteriorValeTransporte;
-	private BigDecimal novoValeTransporte;
-	private BigDecimal anteriorLiquidoComBeneficios;
-	private BigDecimal novoLiquidoComBeneficios;
-	private BigDecimal anteriorAnualLiquido;
-	private BigDecimal novoAnualLiquido;
-	private BigDecimal anteriorParticipacaoLucrosOuBonus;
-	private BigDecimal novaParticipacaoLucrosOuBonus;
-	private BigDecimal anteriorTotalAnualLiquidoComBeneficios;
-	private BigDecimal novoTotalAnualLiquidoComBeneficios;
-	
-	
+	private Double anteriorSalarioFixoBruto;
+	private Double novoSalarioFixoBruto;
+	private Double anteriorSalarioLiquidoMensal;
+	private Double novoSalarioLiquidoMensal;
+	private Double anteriorVrMensal;
+	private Double novoVrMensal;
+	private Double anteriorVaMensal;
+	private Double novoVaMensal;
+	private Double anteriorSeguroSaudeMensal;
+	private Double novoSeguroSaudeMensal;
+	private Double anteriorValeAuto;
+	private Double novoValeAuto;
+	private Double anteriorEstacionamento;
+	private Double novoEstacionamento;
+	private Double anteriorValeTransporte;
+	private Double novoValeTransporte;
+	private Double anteriorLiquidoComBeneficios;
+	private Double novoLiquidoComBeneficios;
+	private Double anteriorAnualLiquido;
+	private Double novoAnualLiquido;
+	private Double anteriorParticipacaoLucrosOuBonus;
+	private Double novaParticipacaoLucrosOuBonus;
+	private Double anteriorTotalAnualLiquidoComBeneficios;
+	private Double novoTotalAnualLiquidoComBeneficios;
+	private Boolean flSituacao;
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public CandidatoBean getCandidato() {
 		return candidato;
 	}
+
 	public void setCandidato(CandidatoBean candidato) {
 		this.candidato = candidato;
 	}
+
 	public String getNovaEmpresa() {
 		return novaEmpresa;
 	}
+
 	public void setNovaEmpresa(String novaEmpresa) {
 		this.novaEmpresa = novaEmpresa;
 	}
+
 	public String getAnteriorEmpresa() {
 		return anteriorEmpresa;
 	}
+
 	public void setAnteriorEmpresa(String anteriorEmpresa) {
 		this.anteriorEmpresa = anteriorEmpresa;
 	}
+
 	public String getNovoCargo() {
 		return novoCargo;
 	}
+
 	public void setNovoCargo(String novoCargo) {
 		this.novoCargo = novoCargo;
 	}
+
 	public String getAnteriorCargo() {
 		return anteriorCargo;
 	}
+
 	public void setAnteriorCargo(String anteriorCargo) {
 		this.anteriorCargo = anteriorCargo;
 	}
-	public BigDecimal getAnteriorSalarioFixoBruto() {
+
+	public Double getAnteriorSalarioFixoBruto() {
 		return anteriorSalarioFixoBruto;
 	}
-	public void setAnteriorSalarioFixoBruto(BigDecimal anteriorSalarioFixoBruto) {
+
+	public void setAnteriorSalarioFixoBruto(Double anteriorSalarioFixoBruto) {
 		this.anteriorSalarioFixoBruto = anteriorSalarioFixoBruto;
 	}
-	public BigDecimal getNovoSalarioFixoBruto() {
+
+	public Double getNovoSalarioFixoBruto() {
 		return novoSalarioFixoBruto;
 	}
-	public void setNovoSalarioFixoBruto(BigDecimal novoSalarioFixoBruto) {
+
+	public void setNovoSalarioFixoBruto(Double novoSalarioFixoBruto) {
 		this.novoSalarioFixoBruto = novoSalarioFixoBruto;
 	}
-	public BigDecimal getAnteriorSalarioLiquidoMensal() {
+
+	public Double getAnteriorSalarioLiquidoMensal() {
 		return anteriorSalarioLiquidoMensal;
 	}
-	public void setAnteriorSalarioLiquidoMensal(BigDecimal anteriorSalarioLiquidoMensal) {
+
+	public void setAnteriorSalarioLiquidoMensal(Double anteriorSalarioLiquidoMensal) {
 		this.anteriorSalarioLiquidoMensal = anteriorSalarioLiquidoMensal;
 	}
-	public BigDecimal getNovoSalarioLiquidoMensal() {
+
+	public Double getNovoSalarioLiquidoMensal() {
 		return novoSalarioLiquidoMensal;
 	}
-	public void setNovoSalarioLiquidoMensal(BigDecimal novoSalarioLiquidoMensal) {
+
+	public void setNovoSalarioLiquidoMensal(Double novoSalarioLiquidoMensal) {
 		this.novoSalarioLiquidoMensal = novoSalarioLiquidoMensal;
 	}
-	public BigDecimal getAnteriorVrMensal() {
+
+	public Double getAnteriorVrMensal() {
 		return anteriorVrMensal;
 	}
-	public void setAnteriorVrMensal(BigDecimal anteriorVrMensal) {
+
+	public void setAnteriorVrMensal(Double anteriorVrMensal) {
 		this.anteriorVrMensal = anteriorVrMensal;
 	}
-	public BigDecimal getNovoVrMensal() {
+
+	public Double getNovoVrMensal() {
 		return novoVrMensal;
 	}
-	public void setNovoVrMensal(BigDecimal novoVrMensal) {
+
+	public void setNovoVrMensal(Double novoVrMensal) {
 		this.novoVrMensal = novoVrMensal;
 	}
-	public BigDecimal getAnteriorSeguroSaudeMensal() {
+
+	public Double getAnteriorVaMensal() {
+		return anteriorVaMensal;
+	}
+
+	public void setAnteriorVaMensal(Double anteriorVaMensal) {
+		this.anteriorVaMensal = anteriorVaMensal;
+	}
+
+	public Double getNovoVaMensal() {
+		return novoVaMensal;
+	}
+
+	public void setNovoVaMensal(Double novoVaMensal) {
+		this.novoVaMensal = novoVaMensal;
+	}
+
+	public Double getAnteriorSeguroSaudeMensal() {
 		return anteriorSeguroSaudeMensal;
 	}
-	public void setAnteriorSeguroSaudeMensal(BigDecimal anteriorSeguroSaudeMensal) {
+
+	public void setAnteriorSeguroSaudeMensal(Double anteriorSeguroSaudeMensal) {
 		this.anteriorSeguroSaudeMensal = anteriorSeguroSaudeMensal;
 	}
-	public BigDecimal getNovoSeguroSaudeMensal() {
+
+	public Double getNovoSeguroSaudeMensal() {
 		return novoSeguroSaudeMensal;
 	}
-	public void setNovoSeguroSaudeMensal(BigDecimal novoSeguroSaudeMensal) {
+
+	public void setNovoSeguroSaudeMensal(Double novoSeguroSaudeMensal) {
 		this.novoSeguroSaudeMensal = novoSeguroSaudeMensal;
 	}
-	public BigDecimal getAnteriorValeAuto() {
+
+	public Double getAnteriorValeAuto() {
 		return anteriorValeAuto;
 	}
-	public void setAnteriorValeAuto(BigDecimal anteriorValeAuto) {
+
+	public void setAnteriorValeAuto(Double anteriorValeAuto) {
 		this.anteriorValeAuto = anteriorValeAuto;
 	}
-	public BigDecimal getNovoValeAuto() {
+
+	public Double getNovoValeAuto() {
 		return novoValeAuto;
 	}
-	public void setNovoValeAuto(BigDecimal novoValeAuto) {
+
+	public void setNovoValeAuto(Double novoValeAuto) {
 		this.novoValeAuto = novoValeAuto;
 	}
-	public BigDecimal getAnteriorEstacionamento() {
+
+	public Double getAnteriorEstacionamento() {
 		return anteriorEstacionamento;
 	}
-	public void setAnteriorEstacionamento(BigDecimal anteriorEstacionamento) {
+
+	public void setAnteriorEstacionamento(Double anteriorEstacionamento) {
 		this.anteriorEstacionamento = anteriorEstacionamento;
 	}
-	public BigDecimal getNovoEstacionamento() {
+
+	public Double getNovoEstacionamento() {
 		return novoEstacionamento;
 	}
-	public void setNovoEstacionamento(BigDecimal novoEstacionamento) {
+
+	public void setNovoEstacionamento(Double novoEstacionamento) {
 		this.novoEstacionamento = novoEstacionamento;
 	}
-	public BigDecimal getAnteriorValeTransporte() {
+
+	public Double getAnteriorValeTransporte() {
 		return anteriorValeTransporte;
 	}
-	public void setAnteriorValeTransporte(BigDecimal anteriorValeTransporte) {
+
+	public void setAnteriorValeTransporte(Double anteriorValeTransporte) {
 		this.anteriorValeTransporte = anteriorValeTransporte;
 	}
-	public BigDecimal getNovoValeTransporte() {
+
+	public Double getNovoValeTransporte() {
 		return novoValeTransporte;
 	}
-	public void setNovoValeTransporte(BigDecimal novoValeTransporte) {
+
+	public void setNovoValeTransporte(Double novoValeTransporte) {
 		this.novoValeTransporte = novoValeTransporte;
 	}
-	public BigDecimal getAnteriorLiquidoComBeneficios() {
+
+	public Double getAnteriorLiquidoComBeneficios() {
 		return anteriorLiquidoComBeneficios;
 	}
-	public void setAnteriorLiquidoComBeneficios(BigDecimal anteriorLiquidoComBeneficios) {
+
+	public void setAnteriorLiquidoComBeneficios(Double anteriorLiquidoComBeneficios) {
 		this.anteriorLiquidoComBeneficios = anteriorLiquidoComBeneficios;
 	}
-	public BigDecimal getNovoLiquidoComBeneficios() {
+
+	public Double getNovoLiquidoComBeneficios() {
 		return novoLiquidoComBeneficios;
 	}
-	public void setNovoLiquidoComBeneficios(BigDecimal novoLiquidoComBeneficios) {
+
+	public void setNovoLiquidoComBeneficios(Double novoLiquidoComBeneficios) {
 		this.novoLiquidoComBeneficios = novoLiquidoComBeneficios;
 	}
-	public BigDecimal getAnteriorAnualLiquido() {
+
+	public Double getAnteriorAnualLiquido() {
 		return anteriorAnualLiquido;
 	}
-	public void setAnteriorAnualLiquido(BigDecimal anteriorAnualLiquido) {
+
+	public void setAnteriorAnualLiquido(Double anteriorAnualLiquido) {
 		this.anteriorAnualLiquido = anteriorAnualLiquido;
 	}
-	public BigDecimal getNovoAnualLiquido() {
+
+	public Double getNovoAnualLiquido() {
 		return novoAnualLiquido;
 	}
-	public void setNovoAnualLiquido(BigDecimal novoAnualLiquido) {
+
+	public void setNovoAnualLiquido(Double novoAnualLiquido) {
 		this.novoAnualLiquido = novoAnualLiquido;
 	}
-	public BigDecimal getAnteriorParticipacaoLucrosOuBonus() {
+
+	public Double getAnteriorParticipacaoLucrosOuBonus() {
 		return anteriorParticipacaoLucrosOuBonus;
 	}
-	public void setAnteriorParticipacaoLucrosOuBonus(BigDecimal anteriorParticipacaoLucrosOuBonus) {
+
+	public void setAnteriorParticipacaoLucrosOuBonus(Double anteriorParticipacaoLucrosOuBonus) {
 		this.anteriorParticipacaoLucrosOuBonus = anteriorParticipacaoLucrosOuBonus;
 	}
-	public BigDecimal getNovaParticipacaoLucrosOuBonus() {
+
+	public Double getNovaParticipacaoLucrosOuBonus() {
 		return novaParticipacaoLucrosOuBonus;
 	}
-	public void setNovaParticipacaoLucrosOuBonus(BigDecimal novaParticipacaoLucrosOuBonus) {
+
+	public void setNovaParticipacaoLucrosOuBonus(Double novaParticipacaoLucrosOuBonus) {
 		this.novaParticipacaoLucrosOuBonus = novaParticipacaoLucrosOuBonus;
 	}
-	public BigDecimal getAnteriorTotalAnualLiquidoComBeneficios() {
+
+	public Double getAnteriorTotalAnualLiquidoComBeneficios() {
 		return anteriorTotalAnualLiquidoComBeneficios;
 	}
-	public void setAnteriorTotalAnualLiquidoComBeneficios(BigDecimal anteriorTotalAnualLiquidoComBeneficios) {
+
+	public void setAnteriorTotalAnualLiquidoComBeneficios(Double anteriorTotalAnualLiquidoComBeneficios) {
 		this.anteriorTotalAnualLiquidoComBeneficios = anteriorTotalAnualLiquidoComBeneficios;
 	}
-	public BigDecimal getNovoTotalAnualLiquidoComBeneficios() {
+
+	public Double getNovoTotalAnualLiquidoComBeneficios() {
 		return novoTotalAnualLiquidoComBeneficios;
 	}
-	public void setNovoTotalAnualLiquidoComBeneficios(BigDecimal novoTotalAnualLiquidoComBeneficios) {
+
+	public void setNovoTotalAnualLiquidoComBeneficios(Double novoTotalAnualLiquidoComBeneficios) {
 		this.novoTotalAnualLiquidoComBeneficios = novoTotalAnualLiquidoComBeneficios;
 	}
 
-	
-	
+	public Boolean getFlSituacao() {
+		return flSituacao;
+	}
+
+	public void setFlSituacao(Boolean flSituacao) {
+		this.flSituacao = flSituacao;
+	}
+
 }
