@@ -36,13 +36,13 @@
 														pattern="dd/MM/yyyy" var="dataAbertura" />
 							<input id="dataAbertura" name="dataAbertura" type="hidden" value="${dataAbertura}">
 							<c:if test="${ultimoStatus.status.id == 27 }">
-								<input id="status" name="status[0].status.id" type="hidden" value="1">
+								<input id="status" name="status[0].status.id" type="hidden" value="${ultimoStatus.status.id}">
 								<input name="status[0].status.nome" type="hidden" value="Ativo">	
 							</c:if>
-							<c:if test="${ultimoStatus.status.id != 27 }">
+							<%-- <c:if test="${ultimoStatus.status.id != 27 }">
 								<input id="status" name="status[0].status.id" type="hidden" value="${ultimoStatus.status.id}">
 								<input name="status[0].status.nome" type="hidden" value="${ultimoStatus.status.nome}">	
-							</c:if>
+							</c:if> --%>
 							<input id="contErro" class ="hidden" value="${erro}">
 							<input id="txtSolicitante" type="hidden" name="nomeSolicitante" value="${autenticado.funcionario.nome}">
 							<input id="solicitante" type="hidden" value="${vaga.nomeSolicitante }">

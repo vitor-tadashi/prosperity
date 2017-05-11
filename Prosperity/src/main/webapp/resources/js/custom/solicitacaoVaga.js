@@ -188,9 +188,6 @@ $(document).ready(function() {
 	// Verifica o status da vaga e esconde caso seja somente para editar avaliadores
 	
 	if ($("#status").val() == 27){
-		$("#tabInformacoes").hide();
-		$("#tabDados").hide();
-		$("#tabPerfil").hide();
 		$("#tabInformacoes2").removeClass("active");
 		$("#tabAvaliadores2").addClass("active");
 		$("#first").removeClass("active in");
