@@ -339,7 +339,8 @@ public class CandidatoBusiness {
 		List<StatusDisponivelEntity> statusDisponivelEntity = statusDisponivelDAO.findAll();
 
 		if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANDIDATURA.getValue()
-				|| situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANCELADO.getValue()) {
+				|| situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANCELADO.getValue()
+				|| situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.SEMVAGA.getValue()) {
 			statusCandidatoEntity = statusAlteracao(situacaoCandidato);
 			statusCandidatoDAO.insert(statusCandidatoEntity);
 			buscarUsuariosParaEmail(situacaoCandidato);
