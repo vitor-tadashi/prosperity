@@ -135,6 +135,9 @@ public class CandidatoBusiness {
 
 	@Autowired
 	private UsuarioBusiness usuarioBusiness;
+	
+	@Autowired
+	SituacaoCandidatoBean situacaoCandidato;
 
 	@Transactional(readOnly = true)
 	public List<CandidatoBean> listarDecrescente() {
@@ -218,7 +221,7 @@ public class CandidatoBusiness {
 
 			if (verificarCandidatura(candidatoBean)) {
 				CandidatoEntity candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoBean);
-				SituacaoCandidatoBean situacaoCandidato = new SituacaoCandidatoBean();
+				situacaoCandidato = null;
 				Date dateNow = new Date();
 				candidatoEntity.setDataAbertura(dateNow);
 
@@ -243,12 +246,27 @@ public class CandidatoBusiness {
 
 		} else {
 			CandidatoEntity candidatoEntity = candidatoDAO.findById(candidatoBean.getId());
+			CandidatoBean beans = candidatoConverter.convertEntityToBean(candidatoEntity);
+			if(beans.getUltimaVaga().getId() != candidatoBean.getUltimaVaga().getId()){
+				situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
+				situacaoCandidato.setIdCandidato(candidatoEntity.getId());
+			alterarStatus(situacaoCandidato);
+				
+				candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoEntity, candidatoBean);
 
-			candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoEntity, candidatoBean);
+				tratarInformacoes(candidatoEntity);
+				
+				
+				candidatoDAO.update(candidatoEntity);
+			}
+			else {
+				candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoEntity, candidatoBean);
 
-			tratarInformacoes(candidatoEntity);
+				tratarInformacoes(candidatoEntity);
 
-			candidatoDAO.update(candidatoEntity);
+				candidatoDAO.update(candidatoEntity);
+			}
+			
 		}
 	}
 

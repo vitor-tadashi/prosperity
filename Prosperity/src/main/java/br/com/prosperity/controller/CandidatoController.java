@@ -50,6 +50,7 @@ import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.StatusBean;
+import br.com.prosperity.bean.StatusCandidatoBean;
 import br.com.prosperity.bean.TipoCursoBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.CanalInformacaoBusiness;
@@ -202,15 +203,16 @@ public class CandidatoController<PaginarCandidato> {
 	@RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
 	public String solicitarCandidato(Model model, @PathVariable Integer id) {
 		CandidatoBean candidato = candidatoBusiness.obterCandidatoPorId(id);
+		StatusCandidatoBean statusCandidato = candidato.getUltimoStatus();
 		obterDominiosCandidato(model);
 
 		BigDecimal b = new BigDecimal(candidato.getValorPretensao().toString());
 		b = b.setScale(2, BigDecimal.ROUND_DOWN);
-
 		candidato.setValorPretensao(b);
-		// candidato.setCurriculo("file:///C:/Users/leonardo.ramos/Downloads/PontosProsperity.docx");
+		
 		model.addAttribute("candidato", candidato);
-
+		model.addAttribute("statusCandidato", statusCandidato);
+		
 		return "candidato/cadastrar-candidato";
 	}
 
