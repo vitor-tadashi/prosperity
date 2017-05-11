@@ -12,7 +12,6 @@
 	</layout:put>
 
 	<layout:put block="contents">
-<<<<<<< HEAD
 	<div id="main-container">
 		<div id="breadcrumb">
 			<ul class="breadcrumb">
@@ -28,7 +27,6 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">Informações da vaga</div>
 					<div class="panel-body">
-								
 						<form class="form-border" id="formCadastro2" action="/vaga/salvar"
 							method="POST" >
 							<input id="vagaIdVar" name="id" type="hidden" value="${vaga.id}">
@@ -36,13 +34,13 @@
 														pattern="dd/MM/yyyy" var="dataAbertura" />
 							<input id="dataAbertura" name="dataAbertura" type="hidden" value="${dataAbertura}">
 							<c:if test="${ultimoStatus.status.id == 27 }">
-								<input id="status" name="status[0].status.id" type="hidden" value="1">
+								<input id="status" name="status[0].status.id" type="hidden" value="${ultimoStatus.status.id}">
 								<input name="status[0].status.nome" type="hidden" value="Ativo">	
 							</c:if>
-							<c:if test="${ultimoStatus.status.id != 27 }">
+							<%-- <c:if test="${ultimoStatus.status.id != 27 }">
 								<input id="status" name="status[0].status.id" type="hidden" value="${ultimoStatus.status.id}">
 								<input name="status[0].status.nome" type="hidden" value="${ultimoStatus.status.nome}">	
-							</c:if>
+							</c:if> --%>
 							<input id="contErro" class ="hidden" value="${erro}">
 							<input id="txtSolicitante" type="hidden" name="nomeSolicitante" value="${autenticado.funcionario.nome}">
 							<input id="solicitante" type="hidden" value="${vaga.nomeSolicitante }">
@@ -89,7 +87,6 @@
 												Divulgação</a></li>
 									</ul>
 								</div>
-
 								<div class="panel-body">
 									<div class="tab-content">
 										<div class="tab-pane fade in active" id="first">
@@ -130,7 +127,6 @@
 													</div>
 												</div>
 											</div>
-
 											<div class="row">
 												<div class="form-group col-md-6">
 													<label for="cmbCargo">Cargo</label> <select
@@ -284,20 +280,15 @@
 													<label for="exampleInputEmail1">Gestor imediato</label> <select
 														id="cmbGestorInterno" name="usuarioBean.id"
 														class="form-control">
-
 														<option value="0">Selecione o gestor</option>
-
 														<c:forEach var="usuario" items="${usuarios}" varStatus="i">
 															<option value="${usuario.id}"
 																${usuario.id == vaga.usuarioBean.id ? 'selected="selected"' : ''}>${usuario.funcionario.nome}</option>
 														</c:forEach>
-
 													</select>
 												</div>
 												<!-- /form-group -->
-
 												<!-- Sessão de Projeto Alocado -->
-
 												<div id="dadosAlocacao" class="col-md-12 hide"
 													style="padding-top: 0px">
 													<div class="col-md-6" style="padding-left: 0px">
@@ -348,9 +339,10 @@
 													<textarea id="descricaoFormacaoAcademica"
 														class="form-control" name="descricaoFormacaoAcademica"
 														rows="5" value="${vaga.descricaoFormacaoAcademica}"
-														maxlength="500" onkeyup="maxCaracterFormacaoAcademica();"
+														maxlength="2000" onkeyup="maxCaracterFormacaoAcademica();"
 														style="resize: none;">${vaga.descricaoFormacaoAcademica}</textarea>
-													<label id="maxFormacaoAcademica">Caracteres restantes : 500</label>
+													<label id="maxFormacaoAcademica">Caracteres
+														restantes : 2000</label>
 												</div>
 											</section>
 											<!-- /panel -->
@@ -362,10 +354,10 @@
 													<textarea id="descricaoPerfilComportamental"
 														class="form-control" name="descricaoPerfilComportamental"
 														rows="5" value="${vaga.descricaoPerfilComportamental}"
-														maxlength="500" onkeyup="maxCaracterPefilComportamental();"
+														maxlength="2000" onkeyup="maxCaracterPefilComportamental();"
 														style="resize: none;">${vaga.descricaoPerfilComportamental}</textarea>
 													<label id="maxPerfilComportamental">Caracteres
-														restantes : 500</label>
+														restantes : 2000</label>
 												</div>
 											</section>
 											<!-- /panel -->
@@ -377,36 +369,28 @@
 													<textarea id="descricaoPerfilTecnico" class="form-control"
 														name="descricaoPerfilTecnico"
 														value="${vaga.descricaoPerfilTecnico}" rows="5"
-														maxlength="500" onkeyup="maxCaracterPefilTecnico();"
+														maxlength="2000" onkeyup="maxCaracterPefilTecnico();"
 														style="resize: none;">${vaga.descricaoPerfilTecnico}</textarea>
 													<label id="maxPerfilTecnico">Caracteres restantes :
-														500</label>
+														2000</label>
 												</div>
 											</section>
 											<!-- /panel -->
 										<!-- /Section-->
 									</div>
-									
-
 										<div class="tab-pane fade hide" id="fourth">
-
 											<div class="panel panel-default">
-
 												<div class="panel-heading">
 													<label>Avaliadores</label>
 												</div>
-
 												<div class="panel-body relative">
 													<select multiple="multiple" id="selectedBox1"
 														class="select-box pull-left form-control">
-
 														<c:forEach var="usuario" items="${usuarios}" varStatus="i">
 															<option value="${usuario.id}"
 																${usuario.id == vaga.usuarioBean.id ? 'selected="selected"' : ''}>${usuario.funcionario.nome}</option>
 														</c:forEach>
-
 													</select>
-
 													<div class="select-box-option">
 														<a class="btn btn-sm btn-default" id="btnRemove"> <i
 															class="fa fa-angle-left"></i>
@@ -420,7 +404,6 @@
 															<i class="fa fa-angle-double-right"></i>
 														</a>
 													</div>
-
 													<select multiple="multiple" name="avaliadores"
 														id="selectedBox2"
 														class="select-box pull-right form-control">
@@ -429,19 +412,15 @@
 															varStatus="i">
 															<option value="${avaliador.usuario.id}"<%-- ${vaga.id == avaliadorVagaBean.vaga.id && usuario.id == avaliadorVagaBean.usuario.id ? 'selected="selected"' : ''} --%> >${avaliador.usuario.funcionario.nome}</option>
 														</c:forEach>
-
 													</select>
 												</div>
 											</div>
-
 										</div>
 										<div class="tab-pane fade" id="fifth">
 											<div class="panel panel-default">
 												<div class="adjoined-bottom">
 													<div class="grid-container">
-														<textarea id="editor" name="editor">
-														
-													</textarea>
+														<textarea id="editor" name="editor"></textarea>
 													</div>
 												</div>
 											</div>

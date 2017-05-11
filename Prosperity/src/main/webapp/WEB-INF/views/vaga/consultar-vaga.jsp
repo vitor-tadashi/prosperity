@@ -472,7 +472,7 @@
 														class="accordian-body collapse" id="demo${count.index}">
 
 														<br />
-														<div class="col-sm-12" style="margin-left: 5px">
+														<div class="col-sm-12" style="margin-left: 110px">
 															<div class="col-md-3 well well-sm btn btn-success"
 																style="height: 56px; margin-right: 5px; width: 200px; margin-left: 5px;">
 																<label>Data de Abertura</label>
@@ -498,15 +498,7 @@
 																		pattern="dd/MM/yyyy" />
 																</p>
 															</div>
-															<div class="col-md-3 well well-sm btn btn-success"
-																style="height: 56px; margin-right: 5px; width: 200px; margin-left: 5px;">
-																<label>Proposta</label>
-																<p style="margin-top: -5px;">
-																	R$
-																	<fmt:formatNumber pattern="#,##0.00"
-																		value="${vaga.valorPretensao}" />
-																</p>
-															</div>
+															
 															<a href="/candidato/filtrar?nome=&vagaBean.id=${vaga.id}">
 																<div class="col-md-3 well well-sm btn btn-warning"
 																	style="height: 56px; margin-right: 5px; width: 200px; margin-left: 5px;"

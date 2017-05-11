@@ -10,7 +10,11 @@ public class CargoSenioridadeBean {
 
 	private Integer id;
 	
-	private String dsPreTexto;
+	private String dsPreFormacaoAcademica;
+	
+	private String dsPrePerfilComportamental;
+	
+	private String dsPrePerfilTecnico;
 	
 	@NumberFormat(pattern = "#,##0.00")
 	private BigDecimal valorMinSalario;
@@ -21,6 +25,32 @@ public class CargoSenioridadeBean {
 	private CargoBean cargos;
 	
 	private SenioridadeBean senioridades;
+
+	
+	
+	public String getDsPreFormacaoAcademica() {
+		return dsPreFormacaoAcademica;
+	}
+
+	public void setDsPreFormacaoAcademica(String dsPreFormacaoAcademica) {
+		this.dsPreFormacaoAcademica = dsPreFormacaoAcademica;
+	}
+
+	public String getDsPrePerfilComportamental() {
+		return dsPrePerfilComportamental;
+	}
+
+	public void setDsPrePerfilComportamental(String dsPrePerfilComportamental) {
+		this.dsPrePerfilComportamental = dsPrePerfilComportamental;
+	}
+
+	public String getDsPrePerfilTecnico() {
+		return dsPrePerfilTecnico;
+	}
+
+	public void setDsPrePerfilTecnico(String dsPrePerfilTecnico) {
+		this.dsPrePerfilTecnico = dsPrePerfilTecnico;
+	}
 
 	public CargoSenioridadeBean() {
 
@@ -46,13 +76,7 @@ public class CargoSenioridadeBean {
 		return valorMaxSalario;
 	}
 
-	public String getDsPreTexto() {
-		return dsPreTexto;
-	}
 
-	public void setDsPreTexto(String dsPreTexto) {
-		this.dsPreTexto = dsPreTexto;
-	}
 
 	public void setValorMaxSalario(BigDecimal valorMaxSalario) {
 		this.valorMaxSalario = valorMaxSalario;
