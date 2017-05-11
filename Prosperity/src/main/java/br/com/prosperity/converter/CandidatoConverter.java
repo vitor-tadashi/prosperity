@@ -107,6 +107,7 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		entity.setDataAlteracao(bean.getDataAlteracao());
 		entity.setDataFechamento(bean.getDataFechamento());
 		entity.setDataNascimento(bean.getDataNascimento());
+		entity.setDatasEntrevistas(dataEntrevistaConverter.convertBeanToEntity(bean.getDataEntrevista()));
 		entity.setContato(contatoConverter.convertBeanToEntity(bean.getContato()));
 		entity.setEndereco(enderecoConverter.convertBeanToEntity(bean.getEndereco()));
 		entity.setCompetencias(candidatoCompetenciaConverter.convertBeanToEntity(bean.getCompetencias()));
