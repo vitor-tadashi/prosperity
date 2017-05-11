@@ -122,17 +122,17 @@
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Salário fixo bruto:</label> <input type="text"
-																id="" name="" class="form-control input-sm">
+																id="vlrAntSalarioFixoBruto" name="vlrAntSalarioFixoBruto" class="form-control input-sm">
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Salário líquido mensal:</label> <input type="text"
-																id="" name="" class="form-control input-sm">
+																id="vlrAntSalarioLiquidoMensal" name="vlrAntSalarioLiquidoMensal" class="form-control input-sm">
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
-															<label>VR mensal:</label> <input type="text" id=""
-																name="" class="form-control input-sm">
+															<label>VR mensal:</label> <input type="text" id="vlrAntVrMensal"
+																name="vlrAntVrMensal" class="form-control input-sm">
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
@@ -142,43 +142,43 @@
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Seguro de saúde mensal:</label> <input type="text"
-																id="" name="" class="form-control input-sm">
+																id="vlrAntSeguroSaudeMensal" name="vlrAntSeguroSaudeMensal" class="form-control input-sm">
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
-															<label>Vale auto:</label> <input type="text" id=""
-																name="" class="form-control input-sm">
+															<label>Vale auto:</label> <input type="text" id="vlrAntValeAuto"
+																name="vlrAntValeAuto" class="form-control input-sm">
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Vale transporte(até 6% desc.):</label> <input
-																type="text" id="" name="" class="form-control input-sm">
+																type="text" id="vlrAntValeTransporte" name="vlrAntValeTransporte" class="form-control input-sm">
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Líquido m. + ben.:</label> <input type="text"
-																id="" name="" class="form-control input-sm">
+																id="vlrAntLiquidoComBeneficios" name="vlrAntLiquidoComBeneficios" class="form-control input-sm">
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
-															<label>Anual líquido:</label> <input type="text" id=""
-																name="" class="form-control input-sm">
+															<label>Anual líquido:</label> <input type="text" id="vlrAntAnualLiquido"
+																name="vlrAntAnualLiquido" class="form-control input-sm">
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>PLR anual líquido/bonús:</label> <input
-																type="text" id="" name="" class="form-control input-sm">
+																type="text" id="vlrAntParticipacaoLucrosOuBonus" name="vlrAntParticipacaoLucrosOuBonus" class="form-control input-sm">
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Total anual líquido + ben.:</label> <input
-																type="text" id="" name="" class="form-control input-sm">
+																type="text" id="vlrAntTotalAnualLiquidoComBeneficios" name="vlrAntTotalAnualLiquidoComBeneficios" class="form-control input-sm">
 														</div>
 														<!-- /form-group -->
 													</div>
 													<div class="col-md-6">
 														<div class="form-group">
-															<label>Proposta:</label> <input type="text" id="" name=""
+															<label>Empresa atual:</label> <input type="text" id="" name=""
 																class="form-control input-sm">
 														</div>
 														<!-- /form-group -->
@@ -189,17 +189,17 @@
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Salário fixo bruto:</label> <input type="text"
-																id="" name="" class="form-control input-sm">
+																id="vlrNvSalarioFixoBruto" name="vlrNvSalarioFixoBruto" class="form-control input-sm">
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Salário líquido mensal:</label> <input type="text"
-																id="" name="" class="form-control input-sm">
+																id="vlrNvSalarioLiquidoMensal" name="vlrNvSalarioLiquidoMensal" class="form-control input-sm">
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
-															<label>VR mensal:</label> <input type="text" id=""
-																name="" class="form-control input-sm">
+															<label>VR mensal:</label> <input type="text" id="vlrNvVrMensal"
+																name="vlrNvVrMensal" class="form-control input-sm">
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
@@ -209,37 +209,37 @@
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Seguro de saúde mensal:</label> <input type="text"
-																id="" name="" class="form-control input-sm">
+																id="vlrNvSeguroSaudeMensal" name="vlrNvSeguroSaudeMensal" class="form-control input-sm">
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
-															<label>Vale auto:</label> <input type="text" id=""
-																name="" class="form-control input-sm">
+															<label>Vale auto:</label> <input type="text" id="vlrNvValeAuto"
+																name="vlrNvValeAuto" class="form-control input-sm">
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Vale transporte(até 6% desc.):</label> <input
-																type="text" id="" name="" class="form-control input-sm">
+																type="text" id="vlrNvValeTransporte" name="vlrNvValeTransporte" class="form-control input-sm">
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Líquido m. + ben.:</label> <input type="text"
-																id="" name="" class="form-control input-sm">
+																id="vlrNvLiquidoComBeneficios" name="vlrNvLiquidoComBeneficios" class="form-control input-sm">
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
-															<label>Anual líquido:</label> <input type="text" id=""
-																name="" class="form-control input-sm">
+															<label>Anual líquido:</label> <input type="text" id="vlrNvAnualLiquido"
+																name="vlrNvAnualLiquido" class="form-control input-sm">
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>PLR anual líquido/bonús:</label> <input
-																type="text" id="" name="" class="form-control input-sm">
+																type="text" id="vlrNvParticipacaoLucrosOuBonus" name="vlrNvParticipacaoLucrosOuBonus" class="form-control input-sm">
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Total anual líquido + ben.:</label> <input
-																type="text" id="" name="" class="form-control input-sm">
+																type="text" id="vlrNvTotalAnualLiquidoComBeneficios" name="vlrNvTotalAnualLiquidoComBeneficios" class="form-control input-sm">
 														</div>
 														<!-- /form-group -->
 													</div>
@@ -755,10 +755,32 @@
 					url : "proposta",
 					type : "GET",
 					success : function(data) {
-						$("#emp").val(data);
+						$("#vlrAntSalarioFixoBruto").val(data.vlrAntSalarioFixoBruto);
+						$("#vlrAntSalarioLiquidoMensal").val(data.vlrAntSalarioLiquidoMensal);
+						$("#vlrAntVrMensal").val(data.vlrAntVrMensal);
+						$("#vlrAntSeguroSaudeMensal").val(data.vlrAntSeguroSaudeMensal);
+						$("#vlrAntValeAuto").val(data.vlrAntValeAuto);
+						$("#vlrAntEstacionamento").val(data.vlrAntEstacionamento);
+						$("#vlrAntValeTransporte").val(data.vlrAntValeTransporte);
+						$("#vlrAntLiquidoComBeneficios").val(data.vlrAntLiquidoComBeneficios);
+						$("#vlrAntAnualLiquido").val(data.vlrAntAnualLiquido);
+						$("#vlrAntParticipacaoLucrosOuBonus").val(data.vlrAntParticipacaoLucrosOuBonus);
+						$("#vlrAntTotalAnualLiquidoComBeneficios").val(data.vlrAntTotalAnualLiquidoComBeneficios);
+						
+						$("#vlrNvSalarioFixoBruto").val(data.vlrNvSalarioFixoBruto);
+						$("#vlrNvSalarioLiquidoMensal").val(data.vlrNvSalarioLiquidoMensal);
+						$("#vlrNvVrMensal").val(data.vlrNvVrMensal);
+						$("#vlrNvSeguroSaudeMensal").val(data.vlrNvSeguroSaudeMensal);
+						$("#vlrNvValeAuto").val(data.vlrNvValeAuto);
+						$("#vlrNvEstacionamento").val(data.vlrNvEstacionamento);
+						$("#vlrNvValeTransporte").val(data.vlrNvValeTransporte);
+						$("#vlrNvLiquidoComBeneficios").val(data.vlrNvLiquidoComBeneficios);
+						$("#vlrNvAnualLiquido").val(data.vlrNvAnualLiquido);
+						$("#vlrNvParticipacaoLucrosOuBonus").val(data.vlrNvParticipacaoLucrosOuBonus);
+						$("#vlrNvTotalAnualLiquidoComBeneficios").val(data.vlrNvTotalAnualLiquidoComBeneficios);
 					},
 					error : function(data) {
-						$("#emp").val(data.a);
+						$("#emp").val(data);
 					}
 				});
 			};

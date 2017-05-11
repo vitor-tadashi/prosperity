@@ -128,6 +128,8 @@ public class CandidatoController<PaginarCandidato> {
 	private ProvaBean provaBean;
 
 	private List<String> caminhoProvas;
+	
+	Double d = null;
 
 	private void paginacao(Integer page, Model model, CandidatoBean candidato) {
 
@@ -543,7 +545,6 @@ public class CandidatoController<PaginarCandidato> {
 	@PostMapping(value = "gerar-proposta")
 	public String gerarProposta(MultipartHttpServletRequest request, Model model) {
 		List<MultipartFile> papers = request.getFiles("file");
-		Double d = null;
 		try {
 			String caminho = gerarProposta(papers);
 			TesteExcel teste = new TesteExcel();
@@ -570,9 +571,8 @@ public class CandidatoController<PaginarCandidato> {
 	
 	@RequestMapping(value = "/proposta", method = RequestMethod.GET)
 	@ResponseStatus(value = HttpStatus.OK)
-	public @ResponseBody String returnProposta(Model model) {
-		String a = "legal";
-		model.addAttribute(a);
-		return a;
+	public @ResponseBody Double returnProposta(Model model) {
+		model.addAttribute(d);
+		return d;
 	}
 }
