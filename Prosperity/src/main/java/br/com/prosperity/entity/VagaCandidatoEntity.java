@@ -17,7 +17,8 @@ import javax.persistence.Table;
 @Table(name = "tbVagaCandidato")
 @NamedQueries({
 	@NamedQuery(name = "countCandidatosVaga", query = "SELECT count(vc) FROM VagaCandidatoEntity vc WHERE vc.vaga.id = 1200"),
-	@NamedQuery(name = "candidatosVaga", query = "SELECT vc FROM VagaCandidatoEntity vc WHERE vc.vaga.id = ?1")
+	@NamedQuery(name = "candidatosVaga", query = "SELECT vc FROM VagaCandidatoEntity vc WHERE vc.vaga.id = ?1"),
+	@NamedQuery(name = "candidatoContratado", query = "SELECT cc FROM VagaCandidatoEntity cc WHERE cc.candidato.id = ?1 ORDER BY cc.idVagaCandidato ASC")
 })
 public class VagaCandidatoEntity {
 	@Id
@@ -37,6 +38,17 @@ public class VagaCandidatoEntity {
 	@JoinColumn(name = "idCandidato")
 	private CandidatoEntity candidato;
 	
+	@Column(name = "contratado")
+	private Boolean contratado;
+	
+	public Boolean getContratado() {
+		return contratado;
+	}
+
+	public void setContratado(Boolean contratado) {
+		this.contratado = contratado;
+	}
+
 	public Integer getIdVagaCandidato() {
 		return idVagaCandidato;
 	}
@@ -69,4 +81,11 @@ public class VagaCandidatoEntity {
 		this.candidato = candidato;
 	}
 
-}
+	public void setContratado(Integer id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	}
+
+
