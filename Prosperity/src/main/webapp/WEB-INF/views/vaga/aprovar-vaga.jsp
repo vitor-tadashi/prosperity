@@ -382,14 +382,13 @@
 																<a href="vaga-modal"
 																onclick="info(${vaga.id})"
 																data-toggle="modal"><i class="fa fa-eye fa-lg">&nbsp;</i>Visualizar</a></li>
-																<li class="divider"></li>
 															<c:forEach var="statusDisponivel"
 																items="${vaga.ultimoStatus.status.statusDisponiveis}">
+																<li class="divider"></li>
 																<li><a class="clickable" 
 																	id="vaga-modal" 
 																	onclick="alterarStatus(${vaga.id}, ${statusDisponivel.idStatusDisponivel})">
 																		<i ${statusDisponivel.classe}>&nbsp;</i>${statusDisponivel.nome}</a></li>
-																<li class="divider"></li>
 															</c:forEach>
 															</ul>
 										</td>

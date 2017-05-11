@@ -162,13 +162,13 @@ public class VagaBusiness {
 			vagaEntity.get(aux).setDataInicio(vaga.getDataInicio());
 			aux++;
 		}
-		// for each para percorrer lista de vagas formantando ela.
-		// vagaEntity.get(0).setDataInicio(parseData(vagaEntity.get(0).getDataInicio()));
+		
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
-		for (int i = 0; i<= vagaBean.size()-1; i++) {
-			for(int c = 0; c <= vagaBean.get(i).getVagaCandidatoBean().size()-1; c++){
+		for (int i = 0; i< vagaBean.size(); i++) {
+			for(int c = 0; c < vagaBean.get(i).getVagaCandidatoBean().size(); c++){
 				if(vagaBean.get(i).getVagaCandidatoBean().get(c).getContratado()!= null && vagaBean.get(i).getVagaCandidatoBean().get(c).getContratado()){
 					vagaBean.get(i).getUltimoStatus().getStatus().getStatusDisponiveis().remove(0);
+					c = vagaBean.get(i).getVagaCandidatoBean().size();
 				}
 			}
 		}
