@@ -40,8 +40,14 @@ public class CargoSenioridadeEntity{
 	@JoinColumn(name = "idSenioridade")
 	private SenioridadeEntity idSenioridade;
 	
-	@Column(name="dsPreTexto")
-	private String dsPretexto;
+	@Column(name="dsPreFormacaoAcademica")
+	private String dsPreFormacaoAcademica;
+	
+	@Column(name="dsPrePerfilComportamental")
+	private String dsPrePerfilComportamental;
+	
+	@Column(name="dsPrePerfilTecnico")
+	private String dsPrePerfilTecnico;
 	
 	@Column(name="vlMinSalario")
 	private BigDecimal vlMinSalario;
@@ -86,11 +92,25 @@ public class CargoSenioridadeEntity{
 	public void setIdCargo(CargoEntity idCargo) {
 		this.idCargo = idCargo;
 	}
-	public String getDsPretexto() {
-		return dsPretexto;
+	public String getDsPreFormacaoAcademica() {
+		return dsPreFormacaoAcademica;
 	}
-	public void setDsPretexto(String dsPretexto) {
-		this.dsPretexto = dsPretexto;
+	public void setDsPreFormacaoAcademica(String dsPreFormacaoAcademica) {
+		this.dsPreFormacaoAcademica = dsPreFormacaoAcademica;
 	}
+	public String getDsPrePerfilComportamental() {
+		return dsPrePerfilComportamental;
+	}
+	public void setDsPrePerfilComportamental(String dsPrePerfilComportamental) {
+		this.dsPrePerfilComportamental = dsPrePerfilComportamental;
+	}
+	public String getDsPrePerfilTecnico() {
+		return dsPrePerfilTecnico;
+	}
+	public void setDsPrePerfilTecnico(String dsPrePerfilTecnico) {
+		this.dsPrePerfilTecnico = dsPrePerfilTecnico;
+	}
+	
+	
 	
 }
