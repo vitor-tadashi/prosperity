@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -238,8 +237,8 @@
 														<label class="control-label" for="pretensaoSalarial">Pretensão
 															salarial</label>
 													</div>
-													
-												
+
+
 													<div class="col-md-2">
 														<input type="text" class="form-control dinheiro pretensao"
 															id="valorPretensao" placeholder="R$"
@@ -251,7 +250,8 @@
 											<div class="form-group col-md-3">
 												<label for="vaga">Vaga a ser aplicado</label> <select
 													class="form-control" id="vaga" name="vagaCandidato.vaga.id"
-													required>
+													required="required"
+													${(statusCandidato.status.id != 17) && (statusCandidato.status.id != 5) ? 'disabled="disabled"' : ''}>
 													<option value="0">Selecione</option>
 													<c:forEach var="vaga" items="${listaVaga}">
 														<option value="${vaga.id}"
@@ -271,7 +271,7 @@
 													</c:forEach>
 												</select>
 											</div>
-</div>
+										</div>
                                     <!--começo - tab 4 -->    
                                     <div class="tab-pane fade" id="fourth">
 <!-- 										conteudo gerado pelo ajax!!!!!                                    -->
@@ -305,7 +305,6 @@
                         </form>
                     </div>
                 </div>
-
 				</div>
 			</div>
 		</div>

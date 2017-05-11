@@ -28,6 +28,7 @@ import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.StatusCandidatoBean;
 import br.com.prosperity.bean.UsuarioBean;
+import br.com.prosperity.bean.VagaCandidatoBean;
 import br.com.prosperity.converter.AvaliacaoConverter;
 import br.com.prosperity.converter.AvaliadorCandidatoConverter;
 import br.com.prosperity.converter.CandidatoConverter;
@@ -134,6 +135,9 @@ public class CandidatoBusiness {
 
 	@Autowired
 	private UsuarioBusiness usuarioBusiness;
+	
+	@Autowired
+	SituacaoCandidatoBean situacaoCandidato;
 
 	@Transactional(readOnly = true)
 	public List<CandidatoBean> listarDecrescente() {
@@ -217,7 +221,7 @@ public class CandidatoBusiness {
 
 			if (verificarCandidatura(candidatoBean)) {
 				CandidatoEntity candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoBean);
-				SituacaoCandidatoBean situacaoCandidato = new SituacaoCandidatoBean();
+				situacaoCandidato = null;
 				Date dateNow = new Date();
 				candidatoEntity.setDataAbertura(dateNow);
 
@@ -242,12 +246,27 @@ public class CandidatoBusiness {
 
 		} else {
 			CandidatoEntity candidatoEntity = candidatoDAO.findById(candidatoBean.getId());
+			CandidatoBean beans = candidatoConverter.convertEntityToBean(candidatoEntity);
+			if(beans.getUltimaVaga().getId() != candidatoBean.getUltimaVaga().getId()){
+				situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
+				situacaoCandidato.setIdCandidato(candidatoEntity.getId());
+			alterarStatus(situacaoCandidato);
+				
+				candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoEntity, candidatoBean);
 
-			candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoEntity, candidatoBean);
+				tratarInformacoes(candidatoEntity);
+				
+				
+				candidatoDAO.update(candidatoEntity);
+			}
+			else {
+				candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoEntity, candidatoBean);
 
-			tratarInformacoes(candidatoEntity);
+				tratarInformacoes(candidatoEntity);
 
-			candidatoDAO.update(candidatoEntity);
+				candidatoDAO.update(candidatoEntity);
+			}
+			
 		}
 	}
 
@@ -338,7 +357,8 @@ public class CandidatoBusiness {
 		List<StatusDisponivelEntity> statusDisponivelEntity = statusDisponivelDAO.findAll();
 
 		if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANDIDATURA.getValue()
-				|| situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANCELADO.getValue()) {
+				|| situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANCELADO.getValue()
+				|| situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.SEMVAGA.getValue()) {
 			statusCandidatoEntity = statusAlteracao(situacaoCandidato);
 			statusCandidatoDAO.insert(statusCandidatoEntity);
 			buscarUsuariosParaEmail(situacaoCandidato);
@@ -354,6 +374,16 @@ public class CandidatoBusiness {
 							statusCandidatoDAO.insert(statusCandidatoEntity);
 							candidatoBean.setId(situacaoCandidato.getIdCandidato());
 							buscarUsuariosParaEmail(situacaoCandidato);
+							if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CONTRATADO.getValue()) {
+								List<VagaCandidatoEntity> contratado = vagaCandidatoDAO
+										.findByNamedQuery("candidatoContratado", situacaoCandidato.getIdCandidato());
+								VagaCandidatoEntity contrados = null;
+								for (VagaCandidatoEntity cand : contratado) {
+									cand.setContratado(true);
+									contrados = cand;
+								}
+								vagaCandidatoDAO.update(contrados);
+							}
 						}
 					}
 				}

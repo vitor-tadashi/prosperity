@@ -274,8 +274,8 @@
 				</div>
 			</div>
 		</div>
-		<!-- Modal aprovar -->
-		<div class="modal fade" id="aprova-modal" data-target="#aprova-modal"
+		<!-- modal padrão -->
+		<div class="modal fade" id="modal-status" data-target="#modal-status"
 			tabindex="-1" role="dialog" aria-labelledby="modalLabel">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -284,125 +284,11 @@
 							aria-label="Fechar">
 							<span aria-hidden="true">&times;</span>
 						</button>
-						<h4 class="modal-title" id="modalLabel">Aprovar vaga</h4>
+						<h4 class="modal-title" id="modalLabel"></h4>
 					</div>
-					<div class="modal-body">Deseja realmente aprovar esta vaga?</div>
-					<input class="aprovar-id" type="hidden"> <input
-						class="aprovar-status" type="hidden">
-					<div class="modal-footer">
-						<a href="#">
-							<button id="aprovaVaga" onclick="status()" type="button"
-								class="btn btn-success" data-dismiss="modal">Sim</button>
-						</a>
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- /.modal aprovar-->
-
-		<!-- Modal reprovar -->
-		<div class="modal fade" id="reprova-modal" data-target="#reprova-modal"
-			tabindex="-1" role="dialog" aria-labelledby="modalLabel">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Fechar">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<h4 class="modal-title" id="modalLabel">Reprovar vaga</h4>
-					</div>
-					<div class="modal-body">Deseja realmente reprovar esta vaga?</div>
-					<input class="reprovar-id" type="hidden"> <input
-						class="reprovar-status" type="hidden">
-					<div class="modal-footer">
-						<a href="#">
-							<button id="reprovaVaga" type="button" onclick="status()"
-								class="btn btn-success" data-dismiss="modal">Sim</button>
-						</a>
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- /.modal aprovar-->
-
-		<!-- modal cancelar -->
-		<div class="modal fade" id="cancela-modal"
-			data-target="#cancela-modal" tabindex="-1" role="dialog"
-			aria-labelledby="modalLabel">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Fechar">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<h4 class="modal-title" id="modalLabel">Cancelar vaga</h4>
-					</div>
-					<div class="modal-body">Deseja realmente cancelar esta vaga? 
-					Voce irá cancelar os candidatos.</div>
-					<input class="cancela-id" type="hidden"> <input
-						class="cancela-status" type="hidden">
-					<div class="modal-footer">
-						<a id="excluir" href="${urlCancelar}">
-							<button id="excluiVaga" onclick="status()" type="button"
-								class="btn btn-success" data-dismiss="modal">Sim</button>
-						</a>
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- /.modal cancelar -->
-		
-		<!-- modal cancelar pendente -->
-		<div class="modal fade" id="pendente-modal"
-			data-target="#cancela-modal" tabindex="-1" role="dialog"
-			aria-labelledby="modalLabel">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Fechar">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<h4 class="modal-title" id="modalLabel">Cancelar vaga</h4>
-					</div>
-					<div class="modal-body">Deseja realmente cancelar esta vaga? 
-					Voce irá cancelar os candidatos.</div>
-					<input class="cancela-id" type="hidden"> <input
-						class="cancela-status" type="hidden">
-					<div class="modal-footer">
-						<a id="excluir" href="${urlCancelar}">
-							<button id="excluiVaga" onclick="status()" type="button"
-								class="btn btn-success" data-dismiss="modal">Sim</button>
-
-						</a>
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- /.modal cancelar pendente -->
-
-		<!-- modal fechar -->
-		<div class="modal fade" id="fechar-modal" data-target="#fechar-modal"
-			tabindex="-1" role="dialog" aria-labelledby="modalLabel">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Fechar">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<h4 class="modal-title" id="modalLabel">Fechar vaga</h4>
-					</div>
-					<div class="modal-body">Deseja realmente fechar esta vaga? 
-					Voce irá cancelar os candidatos.</div>
-					<input class="cancela-id" type="hidden"> <input
-						class="cancela-status" type="hidden">
+					<div class="modal-body" id="mensagem-modal" ></div>
+					<input class="id-vaga" name="idVaga" type="hidden"> <input
+						class="id-status" name="idStatus" type="hidden">
 					<div class="modal-footer">
 						<a href="#">
 							<button id="excluiVaga" onclick="status()" type="button"
@@ -413,37 +299,8 @@
 				</div>
 			</div>
 		</div>
-		<!-- /.modal fechar -->
-		
-		<%-- <!-- modal cancelar avaliador -->
-		<div class="modal fade" id="avaliador-modal"
-			data-target="#avaliador-modal" tabindex="-1" role="dialog"
-			aria-labelledby="modalLabel">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Fechar">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<h4 class="modal-title" id="modalLabel">Cancelar avaliadores</h4>
-					</div>
-					<div class="modal-body">Deseja realmente cancelar avaliador?</div>
-					<input class="avaliador-id" type="hidden"> <input
-						class="avaliador-status" type="hidden">
-					<div class="modal-footer">
-						<a id="excluir" href="${urlCancelar}">
-							<button type="button" class="btn btn-success"
-								data-dismiss="modal">Sim</button>
-						</a>
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
-					</div>
-				</div>
-			</div>
-		</div> --%>
-		<!-- /.modal cancelar avaliador -->
-
-		<!-- CORPO DA PÁGINA -->
+		<!-- /.modal padrão -->
+	<!-- CORPO DA PÁGINA -->
 		<div id="main-container">
 			<div id="breadcrumb">
 				<ul class="breadcrumb">
@@ -484,7 +341,8 @@
 							</thead>
 							<tbody class="text-center">
 								<c:forEach var="vaga" items="${vagas}" varStatus="i">
-
+								
+								
 									<tr>
 										<td>${vaga.nomeVaga}</td>
 										<td>${vaga.cargoBean.nome}</td>
@@ -504,95 +362,35 @@
 										<td>
 											<div class="btn-group">
 												<!-- <-- ! Começo Botão -->
-												<button type="button"
-													class="btn btn-info dropdown-toggle btn-sm"
-													data-toggle="dropdown" aria-haspopup="true"
-													aria-expanded="false">
-													<i class="fa fa-cogs fa-lg">&nbsp; </i><span class="caret"></span>
-												</button>
-												<ul class="dropdown-menu slidedown btnAlinhado">
-													<li><a href="#" data-toggle="modal"
-														onclick="info(${vaga.id})"> <i class="fa fa-eye fa-lg">&nbsp;</i>Visualizar
-													</a></li>
-													
-													<c:if test="${autenticado.perfil.id == 1 || autenticado.perfil.id == 3 || autenticado.perfil.id == 4 || autenticado.perfil.id == 5 || autenticado.perfil.id == 6 || 
-													autenticado.perfil.id == 7 || autenticado.perfil.id == 9 || autenticado.perfil.id == 63 || autenticado.perfil.id == 64 }">
-													
-													<c:if test="${vaga.ultimoStatus.status.nome == 'Pendente'}">
-														<li id="${vaga.ultimoStatus.status.nome}" role="separator"
-															class="Aprovar divider"></li>
-														<li id="${vaga.ultimoStatus.status.nome}" class="Aprovar"><a
-															href="#aprova-modal"
-															onclick="alterarStatus(${vaga.id}, 'ATIVO')"
-															data-toggle="modal"><i
-																class="Aprovar fa fa-check fa-lg"></i> Aprovar</a></li>
-													</c:if>
-													</c:if>
-
-													<c:if test="${autenticado.perfil.id == 1 || autenticado.perfil.id == 3 || autenticado.perfil.id == 4 || autenticado.perfil.id == 5 || autenticado.perfil.id == 6 || 
-													autenticado.perfil.id == 7 || autenticado.perfil.id == 9 || autenticado.perfil.id == 63 || autenticado.perfil.id == 64 }">
-													<c:if test="${vaga.ultimoStatus.status.nome == 'Pendente'}">
-														<li id="${vaga.ultimoStatus.status.nome}" role="separator"
-															class="Reprovar divider"></li>
-														<li id="${vaga.ultimoStatus.status.nome}" class="Reprovar"><a
-															href="#reprova-modal"
-															onclick="alterarStatus(${vaga.id}, 'RECUSADO')"
-															data-toggle="modal"><i
-																class="Reprovar fa  fa-times fa-lg"></i> Reprovar</a></li>
-													</c:if>
-													</c:if>
-													
-													<c:if test="${autenticado.perfil.id == 2}"> 
-													<c:if test="${vaga.ultimoStatus.status.nome == 'Pendente'}">
-														<li id="${vaga.ultimoStatus.status.nome}" role="separator"
-															class="cancelarDivider divider"></li>
-														<li id="${vaga.ultimoStatus.status.nome}" class="Reprovar"><a
-															href="#pendente-modal"
-															onclick="alterarStatus(${vaga.id}, 'CANCELADO')"
-															data-toggle="modal"><i
-																class="Cancelar fa fa-ban fa-lg"></i> Cancelar</a></li>
-													</c:if>
-													</c:if>
-
-
-													<c:if test="${vaga.ultimoStatus.status.nome == 'Ativo'}">
-														<c:url scope="session" value="cancelar-vaga/${vaga.id}"
-															var="urlCancelar">
-														</c:url>
-														<li id="${vaga.ultimoStatus.status.nome}" role="separator"
-															class="cancelarDivider divider"></li>
-														<li id="${vaga.ultimoStatus.status.nome}"><a
-															href="#cancela-modal"
-															onclick="alterarStatus(${vaga.id}, 'CANCELADO')"
-															data-toggle="modal" class="cancelarAtivos"><i
-																class="Cancelar fa fa-ban fa-lg"></i> Cancelar</a></li>
-													</c:if>
-
-													<c:if test="${vaga.ultimoStatus.status.nome == 'Ativo'}">
-														<li id="${vaga.ultimoStatus.status.nome}" role="separator"
-															class="fecharDivider divider"></li>
-														<li id="${vaga.ultimoStatus.status.nome}"><a
-															href="#fechar-modal"
-															onclick="alterarStatus(${vaga.id}, 'FECHADO')"
-															data-toggle="modal" class="fecharAtivo"><i
-																class="Fechar fa fa-trash-o fa-lg"></i> Fechar</a></li>
-													</c:if>
-
-													<%-- <c:if
-														test="${vaga.ultimoStatus.status.nome == 'Pendente de informações'}">
-														<c:url scope="session" value="cancelar-vaga/${vaga.id}"
-															var="urlCancelar">
-														</c:url>
-														<li id="${vaga.ultimoStatus.status.nome}" role="separator"
-															class="avaliadorDivider divider"></li>
-														<li id="${vaga.ultimoStatus.status.nome}"><a
-															href="#avaliador-modal"
-															onclick="alterarStatus(${vaga.id}, ${candidato.id} 'CANCELADO')"
-															data-toggle="modal" class="avaliador"><i
-																class="Cancelar fa fa-ban fa-lg"></i> Cancelar</a></li>
-													</c:if> --%>
-												</ul>
-											</div> <!-- Fim Botão -->
+												
+												<input type="hidden" name="idStatus" id="idStatus"
+													value="${vaga.ultimoStatus.status.id}" />
+													<div class="btn-group">
+														<button class="btn btn-sm btn-info dropdown-toggle"
+															data-toggle="dropdown" aria-haspopup="true"
+															aria-expanded="false">
+															<i class="fa fa-cogs fa-lg">&nbsp;</i> <span
+																class="caret"></span>
+														</button>
+														
+														
+														<ul class="dropdown-menu dropdown-menu-right slidedown">
+														<li> <c:url
+																	value="aprovar/${vaga.id}"
+																	var="urlCancelar">
+																</c:url>
+																<a href="vaga-modal"
+																onclick="info(${vaga.id})"
+																data-toggle="modal"><i class="fa fa-eye fa-lg">&nbsp;</i>Visualizar</a></li>
+															<c:forEach var="statusDisponivel"
+																items="${vaga.ultimoStatus.status.statusDisponiveis}">
+																<li class="divider"></li>
+																<li><a class="clickable" 
+																	id="vaga-modal" 
+																	onclick="alterarStatus(${vaga.id}, ${statusDisponivel.idStatusDisponivel})">
+																		<i ${statusDisponivel.classe}>&nbsp;</i>${statusDisponivel.nome}</a></li>
+															</c:forEach>
+															</ul>
 										</td>
 									</tr>
 								</c:forEach>
@@ -722,29 +520,28 @@
 	    window.print();
 	}
 		
-	// função para a alteração de status no botão ações
+	// função para a alteração de status de acordo com os botões de ação.
 	
 	function status(){
     	$.ajax({
     		url: "status",
     		type: "POST",
     		dataType: "JSON",
-    		data: { 'idVaga' : $('.aprovar-id').val(), 'status' : $('.aprovar-status').val()}
+    		data: { 'idVaga' : $('.id-vaga').val(), 'idStatus' : $('.id-status').val()}
     		}).done(function(dado) {
-    			if(dado == '1' || dado == '27') {
+    			if(dado == '1') {
     				$('#aprova-modal').modal('hide');
         			msg = 'Vaga aprovada com sucesso!';
     			}else if(dado == '3'){
         			$('#cancela-modal').modal('hide');
         			msg = 'Vaga cancelada com sucesso!';
-    			}
-    			
-    			else if (dado == '18'){
+    			}else if(dado == '27'){
+        			$('#aprova-modal').modal('hide');
+        			msg = 'Vaga ativada com sucesso!';
+    			}else if (dado == '18'){
     			$('#reprova-modal').modal('hide');
     			msg = 'Vaga reprovada com sucesso!';
-    			}
-    			
-    			else if (dado == '2'){
+    			}else if (dado == '2'){
         			$('#fechar-modal').modal('hide');
         			msg = 'Vaga fechada com sucesso!';
     			}
@@ -775,15 +572,33 @@
     	
 	// funcao para alterar status
 	function alterarStatus(id,status){
-		$('input.aprovar-id').val(id);
-		$('input.aprovar-status').val(status);
-
-		$('input.reprovar-id').val(id);
-		$('input.reprovar-status').val(status);
-		
-		$('input.cancelar-id').val(id);
-		$('input.cancelar-status').val(status);
-		
+    		var mensagem;
+    		var titulo;
+    		
+    	$('input.id-vaga').val(id);
+    	$('input.id-status').val(status);
+    		
+    	if( status == '1'){
+    		titulo = "Aprovar vaga."
+    		mensagem = "Deseja realmente aprovar esta vaga?";
+    	}else if(status == '18'){
+			titulo = "Reprovar vaga."
+			mensagem = "Deseja realmente reprovar esta vaga?";
+		}else if(status == '3'){
+			titulo = "Cancelar vaga."
+			mensagem = "Deseja realmente cancelar esta vaga?"
+		}else if(status == '2'){
+			titulo = "Fechar vaga."
+			mensagem = "Deseja realmente fechar esta vaga?"
+		}else if(dado == '27'){
+			titulo = "Ativar vaga."
+			msg = 'Deseja realmente ativar esta vaga?';
+		}
+    	
+    	$("#modalLabel").text(titulo);
+    	$("#mensagem-modal").text(mensagem);
+    	$("#modal-status").modal();
+    	
 	}
 	// função para formatar a dataInicio dd/MM/yyyy no modal (visualizar)
 	function dataAtualFormatada(){

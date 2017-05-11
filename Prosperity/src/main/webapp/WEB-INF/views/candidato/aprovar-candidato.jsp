@@ -112,8 +112,7 @@
 													<div class="col-md-6 row">
 														<div class="form-group">
 															<label>Empresa anterior:</label> <input type="text" id=""
-																name="" class="form-control input-sm"
-																value="${valorzinho.d}">
+																name="" class="form-control input-sm">
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
@@ -287,8 +286,7 @@
 						<p>Deseja confirmar a operação?</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-success"
-							onclick="cancelarCandidato()" id="alterarStatus">Sim</button>
+						<button type="button" class="btn btn-success" id="alterarStatus">Sim</button>
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
 					</div>
 				</div>
@@ -320,7 +318,6 @@
 												<option value="${cancelamento.id}"
 													${cancelamento.id == candidato.cancelamento.id ? 'selected="selected"' : ''}>${cancelamento.descricao}</option>
 											</c:forEach>
-
 										</select>
 									</div>
 								</div>
@@ -364,10 +361,8 @@
 			<div class="padding-md">
 				<div class="row">
 					<div class="panel panel-default">
-
 						<!-- MENSAGEM DE SUCESSO -->
 						<div id="msg-sucesso"></div>
-
 						<div class="panel-heading">Aprovação de candidatos</div>
 						<div class="panel-body">
 							<input type="hidden" name="user" id="user"
@@ -439,11 +434,9 @@
 								</c:if>
 							</table>
 						</div>
-
 						<!-- /.row -->
 					</div>
 					<!-- /.panel-body -->
-
 				</div>
 				<!-- /col-md-12 -->
 			</div>
@@ -457,8 +450,6 @@
 		<script src="/resources/js/parsley.min.js"></script>
 		<!-- <script src="/resources/js/custom/aprovar-candidato.js"></script> -->
 		<script>
-			/*contador de caracter - parecer*/
-
 			var nomeCandidato;
 
 			function maxCaracterParecer() {
@@ -581,80 +572,62 @@
 								}
 
 							})
-			$('#alterarStatus')
-					.click(
-							function() {
-								var avaliacoes = [];
+			$('#alterarStatus').click(
+					function() {
+						var avaliacoes = [];
 
-								$(".avaliacaoCompetencia").each(function() {
-									if ($(this).prop("checked")) {
-										var idAvaliacao = $(this).attr("alt");
-										var idCompetencia = $(this).val();
-										avaliacoes.push(idAvaliacao);
-										avaliacoes.push(idCompetencia);
-									}
-								});
+						$(".avaliacaoCompetencia").each(function() {
+							if ($(this).prop("checked")) {
+								var idAvaliacao = $(this).attr("alt");
+								var idCompetencia = $(this).val();
+								avaliacoes.push(idAvaliacao);
+								avaliacoes.push(idCompetencia);
+							}
+						});
 
-								var provasDescricoes = [];
-								var x = 0;
-								$(".processoSeletivo").each(
-										function() {
-											var provaDescricao = {
-												"prova" : "",
-												"descricao" : ""
-											};
+						var provasDescricoes = [];
+						var x = 0;
+						$(".processoSeletivo").each(function() {
+							var provaDescricao = {
+								"prova" : "",
+								"descricao" : ""
+							};
 
-											var select = $(this).find(
-													"#prova-js").val();
-											var input = $(this).find(
-													"#descricao-js").val();
+							var select = $(this).find("#prova-js").val();
+							var input = $(this).find("#descricao-js").val();
 
-											provasDescricoes.push(select);
-											provasDescricoes.push(input);
-											x++;
-										});
-								file();
+							provasDescricoes.push(select);
+							provasDescricoes.push(input);
+							x++;
+						});
+						file();
 
-								$
-										.ajax({
-											url : "alterar-status-candidato",
-											method : "POST",
-											dataType : "JSON",
-											data : {
-												'idCandidato' : $(
-														'#hdn-id-candidato')
-														.val(),
-												'parecer' : $('#parecer').val(),
-												'idStatus' : $('#hdn-status')
-														.val(),
-												'parecerTecnico' : $(
-														'#parecerTecnico')
-														.val(),
-												'processoSelectivo' : JSON
-														.stringify(provasDescricoes),
-												'ac' : JSON
-														.stringify(avaliacoes)
-											},
-											success : function(data) {
-												$('#delete-modal')
-														.modal('hide');
-												msg = 'O candidato <strong>'
-														+ nomeCandidato
-														+ '</strong> foi cancelado com sucesso!'
-												$('#msg-sucesso')
-														.html(msg)
-														.addClass(
-																'alert alert-success')
-														.show();
-												$('#js-trCandidato_' + id)
-														.remove();
-												escondeMensagem();
-											},
-											error : function(e) {
-												location.reload();
-											}
-										});
-							});
+						$.ajax({
+							url : "alterar-status-candidato",
+							method : "POST",
+							dataType : "JSON",
+							data : {
+								'idCandidato' : $('#hdn-id-candidato').val(),
+								'parecer' : $('#parecer').val(),
+								'idStatus' : $('#hdn-status').val(),
+								'parecerTecnico' : $('#parecerTecnico').val(),
+								'processoSelectivo' : JSON
+										.stringify(provasDescricoes),
+								'ac' : JSON.stringify(avaliacoes)
+							},
+							success : function(data) {
+								$('#confirm-modal').modal('hide');
+								msg = 'O candidato <strong>' + nomeCandidato
+										+ '</strong> foi alterado com sucesso!'
+								$('#msg-sucesso').html(msg).addClass(
+										'alert alert-success').show();
+								escondeMensagem();
+							},
+							error : function(e) {
+								location.reload();
+							}
+						});
+					});
 
 			function file() {
 				var paperElement = document.getElementById("modalPapers");
@@ -677,7 +650,6 @@
 				$('#hdn-id-candidato').val(idCandidato);
 				$('#hdn-proposta').val(proposta);
 				$('#hdn-status').val(idStatus);
-
 				$('#idCandidatoFile').val(idCandidato);
 			}
 
@@ -701,9 +673,7 @@
 
 								"<div class='div"+cont+" processoSeletivo'>"
 										+ "<div class='row'>"
-										+
-
-										"<div class='col-md-6 form-inline'>"
+										+ "<div class='col-md-6 form-inline'>"
 										+ "<a id='btnRemover' onclick='remover("
 										+ cont
 										+ ")'class='text-danger fa fa-times fa-lg'></a>"
@@ -713,18 +683,15 @@
 										+ "<option value='${selecao.id}'>${selecao.nome}</option>"
 										+ "</c:forEach>"
 										+ "</select>"
-										+ "<input class='form-control descricaoProva' type='text' id='descricao-js' name='descricao"
+										+ "<input class='form-control descricaoProva' type='text'	id='descricao-js' name='descricao"
 										+ cont
-										+ "' placeholder='Descrição' maxlength='50'  onkeyup='maxDescricaoProva()' />"
+										+ "' placeholder='Descrição' maxlength='50'	onkeyup='maxDescricaoProva()' />"
 										+ "</div>"
-										+
-
-										"<div class='col-md-5 form-inline'>"
+										+ "<div class='col-md-5 form-inline'>"
 										+ "<input name='papers' id='modalPapers' type='file' class='input-sm' multiple data-input='false'>"
-										+ "</div>" +
-										//"&nbsp; &nbsp;<label id='maxDescricao'>Caracteres restantes : <span class='numeroCaracteres" + cont +"'>50</span></label>"+
-
-										"</div>" + "</div>";
+										+ "</div>"
+										+ "&nbsp; &nbsp;<label id='maxDescricao'>Caracteres restantes : <span class='numeroCaracteres" + cont +"'>50</span></label>"
+										+ "</div>" + "</div>";
 								cont++;
 								/*adiciona na div*/
 								$("#processoSeletivo").append(campos);
@@ -784,6 +751,16 @@
 						},
 					});
 				}
+				$.ajax({
+					url : "proposta",
+					type : "GET",
+					success : function(data) {
+						$("#emp").val(data);
+					},
+					error : function(data) {
+						$("#emp").val(data.a);
+					}
+				});
 			};
 
 			function cancelarCandidato() {
