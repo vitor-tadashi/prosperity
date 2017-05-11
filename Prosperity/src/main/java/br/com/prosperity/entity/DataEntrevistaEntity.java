@@ -27,6 +27,8 @@ public class DataEntrevistaEntity {
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
+	
+	
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idCandidato")

@@ -159,7 +159,7 @@ public class CandidatoController<PaginarCandidato> {
 
 		List<CanalInformacaoBean> listaCanal = canalInformacaoBusiness.obterTodos();
 		model.addAttribute("listaCanal", listaCanal);
-
+		
 	}
 
 	@RequestMapping(value = "/salvar", method = RequestMethod.POST)
@@ -278,6 +278,8 @@ public class CandidatoController<PaginarCandidato> {
 		model.addAttribute("provas", provasCandidatoBean);
 		model.addAttribute("candidato", candidato);
 		// model.addAttribute("provasCandidato",provasCandidatoBean);
+		
+		
 
 		return "candidato/historico-candidato";
 	}
