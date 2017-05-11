@@ -270,13 +270,14 @@
 													</c:forEach>
 												</select>
 											</div>
-
+</div>
                                     <!--começo - tab 4 -->    
                                     <div class="tab-pane fade" id="fourth">
 <!-- 										conteudo gerado pelo ajax!!!!!                                    -->
                                     </div>
                                     <!--fim - tab 4 -->        
                                 </div>
+                                
                             </div>
                             <div class="panel-footer">
                                 <input type="hidden" value="${candidato.id}" name="id">
