@@ -1,3 +1,11 @@
+var status;
+
+$(function() {
+	/*${(statusCandidato.status.id != 17) && (statusCandidato.status.id != 5) 
+		&& (not empty statusCandidato) ? 'disabled="disabled"' : ''}*/
+	
+});
+
 //MASK DOS CAMPOS DE CADASTRAR CANDIDATO  
 $(document).ready(function () {
 	        setTimeout(function () {
@@ -130,7 +138,7 @@ $(document).ready(function () {
 			if (strCPF == "00000000000") {
 				var div = document.getElementById("textDiv1").className = "alert alert-danger";
 
-				textDiv1.textContent = "CPF inválidasso";
+				textDiv1.textContent = "CPF inválido";
 
 				var text = "[" + div.textContent + "]";
 				return false;
@@ -390,8 +398,11 @@ $(document).ready(function () {
 	function pesquisacpf(){
 		var cpf = $('#cpf').val();
 		
+		$('select#vaga').removeAttr('disabled');
+		
 		if (verificarCPF(cpf)) {
 			obterCandidato(cpf);
+			//$('input#cpf').attr('disabled', 'disabled');
 		}	
 	}
 	
@@ -404,6 +415,8 @@ $(document).ready(function () {
 			},
 			type : "GET",
 			success: function (data){
+				console.log(data);
+				
 				if(data != null){
 					$("#id").val(data.id);
 					$("#nome").val(data.nome);
@@ -429,6 +442,11 @@ $(document).ready(function () {
 					$("#entrevista").val(dataFormatada(data.entrevista));
 					$("#situacaoAtual").val(data.formacao.situacaoAtual.id);
 					
+					status = data.ultimoStatus.status;
+					if(status.id != '17' && status.id != '5') {
+						$('select#vaga').attr('disabled', 'disabled');
+					}
+					$('input#cpf').attr('disabled', 'disabled');
 					
 					var dadosEntrevistadores = data.dataEntrevista;
 					
@@ -436,8 +454,8 @@ $(document).ready(function () {
 						var campos = "<div class='row'>" +
 										"<div class='col-xs-4 form-group'>" +
 											"<label>Nome do entrevistador: &nbsp;</label>" +
-											"<input type='hidden' value='dataEntrevista.usuario' name='dataEntrevista.usuario'>" +
-											"<input type='text' id='entrevistador"+ index +"' name ='dataEntrevista.usuario' style='width: 140px' class='form-control' value='"+ value.usuario.funcionario.nome +"'/>" +
+											"<input type='hidden' value='dataEntrevista.usuario' name='dataEntrevista"+'['+ index + ']'+".usuario.funcionario'>" +
+											"<input type='text' id='entrevistador"+ index +"' name ='dataEntrevista"+'['+ index + ']'+".usuario.funcionario.nome' style='width: 140px' class='form-control' value='"+ value.usuario.funcionario.nome +"'/>" +
 										"</div>" +
 										"<div class='col-md-2 form-group'>" +
 											"<label>Data de entrevista: &nbsp;</label>" +
@@ -446,21 +464,11 @@ $(document).ready(function () {
                                     "</div>";
 						
 						$("#fourth").append(campos);
-						
-						
-						
 					});
-										
-					$("#entrevistador").text(data.dataEntrevista[0].usuario.nome);
-					$("#data").val(data.dataEntrevista[0].dataEntrevista);
-					
-					
-					
 				}
 			},
 			error: function (data) {
 				console.log("Cpf não encontrado");
-				
 			}
 		});
 	}
@@ -481,7 +489,7 @@ $(document).ready(function () {
 		  var vaga= document.getElementById("vaga").value;
 		    $vaga = vaga;
 		    if (vaga == "0") {
-		    	var div = document.getElementById("textDiv	2").className = "alert alert-danger";
+		    	var div = document.getElementById("textDiv2").className = "alert alert-danger";
 
     			textDiv2.textContent = "O campo vaga a ser aplicado deve ser preenchido";
 

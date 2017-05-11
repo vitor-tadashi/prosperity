@@ -62,7 +62,7 @@ public class CandidatoBean extends FormatUtil {
 	private Map<String, List<StatusCandidatoBean>> statusPorMesAno;
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataUltimoContato;
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	//@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private String proposta;
 	private StatusCandidatoBean ultimoStatus;
 	private VagaBean ultimaVaga;
