@@ -76,20 +76,13 @@
 													name="id">
 												<div class="form-group col-md-3">
 													<label for="cpf" class="control-label">CPF</label>
-													<c:if test="${empty candidato.id}">
-														<input type="text"
-															class="form-control cpf parsley-validated" id="cpf"
-															name="cpf" data-required="true"
-															placeholder="Informe seu CPF" value="${candidato.cpf}"
-															onblur="pesquisacpf()" />
-													</c:if>
-													<c:if test="${not empty candidato.id}">
-														<input type="text" class="form-control cpf" id="cpf"
-															name="cpf" placeholder="Informe seu CPF"
-															value="${candidato.cpf}" disabled="disabled" />
-														<input type="hidden" id="cpf" name="cpf"
-															value="${candidato.cpf}" />
-													</c:if>
+													<input type="text"
+														class="form-control cpf parsley-validated" id="cpf"
+														name="cpf" data-required="true"
+														placeholder="Informe seu CPF" value="${candidato.cpf}"
+														onblur="pesquisacpf()" ${not empty candidato.id ? 'disabled="disabled"' : ''} />
+													<input type="hidden" id="cpf" name="cpf"
+														value="${candidato.cpf}" />
 												</div>
 												<div class="form-group col-md-4">
 													<label class="control-label" for="nome">Nome</label> <input
@@ -251,7 +244,7 @@
 											<div class="form-group col-md-3">
 												<label for="vaga">Vaga a ser aplicado</label> <select
 													class="form-control" id="vaga" name="vagaCandidato.vaga.id"
-													required="required" ${(statusCandidato.status.id != 17) && (statusCandidato.status.id != 5) ? 'disabled="disabled"' : ''}>
+													required="required" ${(statusCandidato.status.id != 17) && (statusCandidato.status.id != 5) && (not empty statusCandidato) ? 'disabled="disabled"' : ''}>
 													<option value="0">Selecione</option>
 													<c:forEach var="vaga" items="${listaVaga}">
 														<option value="${vaga.id}"
@@ -278,6 +271,7 @@
                                     </div>
                                     <!--fim - tab 4 -->        
                                 </div>
+                            </div>
                             </div>
                             <div class="panel-footer">
                                 <input type="hidden" value="${candidato.id}" name="id">
