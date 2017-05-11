@@ -32,7 +32,7 @@ $(document).ready(function() {
 		}
 		$('.telefone').mask('(00)0000-00009');
 		$('.data').mask('00/00/0000');
-		
+	
 		 CKEDITOR.replace('editor');
 		 
 		 setTimeout(function () {
@@ -148,9 +148,9 @@ $(document).ready(function() {
 					data: {idCargo : idCargo,
 						idSenioridade : idSenioridade},
 					success: function(lista){
-						$("#descricaoFormacaoAcademica").val(lista[0].dsPreTexto);
-						$("#descricaoPerfilComportamental").val(lista[0].dsPreTexto);
-						$("#descricaoPerfilTecnico").val(lista[0].dsPreTexto);
+						$("#descricaoFormacaoAcademica").val(lista[0].dsPreFormacaoAcademica);
+						$("#descricaoPerfilComportamental").val(lista[0].dsPrePerfilComportamental);
+						$("#descricaoPerfilTecnico").val(lista[0].dsPrePerfilTecnico);
 					}
 				});
 			} else{
@@ -188,9 +188,6 @@ $(document).ready(function() {
 	// Verifica o status da vaga e esconde caso seja somente para editar avaliadores
 	
 	if ($("#status").val() == 27){
-		$("#tabInformacoes").hide();
-		$("#tabDados").hide();
-		$("#tabPerfil").hide();
 		$("#tabInformacoes2").removeClass("active");
 		$("#tabAvaliadores2").addClass("active");
 		$("#first").removeClass("active in");
@@ -332,4 +329,7 @@ $(document).ready(function() {
 		return true;
 		
 		}
+			$(document).ready(function() {
+				$('.dinheiro').mask('000.000,00', {reverse: true});
+			});
 	}})

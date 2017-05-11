@@ -152,7 +152,12 @@ public class CandidatoEntity {
 	private List<AvaliadorCandidatoEntity> avaliadores;
 
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
+	@JoinColumn(name = "idCandidato")
+	private List<PropostaEntity> propostaEntity;
+
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
 	@Temporal(value = TemporalType.DATE)
+
 	@JoinColumn(name = "idCandidato")
 	private List<DataEntrevistaEntity> datasEntrevistas;
 
@@ -284,7 +289,6 @@ public class CandidatoEntity {
 		this.dataUltimoContato = contatoBean;
 	}
 
-
 	public String getProposta() {
 		return proposta;
 	}
@@ -333,26 +337,6 @@ public class CandidatoEntity {
 		this.datasEntrevistas = datasEntrevistas;
 	}
 
-	/*
-	 * public List<StatusCandidatoEntity> getStatusCandidatos() { return
-	 * statusCandidatos; }
-	 * 
-	 * public void setStatusCandidatos(List<StatusCandidatoEntity>
-	 * statusCandidatos) { this.statusCandidatos = statusCandidatos; }
-	 * 
-	 * public List<CandidatoCompetenciaEntity> getCompetencias() { return
-	 * competencias; }
-	 * 
-	 * public void setCompetencias(List<CandidatoCompetenciaEntity>
-	 * competencias) { this.competencias = competencias; } <<<<<<< HEAD
-	 * 
-	 * public Date getDataultimoContato() { return dataultimoContato; }
-	 * 
-	 * public void setDataultimoContato(Date dataultimoContato) {
-	 * this.dataultimoContato = dataultimoContato; }
-	 * 
-	 * public Double getMin() { =======
-	 */
 	public String getCurriculoTexto() {
 		return curriculoTexto;
 	}
@@ -368,4 +352,13 @@ public class CandidatoEntity {
 	public void setValorPretensao(BigDecimal valorPretensao) {
 		this.valorPretensao = valorPretensao;
 	}
+
+	public List<PropostaEntity> getPropostaEntity() {
+		return propostaEntity;
+	}
+
+	public void setPropostaEntity(List<PropostaEntity> propostaEntity) {
+		this.propostaEntity = propostaEntity;
+	}
+
 }

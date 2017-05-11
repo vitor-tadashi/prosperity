@@ -38,7 +38,6 @@ public class CandidatoBean extends FormatUtil {
 	@NotNull(message = "O campo data de nascimento deve ser preenchido")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataNascimento; 
-	
 	@DecimalMax(value="200000.00", message="Pretensão salarial está com valor inválido")
 	@NumberFormat(pattern = "###,##0.00")
 	private BigDecimal valorPretensao;
@@ -63,7 +62,7 @@ public class CandidatoBean extends FormatUtil {
 	private Map<String, List<StatusCandidatoBean>> statusPorMesAno;
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataUltimoContato;
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	//@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private String proposta;
 	private StatusCandidatoBean ultimoStatus;
 	private VagaBean ultimaVaga;
@@ -80,6 +79,7 @@ public class CandidatoBean extends FormatUtil {
 	private Date dataAberturaPara;
 	private VagaBean vagaBean;
 	private CancelamentoBean cancelamentoBean;
+	private List<PropostaBean> propostaBean;
 	private List<ProvaCandidatoBean> provaCandidato = new ArrayList<>();
 	private List<DataEntrevistaBean> dataEntrevista;
 
@@ -370,6 +370,14 @@ public class CandidatoBean extends FormatUtil {
 
 	public void setCancelamentoBean(CancelamentoBean cancelamentoBean) {
 		this.cancelamentoBean = cancelamentoBean;
+	}
+
+	public List<PropostaBean> getPropostaBean() {
+		return propostaBean;
+	}
+
+	public void setPropostaBean(List<PropostaBean> propostaBean) {
+		this.propostaBean = propostaBean;
 	}
 
 }
