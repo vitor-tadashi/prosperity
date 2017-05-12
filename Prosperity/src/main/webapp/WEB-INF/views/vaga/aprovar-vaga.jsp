@@ -522,7 +522,7 @@
 		
 	// função para a alteração de status no botão ações
 	
-	function status(){
+	function status(){ // Fazer aqui as MENSAGENSW
     	$.ajax({
     		url: "status",
     		type: "POST",

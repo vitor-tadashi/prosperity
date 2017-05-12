@@ -450,7 +450,11 @@
 		<script src="/resources/js/parsley.min.js"></script>
 		<!-- <script src="/resources/js/custom/aprovar-candidato.js"></script> -->
 		<script>
-			var nomeCandidato;
+		
+		/* Variáveis globais para auxílio das mensagens */
+			var nomeCandidato = "";
+			var mensagemMudancaStatus = "";
+			
 
 			function maxCaracterParecer() {
 				var maxParecer = $("#parecer").val();
@@ -564,8 +568,10 @@
 										});
 
 								function alterarStatus(id, status, nome) {
-
 									nomeCandidato = nome;
+									mensagemMudancaStatus = defineMudancaStatus(status);
+									localStorage.setItem("nomeCandidato", nomeCandidato);
+									localStorage.setItem("mensagemMudancaStatus", mensagemMudancaStatus);
 
 									$('input.cancelar-id').val(id);
 									$('input.cancelar-status').val(status);
@@ -611,20 +617,29 @@
 								'parecer' : $('#parecer').val(),
 								'idStatus' : $('#hdn-status').val(),
 								'parecerTecnico' : $('#parecerTecnico').val(),
-								'processoSelectivo' : JSON
+								'processoSeletivo' : JSON
 										.stringify(provasDescricoes),
-								'ac' : JSON.stringify(avaliacoes)
+								'avaliacoesCandidato' : JSON.stringify(avaliacoes)
 							},
 							success : function(data) {
-								$('#confirm-modal').modal('hide');
-								msg = 'O candidato <strong>' + nomeCandidato
-										+ '</strong> foi alterado com sucesso!'
-								$('#msg-sucesso').html(msg).addClass(
-										'alert alert-success').show();
-								escondeMensagem();
+								debugger;
+								
+								mensagemMudancaStatus = defineMudancaStatus(data.ultimoStatus.status.id);
+								localStorage.setItem("mensagemMudancaStatus", mensagemMudancaStatus);
+								localStorage.setItem("nomeCandidato", data.nome);
+								
+								location.reload();
 							},
 							error : function(e) {
-								location.reload();
+								/* Mensagem de erro: */
+								$('#confirm-modal').modal('hide');
+								$('#modalTitulo').modal('hide');
+								$('#modalProposta').modal('hide');
+								
+								msg = 'Ocorreu algo de errado!'
+								$('#msg-sucesso').html(msg).addClass(
+								'alert alert-danger').show();
+								escondeMensagem();
 							}
 						});
 					});
@@ -731,6 +746,23 @@
 					e.preventDefault();
 					$(this).parsley().validate();
 				});
+				
+				/* Pegando valor das variáveis que foram armazenadas localmente:  */
+				var nome = localStorage.getItem("nomeCandidato");
+				var statusMudado = localStorage.getItem("mensagemMudancaStatus");
+				
+				/* Exibe a mensagem de mudança de status do candidato: */
+				if(nome!=""){
+					msg = 'O candidato <strong>' + nome
+					+ '</strong> ' + statusMudado +  ' com sucesso!'
+					$('#msg-sucesso').html(msg).addClass(
+							'alert alert-success').show();
+					escondeMensagem();
+				}
+				
+				/* Limpa as variáveis locais, para quando a página for atualizada/acessada novamente não exiba uma mensagem nula */
+				localStorage.setItem("nomeCandidato", "");
+				localStorage.setItem("mensagemMudancaStatus", "");
 			});
 
 			function gerarProposta() {
@@ -771,15 +803,29 @@
 					type : "POST"
 				}).done(
 						function() {
+							/* Fecha o modal de cancelamento: */
 							$('#delete-modal').modal('hide');
+							
+							/* Mensagem: */
 							msg = 'O candidato <strong>' + nomeCandidato
 									+ '</strong> foi cancelado com sucesso!'
 							$('#msg-sucesso').html(msg).addClass(
 									'alert alert-success').show();
+							
+									/* Remove a linha dele na tabela: */
 							$('#js-trCandidato_' + id).remove();
+									
 							escondeMensagem();
+							
 						}).fail(function(jqXHR, textStatus) {
-					location.reload();
+							
+							/* Exibe mensagem no caso de falha de requisição: */
+							msg = 'Falha ao cancelar o candidato <strong>' + nomeCandidato
+							+ '</strong>!'
+							$('#msg-sucesso').html(msg).addClass(
+									'alert alert-danger').show();
+									
+							escondeMensagem();
 				});
 			}
 
@@ -789,6 +835,41 @@
 					$(".mensagem").hide();
 				}, 5000);
 			}
+			
+			/* Função para alterar a mensagem conforme mudança de status: */
+			function defineMudancaStatus(status) {
+				
+				var mensagem;
+				debugger;
+				switch(status) {
+				case 6:
+					mensagem = "enviado para análise";
+					break;
+				case 7:
+					mensagem = "aprovado";
+					break;
+				case 8:
+					mensagem = "reprovado";
+					break;
+				case 9:
+					mensagem = "teve proposta gerada";
+					break;
+				case 10:
+					mensagem = "teve proposta aprovada";
+					break;
+				case 11:
+					mensagem = "teve proposta reprovada";
+					break;
+				case 15:
+					mensagem = "foi contratado";
+					break;
+				default:
+					mensagem = "sofreu alteração de status";
+				}
+				
+				return mensagem;
+			}
+			
 			/* paginação */
 		</script>
 	</layout:put>

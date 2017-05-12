@@ -16,6 +16,8 @@ import javax.validation.Valid;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.fileupload.FileUpload;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -73,7 +75,7 @@ import br.com.prosperity.util.TesteExcel;
 public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
-	private CandidatoBean bean;
+	private CandidatoBean candidatoBean;
 	@Autowired
 	private CancelamentoBusiness cancelamentoBusiness;
 	@Autowired
@@ -179,7 +181,7 @@ public class CandidatoController<PaginarCandidato> {
 				String caminho = uploadCurriculo(file, candidatoBean.getCpf());
 				candidatoBean.setCurriculo(caminho);
 				candidatoBusiness.inserir(candidatoBean);
-				redirectAttrs.addFlashAttribute("sucesso", "Candidato salvo com sucesso.");
+				redirectAttrs.addFlashAttribute("sucesso", "Candidato salvo com sucesso!");
 			} catch (BusinessException e) {
 
 			}
@@ -400,21 +402,22 @@ public class CandidatoController<PaginarCandidato> {
 	}
 
 	@RequestMapping(value = { "/alterar-status-candidato" }, method = RequestMethod.POST)
-	@ResponseStatus(value = HttpStatus.OK)
-	public @ResponseBody String alterarStatusCandidato(Model model,
+	public @ResponseBody CandidatoBean alterarStatusCandidato(Model model,
 			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato,
-			@ModelAttribute("ac") String ac, @ModelAttribute("processoSelectivo") String processoSeletivo) {
-		bean = candidatoBusiness.obter(situacaoCandidato.getIdCandidato());
-		if (!ac.equals("[]")) {
-			bean.setCompetencias(convertGson(ac));
+			@ModelAttribute("avaliacoesCandidato") String avaliacoesCandidato, @ModelAttribute("processoSeletivo") String processoSeletivo) {
+		
+		candidatoBean = candidatoBusiness.obter(situacaoCandidato.getIdCandidato());
+		
+		if (!avaliacoesCandidato.equals("[]")) {
+			candidatoBean.setCompetencias(convertGson(avaliacoesCandidato));
 			try {
-				candidatoBusiness.inserir(bean);
+				candidatoBusiness.inserir(candidatoBean);
 			} catch (Exception e) {
-				System.out.println(e);
+				e.printStackTrace();
 			}
 		}
 		if (!processoSeletivo.equals("[]")) {
-			List<ProvaCandidatoBean> provas = convertGsonProva(processoSeletivo, bean);
+			List<ProvaCandidatoBean> provas = convertGsonProva(processoSeletivo, candidatoBean);
 			for (int i = 0; i <= provas.size() - 1; i++) {
 				provas.get(i).setCaminhoProva(caminhoProvas.get(i));
 			}
@@ -422,8 +425,17 @@ public class CandidatoController<PaginarCandidato> {
 			// TODO:não da refresh ao salvar status
 
 		}
-		candidatoBusiness.alterarStatus(situacaoCandidato);
-		return "redirect:candidato/aprovar";
+		
+		try {
+			// alterado aqui \/
+			candidatoBusiness.alterarStatus(situacaoCandidato);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		// Tive de fazer essa busca novamente, para buscar o novo Ultimo Status do cara após ter sido alterado ali ^
+		candidatoBean = candidatoBusiness.obter(situacaoCandidato.getIdCandidato());
+		return candidatoBean;
 	}
 
 	@RequestMapping(value = { "/buscar/{id}" }, method = RequestMethod.GET)

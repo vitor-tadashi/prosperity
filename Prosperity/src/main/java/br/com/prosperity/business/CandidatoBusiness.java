@@ -358,12 +358,12 @@ public class CandidatoBusiness {
 							if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CONTRATADO.getValue()) {
 								List<VagaCandidatoEntity> contratado = vagaCandidatoDAO
 										.findByNamedQuery("candidatoContratado", situacaoCandidato.getIdCandidato());
-								VagaCandidatoEntity contrados = null;
+								VagaCandidatoEntity contratados = null;
 								for (VagaCandidatoEntity cand : contratado) {
 									cand.setContratado(true);
-									contrados = cand;
+									contratados = cand;
 								}
-								vagaCandidatoDAO.update(contrados);
+								vagaCandidatoDAO.update(contratados);
 							}
 						}
 					}
@@ -598,10 +598,6 @@ public class CandidatoBusiness {
 	@Transactional
 	public void buscarUsuariosParaEmail(SituacaoCandidatoBean situacaoCandidatoBean) {
 
-		new Thread() {
-			public void run() {
-				try {
-
 					candidatoBean = candidatoConverter
 							.convertEntityToBean(candidatoDAO.findById(situacaoCandidatoBean.getIdCandidato()));
 					List<UsuarioBean> usuarios = usuarioBusiness.findAll();
@@ -654,11 +650,5 @@ public class CandidatoBusiness {
 						email.enviarEmail(candidatoBean, usuario, nomes.get(i));
 						i++;
 					}
-				} catch (Exception e) {
-					System.out.println("Erro\n");
-					e.printStackTrace();
-				}
-			}
-		}.start();
 	}
 }
