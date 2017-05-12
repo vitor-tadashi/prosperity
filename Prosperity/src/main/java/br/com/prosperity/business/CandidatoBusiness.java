@@ -673,7 +673,7 @@ public class CandidatoBusiness {
 	}
 
 	public boolean podeEditarVaga(StatusCandidatoBean ultimoStatus) {
-		if(ultimoStatus.getId() == 5 && ultimoStatus.getId() == 17 && ultimoStatus.getId() == 29) {
+		if(ultimoStatus.getStatus().getId() != 5 && ultimoStatus.getStatus().getId() != 17 && ultimoStatus.getStatus().getId() != 29) {
 			return false;
 		}
 		return true;
