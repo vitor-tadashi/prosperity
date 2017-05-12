@@ -303,7 +303,7 @@ public class VagaBusiness {
 						.findByNamedQuery("obterStatusCandidato", acandidato.getCandidato().getId());
 				if (statusCandidato.get(0).getStatus().getId() != StatusCandidatoEnum.CONTRATADO.getValue()) {
 					situacaoCandidato.setIdCandidato(acandidato.getCandidato().getId());
-					situacaoCandidato.setStatus(StatusCandidatoEnum.CANCELADO);
+					situacaoCandidato.setStatus(StatusCandidatoEnum.SEMVAGA);
 					candidatoBusiness.alterarStatus(situacaoCandidato);
 				}
 			}

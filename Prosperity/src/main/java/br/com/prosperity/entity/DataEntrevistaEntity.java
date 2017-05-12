@@ -2,6 +2,7 @@ package br.com.prosperity.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,7 +25,7 @@ public class DataEntrevistaEntity {
 	@Column(name = "idDataEntrevista", unique = true, nullable = false)
 	private Integer idDataEntrevista;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(cascade = { CascadeType.ALL },fetch = FetchType.LAZY)
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
 	

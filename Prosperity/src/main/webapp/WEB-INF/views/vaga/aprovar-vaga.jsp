@@ -390,13 +390,14 @@
 																	onclick="alterarStatus(${vaga.id}, ${statusDisponivel.idStatusDisponivel})">
 																		<i ${statusDisponivel.classe}>&nbsp;</i>${statusDisponivel.nome}</a></li>
 															</c:forEach>
-															</ul>
+														</ul>
 										</td>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
 						</div>
+					
 						<!-- Fim Tabela -->
 					</div>
 					<!-- /panel -->
@@ -520,7 +521,7 @@
 	    window.print();
 	}
 		
-	// função para a alteração de status no botão ações
+	// função para a alteração de status de acordo com os botões de ação.
 	
 	function status(){ // Fazer aqui as MENSAGENSW
     	$.ajax({
@@ -529,20 +530,19 @@
     		dataType: "JSON",
     		data: { 'idVaga' : $('.id-vaga').val(), 'idStatus' : $('.id-status').val()}
     		}).done(function(dado) {
-    			if(dado == '1' || dado == '27') {
+    			if(dado == '1') {
     				$('#aprova-modal').modal('hide');
         			msg = 'Vaga aprovada com sucesso!';
     			}else if(dado == '3'){
         			$('#cancela-modal').modal('hide');
         			msg = 'Vaga cancelada com sucesso!';
-    			}
-    			
-    			else if (dado == '18'){
+    			}else if(dado == '27'){
+        			$('#aprova-modal').modal('hide');
+        			msg = 'Vaga ativada com sucesso!';
+    			}else if (dado == '18'){
     			$('#reprova-modal').modal('hide');
     			msg = 'Vaga reprovada com sucesso!';
-    			}
-    			
-    			else if (dado == '2'){
+    			}else if (dado == '2'){
         			$('#fechar-modal').modal('hide');
         			msg = 'Vaga fechada com sucesso!';
     			}
@@ -580,20 +580,20 @@
     	$('input.id-status').val(status);
     		
     	if( status == '1'){
-    		titulo = "Aprovar vaga."
-    		mensagem = "Deseja realmente aprovar vaga?";
-    	}
-		else if(status == '18'){
-			titulo = "Reprovar vaga."
-			mensagem = "Deseja realmente reprovar vaga?";
-		}
-		else if(status == '3'){
-			titulo = "Cancelar vaga."
-			mensagem = "Deseja realmente cancelar vaga?"
-		}
-		else if(status == '2'){
-			titulo = "Fechar vaga."
-			mensagem = "Deseja realmente fechar vaga?"
+    		titulo = "Aprovar vaga"
+    		mensagem = "Deseja realmente aprovar esta vaga?";
+    	}else if(status == '18'){
+			titulo = "Reprovar vaga"
+			mensagem = "Deseja realmente reprovar esta vaga?";
+		}else if(status == '3'){
+			titulo = "Cancelar vaga"
+			mensagem = "Deseja realmente cancelar esta vaga?"
+		}else if(status == '2'){
+			titulo = "Fechar vaga"
+			mensagem = "Deseja realmente fechar esta vaga?"
+		}else if(dado == '27'){
+			titulo = "Ativar vaga"
+			msg = 'Deseja realmente ativar esta vaga?';
 		}
     	
     	$("#modalLabel").text(titulo);

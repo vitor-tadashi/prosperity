@@ -38,6 +38,9 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 	public ProvaCandidatoConverter provaCandidatoConverter;
 	
 	@Autowired
+	public PropostaConverter propostaConverter;
+	
+	@Autowired
 	public DataEntrevistaConverter dataEntrevistaConverter;
 
 	public CandidatoEntity convertBeanToEntityService(CandidatoBean bean) {
@@ -104,6 +107,7 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		entity.setDataAlteracao(bean.getDataAlteracao());
 		entity.setDataFechamento(bean.getDataFechamento());
 		entity.setDataNascimento(bean.getDataNascimento());
+		entity.setDatasEntrevistas(dataEntrevistaConverter.convertBeanToEntity(bean.getDataEntrevista()));
 		entity.setContato(contatoConverter.convertBeanToEntity(bean.getContato()));
 		entity.setEndereco(enderecoConverter.convertBeanToEntity(bean.getEndereco()));
 		entity.setCompetencias(candidatoCompetenciaConverter.convertBeanToEntity(bean.getCompetencias()));
@@ -113,6 +117,7 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		entity.setDataUltimoContato(bean.getDataUltimoContato());
 		entity.setProposta(bean.getProposta());
 		entity.setCurriculoTexto(bean.getCurriculoTexto());
+		entity.setPropostaEntity(propostaConverter.convertBeanToEntity(bean.getPropostaBean()));
 		if (entity.getVagas() == null || (entity.getVagas() != null && entity.getVagas().size() == 0)) {
 			entity.setVagas(vagaCandidatoConverter.convertBeanToEntity(bean.getVagas()));
 		}
@@ -151,6 +156,7 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		//bean.setProvaCandidato(provaCandidatoConverter.convertEntityToBean(entity.getProvaCandidato()));
 		//bean.setVagaCandidato(vagaCandidato);
 		bean.setVagas(candidatoVagaConverter.convertEntityToBean(entity.getVagas()));
+		bean.setPropostaBean(propostaConverter.convertEntityToBean(entity.getPropostaEntity()));
 		bean.setDataEntrevista(dataEntrevistaConverter.convertEntityToBean(entity.getDatasEntrevistas()));
 		for(VagaCandidatoBean vc : bean.getVagas()){
 			bean.setVagaCandidato(vc);

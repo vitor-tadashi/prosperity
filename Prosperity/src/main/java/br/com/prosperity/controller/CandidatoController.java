@@ -14,10 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.fileupload.FileUpload;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -46,6 +42,7 @@ import br.com.prosperity.bean.CandidatoCompetenciaBean;
 import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.CompetenciaBean;
 import br.com.prosperity.bean.FuncionarioBean;
+import br.com.prosperity.bean.PropostaBean;
 import br.com.prosperity.bean.ProvaBean;
 import br.com.prosperity.bean.ProvaCandidatoBean;
 import br.com.prosperity.bean.SenioridadeBean;
@@ -128,8 +125,13 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private ProvaBean provaBean;
+	
+	@Autowired
+	private PropostaBean propostaBean;
 
 	private List<String> caminhoProvas;
+	
+	Double d = null;
 
 	private void paginacao(Integer page, Model model, CandidatoBean candidato) {
 
@@ -206,11 +208,12 @@ public class CandidatoController<PaginarCandidato> {
 
 		BigDecimal b = new BigDecimal(candidato.getValorPretensao().toString());
 		b = b.setScale(2, BigDecimal.ROUND_DOWN);
-
 		candidato.setValorPretensao(b);
-		// candidato.setCurriculo("file:///C:/Users/leonardo.ramos/Downloads/PontosProsperity.docx");
+		
+		boolean podeEditarVaga = candidatoBusiness.podeEditarVaga(candidato.getUltimoStatus());
 		model.addAttribute("candidato", candidato);
-
+		model.addAttribute("podeEditarVaga", podeEditarVaga);
+		
 		return "candidato/cadastrar-candidato";
 	}
 
@@ -555,11 +558,10 @@ public class CandidatoController<PaginarCandidato> {
 	@PostMapping(value = "gerar-proposta")
 	public String gerarProposta(MultipartHttpServletRequest request, Model model) {
 		List<MultipartFile> papers = request.getFiles("file");
-		Double d = null;
 		try {
 			String caminho = gerarProposta(papers);
 			TesteExcel teste = new TesteExcel();
-			d = teste.testa(caminho);
+			propostaBean = teste.testa(caminho);
 		} catch (Exception e) {
 			return "error";
 		}
@@ -582,9 +584,8 @@ public class CandidatoController<PaginarCandidato> {
 	
 	@RequestMapping(value = "/proposta", method = RequestMethod.GET)
 	@ResponseStatus(value = HttpStatus.OK)
-	public @ResponseBody String returnProposta(Model model) {
-		String a = "legal";
-		model.addAttribute(a);
-		return a;
+	public @ResponseBody PropostaBean returnProposta(Model model) {
+		model.addAttribute("proposta", propostaBean);
+		return propostaBean;
 	}
 }
