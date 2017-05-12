@@ -335,6 +335,10 @@ public class VagaBean {
 		return avaliadores;
 	}
 
+	public void setAvaliadores(List<UsuarioBean> avaliadores) {
+		this.avaliadores = avaliadores;
+	}
+
 	public String getStatusAtual() {
 		return statusAtual;
 	}
