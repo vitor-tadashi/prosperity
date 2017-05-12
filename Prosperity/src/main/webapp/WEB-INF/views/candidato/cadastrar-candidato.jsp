@@ -51,6 +51,7 @@
 							<form class="form-border" action="salvar" method="post"
 								enctype="multipart/form-data" id=formCadastro
 								onsubmit="validarVaga()">
+								<!--TABS DA PÁGINA -->
 								<div class="panel-tab clearfix">
 									<ul class="tab-bar wizard-demo" id="wizardDemo">
 										<li class="active tab-verity"><a href="#first"
@@ -316,6 +317,7 @@
 				</div>
 			</div>
 		</div>
+
 	</layout:put>
 
 	<layout:put block="scripts" type="REPLACE">
