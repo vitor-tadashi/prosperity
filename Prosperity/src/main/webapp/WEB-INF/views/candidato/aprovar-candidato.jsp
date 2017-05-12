@@ -111,135 +111,135 @@
 												<div class="panel-body">
 													<div class="col-md-6 row">
 														<div class="form-group">
-															<label>Empresa anterior:</label> <input type="text" id=""
-																name="" class="form-control input-sm">
+															<label>Empresa anterior:</label> <input type="text" id="anteriorEmpresa"
+																name="anteriorEmpresa" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
-															<label>Cargo:</label> <input type="text" id="" name=""
-																class="form-control input-sm">
+															<label>Cargo:</label> <input type="text" id="anteriorCargo" name="anteriorCargo"
+																class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Salário fixo bruto:</label> <input type="text"
-																id="" name="" class="form-control input-sm">
+																id="vlrAntSalarioFixoBruto" name="vlrAntSalarioFixoBruto" class="form-control dinheiro input-sm" min="0.01" step="0.01" max="2500" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Salário líquido mensal:</label> <input type="text"
-																id="" name="" class="form-control input-sm">
+																id="vlrAntSalarioLiquidoMensal" name="vlrAntSalarioLiquidoMensal" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
-															<label>VR mensal:</label> <input type="text" id=""
-																name="" class="form-control input-sm">
+															<label>VR mensal:</label> <input type="text" id="vlrAntVrMensal"
+																name="vlrAntVrMensal" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
-															<label>VA mensal:</label> <input type="text" id=""
-																name="" class="form-control input-sm">
+															<label>VA mensal:</label> <input type="text" id="vlrAntVaMensal"
+																name="vlrAntVaMensal" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Seguro de saúde mensal:</label> <input type="text"
-																id="" name="" class="form-control input-sm">
+																id="vlrAntSeguroSaudeMensal" name="vlrAntSeguroSaudeMensal" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
-															<label>Vale auto:</label> <input type="text" id=""
-																name="" class="form-control input-sm">
+															<label>Vale auto:</label> <input type="text" id="vlrAntValeAuto"
+																name="vlrAntValeAuto" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Vale transporte(até 6% desc.):</label> <input
-																type="text" id="" name="" class="form-control input-sm">
+																type="text" id="vlrAntValeTransporte" name="vlrAntValeTransporte" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Líquido m. + ben.:</label> <input type="text"
-																id="" name="" class="form-control input-sm">
+																id="vlrAntLiquidoComBeneficios" name="vlrAntLiquidoComBeneficios" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
-															<label>Anual líquido:</label> <input type="text" id=""
-																name="" class="form-control input-sm">
+															<label>Anual líquido:</label> <input type="text" id="vlrAntAnualLiquido"
+																name="vlrAntAnualLiquido" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>PLR anual líquido/bonús:</label> <input
-																type="text" id="" name="" class="form-control input-sm">
+																type="text" id="vlrAntParticipacaoLucrosOuBonus" name="vlrAntParticipacaoLucrosOuBonus" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Total anual líquido + ben.:</label> <input
-																type="text" id="" name="" class="form-control input-sm">
+																type="text" id="vlrAntTotalAnualLiquidoComBeneficios" name="vlrAntTotalAnualLiquidoComBeneficios" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 													</div>
 													<div class="col-md-6">
 														<div class="form-group">
-															<label>Proposta:</label> <input type="text" id="" name=""
-																class="form-control input-sm">
+															<label>Empresa atual:</label> <input type="text" id="novaEmpresa" name="novaEmpresa"
+																class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
-															<label>Cargo:</label> <input type="text" id="" name=""
-																class="form-control input-sm">
+															<label>Cargo:</label> <input type="text" id="novoCargo" name="novoCargo"
+																class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Salário fixo bruto:</label> <input type="text"
-																id="" name="" class="form-control input-sm">
+																id="vlrNvSalarioFixoBruto" name="vlrNvSalarioFixoBruto" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Salário líquido mensal:</label> <input type="text"
-																id="" name="" class="form-control input-sm">
+																id="vlrNvSalarioLiquidoMensal" name="vlrNvSalarioLiquidoMensal" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
-															<label>VR mensal:</label> <input type="text" id=""
-																name="" class="form-control input-sm">
+															<label>VR mensal:</label> <input type="text" id="vlrNvVrMensal"
+																name="vlrNvVrMensal" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
-															<label>VA mensal:</label> <input type="text" id=""
-																name="" class="form-control input-sm">
+															<label>VA mensal:</label> <input type="text" id="vlrNvVaMensal"
+																name="vlrNvVaMensal" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Seguro de saúde mensal:</label> <input type="text"
-																id="" name="" class="form-control input-sm">
+																id="vlrNvSeguroSaudeMensal" name="vlrNvSeguroSaudeMensal" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
-															<label>Vale auto:</label> <input type="text" id=""
-																name="" class="form-control input-sm">
+															<label>Vale auto:</label> <input type="text" id="vlrNvValeAuto"
+																name="vlrNvValeAuto" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Vale transporte(até 6% desc.):</label> <input
-																type="text" id="" name="" class="form-control input-sm">
+																type="text" id="vlrNvValeTransporte" name="vlrNvValeTransporte" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Líquido m. + ben.:</label> <input type="text"
-																id="" name="" class="form-control input-sm">
+																id="vlrNvLiquidoComBeneficios" name="vlrNvLiquidoComBeneficios" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
-															<label>Anual líquido:</label> <input type="text" id=""
-																name="" class="form-control input-sm">
+															<label>Anual líquido:</label> <input type="text" id="vlrNvAnualLiquido"
+																name="vlrNvAnualLiquido" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>PLR anual líquido/bonús:</label> <input
-																type="text" id="" name="" class="form-control input-sm">
+																type="text" id="vlrNvParticipacaoLucrosOuBonus" name="vlrNvParticipacaoLucrosOuBonus" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Total anual líquido + ben.:</label> <input
-																type="text" id="" name="" class="form-control input-sm">
+																type="text" id="vlrNvTotalAnualLiquidoComBeneficios" name="vlrNvTotalAnualLiquidoComBeneficios" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 													</div>
@@ -755,12 +755,41 @@
 					url : "proposta",
 					type : "GET",
 					success : function(data) {
-						$("#emp").val(data);
+						$("#anteriorEmpresa").val(data.anteriorEmpresa);
+						$("#anteriorCargo").val(data.anteriorCargo);
+						$("#vlrAntSalarioFixoBruto").val(data.anteriorSalarioFixoBruto);
+						$("#vlrAntSalarioLiquidoMensal").val(data.anteriorSalarioLiquidoMensal);
+						$("#vlrAntVrMensal").val(data.anteriorVrMensal);
+						$("#vlrAntVaMensal").val(data.anteriorVaMensal);
+						$("#vlrAntSeguroSaudeMensal").val(data.anteriorSeguroSaudeMensal);
+						$("#vlrAntValeAuto").val(data.anteriorValeAuto);
+						$("#vlrAntEstacionamento").val(data.anteriorEstacionamento);
+						$("#vlrAntValeTransporte").val(data.anteriorValeTransporte);
+						$("#vlrAntLiquidoComBeneficios").val(data.anteriorLiquidoComBeneficios);
+						$("#vlrAntAnualLiquido").val(data.anteriorAnualLiquido);
+						$("#vlrAntParticipacaoLucrosOuBonus").val(data.anteriorParticipacaoLucrosOuBonus);
+						$("#vlrAntTotalAnualLiquidoComBeneficios").val(data.anteriorTotalAnualLiquidoComBeneficios);
+						
+						$("#novaEmpresa").val(data.novaEmpresa);
+						$("#novoCargo").val(data.novoCargo);
+						$("#vlrNvSalarioFixoBruto").val(data.novoSalarioFixoBruto);
+						$("#vlrNvSalarioLiquidoMensal").val(data.novoSalarioLiquidoMensal);
+						$("#vlrNvVrMensal").val(data.novoVrMensal);
+						$("#vlrNvVaMensal").val(data.novoVaMensal);
+						$("#vlrNvSeguroSaudeMensal").val(data.novoSeguroSaudeMensal);
+						$("#vlrNvValeAuto").val(data.novoValeAuto);
+						$("#vlrNvEstacionamento").val(data.novoEstacionamento);
+						$("#vlrNvValeTransporte").val(data.novoValeTransporte);
+						$("#vlrNvLiquidoComBeneficios").val(data.novoLiquidoComBeneficios);
+						$("#vlrNvAnualLiquido").val(data.novoAnualLiquido);
+						$("#vlrNvParticipacaoLucrosOuBonus").val(data.novaParticipacaoLucrosOuBonus);
+						$("#vlrNvTotalAnualLiquidoComBeneficios").val(data.novoTotalAnualLiquidoComBeneficios);
 					},
 					error : function(data) {
-						$("#emp").val(data.a);
+						alert("Deu ruim");
 					}
 				});
+				$('.dinheiro').mask('000.000,00', {reverse: true});
 			};
 
 			function cancelarCandidato() {

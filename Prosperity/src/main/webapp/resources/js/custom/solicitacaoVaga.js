@@ -1,20 +1,20 @@
 function maxCaracterFormacaoAcademica(){
 		var maxFormacaoAcademica = $("#descricaoFormacaoAcademica").val();
-		var restante = 500 - maxFormacaoAcademica.length;
+		var restante = 2000 - maxFormacaoAcademica.length;
 		var maxCaracteres = document.querySelector("#maxFormacaoAcademica");
 		maxCaracteres.innerHTML = "Caracteres restantes : " + restante;
 	}
 	
 	function maxCaracterPefilComportamental(){
 		var maxPerfilComportamental = $("#descricaoPerfilComportamental").val();
-		var restante = 500 - maxPerfilComportamental.length;
+		var restante = 2000 - maxPerfilComportamental.length;
 		var maxCaracteres = document.querySelector("#maxPerfilComportamental");
 		maxCaracteres.innerHTML = "Caracteres restantes : " + restante;
 	}
 	
 	function maxCaracterPefilTecnico(){
 		var maxPerfilTecnico = $("#descricaoPerfilTecnico").val();
-		var restante = 500 - maxPerfilTecnico.length;
+		var restante = 2000 - maxPerfilTecnico.length;
 		var maxCaracteres = document.querySelector("#maxPerfilTecnico");
 		maxCaracteres.innerHTML = "Caracteres restantes : " + restante;
 	}

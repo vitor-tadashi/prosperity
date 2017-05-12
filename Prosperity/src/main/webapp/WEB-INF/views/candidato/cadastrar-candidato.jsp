@@ -47,10 +47,15 @@
 							<div id="textDiv1"></div>
 							<div id="textDiv2"></div>
 							<div id="textDiv3"></div>
-
+							
 							<form class="form-border" action="salvar" method="post"
 								enctype="multipart/form-data" id=formCadastro
 								onsubmit="validarVaga()">
+								
+								<fmt:formatDate value="${candidato.dataAbertura}"
+														pattern="dd/MM/yyyy" var="dataAbertura" />
+								
+								<input type="hidden" name="dataAbertura" value="${dataAbertura}">
 								<div class="panel-tab clearfix">
 									<ul class="tab-bar wizard-demo" id="wizardDemo">
 										<li class="active tab-verity"><a href="#first"
@@ -264,6 +269,20 @@
 												</select>
 											</div>
 										</div>
+									</div>
+								</div>
+
+								<div class="panel-footer">
+									<input type="hidden" value="${candidato.id}" name="id">
+									<input type="hidden" value="${erro}" id="contErro"> <a
+										href="/candidato/file/${candidato.id}" target="_blank"
+										class="btn btn-default pull-left download-download">Download</a>
+									<button class="btn btn-success pull-right">Salvar</button>
+								</div>
+							</form>
+						</div>
+					</div>
+
                                     <!--começo - tab 4 -->    
                                     <div class="tab-pane fade" id="fourth">
 <!-- 										conteudo gerado pelo ajax!!!!!                                    -->
@@ -298,6 +317,7 @@
                         </form>
                     </div>
                 </div>
+
 				</div>
 			</div>
 		</div>

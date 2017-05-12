@@ -32,6 +32,8 @@ public class PropostaConverter implements Converter<PropostaEntity, PropostaBean
 		entity.setAnteriorSalarioLiquidoMensal(bean.getAnteriorSalarioLiquidoMensal());
 		entity.setNovoVrMensal(bean.getNovoVrMensal());
 		entity.setAnteriorVrMensal(bean.getAnteriorVrMensal());
+		entity.setNovoVaMensal(bean.getNovoVaMensal());
+		entity.setAnteriorVaMensal(bean.getAnteriorVaMensal());
 		entity.setNovoSeguroSaudeMensal(bean.getNovoSeguroSaudeMensal());
 		entity.setAnteriorSeguroSaudeMensal(bean.getAnteriorSeguroSaudeMensal());
 		entity.setNovoValeAuto(bean.getNovoValeAuto());
@@ -71,6 +73,8 @@ public class PropostaConverter implements Converter<PropostaEntity, PropostaBean
 		bean.setAnteriorSalarioLiquidoMensal(entity.getAnteriorSalarioLiquidoMensal());
 		bean.setNovoVrMensal(entity.getNovoVrMensal());
 		bean.setAnteriorVrMensal(entity.getAnteriorVrMensal());
+		bean.setNovoVaMensal(entity.getNovoVaMensal());
+		bean.setAnteriorVaMensal(entity.getAnteriorVaMensal());
 		bean.setNovoSeguroSaudeMensal(entity.getNovoSeguroSaudeMensal());
 		bean.setAnteriorSeguroSaudeMensal(entity.getAnteriorSeguroSaudeMensal());
 		bean.setNovoValeAuto(entity.getNovoValeAuto());
