@@ -247,9 +247,8 @@ public class CandidatoBusiness {
 		} else {
 			CandidatoEntity candidatoEntity = candidatoDAO.findById(candidatoBean.getId());
 			CandidatoBean beans = candidatoConverter.convertEntityToBean(candidatoEntity);
-			if(beans.getUltimaVaga().getId() == candidatoBean.getVagaCandidato().getVaga().getId()){
-				situacaoCandidato.setIdCandidato(candidatoEntity.getId());
-				alterarStatus(situacaoCandidato);
+			if(beans.getUltimaVaga().getId().equals(candidatoBean.getVagaCandidato().getVaga().getId())){
+				
 				candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoEntity, candidatoBean);
 
 				tratarInformacoes(candidatoEntity);
@@ -260,7 +259,7 @@ public class CandidatoBusiness {
 			else {
 				situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
 				situacaoCandidato.setIdCandidato(candidatoEntity.getId());
-			alterarStatus(situacaoCandidato);
+				alterarStatus(situacaoCandidato);
 				
 				candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoEntity, candidatoBean);
 
