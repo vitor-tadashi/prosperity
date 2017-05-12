@@ -70,6 +70,9 @@
 										<li class="tab-verity"><a href="#fourth"
 											data-toggle="tab" class="text-success"><i
 												class="fa fa-calendar"></i>&nbsp;Datas de entrevista</a></li>
+										<li class="tab-verity"><a href="#five" data-toggle="tab"
+											class="text-success"><i class="fa fa-calendar"></i> Data ultimo 
+											contato</a></li>
 									</ul>
 								</div>
 								<div class="panel-body">
@@ -248,7 +251,7 @@
 											<div class="form-group col-md-3">
 												<label for="vaga">Vaga a ser aplicado</label> <select
 													class="form-control" id="vaga" name="vagaCandidato.vaga.id"
-													required="required" ${(statusCandidato.status.id != 17) && (statusCandidato.status.id != 5) && (not empty statusCandidato) ? 'disabled="disabled"' : ''}>
+													required="required" ${podeEditarVaga ? 'disabled="disabled"' : ''}>
 													<option value="0">Selecione</option>
 													<c:forEach var="vaga" items="${listaVaga}">
 														<option value="${vaga.id}"
@@ -268,6 +271,58 @@
 													</c:forEach>
 												</select>
 											</div>
+											<!--começo - tab 4 -->
+											<div class="tab-pane fade" id="fourth">
+												<!-- conteudo gerado pelo ajax!!!!!-->
+											</div>
+											<!--fim - tab 4 -->
+
+										</div>
+										
+										<div class="tab-pane fade" id="five">
+										<div class="form-group col-md-3" style="padding-right: 15px; width: 180px;">
+												<label class="control-label"> Data ultimo contato</label>
+										<div class="form-group">
+												<div class="input-group">
+												<input type="text" class="form-control date"
+												name="dataContato" data-required="false"
+												id="dataContato" 
+												value="">
+												</div>
+												</div>
+										</div>
+										<div class="form-group col-md-5" style=" padding-left: 15px;">
+											<label class="control-label"> Observações</label>
+										<div class="form-group">
+												<div class="input-group">
+												<input type="text" placeholder="Informe observações" class="form-control"
+												name="observacoes" data-required="false"
+												id="obs" value style="width: 526px;"
+												>
+												</div>
+											</div>
+										</div>
+										
+
+											<table 
+							class="table table-bordered table-condensed table-hover table-striped"
+							id="tabelaContato"
+							style="font-size: 12px !important; vertical-align: middle !important;">
+							<!-- Começo Tabela -->
+							<thead>
+								<tr class="text-center">
+									<th class="text-center" style="width: 212px;">Data ultimo contato</th>
+									<th class="text-center">Observações</th>
+									<th class="text-center" style="width: 212px;">Usuário</th>
+									
+									</tr>
+									</tbody>
+									</table>
+									<!--começo - tab 5 -->
+								<div class="tab-pane fade" id="fourth">
+							<!-- conteudo gerado pelo ajax!!!!!-->
+											</div>
+											<!--fim - tab 5 -->
 										</div>
 									</div>
 								</div>

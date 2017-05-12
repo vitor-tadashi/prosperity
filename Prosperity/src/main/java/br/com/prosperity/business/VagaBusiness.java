@@ -269,7 +269,15 @@ public class VagaBusiness {
 
 	@Transactional
 	public VagaBean obterVagaPorId(Integer id) {
-		VagaBean bean = vagaConverter.convertEntityToBean(vagaDAO.findById(id));
+		VagaEntity vagaEntity = vagaDAO.findById(id);
+		List<AvaliadorVagaBean> avaliadorVaga = avaliadorVagaConverter.convertEntityToBean(vagaEntity.getAvaliadorVagaEntity());
+		List<UsuarioBean> usuariosBean = new ArrayList<>();
+		
+		VagaBean bean = vagaConverter.convertEntityToBean(vagaEntity);
+		for(AvaliadorVagaBean av : avaliadorVaga){
+			usuariosBean.add(av.getUsuario());
+		}
+		bean.setAvaliadores(usuariosBean);
 		return bean;
 	}
 

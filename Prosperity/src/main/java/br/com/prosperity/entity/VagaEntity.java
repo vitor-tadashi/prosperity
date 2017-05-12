@@ -124,7 +124,9 @@ public class VagaEntity {
 	private List<StatusVagaEntity> statusVagaEntity;
 
 	// @ManyToOne(cascade = CascadeType.ALL)
-	// private AvaliadorEntity avaliadorEntity;
+	//private AvaliadorEntity avaliadorEntity;
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "vaga")
+	private List<AvaliadorVagaEntity> avaliadorVagaEntity;
 
 	@Column(name = "nmResponsavel")
 	private String nmResponsavel;
@@ -251,6 +253,14 @@ public class VagaEntity {
 
 	public void setNomeSubstituido(String nomeSubstituido) {
 		this.nomeSubstituido = nomeSubstituido;
+	}
+
+	public List<AvaliadorVagaEntity> getAvaliadorVagaEntity() {
+		return avaliadorVagaEntity;
+	}
+
+	public void setAvaliadorVagaEntity(List<AvaliadorVagaEntity> avaliadorVagaEntity) {
+		this.avaliadorVagaEntity = avaliadorVagaEntity;
 	}
 
 	public String getDescricaoFormacaoAcademica() {
