@@ -1,11 +1,3 @@
-var status;
-
-$(function() {
-	/*${(statusCandidato.status.id != 17) && (statusCandidato.status.id != 5) 
-		&& (not empty statusCandidato) ? 'disabled="disabled"' : ''}*/
-	
-});
-
 //MASK DOS CAMPOS DE CADASTRAR CANDIDATO  
 $(document).ready(function () {
 	        setTimeout(function () {
@@ -442,8 +434,8 @@ $(document).ready(function () {
 					$("#entrevista").val(dataFormatada(data.entrevista));
 					$("#situacaoAtual").val(data.formacao.situacaoAtual.id);
 					
-					status = data.ultimoStatus.status;
-					if(status.id != '17' && status.id != '5' && status.id != 29) {
+					var status = data.ultimoStatus.status;
+					if(status.id != 17 && status.id != 5 && status.id != 29) {
 						$('select#vaga').attr('disabled', 'disabled');
 					}
 					$('input#cpf').attr('disabled', 'disabled');
