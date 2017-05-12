@@ -111,135 +111,135 @@
 												<div class="panel-body">
 													<div class="col-md-6 row">
 														<div class="form-group">
-															<label>Empresa anterior:</label> <input type="text" id=""
-																name="" class="form-control input-sm">
+															<label>Empresa anterior:</label> <input type="text" id="anteriorEmpresa"
+																name="anteriorEmpresa" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
-															<label>Cargo:</label> <input type="text" id="" name=""
-																class="form-control input-sm">
+															<label>Cargo:</label> <input type="text" id="anteriorCargo" name="anteriorCargo"
+																class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Salário fixo bruto:</label> <input type="text"
-																id="" name="" class="form-control input-sm">
+																id="vlrAntSalarioFixoBruto" name="vlrAntSalarioFixoBruto" class="form-control dinheiro input-sm" min="0.01" step="0.01" max="2500" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Salário líquido mensal:</label> <input type="text"
-																id="" name="" class="form-control input-sm">
+																id="vlrAntSalarioLiquidoMensal" name="vlrAntSalarioLiquidoMensal" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
-															<label>VR mensal:</label> <input type="text" id=""
-																name="" class="form-control input-sm">
+															<label>VR mensal:</label> <input type="text" id="vlrAntVrMensal"
+																name="vlrAntVrMensal" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
-															<label>VA mensal:</label> <input type="text" id=""
-																name="" class="form-control input-sm">
+															<label>VA mensal:</label> <input type="text" id="vlrAntVaMensal"
+																name="vlrAntVaMensal" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Seguro de saúde mensal:</label> <input type="text"
-																id="" name="" class="form-control input-sm">
+																id="vlrAntSeguroSaudeMensal" name="vlrAntSeguroSaudeMensal" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
-															<label>Vale auto:</label> <input type="text" id=""
-																name="" class="form-control input-sm">
+															<label>Vale auto:</label> <input type="text" id="vlrAntValeAuto"
+																name="vlrAntValeAuto" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Vale transporte(até 6% desc.):</label> <input
-																type="text" id="" name="" class="form-control input-sm">
+																type="text" id="vlrAntValeTransporte" name="vlrAntValeTransporte" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Líquido m. + ben.:</label> <input type="text"
-																id="" name="" class="form-control input-sm">
+																id="vlrAntLiquidoComBeneficios" name="vlrAntLiquidoComBeneficios" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
-															<label>Anual líquido:</label> <input type="text" id=""
-																name="" class="form-control input-sm">
+															<label>Anual líquido:</label> <input type="text" id="vlrAntAnualLiquido"
+																name="vlrAntAnualLiquido" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>PLR anual líquido/bonús:</label> <input
-																type="text" id="" name="" class="form-control input-sm">
+																type="text" id="vlrAntParticipacaoLucrosOuBonus" name="vlrAntParticipacaoLucrosOuBonus" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Total anual líquido + ben.:</label> <input
-																type="text" id="" name="" class="form-control input-sm">
+																type="text" id="vlrAntTotalAnualLiquidoComBeneficios" name="vlrAntTotalAnualLiquidoComBeneficios" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 													</div>
 													<div class="col-md-6">
 														<div class="form-group">
-															<label>Proposta:</label> <input type="text" id="" name=""
-																class="form-control input-sm">
+															<label>Empresa atual:</label> <input type="text" id="novaEmpresa" name="novaEmpresa"
+																class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
-															<label>Cargo:</label> <input type="text" id="" name=""
-																class="form-control input-sm">
+															<label>Cargo:</label> <input type="text" id="novoCargo" name="novoCargo"
+																class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Salário fixo bruto:</label> <input type="text"
-																id="" name="" class="form-control input-sm">
+																id="vlrNvSalarioFixoBruto" name="vlrNvSalarioFixoBruto" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Salário líquido mensal:</label> <input type="text"
-																id="" name="" class="form-control input-sm">
+																id="vlrNvSalarioLiquidoMensal" name="vlrNvSalarioLiquidoMensal" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
-															<label>VR mensal:</label> <input type="text" id=""
-																name="" class="form-control input-sm">
+															<label>VR mensal:</label> <input type="text" id="vlrNvVrMensal"
+																name="vlrNvVrMensal" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
-															<label>VA mensal:</label> <input type="text" id=""
-																name="" class="form-control input-sm">
+															<label>VA mensal:</label> <input type="text" id="vlrNvVaMensal"
+																name="vlrNvVaMensal" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Seguro de saúde mensal:</label> <input type="text"
-																id="" name="" class="form-control input-sm">
+																id="vlrNvSeguroSaudeMensal" name="vlrNvSeguroSaudeMensal" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
-															<label>Vale auto:</label> <input type="text" id=""
-																name="" class="form-control input-sm">
+															<label>Vale auto:</label> <input type="text" id="vlrNvValeAuto"
+																name="vlrNvValeAuto" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Vale transporte(até 6% desc.):</label> <input
-																type="text" id="" name="" class="form-control input-sm">
+																type="text" id="vlrNvValeTransporte" name="vlrNvValeTransporte" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Líquido m. + ben.:</label> <input type="text"
-																id="" name="" class="form-control input-sm">
+																id="vlrNvLiquidoComBeneficios" name="vlrNvLiquidoComBeneficios" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
-															<label>Anual líquido:</label> <input type="text" id=""
-																name="" class="form-control input-sm">
+															<label>Anual líquido:</label> <input type="text" id="vlrNvAnualLiquido"
+																name="vlrNvAnualLiquido" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>PLR anual líquido/bonús:</label> <input
-																type="text" id="" name="" class="form-control input-sm">
+																type="text" id="vlrNvParticipacaoLucrosOuBonus" name="vlrNvParticipacaoLucrosOuBonus" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 														<div class="form-group">
 															<label>Total anual líquido + ben.:</label> <input
-																type="text" id="" name="" class="form-control input-sm">
+																type="text" id="vlrNvTotalAnualLiquidoComBeneficios" name="vlrNvTotalAnualLiquidoComBeneficios" class="form-control dinheiro input-sm" disabled>
 														</div>
 														<!-- /form-group -->
 													</div>
@@ -450,7 +450,11 @@
 		<script src="/resources/js/parsley.min.js"></script>
 		<!-- <script src="/resources/js/custom/aprovar-candidato.js"></script> -->
 		<script>
-			var nomeCandidato;
+		
+		/* Variáveis globais para auxílio das mensagens */
+			var nomeCandidato = "";
+			var mensagemMudancaStatus = "";
+			
 
 			function maxCaracterParecer() {
 				var maxParecer = $("#parecer").val();
@@ -564,8 +568,10 @@
 										});
 
 								function alterarStatus(id, status, nome) {
-
 									nomeCandidato = nome;
+									mensagemMudancaStatus = defineMudancaStatus(status);
+									localStorage.setItem("nomeCandidato", nomeCandidato);
+									localStorage.setItem("mensagemMudancaStatus", mensagemMudancaStatus);
 
 									$('input.cancelar-id').val(id);
 									$('input.cancelar-status').val(status);
@@ -611,20 +617,29 @@
 								'parecer' : $('#parecer').val(),
 								'idStatus' : $('#hdn-status').val(),
 								'parecerTecnico' : $('#parecerTecnico').val(),
-								'processoSelectivo' : JSON
+								'processoSeletivo' : JSON
 										.stringify(provasDescricoes),
-								'ac' : JSON.stringify(avaliacoes)
+								'avaliacoesCandidato' : JSON.stringify(avaliacoes)
 							},
 							success : function(data) {
-								$('#confirm-modal').modal('hide');
-								msg = 'O candidato <strong>' + nomeCandidato
-										+ '</strong> foi alterado com sucesso!'
-								$('#msg-sucesso').html(msg).addClass(
-										'alert alert-success').show();
-								escondeMensagem();
+								debugger;
+								
+								mensagemMudancaStatus = defineMudancaStatus(data.ultimoStatus.status.id);
+								localStorage.setItem("mensagemMudancaStatus", mensagemMudancaStatus);
+								localStorage.setItem("nomeCandidato", data.nome);
+								
+								location.reload();
 							},
 							error : function(e) {
-								location.reload();
+								/* Mensagem de erro: */
+								$('#confirm-modal').modal('hide');
+								$('#modalTitulo').modal('hide');
+								$('#modalProposta').modal('hide');
+								
+								msg = 'Ocorreu algo de errado!'
+								$('#msg-sucesso').html(msg).addClass(
+								'alert alert-danger').show();
+								escondeMensagem();
 							}
 						});
 					});
@@ -731,6 +746,23 @@
 					e.preventDefault();
 					$(this).parsley().validate();
 				});
+				
+				/* Pegando valor das variáveis que foram armazenadas localmente:  */
+				var nome = localStorage.getItem("nomeCandidato");
+				var statusMudado = localStorage.getItem("mensagemMudancaStatus");
+				
+				/* Exibe a mensagem de mudança de status do candidato: */
+				if(nome!=""){
+					msg = 'O candidato <strong>' + nome
+					+ '</strong> ' + statusMudado +  ' com sucesso!'
+					$('#msg-sucesso').html(msg).addClass(
+							'alert alert-success').show();
+					escondeMensagem();
+				}
+				
+				/* Limpa as variáveis locais, para quando a página for atualizada/acessada novamente não exiba uma mensagem nula */
+				localStorage.setItem("nomeCandidato", "");
+				localStorage.setItem("mensagemMudancaStatus", "");
 			});
 
 			function gerarProposta() {
@@ -755,12 +787,41 @@
 					url : "proposta",
 					type : "GET",
 					success : function(data) {
-						$("#emp").val(data);
+						$("#anteriorEmpresa").val(data.anteriorEmpresa);
+						$("#anteriorCargo").val(data.anteriorCargo);
+						$("#vlrAntSalarioFixoBruto").val(data.anteriorSalarioFixoBruto);
+						$("#vlrAntSalarioLiquidoMensal").val(data.anteriorSalarioLiquidoMensal);
+						$("#vlrAntVrMensal").val(data.anteriorVrMensal);
+						$("#vlrAntVaMensal").val(data.anteriorVaMensal);
+						$("#vlrAntSeguroSaudeMensal").val(data.anteriorSeguroSaudeMensal);
+						$("#vlrAntValeAuto").val(data.anteriorValeAuto);
+						$("#vlrAntEstacionamento").val(data.anteriorEstacionamento);
+						$("#vlrAntValeTransporte").val(data.anteriorValeTransporte);
+						$("#vlrAntLiquidoComBeneficios").val(data.anteriorLiquidoComBeneficios);
+						$("#vlrAntAnualLiquido").val(data.anteriorAnualLiquido);
+						$("#vlrAntParticipacaoLucrosOuBonus").val(data.anteriorParticipacaoLucrosOuBonus);
+						$("#vlrAntTotalAnualLiquidoComBeneficios").val(data.anteriorTotalAnualLiquidoComBeneficios);
+						
+						$("#novaEmpresa").val(data.novaEmpresa);
+						$("#novoCargo").val(data.novoCargo);
+						$("#vlrNvSalarioFixoBruto").val(data.novoSalarioFixoBruto);
+						$("#vlrNvSalarioLiquidoMensal").val(data.novoSalarioLiquidoMensal);
+						$("#vlrNvVrMensal").val(data.novoVrMensal);
+						$("#vlrNvVaMensal").val(data.novoVaMensal);
+						$("#vlrNvSeguroSaudeMensal").val(data.novoSeguroSaudeMensal);
+						$("#vlrNvValeAuto").val(data.novoValeAuto);
+						$("#vlrNvEstacionamento").val(data.novoEstacionamento);
+						$("#vlrNvValeTransporte").val(data.novoValeTransporte);
+						$("#vlrNvLiquidoComBeneficios").val(data.novoLiquidoComBeneficios);
+						$("#vlrNvAnualLiquido").val(data.novoAnualLiquido);
+						$("#vlrNvParticipacaoLucrosOuBonus").val(data.novaParticipacaoLucrosOuBonus);
+						$("#vlrNvTotalAnualLiquidoComBeneficios").val(data.novoTotalAnualLiquidoComBeneficios);
 					},
 					error : function(data) {
-						$("#emp").val(data.a);
+						alert("Deu ruim");
 					}
 				});
+				$('.dinheiro').mask('000.000,00', {reverse: true});
 			};
 
 			function cancelarCandidato() {
@@ -771,15 +832,29 @@
 					type : "POST"
 				}).done(
 						function() {
+							/* Fecha o modal de cancelamento: */
 							$('#delete-modal').modal('hide');
+							
+							/* Mensagem: */
 							msg = 'O candidato <strong>' + nomeCandidato
 									+ '</strong> foi cancelado com sucesso!'
 							$('#msg-sucesso').html(msg).addClass(
 									'alert alert-success').show();
+							
+									/* Remove a linha dele na tabela: */
 							$('#js-trCandidato_' + id).remove();
+									
 							escondeMensagem();
+							
 						}).fail(function(jqXHR, textStatus) {
-					location.reload();
+							
+							/* Exibe mensagem no caso de falha de requisição: */
+							msg = 'Falha ao cancelar o candidato <strong>' + nomeCandidato
+							+ '</strong>!'
+							$('#msg-sucesso').html(msg).addClass(
+									'alert alert-danger').show();
+									
+							escondeMensagem();
 				});
 			}
 
@@ -789,6 +864,41 @@
 					$(".mensagem").hide();
 				}, 5000);
 			}
+			
+			/* Função para alterar a mensagem conforme mudança de status: */
+			function defineMudancaStatus(status) {
+				
+				var mensagem;
+				debugger;
+				switch(status) {
+				case 6:
+					mensagem = "enviado para análise";
+					break;
+				case 7:
+					mensagem = "aprovado";
+					break;
+				case 8:
+					mensagem = "reprovado";
+					break;
+				case 9:
+					mensagem = "teve proposta gerada";
+					break;
+				case 10:
+					mensagem = "teve proposta aprovada";
+					break;
+				case 11:
+					mensagem = "teve proposta reprovada";
+					break;
+				case 15:
+					mensagem = "foi contratado";
+					break;
+				default:
+					mensagem = "sofreu alteração de status";
+				}
+				
+				return mensagem;
+			}
+			
 			/* paginação */
 		</script>
 	</layout:put>
