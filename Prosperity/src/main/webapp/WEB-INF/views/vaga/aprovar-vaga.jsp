@@ -523,7 +523,7 @@
 		
 	// função para a alteração de status de acordo com os botões de ação.
 	
-	function status(){
+	function status(){ // Fazer aqui as MENSAGENSW
     	$.ajax({
     		url: "status",
     		type: "POST",
