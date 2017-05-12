@@ -443,7 +443,7 @@ $(document).ready(function () {
 					$("#situacaoAtual").val(data.formacao.situacaoAtual.id);
 					
 					status = data.ultimoStatus.status;
-					if(status.id != '17' && status.id != '5') {
+					if(status.id != '17' && status.id != '5' && status.id != 29) {
 						$('select#vaga').attr('disabled', 'disabled');
 					}
 					$('input#cpf').attr('disabled', 'disabled');

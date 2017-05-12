@@ -680,4 +680,11 @@ public class CandidatoBusiness {
 			}
 		}.start();
 	}
+
+	public boolean podeEditarVaga(StatusCandidatoBean ultimoStatus) {
+		if(ultimoStatus.getId() == 5 && ultimoStatus.getId() == 17 && ultimoStatus.getId() == 29) {
+			return false;
+		}
+		return true;
+	}
 }

@@ -201,15 +201,15 @@ public class CandidatoController<PaginarCandidato> {
 	@RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
 	public String solicitarCandidato(Model model, @PathVariable Integer id) {
 		CandidatoBean candidato = candidatoBusiness.obterCandidatoPorId(id);
-		StatusCandidatoBean statusCandidato = candidato.getUltimoStatus();
 		obterDominiosCandidato(model);
 
 		BigDecimal b = new BigDecimal(candidato.getValorPretensao().toString());
 		b = b.setScale(2, BigDecimal.ROUND_DOWN);
 		candidato.setValorPretensao(b);
 		
+		boolean podeEditarVaga = candidatoBusiness.podeEditarVaga(candidato.getUltimoStatus());
 		model.addAttribute("candidato", candidato);
-		model.addAttribute("statusCandidato", statusCandidato);
+		model.addAttribute("podeEditarVaga", podeEditarVaga);
 		
 		return "candidato/cadastrar-candidato";
 	}
