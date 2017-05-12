@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -81,20 +80,13 @@
 													name="id">
 												<div class="form-group col-md-3">
 													<label for="cpf" class="control-label">CPF</label>
-													<c:if test="${empty candidato.id}">
-														<input type="text"
-															class="form-control cpf parsley-validated" id="cpf"
-															name="cpf" data-required="true"
-															placeholder="Informe seu CPF" value="${candidato.cpf}"
-															onblur="pesquisacpf()" />
-													</c:if>
-													<c:if test="${not empty candidato.id}">
-														<input type="text" class="form-control cpf" id="cpf"
-															name="cpf" placeholder="Informe seu CPF"
-															value="${candidato.cpf}" disabled="disabled" />
-														<input type="hidden" id="cpf" name="cpf"
-															value="${candidato.cpf}" />
-													</c:if>
+													<input type="text"
+														class="form-control cpf parsley-validated" id="cpf"
+														name="cpf" data-required="true"
+														placeholder="Informe seu CPF" value="${candidato.cpf}"
+														onblur="pesquisacpf()" ${not empty candidato.id ? 'disabled="disabled"' : ''} />
+													<input type="hidden" id="cpf" name="cpf"
+														value="${candidato.cpf}" />
 												</div>
 												<div class="form-group col-md-4">
 													<label class="control-label" for="nome">Nome</label> <input
@@ -256,8 +248,7 @@
 											<div class="form-group col-md-3">
 												<label for="vaga">Vaga a ser aplicado</label> <select
 													class="form-control" id="vaga" name="vagaCandidato.vaga.id"
-													required="required"
-													${(statusCandidato.status.id != 17) && (statusCandidato.status.id != 5) ? 'disabled="disabled"' : ''}>
+													required="required" ${(statusCandidato.status.id != 17) && (statusCandidato.status.id != 5) && (not empty statusCandidato) ? 'disabled="disabled"' : ''}>
 													<option value="0">Selecione</option>
 													<c:forEach var="vaga" items="${listaVaga}">
 														<option value="${vaga.id}"
@@ -277,23 +268,55 @@
 													</c:forEach>
 												</select>
 											</div>
-											<!--começo - tab 4 -->
-											<div class="tab-pane fade" id="fourth">
-												<!-- 										conteudo gerado pelo ajax!!!!!                                    -->
-											</div>
-											<!--fim - tab 4 -->
 										</div>
 									</div>
-									<div class="panel-footer">
-										<input type="hidden" value="${candidato.id}" name="id">
-										<input type="hidden" value="${erro}" id="contErro"> <a
-											href="/candidato/file/${candidato.id}" target="_blank"
-											class="btn btn-default pull-left download-download">Download</a>
-										<button class="btn btn-success pull-right">Salvar</button>
-									</div>
+								</div>
+
+								<div class="panel-footer">
+									<input type="hidden" value="${candidato.id}" name="id">
+									<input type="hidden" value="${erro}" id="contErro"> <a
+										href="/candidato/file/${candidato.id}" target="_blank"
+										class="btn btn-default pull-left download-download">Download</a>
+									<button class="btn btn-success pull-right">Salvar</button>
+								</div>
 							</form>
 						</div>
 					</div>
+
+                                    <!--começo - tab 4 -->    
+                                    <div class="tab-pane fade" id="fourth">
+<!-- 										conteudo gerado pelo ajax!!!!!                                    -->
+
+											<c:if test="${not empty candidato.dataEntrevista}">
+												<c:forEach var="data" items="${candidato.dataEntrevista}" varStatus="status">
+													<div class="row">
+														<div class='col-xs-4 form-group'>
+															<label>Nome do entrevistador: &nbsp;</label> 
+															<input type="text" name="" style="width: 140px" class="form-control" value="${data.usuario.funcionario.nome}"/>
+															<%-- <input type="hidden" name="candidatoBean.dataEntrevista[${status.index}].usuario.funcionario.nome" value="${data.usuario.funcionario.nome}" /> --%>
+														</div>
+														<div class='col-md-2 form-group'>
+															<label>Data de entrevista: &nbsp;</label>
+															<fmt:formatDate pattern="dd/MM/yyyy" value="${data.dataEntrevista}" var="dataEntrevista"/>
+															<input type="text" name="dataEntrevista[${status.index}].dataEntrevista" name="dataEntrevista" id="dataEntrevista" class="form-control date" data-required="false"  value="${dataEntrevista}">
+														 </div>
+													</div>
+												</c:forEach>
+											</c:if>
+                                    </div>
+                                    <!--fim - tab 4 -->        
+                                </div>
+                            </div>
+                            </div>
+                            <div class="panel-footer">
+                                <input type="hidden" value="${candidato.id}" name="id">
+                                <input type="hidden" value="${erro}" id="contErro">
+                                <a href="/candidato/file/${candidato.id}" target="_blank" class="btn btn-default pull-left download-download">Download</a>
+                                <button class="btn btn-success pull-right">Salvar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
 
 				</div>
 			</div>

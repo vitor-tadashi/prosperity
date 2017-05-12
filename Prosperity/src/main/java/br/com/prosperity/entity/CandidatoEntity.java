@@ -157,6 +157,7 @@ public class CandidatoEntity {
 
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
 	@Temporal(value = TemporalType.DATE)
+
 	@JoinColumn(name = "idCandidato")
 	private List<DataEntrevistaEntity> datasEntrevistas;
 
