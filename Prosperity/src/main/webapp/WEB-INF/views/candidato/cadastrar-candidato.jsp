@@ -48,10 +48,15 @@
 							<div id="textDiv1"></div>
 							<div id="textDiv2"></div>
 							<div id="textDiv3"></div>
-
+							
 							<form class="form-border" action="salvar" method="post"
 								enctype="multipart/form-data" id=formCadastro
 								onsubmit="validarVaga()">
+								
+								<fmt:formatDate value="${candidato.dataAbertura}"
+														pattern="dd/MM/yyyy" var="dataAbertura" />
+								
+								<input type="hidden" name="dataAbertura" value="${dataAbertura}">
 								<div class="panel-tab clearfix">
 									<ul class="tab-bar wizard-demo" id="wizardDemo">
 										<li class="active tab-verity"><a href="#first"

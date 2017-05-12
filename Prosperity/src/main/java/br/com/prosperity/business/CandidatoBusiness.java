@@ -247,7 +247,7 @@ public class CandidatoBusiness {
 		} else {
 			CandidatoEntity candidatoEntity = candidatoDAO.findById(candidatoBean.getId());
 			CandidatoBean beans = candidatoConverter.convertEntityToBean(candidatoEntity);
-			if(beans.getUltimaVaga().getId() != candidatoBean.getUltimaVaga().getId()){
+			if(beans.getUltimaVaga().getId() == candidatoBean.getVagaCandidato().getVaga().getId()){
 				situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
 				situacaoCandidato.setIdCandidato(candidatoEntity.getId());
 			alterarStatus(situacaoCandidato);
