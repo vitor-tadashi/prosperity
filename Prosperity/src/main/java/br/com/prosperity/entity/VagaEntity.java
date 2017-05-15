@@ -3,6 +3,7 @@ package br.com.prosperity.entity;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -125,7 +126,7 @@ public class VagaEntity {
 
 	// @ManyToOne(cascade = CascadeType.ALL)
 	//private AvaliadorEntity avaliadorEntity;
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "vaga")
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "vaga",cascade = CascadeType.ALL)
 	private List<AvaliadorVagaEntity> avaliadorVagaEntity;
 
 	@Column(name = "nmResponsavel")

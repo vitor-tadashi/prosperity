@@ -374,6 +374,13 @@ public class VagaBusiness {
 
 	@Transactional
 	private void inserirAvaliadores(VagaEntity vaga, List<UsuarioBean> usuarios) {
+		List<AvaliadorVagaEntity>avaliadores = avaliadorVagaDAO.findByNamedQuery("obterAvaliadoresDaVaga", vaga.getId()); 
+		if(avaliadores.size()>0 ){
+			for(AvaliadorVagaEntity av:avaliadores){
+				avaliadorVagaDAO.remove(av);
+			}
+
+		}
 		if (usuarios != null) {
 			for (UsuarioBean usuario : usuarios) {
 				AvaliadorVagaEntity avaliadorVagaEntity = new AvaliadorVagaEntity();
