@@ -20,7 +20,6 @@ import br.com.prosperity.bean.AvaliadorVagaBean;
 import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.SituacaoVagaBean;
-import br.com.prosperity.bean.StatusVagaBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.converter.AvaliadorVagaConverter;
@@ -115,8 +114,7 @@ public class VagaBusiness {
 
 	@Transactional(readOnly = true)
 	public List<VagaBean> listar() {
-
-		List<VagaEntity> vagaEntity = vagaDAO.findAll(); // PENSAR
+		List<VagaEntity> vagaEntity = vagaDAO.findAll();
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 		return vagaBean;
 	}
@@ -224,40 +222,19 @@ public class VagaBusiness {
 	public void inserir(VagaBean vagaBean, List<UsuarioBean> usuarioBean) {
 
 		VagaEntity vagaEntity = vagaConverter.convertBeanToEntity(vagaBean);
-		// vagaEntity.setStatusVagaEntity(statusVagaDAO.findByNamedQuery("statusVaga",
-		// vagaEntity.getId()));
 
 		if (vagaEntity.getId() == null) {
-			Date dateNow = new Date();
-			vagaEntity.setDataAbertura(dateNow);
+			vagaEntity.setDataAbertura(new Date());
 			vagaDAO.insert(vagaEntity);
 			situacaoVaga.setIdVaga(vagaEntity.getId());
 			situacaoVaga.setStatus(StatusVagaEnum.PENDENTE);
 			alterarStatus(situacaoVaga);
-			inserirAvaliadores(vagaEntity, usuarioBean);
 		} else {
-			// VERIFICAR SE DEVE SER DATA DE ALTERAÇÂO
-			// TODO jsp verifico se status é 27 se sim manda o status 1
-			// TODO aqui cria um else if se for status 1 faz o set como os
-			// outros mas com ativo
-
-			StatusVagaBean status = new StatusVagaBean();
-			status = vagaBean.getStatus().get(0);
-			if (status.getStatus().getId() == StatusVagaEnum.VAGANOVA.getValue()) {
-				inserirAvaliadores(vagaEntity, usuarioBean);
-				situacaoVaga.setIdVaga(vagaEntity.getId());
-				situacaoVaga.setStatus(StatusVagaEnum.VAGANOVA);
-				alterarStatus(situacaoVaga);
-			} else if (status.getStatus().getId() == StatusVagaEnum.ATIVO.getValue()) {
-				inserirAvaliadores(vagaEntity, usuarioBean);
-				situacaoVaga.setIdVaga(vagaEntity.getId());
-				situacaoVaga.setStatus(StatusVagaEnum.ATIVO);
-				alterarStatus(situacaoVaga);
-			}
-
 			vagaDAO.update(vagaEntity);
 		}
-
+		if (usuarioBean != null) {
+			inserirAvaliadores(vagaEntity, usuarioBean);
+		}
 	}
 
 	@Transactional
@@ -282,6 +259,13 @@ public class VagaBusiness {
 		return date;
 	}
 
+	/**
+	 * @author guilherme.oliveira Método de alteração de status da vaga. Caso
+	 *         tente ativar a vaga que não tenha avaliadores ela fica com status
+	 *         NOVA VAGA. Se a cancelar/recusar/fechar a vaga todos os seus
+	 *         candidato ficam com o status SEM VAGA, exceto os contratados. Se
+	 *         o status for PENDENTE ele não desativa status anteriores.
+	 */
 	@Transactional(readOnly = true)
 	public void alterarStatus(SituacaoVagaBean situacaoVaga) {
 		StatusVagaEntity statusVagaEntity = new StatusVagaEntity();
@@ -339,7 +323,6 @@ public class VagaBusiness {
 			vagaEntity.setDataFechamento(new Date());
 			vagaDAO.update(vagaEntity);
 		}
-
 	}
 
 	@Transactional
