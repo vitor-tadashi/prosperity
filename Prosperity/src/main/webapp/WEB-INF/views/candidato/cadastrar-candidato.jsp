@@ -275,6 +275,11 @@
 													</c:forEach>
 												</select>
 											</div>
+											<div class="form-group col-md-4 js-outros">
+												<label for="canalInformacao">Outros</label>
+												<input type="text" class="form-control" id="informacao-outros"
+															maxlength="50" name="valorPretensao" value="${candidato.valorPretensao}" />
+											</div>
 											<!--começo - tab 4 -->
 											<div class="tab-pane fade" id="fourth">
 												<!-- conteudo gerado pelo ajax!!!!!-->
