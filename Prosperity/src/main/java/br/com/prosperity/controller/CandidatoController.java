@@ -14,8 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.fileupload.FileUpload;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -45,13 +43,13 @@ import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.CompetenciaBean;
 import br.com.prosperity.bean.DataEntrevistaBean;
 import br.com.prosperity.bean.FuncionarioBean;
+import br.com.prosperity.bean.PropostaBean;
 import br.com.prosperity.bean.ProvaBean;
 import br.com.prosperity.bean.ProvaCandidatoBean;
 import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoAtualBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.StatusBean;
-import br.com.prosperity.bean.StatusCandidatoBean;
 import br.com.prosperity.bean.TipoCursoBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.CanalInformacaoBusiness;
@@ -75,7 +73,7 @@ import br.com.prosperity.util.TesteExcel;
 public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
-	private CandidatoBean bean;
+	private CandidatoBean candidatoBean;
 	@Autowired
 	private CancelamentoBusiness cancelamentoBusiness;
 	@Autowired
@@ -128,8 +126,13 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private ProvaBean provaBean;
+	
+	@Autowired
+	private PropostaBean propostaBean;
 
 	private List<String> caminhoProvas;
+	
+	Double d = null;
 
 	private void paginacao(Integer page, Model model, CandidatoBean candidato) {
 
@@ -181,7 +184,7 @@ public class CandidatoController<PaginarCandidato> {
 				String caminho = uploadCurriculo(file, candidatoBean.getCpf());
 				candidatoBean.setCurriculo(caminho);
 				candidatoBusiness.inserir(candidatoBean);
-				redirectAttrs.addFlashAttribute("sucesso", "Candidato salvo com sucesso.");
+				redirectAttrs.addFlashAttribute("sucesso", "Candidato salvo com sucesso!");
 			} catch (BusinessException e) {
 
 			}
@@ -202,15 +205,15 @@ public class CandidatoController<PaginarCandidato> {
 	@RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
 	public String solicitarCandidato(Model model, @PathVariable Integer id) {
 		CandidatoBean candidato = candidatoBusiness.obterCandidatoPorId(id);
-		StatusCandidatoBean statusCandidato = candidato.getUltimoStatus();
 		obterDominiosCandidato(model);
 
 		BigDecimal b = new BigDecimal(candidato.getValorPretensao().toString());
 		b = b.setScale(2, BigDecimal.ROUND_DOWN);
 		candidato.setValorPretensao(b);
 		
+		boolean podeEditarVaga = candidatoBusiness.podeEditarVaga(candidato.getUltimoStatus());
 		model.addAttribute("candidato", candidato);
-		model.addAttribute("statusCandidato", statusCandidato);
+		model.addAttribute("podeEditarVaga", podeEditarVaga);
 		
 		return "candidato/cadastrar-candidato";
 	}
@@ -404,21 +407,22 @@ public class CandidatoController<PaginarCandidato> {
 	}
 
 	@RequestMapping(value = { "/alterar-status-candidato" }, method = RequestMethod.POST)
-	@ResponseStatus(value = HttpStatus.OK)
-	public @ResponseBody String alterarStatusCandidato(Model model,
+	public @ResponseBody CandidatoBean alterarStatusCandidato(Model model,
 			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato,
-			@ModelAttribute("ac") String ac, @ModelAttribute("processoSelectivo") String processoSeletivo) {
-		bean = candidatoBusiness.obter(situacaoCandidato.getIdCandidato());
-		if (!ac.equals("[]")) {
-			bean.setCompetencias(convertGson(ac));
+			@ModelAttribute("avaliacoesCandidato") String avaliacoesCandidato, @ModelAttribute("processoSeletivo") String processoSeletivo) {
+		
+		candidatoBean = candidatoBusiness.obter(situacaoCandidato.getIdCandidato());
+		
+		if (!avaliacoesCandidato.equals("[]")) {
+			candidatoBean.setCompetencias(convertGson(avaliacoesCandidato));
 			try {
-				candidatoBusiness.inserir(bean);
+				candidatoBusiness.inserir(candidatoBean);
 			} catch (Exception e) {
-				System.out.println(e);
+				e.printStackTrace();
 			}
 		}
 		if (!processoSeletivo.equals("[]")) {
-			List<ProvaCandidatoBean> provas = convertGsonProva(processoSeletivo, bean);
+			List<ProvaCandidatoBean> provas = convertGsonProva(processoSeletivo, candidatoBean);
 			for (int i = 0; i <= provas.size() - 1; i++) {
 				provas.get(i).setCaminhoProva(caminhoProvas.get(i));
 			}
@@ -426,8 +430,17 @@ public class CandidatoController<PaginarCandidato> {
 			// TODO:não da refresh ao salvar status
 
 		}
-		candidatoBusiness.alterarStatus(situacaoCandidato);
-		return "redirect:candidato/aprovar";
+		
+		try {
+			// alterado aqui \/
+			candidatoBusiness.alterarStatus(situacaoCandidato);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		// Tive de fazer essa busca novamente, para buscar o novo Ultimo Status do cara após ter sido alterado ali ^
+		candidatoBean = candidatoBusiness.obter(situacaoCandidato.getIdCandidato());
+		return candidatoBean;
 	}
 
 	@RequestMapping(value = { "/buscar/{id}" }, method = RequestMethod.GET)
@@ -547,11 +560,10 @@ public class CandidatoController<PaginarCandidato> {
 	@PostMapping(value = "gerar-proposta")
 	public String gerarProposta(MultipartHttpServletRequest request, Model model) {
 		List<MultipartFile> papers = request.getFiles("file");
-		Double d = null;
 		try {
 			String caminho = gerarProposta(papers);
 			TesteExcel teste = new TesteExcel();
-			d = teste.testa(caminho);
+			propostaBean = teste.testa(caminho);
 		} catch (Exception e) {
 			return "error";
 		}
@@ -574,9 +586,8 @@ public class CandidatoController<PaginarCandidato> {
 	
 	@RequestMapping(value = "/proposta", method = RequestMethod.GET)
 	@ResponseStatus(value = HttpStatus.OK)
-	public @ResponseBody String returnProposta(Model model) {
-		String a = "legal";
-		model.addAttribute(a);
-		return a;
+	public @ResponseBody PropostaBean returnProposta(Model model) {
+		model.addAttribute("proposta", propostaBean);
+		return propostaBean;
 	}
 }

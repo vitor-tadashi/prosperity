@@ -47,10 +47,15 @@
 							<div id="textDiv1"></div>
 							<div id="textDiv2"></div>
 							<div id="textDiv3"></div>
-
+							
 							<form class="form-border" action="salvar" method="post"
 								enctype="multipart/form-data" id=formCadastro
 								onsubmit="validarVaga()">
+								
+								<fmt:formatDate value="${candidato.dataAbertura}"
+														pattern="dd/MM/yyyy" var="dataAbertura" />
+								
+								<input type="hidden" name="dataAbertura" value="${dataAbertura}">
 								<div class="panel-tab clearfix">
 									<ul class="tab-bar wizard-demo" id="wizardDemo">
 										<li class="active tab-verity"><a href="#first"
@@ -65,6 +70,9 @@
 										<li class="tab-verity"><a href="#fourth"
 											data-toggle="tab" class="text-success"><i
 												class="fa fa-calendar"></i>&nbsp;Datas de entrevista</a></li>
+										<li class="tab-verity"><a href="#five" data-toggle="tab"
+											class="text-success"><i class="fa fa-calendar"></i> Data ultimo 
+											contato</a></li>
 									</ul>
 								</div>
 								<div class="panel-body">
@@ -75,20 +83,13 @@
 													name="id">
 												<div class="form-group col-md-3">
 													<label for="cpf" class="control-label">CPF</label>
-													<c:if test="${empty candidato.id}">
-														<input type="text"
-															class="form-control cpf parsley-validated" id="cpf"
-															name="cpf" data-required="true"
-															placeholder="Informe seu CPF" value="${candidato.cpf}"
-															onblur="pesquisacpf()" />
-													</c:if>
-													<c:if test="${not empty candidato.id}">
-														<input type="text" class="form-control cpf" id="cpf"
-															name="cpf" placeholder="Informe seu CPF"
-															value="${candidato.cpf}" disabled="disabled" />
-														<input type="hidden" id="cpf" name="cpf"
-															value="${candidato.cpf}" />
-													</c:if>
+													<input type="text"
+														class="form-control cpf parsley-validated" id="cpf"
+														name="cpf" data-required="true"
+														placeholder="Informe seu CPF" value="${candidato.cpf}"
+														onblur="pesquisacpf()" ${not empty candidato.id ? 'disabled="disabled"' : ''} />
+													<input type="hidden" id="cpf" name="cpf"
+														value="${candidato.cpf}" />
 												</div>
 												<div class="form-group col-md-4">
 													<label class="control-label" for="nome">Nome</label> <input
@@ -250,8 +251,7 @@
 											<div class="form-group col-md-3">
 												<label for="vaga">Vaga a ser aplicado</label> <select
 													class="form-control" id="vaga" name="vagaCandidato.vaga.id"
-													required="required"
-													${(statusCandidato.status.id != 17) && (statusCandidato.status.id != 5) ? 'disabled="disabled"' : ''}>
+													required="required" ${!podeEditarVaga ? 'disabled="disabled"' : ''}>
 													<option value="0">Selecione</option>
 													<c:forEach var="vaga" items="${listaVaga}">
 														<option value="${vaga.id}"
@@ -271,7 +271,73 @@
 													</c:forEach>
 												</select>
 											</div>
+											<!--começo - tab 4 -->
+											<div class="tab-pane fade" id="fourth">
+												<!-- conteudo gerado pelo ajax!!!!!-->
+											</div>
+											<!--fim - tab 4 -->
+
 										</div>
+										
+										<div class="tab-pane fade" id="five">
+										<div class="form-group col-md-3" style="padding-right: 15px; width: 180px;">
+												<label class="control-label"> Data ultimo contato</label>
+										<div class="form-group">
+												<div class="input-group">
+												<input type="text" class="form-control date"
+												name="dataContato" data-required="false"
+												id="dataContato" 
+												value="">
+												</div>
+												</div>
+										</div>
+										<div class="form-group col-md-5" style=" padding-left: 15px;">
+											<label class="control-label"> Observações</label>
+										<div class="form-group">
+												<div class="input-group">
+												<input type="text" placeholder="Informe observações" class="form-control"
+												name="observacoes" data-required="false"
+												id="obs" value style="width: 526px;"
+												>
+												</div>
+											</div>
+										</div>
+										
+
+											<table 
+							class="table table-bordered table-condensed table-hover table-striped"
+							id="tabelaContato"
+							style="font-size: 12px !important; vertical-align: middle !important;">
+							<!-- Começo Tabela -->
+							<thead>
+								<tr class="text-center">
+									<th class="text-center" style="width: 212px;">Data ultimo contato</th>
+									<th class="text-center">Observações</th>
+									<th class="text-center" style="width: 212px;">Usuário</th>
+									
+									</tr>
+									</tbody>
+									</table>
+									<!--começo - tab 5 -->
+								<div class="tab-pane fade" id="fourth">
+							<!-- conteudo gerado pelo ajax!!!!!-->
+											</div>
+											<!--fim - tab 5 -->
+										</div>
+									</div>
+								</div>
+
+								<div class="panel-footer">
+									<input type="hidden" value="${candidato.id}" name="id">
+									<input type="hidden" value="${erro}" id="contErro"> <a
+										href="/candidato/file/${candidato.id}" target="_blank"
+										class="btn btn-default pull-left download-download">Download</a>
+									<button class="btn btn-success pull-right">Salvar</button>
+								</div>
+							</form>
+						</div>
+					</div>
+
                                     <!--começo - tab 4 -->    
                                     <div class="tab-pane fade" id="fourth">
 											<c:if test="${not empty candidato.dataEntrevista}">
@@ -295,6 +361,7 @@
                                     <!--fim - tab 4 -->        
                                 </div>
                             </div>
+                            </div>
                             <div class="panel-footer">
                                 <input type="hidden" value="${candidato.id}" name="id">
                                 <input type="hidden" value="${erro}" id="contErro">
@@ -304,6 +371,7 @@
                         </form>
                     </div>
                 </div>
+
 				</div>
 			</div>
 		</div>

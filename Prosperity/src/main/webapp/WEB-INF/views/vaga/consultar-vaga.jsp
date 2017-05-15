@@ -171,12 +171,23 @@
 													</div>
 
 												</div>
+												<div class="form-group row">
+													<div class="form-group col-md-6 col-xs-6"
+														style="margin-bottom: -30px">
+															<label>Avaliadores da vaga</label>
+															<table class="table table-condensed table-bordered" style="width: 7px;">
+																<tbody id="tBodyAvaliador">
+																	<tr id="trAvaliadores"></tr>
+																</tbody>
+															</table>
+													</div>
+												</div>
 												</form>
 										</div>
 									</section>
 									
 									<div id="quebra">
-										<section class="panel panel-default"
+										<section class="panel panel-default infos"
 											style="margin-bottom: 5px;">
 											<div class="panel-heading">Informações de projeto</div>
 											<div class="panel-body">
@@ -636,6 +647,7 @@
     			
     			if(lista.localTrabalho == 'C') {
     				$("#lblLocal").text('Cliente')
+    				$('.infos').show();
     				$('div#divLocalTrabalho').show();
     				$('#nmResponsavel').val(lista.nmResponsavel);
     				$('#nmAreaResponsavel').val(lista.nmAreaResponsavel);
@@ -643,6 +655,7 @@
     				$('#telResponsavel').val(lista.telResponsavel);
     			} else {
     				$('div#divLocalTrabalho').hide();
+    				$('.infos').hide();
     				$("#lblLocal").text('Interno')
     			}
     			if(lista.idTipoVaga == 'H') { 
@@ -678,6 +691,15 @@
     			$('#formacaoAcademica').text(lista.descricaoFormacaoAcademica);
     			$('#perfilComportamental').text(lista.descricaoPerfilComportamental);
     			$('#perfilTecnico').text(lista.descricaoPerfilTecnico);
+    			
+    			$('.removeTd').remove()
+    			$.each(lista.avaliadores,function(i,item){
+    				$('#trAvaliadores').append(
+    						"<td class='removeTd' style='width: 1px'><i class='fa fa-user pull-center'></i></td> <td class='removeTd' style='width: 6px'><span class='badge badge-info'>"+item.nome+"</span></td>"
+    						
+    				);
+    			});
+    			
     			$('#vaga-modal').modal('show');
     		}
     	})

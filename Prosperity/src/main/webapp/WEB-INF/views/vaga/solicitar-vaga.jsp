@@ -404,7 +404,7 @@
 															<i class="fa fa-angle-double-right"></i>
 														</a>
 													</div>
-													<select multiple="multiple" name="avaliadores"
+													<select multiple="multiple" name="#"
 														id="selectedBox2"
 														class="select-box pull-right form-control">
 
