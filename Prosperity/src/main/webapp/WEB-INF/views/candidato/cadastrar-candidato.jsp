@@ -106,14 +106,14 @@
 													<label for="email" class="control-label">E-mail</label> <input
 														type="email" class="form-control parsley-validated"
 														id="email" name="email" data-required="true"
-														maxlength="100" placeholder="Informe seu email"
+														maxlength="100" placeholder="Informe seu email" 
 														value="${candidato.email}">
 												</div>
 
 												<div class="form-group col-md-2">
 													<label for="rg" class="control-label">RG</label> <input
 														type="text" class="form-control rg parsley-validated"
-														maxlength="50" id="rg" name="rg" data-required="true"
+														maxlength="20" id="rg" name="rg" data-required="true"
 														data-required="true" placeholder="Informe seu RG"
 														value="${candidato.rg}">
 												</div>
@@ -154,25 +154,26 @@
 														type="number" class="form-control parsley-validated"
 														id="numero" data-required="true" name="endereco.numero"
 														value="${candidato.endereco.numero}" maxlength="30" />
+
 												</div>
 												<div class="form-group col-md-3">
 													<label for="complemento" class="control-label">Complemento</label>
 													<input type="text" class="form-control" id="complemento"
-														data-required="true" name="endereco.complemento"
-														value="${candidato.endereco.complemento}">
+														data-required="true" name="endereco.complemento" 
+														maxlength="50" value="${candidato.endereco.complemento}">
 												</div>
 												<div class="form-group col-md-3">
 													<label for="uf" class="control-label">Estado</label> <input
 														type="text" class="form-control parsley-validated" id="uf"
 														data-required="true" name="endereco.estado"
-														value="${candidato.endereco.estado}" />
+														maxlength="25" value="${candidato.endereco.estado}" />
 
 												</div>
 												<div class="form-group col-md-4">
 													<label for="cidade" class="control-label">Cidade</label> <input
 														type="text" class="form-control parsley-validated"
 														id="cidade" data-required="true" name="endereco.cidade"
-														value="${candidato.endereco.cidade}" />
+														maxlength="25" value="${candidato.endereco.cidade}" />
 												</div>
 												<div class="form-group col-xs-12">
 													<label class="control-label">Currículo</label>
@@ -295,8 +296,7 @@
 												<div class="input-group">
 												<input type="text" class="form-control date"
 												name="dataContato" data-required="false"
-												id="dataContato" 
-												value="">
+												 id="dataContato" value="">
 												</div>
 												</div>
 										</div>
@@ -306,7 +306,7 @@
 												<div class="input-group">
 												<input type="text" placeholder="Informe observações" class="form-control"
 												name="observacoes" data-required="false"
-												id="obs" value style="width: 526px;"
+												maxlength="100" id="obs" value style="width: 526px;"
 												>
 												</div>
 											</div>
