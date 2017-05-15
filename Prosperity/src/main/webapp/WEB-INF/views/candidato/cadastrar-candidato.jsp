@@ -51,11 +51,15 @@
 							<form class="form-border" action="salvar" method="post"
 								enctype="multipart/form-data" id=formCadastro
 								onsubmit="validarVaga()">
+
+								<!--TABS DA PÁGINA -->
+
 								
 								<fmt:formatDate value="${candidato.dataAbertura}"
 														pattern="dd/MM/yyyy" var="dataAbertura" />
 								
 								<input type="hidden" name="dataAbertura" value="${dataAbertura}">
+
 								<div class="panel-tab clearfix">
 									<ul class="tab-bar wizard-demo" id="wizardDemo">
 										<li class="active tab-verity"><a href="#first"
@@ -265,8 +269,8 @@
 													name="vagaCandidato.CanalInformacao.id"
 													id="canalInformacao">
 													<option value="0">Selecione</option>
-													<c:forEach var="canalInformacao" items="${listaCanal}">
-														<option value="${canalInformacao.id}"
+														<c:forEach var="canalInformacao" items="${listaCanal}">
+															<option value="${canalInformacao.id}"
 															${canalInformacao.id == candidato.vagaCandidato.canalInformacao.id ? 'selected="selected"' : ''}>${canalInformacao.nome}</option>
 													</c:forEach>
 												</select>
@@ -340,20 +344,19 @@
 
                                     <!--começo - tab 4 -->    
                                     <div class="tab-pane fade" id="fourth">
-<!-- 										conteudo gerado pelo ajax!!!!!                                    -->
-
 											<c:if test="${not empty candidato.dataEntrevista}">
 												<c:forEach var="data" items="${candidato.dataEntrevista}" varStatus="status">
 													<div class="row">
 														<div class='col-xs-4 form-group'>
+															<input type="hidden" value="${data.id}" name="dataEntrevista[${status.index}].id" />
 															<label>Nome do entrevistador: &nbsp;</label> 
-															<input type="text" name="" style="width: 140px" class="form-control" value="${data.usuario.funcionario.nome}"/>
+															<p>${data.usuario.funcionario.nome}</p>
 															<%-- <input type="hidden" name="candidatoBean.dataEntrevista[${status.index}].usuario.funcionario.nome" value="${data.usuario.funcionario.nome}" /> --%>
 														</div>
 														<div class='col-md-2 form-group'>
 															<label>Data de entrevista: &nbsp;</label>
 															<fmt:formatDate pattern="dd/MM/yyyy" value="${data.dataEntrevista}" var="dataEntrevista"/>
-															<input type="text" name="dataEntrevista[${status.index}].dataEntrevista" name="dataEntrevista" id="dataEntrevista" class="form-control date" data-required="false"  value="${dataEntrevista}">
+															<input type="text" name="dataEntrevista[${status.index}].dataEntrevista" id="dataEntrevista" class="form-control date" data-required="false" value="${dataEntrevista}">
 														 </div>
 													</div>
 												</c:forEach>
@@ -376,6 +379,7 @@
 				</div>
 			</div>
 		</div>
+
 	</layout:put>
 
 	<layout:put block="scripts" type="REPLACE">

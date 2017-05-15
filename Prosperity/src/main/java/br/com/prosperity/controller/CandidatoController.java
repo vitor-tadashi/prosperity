@@ -41,6 +41,7 @@ import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CandidatoCompetenciaBean;
 import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.CompetenciaBean;
+import br.com.prosperity.bean.DataEntrevistaBean;
 import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.PropostaBean;
 import br.com.prosperity.bean.ProvaBean;
@@ -56,6 +57,7 @@ import br.com.prosperity.business.CancelamentoBusiness;
 import br.com.prosperity.business.CandidatoBusiness;
 import br.com.prosperity.business.CargoBusiness;
 import br.com.prosperity.business.FuncionarioBusiness;
+import br.com.prosperity.business.PropostaBusiness;
 import br.com.prosperity.business.ProvaBusiness;
 import br.com.prosperity.business.ProvaCandidatoBusiness;
 import br.com.prosperity.business.SenioridadeBusiness;
@@ -73,8 +75,10 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private CandidatoBean candidatoBean;
+	
 	@Autowired
 	private CancelamentoBusiness cancelamentoBusiness;
+	
 	@Autowired
 	private CandidatoBusiness candidatoBusiness;
 
@@ -128,7 +132,10 @@ public class CandidatoController<PaginarCandidato> {
 	
 	@Autowired
 	private PropostaBean propostaBean;
-
+	
+	@Autowired
+	private PropostaBusiness propostaBusiness;
+	
 	private List<String> caminhoProvas;
 	
 	Double d = null;
@@ -235,6 +242,7 @@ public class CandidatoController<PaginarCandidato> {
 			obterDominiosCandidato(model);
 			return "candidato/cadastrar-candidato";
 		}
+		
 		candidatoBusiness.inserir(candidatoBean);
 		redirectAttrs.addFlashAttribute("sucesso", "Candidato salvo com sucesso!");
 
@@ -425,7 +433,12 @@ public class CandidatoController<PaginarCandidato> {
 			}
 			provaCandidatoBusiness.inserir(provas);
 			// TODO:não da refresh ao salvar status
-
+		}
+		
+		if(situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.PROPOSTACANDIDATO.getValue()){
+			propostaBean.setFlSituacao(true);
+			candidatoBean.getPropostaBean().add(propostaBean);
+			propostaBusiness.salvarProposta(candidatoBean);
 		}
 		
 		try {
@@ -564,7 +577,6 @@ public class CandidatoController<PaginarCandidato> {
 		} catch (Exception e) {
 			return "error";
 		}
-		model.addAttribute("valorzinho", d);
 		return "success";
 	}
 
@@ -584,7 +596,6 @@ public class CandidatoController<PaginarCandidato> {
 	@RequestMapping(value = "/proposta", method = RequestMethod.GET)
 	@ResponseStatus(value = HttpStatus.OK)
 	public @ResponseBody PropostaBean returnProposta(Model model) {
-		model.addAttribute("proposta", propostaBean);
 		return propostaBean;
 	}
 }

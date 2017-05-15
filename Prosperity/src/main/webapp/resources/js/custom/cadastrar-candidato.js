@@ -434,26 +434,29 @@ $(document).ready(function () {
 					$("#entrevista").val(dataFormatada(data.entrevista));
 					$("#situacaoAtual").val(data.formacao.situacaoAtual.id);
 					
+
 					var status = data.ultimoStatus.status;
 					if(status.id != 17 && status.id != 5 && status.id != 29) {
 						$('select#vaga').attr('disabled', 'disabled');
 					}
 					$('input#cpf').attr('disabled', 'disabled');
 					
+
 					var dadosEntrevistadores = data.dataEntrevista;
 					
+					//for each que percorre a lista e mostra na tela
 					$(dadosEntrevistadores).each(function(index, value) {
-						var campos = "<div class='row'>" +
-										"<div class='col-xs-4 form-group'>" +
-											"<label>Nome do entrevistador: &nbsp;</label>" +
-											"<input type='hidden' value='dataEntrevista.usuario' name='dataEntrevista"+'['+ index + ']'+".usuario.funcionario'>" +
-											"<input type='text' id='entrevistador"+ index +"' name ='dataEntrevista"+'['+ index + ']'+".usuario.funcionario.nome' style='width: 140px' class='form-control' value='"+ value.usuario.funcionario.nome +"'/>" +
-										"</div>" +
-										"<div class='col-md-2 form-group'>" +
-											"<label>Data de entrevista: &nbsp;</label>" +
-                                    	 	"<input type='text' id='data"+ index +"' class='form-control date' value='"+ value.dataEntrevista +"'/>" +
-                                    	 "</div>" +
-                                    "</div>";
+//						var campos = "<div class='row'>" +
+//										"<div class='col-xs-4 form-group'>" +
+//											"<label>Nome do entrevistador: &nbsp;</label>" +
+//											"<input type='hidden' value='dataEntrevista.usuario' name='dataEntrevista"+'['+ index + ']'+".usuario.funcionario'>" +
+//											"<p id='entrevistador"+ index +"' name ='dataEntrevista"+'['+ index + ']'+".usuario.funcionario.nome'></p>" +
+//										"</div>" +
+//										"<div class='col-md-2 form-group'>" +
+//											"<label>Data de entrevista: &nbsp;</label>" +
+//                                    	 	"<input type='text' id='data"+ index +"' class='form-control date' value='"+ value.dataEntrevista +"'/>" +
+//                                    	 "</div>" +
+//                                    "</div>";
 						
 						$("#fourth").append(campos);
 					});
