@@ -483,7 +483,7 @@
 														class="accordian-body collapse" id="demo${count.index}">
 
 														<br />
-														<div class="col-sm-12" style="margin-left: 110px">
+														<div class="col-sm-12" style="margin-left: 5px">
 															<div class="col-md-3 well well-sm btn btn-success"
 																style="height: 56px; margin-right: 5px; width: 200px; margin-left: 5px;">
 																<label>Data de Abertura</label>
@@ -507,6 +507,15 @@
 																<p style="margin-top: -5px;">
 																	<fmt:formatDate value="${vaga.dataFechamento}"
 																		pattern="dd/MM/yyyy" />
+																</p>
+															</div>
+															
+															<div class="col-md-3 well well-sm btn btn-info"
+																style="height: 56px; margin-right: 5px; width: 200px; margin-left: 5px;">
+																<label>Solicitante da Vaga</label>
+																<p style="margin-top: -5px;">
+																	${vaga.nomeSolicitante}
+																		
 																</p>
 															</div>
 															
