@@ -105,7 +105,7 @@
 													<label for="email" class="control-label">E-mail</label> <input
 														type="email" class="form-control parsley-validated"
 														id="email" name="email" data-required="true"
-														maxlength="100" placeholder="Informe seu email" 
+														maxlength="100" placeholder="Informe seu email"
 														value="${candidato.email}">
 												</div>
 												<div class="form-group col-md-2">
@@ -157,14 +157,14 @@
 												<div class="form-group col-md-3">
 													<label for="complemento" class="control-label">Complemento</label>
 													<input type="text" class="form-control" id="complemento"
-														data-required="true" name="endereco.complemento" 
+														data-required="true" name="endereco.complemento"
 														maxlength="50" value="${candidato.endereco.complemento}">
 												</div>
 												<div class="form-group col-md-3">
 													<label for="uf" class="control-label">Estado</label> <input
 														type="text" class="form-control parsley-validated" id="uf"
-														data-required="true" name="endereco.estado"
-														maxlength="25" value="${candidato.endereco.estado}" />
+														data-required="true" name="endereco.estado" maxlength="25"
+														value="${candidato.endereco.estado}" />
 
 												</div>
 												<div class="form-group col-md-4">
@@ -283,9 +283,10 @@
 															name="dataEntrevista[${status.index}].id" /> <label>Nome
 															do entrevistador: &nbsp;</label>
 														<p>${data.usuario.funcionario.nome}</p>
-														<input type="hidden" name="data.usuario" value="${data.usuario}" />
-														<input type="hidden" name="data.candidato" value="${data.candidato}" />
-														<input type="hidden" name="data.vaga" value="${data.vaga}" />
+														<input type="hidden" name="data.usuario"
+															value="${data.usuario}" /> <input type="hidden"
+															name="data.candidato" value="${data.candidato}" /> <input
+															type="hidden" name="data.vaga" value="${data.vaga}" />
 													</div>
 													<div class='col-md-2 form-group'>
 														<label>Data de entrevista: &nbsp;</label>
@@ -312,14 +313,16 @@
 													</div>
 												</div>
 											</div>
-											<div class="form-group col-md-5" style="padding-left: 15px;">
-												<label class="control-label"> Observações</label>
-												<div class="form-group">
-													<div class="input-group">
-														<input type="text" placeholder="Informe observações"
-															class="form-control" name="observacoes"
-															data-required="false" id="obs" style="width: 526px;">
-													</div>
+											<div class="row col-md-8">
+												<label for="obs" class="control-label">Observações</label><br>
+												<div class="form-group row col-md-8">
+													<input type="text" placeholder="Informe observações"
+														class="form-control col-md-1" id="obs"
+														data-required="true" name="observacoes" value="" />
+												</div>
+												<div class="text-right col-md-2">
+													<button type="button"
+														class="btn btn-success fa fa-check pull-right"></button>
 												</div>
 											</div>
 											<table
@@ -333,9 +336,11 @@
 															ultimo contato</th>
 														<th class="text-center">Observações</th>
 														<th class="text-center" style="width: 212px;">Usuário</th>
+
 													</tr>
 												</tbody>
 											</table>
+											<!--fim - tab 5 -->
 										</div>
 									</div>
 								</div>
