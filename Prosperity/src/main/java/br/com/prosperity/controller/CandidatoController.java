@@ -57,6 +57,7 @@ import br.com.prosperity.business.CancelamentoBusiness;
 import br.com.prosperity.business.CandidatoBusiness;
 import br.com.prosperity.business.CargoBusiness;
 import br.com.prosperity.business.FuncionarioBusiness;
+import br.com.prosperity.business.PropostaBusiness;
 import br.com.prosperity.business.ProvaBusiness;
 import br.com.prosperity.business.ProvaCandidatoBusiness;
 import br.com.prosperity.business.SenioridadeBusiness;
@@ -74,8 +75,10 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private CandidatoBean bean;
+	
 	@Autowired
 	private CancelamentoBusiness cancelamentoBusiness;
+	
 	@Autowired
 	private CandidatoBusiness candidatoBusiness;
 
@@ -129,7 +132,10 @@ public class CandidatoController<PaginarCandidato> {
 	
 	@Autowired
 	private PropostaBean propostaBean;
-
+	
+	@Autowired
+	private PropostaBusiness propostaBusiness;
+	
 	private List<String> caminhoProvas;
 	
 	Double d = null;
@@ -428,6 +434,11 @@ public class CandidatoController<PaginarCandidato> {
 			// TODO:não da refresh ao salvar status
 
 		}
+		if(situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.PROPOSTACANDIDATO.getValue()){
+			propostaBean.setFlSituacao(true);
+			bean.getPropostaBean().add(propostaBean);
+			propostaBusiness.salvarProposta(bean);
+		}
 		candidatoBusiness.alterarStatus(situacaoCandidato);
 		return "redirect:candidato/aprovar";
 	}
@@ -556,7 +567,6 @@ public class CandidatoController<PaginarCandidato> {
 		} catch (Exception e) {
 			return "error";
 		}
-		model.addAttribute("valorzinho", d);
 		return "success";
 	}
 
@@ -576,7 +586,6 @@ public class CandidatoController<PaginarCandidato> {
 	@RequestMapping(value = "/proposta", method = RequestMethod.GET)
 	@ResponseStatus(value = HttpStatus.OK)
 	public @ResponseBody PropostaBean returnProposta(Model model) {
-		model.addAttribute("proposta", propostaBean);
 		return propostaBean;
 	}
 }

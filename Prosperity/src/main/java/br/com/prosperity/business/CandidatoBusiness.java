@@ -680,4 +680,9 @@ public class CandidatoBusiness {
 			}
 		}.start();
 	}
+
+	@Transactional
+	public void salvarProposta(CandidatoBean bean) {
+		candidatoDAO.update(candidatoConverter.convertBeanToEntity(bean));
+	}
 }

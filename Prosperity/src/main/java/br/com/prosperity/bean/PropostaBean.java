@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 public class PropostaBean {
 
 	private Integer id;
-	private CandidatoBean candidato;
 	private String novaEmpresa;
 	private String anteriorEmpresa;
 	private String novoCargo;
@@ -43,14 +42,6 @@ public class PropostaBean {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public CandidatoBean getCandidato() {
-		return candidato;
-	}
-
-	public void setCandidato(CandidatoBean candidato) {
-		this.candidato = candidato;
 	}
 
 	public String getNovaEmpresa() {

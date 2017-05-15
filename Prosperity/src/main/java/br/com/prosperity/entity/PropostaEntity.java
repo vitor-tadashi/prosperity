@@ -24,10 +24,6 @@ public class PropostaEntity {
 	@Column(name = "idProposta", unique = true, nullable = false)
 	private Integer id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idCandidato")
-	private CandidatoEntity candidato;
-
 	@Column(name = "dsNvEmpresa")
 	private String novaEmpresa;
 
@@ -121,14 +117,6 @@ public class PropostaEntity {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public CandidatoEntity getCandidato() {
-		return candidato;
-	}
-
-	public void setCandidato(CandidatoEntity candidato) {
-		this.candidato = candidato;
 	}
 
 	public String getNovaEmpresa() {
