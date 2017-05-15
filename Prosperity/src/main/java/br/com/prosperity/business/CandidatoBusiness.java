@@ -72,6 +72,9 @@ public class CandidatoBusiness {
 
 	@Autowired
 	private CandidatoBean candidatoBean;
+	
+	@Autowired
+	private CandidatoBean beans;
 
 	@Autowired
 	private CandidatoDAO candidatoDAO;
@@ -225,28 +228,25 @@ public class CandidatoBusiness {
 
 	@Transactional
 	public void inserir(CandidatoBean candidatoBean) throws BusinessException {
+		situacaoCandidato = new SituacaoCandidatoBean();
+		beans = new CandidatoBean();
+		CandidatoEntity candidatoEntity = new CandidatoEntity();
 
 		if (candidatoBean.getId() == null) {
-
 			if (verificarCandidatura(candidatoBean)) {
-				CandidatoEntity candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoBean);
-				situacaoCandidato = null;
-				Date dateNow = new Date();
-				candidatoEntity.setDataAbertura(dateNow);
-
-				definirFormacao(candidatoBean, candidatoEntity);
-
+				candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoBean);
 				VagaEntity vagaAtual = definirVagas(candidatoBean, candidatoEntity);
 
+				candidatoEntity.setDataAbertura(new Date());
+				definirFormacao(candidatoBean, candidatoEntity);
 				tratarInformacoes(candidatoEntity);
 
 				candidatoDAO.insert(candidatoEntity);
 
 				inserirAvaliadores(candidatoEntity, vagaAtual.getId());
+				
 				situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
-
 				situacaoCandidato.setIdCandidato(candidatoEntity.getId());
-
 				alterarStatus(situacaoCandidato);
 
 			} else {
@@ -254,28 +254,18 @@ public class CandidatoBusiness {
 			}
 
 		} else {
-			CandidatoEntity candidatoEntity = candidatoDAO.findById(candidatoBean.getId());
-
-			CandidatoBean beans = candidatoConverter.convertEntityToBean(candidatoEntity);
+			candidatoEntity = candidatoDAO.findById(candidatoBean.getId());
+			beans = candidatoConverter.convertEntityToBean(candidatoEntity);
+			
 			if (beans.getUltimaVaga().getId() == candidatoBean.getVagaCandidato().getVaga().getId()) {
-
 				situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
 				situacaoCandidato.setIdCandidato(candidatoEntity.getId());
 				alterarStatus(situacaoCandidato);
-
-				candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoEntity, candidatoBean);
-
-				tratarInformacoes(candidatoEntity);
-
-				candidatoDAO.update(candidatoEntity);
-			} else {
-				candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoEntity, candidatoBean);
-
-				tratarInformacoes(candidatoEntity);
-
-				candidatoDAO.update(candidatoEntity);
 			}
-
+			candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoEntity, candidatoBean);
+			tratarInformacoes(candidatoEntity);
+			
+			candidatoDAO.update(candidatoEntity);
 		}
 	}
 
@@ -301,13 +291,11 @@ public class CandidatoBusiness {
 
 	private void tratarInformacoes(CandidatoEntity candidatoEntity) {
 		String replaceCPF = candidatoEntity.getCpf().replace(".", "").replace("-", "");
-		String replaceRG = candidatoEntity.getRg().replace(".", "").replace("-", "");
 		String replaceTelefone = candidatoEntity.getContato().getTelefone().replace("(", "").replace(")", "")
 				.replace("-", "");
 
 		candidatoEntity.getContato().setTelefone(replaceTelefone);
 		candidatoEntity.setCpf(replaceCPF);
-		candidatoEntity.setRg(replaceRG);
 	}
 
 	private VagaEntity definirVagas(CandidatoBean candidatoBean, CandidatoEntity candidatoEntity) {
