@@ -231,7 +231,7 @@
 															</span> <label class="label-radio inline">Novo</label> <input
 																id="substituicao" name="aumentaQuadro" value="S"
 																type="radio"> <span class="custom-radio">
-															</span> <label class="label-radio inline">Substituição</label> <input
+															</span> <label class="label-radio inline ">Substituição</label> <input
 																id="aumentoQuadroVar" type="hidden"
 																value="${vaga.aumentaQuadro}">
 														</div>
@@ -240,7 +240,7 @@
 															<input id="nomeSubstituido" name="nomeSubstituido"
 																type="text" class="form-control input-sm"
 																placeholder="Nome do Substituido" data-required="true"
-																value="${vaga.nomeSubstituido}" maxlength="50">
+																maxlength="50" value="${vaga.nomeSubstituido}">
 														</div>
 													</div>
 												</div>
@@ -404,7 +404,7 @@
 															<i class="fa fa-angle-double-right"></i>
 														</a>
 													</div>
-													<select multiple="multiple" name="avaliadores"
+													<select multiple="multiple" name="#"
 														id="selectedBox2"
 														class="select-box pull-right form-control">
 

@@ -171,12 +171,23 @@
 													</div>
 
 												</div>
+												<div class="form-group row">
+													<div class="form-group col-md-6 col-xs-6"
+														style="margin-bottom: -30px">
+															<label>Avaliadores da vaga</label>
+															<table class="table table-condensed table-bordered" style="width: 7px;">
+																<tbody id="tBodyAvaliador">
+																	<tr id="trAvaliadores"></tr>
+																</tbody>
+															</table>
+													</div>
+												</div>
 												</form>
 										</div>
 									</section>
 									
 									<div id="quebra">
-										<section class="panel panel-default"
+										<section class="panel panel-default infos"
 											style="margin-bottom: 5px;">
 											<div class="panel-heading">Informações de projeto</div>
 											<div class="panel-body">
@@ -472,7 +483,7 @@
 														class="accordian-body collapse" id="demo${count.index}">
 
 														<br />
-														<div class="col-sm-12" style="margin-left: 110px">
+														<div class="col-sm-12" style="margin-left: 5px">
 															<div class="col-md-3 well well-sm btn btn-success"
 																style="height: 56px; margin-right: 5px; width: 200px; margin-left: 5px;">
 																<label>Data de Abertura</label>
@@ -496,6 +507,15 @@
 																<p style="margin-top: -5px;">
 																	<fmt:formatDate value="${vaga.dataFechamento}"
 																		pattern="dd/MM/yyyy" />
+																</p>
+															</div>
+															
+															<div class="col-md-3 well well-sm btn btn-info"
+																style="height: 56px; margin-right: 5px; width: 200px; margin-left: 5px;">
+																<label>Solicitante da Vaga</label>
+																<p style="margin-top: -5px;">
+																	${vaga.nomeSolicitante}
+																		
 																</p>
 															</div>
 															
@@ -636,6 +656,7 @@
     			
     			if(lista.localTrabalho == 'C') {
     				$("#lblLocal").text('Cliente')
+    				$('.infos').show();
     				$('div#divLocalTrabalho').show();
     				$('#nmResponsavel').val(lista.nmResponsavel);
     				$('#nmAreaResponsavel').val(lista.nmAreaResponsavel);
@@ -643,6 +664,7 @@
     				$('#telResponsavel').val(lista.telResponsavel);
     			} else {
     				$('div#divLocalTrabalho').hide();
+    				$('.infos').hide();
     				$("#lblLocal").text('Interno')
     			}
     			if(lista.idTipoVaga == 'H') { 
@@ -678,6 +700,15 @@
     			$('#formacaoAcademica').text(lista.descricaoFormacaoAcademica);
     			$('#perfilComportamental').text(lista.descricaoPerfilComportamental);
     			$('#perfilTecnico').text(lista.descricaoPerfilTecnico);
+    			
+    			$('.removeTd').remove()
+    			$.each(lista.avaliadores,function(i,item){
+    				$('#trAvaliadores').append(
+    						"<td class='removeTd' style='width: 1px'><i class='fa fa-user pull-center'></i></td> <td class='removeTd' style='width: 6px'><span class='badge badge-info'>"+item.nome+"</span></td>"
+    						
+    				);
+    			});
+    			
     			$('#vaga-modal').modal('show');
     		}
     	})

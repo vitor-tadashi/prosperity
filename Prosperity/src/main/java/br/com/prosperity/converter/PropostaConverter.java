@@ -1,16 +1,12 @@
 package br.com.prosperity.converter;
 
-import br.com.prosperity.bean.PropostaBean;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import br.com.prosperity.bean.PropostaBean;
 import br.com.prosperity.entity.PropostaEntity;
 
 @Component
 public class PropostaConverter implements Converter<PropostaEntity, PropostaBean> {
-
-	@Autowired
-	private CandidatoConverter candidatoConveter;
 
 	@Override
 	public PropostaEntity convertBeanToEntity(PropostaBean bean) {
@@ -21,7 +17,6 @@ public class PropostaConverter implements Converter<PropostaEntity, PropostaBean
 		PropostaEntity entity = new PropostaEntity();
 
 		entity.setId(bean.getId());
-		entity.setCandidato(candidatoConveter.convertBeanToEntity(bean.getCandidato()));
 		entity.setNovaEmpresa(bean.getNovaEmpresa());
 		entity.setAnteriorEmpresa(bean.getAnteriorEmpresa());
 		entity.setNovoCargo(bean.getNovoCargo());
@@ -50,6 +45,7 @@ public class PropostaConverter implements Converter<PropostaEntity, PropostaBean
 		entity.setAnteriorParticipacaoLucrosOuBonus(bean.getAnteriorParticipacaoLucrosOuBonus());
 		entity.setNovoTotalAnualLiquidoComBeneficios(bean.getNovoTotalAnualLiquidoComBeneficios());
 		entity.setAnteriorTotalAnualLiquidoComBeneficios(bean.getAnteriorTotalAnualLiquidoComBeneficios());
+		entity.setFlSituacao(bean.getFlSituacao());
 		return entity;
 
 	}
@@ -62,7 +58,6 @@ public class PropostaConverter implements Converter<PropostaEntity, PropostaBean
 		PropostaBean bean = new PropostaBean();
 
 		bean.setId(entity.getId());
-		bean.setCandidato(candidatoConveter.convertEntityToBean(entity.getCandidato()));
 		bean.setNovaEmpresa(entity.getNovaEmpresa());
 		bean.setAnteriorEmpresa(entity.getAnteriorEmpresa());
 		bean.setNovoCargo(entity.getNovoCargo());
@@ -91,6 +86,7 @@ public class PropostaConverter implements Converter<PropostaEntity, PropostaBean
 		bean.setAnteriorParticipacaoLucrosOuBonus(entity.getAnteriorParticipacaoLucrosOuBonus());
 		bean.setNovoTotalAnualLiquidoComBeneficios(entity.getNovoTotalAnualLiquidoComBeneficios());
 		bean.setAnteriorTotalAnualLiquidoComBeneficios(entity.getAnteriorTotalAnualLiquidoComBeneficios());
+		bean.setFlSituacao(entity.getFlSituacao());
 		return bean;
 	}
 

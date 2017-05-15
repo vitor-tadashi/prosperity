@@ -79,7 +79,8 @@ public class CandidatoBean extends FormatUtil {
 	private Date dataAberturaPara;
 	private VagaBean vagaBean;
 	private CancelamentoBean cancelamentoBean;
-	private List<PropostaBean> propostaBean;
+	private List<PropostaBean> propostaBean = new ArrayList<>();
+	private PropostaBean ultimaProposta;
 	private List<ProvaCandidatoBean> provaCandidato = new ArrayList<>();
 	private List<DataEntrevistaBean> dataEntrevista;
 
@@ -161,6 +162,14 @@ public class CandidatoBean extends FormatUtil {
 		}
 
 		return ultimoStatus;
+	}
+
+	public PropostaBean getUltimaProposta() {
+		if(propostaBean != null && propostaBean.size()>0){
+			Integer idUltimaProposta = propostaBean.stream().map(PropostaBean::getId).max(Integer::compareTo).get();
+			ultimaProposta = propostaBean.stream().filter(st -> st.getId().equals(idUltimaProposta)).findFirst().get();
+		}
+		return ultimaProposta;
 	}
 
 	public VagaBean getUltimaVaga() {
@@ -379,5 +388,4 @@ public class CandidatoBean extends FormatUtil {
 	public void setPropostaBean(List<PropostaBean> propostaBean) {
 		this.propostaBean = propostaBean;
 	}
-
 }

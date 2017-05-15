@@ -287,7 +287,7 @@ public class VagaController {
 		}
 	
 		vagaBusiness.inserir(vagaBean, avaliadoresB);
-		redirectAttributes.addFlashAttribute("sucesso", "Vaga salva com sucesso!");
+		redirectAttributes.addFlashAttribute("sucesso", "Vaga solicitada com sucesso!");
 		return "redirect:/vaga/solicitar";
 
 	}
@@ -297,13 +297,13 @@ public class VagaController {
 
 		@SuppressWarnings("unchecked")
 		List<String> resultado = new Gson().fromJson(avaliadores, List.class);
-
+		avaliadoresB = new ArrayList<>();
 		for (String dados : resultado) {
 			UsuarioBean avaliador = new UsuarioBean();
 			avaliador.setId(Integer.parseInt(dados));
 			avaliadoresB.add(avaliador);
 		}
-		avaliadoresB.remove(0);
+		//avaliadoresB.remove(0);
 
 	}
 

@@ -73,8 +73,10 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private CandidatoBean candidatoBean;
+
 	@Autowired
 	private CancelamentoBusiness cancelamentoBusiness;
+
 	@Autowired
 	private CandidatoBusiness candidatoBusiness;
 
@@ -125,12 +127,12 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private ProvaBean provaBean;
-	
+
 	@Autowired
 	private PropostaBean propostaBean;
 
 	private List<String> caminhoProvas;
-	
+
 	Double d = null;
 
 	private void paginacao(Integer page, Model model, CandidatoBean candidato) {
@@ -163,7 +165,7 @@ public class CandidatoController<PaginarCandidato> {
 
 		List<CanalInformacaoBean> listaCanal = canalInformacaoBusiness.obterTodos();
 		model.addAttribute("listaCanal", listaCanal);
-		
+
 	}
 
 	@RequestMapping(value = "/salvar", method = RequestMethod.POST)
@@ -209,11 +211,11 @@ public class CandidatoController<PaginarCandidato> {
 		BigDecimal b = new BigDecimal(candidato.getValorPretensao().toString());
 		b = b.setScale(2, BigDecimal.ROUND_DOWN);
 		candidato.setValorPretensao(b);
-		
+
 		boolean podeEditarVaga = candidatoBusiness.podeEditarVaga(candidato.getUltimoStatus());
 		model.addAttribute("candidato", candidato);
 		model.addAttribute("podeEditarVaga", podeEditarVaga);
-		
+
 		return "candidato/cadastrar-candidato";
 	}
 
@@ -236,6 +238,7 @@ public class CandidatoController<PaginarCandidato> {
 			obterDominiosCandidato(model);
 			return "candidato/cadastrar-candidato";
 		}
+
 		candidatoBusiness.inserir(candidatoBean);
 		redirectAttrs.addFlashAttribute("sucesso", "Candidato salvo com sucesso!");
 
@@ -283,8 +286,6 @@ public class CandidatoController<PaginarCandidato> {
 		model.addAttribute("provas", provasCandidatoBean);
 		model.addAttribute("candidato", candidato);
 		// model.addAttribute("provasCandidato",provasCandidatoBean);
-		
-		
 
 		return "candidato/historico-candidato";
 	}
@@ -382,7 +383,7 @@ public class CandidatoController<PaginarCandidato> {
 		model.addAttribute("avaliacoes", avaliacoes);
 		model.addAttribute("provas", provas);
 		model.addAttribute("cancelamento", cancelamento);
-
+		
 		return "candidato/aprovar-candidato";
 	}
 
@@ -407,36 +408,46 @@ public class CandidatoController<PaginarCandidato> {
 	@RequestMapping(value = { "/alterar-status-candidato" }, method = RequestMethod.POST)
 	public @ResponseBody CandidatoBean alterarStatusCandidato(Model model,
 			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato,
-			@ModelAttribute("avaliacoesCandidato") String avaliacoesCandidato, @ModelAttribute("processoSeletivo") String processoSeletivo) {
-		
+			@ModelAttribute("avaliacoesCandidato") String avaliacoesCandidato,
+			@ModelAttribute("processoSeletivo") String processoSeletivo) {
+
 		candidatoBean = candidatoBusiness.obter(situacaoCandidato.getIdCandidato());
-		
-		if (!avaliacoesCandidato.equals("[]")) {
-			candidatoBean.setCompetencias(convertGson(avaliacoesCandidato));
+
+		if (!processoSeletivo.equals("[]")) {
+			List<ProvaCandidatoBean> provas = convertGsonProva(processoSeletivo, candidatoBean);
+			// for (int i = 0; i <= provas.size() - 1; i++) {
+			// provas.get(i).setCaminhoProva(caminhoProvas.get(i));
+			// }
+			provaCandidatoBusiness.inserir(provas);
+			// TODO:não da refresh ao salvar status
+		}
+
+		if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.PROPOSTACANDIDATO.getValue()
+				|| !avaliacoesCandidato.equals("[]")) {
+			if (!avaliacoesCandidato.equals("[]")) {
+				candidatoBean.setCompetencias(convertGson(avaliacoesCandidato));
+			}
+			if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.PROPOSTACANDIDATO.getValue()) {
+				propostaBean.setFlSituacao(true);
+				candidatoBean.getPropostaBean().add(propostaBean);
+				// propostaBusiness.salvarProposta(candidatoBean);
+			}
 			try {
 				candidatoBusiness.inserir(candidatoBean);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		if (!processoSeletivo.equals("[]")) {
-			List<ProvaCandidatoBean> provas = convertGsonProva(processoSeletivo, candidatoBean);
-			for (int i = 0; i <= provas.size() - 1; i++) {
-				provas.get(i).setCaminhoProva(caminhoProvas.get(i));
-			}
-			provaCandidatoBusiness.inserir(provas);
-			// TODO:não da refresh ao salvar status
 
-		}
-		
 		try {
 			// alterado aqui \/
 			candidatoBusiness.alterarStatus(situacaoCandidato);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		// Tive de fazer essa busca novamente, para buscar o novo Ultimo Status do cara após ter sido alterado ali ^
+
+		// Tive de fazer essa busca novamente, para buscar o novo Ultimo Status
+		// do cara após ter sido alterado ali ^
 		candidatoBean = candidatoBusiness.obter(situacaoCandidato.getIdCandidato());
 		return candidatoBean;
 	}
@@ -444,6 +455,7 @@ public class CandidatoController<PaginarCandidato> {
 	@RequestMapping(value = { "/buscar/{id}" }, method = RequestMethod.GET)
 	public @ResponseBody CandidatoBean buscarPorId(@PathVariable int id) {
 		CandidatoBean candidato = candidatoBusiness.obter(id);
+		System.out.println(candidato.getUltimaProposta().getAnteriorEmpresa());
 		return candidato;
 	}
 
@@ -553,7 +565,7 @@ public class CandidatoController<PaginarCandidato> {
 			caminhoProvas.add(file.getAbsolutePath());
 		}
 	}
-	
+
 	@ResponseBody
 	@PostMapping(value = "gerar-proposta")
 	public String gerarProposta(MultipartHttpServletRequest request, Model model) {
@@ -565,7 +577,6 @@ public class CandidatoController<PaginarCandidato> {
 		} catch (Exception e) {
 			return "error";
 		}
-		model.addAttribute("valorzinho", d);
 		return "success";
 	}
 
@@ -581,11 +592,10 @@ public class CandidatoController<PaginarCandidato> {
 		}
 		return arquivo;
 	}
-	
+
 	@RequestMapping(value = "/proposta", method = RequestMethod.GET)
 	@ResponseStatus(value = HttpStatus.OK)
 	public @ResponseBody PropostaBean returnProposta(Model model) {
-		model.addAttribute("proposta", propostaBean);
 		return propostaBean;
 	}
 }
