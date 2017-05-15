@@ -43,6 +43,7 @@ import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CandidatoCompetenciaBean;
 import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.CompetenciaBean;
+import br.com.prosperity.bean.DataEntrevistaBean;
 import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.ProvaBean;
 import br.com.prosperity.bean.ProvaCandidatoBean;
@@ -233,6 +234,7 @@ public class CandidatoController<PaginarCandidato> {
 			obterDominiosCandidato(model);
 			return "candidato/cadastrar-candidato";
 		}
+		
 		candidatoBusiness.inserir(candidatoBean);
 		redirectAttrs.addFlashAttribute("sucesso", "Candidato salvo com sucesso!");
 

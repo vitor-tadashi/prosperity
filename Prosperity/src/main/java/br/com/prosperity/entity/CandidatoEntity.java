@@ -155,9 +155,7 @@ public class CandidatoEntity {
 	@JoinColumn(name = "idCandidato")
 	private List<PropostaEntity> propostaEntity;
 
-	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
-	@Temporal(value = TemporalType.DATE)
-
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "idCandidato")
 	private List<DataEntrevistaEntity> datasEntrevistas;
 

@@ -24,21 +24,23 @@ import br.com.prosperity.bean.AvaliacaoBean;
 import br.com.prosperity.bean.AvaliadorCandidatoBean;
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CompetenciaBean;
+import br.com.prosperity.bean.DataEntrevistaBean;
 import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.StatusCandidatoBean;
 import br.com.prosperity.bean.UsuarioBean;
-import br.com.prosperity.bean.VagaCandidatoBean;
 import br.com.prosperity.converter.AvaliacaoConverter;
 import br.com.prosperity.converter.AvaliadorCandidatoConverter;
 import br.com.prosperity.converter.CandidatoConverter;
 import br.com.prosperity.converter.CompetenciaConverter;
+import br.com.prosperity.converter.DataEntrevistaConverter;
 import br.com.prosperity.dao.AvaliacaoDAO;
 import br.com.prosperity.dao.AvaliadorCandidatoDAO;
 import br.com.prosperity.dao.AvaliadorVagaDAO;
 import br.com.prosperity.dao.CanalInformacaoDAO;
 import br.com.prosperity.dao.CandidatoDAO;
 import br.com.prosperity.dao.CompetenciaDAO;
+import br.com.prosperity.dao.DataEntrevistaDAO;
 import br.com.prosperity.dao.SituacaoAtualDAO;
 import br.com.prosperity.dao.StatusCandidatoDAO;
 import br.com.prosperity.dao.StatusDAO;
@@ -53,6 +55,7 @@ import br.com.prosperity.entity.AvaliadorCandidatoEntity;
 import br.com.prosperity.entity.AvaliadorVagaEntity;
 import br.com.prosperity.entity.CandidatoEntity;
 import br.com.prosperity.entity.CompetenciaEntity;
+import br.com.prosperity.entity.DataEntrevistaEntity;
 import br.com.prosperity.entity.StatusCandidatoEntity;
 import br.com.prosperity.entity.StatusDisponivelEntity;
 import br.com.prosperity.entity.StatusFuturoEntity;
@@ -72,6 +75,9 @@ public class CandidatoBusiness {
 
 	@Autowired
 	private CandidatoDAO candidatoDAO;
+	
+	@Autowired
+	private DataEntrevistaDAO dataEntrevistaDAO;
 
 	@Autowired
 	private CandidatoConverter candidatoConverter;
@@ -118,6 +124,9 @@ public class CandidatoBusiness {
 	@Autowired
 	private AvaliadorCandidatoConverter avaliadorCandidatoConverter;
 
+	@Autowired
+	private DataEntrevistaConverter dataEntrevistaConverter;
+	
 	@Autowired
 	private AvaliadorVagaDAO avaliadorVagaDAO;
 
@@ -246,7 +255,13 @@ public class CandidatoBusiness {
 
 		} else {
 			CandidatoEntity candidatoEntity = candidatoDAO.findById(candidatoBean.getId());
-			CandidatoBean beans = candidatoConverter.convertEntityToBean(candidatoEntity);
+			/*for (DataEntrevistaBean dataEntrevistaBean : candidatoBean.getDataEntrevista()) {
+				DataEntrevistaEntity findById = dataEntrevistaDAO.findById(dataEntrevistaBean.getId());
+				findById.setDtEntrevista(dataEntrevistaBean.getDataEntrevista());
+				dataEntrevistaDAO.update(findById);
+			}
+			dataEntrevistaDAO.entityManager.flush();
+			CandidatoBean beans = candidatoConverter.convertEntityToBean(candidatoEntity);*/
 			if(beans.getUltimaVaga().getId() != candidatoBean.getUltimaVaga().getId()){
 				situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
 				situacaoCandidato.setIdCandidato(candidatoEntity.getId());
