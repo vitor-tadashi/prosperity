@@ -2,12 +2,9 @@ package br.com.prosperity.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.Table;
 
@@ -109,7 +106,7 @@ public class PropostaEntity {
 	private Double novoTotalAnualLiquidoComBeneficios;
 
 	@Column(name = "flSituacao")
-	private Double flSituacao;
+	private Boolean flSituacao;
 
 	public Integer getId() {
 		return id;
@@ -327,11 +324,11 @@ public class PropostaEntity {
 		this.novoTotalAnualLiquidoComBeneficios = novoTotalAnualLiquidoComBeneficios;
 	}
 
-	public Double getFlSituacao() {
+	public Boolean getFlSituacao() {
 		return flSituacao;
 	}
 
-	public void setFlSituacao(Double flSituacao) {
+	public void setFlSituacao(Boolean flSituacao) {
 		this.flSituacao = flSituacao;
 	}
 
