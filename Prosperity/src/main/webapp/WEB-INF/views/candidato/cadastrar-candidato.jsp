@@ -278,9 +278,9 @@
 											<!--fim - tab 4 -->
 
 										</div>
-										
+										<!-- começo - tab 5 -->
 										<div class="tab-pane fade" id="five">
-										<div class="form-group col-md-3" style="padding-right: 15px; width: 180px;">
+										<div class="form-group col-md-3">
 												<label class="control-label"> Data ultimo contato</label>
 										<div class="form-group">
 												<div class="input-group">
@@ -291,20 +291,23 @@
 												</div>
 												</div>
 										</div>
-										<div class="form-group col-md-5" style=" padding-left: 15px;">
-											<label class="control-label"> Observações</label>
-										<div class="form-group">
-												<div class="input-group">
-												<input type="text" placeholder="Informe observações" class="form-control"
-												name="observacoes" data-required="false"
-												id="obs" value style="width: 526px;"
-												>
-												</div>
-											</div>
-										</div>
 										
-
-											<table 
+										
+										<div class="row col-md-8">
+										<label for="obs" class="control-label">Observações</label><br>
+										<div class="form-group row col-md-8">
+													 <input
+														type="text" placeholder="Informe observações" class="form-control col-md-1"
+														id="obs" data-required="true" name="observacoes"
+														value="" />
+														
+												
+										</div>
+										<div class="text-right col-md-2">
+											<button type="button" class="btn btn-success fa fa-check pull-right"></button>
+										</div>
+										</div>
+									<table 
 							class="table table-bordered table-condensed table-hover table-striped"
 							id="tabelaContato"
 							style="font-size: 12px !important; vertical-align: middle !important;">
@@ -318,11 +321,7 @@
 									</tr>
 									</tbody>
 									</table>
-									<!--começo - tab 5 -->
-								<div class="tab-pane fade" id="fourth">
-							<!-- conteudo gerado pelo ajax!!!!!-->
-											</div>
-											<!--fim - tab 5 -->
+								<!--fim - tab 5 -->
 										</div>
 									</div>
 								</div>
