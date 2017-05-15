@@ -28,94 +28,131 @@
 				<section class="panel panel-default">
 					<div class="panel-heading">Informações básicas</div>
 					<div class="panel-body">
+						<div class="panel-tab clearfix">
+									<ul class="tab-bar wizard-demo" id="wizardDemo">
+										<li class="active tab-verity"><a href="#first"
+											data-toggle="tab"><i class="fa fa-user"></i> Inf.
+												pessoais</a></li>
+										<li class="tab-verity"><a href="#second"
+											data-toggle="tab" class="text-success"><i
+												class="fa fa-pencil"></i> Inf. acadêmicas</a></li>
+										<li class="tab-verity"><a href="#third" data-toggle="tab"
+											class="text-success"><i class="fa fa-book"></i> Processo seletivo</a></li>
+									</ul>
+								</div>
+								<br>
+								<div class="panel-body">
+									<div class="tab-content">
+										<div class="tab-pane fade in active" id="first">
+											<fieldset>
+												<legend style="color:#424f63"><h5><strong>Informações básicas</strong></h5></legend>
+												<div class="row">
+													<div class="form-group col-md-6">
+														<p class="" id="nome"><strong>Nome: </strong>${candidato.nome}</p>
+													</div>
+													<div class="form-group col-md-6">
+														<p class="" id="nome"><strong>Data de nascimento: </strong><fmt:formatDate value="${candidato.dataNascimento}"
+															pattern="dd/MM/yyyy" /></p>
+													</div>
+												</div>
+												<div class="row">
+													<div class="form-group col-md-6">
+														<p class="" id="nome"><strong>CPF: </strong>${candidato.cpf}</p>
+													</div>
+													<div class="form-group col-md-6">
+														<p class="" id="nome"><strong>RG: </strong>${candidato.rg}</p>
+													</div>
+												</div>
+												<div class="row">
+													<div class="form-group col-md-6">
+														<p class="" id="nome"><strong>E-mail: </strong>${candidato.email}</p>
+													</div>
+													<div class="form-group col-md-6">
+														<p class="" id="nome"><strong>Telefone: </strong>${candidato.contato.telefone}</p>
+													</div>
+												</div>
+											</fieldset>
+											<fieldset>
+												<legend style="color:#424f63"><h5><strong>Endereço</strong></h5></legend>
+												<div class="row">
+													<div class="form-group col-md-6">
+														<p class="" id="nome"><strong>Logradouro: </strong>${candidato.endereco.logradouro}</p>
+													</div>
+													<div class="form-group col-md-6">
+														<p class="" id="nome"><strong>Número: </strong>${candidato.endereco.numero}</p>
+													</div>
+												</div>
+												<div class="row">
+													<div class="form-group col-md-6">
+														<p class="" id="nome"><strong>Complemento: </strong>${candidato.endereco.complemento}</p>
+													</div>
+													<div class="form-group col-md-6">
+														<p class="" id="nome"><strong>CEP: </strong>${candidato.endereco.cep}</p>
+													</div>
+												</div>
+												<div class="row">
+													<div class="form-group col-md-6">
+														<p class="" id="nome"><strong>Cidade: </strong>${candidato.endereco.cidade}</p>
+													</div>
+													<div class="form-group col-md-6">
+														<p class="" id="nome"><strong>Estado: </strong>${candidato.endereco.estado}</p>
+													</div>
+												</div>
+											</fieldset>
+										</div>
+										<div class="tab-pane fade" id="second">
+											<fieldset>
+												<legend style="color:#424f63"><h5><strong>Formação</strong></h5></legend>
+												<div class="row">
+													<div class="form-group col-md-6">
+														<p class="" id="nome"><strong>Curso: </strong>${candidato.formacao.nomeCurso}</p>
+													</div>
+													<div class="form-group col-md-6">
+														<p class="" id="nome"><strong>Instituição: </strong>${candidato.formacao.nomeInstituicao}</p>
+													</div>
+												</div>
+												<div class="row">
+													<div class="form-group col-md-6">
+														<p class="" id="nome"><strong>Grau de instrução: </strong>${candidato.formacao.tipoCurso.nome}</p>
+													</div>
+													<div class="form-group col-md-6">
+														<p class="" id="nome"><strong>Situação Atual: </strong>${candidato.formacao.situacaoAtual.descricao}</p>
+													</div>
+												</div>
+												<div class="row">
+													<div class="form-group col-md-6">
+														<p class="" id="nome"><strong>Data de conclusão: </strong><fmt:formatDate value="${candidato.formacao.dataConclusao}"
+															pattern="dd/MM/yyyy" /></p>
+													</div>
+												</div>
+											</fieldset>
+										</div>
+										<div class="tab-pane fade" id="third">
+											<fieldset>
+												<legend style="color:#424f63"><h5><strong>Provas aplicadas</strong></h5></legend>
+												<div class="row">
+													<div class="form-group col-md-6">
+														<label>Tipo de prova</label>
+														<ol type="none">
+														<c:forEach items="${provas }" var="prova">
+															<li>${prova.provas.nome }</li>
+														</c:forEach>
+														</ol>
+													</div>
+													<div class="form-group col-md-6">
+														<label>Descrição</label>
+														<ol type="none">
+														<c:forEach items="${provas }" var="prova">
+															<li>${prova.descricao }</li>
+														</c:forEach>
+														</ol>
+													</div>
+												</div>
+											</fieldset>
+										</div>
+									</div>
+								</div>	
 						<div class="row">
-							<div class="form-group col-md-6">
-								<label class="col-xs-5 control-label">Nome do candidato:</label>
-								<div class="col-xs-7">
-									<p class="form-control-static" id="nome">${candidato.nome}</p>
-								</div>
-							</div>
-							<div class="form-group col-md-6">
-								<label class="col-xs-5 control-label">Email:</label>
-								<div class="col-xs-7">
-									<p class="form-control-static" id="email">${candidato.email}</p>
-								</div>
-							</div>
-							<div class="form-group col-md-6">
-								<label class="col-xs-5 control-label">CPF:</label>
-								<div class="col-xs-7">
-									<p class="form-control-static" id="cpf">${candidato.cpf}</p>
-								</div>
-							</div>
-							<div class="form-group col-md-6">
-								<label class="col-xs-5 control-label">RG:</label>
-								<div class="col-xs-7">
-									<p class="form-control-static" id="rg">${candidato.rg}</p>
-								</div>
-							</div>
-							<div class="form-group col-md-6">
-								<label class="col-xs-5 control-label">Data nascimento:</label>
-								<div class="col-xs-7">
-									<p class="form-control-static" id="dtNascimento">
-										<fmt:formatDate value="${candidato.dataNascimento}"
-											pattern="dd/MM/yyyy" />
-									</p>
-								</div>
-							</div>
-							<div class="form-group col-md-6">
-								<label class="col-xs-5 control-label">Telefone:</label>
-								<div class="col-xs-7">
-									<p class="form-control-static" id="telefone">${candidato.contato.telefone}</p>
-								</div>
-							</div>
-							<div class="form-group col-md-6">
-								<label class="col-xs-5 control-label">Cidade:</label>
-								<div class="col-xs-7">
-									<p class="form-control-static" id="cidade">${candidato.endereco.cidade}</p>
-								</div>
-							</div>
-							<div class="form-group col-md-6">
-								<label class="col-xs-5 control-label">Estado:</label>
-								<div class="col-xs-7">
-									<p class="form-control-static" id="estado">${candidato.endereco.estado}</p>
-								</div>
-							</div>
-							<div class="form-group col-md-6">
-								<label class="col-xs-5 control-label">Curso:</label>
-								<div class="col-xs-7">
-									<p class="form-control-static" id="nomeCurso">${candidato.formacao.nomeCurso}</p>
-								</div>
-							</div>
-							<div class="form-group col-md-6">
-								<label class="col-xs-5 control-label">Instituição:</label>
-								<div class="col-xs-7">
-									<p class="form-control-static" id="instituicao"
-										>${candidato.formacao.nomeInstituicao}</p>
-								</div>
-							</div>
-							<div class="form-group col-md-6">
-								<label class="col-xs-5 control-label">Tipo de curso:</label>
-								<div class="col-xs-7">
-									<p class="form-control-static" id="tipoCurso">${candidato.formacao.tipoCurso.nome}</p>
-								</div>
-							</div>
-							<div class="form-group col-md-6">
-								<label class="col-xs-5 control-label">Situação atual:</label>
-								<div class="col-xs-7">
-									<p class="form-control-static" id="situacaoAtual">
-										${candidato.formacao.situacaoAtual.descricao}
-									</p>
-								</div>
-							</div>
-							<div class="form-group col-md-6">
-								<label class="col-xs-5 control-label">Mês/Ano conclusão:</label>
-								<div class="col-xs-7">
-									<p class="form-control-static" id="conclusao">
-										<fmt:formatDate value="${candidato.formacao.dataConclusao}"
-											pattern="dd/MM/yyyy" />
-									</p>
-								</div>
-							</div>
 							<div class="form-group col-md-6">
 								<label class="col-xs-5 control-label">Pretensão
 									salarial:</label>
