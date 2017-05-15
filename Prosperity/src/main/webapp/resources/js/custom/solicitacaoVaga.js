@@ -257,10 +257,20 @@ $(document).ready(function() {
     		url: "/vaga/avaliadores",
     		type: "POST",
     		data: {avaliadores : result},
-    		success: function(data){
-    			console.log(data);
-    		}
-    	});
+    	}).done(function() {
+			
+			/* Mensagem: */
+			msg = 'Vaga solicitada com sucesso!'
+			$('#msg-sucesso').html(msg).addClass('alert alert-success').show();
+			escondeMensagem();
+		}).fail(function(jqXHR, textStatus) {
+			
+			/* Exibe mensagem no caso de falha de requisição: */
+			msg = 'Ocorreu algo de errado!'
+			$('#msg-sucesso').html(msg).addClass('alert alert-danger').show();
+			escondeMensagem();
+		});
+    	
     	var tel = $("#telResponsavel").val().replace(/[^\d]+/g,'');
     	$("#telResponsavel").val(tel);
     	var data = $("#dataInicio").val();
@@ -280,7 +290,7 @@ $(document).ready(function() {
 			dados.push($('#selectedBox2')[0][i].value);	
 			
 		}
-			return dados;
+		return dados;
 	}
 	
 	function validarData() {
@@ -332,4 +342,4 @@ $(document).ready(function() {
 			$(document).ready(function() {
 				$('.dinheiro').mask('000.000,00', {reverse: true});
 			});
-	}})
+	}});

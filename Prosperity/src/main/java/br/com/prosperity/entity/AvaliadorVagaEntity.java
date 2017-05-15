@@ -1,5 +1,6 @@
 package br.com.prosperity.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,7 +31,7 @@ public class AvaliadorVagaEntity {
 	@JoinColumn(name = "idVaga")
 	private VagaEntity vaga;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.LAZY,cascade = CascadeType.DETACH)
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
 

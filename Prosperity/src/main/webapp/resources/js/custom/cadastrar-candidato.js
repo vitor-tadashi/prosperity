@@ -130,7 +130,7 @@ $(document).ready(function () {
 			if (strCPF == "00000000000") {
 				var div = document.getElementById("textDiv1").className = "alert alert-danger";
 
-				textDiv1.textContent = "CPF inválido";
+				textDiv1.textContent = "CPF inválido zeros";
 
 				var text = "[" + div.textContent + "]";
 				return false;
@@ -175,9 +175,10 @@ $(document).ready(function () {
 				return false;
 			}
 
-			textDiv1.textContent = "CPF inválido";
+			var div = document.getElementById("textDiv1").className = "";
 
-			var text = "[" + div.textContent + "]";
+			textDiv1.textContent = "";
+			
 			return true;
 		}
 		

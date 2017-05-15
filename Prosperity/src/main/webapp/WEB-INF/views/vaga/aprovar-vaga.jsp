@@ -520,9 +520,22 @@
 	    $printSection.appendChild(domClone);
 	    window.print();
 	}
+	
+	$(document).ready(function() {
+		/* Pegando valor das variáveis que foram armazenadas localmente:  */
+		var msg = localStorage.getItem("mensagem");
+		
+		/* Exibe a mensagem de mudança de status do candidato: */
+		if(msg!="" && msg!=undefined){
+			$('#divAlert').html(msg).addClass('alert alert-success').show();
+			escondeMensagem();
+		}
+		
+		msg = "";
+		localStorage.getItem("mensagem", "");
+	});
 		
 	// função para a alteração de status de acordo com os botões de ação.
-	
 	function status(){ // Fazer aqui as MENSAGENSW
     	$.ajax({
     		url: "status",
@@ -547,15 +560,16 @@
         			msg = 'Vaga fechada com sucesso!';
     			}
     			
-    			$('#divAlert').html(msg).addClass('alert alert-success').show();
-    			escondeMensagem();
-    			setTimeout('location.reload();', 3000);
-    			//location.reload();
+    			localStorage.setItem("mensagem", msg);
+    			location.reload();
+    			
         	}).fail(function(jqXHR, textStatus) {
     			console.log();
     			console.log(jqXHR);
     			console.log(textStatus);
-    			
+    			msg = "Ocorreu algo de errado!";
+    			localStorage.setItem("mensagem", msg);
+    			location.reload();
     		});
     }
 	

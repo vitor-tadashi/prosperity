@@ -1,9 +1,8 @@
 package br.com.prosperity.converter;
 
-import br.com.prosperity.bean.PropostaBean;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import br.com.prosperity.bean.PropostaBean;
 import br.com.prosperity.entity.PropostaEntity;
 
 @Component
@@ -46,6 +45,7 @@ public class PropostaConverter implements Converter<PropostaEntity, PropostaBean
 		entity.setAnteriorParticipacaoLucrosOuBonus(bean.getAnteriorParticipacaoLucrosOuBonus());
 		entity.setNovoTotalAnualLiquidoComBeneficios(bean.getNovoTotalAnualLiquidoComBeneficios());
 		entity.setAnteriorTotalAnualLiquidoComBeneficios(bean.getAnteriorTotalAnualLiquidoComBeneficios());
+		entity.setFlSituacao(bean.getFlSituacao());
 		return entity;
 
 	}
@@ -86,6 +86,7 @@ public class PropostaConverter implements Converter<PropostaEntity, PropostaBean
 		bean.setAnteriorParticipacaoLucrosOuBonus(entity.getAnteriorParticipacaoLucrosOuBonus());
 		bean.setNovoTotalAnualLiquidoComBeneficios(entity.getNovoTotalAnualLiquidoComBeneficios());
 		bean.setAnteriorTotalAnualLiquidoComBeneficios(entity.getAnteriorTotalAnualLiquidoComBeneficios());
+		bean.setFlSituacao(entity.getFlSituacao());
 		return bean;
 	}
 
