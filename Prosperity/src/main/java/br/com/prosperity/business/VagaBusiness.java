@@ -20,7 +20,6 @@ import br.com.prosperity.bean.AvaliadorVagaBean;
 import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.SituacaoVagaBean;
-import br.com.prosperity.bean.StatusDisponivelBean;
 import br.com.prosperity.bean.StatusVagaBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
@@ -29,7 +28,6 @@ import br.com.prosperity.converter.UsuarioConverter;
 import br.com.prosperity.converter.VagaConverter;
 import br.com.prosperity.dao.AvaliadorCandidatoDAO;
 import br.com.prosperity.dao.AvaliadorVagaDAO;
-import br.com.prosperity.dao.CandidatoDAO;
 import br.com.prosperity.dao.StatusCandidatoDAO;
 import br.com.prosperity.dao.StatusDAO;
 import br.com.prosperity.dao.StatusVagaDAO;
@@ -38,10 +36,8 @@ import br.com.prosperity.dao.VagaCandidatoDAO;
 import br.com.prosperity.dao.VagaDAO;
 import br.com.prosperity.entity.AvaliadorCandidatoEntity;
 import br.com.prosperity.entity.AvaliadorVagaEntity;
-import br.com.prosperity.entity.CandidatoEntity;
 import br.com.prosperity.entity.StatusCandidatoEntity;
 import br.com.prosperity.entity.StatusVagaEntity;
-import br.com.prosperity.entity.VagaCandidatoEntity;
 import br.com.prosperity.entity.VagaEntity;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.enumarator.StatusVagaEnum;
@@ -109,9 +105,6 @@ public class VagaBusiness {
 
 	@Autowired
 	private UsuarioBusiness usuarioBusiness;
-	
-	@Autowired
-	private CandidatoDAO candidatoDAO;
 
 	@Transactional(readOnly = true)
 	public List<VagaBean> listarDecrescente() {
@@ -162,11 +155,12 @@ public class VagaBusiness {
 			vagaEntity.get(aux).setDataInicio(vaga.getDataInicio());
 			aux++;
 		}
-		
+
 		List<VagaBean> vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
-		for (int i = 0; i< vagaBean.size(); i++) {
-			for(int c = 0; c < vagaBean.get(i).getVagaCandidatoBean().size(); c++){
-				if(vagaBean.get(i).getVagaCandidatoBean().get(c).getContratado()!= null && vagaBean.get(i).getVagaCandidatoBean().get(c).getContratado()){
+		for (int i = 0; i < vagaBean.size(); i++) {
+			for (int c = 0; c < vagaBean.get(i).getVagaCandidatoBean().size(); c++) {
+				if (vagaBean.get(i).getVagaCandidatoBean().get(c).getContratado() != null
+						&& vagaBean.get(i).getVagaCandidatoBean().get(c).getContratado()) {
 					vagaBean.get(i).getUltimoStatus().getStatus().getStatusDisponiveis().remove(0);
 					c = vagaBean.get(i).getVagaCandidatoBean().size();
 				}
@@ -246,8 +240,7 @@ public class VagaBusiness {
 			// TODO jsp verifico se status é 27 se sim manda o status 1
 			// TODO aqui cria um else if se for status 1 faz o set como os
 			// outros mas com ativo
-			
-			
+
 			StatusVagaBean status = new StatusVagaBean();
 			status = vagaBean.getStatus().get(0);
 			if (status.getStatus().getId() == StatusVagaEnum.VAGANOVA.getValue()) {
@@ -270,11 +263,12 @@ public class VagaBusiness {
 	@Transactional
 	public VagaBean obterVagaPorId(Integer id) {
 		VagaEntity vagaEntity = vagaDAO.findById(id);
-		List<AvaliadorVagaBean> avaliadorVaga = avaliadorVagaConverter.convertEntityToBean(vagaEntity.getAvaliadorVagaEntity());
+		List<AvaliadorVagaBean> avaliadorVaga = avaliadorVagaConverter
+				.convertEntityToBean(vagaEntity.getAvaliadorVagaEntity());
 		List<UsuarioBean> usuariosBean = new ArrayList<>();
-		
+
 		VagaBean bean = vagaConverter.convertEntityToBean(vagaEntity);
-		for(AvaliadorVagaBean av : avaliadorVaga){
+		for (AvaliadorVagaBean av : avaliadorVaga) {
 			usuariosBean.add(av.getUsuario());
 		}
 		bean.setAvaliadores(usuariosBean);
@@ -431,46 +425,51 @@ public class VagaBusiness {
 	@Transactional
 	public void buscarUsuariosParaEmail(SituacaoVagaBean situacaoVagaBean) {
 
-					VagaEntity vaga = vagaDAO.findById(situacaoVagaBean.getIdVaga());
-					List<UsuarioBean> usuarios = usuarioBusiness.findAll();
-					ArrayList<String> recipients = new ArrayList<>();
-					ArrayList<String> nomes = new ArrayList<>();
-					@SuppressWarnings("unused")
-					List<AvaliadorVagaBean> avaliadores = avaliadorVagaConverter
-							.convertEntityToBean(avaliadorVagaDAO.findByNamedQuery("obterProposta", vaga.getId()));
+		try {
+			VagaEntity vaga = vagaDAO.findById(situacaoVagaBean.getIdVaga());
+			List<UsuarioBean> usuarios = usuarioBusiness.findAll();
+			ArrayList<String> recipients = new ArrayList<>();
+			ArrayList<String> nomes = new ArrayList<>();
+			@SuppressWarnings("unused")
+			List<AvaliadorVagaBean> avaliadores = avaliadorVagaConverter
+					.convertEntityToBean(avaliadorVagaDAO.findByNamedQuery("obterProposta", vaga.getId()));
 
-					if (situacaoVagaBean.getStatus().getValue() == StatusVagaEnum.PENDENTE.getValue()) {
-						for (UsuarioBean u : usuarios) {
-							switch (u.getPerfil().getNome()) {
-							case "Diretor de operação":
-								recipients.add(u.getEmail());
-								nomes.add(u.getNome());
-								break;
-							default:
-								break;
-							}
-						}
-					} else {
-						for (UsuarioBean u : usuarios) {
-							switch (u.getPerfil().getNome()) {
-							case "Analista de RH":
-								recipients.add(u.getEmail());
-								nomes.add(u.getNome());
-								break;
-							case "Gestor de RH":
-								recipients.add(u.getEmail());
-								nomes.add(u.getNome());
-								break;
-							default:
-								break;
-							}
-						}
+			if (situacaoVagaBean.getStatus().getValue() == StatusVagaEnum.PENDENTE.getValue()) {
+				for (UsuarioBean u : usuarios) {
+					switch (u.getPerfil().getNome()) {
+					case "Diretor de operação":
+						recipients.add(u.getEmail());
+						nomes.add(u.getNome());
+						break;
+					default:
+						break;
 					}
-					GeradorEmail email = new GeradorEmail();
-					int i = 0;
-					for (String usuario : recipients) {
-						email.enviarEmail(vaga, usuario, nomes.get(i));
-						i++;
+				}
+			} else {
+				for (UsuarioBean u : usuarios) {
+					switch (u.getPerfil().getNome()) {
+					case "Analista de RH":
+						recipients.add(u.getEmail());
+						nomes.add(u.getNome());
+						break;
+					case "Gestor de RH":
+						recipients.add(u.getEmail());
+						nomes.add(u.getNome());
+						break;
+					default:
+						break;
 					}
+				}
+			}
+			GeradorEmail email = new GeradorEmail();
+			int i = 0;
+			for (String usuario : recipients) {
+				email.enviarEmail(vaga, usuario, nomes.get(i));
+				i++;
+			}
+		} catch (Exception e) {
+			System.out.println("Erro\n");
+			e.printStackTrace();
+		}
 	}
 }
