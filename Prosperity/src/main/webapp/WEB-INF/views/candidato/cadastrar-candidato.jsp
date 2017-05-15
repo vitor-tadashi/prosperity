@@ -366,19 +366,7 @@
                                 </div>
                             </div>
                             </div>
-                            <div class="panel-footer">
-                                <input type="hidden" value="${candidato.id}" name="id">
-                                <input type="hidden" value="${erro}" id="contErro">
-                                <a href="/candidato/file/${candidato.id}" target="_blank" class="btn btn-default pull-left download-download">Download</a>
-                                <button class="btn btn-success pull-right">Salvar</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-				</div>
-			</div>
-		</div>
+                          
 
 	</layout:put>
 

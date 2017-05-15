@@ -219,7 +219,6 @@ public class CandidatoController<PaginarCandidato> {
 		
 		boolean podeEditarVaga = candidatoBusiness.podeEditarVaga(candidato.getUltimoStatus());
 		model.addAttribute("candidato", candidato);
-		model.addAttribute("podeEditarVaga", podeEditarVaga);
 		
 		return "candidato/cadastrar-candidato";
 	}
