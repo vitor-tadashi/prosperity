@@ -153,7 +153,7 @@
 													<label for="numero" class="control-label">Número</label> <input
 														type="number" class="form-control parsley-validated"
 														id="numero" data-required="true" name="endereco.numero"
-														value="${candidato.endereco.numero}">
+														value="${candidato.endereco.numero}" maxlength="30" />
 												</div>
 												<div class="form-group col-md-3">
 													<label for="complemento" class="control-label">Complemento</label>
