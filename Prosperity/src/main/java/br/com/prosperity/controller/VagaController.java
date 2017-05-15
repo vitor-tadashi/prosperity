@@ -287,7 +287,7 @@ public class VagaController {
 		}
 	
 		vagaBusiness.inserir(vagaBean, avaliadoresB);
-		redirectAttributes.addFlashAttribute("sucesso", "Vaga salva com sucesso!");
+		redirectAttributes.addFlashAttribute("sucesso", "Vaga solicitada com sucesso!");
 		return "redirect:/vaga/solicitar";
 
 	}

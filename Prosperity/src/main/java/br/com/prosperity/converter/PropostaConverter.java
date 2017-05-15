@@ -9,9 +9,6 @@ import br.com.prosperity.entity.PropostaEntity;
 @Component
 public class PropostaConverter implements Converter<PropostaEntity, PropostaBean> {
 
-	@Autowired
-	private CandidatoConverter candidatoConveter;
-
 	@Override
 	public PropostaEntity convertBeanToEntity(PropostaBean bean) {
 		if (bean == null) {
@@ -21,7 +18,6 @@ public class PropostaConverter implements Converter<PropostaEntity, PropostaBean
 		PropostaEntity entity = new PropostaEntity();
 
 		entity.setId(bean.getId());
-		entity.setCandidato(candidatoConveter.convertBeanToEntity(bean.getCandidato()));
 		entity.setNovaEmpresa(bean.getNovaEmpresa());
 		entity.setAnteriorEmpresa(bean.getAnteriorEmpresa());
 		entity.setNovoCargo(bean.getNovoCargo());
@@ -62,7 +58,6 @@ public class PropostaConverter implements Converter<PropostaEntity, PropostaBean
 		PropostaBean bean = new PropostaBean();
 
 		bean.setId(entity.getId());
-		bean.setCandidato(candidatoConveter.convertEntityToBean(entity.getCandidato()));
 		bean.setNovaEmpresa(entity.getNovaEmpresa());
 		bean.setAnteriorEmpresa(entity.getAnteriorEmpresa());
 		bean.setNovoCargo(entity.getNovoCargo());
