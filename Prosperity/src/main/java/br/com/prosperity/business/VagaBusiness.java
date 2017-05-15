@@ -431,9 +431,6 @@ public class VagaBusiness {
 	@Transactional
 	public void buscarUsuariosParaEmail(SituacaoVagaBean situacaoVagaBean) {
 
-		new Thread() {
-			public void run() {
-				try {
 					VagaEntity vaga = vagaDAO.findById(situacaoVagaBean.getIdVaga());
 					List<UsuarioBean> usuarios = usuarioBusiness.findAll();
 					ArrayList<String> recipients = new ArrayList<>();
@@ -475,11 +472,5 @@ public class VagaBusiness {
 						email.enviarEmail(vaga, usuario, nomes.get(i));
 						i++;
 					}
-				} catch (Exception e) {
-					System.out.println("Erro\n");
-					e.printStackTrace();
-				}
-			}
-		}.start();
 	}
 }
