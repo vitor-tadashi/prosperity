@@ -1,7 +1,10 @@
 package br.com.prosperity.dao;
 
-import br.com.prosperity.entity.FormacaoEntity;
+import org.springframework.stereotype.Repository;
 
-public class DataEntrevistaDAO extends GenericDAOImpl<FormacaoEntity, Integer>  {
+import br.com.prosperity.entity.DataEntrevistaEntity;
+
+@Repository
+public class DataEntrevistaDAO extends GenericDAOImpl<DataEntrevistaEntity, Integer>  {
 
 }

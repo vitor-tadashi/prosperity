@@ -24,21 +24,23 @@ import br.com.prosperity.bean.AvaliacaoBean;
 import br.com.prosperity.bean.AvaliadorCandidatoBean;
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CompetenciaBean;
+import br.com.prosperity.bean.DataEntrevistaBean;
 import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.StatusCandidatoBean;
 import br.com.prosperity.bean.UsuarioBean;
-import br.com.prosperity.bean.VagaCandidatoBean;
 import br.com.prosperity.converter.AvaliacaoConverter;
 import br.com.prosperity.converter.AvaliadorCandidatoConverter;
 import br.com.prosperity.converter.CandidatoConverter;
 import br.com.prosperity.converter.CompetenciaConverter;
+import br.com.prosperity.converter.DataEntrevistaConverter;
 import br.com.prosperity.dao.AvaliacaoDAO;
 import br.com.prosperity.dao.AvaliadorCandidatoDAO;
 import br.com.prosperity.dao.AvaliadorVagaDAO;
 import br.com.prosperity.dao.CanalInformacaoDAO;
 import br.com.prosperity.dao.CandidatoDAO;
 import br.com.prosperity.dao.CompetenciaDAO;
+import br.com.prosperity.dao.DataEntrevistaDAO;
 import br.com.prosperity.dao.SituacaoAtualDAO;
 import br.com.prosperity.dao.StatusCandidatoDAO;
 import br.com.prosperity.dao.StatusDAO;
@@ -53,6 +55,7 @@ import br.com.prosperity.entity.AvaliadorCandidatoEntity;
 import br.com.prosperity.entity.AvaliadorVagaEntity;
 import br.com.prosperity.entity.CandidatoEntity;
 import br.com.prosperity.entity.CompetenciaEntity;
+import br.com.prosperity.entity.DataEntrevistaEntity;
 import br.com.prosperity.entity.StatusCandidatoEntity;
 import br.com.prosperity.entity.StatusDisponivelEntity;
 import br.com.prosperity.entity.StatusFuturoEntity;
@@ -72,6 +75,9 @@ public class CandidatoBusiness {
 
 	@Autowired
 	private CandidatoDAO candidatoDAO;
+	
+	@Autowired
+	private DataEntrevistaDAO dataEntrevistaDAO;
 
 	@Autowired
 	private CandidatoConverter candidatoConverter;
@@ -118,6 +124,9 @@ public class CandidatoBusiness {
 	@Autowired
 	private AvaliadorCandidatoConverter avaliadorCandidatoConverter;
 
+	@Autowired
+	private DataEntrevistaConverter dataEntrevistaConverter;
+	
 	@Autowired
 	private AvaliadorVagaDAO avaliadorVagaDAO;
 
@@ -246,8 +255,10 @@ public class CandidatoBusiness {
 
 		} else {
 			CandidatoEntity candidatoEntity = candidatoDAO.findById(candidatoBean.getId());
+
 			CandidatoBean beans = candidatoConverter.convertEntityToBean(candidatoEntity);
-			if(beans.getUltimaVaga().getId() != candidatoBean.getUltimaVaga().getId()){
+			if(beans.getUltimaVaga().getId() == candidatoBean.getVagaCandidato().getVaga().getId()){
+
 				situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
 				situacaoCandidato.setIdCandidato(candidatoEntity.getId());
 			alterarStatus(situacaoCandidato);
@@ -377,12 +388,12 @@ public class CandidatoBusiness {
 							if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CONTRATADO.getValue()) {
 								List<VagaCandidatoEntity> contratado = vagaCandidatoDAO
 										.findByNamedQuery("candidatoContratado", situacaoCandidato.getIdCandidato());
-								VagaCandidatoEntity contrados = null;
+								VagaCandidatoEntity contratados = null;
 								for (VagaCandidatoEntity cand : contratado) {
 									cand.setContratado(true);
-									contrados = cand;
+									contratados = cand;
 								}
-								vagaCandidatoDAO.update(contrados);
+								vagaCandidatoDAO.update(contratados);
 							}
 						}
 					}
@@ -617,10 +628,6 @@ public class CandidatoBusiness {
 	@Transactional
 	public void buscarUsuariosParaEmail(SituacaoCandidatoBean situacaoCandidatoBean) {
 
-		new Thread() {
-			public void run() {
-				try {
-
 					candidatoBean = candidatoConverter
 							.convertEntityToBean(candidatoDAO.findById(situacaoCandidatoBean.getIdCandidato()));
 					List<UsuarioBean> usuarios = usuarioBusiness.findAll();
@@ -673,12 +680,13 @@ public class CandidatoBusiness {
 						email.enviarEmail(candidatoBean, usuario, nomes.get(i));
 						i++;
 					}
-				} catch (Exception e) {
-					System.out.println("Erro\n");
-					e.printStackTrace();
-				}
-			}
-		}.start();
+	}
+
+	public boolean podeEditarVaga(StatusCandidatoBean ultimoStatus) {
+		if(ultimoStatus.getStatus().getId() != 5 && ultimoStatus.getStatus().getId() != 17 && ultimoStatus.getStatus().getId() != 29) {
+			return false;
+		}
+		return true;
 	}
 
 	@Transactional

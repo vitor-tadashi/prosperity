@@ -34,7 +34,7 @@ public class PropostaBean {
 	private Double novaParticipacaoLucrosOuBonus;
 	private Double anteriorTotalAnualLiquidoComBeneficios;
 	private Double novoTotalAnualLiquidoComBeneficios;
-	private Boolean flSituacao;
+	private Boolean flSituacao = false;
 
 	public Integer getId() {
 		return id;

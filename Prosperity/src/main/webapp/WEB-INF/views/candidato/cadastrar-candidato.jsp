@@ -47,10 +47,19 @@
 							<div id="textDiv1"></div>
 							<div id="textDiv2"></div>
 							<div id="textDiv3"></div>
-
+							
 							<form class="form-border" action="salvar" method="post"
 								enctype="multipart/form-data" id=formCadastro
 								onsubmit="validarVaga()">
+
+								<!--TABS DA PÁGINA -->
+
+								
+								<fmt:formatDate value="${candidato.dataAbertura}"
+														pattern="dd/MM/yyyy" var="dataAbertura" />
+								
+								<input type="hidden" name="dataAbertura" value="${dataAbertura}">
+
 								<div class="panel-tab clearfix">
 									<ul class="tab-bar wizard-demo" id="wizardDemo">
 										<li class="active tab-verity"><a href="#first"
@@ -65,6 +74,9 @@
 										<li class="tab-verity"><a href="#fourth"
 											data-toggle="tab" class="text-success"><i
 												class="fa fa-calendar"></i>&nbsp;Datas de entrevista</a></li>
+										<li class="tab-verity"><a href="#five" data-toggle="tab"
+											class="text-success"><i class="fa fa-calendar"></i> Data ultimo 
+											contato</a></li>
 									</ul>
 								</div>
 								<div class="panel-body">
@@ -243,7 +255,7 @@
 											<div class="form-group col-md-3">
 												<label for="vaga">Vaga a ser aplicado</label> <select
 													class="form-control" id="vaga" name="vagaCandidato.vaga.id"
-													required="required" ${(statusCandidato.status.id != 17) && (statusCandidato.status.id != 5) && (not empty statusCandidato) ? 'disabled="disabled"' : ''}>
+													required="required" ${!podeEditarVaga ? 'disabled="disabled"' : ''}>
 													<option value="0">Selecione</option>
 													<c:forEach var="vaga" items="${listaVaga}">
 														<option value="${vaga.id}"
@@ -257,29 +269,94 @@
 													name="vagaCandidato.CanalInformacao.id"
 													id="canalInformacao">
 													<option value="0">Selecione</option>
-													<c:forEach var="canalInformacao" items="${listaCanal}">
-														<option value="${canalInformacao.id}"
+														<c:forEach var="canalInformacao" items="${listaCanal}">
+															<option value="${canalInformacao.id}"
 															${canalInformacao.id == candidato.vagaCandidato.canalInformacao.id ? 'selected="selected"' : ''}>${canalInformacao.nome}</option>
 													</c:forEach>
 												</select>
 											</div>
+											<!--começo - tab 4 -->
+											<div class="tab-pane fade" id="fourth">
+												<!-- conteudo gerado pelo ajax!!!!!-->
+											</div>
+											<!--fim - tab 4 -->
+
 										</div>
+										
+										<div class="tab-pane fade" id="five">
+										<div class="form-group col-md-3" style="padding-right: 15px; width: 180px;">
+												<label class="control-label"> Data ultimo contato</label>
+										<div class="form-group">
+												<div class="input-group">
+												<input type="text" class="form-control date"
+												name="dataContato" data-required="false"
+												id="dataContato" 
+												value="">
+												</div>
+												</div>
+										</div>
+										<div class="form-group col-md-5" style=" padding-left: 15px;">
+											<label class="control-label"> Observações</label>
+										<div class="form-group">
+												<div class="input-group">
+												<input type="text" placeholder="Informe observações" class="form-control"
+												name="observacoes" data-required="false"
+												id="obs" value style="width: 526px;"
+												>
+												</div>
+											</div>
+										</div>
+										
+
+											<table 
+							class="table table-bordered table-condensed table-hover table-striped"
+							id="tabelaContato"
+							style="font-size: 12px !important; vertical-align: middle !important;">
+							<!-- Começo Tabela -->
+							<thead>
+								<tr class="text-center">
+									<th class="text-center" style="width: 212px;">Data ultimo contato</th>
+									<th class="text-center">Observações</th>
+									<th class="text-center" style="width: 212px;">Usuário</th>
+									
+									</tr>
+									</tbody>
+									</table>
+									<!--começo - tab 5 -->
+								<div class="tab-pane fade" id="fourth">
+							<!-- conteudo gerado pelo ajax!!!!!-->
+											</div>
+											<!--fim - tab 5 -->
+										</div>
+									</div>
+								</div>
+
+								<div class="panel-footer">
+									<input type="hidden" value="${candidato.id}" name="id">
+									<input type="hidden" value="${erro}" id="contErro"> <a
+										href="/candidato/file/${candidato.id}" target="_blank"
+										class="btn btn-default pull-left download-download">Download</a>
+									<button class="btn btn-success pull-right">Salvar</button>
+								</div>
+							</form>
+						</div>
+					</div>
+
                                     <!--começo - tab 4 -->    
                                     <div class="tab-pane fade" id="fourth">
-<!-- 										conteudo gerado pelo ajax!!!!!                                    -->
-
 											<c:if test="${not empty candidato.dataEntrevista}">
 												<c:forEach var="data" items="${candidato.dataEntrevista}" varStatus="status">
 													<div class="row">
 														<div class='col-xs-4 form-group'>
+															<input type="hidden" value="${data.id}" name="dataEntrevista[${status.index}].id" />
 															<label>Nome do entrevistador: &nbsp;</label> 
-															<input type="text" name="" style="width: 140px" class="form-control" value="${data.usuario.funcionario.nome}"/>
+															<p>${data.usuario.funcionario.nome}</p>
 															<%-- <input type="hidden" name="candidatoBean.dataEntrevista[${status.index}].usuario.funcionario.nome" value="${data.usuario.funcionario.nome}" /> --%>
 														</div>
 														<div class='col-md-2 form-group'>
 															<label>Data de entrevista: &nbsp;</label>
 															<fmt:formatDate pattern="dd/MM/yyyy" value="${data.dataEntrevista}" var="dataEntrevista"/>
-															<input type="text" name="dataEntrevista[${status.index}].dataEntrevista" name="dataEntrevista" id="dataEntrevista" class="form-control date" data-required="false"  value="${dataEntrevista}">
+															<input type="text" name="dataEntrevista[${status.index}].dataEntrevista" id="dataEntrevista" class="form-control date" data-required="false" value="${dataEntrevista}">
 														 </div>
 													</div>
 												</c:forEach>
@@ -298,9 +375,11 @@
                         </form>
                     </div>
                 </div>
+
 				</div>
 			</div>
 		</div>
+
 	</layout:put>
 
 	<layout:put block="scripts" type="REPLACE">
