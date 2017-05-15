@@ -51,11 +51,15 @@
 							<form class="form-border" action="salvar" method="post"
 								enctype="multipart/form-data" id=formCadastro
 								onsubmit="validarVaga()">
+
+								<!--TABS DA PÁGINA -->
+
 								
 								<fmt:formatDate value="${candidato.dataAbertura}"
 														pattern="dd/MM/yyyy" var="dataAbertura" />
 								
 								<input type="hidden" name="dataAbertura" value="${dataAbertura}">
+
 								<div class="panel-tab clearfix">
 									<ul class="tab-bar wizard-demo" id="wizardDemo">
 										<li class="active tab-verity"><a href="#first"
@@ -375,6 +379,7 @@
 				</div>
 			</div>
 		</div>
+
 	</layout:put>
 
 	<layout:put block="scripts" type="REPLACE">
