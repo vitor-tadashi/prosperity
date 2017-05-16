@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.commons.io.IOUtils;
@@ -50,6 +51,7 @@ import br.com.prosperity.bean.SituacaoAtualBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.StatusBean;
 import br.com.prosperity.bean.TipoCursoBean;
+import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.CanalInformacaoBusiness;
 import br.com.prosperity.business.CancelamentoBusiness;
@@ -130,6 +132,9 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private PropostaBean propostaBean;
+	
+	@Autowired
+	private HttpSession session;
 
 	private List<String> caminhoProvas;
 
@@ -275,14 +280,10 @@ public class CandidatoController<PaginarCandidato> {
 	public String historicoCandidato(Model model, @PathVariable Integer id) {
 		CandidatoBean candidato = candidatoBusiness.obter(id);
 		List<ProvaCandidatoBean> provasCandidatoBean = provaCandidatoBusiness.obterProva(id);
-		/*
-		 * List<ProvaCandidatoBean> provasCandidatoBean = new
-		 * ArrayList<ProvaCandidatoBean>();
-		 * provasCandidatoBean.get(0).setId(id); List<ProvaCandidatoBean>
-		 * provaCandidato =
-		 * provaCandidatoBusiness.obterProva(provasCandidatoBean);
-		 * obterDominiosCandidato(model);
-		 */
+		//Pega quantas competencias o candidato tem, divide por 7 para ver quantas colunas deve ter na tela;
+		int colCompetencias = candidato.getCompetencias().size()/7;
+		
+		model.addAttribute("colCompetencias", colCompetencias);
 		model.addAttribute("provas", provasCandidatoBean);
 		model.addAttribute("candidato", candidato);
 		// model.addAttribute("provasCandidato",provasCandidatoBean);
@@ -461,6 +462,7 @@ public class CandidatoController<PaginarCandidato> {
 
 	public List<CandidatoCompetenciaBean> convertGson(String ac) {
 		Gson gson = new Gson();
+		UsuarioBean usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
 		@SuppressWarnings("unchecked")
 		List<String> l = gson.fromJson(ac, List.class);
 		candidatoCompetenciasBean = new ArrayList<CandidatoCompetenciaBean>();
@@ -478,6 +480,7 @@ public class CandidatoController<PaginarCandidato> {
 						competenciaBean.setId(aux2);
 						candidatoCompetenciaBean.setAvaliacao(avaliacaoBean);
 						candidatoCompetenciaBean.setCompetencia(competenciaBean);
+						candidatoCompetenciaBean.setNmAvaliador(usuarioBean.getNome());
 						candidatoCompetenciasBean.add(candidatoCompetenciaBean);
 					}
 				}

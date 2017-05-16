@@ -149,6 +149,30 @@
 													</div>
 												</div>
 											</fieldset>
+											<fieldset>
+												<legend style="color:#424f63"><h5><strong>Avaliação de skill</strong></h5></legend>
+												<div class="row">
+													<c:forEach begin="1" end="${colCompetencias }" var="i">
+														<div class="form-group col-md-4">
+															<p class="text-center" id="nome"><strong>Avaliador: </strong>${candidato.competencias[(i * 7) -1].nmAvaliador }</p>
+															<table class="table table-condensed">
+																<tbody>
+																	<tr>
+																		<th class="text-center">Competências</th>
+																		<th class="text-center">Resultados</th>
+																	</tr>
+																	<c:forEach var="competencias" items="${candidato.competencias}" >
+																		<tr class="text-center">
+																			<td>${competencias.competencia.nome}</td>
+																			<td><span class="badge badge-warning">${competencias.avaliacao.nome}</span></td>
+																		</tr>
+																	</c:forEach>
+																</tbody>
+															</table>
+														</div>
+													</c:forEach>
+												</div>
+											</fieldset>
 										</div>
 									</div>
 								</div>	
@@ -166,9 +190,8 @@
 
 							<div class="form-group col-xs-12">
 								<label class="col-xs-2 control-label">Competências</label>
-								<div class="col-xs-4"
-									style="margin-left: 39px; padding-right: 30px">
-									<table class="table table-condensed table-bordered">
+								<div class="col-md-4">
+									<table class="table table-condensed">
 										<c:forEach var="competencias" items="${candidato.competencias}">
 											<tr>
 												<td>${competencias.competencia.nome}</td>
