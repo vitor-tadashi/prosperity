@@ -316,10 +316,7 @@
 					<div class="panel-heading">Aprovação de vaga</div>
 					<div class="panel-body">
 							<div id="divAlert"></div>
-								<c:if test="${not empty mensagem}">
-									<div class="alert alert-info mensagem">${mensagem}</div>
-								</c:if>
-								<div class ="table-responsive">
+							<div class ="table-responsive">
 						<table 
 							class="table table-bordered table-condensed table-hover table-striped"
 							id="tabelaVaga"
@@ -532,7 +529,7 @@
 		}
 		
 		msg = "";
-		localStorage.getItem("mensagem", "");
+		localStorage.setItem("mensagem", "");
 	});
 		
 	// função para a alteração de status de acordo com os botões de ação.
@@ -543,6 +540,9 @@
     		dataType: "JSON",
     		data: { 'idVaga' : $('.id-vaga').val(), 'idStatus' : $('.id-status').val()}
     		}).done(function(dado) {
+    			
+    			var msg = "";
+    			
     			if(dado == '1') {
     				$('#aprova-modal').modal('hide');
         			msg = 'Vaga aprovada com sucesso!';
@@ -564,6 +564,9 @@
     			location.reload();
     			
         	}).fail(function(jqXHR, textStatus) {
+        		
+        		var msg = "";
+        		
     			console.log();
     			console.log(jqXHR);
     			console.log(textStatus);
