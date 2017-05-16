@@ -631,7 +631,6 @@
 								'avaliacoesCandidato' : JSON.stringify(avaliacoes)
 							},
 							success : function(data) {
-								debugger;
 								
 								mensagemMudancaStatus = defineMudancaStatus(data.ultimoStatus.status.id);
 								localStorage.setItem("mensagemMudancaStatus", mensagemMudancaStatus);
@@ -694,8 +693,7 @@
 							function() {
 
 								var campos =
-
-								"<div class='div"+cont+" processoSeletivo'>"
+										"<div class='div"+cont+" processoSeletivo'>"
 										+ "<div class='row'>"
 										+ "<div class='col-md-6 form-inline'>"
 										+ "<a id='btnRemover' onclick='remover("
