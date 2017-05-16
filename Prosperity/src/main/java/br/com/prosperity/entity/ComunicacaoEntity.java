@@ -19,7 +19,7 @@ public class ComunicacaoEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idComunicacaos", unique = true, nullable = false)
+	@Column(name = "idComunicacao", unique = true, nullable = false)
 	private Integer id;
 	
 	@Column(name = "dtContato")
