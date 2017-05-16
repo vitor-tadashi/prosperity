@@ -456,7 +456,6 @@ public class CandidatoController<PaginarCandidato> {
 	@RequestMapping(value = { "/buscar/{id}" }, method = RequestMethod.GET)
 	public @ResponseBody CandidatoBean buscarPorId(@PathVariable int id) {
 		CandidatoBean candidato = candidatoBusiness.obter(id);
-		System.out.println(candidato.getUltimaProposta().getAnteriorEmpresa());
 		return candidato;
 	}
 
