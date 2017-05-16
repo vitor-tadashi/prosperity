@@ -34,6 +34,7 @@ import br.com.prosperity.converter.AvaliadorCandidatoConverter;
 import br.com.prosperity.converter.CandidatoConverter;
 import br.com.prosperity.converter.CompetenciaConverter;
 import br.com.prosperity.converter.DataEntrevistaConverter;
+import br.com.prosperity.converter.UsuarioConverter;
 import br.com.prosperity.dao.AvaliacaoDAO;
 import br.com.prosperity.dao.AvaliadorCandidatoDAO;
 import br.com.prosperity.dao.AvaliadorVagaDAO;
@@ -59,6 +60,7 @@ import br.com.prosperity.entity.DataEntrevistaEntity;
 import br.com.prosperity.entity.StatusCandidatoEntity;
 import br.com.prosperity.entity.StatusDisponivelEntity;
 import br.com.prosperity.entity.StatusFuturoEntity;
+import br.com.prosperity.entity.UsuarioEntity;
 import br.com.prosperity.entity.VagaCandidatoEntity;
 import br.com.prosperity.entity.VagaEntity;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
@@ -103,6 +105,9 @@ public class CandidatoBusiness {
 	@Autowired
 	private UsuarioBean usuarioBean;
 
+	@Autowired
+	private UsuarioConverter usuarioConverter;
+	
 	@Autowired
 	private CanalInformacaoDAO canalInformacaoDAO;
 
@@ -256,6 +261,12 @@ public class CandidatoBusiness {
 		} else {
 			candidatoEntity = candidatoDAO.findById(candidatoBean.getId());
 			beans = candidatoConverter.convertEntityToBean(candidatoEntity);
+			int aux=0;
+			for(DataEntrevistaBean dtEntrevista: beans.getDataEntrevista()){
+				candidatoBean.getDataEntrevista().get(aux).setUsuario(dtEntrevista.getUsuario());
+				candidatoBean.getDataEntrevista().get(aux).setVaga(dtEntrevista.getVaga());
+				aux++;
+			}
 			
 			if (beans.getUltimaVaga().getId() == candidatoBean.getVagaCandidato().getVaga().getId()) {
 				situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
@@ -498,10 +509,15 @@ public class CandidatoBusiness {
 		if (avaliadoresEntity != null && avaliadoresEntity.size() > 0)
 			for (AvaliadorVagaEntity avaliadorVagaEntity : avaliadoresEntity) {
 				AvaliadorCandidatoEntity avaliadorCandidatoEnitty = new AvaliadorCandidatoEntity();
+				DataEntrevistaEntity dataEntrevistaEntity = new DataEntrevistaEntity();
 				avaliadorCandidatoEnitty.setVaga(avaliadorVagaEntity.getVaga());
 				avaliadorCandidatoEnitty.setUsuario(avaliadorVagaEntity.getUsuario());
 				avaliadorCandidatoEnitty.setCandidato(candidato);
 				avaliadorCandidatoDAO.insert(avaliadorCandidatoEnitty);
+				dataEntrevistaEntity.setCandidato(candidato);
+				dataEntrevistaEntity.setUsuario(avaliadorVagaEntity.getUsuario());
+				dataEntrevistaEntity.setVaga(vaga);
+				dataEntrevistaDAO.insert(dataEntrevistaEntity);
 			}
 	}
 

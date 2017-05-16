@@ -47,17 +47,16 @@
 							<div id="textDiv1"></div>
 							<div id="textDiv2"></div>
 							<div id="textDiv3"></div>
-							
+
 							<form class="form-border" action="salvar" method="post"
 								enctype="multipart/form-data" id=formCadastro
 								onsubmit="validarVaga()">
 
 								<!--TABS DA PÁGINA -->
 
-								
 								<fmt:formatDate value="${candidato.dataAbertura}"
-														pattern="dd/MM/yyyy" var="dataAbertura" />
-								
+									pattern="dd/MM/yyyy" var="dataAbertura" />
+
 								<input type="hidden" name="dataAbertura" value="${dataAbertura}">
 
 								<div class="panel-tab clearfix">
@@ -75,8 +74,8 @@
 											data-toggle="tab" class="text-success"><i
 												class="fa fa-calendar"></i>&nbsp;Datas de entrevista</a></li>
 										<li class="tab-verity"><a href="#five" data-toggle="tab"
-											class="text-success"><i class="fa fa-calendar"></i> Data ultimo 
-											contato</a></li>
+											class="text-success"><i class="fa fa-calendar"></i> Data
+												ultimo contato</a></li>
 									</ul>
 								</div>
 								<div class="panel-body">
@@ -86,12 +85,12 @@
 												<input type="hidden" value="${candidato.id}" id="id"
 													name="id">
 												<div class="form-group col-md-3">
-													<label for="cpf" class="control-label">CPF</label>
-													<input type="text"
-														class="form-control cpf parsley-validated" id="cpf"
-														name="cpf" data-required="true"
+													<label for="cpf" class="control-label">CPF</label> <input
+														type="text" class="form-control cpf parsley-validated"
+														id="cpf" name="cpf" data-required="true"
 														placeholder="Informe seu CPF" value="${candidato.cpf}"
-														onblur="pesquisacpf()" ${not empty candidato.id ? 'disabled="disabled"' : ''} />
+														onblur="pesquisacpf()"
+														${not empty candidato.id ? 'disabled="disabled"' : ''} />
 													<input type="hidden" id="cpf" name="cpf"
 														value="${candidato.cpf}" />
 												</div>
@@ -106,10 +105,9 @@
 													<label for="email" class="control-label">E-mail</label> <input
 														type="email" class="form-control parsley-validated"
 														id="email" name="email" data-required="true"
-														maxlength="100" placeholder="Informe seu email" 
+														maxlength="100" placeholder="Informe seu email"
 														value="${candidato.email}">
 												</div>
-
 												<div class="form-group col-md-2">
 													<label for="rg" class="control-label">RG</label> <input
 														type="text" class="form-control rg parsley-validated"
@@ -159,14 +157,14 @@
 												<div class="form-group col-md-3">
 													<label for="complemento" class="control-label">Complemento</label>
 													<input type="text" class="form-control" id="complemento"
-														data-required="true" name="endereco.complemento" 
+														data-required="true" name="endereco.complemento"
 														maxlength="50" value="${candidato.endereco.complemento}">
 												</div>
 												<div class="form-group col-md-3">
 													<label for="uf" class="control-label">Estado</label> <input
 														type="text" class="form-control parsley-validated" id="uf"
-														data-required="true" name="endereco.estado"
-														maxlength="25" value="${candidato.endereco.estado}" />
+														data-required="true" name="endereco.estado" maxlength="25"
+														value="${candidato.endereco.estado}" />
 
 												</div>
 												<div class="form-group col-md-4">
@@ -243,8 +241,6 @@
 														<label class="control-label" for="pretensaoSalarial">Pretensão
 															salarial</label>
 													</div>
-
-
 													<div class="col-md-2">
 														<input type="text" class="form-control dinheiro pretensao"
 															id="valorPretensao" placeholder="R$"
@@ -252,11 +248,11 @@
 													</div>
 												</div>
 											</div>
-
 											<div class="form-group col-md-3">
 												<label for="vaga">Vaga a ser aplicado</label> <select
 													class="form-control" id="vaga" name="vagaCandidato.vaga.id"
-													required="required" ${!podeEditarVaga ? 'disabled="disabled"' : ''}>
+													required="required"
+													${!podeEditarVaga ? 'disabled="disabled"' : ''}>
 													<option value="0">Selecione</option>
 													<c:forEach var="vaga" items="${listaVaga}">
 														<option value="${vaga.id}"
@@ -270,69 +266,84 @@
 													name="vagaCandidato.CanalInformacao.id"
 													id="canalInformacao">
 													<option value="0">Selecione</option>
-														<c:forEach var="canalInformacao" items="${listaCanal}">
-															<option value="${canalInformacao.id}"
+													<c:forEach var="canalInformacao" items="${listaCanal}">
+														<option value="${canalInformacao.id}"
 															${canalInformacao.id == candidato.vagaCandidato.canalInformacao.id ? 'selected="selected"' : ''}>${canalInformacao.nome}</option>
 													</c:forEach>
 												</select>
 											</div>
-											<div class="form-group col-md-4 js-outros">
-												<label for="canalInformacao">Outros</label>
-												<input type="text" class="form-control" id="informacao-outros"
-															maxlength="50" name="valorPretensao" value="${candidato.valorPretensao}" />
-											</div>
-											<!--começo - tab 4 -->
-											<div class="tab-pane fade" id="fourth">
-												<!-- conteudo gerado pelo ajax!!!!!-->
-											</div>
-											<!--fim - tab 4 -->
-
 										</div>
-										<!-- começo - tab 5 -->
+										<!--começo - tab 4 -->
+										<div class="tab-pane fade" id="fourth">
+											<c:forEach var="data" items="${candidato.dataEntrevista}"
+												varStatus="status">
+												<div class="row">
+													<div class='col-xs-4 form-group'>
+														<input type="hidden" value="${data.id}"
+															name="dataEntrevista[${status.index}].id" /> <label>Nome
+															do entrevistador: &nbsp;</label>
+														<p>${data.usuario.funcionario.nome}</p>
+														<input type="hidden" name="data.usuario"
+															value="${data.usuario}" /> <input type="hidden"
+															name="data.candidato" value="${data.candidato}" /> <input
+															type="hidden" name="data.vaga" value="${data.vaga}" />
+													</div>
+													<div class='col-md-2 form-group'>
+														<label>Data de entrevista: &nbsp;</label>
+														<fmt:formatDate pattern="dd/MM/yyyy"
+															value="${data.dataEntrevista}" var="dataEntrevista" />
+														<input type="text"
+															name="dataEntrevista[${status.index}].dataEntrevista"
+															id="dataEntrevista" class="form-control date"
+															data-required="false" value="${dataEntrevista}">
+													</div>
+												</div>
+											</c:forEach>
+										</div>
+										<!--fim - tab 4 -->
 										<div class="tab-pane fade" id="five">
-										<div class="form-group col-md-3">
+											<div class="form-group col-md-3"
+												style="padding-right: 15px; width: 180px;">
 												<label class="control-label"> Data ultimo contato</label>
-										<div class="form-group">
-												<div class="input-group">
-												<input type="text" class="form-control date"
-												name="dataContato" data-required="false"
-												 id="dataContato" value="">
+												<div class="form-group">
+													<div class="input-group">
+														<input type="text" class="form-control date"
+															name="dataContato" data-required="false" id="dataContato"
+															value="">
+													</div>
 												</div>
+											</div>
+											<div class="row col-md-8">
+												<label for="obs" class="control-label">Observações</label><br>
+												<div class="form-group row col-md-8">
+													<input type="text" placeholder="Informe observações"
+														class="form-control col-md-1" id="obs"
+														data-required="true" name="observacoes" value="" />
 												</div>
-										</div>
-										<div class="row col-md-8">
-										<label for="obs" class="control-label">Observações</label><br>
-										<div class="form-group row col-md-8">
-													 <input
-														type="text" placeholder="Informe observações" class="form-control col-md-1"
-														id="obs" data-required="true" name="observacoes"
-														value="" />
-														
-												
-										</div>
-										<div class="text-right col-md-2">
-											<button type="button" class="btn btn-success fa fa-check pull-right"></button>
-										</div>
-										</div>
-									<table 
-							class="table table-bordered table-condensed table-hover table-striped"
-							id="tabelaContato"
-							style="font-size: 12px !important; vertical-align: middle !important;">
-							<!-- Começo Tabela -->
-							<thead>
-								<tr class="text-center">
-									<th class="text-center" style="width: 212px;">Data ultimo contato</th>
-									<th class="text-center">Observações</th>
-									<th class="text-center" style="width: 212px;">Usuário</th>
-									
-									</tr>
-									</tbody>
-									</table>
-								<!--fim - tab 5 -->
+												<div class="text-right col-md-2">
+													<button type="button"
+														class="btn btn-success fa fa-check pull-right"></button>
+												</div>
+											</div>
+											<table
+												class="table table-bordered table-condensed table-hover table-striped"
+												id="tabelaContato"
+												style="font-size: 12px !important; vertical-align: middle !important;">
+												<!-- Começo Tabela -->
+												<thead>
+													<tr class="text-center">
+														<th class="text-center" style="width: 212px;">Data
+															ultimo contato</th>
+														<th class="text-center">Observações</th>
+														<th class="text-center" style="width: 212px;">Usuário</th>
+
+													</tr>
+												</tbody>
+											</table>
+											<!--fim - tab 5 -->
 										</div>
 									</div>
 								</div>
-
 								<div class="panel-footer">
 									<input type="hidden" value="${candidato.id}" name="id">
 									<input type="hidden" value="${erro}" id="contErro"> <a
@@ -343,32 +354,9 @@
 							</form>
 						</div>
 					</div>
-
-                                    <!--começo - tab 4 -->    
-                                    <div class="tab-pane fade" id="fourth">
-											<c:if test="${not empty candidato.dataEntrevista}">
-												<c:forEach var="data" items="${candidato.dataEntrevista}" varStatus="status">
-													<div class="row">
-														<div class='col-xs-4 form-group'>
-															<input type="hidden" value="${data.id}" name="dataEntrevista[${status.index}].id" />
-															<label>Nome do entrevistador: &nbsp;</label> 
-															<p>${data.usuario.funcionario.nome}</p>
-															<%-- <input type="hidden" name="candidatoBean.dataEntrevista[${status.index}].usuario.funcionario.nome" value="${data.usuario.funcionario.nome}" /> --%>
-														</div>
-														<div class='col-md-2 form-group'>
-															<label>Data de entrevista: &nbsp;</label>
-															<fmt:formatDate pattern="dd/MM/yyyy" value="${data.dataEntrevista}" var="dataEntrevista"/>
-															<input type="text" name="dataEntrevista[${status.index}].dataEntrevista" id="dataEntrevista" class="form-control date" data-required="false" value="${dataEntrevista}">
-														 </div>
-													</div>
-												</c:forEach>
-											</c:if>
-                                    </div>
-                                    <!--fim - tab 4 -->        
-                                </div>
-                            </div>
-                            </div>
-                          
+				</div>
+			</div>
+		</div>
 
 	</layout:put>
 
