@@ -1,10 +1,19 @@
 package br.com.prosperity.converter;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import br.com.prosperity.bean.ComunicacaoBean;
 import br.com.prosperity.entity.ComunicacaoEntity;
 
 public class ComunicacaoConverter implements Converter<ComunicacaoEntity, ComunicacaoBean>{
 
+	@Autowired
+	private CandidatoConverter candidatoConverter;
+	
+
+	@Autowired
+	private UsuarioConverter usuarioConverter;
+	
 	@Override
 	public ComunicacaoEntity convertBeanToEntity(ComunicacaoBean bean) {
 		if (bean == null) {
@@ -13,11 +22,11 @@ public class ComunicacaoConverter implements Converter<ComunicacaoEntity, Comuni
 		
 		ComunicacaoEntity entity = new ComunicacaoEntity();
 		
-		//entity.setCandidato(bean.getCandidato());
-		//entity.setDataContato(bean.getDataContato());
-		//entity.setId(bean.getId());
-		//entity.setObservacao(bean.getObservacao());
-		//entity.setUsuario(bean.getUsuario());
+		entity.setCandidatoEntity(candidatoConverter.convertBeanToEntity(bean.getCandidatoBean()));
+		entity.setDataContato(bean.getDataContato());
+		entity.setId(bean.getId());
+		entity.setObservacao(bean.getObservacao());
+		entity.setUsuarioEntity(usuarioConverter.convertBeanToEntity(bean.getUsuarioBean()));
 		
 		return entity;
 	}
@@ -30,11 +39,11 @@ public class ComunicacaoConverter implements Converter<ComunicacaoEntity, Comuni
 		
 		ComunicacaoBean bean = new ComunicacaoBean();
 		
-		//bean.setCandidato(entity.getCandidato());
-		//bean.setDataContato(entity.getDataContato());
-		//bean.setId(entity.getId());
-		//bean.setObservacao(entity.getObservacao());
-		//bean.setUsuario(entity.getUsuario());
+		bean.setCandidatoBean(candidatoConverter.convertEntityToBean(entity.getCandidatoEntity()));
+		bean.setDataContato(bean.getDataContato());
+		bean.setId(bean.getId());
+		bean.setObservacao(bean.getObservacao());
+		bean.setUsuarioBean(usuarioConverter.convertEntityToBean(entity.getUsuarioEntity()));
 		
 		return bean;
 	}

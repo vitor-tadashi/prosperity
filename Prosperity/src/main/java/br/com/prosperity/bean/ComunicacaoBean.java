@@ -6,7 +6,7 @@ public class ComunicacaoBean {
 	
 	private Integer id;
 	private Date dataContato;
-	private String oberservacao;
+	private String observacao;
 	private UsuarioBean usuarioBean;
 	private CandidatoBean candidatoBean;
 	
@@ -22,11 +22,11 @@ public class ComunicacaoBean {
 	public void setDataContato(Date dataContato) {
 		this.dataContato = dataContato;
 	}
-	public String getOberservacao() {
-		return oberservacao;
+	public String getObservacao() {
+		return observacao;
 	}
-	public void setOberservacao(String oberservacao) {
-		this.oberservacao = oberservacao;
+	public void setObservacao(String oberservacao) {
+		this.observacao = oberservacao;
 	}
 	public UsuarioBean getUsuarioBean() {
 		return usuarioBean;
