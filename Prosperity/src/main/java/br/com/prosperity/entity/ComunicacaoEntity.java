@@ -30,11 +30,11 @@ public class ComunicacaoEntity {
 	
 	@ManyToOne(cascade = CascadeType.REFRESH , fetch = FetchType.LAZY)
 	@JoinColumn(name = "idUsuario")
-	private UsuarioEntity usuario;
+	private UsuarioEntity usuarioEntity;
 	
 	@ManyToOne(cascade = CascadeType.REFRESH , fetch = FetchType.LAZY)
 	@JoinColumn(name = "idCandidato")
-	private CandidatoEntity candidato;
+	private CandidatoEntity candidatoEntity;
 
 	public Integer getId() {
 		return id;
@@ -60,19 +60,19 @@ public class ComunicacaoEntity {
 		this.observacao = observacao;
 	}
 
-	public UsuarioEntity getUsuario() {
-		return usuario;
+	public UsuarioEntity getUsuarioEntity() {
+		return usuarioEntity;
 	}
 
-	public void setUsuario(UsuarioEntity usuario) {
-		this.usuario = usuario;
+	public void setUsuarioEntity(UsuarioEntity usuarioEntity) {
+		this.usuarioEntity = usuarioEntity;
 	}
 
-	public CandidatoEntity getCandidato() {
-		return candidato;
+	public CandidatoEntity getCandidatoEntity() {
+		return candidatoEntity;
 	}
 
-	public void setCandidato(CandidatoEntity candidato) {
-		this.candidato = candidato;
+	public void setCandidatoEntity(CandidatoEntity candidatoEntity) {
+		this.candidatoEntity = candidatoEntity;
 	}
 }
