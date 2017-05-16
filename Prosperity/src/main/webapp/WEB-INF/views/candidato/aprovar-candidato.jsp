@@ -111,132 +111,108 @@
 												<div class="panel-body">
 													<div class="col-md-6 row">
 														<div class="form-group">
-															<label>Empresa anterior:</label> <input type="text" id="anteriorEmpresa"
+															<label>Empresa anterior:</label>
+															 <input type="text" id="anteriorEmpresa"
 																name="anteriorEmpresa" class="form-control input-sm" value="${candidato.ultimaProposta.anteriorEmpresa}" disabled>
 														</div>
-														<!-- /form-group -->
 														<div class="form-group">
 															<label>Cargo:</label> <input type="text" id="anteriorCargo" name="anteriorCargo"
 																class="form-control input-sm" value="${candidato.ultimaProposta.anteriorCargo}" disabled>
 														</div>
-														<!-- /form-group -->
 														<div class="form-group">
 															<label>Salário fixo bruto:</label> <input type="text" value="${candidato.ultimaProposta.vlrAntSalarioFixoBruto}"
 																id="vlrAntSalarioFixoBruto" name="vlrAntSalarioFixoBruto" class="form-control dinheiro input-sm" disabled>
 														</div>
-														<!-- /form-group -->
 														<div class="form-group">
 															<label>Salário líquido mensal:</label> <input type="text" value="${candidato.ultimaProposta.vlrAntSalarioLiquidoMensal}"
 																id="vlrAntSalarioLiquidoMensal" name="vlrAntSalarioLiquidoMensal" class="form-control dinheiro input-sm" disabled>
 														</div>
-														<!-- /form-group -->
 														<div class="form-group">
 															<label>VR mensal:</label> <input type="text" id="vlrAntVrMensal" value="${candidato.ultimaProposta.vlrAntVrMensal}"
 																name="vlrAntVrMensal" class="form-control dinheiro input-sm" disabled>
 														</div>
-														<!-- /form-group -->
 														<div class="form-group">
 															<label>VA mensal:</label> <input type="text" id="vlrAntVaMensal" value="${candidato.ultimaProposta.vlrAntVaMensal}"
 																name="vlrAntVaMensal" class="form-control dinheiro input-sm" disabled>
 														</div>
-														<!-- /form-group -->
 														<div class="form-group">
 															<label>Seguro de saúde mensal:</label> <input type="text" value="${candidato.ultimaProposta.vlrAntSeguroSaudeMensal}"
 																id="vlrAntSeguroSaudeMensal" name="vlrAntSeguroSaudeMensal" class="form-control dinheiro input-sm" disabled>
 														</div>
-														<!-- /form-group -->
 														<div class="form-group">
 															<label>Vale auto:</label> <input type="text" id="vlrAntValeAuto" value="${candidato.ultimaProposta.vlrAntValeAuto}"
 																name="vlrAntValeAuto" class="form-control dinheiro input-sm" disabled>
 														</div>
-														<!-- /form-group -->
 														<div class="form-group">
 															<label>Vale transporte(até 6% desc.):</label> <input value="${candidato.ultimaProposta.vlrAntValeTransporte}"
 																type="text" id="vlrAntValeTransporte" name="vlrAntValeTransporte" class="form-control dinheiro input-sm" disabled>
 														</div>
-														<!-- /form-group -->
 														<div class="form-group">
 															<label>Líquido m. + ben.:</label> <input type="text" value="${candidato.ultimaProposta.vlrAntLiquidoComBeneficios}"
 																id="vlrAntLiquidoComBeneficios" name="vlrAntLiquidoComBeneficios" class="form-control dinheiro input-sm" disabled>
 														</div>
-														<!-- /form-group -->
 														<div class="form-group">
 															<label>Anual líquido:</label> <input type="text" id="vlrAntAnualLiquido" value="${candidato.ultimaProposta.vlrAntAnualLiquido}"
 																name="vlrAntAnualLiquido" class="form-control dinheiro input-sm" disabled>
 														</div>
-														<!-- /form-group -->
 														<div class="form-group">
 															<label>PLR anual líquido/bonús:</label> <input value="${candidato.ultimaProposta.vlrAntParticipacaoLucrosOuBonus}"
 																type="text" id="vlrAntParticipacaoLucrosOuBonus" name="vlrAntParticipacaoLucrosOuBonus" class="form-control dinheiro input-sm" disabled>
 														</div>
-														<!-- /form-group -->
 														<div class="form-group">
 															<label>Total anual líquido + ben.:</label> <input value="${candidato.ultimaProposta.vlrAntTotalAnualLiquidoComBeneficios}"
 																type="text" id="vlrAntTotalAnualLiquidoComBeneficios" name="vlrAntTotalAnualLiquidoComBeneficios" class="form-control dinheiro input-sm" disabled>
 														</div>
-														<!-- /form-group -->
 													</div>
 													<div class="col-md-6">
 														<div class="form-group">
 															<label>Empresa atual:</label> <input type="text" id="novaEmpresa" name="novaEmpresa"
 																class="form-control input-sm" disabled value="${candidato.ultimaProposta.novaEmpresa}">
 														</div>
-														<!-- /form-group -->
 														<div class="form-group">
 															<label>Cargo:</label> <input type="text" id="novoCargo" name="novoCargo"
 																class="form-control input-sm" disabled value="${candidato.ultimaProposta.novoCargo}">
 														</div>
-														<!-- /form-group -->
 														<div class="form-group">
 															<label>Salário fixo bruto:</label> <input type="text" value="${candidato.ultimaProposta.vlrNvSalarioFixoBruto}"
 																id="vlrNvSalarioFixoBruto" name="vlrNvSalarioFixoBruto" class="form-control dinheiro input-sm" disabled>
 														</div>
-														<!-- /form-group -->
 														<div class="form-group">
 															<label>Salário líquido mensal:</label> <input type="text" value="${candidato.ultimaProposta.vlrNvSalarioLiquidoMensal}"
 																id="vlrNvSalarioLiquidoMensal" name="vlrNvSalarioLiquidoMensal" class="form-control dinheiro input-sm" disabled>
 														</div>
-														<!-- /form-group -->
 														<div class="form-group">
 															<label>VR mensal:</label> <input type="text" id="vlrNvVrMensal" value="${candidato.ultimaProposta.vlrNvVrMensal}"
 																name="vlrNvVrMensal" class="form-control dinheiro input-sm" disabled>
 														</div>
-														<!-- /form-group -->
 														<div class="form-group">
 															<label>VA mensal:</label> <input type="text" id="vlrNvVaMensal" value="${candidato.ultimaProposta.vlrNvVaMensal}"
 																name="vlrNvVaMensal" class="form-control dinheiro input-sm" disabled>
 														</div>
-														<!-- /form-group -->
 														<div class="form-group">
 															<label>Seguro de saúde mensal:</label> <input type="text" value="${candidato.ultimaProposta.vlrNvSeguroSaudeMensal}"
 																id="vlrNvSeguroSaudeMensal" name="vlrNvSeguroSaudeMensal" class="form-control dinheiro input-sm" disabled>
 														</div>
-														<!-- /form-group -->
 														<div class="form-group">
 															<label>Vale auto:</label> <input type="text" id="vlrNvValeAuto" value="${candidato.ultimaProposta.vlrNvValeAuto}"
 																name="vlrNvValeAuto" class="form-control dinheiro input-sm" disabled>
 														</div>
-														<!-- /form-group -->
 														<div class="form-group">
 															<label>Vale transporte(até 6% desc.):</label> <input value="${candidato.ultimaProposta.vlrNvValeTransporte}"
 																type="text" id="vlrNvValeTransporte" name="vlrNvValeTransporte" class="form-control dinheiro input-sm" disabled>
 														</div>
-														<!-- /form-group -->
 														<div class="form-group">
 															<label>Líquido m. + ben.:</label> <input type="text" value="${candidato.ultimaProposta.vlrNvLiquidoComBeneficios}"
 																id="vlrNvLiquidoComBeneficios" name="vlrNvLiquidoComBeneficios" class="form-control dinheiro input-sm" disabled>
 														</div>
-														<!-- /form-group -->
 														<div class="form-group">
 															<label>Anual líquido:</label> <input type="text" id="vlrNvAnualLiquido" value="${candidato.ultimaProposta.vlrNvAnualLiquido}"
 																name="vlrNvAnualLiquido" class="form-control dinheiro input-sm" disabled>
 														</div>
-														<!-- /form-group -->
 														<div class="form-group">
 															<label>PLR anual líquido/bonús:</label> <input value="${candidato.ultimaProposta.vlrNvParticipacaoLucrosOuBonus}"
 																type="text" id="vlrNvParticipacaoLucrosOuBonus" name="vlrNvParticipacaoLucrosOuBonus" class="form-control dinheiro input-sm" disabled>
 														</div>
-														<!-- /form-group -->
 														<div class="form-group">
 															<label>Total anual líquido + ben.:</label> <input value="${candidato.ultimaProposta.vlrNvTotalAnualLiquidoComBeneficios}"
 																type="text" id="vlrNvTotalAnualLiquidoComBeneficios" name="vlrNvTotalAnualLiquidoComBeneficios" class="form-control dinheiro input-sm" disabled>
@@ -483,14 +459,15 @@
 											if (!isNaN($(value).attr("id"))) {
 												var id = $(value).attr("id");
 
-												$
-														.ajax({
+												$.ajax({
 															url : "buscar/"
 																	+ id,
 															dataType : "json",
 															method : "GET",
 															success : function(
 																	data) {
+																console.log('Esse aqui');
+																console.log(data);
 																var perfil = $(
 																		'#user')
 																		.val();
@@ -562,6 +539,38 @@
 																		'#modalProposta')
 																		.modal(
 																				'show');
+																
+																
+																
+																
+																//carregando as informações do EXCEL via AJAX para a JSP
+																
+																$('#anteriorCargo').val(data.ultimaProposta.anteriorCargo);
+																$('#anteriorEmpresa').val(data.ultimaProposta.anteriorEmpresa);
+																$('#vlrAntSalarioFixoBruto').val(data.ultimaProposta.anteriorSalarioFixoBruto);
+																$('#vlrAntSalarioLiquidoMensal').val(data.ultimaProposta.anteriorSalarioLiquidoMensal);
+																$('#vlrAntVrMensal').val(data.ultimaProposta.anteriorVaMensal);
+																$('#vlrAntSeguroSaudeMensal').val(data.ultimaProposta.anteriorSeguroSaudeMensal);
+																$('#vlrAntValeAuto').val(data.ultimaProposta.anteriorValeAuto);
+																$('#vlrAntValeTransporte').val(data.ultimaProposta.anteriorValeTransporte);
+																$('#vlrAntLiquidoComBeneficios').val(data.ultimaProposta.anteriorLiquidoComBeneficios);
+																$('#vlrAntAnualLiquido').val(data.ultimaProposta.novoAnualLiquido);
+																$('#vlrAntParticipacaoLucrosOuBonus').val(data.ultimaProposta.vlrAntParticipacaoLucrosOuBonus);
+																$('#vlrAntTotalAnualLiquidoComBeneficios').val(data.ultimaProposta.anteriorTotalAnualLiquidoComBeneficios);
+																$('#novaEmpresa').val(data.ultimaProposta.novaEmpresa);
+																$('#novoCargo').val(data.ultimaProposta.novoCargo);
+																$('#vlrNvSalarioFixoBruto').val(data.ultimaProposta.novoSalarioFixoBruto);
+																$('#vlrNvSalarioLiquidoMensal').val(data.ultimaProposta.novoSalarioLiquidoMensal);
+																$('#vlrNvVrMensal').val(data.ultimaProposta.novoVrMensal);
+																$('#vlrNvVaMensal').val(data.ultimaProposta.novoVaMensal);
+																$('#vlrNvSeguroSaudeMensal').val(data.ultimaProposta.novoSeguroSaudeMensal);
+																$('#vlrNvValeAuto').val(data.ultimaProposta.novoValeAuto);
+																$('#vlrNvValeTransporte').val(data.ultimaProposta.novoValeTransporte);
+																$('#vlrNvLiquidoComBeneficios').val(data.ultimaProposta.novoLiquidoComBeneficios);
+																$('#vlrNvAnualLiquido').val(data.ultimaProposta.novoAnualLiquido);
+																$('#vlrNvParticipacaoLucrosOuBonus').val(data.ultimaProposta.vlrNvParticipacaoLucrosOuBonus);
+																$('#vlrNvTotalAnualLiquidoComBeneficios').val(data.ultimaProposta.novoTotalAnualLiquidoComBeneficios);
+
 															}
 														})
 											}
