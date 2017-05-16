@@ -1,4 +1,5 @@
 //MASK DOS CAMPOS DE CADASTRAR CANDIDATO  
+
 $(document).ready(function() {
 	setTimeout(function() {
 		$('#msg-sucesso').fadeOut(1500);
@@ -500,4 +501,12 @@ function validarVaga() {
 		return false;
 	}
 	return true;
+}
+
+function esconderAba(){
+	if (data.ultimoStatus.status.id == "9") {
+		if (perfil == "Analista de RH" || perfil == "Gestor RH") {
+			$("#fourth").show();
+		}
+}
 }

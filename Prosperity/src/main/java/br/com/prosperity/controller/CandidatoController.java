@@ -384,7 +384,7 @@ public class CandidatoController<PaginarCandidato> {
 		model.addAttribute("avaliacoes", avaliacoes);
 		model.addAttribute("provas", provas);
 		model.addAttribute("cancelamento", cancelamento);
-		
+
 		return "candidato/aprovar-candidato";
 	}
 
@@ -422,6 +422,13 @@ public class CandidatoController<PaginarCandidato> {
 			provaCandidatoBusiness.inserir(provas);
 			// TODO:não da refresh ao salvar status
 		}
+		
+		try {
+			// alterado aqui \/
+			candidatoBusiness.alterarStatus(situacaoCandidato);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.PROPOSTACANDIDATO.getValue()
 				|| !avaliacoesCandidato.equals("[]")) {
@@ -431,20 +438,12 @@ public class CandidatoController<PaginarCandidato> {
 			if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.PROPOSTACANDIDATO.getValue()) {
 				propostaBean.setFlSituacao(true);
 				candidatoBean.getPropostaBean().add(propostaBean);
-				// propostaBusiness.salvarProposta(candidatoBean);
 			}
 			try {
 				candidatoBusiness.inserir(candidatoBean);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
-
-		try {
-			// alterado aqui \/
-			candidatoBusiness.alterarStatus(situacaoCandidato);
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 
 		// Tive de fazer essa busca novamente, para buscar o novo Ultimo Status
