@@ -7,14 +7,36 @@ public class ComunicacaoConverter implements Converter<ComunicacaoEntity, Comuni
 
 	@Override
 	public ComunicacaoEntity convertBeanToEntity(ComunicacaoBean bean) {
-		// TODO Auto-generated method stub
-		return null;
+		if (bean == null) {
+			return null;
+		}
+		
+		ComunicacaoEntity entity = new ComunicacaoEntity();
+		
+		//entity.setCandidato(bean.getCandidato());
+		//entity.setDataContato(bean.getDataContato());
+		//entity.setId(bean.getId());
+		//entity.setObservacao(bean.getObservacao());
+		//entity.setUsuario(bean.getUsuario());
+		
+		return entity;
 	}
 
 	@Override
 	public ComunicacaoBean convertEntityToBean(ComunicacaoEntity entity) {
-		// TODO Auto-generated method stub
-		return null;
+		if (entity == null) {
+			return null;
+		}
+		
+		ComunicacaoBean bean = new ComunicacaoBean();
+		
+		//bean.setCandidato(entity.getCandidato());
+		//bean.setDataContato(entity.getDataContato());
+		//bean.setId(entity.getId());
+		//bean.setObservacao(entity.getObservacao());
+		//bean.setUsuario(entity.getUsuario());
+		
+		return bean;
 	}
 
 }
