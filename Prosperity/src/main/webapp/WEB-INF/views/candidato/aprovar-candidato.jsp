@@ -764,8 +764,7 @@
 				if(nome!=""){
 					msg = 'O candidato <strong>' + nome
 					+ '</strong> ' + statusMudado +  ' com sucesso!'
-					$('#msg-sucesso').html(msg).addClass(
-							'alert alert-success').show();
+					$('#msg-sucesso').html(msg).addClass('alert alert-success').show();
 					escondeMensagem();
 				}
 				

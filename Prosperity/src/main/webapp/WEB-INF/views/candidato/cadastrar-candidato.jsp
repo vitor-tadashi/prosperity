@@ -273,6 +273,11 @@
 												</select>
 											</div>
 										</div>
+										<div class="form-group col-md-4 js-outros">
+											<label for="vaga">Outros</label>
+												<input type="text" class="form-control" id="outros"
+													name="como-ficou-sabendo-outros" />
+										</div>
 										<!--começo - tab 4 -->
 										<div class="tab-pane fade" id="fourth">
 											<c:forEach var="data" items="${candidato.dataEntrevista}"
