@@ -60,36 +60,39 @@
 								$('#modalProposta').modal('show');
 																
 								//carregando as informações do EXCEL via AJAX para a JSP
-																
 								$('#anteriorCargo').text(data.ultimaProposta.anteriorCargo);
 								$('#anteriorEmpresa').text(data.ultimaProposta.anteriorEmpresa);
-								$('#vlrAntSalarioFixoBruto').text(data.ultimaProposta.anteriorSalarioFixoBruto);
-								$('#vlrAntSalarioLiquidoMensal').text(data.ultimaProposta.anteriorSalarioLiquidoMensal);
-								$('#vlrAntVrMensal').text(data.ultimaProposta.anteriorVrMensal);
-								$('#vlrAntVaMensal').text(data.ultimaProposta.anteriorVaMensal);
-								$('#vlrAntSeguroSaudeMensal').text(data.ultimaProposta.anteriorSeguroSaudeMensal);
-								$('#vlrAntValeAuto').text(data.ultimaProposta.anteriorValeAuto);
-								$('#vlrAntValeEstacionamento').text(data.ultimaProposta.anteriorEstacionamento);
-								$('#vlrAntValeTransporte').text(data.ultimaProposta.anteriorValeTransporte);
-								$('#vlrAntLiquidoComBeneficios').text(data.ultimaProposta.anteriorLiquidoComBeneficios);
-								$('#vlrAntAnualLiquido').text(data.ultimaProposta.anteriorAnualLiquido);
-								$('#vlrAntParticipacaoLucrosOuBonus').text(data.ultimaProposta.anteriorParticipacaoLucrosOuBonus);
-								$('#vlrAntTotalAnualLiquidoComBeneficios').text(data.ultimaProposta.anteriorTotalAnualLiquidoComBeneficios);
+								$('#vlrAntSalarioFixoBruto').text(parseFloat(data.ultimaProposta.anteriorSalarioFixoBruto).toFixed(2));
+								$('#vlrAntSalarioLiquidoMensal').text(parseFloat(data.ultimaProposta.anteriorSalarioLiquidoMensal).toFixed(2));
+								$('#vlrAntVrMensal').text(parseFloat(data.ultimaProposta.anteriorVrMensal).toFixed(2));
+								$('#vlrAntVaMensal').text(parseFloat(data.ultimaProposta.anteriorVaMensal).toFixed(2));
+								$('#vlrAntSeguroSaudeMensal').text(parseFloat(data.ultimaProposta.anteriorSeguroSaudeMensal).toFixed(2));
+								$('#vlrAntValeAuto').text(parseFloat(data.ultimaProposta.anteriorValeAuto).toFixed(2));
+								$('#vlrAntValeEstacionamento').text(parseFloat(data.ultimaProposta.anteriorEstacionamento).toFixed(2));
+								$('#vlrAntValeTransporte').text(parseFloat(data.ultimaProposta.anteriorValeTransporte).toFixed(2));
+								$('#vlrAntLiquidoComBeneficios').text(parseFloat(data.ultimaProposta.anteriorLiquidoComBeneficios).toFixed(2));
+								$('#vlrAntAnualLiquido').text(parseFloat(data.ultimaProposta.anteriorAnualLiquido).toFixed(2));
+								$('#vlrAntParticipacaoLucrosOuBonus').text(parseFloat(data.ultimaProposta.anteriorParticipacaoLucrosOuBonus).toFixed(2));
+								$('#vlrAntTotalAnualLiquidoComBeneficios').text(parseFloat(data.ultimaProposta.anteriorTotalAnualLiquidoComBeneficios).toFixed(2));
 								
 								$('#novaEmpresa').text(data.ultimaProposta.novaEmpresa);
 								$('#novoCargo').text(data.ultimaProposta.novoCargo);
-								$('#vlrNvSalarioFixoBruto').text(data.ultimaProposta.novoSalarioFixoBruto);
-								$('#vlrNvSalarioLiquidoMensal').text(data.ultimaProposta.novoSalarioLiquidoMensal);
-								$('#vlrNvVrMensal').text(data.ultimaProposta.novoVrMensal);
-								$('#vlrNvVaMensal').text(data.ultimaProposta.novoVaMensal);
-								$('#vlrNvSeguroSaudeMensal').text(data.ultimaProposta.novoSeguroSaudeMensal);
-								$('#vlrNvValeAuto').text(data.ultimaProposta.novoValeAuto);
-								$('#vlrNvValeEstacionamento').text(data.ultimaProposta.novoEstacionamento);
-								$('#vlrNvValeTransporte').text(data.ultimaProposta.novoValeTransporte);
-								$('#vlrNvLiquidoComBeneficios').text(data.ultimaProposta.novoLiquidoComBeneficios);
-								$('#vlrNvAnualLiquido').text(data.ultimaProposta.novoAnualLiquido);
-								$('#vlrNvParticipacaoLucrosOuBonus').text(data.ultimaProposta.novaParticipacaoLucrosOuBonus);
-								$('#vlrNvTotalAnualLiquidoComBeneficios').text(data.ultimaProposta.novoTotalAnualLiquidoComBeneficios);
+								$('#vlrNvSalarioFixoBruto').text(parseFloat(data.ultimaProposta.novoSalarioFixoBruto).toFixed(2));
+								$('#vlrNvSalarioLiquidoMensal').text(parseFloat(data.ultimaProposta.novoSalarioLiquidoMensal).toFixed(2));
+								$('#vlrNvVrMensal').text(parseFloat(data.ultimaProposta.novoVrMensal).toFixed(2));
+								$('#vlrNvVaMensal').text(parseFloat(data.ultimaProposta.novoVaMensal).toFixed(2));
+								$('#vlrNvSeguroSaudeMensal').text(parseFloat(data.ultimaProposta.novoSeguroSaudeMensal).toFixed(2));
+								$('#vlrNvValeAuto').text(parseFloat(data.ultimaProposta.novoValeAuto).toFixed(2));
+								$('#vlrNvValeEstacionamento').text(parseFloat(data.ultimaProposta.novoEstacionamento).toFixed(2));
+								$('#vlrNvValeTransporte').text(parseFloat(data.ultimaProposta.novoValeTransporte).toFixed(2));
+								$('#vlrNvLiquidoComBeneficios').text(parseFloat(data.ultimaProposta.novoLiquidoComBeneficios).toFixed(2));
+								$('#vlrNvAnualLiquido').text(parseFloat(data.ultimaProposta.novoAnualLiquido).toFixed(2));
+								$('#vlrNvParticipacaoLucrosOuBonus').text(parseFloat(data.ultimaProposta.novaParticipacaoLucrosOuBonus).toFixed(2));
+								$('#vlrNvTotalAnualLiquidoComBeneficios').text(parseFloat(data.ultimaProposta.novoTotalAnualLiquidoComBeneficios).toFixed(2));
+								
+								$(document).ready(function() {
+									$('.dinheiro').mask('0.000.000,00', {reverse : true});
+								});
 							}
 						})
 					}
@@ -305,36 +308,36 @@
 								success : function(data) {
 									$("#anteriorEmpresa").text(data.anteriorEmpresa);
 									$("#anteriorCargo").text(data.anteriorCargo);
-									$("#vlrAntSalarioFixoBruto").text(data.anteriorSalarioFixoBruto);
-									$("#vlrAntSalarioLiquidoMensal").text(data.anteriorSalarioLiquidoMensal);
-									$("#vlrAntVrMensal").text(data.anteriorVrMensal);
-									$("#vlrAntVaMensal").text(data.anteriorVaMensal);
-									$("#vlrAntSeguroSaudeMensal").text(data.anteriorSeguroSaudeMensal);
-									$("#vlrAntValeAuto").text(data.anteriorValeAuto);
-									$("#vlrAntEstacionamento").text(data.anteriorEstacionamento);
-									$("#vlrAntValeTransporte").text(data.anteriorValeTransporte);
-									$("#vlrAntLiquidoComBeneficios").text(data.anteriorLiquidoComBeneficios);
-									$("#vlrAntAnualLiquido").text(data.anteriorAnualLiquido);
-									$("#vlrAntParticipacaoLucrosOuBonus").text(data.anteriorParticipacaoLucrosOuBonus);
-									$("#vlrAntTotalAnualLiquidoComBeneficios").text(data.anteriorTotalAnualLiquidoComBeneficios);
+									$('#vlrAntSalarioFixoBruto').text(parseFloat(data.anteriorSalarioFixoBruto).toFixed(2));
+									$("#vlrAntSalarioLiquidoMensal").text(parseFloat(data.anteriorSalarioLiquidoMensal).toFixed(2));
+									$("#vlrAntVrMensal").text(parseFloat(data.anteriorVrMensal).toFixed(2));
+									$("#vlrAntVaMensal").text(parseFloat(data.anteriorVaMensal).toFixed(2));
+									$("#vlrAntSeguroSaudeMensal").text(parseFloat(data.anteriorSeguroSaudeMensal).toFixed(2));
+									$("#vlrAntValeAuto").text(parseFloat(data.anteriorValeAuto).toFixed(2));
+									$("#vlrAntEstacionamento").text(parseFloat(data.anteriorEstacionamento).toFixed(2));
+									$("#vlrAntValeTransporte").text(parseFloat(data.anteriorValeTransporte).toFixed(2));
+									$("#vlrAntLiquidoComBeneficios").text(parseFloat(data.anteriorLiquidoComBeneficios).toFixed(2));
+									$("#vlrAntAnualLiquido").text(parseFloat(data.anteriorAnualLiquido).toFixed(2));
+									$("#vlrAntParticipacaoLucrosOuBonus").text(parseFloat(data.anteriorParticipacaoLucrosOuBonus).toFixed(2));
+									$("#vlrAntTotalAnualLiquidoComBeneficios").text(parseFloat(data.anteriorTotalAnualLiquidoComBeneficios).toFixed(2));
 								
 									$("#novaEmpresa").text(data.novaEmpresa);
 									$("#novoCargo").text(data.novoCargo)
-									$("#vlrNvSalarioFixoBruto").text(data.novoSalarioFixoBruto);
-									$("#vlrNvSalarioLiquidoMensal").text(data.novoSalarioLiquidoMensal);
-									$("#vlrNvVrMensal").text(data.novoVrMensal);
-									$("#vlrNvVaMensal").text(data.novoVaMensal);
-									$("#vlrNvSeguroSaudeMensal").text(data.novoSeguroSaudeMensal);
-									$("#vlrNvValeAuto").text(data.novoValeAuto);
-									$("#vlrNvEstacionamento").text(data.novoEstacionamento);
-									$("#vlrNvValeTransporte").text(data.novoValeTransporte);
-									$("#vlrNvLiquidoComBeneficios").text(data.novoLiquidoComBeneficios);
-									$("#vlrNvAnualLiquido").text(data.novoAnualLiquido);
-									$("#vlrNvParticipacaoLucrosOuBonus").text(data.novaParticipacaoLucrosOuBonus);
-									$("#vlrNvTotalAnualLiquidoComBeneficios").text(data.novoTotalAnualLiquidoComBeneficios);
+									$("#vlrNvSalarioFixoBruto").text(parseFloat(data.novoSalarioFixoBruto).toFixed(2));
+									$("#vlrNvSalarioLiquidoMensal").text(parseFloat(data.novoSalarioLiquidoMensal).toFixed(2));
+									$("#vlrNvVrMensal").text(parseFloat(data.novoVrMensal).toFixed(2));
+									$("#vlrNvVaMensal").text(parseFloat(data.novoVaMensal).toFixed(2));
+									$("#vlrNvSeguroSaudeMensal").text(parseFloat(data.novoSeguroSaudeMensal).toFixed(2));
+									$("#vlrNvValeAuto").text(parseFloat(data.novoValeAuto).toFixed(2));
+									$("#vlrNvEstacionamento").text(parseFloat(data.novoEstacionamento).toFixed(2));
+									$("#vlrNvValeTransporte").text(parseFloat(data.novoValeTransporte).toFixed(2));
+									$("#vlrNvLiquidoComBeneficios").text(parseFloat(data.novoLiquidoComBeneficios).toFixed(2));
+									$("#vlrNvAnualLiquido").text(parseFloat(data.novoAnualLiquido).toFixed(2));
+									$("#vlrNvParticipacaoLucrosOuBonus").text(parseFloat(data.novaParticipacaoLucrosOuBonus).toFixed(2));
+									$("#vlrNvTotalAnualLiquidoComBeneficios").text(parseFloat(data.novoTotalAnualLiquidoComBeneficios).toFixed(2));
 									
-									$('document').ready(function() {
-									    $(".dinheiro").maskMoney();
+									$(document).ready(function() {
+										$('.dinheiro').mask('0.000.000,00', {reverse : true});
 									});
 								},
 								error : function(data) {
@@ -413,5 +416,4 @@
 					}
 					return mensagem;
 				}
-			
 				/* paginação */
