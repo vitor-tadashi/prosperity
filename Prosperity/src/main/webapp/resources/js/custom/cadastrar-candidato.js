@@ -11,15 +11,24 @@ $( "#canalInformacao" ).change(function() {
 	
 	var select = $(this).val();
 	
-    if (select == '9')
+    if (select == '9') {
     	$('.js-outros').show();
-    else
+    	$('.js-indicacao-colegas').hide();
+    }
+    else if (select == '8') {
+    	$('.js-indicacao-colegas').show();
     	$('.js-outros').hide();
+    }
+    else {
+    	$('.js-outros').hide();
+    	$('.js-indicacao-colegas').hide();
+    }
 	});
 
 $(document).ready(function() {
 
 	$('.js-outros').hide();
+	$('.js-indicacao-colegas').hide();
 	
 	$('.cpf').mask('000.000.000-00');
 	$('.telefone').mask('(00)0000-00009');

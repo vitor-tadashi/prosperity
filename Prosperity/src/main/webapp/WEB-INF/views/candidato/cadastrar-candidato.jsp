@@ -272,6 +272,16 @@
 													</c:forEach>
 												</select>
 											</div>
+											<div class="form-group col-md-4 js-outros">
+											<label for="vaga">Qual?</label>
+												<input type="text" class="form-control" id="outros"
+													name="como-ficou-sabendo-outros" />
+											</div>
+										</div>
+										<div class="form-group col-md-4 js-indicacao-colegas">
+											<label for="vaga">Quem indicou?</label>
+												<input type="text" class="form-control" id="indicao-colegas"
+													name="como-ficou-sabendo-colegas" />
 										</div>
 										<!--começo - tab 4 -->
 										<div class="tab-pane fade" id="fourth">
