@@ -19,6 +19,10 @@ public class AvaliacaoEntity {
 
 	@Column(name = "nmAvaliacao")
 	private String nome;
+	@Column(name="tpCss")
+	private String tipoCss;
+	
+
 
 	public Integer getId() {
 		return id;
@@ -36,6 +40,12 @@ public class AvaliacaoEntity {
 		this.nome = nome;
 	}
 	
-	
+	public String getTipoCss() {
+		return tipoCss;
+	}
+
+	public void setTipoCss(String tipoCss) {
+		this.tipoCss = tipoCss;
+	}	
 
 }
