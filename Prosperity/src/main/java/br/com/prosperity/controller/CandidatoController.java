@@ -416,9 +416,11 @@ public class CandidatoController<PaginarCandidato> {
 
 		if (!processoSeletivo.equals("[]")) {
 			List<ProvaCandidatoBean> provas = convertGsonProva(processoSeletivo, candidatoBean);
-			// for (int i = 0; i <= provas.size() - 1; i++) {
-			// provas.get(i).setCaminhoProva(caminhoProvas.get(i));
-			// }
+			if(caminhoProvas != null){
+				for (int i = 0; i < caminhoProvas.size(); i++) {
+					provas.get(i).setCaminhoProva(caminhoProvas.get(i));
+				}
+			}
 			provaCandidatoBusiness.inserir(provas);
 			// TODO:não da refresh ao salvar status
 		}
@@ -513,6 +515,11 @@ public class CandidatoController<PaginarCandidato> {
 						provaCandidatoBean.setCandidato(bean);
 						provasCandidatoBean.add(provaCandidatoBean);
 					}
+				}else if(aux % 2 != 0){
+					provaCandidatoBean = new ProvaCandidatoBean();
+					provaCandidatoBean.setProvas(provaBean);
+					provaCandidatoBean.setCandidato(bean);
+					provasCandidatoBean.add(provaCandidatoBean);
 				}
 			} catch (Exception e) {
 				System.out.println(e);

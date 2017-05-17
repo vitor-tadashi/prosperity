@@ -204,37 +204,7 @@
 				maxCaracterParecerCancelamento();
 			}
 
-			/*gerador de campo*/
-			var cont = 0;
-			$("#gerarCampo").click(function() {
-				var campos =
-					"<div class='div"+cont+" processoSeletivo'>"
-					+ "<div class='row'>"
-					+ "<div class='col-md-6 form-inline'>"
-					+ "<a id='btnRemover' onclick='remover("
-					+ cont
-					+ ")'class='text-danger fa fa-times fa-lg'></a>"
-					+ "&nbsp;<select class='form-control' id='prova-js'>"
-					+ "<option value='0'>Selecione</option>"
-					+ "<c:forEach var='selecao' items='${provas}'>"
-					+ "<option value='${selecao.id}'>${selecao.nome}</option>"
-					+ "</c:forEach>"
-					+ "</select>"
-					+ "<input class='form-control descricaoProva' type='text'	id='descricao-js' name='descricao"
-					+ cont
-					+ "' placeholder='Descrição' maxlength='50'	onkeyup='maxDescricaoProva()' />"
-					+ "</div>"
-					+ "<div class='col-md-5 form-inline'>"
-					+ "<input name='papers' id='modalPapers' type='file' class='input-sm' multiple data-input='false'>"
-					+ "</div>"
-					+ "&nbsp; &nbsp;<label id='maxDescricao'>Caracteres restantes : <span class='numeroCaracteres" + cont +"'>50</span></label>"
-					+ "</div>" + "</div>";
-					cont++;
-					/*adiciona na div*/
-				$("#processoSeletivo").append(campos);
-
-				/*contador de caracter - descrição prova*/
-			});
+			
 			/*remove os campos*/
 
 			function maxDescricaoProva() {

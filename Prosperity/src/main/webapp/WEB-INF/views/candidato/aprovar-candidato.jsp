@@ -520,5 +520,35 @@
         CKEDITOR.instances.editor.setData("");
 		CKEDITOR.instances.editor.insertHtml("");
     </script>
+		<script>
+		/*gerador de campo*/
+		var cont = 0;
+		$("#gerarCampo").click(function() {
+			var campos =
+				"<div class='div"+cont+" processoSeletivo'>"
+				+ "<div class='row'>"
+				+ "<div class='col-md-4 form-inline'>"
+				+ "<a id='btnRemover' onclick='remover("
+				+ cont
+				+ ")'class='text-danger fa fa-times fa-lg'></a>"
+				+ "&nbsp;<select class='form-control parsley-validated' id='prova-js' data-required='true'>"
+				+ "<option value='0'>Selecione</option>"
+				+ "<c:forEach var='selecao' items='${provas}'>"
+				+ "<option value='${selecao.id}'>${selecao.nome}</option>"
+				+ "</c:forEach>"
+				+ "</select>"
+				+ "</div>"
+				+ "<div class='col-md-5 form-inline'>"
+				+ "<input name='papers' id='modalPapers' type='file' class='input-sm parsley-validated' multiple data-input='false' data-required='true'>"
+				+ "</div>"
+				+ "</div>" + "</div>";
+				cont++;
+				/*adiciona na div*/
+			$("#processoSeletivo").append(campos);
+
+			/*contador de caracter - descrição prova*/
+		});
+		</script>
+
 	</layout:put>
 </layout:extends>
