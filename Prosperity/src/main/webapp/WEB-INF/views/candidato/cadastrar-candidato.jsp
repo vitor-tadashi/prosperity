@@ -275,13 +275,18 @@
 											<div class="form-group col-md-4 js-outros">
 											<label for="vaga">Qual?</label>
 												<input type="text" class="form-control" id="outros"
-													name="como-ficou-sabendo-outros" />
+													name="vagaCandidato.outros" />
 											</div>
+										<div class="form-group col-md-2 js-indicacao-colegas">
+											<label for="vaga">Quem indicou?</label>	<select
+													class="form-control" id="listaFuncionarios"
+													name="vagaCandidato.funcionarioBean.id">
+													<option value="0">Selecione</option>
+													<c:forEach var="funcionario" items="${listaFuncionarios}">
+														<option value="${funcionario.id}">${funcionario.nome}</option>
+													</c:forEach>
+												</select>
 										</div>
-										<div class="form-group col-md-4 js-indicacao-colegas">
-											<label for="vaga">Quem indicou?</label>
-												<input type="text" class="form-control" id="indicao-colegas"
-													name="como-ficou-sabendo-colegas" />
 										</div>
 										<!--começo - tab 4 -->
 										<div class="tab-pane fade" id="fourth">
