@@ -287,6 +287,8 @@ public class CandidatoBusiness {
 			candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoEntity, candidatoBean);
 			tratarInformacoes(candidatoEntity);
 			
+			candidatoEntity.setAvaliadores(avaliadorCandidatoDAO.findByNamedQuery("obterProposta", candidatoEntity.getId()));
+			
 			candidatoDAO.update(candidatoEntity);
 		}
 	}

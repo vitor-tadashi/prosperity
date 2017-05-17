@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.commons.io.IOUtils;
@@ -50,6 +51,7 @@ import br.com.prosperity.bean.SituacaoAtualBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.StatusBean;
 import br.com.prosperity.bean.TipoCursoBean;
+import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.CanalInformacaoBusiness;
 import br.com.prosperity.business.CancelamentoBusiness;
@@ -130,6 +132,9 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private PropostaBean propostaBean;
+	
+	@Autowired
+	private HttpSession session;
 
 	private List<String> caminhoProvas;
 
@@ -278,14 +283,10 @@ public class CandidatoController<PaginarCandidato> {
 	public String historicoCandidato(Model model, @PathVariable Integer id) {
 		CandidatoBean candidato = candidatoBusiness.obter(id);
 		List<ProvaCandidatoBean> provasCandidatoBean = provaCandidatoBusiness.obterProva(id);
-		/*
-		 * List<ProvaCandidatoBean> provasCandidatoBean = new
-		 * ArrayList<ProvaCandidatoBean>();
-		 * provasCandidatoBean.get(0).setId(id); List<ProvaCandidatoBean>
-		 * provaCandidato =
-		 * provaCandidatoBusiness.obterProva(provasCandidatoBean);
-		 * obterDominiosCandidato(model);
-		 */
+		//Pega quantas competencias o candidato tem, divide por 7 para ver quantas colunas deve ter na tela;
+		int colCompetencias = candidato.getCompetencias().size()/7;
+		
+		model.addAttribute("colCompetencias", colCompetencias);
 		model.addAttribute("provas", provasCandidatoBean);
 		model.addAttribute("candidato", candidato);
 		// model.addAttribute("provasCandidato",provasCandidatoBean);
@@ -386,7 +387,7 @@ public class CandidatoController<PaginarCandidato> {
 		model.addAttribute("avaliacoes", avaliacoes);
 		model.addAttribute("provas", provas);
 		model.addAttribute("cancelamento", cancelamento);
-		
+
 		return "candidato/aprovar-candidato";
 	}
 
@@ -418,11 +419,20 @@ public class CandidatoController<PaginarCandidato> {
 
 		if (!processoSeletivo.equals("[]")) {
 			List<ProvaCandidatoBean> provas = convertGsonProva(processoSeletivo, candidatoBean);
-			// for (int i = 0; i <= provas.size() - 1; i++) {
-			// provas.get(i).setCaminhoProva(caminhoProvas.get(i));
-			// }
+			if(caminhoProvas != null){
+				for (int i = 0; i < caminhoProvas.size(); i++) {
+					provas.get(i).setCaminhoProva(caminhoProvas.get(i));
+				}
+			}
 			provaCandidatoBusiness.inserir(provas);
 			// TODO:não da refresh ao salvar status
+		}
+		
+		try {
+			// alterado aqui \/
+			candidatoBusiness.alterarStatus(situacaoCandidato);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 		if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.PROPOSTACANDIDATO.getValue()
@@ -433,20 +443,12 @@ public class CandidatoController<PaginarCandidato> {
 			if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.PROPOSTACANDIDATO.getValue()) {
 				propostaBean.setFlSituacao(true);
 				candidatoBean.getPropostaBean().add(propostaBean);
-				// propostaBusiness.salvarProposta(candidatoBean);
 			}
 			try {
 				candidatoBusiness.inserir(candidatoBean);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
-
-		try {
-			// alterado aqui \/
-			candidatoBusiness.alterarStatus(situacaoCandidato);
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 
 		// Tive de fazer essa busca novamente, para buscar o novo Ultimo Status
@@ -458,12 +460,12 @@ public class CandidatoController<PaginarCandidato> {
 	@RequestMapping(value = { "/buscar/{id}" }, method = RequestMethod.GET)
 	public @ResponseBody CandidatoBean buscarPorId(@PathVariable int id) {
 		CandidatoBean candidato = candidatoBusiness.obter(id);
-		System.out.println(candidato.getUltimaProposta().getAnteriorEmpresa());
 		return candidato;
 	}
 
 	public List<CandidatoCompetenciaBean> convertGson(String ac) {
 		Gson gson = new Gson();
+		UsuarioBean usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
 		@SuppressWarnings("unchecked")
 		List<String> l = gson.fromJson(ac, List.class);
 		candidatoCompetenciasBean = new ArrayList<CandidatoCompetenciaBean>();
@@ -481,6 +483,7 @@ public class CandidatoController<PaginarCandidato> {
 						competenciaBean.setId(aux2);
 						candidatoCompetenciaBean.setAvaliacao(avaliacaoBean);
 						candidatoCompetenciaBean.setCompetencia(competenciaBean);
+						candidatoCompetenciaBean.setNmAvaliador(usuarioBean.getNome());
 						candidatoCompetenciasBean.add(candidatoCompetenciaBean);
 					}
 				}
@@ -515,6 +518,11 @@ public class CandidatoController<PaginarCandidato> {
 						provaCandidatoBean.setCandidato(bean);
 						provasCandidatoBean.add(provaCandidatoBean);
 					}
+				}else if(aux % 2 != 0){
+					provaCandidatoBean = new ProvaCandidatoBean();
+					provaCandidatoBean.setProvas(provaBean);
+					provaCandidatoBean.setCandidato(bean);
+					provasCandidatoBean.add(provaCandidatoBean);
 				}
 			} catch (Exception e) {
 				System.out.println(e);

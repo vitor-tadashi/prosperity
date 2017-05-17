@@ -31,13 +31,12 @@
 						<div class="panel-tab clearfix">
 									<ul class="tab-bar wizard-demo" id="wizardDemo">
 										<li class="active tab-verity"><a href="#first"
-											data-toggle="tab"><i class="fa fa-user"></i> Inf.
-												pessoais</a></li>
+											data-toggle="tab"><i class="fa fa-user"></i> Dados gerais</a></li>
 										<li class="tab-verity"><a href="#second"
 											data-toggle="tab" class="text-success"><i
-												class="fa fa-pencil"></i> Inf. acadêmicas</a></li>
+												class="fa fa-pencil"></i> Processo seletivo</a></li>
 										<li class="tab-verity"><a href="#third" data-toggle="tab"
-											class="text-success"><i class="fa fa-book"></i> Processo seletivo</a></li>
+											class="text-success"><i class="fa fa-code-fork"></i> Linha do tempo</a></li>
 									</ul>
 								</div>
 								<br>
@@ -71,6 +70,11 @@
 														<p class="" id="nome"><strong>Telefone: </strong>${candidato.contato.telefone}</p>
 													</div>
 												</div>
+												<div class="row">
+													<div class="form-group col-md-6">
+														<p class="" id="nome"><strong>Pretensão salarial: </strong>${candidato.valorPretensao }</p>
+													</div>
+												</div>
 											</fieldset>
 											<fieldset>
 												<legend style="color:#424f63"><h5><strong>Endereço</strong></h5></legend>
@@ -99,8 +103,6 @@
 													</div>
 												</div>
 											</fieldset>
-										</div>
-										<div class="tab-pane fade" id="second">
 											<fieldset>
 												<legend style="color:#424f63"><h5><strong>Formação</strong></h5></legend>
 												<div class="row">
@@ -127,7 +129,7 @@
 												</div>
 											</fieldset>
 										</div>
-										<div class="tab-pane fade" id="third">
+										<div class="tab-pane fade" id="second">
 											<fieldset>
 												<legend style="color:#424f63"><h5><strong>Provas aplicadas</strong></h5></legend>
 												<div class="row">
@@ -149,110 +151,79 @@
 													</div>
 												</div>
 											</fieldset>
+											<fieldset>
+												<legend style="color:#424f63"><h5><strong>Avaliação de skill</strong></h5></legend>
+												<div class="row">
+													<c:forEach begin="1" end="${colCompetencias }" var="i">
+														<div class="form-group col-md-4">
+															<p class="text-center" id="nome"><strong>Avaliador: </strong>${candidato.competencias[(i * 7) -1].nmAvaliador }</p>
+															<table class="table table-condensed">
+																<tbody>
+																	<tr>
+																		<th class="text-center">Competências</th>
+																		<th class="text-center">Resultados</th>
+																	</tr>
+																	<c:forEach var="c" begin="${(i*7)-7 }" end="${(i * 7) -1 }">
+																		<tr class="text-center">
+																			<td>${candidato.competencias[c].competencia.nome}</td>
+																			<td><span class="badge" style="color:#fff; background-color:${candidato.competencias[c].avaliacao.tipoCss}">${candidato.competencias[c].avaliacao.nome}</span></td>
+																		</tr>
+																	</c:forEach>
+																</tbody>
+															</table>
+														</div>
+													</c:forEach>
+												</div>
+											</fieldset>
+										</div>
+										<div class="tab-pane fade" id="third">
+											<fieldset>
+												<legend style="color:#424f63"><h5><strong>Eventos do processo seletivo</strong></h5></legend>
+												<ul class="timeline">
+													<c:set var="count" value="0" scope="page" />
+													<c:forEach var="statusPorMesAno"
+														items="${candidato.statusPorMesAno}">
+														<li><div class="tldate">${statusPorMesAno.key}</div></li>
+														<c:forEach var="status" items="${statusPorMesAno.value}"
+															varStatus="count">
+						
+															<c:choose>
+																<c:when test="${count.index %2 eq 0}">
+																	<c:set value="timeline" var="cssTimeline"></c:set>
+																</c:when>
+																<c:otherwise>
+																	<c:set value="timeline-inverted" var="cssTimeline"></c:set>
+																</c:otherwise>
+															</c:choose>
+						
+															<li class="${cssTimeline}">
+																<div class="tl-circ"></div>
+																<div class="timeline-panel">
+																	<div class="tl-heading">
+																		<h4>Status: ${status.status.nome}</h4>
+																		<p>
+																			<small class="text-muted"><i class="fa fa-calendar"></i>
+																				<fmt:formatDate value="${status.dataAlteracao}"
+																					pattern="dd/MM/yyyy" /></small>
+																		</p>
+																	</div>
+																	<div class="tl-body">
+																		<p class="desParecer">
+																			<label>Parecer:</label> <span>${status.descricaoParecer}</span>
+																		</p>
+																		<p>
+																			<label>Usuário:</label> <span>${status.usuario.nome}</span>
+																		</p>
+																	</div>
+																</div>
+															</li>
+														</c:forEach>
+													</c:forEach>
+												</ul>
+											</fieldset>
 										</div>
 									</div>
-								</div>	
-						<div class="row">
-							<div class="form-group col-md-6">
-								<label class="col-xs-5 control-label">Pretensão
-									salarial:</label>
-								<div class="col-xs-7">
-									<p class="form-control-static" id="pretensao">
-										<fmt:formatNumber value="${candidato.valorPretensao}"
-											minFractionDigits="2" type="currency" pattern="#,##0.00" />
-									</p>
 								</div>
-							</div>
-
-							<div class="form-group col-xs-12">
-								<label class="col-xs-2 control-label">Competências</label>
-								<div class="col-xs-4"
-									style="margin-left: 39px; padding-right: 30px">
-									<table class="table table-condensed table-bordered">
-										<c:forEach var="competencias" items="${candidato.competencias}">
-											<tr>
-												<td>${competencias.competencia.nome}</td>
-												<td><span class="badge badge-info">${competencias.avaliacao.nome}</span></td>
-											</tr>
-										</c:forEach>
-									</table>
-								</div>
-							</div>
-							
-							
-							
-							<div class="form-group col-md-6">
-								<label class="col-xs-5 control-label">Tipo de prova:</label>
-								<div class="col-xs-7">
-									<p class="form-control-static" id="situacaoAtual" name="#">
-										<c:forEach items="${provas }" var="prova">
-											${prova.provas.nome }<br/>
-										</c:forEach>
-										</p>
-								</div>
-							</div>
-							<div class="form-group col-md-6">
-								<label class="col-xs-5 control-label">Descrição:</label>
-								<div class="col-xs-7">
-									<p class="form-control-static" id="conclusao" name="conclusao">
-										<c:forEach items="${provas }" var="prova">
-											${prova.descricao}<br/>
-										</c:forEach>
-									</p>
-								</div>
-							</div>
-							
-							
-							
-							
-						</div>
-
-
-						<hr>
-
-						<h3 class="text-center">Linha do tempo</h3>
-						<ul class="timeline">
-							<c:set var="count" value="0" scope="page" />
-							<c:forEach var="statusPorMesAno"
-								items="${candidato.statusPorMesAno}">
-								<li><div class="tldate">${statusPorMesAno.key}</div></li>
-								<c:forEach var="status" items="${statusPorMesAno.value}"
-									varStatus="count">
-
-									<c:choose>
-										<c:when test="${count.index %2 eq 0}">
-											<c:set value="timeline" var="cssTimeline"></c:set>
-										</c:when>
-										<c:otherwise>
-											<c:set value="timeline-inverted" var="cssTimeline"></c:set>
-										</c:otherwise>
-									</c:choose>
-
-									<li class="${cssTimeline}">
-										<div class="tl-circ"></div>
-										<div class="timeline-panel">
-											<div class="tl-heading">
-												<h4>Status: ${status.status.nome}</h4>
-												<p>
-													<small class="text-muted"><i class="fa fa-calendar"></i>
-														<fmt:formatDate value="${status.dataAlteracao}"
-															pattern="dd/MM/yyyy" /></small>
-												</p>
-											</div>
-											<div class="tl-body">
-												<p class="desParecer">
-													<label>Parecer:</label> <span>${status.descricaoParecer}</span>
-												</p>
-												<p>
-													<label>Usuário:</label> <span>${status.usuario.nome}</span>
-												</p>
-											</div>
-										</div>
-									</li>
-								</c:forEach>
-							</c:forEach>
-
-						</ul>
 					</div>
 				</section>
 				<!-- /Section -->
