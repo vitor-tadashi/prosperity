@@ -163,6 +163,9 @@ public class CandidatoController<PaginarCandidato> {
 	}
 
 	private void obterDominiosCandidato(Model model) {
+		List<FuncionarioBean> funcionarios = funcionarioBusiness.findAll();
+		model.addAttribute("listaFuncionarios", funcionarios);
+		
 		List<TipoCursoBean> tiposCurso = tipoCursoBusiness.obterTodos();
 		model.addAttribute("tiposCurso", tiposCurso);
 
