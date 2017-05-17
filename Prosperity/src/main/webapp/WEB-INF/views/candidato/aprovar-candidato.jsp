@@ -254,15 +254,14 @@
 														</div>
 														<!-- /form-group -->
 													</div>
-
 													<div class="form-group col-md-12">
 														<div class ="table-responsive">
+															<br/>
+															<br/>
 															<table id="tabelaVaga"
 																class="table table-bordered table-condensed table-hover"
 																style="font-size: 12px; vertical-align: middle; margin-top: -10px;">
 																<thead>
-																	</br>
-																	</br>
 																	<tr>
 																		<th class="text-center">Nome</th>
 																		<th class="text-center">Cargo</th>
@@ -279,20 +278,7 @@
 																		<th class="text-center">Taxa</th>
 																	</tr>
 																</thead>
-																<tbody class="text-center">
-																	<td></td>
-																	<td></td>
-																	<td></td>
-																	<td></td>
-																	<td></td>
-																	<td></td>
-																	<td></td>
-																	<td></td>
-																	<td></td>
-																	<td></td>
-																	<td></td>
-																	<td></td>
-																	<td></td>
+																<tbody class="text-center tbComparativo">
 																</tbody>
 															</table>
 														</div>
@@ -305,15 +291,6 @@
 																data-title="Selecione" for="upload-proposta"> <span
 																id="caminho"></span>
 															</label>
-														</div>
-													</div>
-													<div class="form-group col-md-12">
-														<div class="panel panel-default">
-															<div class="adjoined-bottom">
-																<div class="grid-container">
-																	<textarea id="editor" name="editor"></textarea>
-																</div>
-															</div>
 														</div>
 													</div>
 												</div>
@@ -512,14 +489,6 @@
 
 		<script src="/resources/js/parsley.min.js"></script>
 		<script src="/resources/js/custom/aprovar-candidato.js"></script>
-		<script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace('editor');
-        var ckEditor = CKEDITOR.instances.editor.getData();
-        console.log(ckEditor);
-        CKEDITOR.instances.editor.setData("");
-		CKEDITOR.instances.editor.insertHtml("");
-    </script>
 		<script>
 		/*gerador de campo*/
 		var cont = 0;

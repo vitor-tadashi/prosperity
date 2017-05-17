@@ -3,6 +3,8 @@ package br.com.prosperity.util;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.poi.hssf.util.CellReference;
 import org.apache.poi.ss.usermodel.Cell;
@@ -10,19 +12,21 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import br.com.prosperity.bean.ComparativoPropostaBean;
 import br.com.prosperity.bean.PropostaBean;
 
 public class TesteExcel {
-	
+
 	public PropostaBean testa(String caminho) {
 		PropostaBean propostaBean = new PropostaBean();
+		List<ComparativoPropostaBean> comparativosPropostaBean = new ArrayList<ComparativoPropostaBean>();
 		try {
-			FileInputStream file = new FileInputStream(
-					new File(caminho));
+			FileInputStream file = new FileInputStream(new File(caminho));
 
 			XSSFWorkbook workbook = new XSSFWorkbook(file);
 
 			XSSFSheet sheet = workbook.getSheetAt(0);
+			
 			CellReference cellReference = new CellReference("B3");
 			Row row = sheet.getRow(cellReference.getRow());
 			Cell cell = row.getCell(cellReference.getCol());
@@ -47,7 +51,7 @@ public class TesteExcel {
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
 			propostaBean.setAnteriorVrMensal(cell.getNumericCellValue());
-			
+
 			cellReference = new CellReference("B8");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
@@ -72,27 +76,27 @@ public class TesteExcel {
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
 			propostaBean.setAnteriorValeTransporte(cell.getNumericCellValue());
-			
+
 			cellReference = new CellReference("B13");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
 			propostaBean.setAnteriorLiquidoComBeneficios(cell.getNumericCellValue());
-			
+
 			cellReference = new CellReference("B14");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
 			propostaBean.setAnteriorAnualLiquido(cell.getNumericCellValue());
-			
+
 			cellReference = new CellReference("B15");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
 			propostaBean.setAnteriorParticipacaoLucrosOuBonus(cell.getNumericCellValue());
-			
+
 			cellReference = new CellReference("B16");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
 			propostaBean.setAnteriorTotalAnualLiquidoComBeneficios(cell.getNumericCellValue());
-			
+
 			cellReference = new CellReference("E3");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
@@ -117,7 +121,7 @@ public class TesteExcel {
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
 			propostaBean.setNovoVrMensal(cell.getNumericCellValue());
-			
+
 			cellReference = new CellReference("E8");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
@@ -142,30 +146,112 @@ public class TesteExcel {
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
 			propostaBean.setNovoValeTransporte(cell.getNumericCellValue());
-			
+
 			cellReference = new CellReference("E13");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
 			propostaBean.setNovoLiquidoComBeneficios(cell.getNumericCellValue());
-			
+
 			cellReference = new CellReference("E14");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
 			propostaBean.setNovoAnualLiquido(cell.getNumericCellValue());
-			
+
 			cellReference = new CellReference("E15");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
 			propostaBean.setNovaParticipacaoLucrosOuBonus(cell.getNumericCellValue());
-			
+
 			cellReference = new CellReference("E16");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
 			propostaBean.setNovoTotalAnualLiquidoComBeneficios(cell.getNumericCellValue());
 
+			int aux = 22;
+			boolean continuar = false;
+			
+			while (!continuar) {
+				cellReference = new CellReference("A" + aux);
+				row = sheet.getRow(cellReference.getRow());
+				//cell = row.getCell(cellReference.getCol());
+				if (row != null) {
+					ComparativoPropostaBean comparativoPropostaBean = new ComparativoPropostaBean();
+					
+					cellReference = new CellReference("A" + aux);
+					row = sheet.getRow(cellReference.getRow());
+					cell = row.getCell(cellReference.getCol());
+					comparativoPropostaBean.setNmFuncionario(cell.getStringCellValue());
+
+					cellReference = new CellReference("B" + aux);
+					row = sheet.getRow(cellReference.getRow());
+					cell = row.getCell(cellReference.getCol());
+					comparativoPropostaBean.setNmCargo(cell.getStringCellValue());
+
+					cellReference = new CellReference("C" + aux);
+					row = sheet.getRow(cellReference.getRow());
+					cell = row.getCell(cellReference.getCol());
+					comparativoPropostaBean.setNmSenioridade(cell.getStringCellValue());
+
+					cellReference = new CellReference("D" + aux);
+					row = sheet.getRow(cellReference.getRow());
+					cell = row.getCell(cellReference.getCol());
+					comparativoPropostaBean.setDsConhecimento(cell.getStringCellValue());
+
+					cellReference = new CellReference("E" + aux);
+					row = sheet.getRow(cellReference.getRow());
+					cell = row.getCell(cellReference.getCol());
+					comparativoPropostaBean.setDtAdmissao(cell.getDateCellValue());
+
+					cellReference = new CellReference("F" + aux);
+					row = sheet.getRow(cellReference.getRow());
+					cell = row.getCell(cellReference.getCol());
+					comparativoPropostaBean.setVlrSalario(cell.getNumericCellValue());
+
+					cellReference = new CellReference("G" + aux);
+					row = sheet.getRow(cellReference.getRow());
+					cell = row.getCell(cellReference.getCol());
+					comparativoPropostaBean.setVlrVr(cell.getNumericCellValue());
+
+					cellReference = new CellReference("H" + aux);
+					row = sheet.getRow(cellReference.getRow());
+					cell = row.getCell(cellReference.getCol());
+					comparativoPropostaBean.setVlrVa(cell.getNumericCellValue());
+
+					cellReference = new CellReference("I" + aux);
+					row = sheet.getRow(cellReference.getRow());
+					cell = row.getCell(cellReference.getCol());
+					comparativoPropostaBean.setVlrEstacionamento(cell.getNumericCellValue());
+
+					cellReference = new CellReference("J" + aux);
+					row = sheet.getRow(cellReference.getRow());
+					cell = row.getCell(cellReference.getCol());
+					comparativoPropostaBean.setVlrCombustivel(cell.getNumericCellValue());
+
+					cellReference = new CellReference("K" + aux);
+					row = sheet.getRow(cellReference.getRow());
+					cell = row.getCell(cellReference.getCol());
+					comparativoPropostaBean.setVlrAssistenciaMedica(cell.getNumericCellValue());
+
+					cellReference = new CellReference("L" + aux);
+					row = sheet.getRow(cellReference.getRow());
+					cell = row.getCell(cellReference.getCol());
+					comparativoPropostaBean.setVlrOutros(cell.getNumericCellValue());
+
+					cellReference = new CellReference("M" + aux);
+					row = sheet.getRow(cellReference.getRow());
+					cell = row.getCell(cellReference.getCol());
+					comparativoPropostaBean.setVlrTaxa(cell.getNumericCellValue());
+					
+					comparativosPropostaBean.add(comparativoPropostaBean);
+					aux++;
+				} else {
+					continuar = true;
+				}
+			}
+			propostaBean.setComparativoProposta(comparativosPropostaBean);
+
 			file.close();
-			FileOutputStream out = new FileOutputStream(
-					new File(caminho));
+			FileOutputStream out = new FileOutputStream(new File(caminho));
 			workbook.write(out);
 			out.close();
 		} catch (Exception e) {

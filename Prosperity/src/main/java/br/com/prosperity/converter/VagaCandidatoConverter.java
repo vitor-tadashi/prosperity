@@ -3,7 +3,6 @@ package br.com.prosperity.converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.bean.VagaCandidatoBean;
 import br.com.prosperity.entity.VagaCandidatoEntity;
 
