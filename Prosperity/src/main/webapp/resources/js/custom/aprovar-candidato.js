@@ -135,7 +135,7 @@
 					x++;
 				});
 				file();
-
+				
 				$.ajax({
 					url : "alterar-status-candidato",
 					method : "POST",
@@ -145,6 +145,7 @@
 						'parecer' : $('#parecer').val(),
 						'idStatus' : $('#hdn-status').val(),
 						'parecerTecnico' : $('#parecerTecnico').val(),
+						'proposta' : CKEDITOR.instances.editor.getData(),
 						'processoSeletivo' : JSON.stringify(provasDescricoes),
 						'avaliacoesCandidato' : JSON.stringify(avaliacoes)
 					},
