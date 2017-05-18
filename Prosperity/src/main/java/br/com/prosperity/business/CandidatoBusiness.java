@@ -642,8 +642,10 @@ public class CandidatoBusiness {
 
 		if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOEMANALISE.getValue()) {
 			for (AvaliadorCandidatoBean a : avaliadores) {
-				recipients.add(a.getUsuario().getEmail());
-				nomes.add(a.getUsuario().getNome());
+				if(a.getUsuario()!=null) {
+					recipients.add(a.getUsuario().getEmail());
+					nomes.add(a.getUsuario().getNome());
+				}
 			}
 		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.PROPOSTACANDIDATO.getValue()) {
 			for (UsuarioBean u : usuarios) {
