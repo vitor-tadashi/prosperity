@@ -2,6 +2,7 @@ package br.com.prosperity.bean;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,7 +12,10 @@ public class ComparativoPropostaBean {
 	private String nmCargo;
 	private String nmSenioridade;
 	private String dsConhecimento;
+	
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dtAdmissao;
+	
 	private Double vlrSalario;
 	private Double vlrVr;
 	private Double vlrVa;
