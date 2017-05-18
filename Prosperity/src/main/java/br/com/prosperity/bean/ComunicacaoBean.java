@@ -1,10 +1,20 @@
 package br.com.prosperity.bean;
 
-import java.sql.Date;
+import java.util.Date;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Component;
+
+
+@Component
 public class ComunicacaoBean {
 	
 	private Integer id;
+	@NotNull(message = "O campo data de ultimo contato deve ser preenchido")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataContato;
 	private String observacao;
 	private UsuarioBean usuarioBean;
