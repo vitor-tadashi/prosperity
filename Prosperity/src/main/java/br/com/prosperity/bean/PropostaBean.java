@@ -1,5 +1,7 @@
 package br.com.prosperity.bean;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -35,6 +37,10 @@ public class PropostaBean {
 	private double anteriorTotalAnualLiquidoComBeneficios;
 	private double novoTotalAnualLiquidoComBeneficios;
 	private Boolean flSituacao = false;
+
+	private Integer candidato;
+
+	private List<ComparativoPropostaBean> comparativoProposta;
 
 	public Integer getId() {
 		return id;
@@ -274,6 +280,22 @@ public class PropostaBean {
 
 	public void setFlSituacao(Boolean flSituacao) {
 		this.flSituacao = flSituacao;
+	}
+
+	public Integer getCandidato() {
+		return candidato;
+	}
+
+	public void setCandidato(Integer candidato) {
+		this.candidato = candidato;
+	}
+
+	public List<ComparativoPropostaBean> getComparativoProposta() {
+		return comparativoProposta;
+	}
+
+	public void setComparativoProposta(List<ComparativoPropostaBean> comparativoProposta) {
+		this.comparativoProposta = comparativoProposta;
 	}
 
 }

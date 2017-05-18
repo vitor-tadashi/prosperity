@@ -24,6 +24,7 @@ import br.com.prosperity.bean.AvaliacaoBean;
 import br.com.prosperity.bean.AvaliadorCandidatoBean;
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CompetenciaBean;
+import br.com.prosperity.bean.ComunicacaoBean;
 import br.com.prosperity.bean.DataEntrevistaBean;
 import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
@@ -33,6 +34,7 @@ import br.com.prosperity.converter.AvaliacaoConverter;
 import br.com.prosperity.converter.AvaliadorCandidatoConverter;
 import br.com.prosperity.converter.CandidatoConverter;
 import br.com.prosperity.converter.CompetenciaConverter;
+import br.com.prosperity.converter.ComunicacaoConverter;
 import br.com.prosperity.converter.DataEntrevistaConverter;
 import br.com.prosperity.converter.FuncionarioConverter;
 import br.com.prosperity.converter.UsuarioConverter;
@@ -42,6 +44,7 @@ import br.com.prosperity.dao.AvaliadorVagaDAO;
 import br.com.prosperity.dao.CanalInformacaoDAO;
 import br.com.prosperity.dao.CandidatoDAO;
 import br.com.prosperity.dao.CompetenciaDAO;
+import br.com.prosperity.dao.ComunicacaoDAO;
 import br.com.prosperity.dao.DataEntrevistaDAO;
 import br.com.prosperity.dao.FuncionarioDAO;
 import br.com.prosperity.dao.SituacaoAtualDAO;
@@ -121,6 +124,12 @@ public class CandidatoBusiness {
 
 	@Autowired
 	private SituacaoAtualDAO situacaoAtualDAO;
+	
+	@Autowired
+	private ComunicacaoDAO comunicacaoDAO;
+	
+	@Autowired
+	private ComunicacaoConverter comunicacaoConverter;
 
 	@Autowired
 	private StatusDAO statusDAO;
@@ -664,8 +673,10 @@ public class CandidatoBusiness {
 
 		if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOEMANALISE.getValue()) {
 			for (AvaliadorCandidatoBean a : avaliadores) {
-				recipients.add(a.getUsuario().getEmail());
-				nomes.add(a.getUsuario().getNome());
+				if(a.getUsuario()!=null) {
+					recipients.add(a.getUsuario().getEmail());
+					nomes.add(a.getUsuario().getNome());
+				}
 			}
 		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.PROPOSTACANDIDATO.getValue()) {
 			for (UsuarioBean u : usuarios) {
@@ -717,5 +728,10 @@ public class CandidatoBusiness {
 	@Transactional
 	public void salvarProposta(CandidatoBean bean) {
 		candidatoDAO.update(candidatoConverter.convertBeanToEntity(bean));
+	}
+	
+	@Transactional
+	public void inserirComunicacao(ComunicacaoBean bean){
+		comunicacaoDAO.insert(comunicacaoConverter.convertBeanToEntity(bean));
 	}
 }

@@ -7,7 +7,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -41,7 +44,9 @@ import br.com.prosperity.bean.CancelamentoBean;
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CandidatoCompetenciaBean;
 import br.com.prosperity.bean.CargoBean;
+import br.com.prosperity.bean.CargoSenioridadeBean;
 import br.com.prosperity.bean.CompetenciaBean;
+import br.com.prosperity.bean.ComunicacaoBean;
 import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.PropostaBean;
 import br.com.prosperity.bean.ProvaBean;
@@ -58,6 +63,7 @@ import br.com.prosperity.business.CancelamentoBusiness;
 import br.com.prosperity.business.CandidatoBusiness;
 import br.com.prosperity.business.CargoBusiness;
 import br.com.prosperity.business.FuncionarioBusiness;
+import br.com.prosperity.business.PropostaBusiness;
 import br.com.prosperity.business.ProvaBusiness;
 import br.com.prosperity.business.ProvaCandidatoBusiness;
 import br.com.prosperity.business.SenioridadeBusiness;
@@ -126,13 +132,19 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private List<ProvaCandidatoBean> provasCandidatoBean;
+	
+	@Autowired
+	private List<ComunicacaoBean> comunicacoesBean;
 
 	@Autowired
 	private ProvaBean provaBean;
 
 	@Autowired
 	private PropostaBean propostaBean;
-	
+
+	@Autowired
+	private PropostaBusiness propostaBusiness;
+
 	@Autowired
 	private HttpSession session;
 
@@ -161,7 +173,7 @@ public class CandidatoController<PaginarCandidato> {
 	private void obterDominiosCandidato(Model model) {
 		List<FuncionarioBean> funcionarios = funcionarioBusiness.findAll();
 		model.addAttribute("listaFuncionarios", funcionarios);
-		
+
 		List<TipoCursoBean> tiposCurso = tipoCursoBusiness.obterTodos();
 		model.addAttribute("tiposCurso", tiposCurso);
 
@@ -283,9 +295,10 @@ public class CandidatoController<PaginarCandidato> {
 	public String historicoCandidato(Model model, @PathVariable Integer id) {
 		CandidatoBean candidato = candidatoBusiness.obter(id);
 		List<ProvaCandidatoBean> provasCandidatoBean = provaCandidatoBusiness.obterProva(id);
-		//Pega quantas competencias o candidato tem, divide por 7 para ver quantas colunas deve ter na tela;
-		int colCompetencias = candidato.getCompetencias().size()/7;
-		
+		// Pega quantas competencias o candidato tem, divide por 7 para ver
+		// quantas colunas deve ter na tela;
+		int colCompetencias = candidato.getCompetencias().size() / 7;
+
 		model.addAttribute("colCompetencias", colCompetencias);
 		model.addAttribute("provas", provasCandidatoBean);
 		model.addAttribute("candidato", candidato);
@@ -419,7 +432,7 @@ public class CandidatoController<PaginarCandidato> {
 
 		if (!processoSeletivo.equals("[]")) {
 			List<ProvaCandidatoBean> provas = convertGsonProva(processoSeletivo, candidatoBean);
-			if(caminhoProvas != null){
+			if (caminhoProvas != null) {
 				for (int i = 0; i < caminhoProvas.size(); i++) {
 					provas.get(i).setCaminhoProva(caminhoProvas.get(i));
 				}
@@ -427,28 +440,28 @@ public class CandidatoController<PaginarCandidato> {
 			provaCandidatoBusiness.inserir(provas);
 			// TODO:não da refresh ao salvar status
 		}
-		
+
+		if (!avaliacoesCandidato.equals("[]")) {
+			candidatoBean.setCompetencias(convertGson(avaliacoesCandidato));
+		}
+
+		if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.PROPOSTACANDIDATO.getValue()) {
+			propostaBean.setFlSituacao(true);
+			propostaBean.setCandidato(candidatoBean.getId());
+			propostaBusiness.inserir(propostaBean);
+		}
+
+		try {
+			candidatoBusiness.inserir(candidatoBean);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		try {
 			// alterado aqui \/
 			candidatoBusiness.alterarStatus(situacaoCandidato);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-
-		if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.PROPOSTACANDIDATO.getValue()
-				|| !avaliacoesCandidato.equals("[]")) {
-			if (!avaliacoesCandidato.equals("[]")) {
-				candidatoBean.setCompetencias(convertGson(avaliacoesCandidato));
-			}
-			if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.PROPOSTACANDIDATO.getValue()) {
-				propostaBean.setFlSituacao(true);
-				candidatoBean.getPropostaBean().add(propostaBean);
-			}
-			try {
-				candidatoBusiness.inserir(candidatoBean);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		}
 
 		// Tive de fazer essa busca novamente, para buscar o novo Ultimo Status
@@ -518,7 +531,7 @@ public class CandidatoController<PaginarCandidato> {
 						provaCandidatoBean.setCandidato(bean);
 						provasCandidatoBean.add(provaCandidatoBean);
 					}
-				}else if(aux % 2 != 0){
+				} else if (aux % 2 != 0) {
 					provaCandidatoBean = new ProvaCandidatoBean();
 					provaCandidatoBean.setProvas(provaBean);
 					provaCandidatoBean.setCandidato(bean);
@@ -541,6 +554,22 @@ public class CandidatoController<PaginarCandidato> {
 		try {
 			File file = new File(caminho);
 			response.addHeader("Content-Disposition", "attachment; filename=" + caminho);
+			InputStream is = new FileInputStream(file);
+			org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
+			response.flushBuffer();
+
+			is.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	@RequestMapping(value = "/papers", method = RequestMethod.GET)
+	public void getPapers(String caminho, HttpServletResponse response) {
+		
+		String[] nome = caminho.split("\\\\");
+		try {
+			File file = new File(caminho);
+			response.addHeader("Content-Disposition", "attachment; filename=" + nome[5]);
 			InputStream is = new FileInputStream(file);
 			org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
 			response.flushBuffer();
@@ -584,6 +613,7 @@ public class CandidatoController<PaginarCandidato> {
 		try {
 			String caminho = gerarProposta(papers);
 			TesteExcel teste = new TesteExcel();
+			propostaBean = new PropostaBean();
 			propostaBean = teste.testa(caminho);
 		} catch (Exception e) {
 			return "error";
@@ -609,4 +639,37 @@ public class CandidatoController<PaginarCandidato> {
 	public @ResponseBody PropostaBean returnProposta(Model model) {
 		return propostaBean;
 	}
+	
+	@RequestMapping(value = "/comunicacao", method = RequestMethod.POST)
+	public @ResponseBody List<ComunicacaoBean> comunicacao (Model model,
+			@ModelAttribute("dataContato") String dataContato, @ModelAttribute ("observacao") String observacao, @ModelAttribute ("usuario") Integer usuario, @ModelAttribute ("candidato") Integer candidato) {
+		ComunicacaoBean comunicacaoBean = new ComunicacaoBean();
+		
+		Date data = new Date();
+		try {
+			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+			data = formato.parse(dataContato);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		UsuarioBean usuarioBean = new UsuarioBean();
+		usuarioBean.setId(usuario);
+		comunicacaoBean.setUsuarioBean(usuarioBean);;
+		comunicacaoBean.setDataContato(data);
+		comunicacaoBean.setObservacao(observacao);
+		
+		CandidatoBean candidatoBean = new CandidatoBean();
+		candidatoBean.setId(candidato);
+		comunicacaoBean.setCandidatoBean(candidatoBean);;
+
+		/*SituacaoCandidatoBean bean = new SituacaoCandidatoBean();
+		bean.setIdCandidato(id);
+		bean.setStatus(StatusCandidatoEnum.CANDIDATOEMANALISE);*/
+		
+		candidatoBusiness.inserirComunicacao(comunicacaoBean);
+		//comunicacaoBean.setCandidatoBean();
+		return comunicacoesBean;
+	}
 }
+

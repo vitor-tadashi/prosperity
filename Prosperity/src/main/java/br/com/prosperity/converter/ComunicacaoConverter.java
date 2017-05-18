@@ -1,15 +1,16 @@
 package br.com.prosperity.converter;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import br.com.prosperity.bean.ComunicacaoBean;
 import br.com.prosperity.entity.ComunicacaoEntity;
 
+@Component
 public class ComunicacaoConverter implements Converter<ComunicacaoEntity, ComunicacaoBean>{
 
 	@Autowired
 	private CandidatoConverter candidatoConverter;
-	
 
 	@Autowired
 	private UsuarioConverter usuarioConverter;

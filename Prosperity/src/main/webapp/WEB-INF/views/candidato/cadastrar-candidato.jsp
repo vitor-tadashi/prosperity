@@ -47,6 +47,8 @@
 							<div id="textDiv1"></div>
 							<div id="textDiv2"></div>
 							<div id="textDiv3"></div>
+							
+							<input id="txtUsuario" type="hidden" name="usuarioBean" value="${autenticado.id}">
 
 							<form class="form-border" action="salvar" method="post"
 								enctype="multipart/form-data" id=formCadastro
@@ -320,28 +322,27 @@
 										</div>
 										</c:if>
 										<!--fim - tab 4 -->
+										
+										<!--começo - tab 5-->
 										<div class="tab-pane fade" id="five">
-											<div class="form-group col-md-3"
-												style="padding-right: 15px; width: 180px;">
+											<div class="form-group col-md-2">
 												<label class="control-label"> Data ultimo contato</label>
 												<div class="form-group">
 													<div class="input-group">
-														<input type="text" class="form-control date"
-															name="dataContato" data-required="false" id="dataContato"
-															value="">
+														<input type="text" class="form-control date" onblur="validarDataContato('dataContato')"
+															name="dataContato" data-required="false" id="dataContato" value="${dataContato}" />
 													</div>
 												</div>
 											</div>
-											<div class="row col-md-8">
+											<div class="form-group col-md-10">
 												<label for="obs" class="control-label">Observações</label><br>
 												<div class="form-group row col-md-8">
-													<input type="text" placeholder="Informe observações"
+													<input type="text" placeholder="Informe observações..." maxlength="120"
 														class="form-control col-md-1" id="obs"
 														data-required="true" name="observacoes" value="" />
 												</div>
-												<div class="text-right col-md-2">
-													<button type="button"
-														class="btn btn-success fa fa-check pull-right"></button>
+												<div class="text-right col-md-1">
+													<button type="button" onclick="inserirComunicacao()" class="btn btn-success fa fa-plus pull-right"></button>
 												</div>
 											</div>
 											<table
@@ -351,12 +352,19 @@
 												<!-- Começo Tabela -->
 												<thead>
 													<tr class="text-center">
-														<th class="text-center" style="width: 212px;">Data
-															ultimo contato</th>
+														<th class="text-center" style="width: 212px;">Data ultimo contato</th>
 														<th class="text-center">Observações</th>
 														<th class="text-center" style="width: 212px;">Usuário</th>
-
 													</tr>
+													</thead>
+													<tbody class="text-center">
+														<c:forEach var="comunicacao" items="${comunicacoes}" varStatus="i">
+														<tr>
+														<td><fmt:formatDate value="${comunicacao.dataContato}" pattern="dd/MM/yyyy" /></td>
+														<td>${comunicacao.observacao}</td>
+														<td>${comunicacao.usuarioBean}</td>
+														</tr>
+														</c:forEach> 	
 												</tbody>
 											</table>
 											<!--fim - tab 5 -->
@@ -364,7 +372,7 @@
 									</div>
 								</div>
 								<div class="panel-footer">
-									<input type="hidden" value="${candidato.id}" name="id">
+									<input type="hidden" value="${candidato.id}" name="id" id="candidato">
 									<input type="hidden" value="${erro}" id="contErro"> <a
 										href="/candidato/file/${candidato.id}" target="_blank"
 										class="btn btn-default pull-left download-download">Download</a>
