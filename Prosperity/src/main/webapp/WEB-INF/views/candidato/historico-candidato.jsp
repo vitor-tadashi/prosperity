@@ -132,6 +132,21 @@
 								<div class="tab-pane fade" id="second">
 									<fieldset>
 										<legend style="color:#424f63"><h5><strong>Datas de contatos</strong></h5></legend>
+										<div class="row">
+											<div class="col-md-12">
+												<c:forEach items="${datasContatos }" var="dtContato">
+													<div class="col-md-2">
+														<p class="" id="nome"><i class="fa fa-calendar"></i> <fmt:formatDate value="${dtContato.dataContato}"
+															pattern="dd/MM/yyyy" /></p>
+														<p class="" id="nome"><strong>Avaliador:</strong>${dtContato.usuarioBean.funcionario.nome}</p>
+													</div>
+													<div class="col-md-4">
+														<p class="" id="nome"><strong>Obs:</strong> ${dtContato.observacao }</p>
+														<p> &nbsp;</p>
+													</div>
+												</c:forEach>
+											</div>
+										</div>
 									</fieldset>
 									<fieldset>
 										<legend style="color:#424f63"><h5><strong>Datas de entrevistas</strong></h5></legend>
@@ -212,7 +227,12 @@
 														<div class="tl-circ"></div>
 														<div class="timeline-panel">
 															<div class="tl-heading">
-																<h4>Status: ${status.status.nome}</h4>
+																<h4>
+																	Status: ${status.status.nome} 
+																	<c:if test="${status.status.id == 10}">
+																		<a class="fa fa-eye" data-toggle="tooltip" title="Visualizar proposta"></a>
+																	</c:if>
+																</h4>
 																<p>
 																	<small class="text-muted"><i class="fa fa-calendar"></i>
 																		<fmt:formatDate value="${status.dataAlteracao}"
@@ -220,12 +240,27 @@
 																</p>
 															</div>
 															<div class="tl-body">
-																<p class="desParecer">
-																	<label>Parecer:</label> <span>${status.descricaoParecer}</span>
-																</p>
-																<p>
-																	<label>Usuário:</label> <span>${status.usuario.nome}</span>
-																</p>
+																<div class="col-md-12">
+																	<div class="row">
+																		<p class="desParecer">
+																			<label>Parecer:</label> <span>${status.descricaoParecer}</span>
+																		</p>
+																	</div>
+																	<div class="row">
+																		<p>
+																			<label>Usuário:</label> <span>${status.usuario.nome}</span>
+																		</p>
+																	</div>
+																	<c:if test="${status.status.id == 10}">
+																		<div class="row">
+																			<p class="">
+																				<label>Líquido c/ benefícios:</label>R$: <span>${candidato.propostaBean[0].anteriorTotalAnualLiquidoComBeneficios}</span>
+																				<i class="fa fa-long-arrow-right"></i>
+																				<label> Líquido c/ benefícios:</label>R$: <span>${candidato.propostaBean[0].novoTotalAnualLiquidoComBeneficios}</span>
+																			</p>
+																		</div>
+																	</c:if>
+																</div>
 															</div>
 														</div>
 													</li>
