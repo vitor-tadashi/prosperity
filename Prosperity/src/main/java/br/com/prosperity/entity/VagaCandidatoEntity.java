@@ -16,31 +16,53 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tbVagaCandidato")
 @NamedQueries({
-	@NamedQuery(name = "countCandidatosVaga", query = "SELECT count(vc) FROM VagaCandidatoEntity vc WHERE vc.vaga.id = 1200"),
-	@NamedQuery(name = "candidatosVaga", query = "SELECT vc FROM VagaCandidatoEntity vc WHERE vc.vaga.id = ?1"),
-	@NamedQuery(name = "candidatoContratado", query = "SELECT cc FROM VagaCandidatoEntity cc WHERE cc.candidato.id = ?1 ORDER BY cc.idVagaCandidato ASC")
-})
+		@NamedQuery(name = "countCandidatosVaga", query = "SELECT count(vc) FROM VagaCandidatoEntity vc WHERE vc.vaga.id = 1200"),
+		@NamedQuery(name = "candidatosVaga", query = "SELECT vc FROM VagaCandidatoEntity vc WHERE vc.vaga.id = ?1"),
+		@NamedQuery(name = "candidatoContratado", query = "SELECT cc FROM VagaCandidatoEntity cc WHERE cc.candidato.id = ?1 ORDER BY cc.idVagaCandidato ASC") })
 public class VagaCandidatoEntity {
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
 	@Column(name = "idVagaCandidato", unique = true, nullable = false)
 	private Integer idVagaCandidato;
 
-	@ManyToOne(cascade = CascadeType.REFRESH, fetch=FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@JoinColumn(name = "idVaga")
 	private VagaEntity vaga;
 
-	@OneToOne(cascade = CascadeType.REFRESH, fetch=FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@JoinColumn(name = "idCanalInformacao")
 	private CanalInformacaoEntity canalInformacao;
 
-	@ManyToOne(fetch=FetchType.LAZY,cascade = CascadeType.REFRESH)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "idCandidato")
 	private CandidatoEntity candidato;
-	
+
 	@Column(name = "contratado")
 	private Boolean contratado;
-	
+
+	@Column(name = "dsOutros")
+	private String outros;
+
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idFuncionario")
+	private FuncionarioEntity funcionarioEntity;
+
+	public String getOutros() {
+		return outros;
+	}
+
+	public void setOutros(String outros) {
+		this.outros = outros;
+	}
+
+	public FuncionarioEntity getFuncionarioEntity() {
+		return funcionarioEntity;
+	}
+
+	public void setFuncionarioEntity(FuncionarioEntity funcionarioEntity) {
+		this.funcionarioEntity = funcionarioEntity;
+	}
+
 	public Boolean getContratado() {
 		return contratado;
 	}
@@ -83,9 +105,7 @@ public class VagaCandidatoEntity {
 
 	public void setContratado(Integer id) {
 		// TODO Auto-generated method stub
-		
-	}
 
 	}
 
-
+}

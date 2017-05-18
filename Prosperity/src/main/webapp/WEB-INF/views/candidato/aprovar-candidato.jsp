@@ -254,6 +254,35 @@
 														</div>
 														<!-- /form-group -->
 													</div>
+													<div class="form-group col-md-12">
+														<div class ="table-responsive">
+															<br/>
+															<br/>
+															<table id="tabelaVaga"
+																class="table table-bordered table-condensed table-hover"
+																style="font-size: 12px; vertical-align: middle; margin-top: -10px;">
+																<thead>
+																	<tr>
+																		<th class="text-center">Nome</th>
+																		<th class="text-center">Cargo</th>
+																		<th class="text-center">Nivel</th>
+																		<th class="text-center">Conhecimento</th>
+																		<th class="text-center">Admissão</th>
+																		<th class="text-center">Salário</th>
+																		<th class="text-center">VR</th>
+																		<th class="text-center">VA</th>
+																		<th class="text-center">Estacionamento</th>
+																		<th class="text-center">Comb.</th>
+																		<th class="text-center">AM</th>
+																		<th class="text-center">Outros</th>
+																		<th class="text-center">Taxa</th>
+																	</tr>
+																</thead>
+																<tbody class="text-center tbComparativo" id="idtbComparativo">
+																</tbody>
+															</table>
+														</div>
+													</div>
 													<div class="form-group col-md-6">
 														<label class="control-label">Importe a proposta</label>
 														<div class="upload-file" onchange="gerarProposta()">
@@ -460,6 +489,35 @@
 
 		<script src="/resources/js/parsley.min.js"></script>
 		<script src="/resources/js/custom/aprovar-candidato.js"></script>
+		<script>
+		/*gerador de campo*/
+		var cont = 0;
+		$("#gerarCampo").click(function() {
+			var campos =
+				"<div class='div"+cont+" processoSeletivo'>"
+				+ "<div class='row'>"
+				+ "<div class='col-md-4 form-inline'>"
+				+ "<a id='btnRemover' onclick='remover("
+				+ cont
+				+ ")'class='text-danger fa fa-times fa-lg'></a>"
+				+ "&nbsp;<select class='form-control parsley-validated' id='prova-js' data-required='true'>"
+				+ "<option value='0'>Selecione</option>"
+				+ "<c:forEach var='selecao' items='${provas}'>"
+				+ "<option value='${selecao.id}'>${selecao.nome}</option>"
+				+ "</c:forEach>"
+				+ "</select>"
+				+ "</div>"
+				+ "<div class='col-md-5 form-inline'>"
+				+ "<input name='papers' id='modalPapers' type='file' class='input-sm parsley-validated' multiple data-input='false' data-required='true'>"
+				+ "</div>"
+				+ "</div>" + "</div>";
+				cont++;
+				/*adiciona na div*/
+			$("#processoSeletivo").append(campos);
+
+			/*contador de caracter - descrição prova*/
+		});
+		</script>
 
 	</layout:put>
 </layout:extends>

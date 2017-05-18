@@ -3,7 +3,6 @@ package br.com.prosperity.converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.bean.VagaCandidatoBean;
 import br.com.prosperity.entity.VagaCandidatoEntity;
 
@@ -12,6 +11,9 @@ public class VagaCandidatoConverter implements Converter<VagaCandidatoEntity, Va
 
 	@Autowired
 	private CanalInformacaoConverter canalInformacaoConverter;
+	
+	@Autowired
+	private FuncionarioConverter funcionarioConverter;
 
 	@Override
 	public VagaCandidatoEntity convertBeanToEntity(VagaCandidatoBean bean) {
@@ -22,6 +24,8 @@ public class VagaCandidatoConverter implements Converter<VagaCandidatoEntity, Va
 		entity.setIdVagaCandidato(bean.getId());
 		entity.setCanalInformacao(canalInformacaoConverter.convertBeanToEntity(bean.getCanalInformacao()));
 		entity.setContratado(bean.getContratado());
+		entity.setOutros(bean.getOutros());
+		entity.setFuncionarioEntity(funcionarioConverter.convertBeanToEntity(bean.getFuncionarioBean()));
 		// entity.setCandidato(candidatoConverter.convertBeanToEntity(bean.getCandidatoBean()));
 
 		return entity;
@@ -36,6 +40,8 @@ public class VagaCandidatoConverter implements Converter<VagaCandidatoEntity, Va
 		bean.setId(entity.getIdVagaCandidato());
 		bean.setCanalInformacao(canalInformacaoConverter.convertEntityToBean(entity.getCanalInformacao()));
 		bean.setContratado(entity.getContratado());
+		bean.setOutros(entity.getOutros());
+		bean.setFuncionarioBean(funcionarioConverter.convertEntityToBean(entity.getFuncionarioEntity()));
 		/* bean.setVaga(vagaConverter.convertEntityToBean(entity.getVaga())); */
 		// bean.setCandidatoBean(candidatoConverter.convertEntityToBean(entity.getCandidato()));
 

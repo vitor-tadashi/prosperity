@@ -13,23 +13,41 @@ $( "#canalInformacao" ).change(function() {
 	var select = $(this).val();
 	
     if (select == '9') {
+    	// Outros fica obrigatório e visível:
     	$('.js-outros').show();
+    	$('#outros').prop('required',true);
+    	
     	$('.js-indicacao-colegas').hide();
+    	$('#indicacao-colegas').prop('required',false);
+    	
     }
     else if (select == '8') {
-    	$('.js-indicacao-colegas').show();
     	$('.js-outros').hide();
+    	$('#outros').prop('required',false);
+    	
+    	// Indicacao colegas fica obrigatório e visível:
+    	$('.js-indicacao-colegas').show();
+    	$('#indicacao-colegas').prop('required',true);
     }
     else {
+    	
+    	// Ninguém selecionado, ninguém aparece:
     	$('.js-outros').hide();
     	$('.js-indicacao-colegas').hide();
+    	
+    	// Ninguém obrigatório:
+    	$('#outros').prop('required',false);
+    	$('#indicacao-colegas').prop('required',false);
     }
 	});
 
 $(document).ready(function() {
 
+	// Ao carregar a página, esses campos não aparecem nem ficam obrigatórios:
 	$('.js-outros').hide();
 	$('.js-indicacao-colegas').hide();
+	$('#outros').prop('required',false);
+	$('#indicacao-colegas').prop('required',false);
 	
 	$('.cpf').mask('000.000.000-00');
 	$('.telefone').mask('(00)0000-00009');
@@ -502,6 +520,88 @@ function validarVaga() {
 	}
 	return true;
 }
+function inserirComunicacao(){
+	alert('entrou');
+	var dadosajax = {
+			'dataContato' : $("#dataContato").val(),
+			'observacao' : $("#obs").val(),
+			'usuario': $("#txtUsuario").val(),
+			'candidato': $("#candidato").val(),
+			};
+			$.ajax({
+			url: "/candidato/comunicacao",
+			data: dadosajax,
+			type: 'POST',
+			cache: false,
+			success: function(){
+				alert('sucesso');
+			},
+			error: function(){
+				alert('erro');
+				
+			}
+			});
+}
+function validarDataContato(idCampo) {
+
+				var campo = $("#" + idCampo).val();
+				if (campo != "") {
+					erro = 0;
+					hoje = new Date();
+					anoAtual = hoje.getFullYear();
+					mes = mesAtual = hoje.getMonth();
+					diaAtual = hoje.getDay();
+					dataAtual = diaAtual +"/"+mesAtual+"/"+anoAtual;
+					barras = campo.split("/");
+					if (barras.length == 3) {
+						dia = barras[0];
+						mes = barras[1];
+						ano = barras[2];
+						if(ano>=anoAtual){
+							if(mes>=mesAtual){
+								if(dia>diaAtual){
+								
+								var div = document.getElementById("textDiv2").className = "alert alert-danger";
+
+								textDiv2.textContent = "Data de último contato inválida";
+
+								var text = "[" + div.textContent + "]";
+									return false;
+								}
+							}
+							
+						}
+						resultado = (!isNaN(dia) && (dia > 0) && (dia < 32))
+								&& (!isNaN(mes) && (mes > 0) && (mes < 13))
+								&& (!isNaN(ano) && (ano.length == 4) && (ano >= 1900));
+						if (!resultado) {
+							var div = document.getElementById("textDiv2").className = "alert alert-danger";
+
+							textDiv2.textContent = "Data de último contato inválida";
+
+							var text = "[" + div.textContent + "]";
+
+							return false;
+						}
+					} else {
+						var div = document.getElementById("textDiv2").className = "";
+
+						textDiv2.textContent = "Data de último contato inválida";
+
+						var text = "[" + div.textContent + "]";
+
+						return false;
+					}
+					var div = document.getElementById("textDiv2").className = "";
+
+					textDiv2.textContent = "";
+
+					var text = "[" + div.textContent + "]";
+
+					return true;
+
+				}
+			}
 
 function esconderAba(){
 	if (data.ultimoStatus.status.id == "9") {

@@ -24,6 +24,7 @@ import br.com.prosperity.bean.AvaliacaoBean;
 import br.com.prosperity.bean.AvaliadorCandidatoBean;
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CompetenciaBean;
+import br.com.prosperity.bean.ComunicacaoBean;
 import br.com.prosperity.bean.DataEntrevistaBean;
 import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
@@ -33,7 +34,9 @@ import br.com.prosperity.converter.AvaliacaoConverter;
 import br.com.prosperity.converter.AvaliadorCandidatoConverter;
 import br.com.prosperity.converter.CandidatoConverter;
 import br.com.prosperity.converter.CompetenciaConverter;
+import br.com.prosperity.converter.ComunicacaoConverter;
 import br.com.prosperity.converter.DataEntrevistaConverter;
+import br.com.prosperity.converter.FuncionarioConverter;
 import br.com.prosperity.converter.UsuarioConverter;
 import br.com.prosperity.dao.AvaliacaoDAO;
 import br.com.prosperity.dao.AvaliadorCandidatoDAO;
@@ -41,7 +44,9 @@ import br.com.prosperity.dao.AvaliadorVagaDAO;
 import br.com.prosperity.dao.CanalInformacaoDAO;
 import br.com.prosperity.dao.CandidatoDAO;
 import br.com.prosperity.dao.CompetenciaDAO;
+import br.com.prosperity.dao.ComunicacaoDAO;
 import br.com.prosperity.dao.DataEntrevistaDAO;
+import br.com.prosperity.dao.FuncionarioDAO;
 import br.com.prosperity.dao.SituacaoAtualDAO;
 import br.com.prosperity.dao.StatusCandidatoDAO;
 import br.com.prosperity.dao.StatusDAO;
@@ -57,10 +62,10 @@ import br.com.prosperity.entity.AvaliadorVagaEntity;
 import br.com.prosperity.entity.CandidatoEntity;
 import br.com.prosperity.entity.CompetenciaEntity;
 import br.com.prosperity.entity.DataEntrevistaEntity;
+import br.com.prosperity.entity.FuncionarioEntity;
 import br.com.prosperity.entity.StatusCandidatoEntity;
 import br.com.prosperity.entity.StatusDisponivelEntity;
 import br.com.prosperity.entity.StatusFuturoEntity;
-import br.com.prosperity.entity.UsuarioEntity;
 import br.com.prosperity.entity.VagaCandidatoEntity;
 import br.com.prosperity.entity.VagaEntity;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
@@ -119,6 +124,12 @@ public class CandidatoBusiness {
 
 	@Autowired
 	private SituacaoAtualDAO situacaoAtualDAO;
+	
+	@Autowired
+	private ComunicacaoDAO comunicacaoDAO;
+	
+	@Autowired
+	private ComunicacaoConverter comunicacaoConverter;
 
 	@Autowired
 	private StatusDAO statusDAO;
@@ -155,6 +166,12 @@ public class CandidatoBusiness {
 
 	@Autowired
 	SituacaoCandidatoBean situacaoCandidato;
+	
+	@Autowired
+	FuncionarioDAO funcionarioDAO;
+	
+	@Autowired
+	FuncionarioConverter funcionarioConverter;
 
 	@Transactional(readOnly = true)
 	public List<CandidatoBean> listarDecrescente() {
@@ -236,6 +253,11 @@ public class CandidatoBusiness {
 		situacaoCandidato = new SituacaoCandidatoBean();
 		beans = new CandidatoBean();
 		CandidatoEntity candidatoEntity = new CandidatoEntity();
+		
+		// Para inserir candidato:
+		Integer idFuncionario = candidatoBean.getVagaCandidato().getFuncionarioBean().getId();
+		FuncionarioEntity funcionarioEntity = funcionarioDAO.findById(idFuncionario);
+		VagaCandidatoEntity vagaCandidatoEntity = new VagaCandidatoEntity();
 
 		if (candidatoBean.getId() == null) {
 			if (verificarCandidatura(candidatoBean)) {
@@ -311,6 +333,7 @@ public class CandidatoBusiness {
 		candidatoEntity.setCpf(replaceCPF);
 	}
 
+	// Esse método é que está setando informações na tabela VagaCandidato (tbVagaCandidato):
 	private VagaEntity definirVagas(CandidatoBean candidatoBean, CandidatoEntity candidatoEntity) {
 		Set<VagaCandidatoEntity> vagas = new HashSet<>();
 		for (VagaCandidatoEntity v : candidatoEntity.getVagas()) {
@@ -319,13 +342,21 @@ public class CandidatoBusiness {
 					canalInformacaoDAO.findById(candidatoBean.getVagaCandidato().getCanalInformacao().getId()));
 			vagas.add(v);
 		}
-		if (vagas.isEmpty() || vagas.size() == 0 || vagas == null) {
+		if (vagas == null || vagas.size() == 0 || vagas.isEmpty()) {
 			VagaCandidatoEntity novoVagaCandidato = new VagaCandidatoEntity();
 
 			novoVagaCandidato.setVaga(vagaDAO.findById(candidatoBean.getVagaCandidato().getVaga().getId()));
-			if (candidatoBean.getVagaCandidato().getCanalInformacao().getId() != null)
+			if (candidatoBean.getVagaCandidato().getCanalInformacao().getId() != null){
 				novoVagaCandidato.setCanalInformacao(
 						canalInformacaoDAO.findById(candidatoBean.getVagaCandidato().getCanalInformacao().getId()));
+				if(candidatoBean.getVagaCandidato().getFuncionarioBean().getId()!= null && candidatoBean.getVagaCandidato().getFuncionarioBean().getId()!= 0){
+					novoVagaCandidato.setFuncionarioEntity(funcionarioDAO.findById(
+							candidatoBean.getVagaCandidato().getFuncionarioBean().getId()));
+				} 
+				if(candidatoBean.getVagaCandidato().getOutros()!= null){
+					novoVagaCandidato.setOutros(candidatoBean.getVagaCandidato().getOutros());
+				}
+			}
 			novoVagaCandidato.setCandidato(candidatoEntity);
 			vagas.add(novoVagaCandidato);
 		}
@@ -642,8 +673,10 @@ public class CandidatoBusiness {
 
 		if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOEMANALISE.getValue()) {
 			for (AvaliadorCandidatoBean a : avaliadores) {
-				recipients.add(a.getUsuario().getEmail());
-				nomes.add(a.getUsuario().getNome());
+				if(a.getUsuario()!=null) {
+					recipients.add(a.getUsuario().getEmail());
+					nomes.add(a.getUsuario().getNome());
+				}
 			}
 		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.PROPOSTACANDIDATO.getValue()) {
 			for (UsuarioBean u : usuarios) {
@@ -695,5 +728,10 @@ public class CandidatoBusiness {
 	@Transactional
 	public void salvarProposta(CandidatoBean bean) {
 		candidatoDAO.update(candidatoConverter.convertBeanToEntity(bean));
+	}
+	
+	@Transactional
+	public void inserirComunicacao(ComunicacaoBean bean){
+		comunicacaoDAO.insert(comunicacaoConverter.convertBeanToEntity(bean));
 	}
 }
