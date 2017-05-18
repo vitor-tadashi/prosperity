@@ -2,6 +2,14 @@
 			var nomeCandidato = "";
 			var mensagemMudancaStatus = "";
 
+/* Função violenta para limpar o modal no click */
+			$('#modalProposta').on('hidden.bs.modal', function (e) {
+				  $(this)
+				    .find("input,textarea,select")
+				       .val('')
+				       .end();
+				})
+			
 			function maxCaracterParecer() {
 				var maxParecer = $("#parecer").val();
 				var restante = 500 - maxParecer.length;
@@ -185,7 +193,6 @@
 						'idCandidato' : $('#hdn-id-candidato').val(),
 						'parecer' : $('#parecer').val(),
 						'idStatus' : $('#hdn-status').val(),
-						'parecerTecnico' : $('#parecerTecnico').val(),
 						'processoSeletivo' : JSON.stringify(provasDescricoes),
 						'avaliacoesCandidato' : JSON.stringify(avaliacoes)
 					},
@@ -306,7 +313,7 @@
 						url : 'gerar-proposta',
 						enctype : 'multipart/form-data',
 						type : 'POST',
-						data : formData,
+						data : formData, 'idCandidato' : $('#hdn-id-candidato').val(),
 						processData : false,
 						contentType : false,
 						cache : false,

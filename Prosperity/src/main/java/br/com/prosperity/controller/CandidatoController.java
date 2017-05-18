@@ -614,10 +614,10 @@ public class CandidatoController<PaginarCandidato> {
 
 	@ResponseBody
 	@PostMapping(value = "gerar-proposta")
-	public String gerarProposta(MultipartHttpServletRequest request, Model model) {
+	public String gerarProposta(MultipartHttpServletRequest request, Integer idCandidato, Model model) {
 		List<MultipartFile> papers = request.getFiles("file");
 		try {
-			String caminho = gerarProposta(papers);
+			String caminho = gerarProposta(papers, idCandidato);
 			TesteExcel teste = new TesteExcel();
 			propostaBean = new PropostaBean();
 			propostaBean = teste.testa(caminho);
@@ -627,9 +627,21 @@ public class CandidatoController<PaginarCandidato> {
 		return "success";
 	}
 
-	public String gerarProposta(List<MultipartFile> multipartFiles) throws IOException {
+	public String gerarProposta(List<MultipartFile> multipartFiles, Integer idCandidato) throws IOException {
+//        //criar um diretorio para salvar a proposta
+//		Path path = Paths.get("C:\\Program Files (x86)\\Prosperity\\Proposta");
+//        //if directory exists?
+//        if (!Files.exists(path)) {
+//            try {
+//                Files.createDirectories(path);
+//            } catch (IOException e) {
+//                //fail to create directory
+//                e.printStackTrace();
+//            }
+//        }
 		String arquivo = null;
-		String directory = "C:/Users/guilherme.oliveira/Documents/teste/";
+		//String directory = "C:\\Program Files (x86)\\Prosperity\\Proposta\\";
+		String directory = "/home/user/uploadedFilesDir/" + idCandidato + "/";
 		File file = new File(directory);
 		file.mkdirs();
 		for (MultipartFile multipartFile : multipartFiles) {

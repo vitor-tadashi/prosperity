@@ -150,11 +150,11 @@
 													<label for="rua" class="control-label">Endereço</label> <input
 														type="text" class="form-control parsley-validated"
 														id="rua" data-required="true" name="endereco.logradouro"
-														value="${candidato.endereco.logradouro}" />
+														value="${candidato.endereco.logradouro}" maxlength="100" />
 												</div>
 												<div class="form-group col-md-2">
 													<label for="numero" class="control-label">Número</label> <input
-														type="number" class="form-control parsley-validated"
+														type="text" class="form-control parsley-validated"
 														id="numero" data-required="true" name="endereco.numero"
 														value="${candidato.endereco.numero}" maxlength="30" />
 

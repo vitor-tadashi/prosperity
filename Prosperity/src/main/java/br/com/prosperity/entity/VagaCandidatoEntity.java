@@ -43,7 +43,7 @@ public class VagaCandidatoEntity {
 	@Column(name = "dsOutros")
 	private String outros;
 
-	@OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idFuncionario")
 	private FuncionarioEntity funcionarioEntity;
 
