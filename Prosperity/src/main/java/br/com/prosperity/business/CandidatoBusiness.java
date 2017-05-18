@@ -244,6 +244,8 @@ public class CandidatoBusiness {
 		situacaoCandidato = new SituacaoCandidatoBean();
 		beans = new CandidatoBean();
 		CandidatoEntity candidatoEntity = new CandidatoEntity();
+		
+		// Para inserir candidato:
 		Integer idFuncionario = candidatoBean.getVagaCandidato().getFuncionarioBean().getId();
 		FuncionarioEntity funcionarioEntity = funcionarioDAO.findById(idFuncionario);
 		VagaCandidatoEntity vagaCandidatoEntity = new VagaCandidatoEntity();
@@ -322,6 +324,7 @@ public class CandidatoBusiness {
 		candidatoEntity.setCpf(replaceCPF);
 	}
 
+	// Esse método é que está setando informações na tabela VagaCandidato (tbVagaCandidato):
 	private VagaEntity definirVagas(CandidatoBean candidatoBean, CandidatoEntity candidatoEntity) {
 		Set<VagaCandidatoEntity> vagas = new HashSet<>();
 		for (VagaCandidatoEntity v : candidatoEntity.getVagas()) {
@@ -330,13 +333,21 @@ public class CandidatoBusiness {
 					canalInformacaoDAO.findById(candidatoBean.getVagaCandidato().getCanalInformacao().getId()));
 			vagas.add(v);
 		}
-		if (vagas.isEmpty() || vagas.size() == 0 || vagas == null) {
+		if (vagas == null || vagas.size() == 0 || vagas.isEmpty()) {
 			VagaCandidatoEntity novoVagaCandidato = new VagaCandidatoEntity();
 
 			novoVagaCandidato.setVaga(vagaDAO.findById(candidatoBean.getVagaCandidato().getVaga().getId()));
-			if (candidatoBean.getVagaCandidato().getCanalInformacao().getId() != null)
+			if (candidatoBean.getVagaCandidato().getCanalInformacao().getId() != null){
 				novoVagaCandidato.setCanalInformacao(
 						canalInformacaoDAO.findById(candidatoBean.getVagaCandidato().getCanalInformacao().getId()));
+				if(candidatoBean.getVagaCandidato().getFuncionarioBean().getId()!= null && candidatoBean.getVagaCandidato().getFuncionarioBean().getId()!= 0){
+					novoVagaCandidato.setFuncionarioEntity(funcionarioDAO.findById(
+							candidatoBean.getVagaCandidato().getFuncionarioBean().getId()));
+				} 
+				if(candidatoBean.getVagaCandidato().getOutros()!= null){
+					novoVagaCandidato.setOutros(candidatoBean.getVagaCandidato().getOutros());
+				}
+			}
 			novoVagaCandidato.setCandidato(candidatoEntity);
 			vagas.add(novoVagaCandidato);
 		}
