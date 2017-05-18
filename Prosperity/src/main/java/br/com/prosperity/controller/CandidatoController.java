@@ -7,7 +7,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -40,7 +43,9 @@ import br.com.prosperity.bean.CancelamentoBean;
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CandidatoCompetenciaBean;
 import br.com.prosperity.bean.CargoBean;
+import br.com.prosperity.bean.CargoSenioridadeBean;
 import br.com.prosperity.bean.CompetenciaBean;
+import br.com.prosperity.bean.ComunicacaoBean;
 import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.PropostaBean;
 import br.com.prosperity.bean.ProvaBean;
@@ -50,6 +55,7 @@ import br.com.prosperity.bean.SituacaoAtualBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.StatusBean;
 import br.com.prosperity.bean.TipoCursoBean;
+import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.CanalInformacaoBusiness;
 import br.com.prosperity.business.CancelamentoBusiness;
@@ -124,6 +130,9 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private List<ProvaCandidatoBean> provasCandidatoBean;
+	
+	@Autowired
+	private List<ComunicacaoBean> comunicacoesBean;
 
 	@Autowired
 	private ProvaBean provaBean;
@@ -598,4 +607,37 @@ public class CandidatoController<PaginarCandidato> {
 	public @ResponseBody PropostaBean returnProposta(Model model) {
 		return propostaBean;
 	}
+	
+	@RequestMapping(value = "/comunicacao", method = RequestMethod.POST)
+	public @ResponseBody List<ComunicacaoBean> comunicacao (Model model,
+			@ModelAttribute("dataContato") String dataContato, @ModelAttribute ("observacao") String observacao, @ModelAttribute ("usuario") Integer usuario, @ModelAttribute ("candidato") Integer candidato) {
+		ComunicacaoBean comunicacaoBean = new ComunicacaoBean();
+		
+		Date data = new Date();
+		try {
+			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+			data = formato.parse(dataContato);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		UsuarioBean usuarioBean = new UsuarioBean();
+		usuarioBean.setId(usuario);
+		comunicacaoBean.setUsuarioBean(usuarioBean);;
+		comunicacaoBean.setDataContato(data);
+		comunicacaoBean.setObservacao(observacao);
+		
+		CandidatoBean candidatoBean = new CandidatoBean();
+		candidatoBean.setId(candidato);
+		comunicacaoBean.setCandidatoBean(candidatoBean);;
+
+		/*SituacaoCandidatoBean bean = new SituacaoCandidatoBean();
+		bean.setIdCandidato(id);
+		bean.setStatus(StatusCandidatoEnum.CANDIDATOEMANALISE);*/
+		
+		candidatoBusiness.inserirComunicacao(comunicacaoBean);
+		//comunicacaoBean.setCandidatoBean();
+		return comunicacoesBean;
+	}
 }
+
