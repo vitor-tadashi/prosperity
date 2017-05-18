@@ -547,6 +547,22 @@ public class CandidatoController<PaginarCandidato> {
 			e.printStackTrace();
 		}
 	}
+	@RequestMapping(value = "/papers", method = RequestMethod.GET)
+	public void getPapers(String caminho, HttpServletResponse response) {
+		
+		String[] nome = caminho.split("\\\\");
+		try {
+			File file = new File(caminho);
+			response.addHeader("Content-Disposition", "attachment; filename=" + nome[5]);
+			InputStream is = new FileInputStream(file);
+			org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
+			response.flushBuffer();
+
+			is.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@ResponseBody
 	@RequestMapping(value = "submitFiles", method = RequestMethod.POST)
