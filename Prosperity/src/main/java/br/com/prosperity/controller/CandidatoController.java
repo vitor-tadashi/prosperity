@@ -133,7 +133,7 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private PropostaBean propostaBean;
-	
+
 	@Autowired
 	private PropostaBusiness propostaBusiness;
 
@@ -165,7 +165,7 @@ public class CandidatoController<PaginarCandidato> {
 	private void obterDominiosCandidato(Model model) {
 		List<FuncionarioBean> funcionarios = funcionarioBusiness.findAll();
 		model.addAttribute("listaFuncionarios", funcionarios);
-		
+
 		List<TipoCursoBean> tiposCurso = tipoCursoBusiness.obterTodos();
 		model.addAttribute("tiposCurso", tiposCurso);
 
@@ -433,28 +433,27 @@ public class CandidatoController<PaginarCandidato> {
 			// TODO:não da refresh ao salvar status
 		}
 
+		if (!avaliacoesCandidato.equals("[]")) {
+			candidatoBean.setCompetencias(convertGson(avaliacoesCandidato));
+		}
+
+		if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.PROPOSTACANDIDATO.getValue()) {
+			propostaBean.setFlSituacao(true);
+			propostaBean.setCandidato(candidatoBean.getId());
+			propostaBusiness.inserir(propostaBean);
+		}
+
+		try {
+			candidatoBusiness.inserir(candidatoBean);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		try {
 			// alterado aqui \/
 			candidatoBusiness.alterarStatus(situacaoCandidato);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-
-		if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.PROPOSTACANDIDATO.getValue()
-				|| !avaliacoesCandidato.equals("[]")) {
-			if (!avaliacoesCandidato.equals("[]")) {
-				candidatoBean.setCompetencias(convertGson(avaliacoesCandidato));
-			}
-			if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.PROPOSTACANDIDATO.getValue()) {
-				propostaBean.setFlSituacao(true);
-				candidatoBean.getPropostaBean().add(propostaBean);
-				candidatoBusiness.salvarProposta(candidatoBean);
-			}
-			try {
-				candidatoBusiness.inserir(candidatoBean);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		}
 
 		// Tive de fazer essa busca novamente, para buscar o novo Ultimo Status
@@ -600,7 +599,7 @@ public class CandidatoController<PaginarCandidato> {
 
 	public String gerarProposta(List<MultipartFile> multipartFiles) throws IOException {
 		String arquivo = null;
-		String directory = "/home/user/uploadedFilesDir/" + candidatoBean.getId().toString() + "/";
+		String directory = "C:/Users/guilherme.oliveira/Documents/teste/";
 		File file = new File(directory);
 		file.mkdirs();
 		for (MultipartFile multipartFile : multipartFiles) {

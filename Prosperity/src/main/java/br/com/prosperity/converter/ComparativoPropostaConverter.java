@@ -23,6 +23,7 @@ public class ComparativoPropostaConverter implements Converter<ComparativoPropos
 		entity.setNmSenioridade(bean.getNmSenioridade());
 		entity.setDsConhecimento(bean.getDsConhecimento());
 		entity.setDtAdmissao(bean.getDtAdmissao());
+		entity.setVlrSalario(bean.getVlrSalario());
 		entity.setVlrVr(bean.getVlrVr());
 		entity.setVlrVa(bean.getVlrVa());
 		entity.setVlrEstacionamento(bean.getVlrEstacionamento());
@@ -50,6 +51,7 @@ public class ComparativoPropostaConverter implements Converter<ComparativoPropos
 		bean.setNmSenioridade(entity.getNmSenioridade());
 		bean.setDsConhecimento(entity.getDsConhecimento());
 		bean.setDtAdmissao(entity.getDtAdmissao());
+		bean.setVlrSalario(entity.getVlrSalario());
 		bean.setVlrVr(entity.getVlrVr());
 		bean.setVlrVa(entity.getVlrVa());
 		bean.setVlrEstacionamento(entity.getVlrEstacionamento());

@@ -38,6 +38,8 @@ public class PropostaBean {
 	private double novoTotalAnualLiquidoComBeneficios;
 	private Boolean flSituacao = false;
 
+	private Integer candidato;
+
 	private List<ComparativoPropostaBean> comparativoProposta;
 
 	public Integer getId() {
@@ -278,6 +280,14 @@ public class PropostaBean {
 
 	public void setFlSituacao(Boolean flSituacao) {
 		this.flSituacao = flSituacao;
+	}
+
+	public Integer getCandidato() {
+		return candidato;
+	}
+
+	public void setCandidato(Integer candidato) {
+		this.candidato = candidato;
 	}
 
 	public List<ComparativoPropostaBean> getComparativoProposta() {

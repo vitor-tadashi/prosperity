@@ -118,6 +118,9 @@ public class PropostaEntity {
 	@JoinColumn(name = "idProposta")
 	private List<ComparativoPropostaEntity> comparativoProposta;
 
+	@Column(name = "idCandidato")
+	Integer candidato;
+
 	public Integer getId() {
 		return id;
 	}
@@ -364,6 +367,14 @@ public class PropostaEntity {
 
 	public void setComparativoProposta(List<ComparativoPropostaEntity> comparativoProposta) {
 		this.comparativoProposta = comparativoProposta;
+	}
+
+	public Integer getCandidato() {
+		return candidato;
+	}
+
+	public void setCandidato(Integer candidato) {
+		this.candidato = candidato;
 	}
 
 }
