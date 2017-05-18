@@ -185,7 +185,6 @@
 						'idCandidato' : $('#hdn-id-candidato').val(),
 						'parecer' : $('#parecer').val(),
 						'idStatus' : $('#hdn-status').val(),
-						'parecerTecnico' : $('#parecerTecnico').val(),
 						'processoSeletivo' : JSON.stringify(provasDescricoes),
 						'avaliacoesCandidato' : JSON.stringify(avaliacoes)
 					},
@@ -306,7 +305,7 @@
 						url : 'gerar-proposta',
 						enctype : 'multipart/form-data',
 						type : 'POST',
-						data : formData,
+						data : formData, 'idCandidato' : $('#hdn-id-candidato').val(),
 						processData : false,
 						contentType : false,
 						cache : false,
