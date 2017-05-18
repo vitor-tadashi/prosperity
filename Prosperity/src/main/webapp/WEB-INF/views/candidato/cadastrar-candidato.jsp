@@ -49,6 +49,7 @@
 							<div id="textDiv3"></div>
 							
 							<input id="txtUsuario" type="hidden" name="usuarioBean" value="${autenticado.id}">
+							<input id="nmUsuario" type="hidden" value="${autenticado.funcionario.nome}">
 
 							<form class="form-border" action="salvar" method="post"
 								enctype="multipart/form-data" id=formCadastro
@@ -357,12 +358,12 @@
 														<th class="text-center" style="width: 212px;">Usuário</th>
 													</tr>
 													</thead>
-													<tbody class="text-center">
-														<c:forEach var="comunicacao" items="${comunicacoes}" varStatus="i">
+													<tbody class="text-center" id="trNova">
+														<c:forEach var="comunicacao" items="${datasComunicacao}" varStatus="i">
 														<tr>
 														<td><fmt:formatDate value="${comunicacao.dataContato}" pattern="dd/MM/yyyy" /></td>
 														<td>${comunicacao.observacao}</td>
-														<td>${comunicacao.usuarioBean}</td>
+														<td>${comunicacao.usuarioBean.funcionario.nome}</td>
 														</tr>
 														</c:forEach> 	
 												</tbody>

@@ -62,6 +62,7 @@ import br.com.prosperity.business.CanalInformacaoBusiness;
 import br.com.prosperity.business.CancelamentoBusiness;
 import br.com.prosperity.business.CandidatoBusiness;
 import br.com.prosperity.business.CargoBusiness;
+import br.com.prosperity.business.ComunicacaoBusiness;
 import br.com.prosperity.business.FuncionarioBusiness;
 import br.com.prosperity.business.PropostaBusiness;
 import br.com.prosperity.business.ProvaBusiness;
@@ -147,6 +148,9 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private HttpSession session;
+	
+	@Autowired
+	private ComunicacaoBusiness comunicacaoBusiness;
 
 	private List<String> caminhoProvas;
 
@@ -226,6 +230,7 @@ public class CandidatoController<PaginarCandidato> {
 	@RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
 	public String solicitarCandidato(Model model, @PathVariable Integer id) {
 		CandidatoBean candidato = candidatoBusiness.obterCandidatoPorId(id);
+		List<ComunicacaoBean> comunicacaoBean = comunicacaoBusiness.listarDataComunicacao(id);
 		obterDominiosCandidato(model);
 
 		BigDecimal b = new BigDecimal(candidato.getValorPretensao().toString());
@@ -235,6 +240,7 @@ public class CandidatoController<PaginarCandidato> {
 		boolean podeEditarVaga = candidatoBusiness.podeEditarVaga(candidato.getUltimoStatus());
 		model.addAttribute("candidato", candidato);
 		model.addAttribute("podeEditarVaga", podeEditarVaga);
+		model.addAttribute("datasComunicacao", comunicacaoBean);
 
 		return "candidato/cadastrar-candidato";
 	}
@@ -668,7 +674,9 @@ public class CandidatoController<PaginarCandidato> {
 		bean.setStatus(StatusCandidatoEnum.CANDIDATOEMANALISE);*/
 		
 		candidatoBusiness.inserirComunicacao(comunicacaoBean);
+		
 		//comunicacaoBean.setCandidatoBean();
+		
 		return comunicacoesBean;
 	}
 }

@@ -40,10 +40,10 @@ public class ComunicacaoConverter implements Converter<ComunicacaoEntity, Comuni
 		
 		ComunicacaoBean bean = new ComunicacaoBean();
 		
-		bean.setCandidatoBean(candidatoConverter.convertEntityToBean(entity.getCandidatoEntity()));
-		bean.setDataContato(bean.getDataContato());
-		bean.setId(bean.getId());
-		bean.setObservacao(bean.getObservacao());
+		//bean.setCandidatoBean(candidatoConverter.convertEntityToBean(entity.getCandidatoEntity()));
+		bean.setDataContato(entity.getDataContato());
+		bean.setId(entity.getId());
+		bean.setObservacao(entity.getObservacao());
 		bean.setUsuarioBean(usuarioConverter.convertEntityToBean(entity.getUsuarioEntity()));
 		
 		return bean;
