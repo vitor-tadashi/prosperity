@@ -232,7 +232,7 @@ public class CandidatoController<PaginarCandidato> {
 		CandidatoBean candidato = candidatoBusiness.obterCandidatoPorId(id);
 		List<ComunicacaoBean> comunicacaoBean = comunicacaoBusiness.listarDataComunicacao(id);
 		obterDominiosCandidato(model);
-
+		
 		BigDecimal b = new BigDecimal(candidato.getValorPretensao().toString());
 		b = b.setScale(2, BigDecimal.ROUND_DOWN);
 		candidato.setValorPretensao(b);
@@ -300,12 +300,13 @@ public class CandidatoController<PaginarCandidato> {
 	@RequestMapping(value = "/historico/{id}", method = RequestMethod.GET)
 	public String historicoCandidato(Model model, @PathVariable Integer id) {
 		CandidatoBean candidato = candidatoBusiness.obter(id);
-		//List<ComunicacaoBean> datasContatos = 
+		List<ComunicacaoBean> datasContatos = comunicacaoBusiness.listarDataComunicacao(id);
 		List<ProvaCandidatoBean> provasCandidatoBean = provaCandidatoBusiness.obterProva(id);
 		// Pega quantas competencias o candidato tem, divide por 7 para ver
 		// quantas colunas deve ter na tela;
 		int colCompetencias = candidato.getCompetencias().size() / 7;
-
+		
+		model.addAttribute("datasContatos", datasContatos);
 		model.addAttribute("colCompetencias", colCompetencias);
 		model.addAttribute("provas", provasCandidatoBean);
 		model.addAttribute("candidato", candidato);
