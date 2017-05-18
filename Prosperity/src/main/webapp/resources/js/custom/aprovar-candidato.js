@@ -18,6 +18,7 @@
 			$("body").on("click","#aprovar-candidato",function() {
 				var inputs = $(this).closest("tr").find("input[type=hidden]");
 				var tituloModal = $(this).text();
+				$(".tiraTabela").remove();
 				inputs.each(function(index, value) {
 					if (!isNaN($(value).attr("id"))) {
 						var id = $(value).attr("id");
@@ -96,7 +97,7 @@
 									var aux = 0;
 									if(data.ultimaProposta.comparativoProposta != null){
 										$(comparativo).each(function(index, value) {
-											var campos = "<tr><td id='nmFuncionario"+aux+"'></td>" +
+											var campos = "<tr class='tiraTabela'><td id='nmFuncionario"+aux+"'></td>" +
 											"<td id='nmCargo"+aux+"'></td>" +
 											"<td id='nmSenioridade"+aux+"'></td>" +
 											"<td id='dsConhecimento"+aux+"'></td>" +
@@ -112,8 +113,6 @@
 											
 											$(".tbComparativo").append(campos);
 											
-											alert(data.ultimaProposta.comparativoProposta[index].dtAdmissao);
-	
 											$('#nmFuncionario'+aux).text(data.ultimaProposta.comparativoProposta[index].nmFuncionario);
 											$('#nmCargo'+aux).text(data.ultimaProposta.comparativoProposta[index].nmCargo);
 											$('#nmSenioridade'+aux).text(data.ultimaProposta.comparativoProposta[index].nmSenioridade);
