@@ -25,26 +25,26 @@
 						$.ajax({url : "buscar/"+ id, dataType : "json", method : "GET", success : function(data) {
 							console.log('Esse aqui');
 							console.log(data);
-							var perfil = $('#user').val();
+							var perfil = $('#idPerfil').val();
 							$("#modalTitulo").text(tituloModal);
 								if (data.ultimoStatus.status.id == "9") {
-									if (perfil == "Analista de RH" || perfil == "Gestor RH") {
+									if (perfil == 2 || perfil == 3) {
 										$("#proposta-tab").show();
 									}
 								} else if (data.ultimoStatus.status.id == "10") {
-									if (perfil == "Administrador" || perfil == "CEO" || perfil == "Diretor de operação") {
+									if (perfil == 1 || perfil == 4 || perfil == 9) {
 										$("#proposta-tab").show();
 									}
 								} else if (data.ultimoStatus.status.id == "11") {
-									if (perfil == "Analista de RH" || perfil == "Gestor RH") {
+									if (perfil == 2 || perfil == 3) {
 										$("#proposta-tab").show();
 									}
 								} else if (data.ultimoStatus.status.id == "13") {
-									if (perfil == "Analista de RH" || perfil == "Gestor RH") {
+									if (perfil == 2 || perfil == 3) {
 										$("#proposta-tab").show();
 									}
 								} else if (data.ultimoStatus.status.id == "14") {
-									if (perfil == "Analista de RH" || perfil == "Gestor RH") {
+									if (perfil == 2 || perfil == 3) {
 										$("#proposta-tab").show();
 									}
 								} else {
