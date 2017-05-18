@@ -3,7 +3,10 @@ package br.com.prosperity.util;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.poi.hssf.util.CellReference;
@@ -200,7 +203,13 @@ public class TesteExcel {
 					cellReference = new CellReference("E" + aux);
 					row = sheet.getRow(cellReference.getRow());
 					cell = row.getCell(cellReference.getCol());
-					comparativoPropostaBean.setDtAdmissao(cell.getDateCellValue());
+					
+					Date dataNaoFormatada = cell.getDateCellValue();
+					DateFormat formatar = new SimpleDateFormat("dd/MM/yyyy");
+					String dataFormatada = formatar.format(dataNaoFormatada);
+					
+					comparativoPropostaBean.setDtAdmissao(formatar.parse(dataFormatada));
+					System.out.println(comparativoPropostaBean.getDtAdmissao().toString());
 
 					cellReference = new CellReference("F" + aux);
 					row = sheet.getRow(cellReference.getRow());
