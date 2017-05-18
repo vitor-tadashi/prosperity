@@ -278,7 +278,7 @@
 																		<th class="text-center">Taxa</th>
 																	</tr>
 																</thead>
-																<tbody class="text-center tbComparativo">
+																<tbody class="text-center tbComparativo" id="idtbComparativo">
 																</tbody>
 															</table>
 														</div>

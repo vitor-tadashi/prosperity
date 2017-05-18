@@ -17,15 +17,26 @@ public class PropostaBusiness {
 
 	@Autowired
 	private PropostaDAO propostaDAO;
-	
+
 	@Autowired
 	private PropostaConverter propostaConverter;
-	
+
 	@Transactional
-	public void inserir(List<PropostaBean> beans) {
-		List<PropostaEntity> entitys = propostaConverter.convertBeanToEntity(beans);
-		for(PropostaEntity entity : entitys){
-			propostaDAO.insert(entity);
-		}
+	public void inserir(PropostaBean beans) {
+		propostaDAO.insert(propostaConverter.convertBeanToEntity(beans));
 	}
-}
+
+	//metodo para desativar a proposta
+//	private void desativarProposta(Integer idCandidato) {
+//
+//		List<PropostaEntity> propostas = propostaDAO.findByNamedQuery("buscarProposta", idCandidato);
+//
+//		for (PropostaEntity propostaEntity : propostas) {
+//
+//			propostaEntity.setFlSituacao(false);
+//			propostaDAO.update(propostaEntity);
+//
+//		}
+
+	}
+

@@ -2,6 +2,14 @@
 			var nomeCandidato = "";
 			var mensagemMudancaStatus = "";
 
+/* Função violenta para limpar o modal no click */
+			$('#modalProposta').on('hidden.bs.modal', function (e) {
+				  $(this)
+				    .find("input,textarea,select")
+				       .val('')
+				       .end();
+				})
+			
 			function maxCaracterParecer() {
 				var maxParecer = $("#parecer").val();
 				var restante = 500 - maxParecer.length;
@@ -18,32 +26,33 @@
 			$("body").on("click","#aprovar-candidato",function() {
 				var inputs = $(this).closest("tr").find("input[type=hidden]");
 				var tituloModal = $(this).text();
+				$(".tiraTabela").remove();
 				inputs.each(function(index, value) {
 					if (!isNaN($(value).attr("id"))) {
 						var id = $(value).attr("id");
 						$.ajax({url : "buscar/"+ id, dataType : "json", method : "GET", success : function(data) {
 							console.log('Esse aqui');
 							console.log(data);
-							var perfil = $('#user').val();
+							var perfil = $('#idPerfil').val();
 							$("#modalTitulo").text(tituloModal);
 								if (data.ultimoStatus.status.id == "9") {
-									if (perfil == "Analista de RH" || perfil == "Gestor RH") {
+									if (perfil == 2 || perfil == 3) {
 										$("#proposta-tab").show();
 									}
 								} else if (data.ultimoStatus.status.id == "10") {
-									if (perfil == "Administrador" || perfil == "CEO" || perfil == "Diretor de operação") {
+									if (perfil == 1 || perfil == 4 || perfil == 9) {
 										$("#proposta-tab").show();
 									}
 								} else if (data.ultimoStatus.status.id == "11") {
-									if (perfil == "Analista de RH" || perfil == "Gestor RH") {
+									if (perfil == 2 || perfil == 3) {
 										$("#proposta-tab").show();
 									}
 								} else if (data.ultimoStatus.status.id == "13") {
-									if (perfil == "Analista de RH" || perfil == "Gestor RH") {
+									if (perfil == 2 || perfil == 3) {
 										$("#proposta-tab").show();
 									}
 								} else if (data.ultimoStatus.status.id == "14") {
-									if (perfil == "Analista de RH" || perfil == "Gestor RH") {
+									if (perfil == 2 || perfil == 3) {
 										$("#proposta-tab").show();
 									}
 								} else {
@@ -96,7 +105,7 @@
 									var aux = 0;
 									if(data.ultimaProposta.comparativoProposta != null){
 										$(comparativo).each(function(index, value) {
-											var campos = "<tr><td id='nmFuncionario"+aux+"'></td>" +
+											var campos = "<tr class='tiraTabela'><td id='nmFuncionario"+aux+"'></td>" +
 											"<td id='nmCargo"+aux+"'></td>" +
 											"<td id='nmSenioridade"+aux+"'></td>" +
 											"<td id='dsConhecimento"+aux+"'></td>" +
@@ -112,8 +121,6 @@
 											
 											$(".tbComparativo").append(campos);
 											
-											alert(data.ultimaProposta.comparativoProposta[index].dtAdmissao);
-	
 											$('#nmFuncionario'+aux).text(data.ultimaProposta.comparativoProposta[index].nmFuncionario);
 											$('#nmCargo'+aux).text(data.ultimaProposta.comparativoProposta[index].nmCargo);
 											$('#nmSenioridade'+aux).text(data.ultimaProposta.comparativoProposta[index].nmSenioridade);
@@ -186,7 +193,6 @@
 						'idCandidato' : $('#hdn-id-candidato').val(),
 						'parecer' : $('#parecer').val(),
 						'idStatus' : $('#hdn-status').val(),
-						'parecerTecnico' : $('#parecerTecnico').val(),
 						'processoSeletivo' : JSON.stringify(provasDescricoes),
 						'avaliacoesCandidato' : JSON.stringify(avaliacoes)
 					},
@@ -307,7 +313,7 @@
 						url : 'gerar-proposta',
 						enctype : 'multipart/form-data',
 						type : 'POST',
-						data : formData,
+						data : formData, 'idCandidato' : $('#hdn-id-candidato').val(),
 						processData : false,
 						contentType : false,
 						cache : false,

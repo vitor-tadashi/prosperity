@@ -1,15 +1,16 @@
 package br.com.prosperity.converter;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import br.com.prosperity.bean.ComunicacaoBean;
 import br.com.prosperity.entity.ComunicacaoEntity;
 
+@Component
 public class ComunicacaoConverter implements Converter<ComunicacaoEntity, ComunicacaoBean>{
 
 	@Autowired
 	private CandidatoConverter candidatoConverter;
-	
 
 	@Autowired
 	private UsuarioConverter usuarioConverter;
@@ -39,10 +40,10 @@ public class ComunicacaoConverter implements Converter<ComunicacaoEntity, Comuni
 		
 		ComunicacaoBean bean = new ComunicacaoBean();
 		
-		bean.setCandidatoBean(candidatoConverter.convertEntityToBean(entity.getCandidatoEntity()));
-		bean.setDataContato(bean.getDataContato());
-		bean.setId(bean.getId());
-		bean.setObservacao(bean.getObservacao());
+		//bean.setCandidatoBean(candidatoConverter.convertEntityToBean(entity.getCandidatoEntity()));
+		bean.setDataContato(entity.getDataContato());
+		bean.setId(entity.getId());
+		bean.setObservacao(entity.getObservacao());
 		bean.setUsuarioBean(usuarioConverter.convertEntityToBean(entity.getUsuarioEntity()));
 		
 		return bean;

@@ -11,14 +11,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbProposta")
 @NamedQueries({
-
-})
+	
+		// NamedQuery busca propostas por id do candidato
+		@NamedQuery(name = "buscarProposta", query = "SELECT u FROM PropostaEntity u WHERE u.candidato = ?1") })
 
 public class PropostaEntity {
 
@@ -117,6 +119,9 @@ public class PropostaEntity {
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
 	@JoinColumn(name = "idProposta")
 	private List<ComparativoPropostaEntity> comparativoProposta;
+
+	@Column(name = "idCandidato")
+	Integer candidato;
 
 	public Integer getId() {
 		return id;
@@ -364,6 +369,14 @@ public class PropostaEntity {
 
 	public void setComparativoProposta(List<ComparativoPropostaEntity> comparativoProposta) {
 		this.comparativoProposta = comparativoProposta;
+	}
+
+	public Integer getCandidato() {
+		return candidato;
+	}
+
+	public void setCandidato(Integer candidato) {
+		this.candidato = candidato;
 	}
 
 }
