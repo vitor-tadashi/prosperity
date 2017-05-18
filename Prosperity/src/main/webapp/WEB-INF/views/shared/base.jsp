@@ -72,6 +72,7 @@
 			</ul>
 		</div>
 		<input type="hidden" id="idPerfil" value="${autenticado.perfil.id }">
+		<input type="hidden" id="idPerfilComp" value="${autenticado.perfil}">
 		<!-- /top-nav-->
 		<aside class="fixed skin-6">
 			<div class="sidebar-inner scrollable-sidebar">
