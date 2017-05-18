@@ -1,11 +1,17 @@
 package br.com.prosperity.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -107,6 +113,13 @@ public class PropostaEntity {
 
 	@Column(name = "flSituacao")
 	private Boolean flSituacao;
+
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
+	@JoinColumn(name = "idProposta")
+	private List<ComparativoPropostaEntity> comparativoProposta;
+
+	@Column(name = "idCandidato")
+	Integer candidato;
 
 	public Integer getId() {
 		return id;
@@ -346,6 +359,22 @@ public class PropostaEntity {
 
 	public void setNovoVaMensal(Double novoVaMensal) {
 		this.novoVaMensal = novoVaMensal;
+	}
+
+	public List<ComparativoPropostaEntity> getComparativoProposta() {
+		return comparativoProposta;
+	}
+
+	public void setComparativoProposta(List<ComparativoPropostaEntity> comparativoProposta) {
+		this.comparativoProposta = comparativoProposta;
+	}
+
+	public Integer getCandidato() {
+		return candidato;
+	}
+
+	public void setCandidato(Integer candidato) {
+		this.candidato = candidato;
 	}
 
 }

@@ -72,9 +72,11 @@
 										<li class="tab-verity"><a href="#third" data-toggle="tab"
 											class="text-success"><i class="fa fa-briefcase"></i> Inf.
 												vaga</a></li>
+<!-- 							     se o usuario da sessão for do rh, mostra a aba -->
+										<c:if test="${autenticado.perfil.id} == 2 || ${autenticado.perfil.id} == 3">
 										<li class="tab-verity"><a href="#fourth"
 											data-toggle="tab" class="text-success"><i
-												class="fa fa-calendar"></i>&nbsp;Datas de entrevista</a></li>
+												class="fa fa-calendar"></i>&nbsp;Datas de entrevista</a></li></c:if>
 										<li class="tab-verity"><a href="#five" data-toggle="tab"
 											class="text-success"><i class="fa fa-calendar"></i> Data
 												ultimo contato</a></li>
@@ -274,8 +276,24 @@
 													</c:forEach>
 												</select>
 											</div>
+											<div class="form-group col-md-4 js-outros">
+											<label for="vaga">Qual?</label>
+												<input type="text" class="form-control" id="outros"
+													name="vagaCandidato.outros" />
+											</div>
+										<div class="form-group col-md-2 js-indicacao-colegas">
+											<label for="vaga">Quem indicou?</label>	<select
+													class="form-control" id="listaFuncionarios"
+													name="vagaCandidato.funcionarioBean.id">
+													<option value="0">Selecione</option>
+													<c:forEach var="funcionario" items="${listaFuncionarios}">
+														<option value="${funcionario.id}">${funcionario.nome}</option>
+													</c:forEach>
+												</select>
 										</div>
-										<!--começo - tab 4 -->
+										</div>
+										<!--começo - tab 4 | se o usuario da sessão for do rh, mostra o conteudo -->
+										<c:if test="${autenticado.perfil.id} == 2 || ${autenticado.perfil.id} == 3">
 										<div class="tab-pane fade" id="fourth">
 											<c:forEach var="data" items="${candidato.dataEntrevista}"
 												varStatus="status">
@@ -302,6 +320,7 @@
 												</div>
 											</c:forEach>
 										</div>
+										</c:if>
 										<!--fim - tab 4 -->
 										
 										<!--começo - tab 5-->

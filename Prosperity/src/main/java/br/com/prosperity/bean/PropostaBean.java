@@ -1,5 +1,7 @@
 package br.com.prosperity.bean;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -10,31 +12,35 @@ public class PropostaBean {
 	private String anteriorEmpresa;
 	private String novoCargo;
 	private String anteriorCargo;
-	private Double anteriorSalarioFixoBruto;
-	private Double novoSalarioFixoBruto;
-	private Double anteriorSalarioLiquidoMensal;
-	private Double novoSalarioLiquidoMensal;
-	private Double anteriorVrMensal;
-	private Double novoVrMensal;
-	private Double anteriorVaMensal;
-	private Double novoVaMensal;
-	private Double anteriorSeguroSaudeMensal;
-	private Double novoSeguroSaudeMensal;
-	private Double anteriorValeAuto;
-	private Double novoValeAuto;
-	private Double anteriorEstacionamento;
-	private Double novoEstacionamento;
-	private Double anteriorValeTransporte;
-	private Double novoValeTransporte;
-	private Double anteriorLiquidoComBeneficios;
-	private Double novoLiquidoComBeneficios;
-	private Double anteriorAnualLiquido;
-	private Double novoAnualLiquido;
-	private Double anteriorParticipacaoLucrosOuBonus;
-	private Double novaParticipacaoLucrosOuBonus;
-	private Double anteriorTotalAnualLiquidoComBeneficios;
-	private Double novoTotalAnualLiquidoComBeneficios;
+	private double anteriorSalarioFixoBruto;
+	private double novoSalarioFixoBruto;
+	private double anteriorSalarioLiquidoMensal;
+	private double novoSalarioLiquidoMensal;
+	private double anteriorVrMensal;
+	private double novoVrMensal;
+	private double anteriorVaMensal;
+	private double novoVaMensal;
+	private double anteriorSeguroSaudeMensal;
+	private double novoSeguroSaudeMensal;
+	private double anteriorValeAuto;
+	private double novoValeAuto;
+	private double anteriorEstacionamento;
+	private double novoEstacionamento;
+	private double anteriorValeTransporte;
+	private double novoValeTransporte;
+	private double anteriorLiquidoComBeneficios;
+	private double novoLiquidoComBeneficios;
+	private double anteriorAnualLiquido;
+	private double novoAnualLiquido;
+	private double anteriorParticipacaoLucrosOuBonus;
+	private double novaParticipacaoLucrosOuBonus;
+	private double anteriorTotalAnualLiquidoComBeneficios;
+	private double novoTotalAnualLiquidoComBeneficios;
 	private Boolean flSituacao = false;
+
+	private Integer candidato;
+
+	private List<ComparativoPropostaBean> comparativoProposta;
 
 	public Integer getId() {
 		return id;
@@ -76,195 +82,195 @@ public class PropostaBean {
 		this.anteriorCargo = anteriorCargo;
 	}
 
-	public Double getAnteriorSalarioFixoBruto() {
+	public double getAnteriorSalarioFixoBruto() {
 		return anteriorSalarioFixoBruto;
 	}
 
-	public void setAnteriorSalarioFixoBruto(Double anteriorSalarioFixoBruto) {
+	public void setAnteriorSalarioFixoBruto(double anteriorSalarioFixoBruto) {
 		this.anteriorSalarioFixoBruto = anteriorSalarioFixoBruto;
 	}
 
-	public Double getNovoSalarioFixoBruto() {
+	public double getNovoSalarioFixoBruto() {
 		return novoSalarioFixoBruto;
 	}
 
-	public void setNovoSalarioFixoBruto(Double novoSalarioFixoBruto) {
+	public void setNovoSalarioFixoBruto(double novoSalarioFixoBruto) {
 		this.novoSalarioFixoBruto = novoSalarioFixoBruto;
 	}
 
-	public Double getAnteriorSalarioLiquidoMensal() {
+	public double getAnteriorSalarioLiquidoMensal() {
 		return anteriorSalarioLiquidoMensal;
 	}
 
-	public void setAnteriorSalarioLiquidoMensal(Double anteriorSalarioLiquidoMensal) {
+	public void setAnteriorSalarioLiquidoMensal(double anteriorSalarioLiquidoMensal) {
 		this.anteriorSalarioLiquidoMensal = anteriorSalarioLiquidoMensal;
 	}
 
-	public Double getNovoSalarioLiquidoMensal() {
+	public double getNovoSalarioLiquidoMensal() {
 		return novoSalarioLiquidoMensal;
 	}
 
-	public void setNovoSalarioLiquidoMensal(Double novoSalarioLiquidoMensal) {
+	public void setNovoSalarioLiquidoMensal(double novoSalarioLiquidoMensal) {
 		this.novoSalarioLiquidoMensal = novoSalarioLiquidoMensal;
 	}
 
-	public Double getAnteriorVrMensal() {
+	public double getAnteriorVrMensal() {
 		return anteriorVrMensal;
 	}
 
-	public void setAnteriorVrMensal(Double anteriorVrMensal) {
+	public void setAnteriorVrMensal(double anteriorVrMensal) {
 		this.anteriorVrMensal = anteriorVrMensal;
 	}
 
-	public Double getNovoVrMensal() {
+	public double getNovoVrMensal() {
 		return novoVrMensal;
 	}
 
-	public void setNovoVrMensal(Double novoVrMensal) {
+	public void setNovoVrMensal(double novoVrMensal) {
 		this.novoVrMensal = novoVrMensal;
 	}
 
-	public Double getAnteriorVaMensal() {
+	public double getAnteriorVaMensal() {
 		return anteriorVaMensal;
 	}
 
-	public void setAnteriorVaMensal(Double anteriorVaMensal) {
+	public void setAnteriorVaMensal(double anteriorVaMensal) {
 		this.anteriorVaMensal = anteriorVaMensal;
 	}
 
-	public Double getNovoVaMensal() {
+	public double getNovoVaMensal() {
 		return novoVaMensal;
 	}
 
-	public void setNovoVaMensal(Double novoVaMensal) {
+	public void setNovoVaMensal(double novoVaMensal) {
 		this.novoVaMensal = novoVaMensal;
 	}
 
-	public Double getAnteriorSeguroSaudeMensal() {
+	public double getAnteriorSeguroSaudeMensal() {
 		return anteriorSeguroSaudeMensal;
 	}
 
-	public void setAnteriorSeguroSaudeMensal(Double anteriorSeguroSaudeMensal) {
+	public void setAnteriorSeguroSaudeMensal(double anteriorSeguroSaudeMensal) {
 		this.anteriorSeguroSaudeMensal = anteriorSeguroSaudeMensal;
 	}
 
-	public Double getNovoSeguroSaudeMensal() {
+	public double getNovoSeguroSaudeMensal() {
 		return novoSeguroSaudeMensal;
 	}
 
-	public void setNovoSeguroSaudeMensal(Double novoSeguroSaudeMensal) {
+	public void setNovoSeguroSaudeMensal(double novoSeguroSaudeMensal) {
 		this.novoSeguroSaudeMensal = novoSeguroSaudeMensal;
 	}
 
-	public Double getAnteriorValeAuto() {
+	public double getAnteriorValeAuto() {
 		return anteriorValeAuto;
 	}
 
-	public void setAnteriorValeAuto(Double anteriorValeAuto) {
+	public void setAnteriorValeAuto(double anteriorValeAuto) {
 		this.anteriorValeAuto = anteriorValeAuto;
 	}
 
-	public Double getNovoValeAuto() {
+	public double getNovoValeAuto() {
 		return novoValeAuto;
 	}
 
-	public void setNovoValeAuto(Double novoValeAuto) {
+	public void setNovoValeAuto(double novoValeAuto) {
 		this.novoValeAuto = novoValeAuto;
 	}
 
-	public Double getAnteriorEstacionamento() {
+	public double getAnteriorEstacionamento() {
 		return anteriorEstacionamento;
 	}
 
-	public void setAnteriorEstacionamento(Double anteriorEstacionamento) {
+	public void setAnteriorEstacionamento(double anteriorEstacionamento) {
 		this.anteriorEstacionamento = anteriorEstacionamento;
 	}
 
-	public Double getNovoEstacionamento() {
+	public double getNovoEstacionamento() {
 		return novoEstacionamento;
 	}
 
-	public void setNovoEstacionamento(Double novoEstacionamento) {
+	public void setNovoEstacionamento(double novoEstacionamento) {
 		this.novoEstacionamento = novoEstacionamento;
 	}
 
-	public Double getAnteriorValeTransporte() {
+	public double getAnteriorValeTransporte() {
 		return anteriorValeTransporte;
 	}
 
-	public void setAnteriorValeTransporte(Double anteriorValeTransporte) {
+	public void setAnteriorValeTransporte(double anteriorValeTransporte) {
 		this.anteriorValeTransporte = anteriorValeTransporte;
 	}
 
-	public Double getNovoValeTransporte() {
+	public double getNovoValeTransporte() {
 		return novoValeTransporte;
 	}
 
-	public void setNovoValeTransporte(Double novoValeTransporte) {
+	public void setNovoValeTransporte(double novoValeTransporte) {
 		this.novoValeTransporte = novoValeTransporte;
 	}
 
-	public Double getAnteriorLiquidoComBeneficios() {
+	public double getAnteriorLiquidoComBeneficios() {
 		return anteriorLiquidoComBeneficios;
 	}
 
-	public void setAnteriorLiquidoComBeneficios(Double anteriorLiquidoComBeneficios) {
+	public void setAnteriorLiquidoComBeneficios(double anteriorLiquidoComBeneficios) {
 		this.anteriorLiquidoComBeneficios = anteriorLiquidoComBeneficios;
 	}
 
-	public Double getNovoLiquidoComBeneficios() {
+	public double getNovoLiquidoComBeneficios() {
 		return novoLiquidoComBeneficios;
 	}
 
-	public void setNovoLiquidoComBeneficios(Double novoLiquidoComBeneficios) {
+	public void setNovoLiquidoComBeneficios(double novoLiquidoComBeneficios) {
 		this.novoLiquidoComBeneficios = novoLiquidoComBeneficios;
 	}
 
-	public Double getAnteriorAnualLiquido() {
+	public double getAnteriorAnualLiquido() {
 		return anteriorAnualLiquido;
 	}
 
-	public void setAnteriorAnualLiquido(Double anteriorAnualLiquido) {
+	public void setAnteriorAnualLiquido(double anteriorAnualLiquido) {
 		this.anteriorAnualLiquido = anteriorAnualLiquido;
 	}
 
-	public Double getNovoAnualLiquido() {
+	public double getNovoAnualLiquido() {
 		return novoAnualLiquido;
 	}
 
-	public void setNovoAnualLiquido(Double novoAnualLiquido) {
+	public void setNovoAnualLiquido(double novoAnualLiquido) {
 		this.novoAnualLiquido = novoAnualLiquido;
 	}
 
-	public Double getAnteriorParticipacaoLucrosOuBonus() {
+	public double getAnteriorParticipacaoLucrosOuBonus() {
 		return anteriorParticipacaoLucrosOuBonus;
 	}
 
-	public void setAnteriorParticipacaoLucrosOuBonus(Double anteriorParticipacaoLucrosOuBonus) {
+	public void setAnteriorParticipacaoLucrosOuBonus(double anteriorParticipacaoLucrosOuBonus) {
 		this.anteriorParticipacaoLucrosOuBonus = anteriorParticipacaoLucrosOuBonus;
 	}
 
-	public Double getNovaParticipacaoLucrosOuBonus() {
+	public double getNovaParticipacaoLucrosOuBonus() {
 		return novaParticipacaoLucrosOuBonus;
 	}
 
-	public void setNovaParticipacaoLucrosOuBonus(Double novaParticipacaoLucrosOuBonus) {
+	public void setNovaParticipacaoLucrosOuBonus(double novaParticipacaoLucrosOuBonus) {
 		this.novaParticipacaoLucrosOuBonus = novaParticipacaoLucrosOuBonus;
 	}
 
-	public Double getAnteriorTotalAnualLiquidoComBeneficios() {
+	public double getAnteriorTotalAnualLiquidoComBeneficios() {
 		return anteriorTotalAnualLiquidoComBeneficios;
 	}
 
-	public void setAnteriorTotalAnualLiquidoComBeneficios(Double anteriorTotalAnualLiquidoComBeneficios) {
+	public void setAnteriorTotalAnualLiquidoComBeneficios(double anteriorTotalAnualLiquidoComBeneficios) {
 		this.anteriorTotalAnualLiquidoComBeneficios = anteriorTotalAnualLiquidoComBeneficios;
 	}
 
-	public Double getNovoTotalAnualLiquidoComBeneficios() {
+	public double getNovoTotalAnualLiquidoComBeneficios() {
 		return novoTotalAnualLiquidoComBeneficios;
 	}
 
-	public void setNovoTotalAnualLiquidoComBeneficios(Double novoTotalAnualLiquidoComBeneficios) {
+	public void setNovoTotalAnualLiquidoComBeneficios(double novoTotalAnualLiquidoComBeneficios) {
 		this.novoTotalAnualLiquidoComBeneficios = novoTotalAnualLiquidoComBeneficios;
 	}
 
@@ -274,6 +280,22 @@ public class PropostaBean {
 
 	public void setFlSituacao(Boolean flSituacao) {
 		this.flSituacao = flSituacao;
+	}
+
+	public Integer getCandidato() {
+		return candidato;
+	}
+
+	public void setCandidato(Integer candidato) {
+		this.candidato = candidato;
+	}
+
+	public List<ComparativoPropostaBean> getComparativoProposta() {
+		return comparativoProposta;
+	}
+
+	public void setComparativoProposta(List<ComparativoPropostaBean> comparativoProposta) {
+		this.comparativoProposta = comparativoProposta;
 	}
 
 }

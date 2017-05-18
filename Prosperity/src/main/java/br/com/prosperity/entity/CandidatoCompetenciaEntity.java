@@ -28,6 +28,9 @@ public class CandidatoCompetenciaEntity {
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idCompetencia")
 	private CompetenciaEntity competencia;
+	
+	@Column(name="nmAvaliador")
+	private String nmAvaliador;
 
 	public Integer getIdCandidatoCompetencia() {
 		return idCandidatoCompetencia;
@@ -51,6 +54,14 @@ public class CandidatoCompetenciaEntity {
 
 	public void setCompetencia(CompetenciaEntity competencia) {
 		this.competencia = competencia;
+	}
+
+	public String getNmAvaliador() {
+		return nmAvaliador;
+	}
+
+	public void setNmAvaliador(String nmAvaliador) {
+		this.nmAvaliador = nmAvaliador;
 	}
 
 }
