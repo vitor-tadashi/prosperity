@@ -535,6 +535,13 @@ function inserirComunicacao(){
 			cache: false,
 			success: function(){
 				alert('sucesso');
+				$('#trNova').append(
+						"<tr>"+
+						"<td>"+$("#dataContato").val()+"</td>"+
+						"<td>"+$("#obs").val()+"</td>"+
+						"<td>"+$("#nmUsuario").val()+"</td>"+
+						"</tr>"
+				)
 			},
 			error: function(){
 				alert('erro');

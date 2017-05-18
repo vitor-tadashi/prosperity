@@ -13,8 +13,11 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+@NamedQuery(name="obterComunicacao", query = "SELECT c FROM ComunicacaoEntity c WHERE c.candidatoEntity.id =?1" )
+	
 @Entity
 @Table(name = "tbComunicacao")
 public class ComunicacaoEntity {
@@ -30,7 +33,7 @@ public class ComunicacaoEntity {
 	@Column(name = "dsObservacao")
 	private String observacao;
 	
-	@ManyToOne(cascade = CascadeType.REFRESH , fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.REFRESH , fetch = FetchType.EAGER)
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuarioEntity;
 	
