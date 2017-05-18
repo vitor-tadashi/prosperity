@@ -58,42 +58,82 @@
 								}
 								$('.tab-bar a[href="#infoEntrevista"]').tab('show');
 								$('#modalProposta').modal('show');
-																
-								if(data.ultimarProposta != null){                          
-                                    //carregando as informações do EXCEL via AJAX para a JSP
-                                    $('#anteriorCargo').text(data.ultimaProposta.anteriorCargo);
-                                    $('#anteriorEmpresa').text(data.ultimaProposta.anteriorEmpresa);
-//                              $('#vlrAntSalarioFixoBruto').text(parseFloat(data.ultimaProposta.anteriorSalarioFixoBruto).toFixed(2));
-//                              $('#vlrAntSalarioLiquidoMensal').text(parseFloat(data.ultimaProposta.anteriorSalarioLiquidoMensal).toFixed(2));
-                                $('#vlrAntVrMensal').text(parseFloat(data.ultimaProposta.anteriorVrMensal).toFixed(2));
-                                $('#vlrAntVaMensal').text(parseFloat(data.ultimaProposta.anteriorVaMensal).toFixed(2));
-                              $('#vlrAntSeguroSaudeMensal').text(parseFloat(data.ultimaProposta.anteriorSeguroSaudeMensal).toFixed(2));
-                                $('#vlrAntValeAuto').text(parseFloat(data.ultimaProposta.anteriorValeAuto).toFixed(2));
-                              $('#vlrAntValeEstacionamento').text(parseFloat(data.ultimaProposta.anteriorEstacionamento).toFixed(2));
-                              $('#vlrAntValeTransporte').text(parseFloat(data.ultimaProposta.anteriorValeTransporte).toFixed(2));
-                              $('#vlrAntLiquidoComBeneficios').text(parseFloat(data.ultimaProposta.anteriorLiquidoComBeneficios).toFixed(2));
-                              $('#vlrAntAnualLiquido').text(parseFloat(data.ultimaProposta.anteriorAnualLiquido).toFixed(2));
-                              $('#vlrAntParticipacaoLucrosOuBonus').text(parseFloat(data.ultimaProposta.anteriorParticipacaoLucrosOuBonus).toFixed(2));
-                              $('#vlrAntTotalAnualLiquidoComBeneficios').text(parseFloat(data.ultimaProposta.anteriorTotalAnualLiquidoComBeneficios).toFixed(2));
-                                    
-                                    $('#novaEmpresa').text(data.ultimaProposta.novaEmpresa);
-                                    $('#novoCargo').text(data.ultimaProposta.novoCargo);
-                              $('#vlrNvSalarioFixoBruto').text(parseFloat(data.ultimaProposta.novoSalarioFixoBruto).toFixed(2));
-                              $('#vlrNvSalarioLiquidoMensal').text(parseFloat(data.ultimaProposta.novoSalarioLiquidoMensal).toFixed(2));
-                                    $('#vlrNvVrMensal').text(parseFloat(data.ultimaProposta.novoVrMensal).toFixed(2));
-                                    $('#vlrNvVaMensal').text(parseFloat(data.ultimaProposta.novoVaMensal).toFixed(2));
-                              $('#vlrNvSeguroSaudeMensal').text(parseFloat(data.ultimaProposta.novoSeguroSaudeMensal).toFixed(2));
-                                    $('#vlrNvValeAuto').text(parseFloat(data.ultimaProposta.novoValeAuto).toFixed(2));
-                              $('#vlrNvValeEstacionamento').text(parseFloat(data.ultimaProposta.novoEstacionamento).toFixed(2));
-                              $('#vlrNvValeTransporte').text(parseFloat(data.ultimaProposta.novoValeTransporte).toFixed(2));
-                              $('#vlrNvLiquidoComBeneficios').text(parseFloat(data.ultimaProposta.novoLiquidoComBeneficios).toFixed(2));
-                              $('#vlrNvAnualLiquido').text(parseFloat(data.ultimaProposta.novoAnualLiquido).toFixed(2));
-                              $('#vlrNvParticipacaoLucrosOuBonus').text(parseFloat(data.ultimaProposta.novaParticipacaoLucrosOuBonus).toFixed(2));
-                              $('#vlrNvTotalAnualLiquidoComBeneficios').text(parseFloat(data.ultimaProposta.novoTotalAnualLiquidoComBeneficios).toFixed(2));
-                              
-                                    $(document).ready(function() {
-                                          $('.dinheiro').mask('0.000.000,00', {reverse : true});
-                                    });
+								if(data.ultimaProposta != null){	
+									//carregando as informações do EXCEL via AJAX para a JSP
+									$('#anteriorCargo').text(data.ultimaProposta.anteriorCargo);
+									$('#anteriorEmpresa').text(data.ultimaProposta.anteriorEmpresa);
+									$('#vlrAntSalarioFixoBruto').text(parseFloat(data.ultimaProposta.anteriorSalarioFixoBruto).toFixed(2));
+									$('#vlrAntSalarioLiquidoMensal').text(parseFloat(data.ultimaProposta.anteriorSalarioLiquidoMensal).toFixed(2));
+									$('#vlrAntVrMensal').text(parseFloat(data.ultimaProposta.anteriorVrMensal).toFixed(2));
+									$('#vlrAntVaMensal').text(parseFloat(data.ultimaProposta.anteriorVaMensal).toFixed(2));
+									$('#vlrAntSeguroSaudeMensal').text(parseFloat(data.ultimaProposta.anteriorSeguroSaudeMensal).toFixed(2));
+									$('#vlrAntValeAuto').text(parseFloat(data.ultimaProposta.anteriorValeAuto).toFixed(2));
+									$('#vlrAntValeEstacionamento').text(parseFloat(data.ultimaProposta.anteriorEstacionamento).toFixed(2));
+									$('#vlrAntValeTransporte').text(parseFloat(data.ultimaProposta.anteriorValeTransporte).toFixed(2));
+									$('#vlrAntLiquidoComBeneficios').text(parseFloat(data.ultimaProposta.anteriorLiquidoComBeneficios).toFixed(2));
+									$('#vlrAntAnualLiquido').text(parseFloat(data.ultimaProposta.anteriorAnualLiquido).toFixed(2));
+									$('#vlrAntParticipacaoLucrosOuBonus').text(parseFloat(data.ultimaProposta.anteriorParticipacaoLucrosOuBonus).toFixed(2));
+									$('#vlrAntTotalAnualLiquidoComBeneficios').text(parseFloat(data.ultimaProposta.anteriorTotalAnualLiquidoComBeneficios).toFixed(2));
+									
+									$('#novaEmpresa').text(data.ultimaProposta.novaEmpresa);
+									$('#novoCargo').text(data.ultimaProposta.novoCargo);
+									$('#vlrNvSalarioFixoBruto').text(parseFloat(data.ultimaProposta.novoSalarioFixoBruto).toFixed(2));
+									$('#vlrNvSalarioLiquidoMensal').text(parseFloat(data.ultimaProposta.novoSalarioLiquidoMensal).toFixed(2));
+									$('#vlrNvVrMensal').text(parseFloat(data.ultimaProposta.novoVrMensal).toFixed(2));
+									$('#vlrNvVaMensal').text(parseFloat(data.ultimaProposta.novoVaMensal).toFixed(2));
+									$('#vlrNvSeguroSaudeMensal').text(parseFloat(data.ultimaProposta.novoSeguroSaudeMensal).toFixed(2));
+									$('#vlrNvValeAuto').text(parseFloat(data.ultimaProposta.novoValeAuto).toFixed(2));
+									$('#vlrNvValeEstacionamento').text(parseFloat(data.ultimaProposta.novoEstacionamento).toFixed(2));
+									$('#vlrNvValeTransporte').text(parseFloat(data.ultimaProposta.novoValeTransporte).toFixed(2));
+									$('#vlrNvLiquidoComBeneficios').text(parseFloat(data.ultimaProposta.novoLiquidoComBeneficios).toFixed(2));
+									$('#vlrNvAnualLiquido').text(parseFloat(data.ultimaProposta.novoAnualLiquido).toFixed(2));
+									$('#vlrNvParticipacaoLucrosOuBonus').text(parseFloat(data.ultimaProposta.novaParticipacaoLucrosOuBonus).toFixed(2));
+									$('#vlrNvTotalAnualLiquidoComBeneficios').text(parseFloat(data.ultimaProposta.novoTotalAnualLiquidoComBeneficios).toFixed(2));
+								
+									var comparativo = data.ultimaProposta.comparativoProposta;
+
+									// for each que percorre a lista e mostra na tela
+									var aux = 0;
+									if(data.ultimaProposta.comparativoProposta != null){
+										$(comparativo).each(function(index, value) {
+											var campos = "<tr><td id='nmFuncionario"+aux+"'></td>" +
+											"<td id='nmCargo"+aux+"'></td>" +
+											"<td id='nmSenioridade"+aux+"'></td>" +
+											"<td id='dsConhecimento"+aux+"'></td>" +
+											"<td id='dtAdmissao"+aux+"'></td>" +
+											"<td><p>R$ </p><p id='vlrSalario"+aux+"'></p></td>" +
+											"<td><p>R$ </p><p id='vlrVr"+aux+"'></p></td>" +
+											"<td><p>R$ </p><p id='vlrVa"+aux+"'></p></td>" +
+											"<td><p>R$ </p><p id='vlrEstacionamento"+aux+"'></p></td>" +
+											"<td><p>R$ </p><p id='vlrCombustivel"+aux+"'></p></td>" +
+											"<td><p>R$ </p><p id='vlrAssistenciaMedica"+aux+"'></p></td>" +
+											"<td><p>R$ </p><p id='vlrOutros"+aux+"'></p></td>" +
+											"<td><p>R$ </p><p id='vlrTaxa"+aux+"'></p></td> </tr>";
+											
+											$(".tbComparativo").append(campos);
+											
+											alert(data.ultimaProposta.comparativoProposta[index].dtAdmissao);
+	
+											$('#nmFuncionario'+aux).text(data.ultimaProposta.comparativoProposta[index].nmFuncionario);
+											$('#nmCargo'+aux).text(data.ultimaProposta.comparativoProposta[index].nmCargo);
+											$('#nmSenioridade'+aux).text(data.ultimaProposta.comparativoProposta[index].nmSenioridade);
+											$('#dsConhecimento'+aux).text(data.ultimaProposta.comparativoProposta[index].dsConhecimento);
+											$('#dtAdmissao'+aux).text(data.ultimaProposta.comparativoProposta[index].dtAdmissao);
+											$('#vlrSalario'+aux).text(parseFloat(data.ultimaProposta.comparativoProposta[index].vlrSalario).toFixed(2));
+											$('#vlrVr'+aux).text(parseFloat(data.ultimaProposta.comparativoProposta[index].vlrVr).toFixed(2));
+											$('#vlrVa'+aux).text(parseFloat(data.ultimaProposta.comparativoProposta[index].vlrVa).toFixed(2));
+											$('#vlrEstacionamento'+aux).text(parseFloat(data.ultimaProposta.comparativoProposta[index].vlrEstacionamento).toFixed(2));
+											$('#vlrCombustivel'+aux).text(parseFloat(data.ultimaProposta.comparativoProposta[index].vlrCombustivel).toFixed(2));
+											$('#vlrAssistenciaMedica'+aux).text(parseFloat(data.ultimaProposta.comparativoProposta[index].vlrAssistenciaMedica).toFixed(2));
+											$('#vlrOutros'+aux).text(parseFloat(data.ultimaProposta.comparativoProposta[index].vlrOutros).toFixed(2));
+											$('#vlrTaxa'+aux).text(parseFloat(data.ultimaProposta.comparativoProposta[index].vlrTaxa).toFixed(2));
+											
+											aux++;
+										});
+									}
+									$(document).ready(function() {
+										$('.dinheiro').mask('0.000.000,00', {reverse : true});
+									});
 								}
 							}
 						})
@@ -137,7 +177,7 @@
 					x++;
 				});
 				file();
-
+				
 				$.ajax({
 					url : "alterar-status-candidato",
 					method : "POST",
@@ -205,37 +245,7 @@
 				maxCaracterParecerCancelamento();
 			}
 
-			/*gerador de campo*/
-			var cont = 0;
-			$("#gerarCampo").click(function() {
-				var campos =
-					"<div class='div"+cont+" processoSeletivo'>"
-					+ "<div class='row'>"
-					+ "<div class='col-md-6 form-inline'>"
-					+ "<a id='btnRemover' onclick='remover("
-					+ cont
-					+ ")'class='text-danger fa fa-times fa-lg'></a>"
-					+ "&nbsp;<select class='form-control' id='prova-js'>"
-					+ "<option value='0'>Selecione</option>"
-					+ "<c:forEach var='selecao' items='${provas}'>"
-					+ "<option value='${selecao.id}'>${selecao.nome}</option>"
-					+ "</c:forEach>"
-					+ "</select>"
-					+ "<input class='form-control descricaoProva' type='text'	id='descricao-js' name='descricao"
-					+ cont
-					+ "' placeholder='Descrição' maxlength='50'	onkeyup='maxDescricaoProva()' />"
-					+ "</div>"
-					+ "<div class='col-md-5 form-inline'>"
-					+ "<input name='papers' id='modalPapers' type='file' class='input-sm' multiple data-input='false'>"
-					+ "</div>"
-					+ "&nbsp; &nbsp;<label id='maxDescricao'>Caracteres restantes : <span class='numeroCaracteres" + cont +"'>50</span></label>"
-					+ "</div>" + "</div>";
-					cont++;
-					/*adiciona na div*/
-				$("#processoSeletivo").append(campos);
-
-				/*contador de caracter - descrição prova*/
-			});
+			
 			/*remove os campos*/
 
 			function maxDescricaoProva() {
@@ -316,7 +326,7 @@
 									$("#vlrAntVaMensal").text(parseFloat(data.anteriorVaMensal).toFixed(2));
 									$("#vlrAntSeguroSaudeMensal").text(parseFloat(data.anteriorSeguroSaudeMensal).toFixed(2));
 									$("#vlrAntValeAuto").text(parseFloat(data.anteriorValeAuto).toFixed(2));
-									$("#vlrAntEstacionamento").text(parseFloat(data.anteriorEstacionamento).toFixed(2));
+									$("#vlrAntValeEstacionamento").text(parseFloat(data.anteriorEstacionamento).toFixed(2));
 									$("#vlrAntValeTransporte").text(parseFloat(data.anteriorValeTransporte).toFixed(2));
 									$("#vlrAntLiquidoComBeneficios").text(parseFloat(data.anteriorLiquidoComBeneficios).toFixed(2));
 									$("#vlrAntAnualLiquido").text(parseFloat(data.anteriorAnualLiquido).toFixed(2));
@@ -331,12 +341,50 @@
 									$("#vlrNvVaMensal").text(parseFloat(data.novoVaMensal).toFixed(2));
 									$("#vlrNvSeguroSaudeMensal").text(parseFloat(data.novoSeguroSaudeMensal).toFixed(2));
 									$("#vlrNvValeAuto").text(parseFloat(data.novoValeAuto).toFixed(2));
-									$("#vlrNvEstacionamento").text(parseFloat(data.novoEstacionamento).toFixed(2));
+									$("#vlrNvValeEstacionamento").text(parseFloat(data.novoEstacionamento).toFixed(2));
 									$("#vlrNvValeTransporte").text(parseFloat(data.novoValeTransporte).toFixed(2));
 									$("#vlrNvLiquidoComBeneficios").text(parseFloat(data.novoLiquidoComBeneficios).toFixed(2));
 									$("#vlrNvAnualLiquido").text(parseFloat(data.novoAnualLiquido).toFixed(2));
 									$("#vlrNvParticipacaoLucrosOuBonus").text(parseFloat(data.novaParticipacaoLucrosOuBonus).toFixed(2));
 									$("#vlrNvTotalAnualLiquidoComBeneficios").text(parseFloat(data.novoTotalAnualLiquidoComBeneficios).toFixed(2));
+									
+									var comparativo = data.comparativoProposta;
+
+									// for each que percorre a lista e mostra na tela
+									var aux = 0;
+									$(comparativo).each(function(index, value) {
+										var campos = "<tr><td id='nmFuncionario"+aux+"'></td>" +
+										"<td id='nmCargo"+aux+"'></td>" +
+										"<td id='nmSenioridade"+aux+"'></td>" +
+										"<td id='dsConhecimento"+aux+"'></td>" +
+										"<td id='dtAdmissao"+aux+"'></td>" +
+										"<td><p>R$ </p><p id='vlrSalario"+aux+"'></p></td>" +
+										"<td><p>R$ </p><p id='vlrVr"+aux+"'></p></td>" +
+										"<td><p>R$ </p><p id='vlrVa"+aux+"'></p></td>" +
+										"<td><p>R$ </p><p id='vlrEstacionamento"+aux+"'></p></td>" +
+										"<td><p>R$ </p><p id='vlrCombustivel"+aux+"'></p></td>" +
+										"<td><p>R$ </p><p id='vlrAssistenciaMedica"+aux+"'></p></td>" +
+										"<td><p>R$ </p><p id='vlrOutros"+aux+"'></p></td>" +
+										"<td><p>R$ </p><p id='vlrTaxa"+aux+"'></p></td> </tr>";
+										
+										$(".tbComparativo").append(campos);
+										
+										$('#nmFuncionario'+aux).text(data.comparativoProposta[index].nmFuncionario);
+										$('#nmCargo'+aux).text(data.comparativoProposta[index].nmCargo);
+										$('#nmSenioridade'+aux).text(data.comparativoProposta[index].nmSenioridade);
+										$('#dsConhecimento'+aux).text(data.comparativoProposta[index].dsConhecimento);
+										$('#dtAdmissao'+aux).text(data.comparativoProposta[index].dtAdmissao);
+										$('#vlrSalario'+aux).text(parseFloat(data.comparativoProposta[index].vlrSalario).toFixed(2));
+										$('#vlrVr'+aux).text(parseFloat(data.comparativoProposta[index].vlrVr).toFixed(2));
+										$('#vlrVa'+aux).text(parseFloat(data.comparativoProposta[index].vlrVa).toFixed(2));
+										$('#vlrEstacionamento'+aux).text(parseFloat(data.comparativoProposta[index].vlrEstacionamento).toFixed(2));
+										$('#vlrCombustivel'+aux).text(parseFloat(data.comparativoProposta[index].vlrCombustivel).toFixed(2));
+										$('#vlrAssistenciaMedica'+aux).text(parseFloat(data.comparativoProposta[index].vlrAssistenciaMedica).toFixed(2));
+										$('#vlrOutros'+aux).text(parseFloat(data.comparativoProposta[index].vlrOutros).toFixed(2));
+										$('#vlrTaxa'+aux).text(parseFloat(data.comparativoProposta[index].vlrTaxa).toFixed(2));
+										
+										aux++;
+									});
 									
 									$(document).ready(function() {
 										$('.dinheiro').mask('0.000.000,00', {reverse : true});

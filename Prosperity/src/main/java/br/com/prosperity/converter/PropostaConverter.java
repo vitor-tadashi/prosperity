@@ -1,5 +1,6 @@
 package br.com.prosperity.converter;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.prosperity.bean.PropostaBean;
@@ -7,6 +8,9 @@ import br.com.prosperity.entity.PropostaEntity;
 
 @Component
 public class PropostaConverter implements Converter<PropostaEntity, PropostaBean> {
+
+	@Autowired
+	private ComparativoPropostaConverter comparativoPropostaConverter;
 
 	@Override
 	public PropostaEntity convertBeanToEntity(PropostaBean bean) {
@@ -46,8 +50,11 @@ public class PropostaConverter implements Converter<PropostaEntity, PropostaBean
 		entity.setNovoTotalAnualLiquidoComBeneficios(bean.getNovoTotalAnualLiquidoComBeneficios());
 		entity.setAnteriorTotalAnualLiquidoComBeneficios(bean.getAnteriorTotalAnualLiquidoComBeneficios());
 		entity.setFlSituacao(bean.getFlSituacao());
-		return entity;
+		entity.setComparativoProposta(comparativoPropostaConverter.convertBeanToEntity(bean.getComparativoProposta()));
+		
+		entity.setCandidato(bean.getCandidato());
 
+		return entity;
 	}
 
 	@Override
@@ -87,6 +94,10 @@ public class PropostaConverter implements Converter<PropostaEntity, PropostaBean
 		bean.setNovoTotalAnualLiquidoComBeneficios(entity.getNovoTotalAnualLiquidoComBeneficios());
 		bean.setAnteriorTotalAnualLiquidoComBeneficios(entity.getAnteriorTotalAnualLiquidoComBeneficios());
 		bean.setFlSituacao(entity.getFlSituacao());
+		bean.setComparativoProposta(comparativoPropostaConverter.convertEntityToBean(entity.getComparativoProposta()));
+
+		bean.setCandidato(entity.getCandidato());
+		
 		return bean;
 	}
 

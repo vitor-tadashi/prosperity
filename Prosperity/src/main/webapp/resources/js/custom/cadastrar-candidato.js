@@ -13,23 +13,41 @@ $( "#canalInformacao" ).change(function() {
 	var select = $(this).val();
 	
     if (select == '9') {
+    	// Outros fica obrigatório e visível:
     	$('.js-outros').show();
+    	$('#outros').prop('required',true);
+    	
     	$('.js-indicacao-colegas').hide();
+    	$('#indicacao-colegas').prop('required',false);
+    	
     }
     else if (select == '8') {
-    	$('.js-indicacao-colegas').show();
     	$('.js-outros').hide();
+    	$('#outros').prop('required',false);
+    	
+    	// Indicacao colegas fica obrigatório e visível:
+    	$('.js-indicacao-colegas').show();
+    	$('#indicacao-colegas').prop('required',true);
     }
     else {
+    	
+    	// Ninguém selecionado, ninguém aparece:
     	$('.js-outros').hide();
     	$('.js-indicacao-colegas').hide();
+    	
+    	// Ninguém obrigatório:
+    	$('#outros').prop('required',false);
+    	$('#indicacao-colegas').prop('required',false);
     }
 	});
 
 $(document).ready(function() {
 
+	// Ao carregar a página, esses campos não aparecem nem ficam obrigatórios:
 	$('.js-outros').hide();
 	$('.js-indicacao-colegas').hide();
+	$('#outros').prop('required',false);
+	$('#indicacao-colegas').prop('required',false);
 	
 	$('.cpf').mask('000.000.000-00');
 	$('.telefone').mask('(00)0000-00009');
