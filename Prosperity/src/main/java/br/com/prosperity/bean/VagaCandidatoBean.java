@@ -15,7 +15,27 @@ public class VagaCandidatoBean {
 	
 	@Valid
 	private VagaBean vaga;
+	
+	private String outros;
+	
+	private FuncionarioBean funcionarioBean;
 		
+	public String getOutros() {
+		return outros;
+	}
+
+	public void setOutros(String outros) {
+		this.outros = outros;
+	}
+
+	public FuncionarioBean getFuncionarioBean() {
+		return funcionarioBean;
+	}
+
+	public void setFuncionarioBean(FuncionarioBean funcionarioBean) {
+		this.funcionarioBean = funcionarioBean;
+	}
+
 	private CanalInformacaoBean canalInformacao;
 	
 	private CandidatoBean candidatoBean;

@@ -254,6 +254,35 @@
 														</div>
 														<!-- /form-group -->
 													</div>
+													<div class="form-group col-md-12">
+														<div class ="table-responsive">
+															<br/>
+															<br/>
+															<table id="tabelaVaga"
+																class="table table-bordered table-condensed table-hover"
+																style="font-size: 12px; vertical-align: middle; margin-top: -10px;">
+																<thead>
+																	<tr>
+																		<th class="text-center">Nome</th>
+																		<th class="text-center">Cargo</th>
+																		<th class="text-center">Nivel</th>
+																		<th class="text-center">Conhecimento</th>
+																		<th class="text-center">Admissão</th>
+																		<th class="text-center">Salário</th>
+																		<th class="text-center">VR</th>
+																		<th class="text-center">VA</th>
+																		<th class="text-center">Estacionamento</th>
+																		<th class="text-center">Comb.</th>
+																		<th class="text-center">AM</th>
+																		<th class="text-center">Outros</th>
+																		<th class="text-center">Taxa</th>
+																	</tr>
+																</thead>
+																<tbody class="text-center tbComparativo">
+																</tbody>
+															</table>
+														</div>
+													</div>
 													<div class="form-group col-md-6">
 														<label class="control-label">Importe a proposta</label>
 														<div class="upload-file" onchange="gerarProposta()">

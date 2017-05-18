@@ -58,6 +58,7 @@ import br.com.prosperity.business.CancelamentoBusiness;
 import br.com.prosperity.business.CandidatoBusiness;
 import br.com.prosperity.business.CargoBusiness;
 import br.com.prosperity.business.FuncionarioBusiness;
+import br.com.prosperity.business.PropostaBusiness;
 import br.com.prosperity.business.ProvaBusiness;
 import br.com.prosperity.business.ProvaCandidatoBusiness;
 import br.com.prosperity.business.SenioridadeBusiness;
@@ -134,6 +135,9 @@ public class CandidatoController<PaginarCandidato> {
 	private PropostaBean propostaBean;
 	
 	@Autowired
+	private PropostaBusiness propostaBusiness;
+
+	@Autowired
 	private HttpSession session;
 
 	private List<String> caminhoProvas;
@@ -159,6 +163,9 @@ public class CandidatoController<PaginarCandidato> {
 	}
 
 	private void obterDominiosCandidato(Model model) {
+		List<FuncionarioBean> funcionarios = funcionarioBusiness.findAll();
+		model.addAttribute("listaFuncionarios", funcionarios);
+		
 		List<TipoCursoBean> tiposCurso = tipoCursoBusiness.obterTodos();
 		model.addAttribute("tiposCurso", tiposCurso);
 
@@ -280,9 +287,10 @@ public class CandidatoController<PaginarCandidato> {
 	public String historicoCandidato(Model model, @PathVariable Integer id) {
 		CandidatoBean candidato = candidatoBusiness.obter(id);
 		List<ProvaCandidatoBean> provasCandidatoBean = provaCandidatoBusiness.obterProva(id);
-		//Pega quantas competencias o candidato tem, divide por 7 para ver quantas colunas deve ter na tela;
-		int colCompetencias = candidato.getCompetencias().size()/7;
-		
+		// Pega quantas competencias o candidato tem, divide por 7 para ver
+		// quantas colunas deve ter na tela;
+		int colCompetencias = candidato.getCompetencias().size() / 7;
+
 		model.addAttribute("colCompetencias", colCompetencias);
 		model.addAttribute("provas", provasCandidatoBean);
 		model.addAttribute("candidato", candidato);
@@ -416,7 +424,7 @@ public class CandidatoController<PaginarCandidato> {
 
 		if (!processoSeletivo.equals("[]")) {
 			List<ProvaCandidatoBean> provas = convertGsonProva(processoSeletivo, candidatoBean);
-			if(caminhoProvas != null){
+			if (caminhoProvas != null) {
 				for (int i = 0; i < caminhoProvas.size(); i++) {
 					provas.get(i).setCaminhoProva(caminhoProvas.get(i));
 				}
@@ -424,7 +432,7 @@ public class CandidatoController<PaginarCandidato> {
 			provaCandidatoBusiness.inserir(provas);
 			// TODO:não da refresh ao salvar status
 		}
-		
+
 		try {
 			// alterado aqui \/
 			candidatoBusiness.alterarStatus(situacaoCandidato);
@@ -440,6 +448,7 @@ public class CandidatoController<PaginarCandidato> {
 			if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.PROPOSTACANDIDATO.getValue()) {
 				propostaBean.setFlSituacao(true);
 				candidatoBean.getPropostaBean().add(propostaBean);
+				candidatoBusiness.salvarProposta(candidatoBean);
 			}
 			try {
 				candidatoBusiness.inserir(candidatoBean);
@@ -515,7 +524,7 @@ public class CandidatoController<PaginarCandidato> {
 						provaCandidatoBean.setCandidato(bean);
 						provasCandidatoBean.add(provaCandidatoBean);
 					}
-				}else if(aux % 2 != 0){
+				} else if (aux % 2 != 0) {
 					provaCandidatoBean = new ProvaCandidatoBean();
 					provaCandidatoBean.setProvas(provaBean);
 					provaCandidatoBean.setCandidato(bean);
@@ -597,6 +606,7 @@ public class CandidatoController<PaginarCandidato> {
 		try {
 			String caminho = gerarProposta(papers);
 			TesteExcel teste = new TesteExcel();
+			propostaBean = new PropostaBean();
 			propostaBean = teste.testa(caminho);
 		} catch (Exception e) {
 			return "error";
@@ -606,7 +616,7 @@ public class CandidatoController<PaginarCandidato> {
 
 	public String gerarProposta(List<MultipartFile> multipartFiles) throws IOException {
 		String arquivo = null;
-		String directory = "C:/Users/guilherme.oliveira/Documents/teste/";
+		String directory = "/home/user/uploadedFilesDir/" + candidatoBean.getId().toString() + "/";
 		File file = new File(directory);
 		file.mkdirs();
 		for (MultipartFile multipartFile : multipartFiles) {
