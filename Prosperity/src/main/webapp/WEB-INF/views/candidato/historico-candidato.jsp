@@ -132,6 +132,17 @@
 								<div class="tab-pane fade" id="second">
 									<fieldset>
 										<legend style="color:#424f63"><h5><strong>Datas de contatos</strong></h5></legend>
+
+											<div class="col-md-12">
+												<div class="col-md-2">
+													<p class="" id="nome"><i class="fa fa-calendar"></i> 20/05/2017</p>
+													<p class="" id="nome"><strong>Avaliador:</strong> Vitor Tadashi</p>
+												</div>
+												<div class="col-md-4">
+													<p class="" id="nome"><strong>Obs:</strong> Liguei para o candidato José e ele não atendeu o telefona</p>
+													<p> &nbsp;</p>
+												</div>
+											</div>
 									</fieldset>
 									<fieldset>
 										<legend style="color:#424f63"><h5><strong>Datas de entrevistas</strong></h5></legend>

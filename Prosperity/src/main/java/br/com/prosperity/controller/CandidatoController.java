@@ -286,6 +286,7 @@ public class CandidatoController<PaginarCandidato> {
 	@RequestMapping(value = "/historico/{id}", method = RequestMethod.GET)
 	public String historicoCandidato(Model model, @PathVariable Integer id) {
 		CandidatoBean candidato = candidatoBusiness.obter(id);
+		//List<ComunicacaoBean> datasContatos = 
 		List<ProvaCandidatoBean> provasCandidatoBean = provaCandidatoBusiness.obterProva(id);
 		// Pega quantas competencias o candidato tem, divide por 7 para ver
 		// quantas colunas deve ter na tela;
