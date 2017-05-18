@@ -327,7 +327,7 @@
 										<!--começo - tab 5-->
 										<div class="tab-pane fade" id="five">
 											<div class="form-group col-md-2">
-												<label class="control-label"> Data ultimo contato</label>
+												<label class="control-label"> Data de contato</label>
 												<div class="form-group">
 													<div class="input-group">
 														<input type="text" class="form-control date" onblur="validarDataContato('dataContato')"
@@ -353,7 +353,7 @@
 												<!-- Começo Tabela -->
 												<thead>
 													<tr class="text-center">
-														<th class="text-center" style="width: 212px;">Data ultimo contato</th>
+														<th class="text-center" style="width: 212px;">Data de contato</th>
 														<th class="text-center">Observações</th>
 														<th class="text-center" style="width: 212px;">Usuário</th>
 													</tr>
