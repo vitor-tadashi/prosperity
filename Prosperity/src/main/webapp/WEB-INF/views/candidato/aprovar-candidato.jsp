@@ -11,7 +11,7 @@
 		<div id="modalProposta" class="modal fade" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel">
 			<div class="modal-dialog modal-lg" role="document">
-				<div class="modal-content">
+				<div class="modal-content ajusteTamanhoModalProposta">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
@@ -259,9 +259,9 @@
 													<%-- aqui inicia o painel de comparativos interno --%>
 													<div class="form-group col-md-12">
 														<div class="panel panel-default col-md-12">
-															<div class="panel-heading text-center"><label>Comparativos interno</label></div>
-															<div class="panel-body  form-group">
-															<button class='bt-toggle' onclick="mudarEstado('esconderTabela')" ><span class='fa fa-plus-circle'></span></button>
+															<div class="panel-heading text-center"><label>Comparativos interno</label> &nbsp; <button class='bt-toggle mostrarTabela' onclick="mudarEstado('esconderTabela')" ><span class='fa fa-plus-circle'></span></button>
+</div>
+															<div class="panel-body  form-group ajustePadding">
 															<div class ="table-responsive" id="esconderTabela">
 																<br/>
 																<br/>
