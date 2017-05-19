@@ -527,7 +527,7 @@
 		
 		/* Exibe a mensagem de mudança de status do candidato: */
 		if(msg!="" && msg!=undefined){
-			if(sucesso==true) {
+			if(sucesso != true) {
 				$('#divAlert').html(msg).addClass('alert alert-success').show();
 				escondeMensagem();
 			} else {
@@ -621,7 +621,7 @@
 			mensagem = "Deseja realmente fechar esta vaga?"
 		}else if(status == '27'){
 			titulo = "Ativar vaga"
-			msg = 'Deseja realmente ativar esta vaga?';
+			mensagem = 'Deseja realmente ativar esta vaga?';
 		}
     	
     	$("#modalLabel").text(titulo);
