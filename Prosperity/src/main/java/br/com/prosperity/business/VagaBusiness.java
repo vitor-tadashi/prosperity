@@ -434,7 +434,7 @@ public class VagaBusiness {
 					switch (u.getPerfil().getNome()) {
 					case "Analista de RH":
 						recipients.add(u.getEmail());
-						nomes.add(u.getNome());
+						nomes.add(u.getFuncionario().getNome());
 						break;
 					default:
 						break;
