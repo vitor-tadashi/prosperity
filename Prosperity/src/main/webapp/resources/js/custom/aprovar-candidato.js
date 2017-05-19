@@ -485,10 +485,10 @@
 							mensagem = "teve proposta gerada";
 							break;
 						case 10:
-							mensagem = "teve proposta aprovada";
+							mensagem = "teve proposta reprovada";
 							break;
 						case 11:
-							mensagem = "teve proposta reprovada";
+							mensagem = "teve proposta aprovada";
 							break;
 						case 15:
 							mensagem = "foi contratado";
