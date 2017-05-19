@@ -61,6 +61,7 @@
 									pattern="dd/MM/yyyy" var="dataAbertura" />
 
 								<input type="hidden" name="dataAbertura" value="${dataAbertura}">
+								//<input type="hidden" name="autenticado" value="${autenticado.perfil.id}">
 
 								<div class="panel-tab clearfix">
 									<ul class="tab-bar wizard-demo" id="wizardDemo">
@@ -78,9 +79,10 @@
 										<li class="tab-verity"><a href="#fourth"
 											data-toggle="tab" class="text-success"><i
 												class="fa fa-calendar"></i>&nbsp;Datas de entrevista</a></li></c:if>
+										<c:if test="${autenticado.perfil.id} == 2 || ${autenticado.perfil.id} == 3">
 										<li class="tab-verity"><a href="#five" data-toggle="tab"
-											class="text-success"><i class="fa fa-calendar"></i> Data
-												ultimo contato</a></li>
+											class="text-success"><i class="fa fa-calendar"></i>  Data
+												de contato</a></li></c:if>
 									</ul>
 								</div>
 								<div class="panel-body">
@@ -327,7 +329,7 @@
 										<!--começo - tab 5-->
 										<div class="tab-pane fade" id="five">
 											<div class="form-group col-md-2">
-												<label class="control-label"> Data de contato</label>
+												<label class="control-label">Data de contato</label>
 												<div class="form-group">
 													<div class="input-group">
 														<input type="text" class="form-control date" onblur="validarDataContato('dataContato')"
@@ -353,9 +355,9 @@
 												<!-- Começo Tabela -->
 												<thead>
 													<tr class="text-center">
-														<th class="text-center" style="width: 212px;">Data de contato</th>
+														<th class="text-center">Data de contato</th>
 														<th class="text-center">Observações</th>
-														<th class="text-center" style="width: 212px;">Usuário</th>
+														<th class="text-center">Usuário</th>
 													</tr>
 													</thead>
 													<tbody class="text-center" id="trNova">

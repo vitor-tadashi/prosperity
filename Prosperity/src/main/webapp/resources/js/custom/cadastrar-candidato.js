@@ -501,6 +501,7 @@ $(document).ready(function() {
 	} else {
 		$(".download-download").hide();
 	}
+	
 });
 
 function download(url) {
@@ -520,6 +521,8 @@ function validarVaga() {
 	}
 	return true;
 }
+
+//funcão para a aba de data de comunicação
 function inserirComunicacao(){
 	var dadosajax = {
 			'dataContato' : $("#dataContato").val(),
@@ -547,6 +550,7 @@ function inserirComunicacao(){
 			}
 			});
 }
+//função para validar e exibir mensagem da data de contato
 function validarDataContato(idCampo) {
 
 				var campo = $("#" + idCampo).val();
@@ -612,6 +616,8 @@ function esconderAba(){
 	if (data.ultimoStatus.status.id == "9") {
 		if (perfil == "Analista de RH" || perfil == "Gestor RH") {
 			$("#fourth").show();
+			
+			
 		}
 }
 }
