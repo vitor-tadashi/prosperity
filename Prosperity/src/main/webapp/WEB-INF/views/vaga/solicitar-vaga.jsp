@@ -12,53 +12,58 @@
 	</layout:put>
 
 	<layout:put block="contents">
-	<div id="main-container">
-		<div id="breadcrumb">
-			<ul class="breadcrumb">
-				<li><i class="fa fa-home"></i><a href="/pagina-inicial">
-						Página inicial</a></li>
-				<li>Vaga</li>
-				<li class="active">Solicitar</li>
-			</ul>
-		</div>
-		<!--breadcrumb-->
-		<div class="padding-md">
-			<div class="row">
-				<div class="panel panel-default">
-					<div class="panel-heading">Informações da vaga</div>
-					<div class="panel-body">
-						<form class="form-border" id="formCadastro2" action="/vaga/salvar"
-							method="POST" >
-							<input id="vagaIdVar" name="id" type="hidden" value="${vaga.id}">
-							<fmt:formatDate value="${vaga.dataAbertura}"
-														pattern="dd/MM/yyyy" var="dataAbertura" />
-							<input id="dataAbertura" name="dataAbertura" type="hidden" value="${dataAbertura}">
-							<c:if test="${ultimoStatus.status.id == 27 }">
-								<input id="status" name="status[0].status.id" type="hidden" value="${ultimoStatus.status.id}">
-								<input name="status[0].status.nome" type="hidden" value="Ativo">	
-							</c:if>
-							<%-- <c:if test="${ultimoStatus.status.id != 27 }">
+		<div id="main-container">
+			<div id="breadcrumb">
+				<ul class="breadcrumb">
+					<li><i class="fa fa-home"></i><a href="/pagina-inicial">
+							Página inicial</a></li>
+					<li>Vaga</li>
+					<li class="active">Solicitar</li>
+				</ul>
+			</div>
+			<!--breadcrumb-->
+			<div class="padding-md">
+				<div class="row">
+					<div class="panel panel-default">
+						<div class="panel-heading">Informações da vaga</div>
+						<div class="panel-body">
+							<form class="form-border" id="formCadastro2"
+								action="/vaga/salvar" method="POST">
+								<input id="vagaIdVar" name="id" type="hidden" value="${vaga.id}">
+								<fmt:formatDate value="${vaga.dataAbertura}"
+									pattern="dd/MM/yyyy" var="dataAbertura" />
+								<input id="dataAbertura" name="dataAbertura" type="hidden"
+									value="${dataAbertura}">
+								<c:if test="${ultimoStatus.status.id == 27 }">
+									<input id="status" name="status[0].status.id" type="hidden"
+										value="${ultimoStatus.status.id}">
+									<input name="status[0].status.nome" type="hidden" value="Ativo">
+								</c:if>
+								<%-- <c:if test="${ultimoStatus.status.id != 27 }">
 								<input id="status" name="status[0].status.id" type="hidden" value="${ultimoStatus.status.id}">
 								<input name="status[0].status.nome" type="hidden" value="${ultimoStatus.status.nome}">	
 							</c:if> --%>
-							<input id="contErro" class ="hidden" value="${erro}">
-							<input id="txtSolicitante" type="hidden" name="nomeSolicitante" value="${autenticado.funcionario.nome}">
-							<input id="solicitante" type="hidden" value="${vaga.nomeSolicitante }">
-							<fmt:formatDate value="${vaga.dataAprovacao}" pattern="dd/MM/yyyy" var="aprox"/>
-							<input id="aprovay" type="hidden" name="dataAprovacao" value="${aprox}">
-							
-							<div id="textDiv">
-								<c:forEach var="erro" items="${listaErros}">
-									<p>${erro}</p>
-								</c:forEach>
-								
-								<!-- MENSAGEM DE SUCESSO -->
-							<c:if test="${not empty sucesso}">
-									<div id="msg-sucesso" class="alert alert-success msg-margin">
-										<ul style="list-style: none;">
-											<li class="li-msg">${sucesso }</li>
-										</ul>
-									</div>
+								<input id="contErro" class="hidden" value="${erro}"> <input
+									id="txtSolicitante" type="hidden" name="nomeSolicitante"
+									value="${autenticado.funcionario.nome}"> <input
+									id="solicitante" type="hidden" value="${vaga.nomeSolicitante }">
+								<fmt:formatDate value="${vaga.dataAprovacao}"
+									pattern="dd/MM/yyyy" var="aprox" />
+								<input id="aprovay" type="hidden" name="dataAprovacao"
+									value="${aprox}">
+
+								<div id="textDiv">
+									<c:forEach var="erro" items="${listaErros}">
+										<p>${erro}</p>
+									</c:forEach>
+
+									<!-- MENSAGEM DE SUCESSO -->
+									<c:if test="${not empty sucesso}">
+										<div id="msg-sucesso" class="alert alert-success msg-margin">
+											<ul style="list-style: none;">
+												<li class="li-msg">${sucesso }</li>
+											</ul>
+										</div>
 									</c:if>
 								</div>
 
@@ -231,8 +236,8 @@
 															</span> <label class="label-radio inline">Novo</label> <input
 																id="substituicao" name="aumentaQuadro" value="S"
 																type="radio"> <span class="custom-radio">
-															</span> <label class="label-radio inline ">Substituição</label> <input
-																id="aumentoQuadroVar" type="hidden"
+															</span> <label class="label-radio inline ">Substituição</label>
+															<input id="aumentoQuadroVar" type="hidden"
 																value="${vaga.aumentaQuadro}">
 														</div>
 														<div id="nome" class="col-md-6 hide"
@@ -354,7 +359,8 @@
 													<textarea id="descricaoPerfilComportamental"
 														class="form-control" name="descricaoPerfilComportamental"
 														rows="5" value="${vaga.descricaoPerfilComportamental}"
-														maxlength="2000" onkeyup="maxCaracterPefilComportamental();"
+														maxlength="2000"
+														onkeyup="maxCaracterPefilComportamental();"
 														style="resize: none;">${vaga.descricaoPerfilComportamental}</textarea>
 													<label id="maxPerfilComportamental">Caracteres
 														restantes : 2000</label>
@@ -376,8 +382,8 @@
 												</div>
 											</section>
 											<!-- /panel -->
-										<!-- /Section-->
-									</div>
+											<!-- /Section-->
+										</div>
 										<div class="tab-pane fade hide" id="fourth">
 											<div class="panel panel-default">
 												<div class="panel-heading">
@@ -404,8 +410,7 @@
 															<i class="fa fa-angle-double-right"></i>
 														</a>
 													</div>
-													<select multiple="multiple" name="#"
-														id="selectedBox2"
+													<select multiple="multiple" name="#" id="selectedBox2"
 														class="select-box pull-right form-control">
 
 														<c:forEach var="avaliador" items="${avaliadorVagaBean}"
