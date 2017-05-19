@@ -150,7 +150,7 @@
 															<label class="control-label">Data para inicio</label>
 															<div class="form-group">
 																<div class="input-group">
-																	<input type="text" value="01/01/2017"
+																	<input type="text" value=""
 																		class="datepicker form-control" name="dataInicio"
 																		id="dataInicio" disabled> <span
 																		class="input-group-addon"> <i
@@ -576,8 +576,10 @@
 	</layout:put>
 
 	<layout:put block="scripts" type="REPLACE">
-
+	
+		<script src="/resources/js/custom/moment-with-locales.min.js"></script>
 		<script type="text/javascript">
+		
 		
 		function paginar (page){
 			if($('#filtro1').val() || $('#status').val() > 0 || $('#data1').val() || $('#data2').val()){
@@ -694,8 +696,8 @@
     			$('label#horaEntrada').text(lista.horarioEntrada);
     			$('label#horaSaida').text(lista.horarioSaida);
     			$('input#pretensao').val(lista.valorPretensao);
-    			
-    			$('input#dataInicio').val(lista.dataInicio);
+    			var date = moment(lista.dataInicio);
+    			$('input#dataInicio').val(date.format("DD/MM/YYYY"));
     			$('label#substituido').text(lista.nomeSubstituido);
     			$('#formacaoAcademica').text(lista.descricaoFormacaoAcademica);
     			$('#perfilComportamental').text(lista.descricaoPerfilComportamental);
