@@ -74,11 +74,10 @@
 											class="text-success"><i class="fa fa-briefcase"></i> Inf.
 												vaga</a></li>
 <!-- 							     se o usuario da sessão for do rh, mostra a aba -->
-<%-- 										<c:if test="${autenticado.perfil.id} == 2 || ${autenticado.perfil.id} == 3"> --%>
-										<li class="tab-verity"><a href="#fourth"
+										<li id="tabDataEntrevista" class="tab-verity hide"><a href="#fourth"
 											data-toggle="tab" class="text-success"><i
 												class="fa fa-calendar"></i>&nbsp;Datas de entrevista</a></li>
-										<li class="tab-verity"><a href="#five" data-toggle="tab"
+										<li id="tabDataContato" class="tab-verity hide"><a href="#five" data-toggle="tab"
 											class="text-success"><i class="fa fa-calendar"></i>  Data
 												de contato</a></li>
 									</ul>

@@ -4,6 +4,10 @@ $(document).ready(function() {
 	setTimeout(function() {
 		$('#msg-sucesso').fadeOut(1500);
 	}, 5000);
+	
+	if($('#funcionalidade34').val()){
+		$('#tabDataContato').removeClass('hide');
+	}
 });
 
 $( "#canalInformacao" ).change(function() {
