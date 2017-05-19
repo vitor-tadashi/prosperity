@@ -501,7 +501,6 @@ $(document).ready(function() {
 	} else {
 		$(".download-download").hide();
 	}
-	
 });
 
 function download(url) {
@@ -616,8 +615,6 @@ function esconderAba(){
 	if (data.ultimoStatus.status.id == "9") {
 		if (perfil == "Analista de RH" || perfil == "Gestor RH") {
 			$("#fourth").show();
-			
-			
 		}
 }
 }

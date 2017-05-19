@@ -61,7 +61,6 @@
 									pattern="dd/MM/yyyy" var="dataAbertura" />
 
 								<input type="hidden" name="dataAbertura" value="${dataAbertura}">
-								//<input type="hidden" name="autenticado" value="${autenticado.perfil.id}">
 
 								<div class="panel-tab clearfix">
 									<ul class="tab-bar wizard-demo" id="wizardDemo">
@@ -79,10 +78,9 @@
 										<li class="tab-verity"><a href="#fourth"
 											data-toggle="tab" class="text-success"><i
 												class="fa fa-calendar"></i>&nbsp;Datas de entrevista</a></li></c:if>
-										<c:if test="${autenticado.perfil.id} == 2 || ${autenticado.perfil.id} == 3">
 										<li class="tab-verity"><a href="#five" data-toggle="tab"
 											class="text-success"><i class="fa fa-calendar"></i>  Data
-												de contato</a></li></c:if>
+												de contato</a></li>
 									</ul>
 								</div>
 								<div class="panel-body">
