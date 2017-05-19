@@ -417,7 +417,6 @@ public class CandidatoBusiness {
 							statusCandidatoEntity = statusAlteracao(situacaoCandidato);
 							statusCandidatoDAO.insert(statusCandidatoEntity);
 							candidatoBean.setId(situacaoCandidato.getIdCandidato());
-							buscarUsuariosParaEmail(situacaoCandidato);
 							if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CONTRATADO.getValue()) {
 								List<VagaCandidatoEntity> contratado = vagaCandidatoDAO
 										.findByNamedQuery("candidatoContratado", situacaoCandidato.getIdCandidato());
@@ -458,8 +457,8 @@ public class CandidatoBusiness {
 				avaliadorCandidatoDAO.update(avaliadorCandidatoEntity.get(0));
 			}
 			statusCandidatoDAO.insert(statusAlteracao(situacaoCandidato));
-			buscarUsuariosParaEmail(situacaoCandidato);
 		}
+		buscarUsuariosParaEmail(situacaoCandidato);
 	}
 
 	@Transactional
