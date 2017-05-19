@@ -48,7 +48,7 @@
 								} else if (data.ultimoStatus.status.id == "11") {
 									if (perfil == 2 || perfil == 3) {
 										$("#proposta-tab").show();
-										$("#importxlsx").hide();
+
 									}
 								} else if (data.ultimoStatus.status.id == "13") {
 									if (perfil == 2 || perfil == 3) {
@@ -489,10 +489,10 @@
 							mensagem = "teve proposta gerada";
 							break;
 						case 10:
-							mensagem = "teve proposta aprovada";
+							mensagem = "teve proposta reprovada";
 							break;
 						case 11:
-							mensagem = "teve proposta reprovada";
+							mensagem = "teve proposta aprovada";
 							break;
 						case 15:
 							mensagem = "foi contratado";

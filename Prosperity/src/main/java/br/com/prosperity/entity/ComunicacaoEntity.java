@@ -33,7 +33,7 @@ public class ComunicacaoEntity {
 	@Column(name = "dsObservacao")
 	private String observacao;
 	
-	@ManyToOne(cascade = CascadeType.REFRESH , fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.REFRESH , fetch = FetchType.LAZY)
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuarioEntity;
 	
