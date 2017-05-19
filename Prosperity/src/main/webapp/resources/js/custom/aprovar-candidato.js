@@ -9,7 +9,7 @@
 				       .val('')
 				       .end();
 				})
-			
+
 			function maxCaracterParecer() {
 				var maxParecer = $("#parecer").val();
 				var restante = 500 - maxParecer.length;
@@ -31,25 +31,28 @@
 					if (!isNaN($(value).attr("id"))) {
 						var id = $(value).attr("id");
 						$.ajax({url : "buscar/"+ id, dataType : "json", method : "GET", success : function(data) {
-							console.log('Esse aqui');
-							console.log(data);
 							var perfil = $('#idPerfil').val();
+							$("#nmCandProp").text(data.nome);
 							$("#modalTitulo").text(tituloModal);
 								if (data.ultimoStatus.status.id == "9") {
 									if (perfil == 2 || perfil == 3) {
 										$("#proposta-tab").show();
+										$("#importxlsx").show();
 									}
 								} else if (data.ultimoStatus.status.id == "10") {
 									if (perfil == 1 || perfil == 4 || perfil == 9) {
 										$("#proposta-tab").show();
+										$("#importxlsx").hide();
 									}
 								} else if (data.ultimoStatus.status.id == "11") {
 									if (perfil == 2 || perfil == 3) {
 										$("#proposta-tab").show();
+										$("#importxlsx").hide();
 									}
 								} else if (data.ultimoStatus.status.id == "13") {
 									if (perfil == 2 || perfil == 3) {
 										$("#proposta-tab").show();
+										$("#importxlsx").hide();
 									}
 								} else if (data.ultimoStatus.status.id == "14") {
 									if (perfil == 2 || perfil == 3) {
@@ -67,7 +70,7 @@
 								}
 								$('.tab-bar a[href="#infoEntrevista"]').tab('show');
 								$('#modalProposta').modal('show');
-								if(data.ultimaProposta != null){	
+								if(data.ultimaProposta != null){
 									//carregando as informações do EXCEL via AJAX para a JSP
 									$('#anteriorCargo').text(data.ultimaProposta.anteriorCargo);
 									$('#anteriorEmpresa').text(data.ultimaProposta.anteriorEmpresa);
@@ -83,7 +86,7 @@
 									$('#vlrAntAnualLiquido').text(parseFloat(data.ultimaProposta.anteriorAnualLiquido).toFixed(2));
 									$('#vlrAntParticipacaoLucrosOuBonus').text(parseFloat(data.ultimaProposta.anteriorParticipacaoLucrosOuBonus).toFixed(2));
 									$('#vlrAntTotalAnualLiquidoComBeneficios').text(parseFloat(data.ultimaProposta.anteriorTotalAnualLiquidoComBeneficios).toFixed(2));
-									
+
 									$('#novaEmpresa').text(data.ultimaProposta.novaEmpresa);
 									$('#novoCargo').text(data.ultimaProposta.novoCargo);
 									$('#vlrNvSalarioFixoBruto').text(parseFloat(data.ultimaProposta.novoSalarioFixoBruto).toFixed(2));
@@ -98,14 +101,16 @@
 									$('#vlrNvAnualLiquido').text(parseFloat(data.ultimaProposta.novoAnualLiquido).toFixed(2));
 									$('#vlrNvParticipacaoLucrosOuBonus').text(parseFloat(data.ultimaProposta.novaParticipacaoLucrosOuBonus).toFixed(2));
 									$('#vlrNvTotalAnualLiquidoComBeneficios').text(parseFloat(data.ultimaProposta.novoTotalAnualLiquidoComBeneficios).toFixed(2));
-								
+
 									var comparativo = data.ultimaProposta.comparativoProposta;
 
 									// for each que percorre a lista e mostra na tela
 									var aux = 0;
 									if(data.ultimaProposta.comparativoProposta != null){
 										$(comparativo).each(function(index, value) {
-											var campos = "<tr class='tiraTabela'><td id='nmFuncionario"+aux+"'></td>" +
+
+											var campos = "<tr class='tiraTabela'>"+
+											"<td id='nmFuncionario"+aux+"'></td>" +
 											"<td id='nmCargo"+aux+"'></td>" +
 											"<td id='nmSenioridade"+aux+"'></td>" +
 											"<td id='dsConhecimento"+aux+"'></td>" +
@@ -118,9 +123,9 @@
 											"<td><p>R$ </p><p id='vlrAssistenciaMedica"+aux+"'></p></td>" +
 											"<td><p>R$ </p><p id='vlrOutros"+aux+"'></p></td>" +
 											"<td><p>R$ </p><p id='vlrTaxa"+aux+"'></p></td> </tr>";
-											
+
 											$(".tbComparativo").append(campos);
-											
+
 											$('#nmFuncionario'+aux).text(data.ultimaProposta.comparativoProposta[index].nmFuncionario);
 											$('#nmCargo'+aux).text(data.ultimaProposta.comparativoProposta[index].nmCargo);
 											$('#nmSenioridade'+aux).text(data.ultimaProposta.comparativoProposta[index].nmSenioridade);
@@ -134,7 +139,7 @@
 											$('#vlrAssistenciaMedica'+aux).text(parseFloat(data.ultimaProposta.comparativoProposta[index].vlrAssistenciaMedica).toFixed(2));
 											$('#vlrOutros'+aux).text(parseFloat(data.ultimaProposta.comparativoProposta[index].vlrOutros).toFixed(2));
 											$('#vlrTaxa'+aux).text(parseFloat(data.ultimaProposta.comparativoProposta[index].vlrTaxa).toFixed(2));
-											
+
 											aux++;
 										});
 									}
@@ -184,7 +189,7 @@
 					x++;
 				});
 				file();
-				
+
 				$.ajax({
 					url : "alterar-status-candidato",
 					method : "POST",
@@ -200,7 +205,7 @@
 						mensagemMudancaStatus = defineMudancaStatus(data.ultimoStatus.status.id);
 						localStorage.setItem("mensagemMudancaStatus", mensagemMudancaStatus);
 						localStorage.setItem("nomeCandidato", data.nome);
-						
+
 						location.reload();
 					},
 					error : function(e) {
@@ -208,7 +213,7 @@
 						$('#confirm-modal').modal('hide');
 						$('#modalTitulo').modal('hide');
 						$('#modalProposta').modal('hide');
-						
+
 						msg = 'Ocorreu algo de errado!'
 						$('#msg-sucesso').html(msg).addClass(
 						'alert alert-danger').show();
@@ -251,7 +256,7 @@
 				maxCaracterParecerCancelamento();
 			}
 
-			
+
 			/*remove os campos*/
 
 			function maxDescricaoProva() {
@@ -264,7 +269,7 @@
 					cont++;
 				})
 			}
-			
+
 			function remover(id) {
 				$(".div" + id).remove();
 				cont--;
@@ -301,11 +306,11 @@
 					e.preventDefault();
 					$(this).parsley().validate();
 				});
-				
+
 				/* Pegando valor das variáveis que foram armazenadas localmente:  */
 				var nome = localStorage.getItem("nomeCandidato");
 				var statusMudado = localStorage.getItem("mensagemMudancaStatus");
-				
+
 				/* Exibe a mensagem de mudança de status do candidato: */
 				if(nome!=""){
 					msg = 'O candidato <strong>' + nome
@@ -313,7 +318,7 @@
 					$('#msg-sucesso').html(msg).addClass('alert alert-success').show();
 					escondeMensagem();
 				}
-				
+
 				/* Limpa as variáveis locais, para quando a página for atualizada/acessada novamente não exiba uma mensagem nula */
 				localStorage.setItem("nomeCandidato", "");
 				localStorage.setItem("mensagemMudancaStatus", "");
@@ -354,7 +359,7 @@
 									$("#vlrAntAnualLiquido").text(parseFloat(data.anteriorAnualLiquido).toFixed(2));
 									$("#vlrAntParticipacaoLucrosOuBonus").text(parseFloat(data.anteriorParticipacaoLucrosOuBonus).toFixed(2));
 									$("#vlrAntTotalAnualLiquidoComBeneficios").text(parseFloat(data.anteriorTotalAnualLiquidoComBeneficios).toFixed(2));
-								
+
 									$("#novaEmpresa").text(data.novaEmpresa);
 									$("#novoCargo").text(data.novoCargo)
 									$("#vlrNvSalarioFixoBruto").text(parseFloat(data.novoSalarioFixoBruto).toFixed(2));
@@ -369,7 +374,7 @@
 									$("#vlrNvAnualLiquido").text(parseFloat(data.novoAnualLiquido).toFixed(2));
 									$("#vlrNvParticipacaoLucrosOuBonus").text(parseFloat(data.novaParticipacaoLucrosOuBonus).toFixed(2));
 									$("#vlrNvTotalAnualLiquidoComBeneficios").text(parseFloat(data.novoTotalAnualLiquidoComBeneficios).toFixed(2));
-									
+
 									var comparativo = data.comparativoProposta;
 
 									// for each que percorre a lista e mostra na tela
@@ -388,9 +393,9 @@
 										"<td><p>R$ </p><p id='vlrAssistenciaMedica"+aux+"'></p></td>" +
 										"<td><p>R$ </p><p id='vlrOutros"+aux+"'></p></td>" +
 										"<td><p>R$ </p><p id='vlrTaxa"+aux+"'></p></td> </tr>";
-										
+
 										$(".tbComparativo").append(campos);
-										
+
 										$('#nmFuncionario'+aux).text(data.comparativoProposta[index].nmFuncionario);
 										$('#nmCargo'+aux).text(data.comparativoProposta[index].nmCargo);
 										$('#nmSenioridade'+aux).text(data.comparativoProposta[index].nmSenioridade);
@@ -404,10 +409,10 @@
 										$('#vlrAssistenciaMedica'+aux).text(parseFloat(data.comparativoProposta[index].vlrAssistenciaMedica).toFixed(2));
 										$('#vlrOutros'+aux).text(parseFloat(data.comparativoProposta[index].vlrOutros).toFixed(2));
 										$('#vlrTaxa'+aux).text(parseFloat(data.comparativoProposta[index].vlrTaxa).toFixed(2));
-										
+
 										aux++;
 									});
-									
+
 									$(document).ready(function() {
 										$('.dinheiro').mask('0.000.000,00', {reverse : true});
 									});
@@ -429,23 +434,23 @@
 					function() {
 						/* Fecha o modal de cancelamento: */
 						$('#delete-modal').modal('hide');
-						
+
 						/* Mensagem: */
 						msg = 'O candidato <strong>' + nomeCandidato
 							+ '</strong> foi cancelado com sucesso!'
 						$('#msg-sucesso').html(msg).addClass('alert alert-success').show();
 						/* Remove a linha dele na tabela: */
 						$('#js-trCandidato_' + id).remove();
-								
+
 						escondeMensagem();
-							
+
 					}).fail(function(jqXHR, textStatus) {
-							
+
 						/* Exibe mensagem no caso de falha de requisição: */
 						msg = 'Falha ao cancelar o candidato <strong>' + nomeCandidato
 							+ '</strong>!'
 						$('#msg-sucesso').html(msg).addClass('alert alert-danger').show();
-									
+
 						escondeMensagem();
 					});
 				}
@@ -456,10 +461,10 @@
 						$(".mensagem").hide();
 					}, 5000);
 				}
-			
+
 				/* Função para alterar a mensagem conforme mudança de status: */
 				function defineMudancaStatus(status) {
-				
+
 					var mensagem;
 					switch(status) {
 						case 6:
@@ -489,3 +494,12 @@
 					return mensagem;
 				}
 				/* paginação */
+				
+				//exibir ou esconder comparativo proposta
+				function mudarEstado(el) {
+			        var display = document.getElementById(el).style.display;
+			        if(display == "none")
+			            document.getElementById(el).style.display = 'block';
+			        else
+			            document.getElementById(el).style.display = 'none';
+			    }
