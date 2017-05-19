@@ -495,7 +495,7 @@
 		$("#gerarCampo").click(function() {
 			var campos =
 				"<div class='div"+cont+" processoSeletivo'>"
-				+ "<div class='row'>"
+				+ "<div class='row erro-prova'>"
 				+ "<div class='col-md-4 form-inline'>"
 				+ "<a id='btnRemover' onclick='remover("
 				+ cont
