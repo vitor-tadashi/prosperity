@@ -232,7 +232,7 @@ public class VagaBusiness {
 		} else {
 			vagaDAO.update(vagaEntity);
 		}
-		if (usuarioBean != null) {
+		if (usuarioBean != null && usuarioBean.size()>0) {
 			inserirAvaliadores(vagaEntity, usuarioBean);
 		}
 	}
@@ -361,8 +361,8 @@ public class VagaBusiness {
 		if (usuarios != null) {
 			for (UsuarioBean usuario : usuarios) {
 				AvaliadorVagaEntity avaliadorVagaEntity = new AvaliadorVagaEntity();
-				avaliadorVagaEntity.setUsuario(usuarioConverter.convertBeanToEntity(usuario));
 				avaliadorVagaEntity.setVaga(vaga);
+				avaliadorVagaEntity.setUsuario(usuarioDAO.findById(usuario.getId()));
 				avaliadorVagaDAO.insert(avaliadorVagaEntity);
 			}
 		}

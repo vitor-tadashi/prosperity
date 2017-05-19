@@ -49,6 +49,7 @@
 							<div id="textDiv3"></div>
 							
 							<input id="txtUsuario" type="hidden" name="usuarioBean" value="${autenticado.id}">
+							<input id="nmUsuario" type="hidden" value="${autenticado.funcionario.nome}">
 
 							<form class="form-border" action="salvar" method="post"
 								enctype="multipart/form-data" id=formCadastro
@@ -326,7 +327,7 @@
 										<!--começo - tab 5-->
 										<div class="tab-pane fade" id="five">
 											<div class="form-group col-md-2">
-												<label class="control-label"> Data ultimo contato</label>
+												<label class="control-label"> Data de contato</label>
 												<div class="form-group">
 													<div class="input-group">
 														<input type="text" class="form-control date" onblur="validarDataContato('dataContato')"
@@ -352,17 +353,17 @@
 												<!-- Começo Tabela -->
 												<thead>
 													<tr class="text-center">
-														<th class="text-center" style="width: 212px;">Data ultimo contato</th>
+														<th class="text-center" style="width: 212px;">Data de contato</th>
 														<th class="text-center">Observações</th>
 														<th class="text-center" style="width: 212px;">Usuário</th>
 													</tr>
 													</thead>
-													<tbody class="text-center">
-														<c:forEach var="comunicacao" items="${comunicacoes}" varStatus="i">
+													<tbody class="text-center" id="trNova">
+														<c:forEach var="comunicacao" items="${datasComunicacao}" varStatus="i">
 														<tr>
 														<td><fmt:formatDate value="${comunicacao.dataContato}" pattern="dd/MM/yyyy" /></td>
 														<td>${comunicacao.observacao}</td>
-														<td>${comunicacao.usuarioBean}</td>
+														<td>${comunicacao.usuarioBean.funcionario.nome}</td>
 														</tr>
 														</c:forEach> 	
 												</tbody>

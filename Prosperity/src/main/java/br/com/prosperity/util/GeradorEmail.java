@@ -162,7 +162,7 @@ public class GeradorEmail {
 			status = statusVaga;
 		}
 
-		String mensagemtexto = mensagem.gerador("a vaga ", vaga.getNomeVaga(), status.getStatus().getNome(), nome);
+		String mensagemtexto = mensagem.gerador("a vaga", vaga.getNomeVaga(), status.getStatus().getNome(), nome);
 
 		// Não fazer buscas dentro da thread!!!!!
 		new Thread() {

@@ -2,8 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://kwonnam.pe.kr/jsp/template-inheritance"
-	prefix="layout"%>
+<%@ taglib uri="http://kwonnam.pe.kr/jsp/template-inheritance" prefix="layout"%>
 
 <layout:extends name="base">
 	<layout:put block="contents">
@@ -462,10 +461,7 @@
 																		<i ${statusDisponivel.classe}>&nbsp;</i>${statusDisponivel.nome}</a></li>
 																<li class="divider"></li>
 															</c:forEach>
-															<li><c:url
-																	value="cancelar-candidato/${candidato.id}"
-																	var="urlCancelar">
-																</c:url><a href="#delete-modal"
+															<li><c:url value="cancelar-candidato/${candidato.id}" var="urlCancelar"> </c:url><a href="#delete-modal"
 																onclick="cancelarClick('${candidato.id}', '${candidato.nome}')"
 																data-toggle="modal"><i class="fa fa-trash-o fa-lg">&nbsp;</i>Cancelar</a></li>
 															<!-- /fim botao -->

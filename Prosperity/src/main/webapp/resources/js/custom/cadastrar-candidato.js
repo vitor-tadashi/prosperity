@@ -521,7 +521,6 @@ function validarVaga() {
 	return true;
 }
 function inserirComunicacao(){
-	alert('entrou');
 	var dadosajax = {
 			'dataContato' : $("#dataContato").val(),
 			'observacao' : $("#obs").val(),
@@ -534,10 +533,16 @@ function inserirComunicacao(){
 			type: 'POST',
 			cache: false,
 			success: function(){
-				alert('sucesso');
+				
+				$('#trNova').append(
+						"<tr>"+
+						"<td>"+$("#dataContato").val()+"</td>"+
+						"<td>"+$("#obs").val()+"</td>"+
+						"<td>"+$("#nmUsuario").val()+"</td>"+
+						"</tr>"
+				)
 			},
 			error: function(){
-				alert('erro');
 				
 			}
 			});
@@ -549,8 +554,8 @@ function validarDataContato(idCampo) {
 					erro = 0;
 					hoje = new Date();
 					anoAtual = hoje.getFullYear();
-					mes = mesAtual = hoje.getMonth();
-					diaAtual = hoje.getDay();
+					mesAtual = hoje.getMonth()+ 1;
+					diaAtual = hoje.getDate();
 					dataAtual = diaAtual +"/"+mesAtual+"/"+anoAtual;
 					barras = campo.split("/");
 					if (barras.length == 3) {
