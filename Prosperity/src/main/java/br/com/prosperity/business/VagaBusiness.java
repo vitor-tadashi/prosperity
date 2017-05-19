@@ -232,7 +232,7 @@ public class VagaBusiness {
 		} else {
 			vagaDAO.update(vagaEntity);
 		}
-		if (usuarioBean != null && usuarioBean.size()>0) {
+		if (usuarioBean != null && usuarioBean.size() > 0) {
 			inserirAvaliadores(vagaEntity, usuarioBean);
 		}
 	}
@@ -344,16 +344,17 @@ public class VagaBusiness {
 			data = novaData.format(dataAntiga);
 			return novaData.parse(data);
 		} catch (Exception e) {
-			e.printStackTrace(); // imprimi a stack trace
+			e.printStackTrace();
 		}
 		return dataAntiga;
 	}
 
 	@Transactional
 	private void inserirAvaliadores(VagaEntity vaga, List<UsuarioBean> usuarios) {
-		List<AvaliadorVagaEntity>avaliadores = avaliadorVagaDAO.findByNamedQuery("obterAvaliadoresDaVaga", vaga.getId()); 
-		if(avaliadores.size()>0 ){
-			for(AvaliadorVagaEntity av:avaliadores){
+		List<AvaliadorVagaEntity> avaliadores = avaliadorVagaDAO.findByNamedQuery("obterAvaliadoresDaVaga",
+				vaga.getId());
+		if (avaliadores.size() > 0) {
+			for (AvaliadorVagaEntity av : avaliadores) {
 				avaliadorVagaDAO.remove(av);
 			}
 
@@ -417,19 +418,23 @@ public class VagaBusiness {
 
 		try {
 			VagaEntity vaga = vagaDAO.findById(situacaoVagaBean.getIdVaga());
-			List<UsuarioBean> usuarios = usuarioBusiness.findAll();
+			
+			List<UsuarioBean> usuarios = buscarUsuariosSemRepetir();
+			
+			// Não enviar email caso a lista estiver vazia:
+			if(usuarios==null || usuarios.size()==0){
+				return;
+			}
+			
 			ArrayList<String> recipients = new ArrayList<>();
 			ArrayList<String> nomes = new ArrayList<>();
-			@SuppressWarnings("unused")
-			List<AvaliadorVagaBean> avaliadores = avaliadorVagaConverter
-					.convertEntityToBean(avaliadorVagaDAO.findByNamedQuery("obterProposta", vaga.getId()));
 
 			if (situacaoVagaBean.getStatus().getValue() == StatusVagaEnum.PENDENTE.getValue()) {
 				for (UsuarioBean u : usuarios) {
 					switch (u.getPerfil().getNome()) {
 					case "Diretor de operação":
 						recipients.add(u.getEmail());
-						nomes.add(u.getNome());
+						nomes.add(u.getFuncionario().getNome());
 						break;
 					default:
 						break;
@@ -452,14 +457,26 @@ public class VagaBusiness {
 				}
 			}
 			GeradorEmail email = new GeradorEmail();
-			int i = 0;
-			for (String usuario : recipients) {
-				email.enviarEmail(vaga, usuario, nomes.get(i));
-				i++;
-			}
+				for (int i = 0, j = 0; i< recipients.size() && j<nomes.size(); i++, j++) {
+					email.enviarEmail(vaga, recipients.get(i), nomes.get(j));
+				}
 		} catch (Exception e) {
 			System.out.println("Erro\n");
 			e.printStackTrace();
 		}
+	}
+
+	private List<UsuarioBean> buscarUsuariosSemRepetir() {
+		List<UsuarioBean> usuarios = usuarioBusiness.findAll();
+		List<UsuarioBean> usuariosNaoRepetidos = new ArrayList<>();
+		Set<Integer> idUsuarios = new HashSet<Integer>();
+		
+		for(UsuarioBean u : usuarios) {
+			if(idUsuarios.add( u.getId() )) {
+				usuariosNaoRepetidos.add(u);
+			}
+		}
+		
+		return usuariosNaoRepetidos;
 	}
 }
