@@ -399,7 +399,7 @@ public class CandidatoBusiness {
 		StatusCandidatoEntity statusCandidatoEntity = null;
 		List<StatusFuturoEntity> statusFuturoEntity = null;
 		List<AvaliadorCandidatoEntity> avaliadorCandidatoEntity = null;
-		List<StatusDisponivelEntity> statusDisponivelEntity = statusDisponivelDAO.findAll();
+		List<StatusDisponivelEntity> listaStatusDisponivelEntity = statusDisponivelDAO.findAll();
 
 		if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANDIDATURA.getValue()
 				|| situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANCELADO.getValue()
@@ -407,13 +407,13 @@ public class CandidatoBusiness {
 			statusCandidatoEntity = statusAlteracao(situacaoCandidato);
 			statusCandidatoDAO.insert(statusCandidatoEntity);
 		} else {
-			if (statusDisponivelEntity != null) {
-				List<StatusCandidatoEntity> statusCandidato = null;
-				statusCandidato = statusCandidatoDAO.findByNamedQuery("obterStatusCandidato",
+			if (listaStatusDisponivelEntity != null) {
+				List<StatusCandidatoEntity> listaStatusCandidato = null;
+				listaStatusCandidato = statusCandidatoDAO.findByNamedQuery("obterStatusCandidato",
 						situacaoCandidato.getIdCandidato());
-				for (StatusDisponivelEntity sde : statusDisponivelEntity) {
-					if (sde.getStatus().getId() == statusCandidato.get(0).getStatus().getId()) {
-						if (situacaoCandidato.getStatus().getValue() == sde.getIdStatusDisponivel()) {
+				for (StatusDisponivelEntity statusDisponivelEntity : listaStatusDisponivelEntity) {
+					if (statusDisponivelEntity.getStatus().getId() == listaStatusCandidato.get(0).getStatus().getId()) {
+						if (situacaoCandidato.getStatus().getValue() == statusDisponivelEntity.getIdStatusDisponivel()) {
 							statusCandidatoEntity = statusAlteracao(situacaoCandidato);
 							statusCandidatoDAO.insert(statusCandidatoEntity);
 							candidatoBean.setId(situacaoCandidato.getIdCandidato());
@@ -680,13 +680,10 @@ public class CandidatoBusiness {
 					nomes.add(a.getUsuario().getNome());
 				}
 			}
-		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.PROPOSTACANDIDATO.getValue()) {
+		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.PROPOSTACANDIDATO.getValue() 
+				|| situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CONTRATADO.getValue()) {
 			for (UsuarioBean u : usuarios) {
 				switch (u.getPerfil().getNome()) {
-				case "CEO":
-					recipients.add(u.getEmail());
-					nomes.add(u.getNome());
-					break;
 				case "Diretor de operação":
 					recipients.add(u.getEmail());
 					nomes.add(u.getNome());
@@ -695,14 +692,10 @@ public class CandidatoBusiness {
 					break;
 				}
 			}
-		} else {
+		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOAPROVADO.getValue()){
 			for (UsuarioBean u : usuarios) {
 				switch (u.getPerfil().getNome()) {
 				case "Analista de RH":
-					recipients.add(u.getEmail());
-					nomes.add(u.getNome());
-					break;
-				case "Gestor de RH":
 					recipients.add(u.getEmail());
 					nomes.add(u.getNome());
 					break;
@@ -711,11 +704,10 @@ public class CandidatoBusiness {
 				}
 			}
 		}
+		
 		GeradorEmail email = new GeradorEmail();
-		int i = 0;
-		for (String usuario : recipients) {
-			email.enviarEmail(candidatoBean, usuario, nomes.get(i));
-			i++;
+		for (int i = 0, j = 0; i< recipients.size() && j<nomes.size(); i++, j++) {
+			email.enviarEmail(candidatoBean, recipients.get(i), nomes.get(j));
 		}
 	}
 
