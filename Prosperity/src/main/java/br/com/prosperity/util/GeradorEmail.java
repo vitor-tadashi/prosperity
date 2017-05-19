@@ -18,7 +18,7 @@ import br.com.prosperity.entity.VagaEntity;
 public class GeradorEmail {
 
 	private final String de = "prosperity@verity.com.br";
-	private final String senha = "verity@123";
+	private final String senha = "$pros_java3";
 	private String mailSMTPServer;
 	private String mailSMTPServerPort;
 

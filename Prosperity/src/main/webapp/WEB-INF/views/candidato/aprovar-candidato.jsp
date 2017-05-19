@@ -263,8 +263,6 @@
 </div>
 															<div class="panel-body  form-group ajustePadding">
 															<div class ="table-responsive" id="esconderTabela" style="display:none">
-																<br/>
-																<br/>
 																<table id="tabelaVaga"
 																	class="table table-bordered table-condensed table-hover">
 																	<thead>

@@ -29,4 +29,12 @@ public class CandidatoCompetenciaBusiness {
 		ccBean = ccConverter.convertEntityToBean(cce);
 		return ccBean;
 	}
+
+	@Transactional
+	public void inserirCompetencias(List<CandidatoCompetenciaBean> competencias, Integer idCandidato) {
+		for (CandidatoCompetenciaBean competencia : competencias) {
+			competencia.setIdCandidato(idCandidato);
+			ccDAO.insert(ccConverter.convertBeanToEntity(competencia));
+		}
+	}
 }

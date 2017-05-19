@@ -64,4 +64,12 @@ public class CandidatoCompetenciaEntity {
 		this.nmAvaliador = nmAvaliador;
 	}
 
+	public Integer getIdCandidato() {
+		return idCandidato;
+	}
+
+	public void setIdCandidato(Integer idCandidato) {
+		this.idCandidato = idCandidato;
+	}
+
 }
