@@ -126,11 +126,14 @@
 
 											$(".tbComparativo").append(campos);
 
+
 											$('#nmFuncionario'+aux).text(data.ultimaProposta.comparativoProposta[index].nmFuncionario);
 											$('#nmCargo'+aux).text(data.ultimaProposta.comparativoProposta[index].nmCargo);
 											$('#nmSenioridade'+aux).text(data.ultimaProposta.comparativoProposta[index].nmSenioridade);
 											$('#dsConhecimento'+aux).text(data.ultimaProposta.comparativoProposta[index].dsConhecimento);
-											$('#dtAdmissao'+aux).text(data.ultimaProposta.comparativoProposta[index].dtAdmissao);
+
+											var date = moment(data.ultimaProposta.comparativoProposta[index].dtAdmissao);
+											$('#dtAdmissao'+aux).text(date.format("DD/MM/YYYY"));
 											$('#vlrSalario'+aux).text(parseFloat(data.ultimaProposta.comparativoProposta[index].vlrSalario).toFixed(2));
 											$('#vlrVr'+aux).text(parseFloat(data.ultimaProposta.comparativoProposta[index].vlrVr).toFixed(2));
 											$('#vlrVa'+aux).text(parseFloat(data.ultimaProposta.comparativoProposta[index].vlrVa).toFixed(2));
@@ -274,11 +277,26 @@
 				$(".div" + id).remove();
 				cont--;
 			}
+			function valida(){
+				var erro = true;
+				$(".erro-prova").each(function(i,item) {
+					var paperElement = document.getElementById("modalPapers");
+					if($(this).find("#prova-js").val() == 0 || !$(this).find("#modalPapers").val()){
+						$(item).addClass('alert alert-danger')
+						erro = false;
+					}else{
+						$(item).removeClass('alert alert-danger')
+						
+					}
+				})
+				return erro;
+			}
 
 			// Submit do formulário
 			$("button#btnEnviar").click(function() {
 				$("form#formValidar").submit();
-				if ($('form#formValidar').parsley('isValid')) {
+				
+				if ($('form#formValidar').parsley('isValid') && valida()) {
 					$('#confirm-modal').modal('show');
 				}
 			});
@@ -287,6 +305,7 @@
 				$('form#formValidar').parsley();
 
 				$('form#formValidar').on('submit', function(e) {
+					valida();
 					e.preventDefault();
 					$(this).parsley().validate();
 				});
@@ -384,7 +403,9 @@
 										$('#nmCargo'+aux).text(data.comparativoProposta[index].nmCargo);
 										$('#nmSenioridade'+aux).text(data.comparativoProposta[index].nmSenioridade);
 										$('#dsConhecimento'+aux).text(data.comparativoProposta[index].dsConhecimento);
-										$('#dtAdmissao'+aux).text(data.comparativoProposta[index].dtAdmissao);
+
+										var date2 = moment(data.comparativoProposta[index].dtAdmissao);
+										$('#dtAdmissao'+aux).text(date2.format("DD/MM/YYYY"));
 										$('#vlrSalario'+aux).text(parseFloat(data.comparativoProposta[index].vlrSalario).toFixed(2));
 										$('#vlrVr'+aux).text(parseFloat(data.comparativoProposta[index].vlrVr).toFixed(2));
 										$('#vlrVa'+aux).text(parseFloat(data.comparativoProposta[index].vlrVa).toFixed(2));
@@ -478,7 +499,7 @@
 					return mensagem;
 				}
 				/* paginação */
-				
+
 				//exibir ou esconder comparativo proposta
 				function mudarEstado(el) {
 			        var display = document.getElementById(el).style.display;

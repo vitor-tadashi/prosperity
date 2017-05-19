@@ -418,7 +418,6 @@ public class CandidatoBusiness {
 							statusCandidatoEntity = statusAlteracao(situacaoCandidato);
 							statusCandidatoDAO.insert(statusCandidatoEntity);
 							candidatoBean.setId(situacaoCandidato.getIdCandidato());
-							buscarUsuariosParaEmail(situacaoCandidato);
 							if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CONTRATADO.getValue()) {
 								List<VagaCandidatoEntity> contratado = vagaCandidatoDAO
 										.findByNamedQuery("candidatoContratado", situacaoCandidato.getIdCandidato());
@@ -459,8 +458,8 @@ public class CandidatoBusiness {
 				avaliadorCandidatoDAO.update(avaliadorCandidatoEntity.get(0));
 			}
 			statusCandidatoDAO.insert(statusAlteracao(situacaoCandidato));
-			buscarUsuariosParaEmail(situacaoCandidato);
 		}
+		buscarUsuariosParaEmail(situacaoCandidato);
 	}
 
 	@Transactional
@@ -687,18 +686,19 @@ public class CandidatoBusiness {
 				switch (u.getPerfil().getNome()) {
 				case "Diretor de operação":
 					recipients.add(u.getEmail());
-					nomes.add(u.getNome());
+					nomes.add(u.getFuncionario().getNome());
 					break;
 				default:
 					break;
 				}
 			}
-		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOAPROVADO.getValue()) {
+		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOAPROVADO.getValue()
+				 || situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.PROPOSTARECUSADA.getValue()){
 			for (UsuarioBean u : usuarios) {
 				switch (u.getPerfil().getNome()) {
 				case "Analista de RH":
 					recipients.add(u.getEmail());
-					nomes.add(u.getNome());
+					nomes.add(u.getFuncionario().getNome());
 					break;
 				default:
 					break;

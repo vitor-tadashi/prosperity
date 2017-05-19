@@ -94,7 +94,7 @@
 																			class="avaliacaoCompetencia" type="radio"
 																			alt="${avaliacao.id}"
 																			name="avaliacao${competencia.nome}"
-																			value="${competencia.id}"> <span
+																			value="${competencia.id}" checked> <span
 																			class="custom-radio"></span>
 																	</label></td>
 																</c:forEach>
@@ -262,7 +262,7 @@
 															<div class="panel-heading text-center"><label>Comparativos interno</label> &nbsp; <button class='bt-toggle mostrarTabela' onclick="mudarEstado('esconderTabela')" ><span class='fa fa-plus-circle'></span></button>
 </div>
 															<div class="panel-body  form-group ajustePadding">
-															<div class ="table-responsive" id="esconderTabela">
+															<div class ="table-responsive" id="esconderTabela" style="display:none">
 																<br/>
 																<br/>
 																<table id="tabelaVaga"
@@ -495,13 +495,15 @@
 
 		<script src="/resources/js/parsley.min.js"></script>
 		<script src="/resources/js/custom/aprovar-candidato.js"></script>
+		<script src="/resources/js/custom/moment-with-locales.min.js"></script>
+
 		<script>
 		/*gerador de campo*/
 		var cont = 0;
 		$("#gerarCampo").click(function() {
 			var campos =
 				"<div class='div"+cont+" processoSeletivo'>"
-				+ "<div class='row'>"
+				+ "<div class='row erro-prova'>"
 				+ "<div class='col-md-4 form-inline'>"
 				+ "<a id='btnRemover' onclick='remover("
 				+ cont

@@ -545,16 +545,16 @@
     			
     			if(dado == '1') {
     				$('#aprova-modal').modal('hide');
-        			msg = 'Vaga aprovada com sucesso!';
+        			msg = 'Vaga ativada com sucesso!';
     			}else if(dado == '3'){
         			$('#cancela-modal').modal('hide');
         			msg = 'Vaga cancelada com sucesso!';
     			}else if(dado == '27'){
         			$('#aprova-modal').modal('hide');
-        			msg = 'Vaga ativada com sucesso!';
+        			msg = 'Vaga aprovada com sucesso!';
     			}else if (dado == '18'){
     			$('#reprova-modal').modal('hide');
-    			msg = 'Vaga Reprovada com sucesso!';
+    			msg = 'Vaga reprovada com sucesso!';
     			}else if (dado == '2'){
         			$('#fechar-modal').modal('hide');
         			msg = 'Vaga fechada com sucesso!';
@@ -608,7 +608,7 @@
 		}else if(status == '2'){
 			titulo = "Fechar vaga"
 			mensagem = "Deseja realmente fechar esta vaga?"
-		}else if(dado == '27'){
+		}else if(status == '27'){
 			titulo = "Ativar vaga"
 			msg = 'Deseja realmente ativar esta vaga?';
 		}
