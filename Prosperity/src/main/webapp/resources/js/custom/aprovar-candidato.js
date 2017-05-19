@@ -23,25 +23,28 @@
 					if (!isNaN($(value).attr("id"))) {
 						var id = $(value).attr("id");
 						$.ajax({url : "buscar/"+ id, dataType : "json", method : "GET", success : function(data) {
-							console.log('Esse aqui');
-							console.log(data);
 							var perfil = $('#idPerfil').val();
+							$("#nmCandProp").text(data.nome);
 							$("#modalTitulo").text(tituloModal);
 								if (data.ultimoStatus.status.id == "9") {
 									if (perfil == 2 || perfil == 3) {
 										$("#proposta-tab").show();
+										$("#importxlsx").show();
 									}
 								} else if (data.ultimoStatus.status.id == "10") {
 									if (perfil == 1 || perfil == 4 || perfil == 9) {
 										$("#proposta-tab").show();
+										$("#importxlsx").hide();
 									}
 								} else if (data.ultimoStatus.status.id == "11") {
 									if (perfil == 2 || perfil == 3) {
 										$("#proposta-tab").show();
+										$("#importxlsx").hide();
 									}
 								} else if (data.ultimoStatus.status.id == "13") {
 									if (perfil == 2 || perfil == 3) {
 										$("#proposta-tab").show();
+										$("#importxlsx").hide();
 									}
 								} else if (data.ultimoStatus.status.id == "14") {
 									if (perfil == 2 || perfil == 3) {
@@ -97,7 +100,9 @@
 									var aux = 0;
 									if(data.ultimaProposta.comparativoProposta != null){
 										$(comparativo).each(function(index, value) {
-											var campos = "<tr class='tiraTabela'><td id='nmFuncionario"+aux+"'></td>" +
+											
+											var campos = "<tr class='tiraTabela'>"+
+											"<td id='nmFuncionario"+aux+"'></td>" +
 											"<td id='nmCargo"+aux+"'></td>" +
 											"<td id='nmSenioridade"+aux+"'></td>" +
 											"<td id='dsConhecimento"+aux+"'></td>" +
@@ -465,3 +470,12 @@
 					return mensagem;
 				}
 				/* paginação */
+				
+				//exibir ou esconder comparativo proposta
+				function mudarEstado(el) {
+			        var display = document.getElementById(el).style.display;
+			        if(display == "none")
+			            document.getElementById(el).style.display = 'block';
+			        else
+			            document.getElementById(el).style.display = 'none';
+			    }
