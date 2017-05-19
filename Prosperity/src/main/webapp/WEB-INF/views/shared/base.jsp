@@ -31,7 +31,10 @@
 	</layout:block>
 </head>
 <body class="overflow-hidden">
-
+	
+	<c:forEach items="${autenticado.perfil.listaFuncionalidades }" var="funcionalidade">
+		<input id="funcionalidade${funcionalidade.id }" class="hide" value="${funcionalidade.id }" type="hidden">
+	</c:forEach>
 	<!-- Overlay Div -->
 	<div id="overlay" class="transparent"></div>
 	

@@ -134,6 +134,31 @@
 								</div>
 								<div class="tab-pane fade" id="second">
 									<fieldset>
+										<legend style="color:#424f63"><h5><strong>Vaga aplicado</strong></h5></legend>
+										<div class="row">
+											<div class="form-group col-md-4">
+												<p class="" id="nome"><strong>Vaga: </strong>${candidato.vagaCandidato.vaga.nomeVaga}</p>
+											</div>
+											<div class="form-group col-md-4">
+												<p class="" id="nome"><strong>Solicitante: </strong>${candidato.vagaCandidato.vaga.nomeSolicitante}</p>
+											</div>
+											<div class="form-group col-md-4">
+												<p class="" id="nome"><strong>Horário: </strong>${candidato.vagaCandidato.vaga.horarioEntrada} às ${candidato.vagaCandidato.vaga.horarioSaida }</p>
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-md-4">
+												<p class="" id="nome"><strong>Cargo: </strong>${candidato.vagaCandidato.vaga.cargoBean.nome}</p>
+											</div>
+											<div class="form-group col-md-4">
+												<p class="" id="nome"><strong>Senioridade: </strong>${candidato.vagaCandidato.vaga.senioridadeBean.nome}</p>
+											</div>
+											<div class="form-group col-md-4 bootstrap-timepicker">
+												<p class="" id="nome"><strong>Data de início: </strong><fmt:formatDate value="${candidato.vagaCandidato.vaga.dataInicio}" pattern="dd/MM/yyyy"/></p>
+											</div>
+										</div>
+									</fieldset>	
+									<fieldset>
 										<legend style="color:#424f63"><h5><strong>Datas de contatos</strong></h5></legend>
 										<div class="row">
 											<div class="col-md-12">
@@ -232,12 +257,7 @@
 														<div class="tl-circ"></div>
 														<div class="timeline-panel">
 															<div class="tl-heading">
-																<h4>
-																	Status: ${status.status.nome} 
-																	<c:if test="${status.status.id == 10}">
-																		<a class="fa fa-eye" data-toggle="tooltip" title="Visualizar proposta"></a>
-																	</c:if>
-																</h4>
+																<h4>Status: ${status.status.nome} </h4>
 																<p>
 																	<small class="text-muted"><i class="fa fa-calendar"></i>
 																		<fmt:formatDate value="${status.dataAlteracao}"
@@ -257,7 +277,7 @@
 																		</p>
 																	</div>
 																	<c:if test="${status.status.id == 10}">
-																		<div class="row">
+																		<div class="row hide" id="proposta-js">
 																			<p class="">
 																				<label>Líquido c/ benefícios:</label>R$: <span>${candidato.propostaBean[0].anteriorTotalAnualLiquidoComBeneficios}</span>
 																				<i class="fa fa-long-arrow-right"></i>
@@ -292,6 +312,9 @@
 					$(this).remove();
 				}
 			});
+			if($('#funcionalidade23').val() || $('#funcionalidade26').val()){
+				$('#proposta-js').removeClass('hide');
+			}
 		});
 		function baixarProva(index){
 			var url = $('#p'+index).val()

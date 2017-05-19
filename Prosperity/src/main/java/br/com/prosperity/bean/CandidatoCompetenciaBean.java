@@ -12,6 +12,7 @@ public class CandidatoCompetenciaBean {
 	private CompetenciaBean competencia;
 	private AvaliacaoBean avaliacao;
 	private String nmAvaliador;
+	private Integer idCandidato;
 
 	public Integer getId() {
 		return id;
@@ -43,6 +44,14 @@ public class CandidatoCompetenciaBean {
 
 	public void setNmAvaliador(String nmAvaliador) {
 		this.nmAvaliador = nmAvaliador;
+	}
+
+	public Integer getIdCandidato() {
+		return idCandidato;
+	}
+
+	public void setIdCandidato(Integer idCandidato) {
+		this.idCandidato = idCandidato;
 	}
 
 }
