@@ -420,7 +420,7 @@
 											<div class="panel panel-default">
 												<div class="adjoined-bottom">
 													<div class="grid-container">
-														<textarea id="editor" name="editor"></textarea>
+														<textarea id="editor" name="marketingSocial" ${vaga.marketingSocial}></textarea>
 													</div>
 												</div>
 											</div>

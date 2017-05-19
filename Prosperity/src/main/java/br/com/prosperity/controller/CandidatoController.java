@@ -452,7 +452,8 @@ public class CandidatoController<PaginarCandidato> {
 			// TODO:não da refresh ao salvar status
 		}
 
-		if (!avaliacoesCandidato.equals("[]")) {
+		if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOAPROVADO.getValue() ||
+			situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOREPROVADO.getValue()) {
 			candidatoCompetenciaBusiness.inserirCompetencias(convertGson(avaliacoesCandidato), situacaoCandidato.getIdCandidato());
 		}
 

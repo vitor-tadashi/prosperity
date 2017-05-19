@@ -39,6 +39,7 @@
 										$("#proposta-tab").show();
 										$("#importxlsx").show();
 									}
+									$('.dinheiro').text("");
 								} else if (data.ultimoStatus.status.id == "10") {
 									if (perfil == 1 || perfil == 4 || perfil == 9) {
 										$("#proposta-tab").show();
@@ -52,7 +53,6 @@
 								} else if (data.ultimoStatus.status.id == "13") {
 									if (perfil == 2 || perfil == 3) {
 										$("#proposta-tab").show();
-										$("#importxlsx").hide();
 									}
 								} else if (data.ultimoStatus.status.id == "14") {
 									if (perfil == 2 || perfil == 3) {
@@ -115,14 +115,14 @@
 											"<td id='nmSenioridade"+aux+"'></td>" +
 											"<td id='dsConhecimento"+aux+"'></td>" +
 											"<td id='dtAdmissao"+aux+"'></td>" +
-											"<td><p>R$ </p><p id='vlrSalario"+aux+"'></p></td>" +
-											"<td><p>R$ </p><p id='vlrVr"+aux+"'></p></td>" +
-											"<td><p>R$ </p><p id='vlrVa"+aux+"'></p></td>" +
-											"<td><p>R$ </p><p id='vlrEstacionamento"+aux+"'></p></td>" +
-											"<td><p>R$ </p><p id='vlrCombustivel"+aux+"'></p></td>" +
-											"<td><p>R$ </p><p id='vlrAssistenciaMedica"+aux+"'></p></td>" +
-											"<td><p>R$ </p><p id='vlrOutros"+aux+"'></p></td>" +
-											"<td><p>R$ </p><p id='vlrTaxa"+aux+"'></p></td> </tr>";
+											"<td><p>R$ </p><p id='vlrSalario"+aux+"' class='dinheiro'></p></td>" +
+											"<td><p>R$ </p><p id='vlrVr"+aux+"' class='dinheiro'></p></td>" +
+											"<td><p>R$ </p><p id='vlrVa"+aux+"' class='dinheiro'></p></td>" +
+											"<td><p>R$ </p><p id='vlrEstacionamento"+aux+"' class='dinheiro'></p></td>" +
+											"<td><p>R$ </p><p id='vlrCombustivel"+aux+"' class='dinheiro'></p></td>" +
+											"<td><p>R$ </p><p id='vlrAssistenciaMedica"+aux+"' class='dinheiro'></p></td>" +
+											"<td><p>R$ </p><p id='vlrOutros"+aux+"' class='dinheiro'></p></td>" +
+											"<td><p>R$ </p><p id='vlrTaxa"+aux+"' class='dinheiro'></p></td> </tr>";
 
 											$(".tbComparativo").append(campos);
 
@@ -149,6 +149,10 @@
 									$(document).ready(function() {
 										$('.dinheiro').mask('0.000.000,00', {reverse : true});
 									});
+								}
+								if (data.ultimoStatus.status.id == "9") {
+									$('.dinheiro').text("");
+									$('.nmLimpar').text("");
 								}
 							}
 						})
@@ -388,14 +392,14 @@
 										"<td id='nmSenioridade"+aux+"'></td>" +
 										"<td id='dsConhecimento"+aux+"'></td>" +
 										"<td id='dtAdmissao"+aux+"'></td>" +
-										"<td><p>R$ </p><p id='vlrSalario"+aux+"'></p></td>" +
-										"<td><p>R$ </p><p id='vlrVr"+aux+"'></p></td>" +
-										"<td><p>R$ </p><p id='vlrVa"+aux+"'></p></td>" +
-										"<td><p>R$ </p><p id='vlrEstacionamento"+aux+"'></p></td>" +
-										"<td><p>R$ </p><p id='vlrCombustivel"+aux+"'></p></td>" +
-										"<td><p>R$ </p><p id='vlrAssistenciaMedica"+aux+"'></p></td>" +
-										"<td><p>R$ </p><p id='vlrOutros"+aux+"'></p></td>" +
-										"<td><p>R$ </p><p id='vlrTaxa"+aux+"'></p></td> </tr>";
+										"<td><p>R$ </p><p id='vlrSalario"+aux+"' class='dinheiro'></p></td>" +
+										"<td><p>R$ </p><p id='vlrVr"+aux+"' class='dinheiro'></p></td>" +
+										"<td><p>R$ </p><p id='vlrVa"+aux+"' class='dinheiro'></p></td>" +
+										"<td><p>R$ </p><p id='vlrEstacionamento"+aux+"' class='dinheiro'></p></td>" +
+										"<td><p>R$ </p><p id='vlrCombustivel"+aux+"' class='dinheiro'></p></td>" +
+										"<td><p>R$ </p><p id='vlrAssistenciaMedica"+aux+"' class='dinheiro'></p></td>" +
+										"<td><p>R$ </p><p id='vlrOutros"+aux+"' class='dinheiro'></p></td>" +
+										"<td><p>R$ </p><p id='vlrTaxa"+aux+"' class='dinheiro'></p></td> </tr>";
 
 										$(".tbComparativo").append(campos);
 

@@ -58,6 +58,7 @@ public class VagaBean {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataAberturaPara;
 	private List<VagaCandidatoBean> vagaCandidatoBean;
+	private String marketingSocial;
 
 	public int getCountCandidatos() {
 		return vagaCandidatoBean.size();
@@ -353,6 +354,14 @@ public class VagaBean {
 
 	public void setVagaCandidatoBean(List<VagaCandidatoBean> vagaCandidatoBean) {
 		this.vagaCandidatoBean = vagaCandidatoBean;
+	}
+
+	public String getMarketingSocial() {
+		return marketingSocial;
+	}
+
+	public void setMarketingSocial(String marketingSocial) {
+		this.marketingSocial = marketingSocial;
 	}
 
 }
