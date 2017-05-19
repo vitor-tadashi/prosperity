@@ -545,13 +545,13 @@
     			
     			if(dado == '1') {
     				$('#aprova-modal').modal('hide');
-        			msg = 'Vaga aprovada com sucesso!';
+        			msg = 'Vaga ativada com sucesso!';
     			}else if(dado == '3'){
         			$('#cancela-modal').modal('hide');
         			msg = 'Vaga cancelada com sucesso!';
     			}else if(dado == '27'){
         			$('#aprova-modal').modal('hide');
-        			msg = 'Vaga ativada com sucesso!';
+        			msg = 'Vaga aprovada com sucesso!';
     			}else if (dado == '18'){
     			$('#reprova-modal').modal('hide');
     			msg = 'Vaga reprovada com sucesso!';

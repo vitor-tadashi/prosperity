@@ -277,11 +277,26 @@
 				$(".div" + id).remove();
 				cont--;
 			}
+			function valida(){
+				var erro = true;
+				$(".erro-prova").each(function(i,item) {
+					var paperElement = document.getElementById("modalPapers");
+					if($(this).find("#prova-js").val() == 0 || !$(this).find("#modalPapers").val()){
+						$(item).addClass('alert alert-danger')
+						erro = false;
+					}else{
+						$(item).removeClass('alert alert-danger')
+						
+					}
+				})
+				return erro;
+			}
 
 			// Submit do formulário
 			$("button#btnEnviar").click(function() {
 				$("form#formValidar").submit();
-				if ($('form#formValidar').parsley('isValid')) {
+				
+				if ($('form#formValidar').parsley('isValid') && valida()) {
 					$('#confirm-modal').modal('show');
 				}
 			});
@@ -290,6 +305,7 @@
 				$('form#formValidar').parsley();
 
 				$('form#formValidar').on('submit', function(e) {
+					valida();
 					e.preventDefault();
 					$(this).parsley().validate();
 				});
