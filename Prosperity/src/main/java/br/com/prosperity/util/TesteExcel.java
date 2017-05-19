@@ -204,6 +204,7 @@ public class TesteExcel {
 					row = sheet.getRow(cellReference.getRow());
 					cell = row.getCell(cellReference.getCol());
 					
+					//formatar data
 					Date dataNaoFormatada = cell.getDateCellValue();
 					DateFormat formatar = new SimpleDateFormat("dd/MM/yyyy");
 					String dataFormatada = formatar.format(dataNaoFormatada);
