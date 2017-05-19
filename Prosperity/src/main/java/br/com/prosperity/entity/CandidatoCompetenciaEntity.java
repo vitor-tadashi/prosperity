@@ -31,6 +31,9 @@ public class CandidatoCompetenciaEntity {
 	
 	@Column(name="nmAvaliador")
 	private String nmAvaliador;
+	
+	@Column(name="idCandidato")
+	private Integer idCandidato;
 
 	public Integer getIdCandidatoCompetencia() {
 		return idCandidatoCompetencia;
@@ -62,6 +65,14 @@ public class CandidatoCompetenciaEntity {
 
 	public void setNmAvaliador(String nmAvaliador) {
 		this.nmAvaliador = nmAvaliador;
+	}
+
+	public Integer getIdCandidato() {
+		return idCandidato;
+	}
+
+	public void setIdCandidato(Integer idCandidato) {
+		this.idCandidato = idCandidato;
 	}
 
 }

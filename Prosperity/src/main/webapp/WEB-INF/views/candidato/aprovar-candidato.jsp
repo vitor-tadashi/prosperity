@@ -262,9 +262,7 @@
 															<div class="panel-heading text-center"><label>Comparativos interno</label> &nbsp; <button class='bt-toggle mostrarTabela' onclick="mudarEstado('esconderTabela')" ><span class='fa fa-plus-circle'></span></button>
 </div>
 															<div class="panel-body  form-group ajustePadding">
-															<div class ="table-responsive" id="esconderTabela">
-																<br/>
-																<br/>
+															<div class ="table-responsive" id="esconderTabela" style="display:none">
 																<table id="tabelaVaga"
 																	class="table table-bordered table-condensed table-hover">
 																	<thead>
@@ -495,6 +493,8 @@
 
 		<script src="/resources/js/parsley.min.js"></script>
 		<script src="/resources/js/custom/aprovar-candidato.js"></script>
+		<script src="/resources/js/custom/moment-with-locales.min.js"></script>
+
 		<script>
 		/*gerador de campo*/
 		var cont = 0;

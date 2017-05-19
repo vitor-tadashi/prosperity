@@ -21,10 +21,13 @@ public class CandidatoCompetenciaConverter implements Converter<CandidatoCompete
 			return null;
 		}
 		CandidatoCompetenciaEntity entity = new CandidatoCompetenciaEntity();
+		
 		entity.setIdCandidatoCompetencia(bean.getId());
 		entity.setCompetencia(competenciaConverter.convertBeanToEntity(bean.getCompetencia()));
 		entity.setAvaliacao(avaliacaoConverter.convertBeanToEntity(bean.getAvaliacao()));
 		entity.setNmAvaliador(bean.getNmAvaliador());
+		entity.setIdCandidato(bean.getIdCandidato());
+		
 		return entity;
 	}
 
@@ -34,10 +37,12 @@ public class CandidatoCompetenciaConverter implements Converter<CandidatoCompete
 			return null;
 		}
 		CandidatoCompetenciaBean bean = new CandidatoCompetenciaBean();
+		
 		bean.setId(entity.getIdCandidatoCompetencia());
 		bean.setCompetencia(competenciaConverter.convertEntityToBean(entity.getCompetencia()));
 		bean.setAvaliacao(avaliacaoConverter.convertEntityToBean(entity.getAvaliacao()));
 		bean.setNmAvaliador(entity.getNmAvaliador());
+		bean.setIdCandidato(entity.getIdCandidato());
 		
 		return bean;
 	}
