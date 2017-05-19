@@ -554,7 +554,7 @@
         			msg = 'Vaga divulgada com sucesso!';
     			}else if (dado == '18'){
     			$('#reprova-modal').modal('hide');
-    			msg = 'Vaga reprovada com sucesso!';
+    			msg = 'Vaga Reprovada com sucesso!';
     			}else if (dado == '2'){
         			$('#fechar-modal').modal('hide');
         			msg = 'Vaga fechada com sucesso!';

@@ -79,7 +79,7 @@ public class CandidatoBusiness {
 
 	@Autowired
 	private CandidatoBean candidatoBean;
-	
+
 	@Autowired
 	private CandidatoBean beans;
 
@@ -112,7 +112,7 @@ public class CandidatoBusiness {
 
 	@Autowired
 	private UsuarioConverter usuarioConverter;
-	
+
 	@Autowired
 	private CanalInformacaoDAO canalInformacaoDAO;
 
@@ -124,10 +124,10 @@ public class CandidatoBusiness {
 
 	@Autowired
 	private SituacaoAtualDAO situacaoAtualDAO;
-	
+
 	@Autowired
 	private ComunicacaoDAO comunicacaoDAO;
-	
+
 	@Autowired
 	private ComunicacaoConverter comunicacaoConverter;
 
@@ -166,10 +166,10 @@ public class CandidatoBusiness {
 
 	@Autowired
 	SituacaoCandidatoBean situacaoCandidato;
-	
+
 	@Autowired
 	FuncionarioDAO funcionarioDAO;
-	
+
 	@Autowired
 	FuncionarioConverter funcionarioConverter;
 
@@ -253,7 +253,7 @@ public class CandidatoBusiness {
 		situacaoCandidato = new SituacaoCandidatoBean();
 		beans = new CandidatoBean();
 		CandidatoEntity candidatoEntity = new CandidatoEntity();
-		
+
 		// Para inserir candidato:
 		Integer idFuncionario = candidatoBean.getVagaCandidato().getFuncionarioBean().getId();
 		FuncionarioEntity funcionarioEntity = funcionarioDAO.findById(idFuncionario);
@@ -271,7 +271,7 @@ public class CandidatoBusiness {
 				candidatoDAO.insert(candidatoEntity);
 
 				inserirAvaliadores(candidatoEntity, vagaAtual.getId());
-				
+
 				situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
 				situacaoCandidato.setIdCandidato(candidatoEntity.getId());
 				alterarStatus(situacaoCandidato);
@@ -283,13 +283,14 @@ public class CandidatoBusiness {
 		} else {
 			candidatoEntity = candidatoDAO.findById(candidatoBean.getId());
 			beans = candidatoConverter.convertEntityToBean(candidatoEntity);
-			int aux=0;
-			for(DataEntrevistaBean dtEntrevista: beans.getDataEntrevista()){
-				candidatoBean.getDataEntrevista().get(aux).setUsuario(dtEntrevista.getUsuario());
-				candidatoBean.getDataEntrevista().get(aux).setVaga(dtEntrevista.getVaga());
-				aux++;
+			if (beans.getDataEntrevista() != null) {
+				int aux = 0;
+				for (DataEntrevistaBean dtEntrevista : beans.getDataEntrevista()) {
+					candidatoBean.getDataEntrevista().get(aux).setUsuario(dtEntrevista.getUsuario());
+					candidatoBean.getDataEntrevista().get(aux).setVaga(dtEntrevista.getVaga());
+					aux++;
+				}
 			}
-			
 			if (beans.getUltimaVaga().getId() == candidatoBean.getVagaCandidato().getVaga().getId()) {
 				situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
 				situacaoCandidato.setIdCandidato(candidatoEntity.getId());
@@ -297,9 +298,10 @@ public class CandidatoBusiness {
 			}
 			candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoEntity, candidatoBean);
 			tratarInformacoes(candidatoEntity);
-			
-			candidatoEntity.setAvaliadores(avaliadorCandidatoDAO.findByNamedQuery("obterProposta", candidatoEntity.getId()));
-			
+
+			candidatoEntity
+					.setAvaliadores(avaliadorCandidatoDAO.findByNamedQuery("obterProposta", candidatoEntity.getId()));
+
 			candidatoDAO.update(candidatoEntity);
 		}
 	}
@@ -333,7 +335,8 @@ public class CandidatoBusiness {
 		candidatoEntity.setCpf(replaceCPF);
 	}
 
-	// Esse método é que está setando informações na tabela VagaCandidato (tbVagaCandidato):
+	// Esse método é que está setando informações na tabela VagaCandidato
+	// (tbVagaCandidato):
 	private VagaEntity definirVagas(CandidatoBean candidatoBean, CandidatoEntity candidatoEntity) {
 		Set<VagaCandidatoEntity> vagas = new HashSet<>();
 		for (VagaCandidatoEntity v : candidatoEntity.getVagas()) {
@@ -346,14 +349,15 @@ public class CandidatoBusiness {
 			VagaCandidatoEntity novoVagaCandidato = new VagaCandidatoEntity();
 
 			novoVagaCandidato.setVaga(vagaDAO.findById(candidatoBean.getVagaCandidato().getVaga().getId()));
-			if (candidatoBean.getVagaCandidato().getCanalInformacao().getId() != null){
+			if (candidatoBean.getVagaCandidato().getCanalInformacao().getId() != null) {
 				novoVagaCandidato.setCanalInformacao(
 						canalInformacaoDAO.findById(candidatoBean.getVagaCandidato().getCanalInformacao().getId()));
-				if(candidatoBean.getVagaCandidato().getFuncionarioBean().getId()!= null && candidatoBean.getVagaCandidato().getFuncionarioBean().getId()!= 0){
-					novoVagaCandidato.setFuncionarioEntity(funcionarioDAO.findById(
-							candidatoBean.getVagaCandidato().getFuncionarioBean().getId()));
-				} 
-				if(candidatoBean.getVagaCandidato().getOutros()!= null){
+				if (candidatoBean.getVagaCandidato().getFuncionarioBean().getId() != null
+						&& candidatoBean.getVagaCandidato().getFuncionarioBean().getId() != 0) {
+					novoVagaCandidato.setFuncionarioEntity(
+							funcionarioDAO.findById(candidatoBean.getVagaCandidato().getFuncionarioBean().getId()));
+				}
+				if (candidatoBean.getVagaCandidato().getOutros() != null) {
 					novoVagaCandidato.setOutros(candidatoBean.getVagaCandidato().getOutros());
 				}
 			}
@@ -402,7 +406,6 @@ public class CandidatoBusiness {
 				|| situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.SEMVAGA.getValue()) {
 			statusCandidatoEntity = statusAlteracao(situacaoCandidato);
 			statusCandidatoDAO.insert(statusCandidatoEntity);
-			buscarUsuariosParaEmail(situacaoCandidato);
 		} else {
 			if (statusDisponivelEntity != null) {
 				List<StatusCandidatoEntity> statusCandidato = null;
@@ -665,15 +668,14 @@ public class CandidatoBusiness {
 
 		candidatoBean = candidatoConverter
 				.convertEntityToBean(candidatoDAO.findById(situacaoCandidatoBean.getIdCandidato()));
-		List<UsuarioBean> usuarios = usuarioBusiness.findAll();
+		List<UsuarioBean> usuarios = buscarUsuariosSemRepetir();
 		ArrayList<String> recipients = new ArrayList<>();
 		ArrayList<String> nomes = new ArrayList<>();
-		List<AvaliadorCandidatoBean> avaliadores = avaliadorCandidatoConverter
-				.convertEntityToBean(avaliadorCandidatoDAO.findByNamedQuery("obterProposta", candidatoBean.getId()));
+		List<AvaliadorCandidatoBean> avaliadores = buscarAvaliadoresSemRepetir();
 
 		if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOEMANALISE.getValue()) {
 			for (AvaliadorCandidatoBean a : avaliadores) {
-				if(a.getUsuario()!=null) {
+				if (a.getUsuario() != null) {
 					recipients.add(a.getUsuario().getEmail());
 					nomes.add(a.getUsuario().getNome());
 				}
@@ -717,6 +719,37 @@ public class CandidatoBusiness {
 		}
 	}
 
+	private List<AvaliadorCandidatoBean> buscarAvaliadoresSemRepetir() {
+		
+		List<AvaliadorCandidatoBean> avaliadores = avaliadorCandidatoConverter
+		.convertEntityToBean(avaliadorCandidatoDAO.findByNamedQuery("obterProposta", candidatoBean.getId()));
+		
+		List<AvaliadorCandidatoBean> avaliadoresNaoRepetidos = new ArrayList<>();
+		Set<Integer> idAvaliadores = new HashSet<Integer>();
+		
+		for(AvaliadorCandidatoBean u : avaliadores) {
+			if(idAvaliadores.add( u.getId() )) {
+				avaliadoresNaoRepetidos.add(u);
+			}
+		}
+		
+		return avaliadoresNaoRepetidos;
+	}
+
+	private List<UsuarioBean> buscarUsuariosSemRepetir() {
+		List<UsuarioBean> usuarios = usuarioBusiness.findAll();
+		List<UsuarioBean> usuariosNaoRepetidos = new ArrayList<>();
+		Set<Integer> idUsuarios = new HashSet<Integer>();
+		
+		for(UsuarioBean u : usuarios) {
+			if(idUsuarios.add( u.getId() )) {
+				usuariosNaoRepetidos.add(u);
+			}
+		}
+		
+		return usuariosNaoRepetidos;
+	}
+	
 	public boolean podeEditarVaga(StatusCandidatoBean ultimoStatus) {
 		if (ultimoStatus.getStatus().getId() != 5 && ultimoStatus.getStatus().getId() != 17
 				&& ultimoStatus.getStatus().getId() != 29) {
@@ -729,9 +762,9 @@ public class CandidatoBusiness {
 	public void salvarProposta(CandidatoBean bean) {
 		candidatoDAO.update(candidatoConverter.convertBeanToEntity(bean));
 	}
-	
+
 	@Transactional
-	public void inserirComunicacao(ComunicacaoBean bean){
+	public void inserirComunicacao(ComunicacaoBean bean) {
 		comunicacaoDAO.insert(comunicacaoConverter.convertBeanToEntity(bean));
 	}
 }

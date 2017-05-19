@@ -2,8 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://kwonnam.pe.kr/jsp/template-inheritance"
-	prefix="layout"%>
+<%@ taglib uri="http://kwonnam.pe.kr/jsp/template-inheritance" prefix="layout"%>
 
 <layout:extends name="base">
 	<layout:put block="contents">
@@ -12,7 +11,7 @@
 		<div id="modalProposta" class="modal fade" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel">
 			<div class="modal-dialog modal-lg" role="document">
-				<div class="modal-content">
+				<div class="modal-content ajusteTamanhoModalProposta">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
@@ -107,184 +106,194 @@
 										</div>
 										<div class="tab-pane fade" id="proposta">
 											<div class="panel panel-default">
-												<div class="panel-heading">Proposta</div>
+												<div class="panel-heading text-center"><label id="nmCandProp"></label></div>
 												<div class="panel-body">
-													<div class="col-md-6">
-														<div class="form-group">
-															<label class="col-md-6">Empresa anterior:</label>
-															<p class="col-md-1">&nbsp;</p>
-															<p id="anteriorEmpresa" class="col-md-5"></p>
-														</div>
-														<div class="form-group">
-															<label class="col-md-6">Cargo:</label>
-															<p class="col-md-1">&nbsp;</p>
-															<p class="col-md-5" id="anteriorCargo"></p>
-														</div>
-														<div class="form-group">
-															<label class="col-md-6">Salário fixo bruto:</label>
-															<p class="col-md-1">R$ </p>
-															<p class="col-md-5 dinheiro" id="vlrAntSalarioFixoBruto"></p>
-														</div>
-														<div class="form-group">
-															<label class="col-md-6">Salário líquido mensal:</label>
-															<p class="col-md-1">R$ </p>
-															<p class="col-md-5 dinheiro" id="vlrAntSalarioLiquidoMensal"></p>
-														</div>
-														<div class="form-group">
-															<label class="col-md-6">VR mensal:</label>
-															<p class="col-md-1">R$ </p>
-															<p class="col-md-5 dinheiro"  id="vlrAntVrMensal"></p>
-														</div>
-														<div class="form-group">
-															<label class="col-md-6">VA mensal:</label>
-															<p class="col-md-1">R$ </p>
-															<p class="col-md-5 dinheiro" id="vlrAntVaMensal"></p>
-														</div>
-														<div class="form-group">
-															<label class="col-md-6">Seguro de saúde mensal:</label>
-															<p class="col-md-1">R$ </p>
-															<p class="col-md-5 dinheiro" id="vlrAntSeguroSaudeMensal"></p>
-														</div>
-														<div class="form-group">
-															<label class="col-md-6">Vale auto:</label>
-															<p class="col-md-1">R$ </p>
-															<p class="col-md-5 dinheiro" id="vlrAntValeAuto"></p>
-														</div>
-														<div class="form-group">
-															<label class="col-md-6">Vale estacionamento:</label>
-															<p class="col-md-1">R$ </p>
-															<p class="col-md-5 dinheiro" id="vlrAntValeEstacionamento"></p>
-														</div>
-														<div class="form-group">
-															<label class="col-md-6">Vale transporte:</label>
-															<p class="col-md-1">R$ </p>
-															<p class="col-md-5 dinheiro" id="vlrAntValeTransporte"></p>
-														</div>
-														<div class="form-group">
-															<label class="col-md-6">Líquido m. + ben.:</label>
-															<p class="col-md-1">R$ </p>
-															<p class="col-md-5 dinheiro" id="vlrAntLiquidoComBeneficios"></p>
-														</div>
-														<div class="form-group">
-															<label class="col-md-6">Anual líquido:</label>
-															<p class="col-md-1">R$ </p>
-															<p class="col-md-5 dinheiro" id="vlrAntAnualLiquido"></p>
-														</div>
-														<div class="form-group">
-															<label class="col-md-6">PLR anual líquido/bonús:</label>
-															<p class="col-md-1">R$ </p>
-															<p class="col-md-5 dinheiro" id="vlrAntParticipacaoLucrosOuBonus"></p>
-														</div>
-														<div class="form-group">
-															<label class="col-md-6">Total anual líquido + ben.:</label>
-															<p class="col-md-1">R$ </p>
-															<p class="col-md-5 dinheiro" id="vlrAntTotalAnualLiquidoComBeneficios"></p>
+													<div class="form-group">
+													<div class="panel panel-default col-md-6">
+														<div class="panel-heading text-center"><label>Empresa anteriror</label></div>
+														<div class="panel-body form-group">
+																<div class="col-md-12">
+																	<label class="col-md-6">Empresa:</label>
+																	<p id="anteriorEmpresa" class="col-md-6"></p>
+																</div>
+																<div class="col-md-12">
+																	<label class="col-md-6">Cargo:</label>
+																	<p class="col-md-6" id="anteriorCargo"></p>
+																</div>
+																<div class="col-md-12">
+																	<label class="col-md-6">Salário fixo bruto:</label>
+																	<p class="col-md-1">R$ </p>
+																	<p class="col-md-3 dinheiro" id="vlrAntSalarioFixoBruto"></p>
+																</div>
+																<div class="col-md-12">
+																	<label class="col-md-6">Salário líquido mensal:</label>
+																	<p class="col-md-1">R$ </p>
+																	<p class="col-md-3 dinheiro" id="vlrAntSalarioLiquidoMensal"></p>
+																</div>
+																<div class="col-md-12">
+																	<label class="col-md-6">VR mensal:</label>
+																	<p class="col-md-1">R$ </p>
+																	<p class="col-md-3 dinheiro"  id="vlrAntVrMensal"></p>
+																</div>
+																<div class="col-md-12">
+																	<label class="col-md-6">VA mensal:</label>
+																	<p class="col-md-1">R$ </p>
+																	<p class="col-md-3 dinheiro" id="vlrAntVaMensal"></p>
+																</div>
+																<div class="col-md-12">
+																	<label class="col-md-6">Seguro de saúde mensal:</label>
+																	<p class="col-md-1">R$ </p>
+																	<p class="col-md-3 dinheiro" id="vlrAntSeguroSaudeMensal"></p>
+																</div>
+																<div class="col-md-12">
+																	<label class="col-md-6">Vale auto:</label>
+																	<p class="col-md-1">R$ </p>
+																	<p class="col-md-3 dinheiro" id="vlrAntValeAuto"></p>
+																</div>
+																<div class="col-md-12">
+																	<label class="col-md-6">Vale estacionamento:</label>
+																	<p class="col-md-1">R$ </p>
+																	<p class="col-md-3 dinheiro" id="vlrAntValeEstacionamento"></p>
+																</div>
+																<div class="col-md-12">
+																	<label class="col-md-6">Vale transporte:</label>
+																	<p class="col-md-1">R$ </p>
+																	<p class="col-md-3 dinheiro" id="vlrAntValeTransporte"></p>
+																</div>
+																<div class="col-md-12">
+																	<label class="col-md-6">Líquido m. + ben.:</label>
+																	<p class="col-md-1">R$ </p>
+																	<p class="col-md-3 dinheiro" id="vlrAntLiquidoComBeneficios"></p>
+																</div>
+																<div class="col-md-12">
+																	<label class="col-md-6">Anual líquido:</label>
+																	<p class="col-md-1">R$ </p>
+																	<p class="col-md-3 dinheiro" id="vlrAntAnualLiquido"></p>
+																</div>
+																<div class="col-md-12">
+																	<label class="col-md-6">PLR anual líquido/bonús:</label>
+																	<p class="col-md-1">R$ </p>
+																	<p class="col-md-3 dinheiro" id="vlrAntParticipacaoLucrosOuBonus"></p>
+																</div>
+																<div class="col-md-12">
+																	<label class="col-md-6">Total anual líquido + ben.:</label>
+																	<p class="col-md-1">R$ </p>
+																	<p class="col-md-3 dinheiro" id="vlrAntTotalAnualLiquidoComBeneficios"></p>
+																</div>
 														</div>
 													</div>
-													<div class="col-md-6 row">
-														<div class="form-group">
-															<label class="col-md-6">Empresa atual:</label>
-															<p class="col-md-1">&nbsp;</p>
-															<p class="col-md-5" id="novaEmpresa"></p>
+													<div class="panel panel-default col-md-6">
+														<div class="panel-heading text-center"><label>Expectativa</label></div>
+														<div class="panel-body  form-group">
+																<div class="col-md-12">
+																	<label class="col-md-6">Empresa:</label>
+																	<p class="col-md-6" id="novaEmpresa"></p>
+																</div>
+																<div class="col-md-12">
+																	<label class="col-md-6">Cargo:</label>
+																	<p class="col-md-6" id="novoCargo"></p>
+																</div>
+																<div class="col-md-12">
+																	<label class="col-md-6">Salário fixo bruto:</label>
+																	<p class="col-md-1">R$ </p>
+																	<p class="col-md-3 dinheiro" id="vlrNvSalarioFixoBruto"></p>
+																</div>
+																<div class="col-md-12">
+																	<label class="col-md-6">Salário líquido mensal:</label>
+																	<p class="col-md-1">R$ </p>
+																	<p class="col-md-3 dinheiro" id="vlrNvSalarioLiquidoMensal"></p>
+																</div>
+																<div class="col-md-12">
+																	<label class="col-md-6">VR mensal:</label>
+																	<p class="col-md-1">R$ </p>
+																	<p class="col-md-3 dinheiro" id="vlrNvVrMensal"></p>
+																</div>
+																<div class="col-md-12">
+																	<label class="col-md-6">VA mensal:</label>
+																	<p class="col-md-1">R$ </p>
+																	<p class="col-md-3 dinheiro" id="vlrNvVaMensal"></p>
+																</div>
+																<div class="col-md-12">
+																	<label class="col-md-6">Seguro de saúde mensal:</label>
+																	<p class="col-md-1">R$ </p>
+																	<p class="col-md-3 dinheiro" id="vlrNvSeguroSaudeMensal"></p>
+																</div>
+																<div class="col-md-12">
+																	<label class="col-md-6">Vale auto:</label>
+																	<p class="col-md-1">R$ </p>
+																	<p class="col-md-3 dinheiro" id="vlrNvValeAuto"></p>
+																</div>
+																<div class="col-md-12">
+																	<label class="col-md-6">Vale estacionamento:</label>
+																	<p class="col-md-1">R$ </p>
+																	<p class="col-md-3 dinheiro" id="vlrNvValeEstacionamento"></p>
+																</div>
+																<div class="col-md-12">
+																	<label class="col-md-6">Vale transporte:</label>
+																	<p class="col-md-1">R$ </p>
+																	<p class="col-md-3 dinheiro" id="vlrNvValeTransporte"></p>
+																</div>
+																<div class="col-md-12">
+																	<label class="col-md-6">Líquido m. + ben.:</label>
+																	<p class="col-md-1">R$ </p>
+																	<p class="col-md-3 dinheiro" id="vlrNvLiquidoComBeneficios"></p>
+																</div>
+																<div class="col-md-12">
+																	<label class="col-md-6">Anual líquido:</label>
+																	<p class="col-md-1">R$ </p>
+																	<p class="col-md-3 dinheiro" id="vlrNvAnualLiquido"></p>
+																</div>
+																<div class="col-md-12">
+																	<label class="col-md-6">PLR anual líquido/bonús:</label>
+																	<p class="col-md-1">R$ </p>
+																	<p class="col-md-3 dinheiro" id="vlrNvParticipacaoLucrosOuBonus"></p>
+																</div>
+																<div class="col-md-12">
+																	<label class="col-md-6">Total anual líquido + ben.:</label>
+																	<p class="col-md-1">R$ </p>
+																	<p class="col-md-3 dinheiro" id="vlrNvTotalAnualLiquidoComBeneficios"></p>
+																</div>
 														</div>
-														<div class="form-group">
-															<label class="col-md-6">Cargo:</label>
-															<p class="col-md-1">&nbsp;</p>
-															<p class="col-md-5" id="novoCargo"></p>
-														</div>
-														<div class="form-group">
-															<label class="col-md-6">Salário fixo bruto:</label>
-															<p class="col-md-1">R$ </p>
-															<p class="col-md-5 dinheiro" id="vlrNvSalarioFixoBruto"></p>
-														</div>
-														<div class="form-group">
-															<label class="col-md-6">Salário líquido mensal:</label>
-															<p class="col-md-1">R$ </p>
-															<p class="col-md-5 dinheiro" id="vlrNvSalarioLiquidoMensal"></p>
-														</div>
-														<div class="form-group">
-															<label class="col-md-6">VR mensal:</label>
-															<p class="col-md-1">R$ </p>
-															<p class="col-md-5 dinheiro" id="vlrNvVrMensal"></p>
-														</div>
-														<div class="form-group">
-															<label class="col-md-6">VA mensal:</label>
-															<p class="col-md-1">R$ </p>
-															<p class="col-md-5 dinheiro" id="vlrNvVaMensal"></p>
-														</div>
-														<div class="form-group">
-															<label class="col-md-6">Seguro de saúde mensal:</label>
-															<p class="col-md-1">R$ </p>
-															<p class="col-md-5 dinheiro" id="vlrNvSeguroSaudeMensal"></p>
-														</div>
-														<div class="form-group">
-															<label class="col-md-6">Vale auto:</label>
-															<p class="col-md-1">R$ </p>
-															<p class="col-md-5 dinheiro" id="vlrNvValeAuto"></p>
-														</div>
-														<div class="form-group">
-															<label class="col-md-6">Vale estacionamento:</label>
-															<p class="col-md-1">R$ </p>
-															<p class="col-md-5 dinheiro" id="vlrNvValeEstacionamento"></p>
-														</div>
-														<div class="form-group">
-															<label class="col-md-6">Vale transporte:</label>
-															<p class="col-md-1">R$ </p>
-															<p class="col-md-5 dinheiro" id="vlrNvValeTransporte"></p>
-														</div>
-														<div class="form-group">
-															<label class="col-md-6">Líquido m. + ben.:</label>
-															<p class="col-md-1">R$ </p>
-															<p class="col-md-5 dinheiro" id="vlrNvLiquidoComBeneficios"></p>
-														</div>
-														<div class="form-group">
-															<label class="col-md-6">Anual líquido:</label>
-															<p class="col-md-1">R$ </p>
-															<p class="col-md-5 dinheiro" id="vlrNvAnualLiquido"></p>
-														</div>
-														<div class="form-group">
-															<label class="col-md-6">PLR anual líquido/bonús:</label>
-															<p class="col-md-1">R$ </p>
-															<p class="col-md-5 dinheiro" id="vlrNvParticipacaoLucrosOuBonus"></p>
-														</div>
-														<div class="form-group">
-															<label class="col-md-6">Total anual líquido + ben.:</label>
-															<p class="col-md-1">R$ </p>
-															<p class="col-md-5 dinheiro" id="vlrNvTotalAnualLiquidoComBeneficios"></p>
-														</div>
-														<!-- /form-group -->
 													</div>
+													</div>
+													<%-- aqui inicia o painel de comparativos interno --%>
 													<div class="form-group col-md-12">
-														<div class ="table-responsive">
-															<br/>
-															<br/>
-															<table id="tabelaVaga"
-																class="table table-bordered table-condensed table-hover"
-																style="font-size: 12px; vertical-align: middle; margin-top: -10px;">
-																<thead>
-																	<tr>
-																		<th class="text-center">Nome</th>
-																		<th class="text-center">Cargo</th>
-																		<th class="text-center">Nivel</th>
-																		<th class="text-center">Conhecimento</th>
-																		<th class="text-center">Admissão</th>
-																		<th class="text-center">Salário</th>
-																		<th class="text-center">VR</th>
-																		<th class="text-center">VA</th>
-																		<th class="text-center">Estacionamento</th>
-																		<th class="text-center">Comb.</th>
-																		<th class="text-center">AM</th>
-																		<th class="text-center">Outros</th>
-																		<th class="text-center">Taxa</th>
-																	</tr>
-																</thead>
-																<tbody class="text-center tbComparativo" id="idtbComparativo">
-																</tbody>
-															</table>
+														<div class="panel panel-default col-md-12">
+															<div class="panel-heading text-center"><label>Comparativos interno</label> &nbsp; <button class='bt-toggle mostrarTabela' onclick="mudarEstado('esconderTabela')" ><span class='fa fa-plus-circle'></span></button>
+</div>
+															<div class="panel-body  form-group ajustePadding">
+															<div class ="table-responsive" id="esconderTabela">
+																<br/>
+																<br/>
+																<table id="tabelaVaga"
+																	class="table table-bordered table-condensed table-hover">
+																	<thead>
+																		<tr>
+																			<th class="text-center">Nome</th>
+																			<th class="text-center">Cargo</th>
+																			<th class="text-center">Nivel</th>
+																			<th class="text-center">Conhecimento</th>
+																			<th class="text-center">Admissão</th>
+																			<th class="text-center">Salário</th>
+																			<th class="text-center">VR</th>
+																			<th class="text-center">VA</th>
+																			<th class="text-center">Estacionamento</th>
+																			<th class="text-center">Comb.</th>
+																			<th class="text-center">AM</th>
+																			<th class="text-center">Outros</th>
+																			<th class="text-center">Taxa</th>
+																		</tr>
+																	</thead>
+																	<tbody class="text-center tbComparativo" id="idtbComparativo">
+																	</tbody>
+																</table>
+															</div>
 														</div>
 													</div>
-													<div class="form-group col-md-6">
-														<label class="control-label">Importe a proposta</label>
+												</div>
+												<%-- aqui acaba o painel comparativos interno --%>
+													<div class="form-group col-md-6" id="importxlsx">
+														<label class="control-label">Importa proposta</label>
 														<div class="upload-file" onchange="gerarProposta()">
 															<input type="file" name="file" id="upload-proposta"
 																class="upload-demo" required/> <label
@@ -381,7 +390,7 @@
 						<input type="hidden" id="idCancelamento" value="" />
 						<button type="button" class="btn btn-success"
 							onclick="cancelarCandidato()">Confirmar</button>
-						<button button type="button" class="btn btn-danger"
+						<button type="button" class="btn btn-danger"
 							data-dismiss="modal">Cancelar</button>
 					</div>
 				</div>
@@ -452,10 +461,7 @@
 																		<i ${statusDisponivel.classe}>&nbsp;</i>${statusDisponivel.nome}</a></li>
 																<li class="divider"></li>
 															</c:forEach>
-															<li><c:url
-																	value="cancelar-candidato/${candidato.id}"
-																	var="urlCancelar">
-																</c:url><a href="#delete-modal"
+															<li><c:url value="cancelar-candidato/${candidato.id}" var="urlCancelar"> </c:url><a href="#delete-modal"
 																onclick="cancelarClick('${candidato.id}', '${candidato.nome}')"
 																data-toggle="modal"><i class="fa fa-trash-o fa-lg">&nbsp;</i>Cancelar</a></li>
 															<!-- /fim botao -->

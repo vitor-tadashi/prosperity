@@ -2,6 +2,20 @@
 	cursor: pointer;
 }
 
+.mostrarTabela{
+	background-color: transparent;
+	border: 0px;
+}
+
+.ajusteTamanhoModalProposta{
+	width: 1000px;
+}
+
+.ajustePadding{
+	padding-left: 0px;
+}
+
+
 #menu-toggle{
 	visibility: hidden;
 }
@@ -62,7 +76,7 @@ footer {
 .btnAlinhado {
 	left: -125px !important;
 }
-     
+
 .status {
 	font-size: 12px;
 }
