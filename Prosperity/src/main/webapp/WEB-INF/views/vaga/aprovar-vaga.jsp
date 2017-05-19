@@ -543,7 +543,7 @@
     			
     			var msg = "";
     			
-    			if(dado == '1') {
+    			if(dado == '27') {
     				$('#aprova-modal').modal('hide');
         			msg = 'Vaga aprovada com sucesso!';
     			}else if(dado == '3'){
@@ -551,7 +551,7 @@
         			msg = 'Vaga cancelada com sucesso!';
     			}else if(dado == '27'){
         			$('#aprova-modal').modal('hide');
-        			msg = 'Vaga ativada com sucesso!';
+        			msg = 'Vaga divulgada com sucesso!';
     			}else if (dado == '18'){
     			$('#reprova-modal').modal('hide');
     			msg = 'Vaga reprovada com sucesso!';
