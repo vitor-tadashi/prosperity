@@ -44,7 +44,6 @@ import br.com.prosperity.bean.CancelamentoBean;
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CandidatoCompetenciaBean;
 import br.com.prosperity.bean.CargoBean;
-import br.com.prosperity.bean.CargoSenioridadeBean;
 import br.com.prosperity.bean.CompetenciaBean;
 import br.com.prosperity.bean.ComunicacaoBean;
 import br.com.prosperity.bean.FuncionarioBean;
@@ -61,6 +60,7 @@ import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.CanalInformacaoBusiness;
 import br.com.prosperity.business.CancelamentoBusiness;
 import br.com.prosperity.business.CandidatoBusiness;
+import br.com.prosperity.business.CandidatoCompetenciaBusiness;
 import br.com.prosperity.business.CargoBusiness;
 import br.com.prosperity.business.ComunicacaoBusiness;
 import br.com.prosperity.business.FuncionarioBusiness;
@@ -151,6 +151,9 @@ public class CandidatoController<PaginarCandidato> {
 	
 	@Autowired
 	private ComunicacaoBusiness comunicacaoBusiness;
+	
+	@Autowired
+	private CandidatoCompetenciaBusiness candidatoCompetenciaBusiness;
 
 	private List<String> caminhoProvas;
 
@@ -450,7 +453,7 @@ public class CandidatoController<PaginarCandidato> {
 		}
 
 		if (!avaliacoesCandidato.equals("[]")) {
-			candidatoBean.setCompetencias(convertGson(avaliacoesCandidato));
+			candidatoCompetenciaBusiness.inserirCompetencias(convertGson(avaliacoesCandidato), situacaoCandidato.getIdCandidato());
 		}
 
 		if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.PROPOSTACANDIDATO.getValue()) {
@@ -458,13 +461,6 @@ public class CandidatoController<PaginarCandidato> {
 			propostaBean.setCandidato(candidatoBean.getId());
 			propostaBusiness.inserir(propostaBean);
 		}
-
-		try {
-			candidatoBusiness.inserir(candidatoBean);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
 		try {
 			// alterado aqui \/
 			candidatoBusiness.alterarStatus(situacaoCandidato);
