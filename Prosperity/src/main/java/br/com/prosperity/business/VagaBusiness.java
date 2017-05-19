@@ -429,27 +429,12 @@ public class VagaBusiness {
 			ArrayList<String> recipients = new ArrayList<>();
 			ArrayList<String> nomes = new ArrayList<>();
 
-			if (situacaoVagaBean.getStatus().getValue() == StatusVagaEnum.PENDENTE.getValue()) {
-				for (UsuarioBean u : usuarios) {
-					switch (u.getPerfil().getNome()) {
-					case "Diretor de operação":
-						recipients.add(u.getEmail());
-						nomes.add(u.getFuncionario().getNome());
-						break;
-					default:
-						break;
-					}
-				}
-			} else {
+			if (situacaoVagaBean.getStatus().getValue() == StatusVagaEnum.VAGANOVA.getValue()) {
 				for (UsuarioBean u : usuarios) {
 					switch (u.getPerfil().getNome()) {
 					case "Analista de RH":
 						recipients.add(u.getEmail());
-						nomes.add(u.getNome());
-						break;
-					case "Gestor de RH":
-						recipients.add(u.getEmail());
-						nomes.add(u.getNome());
+						nomes.add(u.getFuncionario().getNome());
 						break;
 					default:
 						break;

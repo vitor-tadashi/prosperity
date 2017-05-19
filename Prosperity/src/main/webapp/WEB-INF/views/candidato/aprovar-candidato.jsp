@@ -94,7 +94,7 @@
 																			class="avaliacaoCompetencia" type="radio"
 																			alt="${avaliacao.id}"
 																			name="avaliacao${competencia.nome}"
-																			value="${competencia.id}"> <span
+																			value="${competencia.id}" checked> <span
 																			class="custom-radio"></span>
 																	</label></td>
 																</c:forEach>
@@ -501,7 +501,7 @@
 		$("#gerarCampo").click(function() {
 			var campos =
 				"<div class='div"+cont+" processoSeletivo'>"
-				+ "<div class='row'>"
+				+ "<div class='row erro-prova'>"
 				+ "<div class='col-md-4 form-inline'>"
 				+ "<a id='btnRemover' onclick='remover("
 				+ cont
