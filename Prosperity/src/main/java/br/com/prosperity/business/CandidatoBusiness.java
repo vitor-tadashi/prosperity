@@ -406,7 +406,6 @@ public class CandidatoBusiness {
 				|| situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.SEMVAGA.getValue()) {
 			statusCandidatoEntity = statusAlteracao(situacaoCandidato);
 			statusCandidatoDAO.insert(statusCandidatoEntity);
-			buscarUsuariosParaEmail(situacaoCandidato);
 		} else {
 			if (statusDisponivelEntity != null) {
 				List<StatusCandidatoEntity> statusCandidato = null;
@@ -669,11 +668,10 @@ public class CandidatoBusiness {
 
 		candidatoBean = candidatoConverter
 				.convertEntityToBean(candidatoDAO.findById(situacaoCandidatoBean.getIdCandidato()));
-		List<UsuarioBean> usuarios = usuarioBusiness.findAll();
+		List<UsuarioBean> usuarios = buscarUsuariosSemRepetir();
 		ArrayList<String> recipients = new ArrayList<>();
 		ArrayList<String> nomes = new ArrayList<>();
-		List<AvaliadorCandidatoBean> avaliadores = avaliadorCandidatoConverter
-				.convertEntityToBean(avaliadorCandidatoDAO.findByNamedQuery("obterProposta", candidatoBean.getId()));
+		List<AvaliadorCandidatoBean> avaliadores = buscarAvaliadoresSemRepetir();
 
 		if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOEMANALISE.getValue()) {
 			for (AvaliadorCandidatoBean a : avaliadores) {
@@ -721,6 +719,37 @@ public class CandidatoBusiness {
 		}
 	}
 
+	private List<AvaliadorCandidatoBean> buscarAvaliadoresSemRepetir() {
+		
+		List<AvaliadorCandidatoBean> avaliadores = avaliadorCandidatoConverter
+		.convertEntityToBean(avaliadorCandidatoDAO.findByNamedQuery("obterProposta", candidatoBean.getId()));
+		
+		List<AvaliadorCandidatoBean> avaliadoresNaoRepetidos = new ArrayList<>();
+		Set<Integer> idAvaliadores = new HashSet<Integer>();
+		
+		for(AvaliadorCandidatoBean u : avaliadores) {
+			if(idAvaliadores.add( u.getId() )) {
+				avaliadoresNaoRepetidos.add(u);
+			}
+		}
+		
+		return avaliadoresNaoRepetidos;
+	}
+
+	private List<UsuarioBean> buscarUsuariosSemRepetir() {
+		List<UsuarioBean> usuarios = usuarioBusiness.findAll();
+		List<UsuarioBean> usuariosNaoRepetidos = new ArrayList<>();
+		Set<Integer> idUsuarios = new HashSet<Integer>();
+		
+		for(UsuarioBean u : usuarios) {
+			if(idUsuarios.add( u.getId() )) {
+				usuariosNaoRepetidos.add(u);
+			}
+		}
+		
+		return usuariosNaoRepetidos;
+	}
+	
 	public boolean podeEditarVaga(StatusCandidatoBean ultimoStatus) {
 		if (ultimoStatus.getStatus().getId() != 5 && ultimoStatus.getStatus().getId() != 17
 				&& ultimoStatus.getStatus().getId() != 29) {

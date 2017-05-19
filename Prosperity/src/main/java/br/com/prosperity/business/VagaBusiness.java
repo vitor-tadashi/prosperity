@@ -344,7 +344,7 @@ public class VagaBusiness {
 			data = novaData.format(dataAntiga);
 			return novaData.parse(data);
 		} catch (Exception e) {
-			e.printStackTrace(); // imprimi a stack trace
+			e.printStackTrace();
 		}
 		return dataAntiga;
 	}
@@ -467,7 +467,7 @@ public class VagaBusiness {
 	}
 
 	private List<UsuarioBean> buscarUsuariosSemRepetir() {
-		List<UsuarioBean> usuarios = usuarioBusiness.buscarGestor();
+		List<UsuarioBean> usuarios = usuarioBusiness.findAll();
 		List<UsuarioBean> usuariosNaoRepetidos = new ArrayList<>();
 		Set<Integer> idUsuarios = new HashSet<Integer>();
 		
