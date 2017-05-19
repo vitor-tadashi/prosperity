@@ -692,7 +692,8 @@ public class CandidatoBusiness {
 					break;
 				}
 			}
-		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOAPROVADO.getValue()){
+		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOAPROVADO.getValue()
+				 || situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.PROPOSTARECUSADA.getValue()){
 			for (UsuarioBean u : usuarios) {
 				switch (u.getPerfil().getNome()) {
 				case "Analista de RH":
