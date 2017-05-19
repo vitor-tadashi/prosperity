@@ -521,15 +521,24 @@
 	$(document).ready(function() {
 		/* Pegando valor das variáveis que foram armazenadas localmente:  */
 		var msg = localStorage.getItem("mensagem");
+	
+		/* Variável booleana para saber se houve erro: */
+		var sucesso = localStorage.getItem("isSuccess");
 		
 		/* Exibe a mensagem de mudança de status do candidato: */
 		if(msg!="" && msg!=undefined){
-			$('#divAlert').html(msg).addClass('alert alert-success').show();
-			escondeMensagem();
+			if(sucesso==true) {
+				$('#divAlert').html(msg).addClass('alert alert-success').show();
+				escondeMensagem();
+			} else {
+				$('#divAlert').html(msg).addClass('alert alert-danger').show();
+				escondeMensagem();
+			}
 		}
 		
 		msg = "";
 		localStorage.setItem("mensagem", "");
+		localStorage.setItem("isSuccess", true);
 	});
 		
 	// função para a alteração de status de acordo com os botões de ação.
@@ -561,6 +570,7 @@
     			}
     			
     			localStorage.setItem("mensagem", msg);
+    			localStorage.setItem("isSuccess", true);
     			location.reload();
     			
         	}).fail(function(jqXHR, textStatus) {
@@ -572,6 +582,7 @@
     			console.log(textStatus);
     			msg = "Ocorreu algo de errado!";
     			localStorage.setItem("mensagem", msg);
+    			localStorage.setItem("isSuccess", false);
     			location.reload();
     		});
     }
