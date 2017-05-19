@@ -608,7 +608,7 @@
 		}else if(status == '2'){
 			titulo = "Fechar vaga"
 			mensagem = "Deseja realmente fechar esta vaga?"
-		}else if(dado == '27'){
+		}else if(status == '27'){
 			titulo = "Ativar vaga"
 			msg = 'Deseja realmente ativar esta vaga?';
 		}
