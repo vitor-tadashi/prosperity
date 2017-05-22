@@ -294,9 +294,6 @@ public class CandidatoBusiness {
 					aux++;
 				}
 			}
-			if(candidatoBean.getVagaCandidato().getVaga() == null){
-				candidatoBean.getVagaCandidato().setVaga(beans.getUltimaVaga());
-			}
 			if (!beans.getUltimaVaga().getId().equals(candidatoBean.getVagaCandidato().getVaga().getId())) {
 				situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
 				situacaoCandidato.setIdCandidato(candidatoEntity.getId());
