@@ -294,14 +294,14 @@ public class CandidatoBusiness {
 					aux++;
 				}
 			}
-			if (beans.getUltimaVaga().getId() == candidatoBean.getVagaCandidato().getVaga().getId()) {
+			if (!beans.getUltimaVaga().getId().equals(candidatoBean.getVagaCandidato().getVaga().getId())) {
 				situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
 				situacaoCandidato.setIdCandidato(candidatoEntity.getId());
 				alterarStatus(situacaoCandidato);
 			}
 			candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoEntity, candidatoBean);
 			tratarInformacoes(candidatoEntity);
-
+			
 			candidatoDAO.update(candidatoEntity);
 		}
 	}

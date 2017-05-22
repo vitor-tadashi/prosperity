@@ -552,13 +552,13 @@ li a.active {
 
 															<li><c:url value="historico/${candidato.id}"
 																	var="myURL">
-																</c:url> <a href="${myURL}"><i class="fa fa-pencil fa-lg">&nbsp;</i>Histórico
+																</c:url> <a href="${myURL}"><i class="fa fa-book fa-lg">&nbsp;</i>Histórico
 																	do Candidato</a></li>
 															<li class="divider js-editar"></li>
 
 															<li class="js-editar"><c:url
 																	value="editar/${candidato.id}" var="myURL">
-																</c:url> <a href="${myURL}"><i class="fa fa-pencil"></i>
+																</c:url> <a href="${myURL}"><i class="fa fa-pencil fa-lg"></i>
 																	Editar</a></li>
 														</ul>
 													</div>
