@@ -500,6 +500,8 @@ $(document).ready(function() {
 		$(".download-download").show();
 		if($('#funcionalidade34').val()){
 			$('#tabDataContato').removeClass('hide');
+			$('#tabDataEntrevista').removeClass('hide');
+			
 		}
 	} else {
 		$(".download-download").hide();

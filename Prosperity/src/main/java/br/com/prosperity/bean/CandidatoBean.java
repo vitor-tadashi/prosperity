@@ -226,7 +226,12 @@ public class CandidatoBean extends FormatUtil {
 	}
 
 	public BigDecimal getValorPretensao() {
-		return valorPretensao.setScale(2, RoundingMode.HALF_EVEN);
+		try{
+			return valorPretensao.setScale(2, RoundingMode.HALF_EVEN);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public void setValorPretensao(BigDecimal valorPretensao) {

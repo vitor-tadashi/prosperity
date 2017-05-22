@@ -293,7 +293,7 @@
 										</div>
 										</div>
 										<!--começo - tab 4 | se o usuario da sessão for do rh, mostra o conteudo -->
-<%-- 										<c:if test="${autenticado.perfil.id} == 2 || ${autenticado.perfil.id} == 3"> --%>
+
 										<div class="tab-pane fade" id="fourth">
 											<c:forEach var="data" items="${candidato.dataEntrevista}"
 												varStatus="status">
@@ -320,7 +320,7 @@
 												</div>
 											</c:forEach>
 										</div>
-										
+<%-- 										</c:if> --%>
 										<!--fim - tab 4 -->
 										
 										<!--começo - tab 5-->
