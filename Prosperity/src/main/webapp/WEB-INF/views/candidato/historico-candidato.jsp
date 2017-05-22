@@ -22,7 +22,6 @@
 		<!--breadcrumb-->
 
 		<!-- SOMENTE ALTERAR DAQUI PARA BAIXO -->
-
 		<div class="padding-md">
 			<div class="row">
 				<section class="panel panel-default">
@@ -237,7 +236,7 @@
 									<fieldset>
 										<legend style="color:#424f63"><h5><strong>Eventos do processo seletivo</strong></h5></legend>
 										<ul class="timeline">
-											<c:set var="count" value="0" scope="page" />
+											<c:set var="c" value="0" scope="page" />
 											<c:forEach var="statusPorMesAno"
 												items="${candidato.statusPorMesAno}">
 												<li><div class="tldate">${statusPorMesAno.key}</div></li>
@@ -254,7 +253,7 @@
 													</c:choose>
 				
 													<li class="${cssTimeline}">
-														<div class="tl-circ"></div>
+														<div class="tl-circ" style="background:${status.status.css}"></div>
 														<div class="timeline-panel">
 															<div class="tl-heading">
 																<h4>Status: ${status.status.nome} </h4>
@@ -273,16 +272,17 @@
 																	</div>
 																	<div class="row">
 																		<p>
-																			<label>Usuário:</label> <span>${status.usuario.nome}</span>
+																			<label>Funcionário:</label> <span>${status.usuario.funcionario.nome}</span>
 																		</p>
 																	</div>
 																	<c:if test="${status.status.id == 10}">
-																		<div class="row hide" id="proposta-js">
+																		<div class="row hide proposta-js">
 																			<p class="">
-																				<label>Líquido c/ benefícios:</label>R$: <span>${candidato.propostaBean[0].anteriorTotalAnualLiquidoComBeneficios}</span>
+																				<label>Salário anual c/ benef.:</label>R$: <span>${candidato.propostaBean[c].anteriorTotalAnualLiquidoComBeneficios}</span>
 																				<i class="fa fa-long-arrow-right"></i>
-																				<label> Líquido c/ benefícios:</label>R$: <span>${candidato.propostaBean[0].novoTotalAnualLiquidoComBeneficios}</span>
+																				R$: <span>${candidato.propostaBean[c].novoTotalAnualLiquidoComBeneficios}</span>
 																			</p>
+																		<input type="hidden" value="${c=c+1 }">
 																		</div>
 																	</c:if>
 																</div>
@@ -313,7 +313,7 @@
 				}
 			});
 			if($('#funcionalidade23').val() || $('#funcionalidade26').val()){
-				$('#proposta-js').removeClass('hide');
+				$('.proposta-js').removeClass('hide');
 			}
 		});
 		function baixarProva(index){
