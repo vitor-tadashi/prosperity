@@ -554,13 +554,13 @@
     			
     			if(dado == '1') {
     				$('#aprova-modal').modal('hide');
-        			msg = 'Vaga ativada com sucesso!';
+        			msg = 'Vaga divulgada com sucesso!';
     			}else if(dado == '3'){
         			$('#cancela-modal').modal('hide');
         			msg = 'Vaga cancelada com sucesso!';
     			}else if(dado == '27'){
         			$('#aprova-modal').modal('hide');
-        			msg = 'Vaga aprovada com sucesso!';
+        			msg = 'Vaga divulgada com sucesso!';
     			}else if (dado == '18'){
     			$('#reprova-modal').modal('hide');
     			msg = 'Vaga reprovada com sucesso!';
@@ -607,7 +607,7 @@
     	$('input.id-vaga').val(id);
     	$('input.id-status').val(status);
     		
-    	if( status == '1'){
+    	if( status == '27'){
     		titulo = "Aprovar vaga"
     		mensagem = "Deseja realmente aprovar esta vaga?";
     	}else if(status == '18'){
@@ -619,9 +619,9 @@
 		}else if(status == '2'){
 			titulo = "Fechar vaga"
 			mensagem = "Deseja realmente fechar esta vaga?"
-		}else if(status == '27'){
-			titulo = "Ativar vaga"
-			mensagem = 'Deseja realmente ativar esta vaga?';
+		}else if(status == '1'){
+			titulo = "Divulgar vaga"
+			mensagem = 'Deseja realmente divulgar esta vaga?';
 		}
     	
     	$("#modalLabel").text(titulo);
