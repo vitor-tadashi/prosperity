@@ -12,6 +12,16 @@ function maxCaracterFormacaoAcademica(){
 		maxCaracteres.innerHTML = "Caracteres restantes : " + restante;
 	}
 	
+	//aba de divulgação só aparece para o RH
+	$(document).ready(function() {
+		var url = window.location.href;
+		if (url.match(/editar/)) {
+			if($('#funcionalidade17').val()){
+				$('#tabMarketing').removeClass('hide');
+				
+			}
+		} });
+	
 	function maxCaracterPefilTecnico(){
 		var maxPerfilTecnico = $("#descricaoPerfilTecnico").val();
 		var restante = 2000 - maxPerfilTecnico.length;
