@@ -377,7 +377,7 @@
 									<input type="hidden" value="${erro}" id="contErro"> <a
 										href="/candidato/file/${candidato.id}" target="_blank"
 										class="btn btn-default pull-left download-download">Download</a>
-									<button class="btn btn-success pull-right">Salvar</button>
+									<button class="btn btn-success pull-right" onclick="salvarForm()">Salvar</button>
 								</div>
 							</form>
 						</div>

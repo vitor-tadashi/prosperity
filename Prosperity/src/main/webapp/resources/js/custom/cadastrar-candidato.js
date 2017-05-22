@@ -623,3 +623,7 @@ function esconderAba(){
 		}
 }
 }
+function salvarForm(){
+	$('#vaga').prop('disabled',false);
+	$('#formCadastro').submit();
+}

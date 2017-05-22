@@ -9,7 +9,6 @@ import br.com.prosperity.entity.DataEntrevistaEntity;
 @Component
 public class DataEntrevistaConverter implements Converter<DataEntrevistaEntity, DataEntrevistaBean> {
 
-
 	@Autowired
 	private UsuarioConverter usuarioConverter;
 
@@ -39,14 +38,14 @@ public class DataEntrevistaConverter implements Converter<DataEntrevistaEntity, 
 			return null;
 		}
 		DataEntrevistaBean bean = new DataEntrevistaBean();
-		
+
 		bean.setId(entity.getIdDataEntrevista());
 		bean.setDataEntrevista(entity.getDtEntrevista());
 		bean.setCandidato(entity.getCandidato());
 		bean.setUsuario(usuarioConverter.convertEntityToBean(entity.getUsuario()));
 		bean.setVaga(vagaConverter.convertEntityToBean(entity.getVaga()));
 		bean.setFlSituacao(entity.getFlSituacao());
-		
+
 		return bean;
 	}
 

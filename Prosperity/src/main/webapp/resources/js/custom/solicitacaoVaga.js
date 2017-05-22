@@ -12,6 +12,16 @@ function maxCaracterFormacaoAcademica(){
 		maxCaracteres.innerHTML = "Caracteres restantes : " + restante;
 	}
 	
+	//aba de divulgação só aparece para o RH
+	$(document).ready(function() {
+		var url = window.location.href;
+		if (url.match(/editar/)) {
+			if($('#funcionalidade17').val()){
+				$('#tabMarketing').removeClass('hide');
+				
+			}
+		} });
+	
 	function maxCaracterPefilTecnico(){
 		var maxPerfilTecnico = $("#descricaoPerfilTecnico").val();
 		var restante = 2000 - maxPerfilTecnico.length;
@@ -98,8 +108,8 @@ $(document).ready(function() {
 				data: {idCargo : idCargo,
 					idSenioridade : idSenioridade},
 				success: function(lista){
-					$("#valorMinimo").val(lista[0].valorMinSalario);
-					$("#valorMaximo").val(lista[0].valorMaxSalario);
+					$("#valorMinimo").val("R$"+parseFloat(lista[0].valorMinSalario).toFixed(2));
+					$("#valorMaximo").val("R$"+parseFloat(lista[0].valorMaxSalario).toFixed(2));
 				}
 			});
 		} else{
@@ -119,8 +129,8 @@ $(document).ready(function() {
 				data: {idCargo : idCargo,
 					idSenioridade : idSenioridade},
 				success: function(lista){
-					$("#valorMinimo").val(lista[0].valorMinSalario);
-					$("#valorMaximo").val(lista[0].valorMaxSalario);
+					$("#valorMinimo").val("R$"+parseFloat(lista[0].valorMinSalario).toFixed(2));
+					$("#valorMaximo").val("R$"+parseFloat(lista[0].valorMaxSalario).toFixed(2));
 				}
 			});
 		} else{
@@ -134,8 +144,10 @@ $(document).ready(function() {
 	// academica
 	// Perfil coomportamental
 	// Perfil técnico
-		
-		var dropdowndescricaoFormacaoAcademica = document.querySelector("#cmbSenioridade");
+	
+		//COMENTADO PARA USAR FUTURAMENTE !!!
+	
+		/*var dropdowndescricaoFormacaoAcademica = document.querySelector("#cmbSenioridade");
 		var dropdownCargo = document.querySelector("#cmbCargo");
 		dropdownSenioridade.addEventListener("change",function(){
 			var idSenioridade = dropdownSenioridade.value;
@@ -158,7 +170,7 @@ $(document).ready(function() {
 				$("#descricaoPerfilComportamental").val("Nao funcionou");
 				$("#descricaoPerfilTecnico").val("Nao funcionou");
 			}
-		});
+		});*/
 	
 		//Ajax para verificar o perfil e ver se ele pode editar avaliadores
 	

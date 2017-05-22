@@ -150,10 +150,9 @@ public class CandidatoBusiness {
 
 	@Autowired
 	private AvaliadorVagaConverter avaliadorVagaConverter;
-	
+
 	@Autowired
 	private VagaConverter vagaConverter;
-
 
 	@Autowired
 	private DataEntrevistaConverter dataEntrevistaConverter;
@@ -293,10 +292,6 @@ public class CandidatoBusiness {
 
 		} else {
 			candidatoEntity = candidatoDAO.findById(candidatoBean.getId());
-			
-			candidatoEntity.setDataAbertura(new Date());
-			definirFormacao(candidatoBean, candidatoEntity);
-			tratarInformacoes(candidatoEntity);
 
 			beans = candidatoConverter.convertEntityToBean(candidatoEntity);
 			if (beans.getDataEntrevista() != null) {
@@ -311,13 +306,15 @@ public class CandidatoBusiness {
 				candidatoBean.getVagaCandidato().setVaga(beans.getUltimaVaga());
 			}
 			candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoEntity, candidatoBean);
+			candidatoEntity.setDataAbertura(new Date());
 			tratarInformacoes(candidatoEntity);
+			definirFormacao(candidatoBean, candidatoEntity);
 
 			candidatoDAO.update(candidatoEntity);
-			
+
 			if (!beans.getUltimaVaga().getId().equals(candidatoBean.getVagaCandidato().getVaga().getId())) {
 				desativarDataEntrevista(candidatoBean);
-				
+
 				VagaEntity vagaAtual = definirVagas(candidatoBean, candidatoEntity);
 
 				inserirAvaliadores(candidatoEntity, vagaAtual.getId());
@@ -770,7 +767,7 @@ public class CandidatoBusiness {
 	public void inserirComunicacao(ComunicacaoBean bean) {
 		comunicacaoDAO.insert(comunicacaoConverter.convertBeanToEntity(bean));
 	}
-	
+
 	@Transactional
 	private void desativarDataEntrevista(CandidatoBean candidatoBean) {
 		List<DataEntrevistaEntity> dtsEntrevista = dataEntrevistaDAO.findByNamedQuery("desativarDtEntrevista",
