@@ -147,7 +147,7 @@ public class CandidatoEntity {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "provas")
 	private List<ProvaCandidatoEntity> provaCandidato;
 
-	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idCandidato")
 	private List<AvaliadorCandidatoEntity> avaliadores;
 
