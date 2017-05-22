@@ -4,10 +4,6 @@ $(document).ready(function() {
 	setTimeout(function() {
 		$('#msg-sucesso').fadeOut(1500);
 	}, 5000);
-	
-	if($('#funcionalidade34').val()){
-		$('#tabDataContato').removeClass('hide');
-	}
 });
 
 $( "#canalInformacao" ).change(function() {
@@ -502,6 +498,9 @@ $(document).ready(function() {
 	var url = window.location.href;
 	if (url.match(/editar/)) {
 		$(".download-download").show();
+		if($('#funcionalidade34').val()){
+			$('#tabDataContato').removeClass('hide');
+		}
 	} else {
 		$(".download-download").hide();
 	}

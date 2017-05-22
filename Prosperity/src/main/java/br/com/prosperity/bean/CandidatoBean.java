@@ -1,6 +1,7 @@
 package br.com.prosperity.bean;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -225,7 +226,7 @@ public class CandidatoBean extends FormatUtil {
 	}
 
 	public BigDecimal getValorPretensao() {
-		return valorPretensao;
+		return valorPretensao.setScale(2, RoundingMode.HALF_EVEN);
 	}
 
 	public void setValorPretensao(BigDecimal valorPretensao) {
