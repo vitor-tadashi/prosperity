@@ -457,7 +457,7 @@ function obterCandidato(cpf) {
 				$("#situacaoAtual").val(data.formacao.situacaoAtual.id);
 
 				var status = data.ultimoStatus.status;
-				if (status.id != 17 && status.id != 5 && status.id != 29) {
+				if (status.id != 17 && status.id != 5 && status.id != 29 && status.id != 15) {
 					$('select#vaga').attr('disabled', 'disabled');
 				}
 				$('input#cpf').attr('disabled', 'disabled');

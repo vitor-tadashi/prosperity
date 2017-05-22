@@ -49,6 +49,7 @@ public class PropostaConverter implements Converter<PropostaEntity, PropostaBean
 		entity.setAnteriorParticipacaoLucrosOuBonus(bean.getAnteriorParticipacaoLucrosOuBonus());
 		entity.setNovoTotalAnualLiquidoComBeneficios(bean.getNovoTotalAnualLiquidoComBeneficios());
 		entity.setAnteriorTotalAnualLiquidoComBeneficios(bean.getAnteriorTotalAnualLiquidoComBeneficios());
+		entity.setCmProposta(bean.getCmProposta());
 		entity.setFlSituacao(bean.getFlSituacao());
 		entity.setComparativoProposta(comparativoPropostaConverter.convertBeanToEntity(bean.getComparativoProposta()));
 		
@@ -93,6 +94,7 @@ public class PropostaConverter implements Converter<PropostaEntity, PropostaBean
 		bean.setAnteriorParticipacaoLucrosOuBonus(entity.getAnteriorParticipacaoLucrosOuBonus());
 		bean.setNovoTotalAnualLiquidoComBeneficios(entity.getNovoTotalAnualLiquidoComBeneficios());
 		bean.setAnteriorTotalAnualLiquidoComBeneficios(entity.getAnteriorTotalAnualLiquidoComBeneficios());
+		bean.setCmProposta(entity.getCmProposta());
 		bean.setFlSituacao(entity.getFlSituacao());
 		bean.setComparativoProposta(comparativoPropostaConverter.convertEntityToBean(entity.getComparativoProposta()));
 

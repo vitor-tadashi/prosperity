@@ -297,30 +297,31 @@
 										<div class="tab-pane fade" id="fourth">
 											<c:forEach var="data" items="${candidato.dataEntrevista}"
 												varStatus="status">
-												<div class="row">
-													<div class='col-xs-4 form-group'>
-														<input type="hidden" value="${data.id}"
-															name="dataEntrevista[${status.index}].id" /> <label>Nome
-															do entrevistador: &nbsp;</label>
-														<p>${data.usuario.funcionario.nome}</p>
-														<input type="hidden" name="data.usuario"
-															value="${data.usuario}" /> <input type="hidden"
-															name="data.candidato" value="${data.candidato}" /> <input
-															type="hidden" name="data.vaga" value="${data.vaga}" />
+												<c:if test="${data.flSituacao == true}">
+													<div class="row">
+														<div class='col-xs-4 form-group'>
+															<input type="hidden" value="${data.id}"
+																name="dataEntrevista[${status.index}].id" /> <label>Nome
+																do entrevistador: &nbsp;</label>
+															<p>${data.usuario.funcionario.nome}</p>
+															<input type="hidden" name="data.usuario"
+																value="${data.usuario}" /> <input type="hidden"
+																name="data.candidato" value="${data.candidato}" /> <input
+																type="hidden" name="data.vaga" value="${data.vaga}" />
+														</div>
+														<div class='col-md-2 form-group'>
+															<label>Data de entrevista: &nbsp;</label>
+															<fmt:formatDate pattern="dd/MM/yyyy"
+																value="${data.dataEntrevista}" var="dataEntrevista" />
+															<input type="text"
+																name="dataEntrevista[${status.index}].dataEntrevista"
+																id="dataEntrevista" class="form-control date"
+																data-required="false" value="${dataEntrevista}">
+														</div>
 													</div>
-													<div class='col-md-2 form-group'>
-														<label>Data de entrevista: &nbsp;</label>
-														<fmt:formatDate pattern="dd/MM/yyyy"
-															value="${data.dataEntrevista}" var="dataEntrevista" />
-														<input type="text"
-															name="dataEntrevista[${status.index}].dataEntrevista"
-															id="dataEntrevista" class="form-control date"
-															data-required="false" value="${dataEntrevista}">
-													</div>
-												</div>
+												</c:if>
 											</c:forEach>
 										</div>
-<%-- 										</c:if> --%>
 										<!--fim - tab 4 -->
 										
 										<!--começo - tab 5-->

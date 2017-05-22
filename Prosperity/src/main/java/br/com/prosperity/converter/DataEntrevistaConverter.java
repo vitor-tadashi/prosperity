@@ -25,8 +25,10 @@ public class DataEntrevistaConverter implements Converter<DataEntrevistaEntity, 
 
 		entity.setIdDataEntrevista(bean.getId());
 		entity.setDtEntrevista(bean.getDataEntrevista());
+		entity.setCandidato(bean.getCandidato());
 		entity.setUsuario(usuarioConverter.convertBeanToEntity(bean.getUsuario()));
 		entity.setVaga(vagaConverter.convertBeanToEntity(bean.getVaga()));
+		entity.setFlSituacao(bean.getFlSituacao());
 
 		return entity;
 	}
@@ -40,8 +42,10 @@ public class DataEntrevistaConverter implements Converter<DataEntrevistaEntity, 
 		
 		bean.setId(entity.getIdDataEntrevista());
 		bean.setDataEntrevista(entity.getDtEntrevista());
+		bean.setCandidato(entity.getCandidato());
 		bean.setUsuario(usuarioConverter.convertEntityToBean(entity.getUsuario()));
 		bean.setVaga(vagaConverter.convertEntityToBean(entity.getVaga()));
+		bean.setFlSituacao(entity.getFlSituacao());
 		
 		return bean;
 	}

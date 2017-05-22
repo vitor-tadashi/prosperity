@@ -48,7 +48,7 @@
 								} else if (data.ultimoStatus.status.id == "11") {
 									if (perfil == 2 || perfil == 3) {
 										$("#proposta-tab").show();
-
+										$("#importxlsx").hide();
 									}
 								} else if (data.ultimoStatus.status.id == "13") {
 									if (perfil == 2 || perfil == 3) {
@@ -71,6 +71,7 @@
 								$('.tab-bar a[href="#infoEntrevista"]').tab('show');
 								$('#modalProposta').modal('show');
 								if(data.ultimaProposta != null){
+									$(".tiraTabela").remove();
 									//carregando as informações do EXCEL via AJAX para a JSP
 									$('#anteriorCargo').text(data.ultimaProposta.anteriorCargo);
 									$('#anteriorEmpresa').text(data.ultimaProposta.anteriorEmpresa);
@@ -108,21 +109,20 @@
 									var aux = 0;
 									if(data.ultimaProposta.comparativoProposta != null){
 										$(comparativo).each(function(index, value) {
-
-											var campos = "<tr class='tiraTabela'>"+
-											"<td id='nmFuncionario"+aux+"'></td>" +
-											"<td id='nmCargo"+aux+"'></td>" +
-											"<td id='nmSenioridade"+aux+"'></td>" +
-											"<td id='dsConhecimento"+aux+"'></td>" +
-											"<td id='dtAdmissao"+aux+"'></td>" +
-											"<td><p>R$ </p><p id='vlrSalario"+aux+"' class='dinheiro'></p></td>" +
-											"<td><p>R$ </p><p id='vlrVr"+aux+"' class='dinheiro'></p></td>" +
-											"<td><p>R$ </p><p id='vlrVa"+aux+"' class='dinheiro'></p></td>" +
-											"<td><p>R$ </p><p id='vlrEstacionamento"+aux+"' class='dinheiro'></p></td>" +
-											"<td><p>R$ </p><p id='vlrCombustivel"+aux+"' class='dinheiro'></p></td>" +
-											"<td><p>R$ </p><p id='vlrAssistenciaMedica"+aux+"' class='dinheiro'></p></td>" +
-											"<td><p>R$ </p><p id='vlrOutros"+aux+"' class='dinheiro'></p></td>" +
-											"<td><p>R$ </p><p id='vlrTaxa"+aux+"' class='dinheiro'></p></td> </tr>";
+											var campos = "<tr>"+
+											"<td class='tiraTabela' id='nmFuncionario"+aux+"'></td>" +
+											"<td class='tiraTabela' id='nmCargo"+aux+"'></td>" +
+											"<td class='tiraTabela' id='nmSenioridade"+aux+"'></td>" +
+											"<td class='tiraTabela' id='dsConhecimento"+aux+"'></td>" +
+											"<td class='tiraTabela' id='dtAdmissao"+aux+"'></td>" +
+											"<td class='tiraTabela'><p>R$ </p><p id='vlrSalario"+aux+"' class='dinheiro'></p></td>" +
+											"<td class='tiraTabela'><p>R$ </p><p id='vlrVr"+aux+"' class='dinheiro'></p></td>" +
+											"<td class='tiraTabela'><p>R$ </p><p id='vlrVa"+aux+"' class='dinheiro'></p></td>" +
+											"<td class='tiraTabela'><p>R$ </p><p id='vlrEstacionamento"+aux+"' class='dinheiro'></p></td>" +
+											"<td class='tiraTabela'><p>R$ </p><p id='vlrCombustivel"+aux+"' class='dinheiro'></p></td>" +
+											"<td class='tiraTabela'><p>R$ </p><p id='vlrAssistenciaMedica"+aux+"' class='dinheiro'></p></td>" +
+											"<td class='tiraTabela'><p>R$ </p><p id='vlrOutros"+aux+"' class='dinheiro'></p></td>" +
+											"<td class='tiraTabela'><p>R$ </p><p id='vlrTaxa"+aux+"' class='dinheiro'></p></td> </tr>";
 
 											$(".tbComparativo").append(campos);
 
@@ -352,6 +352,7 @@
 								dataType : "JSON",
 								type : "GET",
 								success : function(data) {
+									$(".tiraTabela").remove();
 									$("#anteriorEmpresa").text(data.anteriorEmpresa);
 									$("#anteriorCargo").text(data.anteriorCargo);
 									$('#vlrAntSalarioFixoBruto').text(parseFloat(data.anteriorSalarioFixoBruto).toFixed(2));
@@ -387,19 +388,19 @@
 									// for each que percorre a lista e mostra na tela
 									var aux = 0;
 									$(comparativo).each(function(index, value) {
-										var campos = "<tr><td id='nmFuncionario"+aux+"'></td>" +
-										"<td id='nmCargo"+aux+"'></td>" +
-										"<td id='nmSenioridade"+aux+"'></td>" +
-										"<td id='dsConhecimento"+aux+"'></td>" +
-										"<td id='dtAdmissao"+aux+"'></td>" +
-										"<td><p>R$ </p><p id='vlrSalario"+aux+"' class='dinheiro'></p></td>" +
-										"<td><p>R$ </p><p id='vlrVr"+aux+"' class='dinheiro'></p></td>" +
-										"<td><p>R$ </p><p id='vlrVa"+aux+"' class='dinheiro'></p></td>" +
-										"<td><p>R$ </p><p id='vlrEstacionamento"+aux+"' class='dinheiro'></p></td>" +
-										"<td><p>R$ </p><p id='vlrCombustivel"+aux+"' class='dinheiro'></p></td>" +
-										"<td><p>R$ </p><p id='vlrAssistenciaMedica"+aux+"' class='dinheiro'></p></td>" +
-										"<td><p>R$ </p><p id='vlrOutros"+aux+"' class='dinheiro'></p></td>" +
-										"<td><p>R$ </p><p id='vlrTaxa"+aux+"' class='dinheiro'></p></td> </tr>";
+										var campos = "<tr><td class='tiraTabela' id='nmFuncionario"+aux+"'></td>" +
+										"<td class='tiraTabela' id='nmCargo"+aux+"'></td>" +
+										"<td class='tiraTabela' id='nmSenioridade"+aux+"'></td>" +
+										"<td class='tiraTabela' id='dsConhecimento"+aux+"'></td>" +
+										"<td class='tiraTabela' id='dtAdmissao"+aux+"'></td>" +
+										"<td class='tiraTabela'><p>R$ </p><p id='vlrSalario"+aux+"' class='dinheiro'></p></td>" +
+										"<td class='tiraTabela'><p>R$ </p><p id='vlrVr"+aux+"' class='dinheiro'></p></td>" +
+										"<td class='tiraTabela'><p>R$ </p><p id='vlrVa"+aux+"' class='dinheiro'></p></td>" +
+										"<td class='tiraTabela'><p>R$ </p><p id='vlrEstacionamento"+aux+"' class='dinheiro'></p></td>" +
+										"<td class='tiraTabela'><p>R$ </p><p id='vlrCombustivel"+aux+"' class='dinheiro'></p></td>" +
+										"<td class='tiraTabela'><p>R$ </p><p id='vlrAssistenciaMedica"+aux+"' class='dinheiro'></p></td>" +
+										"<td class='tiraTabela'><p>R$ </p><p id='vlrOutros"+aux+"' class='dinheiro'></p></td>" +
+										"<td class='tiraTabela'><p>R$ </p><p id='vlrTaxa"+aux+"' class='dinheiro'></p></td> </tr>";
 
 										$(".tbComparativo").append(campos);
 

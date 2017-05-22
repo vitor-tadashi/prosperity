@@ -295,7 +295,7 @@
 														<div class="upload-file" onchange="gerarProposta()">
 															<input type="file" name="file" id="upload-proposta"
 																class="upload-demo" required/> <label
-																data-title="Selecione" for="upload-proposta"> <span
+																data-title="Selecione" for="upload-proposta"><span
 																id="caminho"></span>
 															</label>
 														</div>
