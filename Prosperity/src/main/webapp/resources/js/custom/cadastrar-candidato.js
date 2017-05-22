@@ -4,6 +4,9 @@ $(document).ready(function() {
 	setTimeout(function() {
 		$('#msg-sucesso').fadeOut(1500);
 	}, 5000);
+	if($("#upload-curriculo2").val() == ""){
+		$("#btnDownload").prop('disabled',true);
+	}
 });
 
 $( "#canalInformacao" ).change(function() {

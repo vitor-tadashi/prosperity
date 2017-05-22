@@ -125,7 +125,7 @@
 															id="txtHorarioInicial" name="horarioEntrada" type="time"
 															class="form-control verity-time-input input-sm col-xs-5"
 															value="${vaga.horarioEntrada}"> <span
-															class="col-xs-1">às</span> <input id="txtHorarioFinal"
+															class="col-xs-1" style="padding-top:5px">às</span> <input id="txtHorarioFinal"
 															name="horarioSaida" type="time"
 															class="form-control verity-time-input input-sm col-xs-5"
 															value="${vaga.horarioSaida}">

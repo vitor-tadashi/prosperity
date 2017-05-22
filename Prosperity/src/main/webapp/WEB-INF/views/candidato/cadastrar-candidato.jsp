@@ -179,12 +179,14 @@
 												</div>
 												<div class="form-group col-xs-12">
 													<label class="control-label">Currículo</label>
-													<div class="upload-file" style="width: 356px;">
+													<div class="upload-file" style="width: 100%;">
 														<input type="file" id="upload-curriculo" name="file"
 															class="upload-demo" value="${candidato.curriculo}">
 														<label data-title="Selecione" for="upload-curriculo">
-															<span data-title="Nenhum arquivo selecionado..."></span>
+															<span id="cmnCurriculo" data-title="${candidato.curriculo}"></span>
 														</label>
+														<input type="text" id="upload-curriculo2" name="file"
+															class="hidden" value="${candidato.curriculo}">
 													</div>
 												</div>
 											</div>
@@ -373,9 +375,9 @@
 								</div>
 								<div class="panel-footer">
 									<input type="hidden" value="${candidato.id}" name="id" id="candidato">
-									<input type="hidden" value="${erro}" id="contErro"> <a
+									<input type="hidden" value="${erro}" id="contErro"> <button id="btnDownload"
 										href="/candidato/file/${candidato.id}" target="_blank"
-										class="btn btn-default pull-left download-download">Download</a>
+										class="btn btn-default pull-left download-download">Download</button>
 									<button class="btn btn-success pull-right" onclick="salvarForm()">Salvar</button>
 								</div>
 							</form>
