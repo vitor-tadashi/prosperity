@@ -18,9 +18,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import br.com.prosperity.bean.ComparativoPropostaBean;
 import br.com.prosperity.bean.PropostaBean;
 
-public class TesteExcel {
+public class ImportarExcel {
 
-	public PropostaBean testa(String caminho) {
+	public PropostaBean importarExcel(String caminho) {
 		PropostaBean propostaBean = new PropostaBean();
 		List<ComparativoPropostaBean> comparativosPropostaBean = new ArrayList<ComparativoPropostaBean>();
 		try {

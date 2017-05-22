@@ -36,6 +36,7 @@ public class PropostaBean {
 	private double novaParticipacaoLucrosOuBonus;
 	private double anteriorTotalAnualLiquidoComBeneficios;
 	private double novoTotalAnualLiquidoComBeneficios;
+	private String cmProposta;
 	private Boolean flSituacao = false;
 
 	private Integer candidato;
@@ -296,6 +297,14 @@ public class PropostaBean {
 
 	public void setComparativoProposta(List<ComparativoPropostaBean> comparativoProposta) {
 		this.comparativoProposta = comparativoProposta;
+	}
+
+	public String getCmProposta() {
+		return cmProposta;
+	}
+
+	public void setCmProposta(String cmProposta) {
+		this.cmProposta = cmProposta;
 	}
 
 }

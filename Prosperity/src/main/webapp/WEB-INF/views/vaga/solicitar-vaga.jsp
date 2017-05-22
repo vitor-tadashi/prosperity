@@ -86,7 +86,7 @@
 											id="tabAvaliadores" href="#fourth" data-toggle="tab"
 											class="text-success hide"><i class="fa fa-group"></i>
 												Avaliadores</a></li>
-										<li id="tabMarketing" class="tab-verity"><a
+										<li id="tabMarketing" class="tab-verity hide"><a
 											id="tabMarketing" href="#fifth" data-toggle="tab"
 											class="text-success"><i class="fa fa-briefcase"></i>
 												Divulgação</a></li>
