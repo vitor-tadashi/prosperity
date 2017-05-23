@@ -14,14 +14,14 @@ public class StatusCandidatoBean {
 	private Integer id;
 	private Date dataAlteracao;
 	private String descricaoParecer;
-	private String proposta;
 	private Boolean situacao;
 	private UsuarioBean usuario;
 	private StatusBean status;
 	private String mensagem;
+	private CancelamentoBean cancelamento;
+	private String dsCancelamento;
 
 	public StatusCandidatoBean() {
-
 	}
 
 	public StatusCandidatoBean(String mensagem) {
@@ -90,12 +90,19 @@ public class StatusCandidatoBean {
 		this.status = status;
 	}
 
-	public String getProposta() {
-		return proposta;
+	public CancelamentoBean getCancelamento() {
+		return cancelamento;
 	}
 
-	public void setProposta(String proposta) {
-		this.proposta = proposta;
+	public void setCancelamento(CancelamentoBean cancelamento) {
+		this.cancelamento = cancelamento;
 	}
 
+	public String getDsCancelamento() {
+		return dsCancelamento;
+	}
+
+	public void setDsCancelamento(String dsCancelamento) {
+		this.dsCancelamento = dsCancelamento;
+	}
 }

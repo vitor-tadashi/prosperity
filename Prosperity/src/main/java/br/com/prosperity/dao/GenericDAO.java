@@ -20,5 +20,4 @@ public interface GenericDAO<T, K extends Serializable> {
 	void remove(final T entity);
 
 	public T update(T entity);
-
 }

@@ -7,16 +7,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "tbCargo")
 public class CargoEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idCargo", unique = true, nullable = false)
+	@Column(name = "idCargo", unique = true, nullable = false)
 	private Integer idCargo;
-	
+
 	@Column(name = "nmCargo")
 	private String nome;
 

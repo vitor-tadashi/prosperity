@@ -33,5 +33,4 @@ public class ClienteConverter implements Converter<ClienteEntity, ClienteBean> {
 
 		return bean;
 	}
-
 }

@@ -14,8 +14,10 @@ public class SenioridadeConverter implements Converter<SenioridadeEntity, Senior
 			return null;
 		}
 		SenioridadeEntity entity = new SenioridadeEntity();
+
 		entity.setId(bean.getId());
 		entity.setNome(bean.getNome());
+
 		return entity;
 	}
 
@@ -25,8 +27,10 @@ public class SenioridadeConverter implements Converter<SenioridadeEntity, Senior
 			return null;
 		}
 		SenioridadeBean bean = new SenioridadeBean();
+
 		bean.setId(entity.getId());
 		bean.setNome(entity.getNome());
+
 		return bean;
 	}
 }

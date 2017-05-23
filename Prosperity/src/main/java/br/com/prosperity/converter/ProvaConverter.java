@@ -32,8 +32,7 @@ public class ProvaConverter implements Converter<ProvaEntity, ProvaBean> {
 
 		bean.setId(entity.getId());
 		bean.setNome(entity.getNome());
-		
+
 		return bean;
 	}
-
 }

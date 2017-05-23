@@ -20,6 +20,7 @@ import javax.persistence.Table;
 		@NamedQuery(name = "candidatosVaga", query = "SELECT vc FROM VagaCandidatoEntity vc WHERE vc.vaga.id = ?1"),
 		@NamedQuery(name = "candidatoContratado", query = "SELECT cc FROM VagaCandidatoEntity cc WHERE cc.candidato.id = ?1 ORDER BY cc.idVagaCandidato ASC") })
 public class VagaCandidatoEntity {
+
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
 	@Column(name = "idVagaCandidato", unique = true, nullable = false)
@@ -102,10 +103,4 @@ public class VagaCandidatoEntity {
 	public void setCandidato(CandidatoEntity candidato) {
 		this.candidato = candidato;
 	}
-
-	public void setContratado(Integer id) {
-		// TODO Auto-generated method stub
-
-	}
-
 }

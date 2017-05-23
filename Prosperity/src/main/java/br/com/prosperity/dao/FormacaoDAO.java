@@ -40,5 +40,4 @@ public class FormacaoDAO extends GenericDAOImpl<FormacaoEntity, Integer> {
 				"SELECT formacao FROM tbFormacao AS formacao WHERE formacao.id = :id", FormacaoEntity.class);
 		return query.setParameter("id", idCurso).getResultList().get(0);
 	}
-
 }

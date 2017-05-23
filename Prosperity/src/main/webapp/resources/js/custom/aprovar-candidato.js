@@ -205,6 +205,8 @@
 						'idCandidato' : $('#hdn-id-candidato').val(),
 						'parecer' : $('#parecer').val(),
 						'idStatus' : $('#hdn-status').val(),
+						'dsCancelamento' : $('#parecerCancelamento').val(),
+						'idCancelamento' : $('#cancelamento').val(),
 						'processoSeletivo' : JSON.stringify(provasDescricoes),
 						'avaliacoesCandidato' : JSON.stringify(avaliacoes)
 					},

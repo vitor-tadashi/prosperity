@@ -17,18 +17,15 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbPerfil")
-
-@NamedQueries({
-	@NamedQuery(name = "obterPerfis", query = "SELECT distinct p FROM PerfilEntity p"),
-	@NamedQuery(name = "obterNomePerfil", query = "SELECT p FROM PerfilEntity p WHERE p .nome = ?1")
-})
+@NamedQueries({ @NamedQuery(name = "obterPerfis", query = "SELECT distinct p FROM PerfilEntity p"),
+		@NamedQuery(name = "obterNomePerfil", query = "SELECT p FROM PerfilEntity p WHERE p .nome = ?1") })
 public class PerfilEntity {
 
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
 	@Column(name = "idPerfil", unique = true, nullable = false)
 	private Integer id;
-	
+
 	@Column(name = "nmPerfil")
 	private String nome;
 
@@ -60,5 +57,4 @@ public class PerfilEntity {
 	public void setFuncionalidades(List<FuncionalidadeEntity> funcionalidades) {
 		this.funcionalidades = funcionalidades;
 	}
-
 }

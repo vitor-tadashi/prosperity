@@ -2,22 +2,16 @@ package br.com.prosperity.entity;
 
 import javax.persistence.*;
 
-/**
- * Entity implementation class for Entity: CargoSenioridade
- *
- */
-
 @Entity
-@Table(name="tbCliente")
-
+@Table(name = "tbCliente")
 public class ClienteEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idCliente", unique = true)
+	@Column(name = "idCliente", unique = true)
 	private Integer id;
-	
-	@Column(name="nmCliente")
+
+	@Column(name = "nmCliente")
 	private String nome;
 
 	public Integer getId() {

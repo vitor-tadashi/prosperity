@@ -1,7 +1,7 @@
 package br.com.prosperity.bean;
 
 public class CancelamentoBean {
-	
+
 	private Integer id;
 	private String descricao;
 
@@ -20,5 +20,4 @@ public class CancelamentoBean {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
 }

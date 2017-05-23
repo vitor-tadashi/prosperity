@@ -67,6 +67,12 @@
 									<p class="grey">${autenticado.email}</p>
 								</div>
 						</a></li>
+						<li><a class="clearfix download-download" href="manual/download" target="_blank">
+								<div class="detail">
+									<strong>Manual</strong>
+									<!-- <p class="grey">${autenticado.email}</p> -->
+								</div>
+						</a></li>
 						<li class="divider"></li>
 						<li><a tabindex="-1" class="main-link logoutConfirm_open"
 							href="usuario"> <i class="fa fa-lock fa-lg"></i> Sair

@@ -113,8 +113,9 @@
 															pattern="dd/MM/yyyy" var="dataInicio" />
 														<input id="dataInicio" name="dataInicio" type="text"
 															class="form-control data parsley-validated"
-															data-required="true" value="${dataInicio}"
-															style="height: 30px">
+															data-required="true" onblur="validarData('dataInicio')"
+															value="${dataInicio}"
+															style="height: 30px" />
 													</div>
 												</div>
 												<!-- /form-group -->

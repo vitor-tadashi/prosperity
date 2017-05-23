@@ -13,13 +13,7 @@ public class EnderecoBean {
 
 	@NotEmpty(message = "O campo CEP deve ser prenchido")
 	private String cep;
-	/*
-	 * @NotNull
-	 * 
-	 * @NotEmpty(message="O campo número deve ser prenchido")
-	 */
 	private Integer numero;
-
 	private String complemento;
 
 	@NotEmpty(message = "O campo cidade deve ser prenchido")
@@ -27,6 +21,7 @@ public class EnderecoBean {
 
 	@NotEmpty(message = "O campo estado deve ser prenchido")
 	private String estado;
+	
 	@NotEmpty(message = "O campo rua deve ser prenchido")
 	private String logradouro;
 

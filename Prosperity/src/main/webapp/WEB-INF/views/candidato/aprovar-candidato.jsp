@@ -378,7 +378,6 @@
 											maxlength="300" rows="3"
 											onkeyup="maxCaracterParecerCancelamento()"></textarea>
 										<label id="maxParecerCanc">Caracteres restantes : 300</label>
-
 									</div>
 								</div>
 							</form>

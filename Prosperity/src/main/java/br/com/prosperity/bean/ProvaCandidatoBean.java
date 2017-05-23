@@ -50,5 +50,4 @@ public class ProvaCandidatoBean {
 	public void setCaminhoProva(String caminhoProva) {
 		this.caminhoProva = caminhoProva;
 	}
-
 }

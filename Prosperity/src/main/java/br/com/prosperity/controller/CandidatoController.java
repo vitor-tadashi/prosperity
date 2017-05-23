@@ -133,7 +133,7 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private List<ProvaCandidatoBean> provasCandidatoBean;
-	
+
 	@Autowired
 	private List<ComunicacaoBean> comunicacoesBean;
 
@@ -148,22 +148,19 @@ public class CandidatoController<PaginarCandidato> {
 
 	@Autowired
 	private HttpSession session;
-	
+
 	@Autowired
 	private ComunicacaoBean comunicacaoBean;
-	
+
 	@Autowired
 	private ComunicacaoBusiness comunicacaoBusiness;
-	
+
 	@Autowired
 	private CandidatoCompetenciaBusiness candidatoCompetenciaBusiness;
 
 	private List<String> caminhoProvas;
 
-	Double d = null;
-
 	private void paginacao(Integer page, Model model, CandidatoBean candidato) {
-
 		Integer startpage = 1;
 		Integer endpage = candidatoBusiness.totalPagina(candidato);
 
@@ -174,7 +171,6 @@ public class CandidatoController<PaginarCandidato> {
 
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.GET)
 	public String cadastrarCandidato(Model model) {
-
 		obterDominiosCandidato(model);
 
 		return "candidato/cadastrar-candidato";
@@ -195,21 +191,18 @@ public class CandidatoController<PaginarCandidato> {
 
 		List<CanalInformacaoBean> listaCanal = canalInformacaoBusiness.obterTodos();
 		model.addAttribute("listaCanal", listaCanal);
-
 	}
 
 	@RequestMapping(value = "/salvar", method = RequestMethod.POST)
 	public String salvarCandidato(@Valid @ModelAttribute("candidatoBean") CandidatoBean candidatoBean,
 			BindingResult result, @RequestParam("file") MultipartFile file, Model model,
 			RedirectAttributes redirectAttrs) throws BusinessException {
-
 		if (result.hasErrors()) {
 			model.addAttribute("erro", result.getErrorCount());
 			model.addAttribute("listaErros", buildErrorMessage(result.getFieldErrors()));
 			model.addAttribute("candidato", candidatoBean);
 			obterDominiosCandidato(model);
 			return "candidato/cadastrar-candidato";
-
 		} else {
 			try {
 				String caminho = uploadCurriculo(file, candidatoBean.getCpf());
@@ -217,10 +210,8 @@ public class CandidatoController<PaginarCandidato> {
 				candidatoBusiness.inserir(candidatoBean);
 				redirectAttrs.addFlashAttribute("sucesso", "Candidato salvo com sucesso!");
 			} catch (BusinessException e) {
-
 			}
 		}
-
 		return "redirect:/candidato/cadastrar";
 	}
 
@@ -238,7 +229,7 @@ public class CandidatoController<PaginarCandidato> {
 		CandidatoBean candidato = candidatoBusiness.obterCandidatoPorId(id);
 		List<ComunicacaoBean> comunicacaoBean = comunicacaoBusiness.listarDataComunicacao(id);
 		obterDominiosCandidato(model);
-		
+
 		BigDecimal b = new BigDecimal(candidato.getValorPretensao().toString());
 		b = b.setScale(2, BigDecimal.ROUND_DOWN);
 		candidato.setValorPretensao(b);
@@ -261,7 +252,6 @@ public class CandidatoController<PaginarCandidato> {
 	@RequestMapping(value = "/editar/salvar", method = RequestMethod.POST)
 	public String salvarEditar(@ModelAttribute("candidatoBean") @Valid CandidatoBean candidatoBean,
 			BindingResult result, Model model, RedirectAttributes redirectAttrs) throws BusinessException {
-
 		if (result.hasErrors()) {
 			model.addAttribute("erro", result.getErrorCount());
 			model.addAttribute("listaErros", buildErrorMessage(result.getFieldErrors()));
@@ -270,7 +260,6 @@ public class CandidatoController<PaginarCandidato> {
 			obterDominiosCandidato(model);
 			return "candidato/cadastrar-candidato";
 		}
-
 		candidatoBusiness.inserir(candidatoBean);
 		redirectAttrs.addFlashAttribute("sucesso", "Candidato salvo com sucesso!");
 
@@ -311,7 +300,7 @@ public class CandidatoController<PaginarCandidato> {
 		// Pega quantas competencias o candidato tem, divide por 7 para ver
 		// quantas colunas deve ter na tela;
 		int colCompetencias = candidato.getCompetencias().size() / 7;
-		
+
 		model.addAttribute("datasContatos", datasContatos);
 		model.addAttribute("colCompetencias", colCompetencias);
 		model.addAttribute("provas", provasCandidatoBean);
@@ -333,9 +322,6 @@ public class CandidatoController<PaginarCandidato> {
 
 		model.addAttribute("candidatos", candidatos);
 
-		// List<CandidatoBean> candidatos = candidatoBusiness.listarTop10();
-		// model.addAttribute("candidatos", candidatos);
-
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
 		model.addAttribute("listaCargo", listaCargo);
 
@@ -352,8 +338,6 @@ public class CandidatoController<PaginarCandidato> {
 		List<VagaBean> listaVagaDrop = vagaBusiness.listar();
 		model.addAttribute("listaVagaDrop", listaVagaDrop);
 
-		// avaliadorBusiness.listar();
-
 		return "candidato/consultar-candidato";
 	}
 
@@ -363,7 +347,6 @@ public class CandidatoController<PaginarCandidato> {
 		if (page == null) {
 			page = 1;
 		}
-
 		if (candidato.getVagaBean().getId() == 0) {
 			candidato.setVagaBean(null);
 		}
@@ -391,19 +374,12 @@ public class CandidatoController<PaginarCandidato> {
 		List<VagaBean> listaVagaDrop = vagaBusiness.listar();
 		model.addAttribute("listaVagaDrop", listaVagaDrop);
 
-		// avaliadorBusiness.listar();
-
 		return "candidato/consultar-candidato";
 	}
 
 	// andre
 	@RequestMapping(value = "/aprovar", method = RequestMethod.GET)
 	public String aprovarCandidato(Model model) {
-		/*
-		 * if (page == null) { page = 1; } //Paginação CandidatoBean c = new
-		 * CandidatoBean(); c.setId(-1); paginacao(page, model, c);
-		 */
-
 		List<CandidatoBean> candidatos = candidatoBusiness.listarAprovacao();
 		List<CompetenciaBean> competencias = candidatoBusiness.listarCompetencia();
 		List<AvaliacaoBean> avaliacoes = candidatoBusiness.listarAvaliacao();
@@ -427,12 +403,9 @@ public class CandidatoController<PaginarCandidato> {
 
 	private List<String> buildErrorMessage(List<FieldError> error) {
 		List<String> novosErros = new ArrayList<>();
-
 		for (FieldError erros : error) {
 			novosErros.add(erros.getDefaultMessage());
-
 		}
-
 		return novosErros;
 	}
 
@@ -441,7 +414,6 @@ public class CandidatoController<PaginarCandidato> {
 			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato,
 			@ModelAttribute("avaliacoesCandidato") String avaliacoesCandidato,
 			@ModelAttribute("processoSeletivo") String processoSeletivo) {
-
 		candidatoBean = candidatoBusiness.obter(situacaoCandidato.getIdCandidato());
 
 		if (!processoSeletivo.equals("[]")) {
@@ -454,9 +426,10 @@ public class CandidatoController<PaginarCandidato> {
 			provaCandidatoBusiness.inserir(provas);
 		}
 
-		if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOAPROVADO.getValue() ||
-			situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOREPROVADO.getValue()) {
-			candidatoCompetenciaBusiness.inserirCompetencias(convertGson(avaliacoesCandidato), situacaoCandidato.getIdCandidato());
+		if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOAPROVADO.getValue()
+				|| situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOREPROVADO.getValue()) {
+			candidatoCompetenciaBusiness.inserirCompetencias(convertGson(avaliacoesCandidato),
+					situacaoCandidato.getIdCandidato());
 		}
 
 		if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.PROPOSTACANDIDATO.getValue()) {
@@ -465,7 +438,6 @@ public class CandidatoController<PaginarCandidato> {
 			propostaBusiness.inserir(propostaBean);
 		}
 		try {
-			// alterado aqui \/
 			candidatoBusiness.alterarStatus(situacaoCandidato);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -554,25 +526,26 @@ public class CandidatoController<PaginarCandidato> {
 
 	@RequestMapping(value = "/file/{id}", method = RequestMethod.GET)
 	@ResponseBody
-	public void getFile(@PathVariable Integer id, HttpServletResponse response) {
+	public void getFile(@PathVariable Integer id, HttpServletResponse response) throws IOException {
 
 		String caminho = candidatoBusiness.obter(id).getCurriculo();
-
-		try {
-			File file = new File(caminho);
-			response.addHeader("Content-Disposition", "attachment; filename=" + caminho);
-			InputStream is = new FileInputStream(file);
-			org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
-			response.flushBuffer();
-
-			is.close();
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (!caminho.isEmpty()) {
+			try {
+				File file = new File(caminho);
+				response.addHeader("Content-Disposition", "attachment; filename=" + caminho);
+				InputStream is = new FileInputStream(file);
+				org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
+				response.flushBuffer();
+				
+				is.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
+
 	@RequestMapping(value = "/papers", method = RequestMethod.GET)
 	public void getPapers(String caminho, HttpServletResponse response) {
-		
 		String[] nome = caminho.split("\\\\");
 		try {
 			File file = new File(caminho);
@@ -647,12 +620,13 @@ public class CandidatoController<PaginarCandidato> {
 	public @ResponseBody PropostaBean returnProposta(Model model) {
 		return propostaBean;
 	}
-	
+
 	@RequestMapping(value = "/comunicacao", method = RequestMethod.POST)
-	public @ResponseBody List<ComunicacaoBean> comunicacao (Model model,
-			@ModelAttribute("dataContato") String dataContato, @ModelAttribute ("observacao") String observacao, @ModelAttribute ("usuario") Integer usuario, @ModelAttribute ("candidato") Integer candidato) {
+	public @ResponseBody List<ComunicacaoBean> comunicacao(Model model,
+			@ModelAttribute("dataContato") String dataContato, @ModelAttribute("observacao") String observacao,
+			@ModelAttribute("usuario") Integer usuario, @ModelAttribute("candidato") Integer candidato) {
 		comunicacaoBean = new ComunicacaoBean();
-		
+
 		Date data = new Date();
 		try {
 			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -660,26 +634,27 @@ public class CandidatoController<PaginarCandidato> {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
+
 		UsuarioBean usuarioBean = new UsuarioBean();
 		usuarioBean.setId(usuario);
-		comunicacaoBean.setUsuarioBean(usuarioBean);;
+		comunicacaoBean.setUsuarioBean(usuarioBean);
 		comunicacaoBean.setDataContato(data);
 		comunicacaoBean.setObservacao(observacao);
-		
+
 		CandidatoBean candidatoBean = new CandidatoBean();
 		candidatoBean.setId(candidato);
-		comunicacaoBean.setCandidatoBean(candidatoBean);;
+		comunicacaoBean.setCandidatoBean(candidatoBean);
 
-		/*SituacaoCandidatoBean bean = new SituacaoCandidatoBean();
-		bean.setIdCandidato(id);
-		bean.setStatus(StatusCandidatoEnum.CANDIDATOEMANALISE);*/
-		
+		/*
+		 * SituacaoCandidatoBean bean = new SituacaoCandidatoBean();
+		 * bean.setIdCandidato(id);
+		 * bean.setStatus(StatusCandidatoEnum.CANDIDATOEMANALISE);
+		 */
+
 		candidatoBusiness.inserirComunicacao(comunicacaoBean);
-		
-		//comunicacaoBean.setCandidatoBean();
-		
+
+		// comunicacaoBean.setCandidatoBean();
+
 		return comunicacoesBean;
 	}
 }
-

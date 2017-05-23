@@ -14,8 +14,10 @@ public class CanalInformacaoConverter implements Converter<CanalInformacaoEntity
 			return null;
 		}
 		CanalInformacaoEntity entity = new CanalInformacaoEntity();
+
 		entity.setId(bean.getId());
 		entity.setNome(bean.getNome());
+
 		return entity;
 	}
 
@@ -25,9 +27,10 @@ public class CanalInformacaoConverter implements Converter<CanalInformacaoEntity
 			return null;
 		}
 		CanalInformacaoBean bean = new CanalInformacaoBean();
+
 		bean.setId(entity.getId());
 		bean.setNome(entity.getNome());
+
 		return bean;
 	}
-
 }

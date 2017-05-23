@@ -10,14 +10,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tbTpStatus")
 public class TipoStatusEntity {
-	/* Mapeamento dos Atributos */
 
-	/* Mapeamento do Id */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idTpStatus", unique = true, nullable = false)
 	private Integer id;
-	/* fim */
 
 	@Column(name = "nmTpStatus")
 	private String nome;
@@ -37,5 +34,4 @@ public class TipoStatusEntity {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 }

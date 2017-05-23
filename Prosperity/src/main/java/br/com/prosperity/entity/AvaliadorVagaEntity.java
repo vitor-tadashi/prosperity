@@ -14,23 +14,21 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbAvaliadorVaga")
-@NamedQueries({ 
-@NamedQuery(name = "obterAvaliadores", query = "SELECT u FROM AvaliadorVagaEntity u "),
-@NamedQuery(name = "obterAvaliadoresDaVaga", query = "SELECT u FROM AvaliadorVagaEntity u WHERE u.vaga.id = ?1"),
-@NamedQuery(name = "queryAvaliador", query = "select v.nome from AvaliadorVagaEntity u LEFT OUTER JOIN u.usuario v LEFT OUTER JOIN u.vaga x WHERE u.vaga.id = ?1")
-})
+@NamedQueries({ @NamedQuery(name = "obterAvaliadores", query = "SELECT u FROM AvaliadorVagaEntity u "),
+		@NamedQuery(name = "obterAvaliadoresDaVaga", query = "SELECT u FROM AvaliadorVagaEntity u WHERE u.vaga.id = ?1"),
+		@NamedQuery(name = "queryAvaliador", query = "select v.nome from AvaliadorVagaEntity u LEFT OUTER JOIN u.usuario v LEFT OUTER JOIN u.vaga x WHERE u.vaga.id = ?1") })
 public class AvaliadorVagaEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idAvaliadorVaga", unique = true, nullable = false)
 	private Integer id;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idVaga")
 	private VagaEntity vaga;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
 

@@ -48,5 +48,4 @@ public class DataEntrevistaConverter implements Converter<DataEntrevistaEntity, 
 
 		return bean;
 	}
-
 }
