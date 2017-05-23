@@ -431,18 +431,20 @@ public class CandidatoBusiness {
 		StatusCandidatoEntity statusCandidatoEntity = null;
 		List<StatusFuturoEntity> statusFuturoEntity = null;
 		List<AvaliadorCandidatoEntity> avaliadorCandidatoEntity = null;
+		List<StatusCandidatoEntity> listaStatusCandidato = null;
+		listaStatusCandidato = statusCandidatoDAO.findByNamedQuery("obterStatusCandidato",
+				situacaoCandidato.getIdCandidato());
 		List<StatusDisponivelEntity> listaStatusDisponivelEntity = statusDisponivelDAO.findAll();
 
 		if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANDIDATURA.getValue()
 				|| situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANCELADO.getValue()
 				|| situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.SEMVAGA.getValue()) {
-			statusCandidatoEntity = statusAlteracao(situacaoCandidato);
-			statusCandidatoDAO.insert(statusCandidatoEntity);
+			if (listaStatusCandidato.get(0).getStatus().getId() != situacaoCandidato.getStatus().getValue()) {
+				statusCandidatoEntity = statusAlteracao(situacaoCandidato);
+				statusCandidatoDAO.insert(statusCandidatoEntity);
+			}
 		} else {
 			if (listaStatusDisponivelEntity != null) {
-				List<StatusCandidatoEntity> listaStatusCandidato = null;
-				listaStatusCandidato = statusCandidatoDAO.findByNamedQuery("obterStatusCandidato",
-						situacaoCandidato.getIdCandidato());
 				for (StatusDisponivelEntity statusDisponivelEntity : listaStatusDisponivelEntity) {
 					if (statusDisponivelEntity.getStatus().getId() == listaStatusCandidato.get(0).getStatus().getId()) {
 						if (situacaoCandidato.getStatus().getValue() == statusDisponivelEntity
