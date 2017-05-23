@@ -677,10 +677,10 @@ public class CandidatoBusiness {
 			for (AvaliadorCandidatoBean a : avaliadores) {
 				if (a.getUsuario() != null) {
 					recipients.add(a.getUsuario().getEmail());
-					nomes.add(a.getUsuario().getNome());
+					nomes.add(a.getUsuario().getFuncionario().getNome());
 				}
 			}
-		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.PROPOSTACANDIDATO.getValue()
+		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.GERARPROPOSTA.getValue()
 				|| situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CONTRATADO.getValue()) {
 			for (UsuarioBean u : usuarios) {
 				switch (u.getPerfil().getNome()) {

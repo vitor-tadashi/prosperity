@@ -552,13 +552,13 @@
     			
     			var msg = "";
     			
-    			if(dado == '1') {
+    			if(dado == '27') {
     				$('#aprova-modal').modal('hide');
         			msg = 'Vaga divulgada com sucesso!';
     			}else if(dado == '3'){
         			$('#cancela-modal').modal('hide');
         			msg = 'Vaga cancelada com sucesso!';
-    			}else if(dado == '27'){
+    			}else if(dado == '1'){
         			$('#aprova-modal').modal('hide');
         			msg = 'Vaga aprovada com sucesso!';
     			}else if (dado == '18'){
@@ -642,7 +642,7 @@
 	    return dia+"/"+mes+"/"+ano;
 	}
 	
-	// função para o metodo status ativo
+	/* // função para o metodo status ativo
 	$(function() {
 		
     	var id = $("#idPerfil").val();
@@ -678,7 +678,7 @@
     			}
     		}
     	});
-	});
+	}); */
 	
 	</script>
 	</layout:put>
