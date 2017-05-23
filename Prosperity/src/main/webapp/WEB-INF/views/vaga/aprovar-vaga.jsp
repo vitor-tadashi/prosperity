@@ -543,7 +543,6 @@
 		
 	// função para a alteração de status de acordo com os botões de ação.
 	function status(){ // Fazer aqui as MENSAGENSW
-		debugger;
 		var statusAnterior = $('#idStatus').val();
 		
     	$.ajax({
@@ -556,7 +555,7 @@
     			var msg = "";
     			if(statusAnterior=='27' && dado=='27') {
     				$('#aprova-modal').modal('hide');
-        			msg = 'Necessário setar avaliadores da vaga!';
+        			msg = 'Necessário setar avaliadores ou marketing social da vaga!';
     			}
     			else if(dado == '27') {
     				$('#aprova-modal').modal('hide');
