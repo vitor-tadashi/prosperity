@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @XmlRootElement(name = "StatusCandidatoBean")
-public class StatusCandidatoBean {
+public class StatusCandidatoBean implements Comparable<StatusCandidatoBean> {
 
 	private Integer id;
 	private Date dataAlteracao;
@@ -20,6 +20,7 @@ public class StatusCandidatoBean {
 	private String mensagem;
 	private CancelamentoBean cancelamento;
 	private String dsCancelamento;
+	private String nomeVaga;
 
 	public StatusCandidatoBean() {
 	}
@@ -104,5 +105,20 @@ public class StatusCandidatoBean {
 
 	public void setDsCancelamento(String dsCancelamento) {
 		this.dsCancelamento = dsCancelamento;
+	}
+
+	public String getNomeVaga() {
+		return nomeVaga;
+	}
+
+	public void setNomeVaga(String nomeVaga) {
+		this.nomeVaga = nomeVaga;
+	}
+
+	@Override
+	public int compareTo(StatusCandidatoBean o) {
+		if (this.getId() > o.getId()) return -1;
+		if (this.getId() < o.getId()) return 1;
+		return 0;
 	}
 }
