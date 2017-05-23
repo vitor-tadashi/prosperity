@@ -23,7 +23,6 @@ public class StatusVagaConverter implements Converter<StatusVagaEntity, StatusVa
 		entity.setDataAlteracao(bean.getDataAlteracao());
 		entity.setStatus(statusConverter.convertBeanToEntity(bean.getStatus()));
 		entity.setSituacao(bean.getSituacao());
-		// entity.setVaga(bean.getVagaBean());
 
 		return entity;
 	}
@@ -39,8 +38,7 @@ public class StatusVagaConverter implements Converter<StatusVagaEntity, StatusVa
 		bean.setDataAlteracao(entity.getDataAlteracao());
 		bean.setStatus(statusConverter.convertEntityToBean(entity.getStatus()));
 		bean.setSituacao(entity.getSituacao());
-		// bean.setVagaBean(entity.getVaga());
+
 		return bean;
 	}
-
 }

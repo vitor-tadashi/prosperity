@@ -92,5 +92,4 @@ public class DataEntrevistaEntity {
 	public void setFlSituacao(Boolean flSituacao) {
 		this.flSituacao = flSituacao;
 	}
-
 }

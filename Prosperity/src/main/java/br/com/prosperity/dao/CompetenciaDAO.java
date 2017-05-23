@@ -6,5 +6,4 @@ import br.com.prosperity.entity.CompetenciaEntity;
 
 @Repository
 public class CompetenciaDAO extends GenericDAOImpl<CompetenciaEntity, Integer> {
-
 }

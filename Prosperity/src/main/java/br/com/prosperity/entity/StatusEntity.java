@@ -27,7 +27,6 @@ public class StatusEntity {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idStatus", unique = true, nullable = false)
 	private Integer id;
-	/* fim */
 
 	@Column(name = "nmStatus")
 	private String nome;

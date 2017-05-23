@@ -6,5 +6,4 @@ import br.com.prosperity.entity.TipoCursoEntity;
 
 @Repository
 public class TipoCursoDAO extends GenericDAOImpl<TipoCursoEntity, Integer> {
-
 }

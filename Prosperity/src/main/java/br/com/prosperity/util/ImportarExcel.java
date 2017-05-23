@@ -29,7 +29,7 @@ public class ImportarExcel {
 			XSSFWorkbook workbook = new XSSFWorkbook(file);
 
 			XSSFSheet sheet = workbook.getSheetAt(0);
-			
+
 			CellReference cellReference = new CellReference("B3");
 			Row row = sheet.getRow(cellReference.getRow());
 			Cell cell = row.getCell(cellReference.getCol());
@@ -172,14 +172,14 @@ public class ImportarExcel {
 
 			int aux = 22;
 			boolean continuar = false;
-			
+
 			while (!continuar) {
 				cellReference = new CellReference("A" + aux);
 				row = sheet.getRow(cellReference.getRow());
-				//cell = row.getCell(cellReference.getCol());
+				// cell = row.getCell(cellReference.getCol());
 				if (row != null) {
 					ComparativoPropostaBean comparativoPropostaBean = new ComparativoPropostaBean();
-					
+
 					cellReference = new CellReference("A" + aux);
 					row = sheet.getRow(cellReference.getRow());
 					cell = row.getCell(cellReference.getCol());
@@ -203,12 +203,12 @@ public class ImportarExcel {
 					cellReference = new CellReference("E" + aux);
 					row = sheet.getRow(cellReference.getRow());
 					cell = row.getCell(cellReference.getCol());
-					
-					//formatar data
+
+					// formatar data
 					Date dataNaoFormatada = cell.getDateCellValue();
 					DateFormat formatar = new SimpleDateFormat("dd/MM/yyyy");
 					String dataFormatada = formatar.format(dataNaoFormatada);
-					
+
 					comparativoPropostaBean.setDtAdmissao(formatar.parse(dataFormatada));
 					System.out.println(comparativoPropostaBean.getDtAdmissao().toString());
 
@@ -251,7 +251,7 @@ public class ImportarExcel {
 					row = sheet.getRow(cellReference.getRow());
 					cell = row.getCell(cellReference.getCol());
 					comparativoPropostaBean.setVlrTaxa(cell.getNumericCellValue());
-					
+
 					comparativosPropostaBean.add(comparativoPropostaBean);
 					aux++;
 				} else {

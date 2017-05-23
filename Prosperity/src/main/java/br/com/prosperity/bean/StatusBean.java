@@ -52,5 +52,4 @@ public class StatusBean {
 	public void setStatusDisponiveis(List<StatusDisponivelBean> statusDisponiveis) {
 		this.statusDisponiveis = statusDisponiveis;
 	}
-
 }

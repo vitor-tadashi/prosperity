@@ -16,7 +16,7 @@ public class ProvaBusiness {
 
 	@Autowired
 	private ProvaDAO provaDAO;
-	
+
 	@Autowired
 	private ProvaConverter provaConverter;
 
@@ -26,6 +26,5 @@ public class ProvaBusiness {
 		List<ProvaBean> beans = provaConverter.convertEntityToBean(entities);
 
 		return beans;
-
 	}
 }

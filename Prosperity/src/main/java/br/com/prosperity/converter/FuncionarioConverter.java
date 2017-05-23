@@ -14,6 +14,7 @@ public class FuncionarioConverter implements Converter<FuncionarioEntity, Funcio
 			return null;
 		}
 		FuncionarioEntity entity = new FuncionarioEntity();
+
 		entity.setId(bean.getId());
 		entity.setNome(bean.getNome());
 

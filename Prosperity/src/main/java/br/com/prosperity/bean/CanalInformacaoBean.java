@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class CanalInformacaoBean {
 	private String nome;
-
 	private Integer id;
 
 	public String getNome() {
@@ -23,5 +22,4 @@ public class CanalInformacaoBean {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
 }

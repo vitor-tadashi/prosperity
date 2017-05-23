@@ -12,10 +12,9 @@ public class ComparativoPropostaBean {
 	private String nmCargo;
 	private String nmSenioridade;
 	private String dsConhecimento;
-	
+
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dtAdmissao;
-	
 	private Double vlrSalario;
 	private Double vlrVr;
 	private Double vlrVa;
@@ -145,5 +144,4 @@ public class ComparativoPropostaBean {
 	public void setDtAdmissao(Date dtAdmissao) {
 		this.dtAdmissao = dtAdmissao;
 	}
-
 }

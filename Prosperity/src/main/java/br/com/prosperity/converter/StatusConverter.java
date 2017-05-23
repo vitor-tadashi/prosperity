@@ -43,8 +43,6 @@ public class StatusConverter implements Converter<StatusEntity, StatusBean> {
 		bean.setCss(entity.getTipoCss());
 		bean.setTipo(tipoStatusConverter.convertEntityToBean(entity.getTipoStatus()));
 		bean.setStatusDisponiveis(statusDisponiveisConverter.convertEntityToBean(entity.getStatusDisponiveis()));
-		//bean.setStatusCandidato(statusCandidatoConverter.convertEntityToBean(entity.getStatusCandidatoEntity()));
-		// bean.setStatusCandidato(statusCandidatoConverter.convertEntityToBean(entity.getStatusCandidatoEntity()));
 
 		return bean;
 	}

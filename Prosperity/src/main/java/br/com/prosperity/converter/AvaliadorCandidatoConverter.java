@@ -49,5 +49,4 @@ public class AvaliadorCandidatoConverter implements Converter<AvaliadorCandidato
 
 		return bean;
 	}
-
 }

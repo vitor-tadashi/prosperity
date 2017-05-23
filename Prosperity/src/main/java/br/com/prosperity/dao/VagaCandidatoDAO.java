@@ -12,13 +12,12 @@ public class VagaCandidatoDAO extends GenericDAOImpl<VagaCandidatoEntity, Intege
 		try {
 			javax.persistence.Query query = entityManager.createNamedQuery(name);
 
-			result = (Long)query.getSingleResult();
+			result = (Long) query.getSingleResult();
 
 		} catch (Exception e) {
 
 		}
 
 		return result;
-	} 
-
+	}
 }

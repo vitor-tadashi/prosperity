@@ -29,7 +29,6 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 
 	@Override
 	public VagaEntity convertBeanToEntity(VagaBean bean) {
-		
 		if (bean == null) {
 			return null;
 		}
@@ -66,12 +65,10 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 		entity.setMarketingSocial(bean.getMarketingSocial());
 
 		return entity;
-
 	}
 
 	@Override
 	public VagaBean convertEntityToBean(VagaEntity entity) {
-		
 		if (entity == null) {
 			return null;
 		}
@@ -107,8 +104,7 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 		bean.setTelResponsavel(entity.getTelResponsavel());
 		bean.setVagaCandidatoBean(vagaCandidatoConverter.convertEntityToBean(entity.getVagaCandidatoEntity()));
 		bean.setMarketingSocial(entity.getMarketingSocial());
-		
+
 		return bean;
 	}
-
 }

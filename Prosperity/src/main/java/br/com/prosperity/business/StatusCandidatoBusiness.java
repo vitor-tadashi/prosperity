@@ -12,33 +12,26 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
-
 @Component
 public class StatusCandidatoBusiness {
 
 	@Autowired
 	private static StatusCandidatoDAO statusCandidatoDAO;
-	
+
 	@Autowired
 	private static StatusCandidatoConverter statusCandidatoConverter;
-	
+
 	@Transactional
 	public static List<StatusCandidatoBean> obterTodos() {
 		List<StatusCandidatoEntity> statusCandidatoEntity = statusCandidatoDAO.findAll();
-		List<StatusCandidatoBean> statusCandidatoBean = statusCandidatoConverter.convertEntityToBean(statusCandidatoEntity);
+		List<StatusCandidatoBean> statusCandidatoBean = statusCandidatoConverter
+				.convertEntityToBean(statusCandidatoEntity);
 		return statusCandidatoBean;
 	}
-	
-	@Transactional(readOnly=true)
+
+	@Transactional(readOnly = true)
 	public StatusCandidatoEntity obterPorId(Integer id) {
 		StatusCandidatoEntity entity = statusCandidatoDAO.findById(id);
 		return entity;
 	}
-	
-
-
-	
-	
-	
 }
