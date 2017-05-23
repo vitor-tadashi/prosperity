@@ -23,7 +23,6 @@ import br.com.prosperity.bean.SituacaoVagaBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.converter.AvaliadorVagaConverter;
-import br.com.prosperity.converter.UsuarioConverter;
 import br.com.prosperity.converter.VagaConverter;
 import br.com.prosperity.dao.AvaliadorCandidatoDAO;
 import br.com.prosperity.dao.AvaliadorVagaDAO;
@@ -50,9 +49,6 @@ public class VagaBusiness {
 
 	@Autowired
 	private VagaConverter vagaConverter;
-
-	@Autowired
-	private UsuarioConverter usuarioConverter;
 
 	@Autowired
 	private VagaCandidatoDAO vagaCandidatoDAO;

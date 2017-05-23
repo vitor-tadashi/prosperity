@@ -314,16 +314,24 @@ public class CandidatoBusiness {
 		Date dateNow = new Date();
 		candidatoEntity.setDataAbertura(dateNow);
 
-		definirFormacao(candidatoBean, candidatoEntity);
-
-		VagaEntity vagaAtual = definirVagas(candidatoBean, candidatoEntity);
-
-		tratarInformacoes(candidatoEntity);
-
 		situacaoCandidato.setStatus(StatusCandidatoEnum.CANCELADO);
+		situacaoCandidato.setIdCandidato(candidatoEntity.getId());
+		alterarStatus(situacaoCandidato);
+		
+		// Verificar se o rapaz já se cadastrou pelo CPF:
+		if (candidatoDAO.findByNamedQuery("obterPorCPF", candidatoEntity.getCpf()) == null) {
 
-		candidatoDAO.insert(candidatoEntity);
+			definirFormacao(candidatoBean, candidatoEntity);
 
+			VagaEntity vagaAtual = definirVagas(candidatoBean, candidatoEntity);
+
+			tratarInformacoes(candidatoEntity);
+
+			candidatoDAO.insert(candidatoEntity);
+		} else {
+			// Se sim, update nele:
+			candidatoDAO.update(candidatoEntity);
+		}
 	}
 
 	private void tratarInformacoes(CandidatoEntity candidatoEntity) {
@@ -352,13 +360,16 @@ public class CandidatoBusiness {
 			if (candidatoBean.getVagaCandidato().getCanalInformacao().getId() != null) {
 				novoVagaCandidato.setCanalInformacao(
 						canalInformacaoDAO.findById(candidatoBean.getVagaCandidato().getCanalInformacao().getId()));
-				if (candidatoBean.getVagaCandidato().getFuncionarioBean().getId() != null
-						&& candidatoBean.getVagaCandidato().getFuncionarioBean().getId() != 0) {
-					novoVagaCandidato.setFuncionarioEntity(
-							funcionarioDAO.findById(candidatoBean.getVagaCandidato().getFuncionarioBean().getId()));
-				}
-				if (candidatoBean.getVagaCandidato().getOutros() != null) {
-					novoVagaCandidato.setOutros(candidatoBean.getVagaCandidato().getOutros());
+
+				if (candidatoBean.getVagaCandidato().getFuncionarioBean() != null) {
+					if (candidatoBean.getVagaCandidato().getFuncionarioBean().getId() != null
+							&& candidatoBean.getVagaCandidato().getFuncionarioBean().getId() != 0) {
+						novoVagaCandidato.setFuncionarioEntity(
+								funcionarioDAO.findById(candidatoBean.getVagaCandidato().getFuncionarioBean().getId()));
+					}
+					if (candidatoBean.getVagaCandidato().getOutros() != null) {
+						novoVagaCandidato.setOutros(candidatoBean.getVagaCandidato().getOutros());
+					}
 				}
 			}
 			novoVagaCandidato.setCandidato(candidatoEntity);
@@ -413,7 +424,8 @@ public class CandidatoBusiness {
 						situacaoCandidato.getIdCandidato());
 				for (StatusDisponivelEntity statusDisponivelEntity : listaStatusDisponivelEntity) {
 					if (statusDisponivelEntity.getStatus().getId() == listaStatusCandidato.get(0).getStatus().getId()) {
-						if (situacaoCandidato.getStatus().getValue() == statusDisponivelEntity.getIdStatusDisponivel()) {
+						if (situacaoCandidato.getStatus().getValue() == statusDisponivelEntity
+								.getIdStatusDisponivel()) {
 							statusCandidatoEntity = statusAlteracao(situacaoCandidato);
 							statusCandidatoDAO.insert(statusCandidatoEntity);
 							candidatoBean.setId(situacaoCandidato.getIdCandidato());
@@ -665,6 +677,9 @@ public class CandidatoBusiness {
 	@Transactional
 	public void buscarUsuariosParaEmail(SituacaoCandidatoBean situacaoCandidatoBean) {
 
+		if(situacaoCandidatoBean==null || situacaoCandidatoBean.getIdCandidato()==null)
+			return;
+		
 		candidatoBean = candidatoConverter
 				.convertEntityToBean(candidatoDAO.findById(situacaoCandidatoBean.getIdCandidato()));
 		List<UsuarioBean> usuarios = buscarUsuariosSemRepetir();
@@ -679,7 +694,7 @@ public class CandidatoBusiness {
 					nomes.add(a.getUsuario().getNome());
 				}
 			}
-		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.PROPOSTACANDIDATO.getValue() 
+		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.PROPOSTACANDIDATO.getValue()
 				|| situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CONTRATADO.getValue()) {
 			for (UsuarioBean u : usuarios) {
 				switch (u.getPerfil().getNome()) {
@@ -692,7 +707,7 @@ public class CandidatoBusiness {
 				}
 			}
 		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOAPROVADO.getValue()
-				 || situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.PROPOSTARECUSADA.getValue()){
+				|| situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.PROPOSTARECUSADA.getValue()) {
 			for (UsuarioBean u : usuarios) {
 				switch (u.getPerfil().getNome()) {
 				case "Analista de RH":
@@ -704,27 +719,27 @@ public class CandidatoBusiness {
 				}
 			}
 		}
-		
+
 		GeradorEmail email = new GeradorEmail();
-		for (int i = 0, j = 0; i< recipients.size() && j<nomes.size(); i++, j++) {
+		for (int i = 0, j = 0; i < recipients.size() && j < nomes.size(); i++, j++) {
 			email.enviarEmail(candidatoBean, recipients.get(i), nomes.get(j));
 		}
 	}
 
 	private List<AvaliadorCandidatoBean> buscarAvaliadoresSemRepetir() {
-		
+
 		List<AvaliadorCandidatoBean> avaliadores = avaliadorCandidatoConverter
-		.convertEntityToBean(avaliadorCandidatoDAO.findByNamedQuery("obterProposta", candidatoBean.getId()));
-		
+				.convertEntityToBean(avaliadorCandidatoDAO.findByNamedQuery("obterProposta", candidatoBean.getId()));
+
 		List<AvaliadorCandidatoBean> avaliadoresNaoRepetidos = new ArrayList<>();
 		Set<Integer> idAvaliadores = new HashSet<Integer>();
-		
-		for(AvaliadorCandidatoBean u : avaliadores) {
-			if(idAvaliadores.add( u.getId() )) {
+
+		for (AvaliadorCandidatoBean u : avaliadores) {
+			if (idAvaliadores.add(u.getId())) {
 				avaliadoresNaoRepetidos.add(u);
 			}
 		}
-		
+
 		return avaliadoresNaoRepetidos;
 	}
 
@@ -732,16 +747,16 @@ public class CandidatoBusiness {
 		List<UsuarioBean> usuarios = usuarioBusiness.findAll();
 		List<UsuarioBean> usuariosNaoRepetidos = new ArrayList<>();
 		Set<Integer> idUsuarios = new HashSet<Integer>();
-		
-		for(UsuarioBean u : usuarios) {
-			if(idUsuarios.add( u.getId() )) {
+
+		for (UsuarioBean u : usuarios) {
+			if (idUsuarios.add(u.getId())) {
 				usuariosNaoRepetidos.add(u);
 			}
 		}
-		
+
 		return usuariosNaoRepetidos;
 	}
-	
+
 	public boolean podeEditarVaga(StatusCandidatoBean ultimoStatus) {
 		if (ultimoStatus.getStatus().getId() != 5 && ultimoStatus.getStatus().getId() != 17
 				&& ultimoStatus.getStatus().getId() != 29) {
