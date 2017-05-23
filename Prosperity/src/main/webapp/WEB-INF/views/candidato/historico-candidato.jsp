@@ -71,7 +71,7 @@
 										</div>
 										<div class="row">
 											<div class="form-group col-md-6">
-												<p class="" id="nome"><strong>Pretensão salarial: </strong>${candidato.valorPretensao }</p>
+												<p class="" id="nome"><strong>Pretensão salarial: </strong>R$ ${candidato.valorPretensao }</p>
 											</div>
 											<div class="form-group col-md-6">
 												<p class="" id="nome"><strong>Currículo: </strong>&nbsp;&nbsp;<a href="/candidato/file/${candidato.id}" target="_blank" data-toggle="tooltip" title="Baixar currículo" class="fa fa-download fa-lg"></a></p>

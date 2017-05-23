@@ -306,22 +306,24 @@ public class CandidatoBusiness {
 				candidatoBean.getVagaCandidato().setVaga(beans.getUltimaVaga());
 			}
 			candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoEntity, candidatoBean);
-			candidatoEntity.setDataAbertura(new Date());
 			tratarInformacoes(candidatoEntity);
 			definirFormacao(candidatoBean, candidatoEntity);
 
 			candidatoDAO.update(candidatoEntity);
 
-			if (!beans.getUltimaVaga().getId().equals(candidatoBean.getVagaCandidato().getVaga().getId())) {
-				desativarDataEntrevista(candidatoBean);
-
-				VagaEntity vagaAtual = definirVagas(candidatoBean, candidatoEntity);
-
-				inserirAvaliadores(candidatoEntity, vagaAtual.getId());
-
-				situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
-				situacaoCandidato.setIdCandidato(candidatoEntity.getId());
-				alterarStatus(situacaoCandidato);
+			if(candidatoBean.getVagaCandidato().getVaga().getId() != 0){
+				if (!beans.getUltimaVaga().getId().equals(candidatoBean.getVagaCandidato().getVaga().getId())) {
+					candidatoEntity.setDataAbertura(new Date());
+					desativarDataEntrevista(candidatoBean);
+	
+					VagaEntity vagaAtual = definirVagas(candidatoBean, candidatoEntity);
+	
+					inserirAvaliadores(candidatoEntity, vagaAtual.getId());
+	
+					situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
+					situacaoCandidato.setIdCandidato(candidatoEntity.getId());
+					alterarStatus(situacaoCandidato);
+				}
 			}
 
 		}
@@ -751,9 +753,11 @@ public class CandidatoBusiness {
 	}
 
 	public boolean podeEditarVaga(StatusCandidatoBean ultimoStatus) {
-		if (ultimoStatus.getStatus().getId() != 5 && ultimoStatus.getStatus().getId() != 17
-				&& ultimoStatus.getStatus().getId() != 29) {
-			return false;
+		if(ultimoStatus.getStatus().getId() != null){
+			if (ultimoStatus.getStatus().getId() != 5 && ultimoStatus.getStatus().getId() != 17
+					&& ultimoStatus.getStatus().getId() != 29) {
+				return false;
+			}
 		}
 		return true;
 	}
