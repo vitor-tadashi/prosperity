@@ -13,6 +13,7 @@ import javax.mail.internet.MimeMessage;
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.entity.StatusVagaEntity;
 import br.com.prosperity.entity.VagaEntity;
+import br.com.prosperity.enumarator.StatusVagaEnum;
 
 //clase que retorna uma autenticacao para ser enviada e verificada pelo servidor smtp
 public class GeradorEmail {
@@ -143,7 +144,7 @@ public class GeradorEmail {
 		String mensagemtexto = mensagem.gerador("o candidato", candidato.getNome(),
 				candidato.getUltimoStatus().getStatus().getNome().toString(), nome);
 
-		// Não fazer buscas dentro da thread!!!!!
+		// Não fazer buscas dentro da thread.
 		new Thread() {
 			public void run() {
 				sendMail(de, para, "Prosperity (Não responda)", mensagemtexto);
@@ -154,17 +155,24 @@ public class GeradorEmail {
 	// Para alterações em status de vagas:
 	public void enviarEmail(VagaEntity vaga, String para, String nome) {
 
+		String statusTexto = "";
 		Mensagem mensagem = new Mensagem();
 
 		StatusVagaEntity status = new StatusVagaEntity();
 
-		for (StatusVagaEntity statusVaga : vaga.getStatusVagaEntity()) {
-			status = statusVaga;
+		if (vaga.getStatusVagaEntity() == null) {
+			
+			statusTexto = "Pendente";
+		} else {
+			for (StatusVagaEntity statusVaga : vaga.getStatusVagaEntity()) {
+				status = statusVaga;
+			}
+			statusTexto = status.getStatus().getNome();
 		}
 
-		String mensagemtexto = mensagem.gerador("a vaga", vaga.getNomeVaga(), status.getStatus().getNome(), nome);
+		String mensagemtexto = mensagem.gerador("a vaga", vaga.getNomeVaga(), statusTexto, nome);
 
-		// Não fazer buscas dentro da thread!!!!!
+		// Não fazer buscas dentro da thread.
 		new Thread() {
 			public void run() {
 				sendMail(de, para, "Prosperity (Não responda)", mensagemtexto);
