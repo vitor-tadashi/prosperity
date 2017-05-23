@@ -223,9 +223,9 @@ public class VagaBusiness {
 			vagaDAO.update(vagaEntity);
 		}
 
-		if(usuarioBean.size() > 0 && usuarioBean.get(0).getId()!= null)
-
+		if(usuarioBean.size() > 0 && usuarioBean.get(0).getId()!= null){
 			inserirAvaliadores(vagaEntity, usuarioBean);
+		}
 	}
 
 	@Transactional
@@ -423,7 +423,19 @@ public class VagaBusiness {
 						break;
 					}
 				}
+			} else if(situacaoVagaBean.getStatus().getValue() == StatusVagaEnum.PENDENTE.getValue()) {
+				for (UsuarioBean u : usuarios) {
+					switch (u.getPerfil().getNome()) {
+					case "Diretor de operação":
+						recipients.add(u.getEmail());
+						nomes.add(u.getFuncionario().getNome());
+						break;
+					default:
+						break;
+					}
+				}
 			}
+			
 			GeradorEmail email = new GeradorEmail();
 			for (int i = 0, j = 0; i < recipients.size() && j < nomes.size(); i++, j++) {
 				email.enviarEmail(vaga, recipients.get(i), nomes.get(j));

@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -53,16 +54,12 @@ public class StatusCandidatoEntity {
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
 
-	@Column(name = "proposta")
-	private String proposta;
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idCancelamento")
+	private CancelamentoEntity cancelamento;
 
-	public String getProposta() {
-		return proposta;
-	}
-
-	public void setProposta(String proposta) {
-		this.proposta = proposta;
-	}
+	@Column(name = "dsCancelamento")
+	private String dsCancelamento;
 
 	public Boolean getFlSituacao() {
 		return flSituacao;
@@ -118,5 +115,21 @@ public class StatusCandidatoEntity {
 
 	public void setCandidato(CandidatoEntity candidato) {
 		this.candidato = candidato;
+	}
+
+	public CancelamentoEntity getCancelamento() {
+		return cancelamento;
+	}
+
+	public void setCancelamento(CancelamentoEntity cancelamento) {
+		this.cancelamento = cancelamento;
+	}
+
+	public String getDsCancelamento() {
+		return dsCancelamento;
+	}
+
+	public void setDsCancelamento(String dsCancelamento) {
+		this.dsCancelamento = dsCancelamento;
 	}
 }

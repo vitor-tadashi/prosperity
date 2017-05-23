@@ -543,6 +543,9 @@
 		
 	// função para a alteração de status de acordo com os botões de ação.
 	function status(){ // Fazer aqui as MENSAGENSW
+		debugger;
+		var statusAnterior = $('#idStatus').val();
+		
     	$.ajax({
     		url: "status",
     		type: "POST",
@@ -551,16 +554,20 @@
     		}).done(function(dado) {
     			
     			var msg = "";
-    			
-    			if(dado == '27') {
-    				$('#divulga-modal').modal('hide');
-        			msg = 'Vaga divulgada com sucesso!';
+
+    			if(statusAnterior=='27' && dado=='27') {
+    				$('#aprova-modal').modal('hide');
+        			msg = 'Necessário setar avaliadores da vaga!';
+    			}
+    			else if(dado == '27') {
+    				$('#aprova-modal').modal('hide');
+        			msg = 'Vaga aprovada com sucesso!';
     			}else if(dado == '3'){
         			$('#cancela-modal').modal('hide');
         			msg = 'Vaga cancelada com sucesso!';
     			}else if(dado == '1'){
         			$('#aprova-modal').modal('hide');
-        			msg = 'Vaga aprovada com sucesso!';
+        			msg = 'Vaga divulgada com sucesso!';
     			}else if (dado == '18'){
     				$('#reprova-modal').modal('hide');
     				msg = 'Vaga reprovada com sucesso!';
@@ -571,9 +578,9 @@
     			
     			localStorage.setItem("mensagem", msg);
     			localStorage.setItem("isSuccess", true);
-    			location.reload();
+    			location.reload()
     			
-        	}).fail(function(jqXHR, textStatus) {
+    		}).fail(function(jqXHR, textStatus) {
         		
         		var msg = "";
         		
