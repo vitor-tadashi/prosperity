@@ -223,9 +223,9 @@ public class VagaBusiness {
 			vagaDAO.update(vagaEntity);
 		}
 
-		if(usuarioBean.size() > 0 && usuarioBean.get(0).getId()!= null)
-
+		if(usuarioBean.size() > 0 && usuarioBean.get(0).getId()!= null){
 			inserirAvaliadores(vagaEntity, usuarioBean);
+		}
 	}
 
 	@Transactional
