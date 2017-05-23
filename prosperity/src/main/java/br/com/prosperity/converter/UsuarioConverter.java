@@ -21,6 +21,7 @@ public class UsuarioConverter implements Converter<UsuarioEntity, UsuarioBean> {
 			return null;
 		}
 		UsuarioEntity entity = new UsuarioEntity();
+
 		entity.setId(bean.getId());
 		entity.setNome(bean.getNome());
 		entity.setSenha(bean.getSenha());

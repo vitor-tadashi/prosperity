@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "tbCompetencia")
 public class CompetenciaEntity {
@@ -16,7 +15,6 @@ public class CompetenciaEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idCompetencia", unique = true, nullable = false)
 	private Integer id;
-	/* fim Id */
 
 	@Column(name = "nmCompetencia")
 	private String nome;
@@ -35,6 +33,4 @@ public class CompetenciaEntity {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-
 }

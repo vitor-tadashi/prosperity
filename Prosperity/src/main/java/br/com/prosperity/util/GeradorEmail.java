@@ -142,7 +142,7 @@ public class GeradorEmail {
 
 		String mensagemtexto = mensagem.gerador("o candidato", candidato.getNome(),
 				candidato.getUltimoStatus().getStatus().getNome().toString(), nome);
-		
+
 		// Não fazer buscas dentro da thread!!!!!
 		new Thread() {
 			public void run() {

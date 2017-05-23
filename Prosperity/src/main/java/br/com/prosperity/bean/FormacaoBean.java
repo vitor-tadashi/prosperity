@@ -13,6 +13,7 @@ public class FormacaoBean {
 	private Integer id;
 	private String nomeInstituicao;
 	private String nomeCurso;
+	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataConclusao;
 	private TipoCursoBean tipoCurso;
@@ -65,5 +66,4 @@ public class FormacaoBean {
 	public void setNomeCurso(String nomeCurso) {
 		this.nomeCurso = nomeCurso;
 	}
-
 }

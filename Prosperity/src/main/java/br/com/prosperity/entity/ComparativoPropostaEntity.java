@@ -14,6 +14,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "tbComparativoProposta")
 public class ComparativoPropostaEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idComparativoProposta", unique = true, nullable = false)
@@ -181,5 +182,4 @@ public class ComparativoPropostaEntity {
 	public void setFlSituacao(Boolean flSituacao) {
 		this.flSituacao = flSituacao;
 	}
-
 }

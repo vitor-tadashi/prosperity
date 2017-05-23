@@ -10,21 +10,20 @@ import org.springframework.stereotype.Component;
 @XmlRootElement(name = "StatusVagaBean")
 public class StatusVagaBean {
 
-	public StatusVagaBean(String mensagem) {
-		status = new StatusBean();
-		status.setNome(mensagem);
-	}
-
-	public StatusVagaBean() {
-
-	}
-
 	private Integer id;
 	private StatusBean status;
 	private Date dataAlteracao;
 	private VagaBean vagaBean;
 	private UsuarioBean usuarioBean;
 	private boolean situacao;
+
+	public StatusVagaBean() {
+	}
+
+	public StatusVagaBean(String mensagem) {
+		status = new StatusBean();
+		status.setNome(mensagem);
+	}
 
 	public Integer getId() {
 		return id;
@@ -73,6 +72,4 @@ public class StatusVagaBean {
 	public void setSituacao(boolean situacao) {
 		this.situacao = situacao;
 	}
-	
-	
 }

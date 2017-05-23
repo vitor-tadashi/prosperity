@@ -10,6 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tbCanalInformacao")
 public class CanalInformacaoEntity {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idCanalInformacao", unique = true, nullable = false)
@@ -33,5 +34,4 @@ public class CanalInformacaoEntity {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 }

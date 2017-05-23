@@ -13,28 +13,23 @@ import br.com.prosperity.entity.StatusVagaEntity;
 
 @Component
 public class StatusVagaBusiness {
+	
 	@Autowired
 	private StatusVagaDAO statusVagaDAO;
-	
+
 	@Autowired
 	private StatusVagaConverter statusVagaConverter;
-	
+
 	@Transactional
 	public List<StatusVagaBean> obterTodos() {
 		List<StatusVagaEntity> statusVagaEntity = statusVagaDAO.findAll();
 		List<StatusVagaBean> statusVagaBean = statusVagaConverter.convertEntityToBean(statusVagaEntity);
 		return statusVagaBean;
 	}
-	
-	@Transactional(readOnly=true)
+
+	@Transactional(readOnly = true)
 	public StatusVagaEntity obterPorId(Integer id) {
 		StatusVagaEntity entity = statusVagaDAO.findById(id);
 		return entity;
 	}
-	
-
-
-	
-	
-	
 }

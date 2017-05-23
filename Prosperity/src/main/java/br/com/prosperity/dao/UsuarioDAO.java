@@ -14,5 +14,4 @@ public class UsuarioDAO extends GenericDAOImpl<UsuarioEntity, Integer> {
 	public boolean existeUsuario(Integer id, String nome) {
 		return !this.findByNamedQuery("existeUsuarioAlterar", id, nome).isEmpty();
 	}
-	
 }

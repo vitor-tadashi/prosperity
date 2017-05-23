@@ -14,6 +14,7 @@ import br.com.prosperity.entity.ProvaCandidatoEntity;
 
 @Component
 public class ProvaCandidatoBusiness {
+	
 	@Autowired
 	private ProvaCandidatoDAO provaCandidatoDAO;
 
@@ -31,16 +32,8 @@ public class ProvaCandidatoBusiness {
 	@Transactional
 	public List<ProvaCandidatoBean> obterProva(Integer id) {
 		List<ProvaCandidatoEntity> provasCandidatoEntity = provaCandidatoDAO.findByNamedQuery("queryProva", id);
-		// ProvaCandidatoEntity provaCandidatoEntity = new
-		// ProvaCandidatoEntity();
-
-		// provaCandidatoEntity.setProvas(provasCandidatoEntity.get(0).getProvas());
-		// provaCandidatoEntity.setDescricaoProva(provasCandidatoEntity.get(0).getDescricaoProva());
-		// ProvaCandidatoBean provaCandidatoBean =
-		// provaCandidatoConverter.convertEntityToBean(provaCandidatoEntity);
 		List<ProvaCandidatoBean> provasCandidatoBean = provaCandidatoConverter
 				.convertEntityToBean(provasCandidatoEntity);
-		// provasCandidatoBean.add(provaCandidatoBean);
 		return provasCandidatoBean;
 	}
 }

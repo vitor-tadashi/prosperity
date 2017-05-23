@@ -21,43 +21,21 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-/**
- * @author andre.posman
- *
- */
 @Entity
 @Table(name = "tbCandidato")
 @NamedQueries({
-
-		// @NamedQuery(name = "status", query = "SELECT u FROM CandidatoEntity u
-		// LEFT OUTER JOIN u.statusCandidatoEntity p left join p.status s WHERE
-		// u.nomecandidato like ?1 and s.id = ?2 and u.dataAbertura between ?3
-		// and ?4"),
 		@NamedQuery(name = "pesquisarNome", query = "SELECT u FROM CandidatoEntity u WHERE u.nome like ?1 AND u.valorPretensao BETWEEN ?2 AND ?3 AND u.dataAbertura BETWEEN ?4 AND ?5"),
 		@NamedQuery(name = "obterPorCPF", query = "SELECT u FROM CandidatoEntity u WHERE u.cpf LIKE ?1"),
 		@NamedQuery(name = "verificarCandidatura", query = "SELECT c FROM CandidatoEntity c JOIN c.statusCandidatos sc WHERE sc.status in(6,7,14)"
 				+ "AND sc.idStatusCandidato = (SELECT MAX(sc.idStatusCandidato) FROM CandidatoEntity c JOIN c.statusCandidatos sc)"),
 		@NamedQuery(name = "obterParaCombo", query = "SELECT v.id, v.nomeVaga FROM VagaEntity v"),
 		@NamedQuery(name = "obterPorDesc", query = "SELECT u FROM CandidatoEntity u ORDER BY u.id DESC"),
-
-		/*
-		 * SELECT * FROM tbCandidato c, tbAvaliadorCandidato ac INNER JOIN
-		 * tbStatusCandidato sc ON sc.idCandidato = ac.idCandidato WHERE
-		 * ac.idCandidato = c.idCandidato AND sc.idStatusCandidato = (SELECT
-		 * max(sc.idStatusCandidato) FROM tbCandidato c JOIN tbStatusCandidato
-		 * sc ON sc.idCandidato = c.idCandidato WHERE sc.idCandidato =
-		 * c.idCandidato AND sc.idStatus IN (6, 10, 9, 5, 11, 13)) AND
-		 * ac.idStatus is NULL OR ac.idStatus IN(9,10,11,12,13) AND ac.idUsuario
-		 * = 14
-		 */
-
 		@NamedQuery(name = "listarAprovacoes", query = "SELECT DISTINCT c FROM CandidatoEntity c "
 				+ "INNER JOIN c.statusCandidatos sc " + "INNER JOIN c.avaliadores ac "
 				+ "WHERE (sc.idStatusCandidato = (SELECT max(scc.idStatusCandidato) FROM StatusCandidatoEntity scc WHERE scc.candidato.id = c.id) "
 				+ "AND (sc.status.id IN (?1) AND ac.status IS NOT NULL AND sc.flSituacao = true) "
 				+ "OR (sc.status.id = ?2 AND ac.status IS NULL AND ac.usuario.id = ?3 AND sc.flSituacao = true)"
 				+ "OR (sc.status.id = ?4 AND ac.status IS NULL AND sc.flSituacao = true)) ORDER BY c.id DESC"),
-
 		@NamedQuery(name = "proposta", query = "SELECT c FROM CandidatoEntity c, AvaliadorCandidatoEntity ac INNER JOIN c.statusCandidatos sc "
 				+ "WHERE ac.candidato.id = c.id AND sc.idStatusCandidato = (SELECT max(sc.idStatusCandidato)"
 				+ "FROM CandidatoEntity c JOIN c.statusCandidatos sc WHERE sc.candidato.id = c.id AND sc.status.id IN (?1))"
@@ -114,8 +92,6 @@ public class CandidatoEntity {
 	@Column(name = "curriculoTexto")
 	private String curriculoTexto;
 
-	/* Mapeamento de Relacionamentos */
-
 	@OneToOne(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, orphanRemoval = true)
 	@JoinColumn(name = "idContato")
 	private ContatoEntity contato;
@@ -128,13 +104,11 @@ public class CandidatoEntity {
 	@JoinColumn(name = "idFormacao")
 	private FormacaoEntity formacao;
 
-	// TODO verificar relacionamento IGOR
 	@ManyToOne(cascade = { CascadeType.REFRESH }, fetch = FetchType.LAZY)
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "candidato")
-	// @JoinColumn(name = "idCandidato")
 	private List<StatusCandidatoEntity> statusCandidatos;
 
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
@@ -358,5 +332,4 @@ public class CandidatoEntity {
 	public void setPropostaEntity(List<PropostaEntity> propostaEntity) {
 		this.propostaEntity = propostaEntity;
 	}
-
 }

@@ -12,6 +12,7 @@ import javax.persistence.Table;
 @Table(name = "tbFuncionalidade")
 @NamedQuery(name = "obterPerfilFuncionalidade", query = "SELECT f FROM FuncionalidadeEntity f WHERE f.id IN (?1)")
 public class FuncionalidadeEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idFuncionalidade", unique = true, nullable = false)
@@ -19,7 +20,7 @@ public class FuncionalidadeEntity {
 
 	@Column(name = "nmFuncionalidade")
 	private String nome;
-	
+
 	@Column(name = "url")
 	private String url;
 
@@ -46,5 +47,4 @@ public class FuncionalidadeEntity {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	
 }

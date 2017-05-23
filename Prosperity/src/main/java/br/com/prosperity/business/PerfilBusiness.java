@@ -53,8 +53,9 @@ public class PerfilBusiness {
 			perfilDAO.update(perfilEntity);
 		}
 	}
+
 	@Transactional(readOnly = true)
-	private List<FuncionalidadeEntity> obterPerfilFuncionalidadeEntity(List<FuncionalidadeBean> lista){
+	private List<FuncionalidadeEntity> obterPerfilFuncionalidadeEntity(List<FuncionalidadeBean> lista) {
 		List<Integer> idFuncionalidades = new ArrayList<>();
 		for (FuncionalidadeBean f : lista) {
 			if (f.getId() != null) {
@@ -63,7 +64,7 @@ public class PerfilBusiness {
 		}
 		return funcionalidadeDAO.findByNamedQuery("obterPerfilFuncionalidade", idFuncionalidades);
 	}
-	
+
 	@Transactional(readOnly = true)
 	public List<PerfilBean> listar() {
 		List<PerfilEntity> perfisEntity = perfilDAO.findByNamedQuery("obterPerfis");
@@ -75,7 +76,6 @@ public class PerfilBusiness {
 	@Transactional(readOnly = true)
 	public List<FuncionalidadeBean> obterPerfilFuncionalidades(Integer id) {
 		PerfilEntity entity = perfilDAO.findById(id);
-
 		PerfilBean bean = perfilConverter.convertEntityToBean(entity);
 		List<FuncionalidadeBean> listaFunc = bean.getListaFuncionalidades();
 

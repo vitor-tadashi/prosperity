@@ -70,5 +70,4 @@ public class StatusDisponivelEntity {
 	public void setStatus(StatusEntity status) {
 		this.status = status;
 	}
-
 }

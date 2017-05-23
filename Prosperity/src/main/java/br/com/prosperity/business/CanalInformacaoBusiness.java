@@ -12,17 +12,18 @@ import br.com.prosperity.dao.CanalInformacaoDAO;
 
 @Component
 public class CanalInformacaoBusiness {
+	
 	@Autowired
 	private CanalInformacaoConverter canalInformacaoConverter;
+	
 	@Autowired
 	private CanalInformacaoDAO canalInformacaoDAO;
-	
-	@Transactional
-	public List<CanalInformacaoBean> obterTodos(){
 
-		List<CanalInformacaoBean> listaCanal = canalInformacaoConverter.convertEntityToBean(canalInformacaoDAO.findAll());
+	@Transactional
+	public List<CanalInformacaoBean> obterTodos() {
+		List<CanalInformacaoBean> listaCanal = canalInformacaoConverter
+				.convertEntityToBean(canalInformacaoDAO.findAll());
 
 		return listaCanal;
 	}
-	
 }

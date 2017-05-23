@@ -103,7 +103,7 @@
 															</div>
 
 															<div class="form-group col-md-1 col-xs-1">
-																<label style="margin-top: 7px">Às</label>
+																<label style="margin-top: 7px">às</label>
 															</div>
 
 															<div class="form-group col-md-2 col-xs-1">
@@ -560,7 +560,7 @@
         			msg = 'Vaga cancelada com sucesso!';
     			}else if(dado == '1'){
         			$('#aprova-modal').modal('hide');
-        			msg = 'Vaga ativa com sucesso!';
+        			msg = 'Vaga aprovada com sucesso!';
     			}else if (dado == '18'){
     				$('#reprova-modal').modal('hide');
     				msg = 'Vaga reprovada com sucesso!';
