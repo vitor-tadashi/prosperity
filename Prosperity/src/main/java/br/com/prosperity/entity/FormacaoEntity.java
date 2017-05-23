@@ -35,7 +35,7 @@ public class FormacaoEntity {
 	@JoinColumn(name = "idTipoCurso")
 	private TipoCursoEntity tipoCurso;
 
-	@OneToOne(cascade = CascadeType.REFRESH , fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@JoinColumn(name = "idSituacaoAtual")
 	private SituacaoAtualEntity situacaoAtual;
 
@@ -86,5 +86,4 @@ public class FormacaoEntity {
 	public void setNomeCurso(String nomeCurso) {
 		this.nomeCurso = nomeCurso;
 	}
-
 }

@@ -8,5 +8,4 @@ import br.com.prosperity.entity.StatusVagaEntity;
 
 @Repository
 public class StatusVagaDAO extends GenericDAOImpl<StatusVagaEntity, Serializable> {
-
 }

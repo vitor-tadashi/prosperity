@@ -9,25 +9,18 @@ import org.springframework.stereotype.Component;
 public class CargoSenioridadeBean {
 
 	private Integer id;
-	
 	private String dsPreFormacaoAcademica;
-	
 	private String dsPrePerfilComportamental;
-	
 	private String dsPrePerfilTecnico;
-	
+
 	@NumberFormat(pattern = "#,##0.00")
 	private BigDecimal valorMinSalario;
-	
+
 	@NumberFormat(pattern = "#,##0.00")
 	private BigDecimal valorMaxSalario;
-	
 	private CargoBean cargos;
-	
 	private SenioridadeBean senioridades;
 
-	
-	
 	public String getDsPreFormacaoAcademica() {
 		return dsPreFormacaoAcademica;
 	}
@@ -76,8 +69,6 @@ public class CargoSenioridadeBean {
 		return valorMaxSalario;
 	}
 
-
-
 	public void setValorMaxSalario(BigDecimal valorMaxSalario) {
 		this.valorMaxSalario = valorMaxSalario;
 	}
@@ -97,5 +88,4 @@ public class CargoSenioridadeBean {
 	public void setSenioridades(SenioridadeBean senioridades) {
 		this.senioridades = senioridades;
 	}
-
 }

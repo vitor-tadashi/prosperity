@@ -11,7 +11,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tbStatusFuturo")
 @NamedQuery(name = "obterStatusFuturos", query = "SELECT u FROM StatusFuturoEntity u WHERE u.idStatus = ?1")
-
 public class StatusFuturoEntity {
 
 	@Id

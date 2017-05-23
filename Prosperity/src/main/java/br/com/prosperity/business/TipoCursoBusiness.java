@@ -11,24 +11,19 @@ import br.com.prosperity.converter.TipoCursoConverter;
 
 import br.com.prosperity.dao.TipoCursoDAO;
 
-
 @Component
 public class TipoCursoBusiness {
+
 	@Autowired
 	private TipoCursoDAO tipoCursoDAO;
-	
+
 	@Autowired
 	private TipoCursoConverter tipoCursoConverter;
-	
+
 	@Transactional
-	public List<TipoCursoBean> obterTodos(){
-	
-		List<TipoCursoBean> tiposCurso = tipoCursoConverter.convertEntityToBean(tipoCursoDAO.findAll()) ;
-		
+	public List<TipoCursoBean> obterTodos() {
+		List<TipoCursoBean> tiposCurso = tipoCursoConverter.convertEntityToBean(tipoCursoDAO.findAll());
+
 		return tiposCurso;
-		
 	}
-
-	
-
 }

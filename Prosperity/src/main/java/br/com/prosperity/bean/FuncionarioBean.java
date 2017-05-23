@@ -53,5 +53,4 @@ public class FuncionarioBean {
 	public void setProjeto(List<ProjetoBean> projeto) {
 		this.projeto = projeto;
 	}
-
 }

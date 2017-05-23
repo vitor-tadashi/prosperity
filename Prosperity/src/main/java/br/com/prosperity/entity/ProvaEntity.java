@@ -34,5 +34,4 @@ public class ProvaEntity {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 }

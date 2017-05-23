@@ -6,5 +6,4 @@ import br.com.prosperity.entity.FuncionarioEntity;
 
 @Repository
 public class FuncionarioDAO extends GenericDAOImpl<FuncionarioEntity, Integer> {
-
 }

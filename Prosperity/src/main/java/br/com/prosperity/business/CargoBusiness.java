@@ -20,17 +20,16 @@ public class CargoBusiness {
 	@Autowired
 	private CargoConverter cargoConverter;
 
-	@Transactional(readOnly=true)
+	@Transactional(readOnly = true)
 	public List<CargoBean> obterTodos() {
 		List<CargoEntity> cargoEntity = cargoDAO.findAll();
 		List<CargoBean> cargoBean = cargoConverter.convertEntityToBean(cargoEntity);
 		return cargoBean;
 	}
 
-	@Transactional(readOnly=true)
+	@Transactional(readOnly = true)
 	public CargoEntity obterPorId(Integer id) {
 		CargoEntity entity = cargoDAO.findById(id);
 		return entity;
 	}
-	
 }

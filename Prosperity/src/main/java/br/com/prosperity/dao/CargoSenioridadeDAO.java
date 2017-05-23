@@ -7,5 +7,4 @@ import br.com.prosperity.entity.CargoSenioridadeEntity;
 
 @Repository
 public class CargoSenioridadeDAO extends GenericDAOImpl<CargoSenioridadeEntity, Serializable> {
-
 }

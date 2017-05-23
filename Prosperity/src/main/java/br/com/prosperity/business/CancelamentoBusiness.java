@@ -10,22 +10,19 @@ import br.com.prosperity.converter.CancelamentoConverter;
 import br.com.prosperity.dao.CancelamentoDAO;
 import br.com.prosperity.entity.CancelamentoEntity;
 
-
 @Component
 public class CancelamentoBusiness {
+	
 	@Autowired
 	private CancelamentoDAO cancelamentoDAO;
+	
 	@Autowired
 	private CancelamentoConverter cancelamentoConverter;
 
 	@Transactional
-	public List<CancelamentoBean> listar(){
+	public List<CancelamentoBean> listar() {
 		List<CancelamentoEntity> cancelamentoEntity = cancelamentoDAO.findAll();
-				List<CancelamentoBean> cancelamentos  = cancelamentoConverter.convertEntityToBean(cancelamentoEntity);
-				return cancelamentos;
-		 
-		
-		
+		List<CancelamentoBean> cancelamentos = cancelamentoConverter.convertEntityToBean(cancelamentoEntity);
+		return cancelamentos;
 	}
-	
 }

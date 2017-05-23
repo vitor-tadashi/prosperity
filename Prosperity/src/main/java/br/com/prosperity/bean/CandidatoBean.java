@@ -30,6 +30,7 @@ public class CandidatoBean extends FormatUtil {
 
 	@NotEmpty(message = "O campo CPF deve ser preenchido")
 	private String cpf;
+
 	@NotEmpty(message = "O campo nome deve ser prenchido")
 	private String nome;
 
@@ -38,21 +39,26 @@ public class CandidatoBean extends FormatUtil {
 
 	@NotNull(message = "O campo data de nascimento deve ser preenchido")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date dataNascimento; 
-	@DecimalMax(value="200000.00", message="Pretensão salarial está com valor inválido")
+	private Date dataNascimento;
+
+	@DecimalMax(value = "200000.00", message = "Pretensão salarial está com valor inválido")
 	@NumberFormat(pattern = "###,##0.00")
 	private BigDecimal valorPretensao;
-	
+
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataAbertura;
 	private Date dataFechamento;
+
 	@NotEmpty(message = "O campo email deve ser prenchido")
 	private String email;
+
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataAlteracao;
 	private String curriculo;
 	@Valid
+
 	private ContatoBean contato;
+
 	@Valid
 	private EnderecoBean endereco;
 	private FormacaoBean formacao;
@@ -61,21 +67,26 @@ public class CandidatoBean extends FormatUtil {
 	private Set<VagaCandidatoBean> vagas = new HashSet<>();
 	private List<CandidatoCompetenciaBean> competencias = new ArrayList<>();
 	private Map<String, List<StatusCandidatoBean>> statusPorMesAno;
+
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataUltimoContato;
-	//@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private String proposta;
 	private StatusCandidatoBean ultimoStatus;
 	private VagaBean ultimaVaga;
+
 	@Valid
 	private VagaCandidatoBean vagaCandidato;
+
 	@NumberFormat(pattern = "#,##0.00")
 	private BigDecimal pretensaoDe;
+
 	@NumberFormat(pattern = "#,##0.00")
 	private BigDecimal pretensaoPara;
 	private String curriculoTexto;
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataAberturaDe;
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataAberturaPara;
 	private VagaBean vagaBean;
@@ -166,7 +177,7 @@ public class CandidatoBean extends FormatUtil {
 	}
 
 	public PropostaBean getUltimaProposta() {
-		if(propostaBean != null && propostaBean.size()>0){
+		if (propostaBean != null && propostaBean.size() > 0) {
 			Integer idUltimaProposta = propostaBean.stream().map(PropostaBean::getId).max(Integer::compareTo).get();
 			ultimaProposta = propostaBean.stream().filter(st -> st.getId().equals(idUltimaProposta)).findFirst().get();
 		}
@@ -226,9 +237,9 @@ public class CandidatoBean extends FormatUtil {
 	}
 
 	public BigDecimal getValorPretensao() {
-		try{
+		try {
 			return valorPretensao.setScale(2, RoundingMode.HALF_EVEN);
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;

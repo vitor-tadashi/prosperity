@@ -13,31 +13,29 @@ import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 // Classe customizada para parsear as datas:
 public class CustomerDateAndTimeDeserialize extends JsonDeserializer<Date> {
 
-    private SimpleDateFormat dateFormat = new SimpleDateFormat(
-            "dd/MM/yyyy");
+	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-    @Override
-    public Date deserialize(JsonParser paramJsonParser,
-            DeserializationContext paramDeserializationContext)
-            throws IOException, JsonProcessingException {
-        String str = paramJsonParser.getText().trim();
-        
-        // o Json vem com essas chaves em volta das datas:
-        // Removo-as:
-        str = str.replace("{", "");
-        str = str.replace("}", "");
-        
-        if(str.equals("")) {
-        	return null;
-        }
-        
-        try {
-            return dateFormat.parse(str);
-        } catch (ParseException e) {
+	@Override
+	public Date deserialize(JsonParser paramJsonParser, DeserializationContext paramDeserializationContext)
+			throws IOException, JsonProcessingException {
+		String str = paramJsonParser.getText().trim();
 
-        } catch (java.text.ParseException e) {
+		// o Json vem com essas chaves em volta das datas:
+		// Removo-as:
+		str = str.replace("{", "");
+		str = str.replace("}", "");
+
+		if (str.equals("")) {
+			return null;
+		}
+
+		try {
+			return dateFormat.parse(str);
+		} catch (ParseException e) {
+
+		} catch (java.text.ParseException e) {
 			e.printStackTrace();
 		}
-        return paramDeserializationContext.parseDate(str);
-    }
+		return paramDeserializationContext.parseDate(str);
+	}
 }

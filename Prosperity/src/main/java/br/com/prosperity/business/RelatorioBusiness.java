@@ -13,14 +13,10 @@ public class RelatorioBusiness {
 
 	@Autowired
 	private VagaDAO vagaDAO;
-	
-	/*@Autowired
-	private VagaConverter vagaConverter;*/
-	
-	@Transactional(readOnly=true)
+
+	@Transactional(readOnly = true)
 	public List<VagaEntity> listarVagas() {
 		List<VagaEntity> vagas = vagaDAO.findAll();
 		return vagas;
 	}
-
 }

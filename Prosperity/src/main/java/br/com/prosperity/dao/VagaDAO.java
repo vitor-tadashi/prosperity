@@ -51,7 +51,8 @@ public class VagaDAO extends GenericDAOImpl<VagaEntity, Integer> {
 	public List<VagaEntity> paginar(Integer page, final List<Criterion> criterion) {
 		List<VagaEntity> ret = null;
 		try {
-			ret = findByCriteria("id", true, (page * limitResultsPerPage) - (limitResultsPerPage), limitResultsPerPage, criterion);
+			ret = findByCriteria("id", true, (page * limitResultsPerPage) - (limitResultsPerPage), limitResultsPerPage,
+					criterion);
 		} catch (Exception e) {
 
 		}
@@ -69,7 +70,7 @@ public class VagaDAO extends GenericDAOImpl<VagaEntity, Integer> {
 			crit.createAlias("vaga.statusVagaEntity", "statusVaga");
 			crit.createAlias("statusVaga.status", "status");
 			crit.add(Restrictions.eq("statusVaga.situacao", true));
-			
+
 			for (final Criterion c : criterion) {
 				crit.add(c);
 			}
@@ -97,7 +98,8 @@ public class VagaDAO extends GenericDAOImpl<VagaEntity, Integer> {
 
 		return result;
 	}
-	public Integer rowCount(final List<Criterion> criterion){
+
+	public Integer rowCount(final List<Criterion> criterion) {
 		Integer result = null;
 		try {
 			Session session = (Session) entityManager.getDelegate();
@@ -105,15 +107,14 @@ public class VagaDAO extends GenericDAOImpl<VagaEntity, Integer> {
 			crit.createAlias("vaga.statusVagaEntity", "statusVaga");
 			crit.createAlias("statusVaga.status", "status");
 			crit.add(Restrictions.eq("statusVaga.situacao", true));
-			
+
 			for (final Criterion c : criterion) {
 				crit.add(c);
 			}
-			result = ((Number)crit.setProjection(Projections.rowCount()).uniqueResult()).intValue();
+			result = ((Number) crit.setProjection(Projections.rowCount()).uniqueResult()).intValue();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return result;
 	}
-
 }

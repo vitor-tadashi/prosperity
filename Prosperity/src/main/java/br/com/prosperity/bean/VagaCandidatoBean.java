@@ -9,17 +9,18 @@ import org.springframework.stereotype.Component;
 @Component
 @XmlRootElement(name = "VagaCandidatoBean")
 public class VagaCandidatoBean {
-	
+
 	@Min(value = 1, message = "O campo de vaga a ser aplicado deve ser preenchido")
 	private Integer id;
-	
+
 	@Valid
 	private VagaBean vaga;
-	
 	private String outros;
-	
 	private FuncionarioBean funcionarioBean;
-		
+	private CanalInformacaoBean canalInformacao;
+	private CandidatoBean candidatoBean;
+	private Boolean contratado;
+
 	public String getOutros() {
 		return outros;
 	}
@@ -36,12 +37,6 @@ public class VagaCandidatoBean {
 		this.funcionarioBean = funcionarioBean;
 	}
 
-	private CanalInformacaoBean canalInformacao;
-	
-	private CandidatoBean candidatoBean;
-	
-	private Boolean contratado;
-	
 	public Boolean getContratado() {
 		return contratado;
 	}
@@ -81,5 +76,4 @@ public class VagaCandidatoBean {
 	public void setCandidatoBean(CandidatoBean candidatoBean) {
 		this.candidatoBean = candidatoBean;
 	}
-
 }

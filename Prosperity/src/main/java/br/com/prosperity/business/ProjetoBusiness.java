@@ -13,32 +13,31 @@ import br.com.prosperity.entity.ProjetoEntity;
 
 @Component
 public class ProjetoBusiness {
-	
+
 	@Autowired
 	private ProjetoDAO projetoDAO;
-			
+
 	@Autowired
 	private ProjetoConverter projetoConverter;
-	
-	@Transactional(readOnly=true)
-	public List<ProjetoBean> obterTodos(){
+
+	@Transactional(readOnly = true)
+	public List<ProjetoBean> obterTodos() {
 		List<ProjetoEntity> projetoEntity = projetoDAO.findAll();
 		List<ProjetoBean> projetoBean = projetoConverter.convertEntityToBean(projetoEntity);
 		return projetoBean;
 	}
-	
+
 	@Transactional
-	public List<ProjetoBean> buscarProjetoAtivo(){
+	public List<ProjetoBean> buscarProjetoAtivo() {
 		List<ProjetoEntity> projetoEntity = projetoDAO.findByNamedQuery("obterProjetosAtivos");
 		List<ProjetoBean> projetoBean = projetoConverter.convertEntityToBean(projetoEntity);
 		return projetoBean;
 	}
-	
+
 	@Transactional
-	public List<ProjetoBean> obterCliente(Integer id){
+	public List<ProjetoBean> obterCliente(Integer id) {
 		List<ProjetoEntity> projetoEntity = projetoDAO.findByNamedQuery("obterCliente", id);
 		List<ProjetoBean> projetoBean = projetoConverter.convertEntityToBean(projetoEntity);
 		return projetoBean;
 	}
-
 }

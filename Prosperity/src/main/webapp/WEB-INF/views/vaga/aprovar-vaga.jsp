@@ -560,7 +560,7 @@
         			msg = 'Vaga cancelada com sucesso!';
     			}else if(dado == '27'){
         			$('#aprova-modal').modal('hide');
-        			msg = 'Vaga divulgada com sucesso!';
+        			msg = 'Vaga aprovada com sucesso!';
     			}else if (dado == '18'){
     			$('#reprova-modal').modal('hide');
     			msg = 'Vaga reprovada com sucesso!';

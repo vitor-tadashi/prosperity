@@ -18,6 +18,7 @@ public class AvaliacaoConverter implements Converter<AvaliacaoEntity, AvaliacaoB
 		entity.setId(bean.getId());
 		entity.setNome(bean.getNome());
 		entity.setTipoCss(bean.getTipoCss());
+
 		return entity;
 	}
 
@@ -31,7 +32,7 @@ public class AvaliacaoConverter implements Converter<AvaliacaoEntity, AvaliacaoB
 		bean.setId(entity.getId());
 		bean.setNome(entity.getNome());
 		bean.setTipoCss(entity.getTipoCss());
+
 		return bean;
 	}
-
 }

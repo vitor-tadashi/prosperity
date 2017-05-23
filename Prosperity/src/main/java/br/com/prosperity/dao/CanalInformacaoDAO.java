@@ -6,5 +6,4 @@ import br.com.prosperity.entity.CanalInformacaoEntity;
 
 @Repository
 public class CanalInformacaoDAO extends GenericDAOImpl<CanalInformacaoEntity, Integer> {
-
 }

@@ -8,17 +8,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tbSenioridade")
+@Table(name = "tbSenioridade")
 public class SenioridadeEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idSenioridade", unique = true, nullable = false)
+	@Column(name = "idSenioridade", unique = true, nullable = false)
 	private Integer idSenioridade;
 
-	@Column(name="nmSenioridade")
+	@Column(name = "nmSenioridade")
 	private String nome;
-	
+
 	public Integer getId() {
 		return idSenioridade;
 	}
@@ -34,5 +34,4 @@ public class SenioridadeEntity {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 }

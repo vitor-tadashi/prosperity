@@ -6,5 +6,4 @@ import br.com.prosperity.entity.PerfilEntity;
 
 @Repository
 public class PerfilDAO extends GenericDAOImpl<PerfilEntity, Integer> {
-
 }

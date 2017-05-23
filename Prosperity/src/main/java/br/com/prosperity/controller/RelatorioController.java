@@ -15,10 +15,10 @@ import br.com.prosperity.enumarator.StatusVagaEnum;
 @Controller
 @RequestMapping("relatorio")
 public class RelatorioController {
-	
+
 	@Autowired
 	private RelatorioBusiness relatorioBusiness;
-	
+
 	@RequestMapping(method = RequestMethod.GET)
 	public String relatorio(Model model) {
 		List<VagaEntity> vagas = relatorioBusiness.listarVagas();
@@ -27,10 +27,9 @@ public class RelatorioController {
 		model.addAttribute("situacoes", situacoes);
 		return "relatorio/gerar-relatorio";
 	}
-	
-	@RequestMapping(value="/gerar", method = RequestMethod.POST)
+
+	@RequestMapping(value = "/gerar", method = RequestMethod.POST)
 	public String gerar(Model model) {
 		return "relatorio/gerar-relatorio";
 	}
-
 }

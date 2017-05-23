@@ -22,7 +22,7 @@ public class AvaliadorVagaConverter implements Converter<AvaliadorVagaEntity, Av
 		}
 		AvaliadorVagaEntity entity = new AvaliadorVagaEntity();
 
-		entity.setId(bean.getId());	
+		entity.setId(bean.getId());
 		entity.setUsuario(usuarioConverter.convertBeanToEntity(bean.getUsuario()));
 		entity.setVaga(vagaConverter.convertBeanToEntity(bean.getVaga()));
 
@@ -38,9 +38,7 @@ public class AvaliadorVagaConverter implements Converter<AvaliadorVagaEntity, Av
 
 		bean.setId(entity.getId());
 		bean.setUsuario(usuarioConverter.convertEntityToBean(entity.getUsuario()));
-		//bean.setVaga(vagaConverter.convertEntityToBean(entity.getVaga()));
 
 		return bean;
 	}
-
 }

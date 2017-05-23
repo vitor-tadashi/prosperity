@@ -33,5 +33,4 @@ public class CompetenciaConverter implements Converter<CompetenciaEntity, Compet
 
 		return bean;
 	}
-
 }

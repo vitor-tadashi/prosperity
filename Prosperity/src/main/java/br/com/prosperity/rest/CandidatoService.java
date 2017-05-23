@@ -31,12 +31,12 @@ public class CandidatoService {
 
 		Gson gson = new GsonBuilder().create();
 		WordpressBean w = gson.fromJson(json, WordpressBean.class);
-		
+
 		List<CandidatoBean> candidatos = new ArrayList<>();
 
 		candidatos = w.getCandidatos();
 
-		if (!candidatos.isEmpty())
+		if (!candidatos.isEmpty()) {
 			for (CandidatoBean c : candidatos) {
 				try {
 					candidatoBusiness.inserirWordpress(c);
@@ -44,5 +44,6 @@ public class CandidatoService {
 					e.printStackTrace();
 				}
 			}
+		}
 	}
 }
