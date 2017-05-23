@@ -103,7 +103,7 @@
 															</div>
 
 															<div class="form-group col-md-1 col-xs-1">
-																<label style="margin-top: 7px">Às</label>
+																<label style="margin-top: 7px">às</label>
 															</div>
 
 															<div class="form-group col-md-2 col-xs-1">
