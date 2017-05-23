@@ -553,7 +553,7 @@
     			var msg = "";
     			
     			if(dado == '27') {
-    				$('#aprova-modal').modal('hide');
+    				$('#divulga-modal').modal('hide');
         			msg = 'Vaga divulgada com sucesso!';
     			}else if(dado == '3'){
         			$('#cancela-modal').modal('hide');
@@ -562,8 +562,8 @@
         			$('#aprova-modal').modal('hide');
         			msg = 'Vaga ativa com sucesso!';
     			}else if (dado == '18'){
-    			$('#reprova-modal').modal('hide');
-    			msg = 'Vaga reprovada com sucesso!';
+    				$('#reprova-modal').modal('hide');
+    				msg = 'Vaga reprovada com sucesso!';
     			}else if (dado == '2'){
         			$('#fechar-modal').modal('hide');
         			msg = 'Vaga fechada com sucesso!';
