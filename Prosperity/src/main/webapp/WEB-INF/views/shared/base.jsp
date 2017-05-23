@@ -67,7 +67,7 @@
 									<p class="grey">${autenticado.email}</p>
 								</div>
 						</a></li>
-						<li><a class="clearfix" href="C:\Users\fabio.peres\Desktop\teste.txt" download>
+						<li><a class="clearfix download-download" href="manual/download" target="_blank">
 								<div class="detail">
 									<strong>Manual</strong>
 									<!-- <p class="grey">${autenticado.email}</p> -->
