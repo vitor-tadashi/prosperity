@@ -216,10 +216,13 @@ public class CandidatoController<PaginarCandidato> {
 	}
 
 	@RequestMapping(value = "/cancelar-candidato/{id}")
-	public String cancelaCandidato(@PathVariable Integer id, Model model) {
+	public String cancelaCandidato(@PathVariable Integer id,
+			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato, Model model) {
 		SituacaoCandidatoBean bean = new SituacaoCandidatoBean();
 		bean.setIdCandidato(id);
 		bean.setStatus(StatusCandidatoEnum.CANCELADO);
+		bean.setDsCancelamento(situacaoCandidato.getDsCancelamento());
+		bean.setIdCancelamento(situacaoCandidato.getIdCancelamento());
 		candidatoBusiness.alterarStatus(bean);
 		return "redirect:/candidato/aprovar";
 	}
@@ -536,7 +539,7 @@ public class CandidatoController<PaginarCandidato> {
 				InputStream is = new FileInputStream(file);
 				org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
 				response.flushBuffer();
-				
+
 				is.close();
 			} catch (IOException e) {
 				e.printStackTrace();

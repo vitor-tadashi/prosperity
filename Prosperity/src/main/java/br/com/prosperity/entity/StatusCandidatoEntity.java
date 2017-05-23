@@ -54,7 +54,7 @@ public class StatusCandidatoEntity {
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idCancelamento")
 	private CancelamentoEntity cancelamento;
 

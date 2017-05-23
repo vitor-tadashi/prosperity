@@ -441,7 +441,12 @@
 				var id = $("#idCancelamento").val();
 				$.ajax({
 					url : "cancelar-candidato/" + id,
-					type : "POST"
+					type : "POST",
+					data : {
+						'idCandidato' : $('#hdn-id-candidato').val(),
+						'dsCancelamento' : $('#parecerCancelamento').val(),
+						'idCancelamento' : $('#cancelamento').val(),
+					}
 				}).done(
 					function() {
 						/* Fecha o modal de cancelamento: */
