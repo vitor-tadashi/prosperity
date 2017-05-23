@@ -141,21 +141,13 @@ public class VagaBean {
 	}
 
 	@XmlTransient
-	public char getLocalTrabalho() {
+	public Character getLocalTrabalho() {
 		return localTrabalho;
 	}
 
-	public void setLocalTrabalho(char localTrabalho) {
-		this.localTrabalho = localTrabalho;
-	}
-
 	@XmlTransient
-	public char getIdTipoVaga() {
+	public Character getIdTipoVaga() {
 		return idTipoVaga;
-	}
-
-	public void setIdTipoVaga(char idTipoVaga) {
-		this.idTipoVaga = idTipoVaga;
 	}
 
 	public String getHorarioEntrada() {
@@ -175,12 +167,8 @@ public class VagaBean {
 	}
 
 	@XmlTransient
-	public char getAumentaQuadro() {
+	public Character getAumentaQuadro() {
 		return aumentaQuadro;
-	}
-
-	public void setAumentaQuadro(char aumentaQuadro) {
-		this.aumentaQuadro = aumentaQuadro;
 	}
 
 	public ProjetoBean getProjeto() {

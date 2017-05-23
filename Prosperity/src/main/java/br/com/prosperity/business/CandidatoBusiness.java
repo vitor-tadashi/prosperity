@@ -306,22 +306,24 @@ public class CandidatoBusiness {
 				candidatoBean.getVagaCandidato().setVaga(beans.getUltimaVaga());
 			}
 			candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoEntity, candidatoBean);
-			candidatoEntity.setDataAbertura(new Date());
 			tratarInformacoes(candidatoEntity);
 			definirFormacao(candidatoBean, candidatoEntity);
 
 			candidatoDAO.update(candidatoEntity);
 
-			if (!beans.getUltimaVaga().getId().equals(candidatoBean.getVagaCandidato().getVaga().getId())) {
-				desativarDataEntrevista(candidatoBean);
-
-				VagaEntity vagaAtual = definirVagas(candidatoBean, candidatoEntity);
-
-				inserirAvaliadores(candidatoEntity, vagaAtual.getId());
-
-				situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
-				situacaoCandidato.setIdCandidato(candidatoEntity.getId());
-				alterarStatus(situacaoCandidato);
+			if(candidatoBean.getVagaCandidato().getVaga().getId() != 0){
+				if (!beans.getUltimaVaga().getId().equals(candidatoBean.getVagaCandidato().getVaga().getId())) {
+					candidatoEntity.setDataAbertura(new Date());
+					desativarDataEntrevista(candidatoBean);
+	
+					VagaEntity vagaAtual = definirVagas(candidatoBean, candidatoEntity);
+	
+					inserirAvaliadores(candidatoEntity, vagaAtual.getId());
+	
+					situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
+					situacaoCandidato.setIdCandidato(candidatoEntity.getId());
+					alterarStatus(situacaoCandidato);
+				}
 			}
 
 		}
@@ -335,16 +337,24 @@ public class CandidatoBusiness {
 		Date dateNow = new Date();
 		candidatoEntity.setDataAbertura(dateNow);
 
-		definirFormacao(candidatoBean, candidatoEntity);
-
-		VagaEntity vagaAtual = definirVagas(candidatoBean, candidatoEntity);
-
-		tratarInformacoes(candidatoEntity);
-
 		situacaoCandidato.setStatus(StatusCandidatoEnum.CANCELADO);
+		situacaoCandidato.setIdCandidato(candidatoEntity.getId());
+		alterarStatus(situacaoCandidato);
+		
+		// Verificar se o rapaz já se cadastrou pelo CPF:
+		if (candidatoDAO.findByNamedQuery("obterPorCPF", candidatoEntity.getCpf()) == null) {
 
-		candidatoDAO.insert(candidatoEntity);
+			definirFormacao(candidatoBean, candidatoEntity);
 
+			VagaEntity vagaAtual = definirVagas(candidatoBean, candidatoEntity);
+
+			tratarInformacoes(candidatoEntity);
+
+			candidatoDAO.insert(candidatoEntity);
+		} else {
+			// Se sim, update nele:
+			candidatoDAO.update(candidatoEntity);
+		}
 	}
 
 	private void tratarInformacoes(CandidatoEntity candidatoEntity) {
@@ -373,13 +383,16 @@ public class CandidatoBusiness {
 			if (candidatoBean.getVagaCandidato().getCanalInformacao().getId() != null) {
 				novoVagaCandidato.setCanalInformacao(
 						canalInformacaoDAO.findById(candidatoBean.getVagaCandidato().getCanalInformacao().getId()));
-				if (candidatoBean.getVagaCandidato().getFuncionarioBean().getId() != null
-						&& candidatoBean.getVagaCandidato().getFuncionarioBean().getId() != 0) {
-					novoVagaCandidato.setFuncionarioEntity(
-							funcionarioDAO.findById(candidatoBean.getVagaCandidato().getFuncionarioBean().getId()));
-				}
-				if (candidatoBean.getVagaCandidato().getOutros() != null) {
-					novoVagaCandidato.setOutros(candidatoBean.getVagaCandidato().getOutros());
+
+				if (candidatoBean.getVagaCandidato().getFuncionarioBean() != null) {
+					if (candidatoBean.getVagaCandidato().getFuncionarioBean().getId() != null
+							&& candidatoBean.getVagaCandidato().getFuncionarioBean().getId() != 0) {
+						novoVagaCandidato.setFuncionarioEntity(
+								funcionarioDAO.findById(candidatoBean.getVagaCandidato().getFuncionarioBean().getId()));
+					}
+					if (candidatoBean.getVagaCandidato().getOutros() != null) {
+						novoVagaCandidato.setOutros(candidatoBean.getVagaCandidato().getOutros());
+					}
 				}
 			}
 			novoVagaCandidato.setCandidato(candidatoEntity);
@@ -673,6 +686,9 @@ public class CandidatoBusiness {
 	@Transactional
 	public void buscarUsuariosParaEmail(SituacaoCandidatoBean situacaoCandidatoBean) {
 
+		if(situacaoCandidatoBean==null || situacaoCandidatoBean.getIdCandidato()==null)
+			return;
+		
 		candidatoBean = candidatoConverter
 				.convertEntityToBean(candidatoDAO.findById(situacaoCandidatoBean.getIdCandidato()));
 		List<UsuarioBean> usuarios = buscarUsuariosSemRepetir();
@@ -684,10 +700,10 @@ public class CandidatoBusiness {
 			for (AvaliadorCandidatoBean a : avaliadores) {
 				if (a.getUsuario() != null) {
 					recipients.add(a.getUsuario().getEmail());
-					nomes.add(a.getUsuario().getNome());
+					nomes.add(a.getUsuario().getFuncionario().getNome());
 				}
 			}
-		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.PROPOSTACANDIDATO.getValue()
+		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.GERARPROPOSTA.getValue()
 				|| situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CONTRATADO.getValue()) {
 			for (UsuarioBean u : usuarios) {
 				switch (u.getPerfil().getNome()) {
@@ -751,9 +767,11 @@ public class CandidatoBusiness {
 	}
 
 	public boolean podeEditarVaga(StatusCandidatoBean ultimoStatus) {
-		if (ultimoStatus.getStatus().getId() != 5 && ultimoStatus.getStatus().getId() != 17
-				&& ultimoStatus.getStatus().getId() != 29) {
-			return false;
+		if(ultimoStatus.getStatus().getId() != null){
+			if (ultimoStatus.getStatus().getId() != 5 && ultimoStatus.getStatus().getId() != 17
+					&& ultimoStatus.getStatus().getId() != 29) {
+				return false;
+			}
 		}
 		return true;
 	}

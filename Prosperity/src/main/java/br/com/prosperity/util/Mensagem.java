@@ -19,14 +19,14 @@ public class Mensagem {
 
 	private String definirAcao(String tipo, String status) {
 		
-		String verbosComporFrase = " e deve ser ";
+		String frase = " e deve ser ";
 		
 		if(tipo.contains("vaga")) {
 			switch(status){
 			case "Pendente":
-				return verbosComporFrase + "analisada.";
+				return frase + "analisada.";
 			case "Vaga nova":
-				return verbosComporFrase + "trabalhada.";
+				return frase + "trabalhada.";
 			default:
 				return ".";
 			}
@@ -35,7 +35,9 @@ public class Mensagem {
 			case "Contratado":
 				return ".";
 			case "Candidato em análise":
-				return verbosComporFrase + "avaliado.";
+				return frase + "avaliado.";
+			case "Gerar proposta":
+				return " e precisa ter proposta gerada.";
 			default:
 				return ".";
 			}
