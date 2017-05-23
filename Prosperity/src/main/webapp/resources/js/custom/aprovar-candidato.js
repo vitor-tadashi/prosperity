@@ -39,6 +39,7 @@
 										$("#proposta-tab").show();
 										$("#importxlsx").show();
 									}
+									$('.dinheiro').text("");
 								} else if (data.ultimoStatus.status.id == "10") {
 									if (perfil == 1 || perfil == 4 || perfil == 9) {
 										$("#proposta-tab").show();
@@ -52,7 +53,6 @@
 								} else if (data.ultimoStatus.status.id == "13") {
 									if (perfil == 2 || perfil == 3) {
 										$("#proposta-tab").show();
-										$("#importxlsx").hide();
 									}
 								} else if (data.ultimoStatus.status.id == "14") {
 									if (perfil == 2 || perfil == 3) {
@@ -71,6 +71,7 @@
 								$('.tab-bar a[href="#infoEntrevista"]').tab('show');
 								$('#modalProposta').modal('show');
 								if(data.ultimaProposta != null){
+									$(".tiraTabela").remove();
 									//carregando as informações do EXCEL via AJAX para a JSP
 									$('#anteriorCargo').text(data.ultimaProposta.anteriorCargo);
 									$('#anteriorEmpresa').text(data.ultimaProposta.anteriorEmpresa);
@@ -108,21 +109,20 @@
 									var aux = 0;
 									if(data.ultimaProposta.comparativoProposta != null){
 										$(comparativo).each(function(index, value) {
-
-											var campos = "<tr class='tiraTabela'>"+
-											"<td id='nmFuncionario"+aux+"'></td>" +
-											"<td id='nmCargo"+aux+"'></td>" +
-											"<td id='nmSenioridade"+aux+"'></td>" +
-											"<td id='dsConhecimento"+aux+"'></td>" +
-											"<td id='dtAdmissao"+aux+"'></td>" +
-											"<td><p>R$ </p><p id='vlrSalario"+aux+"'></p></td>" +
-											"<td><p>R$ </p><p id='vlrVr"+aux+"'></p></td>" +
-											"<td><p>R$ </p><p id='vlrVa"+aux+"'></p></td>" +
-											"<td><p>R$ </p><p id='vlrEstacionamento"+aux+"'></p></td>" +
-											"<td><p>R$ </p><p id='vlrCombustivel"+aux+"'></p></td>" +
-											"<td><p>R$ </p><p id='vlrAssistenciaMedica"+aux+"'></p></td>" +
-											"<td><p>R$ </p><p id='vlrOutros"+aux+"'></p></td>" +
-											"<td><p>R$ </p><p id='vlrTaxa"+aux+"'></p></td> </tr>";
+											var campos = "<tr>"+
+											"<td class='tiraTabela' id='nmFuncionario"+aux+"'></td>" +
+											"<td class='tiraTabela' id='nmCargo"+aux+"'></td>" +
+											"<td class='tiraTabela' id='nmSenioridade"+aux+"'></td>" +
+											"<td class='tiraTabela' id='dsConhecimento"+aux+"'></td>" +
+											"<td class='tiraTabela' id='dtAdmissao"+aux+"'></td>" +
+											"<td class='tiraTabela'><p>R$ </p><p id='vlrSalario"+aux+"' class='dinheiro'></p></td>" +
+											"<td class='tiraTabela'><p>R$ </p><p id='vlrVr"+aux+"' class='dinheiro'></p></td>" +
+											"<td class='tiraTabela'><p>R$ </p><p id='vlrVa"+aux+"' class='dinheiro'></p></td>" +
+											"<td class='tiraTabela'><p>R$ </p><p id='vlrEstacionamento"+aux+"' class='dinheiro'></p></td>" +
+											"<td class='tiraTabela'><p>R$ </p><p id='vlrCombustivel"+aux+"' class='dinheiro'></p></td>" +
+											"<td class='tiraTabela'><p>R$ </p><p id='vlrAssistenciaMedica"+aux+"' class='dinheiro'></p></td>" +
+											"<td class='tiraTabela'><p>R$ </p><p id='vlrOutros"+aux+"' class='dinheiro'></p></td>" +
+											"<td class='tiraTabela'><p>R$ </p><p id='vlrTaxa"+aux+"' class='dinheiro'></p></td> </tr>";
 
 											$(".tbComparativo").append(campos);
 
@@ -149,6 +149,10 @@
 									$(document).ready(function() {
 										$('.dinheiro').mask('0.000.000,00', {reverse : true});
 									});
+								}
+								if (data.ultimoStatus.status.id == "9") {
+									$('.dinheiro').text("");
+									$('.nmLimpar').text("");
 								}
 							}
 						})
@@ -348,6 +352,7 @@
 								dataType : "JSON",
 								type : "GET",
 								success : function(data) {
+									$(".tiraTabela").remove();
 									$("#anteriorEmpresa").text(data.anteriorEmpresa);
 									$("#anteriorCargo").text(data.anteriorCargo);
 									$('#vlrAntSalarioFixoBruto').text(parseFloat(data.anteriorSalarioFixoBruto).toFixed(2));
@@ -383,19 +388,19 @@
 									// for each que percorre a lista e mostra na tela
 									var aux = 0;
 									$(comparativo).each(function(index, value) {
-										var campos = "<tr><td id='nmFuncionario"+aux+"'></td>" +
-										"<td id='nmCargo"+aux+"'></td>" +
-										"<td id='nmSenioridade"+aux+"'></td>" +
-										"<td id='dsConhecimento"+aux+"'></td>" +
-										"<td id='dtAdmissao"+aux+"'></td>" +
-										"<td><p>R$ </p><p id='vlrSalario"+aux+"'></p></td>" +
-										"<td><p>R$ </p><p id='vlrVr"+aux+"'></p></td>" +
-										"<td><p>R$ </p><p id='vlrVa"+aux+"'></p></td>" +
-										"<td><p>R$ </p><p id='vlrEstacionamento"+aux+"'></p></td>" +
-										"<td><p>R$ </p><p id='vlrCombustivel"+aux+"'></p></td>" +
-										"<td><p>R$ </p><p id='vlrAssistenciaMedica"+aux+"'></p></td>" +
-										"<td><p>R$ </p><p id='vlrOutros"+aux+"'></p></td>" +
-										"<td><p>R$ </p><p id='vlrTaxa"+aux+"'></p></td> </tr>";
+										var campos = "<tr><td class='tiraTabela' id='nmFuncionario"+aux+"'></td>" +
+										"<td class='tiraTabela' id='nmCargo"+aux+"'></td>" +
+										"<td class='tiraTabela' id='nmSenioridade"+aux+"'></td>" +
+										"<td class='tiraTabela' id='dsConhecimento"+aux+"'></td>" +
+										"<td class='tiraTabela' id='dtAdmissao"+aux+"'></td>" +
+										"<td class='tiraTabela'><p>R$ </p><p id='vlrSalario"+aux+"' class='dinheiro'></p></td>" +
+										"<td class='tiraTabela'><p>R$ </p><p id='vlrVr"+aux+"' class='dinheiro'></p></td>" +
+										"<td class='tiraTabela'><p>R$ </p><p id='vlrVa"+aux+"' class='dinheiro'></p></td>" +
+										"<td class='tiraTabela'><p>R$ </p><p id='vlrEstacionamento"+aux+"' class='dinheiro'></p></td>" +
+										"<td class='tiraTabela'><p>R$ </p><p id='vlrCombustivel"+aux+"' class='dinheiro'></p></td>" +
+										"<td class='tiraTabela'><p>R$ </p><p id='vlrAssistenciaMedica"+aux+"' class='dinheiro'></p></td>" +
+										"<td class='tiraTabela'><p>R$ </p><p id='vlrOutros"+aux+"' class='dinheiro'></p></td>" +
+										"<td class='tiraTabela'><p>R$ </p><p id='vlrTaxa"+aux+"' class='dinheiro'></p></td> </tr>";
 
 										$(".tbComparativo").append(campos);
 
@@ -485,10 +490,10 @@
 							mensagem = "teve proposta gerada";
 							break;
 						case 10:
-							mensagem = "teve proposta aprovada";
+							mensagem = "teve proposta reprovada";
 							break;
 						case 11:
-							mensagem = "teve proposta reprovada";
+							mensagem = "teve proposta aprovada";
 							break;
 						case 15:
 							mensagem = "foi contratado";

@@ -44,7 +44,6 @@ import br.com.prosperity.bean.CancelamentoBean;
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CandidatoCompetenciaBean;
 import br.com.prosperity.bean.CargoBean;
-import br.com.prosperity.bean.CargoSenioridadeBean;
 import br.com.prosperity.bean.CompetenciaBean;
 import br.com.prosperity.bean.ComunicacaoBean;
 import br.com.prosperity.bean.FuncionarioBean;
@@ -61,6 +60,7 @@ import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.CanalInformacaoBusiness;
 import br.com.prosperity.business.CancelamentoBusiness;
 import br.com.prosperity.business.CandidatoBusiness;
+import br.com.prosperity.business.CandidatoCompetenciaBusiness;
 import br.com.prosperity.business.CargoBusiness;
 import br.com.prosperity.business.ComunicacaoBusiness;
 import br.com.prosperity.business.FuncionarioBusiness;
@@ -74,7 +74,7 @@ import br.com.prosperity.business.TipoCursoBusiness;
 import br.com.prosperity.business.VagaBusiness;
 import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.exception.BusinessException;
-import br.com.prosperity.util.TesteExcel;
+import br.com.prosperity.util.ImportarExcel;
 
 @Controller
 @RequestMapping(value = "/candidato")
@@ -150,7 +150,13 @@ public class CandidatoController<PaginarCandidato> {
 	private HttpSession session;
 	
 	@Autowired
+	private ComunicacaoBean comunicacaoBean;
+	
+	@Autowired
 	private ComunicacaoBusiness comunicacaoBusiness;
+	
+	@Autowired
+	private CandidatoCompetenciaBusiness candidatoCompetenciaBusiness;
 
 	private List<String> caminhoProvas;
 
@@ -446,11 +452,11 @@ public class CandidatoController<PaginarCandidato> {
 				}
 			}
 			provaCandidatoBusiness.inserir(provas);
-			// TODO:não da refresh ao salvar status
 		}
 
-		if (!avaliacoesCandidato.equals("[]")) {
-			candidatoBean.setCompetencias(convertGson(avaliacoesCandidato));
+		if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOAPROVADO.getValue() ||
+			situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOREPROVADO.getValue()) {
+			candidatoCompetenciaBusiness.inserirCompetencias(convertGson(avaliacoesCandidato), situacaoCandidato.getIdCandidato());
 		}
 
 		if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.PROPOSTACANDIDATO.getValue()) {
@@ -458,13 +464,6 @@ public class CandidatoController<PaginarCandidato> {
 			propostaBean.setCandidato(candidatoBean.getId());
 			propostaBusiness.inserir(propostaBean);
 		}
-
-		try {
-			candidatoBusiness.inserir(candidatoBean);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
 		try {
 			// alterado aqui \/
 			candidatoBusiness.alterarStatus(situacaoCandidato);
@@ -504,7 +503,7 @@ public class CandidatoController<PaginarCandidato> {
 						competenciaBean.setId(aux2);
 						candidatoCompetenciaBean.setAvaliacao(avaliacaoBean);
 						candidatoCompetenciaBean.setCompetencia(competenciaBean);
-						candidatoCompetenciaBean.setNmAvaliador(usuarioBean.getNome());
+						candidatoCompetenciaBean.setNmAvaliador(usuarioBean.getFuncionario().getNome());
 						candidatoCompetenciasBean.add(candidatoCompetenciaBean);
 					}
 				}
@@ -620,9 +619,10 @@ public class CandidatoController<PaginarCandidato> {
 		List<MultipartFile> papers = request.getFiles("file");
 		try {
 			String caminho = gerarProposta(papers, idCandidato);
-			TesteExcel teste = new TesteExcel();
+			ImportarExcel importarExcel = new ImportarExcel();
 			propostaBean = new PropostaBean();
-			propostaBean = teste.testa(caminho);
+			propostaBean = importarExcel.importarExcel(caminho);
+			propostaBean.setCmProposta(caminho);
 		} catch (Exception e) {
 			return "error";
 		}
@@ -630,19 +630,7 @@ public class CandidatoController<PaginarCandidato> {
 	}
 
 	public String gerarProposta(List<MultipartFile> multipartFiles, Integer idCandidato) throws IOException {
-//        //criar um diretorio para salvar a proposta
-//		Path path = Paths.get("C:\\Program Files (x86)\\Prosperity\\Proposta");
-//        //if directory exists?
-//        if (!Files.exists(path)) {
-//            try {
-//                Files.createDirectories(path);
-//            } catch (IOException e) {
-//                //fail to create directory
-//                e.printStackTrace();
-//            }
-//        }
 		String arquivo = null;
-		//String directory = "C:\\Program Files (x86)\\Prosperity\\Proposta\\";
 		String directory = "/home/user/uploadedFilesDir/" + idCandidato + "/";
 		File file = new File(directory);
 		file.mkdirs();
@@ -663,7 +651,7 @@ public class CandidatoController<PaginarCandidato> {
 	@RequestMapping(value = "/comunicacao", method = RequestMethod.POST)
 	public @ResponseBody List<ComunicacaoBean> comunicacao (Model model,
 			@ModelAttribute("dataContato") String dataContato, @ModelAttribute ("observacao") String observacao, @ModelAttribute ("usuario") Integer usuario, @ModelAttribute ("candidato") Integer candidato) {
-		ComunicacaoBean comunicacaoBean = new ComunicacaoBean();
+		comunicacaoBean = new ComunicacaoBean();
 		
 		Date data = new Date();
 		try {

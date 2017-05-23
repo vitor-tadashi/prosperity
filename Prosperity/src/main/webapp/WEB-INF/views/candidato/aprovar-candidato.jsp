@@ -114,11 +114,11 @@
 														<div class="panel-body form-group">
 																<div class="col-md-12">
 																	<label class="col-md-6">Empresa:</label>
-																	<p id="anteriorEmpresa" class="col-md-6"></p>
+																	<p id="anteriorEmpresa" class="col-md-6 nmLimpar"></p>
 																</div>
 																<div class="col-md-12">
 																	<label class="col-md-6">Cargo:</label>
-																	<p class="col-md-6" id="anteriorCargo"></p>
+																	<p class="col-md-6 nmLimpar" id="anteriorCargo"></p>
 																</div>
 																<div class="col-md-12">
 																	<label class="col-md-6">Salário fixo bruto:</label>
@@ -187,11 +187,11 @@
 														<div class="panel-body  form-group">
 																<div class="col-md-12">
 																	<label class="col-md-6">Empresa:</label>
-																	<p class="col-md-6" id="novaEmpresa"></p>
+																	<p class="col-md-6 nmLimpar" id="novaEmpresa"></p>
 																</div>
 																<div class="col-md-12">
 																	<label class="col-md-6">Cargo:</label>
-																	<p class="col-md-6" id="novoCargo"></p>
+																	<p class="col-md-6 nmLimpar" id="novoCargo"></p>
 																</div>
 																<div class="col-md-12">
 																	<label class="col-md-6">Salário fixo bruto:</label>
@@ -295,7 +295,7 @@
 														<div class="upload-file" onchange="gerarProposta()">
 															<input type="file" name="file" id="upload-proposta"
 																class="upload-demo" required/> <label
-																data-title="Selecione" for="upload-proposta"> <span
+																data-title="Selecione" for="upload-proposta"><span
 																id="caminho"></span>
 															</label>
 														</div>

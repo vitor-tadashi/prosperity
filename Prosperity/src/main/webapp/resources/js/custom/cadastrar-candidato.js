@@ -4,6 +4,9 @@ $(document).ready(function() {
 	setTimeout(function() {
 		$('#msg-sucesso').fadeOut(1500);
 	}, 5000);
+	if($("#upload-curriculo2").val() == ""){
+		$("#btnDownload").prop('disabled',true);
+	}
 });
 
 $( "#canalInformacao" ).change(function() {
@@ -457,7 +460,7 @@ function obterCandidato(cpf) {
 				$("#situacaoAtual").val(data.formacao.situacaoAtual.id);
 
 				var status = data.ultimoStatus.status;
-				if (status.id != 17 && status.id != 5 && status.id != 29) {
+				if (status.id != 17 && status.id != 5 && status.id != 29 && status.id != 15) {
 					$('select#vaga').attr('disabled', 'disabled');
 				}
 				$('input#cpf').attr('disabled', 'disabled');
@@ -498,6 +501,11 @@ $(document).ready(function() {
 	var url = window.location.href;
 	if (url.match(/editar/)) {
 		$(".download-download").show();
+		if($('#funcionalidade34').val()){
+			$('#tabDataContato').removeClass('hide');
+			$('#tabDataEntrevista').removeClass('hide');
+			
+		}
 	} else {
 		$(".download-download").hide();
 	}
@@ -617,4 +625,8 @@ function esconderAba(){
 			$("#fourth").show();
 		}
 }
+}
+function salvarForm(){
+	$('#vaga').prop('disabled',false);
+	$('#formCadastro').submit();
 }

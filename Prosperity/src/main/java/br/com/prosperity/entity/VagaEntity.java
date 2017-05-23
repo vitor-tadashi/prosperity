@@ -27,13 +27,6 @@ import javax.persistence.TemporalType;
 				+ "AND sv.status.id IN(?1) ORDER BY v.id DESC"),
 		@NamedQuery(name = "obterPorId", query = "SELECT u FROM VagaEntity u WHERE u.id = ?1"),
 		@NamedQuery(name = "findAllDesc", query = "SELECT u FROM VagaEntity u LEFT OUTER JOIN u.statusVagaEntity v WHERE v.situacao = TRUE ORDER BY u.id DESC"),
-
-		// @NamedQuery(name="listarVagaFiltrado", query="SELECT u FROM
-		// VagaEntity u LEFT JOIN u.statusVagaEntity p LEFT JOIN p.status e
-		// WHERE u.dataAbertura BETWEEN ?1 AND ?2 AND u.nomeVaga like ?3 AND
-		// p.status = ?4" )
-
-		// VAGAS ATIVAS
 		@NamedQuery(name = "listarVagasAtivas", query = "SELECT v FROM VagaEntity v LEFT JOIN v.statusVagaEntity sv where sv.situacao = TRUE AND sv.status.id = 1 ORDER BY v.id DESC"),
 
 		@NamedQuery(name = "listarVagaFiltrado", query = "SELECT u FROM VagaEntity u LEFT OUTER JOIN u.statusVagaEntity p left join p.status s "
@@ -124,9 +117,7 @@ public class VagaEntity {
 	// @JoinColumn(name = "idVaga")
 	private List<StatusVagaEntity> statusVagaEntity;
 
-	// @ManyToOne(cascade = CascadeType.ALL)
-	//private AvaliadorEntity avaliadorEntity;
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "vaga",cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "vaga", cascade = CascadeType.ALL)
 	private List<AvaliadorVagaEntity> avaliadorVagaEntity;
 
 	@Column(name = "nmResponsavel")
@@ -141,6 +132,9 @@ public class VagaEntity {
 	@Column(name = "telResponsavel")
 	private String telResponsavel;
 
+	@Column(name = "dsPreTexto")
+	private String marketingSocial;
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "vaga")
 	// @JoinColumn(name = "idVaga")
 	private List<VagaCandidatoEntity> vagaCandidatoEntity;
@@ -148,21 +142,6 @@ public class VagaEntity {
 	public Integer getId() {
 		return id;
 	}
-	/*
-	 * =======
-	 * 
-	 * @OneToMany()
-	 * 
-	 * @JoinColumn(name = "idVaga") private List<StatusVagaEntity> statusEntity;
-	 * 
-	 * public Integer getId() { return id; }
-	 * 
-	 * public List<StatusVagaEntity> getStatusEntity() { return statusEntity; }
-	 * 
-	 * public void setStatusEntity(List<StatusVagaEntity> statusEntity) {
-	 * this.statusEntity = statusEntity; >>>>>>>
-	 * 6177abe9dacbea6ac3a7b401caace31a61a978f4 }
-	 */
 
 	public void setId(Integer id) {
 		this.id = id;
@@ -392,12 +371,12 @@ public class VagaEntity {
 		this.vagaCandidatoEntity = vagaCandidatoEntity;
 	}
 
-	// public AvaliadorEntity getAvaliadorEntity() {
-	// return avaliadorEntity;
-	// }
+	public String getMarketingSocial() {
+		return marketingSocial;
+	}
 
-	// public void setAvaliadorEntity(AvaliadorEntity avaliadorEntity) {
-	// this.avaliadorEntity = avaliadorEntity;
-	// }
+	public void setMarketingSocial(String marketingSocial) {
+		this.marketingSocial = marketingSocial;
+	}
 
 }

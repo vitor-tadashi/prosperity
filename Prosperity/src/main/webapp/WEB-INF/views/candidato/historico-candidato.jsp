@@ -22,7 +22,6 @@
 		<!--breadcrumb-->
 
 		<!-- SOMENTE ALTERAR DAQUI PARA BAIXO -->
-
 		<div class="padding-md">
 			<div class="row">
 				<section class="panel panel-default">
@@ -72,7 +71,7 @@
 										</div>
 										<div class="row">
 											<div class="form-group col-md-6">
-												<p class="" id="nome"><strong>Pretensão salarial: </strong>${candidato.valorPretensao }</p>
+												<p class="" id="nome"><strong>Pretensão salarial: </strong>R$ ${candidato.valorPretensao }</p>
 											</div>
 											<div class="form-group col-md-6">
 												<p class="" id="nome"><strong>Currículo: </strong>&nbsp;&nbsp;<a href="/candidato/file/${candidato.id}" target="_blank" data-toggle="tooltip" title="Baixar currículo" class="fa fa-download fa-lg"></a></p>
@@ -133,6 +132,31 @@
 									</fieldset>
 								</div>
 								<div class="tab-pane fade" id="second">
+									<fieldset>
+										<legend style="color:#424f63"><h5><strong>Vaga aplicado</strong></h5></legend>
+										<div class="row">
+											<div class="form-group col-md-4">
+												<p class="" id="nome"><strong>Vaga: </strong>${candidato.vagaCandidato.vaga.nomeVaga}</p>
+											</div>
+											<div class="form-group col-md-4">
+												<p class="" id="nome"><strong>Solicitante: </strong>${candidato.vagaCandidato.vaga.nomeSolicitante}</p>
+											</div>
+											<div class="form-group col-md-4">
+												<p class="" id="nome"><strong>Horário: </strong>${candidato.vagaCandidato.vaga.horarioEntrada} às ${candidato.vagaCandidato.vaga.horarioSaida }</p>
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-md-4">
+												<p class="" id="nome"><strong>Cargo: </strong>${candidato.vagaCandidato.vaga.cargoBean.nome}</p>
+											</div>
+											<div class="form-group col-md-4">
+												<p class="" id="nome"><strong>Senioridade: </strong>${candidato.vagaCandidato.vaga.senioridadeBean.nome}</p>
+											</div>
+											<div class="form-group col-md-4 bootstrap-timepicker">
+												<p class="" id="nome"><strong>Data de início: </strong><fmt:formatDate value="${candidato.vagaCandidato.vaga.dataInicio}" pattern="dd/MM/yyyy"/></p>
+											</div>
+										</div>
+									</fieldset>	
 									<fieldset>
 										<legend style="color:#424f63"><h5><strong>Datas de contatos</strong></h5></legend>
 										<div class="row">
@@ -212,7 +236,7 @@
 									<fieldset>
 										<legend style="color:#424f63"><h5><strong>Eventos do processo seletivo</strong></h5></legend>
 										<ul class="timeline">
-											<c:set var="count" value="0" scope="page" />
+											<c:set var="c" value="0" scope="page" />
 											<c:forEach var="statusPorMesAno"
 												items="${candidato.statusPorMesAno}">
 												<li><div class="tldate">${statusPorMesAno.key}</div></li>
@@ -229,15 +253,10 @@
 													</c:choose>
 				
 													<li class="${cssTimeline}">
-														<div class="tl-circ"></div>
+														<div class="tl-circ" style="background:${status.status.css}"></div>
 														<div class="timeline-panel">
 															<div class="tl-heading">
-																<h4>
-																	Status: ${status.status.nome} 
-																	<c:if test="${status.status.id == 10}">
-																		<a class="fa fa-eye" data-toggle="tooltip" title="Visualizar proposta"></a>
-																	</c:if>
-																</h4>
+																<h4>Status: ${status.status.nome} </h4>
 																<p>
 																	<small class="text-muted"><i class="fa fa-calendar"></i>
 																		<fmt:formatDate value="${status.dataAlteracao}"
@@ -253,16 +272,17 @@
 																	</div>
 																	<div class="row">
 																		<p>
-																			<label>Usuário:</label> <span>${status.usuario.nome}</span>
+																			<label>Funcionário:</label> <span>${status.usuario.funcionario.nome}</span>
 																		</p>
 																	</div>
 																	<c:if test="${status.status.id == 10}">
-																		<div class="row">
+																		<div class="row hide proposta-js">
 																			<p class="">
-																				<label>Líquido c/ benefícios:</label>R$: <span>${candidato.propostaBean[0].anteriorTotalAnualLiquidoComBeneficios}</span>
+																				<label>Salário anual c/ benef.:</label>R$: <span>${candidato.propostaBean[c].anteriorTotalAnualLiquidoComBeneficios}</span>
 																				<i class="fa fa-long-arrow-right"></i>
-																				<label> Líquido c/ benefícios:</label>R$: <span>${candidato.propostaBean[0].novoTotalAnualLiquidoComBeneficios}</span>
+																				R$: <span>${candidato.propostaBean[c].novoTotalAnualLiquidoComBeneficios}</span>
 																			</p>
+																		<input type="hidden" value="${c=c+1 }">
 																		</div>
 																	</c:if>
 																</div>
@@ -292,6 +312,9 @@
 					$(this).remove();
 				}
 			});
+			if($('#funcionalidade23').val() || $('#funcionalidade26').val()){
+				$('.proposta-js').removeClass('hide');
+			}
 		});
 		function baixarProva(index){
 			var url = $('#p'+index).val()

@@ -125,14 +125,6 @@ public class VagaController {
 		paginacao(page, model, vaga);
 
 		model.addAttribute("vagas", vagas);
-
-		// List<VagaBean> listarDecrescente = vagaBusiness.listarDecrescente();
-
-		// FAZ APARECER A TABELA
-		// model.addAttribute("vagas", vagaBusiness.listarDecrescente());
-
-		/* model.addAttribute("vagas", vagaBusiness.listar()); */
-
 		List<AvaliadorVagaBean> avaliadorVagaBean = avaliadorVagaBusiness.obterAvaliador(id);
 		model.addAttribute("avaliadores", avaliadorVagaBean);
 
@@ -142,11 +134,6 @@ public class VagaController {
 		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.obterTodos();
 		model.addAttribute("listaSenioridade", listaSenioridade);
 
-		/*
-		 * List<VagaBean> listaVaga = vagaBusiness.listar();
-		 * model.addAttribute("listaVaga", listaVaga);
-		 */
-
 		List<StatusBean> listaStatus = statusBusiness.obterTodos();
 		model.addAttribute("listaStatus", listaStatus);
 
@@ -154,14 +141,6 @@ public class VagaController {
 		model.addAttribute("listaStatusDrop", listaStatusDrop);
 
 		vagaBusiness.obterQtdCandidatos(1200);
-
-		/*
-		 * List<StatusVagaBean> listaStatusVaga =
-		 * statusVagaBusiness.obterTodos(); StatusVagaBean vagaStatus = new
-		 * StatusVagaBean(); for(StatusVagaBean svb : listaStatusVaga){
-		 * vagaStatus = svb; } model.addAttribute("listaStatusVaga",
-		 * listaStatusVaga);
-		 */
 
 		return "vaga/consultar-vaga";
 	}
@@ -182,11 +161,6 @@ public class VagaController {
 
 		List<SenioridadeBean> listaSenioridade = senioridadeBusiness.obterTodos();
 		model.addAttribute("listaSenioridade", listaSenioridade);
-
-		/*
-		 * List<VagaBean> listaVaga = vagaBusiness.listar();
-		 * model.addAttribute("listaVaga", listaVaga);
-		 */
 
 		List<StatusBean> listaStatus = statusBusiness.obterTodos();
 		model.addAttribute("listaStatus", listaStatus);
@@ -266,7 +240,6 @@ public class VagaController {
 	public RedirectView cancelaCandidato(Model model, @PathVariable Integer id, RedirectAttributes redirectAttributes)
 			throws BusinessException {
 		SituacaoVagaBean bean = new SituacaoVagaBean();
-		// vagaBusiness.cancelarVagaCandidato(id);
 		bean.setIdVaga(id);
 		bean.setStatus(StatusVagaEnum.CANCELADO);
 		vagaBusiness.alterarStatus(bean);

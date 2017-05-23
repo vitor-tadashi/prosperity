@@ -15,6 +15,10 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * @author guilherme.oliveira
+ *
+ */
 @Entity
 @Table(name = "tbProposta")
 @NamedQueries({
@@ -112,6 +116,9 @@ public class PropostaEntity {
 
 	@Column(name = "vlrNvTotalAnualNvLiquidoComBeneficios")
 	private Double novoTotalAnualLiquidoComBeneficios;
+	
+	@Column(name = "cmProposta")
+	private String cmProposta;
 
 	@Column(name = "flSituacao")
 	private Boolean flSituacao;
@@ -377,6 +384,14 @@ public class PropostaEntity {
 
 	public void setCandidato(Integer candidato) {
 		this.candidato = candidato;
+	}
+
+	public String getCmProposta() {
+		return cmProposta;
+	}
+
+	public void setCmProposta(String cmProposta) {
+		this.cmProposta = cmProposta;
 	}
 
 }

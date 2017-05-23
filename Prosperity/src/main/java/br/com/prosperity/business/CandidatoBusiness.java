@@ -32,12 +32,14 @@ import br.com.prosperity.bean.StatusCandidatoBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.converter.AvaliacaoConverter;
 import br.com.prosperity.converter.AvaliadorCandidatoConverter;
+import br.com.prosperity.converter.AvaliadorVagaConverter;
 import br.com.prosperity.converter.CandidatoConverter;
 import br.com.prosperity.converter.CompetenciaConverter;
 import br.com.prosperity.converter.ComunicacaoConverter;
 import br.com.prosperity.converter.DataEntrevistaConverter;
 import br.com.prosperity.converter.FuncionarioConverter;
 import br.com.prosperity.converter.UsuarioConverter;
+import br.com.prosperity.converter.VagaConverter;
 import br.com.prosperity.dao.AvaliacaoDAO;
 import br.com.prosperity.dao.AvaliadorCandidatoDAO;
 import br.com.prosperity.dao.AvaliadorVagaDAO;
@@ -144,10 +146,16 @@ public class CandidatoBusiness {
 	private AvaliadorCandidatoConverter avaliadorCandidatoConverter;
 
 	@Autowired
-	private DataEntrevistaConverter dataEntrevistaConverter;
+	private AvaliadorVagaDAO avaliadorVagaDAO;
 
 	@Autowired
-	private AvaliadorVagaDAO avaliadorVagaDAO;
+	private AvaliadorVagaConverter avaliadorVagaConverter;
+
+	@Autowired
+	private VagaConverter vagaConverter;
+
+	@Autowired
+	private DataEntrevistaConverter dataEntrevistaConverter;
 
 	@Autowired
 	private VagaDAO vagaDAO;
@@ -165,13 +173,13 @@ public class CandidatoBusiness {
 	private UsuarioBusiness usuarioBusiness;
 
 	@Autowired
-	SituacaoCandidatoBean situacaoCandidato;
+	private SituacaoCandidatoBean situacaoCandidato;
 
 	@Autowired
-	FuncionarioDAO funcionarioDAO;
+	private FuncionarioDAO funcionarioDAO;
 
 	@Autowired
-	FuncionarioConverter funcionarioConverter;
+	private FuncionarioConverter funcionarioConverter;
 
 	@Transactional(readOnly = true)
 	public List<CandidatoBean> listarDecrescente() {
@@ -255,8 +263,10 @@ public class CandidatoBusiness {
 		CandidatoEntity candidatoEntity = new CandidatoEntity();
 
 		// Para inserir candidato:
-		Integer idFuncionario = candidatoBean.getVagaCandidato().getFuncionarioBean().getId();
-		FuncionarioEntity funcionarioEntity = funcionarioDAO.findById(idFuncionario);
+		if (candidatoBean.getVagaCandidato().getFuncionarioBean() != null) {
+			Integer idFuncionario = candidatoBean.getVagaCandidato().getFuncionarioBean().getId();
+			FuncionarioEntity funcionarioEntity = funcionarioDAO.findById(idFuncionario);
+		}
 		VagaCandidatoEntity vagaCandidatoEntity = new VagaCandidatoEntity();
 
 		if (candidatoBean.getId() == null) {
@@ -282,6 +292,7 @@ public class CandidatoBusiness {
 
 		} else {
 			candidatoEntity = candidatoDAO.findById(candidatoBean.getId());
+
 			beans = candidatoConverter.convertEntityToBean(candidatoEntity);
 			if (beans.getDataEntrevista() != null) {
 				int aux = 0;
@@ -291,18 +302,30 @@ public class CandidatoBusiness {
 					aux++;
 				}
 			}
-			if (beans.getUltimaVaga().getId() == candidatoBean.getVagaCandidato().getVaga().getId()) {
-				situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
-				situacaoCandidato.setIdCandidato(candidatoEntity.getId());
-				alterarStatus(situacaoCandidato);
+			if (candidatoBean.getVagaCandidato().getVaga() == null) {
+				candidatoBean.getVagaCandidato().setVaga(beans.getUltimaVaga());
 			}
 			candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoEntity, candidatoBean);
 			tratarInformacoes(candidatoEntity);
-
-			candidatoEntity
-					.setAvaliadores(avaliadorCandidatoDAO.findByNamedQuery("obterProposta", candidatoEntity.getId()));
+			definirFormacao(candidatoBean, candidatoEntity);
 
 			candidatoDAO.update(candidatoEntity);
+
+			if(candidatoBean.getVagaCandidato().getVaga().getId() != 0){
+				if (!beans.getUltimaVaga().getId().equals(candidatoBean.getVagaCandidato().getVaga().getId())) {
+					candidatoEntity.setDataAbertura(new Date());
+					desativarDataEntrevista(candidatoBean);
+	
+					VagaEntity vagaAtual = definirVagas(candidatoBean, candidatoEntity);
+	
+					inserirAvaliadores(candidatoEntity, vagaAtual.getId());
+	
+					situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
+					situacaoCandidato.setIdCandidato(candidatoEntity.getId());
+					alterarStatus(situacaoCandidato);
+				}
+			}
+
 		}
 	}
 
@@ -561,7 +584,7 @@ public class CandidatoBusiness {
 				avaliadorCandidatoEnitty.setUsuario(avaliadorVagaEntity.getUsuario());
 				avaliadorCandidatoEnitty.setCandidato(candidato);
 				avaliadorCandidatoDAO.insert(avaliadorCandidatoEnitty);
-				dataEntrevistaEntity.setCandidato(candidato);
+				dataEntrevistaEntity.setCandidato(candidato.getId());
 				dataEntrevistaEntity.setUsuario(avaliadorVagaEntity.getUsuario());
 				dataEntrevistaEntity.setVaga(vaga);
 				dataEntrevistaDAO.insert(dataEntrevistaEntity);
@@ -621,20 +644,6 @@ public class CandidatoBusiness {
 		float pag = 0;
 		List<Criterion> criterions = confFiltro(candidato);
 		pag = (float) candidatoDAO.rowCount(criterions) / (float) CandidatoDAO.limitResultsPerPage;
-		/*
-		 * else { List<Integer> listaStatus = obterStatusDisponivelAprovacao();
-		 * usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
-		 * Integer idStatusCandidatura = 0;
-		 * 
-		 * for (FuncionalidadeBean funcionalidadeBean :
-		 * usuarioBean.getPerfil().getListaFuncionalidades()) { if
-		 * (funcionalidadeBean.getId() == 27) { idStatusCandidatura =
-		 * StatusCandidatoEnum.CANDIDATURA.getValue(); } } pag = (float)
-		 * candidatoDAO.countAprovacao(listaStatus,
-		 * StatusCandidatoEnum.CANDIDATOEMANALISE.getValue(),
-		 * usuarioBean.getId(), idStatusCandidatura) / (float)
-		 * CandidatoDAO.limitResultsPerPage; }
-		 */
 		Integer paginas = null;
 		if (pag % 1 == 0) {
 			paginas = (int) pag;
@@ -758,9 +767,11 @@ public class CandidatoBusiness {
 	}
 
 	public boolean podeEditarVaga(StatusCandidatoBean ultimoStatus) {
-		if (ultimoStatus.getStatus().getId() != 5 && ultimoStatus.getStatus().getId() != 17
-				&& ultimoStatus.getStatus().getId() != 29) {
-			return false;
+		if(ultimoStatus.getStatus().getId() != null){
+			if (ultimoStatus.getStatus().getId() != 5 && ultimoStatus.getStatus().getId() != 17
+					&& ultimoStatus.getStatus().getId() != 29) {
+				return false;
+			}
 		}
 		return true;
 	}
@@ -773,5 +784,17 @@ public class CandidatoBusiness {
 	@Transactional
 	public void inserirComunicacao(ComunicacaoBean bean) {
 		comunicacaoDAO.insert(comunicacaoConverter.convertBeanToEntity(bean));
+	}
+
+	@Transactional
+	private void desativarDataEntrevista(CandidatoBean candidatoBean) {
+		List<DataEntrevistaEntity> dtsEntrevista = dataEntrevistaDAO.findByNamedQuery("desativarDtEntrevista",
+				candidatoBean.getId());
+
+		for (DataEntrevistaEntity dtEntrevista : dtsEntrevista) {
+			dtEntrevista.setCandidato(candidatoBean.getId());
+			dtEntrevista.setFlSituacao(false);
+			dataEntrevistaDAO.update(dtEntrevista);
+		}
 	}
 }

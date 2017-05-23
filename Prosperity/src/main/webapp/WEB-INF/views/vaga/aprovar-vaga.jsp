@@ -521,15 +521,24 @@
 	$(document).ready(function() {
 		/* Pegando valor das variáveis que foram armazenadas localmente:  */
 		var msg = localStorage.getItem("mensagem");
+	
+		/* Variável booleana para saber se houve erro: */
+		var sucesso = localStorage.getItem("isSuccess");
 		
 		/* Exibe a mensagem de mudança de status do candidato: */
 		if(msg!="" && msg!=undefined){
-			$('#divAlert').html(msg).addClass('alert alert-success').show();
-			escondeMensagem();
+			if(sucesso != true) {
+				$('#divAlert').html(msg).addClass('alert alert-success').show();
+				escondeMensagem();
+			} else {
+				$('#divAlert').html(msg).addClass('alert alert-danger').show();
+				escondeMensagem();
+			}
 		}
 		
 		msg = "";
 		localStorage.setItem("mensagem", "");
+		localStorage.setItem("isSuccess", true);
 	});
 		
 	// função para a alteração de status de acordo com os botões de ação.
@@ -545,13 +554,13 @@
     			
     			if(dado == '1') {
     				$('#aprova-modal').modal('hide');
-        			msg = 'Vaga ativada com sucesso!';
+        			msg = 'Vaga divulgada com sucesso!';
     			}else if(dado == '3'){
         			$('#cancela-modal').modal('hide');
         			msg = 'Vaga cancelada com sucesso!';
     			}else if(dado == '27'){
         			$('#aprova-modal').modal('hide');
-        			msg = 'Vaga aprovada com sucesso!';
+        			msg = 'Vaga divulgada com sucesso!';
     			}else if (dado == '18'){
     			$('#reprova-modal').modal('hide');
     			msg = 'Vaga reprovada com sucesso!';
@@ -561,6 +570,7 @@
     			}
     			
     			localStorage.setItem("mensagem", msg);
+    			localStorage.setItem("isSuccess", true);
     			location.reload();
     			
         	}).fail(function(jqXHR, textStatus) {
@@ -572,6 +582,7 @@
     			console.log(textStatus);
     			msg = "Ocorreu algo de errado!";
     			localStorage.setItem("mensagem", msg);
+    			localStorage.setItem("isSuccess", false);
     			location.reload();
     		});
     }
@@ -596,7 +607,7 @@
     	$('input.id-vaga').val(id);
     	$('input.id-status').val(status);
     		
-    	if( status == '1'){
+    	if( status == '27'){
     		titulo = "Aprovar vaga"
     		mensagem = "Deseja realmente aprovar esta vaga?";
     	}else if(status == '18'){
@@ -608,9 +619,9 @@
 		}else if(status == '2'){
 			titulo = "Fechar vaga"
 			mensagem = "Deseja realmente fechar esta vaga?"
-		}else if(status == '27'){
-			titulo = "Ativar vaga"
-			msg = 'Deseja realmente ativar esta vaga?';
+		}else if(status == '1'){
+			titulo = "Divulgar vaga"
+			mensagem = 'Deseja realmente divulgar esta vaga?';
 		}
     	
     	$("#modalLabel").text(titulo);

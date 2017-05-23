@@ -13,10 +13,9 @@ public class DataEntrevistaBean {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataEntrevista;
 	private UsuarioBean usuario;
-
 	private VagaBean vaga;
-
-	private CandidatoBean candidato;
+	private Integer candidato;
+	private Boolean flSituacao = true;
 
 	public Integer getId() {
 		return id;
@@ -50,12 +49,20 @@ public class DataEntrevistaBean {
 		this.vaga = vaga;
 	}
 
-	public CandidatoBean getCandidato() {
+	public Integer getCandidato() {
 		return candidato;
 	}
 
-	public void setCandidato(CandidatoBean candidato) {
+	public void setCandidato(Integer candidato) {
 		this.candidato = candidato;
+	}
+
+	public Boolean getFlSituacao() {
+		return flSituacao;
+	}
+
+	public void setFlSituacao(Boolean flSituacao) {
+		this.flSituacao = flSituacao;
 	}
 
 }

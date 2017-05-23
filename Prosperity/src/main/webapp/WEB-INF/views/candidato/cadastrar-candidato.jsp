@@ -74,11 +74,10 @@
 											class="text-success"><i class="fa fa-briefcase"></i> Inf.
 												vaga</a></li>
 <!-- 							     se o usuario da sessão for do rh, mostra a aba -->
-<%-- 										<c:if test="${autenticado.perfil.id} == 2 || ${autenticado.perfil.id} == 3"> --%>
-										<li class="tab-verity"><a href="#fourth"
+										<li id="tabDataEntrevista" class="tab-verity hide"><a href="#fourth"
 											data-toggle="tab" class="text-success"><i
 												class="fa fa-calendar"></i>&nbsp;Datas de entrevista</a></li>
-										<li class="tab-verity"><a href="#five" data-toggle="tab"
+										<li id="tabDataContato" class="tab-verity hide"><a href="#five" data-toggle="tab"
 											class="text-success"><i class="fa fa-calendar"></i>  Data
 												de contato</a></li>
 									</ul>
@@ -154,9 +153,9 @@
 												</div>
 												<div class="form-group col-md-2">
 													<label for="numero" class="control-label">Número</label> <input
-														type="text" class="form-control parsley-validated"
+														type="number" class="form-control parsley-validated"
 														id="numero" data-required="true" name="endereco.numero"
-														value="${candidato.endereco.numero}" maxlength="30" />
+														value="${candidato.endereco.numero}"  min="0"/>
 
 												</div>
 												<div class="form-group col-md-3">
@@ -180,12 +179,14 @@
 												</div>
 												<div class="form-group col-xs-12">
 													<label class="control-label">Currículo</label>
-													<div class="upload-file" style="width: 356px;">
+													<div class="upload-file" style="width: 100%;">
 														<input type="file" id="upload-curriculo" name="file"
 															class="upload-demo" value="${candidato.curriculo}">
 														<label data-title="Selecione" for="upload-curriculo">
-															<span data-title="Nenhum arquivo selecionado..."></span>
+															<span id="cmnCurriculo" data-title="${candidato.curriculo}"></span>
 														</label>
+														<input type="text" id="upload-curriculo2" name="file"
+															class="hidden" value="${candidato.curriculo}">
 													</div>
 												</div>
 											</div>
@@ -294,34 +295,35 @@
 										</div>
 										</div>
 										<!--começo - tab 4 | se o usuario da sessão for do rh, mostra o conteudo -->
-<%-- 										<c:if test="${autenticado.perfil.id} == 2 || ${autenticado.perfil.id} == 3"> --%>
+
 										<div class="tab-pane fade" id="fourth">
 											<c:forEach var="data" items="${candidato.dataEntrevista}"
 												varStatus="status">
-												<div class="row">
-													<div class='col-xs-4 form-group'>
-														<input type="hidden" value="${data.id}"
-															name="dataEntrevista[${status.index}].id" /> <label>Nome
-															do entrevistador: &nbsp;</label>
-														<p>${data.usuario.funcionario.nome}</p>
-														<input type="hidden" name="data.usuario"
-															value="${data.usuario}" /> <input type="hidden"
-															name="data.candidato" value="${data.candidato}" /> <input
-															type="hidden" name="data.vaga" value="${data.vaga}" />
+												<c:if test="${data.flSituacao == true}">
+													<div class="row">
+														<div class='col-xs-4 form-group'>
+															<input type="hidden" value="${data.id}"
+																name="dataEntrevista[${status.index}].id" /> <label>Nome
+																do entrevistador: &nbsp;</label>
+															<p>${data.usuario.funcionario.nome}</p>
+															<input type="hidden" name="data.usuario"
+																value="${data.usuario}" /> <input type="hidden"
+																name="data.candidato" value="${data.candidato}" /> <input
+																type="hidden" name="data.vaga" value="${data.vaga}" />
+														</div>
+														<div class='col-md-2 form-group'>
+															<label>Data de entrevista: &nbsp;</label>
+															<fmt:formatDate pattern="dd/MM/yyyy"
+																value="${data.dataEntrevista}" var="dataEntrevista" />
+															<input type="text"
+																name="dataEntrevista[${status.index}].dataEntrevista"
+																id="dataEntrevista" class="form-control date"
+																data-required="false" value="${dataEntrevista}">
+														</div>
 													</div>
-													<div class='col-md-2 form-group'>
-														<label>Data de entrevista: &nbsp;</label>
-														<fmt:formatDate pattern="dd/MM/yyyy"
-															value="${data.dataEntrevista}" var="dataEntrevista" />
-														<input type="text"
-															name="dataEntrevista[${status.index}].dataEntrevista"
-															id="dataEntrevista" class="form-control date"
-															data-required="false" value="${dataEntrevista}">
-													</div>
-												</div>
+												</c:if>
 											</c:forEach>
 										</div>
-										
 										<!--fim - tab 4 -->
 										
 										<!--começo - tab 5-->
@@ -374,10 +376,10 @@
 								</div>
 								<div class="panel-footer">
 									<input type="hidden" value="${candidato.id}" name="id" id="candidato">
-									<input type="hidden" value="${erro}" id="contErro"> <a
+									<input type="hidden" value="${erro}" id="contErro"> <button id="btnDownload"
 										href="/candidato/file/${candidato.id}" target="_blank"
-										class="btn btn-default pull-left download-download">Download</a>
-									<button class="btn btn-success pull-right">Salvar</button>
+										class="btn btn-default pull-left download-download">Download</button>
+									<button class="btn btn-success pull-right" onclick="salvarForm()">Salvar</button>
 								</div>
 							</form>
 						</div>

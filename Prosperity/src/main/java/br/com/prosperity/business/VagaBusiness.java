@@ -228,9 +228,8 @@ public class VagaBusiness {
 		} else {
 			vagaDAO.update(vagaEntity);
 		}
-		if (usuarioBean != null && usuarioBean.size() > 0) {
+		if(usuarioBean.size() > 0)
 			inserirAvaliadores(vagaEntity, usuarioBean);
-		}
 	}
 
 	@Transactional
@@ -270,7 +269,8 @@ public class VagaBusiness {
 		if (situacaoVaga.getStatus() == StatusVagaEnum.ATIVO) {
 			List<AvaliadorVagaEntity> avaliadorVagaEntity = avaliadorVagaDao.findByNamedQuery("obterAvaliadoresDaVaga",
 					vagaEntity.getId());
-			if (avaliadorVagaEntity == null || avaliadorVagaEntity.size() == 0) {
+			if (avaliadorVagaEntity == null || avaliadorVagaEntity.size() == 0 ||
+				vagaEntity.getMarketingSocial().equals("")) {
 				situacaoVaga.setStatus(StatusVagaEnum.VAGANOVA);
 			}
 		}
@@ -414,14 +414,14 @@ public class VagaBusiness {
 
 		try {
 			VagaEntity vaga = vagaDAO.findById(situacaoVagaBean.getIdVaga());
-			
+
 			List<UsuarioBean> usuarios = buscarUsuariosSemRepetir();
-			
+
 			// Não enviar email caso a lista estiver vazia:
-			if(usuarios==null || usuarios.size()==0){
+			if (usuarios == null || usuarios.size() == 0) {
 				return;
 			}
-			
+
 			ArrayList<String> recipients = new ArrayList<>();
 			ArrayList<String> nomes = new ArrayList<>();
 
@@ -438,9 +438,9 @@ public class VagaBusiness {
 				}
 			}
 			GeradorEmail email = new GeradorEmail();
-				for (int i = 0, j = 0; i< recipients.size() && j<nomes.size(); i++, j++) {
-					email.enviarEmail(vaga, recipients.get(i), nomes.get(j));
-				}
+			for (int i = 0, j = 0; i < recipients.size() && j < nomes.size(); i++, j++) {
+				email.enviarEmail(vaga, recipients.get(i), nomes.get(j));
+			}
 		} catch (Exception e) {
 			System.out.println("Erro\n");
 			e.printStackTrace();
@@ -451,13 +451,13 @@ public class VagaBusiness {
 		List<UsuarioBean> usuarios = usuarioBusiness.findAll();
 		List<UsuarioBean> usuariosNaoRepetidos = new ArrayList<>();
 		Set<Integer> idUsuarios = new HashSet<Integer>();
-		
-		for(UsuarioBean u : usuarios) {
-			if(idUsuarios.add( u.getId() )) {
+
+		for (UsuarioBean u : usuarios) {
+			if (idUsuarios.add(u.getId())) {
 				usuariosNaoRepetidos.add(u);
 			}
 		}
-		
+
 		return usuariosNaoRepetidos;
 	}
 }
