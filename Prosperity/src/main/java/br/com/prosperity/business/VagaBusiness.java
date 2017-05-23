@@ -228,7 +228,7 @@ public class VagaBusiness {
 		} else {
 			vagaDAO.update(vagaEntity);
 		}
-		if(usuarioBean.size() > 0)
+		if(usuarioBean.size() > 0 && usuarioBean.get(0).getId()!= null)
 			inserirAvaliadores(vagaEntity, usuarioBean);
 	}
 
