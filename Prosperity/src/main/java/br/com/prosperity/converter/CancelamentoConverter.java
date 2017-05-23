@@ -10,6 +10,9 @@ public class CancelamentoConverter implements Converter<CancelamentoEntity, Canc
 
 	@Override
 	public CancelamentoEntity convertBeanToEntity(CancelamentoBean bean) {
+		if (bean != null) {
+			return null;
+		}
 		CancelamentoEntity entity = new CancelamentoEntity();
 
 		entity.setId(bean.getId());
@@ -20,6 +23,9 @@ public class CancelamentoConverter implements Converter<CancelamentoEntity, Canc
 
 	@Override
 	public CancelamentoBean convertEntityToBean(CancelamentoEntity entity) {
+		if (entity != null) {
+			return null;
+		}
 		CancelamentoBean bean = new CancelamentoBean();
 
 		bean.setId(entity.getId());
