@@ -33,6 +33,7 @@ import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.converter.AvaliacaoConverter;
 import br.com.prosperity.converter.AvaliadorCandidatoConverter;
 import br.com.prosperity.converter.AvaliadorVagaConverter;
+import br.com.prosperity.converter.CancelamentoConverter;
 import br.com.prosperity.converter.CandidatoConverter;
 import br.com.prosperity.converter.CompetenciaConverter;
 import br.com.prosperity.converter.ComunicacaoConverter;
@@ -44,6 +45,7 @@ import br.com.prosperity.dao.AvaliacaoDAO;
 import br.com.prosperity.dao.AvaliadorCandidatoDAO;
 import br.com.prosperity.dao.AvaliadorVagaDAO;
 import br.com.prosperity.dao.CanalInformacaoDAO;
+import br.com.prosperity.dao.CancelamentoDAO;
 import br.com.prosperity.dao.CandidatoDAO;
 import br.com.prosperity.dao.CompetenciaDAO;
 import br.com.prosperity.dao.ComunicacaoDAO;
@@ -180,6 +182,12 @@ public class CandidatoBusiness {
 
 	@Autowired
 	private FuncionarioConverter funcionarioConverter;
+
+	@Autowired
+	private CancelamentoDAO cancelamentoDAO;
+
+	@Autowired
+	private CancelamentoConverter cancelamentoConverter;
 
 	@Transactional(readOnly = true)
 	public List<CandidatoBean> listarDecrescente() {
@@ -423,18 +431,20 @@ public class CandidatoBusiness {
 		StatusCandidatoEntity statusCandidatoEntity = null;
 		List<StatusFuturoEntity> statusFuturoEntity = null;
 		List<AvaliadorCandidatoEntity> avaliadorCandidatoEntity = null;
+		List<StatusCandidatoEntity> listaStatusCandidato = null;
+		listaStatusCandidato = statusCandidatoDAO.findByNamedQuery("obterStatusCandidato",
+				situacaoCandidato.getIdCandidato());
 		List<StatusDisponivelEntity> listaStatusDisponivelEntity = statusDisponivelDAO.findAll();
 
 		if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANDIDATURA.getValue()
 				|| situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANCELADO.getValue()
 				|| situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.SEMVAGA.getValue()) {
-			statusCandidatoEntity = statusAlteracao(situacaoCandidato);
-			statusCandidatoDAO.insert(statusCandidatoEntity);
+			if (listaStatusCandidato.get(0).getStatus().getId() != situacaoCandidato.getStatus().getValue()) {
+				statusCandidatoEntity = statusAlteracao(situacaoCandidato);
+				statusCandidatoDAO.insert(statusCandidatoEntity);
+			}
 		} else {
 			if (listaStatusDisponivelEntity != null) {
-				List<StatusCandidatoEntity> listaStatusCandidato = null;
-				listaStatusCandidato = statusCandidatoDAO.findByNamedQuery("obterStatusCandidato",
-						situacaoCandidato.getIdCandidato());
 				for (StatusDisponivelEntity statusDisponivelEntity : listaStatusDisponivelEntity) {
 					if (statusDisponivelEntity.getStatus().getId() == listaStatusCandidato.get(0).getStatus().getId()) {
 						if (situacaoCandidato.getStatus().getValue() == statusDisponivelEntity
@@ -497,15 +507,19 @@ public class CandidatoBusiness {
 		if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANCELADO.getValue()
 				|| situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOREPROVADO.getValue()) {
 			desativarAvaliadores(situacaoCandidato.getIdCandidato());
-
 		}
 
 		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
 		statusCandidatoEntity.setStatus(statusDAO.findById(situacaoCandidato.getStatus().getValue()));
 		statusCandidatoEntity.setCandidato(candidatoEntity);
 		statusCandidatoEntity.setDsParecer(situacaoCandidato.getParecer());
-		statusCandidatoEntity.setProposta(situacaoCandidato.getProposta());
 		statusCandidatoEntity.setDtAlteracao(new Date());
+		if (situacaoCandidato.getIdCancelamento() != null) {
+			statusCandidatoEntity.setCancelamento(cancelamentoDAO.findById(situacaoCandidato.getIdCancelamento()));
+		}
+		if (situacaoCandidato.getDsCancelamento() != null) {
+			statusCandidatoEntity.setDsCancelamento(situacaoCandidato.getDsCancelamento());
+		}
 		if (usuarioBean != null)
 			statusCandidatoEntity.setUsuario(usuarioDAO.findById(usuarioBean.getId()));
 		statusCandidatoEntity.setFlSituacao(true);

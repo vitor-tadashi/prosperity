@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class TipoStatusEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idTpStatus", unique = true, nullable = false)
 	private Integer id;
 
