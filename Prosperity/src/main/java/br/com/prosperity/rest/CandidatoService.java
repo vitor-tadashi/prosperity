@@ -7,8 +7,12 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.WordpressBean;
@@ -18,27 +22,28 @@ import br.com.prosperity.exception.BusinessException;
 @RestController
 public class CandidatoService {
 	@Autowired
-	private CandidatoBusiness b;
+	private CandidatoBusiness candidatoBusiness;
 
 	@POST
-	@RequestMapping("/servico")
-	@Consumes("application/xml")
-	public void salvarBean(WordpressBean w) {
+	@RequestMapping(value = "/servico")
+	@Consumes("application/json")
+	public void salvarBean(@RequestBody String json) {
 
-		System.out.println("Chegou aqui!");
+		Gson gson = new GsonBuilder().create();
+		WordpressBean w = gson.fromJson(json, WordpressBean.class);
 
 		List<CandidatoBean> candidatos = new ArrayList<>();
 
 		candidatos = w.getCandidatos();
 
-		if (!candidatos.isEmpty())
+		if (!candidatos.isEmpty()) {
 			for (CandidatoBean c : candidatos) {
 				try {
-					b.inserirWordpress(c);
+					candidatoBusiness.inserirWordpress(c);
 				} catch (BusinessException e) {
-				
 					e.printStackTrace();
 				}
 			}
+		}
 	}
 }

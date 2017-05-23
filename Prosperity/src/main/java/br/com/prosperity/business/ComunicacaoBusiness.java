@@ -13,20 +13,18 @@ import br.com.prosperity.entity.ComunicacaoEntity;
 
 @Component
 public class ComunicacaoBusiness {
-	
+
 	@Autowired
 	ComunicacaoDAO comunicacaoDAO;
+
 	@Autowired
 	ComunicacaoConverter comunicacaoConverter;
-	
+
 	@Transactional
-	public List<ComunicacaoBean> listarDataComunicacao(Integer idCandidato){
+	public List<ComunicacaoBean> listarDataComunicacao(Integer idCandidato) {
 		List<ComunicacaoEntity> comunicacaoEntity = comunicacaoDAO.findByNamedQuery("obterComunicacao", idCandidato);
 		List<ComunicacaoBean> comunicacaoBean = comunicacaoConverter.convertEntityToBean(comunicacaoEntity);
-		
-		return comunicacaoBean;
-		
-	}
-	
 
+		return comunicacaoBean;
+	}
 }

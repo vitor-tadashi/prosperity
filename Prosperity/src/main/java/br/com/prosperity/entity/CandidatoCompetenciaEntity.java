@@ -74,5 +74,4 @@ public class CandidatoCompetenciaEntity {
 	public void setIdCandidato(Integer idCandidato) {
 		this.idCandidato = idCandidato;
 	}
-
 }

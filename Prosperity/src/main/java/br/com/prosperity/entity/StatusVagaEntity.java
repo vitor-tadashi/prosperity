@@ -20,41 +20,34 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "tbStatusVaga")
 @NamedQueries({
-	@NamedQuery(name = "obterStatusVaga", query = "SELECT v FROM StatusVagaEntity v WHERE v.vaga = ?1 AND v.situacao = TRUE"),
-	@NamedQuery(name="desativarStatusVaga",query="SELECT sv FROM StatusVagaEntity sv WHERE sv.vaga = ?1")
-})
+		@NamedQuery(name = "obterStatusVaga", query = "SELECT v FROM StatusVagaEntity v WHERE v.vaga = ?1 AND v.situacao = TRUE"),
+		@NamedQuery(name = "desativarStatusVaga", query = "SELECT sv FROM StatusVagaEntity sv WHERE sv.vaga = ?1") })
 
 public class StatusVagaEntity {
-	/* Mapeamento dos Atributos */
-
-	/* Mapeamento do Id */
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idStatusVaga", unique = true, nullable = false)
 	private Integer id;
-	/* fim */
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idStatus")
 	private StatusEntity status;
 
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
 
 	@Column(name = "dtAlteracao")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataAlteracao;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idVaga")
 	private VagaEntity vaga;
-	
-	@Column(name="flSituacao")
-	private Boolean situacao;
 
-	/* fim dos mapeamentos */
+	@Column(name = "flSituacao")
+	private Boolean situacao;
 
 	public Integer getId() {
 		return id;
@@ -103,6 +96,4 @@ public class StatusVagaEntity {
 	public void setSituacao(Boolean situacao) {
 		this.situacao = situacao;
 	}
-	
-	
 }

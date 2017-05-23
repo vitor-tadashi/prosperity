@@ -6,16 +6,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbProvaCandidato")
-@NamedQueries({
- @NamedQuery(name = "queryProva", query = "SELECT u FROM ProvaCandidatoEntity u LEFT OUTER JOIN u.provas c WHERE u.candidato.id = ?1")
-})
+@NamedQuery(name = "queryProva", query = "SELECT u FROM ProvaCandidatoEntity u LEFT OUTER JOIN u.provas c WHERE u.candidato.id = ?1")
 
 public class ProvaCandidatoEntity {
 
@@ -77,5 +74,4 @@ public class ProvaCandidatoEntity {
 	public void setProvas(ProvaEntity provas) {
 		this.provas = provas;
 	}
-
 }

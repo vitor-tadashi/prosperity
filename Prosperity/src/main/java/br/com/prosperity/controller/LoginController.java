@@ -21,7 +21,7 @@ public class LoginController {
 
 	@Autowired
 	private UsuarioBean usuario;
-	
+
 	@Autowired
 	private HttpSession session;
 
@@ -44,10 +44,9 @@ public class LoginController {
 		} catch (BusinessException ex) {
 			model.addAttribute("log", ex.getMessage());
 		}
-
 		return "login/acesso";
 	}
-	
+
 	@RequestMapping(value = "/primeiro-acesso", method = RequestMethod.GET)
 	public String primeiroAcessoUsuario() throws BusinessException {
 		return "login/acesso";

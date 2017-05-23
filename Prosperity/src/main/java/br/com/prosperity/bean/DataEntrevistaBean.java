@@ -64,5 +64,4 @@ public class DataEntrevistaBean {
 	public void setFlSituacao(Boolean flSituacao) {
 		this.flSituacao = flSituacao;
 	}
-
 }

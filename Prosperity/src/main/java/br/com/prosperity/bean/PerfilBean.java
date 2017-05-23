@@ -10,7 +10,6 @@ public class PerfilBean {
 
 	private Integer id;
 	private String nome;
-	// Não tira o new.. Dá exception [Stephen]
 	private List<FuncionalidadeBean> listaFuncionalidades = new ArrayList<>();
 
 	public Integer getId() {
@@ -36,5 +35,4 @@ public class PerfilBean {
 	public void setListaFuncionalidades(List<FuncionalidadeBean> listaFuncionalidades) {
 		this.listaFuncionalidades = listaFuncionalidades;
 	}
-
 }

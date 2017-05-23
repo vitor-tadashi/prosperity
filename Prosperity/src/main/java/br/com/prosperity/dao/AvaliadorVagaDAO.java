@@ -5,6 +5,5 @@ import org.springframework.stereotype.Repository;
 import br.com.prosperity.entity.AvaliadorVagaEntity;
 
 @Repository
-public class AvaliadorVagaDAO extends GenericDAOImpl<AvaliadorVagaEntity, Integer>{
-
+public class AvaliadorVagaDAO extends GenericDAOImpl<AvaliadorVagaEntity, Integer> {
 }

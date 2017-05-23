@@ -10,10 +10,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tbCancelamento")
 public class CancelamentoEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idCancelamento", unique = true, nullable = false)
 	private Integer id;
+
 	@Column(name = "dsCancelamento")
 	private String descricao;
 

@@ -14,6 +14,7 @@ public class RelatorioConverter implements Converter<RelatorioEntity, RelatorioB
 			return null;
 		}
 		RelatorioEntity entity = new RelatorioEntity();
+		
 		entity.setId(bean.getId());
 
 		return entity;
@@ -25,6 +26,7 @@ public class RelatorioConverter implements Converter<RelatorioEntity, RelatorioB
 			return null;
 		}
 		RelatorioBean bean = new RelatorioBean();
+		
 		bean.setId(entity.getId());
 
 		return bean;

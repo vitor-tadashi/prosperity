@@ -13,23 +13,23 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbFuncionario")
-@NamedQuery(name="findNotRegistered", query="SELECT f FROM FuncionarioEntity f where f.id not in (SELECT u.funcionarioEntity.id from UsuarioEntity u)")
+@NamedQuery(name = "findNotRegistered", query = "SELECT f FROM FuncionarioEntity f where f.id not in (SELECT u.funcionarioEntity.id from UsuarioEntity u)")
 public class FuncionarioEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idFuncionario", unique = true, nullable = false)
+	@Column(name = "idFuncionario", unique = true, nullable = false)
 	private Integer id;
-	
-	@Column(name="nmFuncionario")
+
+	@Column(name = "nmFuncionario")
 	private String nome;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="idCargo")
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idCargo")
 	private CargoEntity cargo;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="idSenioridade")
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idSenioridade")
 	private SenioridadeEntity senioridade;
 
 	public Integer getId() {
@@ -63,5 +63,5 @@ public class FuncionarioEntity {
 	public void setSenioridade(SenioridadeEntity senioridade) {
 		this.senioridade = senioridade;
 	}
-	
+
 }

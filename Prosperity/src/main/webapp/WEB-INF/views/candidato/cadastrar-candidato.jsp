@@ -153,9 +153,9 @@
 												</div>
 												<div class="form-group col-md-2">
 													<label for="numero" class="control-label">Número</label> <input
-														type="text" class="form-control parsley-validated"
+														type="number" class="form-control parsley-validated"
 														id="numero" data-required="true" name="endereco.numero"
-														value="${candidato.endereco.numero}" maxlength="30" />
+														value="${candidato.endereco.numero}"  min="0"/>
 
 												</div>
 												<div class="form-group col-md-3">

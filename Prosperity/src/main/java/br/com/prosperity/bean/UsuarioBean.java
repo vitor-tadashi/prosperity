@@ -9,29 +9,17 @@ import org.springframework.stereotype.Component;
 public class UsuarioBean {
 
 	private final String SENHA_PADRAO = "verity@123";
-	
+
 	@Min(value = 1, message = "O campo Gestor imediato deve ser preenchido")
 	private Integer id;
-	
 	private PerfilBean perfil;
-	
 	private FuncionarioBean funcionario;
-	
 	private String nome;
-
 	private String senha = SENHA_PADRAO;
-
-	private Boolean autenticado;
-
+	private Boolean autenticado = false;
 	private Boolean primeiroAcesso = true;
-
 	private String email;
-
 	private Boolean ativo = true;
-
-	public UsuarioBean() {
-		autenticado = false;
-	}
 
 	public Integer getId() {
 		return id;

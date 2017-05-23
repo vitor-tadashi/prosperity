@@ -35,5 +35,4 @@ public class SenioridadeBusiness {
 		SenioridadeEntity entity = senioridadeDAO.findById(id);
 		return entity;
 	}
-	
 }

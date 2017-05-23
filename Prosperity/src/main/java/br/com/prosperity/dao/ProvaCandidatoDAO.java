@@ -6,5 +6,4 @@ import br.com.prosperity.entity.ProvaCandidatoEntity;
 
 @Repository
 public class ProvaCandidatoDAO extends GenericDAOImpl<ProvaCandidatoEntity, Integer> {
-
 }

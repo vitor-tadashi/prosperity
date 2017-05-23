@@ -18,22 +18,19 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
 @Entity
 @Table(name = "tbStatusCandidato")
 @NamedQueries({
-@NamedQuery(name="obterStatusCandidato",query="SELECT sc FROM StatusCandidatoEntity sc WHERE sc.candidato.id = ?1 AND sc.flSituacao = true"),
-@NamedQuery(name="desativarStatus",query="SELECT sc FROM StatusCandidatoEntity sc WHERE sc.candidato.id = ?1"),
-@NamedQuery(name="obterStatusCandidatos",query="SELECT sc FROM StatusCandidatoEntity sc WHERE sc.candidato IN (?1) AND sc.flSituacao = true")
-
-})
+		@NamedQuery(name = "obterStatusCandidato", query = "SELECT sc FROM StatusCandidatoEntity sc WHERE sc.candidato.id = ?1 AND sc.flSituacao = true"),
+		@NamedQuery(name = "desativarStatus", query = "SELECT sc FROM StatusCandidatoEntity sc WHERE sc.candidato.id = ?1"),
+		@NamedQuery(name = "obterStatusCandidatos", query = "SELECT sc FROM StatusCandidatoEntity sc WHERE sc.candidato IN (?1) AND sc.flSituacao = true") })
 public class StatusCandidatoEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idStatusCandidato", unique = true, nullable = false)
 	private Integer idStatusCandidato;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "idCandidato")
 	private CandidatoEntity candidato;
@@ -44,26 +41,25 @@ public class StatusCandidatoEntity {
 
 	@Column(name = "dsParecer")
 	private String dsParecer;
-	
+
 	@Column(name = "flSituacao")
 	private Boolean flSituacao;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idStatus")
 	private StatusEntity status;
-	
-	//TODO vereficar relacionamento IGOR
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
 
 	@Column(name = "proposta")
 	private String proposta;
-	
+
 	public String getProposta() {
 		return proposta;
 	}
-	
+
 	public void setProposta(String proposta) {
 		this.proposta = proposta;
 	}
@@ -71,9 +67,11 @@ public class StatusCandidatoEntity {
 	public Boolean getFlSituacao() {
 		return flSituacao;
 	}
+
 	public void setFlSituacao(Boolean flSituacao) {
 		this.flSituacao = flSituacao;
 	}
+
 	public Date getDtAlteracao() {
 		return dtAlteracao;
 	}
@@ -121,5 +119,4 @@ public class StatusCandidatoEntity {
 	public void setCandidato(CandidatoEntity candidato) {
 		this.candidato = candidato;
 	}
-
 }

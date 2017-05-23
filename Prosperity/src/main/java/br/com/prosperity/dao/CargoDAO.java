@@ -8,6 +8,4 @@ import br.com.prosperity.entity.CargoEntity;
 
 @Repository
 public class CargoDAO extends GenericDAOImpl<CargoEntity, Serializable> {
-
-	
 }

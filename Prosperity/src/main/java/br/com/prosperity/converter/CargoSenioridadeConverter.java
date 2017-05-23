@@ -11,16 +11,17 @@ public class CargoSenioridadeConverter implements Converter<CargoSenioridadeEnti
 
 	@Autowired
 	CargoConverter cargoConverter;
+
 	@Autowired
 	SenioridadeConverter senioridadeConverter;
-	
+
 	@Override
 	public CargoSenioridadeEntity convertBeanToEntity(CargoSenioridadeBean bean) {
 		if (bean == null) {
 			return null;
 		}
-
 		CargoSenioridadeEntity entity = new CargoSenioridadeEntity();
+
 		entity.setId(bean.getId());
 		entity.setCargo(cargoConverter.convertBeanToEntity(bean.getCargos()));
 		entity.setIdSenioridade(senioridadeConverter.convertBeanToEntity(bean.getSenioridades()));
@@ -29,6 +30,7 @@ public class CargoSenioridadeConverter implements Converter<CargoSenioridadeEnti
 		entity.setDsPreFormacaoAcademica(bean.getDsPreFormacaoAcademica());
 		entity.setDsPrePerfilComportamental(bean.getDsPrePerfilComportamental());
 		entity.setDsPrePerfilTecnico(bean.getDsPrePerfilTecnico());
+
 		return entity;
 	}
 
@@ -38,6 +40,7 @@ public class CargoSenioridadeConverter implements Converter<CargoSenioridadeEnti
 			return null;
 		}
 		CargoSenioridadeBean bean = new CargoSenioridadeBean();
+
 		bean.setId(bean.getId());
 		bean.setCargos(cargoConverter.convertEntityToBean(entity.getCargo()));
 		bean.setSenioridades(senioridadeConverter.convertEntityToBean(entity.getIdSenioridade()));
@@ -46,6 +49,7 @@ public class CargoSenioridadeConverter implements Converter<CargoSenioridadeEnti
 		bean.setDsPreFormacaoAcademica(entity.getDsPreFormacaoAcademica());
 		bean.setDsPrePerfilComportamental(entity.getDsPrePerfilComportamental());
 		bean.setDsPrePerfilTecnico(entity.getDsPrePerfilTecnico());
+
 		return bean;
 	}
 }

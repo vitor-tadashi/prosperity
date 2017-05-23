@@ -17,14 +17,11 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "tbUsuario")
 @NamedQueries({
-	@NamedQuery(name = "obterPorUsuario", query = "SELECT u FROM UsuarioEntity u WHERE u.nome = ?1 AND u.ativo = true"),
-	@NamedQuery(name="obterGestor", query="SELECT u FROM UsuarioEntity u LEFT OUTER JOIN u.perfilEntity p WHERE p.nome like 'Gestor%'"),
-	@NamedQuery(name = "existeUsuario", query = "SELECT u FROM UsuarioEntity u WHERE u.nome = ?1"),
-	@NamedQuery(name = "obterUsuariosAtivos", query = "SELECT u FROM UsuarioEntity u WHERE u.ativo = true"),
-	@NamedQuery(name = "existeUsuarioAlterar", query = "SELECT u FROM UsuarioEntity u WHERE u.nome = ?2 AND u.id NOT LIKE ?1")
-	
-
-})
+		@NamedQuery(name = "obterPorUsuario", query = "SELECT u FROM UsuarioEntity u WHERE u.nome = ?1 AND u.ativo = true"),
+		@NamedQuery(name = "obterGestor", query = "SELECT u FROM UsuarioEntity u LEFT OUTER JOIN u.perfilEntity p WHERE p.nome like 'Gestor%'"),
+		@NamedQuery(name = "existeUsuario", query = "SELECT u FROM UsuarioEntity u WHERE u.nome = ?1"),
+		@NamedQuery(name = "obterUsuariosAtivos", query = "SELECT u FROM UsuarioEntity u WHERE u.ativo = true"),
+		@NamedQuery(name = "existeUsuarioAlterar", query = "SELECT u FROM UsuarioEntity u WHERE u.nome = ?2 AND u.id NOT LIKE ?1") })
 public class UsuarioEntity {
 
 	@Id
@@ -39,9 +36,9 @@ public class UsuarioEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idFuncionario")
 	private FuncionarioEntity funcionarioEntity;
-	
+
 	@NotNull
-	@Size(min=5, message="O usuário não pode ter menos que 5 caracteres!")
+	@Size(min = 5, message = "O usuário não pode ter menos que 5 caracteres!")
 	@Column(name = "nmUsuario")
 	private String nome;
 

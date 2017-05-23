@@ -20,7 +20,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @NamedQueries({
-
 		@NamedQuery(name = "obterTodos", query = "SELECT u FROM VagaEntity u WHERE u.nomeVaga = ?1"),
 		@NamedQuery(name = "listarVagaAprovar", query = "SELECT v FROM VagaEntity v LEFT OUTER JOIN v.statusVagaEntity sv "
 				+ "LEFT JOIN sv.status s WHERE sv.id = (SELECT MAX(sv.id) FROM v.statusVagaEntity sv WHERE sv.vaga.id = v.id) "
@@ -28,7 +27,6 @@ import javax.persistence.TemporalType;
 		@NamedQuery(name = "obterPorId", query = "SELECT u FROM VagaEntity u WHERE u.id = ?1"),
 		@NamedQuery(name = "findAllDesc", query = "SELECT u FROM VagaEntity u LEFT OUTER JOIN u.statusVagaEntity v WHERE v.situacao = TRUE ORDER BY u.id DESC"),
 		@NamedQuery(name = "listarVagasAtivas", query = "SELECT v FROM VagaEntity v LEFT JOIN v.statusVagaEntity sv where sv.situacao = TRUE AND sv.status.id = 1 ORDER BY v.id DESC"),
-
 		@NamedQuery(name = "listarVagaFiltrado", query = "SELECT u FROM VagaEntity u LEFT OUTER JOIN u.statusVagaEntity p left join p.status s "
 				+ "WHERE u.nomeVaga like ?1 and s.id = ?2 and u.dataAbertura between ?3 and ?4"),
 		@NamedQuery(name = "ultimoCadastro", query = "SELECT MAX(u.id) FROM VagaEntity u") })
@@ -71,31 +69,31 @@ public class VagaEntity {
 	private Character aumentoQuadro;
 
 	@Column(name = "numCandidatos")
-	private Integer numeroCandidatos; //
+	private Integer numeroCandidatos;
 
 	@Column(name = "nmSubstituido")
-	private String nomeSubstituido; //
+	private String nomeSubstituido;
 
 	@Column(name = "dsFormacaoAcademica")
-	private String descricaoFormacaoAcademica; //
+	private String descricaoFormacaoAcademica;
 
 	@Column(name = "dsPerfilComportamental")
-	private String descricaoPerfilComportamental; //
+	private String descricaoPerfilComportamental;
 
 	@Column(name = "dsPerfilTecnico")
-	private String descricaoPerfilTecnico; //
+	private String descricaoPerfilTecnico;
 
 	@Column(name = "dtAbertura")
 	@Temporal(value = TemporalType.DATE)
-	private Date dataAbertura; //
+	private Date dataAbertura;
 
 	@Column(name = "dtAprovacao")
 	@Temporal(value = TemporalType.DATE)
-	private Date dataAprovacao; //
+	private Date dataAprovacao;
 
 	@Column(name = "dtFechamento")
 	@Temporal(value = TemporalType.DATE)
-	private Date dataFechamento; //
+	private Date dataFechamento;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idProjeto")
@@ -114,7 +112,6 @@ public class VagaEntity {
 	private UsuarioEntity usuarioEntity;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "vaga")
-	// @JoinColumn(name = "idVaga")
 	private List<StatusVagaEntity> statusVagaEntity;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "vaga", cascade = CascadeType.ALL)
@@ -136,7 +133,6 @@ public class VagaEntity {
 	private String marketingSocial;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "vaga")
-	// @JoinColumn(name = "idVaga")
 	private List<VagaCandidatoEntity> vagaCandidatoEntity;
 
 	public Integer getId() {
@@ -378,5 +374,4 @@ public class VagaEntity {
 	public void setMarketingSocial(String marketingSocial) {
 		this.marketingSocial = marketingSocial;
 	}
-
 }

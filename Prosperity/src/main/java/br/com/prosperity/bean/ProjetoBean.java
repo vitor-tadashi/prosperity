@@ -45,7 +45,7 @@ public class ProjetoBean {
 	public void setCliente(ClienteBean cliente) {
 		this.cliente = cliente;
 	}
-	
+
 	public Boolean getAtivo() {
 		return ativo;
 	}
@@ -53,5 +53,4 @@ public class ProjetoBean {
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
-
 }

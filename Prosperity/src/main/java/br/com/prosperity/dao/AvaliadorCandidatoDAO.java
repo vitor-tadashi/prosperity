@@ -6,5 +6,4 @@ import br.com.prosperity.entity.AvaliadorCandidatoEntity;
 
 @Repository
 public class AvaliadorCandidatoDAO extends GenericDAOImpl<AvaliadorCandidatoEntity, Integer> {
-
 }

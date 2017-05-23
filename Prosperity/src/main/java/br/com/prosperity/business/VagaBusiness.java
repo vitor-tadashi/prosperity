@@ -183,7 +183,6 @@ public class VagaBusiness {
 			if (!vaga.getNomeVaga().isEmpty() || vaga.getNomeVaga() != null) {
 				criterions.add(Restrictions.like("nomeVaga", "%" + vaga.getNomeVaga() + "%"));
 			}
-
 			if (vaga.getDataAberturaDe() != null && vaga.getDataAberturaPara() != null) {
 				if (vaga.getDataAberturaDe() == null) {
 					criterions.add(Restrictions.between("dataAbertura", "", parseData(vaga.getDataAberturaPara())));
@@ -194,21 +193,17 @@ public class VagaBusiness {
 							parseData(vaga.getDataAberturaPara())));
 				}
 			}
-
 			if (idStatus != 0) {
 				criterions.add(Restrictions.eq("status.id", idStatus));
 			}
 		} catch (Exception e) {
-
 		}
 		return criterions;
 	}
 
 	@Transactional(readOnly = true)
 	public VagaBean obter(int idVaga) {
-
 		VagaEntity vagaEntity = vagaDAO.findById(idVaga);
-
 		VagaBean vagaBean = vagaConverter.convertEntityToBean(vagaEntity);
 
 		return vagaBean;
@@ -216,7 +211,6 @@ public class VagaBusiness {
 
 	@Transactional
 	public void inserir(VagaBean vagaBean, List<UsuarioBean> usuarioBean) {
-
 		VagaEntity vagaEntity = vagaConverter.convertBeanToEntity(vagaBean);
 
 		if (vagaEntity.getId() == null) {
@@ -228,7 +222,10 @@ public class VagaBusiness {
 		} else {
 			vagaDAO.update(vagaEntity);
 		}
-		inserirAvaliadores(vagaEntity, usuarioBean);
+
+		if(usuarioBean.size() > 0 && usuarioBean.get(0).getId()!= null)
+
+			inserirAvaliadores(vagaEntity, usuarioBean);
 	}
 
 	@Transactional
@@ -268,8 +265,8 @@ public class VagaBusiness {
 		if (situacaoVaga.getStatus() == StatusVagaEnum.ATIVO) {
 			List<AvaliadorVagaEntity> avaliadorVagaEntity = avaliadorVagaDao.findByNamedQuery("obterAvaliadoresDaVaga",
 					vagaEntity.getId());
-			if (avaliadorVagaEntity == null || avaliadorVagaEntity.size() == 0 ||
-				vagaEntity.getMarketingSocial().equals("")) {
+			if (avaliadorVagaEntity == null || avaliadorVagaEntity.size() == 0
+					|| vagaEntity.getMarketingSocial().equals("")) {
 				situacaoVaga.setStatus(StatusVagaEnum.VAGANOVA);
 			}
 		}
@@ -289,11 +286,9 @@ public class VagaBusiness {
 				}
 			}
 		}
-
 		if (situacaoVaga.getStatus().getValue() != StatusVagaEnum.PENDENTE.getValue()) {
 			desativarStatus(vagaEntity);
 		}
-
 		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
 		statusVagaEntity.setStatus(statusDAO.findById(situacaoVaga.getStatus().getValue()));
 		statusVagaEntity.setVaga(vagaEntity);
@@ -310,7 +305,6 @@ public class VagaBusiness {
 	public void alterarDataAprovacao(SituacaoVagaBean status) {
 		Integer idStatus = status.getStatus().getValue();
 		VagaEntity vagaEntity = vagaDAO.findById(status.getIdVaga());
-
 		if (idStatus == 1 || idStatus == 27) {
 			vagaEntity.setDataAprovacao(new Date());
 			vagaDAO.update(vagaEntity);
@@ -333,7 +327,6 @@ public class VagaBusiness {
 
 	private Date parseData(Date dataAntiga) {
 		SimpleDateFormat novaData = new SimpleDateFormat("dd-MM-yyyy");
-
 		String data = "";
 		try {
 			data = novaData.format(dataAntiga);
@@ -352,7 +345,6 @@ public class VagaBusiness {
 			for (AvaliadorVagaEntity av : avaliadores) {
 				avaliadorVagaDAO.remove(av);
 			}
-
 		}
 		if (usuarios != null) {
 			for (UsuarioBean usuario : usuarios) {
@@ -371,7 +363,7 @@ public class VagaBusiness {
 		return vagaBean;
 	}
 
-	@Transactional(readOnly = true) // esta dando nullPointer
+	@Transactional(readOnly = true)
 	public List<AvaliadorVagaBean> obterAvaliadores(Integer id) {
 		List<AvaliadorVagaEntity> avaliadorVagaEntity = avaliadorVagaDao.findByNamedQuery("obterAvaliadoresDaVaga", id);
 		avaliadorVagaBean = avaliadorVagaConverter.convertEntityToBean(avaliadorVagaEntity);
@@ -382,19 +374,17 @@ public class VagaBusiness {
 		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
 		Set<Integer> lista = new HashSet<>();
 		List<Integer> listaStatus = new ArrayList<Integer>();
-
 		for (FuncionalidadeBean funcionalidadeBean : usuarioBean.getPerfil().getListaFuncionalidades()) {
-			if (funcionalidadeBean.getId() == 1)
+			if (funcionalidadeBean.getId() == 1) {
 				lista.add(StatusVagaEnum.PENDENTE.getValue());
-
-			if (funcionalidadeBean.getId() == 30)
+			}
+			if (funcionalidadeBean.getId() == 30) {
 				lista.add(StatusVagaEnum.ATIVO.getValue());
-
+			}
 			if (funcionalidadeBean.getId() == 29) {
 				lista.add(StatusVagaEnum.VAGANOVA.getValue());
 				lista.add(StatusVagaEnum.PENDENTE.getValue());
 				lista.add(StatusVagaEnum.ATIVO.getValue());
-
 			}
 		}
 		for (Integer listas : lista) {
@@ -410,10 +400,8 @@ public class VagaBusiness {
 
 	@Transactional
 	public void buscarUsuariosParaEmail(SituacaoVagaBean situacaoVagaBean) {
-
 		try {
 			VagaEntity vaga = vagaDAO.findById(situacaoVagaBean.getIdVaga());
-
 			List<UsuarioBean> usuarios = buscarUsuariosSemRepetir();
 
 			// Não enviar email caso a lista estiver vazia:
@@ -435,7 +423,19 @@ public class VagaBusiness {
 						break;
 					}
 				}
+			} else if(situacaoVagaBean.getStatus().getValue() == StatusVagaEnum.PENDENTE.getValue()) {
+				for (UsuarioBean u : usuarios) {
+					switch (u.getPerfil().getNome()) {
+					case "Diretor de operação":
+						recipients.add(u.getEmail());
+						nomes.add(u.getFuncionario().getNome());
+						break;
+					default:
+						break;
+					}
+				}
 			}
+			
 			GeradorEmail email = new GeradorEmail();
 			for (int i = 0, j = 0; i < recipients.size() && j < nomes.size(); i++, j++) {
 				email.enviarEmail(vaga, recipients.get(i), nomes.get(j));
@@ -456,7 +456,6 @@ public class VagaBusiness {
 				usuariosNaoRepetidos.add(u);
 			}
 		}
-
 		return usuariosNaoRepetidos;
 	}
 }

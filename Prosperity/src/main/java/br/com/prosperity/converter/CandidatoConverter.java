@@ -30,16 +30,16 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 
 	@Autowired
 	private StatusCandidatoConverter statusCandidatoConverter;
-	
+
 	@Autowired
 	public CandidatoVagaConverter candidatoVagaConverter;
-	
+
 	@Autowired
 	public ProvaCandidatoConverter provaCandidatoConverter;
-	
+
 	@Autowired
 	public PropostaConverter propostaConverter;
-	
+
 	@Autowired
 	public DataEntrevistaConverter dataEntrevistaConverter;
 
@@ -47,7 +47,6 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		if (bean == null) {
 			return null;
 		}
-
 		CandidatoEntity entity = new CandidatoEntity();
 
 		entity.setId(bean.getId());
@@ -71,23 +70,21 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		entity.setProposta(bean.getProposta());
 		entity.setCurriculoTexto(bean.getCurriculoTexto());
 		entity.setVagas(vagaCandidatoConverter.convertBeanToEntity(bean.getVagas()));
-		//entity.setProvaCandidato(provaCandidatoConverter.convertBeanToEntity(bean.getProvaCandidato()));
-		
+
 		return entity;
 	}
 
 	public CandidatoEntity convertBeanToEntity(CandidatoEntity entity, CandidatoBean bean) {
 		entity = convertFields(entity, bean);
-		
+
 		return entity;
 	}
-	
+
 	@Override
 	public CandidatoEntity convertBeanToEntity(CandidatoBean bean) {
 		if (bean == null) {
 			return null;
 		}
-
 		CandidatoEntity entity = new CandidatoEntity();
 
 		entity.setId(bean.getId());
@@ -96,7 +93,7 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		return entity;
 	}
 
-	private CandidatoEntity convertFields(CandidatoEntity entity , CandidatoBean bean) {
+	private CandidatoEntity convertFields(CandidatoEntity entity, CandidatoBean bean) {
 		entity.setCpf(bean.getCpf());
 		entity.setCurriculo(bean.getCurriculo());
 		entity.setEmail(bean.getEmail());
@@ -121,7 +118,7 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		if (entity.getVagas() == null || (entity.getVagas() != null && entity.getVagas().size() == 0)) {
 			entity.setVagas(vagaCandidatoConverter.convertBeanToEntity(bean.getVagas()));
 		}
-		
+
 		return entity;
 	}
 
@@ -130,7 +127,6 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		if (entity == null) {
 			return null;
 		}
-
 		CandidatoBean bean = new CandidatoBean();
 
 		bean.setId(entity.getId());
@@ -153,12 +149,10 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		bean.setDataUltimoContato(entity.getDataUltimoContato());
 		bean.setProposta(entity.getProposta());
 		bean.setCurriculoTexto(entity.getCurriculoTexto());
-		//bean.setProvaCandidato(provaCandidatoConverter.convertEntityToBean(entity.getProvaCandidato()));
-		//bean.setVagaCandidato(vagaCandidato);
 		bean.setVagas(candidatoVagaConverter.convertEntityToBean(entity.getVagas()));
 		bean.setPropostaBean(propostaConverter.convertEntityToBean(entity.getPropostaEntity()));
 		bean.setDataEntrevista(dataEntrevistaConverter.convertEntityToBean(entity.getDatasEntrevistas()));
-		for(VagaCandidatoBean vc : bean.getVagas()){
+		for (VagaCandidatoBean vc : bean.getVagas()) {
 			bean.setVagaCandidato(vc);
 		}
 		return bean;

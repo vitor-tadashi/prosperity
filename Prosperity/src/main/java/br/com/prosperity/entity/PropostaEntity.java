@@ -10,22 +10,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-/**
- * @author guilherme.oliveira
- *
- */
 @Entity
 @Table(name = "tbProposta")
-@NamedQueries({
-	
-		// NamedQuery busca propostas por id do candidato
-		@NamedQuery(name = "buscarProposta", query = "SELECT u FROM PropostaEntity u WHERE u.candidato = ?1") })
-
+@NamedQuery(name = "buscarProposta", query = "SELECT u FROM PropostaEntity u WHERE u.candidato = ?1")
 public class PropostaEntity {
 
 	@Id
@@ -393,5 +384,4 @@ public class PropostaEntity {
 	public void setCmProposta(String cmProposta) {
 		this.cmProposta = cmProposta;
 	}
-
 }

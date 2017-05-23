@@ -5,6 +5,5 @@ import org.springframework.stereotype.Repository;
 import br.com.prosperity.entity.StatusDisponivelEntity;
 
 @Repository
-public class StatusDisponivelDAO  extends GenericDAOImpl<StatusDisponivelEntity, Integer>{
-
+public class StatusDisponivelDAO extends GenericDAOImpl<StatusDisponivelEntity, Integer> {
 }
