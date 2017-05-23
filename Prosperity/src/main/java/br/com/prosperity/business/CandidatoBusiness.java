@@ -182,7 +182,7 @@ public class CandidatoBusiness {
 
 	@Autowired
 	private FuncionarioConverter funcionarioConverter;
-	
+
 	@Autowired
 	private CancelamentoDAO cancelamentoDAO;
 
@@ -505,7 +505,6 @@ public class CandidatoBusiness {
 		if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANCELADO.getValue()
 				|| situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOREPROVADO.getValue()) {
 			desativarAvaliadores(situacaoCandidato.getIdCandidato());
-
 		}
 
 		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
@@ -513,8 +512,12 @@ public class CandidatoBusiness {
 		statusCandidatoEntity.setCandidato(candidatoEntity);
 		statusCandidatoEntity.setDsParecer(situacaoCandidato.getParecer());
 		statusCandidatoEntity.setDtAlteracao(new Date());
-		statusCandidatoEntity.setCancelamento(cancelamentoDAO.findById(situacaoCandidato.getIdCancelamento()));
-		statusCandidatoEntity.setDsCancelamento(situacaoCandidato.getDsCancelamento());
+		if (situacaoCandidato.getIdCancelamento() != null) {
+			statusCandidatoEntity.setCancelamento(cancelamentoDAO.findById(situacaoCandidato.getIdCancelamento()));
+		}
+		if (situacaoCandidato.getDsCancelamento() != null) {
+			statusCandidatoEntity.setDsCancelamento(situacaoCandidato.getDsCancelamento());
+		}
 		if (usuarioBean != null)
 			statusCandidatoEntity.setUsuario(usuarioDAO.findById(usuarioBean.getId()));
 		statusCandidatoEntity.setFlSituacao(true);
