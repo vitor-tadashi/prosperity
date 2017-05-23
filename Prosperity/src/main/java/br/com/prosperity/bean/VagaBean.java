@@ -15,11 +15,9 @@ import org.springframework.stereotype.Component;
 public class VagaBean {
 
 	private Integer id;
-	// @NotEmpty(message = "O campo Nome da vaga deve ser preenchido")
 	private String nomeVaga;
 	private String nomeSolicitante;
 	private Double valorPretensao;
-	// @NotNull(message = "O campo Data para inicio deve ser preenchido")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataInicio;
 	private Character localTrabalho;
@@ -33,16 +31,16 @@ public class VagaBean {
 	private CargoBean cargoBean;
 	@Valid
 	private SenioridadeBean senioridadeBean;
-	private String nomeSubstituido; //
-	private String descricaoFormacaoAcademica; //
-	private String descricaoPerfilComportamental; //
-	private String descricaoPerfilTecnico; //
+	private String nomeSubstituido;
+	private String descricaoFormacaoAcademica;
+	private String descricaoPerfilComportamental;
+	private String descricaoPerfilTecnico;
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date dataAbertura; //
+	private Date dataAbertura;
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date dataAprovacao; //
-	private Date dataFechamento; //
-	private Integer numeroCandidatos; //
+	private Date dataAprovacao;
+	private Date dataFechamento;
+	private Integer numeroCandidatos;
 	@Valid
 	private UsuarioBean usuarioBean;
 	private List<StatusVagaBean> status;
@@ -60,6 +58,13 @@ public class VagaBean {
 	private List<VagaCandidatoBean> vagaCandidatoBean;
 	private String marketingSocial;
 
+	public VagaBean() {
+	}
+
+	public VagaBean(String nome) {
+		this.nomeVaga = nome;
+	}
+
 	public int getCountCandidatos() {
 		return vagaCandidatoBean.size();
 	}
@@ -72,16 +77,7 @@ public class VagaBean {
 		} else {
 			ultimoStatus = new StatusVagaBean("Não possui status");
 		}
-
 		return ultimoStatus;
-	}
-
-	public VagaBean() {
-
-	}
-
-	public VagaBean(String nome) {
-		this.nomeVaga = nome;
 	}
 
 	public Date getDataAberturaDe() {
@@ -141,21 +137,13 @@ public class VagaBean {
 	}
 
 	@XmlTransient
-	public char getLocalTrabalho() {
+	public Character getLocalTrabalho() {
 		return localTrabalho;
 	}
 
-	public void setLocalTrabalho(char localTrabalho) {
-		this.localTrabalho = localTrabalho;
-	}
-
 	@XmlTransient
-	public char getIdTipoVaga() {
+	public Character getIdTipoVaga() {
 		return idTipoVaga;
-	}
-
-	public void setIdTipoVaga(char idTipoVaga) {
-		this.idTipoVaga = idTipoVaga;
 	}
 
 	public String getHorarioEntrada() {
@@ -175,12 +163,8 @@ public class VagaBean {
 	}
 
 	@XmlTransient
-	public char getAumentaQuadro() {
+	public Character getAumentaQuadro() {
 		return aumentaQuadro;
-	}
-
-	public void setAumentaQuadro(char aumentaQuadro) {
-		this.aumentaQuadro = aumentaQuadro;
 	}
 
 	public ProjetoBean getProjeto() {
@@ -363,5 +347,4 @@ public class VagaBean {
 	public void setMarketingSocial(String marketingSocial) {
 		this.marketingSocial = marketingSocial;
 	}
-
 }

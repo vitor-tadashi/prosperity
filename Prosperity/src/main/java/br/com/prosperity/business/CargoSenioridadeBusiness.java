@@ -34,5 +34,4 @@ public class CargoSenioridadeBusiness {
 				.convertEntityToBean(rangeSalarialEntity);
 		return rangeSalarialBean;
 	}
-
 }

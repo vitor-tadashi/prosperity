@@ -1,6 +1,5 @@
 package br.com.prosperity.entity;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,28 +15,27 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-@NamedQuery(name="obterComunicacao", query = "SELECT c FROM ComunicacaoEntity c WHERE c.candidatoEntity.id =?1" )
-	
+@NamedQuery(name = "obterComunicacao", query = "SELECT c FROM ComunicacaoEntity c WHERE c.candidatoEntity.id =?1")
 @Entity
 @Table(name = "tbComunicacao")
 public class ComunicacaoEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idComunicacao", unique = true, nullable = false)
 	private Integer id;
-	
+
 	@Column(name = "dtContato")
 	private Date dataContato;
-	
+
 	@Column(name = "dsObservacao")
 	private String observacao;
-	
-	@ManyToOne(cascade = CascadeType.REFRESH , fetch = FetchType.LAZY)
+
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuarioEntity;
-	
-	@ManyToOne(cascade = CascadeType.REFRESH , fetch = FetchType.LAZY)
+
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@JoinColumn(name = "idCandidato")
 	private CandidatoEntity candidatoEntity;
 

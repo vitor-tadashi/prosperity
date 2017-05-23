@@ -10,11 +10,9 @@ public class ComparativoPropostaConverter implements Converter<ComparativoPropos
 
 	@Override
 	public ComparativoPropostaEntity convertBeanToEntity(ComparativoPropostaBean bean) {
-		// TODO Auto-generated method stub
 		if (bean == null) {
 			return null;
 		}
-
 		ComparativoPropostaEntity entity = new ComparativoPropostaEntity();
 
 		entity.setId(bean.getId());
@@ -38,11 +36,9 @@ public class ComparativoPropostaConverter implements Converter<ComparativoPropos
 
 	@Override
 	public ComparativoPropostaBean convertEntityToBean(ComparativoPropostaEntity entity) {
-		// TODO Auto-generated method stub
 		if (entity == null) {
 			return null;
 		}
-
 		ComparativoPropostaBean bean = new ComparativoPropostaBean();
 
 		bean.setId(entity.getId());
@@ -63,5 +59,4 @@ public class ComparativoPropostaConverter implements Converter<ComparativoPropos
 
 		return bean;
 	}
-
 }

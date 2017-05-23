@@ -53,5 +53,4 @@ public class CandidatoCompetenciaBean {
 	public void setIdCandidato(Integer idCandidato) {
 		this.idCandidato = idCandidato;
 	}
-
 }

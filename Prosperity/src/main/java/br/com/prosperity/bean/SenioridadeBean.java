@@ -9,7 +9,6 @@ public class SenioridadeBean {
 
 	@Min(value = 1, message = "O campo Senioridade da vaga deve ser preenchido")
 	private Integer id;
-
 	private String nome;
 
 	public Integer getId() {
@@ -27,5 +26,4 @@ public class SenioridadeBean {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 }

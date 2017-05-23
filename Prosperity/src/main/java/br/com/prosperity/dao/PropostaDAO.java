@@ -8,5 +8,4 @@ import br.com.prosperity.entity.PropostaEntity;
 
 @Repository
 public class PropostaDAO extends GenericDAOImpl<PropostaEntity, Serializable> {
-
 }

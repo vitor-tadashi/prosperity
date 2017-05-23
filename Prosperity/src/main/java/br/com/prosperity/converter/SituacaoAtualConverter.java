@@ -14,8 +14,10 @@ public class SituacaoAtualConverter implements Converter<SituacaoAtualEntity, Si
 			return null;
 		}
 		SituacaoAtualEntity entity = new SituacaoAtualEntity();
+
 		entity.setIdSituacaoAtual(bean.getId());
 		entity.setDescricao(bean.getDescricao());
+
 		return entity;
 	}
 
@@ -24,10 +26,12 @@ public class SituacaoAtualConverter implements Converter<SituacaoAtualEntity, Si
 		if (entity == null) {
 			return null;
 		}
-		
+
 		SituacaoAtualBean bean = new SituacaoAtualBean();
+		
 		bean.setId(entity.getIdSituacaoAtual());
 		bean.setDescricao(entity.getDescricao());
+		
 		return bean;
 	}
 }

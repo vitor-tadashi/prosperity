@@ -32,9 +32,8 @@ public enum StatusCandidatoEnum {
     public static StatusCandidatoEnum valueOf(Integer statusCandidatoEnum) {
         return map.get(statusCandidatoEnum);
     }
-
+    
 	public Integer getValue() {
 		return value;
 	}
-
 }

@@ -3,17 +3,21 @@ package br.com.prosperity.bean;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import br.com.prosperity.util.CustomerDateAndTimeDeserialize;
 
 
-@XmlRootElement(name = "WordpressBean")
+@JsonRootName(value = "WordpressBean")
+@JsonDeserialize(using=CustomerDateAndTimeDeserialize.class)
 public class WordpressBean {
 	
-	@XmlTransient
+	@JsonIgnore
 	private List<CandidatoWordPressBean> candidatosWordPress;
 
-	@XmlTransient
 	private List<CandidatoBean> candidatos;
 
 	public WordpressBean(List<CandidatoBean> candidatos) {

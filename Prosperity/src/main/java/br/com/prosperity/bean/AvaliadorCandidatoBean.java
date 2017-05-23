@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AvaliadorCandidatoBean {
-
 	private Integer id;
 	private CandidatoBean candidato;
 	private UsuarioBean usuario;
@@ -50,5 +49,4 @@ public class AvaliadorCandidatoBean {
 	public void setVaga(VagaBean vaga) {
 		this.vaga = vaga;
 	}
-
 }

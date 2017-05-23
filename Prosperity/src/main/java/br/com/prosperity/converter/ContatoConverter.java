@@ -18,8 +18,10 @@ public class ContatoConverter implements Converter<ContatoEntity, ContatoBean> {
 			return null;
 		}
 		ContatoEntity entity = new ContatoEntity();
+
 		entity.setId(bean.getId());
 		entity.setTelefone(bean.getTelefone());
+
 		return entity;
 	}
 
@@ -29,8 +31,10 @@ public class ContatoConverter implements Converter<ContatoEntity, ContatoBean> {
 			return null;
 		}
 		ContatoBean bean = new ContatoBean();
+
 		bean.setId(entity.getId());
 		bean.setTelefone(entity.getTelefone());
+
 		return bean;
 	}
 }

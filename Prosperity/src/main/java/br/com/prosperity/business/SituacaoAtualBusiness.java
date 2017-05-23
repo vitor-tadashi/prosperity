@@ -12,8 +12,10 @@ import br.com.prosperity.dao.SituacaoAtualDAO;
 
 @Component
 public class SituacaoAtualBusiness {
+	
 	@Autowired
 	private SituacaoAtualDAO situacaoAtualDAO;
+	
 	@Autowired
 	private SituacaoAtualConverter situacaoAtualConverter;
 
@@ -23,5 +25,4 @@ public class SituacaoAtualBusiness {
 		
 		return situacaoAtual;
 	}
-
 }

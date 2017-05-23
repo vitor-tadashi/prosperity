@@ -21,7 +21,6 @@ public class StatusCandidatoBean {
 	private String mensagem;
 
 	public StatusCandidatoBean() {
-
 	}
 
 	public StatusCandidatoBean(String mensagem) {
@@ -97,5 +96,4 @@ public class StatusCandidatoBean {
 	public void setProposta(String proposta) {
 		this.proposta = proposta;
 	}
-
 }

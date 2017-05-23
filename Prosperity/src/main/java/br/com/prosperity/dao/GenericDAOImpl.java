@@ -136,7 +136,7 @@ public class GenericDAOImpl<T, ID extends Serializable> implements GenericDAO<T,
 			Criteria crit = session.createCriteria(getEntityClass());
 
 			for (final Criterion c : criterion) {
-					crit.add(c);
+				crit.add(c);
 			}
 
 			if (firstResult > 0) {
@@ -202,16 +202,15 @@ public class GenericDAOImpl<T, ID extends Serializable> implements GenericDAO<T,
 	@Override
 	public T update(T entity) {
 		try {
-//			entityManager.merge(entity);
+			// entityManager.merge(entity);
 
-			entity = entityManager.merge( entity );
+			entity = entityManager.merge(entity);
 			entityManager.flush();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 
 		}
 		return entity;
 	}
-
 }

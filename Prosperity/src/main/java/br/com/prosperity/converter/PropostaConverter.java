@@ -52,7 +52,6 @@ public class PropostaConverter implements Converter<PropostaEntity, PropostaBean
 		entity.setCmProposta(bean.getCmProposta());
 		entity.setFlSituacao(bean.getFlSituacao());
 		entity.setComparativoProposta(comparativoPropostaConverter.convertBeanToEntity(bean.getComparativoProposta()));
-		
 		entity.setCandidato(bean.getCandidato());
 
 		return entity;
@@ -97,10 +96,8 @@ public class PropostaConverter implements Converter<PropostaEntity, PropostaBean
 		bean.setCmProposta(entity.getCmProposta());
 		bean.setFlSituacao(entity.getFlSituacao());
 		bean.setComparativoProposta(comparativoPropostaConverter.convertEntityToBean(entity.getComparativoProposta()));
-
 		bean.setCandidato(entity.getCandidato());
-		
+
 		return bean;
 	}
-
 }

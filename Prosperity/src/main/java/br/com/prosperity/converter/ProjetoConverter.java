@@ -11,6 +11,7 @@ public class ProjetoConverter implements Converter<ProjetoEntity, ProjetoBean> {
 
 	@Autowired
 	private FuncionarioConverter funcionarioConverter;
+
 	@Autowired
 	private ClienteConverter clienteConverter;
 
@@ -25,7 +26,6 @@ public class ProjetoConverter implements Converter<ProjetoEntity, ProjetoBean> {
 		entity.setFuncionario(funcionarioConverter.convertBeanToEntity(bean.getFuncionario()));
 		entity.setClienteProjeto(clienteConverter.convertBeanToEntity(bean.getCliente()));
 		entity.setAtivo(bean.getAtivo());
-		// entity.setPerfilEntity(perfilConverter.convertBeanToEntity(bean.getPerfil()));
 
 		return entity;
 	}
@@ -42,7 +42,7 @@ public class ProjetoConverter implements Converter<ProjetoEntity, ProjetoBean> {
 		bean.setFuncionario(funcionarioConverter.convertEntityToBean(entity.getFuncionario()));
 		bean.setCliente(clienteConverter.convertEntityToBean(entity.getClienteProjeto()));
 		bean.setAtivo(entity.getAtivo());
-		
+
 		return bean;
 	}
 }

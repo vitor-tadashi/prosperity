@@ -8,6 +8,4 @@ import br.com.prosperity.entity.ComunicacaoEntity;
 
 @Repository
 public class ComunicacaoDAO extends GenericDAOImpl<ComunicacaoEntity, Serializable> {
-
 }
-	

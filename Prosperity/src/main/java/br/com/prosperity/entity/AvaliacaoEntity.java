@@ -15,15 +15,12 @@ public class AvaliacaoEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idAvaliacao", unique = true, nullable = false)
 	private Integer id;
-	/* fim Id */
 
 	@Column(name = "nmAvaliacao")
 	private String nome;
 	@Column(name="tpCss")
 	private String tipoCss;
 	
-
-
 	public Integer getId() {
 		return id;
 	}
@@ -47,5 +44,4 @@ public class AvaliacaoEntity {
 	public void setTipoCss(String tipoCss) {
 		this.tipoCss = tipoCss;
 	}	
-
 }

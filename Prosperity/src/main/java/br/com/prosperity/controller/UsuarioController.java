@@ -27,6 +27,7 @@ import br.com.prosperity.exception.BusinessException;
 @Controller
 @RequestMapping("usuario")
 public class UsuarioController {
+
 	@Autowired
 	private FuncionalidadeBusiness funcionalidadeBusiness;
 
@@ -47,7 +48,7 @@ public class UsuarioController {
 		model.addAttribute("funcionarios", funcionarios);
 		model.addAttribute("perfis", perfis);
 		model.addAttribute("usuarios", usuarios);
-		
+
 		return "usuario/gerenciar-usuario";
 	}
 
@@ -57,20 +58,19 @@ public class UsuarioController {
 		List<PerfilBean> perfis = perfilBusiness.listar();
 		model.addAttribute("funcionalidades", funcionalidades);
 		model.addAttribute("perfis", perfis);
-		
+
 		return "usuario/gerenciar-perfil";
 	}
 
 	@RequestMapping(value = "/perfil/salvar-perfil", method = RequestMethod.POST)
-	public String inserirPerfil(@ModelAttribute("perfilBean") PerfilBean perfilBean, RedirectAttributes redirectAttributes ) throws BusinessException {
-		try{
+	public String inserirPerfil(@ModelAttribute("perfilBean") PerfilBean perfilBean,
+			RedirectAttributes redirectAttributes) throws BusinessException {
+		try {
 			perfilBusiness.inserir(perfilBean);
 			redirectAttributes.addFlashAttribute("sucesso", "Perfil salvo com sucesso.");
-			
-		}catch(BusinessException e){
+		} catch (BusinessException e) {
 			redirectAttributes.addFlashAttribute("erros", e.getMessage());
 		}
-
 		return "redirect:gerenciar";
 	}
 
@@ -79,55 +79,52 @@ public class UsuarioController {
 		String mensagem;
 		try {
 			usuarioBusiness.inserir(usuario);
-			if(usuario.getId() == null) {
+			if (usuario.getId() == null) {
 				mensagem = "Usuário incluido com sucesso!";
-			}
-			else {
+			} else {
 				mensagem = "Usuário alterado com sucesso!";
 			}
 			redirectAttrs.addFlashAttribute("mensagem", mensagem);
 		} catch (BusinessException e) {
 			redirectAttrs.addFlashAttribute("mensagem", e.getMessage());
 		}
-		
 		return "redirect:gerenciar";
 	}
-	
+
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.GET)
 	public String redirecionaLista() {
 		return "redirect:gerenciar";
 	}
-	
-	@RequestMapping(value = {"/carregar-usuario-api/{id}"}, method = RequestMethod.GET)
+
+	@RequestMapping(value = { "/carregar-usuario-api/{id}" }, method = RequestMethod.GET)
 	@ResponseStatus(value = HttpStatus.OK)
 	public @ResponseBody UsuarioBean carregaUsuarioAjax(@PathVariable Integer id) {
 		UsuarioBean usuario = usuarioBusiness.obterPorId(id);
 		return usuario;
 	}
-	
+
 	@RequestMapping(value = "/mudar-status-api/{id}", method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
 	public void mudarStatusAjax(@PathVariable Integer id) {
 		usuarioBusiness.mudarStatus(id);
 	}
-	
+
 	@RequestMapping(value = "/redefinir-senha-api/{id}", method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
 	public void redefinirSenhaAjax(@PathVariable Integer id) {
 		usuarioBusiness.redefinirSenha(id);
 	}
-	
-	@RequestMapping(value = "obter-perfil-funcionalidade", method=RequestMethod.GET)
-	public @ResponseBody List<FuncionalidadeBean> obterPerfilFuncionalidade(@ModelAttribute("id") Integer id){
+
+	@RequestMapping(value = "obter-perfil-funcionalidade", method = RequestMethod.GET)
+	public @ResponseBody List<FuncionalidadeBean> obterPerfilFuncionalidade(@ModelAttribute("id") Integer id) {
 		List<FuncionalidadeBean> listaFunc = perfilBusiness.obterPerfilFuncionalidades(id);
-		
 		return listaFunc;
 	}
-	@RequestMapping(value = "carrega-funcionalidade-ajax", method=RequestMethod.GET)
-	public @ResponseBody List<FuncionalidadeBean> carregaPerfilFuncionalidadeAjax(Model model,@ModelAttribute("id")Integer id){
+
+	@RequestMapping(value = "carrega-funcionalidade-ajax", method = RequestMethod.GET)
+	public @ResponseBody List<FuncionalidadeBean> carregaPerfilFuncionalidadeAjax(Model model,
+			@ModelAttribute("id") Integer id) {
 		List<FuncionalidadeBean> lista = perfilBusiness.obterPerfilFuncionalidades(id);
-		
 		return lista;
 	}
-
 }

@@ -13,12 +13,13 @@ import br.com.prosperity.entity.FuncionalidadeEntity;
 
 @Component
 public class FuncionalidadeBusiness {
+
 	@Autowired
 	private FuncionalidadeDAO funcionalidadeDAO;
 
 	@Autowired
 	private FuncionalidadeConverter funcionalidadeConverter;
-	
+
 	@Transactional(readOnly = true)
 	public List<FuncionalidadeBean> listar() {
 		List<FuncionalidadeEntity> funcionalidadeEntity = funcionalidadeDAO.findAll();

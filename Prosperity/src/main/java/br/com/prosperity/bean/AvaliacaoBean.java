@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AvaliacaoBean {
-
 	private Integer id;
 	private String nome;
 	private String tipoCss;
@@ -32,5 +31,4 @@ public class AvaliacaoBean {
 	public void setTipoCss(String tipoCss) {
 		this.tipoCss = tipoCss;
 	}
-
 }

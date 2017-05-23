@@ -6,5 +6,4 @@ import br.com.prosperity.entity.FuncionalidadeEntity;
 
 @Repository
 public class FuncionalidadeDAO extends GenericDAOImpl<FuncionalidadeEntity, Integer> {
-
 }

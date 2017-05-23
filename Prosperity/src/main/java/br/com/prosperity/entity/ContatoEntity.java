@@ -34,5 +34,4 @@ public class ContatoEntity {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-
 }

@@ -13,8 +13,8 @@ public class FuncionalidadeConverter implements Converter<FuncionalidadeEntity, 
 		if (bean == null) {
 			return null;
 		}
-
 		FuncionalidadeEntity entity = new FuncionalidadeEntity();
+
 		entity.setId(bean.getId());
 		entity.setNome(bean.getNome());
 		entity.setUrl(bean.getUrl());

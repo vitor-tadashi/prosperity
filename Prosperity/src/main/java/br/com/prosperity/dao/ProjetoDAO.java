@@ -8,5 +8,4 @@ import br.com.prosperity.entity.ProjetoEntity;
 
 @Repository
 public class ProjetoDAO extends GenericDAOImpl<ProjetoEntity, Serializable> {
-
 }

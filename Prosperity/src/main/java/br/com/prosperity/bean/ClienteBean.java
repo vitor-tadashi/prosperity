@@ -8,7 +8,6 @@ public class ClienteBean {
 	private String nome;
 
 	public ClienteBean() {
-
 	}
 
 	public ClienteBean(Integer id, String nome) {
@@ -31,5 +30,4 @@ public class ClienteBean {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 }
