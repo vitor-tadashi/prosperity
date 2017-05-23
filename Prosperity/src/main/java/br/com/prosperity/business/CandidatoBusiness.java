@@ -33,6 +33,7 @@ import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.converter.AvaliacaoConverter;
 import br.com.prosperity.converter.AvaliadorCandidatoConverter;
 import br.com.prosperity.converter.AvaliadorVagaConverter;
+import br.com.prosperity.converter.CancelamentoConverter;
 import br.com.prosperity.converter.CandidatoConverter;
 import br.com.prosperity.converter.CompetenciaConverter;
 import br.com.prosperity.converter.ComunicacaoConverter;
@@ -44,6 +45,7 @@ import br.com.prosperity.dao.AvaliacaoDAO;
 import br.com.prosperity.dao.AvaliadorCandidatoDAO;
 import br.com.prosperity.dao.AvaliadorVagaDAO;
 import br.com.prosperity.dao.CanalInformacaoDAO;
+import br.com.prosperity.dao.CancelamentoDAO;
 import br.com.prosperity.dao.CandidatoDAO;
 import br.com.prosperity.dao.CompetenciaDAO;
 import br.com.prosperity.dao.ComunicacaoDAO;
@@ -180,6 +182,12 @@ public class CandidatoBusiness {
 
 	@Autowired
 	private FuncionarioConverter funcionarioConverter;
+	
+	@Autowired
+	private CancelamentoDAO cancelamentoDAO;
+
+	@Autowired
+	private CancelamentoConverter cancelamentoConverter;
 
 	@Transactional(readOnly = true)
 	public List<CandidatoBean> listarDecrescente() {
@@ -504,8 +512,9 @@ public class CandidatoBusiness {
 		statusCandidatoEntity.setStatus(statusDAO.findById(situacaoCandidato.getStatus().getValue()));
 		statusCandidatoEntity.setCandidato(candidatoEntity);
 		statusCandidatoEntity.setDsParecer(situacaoCandidato.getParecer());
-		statusCandidatoEntity.setProposta(situacaoCandidato.getProposta());
 		statusCandidatoEntity.setDtAlteracao(new Date());
+		statusCandidatoEntity.setCancelamento(cancelamentoDAO.findById(situacaoCandidato.getIdCancelamento()));
+		statusCandidatoEntity.setDsCancelamento(situacaoCandidato.getDsCancelamento());
 		if (usuarioBean != null)
 			statusCandidatoEntity.setUsuario(usuarioDAO.findById(usuarioBean.getId()));
 		statusCandidatoEntity.setFlSituacao(true);

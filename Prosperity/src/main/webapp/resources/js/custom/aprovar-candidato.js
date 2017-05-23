@@ -205,6 +205,8 @@
 						'idCandidato' : $('#hdn-id-candidato').val(),
 						'parecer' : $('#parecer').val(),
 						'idStatus' : $('#hdn-status').val(),
+						'dsCancelamento' : $('#parecerCancelamento').val(),
+						'idCancelamento' : $('#cancelamento').val(),
 						'processoSeletivo' : JSON.stringify(provasDescricoes),
 						'avaliacoesCandidato' : JSON.stringify(avaliacoes)
 					},
@@ -439,7 +441,12 @@
 				var id = $("#idCancelamento").val();
 				$.ajax({
 					url : "cancelar-candidato/" + id,
-					type : "POST"
+					type : "POST",
+					data : {
+						'idCandidato' : $('#hdn-id-candidato').val(),
+						'dsCancelamento' : $('#parecerCancelamento').val(),
+						'idCancelamento' : $('#cancelamento').val(),
+					}
 				}).done(
 					function() {
 						/* Fecha o modal de cancelamento: */

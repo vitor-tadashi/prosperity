@@ -216,10 +216,13 @@ public class CandidatoController<PaginarCandidato> {
 	}
 
 	@RequestMapping(value = "/cancelar-candidato/{id}")
-	public String cancelaCandidato(@PathVariable Integer id, Model model) {
+	public String cancelaCandidato(@PathVariable Integer id,
+			@ModelAttribute("situacaoCandidato") SituacaoCandidatoBean situacaoCandidato, Model model) {
 		SituacaoCandidatoBean bean = new SituacaoCandidatoBean();
 		bean.setIdCandidato(id);
 		bean.setStatus(StatusCandidatoEnum.CANCELADO);
+		bean.setDsCancelamento(situacaoCandidato.getDsCancelamento());
+		bean.setIdCancelamento(situacaoCandidato.getIdCancelamento());
 		candidatoBusiness.alterarStatus(bean);
 		return "redirect:/candidato/aprovar";
 	}
@@ -526,18 +529,21 @@ public class CandidatoController<PaginarCandidato> {
 
 	@RequestMapping(value = "/file/{id}", method = RequestMethod.GET)
 	@ResponseBody
-	public void getFile(@PathVariable Integer id, HttpServletResponse response) {
-		String caminho = candidatoBusiness.obter(id).getCurriculo();
-		try {
-			File file = new File(caminho);
-			response.addHeader("Content-Disposition", "attachment; filename=" + caminho);
-			InputStream is = new FileInputStream(file);
-			org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
-			response.flushBuffer();
+	public void getFile(@PathVariable Integer id, HttpServletResponse response) throws IOException {
 
-			is.close();
-		} catch (IOException e) {
-			e.printStackTrace();
+		String caminho = candidatoBusiness.obter(id).getCurriculo();
+		if (!caminho.isEmpty()) {
+			try {
+				File file = new File(caminho);
+				response.addHeader("Content-Disposition", "attachment; filename=" + caminho);
+				InputStream is = new FileInputStream(file);
+				org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
+				response.flushBuffer();
+
+				is.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -642,7 +648,15 @@ public class CandidatoController<PaginarCandidato> {
 		candidatoBean.setId(candidato);
 		comunicacaoBean.setCandidatoBean(candidatoBean);
 
+		/*
+		 * SituacaoCandidatoBean bean = new SituacaoCandidatoBean();
+		 * bean.setIdCandidato(id);
+		 * bean.setStatus(StatusCandidatoEnum.CANDIDATOEMANALISE);
+		 */
+
 		candidatoBusiness.inserirComunicacao(comunicacaoBean);
+
+		// comunicacaoBean.setCandidatoBean();
 
 		return comunicacoesBean;
 	}
