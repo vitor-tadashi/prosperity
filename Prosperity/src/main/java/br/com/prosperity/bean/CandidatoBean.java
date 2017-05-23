@@ -160,6 +160,7 @@ public class CandidatoBean extends FormatUtil {
 			ultimoStatus = status.stream().filter(st -> st.getId().equals(idUltimoStatus)).findFirst().get();
 		} else {
 			ultimoStatus = new StatusCandidatoBean("Não possui status");
+			ultimoStatus.getStatus().setCss("#7f8c8d");
 		}
 
 		return ultimoStatus;

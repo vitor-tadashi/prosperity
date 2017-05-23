@@ -77,6 +77,11 @@ footer {
 	left: -125px !important;
 }
 
+/*tira o resize do parecer de cancelamento*/
+#parecerCancelamento{
+	resize: none;
+}
+
 .status {
 	font-size: 12px;
 }
