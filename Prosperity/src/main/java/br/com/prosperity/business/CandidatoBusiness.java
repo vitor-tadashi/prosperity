@@ -351,7 +351,6 @@ public class CandidatoBusiness {
 			candidatoDAO.insert(candidatoEntity);
 		} else {
 			// Se sim, update nele:
-			candidatoDAO.update(candidatoEntity);
 		}
 	}
 
