@@ -3,6 +3,7 @@ package br.com.prosperity.business;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -182,7 +183,7 @@ public class CandidatoBusiness {
 
 	@Autowired
 	private FuncionarioConverter funcionarioConverter;
-	
+
 	@Autowired
 	private CancelamentoDAO cancelamentoDAO;
 
@@ -205,6 +206,7 @@ public class CandidatoBusiness {
 			candidatoBean = FormatUtil.formatCPF(candidatoBean);
 			candidatoBean.setContato(FormatUtil.formatPhone(candidatoBean.getContato()));
 		}
+		Collections.sort(candidatoBean.getStatus());
 		Map<String, List<StatusCandidatoBean>> listaStatusOrdenada = groupByOrdered(candidatoBean.getStatus(),
 				StatusCandidatoBean::getMesAno);
 		candidatoBean.setStatusPorMesAno(listaStatusOrdenada);
@@ -287,6 +289,7 @@ public class CandidatoBusiness {
 
 				situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
 				situacaoCandidato.setIdCandidato(candidatoEntity.getId());
+				situacaoCandidato.setNomeVaga(vagaAtual.getNomeVaga());
 				alterarStatus(situacaoCandidato);
 
 			} else {
@@ -325,6 +328,7 @@ public class CandidatoBusiness {
 
 					situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
 					situacaoCandidato.setIdCandidato(candidatoEntity.getId());
+					situacaoCandidato.setNomeVaga(vagaAtual.getNomeVaga());
 					alterarStatus(situacaoCandidato);
 				}
 			}
@@ -431,18 +435,20 @@ public class CandidatoBusiness {
 		StatusCandidatoEntity statusCandidatoEntity = null;
 		List<StatusFuturoEntity> statusFuturoEntity = null;
 		List<AvaliadorCandidatoEntity> avaliadorCandidatoEntity = null;
+		List<StatusCandidatoEntity> listaStatusCandidato = null;
+		listaStatusCandidato = statusCandidatoDAO.findByNamedQuery("obterStatusCandidato",
+				situacaoCandidato.getIdCandidato());
 		List<StatusDisponivelEntity> listaStatusDisponivelEntity = statusDisponivelDAO.findAll();
 
 		if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANDIDATURA.getValue()
 				|| situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANCELADO.getValue()
 				|| situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.SEMVAGA.getValue()) {
-			statusCandidatoEntity = statusAlteracao(situacaoCandidato);
-			statusCandidatoDAO.insert(statusCandidatoEntity);
+			if (listaStatusCandidato.get(0).getStatus().getId() != situacaoCandidato.getStatus().getValue()) {
+				statusCandidatoEntity = statusAlteracao(situacaoCandidato);
+				statusCandidatoDAO.insert(statusCandidatoEntity);
+			}
 		} else {
 			if (listaStatusDisponivelEntity != null) {
-				List<StatusCandidatoEntity> listaStatusCandidato = null;
-				listaStatusCandidato = statusCandidatoDAO.findByNamedQuery("obterStatusCandidato",
-						situacaoCandidato.getIdCandidato());
 				for (StatusDisponivelEntity statusDisponivelEntity : listaStatusDisponivelEntity) {
 					if (statusDisponivelEntity.getStatus().getId() == listaStatusCandidato.get(0).getStatus().getId()) {
 						if (situacaoCandidato.getStatus().getValue() == statusDisponivelEntity
@@ -505,7 +511,6 @@ public class CandidatoBusiness {
 		if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANCELADO.getValue()
 				|| situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOREPROVADO.getValue()) {
 			desativarAvaliadores(situacaoCandidato.getIdCandidato());
-
 		}
 
 		usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
@@ -513,8 +518,16 @@ public class CandidatoBusiness {
 		statusCandidatoEntity.setCandidato(candidatoEntity);
 		statusCandidatoEntity.setDsParecer(situacaoCandidato.getParecer());
 		statusCandidatoEntity.setDtAlteracao(new Date());
-		statusCandidatoEntity.setCancelamento(cancelamentoDAO.findById(situacaoCandidato.getIdCancelamento()));
-		statusCandidatoEntity.setDsCancelamento(situacaoCandidato.getDsCancelamento());
+		//TODO set nome vaga, se não for nulo
+		if(situacaoCandidato.getNomeVaga() != null && !situacaoCandidato.getNomeVaga().isEmpty())
+			statusCandidatoEntity.setNmVaga(situacaoCandidato.getNomeVaga());
+
+		if (situacaoCandidato.getIdCancelamento() != null) {
+			statusCandidatoEntity.setCancelamento(cancelamentoDAO.findById(situacaoCandidato.getIdCancelamento()));
+		}
+		if (situacaoCandidato.getDsCancelamento() != null) {
+			statusCandidatoEntity.setDsCancelamento(situacaoCandidato.getDsCancelamento());
+		}
 		if (usuarioBean != null)
 			statusCandidatoEntity.setUsuario(usuarioDAO.findById(usuarioBean.getId()));
 		statusCandidatoEntity.setFlSituacao(true);

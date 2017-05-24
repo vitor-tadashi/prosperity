@@ -24,7 +24,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 public class StatusEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idStatus", unique = true, nullable = false)
 	private Integer id;
 

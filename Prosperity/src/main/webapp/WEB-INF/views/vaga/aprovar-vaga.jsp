@@ -553,6 +553,7 @@
     		}).done(function(dado) {
     			
     			var msg = "";
+
     			if(statusAnterior=='27' && dado=='27') {
     				$('#aprova-modal').modal('hide');
         			msg = 'Necessário setar avaliadores ou marketing social da vaga!';
@@ -567,8 +568,8 @@
         			$('#aprova-modal').modal('hide');
         			msg = 'Vaga divulgada com sucesso!';
     			}else if (dado == '18'){
-    			$('#reprova-modal').modal('hide');
-    			msg = 'Vaga reprovada com sucesso!';
+    				$('#reprova-modal').modal('hide');
+    				msg = 'Vaga reprovada com sucesso!';
     			}else if (dado == '2'){
         			$('#fechar-modal').modal('hide');
         			msg = 'Vaga fechada com sucesso!';
@@ -576,9 +577,9 @@
     			
     			localStorage.setItem("mensagem", msg);
     			localStorage.setItem("isSuccess", true);
-    			location.reload();
+    			location.reload()
     			
-        	}).fail(function(jqXHR, textStatus) {
+    		}).fail(function(jqXHR, textStatus) {
         		
         		var msg = "";
         		

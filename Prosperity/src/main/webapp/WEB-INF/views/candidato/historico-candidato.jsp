@@ -258,7 +258,7 @@
 														<div class="tl-circ" style="background:${status.status.css}"></div>
 														<div class="timeline-panel">
 															<div class="tl-heading">
-																<h4>Status: ${status.status.nome} </h4>
+																<h4>Status: ${status.status.nome} - ${ status.nomeVaga } </h4>
 																<p>
 																	<small class="text-muted"><i class="fa fa-calendar"></i>
 																		<fmt:formatDate value="${status.dataAlteracao}"
@@ -277,6 +277,18 @@
 																			<label>Funcionário:</label> <span>${status.usuario.funcionario.nome}</span>
 																		</p>
 																	</div>
+																	<c:if test="${status.status.id == 17}">
+																		<div class="row">
+																			<p class="">
+																				<label>Motivo:</label> <span>${status.cancelamento.descricao}</span>
+																			</p>
+																		</div>
+																		<div class="row">
+																			<p class="">
+																				<label> Obs:</label> <span>${status.dsCancelamento}</span>
+																			</p>
+																		</div>
+																	</c:if>
 																	<c:if test="${status.status.id == 10}">
 																		<div class="row hide proposta-js">
 																			<p class="">

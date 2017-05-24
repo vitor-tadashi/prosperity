@@ -223,7 +223,7 @@ public class VagaBusiness {
 			vagaDAO.update(vagaEntity);
 		}
 
-		if(usuarioBean.size() > 0 && usuarioBean.get(0).getId()!= null){
+		if(usuarioBean.get(0).getId()!= null && usuarioBean.size()>0) {
 			inserirAvaliadores(vagaEntity, usuarioBean);
 		}
 	}
@@ -268,6 +268,7 @@ public class VagaBusiness {
 			if (avaliadorVagaEntity == null || avaliadorVagaEntity.size() == 0
 					|| vagaEntity.getMarketingSocial().equals("")) {
 				situacaoVaga.setStatus(StatusVagaEnum.VAGANOVA);
+				return;
 			}
 		}
 

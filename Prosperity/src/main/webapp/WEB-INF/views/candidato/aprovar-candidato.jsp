@@ -259,8 +259,11 @@
 													<%-- aqui inicia o painel de comparativos interno --%>
 													<div class="form-group col-md-12">
 														<div class="panel panel-default col-md-12">
-															<div class="panel-heading text-center"><label>Comparativos interno</label> &nbsp; <button class='bt-toggle mostrarTabela' onclick="mudarEstado('esconderTabela')" ><span class='fa fa-plus-circle'></span></button>
-</div>
+															<div class="panel-heading text-center"><label>Comparativos interno</label>
+																&nbsp; 
+																<button class='bt-toggle mostrarTabela' onclick="mudarEstado('esconderTabela')" >
+																<span class='fa fa-plus-circle'></span></button>
+															</div>
 															<div class="panel-body  form-group ajustePadding">
 															<div class ="table-responsive" id="esconderTabela" style="display:none">
 																<table id="tabelaVaga"
@@ -293,7 +296,8 @@
 													<div class="form-group col-md-6" id="importxlsx">
 														<label class="control-label">Importa proposta</label>
 														<div class="upload-file" onchange="gerarProposta()">
-															<input type="file" name="file" id="upload-proposta"
+															<input type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+																name="file" id="upload-proposta"
 																class="upload-demo" required/> <label
 																data-title="Selecione" for="upload-proposta"><span
 																id="caminho"></span>
