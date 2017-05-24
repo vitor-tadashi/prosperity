@@ -518,7 +518,6 @@ public class CandidatoBusiness {
 		statusCandidatoEntity.setCandidato(candidatoEntity);
 		statusCandidatoEntity.setDsParecer(situacaoCandidato.getParecer());
 		statusCandidatoEntity.setDtAlteracao(new Date());
-		//TODO set nome vaga, se não for nulo
 		if(situacaoCandidato.getNomeVaga() != null && !situacaoCandidato.getNomeVaga().isEmpty())
 			statusCandidatoEntity.setNmVaga(situacaoCandidato.getNomeVaga());
 
@@ -761,7 +760,7 @@ public class CandidatoBusiness {
 	public boolean podeEditarVaga(StatusCandidatoBean ultimoStatus) {
 		if (ultimoStatus.getStatus().getId() != null) {
 			if (ultimoStatus.getStatus().getId() != 5 && ultimoStatus.getStatus().getId() != 17
-					&& ultimoStatus.getStatus().getId() != 29) {
+					&& ultimoStatus.getStatus().getId() != 29 && ultimoStatus.getStatus().getId() != 15) {
 				return false;
 			}
 		}
