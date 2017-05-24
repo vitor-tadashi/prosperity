@@ -258,7 +258,7 @@
 														<div class="tl-circ" style="background:${status.status.css}"></div>
 														<div class="timeline-panel">
 															<div class="tl-heading">
-																<h4>Status: ${status.status.nome} - ${ status.nomeVaga } </h4>
+																<h4>Status: ${status.status.nome}  ${status.nomeVaga } </h4>
 																<p>
 																	<small class="text-muted"><i class="fa fa-calendar"></i>
 																		<fmt:formatDate value="${status.dataAlteracao}"

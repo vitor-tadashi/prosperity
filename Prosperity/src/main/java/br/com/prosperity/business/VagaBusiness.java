@@ -376,7 +376,7 @@ public class VagaBusiness {
 		Set<Integer> lista = new HashSet<>();
 		List<Integer> listaStatus = new ArrayList<Integer>();
 		for (FuncionalidadeBean funcionalidadeBean : usuarioBean.getPerfil().getListaFuncionalidades()) {
-			if (funcionalidadeBean.getId() == 1) {
+			if (funcionalidadeBean.getId() == 35) {
 				lista.add(StatusVagaEnum.PENDENTE.getValue());
 			}
 			if (funcionalidadeBean.getId() == 30) {
@@ -384,7 +384,6 @@ public class VagaBusiness {
 			}
 			if (funcionalidadeBean.getId() == 29) {
 				lista.add(StatusVagaEnum.VAGANOVA.getValue());
-				lista.add(StatusVagaEnum.PENDENTE.getValue());
 				lista.add(StatusVagaEnum.ATIVO.getValue());
 			}
 		}
