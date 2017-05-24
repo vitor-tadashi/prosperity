@@ -128,8 +128,11 @@ public class VagaEntity {
 
 	@Column(name = "telResponsavel")
 	private String telResponsavel;
-
+	
 	@Column(name = "dsPreTexto")
+	private String dsPreTexto;
+
+	@Column(name = "dsMarketingSocial")
 	private String marketingSocial;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "vaga")
