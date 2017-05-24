@@ -14,6 +14,7 @@ import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.entity.StatusVagaEntity;
 import br.com.prosperity.entity.VagaEntity;
 import br.com.prosperity.enumarator.StatusVagaEnum;
+import br.com.prosperity.exception.BusinessException;
 
 //clase que retorna uma autenticacao para ser enviada e verificada pelo servidor smtp
 public class GeradorEmail {
@@ -137,7 +138,7 @@ public class GeradorEmail {
 	}
 
 	// Para alterações em status de candidatos:
-	public void enviarEmail(CandidatoBean candidato, String para, String nome) {
+	public void enviarEmail(CandidatoBean candidato, String para, String nome) throws BusinessException {
 
 		Mensagem mensagem = new Mensagem();
 
@@ -153,7 +154,7 @@ public class GeradorEmail {
 	}
 
 	// Para alterações em status de vagas:
-	public void enviarEmail(VagaEntity vaga, String para, String nome) {
+	public void enviarEmail(VagaEntity vaga, String para, String nome) throws BusinessException {
 
 		String statusTexto = "";
 		Mensagem mensagem = new Mensagem();

@@ -439,9 +439,10 @@ public class CandidatoBusiness {
 		listaStatusCandidato = statusCandidatoDAO.findByNamedQuery("obterStatusCandidato",
 				situacaoCandidato.getIdCandidato());
 		List<StatusDisponivelEntity> listaStatusDisponivelEntity = statusDisponivelDAO.findAll();
-
-		if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANDIDATURA.getValue()
-				|| situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANCELADO.getValue()
+		if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANDIDATURA.getValue()) {
+			statusCandidatoEntity = statusAlteracao(situacaoCandidato);
+			statusCandidatoDAO.insert(statusCandidatoEntity);
+		} else if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANCELADO.getValue()
 				|| situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.SEMVAGA.getValue()) {
 			if (listaStatusCandidato.get(0).getStatus().getId() != situacaoCandidato.getStatus().getValue()) {
 				statusCandidatoEntity = statusAlteracao(situacaoCandidato);
@@ -518,7 +519,7 @@ public class CandidatoBusiness {
 		statusCandidatoEntity.setCandidato(candidatoEntity);
 		statusCandidatoEntity.setDsParecer(situacaoCandidato.getParecer());
 		statusCandidatoEntity.setDtAlteracao(new Date());
-		if(situacaoCandidato.getNomeVaga() != null && !situacaoCandidato.getNomeVaga().isEmpty())
+		if (situacaoCandidato.getNomeVaga() != null && !situacaoCandidato.getNomeVaga().isEmpty())
 			statusCandidatoEntity.setNmVaga(situacaoCandidato.getNomeVaga());
 
 		if (situacaoCandidato.getIdCancelamento() != null) {
@@ -728,7 +729,11 @@ public class CandidatoBusiness {
 		}
 		GeradorEmail email = new GeradorEmail();
 		for (int i = 0, j = 0; i < recipients.size() && j < nomes.size(); i++, j++) {
-			email.enviarEmail(candidatoBean, recipients.get(i), nomes.get(j));
+			try {
+				email.enviarEmail(candidatoBean, recipients.get(i), nomes.get(j));
+			} catch (BusinessException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
