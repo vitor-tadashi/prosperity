@@ -354,8 +354,8 @@ public class CandidatoBusiness {
 
 			candidatoDAO.insert(candidatoEntity);
 		} else {
-			// Se sim, update nele:
-			candidatoDAO.update(candidatoEntity);
+			// Se sim, fazer nada:
+			// Porque ele ficará sempre na VagaWordpress
 		}
 	}
 
