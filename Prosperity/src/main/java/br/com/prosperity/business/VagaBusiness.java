@@ -349,10 +349,12 @@ public class VagaBusiness {
 		}
 		if (usuarios != null) {
 			for (UsuarioBean usuario : usuarios) {
-				AvaliadorVagaEntity avaliadorVagaEntity = new AvaliadorVagaEntity();
-				avaliadorVagaEntity.setVaga(vaga);
-				avaliadorVagaEntity.setUsuario(usuarioDAO.findById(usuario.getId()));
-				avaliadorVagaDAO.insert(avaliadorVagaEntity);
+				if(usuario.getId() != null && usuario.getId()>0){
+					AvaliadorVagaEntity avaliadorVagaEntity = new AvaliadorVagaEntity();
+					avaliadorVagaEntity.setVaga(vaga);
+					avaliadorVagaEntity.setUsuario(usuarioDAO.findById(usuario.getId()));
+					avaliadorVagaDAO.insert(avaliadorVagaEntity);
+				}
 			}
 		}
 	}
