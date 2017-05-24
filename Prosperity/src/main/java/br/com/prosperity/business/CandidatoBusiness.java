@@ -3,6 +3,7 @@ package br.com.prosperity.business;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -205,6 +206,7 @@ public class CandidatoBusiness {
 			candidatoBean = FormatUtil.formatCPF(candidatoBean);
 			candidatoBean.setContato(FormatUtil.formatPhone(candidatoBean.getContato()));
 		}
+		Collections.sort(candidatoBean.getStatus());
 		Map<String, List<StatusCandidatoBean>> listaStatusOrdenada = groupByOrdered(candidatoBean.getStatus(),
 				StatusCandidatoBean::getMesAno);
 		candidatoBean.setStatusPorMesAno(listaStatusOrdenada);
@@ -287,6 +289,7 @@ public class CandidatoBusiness {
 
 				situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
 				situacaoCandidato.setIdCandidato(candidatoEntity.getId());
+				situacaoCandidato.setNomeVaga(vagaAtual.getNomeVaga());
 				alterarStatus(situacaoCandidato);
 
 			} else {
@@ -325,6 +328,7 @@ public class CandidatoBusiness {
 
 					situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
 					situacaoCandidato.setIdCandidato(candidatoEntity.getId());
+					situacaoCandidato.setNomeVaga(vagaAtual.getNomeVaga());
 					alterarStatus(situacaoCandidato);
 				}
 			}
@@ -514,6 +518,10 @@ public class CandidatoBusiness {
 		statusCandidatoEntity.setCandidato(candidatoEntity);
 		statusCandidatoEntity.setDsParecer(situacaoCandidato.getParecer());
 		statusCandidatoEntity.setDtAlteracao(new Date());
+		//TODO set nome vaga, se não for nulo
+		if(situacaoCandidato.getNomeVaga() != null && !situacaoCandidato.getNomeVaga().isEmpty())
+			statusCandidatoEntity.setNmVaga(situacaoCandidato.getNomeVaga());
+
 		if (situacaoCandidato.getIdCancelamento() != null) {
 			statusCandidatoEntity.setCancelamento(cancelamentoDAO.findById(situacaoCandidato.getIdCancelamento()));
 		}

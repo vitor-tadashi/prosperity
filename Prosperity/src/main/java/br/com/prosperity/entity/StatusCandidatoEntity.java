@@ -60,6 +60,9 @@ public class StatusCandidatoEntity {
 
 	@Column(name = "dsCancelamento")
 	private String dsCancelamento;
+	
+	@Column(name = "nmVaga")
+	private String nmVaga;
 
 	public Boolean getFlSituacao() {
 		return flSituacao;
@@ -131,5 +134,13 @@ public class StatusCandidatoEntity {
 
 	public void setDsCancelamento(String dsCancelamento) {
 		this.dsCancelamento = dsCancelamento;
+	}
+
+	public String getNmVaga() {
+		return nmVaga;
+	}
+
+	public void setNmVaga(String nmVaga) {
+		this.nmVaga = nmVaga;
 	}
 }
