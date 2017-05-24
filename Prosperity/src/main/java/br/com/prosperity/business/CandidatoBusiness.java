@@ -729,7 +729,11 @@ public class CandidatoBusiness {
 		}
 		GeradorEmail email = new GeradorEmail();
 		for (int i = 0, j = 0; i < recipients.size() && j < nomes.size(); i++, j++) {
-			email.enviarEmail(candidatoBean, recipients.get(i), nomes.get(j));
+			try {
+				email.enviarEmail(candidatoBean, recipients.get(i), nomes.get(j));
+			} catch (BusinessException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
