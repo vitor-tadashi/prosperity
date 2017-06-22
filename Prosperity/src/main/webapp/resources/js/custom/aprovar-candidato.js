@@ -83,6 +83,21 @@
 									$('#vlrAntValeAuto').text(parseFloat(data.ultimaProposta.anteriorValeAuto).toFixed(2));
 									$('#vlrAntValeEstacionamento').text(parseFloat(data.ultimaProposta.anteriorEstacionamento).toFixed(2));
 									$('#vlrAntValeTransporte').text(parseFloat(data.ultimaProposta.anteriorValeTransporte).toFixed(2));
+									$('#dsAntOutros1').text(data.ultimaProposta.antDsOutros1);
+									$('#vlrAntOutros1').text(parseFloat(data.ultimaProposta.antVlrOutros1).toFixed(2));
+									if(data.ultimaProposta.antDsOutros1 != null){
+										$('.divAntOutros1').removeClass("hide");
+									}
+									$('#dsAntOutros2').text(data.ultimaProposta.antDsOutros2);
+									$('#vlrAntOutros2').text(parseFloat(data.ultimaProposta.antVlrOutros2).toFixed(2));
+									if(data.ultimaProposta.antDsOutros2 != null){
+										$('.divAntOutros2').removeClass("hide");
+									}
+									$('#dsAntOutros3').text(data.ultimaProposta.antDsOutros3);
+									$('#vlrAntOutros3').text(parseFloat(data.ultimaProposta.antVlrOutros3).toFixed(2));
+									if(data.ultimaProposta.antDsOutros3 != null){
+										$('.divAntOutros3').removeClass("hide");
+									}
 									$('#vlrAntLiquidoComBeneficios').text(parseFloat(data.ultimaProposta.anteriorLiquidoComBeneficios).toFixed(2));
 									$('#vlrAntAnualLiquido').text(parseFloat(data.ultimaProposta.anteriorAnualLiquido).toFixed(2));
 									$('#vlrAntParticipacaoLucrosOuBonus').text(parseFloat(data.ultimaProposta.anteriorParticipacaoLucrosOuBonus).toFixed(2));
@@ -98,6 +113,21 @@
 									$('#vlrNvValeAuto').text(parseFloat(data.ultimaProposta.novoValeAuto).toFixed(2));
 									$('#vlrNvValeEstacionamento').text(parseFloat(data.ultimaProposta.novoEstacionamento).toFixed(2));
 									$('#vlrNvValeTransporte').text(parseFloat(data.ultimaProposta.novoValeTransporte).toFixed(2));
+									$('#dsNvOutros1').text(data.ultimaProposta.nvDsOutros1);
+									$('#vlrNvOutros1').text(parseFloat(data.ultimaProposta.nvVlrOutros1).toFixed(2));
+									if(data.ultimaProposta.nvDsOutros1 != null){
+										$('.divNvOutros1').removeClass("hide");
+									}
+									$('#dsNvOutros2').text(data.ultimaProposta.nvDsOutros2);
+									$('#vlrNvOutros2').text(parseFloat(data.ultimaProposta.nvVlrOutros2).toFixed(2));
+									if(data.ultimaProposta.nvDsOutros2 != null){
+										$('.divNvOutros2').removeClass("hide");
+									}
+									$('#dsNvOutros3').text(data.ultimaProposta.nvDsOutros3);
+									$('#vlrNvOutros3').text(parseFloat(data.ultimaProposta.nvVlrOutros3).toFixed(2));
+									if(data.ultimaProposta.nvDsOutros3 != null){
+										$('.divNvOutros3').removeClass("hide");
+									}
 									$('#vlrNvLiquidoComBeneficios').text(parseFloat(data.ultimaProposta.novoLiquidoComBeneficios).toFixed(2));
 									$('#vlrNvAnualLiquido').text(parseFloat(data.ultimaProposta.novoAnualLiquido).toFixed(2));
 									$('#vlrNvParticipacaoLucrosOuBonus').text(parseFloat(data.ultimaProposta.novaParticipacaoLucrosOuBonus).toFixed(2));
@@ -363,6 +393,21 @@
 									$("#vlrAntValeAuto").text(parseFloat(data.anteriorValeAuto).toFixed(2));
 									$("#vlrAntValeEstacionamento").text(parseFloat(data.anteriorEstacionamento).toFixed(2));
 									$("#vlrAntValeTransporte").text(parseFloat(data.anteriorValeTransporte).toFixed(2));
+									$('#dsAntOutros1').text(data.antDsOutros1);
+									$('#vlrAntOutros1').text(parseFloat(data.antVlrOutros1).toFixed(2));
+									if(data.antDsOutros1 != null){
+										$('.divAntOutros1').removeClass("hide");
+									}
+									$('#dsAntOutros2').text(data.antDsOutros2);
+									$('#vlrAntOutros2').text(parseFloat(data.antVlrOutros2).toFixed(2));
+									if(data.antDsOutros2 != null){
+										$('.divAntOutros2').removeClass("hide");
+									}
+									$('#dsAntOutros3').text(data.antDsOutros3);
+									$('#vlrAntOutros3').text(parseFloat(data.antVlrOutros3).toFixed(2));
+									if(data.antDsOutros3 != null){
+										$('.divAntOutros3').removeClass("hide");
+									}
 									$("#vlrAntLiquidoComBeneficios").text(parseFloat(data.anteriorLiquidoComBeneficios).toFixed(2));
 									$("#vlrAntAnualLiquido").text(parseFloat(data.anteriorAnualLiquido).toFixed(2));
 									$("#vlrAntParticipacaoLucrosOuBonus").text(parseFloat(data.anteriorParticipacaoLucrosOuBonus).toFixed(2));
@@ -378,6 +423,21 @@
 									$("#vlrNvValeAuto").text(parseFloat(data.novoValeAuto).toFixed(2));
 									$("#vlrNvValeEstacionamento").text(parseFloat(data.novoEstacionamento).toFixed(2));
 									$("#vlrNvValeTransporte").text(parseFloat(data.novoValeTransporte).toFixed(2));
+									$('#dsNvOutros1').text(data.nvDsOutros1);
+									$('#vlrNvOutros1').text(parseFloat(data.nvVlrOutros1).toFixed(2));
+									if(data.nvDsOutros1 != null){
+										$('.divNvOutros1').removeClass("hide");
+									}
+									$('#dsNvOutros2').text(data.nvDsOutros2);
+									$('#vlrNvOutros2').text(parseFloat(data.nvVlrOutros2).toFixed(2));
+									if(data.nvDsOutros2 != null){
+										$('.divNvOutros2').removeClass("hide");
+									}
+									$('#dsNvOutros3').text(data.nvDsOutros3);
+									$('#vlrNvOutros3').text(parseFloat(data.nvVlrOutros3).toFixed(2));
+									if(data.nvDsOutros3 != null){
+										$('.divNvOutros3').removeClass("hide");
+									}
 									$("#vlrNvLiquidoComBeneficios").text(parseFloat(data.novoLiquidoComBeneficios).toFixed(2));
 									$("#vlrNvAnualLiquido").text(parseFloat(data.novoAnualLiquido).toFixed(2));
 									$("#vlrNvParticipacaoLucrosOuBonus").text(parseFloat(data.novaParticipacaoLucrosOuBonus).toFixed(2));

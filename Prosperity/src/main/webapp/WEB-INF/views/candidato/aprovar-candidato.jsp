@@ -160,6 +160,21 @@
 																	<p class="col-md-1">R$ </p>
 																	<p class="col-md-3 dinheiro" id="vlrAntValeTransporte"></p>
 																</div>
+																<div class="col-md-12 divAntOutros1 hide">
+																	<label class="col-md-6" id="dsAntOutros1"></label>
+																	<p class="col-md-1">R$ </p>
+																	<p class="col-md-3 dinheiro" id="vlrAntOutros1"></p>
+																</div>
+																<div class="col-md-12 divAntOutros2 hide">
+																	<label class="col-md-6" id="dsAntOutros2"></label>
+																	<p class="col-md-1">R$ </p>
+																	<p class="col-md-3 dinheiro" id="vlrAntOutros2"></p>
+																</div>
+																<div class="col-md-12 divAntOutros3 hide">
+																	<label class="col-md-6" id="dsAntOutros3"></label>
+																	<p class="col-md-1">R$ </p>
+																	<p class="col-md-3 dinheiro" id="vlrAntOutros3"></p>
+																</div>
 																<div class="col-md-12">
 																	<label class="col-md-6">Líquido m. + ben.:</label>
 																	<p class="col-md-1">R$ </p>
@@ -232,6 +247,21 @@
 																	<label class="col-md-6">Vale transporte:</label>
 																	<p class="col-md-1">R$ </p>
 																	<p class="col-md-3 dinheiro" id="vlrNvValeTransporte"></p>
+																</div>
+																<div class="col-md-12 divNvOutros1 hide">
+																	<label class="col-md-6" id="dsNvOutros1"></label>
+																	<p class="col-md-1">R$ </p>
+																	<p class="col-md-3 dinheiro" id="vlrNvOutros1"></p>
+																</div>
+																<div class="col-md-12 divNvOutros2 hide">
+																	<label class="col-md-6" id="dsNvOutros2"></label>
+																	<p class="col-md-1">R$ </p>
+																	<p class="col-md-3 dinheiro" id="vlrNvOutros2"></p>
+																</div>
+																<div class="col-md-12 divNvOutros3 hide">
+																	<label class="col-md-6" id="dsNvOutros3"></label>
+																	<p class="col-md-1">R$ </p>
+																	<p class="col-md-3 dinheiro" id="vlrNvOutros3"></p>
 																</div>
 																<div class="col-md-12">
 																	<label class="col-md-6">Líquido m. + ben.:</label>

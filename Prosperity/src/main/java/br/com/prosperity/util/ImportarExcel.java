@@ -79,23 +79,53 @@ public class ImportarExcel {
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
 			propostaBean.setAnteriorValeTransporte(cell.getNumericCellValue());
+			
+			cellReference = new CellReference("A13");
+			row = sheet.getRow(cellReference.getRow());
+			cell = row.getCell(cellReference.getCol());
+			propostaBean.setAntDsOutros1(cell.getStringCellValue());
 
 			cellReference = new CellReference("B13");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			propostaBean.setAnteriorLiquidoComBeneficios(cell.getNumericCellValue());
+			propostaBean.setAntVlrOutros1(cell.getNumericCellValue());
+			
+			cellReference = new CellReference("A14");
+			row = sheet.getRow(cellReference.getRow());
+			cell = row.getCell(cellReference.getCol());
+			propostaBean.setAntDsOutros2(cell.getStringCellValue());
 
 			cellReference = new CellReference("B14");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			propostaBean.setAnteriorAnualLiquido(cell.getNumericCellValue());
+			propostaBean.setAntVlrOutros2(cell.getNumericCellValue());
+			
+			cellReference = new CellReference("A15");
+			row = sheet.getRow(cellReference.getRow());
+			cell = row.getCell(cellReference.getCol());
+			propostaBean.setAntDsOutros3(cell.getStringCellValue());
 
 			cellReference = new CellReference("B15");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			propostaBean.setAnteriorParticipacaoLucrosOuBonus(cell.getNumericCellValue());
+			propostaBean.setAntVlrOutros3(cell.getNumericCellValue());
 
 			cellReference = new CellReference("B16");
+			row = sheet.getRow(cellReference.getRow());
+			cell = row.getCell(cellReference.getCol());
+			propostaBean.setAnteriorLiquidoComBeneficios(cell.getNumericCellValue());
+
+			cellReference = new CellReference("B17");
+			row = sheet.getRow(cellReference.getRow());
+			cell = row.getCell(cellReference.getCol());
+			propostaBean.setAnteriorAnualLiquido(cell.getNumericCellValue());
+
+			cellReference = new CellReference("B18");
+			row = sheet.getRow(cellReference.getRow());
+			cell = row.getCell(cellReference.getCol());
+			propostaBean.setAnteriorParticipacaoLucrosOuBonus(cell.getNumericCellValue());
+
+			cellReference = new CellReference("B19");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
 			propostaBean.setAnteriorTotalAnualLiquidoComBeneficios(cell.getNumericCellValue());
@@ -149,34 +179,63 @@ public class ImportarExcel {
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
 			propostaBean.setNovoValeTransporte(cell.getNumericCellValue());
-
+			
+			cellReference = new CellReference("D13");
+			row = sheet.getRow(cellReference.getRow());
+			cell = row.getCell(cellReference.getCol());
+			propostaBean.setNvDsOutros1(cell.getStringCellValue());
+			
 			cellReference = new CellReference("E13");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			propostaBean.setNovoLiquidoComBeneficios(cell.getNumericCellValue());
+			propostaBean.setNvVlrOutros1(cell.getNumericCellValue());
+			
+			cellReference = new CellReference("D14");
+			row = sheet.getRow(cellReference.getRow());
+			cell = row.getCell(cellReference.getCol());
+			propostaBean.setNvDsOutros2(cell.getStringCellValue());
 
 			cellReference = new CellReference("E14");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			propostaBean.setNovoAnualLiquido(cell.getNumericCellValue());
+			propostaBean.setNvVlrOutros2(cell.getNumericCellValue());
 
+			cellReference = new CellReference("D15");
+			row = sheet.getRow(cellReference.getRow());
+			cell = row.getCell(cellReference.getCol());
+			propostaBean.setNvDsOutros3(cell.getStringCellValue());
+			
 			cellReference = new CellReference("E15");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
-			propostaBean.setNovaParticipacaoLucrosOuBonus(cell.getNumericCellValue());
+			propostaBean.setNvVlrOutros3(cell.getNumericCellValue());
 
 			cellReference = new CellReference("E16");
 			row = sheet.getRow(cellReference.getRow());
 			cell = row.getCell(cellReference.getCol());
+			propostaBean.setNovoLiquidoComBeneficios(cell.getNumericCellValue());
+
+			cellReference = new CellReference("E17");
+			row = sheet.getRow(cellReference.getRow());
+			cell = row.getCell(cellReference.getCol());
+			propostaBean.setNovoAnualLiquido(cell.getNumericCellValue());
+
+			cellReference = new CellReference("E18");
+			row = sheet.getRow(cellReference.getRow());
+			cell = row.getCell(cellReference.getCol());
+			propostaBean.setNovaParticipacaoLucrosOuBonus(cell.getNumericCellValue());
+
+			cellReference = new CellReference("E19");
+			row = sheet.getRow(cellReference.getRow());
+			cell = row.getCell(cellReference.getCol());
 			propostaBean.setNovoTotalAnualLiquidoComBeneficios(cell.getNumericCellValue());
 
-			int aux = 22;
+			int aux = 25;
 			boolean continuar = false;
 
 			while (!continuar) {
 				cellReference = new CellReference("A" + aux);
 				row = sheet.getRow(cellReference.getRow());
-				// cell = row.getCell(cellReference.getCol());
 				if (row != null) {
 					ComparativoPropostaBean comparativoPropostaBean = new ComparativoPropostaBean();
 

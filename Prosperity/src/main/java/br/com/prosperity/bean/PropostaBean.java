@@ -36,6 +36,18 @@ public class PropostaBean {
 	private double novaParticipacaoLucrosOuBonus;
 	private double anteriorTotalAnualLiquidoComBeneficios;
 	private double novoTotalAnualLiquidoComBeneficios;
+	private String antDsOutros1;
+	private String antDsOutros2;
+	private String antDsOutros3;
+	private String nvDsOutros1;
+	private String nvDsOutros2;
+	private String nvDsOutros3;
+	private Double antVlrOutros1;
+	private Double antVlrOutros2;
+	private Double antVlrOutros3;
+	private Double nvVlrOutros1;
+	private Double nvVlrOutros2;
+	private Double nvVlrOutros3;
 	private String cmProposta;
 	private Boolean flSituacao = false;
 	private Integer candidato;
@@ -304,4 +316,101 @@ public class PropostaBean {
 	public void setCmProposta(String cmProposta) {
 		this.cmProposta = cmProposta;
 	}
+
+	public String getAntDsOutros1() {
+		return antDsOutros1;
+	}
+
+	public void setAntDsOutros1(String antDsOutros1) {
+		this.antDsOutros1 = antDsOutros1;
+	}
+
+	public String getAntDsOutros2() {
+		return antDsOutros2;
+	}
+
+	public void setAntDsOutros2(String antDsOutros2) {
+		this.antDsOutros2 = antDsOutros2;
+	}
+
+	public String getAntDsOutros3() {
+		return antDsOutros3;
+	}
+
+	public void setAntDsOutros3(String antDsOutros3) {
+		this.antDsOutros3 = antDsOutros3;
+	}
+
+	public String getNvDsOutros1() {
+		return nvDsOutros1;
+	}
+
+	public void setNvDsOutros1(String nvDsOutros1) {
+		this.nvDsOutros1 = nvDsOutros1;
+	}
+
+	public String getNvDsOutros2() {
+		return nvDsOutros2;
+	}
+
+	public void setNvDsOutros2(String nvDsOutros2) {
+		this.nvDsOutros2 = nvDsOutros2;
+	}
+
+	public String getNvDsOutros3() {
+		return nvDsOutros3;
+	}
+
+	public void setNvDsOutros3(String nvDsOutros3) {
+		this.nvDsOutros3 = nvDsOutros3;
+	}
+
+	public Double getAntVlrOutros1() {
+		return antVlrOutros1;
+	}
+
+	public void setAntVlrOutros1(Double antVlrOutros1) {
+		this.antVlrOutros1 = antVlrOutros1;
+	}
+
+	public Double getAntVlrOutros2() {
+		return antVlrOutros2;
+	}
+
+	public void setAntVlrOutros2(Double antVlrOutros2) {
+		this.antVlrOutros2 = antVlrOutros2;
+	}
+
+	public Double getAntVlrOutros3() {
+		return antVlrOutros3;
+	}
+
+	public void setAntVlrOutros3(Double antVlrOutros3) {
+		this.antVlrOutros3 = antVlrOutros3;
+	}
+
+	public Double getNvVlrOutros1() {
+		return nvVlrOutros1;
+	}
+
+	public void setNvVlrOutros1(Double nvVlrOutros1) {
+		this.nvVlrOutros1 = nvVlrOutros1;
+	}
+
+	public Double getNvVlrOutros2() {
+		return nvVlrOutros2;
+	}
+
+	public void setNvVlrOutros2(Double nvVlrOutros2) {
+		this.nvVlrOutros2 = nvVlrOutros2;
+	}
+
+	public Double getNvVlrOutros3() {
+		return nvVlrOutros3;
+	}
+
+	public void setNvVlrOutros3(Double nvVlrOutros3) {
+		this.nvVlrOutros3 = nvVlrOutros3;
+	}
+	
 }

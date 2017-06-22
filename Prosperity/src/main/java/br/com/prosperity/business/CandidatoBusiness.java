@@ -53,6 +53,7 @@ import br.com.prosperity.dao.CompetenciaDAO;
 import br.com.prosperity.dao.ComunicacaoDAO;
 import br.com.prosperity.dao.DataEntrevistaDAO;
 import br.com.prosperity.dao.FuncionarioDAO;
+import br.com.prosperity.dao.PropostaDAO;
 import br.com.prosperity.dao.SituacaoAtualDAO;
 import br.com.prosperity.dao.StatusCandidatoDAO;
 import br.com.prosperity.dao.StatusDAO;
@@ -190,6 +191,9 @@ public class CandidatoBusiness {
 
 	@Autowired
 	private CancelamentoConverter cancelamentoConverter;
+	
+	@Autowired
+	private PropostaDAO propostaDAO;
 
 	@Transactional(readOnly = true)
 	public List<CandidatoBean> listarDecrescente() {
@@ -299,6 +303,8 @@ public class CandidatoBusiness {
 
 		} else {
 			candidatoEntity = candidatoDAO.findById(candidatoBean.getId());
+			candidatoEntity.setPropostaEntity(propostaDAO.findByNamedQuery("buscarProposta", candidatoEntity.getId()));
+			
 			//TODO fazer datas salvar certa quando edita
 			beans = candidatoConverter.convertEntityToBean(candidatoEntity);
 			/*if (beans.getDataEntrevista() != null) {
@@ -319,6 +325,7 @@ public class CandidatoBusiness {
 			if (candidatoBean.getVagaCandidato().getVaga() == null) {
 				candidatoBean.getVagaCandidato().setVaga(beans.getUltimaVaga());
 			}
+			candidatoBean.setPropostaBean(beans.getPropostaBean());
 			candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoEntity, candidatoBean);
 			tratarInformacoes(candidatoEntity);
 			definirFormacao(candidatoBean, candidatoEntity);
