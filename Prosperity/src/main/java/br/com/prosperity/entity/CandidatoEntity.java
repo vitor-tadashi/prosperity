@@ -129,7 +129,7 @@ public class CandidatoEntity {
 	@JoinColumn(name = "idCandidato")
 	private List<PropostaEntity> propostaEntity;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@JoinColumn(name = "idCandidato")
 	private List<DataEntrevistaEntity> datasEntrevistas;
 

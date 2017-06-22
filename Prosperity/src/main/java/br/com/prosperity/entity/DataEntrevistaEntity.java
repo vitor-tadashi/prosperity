@@ -10,7 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -27,14 +29,14 @@ public class DataEntrevistaEntity {
 	@Column(name = "idDataEntrevista", unique = true, nullable = false)
 	private Integer idDataEntrevista;
 
-	@OneToOne(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
+	@OneToOne(cascade = { CascadeType.REFRESH }, fetch = FetchType.LAZY)
 	@JoinColumn(name = "idUsuario")
 	private UsuarioEntity usuario;
 
 	@Column(name = "idCandidato")
 	private Integer candidato;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idVaga")
 	private VagaEntity vaga;
 

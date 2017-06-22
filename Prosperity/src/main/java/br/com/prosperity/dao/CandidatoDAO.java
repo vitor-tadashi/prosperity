@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import br.com.prosperity.entity.CandidatoEntity;
@@ -40,6 +41,9 @@ public class CandidatoDAO extends GenericDAOImpl<CandidatoEntity, Integer> {
 			Session session = (Session) entityManager.getDelegate();
 			Criteria crit = session.createCriteria(CandidatoEntity.class, "candidato");
 			crit.createAlias("candidato.vagas", "vaga");
+			//crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+			crit.add(Restrictions.eq("vaga.situacao", true));
+			//crit.add(Restrictions.sqlRestriction("order by vaga.idVagaCandidato)"));
 			for (final Criterion c : criterion) {
 				crit.add(c);
 			}
@@ -73,7 +77,8 @@ public class CandidatoDAO extends GenericDAOImpl<CandidatoEntity, Integer> {
 		try {
 			Session session = (Session) entityManager.getDelegate();
 			Criteria crit = session.createCriteria(CandidatoEntity.class, "candidato");
-			crit.createAlias("candidato.vagas", "vaga");
+			//crit.createAlias("candidato.vagas", "vaga");
+			//crit.setProjection(Projections.distinct(Projections.property("id")));
 
 			for (final Criterion c : criterions) {
 				crit.add(c);

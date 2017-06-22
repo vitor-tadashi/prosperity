@@ -231,6 +231,7 @@ public class CandidatoController<PaginarCandidato> {
 	public String solicitarCandidato(Model model, @PathVariable Integer id) {
 		CandidatoBean candidato = candidatoBusiness.obterCandidatoPorId(id);
 		List<ComunicacaoBean> comunicacaoBean = comunicacaoBusiness.listarDataComunicacao(id);
+		comunicacaoBean = comunicacaoBusiness.listarDatasAtivas(comunicacaoBean,candidato);
 		obterDominiosCandidato(model);
 
 		BigDecimal b = new BigDecimal(candidato.getValorPretensao().toString());
@@ -431,7 +432,7 @@ public class CandidatoController<PaginarCandidato> {
 
 		if (situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOAPROVADO.getValue()
 				|| situacaoCandidato.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOREPROVADO.getValue()) {
-			candidatoCompetenciaBusiness.inserirCompetencias(convertGson(avaliacoesCandidato),
+			candidatoCompetenciaBusiness.inserirCompetencias(convertGson(avaliacoesCandidato,candidatoBean),
 					situacaoCandidato.getIdCandidato());
 		}
 
@@ -458,7 +459,7 @@ public class CandidatoController<PaginarCandidato> {
 		return candidato;
 	}
 
-	public List<CandidatoCompetenciaBean> convertGson(String ac) {
+	public List<CandidatoCompetenciaBean> convertGson(String ac, CandidatoBean candidato) {
 		Gson gson = new Gson();
 		UsuarioBean usuarioBean = (UsuarioBean) session.getAttribute("autenticado");
 		@SuppressWarnings("unchecked")
@@ -479,6 +480,7 @@ public class CandidatoController<PaginarCandidato> {
 						candidatoCompetenciaBean.setAvaliacao(avaliacaoBean);
 						candidatoCompetenciaBean.setCompetencia(competenciaBean);
 						candidatoCompetenciaBean.setNmAvaliador(usuarioBean.getFuncionario().getNome());
+						candidatoCompetenciaBean.setIdVaga(candidatoBean.getUltimaVaga().getId());
 						candidatoCompetenciasBean.add(candidatoCompetenciaBean);
 					}
 				}
@@ -511,12 +513,14 @@ public class CandidatoController<PaginarCandidato> {
 						provaCandidatoBean.setProvas(provaBean);
 						provaCandidatoBean.setDescricao(dsProva);
 						provaCandidatoBean.setCandidato(bean);
+						provaCandidatoBean.setIdVaga(candidatoBean.getUltimaVaga().getId());
 						provasCandidatoBean.add(provaCandidatoBean);
 					}
 				} else if (aux % 2 != 0) {
 					provaCandidatoBean = new ProvaCandidatoBean();
 					provaCandidatoBean.setProvas(provaBean);
 					provaCandidatoBean.setCandidato(bean);
+					provaCandidatoBean.setIdVaga(candidatoBean.getUltimaVaga().getId());
 					provasCandidatoBean.add(provaCandidatoBean);
 				}
 			} catch (Exception e) {
@@ -627,7 +631,7 @@ public class CandidatoController<PaginarCandidato> {
 	@RequestMapping(value = "/comunicacao", method = RequestMethod.POST)
 	public @ResponseBody List<ComunicacaoBean> comunicacao(Model model,
 			@ModelAttribute("dataContato") String dataContato, @ModelAttribute("observacao") String observacao,
-			@ModelAttribute("usuario") Integer usuario, @ModelAttribute("candidato") Integer candidato) {
+			@ModelAttribute("usuario") Integer usuario, @ModelAttribute("candidato") Integer candidato,@ModelAttribute("vaga") Integer vaga) {
 		comunicacaoBean = new ComunicacaoBean();
 
 		Date data = new Date();
@@ -647,6 +651,7 @@ public class CandidatoController<PaginarCandidato> {
 		CandidatoBean candidatoBean = new CandidatoBean();
 		candidatoBean.setId(candidato);
 		comunicacaoBean.setCandidatoBean(candidatoBean);
+		comunicacaoBean.setIdVaga(vaga);
 
 		/*
 		 * SituacaoCandidatoBean bean = new SituacaoCandidatoBean();

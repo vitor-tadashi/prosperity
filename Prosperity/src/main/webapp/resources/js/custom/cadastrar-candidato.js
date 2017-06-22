@@ -7,6 +7,11 @@ $(document).ready(function() {
 	if($("#upload-curriculo2").val() == ""){
 		$("#btnDownload").prop('disabled',true);
 	}
+	$(document).on("change","select",function(){
+		  $("option[value=" + this.value + "]", this)
+		  .attr("selected", true).siblings()
+		  .removeAttr("selected")
+		});
 });
 
 $( "#canalInformacao" ).change(function() {
@@ -536,6 +541,7 @@ function inserirComunicacao(){
 			'observacao' : $("#obs").val(),
 			'usuario': $("#txtUsuario").val(),
 			'candidato': $("#candidato").val(),
+			'vaga' : $('#vaga').val()
 			};
 			$.ajax({
 			url: "/candidato/comunicacao",

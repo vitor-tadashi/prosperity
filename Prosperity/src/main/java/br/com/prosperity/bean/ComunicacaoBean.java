@@ -18,6 +18,7 @@ public class ComunicacaoBean {
 	private String observacao;
 	private UsuarioBean usuarioBean;
 	private CandidatoBean candidatoBean;
+	private Integer idVaga;
 
 	public Integer getId() {
 		return id;
@@ -57,5 +58,13 @@ public class ComunicacaoBean {
 
 	public void setCandidatoBean(CandidatoBean candidatoBean) {
 		this.candidatoBean = candidatoBean;
+	}
+
+	public Integer getIdVaga() {
+		return idVaga;
+	}
+
+	public void setIdVaga(Integer idVaga) {
+		this.idVaga = idVaga;
 	}
 }

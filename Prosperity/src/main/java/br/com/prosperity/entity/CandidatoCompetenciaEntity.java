@@ -34,6 +34,9 @@ public class CandidatoCompetenciaEntity {
 	
 	@Column(name="idCandidato")
 	private Integer idCandidato;
+	
+	@Column(name = "idVaga")
+	private Integer idVaga;
 
 	public Integer getIdCandidatoCompetencia() {
 		return idCandidatoCompetencia;
@@ -73,5 +76,13 @@ public class CandidatoCompetenciaEntity {
 
 	public void setIdCandidato(Integer idCandidato) {
 		this.idCandidato = idCandidato;
+	}
+
+	public Integer getIdVaga() {
+		return idVaga;
+	}
+
+	public void setIdVaga(Integer idVaga) {
+		this.idVaga = idVaga;
 	}
 }

@@ -28,6 +28,7 @@ public class ComunicacaoConverter implements Converter<ComunicacaoEntity, Comuni
 		entity.setId(bean.getId());
 		entity.setObservacao(bean.getObservacao());
 		entity.setUsuarioEntity(usuarioConverter.convertBeanToEntity(bean.getUsuarioBean()));
+		entity.setIdVaga(bean.getIdVaga());
 
 		return entity;
 	}
@@ -45,6 +46,7 @@ public class ComunicacaoConverter implements Converter<ComunicacaoEntity, Comuni
 		bean.setId(entity.getId());
 		bean.setObservacao(entity.getObservacao());
 		bean.setUsuarioBean(usuarioConverter.convertEntityToBean(entity.getUsuarioEntity()));
+		bean.setIdVaga(entity.getIdVaga());
 
 		return bean;
 	}

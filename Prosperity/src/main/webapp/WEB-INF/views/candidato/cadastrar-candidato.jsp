@@ -258,11 +258,11 @@
 												<label for="vaga">Vaga a ser aplicado</label> <select
 													class="form-control" id="vaga" name="vagaCandidato.vaga.id"
 													required="required"
-													${!podeEditarVaga ? 'disabled="disabled"' : ''}>
+													${!podeEditarVaga ? 'disabled="disabled"' : ''} onchange="selecionar()">
 													<option value="0">Selecione</option>
 													<c:forEach var="vaga" items="${listaVaga}">
 														<option value="${vaga.id}"
-															${vaga.id == candidato.vagaCandidato.vaga.id ? 'selected="selected"' : ''}>${vaga.nomeVaga}</option>
+															${vaga.id == candidato.ultimaVaga.id ? 'selected="selected"' : ''}>${vaga.nomeVaga}</option>
 													</c:forEach>
 												</select>
 											</div>
@@ -306,10 +306,10 @@
 																name="dataEntrevista[${status.index}].id" /> <label>Nome
 																do entrevistador: &nbsp;</label>
 															<p>${data.usuario.funcionario.nome}</p>
-															<input type="hidden" name="data.usuario"
-																value="${data.usuario}" /> <input type="hidden"
-																name="data.candidato" value="${data.candidato}" /> <input
-																type="hidden" name="data.vaga" value="${data.vaga}" />
+															<input type="hidden" name="dataEntrevista[${status.index}].usuario.id"
+																value="${data.usuario.id}"> <input type="hidden"
+																name="dataEntrevista[${status.index}].candidato" value="${data.candidato}"> <input
+																type="hidden" name="dataEntrevista[${status.index}].vaga.id" value="${data.vaga.id}">
 														</div>
 														<div class='col-md-2 form-group'>
 															<label>Data de entrevista: &nbsp;</label>

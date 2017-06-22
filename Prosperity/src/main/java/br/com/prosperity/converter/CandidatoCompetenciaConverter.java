@@ -27,6 +27,7 @@ public class CandidatoCompetenciaConverter implements Converter<CandidatoCompete
 		entity.setAvaliacao(avaliacaoConverter.convertBeanToEntity(bean.getAvaliacao()));
 		entity.setNmAvaliador(bean.getNmAvaliador());
 		entity.setIdCandidato(bean.getIdCandidato());
+		entity.setIdVaga(bean.getIdVaga());
 
 		return entity;
 	}
@@ -43,6 +44,7 @@ public class CandidatoCompetenciaConverter implements Converter<CandidatoCompete
 		bean.setAvaliacao(avaliacaoConverter.convertEntityToBean(entity.getAvaliacao()));
 		bean.setNmAvaliador(entity.getNmAvaliador());
 		bean.setIdCandidato(entity.getIdCandidato());
+		bean.setIdVaga(entity.getIdVaga());
 
 		return bean;
 	}

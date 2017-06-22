@@ -28,6 +28,7 @@ public class ProvaCandidatoConverter implements Converter<ProvaCandidatoEntity, 
 		entity.setProvas(provasConverter.convertBeanToEntity(bean.getProvas()));
 		entity.setCandidato(candidatoConverter.convertBeanToEntity(bean.getCandidato()));
 		entity.setCaminhoProva(bean.getCaminhoProva());
+		entity.setIdVaga(bean.getIdVaga());
 
 		return entity;
 	}
@@ -45,6 +46,7 @@ public class ProvaCandidatoConverter implements Converter<ProvaCandidatoEntity, 
 		bean.setProvas(provasConverter.convertEntityToBean(entity.getProvas()));
 		bean.setCandidato(candidatoConverter.convertEntityToBean(entity.getCandidato()));
 		bean.setCaminhoProva(entity.getCaminhoProva());
+		bean.setIdVaga(entity.getIdVaga());
 
 		return bean;
 	}

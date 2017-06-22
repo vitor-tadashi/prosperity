@@ -138,24 +138,24 @@
 										<legend style="color:#424f63"><h5><strong>Vaga aplicado</strong></h5></legend>
 										<div class="row">
 											<div class="form-group col-md-4">
-												<p class="" id="nome"><strong>Vaga: </strong>${candidato.vagaCandidato.vaga.nomeVaga}</p>
+												<p class="" id="nome"><strong>Vaga: </strong>${candidato.ultimaVaga.nomeVaga}</p>
 											</div>
 											<div class="form-group col-md-4">
-												<p class="" id="nome"><strong>Solicitante: </strong>${candidato.vagaCandidato.vaga.nomeSolicitante}</p>
+												<p class="" id="nome"><strong>Solicitante: </strong>${candidato.ultimaVaga.nomeSolicitante}</p>
 											</div>
 											<div class="form-group col-md-4">
-												<p class="" id="nome"><strong>Horário: </strong>${candidato.vagaCandidato.vaga.horarioEntrada} às ${candidato.vagaCandidato.vaga.horarioSaida }</p>
+												<p class="" id="nome"><strong>Horário: </strong>${candidato.ultimaVaga.horarioEntrada} às ${candidato.ultimaVaga.horarioSaida }</p>
 											</div>
 										</div>
 										<div class="row">
 											<div class="form-group col-md-4">
-												<p class="" id="nome"><strong>Cargo: </strong>${candidato.vagaCandidato.vaga.cargoBean.nome}</p>
+												<p class="" id="nome"><strong>Cargo: </strong>${candidato.ultimaVaga.cargoBean.nome}</p>
 											</div>
 											<div class="form-group col-md-4">
-												<p class="" id="nome"><strong>Senioridade: </strong>${candidato.vagaCandidato.vaga.senioridadeBean.nome}</p>
+												<p class="" id="nome"><strong>Senioridade: </strong>${candidato.ultimaVaga.senioridadeBean.nome}</p>
 											</div>
 											<div class="form-group col-md-4 bootstrap-timepicker">
-												<p class="" id="nome"><strong>Data de início: </strong><fmt:formatDate value="${candidato.vagaCandidato.vaga.dataInicio}" pattern="dd/MM/yyyy"/></p>
+												<p class="" id="nome"><strong>Data de início: </strong><fmt:formatDate value="${candidato.ultimaVaga.dataInicio}" pattern="dd/MM/yyyy"/></p>
 											</div>
 										</div>
 									</fieldset>	
@@ -198,6 +198,7 @@
 										<div class="row">
 											<div class="col-md-12">
 												<c:forEach items="${provas }" var="prova" varStatus="i">
+													<c:if test="${prova.idVaga == candidato.ultimaVaga.id }">
 													<div class="col-md-2">
 													<input type="hidden" id="p${i.count }" value="${prova.caminhoProva }">
 													<c:url value="/candidato/papers" var="url">
@@ -205,6 +206,7 @@
 													</c:url>
 														<p class="" id="nome"><strong>${i.count }.</strong> ${prova.provas.nome }&nbsp;&nbsp;<a href="${url }" target="_blank" data-toggle="tooltip" title="Baixar prova" class="fa fa-download fa-lg"></a></p>
 													</div>
+													</c:if>
 												</c:forEach>
 											</div>
 										</div>

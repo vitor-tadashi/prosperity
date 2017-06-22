@@ -30,6 +30,9 @@ public class ProvaCandidatoEntity {
 	
 	@Column(name = "cmProva")
 	private String caminhoProva;
+	
+	@Column(name="idVaga")
+	private Integer idVaga;
 
 	@OneToOne
 	@JoinColumn(name = "idCandidato")
@@ -65,6 +68,14 @@ public class ProvaCandidatoEntity {
 
 	public void setCaminhoProva(String caminhoProva) {
 		this.caminhoProva = caminhoProva;
+	}
+
+	public Integer getIdVaga() {
+		return idVaga;
+	}
+
+	public void setIdVaga(Integer idVaga) {
+		this.idVaga = idVaga;
 	}
 
 	public ProvaEntity getProvas() {

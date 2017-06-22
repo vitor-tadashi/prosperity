@@ -47,6 +47,9 @@ public class VagaCandidatoEntity {
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idFuncionario")
 	private FuncionarioEntity funcionarioEntity;
+	
+	@Column(name = "situacao")
+	private Boolean situacao;
 
 	public String getOutros() {
 		return outros;
@@ -102,5 +105,13 @@ public class VagaCandidatoEntity {
 
 	public void setCandidato(CandidatoEntity candidato) {
 		this.candidato = candidato;
+	}
+
+	public Boolean getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(Boolean situacao) {
+		this.situacao = situacao;
 	}
 }

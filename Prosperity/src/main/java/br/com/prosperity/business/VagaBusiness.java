@@ -3,6 +3,7 @@ package br.com.prosperity.business;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -184,13 +185,17 @@ public class VagaBusiness {
 				criterions.add(Restrictions.like("nomeVaga", "%" + vaga.getNomeVaga() + "%"));
 			}
 			if (vaga.getDataAberturaDe() != null && vaga.getDataAberturaPara() != null) {
-				if (vaga.getDataAberturaDe() == null) {
-					criterions.add(Restrictions.between("dataAbertura", "", parseData(vaga.getDataAberturaPara())));
-				} else if (vaga.getDataAberturaPara() == null) {
-					criterions.add(Restrictions.between("dataAbertura", parseData(vaga.getDataAberturaDe()), ""));
-				} else {
-					criterions.add(Restrictions.between("dataAbertura", parseData(vaga.getDataAberturaDe()),
+				criterions.add(Restrictions.between("dataAbertura", parseData(vaga.getDataAberturaDe()),
+						parseData(vaga.getDataAberturaPara())));
+			}else if (vaga.getDataAberturaDe() != null && vaga.getDataAberturaPara() == null) {
+				criterions.add(Restrictions.between("dataAbertura", parseData(vaga.getDataAberturaDe()),
+						Calendar.getInstance().getTime()));
+			}else if (vaga.getDataAberturaDe() == null && vaga.getDataAberturaPara() != null) {
+				try {
+					criterions.add(Restrictions.between("dataAbertura", new SimpleDateFormat("yyyy-MM-dd").parse("2010-01-01"),
 							parseData(vaga.getDataAberturaPara())));
+				} catch (ParseException e) {
+					e.printStackTrace();
 				}
 			}
 			if (idStatus != 0) {

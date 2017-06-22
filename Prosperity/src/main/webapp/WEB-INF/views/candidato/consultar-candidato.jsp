@@ -9,7 +9,7 @@
 	<layout:put block="title" type="REPLACE">
 		<title>Consulta de candidatos</title>
 	</layout:put>
-
+'
 	<layout:put block="contents">
 		<style>
 li a.active {
@@ -528,7 +528,7 @@ li a.active {
 
 											<tr>
 												<td>${candidato.nome}</td>
-												<td>${candidato.vagaCandidato.vaga.nomeVaga}</td>
+												<td>${candidato.ultimaVaga.nomeVaga}</td>
 
 												<td><fmt:formatNumber
 														value="${candidato.valorPretensao}" type="currency"></fmt:formatNumber></td>

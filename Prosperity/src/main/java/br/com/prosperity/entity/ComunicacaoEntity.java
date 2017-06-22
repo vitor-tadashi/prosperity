@@ -38,6 +38,9 @@ public class ComunicacaoEntity {
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@JoinColumn(name = "idCandidato")
 	private CandidatoEntity candidatoEntity;
+	
+	@Column(name = "idVaga")
+	private Integer idVaga;
 
 	public Integer getId() {
 		return id;
@@ -77,5 +80,13 @@ public class ComunicacaoEntity {
 
 	public void setCandidatoEntity(CandidatoEntity candidatoEntity) {
 		this.candidatoEntity = candidatoEntity;
+	}
+
+	public Integer getIdVaga() {
+		return idVaga;
+	}
+
+	public void setIdVaga(Integer idVaga) {
+		this.idVaga = idVaga;
 	}
 }
