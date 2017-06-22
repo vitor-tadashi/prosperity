@@ -164,15 +164,17 @@
 										<div class="row">
 											<div class="col-md-12">
 												<c:forEach items="${datasContatos }" var="dtContato">
-													<div class="col-md-2">
-														<p class="" id="nome"><i class="fa fa-calendar"></i> <fmt:formatDate value="${dtContato.dataContato}"
-															pattern="dd/MM/yyyy" /></p>
-														<p class="" id="nome"><strong>Avaliador:</strong>${dtContato.usuarioBean.funcionario.nome}</p>
-													</div>
-													<div class="col-md-4">
-														<p class="" id="nome"><strong>Obs:</strong> ${dtContato.observacao }</p>
-														<p> &nbsp;</p>
-													</div>
+													<c:if test="${candidato.ultimaVaga.id == dtContato.idVaga}">
+														<div class="col-md-2">
+															<p class="" id="nome"><i class="fa fa-calendar"></i> <fmt:formatDate value="${dtContato.dataContato}"
+																pattern="dd/MM/yyyy" /></p>
+															<p class="" id="nome"><strong>Avaliador:</strong>${dtContato.usuarioBean.funcionario.nome}</p>
+														</div>
+														<div class="col-md-4">
+															<p class="" id="nome"><strong>Obs:</strong> ${dtContato.observacao }</p>
+															<p> &nbsp;</p>
+														</div>
+													</c:if>
 												</c:forEach>
 											</div>
 										</div>
@@ -182,7 +184,7 @@
 										<div class="row">
 											<div class="col-md-12">
 												<c:forEach items="${candidato.dataEntrevista }" var="dtEntrevista">
-													<c:if test="${not empty dtEntrevista.dataEntrevista}">
+													<c:if test="${not empty dtEntrevista.dataEntrevista && candidato.ultimaVaga.id == dtEntrevista.vaga.id}">
 														<div class="col-md-3">
 															<p class="" id="nome"><i class="fa fa-calendar"></i> <fmt:formatDate value="${dtEntrevista.dataEntrevista}"
 																pattern="dd/MM/yyyy" /></p>

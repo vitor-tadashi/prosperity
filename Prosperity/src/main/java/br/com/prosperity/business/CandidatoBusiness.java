@@ -318,9 +318,18 @@ public class CandidatoBusiness {
 			if(candidatoBean.getDataEntrevista() == null){
 				candidatoBean.setDataEntrevista(beans.getDataEntrevista());
 			}else{
+				int i = 0;
 				for(DataEntrevistaBean dt:beans.getDataEntrevista()){
-					candidatoBean.getDataEntrevista().add(dt);
+					for(DataEntrevistaBean dtTela : candidatoBean.getDataEntrevista()){
+						if(dt.getVaga().getId().equals(dtTela.getVaga().getId()) && 
+								dt.getUsuario().getId().equals(dtTela.getUsuario().getId())){
+							beans.getDataEntrevista().get(i).setDataEntrevista(dtTela.getDataEntrevista());
+						}
+					}
+					//candidatoBean.getDataEntrevista().add(dt);
+					i++;
 				}
+				candidatoBean.setDataEntrevista(beans.getDataEntrevista());
 			}
 			if (candidatoBean.getVagaCandidato().getVaga() == null) {
 				candidatoBean.getVagaCandidato().setVaga(beans.getUltimaVaga());
@@ -422,7 +431,7 @@ public class CandidatoBusiness {
 
 		candidatoEntity.setVagas(vagas);
 		List<VagaCandidatoEntity> vagasCandidato = new ArrayList<VagaCandidatoEntity>(vagas);
-		VagaEntity vagaAtual = vagasCandidato.get(vagasCandidato.size()-1).getVaga();
+		VagaEntity vagaAtual = vagasCandidato.get(vagasCandidato.size()-2).getVaga();
 		return vagaAtual;
 	}
 
