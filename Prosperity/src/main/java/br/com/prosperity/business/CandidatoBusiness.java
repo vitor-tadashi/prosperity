@@ -430,9 +430,8 @@ public class CandidatoBusiness {
 			vagas.add(novoVagaCandidato);
 
 		candidatoEntity.setVagas(vagas);
-		List<VagaCandidatoEntity> vagasCandidato = new ArrayList<VagaCandidatoEntity>(vagas);
-		VagaEntity vagaAtual = vagasCandidato.get(vagasCandidato.size()-2).getVaga();
-		return vagaAtual;
+		
+		return novoVagaCandidato.getVaga();
 	}
 
 	private void definirFormacao(CandidatoBean candidatoBean, CandidatoEntity candidatoEntity) {
