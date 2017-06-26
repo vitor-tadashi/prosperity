@@ -14,7 +14,7 @@
 	<div id="main-container">
 		<div id="breadcrumb">
 			<ul class="breadcrumb">
-				<li><i class="fa fa-home"></i><a href="dashboard.html">
+				<li><i class="fa fa-home"></i><a href="/pagina-inicial">
 						Início</a></li>
 				<li class="active">Histórico da vaga</li>
 			</ul>
@@ -22,7 +22,6 @@
 		<!--breadcrumb-->
 
 		<!-- SOMENTE ALTERAR DAQUI PARA BAIXO -->
-		
 	</div>
 	</layout:put>
 	<layout:put block="scripts" type="REPLACE">

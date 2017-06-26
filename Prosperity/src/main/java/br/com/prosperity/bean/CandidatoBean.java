@@ -416,11 +416,12 @@ public class CandidatoBean extends FormatUtil {
 					penultimoStatus = scb;
 				}
 			}
-		} else {
-			penultimoStatus = new StatusCandidatoBean("Não possui status");
-			penultimoStatus.getStatus().setCss("#7f8c8d");
-		}
+			return penultimoStatus;
+		} 
+		return null;
+	}
 
-		return penultimoStatus;
+	public void setPenultimoStatus(StatusCandidatoBean penultimoStatus) {
+		this.penultimoStatus = penultimoStatus;
 	}
 }

@@ -456,6 +456,11 @@
 															<li><a data-toggle="modal"
 																data-target="#visualizar-modal"
 																onclick="info(${vaga.id})"><i class="pri fa fa-eye">&nbsp;</i>Visualizar</a></li>
+															<li role="separator" class="editarDivider pro divider"></li>
+															<li><c:url value="historico/${vaga.id}"
+																var="myURL">
+															</c:url> <a href="${myURL}"><i class="fa fa-book fa-lg">&nbsp;</i>Histórico
+																da vaga</a></li>
 															<c:if
 																test="${vaga.ultimoStatus.status.nome == 'Pendente'}">
 																<li role="separator" class="editarDivider pro divider"></li>

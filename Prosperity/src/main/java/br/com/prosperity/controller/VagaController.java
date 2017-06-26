@@ -314,8 +314,8 @@ public class VagaController {
 		return perfilPrePronto;
 	}
 	
-	@RequestMapping(value = "/historico/{id}", method = RequestMethod.GET)
-	public @ResponseBody String historico(Model model) {
-		return "vaga/historico-vaga";
+	@RequestMapping(value = "historico/{id}", method = RequestMethod.GET)
+	public String historico() {
+		return "/vaga/historico-vaga";
 	}	
 }

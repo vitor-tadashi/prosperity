@@ -114,8 +114,14 @@ li a.active {
 														value="${candidato.valorPretensao}" type="currency"></fmt:formatNumber></td>
 												<td><fmt:formatDate value="${candidato.dataAbertura}"
 														pattern="dd/MM/yyyy" /></td>
+												<c:if test="${candidato.penultimoStatus.status != null}">
 												<td id="linhaStatus"><span class="label"
 													style="color: #fff; background-color: ${candidato.penultimoStatus.status.css}">${candidato.penultimoStatus.status.nome}</span></td>
+												</c:if>
+												<c:if test="${candidato.penultimoStatus.status == null}">
+												<td id="linhaStatus"><span class="label"
+													style="color: #fff; background-color:#7f8c8d">Não possui status</span></td>
+												</c:if>
 												<td id="linhaStatus"><span class="label"
 													style="color: #fff; background-color: ${candidato.ultimoStatus.status.css}">${candidato.ultimoStatus.status.nome}</span></td>
 												<td>
