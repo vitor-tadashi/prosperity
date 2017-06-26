@@ -323,7 +323,7 @@ public class CandidatoController<PaginarCandidato> {
 		List<CandidatoBean> candidatos = candidatoBusiness.filtroCandidato(candidato, page);
 		// Paginando
 		paginacao(page, model, candidato);
-
+		
 		model.addAttribute("candidatos", candidatos);
 
 		List<CargoBean> listaCargo = cargoBusiness.obterTodos();
