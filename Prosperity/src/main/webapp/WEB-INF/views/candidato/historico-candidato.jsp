@@ -25,7 +25,6 @@
 		<div class="padding-md">
 			<div class="row">
 				<section class="panel panel-default">
-					<div class="panel-heading">Informações básicas</div>
 					<div class="panel-body">
 						<div class="panel-tab clearfix">
 							<ul class="tab-bar wizard-demo" id="wizardDemo">
