@@ -72,6 +72,7 @@ public class CandidatoBean extends FormatUtil {
 	private Date dataUltimoContato;
 	private String proposta;
 	private StatusCandidatoBean ultimoStatus;
+	private StatusCandidatoBean penultimoStatus;
 	private VagaBean ultimaVaga;
 
 	@Valid
@@ -405,5 +406,21 @@ public class CandidatoBean extends FormatUtil {
 
 	public void setPropostaBean(List<PropostaBean> propostaBean) {
 		this.propostaBean = propostaBean;
+	}
+	
+	public StatusCandidatoBean getPenultimoStatus() {
+		if (status != null && status.size() > 1) {
+			Integer idPenultimoStatus = status.stream().map(StatusCandidatoBean::getId).max(Integer::compareTo).get();
+			for(StatusCandidatoBean scb : status){
+				if(idPenultimoStatus != scb.getId()){
+					penultimoStatus = scb;
+				}
+			}
+		} else {
+			penultimoStatus = new StatusCandidatoBean("Não possui status");
+			penultimoStatus.getStatus().setCss("#7f8c8d");
+		}
+
+		return penultimoStatus;
 	}
 }

@@ -307,14 +307,6 @@ public class CandidatoBusiness {
 			
 			//TODO fazer datas salvar certa quando edita
 			beans = candidatoConverter.convertEntityToBean(candidatoEntity);
-			/*if (beans.getDataEntrevista() != null) {
-				int aux = 0;
-				for (DataEntrevistaBean dtEntrevista : beans.getDataEntrevista()) {
-					candidatoBean.getDataEntrevista().get(aux).setUsuario(dtEntrevista.getUsuario());
-					candidatoBean.getDataEntrevista().get(aux).setVaga(dtEntrevista.getVaga());
-					aux++;
-				}
-			}*/
 			if(candidatoBean.getDataEntrevista() == null){
 				candidatoBean.setDataEntrevista(beans.getDataEntrevista());
 			}else{
@@ -326,7 +318,6 @@ public class CandidatoBusiness {
 							beans.getDataEntrevista().get(i).setDataEntrevista(dtTela.getDataEntrevista());
 						}
 					}
-					//candidatoBean.getDataEntrevista().add(dt);
 					i++;
 				}
 				candidatoBean.setDataEntrevista(beans.getDataEntrevista());
@@ -335,6 +326,8 @@ public class CandidatoBusiness {
 				candidatoBean.getVagaCandidato().setVaga(beans.getUltimaVaga());
 			}
 			candidatoBean.setPropostaBean(beans.getPropostaBean());
+			candidatoBean.setCurriculo(beans.getCurriculo());
+			candidatoBean.setCompetencias(beans.getCompetencias());
 			candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoEntity, candidatoBean);
 			tratarInformacoes(candidatoEntity);
 			definirFormacao(candidatoBean, candidatoEntity);
@@ -430,9 +423,7 @@ public class CandidatoBusiness {
 			vagas.add(novoVagaCandidato);
 
 		candidatoEntity.setVagas(vagas);
-		List<VagaCandidatoEntity> vagasCandidato = new ArrayList<VagaCandidatoEntity>(vagas);
-		VagaEntity vagaAtual = vagasCandidato.get(vagasCandidato.size()-2).getVaga();
-		return vagaAtual;
+		return novoVagaCandidato.getVaga();
 	}
 
 	private void definirFormacao(CandidatoBean candidatoBean, CandidatoEntity candidatoEntity) {

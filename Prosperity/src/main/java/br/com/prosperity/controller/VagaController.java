@@ -313,4 +313,9 @@ public class VagaController {
 				senioridade.getId());
 		return perfilPrePronto;
 	}
+	
+	@RequestMapping(value = "/historico/{id}", method = RequestMethod.GET)
+	public @ResponseBody String historico(Model model) {
+		return "vaga/historico-vaga";
+	}	
 }
