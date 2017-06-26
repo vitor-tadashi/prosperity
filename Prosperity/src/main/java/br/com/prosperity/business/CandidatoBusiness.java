@@ -191,7 +191,7 @@ public class CandidatoBusiness {
 
 	@Autowired
 	private CancelamentoConverter cancelamentoConverter;
-	
+
 	@Autowired
 	private PropostaDAO propostaDAO;
 
@@ -215,7 +215,7 @@ public class CandidatoBusiness {
 		Map<String, List<StatusCandidatoBean>> listaStatusOrdenada = groupByOrdered(candidatoBean.getStatus(),
 				StatusCandidatoBean::getMesAno);
 		candidatoBean.setStatusPorMesAno(listaStatusOrdenada);
-		
+
 		return candidatoBean;
 	}
 
@@ -258,7 +258,7 @@ public class CandidatoBusiness {
 	}
 
 	@Transactional
-	public List<CandidatoBean> filtroCandidato(CandidatoBean candidato, Integer page){
+	public List<CandidatoBean> filtroCandidato(CandidatoBean candidato, Integer page) {
 		List<Criterion> criterions = confFiltro(candidato);
 
 		List<CandidatoEntity> candidatos = candidatoDAO.findByCriteria(page, criterions);
@@ -304,17 +304,17 @@ public class CandidatoBusiness {
 		} else {
 			candidatoEntity = candidatoDAO.findById(candidatoBean.getId());
 			candidatoEntity.setPropostaEntity(propostaDAO.findByNamedQuery("buscarProposta", candidatoEntity.getId()));
-			
-			//TODO fazer datas salvar certa quando edita
+
+			// TODO fazer datas salvar certa quando edita
 			beans = candidatoConverter.convertEntityToBean(candidatoEntity);
 			if(candidatoBean.getDataEntrevista() == null){
 				candidatoBean.setDataEntrevista(beans.getDataEntrevista());
-			}else{
+			} else {
 				int i = 0;
-				for(DataEntrevistaBean dt:beans.getDataEntrevista()){
-					for(DataEntrevistaBean dtTela : candidatoBean.getDataEntrevista()){
-						if(dt.getVaga().getId().equals(dtTela.getVaga().getId()) && 
-								dt.getUsuario().getId().equals(dtTela.getUsuario().getId())){
+				for (DataEntrevistaBean dt : beans.getDataEntrevista()) {
+					for (DataEntrevistaBean dtTela : candidatoBean.getDataEntrevista()) {
+						if (dt.getVaga().getId().equals(dtTela.getVaga().getId())
+								&& dt.getUsuario().getId().equals(dtTela.getUsuario().getId())) {
 							beans.getDataEntrevista().get(i).setDataEntrevista(dtTela.getDataEntrevista());
 						}
 					}
@@ -337,10 +337,10 @@ public class CandidatoBusiness {
 			if (candidatoBean.getVagaCandidato().getVaga().getId() != 0) {
 				if (!beans.getUltimaVaga().getId().equals(candidatoBean.getVagaCandidato().getVaga().getId())) {
 					candidatoEntity.setDataAbertura(new Date());
-					//desativarDataEntrevista(candidatoBean);
+					// desativarDataEntrevista(candidatoBean);
 
 					VagaEntity vagaAtual = definirVagas(candidatoBean, candidatoEntity);
-					
+
 					desativarAvaliadores(candidatoBean.getId());
 					inserirAvaliadores(candidatoEntity, vagaAtual.getId());
 
@@ -390,19 +390,22 @@ public class CandidatoBusiness {
 	// (tbVagaCandidato):
 
 	private VagaEntity definirVagas(CandidatoBean candidatoBean, CandidatoEntity candidatoEntity) {
-		//TODO findById not working
+		// TODO findById not working
 		Set<VagaCandidatoEntity> vagas = new HashSet<>();
 		for (VagaCandidatoEntity v : candidatoEntity.getVagas()) {
-			/*v.setVaga(vagaDAO.findById(candidatoBean.getVagaCandidato().getVaga().getId()));
-			v.setCanalInformacao(
-					canalInformacaoDAO.findById(candidatoBean.getVagaCandidato().getCanalInformacao().getId()));*/
+			/*
+			 * v.setVaga(vagaDAO.findById(candidatoBean.getVagaCandidato().
+			 * getVaga().getId())); v.setCanalInformacao(
+			 * canalInformacaoDAO.findById(candidatoBean.getVagaCandidato().
+			 * getCanalInformacao().getId()));
+			 */
 			v.setSituacao(false);
 			vagas.add(v);
 		}
 		VagaCandidatoEntity novoVagaCandidato = new VagaCandidatoEntity();
 		VagaEntity vagaEntity = vagaDAO.findById(candidatoBean.getVagaCandidato().getVaga().getId());
 		novoVagaCandidato.setVaga(vagaEntity);
-		
+
 		if (candidatoBean.getVagaCandidato().getCanalInformacao().getId() != null) {
 			novoVagaCandidato.setCanalInformacao(
 					canalInformacaoDAO.findById(candidatoBean.getVagaCandidato().getCanalInformacao().getId()));
@@ -418,9 +421,9 @@ public class CandidatoBusiness {
 				}
 			}
 		}
-			novoVagaCandidato.setSituacao(true);
-			novoVagaCandidato.setCandidato(candidatoEntity);
-			vagas.add(novoVagaCandidato);
+		novoVagaCandidato.setSituacao(true);
+		novoVagaCandidato.setCandidato(candidatoEntity);
+		vagas.add(novoVagaCandidato);
 
 		candidatoEntity.setVagas(vagas);
 		return novoVagaCandidato.getVaga();
@@ -436,9 +439,9 @@ public class CandidatoBusiness {
 	@Transactional
 	public CandidatoBean obterCandidatoPorId(Integer id) {
 		CandidatoBean bean = candidatoConverter.convertEntityToBean(candidatoDAO.findById(id));
-		
-		for(int i = 0; i < bean.getDataEntrevista().size(); i++){
-			if(!bean.getDataEntrevista().get(i).getVaga().getId().equals(bean.getUltimaVaga().getId())){
+
+		for (int i = 0; i < bean.getDataEntrevista().size(); i++) {
+			if (!bean.getDataEntrevista().get(i).getVaga().getId().equals(bean.getUltimaVaga().getId())) {
 				bean.getDataEntrevista().remove(i);
 				i--;
 			}
@@ -521,14 +524,14 @@ public class CandidatoBusiness {
 			avaliadorCandidatoEntity = avaliadorCandidatoDAO.findByNamedQuery("atualizarAvaliador", usuarioBean.getId(),
 					statusCandidatoEntity.getCandidato());
 			if (avaliadorCandidatoEntity != null && avaliadorCandidatoEntity.size() > 0) {
-				for(int i = 0; i < avaliadorCandidatoEntity.size(); i++){
+				for (int i = 0; i < avaliadorCandidatoEntity.size(); i++) {
 					avaliadorCandidatoEntity.get(i).setStatus(situacaoCandidato.getStatus().getValue());
 					avaliadorCandidatoDAO.update(avaliadorCandidatoEntity.get(i));
 				}
 			}
 			statusCandidatoDAO.insert(statusAlteracao(situacaoCandidato));
 		}
-		//buscarUsuariosParaEmail(situacaoCandidato);
+		 buscarUsuariosParaEmail(situacaoCandidato);
 	}
 
 	@Transactional
@@ -676,7 +679,7 @@ public class CandidatoBusiness {
 	}
 
 	@Transactional
-	public Integer totalPagina(CandidatoBean candidato){
+	public Integer totalPagina(CandidatoBean candidato) {
 		float pag = 0;
 		List<Criterion> criterions = confFiltro(candidato);
 		pag = (float) candidatoDAO.rowCount(criterions) / (float) CandidatoDAO.limitResultsPerPage;
@@ -702,13 +705,14 @@ public class CandidatoBusiness {
 		if (candidato.getDataAberturaDe() != null && candidato.getDataAberturaPara() != null) {
 			criterions.add(Restrictions.between("dataAbertura", parseData(candidato.getDataAberturaDe()),
 					parseData(candidato.getDataAberturaPara())));
-		}else if (candidato.getDataAberturaDe() != null && candidato.getDataAberturaPara() == null) {
+		} else if (candidato.getDataAberturaDe() != null && candidato.getDataAberturaPara() == null) {
 			criterions.add(Restrictions.between("dataAbertura", parseData(candidato.getDataAberturaDe()),
 					Calendar.getInstance().getTime()));
-		}else if (candidato.getDataAberturaDe() == null && candidato.getDataAberturaPara() != null) {
+		} else if (candidato.getDataAberturaDe() == null && candidato.getDataAberturaPara() != null) {
 			try {
-				criterions.add(Restrictions.between("dataAbertura", new SimpleDateFormat("yyyy-MM-dd").parse("2010-01-01"),
-						parseData(candidato.getDataAberturaPara())));
+				criterions.add(
+						Restrictions.between("dataAbertura", new SimpleDateFormat("yyyy-MM-dd").parse("2010-01-01"),
+								parseData(candidato.getDataAberturaPara())));
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
@@ -734,36 +738,35 @@ public class CandidatoBusiness {
 		ArrayList<String> recipients = new ArrayList<>();
 		ArrayList<String> nomes = new ArrayList<>();
 		List<AvaliadorCandidatoBean> avaliadores = buscarAvaliadoresSemRepetir();
-
-		if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOEMANALISE.getValue()) {
+		FuncionalidadeBean f = new FuncionalidadeBean();
+		
+		if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOEMANALISE.getValue()
+				|| situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CONTRATADO.getValue()) {
 			for (AvaliadorCandidatoBean a : avaliadores) {
 				if (a.getUsuario() != null) {
 					recipients.add(a.getUsuario().getEmail());
 					nomes.add(a.getUsuario().getFuncionario().getNome());
 				}
 			}
-		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.GERARPROPOSTA.getValue()
-				|| situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CONTRATADO.getValue()) {
+		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.PROPOSTACANDIDATO.getValue()) {
+			f.setId(23);
 			for (UsuarioBean u : usuarios) {
-				switch (u.getPerfil().getNome()) {
-				case "Diretor de operação":
+				//recebe email quem pode aprovar proposta
+				if (u.getPerfil().getListaFuncionalidades().contains(f)) {
+				//case "Diretor de operação":
 					recipients.add(u.getEmail());
 					nomes.add(u.getFuncionario().getNome());
-					break;
-				default:
-					break;
 				}
 			}
-		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOAPROVADO.getValue()
-				|| situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.PROPOSTARECUSADA.getValue()) {
+		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.GERARPROPOSTA.getValue()
+				|| situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CANDIDATORECUSOUPROPOSTA.getValue()) {
+			f.setId(26);
 			for (UsuarioBean u : usuarios) {
-				switch (u.getPerfil().getNome()) {
-				case "Analista de RH":
+				//recebe email quem pode gerar proposta
+				if (u.getPerfil().getListaFuncionalidades().contains(f)) {
+				//case "Analista de RH":
 					recipients.add(u.getEmail());
 					nomes.add(u.getFuncionario().getNome());
-					break;
-				default:
-					break;
 				}
 			}
 		}
@@ -782,7 +785,7 @@ public class CandidatoBusiness {
 				.convertEntityToBean(avaliadorCandidatoDAO.findByNamedQuery("obterProposta", candidatoBean.getId()));
 		List<AvaliadorCandidatoBean> avaliadoresNaoRepetidos = new ArrayList<>();
 		Set<Integer> idAvaliadores = new HashSet<Integer>();
-		if(avaliadores != null){
+		if (avaliadores != null) {
 			for (AvaliadorCandidatoBean u : avaliadores) {
 				if (idAvaliadores.add(u.getId())) {
 					avaliadoresNaoRepetidos.add(u);
@@ -796,8 +799,8 @@ public class CandidatoBusiness {
 		List<UsuarioBean> usuarios = usuarioBusiness.findAll();
 		List<UsuarioBean> usuariosNaoRepetidos = new ArrayList<>();
 		Set<Integer> idUsuarios = new HashSet<Integer>();
-		
-		if(usuarios != null){
+
+		if (usuarios != null) {
 			for (UsuarioBean u : usuarios) {
 				if (idUsuarios.add(u.getId())) {
 					usuariosNaoRepetidos.add(u);
@@ -831,8 +834,8 @@ public class CandidatoBusiness {
 	private void desativarDataEntrevista(CandidatoBean candidatoBean) {
 		List<DataEntrevistaEntity> dtsEntrevista = dataEntrevistaDAO.findByNamedQuery("desativarDtEntrevista",
 				candidatoBean.getId());
-		
-		if(dtsEntrevista != null){
+
+		if (dtsEntrevista != null) {
 			for (DataEntrevistaEntity dtEntrevista : dtsEntrevista) {
 				dtEntrevista.setCandidato(candidatoBean.getId());
 				dtEntrevista.setFlSituacao(false);

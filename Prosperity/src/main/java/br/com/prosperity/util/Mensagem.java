@@ -34,8 +34,10 @@ public class Mensagem {
 				return ".";
 			case "Candidato em análise":
 				return frase + "avaliado.";
+			case "Proposta gerada":
+				return " e precisa ter proposta avaliada.";
 			case "Gerar proposta":
-				return " e precisa ter proposta gerada.";
+				return " e precisa ter proposta gerarda.";
 			default:
 				return ".";
 			}
