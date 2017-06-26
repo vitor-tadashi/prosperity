@@ -625,13 +625,6 @@ function validarDataContato(idCampo) {
 				}
 			}
 
-function esconderAba(){
-	if (data.ultimoStatus.status.id == "9") {
-		if (perfil == "Analista de RH" || perfil == "Gestor RH") {
-			$("#fourth").show();
-		}
-}
-}
 function salvarForm(){
 	$('#vaga').prop('disabled',false);
 	$('#formCadastro').submit();
