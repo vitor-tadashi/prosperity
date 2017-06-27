@@ -21,6 +21,7 @@ public class StatusCandidatoBean implements Comparable<StatusCandidatoBean> {
 	private CancelamentoBean cancelamento;
 	private String dsCancelamento;
 	private String nomeVaga;
+	private Integer idVaga;
 
 	public StatusCandidatoBean() {
 	}
@@ -120,5 +121,13 @@ public class StatusCandidatoBean implements Comparable<StatusCandidatoBean> {
 		if (this.getId() > o.getId()) return -1;
 		if (this.getId() < o.getId()) return 1;
 		return 0;
+	}
+
+	public Integer getIdVaga() {
+		return idVaga;
+	}
+
+	public void setIdVaga(Integer idVaga) {
+		this.idVaga = idVaga;
 	}
 }

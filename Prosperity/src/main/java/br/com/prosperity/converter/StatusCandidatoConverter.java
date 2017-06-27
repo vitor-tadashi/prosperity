@@ -34,6 +34,7 @@ public class StatusCandidatoConverter implements Converter<StatusCandidatoEntity
 		entity.setCancelamento(cancelamentoConverter.convertBeanToEntity(bean.getCancelamento()));
 		entity.setDsCancelamento(bean.getDsCancelamento());
 		entity.setNmVaga(bean.getNomeVaga());
+		entity.setIdVaga(bean.getIdVaga());
 
 		return entity;
 	}
@@ -54,6 +55,7 @@ public class StatusCandidatoConverter implements Converter<StatusCandidatoEntity
 		bean.setCancelamento(cancelamentoConverter.convertEntityToBean(entity.getCancelamento()));
 		bean.setDsCancelamento(entity.getDsCancelamento());
 		bean.setNomeVaga(entity.getNmVaga());
+		bean.setIdVaga(entity.getIdVaga());
 
 		return bean;
 	}

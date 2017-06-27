@@ -295,6 +295,7 @@ public class CandidatoBusiness {
 				situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
 				situacaoCandidato.setIdCandidato(candidatoEntity.getId());
 				situacaoCandidato.setNomeVaga(vagaAtual.getNomeVaga());
+				situacaoCandidato.setIdVaga(vagaAtual.getId());
 				alterarStatus(situacaoCandidato);
 
 			} else {
@@ -347,6 +348,7 @@ public class CandidatoBusiness {
 					situacaoCandidato.setStatus(StatusCandidatoEnum.CANDIDATURA);
 					situacaoCandidato.setIdCandidato(candidatoEntity.getId());
 					situacaoCandidato.setNomeVaga(vagaAtual.getNomeVaga());
+					situacaoCandidato.setIdVaga(vagaAtual.getId());
 					alterarStatus(situacaoCandidato);
 				}
 			}
@@ -552,9 +554,10 @@ public class CandidatoBusiness {
 		statusCandidatoEntity.setCandidato(candidatoEntity);
 		statusCandidatoEntity.setDsParecer(situacaoCandidato.getParecer());
 		statusCandidatoEntity.setDtAlteracao(new Date());
-		if (situacaoCandidato.getNomeVaga() != null && !situacaoCandidato.getNomeVaga().isEmpty())
+		statusCandidatoEntity.setIdVaga(situacaoCandidato.getIdVaga());
+		if (situacaoCandidato.getNomeVaga() != null && !situacaoCandidato.getNomeVaga().isEmpty()){
 			statusCandidatoEntity.setNmVaga(situacaoCandidato.getNomeVaga());
-
+		}
 		if (situacaoCandidato.getIdCancelamento() != null) {
 			statusCandidatoEntity.setCancelamento(cancelamentoDAO.findById(situacaoCandidato.getIdCancelamento()));
 		}
