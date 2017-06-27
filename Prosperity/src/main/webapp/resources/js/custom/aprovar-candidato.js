@@ -198,6 +198,7 @@
 					$('input.cancelar-status').val(status);
 				}
 			})
+			
 			$('#alterarStatus').click(function() {
 				var avaliacoes = [];
 
@@ -234,6 +235,7 @@
 					data : {
 						'idCandidato' : $('#hdn-id-candidato').val(),
 						'parecer' : $('#parecer').val(),
+						'idVaga' : $('#idVaga').val(),
 						'idStatus' : $('#hdn-status').val(),
 						'processoSeletivo' : JSON.stringify(provasDescricoes),
 						'avaliacoesCandidato' : JSON.stringify(avaliacoes)

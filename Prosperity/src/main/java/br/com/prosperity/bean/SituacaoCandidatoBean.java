@@ -12,6 +12,7 @@ public class SituacaoCandidatoBean {
 	private String parecer;
 	private String dsCancelamento;
 	private Integer idCancelamento;
+	private Integer idVaga;
 	private String nomeVaga;
 
 	public Integer getIdCandidato() {
@@ -65,4 +66,13 @@ public class SituacaoCandidatoBean {
 	public void setNomeVaga(String nomeVaga) {
 		this.nomeVaga = nomeVaga;
 	}
+
+	public Integer getIdVaga() {
+		return idVaga;
+	}
+
+	public void setIdVaga(Integer idVaga) {
+		this.idVaga = idVaga;
+	}
+	
 }

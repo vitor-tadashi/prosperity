@@ -63,6 +63,9 @@ public class StatusCandidatoEntity {
 	
 	@Column(name = "nmVaga")
 	private String nmVaga;
+	
+	@Column(name = "idVaga")
+	private Integer idVaga;
 
 	public Boolean getFlSituacao() {
 		return flSituacao;
@@ -142,5 +145,13 @@ public class StatusCandidatoEntity {
 
 	public void setNmVaga(String nmVaga) {
 		this.nmVaga = nmVaga;
+	}
+
+	public Integer getIdVaga() {
+		return idVaga;
+	}
+
+	public void setIdVaga(Integer idVaga) {
+		this.idVaga = idVaga;
 	}
 }
