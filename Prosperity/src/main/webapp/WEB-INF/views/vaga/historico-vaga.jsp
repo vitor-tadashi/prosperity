@@ -169,14 +169,38 @@
 														<div class="panel-heading">
 															<h4 class="panel-title">
 																<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-																	IN-STORE Sales
+																	Candidatura
 																	<span class="badge badge-success pull-right">75%</span>
 																</a>
 															</h4>
 														</div>
 														<div id="collapseOne" class="panel-collapse collapse">
 															<div class="panel-body">
-																Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. 
+																<table class="table table-bordered table-condensed table-hover table-striped" id="tabelaCandidato"
+																	style="font-size: 12px !important; vertical-align: middle !important;">
+																	<thead>
+																		<tr>
+																			<th class="text-center">Nome do candidato</th>
+																			<th class="text-center">Data de alteração</th>
+																			<th class="text-center">Status</th>
+																			<th class="text-center">Histórico do Candidato</th>
+																		</tr>
+																	</thead>
+																	<tbody class="text-center">
+																		<c:forEach var="candidato" items="${candidatos}">
+																			<c:if test="${candidato.ultimoStatus.status.id == 5 }">
+																				<tr id="">
+																					<td>${candidato.nome}</td>
+																					<td><fmt:formatDate value="${candidato.ultimoStatus.dataAlteracao}"
+																							pattern="dd/MM/yyyy" /></td>
+																					<td><span class="label"
+																						style="color: #fff; background-color: ${candidato.ultimoStatus.status.css}">${candidato.ultimoStatus.status.nome}</span></td>
+																					<td>Historico</td>
+																				</tr>
+																			</c:if>
+																		</c:forEach>
+																	</tbody>
+																</table>
 															</div>
 														</div>
 													</div><!-- panel -->

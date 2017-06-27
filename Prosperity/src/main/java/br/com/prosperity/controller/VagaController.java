@@ -22,16 +22,19 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.google.gson.Gson;
 
 import br.com.prosperity.bean.AvaliadorVagaBean;
+import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.CargoSenioridadeBean;
 import br.com.prosperity.bean.ProjetoBean;
 import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoVagaBean;
 import br.com.prosperity.bean.StatusBean;
+import br.com.prosperity.bean.StatusCandidatoBean;
 import br.com.prosperity.bean.StatusVagaBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.AvaliadorVagaBusiness;
+import br.com.prosperity.business.CandidatoBusiness;
 import br.com.prosperity.business.CargoBusiness;
 import br.com.prosperity.business.CargoSenioridadeBusiness;
 import br.com.prosperity.business.ProjetoBusiness;
@@ -49,6 +52,9 @@ public class VagaController {
 
 	@Autowired
 	private VagaBusiness vagaBusiness;
+	
+	@Autowired
+	private CandidatoBusiness candidatoBusiness;
 
 	@Autowired
 	private ProjetoBusiness projetoBusiness;
@@ -316,10 +322,11 @@ public class VagaController {
 	
 	@RequestMapping(value = "historico/{id}", method = RequestMethod.GET)
 	public String historico(Model model, @PathVariable Integer id) {
-		VagaBean vaga = new VagaBean();
+		List<CandidatoBean> candidatos = candidatoBusiness.listarCandidatosVaga(id);
+		VagaBean vaga = vagaBusiness.obterVagaPorId(id);
 		
-		vaga = vagaBusiness.obterVagaPorId(id);
 		model.addAttribute("vaga", vaga);
+		model.addAttribute("candidatos", candidatos);
 		
 		return "/vaga/historico-vaga";
 	}	
