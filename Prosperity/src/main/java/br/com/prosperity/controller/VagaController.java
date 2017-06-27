@@ -315,7 +315,8 @@ public class VagaController {
 	}
 	
 	@RequestMapping(value = "historico/{id}", method = RequestMethod.GET)
-	public String historico() {
+	public String historico(Model model, @PathVariable Integer id) {
+		model.addAttribute("candidato", new VagaBean());
 		return "/vaga/historico-vaga";
 	}	
 }

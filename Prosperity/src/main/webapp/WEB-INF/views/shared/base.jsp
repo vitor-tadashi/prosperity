@@ -20,6 +20,9 @@
 	<!-- Pace -->
 	<link href="/resources/css/pace.css" rel="stylesheet">
 	
+	<!-- Morris -->
+	<link href="/resources/css/morris.css" rel="stylesheet"/>	
+	
 	<!-- Perfect -->
 	<link href="/resources/css/app.css" rel="stylesheet">
 	<link href="/resources/css/app-skin.css" rel="stylesheet">
@@ -250,7 +253,6 @@
 	<!-- Cookie -->
 	<script src='/resources/js/jquery.cookie.min.js'></script>
 	
-	<!-- Perfect -->
 	<script src="/resources/js/app/app_form.js"></script>
 	<script src="/resources/js/app/app.js"></script>
 	

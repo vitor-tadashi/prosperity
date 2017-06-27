@@ -241,8 +241,8 @@
 						'avaliacoesCandidato' : JSON.stringify(avaliacoes)
 					},
 					success : function(data) {
-						mensagemMudancaStatus = defineMudancaStatus(data.ultimoStatus.status.id);
-						localStorage.setItem("mensagemMudancaStatus", mensagemMudancaStatus);
+						//mensagemMudancaStatus = defineMudancaStatus(data.ultimoStatus.status.id);
+						//localStorage.setItem("mensagemMudancaStatus", mensagemMudancaStatus);
 						localStorage.setItem("nomeCandidato", data.nome);
 
 						location.reload();
@@ -279,6 +279,8 @@
 			}
 
 			function alterarStatus(idCandidato, idStatus, proposta) {
+				mensagemMudancaStatus = defineMudancaStatus(parseInt(idStatus));
+				localStorage.setItem("mensagemMudancaStatus", mensagemMudancaStatus);
 				$('#hdn-id-candidato').val(idCandidato);
 				$('#hdn-proposta').val(proposta);
 				$('#hdn-status').val(idStatus);
@@ -353,7 +355,7 @@
 				/* Exibe a mensagem de mudança de status do candidato: */
 				if(nome!=""){
 					msg = 'O candidato <strong>' + nome
-					+ '</strong> ' + statusMudado +  ' com sucesso!'
+					+ '</strong> ' + statusMudado
 					$('#msg-sucesso').html(msg).addClass('alert alert-success').show();
 					escondeMensagem();
 				}
@@ -540,23 +542,25 @@
 					var mensagem;
 					switch(status) {
 						case 6:
-							mensagem = "enviado para análise";
+							mensagem = " foi enviado para análise";
 							break;
 						case 7:
-						mensagem = "aprovado";
+							mensagem = "foi aprovado";
 							break;
 						case 8:
-							mensagem = "reprovado";
-							break;
-						case 9:
-							mensagem = "teve proposta gerada";
+							mensagem = "foi reprovado";
 							break;
 						case 10:
-							mensagem = "teve proposta reprovada";
+							mensagem = "teve a proposta gerada";
+							break;
+						case 13:
+							mensagem = "teve a proposta reprovada";
 							break;
 						case 11:
-							mensagem = "teve proposta aprovada";
+							mensagem = "teve a proposta aprovada";
 							break;
+						case 14:
+							mensagem = "recusou a proposta"
 						case 15:
 							mensagem = "foi contratado";
 							break;
