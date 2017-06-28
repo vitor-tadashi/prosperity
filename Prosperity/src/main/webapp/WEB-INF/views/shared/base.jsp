@@ -229,11 +229,11 @@
 	<script src='/resources/js/bootstrap-slider.min.js'></script>
 	
 	<!-- Flot -->
-	<script src='/resources/js/jquery.flot.min.js'></script>
+	<!-- <script src='/resources/js/jquery.flot.min.js'></script> -->
 	
 	<!-- Morris -->
-	<script src='/resources/js/rapheal.min.js'></script>	
-	<script src='/resources/js/morris.min.js'></script>	
+	<!-- <script src='/resources/js/rapheal.min.js'></script>	
+	<script src='/resources/js/morris.min.js'></script>	 -->
 	
 	<!-- Tag input -->
 	<script src='/resources/js/jquery.tagsinput.min.js'></script>
@@ -279,7 +279,7 @@
 	<script src='/resources/js/modernizr.min.js'></script>
 	
 	<!-- Perfect -->
-	<script src="/resources/js/app/app_dashboard.js"></script>
+	<!-- <script src="/resources/js/app/app_dashboard.js"></script> -->
 	
 	<!-- scripts serão carregados aqui -->	
 	<layout:block name="scripts"></layout:block>

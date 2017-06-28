@@ -353,7 +353,7 @@
 				var statusMudado = localStorage.getItem("mensagemMudancaStatus");
 
 				/* Exibe a mensagem de mudança de status do candidato: */
-				if(nome!=""){
+				if(nome!="" && nome != undefined){
 					msg = 'O candidato <strong>' + nome
 					+ '</strong> ' + statusMudado
 					$('#msg-sucesso').html(msg).addClass('alert alert-success').show();
@@ -561,6 +561,7 @@
 							break;
 						case 14:
 							mensagem = "recusou a proposta"
+							break;
 						case 15:
 							mensagem = "foi contratado";
 							break;

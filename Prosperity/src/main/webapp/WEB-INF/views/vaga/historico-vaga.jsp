@@ -412,5 +412,13 @@
 	</div>
 	</layout:put>
 	<layout:put block="scripts" type="REPLACE">
+		<!-- Flot -->
+		<script src='/resources/js/jquery.flot.min.js'></script>
+	
+		<!-- Morris -->
+		<script src='/resources/js/rapheal.min.js'></script>	
+		<script src='/resources/js/morris.min.js'></script>	
+	
+		<script src="/resources/js/app/app_dashboard.js"></script>
 	</layout:put>
 </layout:extends>
