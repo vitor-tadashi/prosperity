@@ -848,4 +848,18 @@ public class CandidatoBusiness {
 			}
 		}
 	}
+	@Transactional
+	public List<CandidatoBean> listarCandidatosVaga(Integer idVaga) {
+		List<CandidatoEntity> entitys = candidatoDAO.findByNamedQuery("listaCandidatosVaga", idVaga);
+		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(entitys);
+		for(CandidatoBean b : beans){
+			for(int i = 0; i < b.getStatus().size(); i++){
+				if(b.getStatus().get(i).getIdVaga() == null || !b.getStatus().get(i).getIdVaga().equals(idVaga)){
+					b.getStatus().remove(i);
+					i--;
+				}
+			}
+		}
+		return beans;
+	}
 }
