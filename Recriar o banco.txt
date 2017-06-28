@@ -621,7 +621,7 @@ SET ANSI_PADDING ON
 GO
 
 CREATE TABLE [dbo].[tbFuncionalidade](
-	[idFuncionalidade] [int] IDENTITY(1,1) NOT NULL,
+	[idFuncionalidade] [int] NOT NULL,
 	[nmFuncionalidade] [varchar](50) NULL,
 	[url] [varchar](50) NULL,
 PRIMARY KEY CLUSTERED 
@@ -967,7 +967,7 @@ SET ANSI_PADDING ON
 GO
 
 CREATE TABLE [dbo].[tbStatus](
-	[idStatus] [int] IDENTITY(1,1) NOT NULL,
+	[idStatus] [int] NOT NULL,
 	[nmStatus] [varchar](50) NULL,
 	[tpCss] [varchar](100) NULL,
 	[idTpStatus] [int] NULL,

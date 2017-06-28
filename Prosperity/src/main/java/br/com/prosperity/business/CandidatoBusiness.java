@@ -555,7 +555,9 @@ public class CandidatoBusiness {
 		statusCandidatoEntity.setCandidato(candidatoEntity);
 		statusCandidatoEntity.setDsParecer(situacaoCandidato.getParecer());
 		statusCandidatoEntity.setDtAlteracao(new Date());
-		statusCandidatoEntity.setIdVaga(situacaoCandidato.getIdVaga());
+		if(situacaoCandidato.getStatus().getValue() != StatusCandidatoEnum.SEMVAGA.getValue()){
+			statusCandidatoEntity.setIdVaga(situacaoCandidato.getIdVaga());
+		}
 		if (situacaoCandidato.getNomeVaga() != null && !situacaoCandidato.getNomeVaga().isEmpty()){
 			statusCandidatoEntity.setNmVaga(situacaoCandidato.getNomeVaga());
 		}
