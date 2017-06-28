@@ -4,19 +4,14 @@ $(function	()	{
 	var donutChart = Morris.Donut({
 	  element: 'donutChart',
 	  data: [
-		{label: "Candidatura", value: 10000},
-		{label: "Em análise", value: 3091},
-		{label: "Mail-Order Sales", value: 2781},
-		{label: "Mail-Order Sales", value: 2781},
-		{label: "Mail-Order Sales", value: 2781},
-		{label: "Download Sales", value: 1236},
-		{label: "In-Store Sales", value: 3091},
-		{label: "Mail-Order Sales", value: 2781},
-		{label: "Mail-Order Sales", value: 2781},
-		{label: "Mail-Order Sales", value: 2781},
-		{label: "Mail-Order Sales", value: 2781}
+		{label: "Candidatura", value: $('#qtd-candidaturas-js').val()},
+		{label: "Em análise", value: $('#qtd-emAnalise-js').val()},
+		{label: "Aprovado", value: $('#qtd-aprovados-js').val()},
+		{label: "Reprovado", value: $('#qtd-reprovados-js').val()},
+		{label: "Contratado", value: $('#qtd-contratados-js').val()},
+		{label: "Cancelado", value: $('#qtd-cancelados-js').val()}
 	  ],
-	  colors: ['#f3ce85','#65CEA7' ,'#FC8675','#65CEA7','#65CEA7','#f3ce85','#65CEA7' ,'#FC8675','#65CEA7','#65CEA7','#65CEA7']
+	  colors: ['#03C9A9','#e67e22' ,'#2ECC71','#CF000F','#2ECC71','#CF000F']
 	});
 	
 

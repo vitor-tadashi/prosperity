@@ -29,6 +29,7 @@ import br.com.prosperity.bean.CompetenciaBean;
 import br.com.prosperity.bean.ComunicacaoBean;
 import br.com.prosperity.bean.DataEntrevistaBean;
 import br.com.prosperity.bean.FuncionalidadeBean;
+import br.com.prosperity.bean.QuantiaCandidatoPorStatusBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.StatusCandidatoBean;
 import br.com.prosperity.bean.UsuarioBean;
@@ -850,14 +851,47 @@ public class CandidatoBusiness {
 	public List<CandidatoBean> listarCandidatosVaga(Integer idVaga) {
 		List<CandidatoEntity> entitys = candidatoDAO.findByNamedQuery("listaCandidatosVaga", idVaga);
 		List<CandidatoBean> beans = candidatoConverter.convertEntityToBean(entitys);
-		for(CandidatoBean b : beans){
-			for(int i = 0; i < b.getStatus().size(); i++){
-				if(b.getStatus().get(i).getIdVaga() == null || !b.getStatus().get(i).getIdVaga().equals(idVaga)){
-					b.getStatus().remove(i);
+		
+		for(int cont = 0; cont < beans.size(); cont ++){
+			for(int i = 0; i < beans.get(cont).getStatus().size(); i++){
+				if(beans.get(cont).getStatus().get(i).getIdVaga() == null || !beans.get(cont).getStatus().get(i).getIdVaga().equals(idVaga)){
+					beans.get(cont).getStatus().remove(i);
 					i--;
 				}
 			}
 		}
 		return beans;
+	}
+	public QuantiaCandidatoPorStatusBean contarCandidatosPorStatus(List<CandidatoBean> beans){
+		QuantiaCandidatoPorStatusBean qtdCandidatoPorStatus = new QuantiaCandidatoPorStatusBean();
+		
+		for(CandidatoBean candidato : beans){
+			Integer idStatusCandidato = candidato.getUltimoStatus().getStatus().getId();
+			
+			if(idStatusCandidato.equals(StatusCandidatoEnum.CANDIDATURA.getValue())){
+				qtdCandidatoPorStatus.setCandidaturas();
+			}else if(idStatusCandidato.equals(StatusCandidatoEnum.CANDIDATOAPROVADO.getValue())){
+				qtdCandidatoPorStatus.setAprovados();
+			}else if(idStatusCandidato.equals(StatusCandidatoEnum.GERARPROPOSTA.getValue())){
+				qtdCandidatoPorStatus.setAprovados();
+			}else if(idStatusCandidato.equals(StatusCandidatoEnum.PROPOSTACANDIDATO.getValue())){
+				qtdCandidatoPorStatus.setAprovados();
+			}else if(idStatusCandidato.equals(StatusCandidatoEnum.PROPOSTAAPROVADA.getValue())){
+				qtdCandidatoPorStatus.setAprovados();
+			}else if(idStatusCandidato.equals(StatusCandidatoEnum.PROPOSTARECUSADA.getValue())){
+				qtdCandidatoPorStatus.setAprovados();
+			}else if(idStatusCandidato.equals(StatusCandidatoEnum.CANDIDATORECUSOUPROPOSTA.getValue())){
+				qtdCandidatoPorStatus.setAprovados();
+			}else if(idStatusCandidato.equals(StatusCandidatoEnum.CANDIDATOREPROVADO.getValue())){
+				qtdCandidatoPorStatus.setReprovados();
+			}else if(idStatusCandidato.equals(StatusCandidatoEnum.CANCELADO.getValue())){
+				qtdCandidatoPorStatus.setCancelados();
+			}else if(idStatusCandidato.equals(StatusCandidatoEnum.CONTRATADO.getValue())){
+				qtdCandidatoPorStatus.setContratados();
+			}else if(idStatusCandidato.equals(StatusCandidatoEnum.CANDIDATOEMANALISE.getValue())){
+				qtdCandidatoPorStatus.setEmAnalise();
+			}
+		}
+		return qtdCandidatoPorStatus;
 	}
 }

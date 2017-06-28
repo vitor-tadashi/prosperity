@@ -26,21 +26,11 @@
 			<div class="row">
 				<section class="panel panel-default">
 					<div class="panel-body">
-						<div class="panel-tab clearfix">
-							<ul class="tab-bar wizard-demo" id="wizardDemo">
-								<li class="active tab-verity"><a href="#first"
-									data-toggle="tab"><i class="fa fa-suitcase"></i> Dados gerais</a></li>
-								<li class="tab-verity"><a href="#second"
-									data-toggle="tab" class="text-success"><i
-										class="fa fa-user"></i> Candidatos</a></li>
-							</ul>
-						</div>
-						<br>
 						<div class="panel-body">
 							<div class="tab-content">
-								<div class="tab-pane fade in active" id="first">
+								<div class="" id="">
 									<fieldset>
-										<legend style="color:#424f63"><h5><strong>Informações básicas</strong></h5></legend>
+										<legend style="color:#424f63"><h5><strong>Informações gerais</strong></h5></legend>
 										<div class="row">
 											<div class="form-group col-md-6">
 												<p class="" id="nome"><strong>Nome da vaga: </strong>${vaga.nomeVaga}</p>
@@ -69,7 +59,7 @@
 												</p>
 											</div>
 											<div class="form-group col-md-6">
-												<p class="" id="nome"><strong>Status da vaga: </strong>${vaga.ultimoStatus.status.nome}</p>
+												<p class="" id="nome"><strong>Status da vaga: </strong><span style="color: ${vaga.ultimoStatus.status.css}">${vaga.ultimoStatus.status.nome}</span></p>
 											</div>
 										</div>
 										<div class="row">
@@ -169,8 +159,8 @@
 														<div class="panel-heading">
 															<h4 class="panel-title">
 																<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-																	Candidatura
-																	<span class="badge badge-success pull-right">75%</span>
+																	<span><strong>Candidatura</strong></span>
+																	<span class="pull-right"><i class="fa fa-angle-double-down fa-2x"></i></span>
 																</a>
 															</h4>
 														</div>
@@ -195,7 +185,7 @@
 																							pattern="dd/MM/yyyy" /></td>
 																					<td><span class="label"
 																						style="color: #fff; background-color: ${candidato.ultimoStatus.status.css}">${candidato.ultimoStatus.status.nome}</span></td>
-																					<td>Historico</td>
+																					<td><a href="/candidato/historico/${candidato.id}"><i class="fa fa-book fa-lg"></i></a></td>
 																				</tr>
 																			</c:if>
 																		</c:forEach>
@@ -208,13 +198,38 @@
 														<div class="panel-heading">
 															<h4 class="panel-title">
 																<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-																	DOWMLOAD Sales
+																	<span><strong>Em análise</strong></span>
+																	<span class="pull-right"><i class="fa fa-angle-double-down fa-2x"></i></span>
 																</a>
 															</h4>
 														</div>
 														<div id="collapseTwo" class="panel-collapse collapse">
 															<div class="panel-body">
-																Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. 
+																<table class="table table-bordered table-condensed table-hover table-striped" id="tabelaCandidato"
+																	style="font-size: 12px !important; vertical-align: middle !important;">
+																	<thead>
+																		<tr>
+																			<th class="text-center">Nome do candidato</th>
+																			<th class="text-center">Data de alteração</th>
+																			<th class="text-center">Status</th>
+																			<th class="text-center">Histórico do Candidato</th>
+																		</tr>
+																	</thead>
+																	<tbody class="text-center">
+																		<c:forEach var="candidato" items="${candidatos}">
+																			<c:if test="${candidato.ultimoStatus.status.id == 6 }">
+																				<tr id="">
+																					<td>${candidato.nome}</td>
+																					<td><fmt:formatDate value="${candidato.ultimoStatus.dataAlteracao}"
+																							pattern="dd/MM/yyyy" /></td>
+																					<td><span class="label"
+																						style="color: #fff; background-color: ${candidato.ultimoStatus.status.css}">${candidato.ultimoStatus.status.nome}</span></td>
+																					<td><a href="/candidato/historico/${candidato.id}"><i class="fa fa-book fa-lg"></i></a></td>
+																				</tr>
+																			</c:if>
+																		</c:forEach>
+																	</tbody>
+																</table> 
 															</div>
 														</div>
 													</div><!-- panel -->
@@ -222,26 +237,162 @@
 														<div class="panel-heading">
 															<h4 class="panel-title">
 																<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-																	MAIL-ORDER Sales 
-																	<span class="badge badge-danger pull-right"><i class="fa fa-arrow-down"></i> 3%</span>
+																	<span><strong>Aprovado</strong></span>
+																	<span class="pull-right"><i class="fa fa-angle-double-down fa-2x"></i></span>
 																</a>
 															</h4>
 														</div>
 														<div id="collapseThree" class="panel-collapse collapse">
 															<div class="panel-body">
-																Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. 
+																<table class="table table-bordered table-condensed table-hover table-striped" id="tabelaCandidato"
+																	style="font-size: 12px !important; vertical-align: middle !important;">
+																	<thead>
+																		<tr>
+																			<th class="text-center">Nome do candidato</th>
+																			<th class="text-center">Data de alteração</th>
+																			<th class="text-center">Status</th>
+																			<th class="text-center">Histórico do Candidato</th>
+																		</tr>
+																	</thead>
+																	<tbody class="text-center">
+																		<c:forEach var="candidato" items="${candidatos}">
+																			<c:if test="${candidato.ultimoStatus.status.id == 7 || candidato.ultimoStatus.status.id == 9 || candidato.ultimoStatus.status.id == 10 ||
+																				candidato.ultimoStatus.status.id == 11 || candidato.ultimoStatus.status.id == 13 || candidato.ultimoStatus.status.id == 14}">
+																				<tr id="">
+																					<td>${candidato.nome}</td>
+																					<td><fmt:formatDate value="${candidato.ultimoStatus.dataAlteracao}"
+																							pattern="dd/MM/yyyy" /></td>
+																					<td><span class="label"
+																						style="color: #fff; background-color: ${candidato.ultimoStatus.status.css}">${candidato.ultimoStatus.status.nome}</span></td>
+																					<td><a href="/candidato/historico/${candidato.id}"><i class="fa fa-book fa-lg"></i></a></td>
+																				</tr>
+																			</c:if>
+																		</c:forEach>
+																	</tbody>
+																</table> 
+															</div>
+														</div>
+													</div><!-- panel -->
+													<div class="panel panel-default">
+														<div class="panel-heading">
+															<h4 class="panel-title">
+																<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+																	<span><strong>Reprovado</strong></span>
+																	<span class="pull-right"><i class="fa fa-angle-double-down fa-2x"></i></span>
+																</a>
+															</h4>
+														</div>
+														<div id="collapseFour" class="panel-collapse collapse">
+															<div class="panel-body">
+																<table class="table table-bordered table-condensed table-hover table-striped" id="tabelaCandidato"
+																	style="font-size: 12px !important; vertical-align: middle !important;">
+																	<thead>
+																		<tr>
+																			<th class="text-center">Nome do candidato</th>
+																			<th class="text-center">Data de alteração</th>
+																			<th class="text-center">Status</th>
+																			<th class="text-center">Histórico do Candidato</th>
+																		</tr>
+																	</thead>
+																	<tbody class="text-center">
+																		<c:forEach var="candidato" items="${candidatos}">
+																			<c:if test="${candidato.ultimoStatus.status.id == 8 }">
+																				<tr id="">
+																					<td>${candidato.nome}</td>
+																					<td><fmt:formatDate value="${candidato.ultimoStatus.dataAlteracao}"
+																							pattern="dd/MM/yyyy" /></td>
+																					<td><span class="label"
+																						style="color: #fff; background-color: ${candidato.ultimoStatus.status.css}">${candidato.ultimoStatus.status.nome}</span></td>
+																					<td><a href="/candidato/historico/${candidato.id}"><i class="fa fa-book fa-lg"></i></a></td>
+																				</tr>
+																			</c:if>
+																		</c:forEach>
+																	</tbody>
+																</table> 
+															</div>
+														</div>
+													</div><!-- panel -->
+													<div class="panel panel-default">
+														<div class="panel-heading">
+															<h4 class="panel-title">
+																<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+																	<span><strong>Contratado</strong></span>
+																	<span class="pull-right"><i class="fa fa-angle-double-down fa-2x"></i></span>
+																</a>
+															</h4>
+														</div>
+														<div id="collapseFive" class="panel-collapse collapse">
+															<div class="panel-body">
+																<table class="table table-bordered table-condensed table-hover table-striped" id="tabelaCandidato"
+																	style="font-size: 12px !important; vertical-align: middle !important;">
+																	<thead>
+																		<tr>
+																			<th class="text-center">Nome do candidato</th>
+																			<th class="text-center">Data de alteração</th>
+																			<th class="text-center">Status</th>
+																			<th class="text-center">Histórico do Candidato</th>
+																		</tr>
+																	</thead>
+																	<tbody class="text-center">
+																		<c:forEach var="candidato" items="${candidatos}">
+																			<c:if test="${candidato.ultimoStatus.status.id == 15 }">
+																				<tr id="">
+																					<td>${candidato.nome}</td>
+																					<td><fmt:formatDate value="${candidato.ultimoStatus.dataAlteracao}"
+																							pattern="dd/MM/yyyy" /></td>
+																					<td><span class="label"
+																						style="color: #fff; background-color: ${candidato.ultimoStatus.status.css}">${candidato.ultimoStatus.status.nome}</span></td>
+																					<td><a href="/candidato/historico/${candidato.id}"><i class="fa fa-book fa-lg"></i></a></td>
+																				</tr>
+																			</c:if>
+																		</c:forEach>
+																	</tbody>
+																</table> 
+															</div>
+														</div>
+													</div><!-- panel -->
+													<div class="panel panel-default">
+														<div class="panel-heading">
+															<h4 class="panel-title">
+																<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
+																	<span><strong>Cancelado</strong></span>
+																	<span class="pull-right"><i class="fa fa-angle-double-down fa-2x"></i></span>
+																</a>
+															</h4>
+														</div>
+														<div id="collapseSix" class="panel-collapse collapse">
+															<div class="panel-body">
+																<table class="table table-bordered table-condensed table-hover table-striped" id="tabelaCandidato"
+																	style="font-size: 12px !important; vertical-align: middle !important;">
+																	<thead>
+																		<tr>
+																			<th class="text-center">Nome do candidato</th>
+																			<th class="text-center">Data de alteração</th>
+																			<th class="text-center">Status</th>
+																			<th class="text-center">Histórico do Candidato</th>
+																		</tr>
+																	</thead>
+																	<tbody class="text-center">
+																		<c:forEach var="candidato" items="${candidatos}">
+																			<c:if test="${candidato.ultimoStatus.status.id == 17 }">
+																				<tr id="">
+																					<td>${candidato.nome}</td>
+																					<td><fmt:formatDate value="${candidato.ultimoStatus.dataAlteracao}"
+																							pattern="dd/MM/yyyy" /></td>
+																					<td><span class="label"
+																						style="color: #fff; background-color: ${candidato.ultimoStatus.status.css}">${candidato.ultimoStatus.status.nome}</span></td>
+																					<td><a href="/candidato/historico/${candidato.id}"><i class="fa fa-book fa-lg"></i></a></td>
+																				</tr>
+																			</c:if>
+																		</c:forEach>
+																	</tbody>
+																</table> 
 															</div>
 														</div>
 													</div><!-- panel -->
 												</div><!-- panel-group -->
 											</div>
 										</div><!-- /panel -->
-									</fieldset>
-								</div>
-								<div class="tab-pane fade" id="second">
-									<fieldset>
-										<legend style="color:#424f63"><h5><strong>Vaga aplicado</strong></h5></legend>
-										
 									</fieldset>
 								</div>
 							</div>
@@ -252,6 +403,12 @@
 			</div>
 			<!-- /.padding-md -->
 		</div>
+		<input type="hidden" id="qtd-candidaturas-js" value="${qtdCandidatoStatus.candidaturas }">
+		<input type="hidden" id="qtd-emAnalise-js" value="${qtdCandidatoStatus.emAnalise }">
+		<input type="hidden" id="qtd-aprovados-js" value="${qtdCandidatoStatus.aprovados }">
+		<input type="hidden" id="qtd-reprovados-js" value="${qtdCandidatoStatus.reprovados }">
+		<input type="hidden" id="qtd-cancelados-js" value="${qtdCandidatoStatus.cancelados }">
+		<input type="hidden" id="qtd-contratados-js" value="${qtdCandidatoStatus.contratados }">
 	</div>
 	</layout:put>
 	<layout:put block="scripts" type="REPLACE">

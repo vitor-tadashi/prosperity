@@ -26,6 +26,7 @@ import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CargoBean;
 import br.com.prosperity.bean.CargoSenioridadeBean;
 import br.com.prosperity.bean.ProjetoBean;
+import br.com.prosperity.bean.QuantiaCandidatoPorStatusBean;
 import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoVagaBean;
 import br.com.prosperity.bean.StatusBean;
@@ -324,9 +325,11 @@ public class VagaController {
 	public String historico(Model model, @PathVariable Integer id) {
 		List<CandidatoBean> candidatos = candidatoBusiness.listarCandidatosVaga(id);
 		VagaBean vaga = vagaBusiness.obterVagaPorId(id);
+		QuantiaCandidatoPorStatusBean qtdCandidatoPorStatus = candidatoBusiness.contarCandidatosPorStatus(candidatos);
 		
 		model.addAttribute("vaga", vaga);
 		model.addAttribute("candidatos", candidatos);
+		model.addAttribute("qtdCandidatoStatus",qtdCandidatoPorStatus);
 		
 		return "/vaga/historico-vaga";
 	}	
