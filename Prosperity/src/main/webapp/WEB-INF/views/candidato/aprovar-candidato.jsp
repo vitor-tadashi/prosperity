@@ -342,7 +342,7 @@
 								</form>
 							</div>
 							<div class="panel-footer clearfix">
-								<button type="button" class="btn btn-sm btn-primary pull-right"
+								<button type="button" class="btn btn-sm btn-primary pull-right um-click-js"
 									id="btnEnviar">
 									<i class="fa fa-check fa-lg"></i>&nbsp;Enviar
 								</button>
@@ -367,7 +367,7 @@
 						<p>Deseja confirmar a operação?</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-success" id="alterarStatus">Sim</button>
+						<button type="button" class="btn btn-success um-click-js" id="alterarStatus">Sim</button>
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
 					</div>
 				</div>

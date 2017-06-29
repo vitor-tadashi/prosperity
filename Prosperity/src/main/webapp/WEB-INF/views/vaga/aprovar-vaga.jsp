@@ -292,7 +292,7 @@
 					<div class="modal-footer">
 						<a href="#">
 							<button id="excluiVaga" onclick="status()" type="button"
-								class="btn btn-success" data-dismiss="modal">Sim</button>
+								class="btn btn-success um-click-js" data-dismiss="modal">Sim</button>
 						</a>
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
 					</div>

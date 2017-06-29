@@ -379,7 +379,7 @@
 									<input type="hidden" value="${erro}" id="contErro"> <button id="btnDownload"
 										href="/candidato/file/${candidato.id}" target="_blank"
 										class="btn btn-default pull-left download-download">Download</button>
-									<button class="btn btn-success pull-right" onclick="salvarForm()">Salvar</button>
+									<button class="btn btn-success pull-right um-click-js" onclick="salvarForm()">Salvar</button>
 								</div>
 							</form>
 						</div>

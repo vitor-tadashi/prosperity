@@ -434,7 +434,7 @@
 									</div>
 								</div>
 								<div class="text-right pull-right">
-									<button type="submit" class="btn btn-sm btn-success"
+									<button type="submit" class="btn btn-sm btn-success um-click-js"
 										id="btnSalvar">
 										<i class="fa fa-check"></i> Salvar
 									</button>
