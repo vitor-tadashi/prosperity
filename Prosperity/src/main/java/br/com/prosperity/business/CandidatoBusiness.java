@@ -516,7 +516,7 @@ public class CandidatoBusiness {
 				situacaoCandidato.setStatus(StatusCandidatoEnum.valueOf(statusFuturoEntity.get(0).getIdStatusFuturo()));
 			} else {
 				avaliadorCandidatoEntity = avaliadorCandidatoDAO.findByNamedQuery("obterAvaliadoresCandidato",
-						statusCandidatoEntity.getCandidato());
+						statusCandidatoEntity.getCandidato().getId());
 				if (avaliadorCandidatoEntity != null && avaliadorCandidatoEntity.size() > 0) {
 					StatusCandidatoEnum status = avaliadorCandidatoEntity.size() == 1
 							? StatusCandidatoEnum.GERARPROPOSTA : StatusCandidatoEnum.CANDIDATOEMANALISE;
@@ -759,10 +759,12 @@ public class CandidatoBusiness {
 			
 			avaliadores = avaliadorCandidatoConverter.convertEntityToBean(avaliadorCandidatoDAO.findByNamedQuery("obterAvaliadoresCandidato", 
 					situacaoCandidatoBean.getIdCandidato()));
-			for (AvaliadorCandidatoBean a : avaliadores) {
-				if (a.getUsuario() != null) {
-					recipients.add(a.getUsuario().getEmail());
-					nomes.add(a.getUsuario().getFuncionario().getNome());
+			if(avaliadores != null && avaliadores.size() > 0){
+				for (AvaliadorCandidatoBean a : avaliadores) {
+					if (a.getUsuario() != null) {
+						recipients.add(a.getUsuario().getEmail());
+						nomes.add(a.getUsuario().getFuncionario().getNome());
+					}
 				}
 			}
 		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.PROPOSTACANDIDATO.getValue()) {
