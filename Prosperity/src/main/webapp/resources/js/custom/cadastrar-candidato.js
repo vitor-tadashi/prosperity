@@ -536,6 +536,12 @@ function validarVaga() {
 
 //funcão para a aba de data de comunicação
 function inserirComunicacao(){
+	if($.trim($('#dataContato').val()) == ''  || $.trim($('#dataContato').val()) == '' ){
+		var div = document.getElementById("textDiv2").className = "alert alert-danger";
+
+		textDiv2.textContent = "Preencha os campos";
+		return false;
+	}
 	var dadosajax = {
 			'dataContato' : $("#dataContato").val(),
 			'observacao' : $("#obs").val(),
@@ -557,6 +563,8 @@ function inserirComunicacao(){
 						"<td>"+$("#nmUsuario").val()+"</td>"+
 						"</tr>"
 				)
+				$('#dataContato').val("")
+				$('#obs').val("")
 			},
 			error: function(){
 				

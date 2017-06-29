@@ -23,4 +23,8 @@ $(function() {
 			$("#menu-toggle").css("visibility", "visible");
 		}
 	});
+	$('.um-click-js').click(function(){ 
+
+        $(this).attr('disabled',true);
+    });
 });
