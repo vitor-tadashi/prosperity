@@ -328,7 +328,9 @@ public class CandidatoBusiness {
 				candidatoBean.getVagaCandidato().setVaga(beans.getUltimaVaga());
 			}
 			candidatoBean.setPropostaBean(beans.getPropostaBean());
-			candidatoBean.setCurriculo(beans.getCurriculo());
+			if(candidatoBean.getCurriculo() == null || candidatoBean.getCurriculo().equals("")){
+				candidatoBean.setCurriculo(beans.getCurriculo());
+			}
 			candidatoBean.setCompetencias(beans.getCompetencias());
 			candidatoEntity = candidatoConverter.convertBeanToEntity(candidatoEntity, candidatoBean);
 			tratarInformacoes(candidatoEntity);

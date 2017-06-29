@@ -74,7 +74,11 @@
 											</div>
 											<c:if test="${not empty candidato.curriculo }">
 												<div class="form-group col-md-6">
-													<p class="" id="nome"><strong>Currículo: </strong>&nbsp;&nbsp;<a href="/candidato/file/${candidato.id}" target="_blank" data-toggle="tooltip" title="Baixar currículo" class="fa fa-download fa-lg"></a></p>
+													<p class="" id="nome"><strong>Currículo: </strong>&nbsp;&nbsp;
+													<c:url value="/candidato/papers" var="url">
+														<c:param name="caminho">${candidato.curriculo}</c:param>
+													</c:url>
+													<a href="${url}" target="_blank" data-toggle="tooltip" title="Baixar" class="fa fa-download fa-lg"></a>
 												</div>
 											</c:if>
 										</div>
@@ -337,6 +341,20 @@
 			var url = $('#p'+index).val()
 			$.ajax({
 				url : "/candidato/papers",
+				data : {
+					'caminho' : url
+				},
+				type : "POST",
+				success : function() {
+					console.log('sucesso');
+					}
+			});
+		}
+		
+		function baixarCurriculo(index){
+			var url = $('#c').val()
+			$.ajax({
+				url : "/candidato/file",
 				data : {
 					'caminho' : url
 				},

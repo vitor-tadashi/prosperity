@@ -205,6 +205,7 @@ public class CandidatoController<PaginarCandidato> {
 			return "candidato/cadastrar-candidato";
 		} else {
 			try {
+				candidatoBean.setCpf(candidatoBean.getCpf().substring(0, 14));
 				String caminho = uploadCurriculo(file, candidatoBean.getCpf());
 				candidatoBean.setCurriculo(caminho);
 				candidatoBusiness.inserir(candidatoBean);
@@ -255,7 +256,8 @@ public class CandidatoController<PaginarCandidato> {
 
 	@RequestMapping(value = "/editar/salvar", method = RequestMethod.POST)
 	public String salvarEditar(@ModelAttribute("candidatoBean") @Valid CandidatoBean candidatoBean,
-			BindingResult result, Model model, RedirectAttributes redirectAttrs) throws BusinessException {
+					BindingResult result, Model model, RedirectAttributes redirectAttrs, @RequestParam("file") MultipartFile file)
+					throws BusinessException {
 		if (result.hasErrors()) {
 			model.addAttribute("erro", result.getErrorCount());
 			model.addAttribute("listaErros", buildErrorMessage(result.getFieldErrors()));
@@ -264,6 +266,8 @@ public class CandidatoController<PaginarCandidato> {
 			obterDominiosCandidato(model);
 			return "candidato/cadastrar-candidato";
 		}
+		String caminho = uploadCurriculo(file, candidatoBean.getCpf());
+		candidatoBean.setCurriculo(caminho);
 		candidatoBusiness.inserir(candidatoBean);
 		redirectAttrs.addFlashAttribute("sucesso", "Candidato salvo com sucesso!");
 
@@ -531,32 +535,13 @@ public class CandidatoController<PaginarCandidato> {
 		return provasCandidatoBean;
 	}
 
-	@RequestMapping(value = "/file/{id}", method = RequestMethod.GET)
-	@ResponseBody
-	public void getFile(@PathVariable Integer id, HttpServletResponse response) throws IOException {
-
-		String caminho = candidatoBusiness.obter(id).getCurriculo();
-		if (!caminho.isEmpty()) {
-			try {
-				File file = new File(caminho);
-				response.addHeader("Content-Disposition", "attachment; filename=" + caminho);
-				InputStream is = new FileInputStream(file);
-				org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
-				response.flushBuffer();
-
-				is.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
 	@RequestMapping(value = "/papers", method = RequestMethod.GET)
 	public void getPapers(String caminho, HttpServletResponse response) {
 		String[] nome = caminho.split("\\\\");
+		int tamanho = nome.length - 1;
 		try {
 			File file = new File(caminho);
-			response.addHeader("Content-Disposition", "attachment; filename=" + nome[5]);
+			response.addHeader("Content-Disposition", "attachment; filename=" + nome[tamanho]);
 			InputStream is = new FileInputStream(file);
 			org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
 			response.flushBuffer();

@@ -374,14 +374,19 @@
 										</div>
 									</div>
 								</div>
-								<div class="panel-footer">
-									<input type="hidden" value="${candidato.id}" name="id" id="candidato">
-									<input type="hidden" value="${erro}" id="contErro"> <button id="btnDownload"
-										href="/candidato/file/${candidato.id}" target="_blank"
-										class="btn btn-default pull-left download-download">Download</button>
-									<button class="btn btn-success pull-right um-click-js" onclick="salvarForm()">Salvar</button>
-								</div>
 							</form>
+							<div class="panel-footer">
+								<button class="btn btn-success pull-right um-click-js" onclick="salvarForm()">Salvar</button>
+								<c:if test="${not empty candidato.curriculo }">
+									<div class="form-group col-md-6">
+										<p class="" id="nome"><strong>Currículo: </strong>&nbsp;&nbsp;
+										<c:url value="/candidato/papers" var="url">
+											<c:param name="caminho">${candidato.curriculo}</c:param>
+										</c:url>
+										<a href="${url}" target="_blank" data-toggle="tooltip" title="Baixar" class="fa fa-download fa-lg um-click-js"></a>
+									</div>
+								</c:if>
+							</div>
 						</div>
 					</div>
 				</div>
