@@ -160,7 +160,11 @@
 															<h4 class="panel-title">
 																<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
 																	<span><strong>Candidatura</strong></span>
-																	<span class="pull-right"><i class="fa fa-angle-double-down fa-2x"></i></span>
+																	<span class="pull-right">
+																		<span class="badge badge-success">
+																			${qtdCandidatoStatus.candidaturasPercentual } ${not empty qtdCandidatoStatus.candidaturasPercentual? '%':'0' }
+																		</span>
+																	</span>
 																</a>
 															</h4>
 														</div>
@@ -199,7 +203,11 @@
 															<h4 class="panel-title">
 																<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
 																	<span><strong>Em análise</strong></span>
-																	<span class="pull-right"><i class="fa fa-angle-double-down fa-2x"></i></span>
+																	<span class="pull-right">
+																		<span class="badge badge-success">
+																			${qtdCandidatoStatus.emAnalisePercentual } ${not empty qtdCandidatoStatus.emAnalisePercentual? '%':'0' }
+																		</span>
+																	</span>
 																</a>
 															</h4>
 														</div>
@@ -238,7 +246,11 @@
 															<h4 class="panel-title">
 																<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
 																	<span><strong>Aprovado</strong></span>
-																	<span class="pull-right"><i class="fa fa-angle-double-down fa-2x"></i></span>
+																	<span class="pull-right">
+																		<span class="badge badge-success">
+																			${qtdCandidatoStatus.aprovadosPercentual } ${not empty qtdCandidatoStatus.aprovadosPercentual? '%':'0' }
+																		</span>
+																	</span>
 																</a>
 															</h4>
 														</div>
@@ -278,7 +290,11 @@
 															<h4 class="panel-title">
 																<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
 																	<span><strong>Reprovado</strong></span>
-																	<span class="pull-right"><i class="fa fa-angle-double-down fa-2x"></i></span>
+																	<span class="pull-right">
+																		<span class="badge badge-success">
+																			${qtdCandidatoStatus.reprovadosPercentual } ${not empty qtdCandidatoStatus.reprovadosPercentual? '%':'0' }
+																		</span>
+																	</span>
 																</a>
 															</h4>
 														</div>
@@ -317,7 +333,11 @@
 															<h4 class="panel-title">
 																<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
 																	<span><strong>Contratado</strong></span>
-																	<span class="pull-right"><i class="fa fa-angle-double-down fa-2x"></i></span>
+																	<span class="pull-right">
+																		<span class="badge badge-success">
+																			${qtdCandidatoStatus.contratadosPercentual } ${not empty qtdCandidatoStatus.contratadosPercentual? '%':'0' }
+																		</span>
+																	</span>
 																</a>
 															</h4>
 														</div>
@@ -356,7 +376,11 @@
 															<h4 class="panel-title">
 																<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
 																	<span><strong>Cancelado</strong></span>
-																	<span class="pull-right"><i class="fa fa-angle-double-down fa-2x"></i></span>
+																	<span class="pull-right">
+																		<span class="badge badge-success">
+																			${qtdCandidatoStatus.canceladosPercentual } ${not empty qtdCandidatoStatus.canceladosPercentual? '%':'0' }
+																		</span>
+																	</span>
 																</a>
 															</h4>
 														</div>
