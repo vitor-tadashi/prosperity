@@ -4,11 +4,11 @@
 
 /* Função violenta para limpar o modal no click */
 			$('#modalProposta').on('hidden.bs.modal', function (e) {
-				  $(this)
-				    .find("input,textarea,select")
-				       .val('')
-				       .end();
-				})
+				  $(this).find("textarea,select").val('').end();
+				  $(".processoSeletivo").remove();
+				  limparProposta();
+				  
+			})
 
 			function maxCaracterParecer() {
 				var maxParecer = $("#parecer").val();
@@ -262,7 +262,7 @@
 			});
 
 			function file() {
-				var paperElement = document.getElementById("modalPapers");
+				var paperElement = document.getElementsByClassName("modalPapers");
 
 				if ($(paperElement).val()) {
 					var form = document.getElementById("formValidar");
@@ -313,13 +313,12 @@
 
 			function remover(id) {
 				$(".div" + id).remove();
-				cont--;
 			}
 			function valida(){
 				var erro = true;
 				$(".erro-prova").each(function(i,item) {
-					var paperElement = document.getElementById("modalPapers");
-					if($(this).find("#prova-js").val() == 0 || !$(this).find("#modalPapers").val()){
+					var paperElement = document.getElementsByClassName("modalPapers");
+					if($(this).find("#prova-js").val() == 0 || !$(this).find(".modalPapers").val()){
 						$(item).addClass('alert alert-danger')
 						erro = false;
 					}else{
@@ -580,3 +579,50 @@
 			        else
 			            document.getElementById(el).style.display = 'none';
 			    }
+				
+				function limparProposta(){
+					$(".tiraTabela").remove();
+					$('#anteriorCargo').text('');
+					$('#anteriorEmpresa').text('');
+					$('#vlrAntSalarioFixoBruto').text('');
+					$('#vlrAntSalarioLiquidoMensal').text('');
+					$('#vlrAntVrMensal').text('');
+					$('#vlrAntVaMensal').text('');
+					$('#vlrAntSeguroSaudeMensal').text('');
+					$('#vlrAntValeAuto').text('');
+					$('#vlrAntValeEstacionamento').text('');
+					$('#vlrAntValeTransporte').text('');
+					$('#dsAntOutros1').text('');
+					$('#vlrAntOutros1').text('');
+					$('#dsAntOutros2').text('');
+					$('#vlrAntOutros2')
+					$('#dsAntOutros3').text('');
+					$('#vlrAntOutros3').text('');
+					$('#vlrAntLiquidoComBeneficios').text('');
+					$('#vlrAntAnualLiquido').text('');
+					$('#vlrAntParticipacaoLucrosOuBonus').text('');
+					$('#vlrAntTotalAnualLiquidoComBeneficios').text('');
+					$('#novaEmpresa').text('');
+					$('#novoCargo').text('');
+					$('#vlrNvSalarioFixoBruto').text('');
+					$('#vlrNvSalarioLiquidoMensal').text('');
+					$('#vlrNvVrMensal').text('');
+					$('#vlrNvVaMensal').text('');
+					$('#vlrNvSeguroSaudeMensal').text('');
+					$('#vlrNvValeAuto').text('');
+					$('#vlrNvValeEstacionamento').text('');
+					$('#vlrNvValeTransporte').text('');
+					$('#dsNvOutros1').text('');
+					$('#vlrNvOutros1').text('');
+					$('#dsNvOutros2').text('');
+					$('#vlrNvOutros2').text('');
+					$('#dsNvOutros3').text('');
+					$('#vlrNvOutros3').text('');
+					$('#vlrNvLiquidoComBeneficios').text('');
+					$('#vlrNvAnualLiquido').text('');
+					$('#vlrNvParticipacaoLucrosOuBonus').text('');
+					$('#vlrNvTotalAnualLiquidoComBeneficios').text('');
+					$('.upload-file').parent().find('span').attr('data-title','');
+					$('.upload-file').parent().find('label').attr('data-title','Selecione');
+					$('.upload-file').parent().find('label').removeClass('selected');
+				}
