@@ -419,7 +419,7 @@
 					</div>
 					<div class="modal-footer">
 						<input type="hidden" id="idCancelamento" value="" />
-						<button type="button" class="btn btn-success"
+						<button type="button" class="btn btn-success um-click-js"
 							onclick="cancelarCandidato()">Confirmar</button>
 						<button type="button" class="btn btn-danger"
 							data-dismiss="modal">Cancelar</button>
