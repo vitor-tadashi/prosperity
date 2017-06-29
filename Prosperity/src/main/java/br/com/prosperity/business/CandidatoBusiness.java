@@ -518,7 +518,7 @@ public class CandidatoBusiness {
 				situacaoCandidato.setStatus(StatusCandidatoEnum.valueOf(statusFuturoEntity.get(0).getIdStatusFuturo()));
 			} else {
 				avaliadorCandidatoEntity = avaliadorCandidatoDAO.findByNamedQuery("obterAvaliadoresCandidato",
-						statusCandidatoEntity.getCandidato());
+						statusCandidatoEntity.getCandidato().getId());
 				if (avaliadorCandidatoEntity != null && avaliadorCandidatoEntity.size() > 0) {
 					StatusCandidatoEnum status = avaliadorCandidatoEntity.size() == 1
 							? StatusCandidatoEnum.GERARPROPOSTA : StatusCandidatoEnum.CANDIDATOEMANALISE;
@@ -742,22 +742,37 @@ public class CandidatoBusiness {
 		}
 		candidatoBean = candidatoConverter
 				.convertEntityToBean(candidatoDAO.findById(situacaoCandidatoBean.getIdCandidato()));
-		List<UsuarioBean> usuarios = buscarUsuariosSemRepetir();
+		List<UsuarioBean> usuarios;
 		ArrayList<String> recipients = new ArrayList<>();
 		ArrayList<String> nomes = new ArrayList<>();
-		List<AvaliadorCandidatoBean> avaliadores = buscarAvaliadoresSemRepetir();
+		List<AvaliadorCandidatoBean> avaliadores;
 		FuncionalidadeBean f = new FuncionalidadeBean();
 		
-		if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOEMANALISE.getValue()
-				|| situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CONTRATADO.getValue()) {
+		if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CONTRATADO.getValue()) {
+			
+			avaliadores = buscarAvaliadoresSemRepetir(situacaoCandidatoBean.getIdCandidato(),situacaoCandidatoBean.getIdVaga());
 			for (AvaliadorCandidatoBean a : avaliadores) {
 				if (a.getUsuario() != null) {
 					recipients.add(a.getUsuario().getEmail());
 					nomes.add(a.getUsuario().getFuncionario().getNome());
 				}
 			}
+		}else if(situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOEMANALISE.getValue()){
+			
+			avaliadores = avaliadorCandidatoConverter.convertEntityToBean(avaliadorCandidatoDAO.findByNamedQuery("obterAvaliadoresCandidato", 
+					situacaoCandidatoBean.getIdCandidato()));
+			if(avaliadores != null && avaliadores.size() > 0){
+				for (AvaliadorCandidatoBean a : avaliadores) {
+					if (a.getUsuario() != null) {
+						recipients.add(a.getUsuario().getEmail());
+						nomes.add(a.getUsuario().getFuncionario().getNome());
+					}
+				}
+			}
 		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.PROPOSTACANDIDATO.getValue()) {
+			
 			f.setId(23);
+			usuarios = buscarUsuariosSemRepetir();
 			for (UsuarioBean u : usuarios) {
 				//recebe email quem pode aprovar proposta
 				if (u.getPerfil().getListaFuncionalidades().contains(f)) {
@@ -768,7 +783,9 @@ public class CandidatoBusiness {
 			}
 		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.GERARPROPOSTA.getValue()
 				|| situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CANDIDATORECUSOUPROPOSTA.getValue()) {
+			
 			f.setId(26);
+			usuarios = buscarUsuariosSemRepetir();
 			for (UsuarioBean u : usuarios) {
 				//recebe email quem pode gerar proposta
 				if (u.getPerfil().getListaFuncionalidades().contains(f)) {
@@ -779,18 +796,18 @@ public class CandidatoBusiness {
 			}
 		}
 		GeradorEmail email = new GeradorEmail();
-		for (int i = 0, j = 0; i < recipients.size() && j < nomes.size(); i++, j++) {
+		for (int i = 0; i < recipients.size(); i++) {
 			try {
-				email.enviarEmail(candidatoBean, recipients.get(i), nomes.get(j));
+				email.enviarEmail(candidatoBean, recipients.get(i), nomes.get(i));
 			} catch (BusinessException e) {
 				e.printStackTrace();
 			}
 		}
 	}
 
-	private List<AvaliadorCandidatoBean> buscarAvaliadoresSemRepetir() {
+	private List<AvaliadorCandidatoBean> buscarAvaliadoresSemRepetir(int idCandidato, int idVaga) {
 		List<AvaliadorCandidatoBean> avaliadores = avaliadorCandidatoConverter
-				.convertEntityToBean(avaliadorCandidatoDAO.findByNamedQuery("obterProposta", candidatoBean.getId()));
+				.convertEntityToBean(avaliadorCandidatoDAO.findByNamedQuery("listarAvaliadoresCandidatoVaga", idCandidato, idVaga));
 		List<AvaliadorCandidatoBean> avaliadoresNaoRepetidos = new ArrayList<>();
 		Set<Integer> idAvaliadores = new HashSet<Integer>();
 		if (avaliadores != null) {
