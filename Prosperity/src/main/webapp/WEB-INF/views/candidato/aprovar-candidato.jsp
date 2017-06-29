@@ -60,10 +60,11 @@
 												<div class="panel panel-default">
 													<div class="panel-body">
 														<div class="form-group col-md-12" id="processoSeletivo">
-															<label>Etapas dos processos de seleção: </label> <input
-																type="button" id="gerarCampo"
+															<label>Etapas dos processos de seleção: </label> 
+															<input type="button" id="gerarCampo"
 																value="Gerar etapa do processo seletivo"
-																class="btn btn-sm btn-primary"> <br> <br>
+																class="btn btn-sm btn-primary"> 
+															<br> <br>
 														</div>
 													</div>
 												</div>
@@ -531,8 +532,9 @@
 
 		<script>
 		/*gerador de campo*/
-		var cont = 0;
+		var cont = -1;
 		$("#gerarCampo").click(function() {
+			cont++;
 			var campos =
 				"<div class='div"+cont+" processoSeletivo'>"
 				+ "<div class='row erro-prova'>"
@@ -547,16 +549,24 @@
 				+ "</c:forEach>"
 				+ "</select>"
 				+ "</div>"
-				+ "<div class='col-md-5 form-inline'>"
-				+ "<input name='papers' id='modalPapers' type='file' class='input-sm parsley-validated' multiple data-input='false' data-required='true'>"
-				+ "</div>"
-				+ "</div>" + "</div>";
-				cont++;
+				+ "<div id='up"+cont+"' class='col-md-5 upload-file'>"
+				+ "<input name='papers' id='upload-file"+cont+"' type='file' onchange='alterarUploadFile(this);' class='upload-demo parsley-validated modalPapers'"
+				+ "data-required='true'><label data-title='Selecione' for='upload-file"+cont+"'><span id='nmArquivo'>"
+				+ "</span></label></div>"
+				+ "</div></div>";
 				/*adiciona na div*/
 			$("#processoSeletivo").append(campos);
-
 			/*contador de caracter - descrição prova*/
+
 		});
+		
+		function alterarUploadFile(element) {
+			var parent = $(element).parent();
+			var filename = $(element).val().split('\\').pop();
+			parent.find("span").attr('data-title',filename);
+			parent.find("label").addClass('selected');
+		}
+		
 		</script>
 
 	</layout:put>
