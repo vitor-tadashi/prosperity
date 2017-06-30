@@ -502,6 +502,8 @@
 				var id = $("#idCancelamento").val();
 				$.ajax({
 					url : "cancelar-candidato/" + id,
+					data : {'dsCancelamento' : $('#parecerCancelamento').val(),
+							'idCancelamento':$('#cancelamento').val()},
 					type : "POST"
 				}).done(
 					function() {

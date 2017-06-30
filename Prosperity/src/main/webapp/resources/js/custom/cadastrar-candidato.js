@@ -546,7 +546,7 @@ function inserirComunicacao(){
 			'dataContato' : $("#dataContato").val(),
 			'observacao' : $("#obs").val(),
 			'usuario': $("#txtUsuario").val(),
-			'candidato': $("#candidato").val(),
+			'candidato': $("#id").val(),
 			'vaga' : $('#vaga').val()
 			};
 			$.ajax({
