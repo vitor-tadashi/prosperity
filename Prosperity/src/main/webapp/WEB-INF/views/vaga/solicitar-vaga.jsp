@@ -214,14 +214,14 @@
 													</div>
 													<label class="control-label col-md-2"
 														for="txtPropostaSalarial" style="padding-top: 5px">Mínimo</label>
-													<input id="valorMinimo" name="valorMinimo" type="text"
+													<input id="valorMinimo" name="valorPretensaoMin" type="text"
 														class="input-sm col-md-4" disabled placeholder="R$"
 														value="${vaga.valorPretensaoMin }" style="height: 30px" data-mask="000.000,00"
 														data-mask-reverse="true"> 
 													<label class="control-label col-md-2"
 														style="padding-left: 10px; padding-top: 5px"
 														for="txtPropostaSalarial">Máximo</label> 
-													<input id="valorMaximo" name="valorMaximo" type="text"
+													<input id="valorMaximo" name=valorPretensaoMax type="text"
 														class="input-sm col-md-4" disabled placeholder="R$"
 														value="${vaga.valorPretensaoMax }" style="height: 30px" data-mask="000.000,00"
 														data-mask-reverse="true">
