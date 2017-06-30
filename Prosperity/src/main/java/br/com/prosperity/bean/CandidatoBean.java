@@ -54,9 +54,10 @@ public class CandidatoBean extends FormatUtil {
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataAlteracao;
+	
 	private String curriculo;
+	
 	@Valid
-
 	private ContatoBean contato;
 
 	@Valid

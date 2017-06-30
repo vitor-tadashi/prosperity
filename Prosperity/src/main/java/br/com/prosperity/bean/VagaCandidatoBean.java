@@ -13,7 +13,6 @@ public class VagaCandidatoBean {
 	@Min(value = 1, message = "O campo de vaga a ser aplicado deve ser preenchido")
 	private Integer id;
 
-	@Valid
 	private VagaBean vaga;
 	private String outros;
 	private FuncionarioBean funcionarioBean;

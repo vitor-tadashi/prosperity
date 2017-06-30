@@ -220,23 +220,25 @@
 										<legend style="color:#424f63"><h5><strong>Avaliação de skill</strong></h5></legend>
 										<div class="row">
 											<c:forEach begin="1" end="${colCompetencias }" var="i">
-												<div class="form-group col-md-4">
-													<p class="text-center" id="nome"><strong>Avaliador: </strong>${candidato.competencias[(i * 7) -1].nmAvaliador }</p>
-													<table class="table table-condensed">
-														<tbody>
-															<tr>
-																<th class="text-center">Competências</th>
-																<th class="text-center">Resultados</th>
-															</tr>
-															<c:forEach var="c" begin="${(i*7)-7 }" end="${(i * 7) -1 }">
-																<tr class="text-center">
-																	<td>${candidato.competencias[c].competencia.nome}</td>
-																	<td><span class="badge" style="color:#fff; background-color:${candidato.competencias[c].avaliacao.tipoCss}">${candidato.competencias[c].avaliacao.nome}</span></td>
+												<c:if test="${candidato.competencias[(i * 7) -1].idVaga == candidato.ultimaVaga.id }">
+													<div class="form-group col-md-4">
+														<p class="text-center" id="nome"><strong>Avaliador: </strong>${candidato.competencias[(i * 7) -1].nmAvaliador }</p>
+														<table class="table table-condensed">
+															<tbody>
+																<tr>
+																	<th class="text-center">Competências</th>
+																	<th class="text-center">Resultados</th>
 																</tr>
-															</c:forEach>
-														</tbody>
-													</table>
-												</div>
+																<c:forEach var="c" begin="${(i*7)-7 }" end="${(i * 7) -1 }">
+																	<tr class="text-center">
+																		<td>${candidato.competencias[c].competencia.nome}</td>
+																		<td><span class="badge" style="color:#fff; background-color:${candidato.competencias[c].avaliacao.tipoCss}">${candidato.competencias[c].avaliacao.nome}</span></td>
+																	</tr>
+																</c:forEach>
+															</tbody>
+														</table>
+													</div>
+												</c:if>
 											</c:forEach>
 										</div>
 									</fieldset>

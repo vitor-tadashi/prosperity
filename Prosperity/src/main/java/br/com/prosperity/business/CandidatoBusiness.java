@@ -838,7 +838,8 @@ public class CandidatoBusiness {
 	public boolean podeEditarVaga(StatusCandidatoBean ultimoStatus) {
 		if (ultimoStatus.getStatus().getId() != null) {
 			if (ultimoStatus.getStatus().getId() != 5 && ultimoStatus.getStatus().getId() != 17
-					&& ultimoStatus.getStatus().getId() != 29 && ultimoStatus.getStatus().getId() != 15) {
+					&& ultimoStatus.getStatus().getId() != 29 && ultimoStatus.getStatus().getId() != 15 && 
+					ultimoStatus.getStatus().getId() != 8) {
 				return false;
 			}
 		}
