@@ -1,5 +1,7 @@
 package br.com.prosperity.bean;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 import java.util.List;
 
@@ -20,8 +22,8 @@ public class VagaBean {
 	@NotEmpty(message = "O campo Nome da vaga deve ser preenchido")
 	private String nomeVaga;
 	private String nomeSolicitante;
-	private Double valorPretensaoMax;
-	private Double valorPretensaoMin;
+	private BigDecimal valorPretensaoMax;
+	private BigDecimal valorPretensaoMin;
 	@NotNull(message = "O campo Data para inicio deve ser preenchido")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataInicio;
@@ -345,19 +347,29 @@ public class VagaBean {
 		this.marketingSocial = marketingSocial;
 	}
 
-	public Double getValorPretensaoMax() {
-		return valorPretensaoMax;
+	public BigDecimal getValorPretensaoMax() {
+		try {
+			return valorPretensaoMax.setScale(2, RoundingMode.HALF_EVEN);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
-	public void setValorPretensaoMax(Double valorPretensaoMax) {
+	public void setValorPretensaoMax(BigDecimal valorPretensaoMax) {
 		this.valorPretensaoMax = valorPretensaoMax;
 	}
 
-	public Double getValorPretensaoMin() {
-		return valorPretensaoMin;
+	public BigDecimal getValorPretensaoMin() {
+		try {
+			return valorPretensaoMin.setScale(2, RoundingMode.HALF_EVEN);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
-	public void setValorPretensaoMin(Double valorPretensaoMin) {
+	public void setValorPretensaoMin(BigDecimal valorPretensaoMin) {
 		this.valorPretensaoMin = valorPretensaoMin;
 	}
 	

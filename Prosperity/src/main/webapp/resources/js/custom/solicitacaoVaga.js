@@ -61,13 +61,9 @@ dropdownSenioridade.addEventListener("change", function() {
 						idSenioridade : idSenioridade
 					},
 					success : function(lista) {
-						$("#valorMinimo").val(
-								"R$"
-										+ parseFloat(lista[0].valorMinSalario)
+						$("#valorMinimo").val(parseFloat(lista[0].valorMinSalario)
 												.toFixed(2));
-						$("#valorMaximo").val(
-								"R$"
-										+ parseFloat(lista[0].valorMaxSalario)
+						$("#valorMaximo").val(parseFloat(lista[0].valorMaxSalario)
 												.toFixed(2));
 					}
 				});
@@ -152,6 +148,10 @@ $("#btnSalvar").click(function() {
 	var data = $("#dataInicio").val();
 	$("#dataInicio").val(data);
 	console.log(dataInicio.value);
+
+	$('input#valorMinimo').removeAttr('disabled');
+	$('input#valorMaximo').removeAttr('disabled');
+	
 	$("#formCadastro2").submit();
 	// var resp = ${resposta};
 	// if (resp == "Ok"){

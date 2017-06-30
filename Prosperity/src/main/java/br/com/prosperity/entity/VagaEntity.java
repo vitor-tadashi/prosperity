@@ -1,5 +1,6 @@
 package br.com.prosperity.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -47,10 +48,10 @@ public class VagaEntity {
 	private String nomeSolicitante;
 
 	@Column(name = "vlPretensaoMin")
-	private Double valorPretensaoMin;
+	private BigDecimal valorPretensaoMin;
 
 	@Column(name = "vlPretensaoMax")
-	private Double valorPretensaoMax;
+	private BigDecimal valorPretensaoMax;
 	
 	@Column(name = "dtInicio")
 	@Temporal(value = TemporalType.DATE)
@@ -373,19 +374,19 @@ public class VagaEntity {
 		this.marketingSocial = marketingSocial;
 	}
 
-	public Double getValorPretensaoMin() {
+	public BigDecimal getValorPretensaoMin() {
 		return valorPretensaoMin;
 	}
 
-	public void setValorPretensaoMin(Double valorPretensaoMin) {
+	public void setValorPretensaoMin(BigDecimal valorPretensaoMin) {
 		this.valorPretensaoMin = valorPretensaoMin;
 	}
 
-	public Double getValorPretensaoMax() {
+	public BigDecimal getValorPretensaoMax() {
 		return valorPretensaoMax;
 	}
 
-	public void setValorPretensaoMax(Double valorPretensaoMax) {
+	public void setValorPretensaoMax(BigDecimal valorPretensaoMax) {
 		this.valorPretensaoMax = valorPretensaoMax;
 	}
 }
