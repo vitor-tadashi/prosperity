@@ -372,7 +372,7 @@
 									</div>
 
 									<div class="col-md-5">
-										<label for="">Data</label>
+										<label for="">Data de abertura</label>
 										<div class="input-group">
 											<fmt:formatDate value="${filtroVaga.dataAberturaDe}"
 												pattern="yyyy-MM-dd" var="d1" />
@@ -413,6 +413,7 @@
 									<thead>
 										<tr>
 											<th class="text-center"></th>
+											<th class="text-center">Id</th>
 											<th class="text-center">Vaga</th>
 											<th class="text-center">Solicitante</th>
 											<th class="text-center">Cliente</th>
@@ -429,6 +430,7 @@
 												<td class="accordion-toggle" data-toggle="collapse"
 												data-target="#demo${count.index}" 
 												style="cursor: pointer;"><span class="fa fa-plus-circle"></span></td>
+												<td>${vaga.id}</td>
 												<td id="linhaNome">${vaga.nomeVaga}</td>
 												<td>${vaga.nomeSolicitante}</td>
 												<td>${vaga.projeto.cliente.nome}</td>

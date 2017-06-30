@@ -4,9 +4,11 @@ import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
@@ -15,9 +17,12 @@ import org.springframework.stereotype.Component;
 public class VagaBean {
 
 	private Integer id;
+	@NotEmpty(message = "O campo Nome da vaga deve ser preenchido")
 	private String nomeVaga;
 	private String nomeSolicitante;
-	private Double valorPretensao;
+	private Double valorPretensaoMax;
+	private Double valorPretensaoMin;
+	@NotNull(message = "O campo Data para inicio deve ser preenchido")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataInicio;
 	private Character localTrabalho;
@@ -118,14 +123,6 @@ public class VagaBean {
 
 	public void setNomeSolicitante(String nomeSolicitante) {
 		this.nomeSolicitante = nomeSolicitante;
-	}
-
-	public Double getValorPretensao() {
-		return valorPretensao;
-	}
-
-	public void setValorPretensao(Double valorPretensao) {
-		this.valorPretensao = valorPretensao;
 	}
 
 	public Date getDataInicio() {
@@ -347,4 +344,21 @@ public class VagaBean {
 	public void setMarketingSocial(String marketingSocial) {
 		this.marketingSocial = marketingSocial;
 	}
+
+	public Double getValorPretensaoMax() {
+		return valorPretensaoMax;
+	}
+
+	public void setValorPretensaoMax(Double valorPretensaoMax) {
+		this.valorPretensaoMax = valorPretensaoMax;
+	}
+
+	public Double getValorPretensaoMin() {
+		return valorPretensaoMin;
+	}
+
+	public void setValorPretensaoMin(Double valorPretensaoMin) {
+		this.valorPretensaoMin = valorPretensaoMin;
+	}
+	
 }

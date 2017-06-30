@@ -104,7 +104,7 @@ public class UsuarioBusiness {
 
 	@Transactional
 	public List<UsuarioBean> buscarUsuarioAtivo() {
-		List<UsuarioEntity> usuariosEntity = usuarioDAO.findByNamedQuery("obterUsuariosAtivos");
+		List<UsuarioEntity> usuariosEntity = usuarioDAO.findByNamedQuery("obterPossiveisAvaliadores");
 		List<UsuarioBean> usuariosBean = usuarioConverter.convertEntityToBean(usuariosEntity);
 		return usuariosBean;
 	}

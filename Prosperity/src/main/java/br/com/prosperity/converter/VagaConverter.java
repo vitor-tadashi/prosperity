@@ -55,7 +55,8 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 		entity.setProjetoEntity(projetoConverter.convertBeanToEntity(bean.getProjeto()));
 		entity.setSenioridadeEntity(senioridadeConverter.convertBeanToEntity(bean.getSenioridadeBean()));
 		entity.setTipoVaga(bean.getIdTipoVaga());
-		entity.setValorPretensao(bean.getValorPretensao());
+		entity.setValorPretensaoMin(bean.getValorPretensaoMin());
+		entity.setValorPretensaoMax(bean.getValorPretensaoMax());
 		entity.setUsuarioEntity(usuarioConverter.convertBeanToEntity(bean.getUsuarioBean()));
 		entity.setStatusVagaEntity(statusVagaConverter.convertBeanToEntity(bean.getStatus()));
 		entity.setNmResponsavel(bean.getNmResponsavel());
@@ -95,7 +96,8 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 		bean.setProjeto(projetoConverter.convertEntityToBean(entity.getProjetoEntity()));
 		bean.setSenioridadeBean(senioridadeConverter.convertEntityToBean(entity.getSenioridadeEntity()));
 		bean.setIdTipoVaga(entity.getTipoVaga());
-		bean.setValorPretensao(entity.getValorPretensao());
+		bean.setValorPretensaoMin(entity.getValorPretensaoMin());
+		bean.setValorPretensaoMax(entity.getValorPretensaoMax());
 		bean.setUsuarioBean(usuarioConverter.convertEntityToBean(entity.getUsuarioEntity()));
 		bean.setStatus(statusVagaConverter.convertEntityToBean(entity.getStatusVagaEntity()));
 		bean.setNmResponsavel(entity.getNmResponsavel());

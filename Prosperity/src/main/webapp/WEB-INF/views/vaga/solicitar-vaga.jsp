@@ -216,14 +216,14 @@
 														for="txtPropostaSalarial" style="padding-top: 5px">Mínimo</label>
 													<input id="valorMinimo" name="valorMinimo" type="text"
 														class="input-sm col-md-4" disabled placeholder="R$"
-														value="" style="height: 30px" data-mask="000.000,00"
-														data-mask-reverse="true"> <label
-														class="control-label col-md-2"
+														value="${vaga.valorPretensaoMin }" style="height: 30px" data-mask="000.000,00"
+														data-mask-reverse="true"> 
+													<label class="control-label col-md-2"
 														style="padding-left: 10px; padding-top: 5px"
-														for="txtPropostaSalarial">Máximo</label> <input
-														id="valorMaximo" name="valorMaximo" type="text"
+														for="txtPropostaSalarial">Máximo</label> 
+													<input id="valorMaximo" name="valorMaximo" type="text"
 														class="input-sm col-md-4" disabled placeholder="R$"
-														value="" style="height: 30px" data-mask="000.000,00"
+														value="${vaga.valorPretensaoMax }" style="height: 30px" data-mask="000.000,00"
 														data-mask-reverse="true">
 												</div>
 												<!-- /form-group -->
@@ -413,7 +413,6 @@
 													</div>
 													<select multiple="multiple" name="#" id="selectedBox2"
 														class="select-box pull-right form-control">
-
 														<c:forEach var="avaliador" items="${avaliadorVagaBean}"
 															varStatus="i">
 															<option value="${avaliador.usuario.id}"<%-- ${vaga.id == avaliadorVagaBean.vaga.id && usuario.id == avaliadorVagaBean.usuario.id ? 'selected="selected"' : ''} --%> >${avaliador.usuario.funcionario.nome}</option>

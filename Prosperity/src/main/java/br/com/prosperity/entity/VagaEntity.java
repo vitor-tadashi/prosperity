@@ -46,9 +46,12 @@ public class VagaEntity {
 	@Column(name = "nmSolicitante")
 	private String nomeSolicitante;
 
-	@Column(name = "vlPretensao")
-	private Double valorPretensao;
+	@Column(name = "vlPretensaoMin")
+	private Double valorPretensaoMin;
 
+	@Column(name = "vlPretensaoMax")
+	private Double valorPretensaoMax;
+	
 	@Column(name = "dtInicio")
 	@Temporal(value = TemporalType.DATE)
 	private Date dataInicio;
@@ -160,14 +163,6 @@ public class VagaEntity {
 
 	public void setNomeSolicitante(String nomeSolicitante) {
 		this.nomeSolicitante = nomeSolicitante;
-	}
-
-	public Double getValorPretensao() {
-		return valorPretensao;
-	}
-
-	public void setValorPretensao(Double valorPretensao) {
-		this.valorPretensao = valorPretensao;
 	}
 
 	public Date getDataInicio() {
@@ -376,5 +371,21 @@ public class VagaEntity {
 
 	public void setMarketingSocial(String marketingSocial) {
 		this.marketingSocial = marketingSocial;
+	}
+
+	public Double getValorPretensaoMin() {
+		return valorPretensaoMin;
+	}
+
+	public void setValorPretensaoMin(Double valorPretensaoMin) {
+		this.valorPretensaoMin = valorPretensaoMin;
+	}
+
+	public Double getValorPretensaoMax() {
+		return valorPretensaoMax;
+	}
+
+	public void setValorPretensaoMax(Double valorPretensaoMax) {
+		this.valorPretensaoMax = valorPretensaoMax;
 	}
 }
