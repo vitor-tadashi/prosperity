@@ -413,7 +413,7 @@
 									<thead>
 										<tr>
 											<th class="text-center"></th>
-											<th class="text-center">Id</th>
+											<th class="text-center">Código</th>
 											<th class="text-center">Vaga</th>
 											<th class="text-center">Solicitante</th>
 											<th class="text-center">Cliente</th>

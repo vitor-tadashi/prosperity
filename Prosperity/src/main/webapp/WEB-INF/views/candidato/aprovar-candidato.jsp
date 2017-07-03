@@ -44,6 +44,7 @@
 										<div class="tab-pane fade in active" id="infoEntrevista">
 											<div class="form-group">
 												<label class="control-label">Observação :</label>
+												<input type="hidden" id="idVaga"/>
 												<div class="form-group">
 													<input type="hidden" id="hdn-id-candidato" /> <input
 														type="hidden" id="hdn-status" />
@@ -467,7 +468,6 @@
 										<c:forEach var="candidato" items="${candidatos}">
 											<tr id="js-trCandidato_${candidato.id}">
 												<input type="hidden" id="${candidato.id}" />
-												<input type="hidden" id="idVaga" value="${candidato.ultimaVaga.id}" />
 												<td>${candidato.nome}</td>
 												<td>${candidato.ultimaVaga.nomeVaga}</td>
 												<td><fmt:formatNumber

@@ -280,6 +280,8 @@ public class CandidatoController<PaginarCandidato> {
 				byte[] bytes = file.getBytes();
 
 				// Creating the directory to store file
+				cpf= cpf.replace(".", "");
+				cpf= cpf.replace("-", "");
 				File dir = new File("curriculo" + File.separator + cpf);
 				if (!dir.exists())
 					dir.mkdirs();

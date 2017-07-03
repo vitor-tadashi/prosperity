@@ -34,6 +34,7 @@
 							var perfil = $('#idPerfil').val();
 							$("#nmCandProp").text(data.nome);
 							$("#modalTitulo").text(tituloModal);
+							$("#idVaga").val(data.ultimaVaga.id);
 								if (data.ultimoStatus.status.id == "9") {
 									if (perfil == 2 || perfil == 3) {
 										$("#proposta-tab").show();

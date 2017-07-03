@@ -357,7 +357,7 @@
 													<tr class="text-center">
 														<th class="text-center">Data de contato</th>
 														<th class="text-center">Observações</th>
-														<th class="text-center">Usuário</th>
+														<th class="text-center">Contatante</th>
 													</tr>
 													</thead>
 													<tbody class="text-center" id="trNova">
