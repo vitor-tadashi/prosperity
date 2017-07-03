@@ -3,6 +3,7 @@ package br.com.prosperity.bean;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -411,14 +412,22 @@ public class CandidatoBean extends FormatUtil {
 	
 	public StatusCandidatoBean getPenultimoStatus() {
 		if (status != null && status.size() > 1) {
+			Collections.sort(this.status);
+			for(int i = 0; i < status.size(); i++){
+				if(status.get(i).getIdVaga() != null && !status.get(i).getIdVaga().equals(getUltimaVaga().getId())){
+					if(!status.get(i).getStatus().getId().equals(29)){
+						return status.get(i);
+					}
+				}
+			}/*
 			Integer idPenultimoStatus = status.stream().map(StatusCandidatoBean::getId).max(Integer::compareTo).get();
 			for(StatusCandidatoBean scb : status){
 				if(idPenultimoStatus != scb.getId()){
 					penultimoStatus = scb;
 				}
 			}
-			return penultimoStatus;
-		} 
+			return penultimoStatus;*/
+		}
 		return null;
 	}
 

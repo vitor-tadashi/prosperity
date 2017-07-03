@@ -30,7 +30,6 @@ import br.com.prosperity.bean.QuantiaCandidatoPorStatusBean;
 import br.com.prosperity.bean.SenioridadeBean;
 import br.com.prosperity.bean.SituacaoVagaBean;
 import br.com.prosperity.bean.StatusBean;
-import br.com.prosperity.bean.StatusCandidatoBean;
 import br.com.prosperity.bean.StatusVagaBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;

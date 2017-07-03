@@ -409,10 +409,10 @@
 	<script type="text/javascript">
 	
 	// script para cores dos status
-	$(".span-Fechado").addClass("label-warning");
+	/* $(".span-Fechado").addClass("label-warning");
 	$(".span-Ativo").addClass("label-success");
 	$(".span-Cancelado").addClass("label-danger");
-	$(".span-Pendente").addClass("label-info");
+	$(".span-Pendente").addClass("label-info"); */
 	
 	// função para mostrar no modal (visualizar) os campos preenchidos
 	function info(listaId){
@@ -473,23 +473,8 @@
     			$('#vagaPerfilTecnico').text(lista.descricaoPerfilTecnico);
     			$('#vagaGestor').val(lista.usuarioBean.funcionario.nome);
     			
-    				var idSenioridade = lista.senioridadeBean.id;
-    				var idCargo = lista.cargoBean.id;
-    				if (idSenioridade>0 && idCargo>0){
-    					$.ajax({
-    						url: "/vaga/obter-range-salarial",
-    						type: "GET",
-    						dataType: "JSON",
-    						data: {idCargo : idCargo,
-    							idSenioridade : idSenioridade},
-    						success: function(lista){
-    							$('input#vagaSalario').val("R$ " + lista[0].valorMinSalario + " até " + "R$ " + lista[0].valorMaxSalario);
-    							//$("#valorMaximo").val(lista[0].valorMaxSalario);
-    						}
-    					});
-    				} else{
-    					$('input#vagaSalario').val("R$ 00,00 - R$ 00,00");
-    				}
+    			var pretensao = 'R$ ' + lista.valorPretensaoMin + ' - R$ ' + lista.valorPretensaoMax
+    			$('input#vagaSalario').val(pretensao);
     			
     			$('#vaga-modal').modal('show');
     		}

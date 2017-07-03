@@ -67,7 +67,7 @@
 												<p class="" id="nome"><strong>Cargo: </strong>${vaga.cargoBean.nome }</p>
 											</div>
 											<div class="form-group col-md-6">
-												<p class="" id="nome"><strong>Faixa salarial: </strong>R$ 1000,00 até R$ 5000,00</p>
+												<p class="" id="nome"><strong>Faixa salarial: </strong>R$ ${vaga.valorPretensaoMin} até R$ ${vaga.valorPretensaoMax}</p>
 											</div>
 										</div>
 										<div class="row">

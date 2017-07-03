@@ -702,7 +702,8 @@
     			$('input#senioridade').val(lista.senioridadeBean.nome);
     			$('label#horaEntrada').text(lista.horarioEntrada);
     			$('label#horaSaida').text(lista.horarioSaida);
-    			$('input#pretensao').val(lista.valorPretensao);
+    			var pretensao = 'R$ ' + lista.valorPretensaoMin + ' - R$ ' + lista.valorPretensaoMax
+    			$('input#pretensao').val(pretensao);
     			var date = moment(lista.dataInicio);
     			$('input#dataInicio').val(date.format("DD/MM/YYYY"));
     			$('label#substituido').text(lista.nomeSubstituido);
