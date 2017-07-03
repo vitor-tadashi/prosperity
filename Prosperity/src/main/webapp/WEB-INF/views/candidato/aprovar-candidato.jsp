@@ -344,7 +344,7 @@
 								</form>
 							</div>
 							<div class="panel-footer clearfix">
-								<button type="button" class="btn btn-sm btn-primary pull-right um-click-js"
+								<button type="button" class="btn btn-sm btn-primary pull-right"
 									id="btnEnviar">
 									<i class="fa fa-check fa-lg"></i>&nbsp;Enviar
 								</button>
