@@ -287,8 +287,9 @@
 						<h4 class="modal-title" id="modalLabel"></h4>
 					</div>
 					<div class="modal-body" id="mensagem-modal" ></div>
-					<input class="id-vaga" name="idVaga" type="hidden"> <input
-						class="id-status" name="idStatus" type="hidden">
+					<input class="id-vaga" name="idVaga" type="hidden"> 
+					<input class="id-status" name="idStatus" type="hidden">
+					<input class="idStatusAnterior" name="#" type="hidden">
 					<div class="modal-footer">
 						<a href="#">
 							<button id="excluiVaga" onclick="status()" type="button"
@@ -384,7 +385,7 @@
 																<li class="divider"></li>
 																<li><a class="clickable" 
 																	id="vaga-modal" 
-																	onclick="alterarStatus(${vaga.id}, ${statusDisponivel.idStatusDisponivel})">
+																	onclick="alterarStatus(${vaga.id}, ${statusDisponivel.idStatusDisponivel}, ${vaga.ultimoStatus.status.id})">
 																		<i ${statusDisponivel.classe}>&nbsp;</i>${statusDisponivel.nome}</a></li>
 															</c:forEach>
 														</ul>
@@ -528,7 +529,7 @@
 		
 	// função para a alteração de status de acordo com os botões de ação.
 	function status(){ // Fazer aqui as MENSAGENSW
-		var statusAnterior = $('#idStatus').val();
+		var statusAnterior = $('.idStatusAnterior').val();
 		
     	$.ajax({
     		url: "status",
@@ -591,12 +592,13 @@
     	}); */
     	
 	// funcao para alterar status
-	function alterarStatus(id,status){
+	function alterarStatus(id,status,statusAnterior){
     		var mensagem;
     		var titulo;
     		
     	$('input.id-vaga').val(id);
     	$('input.id-status').val(status);
+    	$('input.idStatusAnterior').val(statusAnterior);
     		
     	if( status == '27'){
     		titulo = "Aprovar vaga"
