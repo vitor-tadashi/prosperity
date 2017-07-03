@@ -18,7 +18,16 @@ function maxCaracterPefilTecnico() {
 	var maxCaracteres = document.querySelector("#maxPerfilTecnico");
 	maxCaracteres.innerHTML = "Caracteres restantes : " + restante;
 }
+function formatReal( int )
+{
+		int = int.replace('.','');
+        var tmp = int+'';
+        tmp = tmp.replace(/([0-9]{2})$/g, ",$1");
+        if( tmp.length > 6 )
+                tmp = tmp.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
 
+        return tmp;
+}
 // Ajax para verificar o projeto e preencher o campo cliente de acordo com o
 // projeto
 
@@ -47,60 +56,29 @@ dropdownProjeto.addEventListener("change", function() {
 
 var dropdownSenioridade = document.querySelector("#cmbSenioridade");
 var dropdownCargo = document.querySelector("#cmbCargo");
-dropdownSenioridade.addEventListener("change", function() {
+$('.rangeSalarial').change(function() {
 	var idSenioridade = dropdownSenioridade.value;
 	var idCargo = dropdownCargo.value;
 	if (idSenioridade > 0 && idCargo > 0) {
-		$
-				.ajax({
-					url : "/vaga/obter-range-salarial",
-					type : "GET",
-					dataType : "JSON",
-					data : {
-						idCargo : idCargo,
-						idSenioridade : idSenioridade
-					},
-					success : function(lista) {
-						$("#valorMinimo").val(parseFloat(lista[0].valorMinSalario)
-												.toFixed(2));
-						$("#valorMaximo").val(parseFloat(lista[0].valorMaxSalario)
-												.toFixed(2));
-					}
-				});
+		$.ajax({
+			url : "/vaga/obter-range-salarial",
+			type : "GET",
+			dataType : "JSON",
+			data : {
+				idCargo : idCargo,
+				idSenioridade : idSenioridade
+			},
+			success : function(lista) {
+				$("#valorMinimo").val(formatReal(parseFloat(lista[0].valorMinSalario)
+										.toFixed(2)));
+				
+				$("#valorMaximo").val(formatReal(parseFloat(lista[0].valorMaxSalario)
+										.toFixed(2)));
+			}
+		});		
 	} else {
 		$("#valorMinimo").val("R$");
 		$("#valorMaximo").val("R$");
-	}
-});
-
-dropdownCargo.addEventListener("change", function() {
-	var idSenioridade = dropdownSenioridade.value;
-	var idCargo = dropdownCargo.value;
-	if (idSenioridade > 0 && idCargo > 0) {
-		$
-				.ajax({
-					url : "/vaga/obter-range-salarial",
-					type : "GET",
-					dataType : "JSON",
-					data : {
-						idCargo : idCargo,
-						idSenioridade : idSenioridade
-					},
-					success : function(lista) {
-						$("#valorMinimo").val(
-								"R$"
-										+ parseFloat(lista[0].valorMinSalario)
-												.toFixed(2));
-						$("#valorMaximo").val(
-								"R$"
-										+ parseFloat(lista[0].valorMaxSalario)
-												.toFixed(2));
-					}
-				});
-	} else {
-		$("#valorMinimo").val("R$");
-		$("#valorMaximo").val("R$");
-
 	}
 });
 
@@ -148,7 +126,12 @@ $("#btnSalvar").click(function() {
 	var data = $("#dataInicio").val();
 	$("#dataInicio").val(data);
 	console.log(dataInicio.value);
-
+	
+	var valorMin = $('input#valorMinimo').val().replace('.','');
+	var valorMax = $('input#valorMaximo').val().replace('.','');
+	$('input#valorMinimo').val(valorMin.replace(',','.'));
+	$('input#valorMaximo').val(valorMax.replace(',','.'));
+	
 	$('input#valorMinimo').removeAttr('disabled');
 	$('input#valorMaximo').removeAttr('disabled');
 	

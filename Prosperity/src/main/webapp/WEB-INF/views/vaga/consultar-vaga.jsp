@@ -485,7 +485,7 @@
 												</td>
 											</tr>
 											<tr>
-												<td colspan="9" class="hiddenRow"
+												<td colspan="12" class="hiddenRow"
 													style="background-color: #c7dbe5"><div
 														class="accordian-body collapse" id="demo${count.index}">
 

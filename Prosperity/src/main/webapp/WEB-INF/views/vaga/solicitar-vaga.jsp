@@ -136,7 +136,7 @@
 											<div class="row">
 												<div class="form-group col-md-6">
 													<label for="cmbCargo">Cargo</label> <select
-														class="form-control" id="cmbCargo" name="cargoBean.id"
+														class="form-control rangeSalarial" id="cmbCargo" name="cargoBean.id"
 														value="${cargoBean.id}">
 
 														<option value="0">Selecione o cargo</option>
@@ -171,7 +171,7 @@
 												<div class="form-group col-md-6" style="padding-top: 0px">
 													<label for="cmbSenioridade">Senioridade da vaga</label> <select
 														id="cmbSenioridade" name="senioridadeBean.id"
-														class="form-control">
+														class="form-control rangeSalarial">
 
 														<option value="0">Selecione a senioridade</option>
 
