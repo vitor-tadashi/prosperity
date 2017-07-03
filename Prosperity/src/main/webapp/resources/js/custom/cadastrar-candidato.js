@@ -536,7 +536,7 @@ function validarVaga() {
 
 //funcão para a aba de data de comunicação
 function inserirComunicacao(){
-	if($.trim($('#dataContato').val()) == ''  || $.trim($('#dataContato').val()) == '' ){
+	if($.trim($('#dataContato').val()) == ''  || $.trim($('#obs').val()) == '' ){
 		var div = document.getElementById("textDiv2").className = "alert alert-danger";
 
 		textDiv2.textContent = "Preencha os campos";
