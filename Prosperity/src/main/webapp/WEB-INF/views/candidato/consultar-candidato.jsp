@@ -99,8 +99,8 @@ li a.active {
 											<th class="text-center">Vaga</th>
 											<th class="text-center">Pretensão</th>
 											<th class="text-center">Data de candidatura</th>
-											<th class="text-center">Último status</th>
-											<th class="text-center">Status atual</th>
+											<th class="text-center">Status vaga anterior</th>
+											<th class="text-center">Status vaga atual</th>
 											<th class="text-center">Ações</th>
 										</tr>
 									</thead>

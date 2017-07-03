@@ -21,6 +21,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.stereotype.Component;
 
+import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.util.FormatUtil;
 
 @Component
@@ -415,9 +416,7 @@ public class CandidatoBean extends FormatUtil {
 			Collections.sort(this.status);
 			for(int i = 0; i < status.size(); i++){
 				if(status.get(i).getIdVaga() != null && !status.get(i).getIdVaga().equals(getUltimaVaga().getId())){
-					if(!status.get(i).getStatus().getId().equals(29)){
-						return status.get(i);
-					}
+					return status.get(i);
 				}
 			}/*
 			Integer idPenultimoStatus = status.stream().map(StatusCandidatoBean::getId).max(Integer::compareTo).get();

@@ -178,15 +178,26 @@
 														maxlength="25" value="${candidato.endereco.cidade}" />
 												</div>
 												<div class="form-group col-xs-12">
-													<label class="control-label">Currículo</label>
-													<div class="upload-file" style="width: 100%;">
+													<label class="control-label">Currículo: </label>
+												</div>
+												<div class="form-group form-inline col-md-12">
+													<div class="form-group upload-file" style="width: 70%;">
 														<input type="file" id="upload-curriculo" name="file"
 															class="upload-demo" value="${candidato.curriculo}">
 														<label data-title="Selecione" for="upload-curriculo">
-															<span id="cmnCurriculo" data-title="${candidato.curriculo}"></span>
+															<span id="cmnCurriculo" data-title="${candidato.nome}.doc"></span>
 														</label>
 														<input type="text" id="upload-curriculo2" name="file"
 															class="hidden" value="${candidato.curriculo}">
+													</div>
+													<div class="form-group pull-right">
+														<button type="button" class="btn btn-sm btn-default" style="margin-top: 0px;">
+															<span>
+																<a href="/candidato/papers?caminho=C%3a%5cUsers%5cguilherme.oliveira%5cDocuments%5cprosperity%5cProsperity%5ccurriculo%5c40613292863%5cCurriculo_40613292863MTC.docx"
+																 target="_blank" data-toggle="tooltip" title="" class="fa fa-file-text fa-lg um-click-js" data-original-title="Baixar"></a>
+																	Baixar currículo
+															</span>
+														</button>
 													</div>
 												</div>
 											</div>
@@ -377,15 +388,6 @@
 							</form>
 							<div class="panel-footer">
 								<button class="btn btn-success pull-right um-click-js" onclick="salvarForm()">Salvar</button>
-								<c:if test="${not empty candidato.curriculo }">
-									<div class="form-group col-md-6">
-										<p class="" id="nome"><strong>Currículo: </strong>&nbsp;&nbsp;
-										<c:url value="/candidato/papers" var="url">
-											<c:param name="caminho">${candidato.curriculo}</c:param>
-										</c:url>
-										<a href="${url}" target="_blank" data-toggle="tooltip" title="Baixar" class="fa fa-download fa-lg um-click-js"></a>
-									</div>
-								</c:if>
 							</div>
 						</div>
 					</div>

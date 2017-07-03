@@ -35,6 +35,8 @@
 							$("#nmCandProp").text(data.nome);
 							$("#modalTitulo").text(tituloModal);
 							$("#idVaga").val(data.ultimaVaga.id);
+							$('#parecer').removeClass("parsley-error")
+							$('.parsley-error-list').attr("style", "display: none;");
 								if (data.ultimoStatus.status.id == "9") {
 									if (perfil == 2 || perfil == 3) {
 										$("#proposta-tab").show();
