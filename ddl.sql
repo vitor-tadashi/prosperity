@@ -75,16 +75,13 @@ BEGIN TRY
 				[rg] [varchar](15) NULL,
 				[dtNascimento] [date] NULL,
 				[vlPretensao] [smallmoney] NULL,
-				[dtFechamento] [date] NULL,
 				[cmCurriculo] [varchar](200) NULL,
 				[nmEmail] [varchar](45) NULL,
 				[idUsuario] [int] NULL,
 				[dtAlteracao] [date] NULL,
 				[dtUltimoContato] [date] NULL,
 				[dtEntrevista] [date] NULL,
-				[dsProposta] [varchar](8000) NULL,
 				[dtAbertura] [date] NULL,
-				[curriculoTexto] [varchar](max) NULL,
 			 CONSTRAINT [PK__tbCandid__F84D9A3C83E0F730] PRIMARY KEY CLUSTERED 
 			(
 				[idCandidato] ASC
@@ -332,21 +329,10 @@ BEGIN TRY
 				[idProvaCandidato] [int] IDENTITY(1,1) NOT NULL,
 				[idCandidato] [int] NULL,
 				[idProva] [int] NULL,
-				[dsProva] [nvarchar](50) NULL,
 				[cmProva] [nvarchar](300) NULL,
 			 CONSTRAINT [PK_tbProvaCandidato] PRIMARY KEY CLUSTERED 
 			(
 				[idProvaCandidato] ASC
-			)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-			) ON [PRIMARY]
-
-			CREATE TABLE [dbo].[tbRelatorio](
-				[idRelatorio] [int] IDENTITY(1,1) NOT NULL,
-				[nmRelatorio] [varchar](100) NULL,
-				[cmRelatorio] [varchar](100) NULL,
-			PRIMARY KEY CLUSTERED 
-			(
-				[idRelatorio] ASC
 			)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 			) ON [PRIMARY]
 
@@ -387,7 +373,10 @@ BEGIN TRY
 				[dsParecer] [varchar](500) NULL,
 				[idUsuario] [int] NULL,
 				[flSituacao] [bit] NULL,
-				[cancelamento] [int] NULL,
+				[idCancelamento] [int] NULL,
+				[dsCancelamento] [varchar](300) NULL,
+				[nmVaga] [varchar](100) NULL,
+				[idVaga] [int] NULL,
 			 CONSTRAINT [PK__tbStatus__9D0E13172F5355D0] PRIMARY KEY CLUSTERED 
 			(
 				[idStatusCandidato] ASC
@@ -469,12 +458,12 @@ BEGIN TRY
 				[idSenioridade] [int] NULL,
 				[idUsuario] [int] NULL,
 				[nmSolicitante] [varchar](50) NULL,
-				[vlPretensao] [decimal](18, 0) NULL,
+				[vlPretensaoMin] [decimal](9, 0) NULL,
+				[vlPretensaoMax] [decimal](9, 0) NULL,
 				[dtInicio] [date] NULL,
 				[flLocalTrabalho] [char](1) NULL,
 				[idTpVaga] [char](1) NULL,
 				[flAumentoQuadra] [char](1) NULL,
-				[numCandidatos] [int] NULL,
 				[nmSubstituido] [varchar](50) NULL,
 				[dsFormacaoAcademica] [varchar](2000) NULL,
 				[dsPerfilComportamental] [varchar](2000) NULL,
