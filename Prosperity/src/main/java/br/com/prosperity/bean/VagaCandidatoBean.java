@@ -1,6 +1,5 @@
 package br.com.prosperity.bean;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -15,7 +14,7 @@ public class VagaCandidatoBean {
 
 	private VagaBean vaga;
 	private String outros;
-	private FuncionarioBean funcionarioBean;
+	private String nomeFuncionario;
 	private CanalInformacaoBean canalInformacao;
 	private CandidatoBean candidatoBean;
 	private Boolean contratado;
@@ -28,12 +27,12 @@ public class VagaCandidatoBean {
 		this.outros = outros;
 	}
 
-	public FuncionarioBean getFuncionarioBean() {
-		return funcionarioBean;
+	public String getNomeFuncionario() {
+		return nomeFuncionario;
 	}
 
-	public void setFuncionarioBean(FuncionarioBean funcionarioBean) {
-		this.funcionarioBean = funcionarioBean;
+	public void setNomeFuncionario(String nomeFuncionario) {
+		this.nomeFuncionario = nomeFuncionario;
 	}
 
 	public Boolean getContratado() {

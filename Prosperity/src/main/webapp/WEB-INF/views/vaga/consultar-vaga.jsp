@@ -702,7 +702,7 @@
     			$('.removeTd').remove()
     			$.each(lista.avaliadores,function(i,item){
     				$('#trAvaliadores').append(
-    						"<td class='removeTd' style='width: 1px'><i class='fa fa-user pull-center'></i></td> <td class='removeTd' style='width: 6px'><span class='badge badge-info'>"+item.funcionario.nome+"</span></td>"
+    						"<td class='removeTd' style='width: 1px'><i class='fa fa-user pull-center'></i></td> <td class='removeTd' style='width: 6px'><span class='badge badge-info'>"+item.nomeFuncionario+"</span></td>"
     						
     				);
     			});

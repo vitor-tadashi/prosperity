@@ -235,10 +235,11 @@ public class CandidatoController<PaginarCandidato> {
 		comunicacaoBean = comunicacaoBusiness.listarDatasAtivas(comunicacaoBean,candidato);
 		obterDominiosCandidato(model);
 
-		BigDecimal b = new BigDecimal(candidato.getValorPretensao().toString());
-		b = b.setScale(2, BigDecimal.ROUND_DOWN);
-		candidato.setValorPretensao(b);
-
+		if(candidato.getValorPretensao() != null){
+			BigDecimal b = new BigDecimal(candidato.getValorPretensao().toString());
+			b = b.setScale(2, BigDecimal.ROUND_DOWN);
+			candidato.setValorPretensao(b);
+		}
 		boolean podeEditarVaga = candidatoBusiness.podeEditarVaga(candidato.getUltimoStatus());
 		model.addAttribute("candidato", candidato);
 		model.addAttribute("podeEditarVaga", podeEditarVaga);
@@ -485,7 +486,7 @@ public class CandidatoController<PaginarCandidato> {
 						competenciaBean.setId(aux2);
 						candidatoCompetenciaBean.setAvaliacao(avaliacaoBean);
 						candidatoCompetenciaBean.setCompetencia(competenciaBean);
-						candidatoCompetenciaBean.setNmAvaliador(usuarioBean.getFuncionario().getNome());
+						candidatoCompetenciaBean.setNmAvaliador(usuarioBean.getNomeFuncionario());
 						candidatoCompetenciaBean.setIdVaga(candidatoBean.getUltimaVaga().getId());
 						candidatoCompetenciasBean.add(candidatoCompetenciaBean);
 					}

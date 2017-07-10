@@ -54,7 +54,7 @@
 												<p class="" id="nome"><strong>Avaliadores: </strong>
 													<c:forEach items="${vaga.avaliadores }" var="av" varStatus="i">
 														<c:if test="${i.index > 0 }">,</c:if> 
-														${av.funcionario.nome }
+														${av.nomeFuncionario }
 													</c:forEach>
 												</p>
 											</div>
@@ -107,7 +107,7 @@
 													<p class="" id="nome"><strong>Cliente: </strong>${vaga.projeto.cliente.nome}</p>
 												</div>
 												<div class="form-group col-md-6">
-													<p class="" id="nome"><strong>Gestor imediato: </strong>${vaga.usuarioBean.funcionario.nome}</p>
+													<p class="" id="nome"><strong>Gestor imediato: </strong>${vaga.usuarioBean.nomeFuncionario}</p>
 												</div>
 											</div>
 											<div class="row">
@@ -141,7 +141,7 @@
 											</div>
 											<div class="row">
 												<div class="form-group col-md-6">
-													<p class="" id="nome"><strong>Gestor imediato: </strong>${vaga.usuarioBean.funcionario.nome}</p>
+													<p class="" id="nome"><strong>Gestor imediato: </strong>${vaga.usuarioBean.nomeFuncionario}</p>
 												</div>
 											</div>
 										</c:if>

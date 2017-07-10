@@ -21,7 +21,7 @@
 				$('input#id').val(data.id);
 				$('input#usuario').val(data.nome);
 				$('input#email').val(data.email);
-				nomeFuncionario = data.funcionario.nome;
+				nomeFuncionario = data.nomeFuncionario;
 				if(data.ativo) {
 					$('button#btnMudarStatus').html("<span class='fa fa-power-off'></span> Desativar");
 					$('button#btnMudarStatus').removeClass("btn-primary").addClass("btn-danger");
@@ -31,7 +31,7 @@
 					$('button#btnMudarStatus').removeClass("btn-danger").addClass("btn-primary");
 					ativo = false;
 				}
-				$('select#cmbFuncionario').val(data.funcionario.id);
+				$('select#cmbFuncionario').val(data.nomeFuncionario);
 				$('select#cmbPerfil').val(data.perfil.id);
 				$('#usuario-modal').modal('show');
 			}).fail(function(jqXHR, textStatus) {

@@ -34,9 +34,8 @@ public class UsuarioEntity {
 	@JoinColumn(name = "idPerfil")
 	private PerfilEntity perfilEntity;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idFuncionario")
-	private FuncionarioEntity funcionarioEntity;
+	@Column(name = "nmFuncionario")
+	private String nmFuncionario;
 
 	@NotNull
 	@Size(min = 5, message = "O usuário não pode ter menos que 5 caracteres!")
@@ -71,12 +70,12 @@ public class UsuarioEntity {
 		this.perfilEntity = perfilEntity;
 	}
 
-	public FuncionarioEntity getFuncionarioEntity() {
-		return funcionarioEntity;
+	public String getNmFuncionario() {
+		return nmFuncionario;
 	}
 
-	public void setFuncionarioEntity(FuncionarioEntity funcionarioEntity) {
-		this.funcionarioEntity = funcionarioEntity;
+	public void setNmFuncionario(String nmFuncionario) {
+		this.nmFuncionario = nmFuncionario;
 	}
 
 	public String getNome() {

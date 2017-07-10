@@ -45,7 +45,7 @@
 							</c:if> --%>
 								<input id="contErro" class="hidden" value="${erro}"> <input
 									id="txtSolicitante" type="hidden" name="nomeSolicitante"
-									value="${autenticado.funcionario.nome}"> <input
+									value="${autenticado.nomeFuncionario}"> <input
 									id="solicitante" type="hidden" value="${vaga.nomeSolicitante }">
 								<fmt:formatDate value="${vaga.dataAprovacao}"
 									pattern="dd/MM/yyyy" var="aprox" />
@@ -269,7 +269,7 @@
 														<option value="0">Selecione o gestor</option>
 														<c:forEach var="usuario" items="${usuarios}" varStatus="i">
 															<option value="${usuario.id}"
-																${usuario.id == vaga.usuarioBean.id ? 'selected="selected"' : ''}>${usuario.funcionario.nome}</option>
+																${usuario.id == vaga.usuarioBean.id ? 'selected="selected"' : ''}>${usuario.nomeFuncionario}</option>
 														</c:forEach>
 													</select>
 												</div>
@@ -375,7 +375,7 @@
 														class="select-box pull-left form-control">
 														<c:forEach var="usuario" items="${usuarios}" varStatus="i">
 															<option value="${usuario.id}"
-																${usuario.id == vaga.usuarioBean.id ? 'selected="selected"' : ''}>${usuario.funcionario.nome}</option>
+																${usuario.id == vaga.usuarioBean.id ? 'selected="selected"' : ''}>${usuario.nomeFuncionario}</option>
 														</c:forEach>
 													</select>
 													<div class="select-box-option">
@@ -395,7 +395,7 @@
 														class="select-box pull-right form-control">
 														<c:forEach var="avaliador" items="${avaliadorVagaBean}"
 															varStatus="i">
-															<option value="${avaliador.usuario.id}"<%-- ${vaga.id == avaliadorVagaBean.vaga.id && usuario.id == avaliadorVagaBean.usuario.id ? 'selected="selected"' : ''} --%> >${avaliador.usuario.funcionario.nome}</option>
+															<option value="${avaliador.usuario.id}"<%-- ${vaga.id == avaliadorVagaBean.vaga.id && usuario.id == avaliadorVagaBean.usuario.id ? 'selected="selected"' : ''} --%> >${avaliador.usuario.nomeFuncionario}</option>
 														</c:forEach>
 													</select>
 												</div>

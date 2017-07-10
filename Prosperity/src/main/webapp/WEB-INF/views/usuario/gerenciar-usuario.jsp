@@ -30,11 +30,11 @@
 									<div class="row">
 										<div class="form-group col-md-6">
 											<label for="funcionario">Funcionário</label> <select
-												class="form-control" name="funcionario.id"
+												class="form-control" name="nomeFuncionario"
 												id="cmbFuncionario" data-required="true">
 												<option value="">Selecione</option>
 												<c:forEach var="funcionario" items="${funcionarios}">
-													<option value="${funcionario.id}">${funcionario.nome}</option>
+													<option value="${funcionario.nome}">${funcionario.nome}</option>
 												</c:forEach>
 											</select>
 										</div>
@@ -119,7 +119,7 @@
 									<tbody>
 										<c:forEach var="usuario" items="${usuarios}">
 											<tr class="text-center">
-												<td>${usuario.funcionario.nome}</td>
+												<td>${usuario.nomeFuncionario}</td>
 												<td>${usuario.nome}</td>
 												<td>${usuario.email}</td>
 												<td>${usuario.perfil.nome}</td>

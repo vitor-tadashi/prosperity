@@ -51,7 +51,7 @@
 							<div id="textDiv3"></div>
 							
 							<input id="txtUsuario" type="hidden" name="usuarioBean" value="${autenticado.id}">
-							<input id="nmUsuario" type="hidden" value="${autenticado.funcionario.nome}">
+							<input id="nmUsuario" type="hidden" value="${autenticado.nomeFuncionario}">
 
 							<form class="form-border" action="salvar" method="post"
 								enctype="multipart/form-data" id=formCadastro
@@ -299,10 +299,10 @@
 										<div class="form-group col-md-2 js-indicacao-colegas">
 											<label for="vaga">Quem indicou?</label>	<select
 													class="form-control" id="listaFuncionarios"
-													name="vagaCandidato.funcionarioBean.id">
+													name="vagaCandidato.nomeFuncionario">
 													<option value="0">Selecione</option>
 													<c:forEach var="funcionario" items="${listaFuncionarios}">
-														<option value="${funcionario.id}">${funcionario.nome}</option>
+														<option value="${funcionario.nome}">${funcionario.nome}</option>
 													</c:forEach>
 												</select>
 										</div>
@@ -318,7 +318,7 @@
 															<input type="hidden" value="${data.id}"
 																name="dataEntrevista[${status.index}].id" /> <label>Nome
 																do entrevistador: &nbsp;</label>
-															<p>${data.usuario.funcionario.nome}</p>
+															<p>${data.usuario.nomeFuncionario}</p>
 															<input type="hidden" name="dataEntrevista[${status.index}].usuario.id"
 																value="${data.usuario.id}"> <input type="hidden"
 																name="dataEntrevista[${status.index}].candidato" value="${data.candidato}"> <input
@@ -378,7 +378,7 @@
 														<tr>
 														<td><fmt:formatDate value="${comunicacao.dataContato}" pattern="dd/MM/yyyy" /></td>
 														<td>${comunicacao.observacao}</td>
-														<td>${comunicacao.usuarioBean.funcionario.nome}</td>
+														<td>${comunicacao.usuarioBean.nomeFuncionario}</td>
 														</tr>
 														</c:forEach> 	
 												</tbody>

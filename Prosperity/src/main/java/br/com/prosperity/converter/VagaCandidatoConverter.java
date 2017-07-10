@@ -25,7 +25,7 @@ public class VagaCandidatoConverter implements Converter<VagaCandidatoEntity, Va
 		entity.setCanalInformacao(canalInformacaoConverter.convertBeanToEntity(bean.getCanalInformacao()));
 		entity.setContratado(bean.getContratado());
 		entity.setOutros(bean.getOutros());
-		entity.setFuncionarioEntity(funcionarioConverter.convertBeanToEntity(bean.getFuncionarioBean()));
+		entity.setNmFuncionario(bean.getNomeFuncionario());;
 
 		return entity;
 	}
@@ -40,7 +40,7 @@ public class VagaCandidatoConverter implements Converter<VagaCandidatoEntity, Va
 		bean.setCanalInformacao(canalInformacaoConverter.convertEntityToBean(entity.getCanalInformacao()));
 		bean.setContratado(entity.getContratado());
 		bean.setOutros(entity.getOutros());
-		bean.setFuncionarioBean(funcionarioConverter.convertEntityToBean(entity.getFuncionarioEntity()));
+		bean.setNomeFuncionario(entity.getNmFuncionario());
 
 		return bean;
 	}
