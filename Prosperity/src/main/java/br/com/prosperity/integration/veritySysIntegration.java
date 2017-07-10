@@ -1,5 +1,7 @@
 package br.com.prosperity.integration;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -7,6 +9,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
@@ -19,11 +22,26 @@ import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.ProjetoBean;
 
 public class veritySysIntegration {
+	
+	public Properties getProp(){
+		try {
+			Properties props = new Properties();
+			FileInputStream file = new FileInputStream("./properties/dados.properties");
+			props.load(file);
+			return props;
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		return null;
+	}
 
 	public List<CargoBean> getListCargos() {
 		List<CargoBean> cargos = new ArrayList<CargoBean>();
+		
+		Properties props = getProp();
+		String endereco = props.getProperty("prop.integration.listcargo");
 		try {
-			URL url = new URL("http://localhost:1276/ServiceCargo.svc/ListCargos");
+			URL url = new URL(endereco);
 			String response = genericGet(url);
 			
 			JSONObject json = new JSONObject(response);
@@ -47,8 +65,10 @@ public class veritySysIntegration {
 	public CargoBean getCargo(Integer id) {
 		CargoBean cargo = new CargoBean();
 
+		Properties props = getProp();
+		String endereco = props.getProperty("prop.integration.cargo");
 		try {
-			URL url = new URL("http://localhost:1276/ServiceCargo.svc/GetCargo/" + id);
+			URL url = new URL(endereco + id);
 			String response = genericGet(url);
 
 			JSONObject json = new JSONObject(response);
@@ -65,8 +85,11 @@ public class veritySysIntegration {
 
 	public List<ClienteBean> getListClientes() {
 		List<ClienteBean> clientes = new ArrayList<ClienteBean>();
+		
+		Properties props = getProp();
+		String endereco = props.getProperty("prop.integration.listcliente");
 		try {
-			URL url = new URL("http://localhost:1276/ServiceCliente.svc/ListClientes");
+			URL url = new URL(endereco);
 			String response = genericGet(url);
 			
 			JSONObject json = new JSONObject(response);
@@ -89,8 +112,11 @@ public class veritySysIntegration {
 
 	public ClienteBean getCliente(Integer id) {
 		ClienteBean cliente = new ClienteBean();
+		
+		Properties props = getProp();
+		String endereco = props.getProperty("prop.integration.cliente");
 		try {
-			URL url = new URL("http://localhost:1276/ServiceCliente.svc/GetCliente" + id);
+			URL url = new URL(endereco + id);
 			String response = genericGet(url);
 
 			JSONObject json = new JSONObject(response);
@@ -107,8 +133,11 @@ public class veritySysIntegration {
 
 	public List<FuncionarioBean> getListFuncionarios() {
 		List<FuncionarioBean> funcionarios = new ArrayList<FuncionarioBean>();
+		
+		Properties props = getProp();
+		String endereco = props.getProperty("prop.integration.listfuncionario");
 		try {
-			URL url = new URL("http://localhost:1276/ServiceFuncionario.svc/ListFuncionarios");
+			URL url = new URL(endereco);
 			String response = genericGet(url);
 			
 			JSONObject json = new JSONObject(response);
@@ -131,8 +160,11 @@ public class veritySysIntegration {
 
 	public FuncionarioBean getFuncionario(Integer id) {
 		FuncionarioBean funcionario = new FuncionarioBean();
+		
+		Properties props = getProp();
+		String endereco = props.getProperty("prop.integration.funcionario");
 		try {
-			URL url = new URL("http://localhost:1276/ServiceFuncionario.svc/GetFuncionario" + id);
+			URL url = new URL(endereco + id);
 			String response = genericGet(url);
 
 			JSONObject json = new JSONObject(response);
@@ -149,8 +181,11 @@ public class veritySysIntegration {
 
 	public List<ProjetoBean> getListProjetos() {
 		List<ProjetoBean> projetos = new ArrayList<ProjetoBean>();
+		
+		Properties props = getProp();
+		String endereco = props.getProperty("prop.integration.listprojeto");
 		try {
-			URL url = new URL("http://localhost:1276/ServiceProjeto.svc/ListProjetos");
+			URL url = new URL(endereco);
 			String response = genericGet(url);
 			
 			JSONObject json = new JSONObject(response);
@@ -173,8 +208,11 @@ public class veritySysIntegration {
 
 	public ProjetoBean getProjeto(Integer id) {
 		ProjetoBean projeto = new ProjetoBean();
+		
+		Properties props = getProp();
+		String endereco = props.getProperty("prop.integration.projeto");
 		try {
-			URL url = new URL("http://localhost:1276/ServiceProjeto.svc/GetProjeto" + id);
+			URL url = new URL(endereco + id);
 			String response = genericGet(url);
 
 			JSONObject json = new JSONObject(response);
