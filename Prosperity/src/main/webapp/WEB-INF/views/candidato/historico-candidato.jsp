@@ -203,7 +203,7 @@
 											<div class="row">
 												<div class="form-group col-md-4">
 													<p class="" id="nome">
-														<strong>Cargo: </strong>${candidato.ultimaVaga.cargoBean.nome}</p>
+														<strong>Cargo: </strong>${candidato.ultimaVaga.nmCargo}</p>
 												</div>
 												<div class="form-group col-md-4">
 													<p class="" id="nome">

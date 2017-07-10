@@ -427,7 +427,7 @@
 												<td>${vaga.id}</td>
 												<td id="linhaNome">${vaga.nomeVaga}</td>
 												<td>${vaga.nomeSolicitante}</td>
-												<td>${vaga.projeto.cliente.nome}</td>
+												<td>${vaga.nmProjeto}</td>
 												<td><c:if test="${vaga.localTrabalho == 73}">
 											     Interno
 											</c:if> <c:if test="${vaga.localTrabalho == 67}">
@@ -686,7 +686,7 @@
     			$('input#solicitante').val(lista.nomeSolicitante);
     			
     			
-    			$('input#cargo').val(lista.cargoBean.nome);
+    			$('input#cargo').val(lista.nmCargo);
     			
     			
     			$('input#senioridade').val(lista.senioridadeBean.nome);

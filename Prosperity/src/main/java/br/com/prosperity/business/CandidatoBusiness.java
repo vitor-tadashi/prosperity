@@ -41,7 +41,6 @@ import br.com.prosperity.converter.CandidatoConverter;
 import br.com.prosperity.converter.CompetenciaConverter;
 import br.com.prosperity.converter.ComunicacaoConverter;
 import br.com.prosperity.converter.DataEntrevistaConverter;
-import br.com.prosperity.converter.FuncionarioConverter;
 import br.com.prosperity.converter.UsuarioConverter;
 import br.com.prosperity.converter.VagaConverter;
 import br.com.prosperity.dao.AvaliacaoDAO;
@@ -70,7 +69,6 @@ import br.com.prosperity.entity.AvaliadorVagaEntity;
 import br.com.prosperity.entity.CandidatoEntity;
 import br.com.prosperity.entity.CompetenciaEntity;
 import br.com.prosperity.entity.DataEntrevistaEntity;
-import br.com.prosperity.entity.FuncionarioEntity;
 import br.com.prosperity.entity.StatusCandidatoEntity;
 import br.com.prosperity.entity.StatusDisponivelEntity;
 import br.com.prosperity.entity.StatusFuturoEntity;
@@ -183,9 +181,6 @@ public class CandidatoBusiness {
 
 	@Autowired
 	private FuncionarioDAO funcionarioDAO;
-
-	@Autowired
-	private FuncionarioConverter funcionarioConverter;
 
 	@Autowired
 	private CancelamentoDAO cancelamentoDAO;

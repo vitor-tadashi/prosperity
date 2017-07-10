@@ -67,6 +67,9 @@ public class VagaController {
 
 	@Autowired
 	private ProjetoBusiness preencherProjeto;
+	
+	@Autowired
+	private ClienteBusiness preencherCliente;
 
 	@Autowired
 	private UsuarioBusiness preencherUsuario;
@@ -79,6 +82,9 @@ public class VagaController {
 
 	@Autowired
 	private List<ProjetoBean> projetos;
+	
+	@Autowired
+	private List<ClienteBean> clientes;
 
 	@Autowired
 	private List<UsuarioBean> usuarios;
@@ -207,11 +213,13 @@ public class VagaController {
 		senioridades = preencherSenioridade.obterTodos();
 		cargos = preencherCargo.obterTodos();
 		projetos = preencherProjeto.obterTodos();
+		clientes = preencherCliente.obterTodos();
 		usuarios = preencherUsuario.buscarUsuarioAtivo();
 
 		model.addAttribute("senioridades", senioridades);
 		model.addAttribute("cargos", cargos);
 		model.addAttribute("projetos", projetos);
+		model.addAttribute("clientes", clientes);
 		model.addAttribute("usuarios", usuarios);
 	}
 

@@ -28,28 +28,6 @@ function formatReal( int )
 
         return tmp;
 }
-// Ajax para verificar o projeto e preencher o campo cliente de acordo com o
-// projeto
-
-var dropdownProjeto = document.querySelector("#cmbProjetoInterno");
-dropdownProjeto.addEventListener("change", function() {
-	var id = dropdownProjeto.value;
-	if (id > 0) {
-		$.ajax({
-			url : "/vaga/obter-cliente",
-			type : "GET",
-			dataType : "JSON",
-			data : {
-				id : id
-			},
-			success : function(lista) {
-				$("#Cliente").val(lista[0].cliente.nome);
-			}
-		});
-	} else {
-		$("#Cliente").val("Selecione o projeto");
-	}
-});
 
 
 $("#novo").click(function() {
@@ -232,10 +210,6 @@ $(document).ready(function() {
 				});
 			}
 		}
-	});
-
-	$("#cmbProjetoInterno").change(function() {
-		var cliente = $("#cmbProjetoInterno").val();
 	});
 
 	// Verifica o status da vaga e esconde caso seja somente para editar

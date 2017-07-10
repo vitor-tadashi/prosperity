@@ -39,10 +39,6 @@
 										value="${ultimoStatus.status.id}">
 									<input name="status[0].status.nome" type="hidden" value="Ativo">
 								</c:if>
-								<%-- <c:if test="${ultimoStatus.status.id != 27 }">
-								<input id="status" name="status[0].status.id" type="hidden" value="${ultimoStatus.status.id}">
-								<input name="status[0].status.nome" type="hidden" value="${ultimoStatus.status.nome}">	
-							</c:if> --%>
 								<input id="contErro" class="hidden" value="${erro}"> <input
 									id="txtSolicitante" type="hidden" name="nomeSolicitante"
 									value="${autenticado.nomeFuncionario}"> <input
@@ -240,26 +236,34 @@
 											<div id="dadosInterno" class="row panel panel-default">
 												<div class="form-group col-md-12">
 													<label for="exampleInputEmail1">Nome do projeto</label> <select
-														id="cmbProjetoInterno" name="projeto.id"
+														id="cmbProjetoInterno" name="vaga.nmProjeto"
 														class="form-control">
 
 														<option value="0">Selecione o projeto</option>
 
 														<c:forEach var="projeto" items="${projetos}" varStatus="i">
-															<option value="${projeto.id}"
-																${projeto.id ==
-														vaga.projeto.id ? 'selected="selected"' : ''}>${projeto.nome}</option>
+															<option value="${projeto.nome}"
+																${projeto.nome ==
+														vaga.nmProjeto ? 'selected="selected"' : ''}>${projeto.nome}</option>
 														</c:forEach>
 
 													</select>
 												</div>
 												<!-- /form-group -->
 												<div class="form-group col-md-6" style="padding-top: 0px">
-													<label for="exampleInputEmail1">Cliente</label> <input
-														type="text" class="form-control input-sm"
-														placeholder="Selecione o projeto" id="Cliente"
-														name="Cliente" value="${vaga.projeto.cliente.nome}"
-														disabled="disabled" onblur="cliente">
+													<label for="exampleInputEmail1">Cliente</label> <select
+														id="cmbProjetoInterno" name="vaga.nmCliente"
+														class="form-control">
+
+														<option value="0">Selecione o cliente</option>
+
+														<c:forEach var="cliente" items="${clientes}" varStatus="i">
+															<option value="${cliente.nome}"
+																${cliente.nome ==
+														vaga.nmCliente ? 'selected="selected"' : ''}>${cliente.nome}</option>
+														</c:forEach>
+
+													</select>
 												</div>
 												<!-- /form-group -->
 												<div class="form-group col-md-6" style="padding-top: 0px">
@@ -325,7 +329,7 @@
 													<textarea id="descricaoFormacaoAcademica"
 														class="form-control" name="descricaoFormacaoAcademica"
 														rows="5" value="${vaga.descricaoFormacaoAcademica}"
-														maxlength="2000" onkeyup="maxCaracterFormacaoAcademica();"
+														maxlength="2000"
 														style="resize: none;">${vaga.descricaoFormacaoAcademica}</textarea>
 													<label id="maxFormacaoAcademica">Caracteres
 														restantes : 2000</label>
@@ -341,7 +345,6 @@
 														class="form-control" name="descricaoPerfilComportamental"
 														rows="5" value="${vaga.descricaoPerfilComportamental}"
 														maxlength="2000"
-														onkeyup="maxCaracterPefilComportamental();"
 														style="resize: none;">${vaga.descricaoPerfilComportamental}</textarea>
 													<label id="maxPerfilComportamental">Caracteres
 														restantes : 2000</label>
@@ -356,7 +359,7 @@
 													<textarea id="descricaoPerfilTecnico" class="form-control"
 														name="descricaoPerfilTecnico"
 														value="${vaga.descricaoPerfilTecnico}" rows="5"
-														maxlength="2000" onkeyup="maxCaracterPefilTecnico();"
+														maxlength="2000"
 														style="resize: none;">${vaga.descricaoPerfilTecnico}</textarea>
 													<label id="maxPerfilTecnico">Caracteres restantes :
 														2000</label>
