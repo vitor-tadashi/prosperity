@@ -43,10 +43,9 @@ public class VagaCandidatoEntity {
 
 	@Column(name = "dsOutros")
 	private String outros;
-
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idFuncionario")
-	private FuncionarioEntity funcionarioEntity;
+	
+	@Column(name = "nmFuncionario")
+	private String nmFuncionario;
 	
 	@Column(name = "situacao")
 	private Boolean situacao;
@@ -59,12 +58,12 @@ public class VagaCandidatoEntity {
 		this.outros = outros;
 	}
 
-	public FuncionarioEntity getFuncionarioEntity() {
-		return funcionarioEntity;
+	public String getNmFuncionario() {
+		return nmFuncionario;
 	}
 
-	public void setFuncionarioEntity(FuncionarioEntity funcionarioEntity) {
-		this.funcionarioEntity = funcionarioEntity;
+	public void setNmFuncionario(String nmFuncionario) {
+		this.nmFuncionario = nmFuncionario;
 	}
 
 	public Boolean getContratado() {

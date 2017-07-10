@@ -21,7 +21,6 @@ import br.com.prosperity.bean.AvaliadorVagaBean;
 import br.com.prosperity.bean.FuncionalidadeBean;
 import br.com.prosperity.bean.SituacaoCandidatoBean;
 import br.com.prosperity.bean.SituacaoVagaBean;
-import br.com.prosperity.bean.StatusCandidatoBean;
 import br.com.prosperity.bean.UsuarioBean;
 import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.converter.AvaliadorVagaConverter;
@@ -425,7 +424,7 @@ public class VagaBusiness {
 					switch (u.getPerfil().getNome()) {
 					case "Analista de RH":
 						recipients.add(u.getEmail());
-						nomes.add(u.getFuncionario().getNome());
+						nomes.add(u.getNomeFuncionario());
 						break;
 					default:
 						break;
@@ -436,7 +435,7 @@ public class VagaBusiness {
 					switch (u.getPerfil().getNome()) {
 					case "Diretor de operação":
 						recipients.add(u.getEmail());
-						nomes.add(u.getFuncionario().getNome());
+						nomes.add(u.getNomeFuncionario());
 						break;
 					default:
 						break;

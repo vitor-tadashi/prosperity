@@ -13,6 +13,7 @@ public class UsuarioBean {
 	@Min(value = 1, message = "O campo Gestor imediato deve ser preenchido")
 	private Integer id;
 	private PerfilBean perfil;
+	private String nomeFuncionario;
 	private String nome;
 	private String senha = SENHA_PADRAO;
 	private Boolean autenticado = false;
@@ -34,6 +35,14 @@ public class UsuarioBean {
 
 	public void setPerfil(PerfilBean perfil) {
 		this.perfil = perfil;
+	}
+
+	public String getNomeFuncionario() {
+		return nomeFuncionario;
+	}
+
+	public void setNomeFuncionario(String nomeFuncionario) {
+		this.nomeFuncionario = nomeFuncionario;
 	}
 
 	public String getNome() {

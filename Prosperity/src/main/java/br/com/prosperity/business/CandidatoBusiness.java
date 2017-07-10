@@ -274,10 +274,10 @@ public class CandidatoBusiness {
 		CandidatoEntity candidatoEntity = new CandidatoEntity();
 
 		// Para inserir candidato:
-		if (candidatoBean.getVagaCandidato().getFuncionarioBean() != null) {
+		/*if (candidatoBean.getVagaCandidato().getFuncionarioBean() != null) {
 			Integer idFuncionario = candidatoBean.getVagaCandidato().getFuncionarioBean().getId();
 			FuncionarioEntity funcionarioEntity = funcionarioDAO.findById(idFuncionario);
-		}
+		}*/
 		VagaCandidatoEntity vagaCandidatoEntity = new VagaCandidatoEntity();
 
 		if (candidatoBean.getId() == null) {
@@ -414,16 +414,12 @@ public class CandidatoBusiness {
 		if (candidatoBean.getVagaCandidato().getCanalInformacao().getId() != null) {
 			novoVagaCandidato.setCanalInformacao(
 					canalInformacaoDAO.findById(candidatoBean.getVagaCandidato().getCanalInformacao().getId()));
-
-			if (candidatoBean.getVagaCandidato().getFuncionarioBean() != null) {
-				if (candidatoBean.getVagaCandidato().getFuncionarioBean().getId() != null
-						&& candidatoBean.getVagaCandidato().getFuncionarioBean().getId() != 0) {
-					novoVagaCandidato.setFuncionarioEntity(
-							funcionarioDAO.findById(candidatoBean.getVagaCandidato().getFuncionarioBean().getId()));
-				}
-				if (candidatoBean.getVagaCandidato().getOutros() != null) {
-					novoVagaCandidato.setOutros(candidatoBean.getVagaCandidato().getOutros());
-				}
+			if (candidatoBean.getVagaCandidato().getNomeFuncionario() != null
+					&& !candidatoBean.getVagaCandidato().getNomeFuncionario().isEmpty()) {
+				novoVagaCandidato.setNmFuncionario(candidatoBean.getVagaCandidato().getNomeFuncionario());
+			}
+			if (candidatoBean.getVagaCandidato().getOutros() != null) {
+				novoVagaCandidato.setOutros(candidatoBean.getVagaCandidato().getOutros());
 			}
 		}
 		novoVagaCandidato.setSituacao(true);
@@ -754,7 +750,7 @@ public class CandidatoBusiness {
 			for (AvaliadorCandidatoBean a : avaliadores) {
 				if (a.getUsuario() != null) {
 					recipients.add(a.getUsuario().getEmail());
-					nomes.add(a.getUsuario().getFuncionario().getNome());
+					nomes.add(a.getUsuario().getNomeFuncionario());
 				}
 			}
 		}else if(situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.CANDIDATOEMANALISE.getValue()){
@@ -765,7 +761,7 @@ public class CandidatoBusiness {
 				for (AvaliadorCandidatoBean a : avaliadores) {
 					if (a.getUsuario() != null) {
 						recipients.add(a.getUsuario().getEmail());
-						nomes.add(a.getUsuario().getFuncionario().getNome());
+						nomes.add(a.getUsuario().getNomeFuncionario());
 					}
 				}
 			}
@@ -778,7 +774,7 @@ public class CandidatoBusiness {
 				if (u.getPerfil().getListaFuncionalidades().contains(f)) {
 				//case "Diretor de operação":
 					recipients.add(u.getEmail());
-					nomes.add(u.getFuncionario().getNome());
+					nomes.add(u.getNomeFuncionario());
 				}
 			}
 		} else if (situacaoCandidatoBean.getStatus().getValue() == StatusCandidatoEnum.GERARPROPOSTA.getValue()
@@ -791,7 +787,7 @@ public class CandidatoBusiness {
 				if (u.getPerfil().getListaFuncionalidades().contains(f)) {
 				//case "Analista de RH":
 					recipients.add(u.getEmail());
-					nomes.add(u.getFuncionario().getNome());
+					nomes.add(u.getNomeFuncionario());
 				}
 			}
 		}

@@ -60,13 +60,13 @@
 			</button>
 			<ul class="nav-notification clearfix">
 				<li class="profile dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#"> <strong>${autenticado.funcionario.nome}</strong>
+					data-toggle="dropdown" href="#"> <strong>${autenticado.nomeFuncionario}</strong>
 						<span><i class="fa fa-chevron-down"></i></span>
 				</a>
 					<ul class="dropdown-menu">
 						<li><a class="clearfix" href="#">
 								<div class="detail">
-									<strong>${autenticado.funcionario.nome}</strong>
+									<strong>${autenticado.nomeFuncionario}</strong>
 									<p class="grey">${autenticado.email}</p>
 								</div>
 						</a></li>

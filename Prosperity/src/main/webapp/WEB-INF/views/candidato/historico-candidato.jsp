@@ -236,7 +236,7 @@
 																		pattern="dd/MM/yyyy" />
 																</p>
 																<p class="" id="nome">
-																	<strong>Contatante: </strong>${dtContato.usuarioBean.funcionario.nome}</p>
+																	<strong>Contatante: </strong>${dtContato.usuarioBean.nomeFuncionario}</p>
 															</div>
 															<div class="col-md-10">
 																<p class="" id="nome">
@@ -269,7 +269,7 @@
 																</p>
 																<p class="" id="nome">
 																	<strong>Avaliador:</strong>
-																	${dtEntrevista.usuario.funcionario.nome }
+																	${dtEntrevista.usuario.nomeFuncionario }
 																</p>
 															</div>
 														</c:if>
@@ -385,7 +385,7 @@
 																		</div>
 																		<div class="row">
 																			<p>
-																				<label>Funcionário:</label> <span>${status.usuario.funcionario.nome}</span>
+																				<label>Funcionário:</label> <span>${status.usuario.nomeFuncionario}</span>
 																			</p>
 																		</div>
 																		<c:if test="${status.status.id == 17}">
