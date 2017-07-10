@@ -373,20 +373,4 @@ public class VagaEntity {
 	public void setMarketingSocial(String marketingSocial) {
 		this.marketingSocial = marketingSocial;
 	}
-
-	public BigDecimal getValorPretensaoMin() {
-		return valorPretensaoMin;
-	}
-
-	public void setValorPretensaoMin(BigDecimal valorPretensaoMin) {
-		this.valorPretensaoMin = valorPretensaoMin;
-	}
-
-	public BigDecimal getValorPretensaoMax() {
-		return valorPretensaoMax;
-	}
-
-	public void setValorPretensaoMax(BigDecimal valorPretensaoMax) {
-		this.valorPretensaoMax = valorPretensaoMax;
-	}
 }

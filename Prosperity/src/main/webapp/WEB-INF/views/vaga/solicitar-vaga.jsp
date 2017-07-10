@@ -207,27 +207,7 @@
 											</div>
 											<!-- /form-group -->
 											<div class="row">
-												<div class="form-group col-md-6" style="padding-top: 0px">
-													<div>
-														<label class="control-label" for="txtPropostaSalarial">Faixa
-															salarial</label>
-													</div>
-													<label class="control-label col-md-2"
-														for="txtPropostaSalarial" style="padding-top: 5px">Mínimo</label>
-													<input id="valorMinimo" name="valorPretensaoMin" type="text"
-														class="input-sm col-md-4" disabled placeholder="R$"
-														value="${vaga.valorPretensaoMin }" style="height: 30px" data-mask="000.000,00"
-														data-mask-reverse="true"> 
-													<label class="control-label col-md-2"
-														style="padding-left: 10px; padding-top: 5px"
-														for="txtPropostaSalarial">Máximo</label> 
-													<input id="valorMaximo" name=valorPretensaoMax type="text"
-														class="input-sm col-md-4" disabled placeholder="R$"
-														value="${vaga.valorPretensaoMax }" style="height: 30px" data-mask="000.000,00"
-														data-mask-reverse="true">
-												</div>
-												<!-- /form-group -->
-												<div class="form-group col-md-6" style="padding-top: 0px">
+												<div class="form-group col-md-offset-6 col-md-6" style="padding-top: 0px">
 													<label class="control-label">Aumento de quadro</label>
 													<div>
 														<div class="form-group col-md-5"

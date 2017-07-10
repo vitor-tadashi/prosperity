@@ -13,7 +13,6 @@ import javax.mail.internet.MimeMessage;
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.entity.StatusVagaEntity;
 import br.com.prosperity.entity.VagaEntity;
-import br.com.prosperity.enumarator.StatusVagaEnum;
 import br.com.prosperity.exception.BusinessException;
 
 //clase que retorna uma autenticacao para ser enviada e verificada pelo servidor smtp

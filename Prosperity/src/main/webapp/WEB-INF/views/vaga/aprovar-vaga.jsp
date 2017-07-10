@@ -118,28 +118,7 @@
 												</div>
 
 												<div class="form-group row">
-													<div class="">
-														<div class="form-group col-md-6 col-xs-6"
-															style="margin-bottom: 0px">
-															<label for="vagaSalario">Faixa salarial</label> <input
-																class="form-control input-sm" id="vagaSalario"
-																placeholder="Faixa Salarial" disabled>
-														</div>
-														<!-- /form-group -->
-														<div class="form-group col-md-6 col-xs-6"
-															style="margin-bottom: 0px">
-															<label for="vagaQuadro">Aumento de quadro:</label>
-															<div class="radiogroup" id="aumento">
-																<label id="lblQuadro" class="label-radio inline">
-																</label>
-
-															</div>
-															<!-- /.col -->
-														</div>
-													</div>
-												</div>
-												<div class="form-group row" style="margin-bottom: 0px">
-													<div class="form-group col-md-6 col-xs-6"
+													<div class="form-group col-md-6"
 														style="margin-bottom: 0px">
 														<div class="form-group">
 
@@ -159,12 +138,35 @@
 														</div>
 														<!-- /form-group -->
 													</div>
-													<div class="form-group col-md-6 col-xs-6"
+													<div class="form-group col-md-6"
+														style="margin-bottom: 0px">
+														<label for="vagaQuadro">Aumento de quadro:</label>
+														<div class="radiogroup" id="aumento">
+															<label id="lblQuadro" class="label-radio inline">
+															</label>
+
+														</div>
+														<!-- /.col -->
+													</div>
+												</div>
+												<div class="form-group row" style="margin-bottom: 0px">
+													<div class="form-group col-md-6 col-md-offset-6"
 														style="margin-bottom: 0px">
 														<div id="" class="">
 															<label id="substituidoId">Nome do substituido:</label>
 														</div>
 														<label id="vagaSubstituto" style="margin-top: 7px"></label>
+													</div>
+												</div>
+												<div class="form-group row">
+													<div class="form-group col-md-6 col-xs-6"
+														style="margin-bottom: -30px">
+															<label>Avaliadores da vaga</label>
+															<table class="table table-condensed table-bordered" style="width: 7px;">
+																<tbody id="tBodyAvaliador">
+																	<tr id="trAvaliadores"></tr>
+																</tbody>
+															</table>
 													</div>
 												</div>
 											</form>
@@ -457,8 +459,6 @@
        				$("#substituidoId").show();
     				$("#vagaSubstituto").show();
     			}
-    			//var rangeSalarial = ${rangeSalarial.valorMaxSalario};
-    			//$('input#vagaSalario').val(rangeSalarial);
     			$('input#cargo').val(lista.cargoBean.nome);
     			$('input#vagaSenioridade').val(lista.senioridadeBean.nome);
     			$('label#horaEntrada').text(lista.horarioEntrada);
@@ -474,8 +474,13 @@
     			$('#vagaPerfilTecnico').text(lista.descricaoPerfilTecnico);
     			$('#vagaGestor').val(lista.usuarioBean.funcionario.nome);
     			
-    			var pretensao = 'R$ ' + lista.valorPretensaoMin + ' - R$ ' + lista.valorPretensaoMax
-    			$('input#vagaSalario').val(pretensao);
+    			$('.removeTd').remove()
+    			$.each(lista.avaliadores,function(i,item){
+    				$('#trAvaliadores').append(
+    						"<td class='removeTd' style='width: 1px'><i class='fa fa-user pull-center'></i></td> <td class='removeTd' style='width: 6px'><span class='badge badge-info'>"+item.funcionario.nome+"</span></td>"
+    						
+    				);
+    			});
     			
     			$('#vaga-modal').modal('show');
     		}

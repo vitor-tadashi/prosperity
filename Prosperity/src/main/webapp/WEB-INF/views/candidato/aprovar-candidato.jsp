@@ -297,34 +297,34 @@
 																<span class='fa fa-plus-circle'></span></button>
 															</div>
 															<div class="panel-body  form-group ajustePadding">
-															<div class ="table-responsive" id="esconderTabela" style="display:none">
-																<table id="tabelaVaga"
-																	class="table table-bordered table-condensed table-hover">
-																	<thead>
-																		<tr>
-																			<th class="text-center">Nome</th>
-																			<th class="text-center">Cargo</th>
-																			<th class="text-center">Nivel</th>
-																			<th class="text-center">Conhecimento</th>
-																			<th class="text-center">Admissão</th>
-																			<th class="text-center">Salário</th>
-																			<th class="text-center">VR</th>
-																			<th class="text-center">VA</th>
-																			<th class="text-center">Estacionamento</th>
-																			<th class="text-center">Comb.</th>
-																			<th class="text-center">AM</th>
-																			<th class="text-center">Outros</th>
-																			<th class="text-center">Taxa</th>
-																		</tr>
-																	</thead>
-																	<tbody class="text-center tbComparativo" id="idtbComparativo">
-																	</tbody>
-																</table>
+																<div class ="table-responsive" id="esconderTabela" style="display:none">
+																	<table id="tabelaVaga"
+																		class="table table-bordered table-condensed table-hover">
+																		<thead>
+																			<tr>
+																				<th class="text-center">Nome</th>
+																				<th class="text-center">Cargo</th>
+																				<th class="text-center">Nivel</th>
+																				<th class="text-center">Conhecimento</th>
+																				<th class="text-center">Admissão</th>
+																				<th class="text-center">Salário</th>
+																				<th class="text-center">VR</th>
+																				<th class="text-center">VA</th>
+																				<th class="text-center">Estacionamento</th>
+																				<th class="text-center">Comb.</th>
+																				<th class="text-center">AM</th>
+																				<th class="text-center">Outros</th>
+																				<th class="text-center">Taxa</th>
+																			</tr>
+																		</thead>
+																		<tbody class="text-center tbComparativo" id="idtbComparativo">
+																		</tbody>
+																	</table>
+																</div>
 															</div>
 														</div>
 													</div>
-												</div>
-												<%-- aqui acaba o painel comparativos interno --%>
+													<%-- aqui acaba o painel comparativos interno --%>
 													<div class="form-group col-md-6" id="importxlsx">
 														<label class="control-label">Importa proposta</label>
 														<div class="upload-file" onchange="gerarProposta()">

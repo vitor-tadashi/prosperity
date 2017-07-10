@@ -51,36 +51,6 @@ dropdownProjeto.addEventListener("change", function() {
 	}
 });
 
-// Ajax para verificar o cargo e a senioridade e preencher o campo de valor
-// minimo e valor máximo
-
-var dropdownSenioridade = document.querySelector("#cmbSenioridade");
-var dropdownCargo = document.querySelector("#cmbCargo");
-$('.rangeSalarial').change(function() {
-	var idSenioridade = dropdownSenioridade.value;
-	var idCargo = dropdownCargo.value;
-	if (idSenioridade > 0 && idCargo > 0) {
-		$.ajax({
-			url : "/vaga/obter-range-salarial",
-			type : "GET",
-			dataType : "JSON",
-			data : {
-				idCargo : idCargo,
-				idSenioridade : idSenioridade
-			},
-			success : function(lista) {
-				$("#valorMinimo").val(formatReal(parseFloat(lista[0].valorMinSalario)
-										.toFixed(2)));
-				
-				$("#valorMaximo").val(formatReal(parseFloat(lista[0].valorMaxSalario)
-										.toFixed(2)));
-			}
-		});		
-	} else {
-		$("#valorMinimo").val("R$");
-		$("#valorMaximo").val("R$");
-	}
-});
 
 $("#novo").click(function() {
 	$("div#nome").addClass("hide");
@@ -126,14 +96,6 @@ $("#btnSalvar").click(function() {
 	var data = $("#dataInicio").val();
 	$("#dataInicio").val(data);
 	console.log(dataInicio.value);
-	
-	var valorMin = $('input#valorMinimo').val().replace('.','');
-	var valorMax = $('input#valorMaximo').val().replace('.','');
-	$('input#valorMinimo').val(valorMin.replace(',','.'));
-	$('input#valorMaximo').val(valorMax.replace(',','.'));
-	
-	$('input#valorMinimo').removeAttr('disabled');
-	$('input#valorMaximo').removeAttr('disabled');
 	
 	$("#formCadastro2").submit();
 	// var resp = ${resposta};

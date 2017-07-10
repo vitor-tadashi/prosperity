@@ -67,21 +67,16 @@
 												<p class="" id="nome"><strong>Cargo: </strong>${vaga.cargoBean.nome }</p>
 											</div>
 											<div class="form-group col-md-6">
-												<p class="" id="nome"><strong>Faixa salarial: </strong>R$ ${vaga.valorPretensaoMin} até R$ ${vaga.valorPretensaoMax}</p>
+												<p class="" id="nome"><strong>Senioridade: </strong>${vaga.senioridadeBean.nome }</p>
 											</div>
 										</div>
 										<div class="row">
-											<div class="form-group col-md-6">
-												<p class="" id="nome"><strong>Senioridade: </strong>${vaga.senioridadeBean.nome }</p>
-											</div>
 											<div class="form-group col-md-6">
 												<p class="" id="nome"><strong>Local de trabalho: </strong> 
 													<c:if test="${vaga.localTrabalho.toString() eq 'C' }">Cliente</c:if>
 													<c:if test="${vaga.localTrabalho.toString() eq 'I' }">Interno</c:if>
 												</p>
 											</div>
-										</div>
-										<div class="row">
 											<div class="form-group col-md-6">
 												<p class="" id="nome"><strong>Tipo de vaga: </strong>
 													<c:if test="${vaga.idTipoVaga.toString() eq 'R' }">Real</c:if>
@@ -89,6 +84,8 @@
 													<c:if test="${vaga.idTipoVaga.toString() eq 'H' }">Hunting</c:if>
 												</p>
 											</div>
+										</div>
+										<div class="row">
 											<div class="form-group col-md-6">
 												<p class="" id="nome"><strong>Aumento de quadro: </strong>
 													<c:if test="${vaga.aumentaQuadro.toString() eq 'N' }">Novo</c:if>

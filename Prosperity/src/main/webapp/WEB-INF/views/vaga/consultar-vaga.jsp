@@ -119,11 +119,22 @@
 
 													<div class="">
 														<div class="form-group col-md-6 col-xs-6"
-															style="margin-bottom: 0px">
-															<label for="exampleInputPassword1">Faixa salarial</label>
-															<input class="form-control input-sm" id="pretensao"
-																placeholder="Faixa Salarial" disabled
-																name="valorPretensao">
+														style="margin-bottom: 0px">
+
+															<div class="form-group">
+																<label class="control-label">Data para inicio</label>
+																<div class="form-group">
+																	<div class="input-group">
+																		<input type="text" value=""
+																			class="datepicker form-control" name="dataInicio"
+																			id="dataInicio" disabled> <span
+																			class="input-group-addon"> <i
+																			class="fa fa-calendar"></i></span>
+																	</div>
+																</div>
+																<!-- /.col -->
+															</div>
+															<!-- /form-group -->
 														</div>
 														<!-- /form-group -->
 
@@ -143,24 +154,7 @@
 
 												<div class="form-group row">
 
-													<div class="form-group col-md-6 col-xs-6"
-														style="margin-bottom: 0px">
-
-														<div class="form-group">
-															<label class="control-label">Data para inicio</label>
-															<div class="form-group">
-																<div class="input-group">
-																	<input type="text" value=""
-																		class="datepicker form-control" name="dataInicio"
-																		id="dataInicio" disabled> <span
-																		class="input-group-addon"> <i
-																		class="fa fa-calendar"></i></span>
-																</div>
-															</div>
-															<!-- /.col -->
-														</div>
-														<!-- /form-group -->
-													</div>
+													
 													
 													<div class="form-group col-md-6 col-xs-6"
 														style="margin-bottom: 0px">
@@ -622,7 +616,6 @@
     					}
     					
     				});
-				
 			}
 		}
 	});
@@ -641,14 +634,11 @@
 		$('li#Pendente').hide();
 	}
 	
-	
-	
 	function info(listaId){
 		
     	//var Visualizar = $("#fid option:selected").val();
     	var Solicitante;
     	var Titulo;
-    	
     	//
     	$.ajax({
     		url: "abrir",
@@ -702,8 +692,6 @@
     			$('input#senioridade').val(lista.senioridadeBean.nome);
     			$('label#horaEntrada').text(lista.horarioEntrada);
     			$('label#horaSaida').text(lista.horarioSaida);
-    			var pretensao = 'R$ ' + lista.valorPretensaoMin + ' - R$ ' + lista.valorPretensaoMax
-    			$('input#pretensao').val(pretensao);
     			var date = moment(lista.dataInicio);
     			$('input#dataInicio').val(date.format("DD/MM/YYYY"));
     			$('label#substituido').text(lista.nomeSubstituido);
@@ -751,30 +739,6 @@
 		
 		
 	}
-	
-	function status(){
-    	$.ajax({
-    		url: "status",
-    		type: "POST",
-    		dataType: "JSON",
-    		data: { 'idVaga' : $('.cancela-id').val(), 'status' : $('.cancela-status').val()},
-    		success: function(){
-    				location.reload();	
-    			}
-    	});
-    	}
-	function alterarStatus(id,status){
-		$('input.cancela-id').val(id);
-		$('input.cancela-status').val(status);
-	
-		$('input.reprovar-id').val(id);
-		$('input.reprovar-status').val(status);
-		
-	}
-	
-	
-	</script>
-		<script>
 	
 	$(function() {
 		

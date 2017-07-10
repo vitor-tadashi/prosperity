@@ -22,8 +22,6 @@ public class VagaBean {
 	@NotEmpty(message = "O campo Nome da vaga deve ser preenchido")
 	private String nomeVaga;
 	private String nomeSolicitante;
-	private BigDecimal valorPretensaoMax;
-	private BigDecimal valorPretensaoMin;
 	@NotNull(message = "O campo Data para inicio deve ser preenchido")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataInicio;
@@ -346,31 +344,4 @@ public class VagaBean {
 	public void setMarketingSocial(String marketingSocial) {
 		this.marketingSocial = marketingSocial;
 	}
-
-	public BigDecimal getValorPretensaoMax() {
-		try {
-			return valorPretensaoMax.setScale(2, RoundingMode.HALF_EVEN);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	public void setValorPretensaoMax(BigDecimal valorPretensaoMax) {
-		this.valorPretensaoMax = valorPretensaoMax;
-	}
-
-	public BigDecimal getValorPretensaoMin() {
-		try {
-			return valorPretensaoMin.setScale(2, RoundingMode.HALF_EVEN);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	public void setValorPretensaoMin(BigDecimal valorPretensaoMin) {
-		this.valorPretensaoMin = valorPretensaoMin;
-	}
-	
 }
