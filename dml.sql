@@ -972,6 +972,22 @@ BEGIN TRY
 					(32,'Editar candidato','candidato/editar/*'),
 					(34,'Informar data contato','colocarUrlAqui'),
 					(35,'Aprovar vaga','colocarUrlAqui')
+
+	INSERT INTO [dbo].[tbPerfil]
+				   (nmPerfil)
+			 VALUES
+					('Administrador')
+
+	INSERT INTO [dbo].[tbPerfilFuncionalidade]
+				   (idPerfil, idFuncionalidade)
+			 VALUES
+					(1, 16),
+					(1, 22)
+
+	INSERT INTO [dbo].[tbUsuario]
+				   (idPerfil, idFuncionario, senha ,nmUsuario, email, flPrimeiroAcesso, ativo)
+			 VALUES
+					(1, 50, 'admin', 'dmVyaXR5QDEyMw==' ,'admin@verity.com.br', 1, 1)
 	
 	COMMIT TRANSACTION;
  

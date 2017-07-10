@@ -20,7 +20,7 @@ $( "#canalInformacao" ).change(function() {
 	
 	var select = $(this).val();
 	
-    if (select == '9') {
+    if (select == '8') {
     	// Outros fica obrigatório e visível:
     	$('.js-outros').show();
     	$('#outros').prop('required',true);
@@ -29,7 +29,7 @@ $( "#canalInformacao" ).change(function() {
     	$('#indicacao-colegas').prop('required',false);
     	
     }
-    else if (select == '8') {
+    else if (select == '7') {
     	$('.js-outros').hide();
     	$('#outros').prop('required',false);
     	
@@ -531,7 +531,6 @@ function validarVaga() {
 
 		return false;
 	}
-	return true;
 }
 
 //funcão para a aba de data de comunicação

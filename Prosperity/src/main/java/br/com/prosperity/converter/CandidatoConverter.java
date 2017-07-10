@@ -23,9 +23,6 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 	private FormacaoConverter formacaoConverter;
 
 	@Autowired
-	private UsuarioConverter usuarioConverter;
-
-	@Autowired
 	private VagaCandidatoConverter vagaCandidatoConverter;
 
 	@Autowired
@@ -57,17 +54,12 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		entity.setRg(bean.getRg());
 		entity.setValorPretensao(bean.getValorPretensao());
 		entity.setDataAbertura(bean.getDataAbertura());
-		entity.setDataAlteracao(bean.getDataAlteracao());
-		entity.setDataFechamento(bean.getDataFechamento());
 		entity.setDataNascimento(bean.getDataNascimento());
 		entity.setContato(contatoConverter.convertBeanToEntity(bean.getContato()));
 		entity.setEndereco(enderecoConverter.convertBeanToEntity(bean.getEndereco()));
 		entity.setCompetencias(candidatoCompetenciaConverter.convertBeanToEntity(bean.getCompetencias()));
 		entity.setFormacao(formacaoConverter.convertBeanToEntity(bean.getFormacao()));
-		entity.setUsuario(usuarioConverter.convertBeanToEntity(bean.getUsuario()));
 		entity.setStatusCandidatos(statusCandidatoConverter.convertBeanToEntity(bean.getStatus()));
-		entity.setDataUltimoContato(bean.getDataUltimoContato());
-		entity.setProposta(bean.getProposta());
 		entity.setCurriculoTexto(bean.getCurriculoTexto());
 		entity.setVagas(vagaCandidatoConverter.convertBeanToEntity(bean.getVagas()));
 
@@ -101,18 +93,13 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		entity.setRg(bean.getRg());
 		entity.setValorPretensao(bean.getValorPretensao());
 		entity.setDataAbertura(bean.getDataAbertura());
-		entity.setDataAlteracao(bean.getDataAlteracao());
-		entity.setDataFechamento(bean.getDataFechamento());
 		entity.setDataNascimento(bean.getDataNascimento());
 		entity.setDatasEntrevistas(dataEntrevistaConverter.convertBeanToEntity(bean.getDataEntrevista()));
 		entity.setContato(contatoConverter.convertBeanToEntity(bean.getContato()));
 		entity.setEndereco(enderecoConverter.convertBeanToEntity(bean.getEndereco()));
 		entity.setCompetencias(candidatoCompetenciaConverter.convertBeanToEntity(bean.getCompetencias()));
 		entity.setFormacao(formacaoConverter.convertBeanToEntity(bean.getFormacao()));
-		entity.setUsuario(usuarioConverter.convertBeanToEntity(bean.getUsuario()));
 		entity.setStatusCandidatos(statusCandidatoConverter.convertBeanToEntity(bean.getStatus()));
-		entity.setDataUltimoContato(bean.getDataUltimoContato());
-		entity.setProposta(bean.getProposta());
 		entity.setCurriculoTexto(bean.getCurriculoTexto());
 		entity.setPropostaEntity(propostaConverter.convertBeanToEntity(bean.getPropostaBean()));
 		if (entity.getVagas() == null || (entity.getVagas() != null && entity.getVagas().size() == 0)) {
@@ -137,17 +124,12 @@ public class CandidatoConverter implements Converter<CandidatoEntity, CandidatoB
 		bean.setRg(entity.getRg());
 		bean.setValorPretensao(entity.getValorPretensao());
 		bean.setDataAbertura(entity.getDataAbertura());
-		bean.setDataAlteracao(entity.getDataAlteracao());
-		bean.setDataFechamento(entity.getDataFechamento());
 		bean.setDataNascimento(entity.getDataNascimento());
 		bean.setContato(contatoConverter.convertEntityToBean(entity.getContato()));
 		bean.setEndereco(enderecoConverter.convertEntityToBean(entity.getEndereco()));
 		bean.setCompetencias(candidatoCompetenciaConverter.convertEntityToBean(entity.getCompetencias()));
 		bean.setFormacao(formacaoConverter.convertEntityToBean(entity.getFormacao()));
-		bean.setUsuario(usuarioConverter.convertEntityToBean(entity.getUsuario()));
 		bean.setStatus(statusCandidatoConverter.convertEntityToBean(entity.getStatusCandidatos()));
-		bean.setDataUltimoContato(entity.getDataUltimoContato());
-		bean.setProposta(entity.getProposta());
 		bean.setCurriculoTexto(entity.getCurriculoTexto());
 		bean.setVagas(candidatoVagaConverter.convertEntityToBean(entity.getVagas()));
 		bean.setPropostaBean(propostaConverter.convertEntityToBean(entity.getPropostaEntity()));

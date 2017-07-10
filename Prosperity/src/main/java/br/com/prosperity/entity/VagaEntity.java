@@ -72,9 +72,6 @@ public class VagaEntity {
 	@Column(name = "flAumentoQuadra")
 	private Character aumentoQuadro;
 
-	@Column(name = "numCandidatos")
-	private Integer numeroCandidatos;
-
 	@Column(name = "nmSubstituido")
 	private String nomeSubstituido;
 
@@ -133,9 +130,6 @@ public class VagaEntity {
 	@Column(name = "telResponsavel")
 	private String telResponsavel;
 	
-	@Column(name = "dsPreTexto")
-	private String dsPreTexto;
-
 	@Column(name = "dsMarketingSocial")
 	private String marketingSocial;
 
@@ -212,14 +206,6 @@ public class VagaEntity {
 
 	public void setAumentoQuadro(Character aumentoQuadro) {
 		this.aumentoQuadro = aumentoQuadro;
-	}
-
-	public Integer getNumeroCandidatos() {
-		return numeroCandidatos;
-	}
-
-	public void setNumeroCandidatos(Integer numeroCandidatos) {
-		this.numeroCandidatos = numeroCandidatos;
 	}
 
 	public String getNomeSubstituido() {
