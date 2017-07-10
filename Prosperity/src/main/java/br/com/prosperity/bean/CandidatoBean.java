@@ -21,7 +21,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.stereotype.Component;
 
-import br.com.prosperity.enumarator.StatusCandidatoEnum;
 import br.com.prosperity.util.FormatUtil;
 
 @Component
@@ -49,13 +48,9 @@ public class CandidatoBean extends FormatUtil {
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataAbertura;
-	private Date dataFechamento;
 
 	@NotEmpty(message = "O campo email deve ser prenchido")
 	private String email;
-
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date dataAlteracao;
 	
 	private String curriculo;
 	
@@ -65,15 +60,11 @@ public class CandidatoBean extends FormatUtil {
 	@Valid
 	private EnderecoBean endereco;
 	private FormacaoBean formacao;
-	private UsuarioBean usuario;
 	private List<StatusCandidatoBean> status = new ArrayList<>();
 	private Set<VagaCandidatoBean> vagas = new HashSet<>();
 	private List<CandidatoCompetenciaBean> competencias = new ArrayList<>();
 	private Map<String, List<StatusCandidatoBean>> statusPorMesAno;
 
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date dataUltimoContato;
-	private String proposta;
 	private StatusCandidatoBean ultimoStatus;
 	private StatusCandidatoBean penultimoStatus;
 	private VagaBean ultimaVaga;
@@ -262,28 +253,12 @@ public class CandidatoBean extends FormatUtil {
 		this.dataAbertura = dataAbertura;
 	}
 
-	public Date getDataFechamento() {
-		return dataFechamento;
-	}
-
-	public void setDataFechamento(Date dataFechamento) {
-		this.dataFechamento = dataFechamento;
-	}
-
 	public String getEmail() {
 		return email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public Date getDataAlteracao() {
-		return dataAlteracao;
-	}
-
-	public void setDataAlteracao(Date dataAlteracao) {
-		this.dataAlteracao = dataAlteracao;
 	}
 
 	public String getCurriculo() {
@@ -318,14 +293,6 @@ public class CandidatoBean extends FormatUtil {
 		this.formacao = formacao;
 	}
 
-	public UsuarioBean getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(UsuarioBean usuario) {
-		this.usuario = usuario;
-	}
-
 	public List<StatusCandidatoBean> getStatus() {
 		return status;
 	}
@@ -357,22 +324,6 @@ public class CandidatoBean extends FormatUtil {
 
 	public void setStatusPorMesAno(Map<String, List<StatusCandidatoBean>> statusPorMesAno) {
 		this.statusPorMesAno = statusPorMesAno;
-	}
-
-	public Date getDataUltimoContato() {
-		return dataUltimoContato;
-	}
-
-	public void setDataUltimoContato(Date dataUltimoContato) {
-		this.dataUltimoContato = dataUltimoContato;
-	}
-
-	public String getProposta() {
-		return proposta;
-	}
-
-	public void setProposta(String proposta) {
-		this.proposta = proposta;
 	}
 
 	public VagaBean getVagaBean() {
@@ -416,7 +367,8 @@ public class CandidatoBean extends FormatUtil {
 			Collections.sort(this.status);
 			for(int i = 0; i < status.size(); i++){
 				if(status.get(i).getIdVaga() != null && !status.get(i).getIdVaga().equals(getUltimaVaga().getId())){
-					return status.get(i);
+					penultimoStatus = status.get(i);
+					return penultimoStatus;
 				}
 			}/*
 			Integer idPenultimoStatus = status.stream().map(StatusCandidatoBean::getId).max(Integer::compareTo).get();

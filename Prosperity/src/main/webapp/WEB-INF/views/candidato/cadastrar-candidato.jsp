@@ -31,11 +31,13 @@
 						<div class="panel-heading">Informações do candidato</div>
 
 						<div class="panel-body">
-							<div id="textDiv">
-								<c:forEach var="erro" items="${listaErros}">
-									<p>${erro}</p>
-								</c:forEach>
-							</div>
+							<c:if test="${not empty listaErros }">
+								<div id="textDiv" class="alert alert-danger">
+									<c:forEach var="erro" items="${listaErros}">
+										<p>${erro}</p>
+									</c:forEach>
+								</div>
+							</c:if>
 							<c:if test="${not empty sucesso}">
 								<div id="msg-sucesso" class="alert alert-success msg-margin">
 									<ul style="list-style: none;">

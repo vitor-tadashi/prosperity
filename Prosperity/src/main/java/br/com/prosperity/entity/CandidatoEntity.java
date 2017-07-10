@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -71,26 +71,11 @@ public class CandidatoEntity {
 	@Temporal(TemporalType.DATE)
 	private Date dataAbertura;
 
-	@Column(name = "dtFechamento")
-	@Temporal(TemporalType.DATE)
-	private Date dataFechamento;
-
 	@Column(name = "nmEmail")
 	private String email;
 
-	@Column(name = "dtAlteracao")
-	@Temporal(TemporalType.DATE)
-	private Date dataAlteracao;
-
 	@Column(name = "cmCurriculo")
 	private String curriculo;
-
-	@Column(name = "dtUltimoContato")
-	@Temporal(TemporalType.DATE)
-	private Date dataUltimoContato;
-
-	@Column(name = "dsProposta")
-	private String proposta;
 
 	@Column(name = "curriculoTexto")
 	private String curriculoTexto;
@@ -106,10 +91,6 @@ public class CandidatoEntity {
 	@OneToOne(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, orphanRemoval = true)
 	@JoinColumn(name = "idFormacao")
 	private FormacaoEntity formacao;
-
-	@ManyToOne(cascade = { CascadeType.REFRESH }, fetch = FetchType.LAZY)
-	@JoinColumn(name = "idUsuario")
-	private UsuarioEntity usuario;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "candidato")
 	private List<StatusCandidatoEntity> statusCandidatos;
@@ -224,14 +205,6 @@ public class CandidatoEntity {
 		this.dataAbertura = dataAbertura;
 	}
 
-	public Date getDataFechamento() {
-		return dataFechamento;
-	}
-
-	public void setDataFechamento(Date dataFechamento) {
-		this.dataFechamento = dataFechamento;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -240,36 +213,12 @@ public class CandidatoEntity {
 		this.email = email;
 	}
 
-	public Date getDataAlteracao() {
-		return dataAlteracao;
-	}
-
-	public void setDataAlteracao(Date dataAlteracao) {
-		this.dataAlteracao = dataAlteracao;
-	}
-
 	public String getCurriculo() {
 		return curriculo;
 	}
 
 	public void setCurriculo(String file) {
 		this.curriculo = file;
-	}
-
-	public Date getDataUltimoContato() {
-		return dataUltimoContato;
-	}
-
-	public void setDataUltimoContato(Date contatoBean) {
-		this.dataUltimoContato = contatoBean;
-	}
-
-	public String getProposta() {
-		return proposta;
-	}
-
-	public void setProposta(String proposta) {
-		this.proposta = proposta;
 	}
 
 	public ContatoEntity getContato() {
@@ -294,14 +243,6 @@ public class CandidatoEntity {
 
 	public void setFormacao(FormacaoEntity formacao) {
 		this.formacao = formacao;
-	}
-
-	public UsuarioEntity getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(UsuarioEntity usuario) {
-		this.usuario = usuario;
 	}
 
 	public List<DataEntrevistaEntity> getDatasEntrevistas() {

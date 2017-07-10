@@ -47,7 +47,7 @@ public class VagaBean {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataAprovacao;
 	private Date dataFechamento;
-	private Integer numeroCandidatos;
+	
 	@Valid
 	private UsuarioBean usuarioBean;
 	private List<StatusVagaBean> status;
@@ -244,14 +244,6 @@ public class VagaBean {
 
 	public void setDataFechamento(Date dataFechamento) {
 		this.dataFechamento = dataFechamento;
-	}
-
-	public Integer getNumeroCandidatos() {
-		return numeroCandidatos;
-	}
-
-	public void setNumeroCandidatos(Integer numeroCandidatos) {
-		this.numeroCandidatos = numeroCandidatos;
 	}
 
 	public UsuarioBean getUsuarioBean() {

@@ -51,7 +51,6 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 		entity.setLocalTrabalho(bean.getLocalTrabalho());
 		entity.setNomeSolicitante(bean.getNomeSolicitante());
 		entity.setNomeSubstituido(bean.getNomeSubstituido());
-		entity.setNumeroCandidatos(bean.getNumeroCandidatos());
 		entity.setProjetoEntity(projetoConverter.convertBeanToEntity(bean.getProjeto()));
 		entity.setSenioridadeEntity(senioridadeConverter.convertBeanToEntity(bean.getSenioridadeBean()));
 		entity.setTipoVaga(bean.getIdTipoVaga());
@@ -92,7 +91,6 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 		bean.setLocalTrabalho(entity.getLocalTrabalho());
 		bean.setNomeSolicitante(entity.getNomeSolicitante());
 		bean.setNomeSubstituido(entity.getNomeSubstituido());
-		bean.setNumeroCandidatos(entity.getNumeroCandidatos());
 		bean.setProjeto(projetoConverter.convertEntityToBean(entity.getProjetoEntity()));
 		bean.setSenioridadeBean(senioridadeConverter.convertEntityToBean(entity.getSenioridadeEntity()));
 		bean.setIdTipoVaga(entity.getTipoVaga());
