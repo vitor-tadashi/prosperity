@@ -24,10 +24,10 @@ public class FuncionarioEntity {
 	@Column(name = "nmFuncionario")
 	private String nome;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+/*	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idCargo")
 	private CargoEntity cargo;
-
+*/
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idSenioridade")
 	private SenioridadeEntity senioridade;
@@ -48,14 +48,14 @@ public class FuncionarioEntity {
 		this.nome = nome;
 	}
 
-	public CargoEntity getCargo() {
+/*	public CargoEntity getCargo() {
 		return cargo;
 	}
 
 	public void setCargo(CargoEntity cargo) {
 		this.cargo = cargo;
 	}
-
+*/
 	public SenioridadeEntity getSenioridade() {
 		return senioridade;
 	}

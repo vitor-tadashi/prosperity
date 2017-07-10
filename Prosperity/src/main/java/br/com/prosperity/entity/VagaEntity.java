@@ -20,8 +20,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@NamedQueries({
-		@NamedQuery(name = "obterTodos", query = "SELECT u FROM VagaEntity u WHERE u.nomeVaga = ?1"),
+@NamedQueries({ @NamedQuery(name = "obterTodos", query = "SELECT u FROM VagaEntity u WHERE u.nomeVaga = ?1"),
 		@NamedQuery(name = "listarVagaAprovar", query = "SELECT v FROM VagaEntity v LEFT OUTER JOIN v.statusVagaEntity sv "
 				+ "LEFT JOIN sv.status s WHERE sv.id = (SELECT MAX(sv.id) FROM v.statusVagaEntity sv WHERE sv.vaga.id = v.id) "
 				+ "AND sv.status.id IN(?1) ORDER BY v.id DESC"),
@@ -47,12 +46,6 @@ public class VagaEntity {
 	@Column(name = "nmSolicitante")
 	private String nomeSolicitante;
 
-	@Column(name = "vlPretensaoMin")
-	private BigDecimal valorPretensaoMin;
-
-	@Column(name = "vlPretensaoMax")
-	private BigDecimal valorPretensaoMax;
-	
 	@Column(name = "dtInicio")
 	@Temporal(value = TemporalType.DATE)
 	private Date dataInicio;
@@ -96,13 +89,14 @@ public class VagaEntity {
 	@Temporal(value = TemporalType.DATE)
 	private Date dataFechamento;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idProjeto")
-	private ProjetoEntity projetoEntity;
+	@Column(name = "nmProjeto")
+	private String nmProjeto;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idCargo")
-	private CargoEntity cargoEntity;
+	@Column(name = "nmCargo")
+	private String nmCargo;
+
+	@Column(name = "nmCliente")
+	private String nmCliente;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idSenioridade")
@@ -129,7 +123,7 @@ public class VagaEntity {
 
 	@Column(name = "telResponsavel")
 	private String telResponsavel;
-	
+
 	@Column(name = "dsMarketingSocial")
 	private String marketingSocial;
 
@@ -272,22 +266,6 @@ public class VagaEntity {
 		this.dataFechamento = dataFechamento;
 	}
 
-	public ProjetoEntity getProjetoEntity() {
-		return projetoEntity;
-	}
-
-	public void setProjetoEntity(ProjetoEntity projetoEntity) {
-		this.projetoEntity = projetoEntity;
-	}
-
-	public CargoEntity getCargoEntity() {
-		return cargoEntity;
-	}
-
-	public void setCargoEntity(CargoEntity cargoEntity) {
-		this.cargoEntity = cargoEntity;
-	}
-
 	public SenioridadeEntity getSenioridadeEntity() {
 		return senioridadeEntity;
 	}
@@ -359,4 +337,29 @@ public class VagaEntity {
 	public void setMarketingSocial(String marketingSocial) {
 		this.marketingSocial = marketingSocial;
 	}
+
+	public String getNmProjeto() {
+		return nmProjeto;
+	}
+
+	public void setNmProjeto(String nmProjeto) {
+		this.nmProjeto = nmProjeto;
+	}
+
+	public String getNmCargo() {
+		return nmCargo;
+	}
+
+	public void setNmCargo(String nmCargo) {
+		this.nmCargo = nmCargo;
+	}
+
+	public String getNmCliente() {
+		return nmCliente;
+	}
+
+	public void setNmCliente(String nmCliente) {
+		this.nmCliente = nmCliente;
+	}
+
 }

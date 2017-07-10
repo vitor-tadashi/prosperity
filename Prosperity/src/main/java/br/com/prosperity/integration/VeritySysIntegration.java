@@ -21,7 +21,7 @@ import br.com.prosperity.bean.ClienteBean;
 import br.com.prosperity.bean.FuncionarioBean;
 import br.com.prosperity.bean.ProjetoBean;
 
-public class veritySysIntegration {
+public class VeritySysIntegration {
 	
 	public Properties getProp(){
 		try {

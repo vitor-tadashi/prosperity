@@ -1,6 +1,5 @@
 package br.com.prosperity.bean;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.xml.bind.annotation.XmlRootElement;
 

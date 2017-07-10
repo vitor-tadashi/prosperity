@@ -1,7 +1,5 @@
 package br.com.prosperity.bean;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Date;
 import java.util.List;
 
@@ -31,10 +29,6 @@ public class VagaBean {
 	private String horarioSaida;
 	private Character aumentaQuadro;
 	@Valid
-	private ProjetoBean projeto;
-	@Valid
-	private CargoBean cargoBean;
-	@Valid
 	private SenioridadeBean senioridadeBean;
 	private String nomeSubstituido;
 	private String descricaoFormacaoAcademica;
@@ -45,7 +39,7 @@ public class VagaBean {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataAprovacao;
 	private Date dataFechamento;
-	
+
 	@Valid
 	private UsuarioBean usuarioBean;
 	private List<StatusVagaBean> status;
@@ -62,6 +56,9 @@ public class VagaBean {
 	private Date dataAberturaPara;
 	private List<VagaCandidatoBean> vagaCandidatoBean;
 	private String marketingSocial;
+	private String nmCargo;
+	private String nmCliente;
+	private String nmProjeto;
 
 	public VagaBean() {
 	}
@@ -162,22 +159,6 @@ public class VagaBean {
 	@XmlTransient
 	public Character getAumentaQuadro() {
 		return aumentaQuadro;
-	}
-
-	public ProjetoBean getProjeto() {
-		return projeto;
-	}
-
-	public void setProjeto(ProjetoBean projetoBean) {
-		this.projeto = projetoBean;
-	}
-
-	public CargoBean getCargoBean() {
-		return cargoBean;
-	}
-
-	public void setCargoBean(CargoBean cargoBean) {
-		this.cargoBean = cargoBean;
 	}
 
 	public SenioridadeBean getSenioridadeBean() {
@@ -336,4 +317,29 @@ public class VagaBean {
 	public void setMarketingSocial(String marketingSocial) {
 		this.marketingSocial = marketingSocial;
 	}
+
+	public String getNmCargo() {
+		return nmCargo;
+	}
+
+	public void setNmCargo(String nmCargo) {
+		this.nmCargo = nmCargo;
+	}
+
+	public String getNmCliente() {
+		return nmCliente;
+	}
+
+	public void setNmCliente(String nmCliente) {
+		this.nmCliente = nmCliente;
+	}
+
+	public String getNmProjeto() {
+		return nmProjeto;
+	}
+
+	public void setNmProjeto(String nmProjeto) {
+		this.nmProjeto = nmProjeto;
+	}
+
 }

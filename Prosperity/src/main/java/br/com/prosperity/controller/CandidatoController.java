@@ -485,7 +485,7 @@ public class CandidatoController<PaginarCandidato> {
 						competenciaBean.setId(aux2);
 						candidatoCompetenciaBean.setAvaliacao(avaliacaoBean);
 						candidatoCompetenciaBean.setCompetencia(competenciaBean);
-						candidatoCompetenciaBean.setNmAvaliador(usuarioBean.getFuncionario().getNome());
+						//candidatoCompetenciaBean.setNmAvaliador(usuarioBean.getFuncionario().getNome());
 						candidatoCompetenciaBean.setIdVaga(candidatoBean.getUltimaVaga().getId());
 						candidatoCompetenciasBean.add(candidatoCompetenciaBean);
 					}

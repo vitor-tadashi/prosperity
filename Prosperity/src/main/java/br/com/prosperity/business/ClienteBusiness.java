@@ -4,20 +4,20 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import br.com.prosperity.bean.ProjetoBean;
+import br.com.prosperity.bean.ClienteBean;
 import br.com.prosperity.integration.VeritySysIntegration;
 
 @Component
-public class ProjetoBusiness {
+public class ClienteBusiness {
 
-	public ProjetoBean obterCliente(Integer id) {
+	public ClienteBean obterCliente(Integer id) {
 		VeritySysIntegration integration = new VeritySysIntegration();
-		return integration.getProjeto(id);
+		return integration.getCliente(id);
 	}
 
-	public List<ProjetoBean> obterTodos() {
+	public List<ClienteBean> obterTodos() {
 		VeritySysIntegration integration = new VeritySysIntegration();
-		return integration.getListProjetos();
+		return integration.getListClientes();
 	}
 
 }

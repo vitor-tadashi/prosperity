@@ -7,14 +7,6 @@ public class ClienteBean {
 	private Integer id;
 	private String nome;
 
-	public ClienteBean() {
-	}
-
-	public ClienteBean(Integer id, String nome) {
-		this.id = id;
-		this.nome = nome;
-	}
-
 	public Integer getId() {
 		return id;
 	}

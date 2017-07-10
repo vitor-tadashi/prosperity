@@ -24,7 +24,7 @@ import com.google.gson.Gson;
 import br.com.prosperity.bean.AvaliadorVagaBean;
 import br.com.prosperity.bean.CandidatoBean;
 import br.com.prosperity.bean.CargoBean;
-import br.com.prosperity.bean.CargoSenioridadeBean;
+import br.com.prosperity.bean.ClienteBean;
 import br.com.prosperity.bean.ProjetoBean;
 import br.com.prosperity.bean.QuantiaCandidatoPorStatusBean;
 import br.com.prosperity.bean.SenioridadeBean;
@@ -36,7 +36,7 @@ import br.com.prosperity.bean.VagaBean;
 import br.com.prosperity.business.AvaliadorVagaBusiness;
 import br.com.prosperity.business.CandidatoBusiness;
 import br.com.prosperity.business.CargoBusiness;
-import br.com.prosperity.business.CargoSenioridadeBusiness;
+import br.com.prosperity.business.ClienteBusiness;
 import br.com.prosperity.business.ProjetoBusiness;
 import br.com.prosperity.business.SenioridadeBusiness;
 import br.com.prosperity.business.StatusBusiness;
@@ -55,9 +55,9 @@ public class VagaController {
 	
 	@Autowired
 	private CandidatoBusiness candidatoBusiness;
-
+	
 	@Autowired
-	private ProjetoBusiness projetoBusiness;
+	private ClienteBusiness clienteBusiness;
 
 	@Autowired
 	private SenioridadeBusiness preencherSenioridade;
@@ -85,9 +85,6 @@ public class VagaController {
 
 	@Autowired
 	private List<UsuarioBean> avaliadoresB;
-
-	@Autowired
-	private CargoSenioridadeBusiness cargoSenioridadeBusiness;
 
 	@Autowired
 	private CargoBusiness cargoBusiness;
@@ -209,7 +206,7 @@ public class VagaController {
 	private void obterDominiosVaga(Model model) {
 		senioridades = preencherSenioridade.obterTodos();
 		cargos = preencherCargo.obterTodos();
-		projetos = preencherProjeto.buscarProjetoAtivo();
+		projetos = preencherProjeto.obterTodos();
 		usuarios = preencherUsuario.buscarUsuarioAtivo();
 
 		model.addAttribute("senioridades", senioridades);
@@ -291,33 +288,9 @@ public class VagaController {
 	}
 
 	@RequestMapping(value = "/obter-cliente", method = RequestMethod.GET)
-	public @ResponseBody List<ProjetoBean> obterPerfilFuncionalidade(Model model, @ModelAttribute("id") Integer id) {
-		List<ProjetoBean> cliente = projetoBusiness.obterCliente(id);
+	public @ResponseBody ClienteBean obterPerfilFuncionalidade(Model model, @ModelAttribute("id") Integer id) {
+		ClienteBean cliente = clienteBusiness.obterCliente(id);
 		return cliente;
-	}
-
-	@RequestMapping(value = "/obter-range-salarial", method = RequestMethod.GET)
-	public @ResponseBody List<CargoSenioridadeBean> obterCargoSenioridade(Model model,
-			@ModelAttribute("idCargo") Integer idCargo, @ModelAttribute("idSenioridade") Integer idSenioridade) {
-		CargoBean cargo = new CargoBean();
-		SenioridadeBean senioridade = new SenioridadeBean();
-		cargo.setId(idCargo);
-		senioridade.setId(idSenioridade);
-		List<CargoSenioridadeBean> rangeSalarial = cargoSenioridadeBusiness.obterRangeSalarial(cargo.getId(),
-				senioridade.getId());
-		return rangeSalarial;
-	}
-
-	@RequestMapping(value = "/obter-perfil-pre-pronto", method = RequestMethod.GET)
-	public @ResponseBody List<CargoSenioridadeBean> obterPerfilPrePronto(Model model,
-			@ModelAttribute("idCargo") Integer idCargo, @ModelAttribute("idSenioridade") Integer idSenioridade) {
-		CargoBean cargo = new CargoBean();
-		SenioridadeBean senioridade = new SenioridadeBean();
-		cargo.setId(idCargo);
-		senioridade.setId(idSenioridade);
-		List<CargoSenioridadeBean> perfilPrePronto = cargoSenioridadeBusiness.obterRangeSalarial(cargo.getId(),
-				senioridade.getId());
-		return perfilPrePronto;
 	}
 	
 	@RequestMapping(value = "historico/{id}", method = RequestMethod.GET)

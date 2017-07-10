@@ -1,7 +1,7 @@
 /************************************************************************** 
 * Verity TI
 * --------------------------- 
-* Criado por...:           Guilherme de Oliveira
+* Criado por...:           Guilherme de Oliveira e Igor Cunha
 * Em...........:           03/07/2017
 * Projeto......:           Prosperity
 * Descrição....:           Script para criação do banco Prosperity
@@ -96,39 +96,6 @@ BEGIN TRY
 			PRIMARY KEY CLUSTERED 
 			(
 				[idCandidatoCompetencia] ASC
-			)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-			) ON [PRIMARY]
-
-			CREATE TABLE [dbo].[tbCargo](
-				[idCargo] [int] IDENTITY(1,1) NOT NULL,
-				[nmCargo] [varchar](50) NULL,
-			PRIMARY KEY CLUSTERED 
-			(
-				[idCargo] ASC
-			)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-			) ON [PRIMARY]
-
-			CREATE TABLE [dbo].[tbCargoSenioridade](
-				[idCargoSenioridade] [int] IDENTITY(1,1) NOT NULL,
-				[idCargo] [int] NULL,
-				[idSenioridade] [int] NULL,
-				[vlMinSalario] [smallmoney] NULL,
-				[vlMaxSalario] [smallmoney] NULL,
-				[dsPreFormacaoAcademica] [varchar](2000) NULL,
-				[dsPrePerfilComportamental] [varchar](2000) NULL,
-				[dsPrePerfilTecnico] [varchar](2000) NULL,
-			 CONSTRAINT [PK__tbCargoS__52D447EA8F8D8611] PRIMARY KEY CLUSTERED 
-			(
-				[idCargoSenioridade] ASC
-			)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-			) ON [PRIMARY]
-
-			CREATE TABLE [dbo].[tbCliente](
-				[idCliente] [int] IDENTITY(1,1) NOT NULL,
-				[nmCliente] [varchar](200) NULL,
-			PRIMARY KEY CLUSTERED 
-			(
-				[idCliente] ASC
 			)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 			) ON [PRIMARY]
 
@@ -236,17 +203,6 @@ BEGIN TRY
 			)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 			) ON [PRIMARY]
 
-			CREATE TABLE [dbo].[tbFuncionario](
-				[idFuncionario] [int] IDENTITY(1,1) NOT NULL,
-				[nmFuncionario] [varchar](50) NULL,
-				[idCargo] [int] NULL,
-				[idSenioridade] [int] NULL,
-			PRIMARY KEY CLUSTERED 
-			(
-				[idFuncionario] ASC
-			)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-			) ON [PRIMARY]
-
 			CREATE TABLE [dbo].[tbPerfil](
 				[idPerfil] [int] IDENTITY(1,1) NOT NULL,
 				[nmPerfil] [varchar](45) NULL,
@@ -263,18 +219,6 @@ BEGIN TRY
 			PRIMARY KEY CLUSTERED 
 			(
 				[idPerfilFuncionalidade] ASC
-			)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-			) ON [PRIMARY]
-
-			CREATE TABLE [dbo].[tbProjeto](
-				[idProjeto] [int] IDENTITY(1,1) NOT NULL,
-				[nmProjeto] [varchar](100) NULL,
-				[idFuncionario] [int] NULL,
-				[idCliente] [int] NULL,
-				[ativo] [bit] NULL,
-			PRIMARY KEY CLUSTERED 
-			(
-				[idProjeto] ASC
 			)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 			) ON [PRIMARY]
 
@@ -311,17 +255,17 @@ BEGIN TRY
 				[vlrNvTotalAnualNvLiquidoComBeneficios] [decimal](7, 2) NULL,
 				[cmProposta] [varchar](300) NULL,
 				[flSituacao] [bit] NULL,
-				[antDsOutros1] [nchar](50) NULL,
+				[antDsOutros1] [varchar](50) NULL,
 				[antVlrOutros1] [decimal](7,2) NULL,
-				[antDsOutros2] [nchar](50) NULL,
+				[antDsOutros2] [varchar](50) NULL,
 				[antVlrOutros2] [decimal](7,2) NULL,
-				[antDsOutros3] [nchar](50) NULL,
+				[antDsOutros3] [varchar](50) NULL,
 				[antVlrOutros3] [decimal](7,2) NULL,
-				[nvDsOutros1] [nchar](50) NULL,
+				[nvDsOutros1] [varchar](50) NULL,
 				[nvVlrOutros1] [decimal](7,2) NULL,
-				[nvDsOutros2] [nchar](50) NULL,
+				[nvDsOutros2] [varchar](50) NULL,
 				[nvVlrOutros2] [decimal](7,2) NULL,
-				[nvDsOutros3] [nchar](50) NULL,
+				[nvDsOutros3] [varchar](50) NULL,
 				[nvVlrOutros3] [decimal](7,2) NULL
 			 CONSTRAINT [PK_tbProposta1] PRIMARY KEY CLUSTERED 
 			(
@@ -453,10 +397,10 @@ BEGIN TRY
 			CREATE TABLE [dbo].[tbUsuario](
 				[idUsuario] [int] IDENTITY(1,1) NOT NULL,
 				[idPerfil] [int] NULL,
-				[idFuncionario] [int] NULL,
 				[nmUsuario] [varchar](200) NULL,
 				[senha] [varchar](max) NULL CONSTRAINT [def_senha]  DEFAULT ('verity@123'),
 				[email] [varchar](50) NULL,
+				[nmFuncionario] [varchar](200) NULL,
 				[flPrimeiroAcesso] [bit] NULL CONSTRAINT [def_primeiroAcesso]  DEFAULT ((1)),
 				[ativo] [bit] NULL,
 			 CONSTRAINT [PK__tbUsuari__645723A6C77113D0] PRIMARY KEY CLUSTERED 
@@ -467,32 +411,31 @@ BEGIN TRY
 
 			CREATE TABLE [dbo].[tbVaga](
 				[idVaga] [int] IDENTITY(1,1) NOT NULL,
-				[idProjeto] [int] NULL,
-				[idCargo] [int] NULL,
 				[idSenioridade] [int] NULL,
 				[idUsuario] [int] NULL,
 				[nmSolicitante] [varchar](50) NULL,
-				[vlPretensaoMin] [decimal](9, 0) NULL,
-				[vlPretensaoMax] [decimal](9, 0) NULL,
 				[dtInicio] [date] NULL,
 				[flLocalTrabalho] [char](1) NULL,
 				[idTpVaga] [char](1) NULL,
 				[flAumentoQuadra] [char](1) NULL,
 				[nmSubstituido] [varchar](50) NULL,
-				[dsFormacaoAcademica] [varchar](2000) NULL,
-				[dsPerfilComportamental] [varchar](2000) NULL,
-				[dsPerfilTecnico] [varchar](2000) NULL,
+				[dsFormacaoAcademica] [varchar](max) NULL,
+				[dsPerfilComportamental] [varchar](max) NULL,
+				[dsPerfilTecnico] [varchar](max) NULL,
 				[dtAbertura] [date] NULL CONSTRAINT [DF_tbVaga_dtAbertura]  DEFAULT (getdate()),
 				[dtAprovacao] [date] NULL,
 				[dtFechamento] [date] NULL,
-				[nmVaga] [varchar](50) NULL,
+				[nmVaga] [varchar](100) NULL,
 				[hrEntrada] [time](0) NULL,
 				[hrSaida] [time](0) NULL,
-				[nmResponsavel] [varchar](30) NULL,
-				[nmAreaResponsavel] [varchar](30) NULL,
+				[nmResponsavel] [varchar](50) NULL,
+				[nmAreaResponsavel] [varchar](50) NULL,
 				[emailResponsavel] [varchar](50) NULL,
-				[telResponsavel] [varchar](20) NULL,
-				[dsMarketingSocial] [varchar](8000) NULL,
+				[telResponsavel] [varchar](30) NULL,
+				[dsMarketingSocial] [varchar](max) NULL,
+				[nmProjeto] [varchar](200) NULL,
+				[nmCargo] [varchar](200) NULL,
+				[nmCliente] [varchar](200) NULL,
 			 CONSTRAINT [PK__tbVaga__02E6F4AA7CB2B6C6] PRIMARY KEY CLUSTERED 
 			(
 				[idVaga] ASC
@@ -506,21 +449,21 @@ BEGIN TRY
 				[idCanalInformacao] [int] NULL,
 				[contratado] [bit] NULL,
 				[dsOutros] [varchar](100) NULL,
-				[idFuncionario] [int] NULL,
+				[nmFuncionario] [varchar](200) NULL,
 				[situacao] [bit] NULL
 			PRIMARY KEY CLUSTERED 
 			(
 				[idVagaCandidato] ASC
 			)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 			) ON [PRIMARY]
+			
+			--constraint tbVagaCandidato
 			ALTER TABLE [dbo].[tbVagaCandidato]  WITH NOCHECK ADD  CONSTRAINT [FK__tbVagaCan__idCan__534D60F1] FOREIGN KEY([idCandidato])
 			REFERENCES [dbo].[tbCandidato] ([idCandidato])
 			ON DELETE CASCADE
-			
 
 			ALTER TABLE [dbo].[tbVagaCandidato] CHECK CONSTRAINT [FK__tbVagaCan__idCan__534D60F1]
 			
-
 			ALTER TABLE [dbo].[tbVagaCandidato]  WITH NOCHECK ADD FOREIGN KEY([idCanalInformacao])
 			REFERENCES [dbo].[tbCanalInformacao] ([idCanalInformacao])
 			
@@ -528,294 +471,191 @@ BEGIN TRY
 			ALTER TABLE [dbo].[tbVagaCandidato]  WITH NOCHECK ADD  CONSTRAINT [FK__tbVagaCan__idVag__52593CB8] FOREIGN KEY([idVaga])
 			REFERENCES [dbo].[tbVaga] ([idVaga])
 			
-
 			ALTER TABLE [dbo].[tbVagaCandidato] CHECK CONSTRAINT [FK__tbVagaCan__idVag__52593CB8]
 			
-
-			ALTER TABLE [dbo].[tbVagaCandidato]  WITH CHECK ADD  CONSTRAINT [fk_funcionario] FOREIGN KEY([idFuncionario])
-			REFERENCES [dbo].[tbFuncionario] ([idFuncionario])
-			
-
-			ALTER TABLE [dbo].[tbVagaCandidato] CHECK CONSTRAINT [fk_funcionario]
-			
-
+			--constraint tbAvaliadorCandidato
 			ALTER TABLE [dbo].[tbAvaliadorCandidato]  WITH NOCHECK ADD  CONSTRAINT [FK_tbAvaliadorCandidato_tbCandidato] FOREIGN KEY([idCandidato])
 			REFERENCES [dbo].[tbCandidato] ([idCandidato])
-			
 
-			ALTER TABLE [dbo].[tbAvaliadorCandidato] CHECK CONSTRAINT [FK_tbAvaliadorCandidato_tbCandidato]
-			
+			ALTER TABLE [dbo].[tbAvaliadorCandidato] CHECK CONSTRAINT [FK_tbAvaliadorCandidato_tbCandidato]	
 
 			ALTER TABLE [dbo].[tbAvaliadorCandidato]  WITH NOCHECK ADD  CONSTRAINT [FK_tbAvaliadorCandidato_tbStatus] FOREIGN KEY([idStatus])
 			REFERENCES [dbo].[tbStatus] ([idStatus])
-			
 
-			ALTER TABLE [dbo].[tbAvaliadorCandidato] CHECK CONSTRAINT [FK_tbAvaliadorCandidato_tbStatus]
-			
+			ALTER TABLE [dbo].[tbAvaliadorCandidato] CHECK CONSTRAINT [FK_tbAvaliadorCandidato_tbStatus]			
 
 			ALTER TABLE [dbo].[tbAvaliadorCandidato]  WITH NOCHECK ADD  CONSTRAINT [FK_tbAvaliadorCandidato_tbUsuario] FOREIGN KEY([idUsuario])
 			REFERENCES [dbo].[tbUsuario] ([idUsuario])
 			
-
 			ALTER TABLE [dbo].[tbAvaliadorCandidato] CHECK CONSTRAINT [FK_tbAvaliadorCandidato_tbUsuario]
-			
 
 			ALTER TABLE [dbo].[tbAvaliadorCandidato]  WITH NOCHECK ADD  CONSTRAINT [FK_tbAvaliadorCandidato_tbVaga] FOREIGN KEY([idVaga])
 			REFERENCES [dbo].[tbVaga] ([idVaga])
-			
 
 			ALTER TABLE [dbo].[tbAvaliadorCandidato] CHECK CONSTRAINT [FK_tbAvaliadorCandidato_tbVaga]
-			
 
+			--constraint tbAvaliadorVaga
 
 			ALTER TABLE [dbo].[tbAvaliadorVaga]  WITH NOCHECK ADD  CONSTRAINT [FK_tbAvaliadorVaga_tbUsuario] FOREIGN KEY([idUsuario])
 			REFERENCES [dbo].[tbUsuario] ([idUsuario])
-			
 
-			ALTER TABLE [dbo].[tbAvaliadorVaga] CHECK CONSTRAINT [FK_tbAvaliadorVaga_tbUsuario]
-			
+			ALTER TABLE [dbo].[tbAvaliadorVaga] CHECK CONSTRAINT [FK_tbAvaliadorVaga_tbUsuario]			
 
 			ALTER TABLE [dbo].[tbAvaliadorVaga]  WITH NOCHECK ADD  CONSTRAINT [FK_tbAvaliadorVaga_tbVaga] FOREIGN KEY([idVaga])
-			REFERENCES [dbo].[tbVaga] ([idVaga])
-			
+			REFERENCES [dbo].[tbVaga] ([idVaga])			
 
-			ALTER TABLE [dbo].[tbAvaliadorVaga] CHECK CONSTRAINT [FK_tbAvaliadorVaga_tbVaga]
-			
+			ALTER TABLE [dbo].[tbAvaliadorVaga] CHECK CONSTRAINT [FK_tbAvaliadorVaga_tbVaga]		
 
-
+			--constraint tbCandidato
 			ALTER TABLE [dbo].[tbCandidato]  WITH NOCHECK ADD  CONSTRAINT [FK__tbCandida__idEnd__4AB81AF0] FOREIGN KEY([idEndereco])
-			REFERENCES [dbo].[tbEndereco] ([idEndereco])
-			
+			REFERENCES [dbo].[tbEndereco] ([idEndereco])			
 
-			ALTER TABLE [dbo].[tbCandidato] CHECK CONSTRAINT [FK__tbCandida__idEnd__4AB81AF0]
-			
+			ALTER TABLE [dbo].[tbCandidato] CHECK CONSTRAINT [FK__tbCandida__idEnd__4AB81AF0]			
 
 			ALTER TABLE [dbo].[tbCandidato]  WITH NOCHECK ADD  CONSTRAINT [FK__tbCandida__idFor__4BAC3F29] FOREIGN KEY([idFormacao])
-			REFERENCES [dbo].[tbFormacao] ([idFormacao])
-			
+			REFERENCES [dbo].[tbFormacao] ([idFormacao])			
 
-			ALTER TABLE [dbo].[tbCandidato] CHECK CONSTRAINT [FK__tbCandida__idFor__4BAC3F29]
-			
+			ALTER TABLE [dbo].[tbCandidato] CHECK CONSTRAINT [FK__tbCandida__idFor__4BAC3F29]			
 
 			ALTER TABLE [dbo].[tbCandidato]  WITH NOCHECK ADD  CONSTRAINT [FK__tbCandida__idUsu__4CA06362] FOREIGN KEY([idUsuario])
-			REFERENCES [dbo].[tbUsuario] ([idUsuario])
-			
+			REFERENCES [dbo].[tbUsuario] ([idUsuario])			
 
-			ALTER TABLE [dbo].[tbCandidato] CHECK CONSTRAINT [FK__tbCandida__idUsu__4CA06362]
-			
+			ALTER TABLE [dbo].[tbCandidato] CHECK CONSTRAINT [FK__tbCandida__idUsu__4CA06362]			
 
 			ALTER TABLE [dbo].[tbCandidato]  WITH NOCHECK ADD  CONSTRAINT [FK_tbCandidato_tbContato] FOREIGN KEY([idContato])
-			REFERENCES [dbo].[tbContato] ([idContato])
-			
+			REFERENCES [dbo].[tbContato] ([idContato])			
 
-			ALTER TABLE [dbo].[tbCandidato] CHECK CONSTRAINT [FK_tbCandidato_tbContato]
-			
+			ALTER TABLE [dbo].[tbCandidato] CHECK CONSTRAINT [FK_tbCandidato_tbContato]			
 
+
+			--constraint tbCandidatoCompetencia
 			ALTER TABLE [dbo].[tbCandidatoCompetencia]  WITH CHECK ADD FOREIGN KEY([idAvaliacao])
-			REFERENCES [dbo].[tbAvaliacao] ([idAvaliacao])
-			
+			REFERENCES [dbo].[tbAvaliacao] ([idAvaliacao])			
 
 			ALTER TABLE [dbo].[tbCandidatoCompetencia]  WITH CHECK ADD  CONSTRAINT [FK__tbCandida__idCan__0D44F85C] FOREIGN KEY([idCandidato])
 			REFERENCES [dbo].[tbCandidato] ([idCandidato])
-			ON DELETE CASCADE
-			
+			ON DELETE CASCADE			
 
-			ALTER TABLE [dbo].[tbCandidatoCompetencia] CHECK CONSTRAINT [FK__tbCandida__idCan__0D44F85C]
-			
+			ALTER TABLE [dbo].[tbCandidatoCompetencia] CHECK CONSTRAINT [FK__tbCandida__idCan__0D44F85C]			
 
 			ALTER TABLE [dbo].[tbCandidatoCompetencia]  WITH CHECK ADD FOREIGN KEY([idCompetencia])
-			REFERENCES [dbo].[tbCompetencia] ([idCompetencia])
-			
+			REFERENCES [dbo].[tbCompetencia] ([idCompetencia])			
 
-
-			ALTER TABLE [dbo].[tbCargoSenioridade]  WITH CHECK ADD  CONSTRAINT [FK__tbCargoSe__idCar__5CD6CB2B] FOREIGN KEY([idCargo])
-			REFERENCES [dbo].[tbCargo] ([idCargo])
-			
-
-			ALTER TABLE [dbo].[tbCargoSenioridade] CHECK CONSTRAINT [FK__tbCargoSe__idCar__5CD6CB2B]
-			
-
-			ALTER TABLE [dbo].[tbCargoSenioridade]  WITH CHECK ADD  CONSTRAINT [FK__tbCargoSe__idSen__5DCAEF64] FOREIGN KEY([idSenioridade])
-			REFERENCES [dbo].[tbSenioridade] ([idSenioridade])
-			
-
-			ALTER TABLE [dbo].[tbCargoSenioridade] CHECK CONSTRAINT [FK__tbCargoSe__idSen__5DCAEF64]
-			
-
+			--constraint tbComparativoProposta
 			ALTER TABLE [dbo].[tbComparativoProposta]  WITH CHECK ADD  CONSTRAINT [FK_tbComparativoProposta_tbProposta] FOREIGN KEY([idProposta])
-			REFERENCES [dbo].[tbProposta] ([idProposta])
-			
+			REFERENCES [dbo].[tbProposta] ([idProposta])			
 
 			ALTER TABLE [dbo].[tbComparativoProposta] CHECK CONSTRAINT [FK_tbComparativoProposta_tbProposta]
 			
-
+			--constraint tbComunicacao
 			ALTER TABLE [dbo].[tbComunicacao]  WITH CHECK ADD FOREIGN KEY([idCandidato])
-			REFERENCES [dbo].[tbCandidato] ([idCandidato])
-			
+			REFERENCES [dbo].[tbCandidato] ([idCandidato])			
 
 			ALTER TABLE [dbo].[tbComunicacao]  WITH CHECK ADD FOREIGN KEY([idUsuario])
-			REFERENCES [dbo].[tbUsuario] ([idUsuario])
-			
+			REFERENCES [dbo].[tbUsuario] ([idUsuario])			
 
-
+			--constraint tbDataEntrevista
 			ALTER TABLE [dbo].[tbDataEntrevista]  WITH CHECK ADD  CONSTRAINT [FK_tbDataEntrevista_tbCandidato] FOREIGN KEY([idCandidato])
-			REFERENCES [dbo].[tbCandidato] ([idCandidato])
-			
+			REFERENCES [dbo].[tbCandidato] ([idCandidato])			
 
-			ALTER TABLE [dbo].[tbDataEntrevista] CHECK CONSTRAINT [FK_tbDataEntrevista_tbCandidato]
-			
+			ALTER TABLE [dbo].[tbDataEntrevista] CHECK CONSTRAINT [FK_tbDataEntrevista_tbCandidato]			
 
 			ALTER TABLE [dbo].[tbDataEntrevista]  WITH CHECK ADD  CONSTRAINT [FK_tbDataEntrevista_tbUsuario] FOREIGN KEY([idUsuario])
-			REFERENCES [dbo].[tbUsuario] ([idUsuario])
-			
+			REFERENCES [dbo].[tbUsuario] ([idUsuario])			
 
-			ALTER TABLE [dbo].[tbDataEntrevista] CHECK CONSTRAINT [FK_tbDataEntrevista_tbUsuario]
-			
+			ALTER TABLE [dbo].[tbDataEntrevista] CHECK CONSTRAINT [FK_tbDataEntrevista_tbUsuario]			
 
 			ALTER TABLE [dbo].[tbDataEntrevista]  WITH CHECK ADD  CONSTRAINT [FK_tbDataEntrevista_tbVaga] FOREIGN KEY([idVaga])
-			REFERENCES [dbo].[tbVaga] ([idVaga])
-			
+			REFERENCES [dbo].[tbVaga] ([idVaga])			
 
 			ALTER TABLE [dbo].[tbDataEntrevista] CHECK CONSTRAINT [FK_tbDataEntrevista_tbVaga]
 			
-
+			--constraint tbFormacao
 			ALTER TABLE [dbo].[tbFormacao]  WITH CHECK ADD FOREIGN KEY([idSituacaoAtual])
-			REFERENCES [dbo].[tbSituacaoAtual] ([idSituacaoAtual])
-			
+			REFERENCES [dbo].[tbSituacaoAtual] ([idSituacaoAtual])			
 
 			ALTER TABLE [dbo].[tbFormacao]  WITH CHECK ADD FOREIGN KEY([idTipoCurso])
-			REFERENCES [dbo].[tbTipoCurso] ([idTipoCurso])
-			
+			REFERENCES [dbo].[tbTipoCurso] ([idTipoCurso])			
 
-			ALTER TABLE [dbo].[tbFuncionario]  WITH CHECK ADD FOREIGN KEY([idCargo])
-			REFERENCES [dbo].[tbCargo] ([idCargo])
-			
-
-			ALTER TABLE [dbo].[tbFuncionario]  WITH CHECK ADD FOREIGN KEY([idSenioridade])
-			REFERENCES [dbo].[tbSenioridade] ([idSenioridade])
-			
+			--constraint tbPerfilFuncionalidade
 			ALTER TABLE [dbo].[tbPerfilFuncionalidade]  WITH CHECK ADD FOREIGN KEY([idFuncionalidade])
-			REFERENCES [dbo].[tbFuncionalidade] ([idFuncionalidade])
-			
+			REFERENCES [dbo].[tbFuncionalidade] ([idFuncionalidade])			
 
 			ALTER TABLE [dbo].[tbPerfilFuncionalidade]  WITH CHECK ADD FOREIGN KEY([idPerfil])
-			REFERENCES [dbo].[tbPerfil] ([idPerfil])
+			REFERENCES [dbo].[tbPerfil] ([idPerfil])			
 			
-
-			ALTER TABLE [dbo].[tbProjeto]  WITH CHECK ADD FOREIGN KEY([idCliente])
-			REFERENCES [dbo].[tbCliente] ([idCliente])
-			
-
-			ALTER TABLE [dbo].[tbProjeto]  WITH CHECK ADD FOREIGN KEY([idFuncionario])
-			REFERENCES [dbo].[tbFuncionario] ([idFuncionario])
-			
-
+			--constraint tbProposta
 			ALTER TABLE [dbo].[tbProposta]  WITH CHECK ADD  CONSTRAINT [FK_tbProposta_tbCandidato] FOREIGN KEY([idCandidato])
-			REFERENCES [dbo].[tbCandidato] ([idCandidato])
-			
+			REFERENCES [dbo].[tbCandidato] ([idCandidato])			
 
-			ALTER TABLE [dbo].[tbProposta] CHECK CONSTRAINT [FK_tbProposta_tbCandidato]
-			
+			ALTER TABLE [dbo].[tbProposta] CHECK CONSTRAINT [FK_tbProposta_tbCandidato]			
 
+			--constraint tbProvaCandidato
 			ALTER TABLE [dbo].[tbProvaCandidato]  WITH CHECK ADD  CONSTRAINT [FK_tbProvaCandidato_tbCandidato] FOREIGN KEY([idCandidato])
-			REFERENCES [dbo].[tbCandidato] ([idCandidato])
-			
+			REFERENCES [dbo].[tbCandidato] ([idCandidato])			
 
-			ALTER TABLE [dbo].[tbProvaCandidato] CHECK CONSTRAINT [FK_tbProvaCandidato_tbCandidato]
-			
+			ALTER TABLE [dbo].[tbProvaCandidato] CHECK CONSTRAINT [FK_tbProvaCandidato_tbCandidato]			
 
 			ALTER TABLE [dbo].[tbProvaCandidato]  WITH CHECK ADD  CONSTRAINT [FK_tbProvaCandidato_tbProva] FOREIGN KEY([idProva])
-			REFERENCES [dbo].[tbProva] ([idProva])
-			
+			REFERENCES [dbo].[tbProva] ([idProva])			
 
 			ALTER TABLE [dbo].[tbProvaCandidato] CHECK CONSTRAINT [FK_tbProvaCandidato_tbProva]
-			
+
+			--constraint tbStatusCandidato
 			ALTER TABLE [dbo].[tbStatusCandidato]  WITH CHECK ADD  CONSTRAINT [FK__tbStatusC__idCan__571DF1D5] FOREIGN KEY([idCandidato])
 			REFERENCES [dbo].[tbCandidato] ([idCandidato])
-			ON DELETE CASCADE
-			
+			ON DELETE CASCADE			
 
-			ALTER TABLE [dbo].[tbStatusCandidato] CHECK CONSTRAINT [FK__tbStatusC__idCan__571DF1D5]
-			
+			ALTER TABLE [dbo].[tbStatusCandidato] CHECK CONSTRAINT [FK__tbStatusC__idCan__571DF1D5]			
 
 			ALTER TABLE [dbo].[tbStatusCandidato]  WITH CHECK ADD  CONSTRAINT [FK__tbStatusC__idSta__5629CD9C] FOREIGN KEY([idStatus])
-			REFERENCES [dbo].[tbStatus] ([idStatus])
-			
+			REFERENCES [dbo].[tbStatus] ([idStatus])			
 
-			ALTER TABLE [dbo].[tbStatusCandidato] CHECK CONSTRAINT [FK__tbStatusC__idSta__5629CD9C]
-			
+			ALTER TABLE [dbo].[tbStatusCandidato] CHECK CONSTRAINT [FK__tbStatusC__idSta__5629CD9C]			
 
 			ALTER TABLE [dbo].[tbStatusCandidato]  WITH CHECK ADD  CONSTRAINT [FK__tbStatusC__idUsu__11158940] FOREIGN KEY([idUsuario])
-			REFERENCES [dbo].[tbUsuario] ([idUsuario])
-			
+			REFERENCES [dbo].[tbUsuario] ([idUsuario])			
 
 			ALTER TABLE [dbo].[tbStatusCandidato] CHECK CONSTRAINT [FK__tbStatusC__idUsu__11158940]
-			
+
+			--constraint tbStatusFuturo
 			ALTER TABLE [dbo].[tbStatusFuturo]  WITH CHECK ADD  CONSTRAINT [FK_tbStatusFuturo_tbStatus] FOREIGN KEY([idStatus])
-			REFERENCES [dbo].[tbStatus] ([idStatus])
-			
+			REFERENCES [dbo].[tbStatus] ([idStatus])			
 
-			ALTER TABLE [dbo].[tbStatusFuturo] CHECK CONSTRAINT [FK_tbStatusFuturo_tbStatus]
-			
+			ALTER TABLE [dbo].[tbStatusFuturo] CHECK CONSTRAINT [FK_tbStatusFuturo_tbStatus]			
 
+			--constraint tbStatusVaga
 			ALTER TABLE [dbo].[tbStatusVaga]  WITH NOCHECK ADD FOREIGN KEY([idStatus])
-			REFERENCES [dbo].[tbStatus] ([idStatus])
-			
+			REFERENCES [dbo].[tbStatus] ([idStatus])			
 
 			ALTER TABLE [dbo].[tbStatusVaga]  WITH NOCHECK ADD  CONSTRAINT [FK_tbStatusVaga_tbUsuario] FOREIGN KEY([idUsuario])
-			REFERENCES [dbo].[tbUsuario] ([idUsuario])
-			
+			REFERENCES [dbo].[tbUsuario] ([idUsuario])			
 
-			ALTER TABLE [dbo].[tbStatusVaga] CHECK CONSTRAINT [FK_tbStatusVaga_tbUsuario]
-			
+			ALTER TABLE [dbo].[tbStatusVaga] CHECK CONSTRAINT [FK_tbStatusVaga_tbUsuario]			
 
 			ALTER TABLE [dbo].[tbStatusVaga]  WITH NOCHECK ADD  CONSTRAINT [FK_tbStatusVaga_tbVaga] FOREIGN KEY([idVaga])
-			REFERENCES [dbo].[tbVaga] ([idVaga])
-			
+			REFERENCES [dbo].[tbVaga] ([idVaga])			
 
 			ALTER TABLE [dbo].[tbStatusVaga] CHECK CONSTRAINT [FK_tbStatusVaga_tbVaga]
 			
-			ALTER TABLE [dbo].[tbUsuario]  WITH CHECK ADD  CONSTRAINT [FK__tbUsuario__idFun__24927208] FOREIGN KEY([idFuncionario])
-			REFERENCES [dbo].[tbFuncionario] ([idFuncionario])
-			
-
-			ALTER TABLE [dbo].[tbUsuario] CHECK CONSTRAINT [FK__tbUsuario__idFun__24927208]
-			
-
+			--constraint tbPerfil
 			ALTER TABLE [dbo].[tbUsuario]  WITH CHECK ADD  CONSTRAINT [FK__tbUsuario__idPer__239E4DCF] FOREIGN KEY([idPerfil])
-			REFERENCES [dbo].[tbPerfil] ([idPerfil])
-			
+			REFERENCES [dbo].[tbPerfil] ([idPerfil])			
 
-			ALTER TABLE [dbo].[tbUsuario] CHECK CONSTRAINT [FK__tbUsuario__idPer__239E4DCF]
-			
+			ALTER TABLE [dbo].[tbUsuario] CHECK CONSTRAINT [FK__tbUsuario__idPer__239E4DCF]			
 
-			ALTER TABLE [dbo].[tbVaga]  WITH NOCHECK ADD  CONSTRAINT [FK__tbVaga__idCargo__286302EC] FOREIGN KEY([idCargo])
-			REFERENCES [dbo].[tbCargo] ([idCargo])
-			
-
-			ALTER TABLE [dbo].[tbVaga] CHECK CONSTRAINT [FK__tbVaga__idCargo__286302EC]
-			
-
-			ALTER TABLE [dbo].[tbVaga]  WITH NOCHECK ADD  CONSTRAINT [FK__tbVaga__idProjet__276EDEB3] FOREIGN KEY([idProjeto])
-			REFERENCES [dbo].[tbProjeto] ([idProjeto])
-			
-
-			ALTER TABLE [dbo].[tbVaga] CHECK CONSTRAINT [FK__tbVaga__idProjet__276EDEB3]
-			
-
+			--constraint tbVaga
 			ALTER TABLE [dbo].[tbVaga]  WITH NOCHECK ADD  CONSTRAINT [FK__tbVaga__idSenior__29572725] FOREIGN KEY([idSenioridade])
-			REFERENCES [dbo].[tbSenioridade] ([idSenioridade])
-			
+			REFERENCES [dbo].[tbSenioridade] ([idSenioridade])			
 
 			ALTER TABLE [dbo].[tbVaga] CHECK CONSTRAINT [FK__tbVaga__idSenior__29572725]
 			
-
 			ALTER TABLE [dbo].[tbVaga]  WITH NOCHECK ADD  CONSTRAINT [FK__tbVaga__idUsuari__2A4B4B5E] FOREIGN KEY([idUsuario])
-			REFERENCES [dbo].[tbUsuario] ([idUsuario])
-			
+			REFERENCES [dbo].[tbUsuario] ([idUsuario])			
 
 			ALTER TABLE [dbo].[tbVaga] CHECK CONSTRAINT [FK__tbVaga__idUsuari__2A4B4B5E]
 
+			--constraint tbCandidatoCompetencia
 			ALTER TABLE [dbo].[tbCandidatoCompetencia]  WITH NOCHECK ADD  CONSTRAINT [FK__tbCandidatoCompetencia__idVaga__] FOREIGN KEY([idVaga])
 			REFERENCES [dbo].[tbVaga] ([idVaga])
 

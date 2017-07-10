@@ -1,13 +1,10 @@
 package br.com.prosperity.bean;
 
-import javax.validation.constraints.Min;
-
 import org.springframework.stereotype.Component;
 
 @Component
 public class CargoBean {
 
-	@Min(value = 1, message = "O campo Cargo deve ser preenchido")
 	private Integer id;
 	private String nome;
 

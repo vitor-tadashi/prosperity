@@ -13,12 +13,6 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 	private SenioridadeConverter senioridadeConverter;
 
 	@Autowired
-	private CargoConverter cargoConverter;
-
-	@Autowired
-	private ProjetoConverter projetoConverter;
-
-	@Autowired
 	private StatusVagaConverter statusVagaConverter;
 
 	@Autowired
@@ -38,7 +32,6 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 		entity.setId(bean.getId());
 		entity.setNomeVaga(bean.getNomeVaga());
 		entity.setAumentoQuadro(bean.getAumentaQuadro());
-		entity.setCargoEntity(cargoConverter.convertBeanToEntity(bean.getCargoBean()));
 		entity.setDataAbertura(bean.getDataAbertura());
 		entity.setDataAprovacao(bean.getDataAprovacao());
 		entity.setDataFechamento(bean.getDataFechamento());
@@ -51,7 +44,6 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 		entity.setLocalTrabalho(bean.getLocalTrabalho());
 		entity.setNomeSolicitante(bean.getNomeSolicitante());
 		entity.setNomeSubstituido(bean.getNomeSubstituido());
-		entity.setProjetoEntity(projetoConverter.convertBeanToEntity(bean.getProjeto()));
 		entity.setSenioridadeEntity(senioridadeConverter.convertBeanToEntity(bean.getSenioridadeBean()));
 		entity.setTipoVaga(bean.getIdTipoVaga());
 		entity.setUsuarioEntity(usuarioConverter.convertBeanToEntity(bean.getUsuarioBean()));
@@ -61,6 +53,9 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 		entity.setEmailResponsavel(bean.getEmailResponsavel());
 		entity.setTelResponsavel(bean.getTelResponsavel());
 		entity.setMarketingSocial(bean.getMarketingSocial());
+		entity.setNmCargo(bean.getNmCargo());
+		entity.setNmCliente(bean.getNmCliente());
+		entity.setNmProjeto(bean.getNmProjeto());
 
 		return entity;
 	}
@@ -76,7 +71,6 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 		bean.setId(entity.getId());
 		bean.setNomeVaga(entity.getNomeVaga());
 		bean.setAumentaQuadro(entity.getAumentoQuadro());
-		bean.setCargoBean(cargoConverter.convertEntityToBean(entity.getCargoEntity()));
 		bean.setDataAbertura(entity.getDataAbertura());
 		bean.setDataAprovacao(entity.getDataAprovacao());
 		bean.setDataFechamento(entity.getDataFechamento());
@@ -89,7 +83,6 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 		bean.setLocalTrabalho(entity.getLocalTrabalho());
 		bean.setNomeSolicitante(entity.getNomeSolicitante());
 		bean.setNomeSubstituido(entity.getNomeSubstituido());
-		bean.setProjeto(projetoConverter.convertEntityToBean(entity.getProjetoEntity()));
 		bean.setSenioridadeBean(senioridadeConverter.convertEntityToBean(entity.getSenioridadeEntity()));
 		bean.setIdTipoVaga(entity.getTipoVaga());
 		bean.setUsuarioBean(usuarioConverter.convertEntityToBean(entity.getUsuarioEntity()));
@@ -100,6 +93,9 @@ public class VagaConverter implements Converter<VagaEntity, VagaBean> {
 		bean.setTelResponsavel(entity.getTelResponsavel());
 		bean.setVagaCandidatoBean(vagaCandidatoConverter.convertEntityToBean(entity.getVagaCandidatoEntity()));
 		bean.setMarketingSocial(entity.getMarketingSocial());
+		bean.setNmCargo(entity.getNmCargo());
+		bean.setNmCliente(entity.getNmCliente());
+		bean.setNmProjeto(entity.getNmProjeto());
 
 		return bean;
 	}
