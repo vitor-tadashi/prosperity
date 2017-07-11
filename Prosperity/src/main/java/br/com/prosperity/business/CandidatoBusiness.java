@@ -52,7 +52,6 @@ import br.com.prosperity.dao.CandidatoDAO;
 import br.com.prosperity.dao.CompetenciaDAO;
 import br.com.prosperity.dao.ComunicacaoDAO;
 import br.com.prosperity.dao.DataEntrevistaDAO;
-import br.com.prosperity.dao.FuncionarioDAO;
 import br.com.prosperity.dao.PropostaDAO;
 import br.com.prosperity.dao.SituacaoAtualDAO;
 import br.com.prosperity.dao.StatusCandidatoDAO;
@@ -178,9 +177,6 @@ public class CandidatoBusiness {
 
 	@Autowired
 	private SituacaoCandidatoBean situacaoCandidato;
-
-	@Autowired
-	private FuncionarioDAO funcionarioDAO;
 
 	@Autowired
 	private CancelamentoDAO cancelamentoDAO;
