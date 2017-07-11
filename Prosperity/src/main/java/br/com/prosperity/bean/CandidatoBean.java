@@ -370,14 +370,13 @@ public class CandidatoBean extends FormatUtil {
 					penultimoStatus = status.get(i);
 					return penultimoStatus;
 				}
-			}/*
-			Integer idPenultimoStatus = status.stream().map(StatusCandidatoBean::getId).max(Integer::compareTo).get();
-			for(StatusCandidatoBean scb : status){
-				if(idPenultimoStatus != scb.getId()){
-					penultimoStatus = scb;
+			}
+			for(int i = 0; i < status.size(); i++){
+				if(status.get(i).getIdVaga() != null && status.get(i).getIdVaga().equals(getUltimaVaga().getId())){
+					penultimoStatus = status.get(i);
+					return penultimoStatus;
 				}
 			}
-			return penultimoStatus;*/
 		}
 		return null;
 	}

@@ -166,7 +166,7 @@
 												<div class="form-group col-md-6" style="padding-top: 0px">
 													<label for="cmbSenioridade">Senioridade da vaga</label> <select
 														id="cmbSenioridade" name="senioridadeBean.id"
-														class="form-control rangeSalarial">
+														class="form-control">
 
 														<option value="0">Selecione a senioridade</option>
 
@@ -327,6 +327,7 @@
 												<div class="panel-body relative">
 													<textarea id="descricaoFormacaoAcademica"
 														class="form-control" name="descricaoFormacaoAcademica"
+														onKeyPress="maxCaracterFormacaoAcademica()"
 														rows="5" value="${vaga.descricaoFormacaoAcademica}"
 														maxlength="2000"
 														style="resize: none;">${vaga.descricaoFormacaoAcademica}</textarea>
@@ -342,6 +343,7 @@
 												<div class="panel-body relative">
 													<textarea id="descricaoPerfilComportamental"
 														class="form-control" name="descricaoPerfilComportamental"
+														onKeyPress="maxCaracterPefilComportamental()"
 														rows="5" value="${vaga.descricaoPerfilComportamental}"
 														maxlength="2000"
 														style="resize: none;">${vaga.descricaoPerfilComportamental}</textarea>
@@ -357,6 +359,7 @@
 												<div class="panel-body relative">
 													<textarea id="descricaoPerfilTecnico" class="form-control"
 														name="descricaoPerfilTecnico"
+														onKeyPress="maxCaracterPefilTecnico()"
 														value="${vaga.descricaoPerfilTecnico}" rows="5"
 														maxlength="2000"
 														style="resize: none;">${vaga.descricaoPerfilTecnico}</textarea>
