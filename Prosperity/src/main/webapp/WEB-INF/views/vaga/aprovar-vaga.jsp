@@ -345,10 +345,10 @@
 								
 									<tr>
 										<td>${vaga.nomeVaga}</td>
-										<td>${vaga.cargoBean.nome}</td>
+										<td>${vaga.nmCargo}</td>
 										<td>${vaga.senioridadeBean.nome}</td>
 										<td style="width: 112px;">${vaga.nomeSolicitante}</td>
-										<td style="width: 302px;">${vaga.projeto.nome}</td>
+										<td style="width: 302px;">${vaga.nmProjeto}</td>
 										<%-- <td>${vaga.projeto.cliente.nome}</td>
 									<td><c:if test="${vaga.localTrabalho == 73}">
 										     Interno
@@ -459,7 +459,7 @@
        				$("#substituidoId").show();
     				$("#vagaSubstituto").show();
     			}
-    			$('input#cargo').val(lista.cargoBean.nome);
+    			$('input#cargo').val(lista.nmCargo);
     			$('input#vagaSenioridade').val(lista.senioridadeBean.nome);
     			$('label#horaEntrada').text(lista.horarioEntrada);
     			$('label#horaSaida').text(lista.horarioSaida);
@@ -467,8 +467,8 @@
     			$('input#vagaQuadro').val(lista.aumentaQuadro);
     			$('label#vagaSubstituto').text(lista.nomeSubstituido);
     			$('input#dataInicio').val(lista.dataInicio);
-    			$('input#vagaCliente').val(lista.projeto.cliente.nome);
-    			$('input#vagaProjeto').val(lista.projeto.nome);
+    			$('input#vagaCliente').val(lista.nmCliente);
+    			$('input#vagaProjeto').val(lista.nmProjeto);
     			$('#vagaPerfil').text(lista.descricaoPerfilComportamental);
     			$('#vagaFormacao').text(lista.descricaoFormacaoAcademica);
     			$('#vagaPerfilTecnico').text(lista.descricaoPerfilTecnico);
