@@ -193,13 +193,16 @@
 															class="hidden" value="${candidato.curriculo}">
 													</div>
 													<div class="form-group pull-right">
-														<button type="button" class="btn btn-sm btn-default" style="margin-top: 0px;">
-															<span>
-																<a href="/candidato/papers?caminho=C%3a%5cUsers%5cguilherme.oliveira%5cDocuments%5cprosperity%5cProsperity%5ccurriculo%5c40613292863%5cCurriculo_40613292863MTC.docx"
-																 target="_blank" data-toggle="tooltip" title="" class="fa fa-file-text fa-lg um-click-js" data-original-title="Baixar"></a>
-																	Baixar currículo
-															</span>
-														</button>
+													<c:if test="${candidato.curriculo != null}">
+														<c:url value="/candidato/papers" var="url">
+															<c:param name="caminho">${candidato.curriculo}</c:param>
+														</c:url>
+														<a href="${url}" target="_blank" data-toggle="tooltip" class="um-click-js" data-original-title="Baixar">
+															<button type="button" class="btn btn-sm btn-default">
+																<span class="fa fa-file-text "></span> Baixar currículo
+															</button>
+														</a> 
+													</c:if>
 													</div>
 												</div>
 											</div>
