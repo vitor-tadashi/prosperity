@@ -255,6 +255,7 @@ public class VeritySysIntegration {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("erro aqui");
 		}
 		return response;
 	}
