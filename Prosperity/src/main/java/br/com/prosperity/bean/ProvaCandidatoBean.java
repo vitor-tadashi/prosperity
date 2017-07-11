@@ -8,7 +8,6 @@ public class ProvaCandidatoBean {
 	private Integer id;
 	private CandidatoBean candidato;
 	private ProvaBean provas;
-	private String descricao;
 	private String caminhoProva;
 	private Integer idVaga;
 
@@ -34,14 +33,6 @@ public class ProvaCandidatoBean {
 
 	public void setProvas(ProvaBean provas) {
 		this.provas = provas;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
 	}
 
 	public String getCaminhoProva() {

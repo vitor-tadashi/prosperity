@@ -132,15 +132,15 @@
 											<div class="row">
 												<div class="form-group col-md-6">
 													<label for="cmbCargo">Cargo</label> <select
-														class="form-control rangeSalarial" id="cmbCargo" name="cargoBean.id"
+														class="form-control" id="cmbCargo" name="nmCargo"
 														value="${cargoBean.id}">
 
 														<option value="0">Selecione o cargo</option>
 
 														<c:forEach var="cargo" items="${cargos}" varStatus="i">
-															<option value="${cargo.id}"
-																${cargo.id ==
-															vaga.cargoBean.id ? 'selected="selected"' : ''}>${cargo.nome}</option>
+															<option value="${cargo.nome}"
+																${cargo.nome ==
+															vaga.nmCargo ? 'selected="selected"' : ''}>${cargo.nome}</option>
 														</c:forEach>
 
 													</select>
@@ -236,7 +236,7 @@
 											<div id="dadosInterno" class="row panel panel-default">
 												<div class="form-group col-md-12">
 													<label for="exampleInputEmail1">Nome do projeto</label> <select
-														id="cmbProjetoInterno" name="vaga.nmProjeto"
+														id="cmbProjetoInterno" name="nmProjeto"
 														class="form-control">
 
 														<option value="0">Selecione o projeto</option>
@@ -252,7 +252,7 @@
 												<!-- /form-group -->
 												<div class="form-group col-md-6" style="padding-top: 0px">
 													<label for="exampleInputEmail1">Cliente</label> <select
-														id="cmbProjetoInterno" name="vaga.nmCliente"
+														id="cmbProjetoInterno" name="nmCliente"
 														class="form-control">
 
 														<option value="0">Selecione o cliente</option>

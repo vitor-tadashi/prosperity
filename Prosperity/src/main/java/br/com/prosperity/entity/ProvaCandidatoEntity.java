@@ -25,9 +25,6 @@ public class ProvaCandidatoEntity {
 	@JoinColumn(name = "idProva")
 	private ProvaEntity provas;
 
-	@Column(name = "dsProva")
-	private String descricaoProva;
-	
 	@Column(name = "cmProva")
 	private String caminhoProva;
 	
@@ -52,14 +49,6 @@ public class ProvaCandidatoEntity {
 
 	public void setCandidato(CandidatoEntity candidato) {
 		this.candidato = candidato;
-	}
-
-	public String getDescricaoProva() {
-		return descricaoProva;
-	}
-
-	public void setDescricaoProva(String descricaoProva) {
-		this.descricaoProva = descricaoProva;
 	}
 
 	public String getCaminhoProva() {

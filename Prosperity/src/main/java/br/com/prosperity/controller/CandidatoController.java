@@ -515,10 +515,8 @@ public class CandidatoController<PaginarCandidato> {
 						provaBean = new ProvaBean();
 						provaBean.setId(Integer.parseInt(aux2));
 					} else {
-						String dsProva = aux2;
 						provaCandidatoBean = new ProvaCandidatoBean();
 						provaCandidatoBean.setProvas(provaBean);
-						provaCandidatoBean.setDescricao(dsProva);
 						provaCandidatoBean.setCandidato(bean);
 						provaCandidatoBean.setIdVaga(candidatoBean.getUltimaVaga().getId());
 						provasCandidatoBean.add(provaCandidatoBean);

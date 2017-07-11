@@ -64,7 +64,7 @@
 										</div>
 										<div class="row">
 											<div class="form-group col-md-6">
-												<p class="" id="nome"><strong>Cargo: </strong>${vaga.cargoBean.nome }</p>
+												<p class="" id="nome"><strong>Cargo: </strong>${vaga.nmCargo }</p>
 											</div>
 											<div class="form-group col-md-6">
 												<p class="" id="nome"><strong>Senioridade: </strong>${vaga.senioridadeBean.nome }</p>
@@ -99,12 +99,12 @@
 											<legend style="color:#424f63"><h5><strong>Informações do projeto</strong> - cliente</h5></legend>
 											<div class="row">
 												<div class="form-group col-md-6">
-													<p class="" id="nome"><strong>Nome do projeto: </strong>${vaga.projeto.nome}</p>
+													<p class="" id="nome"><strong>Nome do projeto: </strong>${vaga.nmProjeto}</p>
 												</div>
 											</div>
 											<div class="row">
 												<div class="form-group col-md-6">
-													<p class="" id="nome"><strong>Cliente: </strong>${vaga.projeto.cliente.nome}</p>
+													<p class="" id="nome"><strong>Cliente: </strong>${vaga.nmCliente}</p>
 												</div>
 												<div class="form-group col-md-6">
 													<p class="" id="nome"><strong>Gestor imediato: </strong>${vaga.usuarioBean.nomeFuncionario}</p>
@@ -131,12 +131,12 @@
 											<legend style="color:#424f63"><h5><strong>Informações do projeto</strong> - interno</h5></legend>
 											<div class="row">
 												<div class="form-group col-md-6">
-													<p class="" id="nome"><strong>Nome do projeto: </strong>${vaga.projeto.nome}</p>
+													<p class="" id="nome"><strong>Nome do projeto: </strong>${vaga.nmProjeto}</p>
 												</div>
 											</div>
 											<div class="row">
 												<div class="form-group col-md-6">
-													<p class="" id="nome"><strong>Cliente: </strong>${vaga.projeto.cliente.nome}</p>
+													<p class="" id="nome"><strong>Cliente: </strong>${vaga.nmCliente}</p>
 												</div>
 											</div>
 											<div class="row">
